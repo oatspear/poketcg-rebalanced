@@ -242,16 +242,16 @@ BulbasaurCard:
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db BULBASAUR
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy GRASS, 2 ; energies
+	energy GRASS, 1 ; energies
 	tx LeechSeedName ; name
 	tx BulbasaursLeechSeedDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw BulbasaurLeechSeedEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -261,18 +261,18 @@ BulbasaurCard:
 	db ATK_ANIM_DRAIN ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
+	energy GRASS, 1, COLORLESS, 1 ; energies
+	tx VineWhipName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_WHIP ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
