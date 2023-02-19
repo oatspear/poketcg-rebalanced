@@ -5827,7 +5827,7 @@ AIDecide_PokemonTrader_PowerGenerator:
 	ld b, PIKACHU_LV12
 	ld a, RAICHU_LV40
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
-	jr c, .find_duplicates
+	jp c, .find_duplicates
 	ld a, PIKACHU_LV14
 	ld b, RAICHU_LV40
 	call LookForCardIDInDeck_GivenCardIDInHand
@@ -5884,14 +5884,7 @@ AIDecide_PokemonTrader_PowerGenerator:
 	ld b, MAGNETON_LV28
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	; bug, missing jr .no_carry
-
-; since this last check falls through regardless of result,
-; register a might hold an invalid deck index,
-; which might lead to hilarious results like Brandon
-; trading a Pikachu with a Grass Energy from the deck.
-; however, since it's deep in a tower of conditionals,
-; reaching here is extremely unlikely.
+	jr .no_carry
 
 ; a card in deck was found to look for,
 ; check if there are duplicates in hand to trade with.
@@ -5903,6 +5896,8 @@ AIDecide_PokemonTrader_PowerGenerator:
 	ret
 .set_carry
 	scf
+; fallthrough
+.no_carry
 	ret
 
 AIDecide_PokemonTrader_FlowerGarden:

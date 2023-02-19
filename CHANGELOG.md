@@ -10,3 +10,4 @@
 - Rick never plays Energy Search.
 - Rick uses wrong Pokédex AI subroutine.
 - Chris never uses Revive on Kangaskhan.
+- AI Pokemon Trader may result in unintended effects.
