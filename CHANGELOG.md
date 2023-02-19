@@ -7,3 +7,4 @@
 - Cards in AI decks that are not supposed to be placed as Prize cards are ignored.
 - AI score modifiers for retreating are never used.
 - AI handles Basic Pokémon cards in hand wrong when scoring the use of Professor Oak.
+- Rick never plays Energy Search.

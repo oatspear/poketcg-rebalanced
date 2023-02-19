@@ -3274,14 +3274,11 @@ AIDecide_EnergySearch:
 	scf
 	ret
 
-; this subroutine has a bug.
-; it was supposed to use the .CheckUsefulGrassEnergy subroutine
-; but uses .CheckUsefulFireOrLightningEnergy instead.
 .wonders_of_science
 	ld a, CARD_LOCATION_DECK
 	call FindBasicEnergyCardsInLocation
 	jr c, .no_carry
-	call .CheckUsefulFireOrLightningEnergy
+	call .CheckUsefulGrassEnergy
 	jr c, .no_carry
 	scf
 	ret
