@@ -98,7 +98,7 @@ Text0532: ; 4856a (12:456a)
 	done
 
 Text0533: ; 485a2 (12:45a2)
-	text "Presently, <RAMNAME> is still"
+	text "Presently, <RAMTEXT> is still"
 	line "a contender!"
 	done
 
