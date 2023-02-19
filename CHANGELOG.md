@@ -11,3 +11,4 @@
 - Rick uses wrong Pokédex AI subroutine.
 - Chris never uses Revive on Kangaskhan.
 - AI Pokemon Trader may result in unintended effects.
+- Sam's practice deck does wrong card ID check.
