@@ -12,3 +12,4 @@
 - Chris never uses Revive on Kangaskhan.
 - AI Pokemon Trader may result in unintended effects.
 - Sam's practice deck does wrong card ID check.
+- AI does not account for Mysterious Fossil or Clefairy Doll when using Shift Pkmn Power.

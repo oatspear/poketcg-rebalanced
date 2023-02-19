@@ -678,14 +678,11 @@ HandleAIShift:
 	push bc
 	call GetCardIDFromDeckIndex
 	call GetCardType
-	; in case this is a Mysterious Fossil or Clefairy Doll card,
-	; AI might read the type of the card incorrectly here.
-	; uncomment the following lines to account for this
-	; cp TYPE_TRAINER
-	; jr nz, .not_trainer
-	; pop bc
-	; jr .loop_play_area
-; .not_trainer
+	cp TYPE_TRAINER
+	jr nz, .not_trainer
+	pop bc
+	jr .loop_play_area
+.not_trainer
 	call TranslateColorToWR
 	pop bc
 	and b
