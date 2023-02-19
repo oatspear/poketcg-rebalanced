@@ -8,3 +8,4 @@
 - AI score modifiers for retreating are never used.
 - AI handles Basic Pokémon cards in hand wrong when scoring the use of Professor Oak.
 - Rick never plays Energy Search.
+- Rick uses wrong Pokédex AI subroutine.

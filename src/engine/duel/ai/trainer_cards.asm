@@ -3497,18 +3497,14 @@ AIDecide_Pokedex:
 	ret
 
 .pick_cards
-; the following comparison is disregarded
-; the Wonders of Science deck was probably intended
-; to use PickPokedexCards_Unreferenced instead
 	ld a, [wOpponentDeckID]
 	cp WONDERS_OF_SCIENCE_DECK_ID
-	jp PickPokedexCards ; bug, should be jp nz
+	jp nz, PickPokedexCards
+	; fallthrough
 
 ; picks order of the cards in deck from the effects of Pokedex.
 ; prioritizes Pokemon cards, then Trainer cards, then energy cards.
 ; stores the resulting order in wce1a.
-PickPokedexCards_Unreferenced:
-; unreferenced
 	xor a
 	ld [wAIPokedexCounter], a ; reset counter
 
