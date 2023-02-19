@@ -2365,11 +2365,6 @@ AIDecide_ProfessorOak:
 	add $0a
 	ld [wce06], a
 
-; this part seems buggy
-; the AI loops through all the cards in hand and checks
-; if any of them is not a Pokemon card and has Basic stage.
-; it seems like the intention was that if there was
-; any Basic Pokemon still in hand, the AI would add to the score.
 .check_hand
 	call CreateHandCardList
 	ld hl, wDuelTempList
@@ -2381,7 +2376,7 @@ AIDecide_ProfessorOak:
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld a, [wLoadedCard1Type]
 	cp TYPE_ENERGY
-	jr c, .loop_hand ; bug, should be jr nc
+	jr nc, .loop_hand
 
 	ld a, [wLoadedCard1Stage]
 	or a
