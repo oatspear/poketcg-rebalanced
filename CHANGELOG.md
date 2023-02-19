@@ -9,3 +9,4 @@
 - AI handles Basic Pokémon cards in hand wrong when scoring the use of Professor Oak.
 - Rick never plays Energy Search.
 - Rick uses wrong Pokédex AI subroutine.
+- Chris never uses Revive on Kangaskhan.

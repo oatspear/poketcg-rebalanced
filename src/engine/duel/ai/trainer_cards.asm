@@ -4623,22 +4623,14 @@ AIDecide_Revive:
 	ld b, a
 	call LoadCardDataToBuffer1_FromDeckIndex
 
-; these checks have a bug.
-; it works fine for Hitmonchan and Hitmonlee,
-; but in case it's a Tauros card, the routine will fallthrough
-; into the Kangaskhan check. since it will never be equal to Kangaskhan,
-; it will fallthrough into the set carry branch.
-; in case it's a Kangaskhan card, the check will fail in the Tauros check
-; and jump back into the loop. so just by accident the Tauros check works,
-; but Kangaskhan will never be correctly checked because of this.
 	cp HITMONCHAN
 	jr z, .set_carry
 	cp HITMONLEE
 	jr z, .set_carry
 	cp TAUROS
-	jr nz, .loop_discard_pile ; bug, these two lines should be swapped
+	jr z, .set_carry
 	cp KANGASKHAN
-	jr z, .set_carry ; bug, these two lines should be swapped
+	jr nz, .loop_discard_pile
 
 .set_carry
 	ld a, b
