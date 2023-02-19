@@ -513,10 +513,7 @@ DetermineAIScoreOfAttackEnergyRequirement: ; 16695 (5:6695)
 	ld a, 3
 	call AddToAIScore
 
-; if the attack KOs player and this is the active card, add to AI score.
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	or a
-	jr nz, .check_evolution
+; if the attack KOs player, add to AI score.
 	ld a, [wSelectedAttack]
 	call EstimateDamage_VersusDefendingCard
 	ld a, DUELVARS_ARENA_CARD_HP
@@ -529,12 +526,7 @@ DetermineAIScoreOfAttackEnergyRequirement: ; 16695 (5:6695)
 	ld a, 20
 	call AddToAIScore
 
-; this is possibly a bug.
-; this is an identical check as above to test whether this card is active.
-; in case it is active, the score gets added 10 more points,
-; in addition to the 20 points already added above.
-; what was probably intended was to add 20 points
-; plus 10 in case it is the Arena card.
+; add 10 more in case it is the Arena card.
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
 	jr nz, .check_evolution
