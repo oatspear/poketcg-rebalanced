@@ -24,3 +24,5 @@
 
 # *disasm.py output file
 *disasm_output.asm
+
+*.sa1
