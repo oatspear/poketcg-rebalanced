@@ -26,14 +26,16 @@ DuelCardHeaderGraphics::
 INCBIN "gfx/duel/card_headers.2bpp"
 
 DuelDmgSgbSymbolGraphics::
-INCBIN "gfx/duel/dmg_sgb_symbols.2bpp"
+INCBIN "gfx/duel/dmg_sgb_symbols2.2bpp"
 
 DuelCgbSymbolGraphics::
-INCBIN "gfx/duel/cgb_symbols.2bpp", $0, $808
+; INCBIN "gfx/duel/cgb_symbols2.2bpp", $0, $808
+INCBIN "gfx/duel/cgb_symbols2.2bpp", $0, $798
 
 SECTION "Gfx 2", ROMX
 
-INCBIN "gfx/duel/cgb_symbols.2bpp", $808, $8
+; INCBIN "gfx/duel/cgb_symbols2.2bpp", $808, $8
+INCBIN "gfx/duel/cgb_symbols2.2bpp", $798, $78
 
 DuelOtherGraphics::
 INCBIN "gfx/duel/other.2bpp"
