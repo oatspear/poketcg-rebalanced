@@ -237,10 +237,11 @@ DrawBottomCardInfoInSRAMGfxBuffer0:
 	call PlaceTextItems
 	ld c, 66
 	bank1call DisplayCardPage_PokemonOverview.attacks
-	ld a, SYM_No
-	lb bc, 15, 72
-	call WriteByteToBGMap0
-	inc b
+	; ld a, SYM_No
+	; lb bc, 15, 72
+	; call WriteByteToBGMap0
+	; inc b
+	ld b, 16
 	ld a, [wLoadedCard1PokedexNumber]
 	bank1call WriteTwoByteNumberInTxSymbolFormat
 	ret
@@ -248,7 +249,8 @@ DrawBottomCardInfoInSRAMGfxBuffer0:
 .not_pkmn_card
 	bank1call SetNoLineSeparation
 	lb de, 1, 66
-	ld a, SYM_No
+	; ld a, SYM_No
+	ld a, SYM_E
 	call InitTextPrintingInTextbox
 	ld hl, wLoadedCard1NonPokemonDescription
 	call ProcessTextFromPointerToID
@@ -259,6 +261,7 @@ RetreatWeakResistData:
 	textitem 1, 70, RetreatText
 	textitem 1, 71, WeaknessText
 	textitem 1, 72, ResistanceText
+	textitem 15, 72, NumberText
 	db $ff
 
 Func_1a011:

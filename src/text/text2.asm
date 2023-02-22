@@ -839,11 +839,6 @@ Text0194: ; 39ed3 (e:5ed3)
 	line "Looked at the card list!"
 	done
 
-NowPrintingPleaseWaitText: ; 39f03 (e:5f03)
-	text "Now printing."
-	line "Please wait..."
-	done
-
 BoosterPackText: ; 39f21 (e:5f21)
 	text "Booster Pack"
 	done
@@ -898,6 +893,7 @@ DeckConfigurationTransferWasntSuccessful2Text: ; 3a0e1 (e:60e1)
 	line "wasn't successful."
 	done
 
+NowPrintingPleaseWaitText: ; 39f03 (e:5f03)
 NowPrintingText: ; 3a111 (e:6111)
 	text "Now printing..."
 	done

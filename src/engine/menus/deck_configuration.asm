@@ -2988,9 +2988,9 @@ GetCardTypeIconPalette:
 	db ICON_TILE_WATER,           2
 	db ICON_TILE_FIGHTING,        3
 	db ICON_TILE_PSYCHIC,         3
+	db ICON_TILE_DARKNESS,        0
 	db ICON_TILE_COLORLESS,       0
 	; db ICON_TILE_ENERGY,          2
-	db ICON_TILE_DARKNESS,        0
 	db ICON_TILE_BASIC_POKEMON,   2
 	db ICON_TILE_STAGE_1_POKEMON, 2
 	db ICON_TILE_STAGE_2_POKEMON, 1

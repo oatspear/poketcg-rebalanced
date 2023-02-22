@@ -34,6 +34,10 @@ ResistanceText: ; 3634a (d:634a)
 	text "Resistance"
 	done
 
+NumberText:
+	text "No"
+	done
+
 PKMNPWRText: ; 36356 (d:6356)
 	text "PKMN PWR"
 	done
@@ -112,6 +116,10 @@ FightingPokemonText: ; 3640f (d:640f)
 
 PsychicPokemonText: ; 36421 (d:6421)
 	text "Psychic Pokémon"
+	done
+
+DarknessPokemonText: ; 36421 (d:6421)
+	text "Darkness Pokémon"
 	done
 
 ColorlessPokemonText: ; 36432 (d:6432)
@@ -301,6 +309,7 @@ ColorListText: ; 3681b (d:681b)
 	line "Lightning"
 	line "Fighting"
 	line "Psychic"
+	line "Darkness"
 	done
 
 GrassSymbolText: ; 36848 (d:6848)
@@ -327,6 +336,10 @@ PsychicSymbolText: ; 36857 (d:6857)
 	textfw0 "<PSYCHIC>"
 	done
 
+DarknessSymbolText: ; 36857 (d:6857)
+	textfw0 "<DARKNESS>"
+	done
+
 BenchText: ; 3685a (d:685a)
 	text "Bench"
 	done
@@ -346,7 +359,7 @@ ChooseEnergyCardToDiscardText: ; 36891 (d:6891)
 
 ChooseNextActivePokemonText: ; 368be (d:68be)
 	text "The Active Pokémon was Knocked Out."
-	line "Please choose the next Pokémon."
+	line "Choose the next Pokémon."
 	done
 
 PressStartWhenReadyText: ; 36903 (d:6903)
@@ -1039,12 +1052,8 @@ CardPopCannotBePlayedWithTheGameBoyText: ; 37b5d (d:7b5d)
 	done
 
 SandAttackCheckText: ; 37ba9 (d:7ba9)
-	text "Sand-attack check!"
-	line "If Tails, Attack is unsuccessful."
-	done
-
 SmokescreenCheckText: ; 37bdf (d:7bdf)
-	text "Smokescreen check!"
+	text "Accuracy check!"
 	line "If Tails, Attack is unsuccessful."
 	done
 

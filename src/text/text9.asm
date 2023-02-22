@@ -1226,12 +1226,12 @@ PsychicEnergyDescription: ; 57466 (15:7466)
 	text "Provides 1 <PSYCHIC> Energy."
 	done
 
-DarknessEnergyName: ; 57456 (15:7456)  FIXME
+DarknessEnergyName: ; 57456 (15:7456)
 	text "Darkness Energy"
 	done
 
-DarknessEnergyDescription: ; 57466 (15:7466)  FIXME
-	text "Provides 1 <PSYCHIC> Energy."
+DarknessEnergyDescription: ; 57466 (15:7466)
+	text "Provides 1 <DARKNESS> Energy."
 	done
 
 DoubleColorlessEnergyName: ; 5747d (15:747d)

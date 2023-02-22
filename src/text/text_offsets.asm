@@ -13,6 +13,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ResistanceText                                     ; 0x0009
 	textpointer PKMNPWRText                                        ; 0x000a
 	; textpointer Text000b                                           ; 0x000b
+	textpointer NumberText                                         ; 0x000b
 	textpointer LengthText                                         ; 0x000c
 	textpointer WeightText                                         ; 0x000d
 	textpointer PokemonText                                        ; 0x000e
@@ -31,6 +32,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LightningPokemonText                               ; 0x001b
 	textpointer FightingPokemonText                                ; 0x001c
 	textpointer PsychicPokemonText                                 ; 0x001d
+	textpointer DarknessPokemonText                                ; 0x001d
 	textpointer ColorlessPokemonText                               ; 0x001e
 	textpointer TrainerCardText                                    ; 0x001f
 	textpointer EnergyCardText                                     ; 0x0020
