@@ -397,12 +397,19 @@ Func_b088:
 	jr z, .asm_b0fc
 	and FILTER_ENERGY
 	cp FILTER_ENERGY
-	jr z, .asm_b0f5
+	jr z, .check_energy
+; OATS begin custom logic to include energy and pokemon in the same filter
 	ld a, c
+	cp TYPE_TRAINER
+	jr nc, .normal_card_check  ; it's a trainer card
+	and TYPE_PKMN  ; treat pokemon and energy as the same thing
+; OATS end custom logic
+.normal_card_check
+	; ld a, c
 	cp b
 	jr nz, .asm_b0dd
 	jr .asm_b0fc
-.asm_b0f5
+.check_energy
 	ld a, c
 	and TYPE_ENERGY
 	cp TYPE_ENERGY
