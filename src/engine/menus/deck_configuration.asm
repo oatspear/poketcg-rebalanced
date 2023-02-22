@@ -1073,7 +1073,14 @@ CreateFilteredCardList:
 	and FILTER_ENERGY
 	cp FILTER_ENERGY
 	jr z, .check_energy
+; OATS begin custom logic to include energy and pokemon in the same filter
 	ld a, c
+	cp TYPE_TRAINER
+	jr nc, .normal_card_check  ; it's a trainer card
+	and TYPE_PKMN  ; treat pokemon and energy as the same thing
+; OATS end custom logic
+.normal_card_check
+	; ld a, c
 	cp b
 	jr nz, .loop_card_ids
 	jr .add_card
@@ -1372,7 +1379,16 @@ CountNumberOfCardsOfType:
 	and FILTER_ENERGY
 	cp FILTER_ENERGY
 	jr z, .check_energy
+
+; OATS begin custom logic to include energy and pokemon in the same filter
 	ld a, l
+	cp TYPE_TRAINER
+	jr nc, .normal_card_check  ; it's a trainer card
+	and TYPE_PKMN  ; treat pokemon and energy as the same thing
+; OATS end custom logic
+.normal_card_check
+
+	; ld a, l
 	pop hl
 	cp b
 	jr nz, .loop_cards
@@ -1471,9 +1487,10 @@ CardTypeFilters:
 	db FILTER_LIGHTNING
 	db FILTER_FIGHTING
 	db FILTER_PSYCHIC
+	db FILTER_DARKNESS
 	db FILTER_COLORLESS
 	db FILTER_TRAINER
-	db FILTER_ENERGY
+	; db FILTER_ENERGY
 	db -1 ; end of list
 
 ; counts all the cards from each card type
