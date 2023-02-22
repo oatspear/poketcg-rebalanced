@@ -4,19 +4,19 @@
 ; | a+1*l+0*h | a+1*l+1*h | a+1*l+2*h |
 ; | a+2*l+0*h | a+2*l+1*h | a+2*l+2*h |
 FillRectangle:
-	push de
-	push af
-	push hl
+	push de  ; store function argument
+	push af  ; store function argument
+	push hl  ; store function argument
 	add sp, -BG_MAP_WIDTH
 	call DECoordToBGMap0Address
 .next_row
 	push hl
 	push bc
-	ld hl, sp+$25
+	ld hl, sp+$25  ; points at the `hl` argument (height and width of tile to copy from png)
 	ld d, [hl]
-	ld hl, sp+$27
+	ld hl, sp+$27  ; points at the `a` argument (tile a)
 	ld a, [hl]
-	ld hl, sp+$4
+	ld hl, sp+$4  ; start of the blank space to draw on
 	push hl
 .next_tile
 	ld [hli], a
