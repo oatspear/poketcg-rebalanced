@@ -272,7 +272,6 @@ LoadDuelCardSymbolTiles:
 .copy
 	ld de, v0Tiles1 + $50 tiles
 	ld b, $30
-	; ld b, $34
 	jr CopyFontsOrDuelGraphicsTiles
 
 ; loads the symbols for Stage 1 Pkmn card, Stage 2 Pkmn card, and Trainer card.
@@ -297,13 +296,13 @@ LoadDuelFaceDownCardTiles:
 LoadDuelCheckPokemonScreenTiles:
 	ld b, $24
 .got_num_tiles
-	; ld hl, DuelDmgSgbSymbolGraphics + $30 tiles - $4000
-	ld hl, DuelDmgSgbSymbolGraphics + $34 tiles - $4000
+	ld hl, DuelDmgSgbSymbolGraphics + $30 tiles - $4000
+	; ld hl, DuelDmgSgbSymbolGraphics + $34 tiles - $4000
 	ld a, [wConsole]
 	cp CONSOLE_CGB
 	jr nz, .copy
-	; ld hl, DuelCgbSymbolGraphics + $30 tiles - $4000
-	ld hl, DuelCgbSymbolGraphics + $34 tiles - $4000
+	ld hl, DuelCgbSymbolGraphics + $30 tiles - $4000
+	; ld hl, DuelCgbSymbolGraphics + $34 tiles - $4000
 .copy
 	ld de, v0Tiles1 + $50 tiles
 	jr CopyFontsOrDuelGraphicsTiles
@@ -319,13 +318,13 @@ LoadPlacingThePrizesScreenTiles:
 
 ; load the Deck and the Discard Pile icons
 LoadDeckAndDiscardPileIcons:
-	; ld hl, DuelDmgSgbSymbolGraphics + $54 tiles - $4000
-	ld hl, DuelDmgSgbSymbolGraphics + $58 tiles - $4000
+	ld hl, DuelDmgSgbSymbolGraphics + $54 tiles - $4000
+	; ld hl, DuelDmgSgbSymbolGraphics + $58 tiles - $4000
 	ld a, [wConsole]
 	cp CONSOLE_CGB
 	jr nz, .copy
-	; ld hl, DuelCgbSymbolGraphics + $54 tiles - $4000
-	ld hl, DuelCgbSymbolGraphics + $58 tiles - $4000
+	ld hl, DuelCgbSymbolGraphics + $54 tiles - $4000
+	; ld hl, DuelCgbSymbolGraphics + $58 tiles - $4000
 .copy
 	ld de, v0Tiles1 + $50 tiles
 	ld b, $30
