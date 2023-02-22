@@ -531,29 +531,30 @@ ConvertColorToEnergyCardID:
 	db WATER_ENERGY
 	db FIGHTING_ENERGY
 	db PSYCHIC_ENERGY
+	db DARKNESS_ENERGY
 	db DOUBLE_COLORLESS_ENERGY
 
 ; returns carry if loaded attack effect has
 ; an "initial effect 2" or "require selection" command type
 ; unreferenced
-Func_14323:
-	ld hl, wLoadedAttackEffectCommands
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
-	push hl
-	call CheckMatchingCommand
-	pop hl
-	jr nc, .set_carry
-	ld a, EFFECTCMDTYPE_REQUIRE_SELECTION
-	call CheckMatchingCommand
-	jr nc, .set_carry
-	or a
-	ret
-.set_carry
-	scf
-	ret
+; Func_14323:
+; 	ld hl, wLoadedAttackEffectCommands
+; 	ld a, [hli]
+; 	ld h, [hl]
+; 	ld l, a
+; 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
+; 	push hl
+; 	call CheckMatchingCommand
+; 	pop hl
+; 	jr nc, .set_carry
+; 	ld a, EFFECTCMDTYPE_REQUIRE_SELECTION
+; 	call CheckMatchingCommand
+; 	jr nc, .set_carry
+; 	or a
+; 	ret
+; .set_carry
+; 	scf
+; 	ret
 
 ; return carry depending on card index in a:
 ;	- if energy card, return carry if no energy card has been played yet
@@ -1602,8 +1603,13 @@ CheckEnergyFlagsNeededInList:
 	jr .check_energy
 .psychic
 	cp PSYCHIC_ENERGY
-	jr nz, .colorless
+	jr nz, .darkness
 	ld a, PSYCHIC_F
+	jr .check_energy
+.darkness
+	cp DARKNESS_ENERGY
+	jr nz, .colorless
+	ld a, DARKNESS_F
 	jr .check_energy
 .colorless
 	cp DOUBLE_COLORLESS_ENERGY

@@ -105,6 +105,7 @@ EnergyCardList:
 	db LIGHTNING_ENERGY
 	db FIGHTING_ENERGY
 	db PSYCHIC_ENERGY
+	db DARKNESS_ENERGY
 .end
 
 Script_Tech2:

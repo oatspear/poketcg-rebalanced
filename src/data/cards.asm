@@ -10,6 +10,7 @@ CardPointers:
 	dw LightningEnergyCard
 	dw FightingEnergyCard
 	dw PsychicEnergyCard
+	dw DarknessEnergyCard
 	dw DoubleColorlessEnergyCard
 	dw BulbasaurCard
 	dw IvysaurCard
@@ -9836,6 +9837,17 @@ PsychicEnergyCard:
 	db PSYCHIC_ENERGY
 	dw PsychicEnergyEffectCommands ; effect commands
 	tx PsychicEnergyDescription ; description
+	dw NONE ; description (cont)
+
+DarknessEnergyCard:
+	db TYPE_ENERGY_DARKNESS ; type
+	gfx DarknessEnergyCardGfx ; gfx
+	tx DarknessEnergyName ; name
+	db CIRCLE ; rarity
+	db ENERGY | NONE ; sets
+	db DARKNESS_ENERGY
+	dw PsychicEnergyEffectCommands ; effect commands
+	tx DarknessEnergyDescription ; description
 	dw NONE ; description (cont)
 
 DoubleColorlessEnergyCard:

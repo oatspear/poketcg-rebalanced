@@ -12,7 +12,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WeaknessText                                       ; 0x0008
 	textpointer ResistanceText                                     ; 0x0009
 	textpointer PKMNPWRText                                        ; 0x000a
-	textpointer Text000b                                           ; 0x000b
+	; textpointer Text000b                                           ; 0x000b
 	textpointer LengthText                                         ; 0x000c
 	textpointer WeightText                                         ; 0x000d
 	textpointer PokemonText                                        ; 0x000e
@@ -2991,3 +2991,5 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GamblerDescription                                 ; 0x0bab
 	textpointer RecycleName                                        ; 0x0bac
 	textpointer RecycleDescription                                 ; 0x0bad
+	textpointer DarknessEnergyName                                 ; 0x0bae
+	textpointer DarknessEnergyDescription                          ; 0x0baf

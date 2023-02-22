@@ -1498,6 +1498,10 @@ PsychicEnergyCardGfx::
 	INCBIN "gfx/cards/psychicenergy.2bpp"
 	INCBIN "gfx/cards/psychicenergy.pal"
 
+DarknessEnergyCardGfx::
+	INCBIN "gfx/cards/darknessenergy.2bpp"
+	INCBIN "gfx/cards/darknessenergy.pal"
+
 DoubleColorlessEnergyCardGfx::
 	INCBIN "gfx/cards/doublecolorlessenergy.2bpp"
 	INCBIN "gfx/cards/doublecolorlessenergy.pal"
@@ -1554,13 +1558,13 @@ NidoranFCardGfx::
 	INCBIN "gfx/cards/nidoranf.2bpp"
 	INCBIN "gfx/cards/nidoranf.pal"
 
-NidorinaCardGfx::
-	INCBIN "gfx/cards/nidorina.2bpp"
-	INCBIN "gfx/cards/nidorina.pal"
-
 	ds $58
 
 SECTION "Card Gfx 2", ROMX
+
+NidorinaCardGfx::
+	INCBIN "gfx/cards/nidorina.2bpp"
+	INCBIN "gfx/cards/nidorina.pal"
 
 NidoqueenCardGfx::
 	INCBIN "gfx/cards/nidoqueen.2bpp"
@@ -1642,13 +1646,13 @@ ExeggutorCardGfx::
 	INCBIN "gfx/cards/exeggutor.2bpp"
 	INCBIN "gfx/cards/exeggutor.pal"
 
-KoffingCardGfx::
-	INCBIN "gfx/cards/koffing.2bpp"
-	INCBIN "gfx/cards/koffing.pal"
-
 	ds $58
 
 SECTION "Card Gfx 3", ROMX
+
+KoffingCardGfx::
+	INCBIN "gfx/cards/koffing.2bpp"
+	INCBIN "gfx/cards/koffing.pal"
 
 WeezingCardGfx::
 	INCBIN "gfx/cards/weezing.2bpp"
@@ -1730,13 +1734,13 @@ FlareonLv28CardGfx::
 	INCBIN "gfx/cards/flareon2.2bpp"
 	INCBIN "gfx/cards/flareon2.pal"
 
-MoltresLv35CardGfx::
-	INCBIN "gfx/cards/moltres1.2bpp"
-	INCBIN "gfx/cards/moltres1.pal"
-
 	ds $58
 
 SECTION "Card Gfx 4", ROMX
+
+MoltresLv35CardGfx::
+	INCBIN "gfx/cards/moltres1.2bpp"
+	INCBIN "gfx/cards/moltres1.pal"
 
 MoltresLv37CardGfx::
 	INCBIN "gfx/cards/moltres2.2bpp"
@@ -1818,13 +1822,13 @@ GoldeenCardGfx::
 	INCBIN "gfx/cards/goldeen.2bpp"
 	INCBIN "gfx/cards/goldeen.pal"
 
-SeakingCardGfx::
-	INCBIN "gfx/cards/seaking.2bpp"
-	INCBIN "gfx/cards/seaking.pal"
-
 	ds $58
 
 SECTION "Card Gfx 5", ROMX
+
+SeakingCardGfx::
+	INCBIN "gfx/cards/seaking.2bpp"
+	INCBIN "gfx/cards/seaking.pal"
 
 StaryuCardGfx::
 	INCBIN "gfx/cards/staryu.2bpp"
@@ -1906,13 +1910,13 @@ RaichuLv45CardGfx::
 	INCBIN "gfx/cards/raichu2.2bpp"
 	INCBIN "gfx/cards/raichu2.pal"
 
-MagnemiteLv13CardGfx::
-	INCBIN "gfx/cards/magnemite1.2bpp"
-	INCBIN "gfx/cards/magnemite1.pal"
-
 	ds $58
 
 SECTION "Card Gfx 6", ROMX
+
+MagnemiteLv13CardGfx::
+	INCBIN "gfx/cards/magnemite1.2bpp"
+	INCBIN "gfx/cards/magnemite1.pal"
 
 MagnemiteLv15CardGfx::
 	INCBIN "gfx/cards/magnemite2.2bpp"
@@ -1994,13 +1998,13 @@ MachopCardGfx::
 	INCBIN "gfx/cards/machop.2bpp"
 	INCBIN "gfx/cards/machop.pal"
 
-MachokeCardGfx::
-	INCBIN "gfx/cards/machoke.2bpp"
-	INCBIN "gfx/cards/machoke.pal"
-
 	ds $58
 
 SECTION "Card Gfx 7", ROMX
+
+MachokeCardGfx::
+	INCBIN "gfx/cards/machoke.2bpp"
+	INCBIN "gfx/cards/machoke.pal"
 
 MachampCardGfx::
 	INCBIN "gfx/cards/machamp.2bpp"
@@ -2082,13 +2086,13 @@ SlowpokeLv18CardGfx::
 	INCBIN "gfx/cards/slowpoke2.2bpp"
 	INCBIN "gfx/cards/slowpoke2.pal"
 
-SlowbroCardGfx::
-	INCBIN "gfx/cards/slowbro.2bpp"
-	INCBIN "gfx/cards/slowbro.pal"
-
 	ds $58
 
 SECTION "Card Gfx 8", ROMX
+
+SlowbroCardGfx::
+	INCBIN "gfx/cards/slowbro.2bpp"
+	INCBIN "gfx/cards/slowbro.pal"
 
 GastlyLv8CardGfx::
 	INCBIN "gfx/cards/gastly1.2bpp"
@@ -2170,13 +2174,13 @@ RattataCardGfx::
 	INCBIN "gfx/cards/rattata.2bpp"
 	INCBIN "gfx/cards/rattata.pal"
 
-RaticateCardGfx::
-	INCBIN "gfx/cards/raticate.2bpp"
-	INCBIN "gfx/cards/raticate.pal"
-
 	ds $58
 
 SECTION "Card Gfx 9", ROMX
+
+RaticateCardGfx::
+	INCBIN "gfx/cards/raticate.2bpp"
+	INCBIN "gfx/cards/raticate.pal"
 
 SpearowCardGfx::
 	INCBIN "gfx/cards/spearow.2bpp"
@@ -2258,13 +2262,13 @@ EeveeCardGfx::
 	INCBIN "gfx/cards/eevee.2bpp"
 	INCBIN "gfx/cards/eevee.pal"
 
-PorygonCardGfx::
-	INCBIN "gfx/cards/porygon.2bpp"
-	INCBIN "gfx/cards/porygon.pal"
-
 	ds $58
 
 SECTION "Card Gfx 10", ROMX
+
+PorygonCardGfx::
+	INCBIN "gfx/cards/porygon.2bpp"
+	INCBIN "gfx/cards/porygon.pal"
 
 SnorlaxCardGfx::
 	INCBIN "gfx/cards/snorlax.2bpp"
@@ -2346,13 +2350,13 @@ SuperEnergyRemovalCardGfx::
 	INCBIN "gfx/cards/superenergyremoval.2bpp"
 	INCBIN "gfx/cards/superenergyremoval.pal"
 
-SwitchCardGfx::
-	INCBIN "gfx/cards/switch.2bpp"
-	INCBIN "gfx/cards/switch.pal"
-
 	ds $58
 
 SECTION "Card Gfx 11", ROMX
+
+SwitchCardGfx::
+	INCBIN "gfx/cards/switch.2bpp"
+	INCBIN "gfx/cards/switch.pal"
 
 PokemonCenterCardGfx::
 	INCBIN "gfx/cards/pokemoncenter.2bpp"

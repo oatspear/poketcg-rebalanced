@@ -1226,17 +1226,23 @@ PsychicEnergyDescription: ; 57466 (15:7466)
 	text "Provides 1 <PSYCHIC> Energy."
 	done
 
+DarknessEnergyName: ; 57456 (15:7456)  FIXME
+	text "Darkness Energy"
+	done
+
+DarknessEnergyDescription: ; 57466 (15:7466)  FIXME
+	text "Provides 1 <PSYCHIC> Energy."
+	done
+
 DoubleColorlessEnergyName: ; 5747d (15:747d)
 	text "Double Colorless Energy"
 	done
 
 DoubleColorlessEnergyDescription: ; 57496 (15:7496)
-	text "Provides <COLORLESS><COLORLESS> Energy. (Doesn't"
-	line "count as a basic Energy card.) "
+	text "Provides <COLORLESS><COLORLESS> Energy."
+	line "(Special Energy card) "
 	line "Colorless Energy can't be used to"
-	line "pay colored Energy costs. (Any type"
-	line "of Energy can be used to pay"
-	line "Colorless Energy costs.)"
+	line "pay colored Energy costs."
 	done
 
 BulbasaurName: ; 57552 (15:7552)
