@@ -442,8 +442,7 @@ NamingScreen_CheckButtonState:
 	ld hl, wCheckMenuCursorBlinkCounter
 	ld a, [hl]
 	inc [hl]
-	; and $0f
-	and SYM_CURSOR_R
+	and $0f
 	ret nz
 	ld a, [wVisibleCursorTile]
 	bit 4, [hl]
@@ -452,7 +451,7 @@ NamingScreen_CheckButtonState:
 Func_1aa07:
 	ld a, [wInvisibleCursorTile]
 .asm_6a0a
-	ld e, a
+	ld e, a  ; store in e the cursor tile to draw (visible/invisible)
 	ld a, [wNamingScreenCursorX]
 	ld h, a
 	ld a, [wNamingScreenCursorY]
@@ -483,7 +482,7 @@ Func_1aa28:
 	ld b, a
 	ld a, [wInvisibleCursorTile]
 	cp b
-	jr z, .asm_6a60
+	jr z, .done
 	ld a, [wNamingScreenBufferLength]
 	srl a
 	ld d, a
@@ -507,7 +506,7 @@ Func_1aa28:
 	ld e, $18
 	ld bc, $0000
 	call SetOneObjectAttributes
-.asm_6a60
+.done
 	pop hl
 	pop de
 	pop bc
@@ -844,15 +843,14 @@ KeyboardData_Player:
 	kbitem $06, $0e, $30, $00, TX_FULLWIDTH3,   "P"
 	kbitem $08, $0e, $31, $00, TX_FULLWIDTH3,   "Y"
 	kbitem $0a, $0e, $32, $00, TX_FULLWIDTH0,   "1"
-	kbitem $0c, $0e, $33, $00, TX_FULLWIDTH0,   " "
+	kbitem $0c, $0e, $33, $00, TX_SYMBOL,       SYM_Lv
 	kbitem $10, $0f, $01, $09, $0000
 
 	kbitem $04, $10, $34, $00, TX_FULLWIDTH3,   "H"
 	kbitem $06, $10, $35, $00, TX_FULLWIDTH3,   "Q"
 	kbitem $08, $10, $36, $00, TX_FULLWIDTH3,   "Z"
 	kbitem $0a, $10, $3c, $00, TX_FULLWIDTH0,   "2"
-	kbitem $0c, $10, $3d, $00, TX_FULLWIDTH0,   "2"
-	; kbitem $0c, $10, $3d, $00, TX_SYMBOL,       SYM_Lv
+	kbitem $0c, $10, $3d, $00, TX_SYMBOL,       SYM_Lv
 	; kbitem $10, $0f, $01, $09, $0000
 	kbitem $10, $0f, $01, $09, $0000
 
@@ -860,8 +858,8 @@ KeyboardData_Player:
 	kbitem $06, $12, $38, $00, TX_FULLWIDTH3,   "R"
 	kbitem $08, $12, $39, $00, TX_FULLWIDTH0,   "!"
 	kbitem $0a, $12, $3a, $00, TX_FULLWIDTH0,   "3"
-	; kbitem $0c, $12, $3b, $00, TX_FULLWIDTH0,   " "
-	kbitem $10, $0f, $01, $09, $0000
+	kbitem $0c, $12, $3b, $00, TX_FULLWIDTH0,   " "
+	; kbitem $10, $0f, $01, $09, $0000
 	kbitem $10, $0f, $01, $09, $0000
 	kbitem $00, $00, $00, $00, $0000
 
@@ -955,7 +953,6 @@ InputDeckName:
 	ld [wNamingScreenNumColumns], a
 	ld a, $07
 	ld [wNamingScreenKeyboardHeight], a
-	; ld a, $0f
 	ld a, SYM_CURSOR_R
 	ld [wVisibleCursorTile], a
 	ld a, $00
@@ -1247,8 +1244,7 @@ Func_1aefb:
 	ld hl, wCheckMenuCursorBlinkCounter
 	ld a, [hl]
 	inc [hl]
-	; and $0f
-	and SYM_CURSOR_R
+	and $0f
 	ret nz
 	ld a, [wVisibleCursorTile]
 	bit 4, [hl]
