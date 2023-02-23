@@ -443,7 +443,7 @@ NamingScreen_CheckButtonState:
 	ld a, [hl]
 	inc [hl]
 	; and $0f
-	and $10
+	and SYM_CURSOR_R
 	ret nz
 	ld a, [wVisibleCursorTile]
 	bit 4, [hl]
@@ -851,8 +851,9 @@ KeyboardData_Player:
 	kbitem $06, $10, $35, $00, TX_FULLWIDTH3,   "Q"
 	kbitem $08, $10, $36, $00, TX_FULLWIDTH3,   "Z"
 	kbitem $0a, $10, $3c, $00, TX_FULLWIDTH0,   "2"
+	kbitem $0c, $10, $3d, $00, TX_FULLWIDTH0,   "2"
 	; kbitem $0c, $10, $3d, $00, TX_SYMBOL,       SYM_Lv
-	kbitem $0c, $10, $01, $09, $0000
+	; kbitem $10, $0f, $01, $09, $0000
 	kbitem $10, $0f, $01, $09, $0000
 
 	kbitem $04, $12, $37, $00, TX_FULLWIDTH3,   "I"
@@ -860,7 +861,7 @@ KeyboardData_Player:
 	kbitem $08, $12, $39, $00, TX_FULLWIDTH0,   "!"
 	kbitem $0a, $12, $3a, $00, TX_FULLWIDTH0,   "3"
 	; kbitem $0c, $12, $3b, $00, TX_FULLWIDTH0,   " "
-	kbitem $0c, $12, $01, $09, $0000
+	kbitem $10, $0f, $01, $09, $0000
 	kbitem $10, $0f, $01, $09, $0000
 	kbitem $00, $00, $00, $00, $0000
 
@@ -1247,7 +1248,7 @@ Func_1aefb:
 	ld a, [hl]
 	inc [hl]
 	; and $0f
-	and $10
+	and SYM_CURSOR_R
 	ret nz
 	ld a, [wVisibleCursorTile]
 	bit 4, [hl]
