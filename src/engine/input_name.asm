@@ -850,7 +850,7 @@ KeyboardData_Player:
 	kbitem $06, $10, $35, $00, TX_FULLWIDTH3,   "Q"
 	kbitem $08, $10, $36, $00, TX_FULLWIDTH3,   "Z"
 	kbitem $0a, $10, $3c, $00, TX_FULLWIDTH0,   "2"
-	kbitem $0c, $10, $3d, $00, TX_SYMBOL,       SYM_Lv
+	kbitem $0c, $10, $3d, $00, TX_FULLWIDTH0,   " "
 	; kbitem $10, $0f, $01, $09, $0000
 	kbitem $10, $0f, $01, $09, $0000
 

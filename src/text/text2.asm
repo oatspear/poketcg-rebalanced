@@ -1571,7 +1571,7 @@ PlayerNameKeyboardText: ; 3b8f2 (e:78f2)
 	textfw3 "& "
 	textfw0 "+ - ・ 0 1 2 3"
 	line ""
-	textfw0 "4 5 6 7 8 9 ", "<No>", " ", "<Lv>", "  "
+	textfw0 "4 5 6 7 8 9 ", "<Lv>", "    "
 	line ""
 	textfw0 "                 "
 	done
