@@ -1317,14 +1317,20 @@ _CheckIfEnoughEnergiesToAttack:
 	inc de
 	dec c
 	jr nz, .next_energy_type_pair
-	ld a, [de] ; colorless energy
+; OATS: NUM_COLORED_TYPES is odd with the addition of DARKNESS
+	ld a, [de]  ; darkness and colorless pair
 	swap a
+	call CheckIfEnoughEnergiesOfType
+	jr c, .not_usable_or_not_enough_energies
+
+	ld a, [de] ; colorless energy
+	; swap a
 	and $f
-	ld b, a
+	ld b, a  ; colorless energy cost
 	ld a, [wAttachedEnergiesAccum]
 	ld c, a
 	ld a, [wTotalAttachedEnergies]
-	sub c
+	sub c  ; a = (total energies) - (energies counted so far)
 	cp b
 	jr c, .not_usable_or_not_enough_energies
 	or a

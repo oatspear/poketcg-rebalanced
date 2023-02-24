@@ -430,6 +430,11 @@ CheckEnergyNeededForAttack:
 	dec c
 	jr nz, .loop
 
+; OATS add check for darkness energy
+	ld a, [de]
+	swap a
+	call CheckIfEnoughParticularAttachedEnergy
+
 ; running CheckIfEnoughParticularAttachedEnergy back to back like this
 ; overwrites the results of a previous call of this function,
 ; however, no attack in the game has energy requirements for two
@@ -442,8 +447,8 @@ CheckEnergyNeededForAttack:
 
 	; colorless
 	ld a, [de]
-	swap a
-	and %00001111
+	; swap a
+	and $f
 	ld b, a ; colorless energy still needed
 	ld a, [wTempLoadedAttackEnergyCost]
 	ld hl, wTempLoadedAttackEnergyNeededAmount
