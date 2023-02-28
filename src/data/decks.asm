@@ -1725,7 +1725,7 @@ LovelyNidoranDeck:
 PoisonDeck:
 	deck_list_start
 	card_item GRASS_ENERGY,            8
-	card_item DARNESS_ENERGY,         16
+	card_item DARKNESS_ENERGY,        16
 	card_item WEEDLE,                  3
 	card_item KAKUNA,                  2
 	card_item BEEDRILL,                1
