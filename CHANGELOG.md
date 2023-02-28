@@ -6,6 +6,9 @@
 - Darkness type.
 - Card: Darkness Basic Energy.
 
+### Changed
+- Changed Pokémon types, weaknesses and resistances to accomodate for the Darkness type and to better distribute weakness and resistance ratios per type.
+
 ### Fixed
 - AI wrongfully adds score twice for attaching energy to Arena card.
 - Cards in AI decks that are not supposed to be placed as Prize cards are ignored.
