@@ -23,6 +23,7 @@
 - **Geodude**, **Graveler** and **Golem**: added resistance to Lightning.
 - **Onix**: added resistance to Lightning.
 - **Aerodactyl**: changed weakness to Water.
+- Updated AI decks to include appropriate energy cards.
 
 ### Fixed
 - AI wrongfully adds score twice for attaching energy to Arena card.
