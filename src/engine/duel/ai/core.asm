@@ -1704,17 +1704,23 @@ GetEnergyCostBits:
 .psychic
 	ld a, b
 	and $0f
-	jr z, .colorless
+	jr z, .darkness
 	ld a, PSYCHIC_F
 	or c
 	ld c, a
-.colorless
+.darkness
 	ld a, [hli]
 	ld b, a
 	and $f0
+	jr z, .colorless
+	ld a, DARKNESS_F
+	or c
+	ld c, a
+.colorless
+	ld a, b
+	and $0f
 	jr z, .done
 	ld a, %11111111
-	or c ; unnecessary
 	ld c, a
 .done
 	ld a, c
