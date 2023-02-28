@@ -991,7 +991,7 @@ NidoqueenCard:
 
 	db 3 ; retreat cost
 	db WR_FIGHTING ; weakness
-	db NONE ; resistance
+	db WR_LIGHTNING ; resistance
 	tx DrillName ; category
 	db 31 ; Pokedex number
 	db 0
@@ -1144,7 +1144,7 @@ NidokingCard:
 
 	db 3 ; retreat cost
 	db WR_FIGHTING ; weakness
-	db NONE ; resistance
+	db WR_LIGHTNING ; resistance
 	tx DrillName ; category
 	db 34 ; Pokedex number
 	db 0
@@ -3438,7 +3438,7 @@ PoliwagCard:
 	db ATK_ANIM_NONE ; animation
 
 	db 1 ; retreat cost
-	db WR_GRASS ; weakness
+	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx TadpoleName ; category
 	db 60 ; Pokedex number
@@ -3489,7 +3489,7 @@ PoliwhirlCard:
 	db ATK_ANIM_HIT ; animation
 
 	db 1 ; retreat cost
-	db WR_GRASS ; weakness
+	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx TadpoleName ; category
 	db 61 ; Pokedex number
@@ -3540,7 +3540,7 @@ PoliwrathCard:
 	db ATK_ANIM_WHIRLPOOL ; animation
 
 	db 3 ; retreat cost
-	db WR_GRASS ; weakness
+	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx TadpoleName ; category
 	db 62 ; Pokedex number
@@ -4356,7 +4356,7 @@ GyaradosCard:
 	db ATK_ANIM_BUBBLES ; animation
 
 	db 3 ; retreat cost
-	db WR_GRASS ; weakness
+	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx AtrociousName ; category
 	db 130 ; Pokedex number
@@ -6397,7 +6397,7 @@ GeodudeCard:
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
-	db NONE ; resistance
+	db WR_LIGHTNING ; resistance
 	tx RockName ; category
 	db 74 ; Pokedex number
 	db 0
@@ -6448,7 +6448,7 @@ GravelerCard:
 
 	db 2 ; retreat cost
 	db WR_GRASS ; weakness
-	db NONE ; resistance
+	db WR_LIGHTNING ; resistance
 	tx RockName ; category
 	db 75 ; Pokedex number
 	db 0
@@ -6499,7 +6499,7 @@ GolemCard:
 
 	db 4 ; retreat cost
 	db WR_GRASS ; weakness
-	db NONE ; resistance
+	db WR_LIGHTNING ; resistance
 	tx MegatonName ; category
 	db 76 ; Pokedex number
 	db 0
@@ -6550,7 +6550,7 @@ OnixCard:
 
 	db 3 ; retreat cost
 	db WR_GRASS ; weakness
-	db NONE ; resistance
+	db WR_LIGHTNING ; resistance
 	tx RockSnakeName ; category
 	db 95 ; Pokedex number
 	db 0
@@ -7059,7 +7059,7 @@ AerodactylCard:
 	db ATK_ANIM_HIT ; animation
 
 	db 2 ; retreat cost
-	db WR_GRASS ; weakness
+	db WR_WATER ; weakness
 	db WR_FIGHTING ; resistance
 	tx FossilName ; category
 	db 142 ; Pokedex number
