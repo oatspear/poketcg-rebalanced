@@ -5574,7 +5574,7 @@ PrintPlayAreaCardAttachedEnergies:
 	jr nz, .empty_loop
 	pop hl
 	ld de, wAttachedEnergies
-	lb bc, SYM_FIRE, NUM_TYPES - 1
+	lb bc, SYM_FIRE, NUM_TYPES
 .next_color
 	ld a, [de] ; energy count of current color
 	inc de
