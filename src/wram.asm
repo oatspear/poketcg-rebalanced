@@ -642,6 +642,8 @@ wDuelType:: ; cc09
 wGotHeadsFromSandAttackOrSmokescreenCheck:: ; cc0a
 	ds $1
 
+; OATS WRAM0 is full, so we must reuse this byte to implement SUPPORTER checks
+; see duel_constants.asm
 wAlreadyPlayedEnergyOrSupporter:: ; cc0b
 	ds $1
 

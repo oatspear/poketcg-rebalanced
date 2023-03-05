@@ -72,7 +72,7 @@ AIMainTurnLogic:
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	or a
+	and PLAYED_ENERGY_THIS_TURN  ; or a
 	jr nz, .skip_energy_attach_1
 	call AIProcessAndTryToPlayEnergy
 .skip_energy_attach_1
@@ -121,7 +121,7 @@ AIMainTurnLogic:
 	ld a, AI_TRAINER_CARD_PHASE_12
 	call AIProcessHandTrainerCards
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	or a
+	and PLAYED_ENERGY_THIS_TURN  ; or a
 	jr nz, .skip_energy_attach_2
 	call AIProcessAndTryToPlayEnergy
 .skip_energy_attach_2

@@ -562,11 +562,11 @@ ConvertColorToEnergyCardID:
 ; 	ret
 
 ; return carry depending on card index in a:
-;	- if energy card, return carry if no energy card has been played yet
-;	- if basic Pokémon card, return carry if there's space in bench
-;	- if evolution card, return carry if there's a Pokémon
+;	- if energy card, return carry if an energy card has already been played
+;	- if basic Pokémon card, return carry if there's no space in bench
+;	- if evolution card, return carry if there's no Pokémon
 ;	  in Play Area it can evolve
-;	- if trainer card, return carry if it can be used
+;	- if trainer card, return carry if it cannot be used
 ; input:
 ;	a = card index to check
 CheckIfCardCanBePlayed:
@@ -582,7 +582,7 @@ CheckIfCardCanBePlayed:
 
 ; energy card
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	or a
+	and PLAYED_ENERGY_THIS_TURN  ; or a
 	ret z
 	scf
 	ret
@@ -621,13 +621,15 @@ CheckIfCardCanBePlayed:
 .trainer_card
 ; OATS begin check SUPPORTER played this turn
 ; card type in stored in a
-	; cp TYPE_TRAINER_UNUSED
-	; jr nz, .not_supporter_card
-	; ld a, [wAlreadyPlayedSupporter]
-	; or a
-	; jr z, .not_supporter_card  ; supporter not yet played
-	; ret  ; supporter played, c is not set
-; .not_supporter_card
+	cp TYPE_TRAINER_UNUSED
+	jr nz, .not_supporter_card
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_SUPPORTER_THIS_TURN
+	jr z, .not_supporter_card
+; supporter already played
+	scf
+	ret
+.not_supporter_card
 ; OATS end SUPPORTER check
 	bank1call CheckCantUseTrainerDueToHeadache
 	ret c

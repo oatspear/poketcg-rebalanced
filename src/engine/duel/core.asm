@@ -589,13 +589,14 @@ PlayEnergyCard:
 
 .not_water_energy
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	or a
+	and PLAYED_ENERGY_THIS_TURN  ; or a
 	jr nz, .already_played_energy
 	call HasAlivePokemonInPlayArea
 	call OpenPlayAreaScreenForSelection ; choose card to play energy card on
 	jp c, DuelMainInterface ; exit if no card was chosen
 .play_energy_set_played
-	ld a, 1
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	or PLAYED_ENERGY_THIS_TURN
 	ld [wAlreadyPlayedEnergyOrSupporter], a
 .play_energy
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -617,7 +618,7 @@ PlayEnergyCard:
 	call CheckRainDanceScenario
 	jr c, .play_energy
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	or a
+	and PLAYED_ENERGY_THIS_TURN  ; or a
 	jr z, .play_energy_set_played
 	ldtx hl, MayOnlyAttachOneEnergyCardText
 	call DrawWideTextBox_WaitForInput
@@ -6522,7 +6523,8 @@ OppAction_PlayEnergyCard:
 	call LoadCardDataToBuffer1_FromDeckIndex
 	call DrawLargePictureOfCard
 	call PrintAttachedEnergyToPokemon
-	ld a, 1
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	or PLAYED_ENERGY_THIS_TURN
 	ld [wAlreadyPlayedEnergyOrSupporter], a
 	call DrawDuelMainScene
 	ret
@@ -6589,6 +6591,15 @@ OppAction_PlayTrainerCard:
 	call ExchangeRNG
 	ld a, $01
 	ld [wSkipDuelistIsThinkingDelay], a
+; OATS begin support trainer subtypes
+	ld a, [wLoadedCard1Type]
+	cp TYPE_TRAINER_UNUSED
+	jr nz, .not_supporter_card
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	or PLAYED_SUPPORTER_THIS_TURN
+	ld [wAlreadyPlayedEnergyOrSupporter], a
+.not_supporter_card
+; OATS end support trainer subtypes
 	ret
 
 ; execute the effect commands of the trainer card that is being played

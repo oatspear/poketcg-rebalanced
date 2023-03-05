@@ -1758,6 +1758,18 @@ PlayTrainerCard:
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTempCardIndex_ff9f], a
 	call LoadNonPokemonCardEffectCommands
+; OATS begin support trainer subtypes
+	ld a, [wLoadedCard1Type]
+	cp TYPE_TRAINER_UNUSED
+	jr nz, .not_supporter_card
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_SUPPORTER_THIS_TURN
+	jr nz, .cant_use
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	or PLAYED_SUPPORTER_THIS_TURN
+	ld [wAlreadyPlayedEnergyOrSupporter], a
+.not_supporter_card
+; OATS end support trainer subtypes
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
 	call TryExecuteEffectCommandFunction
 	jr nc, .can_use
