@@ -1073,6 +1073,14 @@ CreateFilteredCardList:
 	and FILTER_ENERGY
 	cp FILTER_ENERGY
 	jr z, .check_energy
+
+; OATS begin custom logic to count all Trainer subtypes in the same filter
+	ld a, b
+	and FILTER_TRAINER
+	cp FILTER_TRAINER
+	jr z, .check_trainer
+; OATS end custom logic
+
 ; OATS begin custom logic to include energy and pokemon in the same filter
 	ld a, c
 	cp TYPE_TRAINER
@@ -1089,6 +1097,12 @@ CreateFilteredCardList:
 	and TYPE_ENERGY
 	cp TYPE_ENERGY
 	jr nz, .loop_card_ids
+	jr .add_card
+
+.check_trainer
+	ld a, c
+	bit TYPE_TRAINER_F, a
+	jr z, .loop_card_ids
 
 .add_card
 	push bc
@@ -1380,6 +1394,13 @@ CountNumberOfCardsOfType:
 	cp FILTER_ENERGY
 	jr z, .check_energy
 
+; OATS begin custom logic to count all Trainer subtypes in the same filter
+	ld a, b
+	and FILTER_TRAINER
+	cp FILTER_TRAINER
+	jr z, .check_trainer
+; OATS end custom logic
+
 ; OATS begin custom logic to include energy and pokemon in the same filter
 	ld a, l
 	cp TYPE_TRAINER
@@ -1401,6 +1422,13 @@ CountNumberOfCardsOfType:
 	and TYPE_ENERGY
 	cp TYPE_ENERGY
 	jr nz, .loop_cards
+	jr .incr_count
+; OATS counts all trainer cards as the same
+.check_trainer
+	ld a, l
+	pop hl
+	bit TYPE_TRAINER_F, a
+	jr z, .loop_cards
 .incr_count
 	inc c
 	jr .loop_cards
