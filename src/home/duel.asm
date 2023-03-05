@@ -1762,6 +1762,7 @@ PlayTrainerCard:
 	ld a, [wLoadedCard1Type]
 	cp TYPE_TRAINER_UNUSED
 	jr nz, .not_supporter_card
+	ldtx hl, MayOnlyUseOneSupporterCardText
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	and PLAYED_SUPPORTER_THIS_TURN
 	jr nz, .cant_use

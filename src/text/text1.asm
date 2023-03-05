@@ -268,6 +268,11 @@ MayOnlyAttachOneEnergyCardText: ; 366d9 (d:66d9)
 	line "per turn."
 	done
 
+MayOnlyUseOneSupporterCardText: ; 366d9 (d:66d9)
+	text "You may only use 1 Supporter card"
+	line "per turn."
+	done
+
 UseThisPokemonPowerText: ; 36706 (d:6706)
 	text "Use this Pokémon Power?"
 	done
@@ -1003,12 +1008,11 @@ OpponentIsNotAsleepText: ; 379f2 (d:79f2)
 	done
 
 UnableDueToToxicGasText: ; 37a0a (d:7a0a)
-	text "Unable to use due to the"
-	line "effects of Toxic Gas."
+	text "Unable to use due to Toxic Gas."
 	done
 
 Text00d5: ; 37a3a (d:7a3a)
-	text "A Transmission Error occured."
+	text "Transmission Error."
 	done
 
 BackUpIsBrokenText: ; 37a59 (d:7a59)
@@ -1016,27 +1020,27 @@ BackUpIsBrokenText: ; 37a59 (d:7a59)
 	done
 
 PrinterIsNotConnectedText: ; 37a6d (d:7a6d)
-	text "Error No. 02:"
+	text "Error 02:"
 	line "Printer is not connected."
 	done
 
 BatteriesHaveLostTheirChargeText: ; 37a96 (d:7a96)
-	text "Error No. 01:"
+	text "Error 01:"
 	line "Batteries have lost their charge."
 	done
 
 PrinterPaperIsJammedText: ; 37ac7 (d:7ac7)
-	text "Error No. 03:"
+	text "Error 03:"
 	line "Printer paper is jammed."
 	done
 
 CheckCableOrPrinterSwitchText: ; 37aef (d:7aef)
-	text "Error No. 02:"
+	text "Error 02:"
 	line "Check cable or printer switch."
 	done
 
 PrinterPacketErrorText: ; 37b1d (d:7b1d)
-	text "Error No. 04:"
+	text "Error 04:"
 	line "Printer Packet Error."
 	done
 
@@ -1045,10 +1049,8 @@ PrintingWasInterruptedText: ; 37b42 (d:7b42)
 	done
 
 CardPopCannotBePlayedWithTheGameBoyText: ; 37b5d (d:7b5d)
-	text "Card Pop! cannot be played"
-	line "with the Game Boy."
-	line "Please use a"
-	line "Game Boy Color."
+	text "Card Pop! can only be played"
+	line "with a Game Boy Color."
 	done
 
 SandAttackCheckText: ; 37ba9 (d:7ba9)

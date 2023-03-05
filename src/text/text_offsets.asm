@@ -66,6 +66,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NoSelectableAttackText                             ; 0x003c
 	textpointer UnableToRetreatText                                ; 0x003d
 	textpointer MayOnlyAttachOneEnergyCardText                     ; 0x003e
+	textpointer MayOnlyUseOneSupporterCardText                     ; 0x003e
 	textpointer UseThisPokemonPowerText                            ; 0x003f
 	textpointer PokemonPowerSelectNotRequiredText                  ; 0x0040
 	textpointer DiscardDescription                                 ; 0x0041

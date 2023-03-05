@@ -5,6 +5,7 @@
 ### Added
 - Darkness type.
 - Card: Darkness Basic Energy.
+- Implemented Supporter Trainer cards.
 
 ### Changed
 - Changed Pokémon types, weaknesses and resistances to accommodate the new Darkness type and to better distribute weakness and resistance ratios per type.
