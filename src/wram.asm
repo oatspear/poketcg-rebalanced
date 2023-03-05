@@ -642,7 +642,7 @@ wDuelType:: ; cc09
 wGotHeadsFromSandAttackOrSmokescreenCheck:: ; cc0a
 	ds $1
 
-wAlreadyPlayedEnergy:: ; cc0b
+wAlreadyPlayedEnergyOrSupporter:: ; cc0b
 	ds $1
 
 ; set to 1 if the confusion check coin toss in AttemptRetreat is heads

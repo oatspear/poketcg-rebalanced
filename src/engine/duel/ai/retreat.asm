@@ -793,7 +793,7 @@ AITryToRetreat:
 ; checks if the Pokémon needs just one more energy to retreat
 ; if it does, check if there are any energy cards in hand
 ; and if there are, play that energy card
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	or a
 	jr nz, .check_id
 	ld e, PLAY_AREA_ARENA

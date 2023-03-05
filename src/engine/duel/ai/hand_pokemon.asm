@@ -211,7 +211,7 @@ AIDecideEvolution:
 	jr z, .check_evolution_ko
 	ld a, 2
 	call SubFromAIScore
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	or a
 	jr nz, .check_evolution_ko
 	call LookForEnergyNeededInHand

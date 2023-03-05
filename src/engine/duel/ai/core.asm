@@ -581,7 +581,7 @@ CheckIfCardCanBePlayed:
 ; OATS end support trainer subtypes
 
 ; energy card
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	or a
 	ret z
 	scf

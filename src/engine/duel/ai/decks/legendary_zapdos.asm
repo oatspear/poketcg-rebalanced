@@ -98,7 +98,7 @@ AIDoTurn_LegendaryZapdos:
 	ld a, AI_TRAINER_CARD_PHASE_10
 	call AIProcessHandTrainerCards
 ; play Energy card if possible.
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	or a
 	jr nz, .skip_energy_attach
 
