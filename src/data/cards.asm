@@ -9862,7 +9862,7 @@ DoubleColorlessEnergyCard:
 	dw NONE ; description (cont)
 
 ProfessorOakCard:
-	db TYPE_TRAINER_UNUSED ; type
+	db TYPE_TRAINER_SUPPORTER ; type
 	gfx ProfessorOakCardGfx ; gfx
 	tx ProfessorOakName ; name
 	db DIAMOND ; rarity
@@ -9884,7 +9884,7 @@ ImposterProfessorOakCard:
 	dw NONE ; description (cont)
 
 BillCard:
-	db TYPE_TRAINER_UNUSED ; type
+	db TYPE_TRAINER_SUPPORTER ; type
 	gfx BillCardGfx ; gfx
 	tx BillName ; name
 	db CIRCLE ; rarity

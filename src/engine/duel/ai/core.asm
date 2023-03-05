@@ -621,7 +621,7 @@ CheckIfCardCanBePlayed:
 .trainer_card
 ; OATS begin check SUPPORTER played this turn
 ; card type in stored in a
-	cp TYPE_TRAINER_UNUSED
+	cp TYPE_TRAINER_SUPPORTER
 	jr nz, .not_supporter_card
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	and PLAYED_SUPPORTER_THIS_TURN

@@ -6593,7 +6593,7 @@ OppAction_PlayTrainerCard:
 	ld [wSkipDuelistIsThinkingDelay], a
 ; OATS begin support trainer subtypes
 	ld a, [wLoadedCard1Type]
-	cp TYPE_TRAINER_UNUSED
+	cp TYPE_TRAINER_SUPPORTER
 	jr nz, .not_supporter_card
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	or PLAYED_SUPPORTER_THIS_TURN

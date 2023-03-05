@@ -1760,7 +1760,7 @@ PlayTrainerCard:
 	call LoadNonPokemonCardEffectCommands
 ; OATS begin support trainer subtypes
 	ld a, [wLoadedCard1Type]
-	cp TYPE_TRAINER_UNUSED
+	cp TYPE_TRAINER_SUPPORTER
 	jr nz, .not_supporter_card
 	ldtx hl, MayOnlyUseOneSupporterCardText
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
