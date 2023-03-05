@@ -398,6 +398,13 @@ Func_b088:
 	and FILTER_ENERGY
 	cp FILTER_ENERGY
 	jr z, .check_energy
+; OATS begin custom logic to include trainer subtypes in the same filter
+	ld a, b
+	and FILTER_TRAINER
+	cp FILTER_TRAINER
+	jr z, .check_trainer
+; OATS end custom logic
+
 ; OATS begin custom logic to include energy and pokemon in the same filter
 	ld a, c
 	cp TYPE_TRAINER
@@ -409,11 +416,18 @@ Func_b088:
 	cp b
 	jr nz, .asm_b0dd
 	jr .asm_b0fc
+
 .check_energy
 	ld a, c
 	and TYPE_ENERGY
 	cp TYPE_ENERGY
 	jr nz, .asm_b0dd
+	jr .asm_b0fc
+
+.check_trainer
+	ld a, c
+	bit TYPE_TRAINER_F, a
+	jr z, .asm_b0dd
 .asm_b0fc
 	push bc
 	push hl

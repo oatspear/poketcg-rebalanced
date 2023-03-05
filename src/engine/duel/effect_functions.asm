@@ -541,8 +541,10 @@ CreateTrainerCardListFromDiscardPile: ; 2c26e (b:426e)
 	ld a, [hl]
 	call LoadCardDataToBuffer2_FromDeckIndex
 	ld a, [wLoadedCard2Type]
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr nz, .next_card
+	jr c, .next_card  ; original: jr nz
+; OATS end support trainer subtypes
 
 	ld a, [hl]
 	ld [de], a
@@ -8891,8 +8893,11 @@ CheckIfThereAreAnyEnergyCardsAttached: ; 2f1c4 (b:71c4)
 	ld a, l
 	call LoadCardDataToBuffer2_FromDeckIndex
 	ld a, [wLoadedCard2Type]
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr z, .next_card ; skip if it's a Trainer card
+	; original: jr z
+	jr nc, .next_card  ; skip if it's a Trainer card
+; OATS end support trainer subtypes
 	cp TYPE_ENERGY
 	jr nc, .found
 .next_card
@@ -10339,8 +10344,10 @@ LassEffect: ; 2f9e3 (b:79e3)
 	jr z, .done
 	call GetCardIDFromDeckIndex
 	call GetCardType
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr nz, .loop_hand
+	jr c, .loop_hand  ; original: jr nz
+; OATS end support trainer subtypes
 	ldh a, [hTempCardIndex_ff98]
 	call RemoveCardFromHand
 	call ReturnCardToDeck

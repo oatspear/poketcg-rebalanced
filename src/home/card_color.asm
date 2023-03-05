@@ -19,8 +19,12 @@ GetPlayAreaCardColor:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	call GetCardType
-	cp TYPE_TRAINER
-	jr nz, .got_type
+; OATS begin custom logic to support trainer subtypes
+	; cp TYPE_TRAINER
+	; jr nz, .got_type
+	bit TYPE_TRAINER_F, a
+	jr z, .got_type
+; OATS end custom logic
 	ld a, COLORLESS
 .got_type
 	pop de

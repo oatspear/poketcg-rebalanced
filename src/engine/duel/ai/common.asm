@@ -738,8 +738,10 @@ RemoveFromListDifferentCardOfGivenType: ; 22a95 (8:6a95)
 	pop de
 	cp TYPE_ENERGY
 	jr c, .pkmn_card
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr nz, .energy
+	jr c, .energy  ; original: jr nz
+; OATS end support trainer subtypes
 
 ; only remove from list specific type.
 

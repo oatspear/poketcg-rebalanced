@@ -36,8 +36,10 @@ SetUpBossStartingHandAndDeck:
 	ld a, [wLoadedCard1Type]
 	cp TYPE_ENERGY
 	jr c, .pokemon_card_1
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr z, .next_card_deck_1
+	jr nc, .next_card_deck_1  ; original: jr z
+; OATS end support trainer subtypes
 
 ; energy card
 	ld a, [wAISetupEnergyCount]
@@ -91,8 +93,10 @@ SetUpBossStartingHandAndDeck:
 	ld a, [wLoadedCard1Type]
 	cp TYPE_ENERGY
 	jr c, .pokemon_card_2
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr z, .next_card_deck_2
+	jr nc, .next_card_deck_2  ; original: jr z
+; OATS end support trainer subtypes
 
 ; energy card
 	ld a, [wAISetupEnergyCount]

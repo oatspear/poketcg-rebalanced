@@ -575,8 +575,10 @@ CheckIfCardCanBePlayed:
 	ld a, [wLoadedCard1Type]
 	cp TYPE_ENERGY
 	jr c, .pokemon_card
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr z, .trainer_card
+	jr nc, .trainer_card  ; original: jr z
+; OATS end support trainer subtypes
 
 ; energy card
 	ld a, [wAlreadyPlayedEnergy]

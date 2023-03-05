@@ -37,3 +37,6 @@
 - Sam's practice deck does wrong card ID check.
 - AI does not account for Mysterious Fossil or Clefairy Doll when using Shift Pkmn Power.
 - Challenge host uses wrong name for the first rival.
+
+### To Do
+- Simplify custom logic (`OATS`) for card filters in `deck_configuration.asm`. Trainer filter already handles Trainer cards, no need to check for Trainer in Pokémon/Energy filters.

@@ -678,8 +678,10 @@ HandleAIShift:
 	push bc
 	call GetCardIDFromDeckIndex
 	call GetCardType
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr nz, .not_trainer
+	jr c, .not_trainer  ; original: jr nz
+; OATS end support trainer subtypes
 	pop bc
 	jr .loop_play_area
 .not_trainer

@@ -3580,8 +3580,10 @@ AIDecide_Pokedex:
 	ld a, [hli]
 	cp $ff
 	jr z, .find_energy
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr nz, .loop_trainers
+	jr c, .loop_trainers  ; original: jr nz
+; OATS end support trainer subtypes
 ; found a Trainer card
 ; store it in wce1a list
 	push hl
@@ -3735,8 +3737,10 @@ PickPokedexCards:
 	ld a, [hli]
 	cp $ff
 	jr z, .done
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr nz, .loop_trainers
+	jr c, .loop_trainers  ; original: jr nz
+; OATS end support trainer subtypes
 ; found a Trainer card
 ; store it in wce1a list
 	push hl
@@ -4400,8 +4404,10 @@ AIDecide_Lass:
 	cp LASS
 	jr z, .loop
 	ld a, [wLoadedCard1Type]
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr nz, .loop
+	jr c, .loop  ; original: jr nz
+; OATS end support trainer subtypes
 .no_carry
 	or a
 	ret

@@ -787,8 +787,10 @@ CheckAbleToRetreat:
 	call GetCardIDFromDeckIndex
 	call LoadCardDataToBuffer1_FromCardID
 	ld a, [wLoadedCard1Type]
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr z, .unable_to_retreat
+	jr nc, .unable_to_retreat  ; original: jr z
+; OATS end support trainer subtypes
 	call CheckIfEnoughEnergiesToRetreat
 	jr c, .not_enough_energies
 	or a
@@ -3355,8 +3357,10 @@ CardListItemSelectionMenu:
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ldtx hl, PlayCheck2Text ; identical to PlayCheck1Text
 	ld a, [wLoadedCard1Type]
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr nz, .got_text
+	jr c, .got_text  ; original: jr nz
+; OATS end support trainer subtypes
 	ldtx hl, PlayCheck1Text
 .got_text
 	call DrawNarrowTextBox_PrintTextNoDelay
@@ -4731,8 +4735,10 @@ DrawLargePictureOfCard:
 	call LoadCardOrDuelMenuBorderTiles
 	ld e, HEADER_TRAINER
 	ld a, [wLoadedCard1Type]
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr z, .draw
+	jr nc, .draw  ; original: jr z
+; OATS end support trainer subtypes
 	ld e, HEADER_ENERGY
 	and TYPE_ENERGY
 	jr nz, .draw
@@ -7102,8 +7108,11 @@ HandlePoisonDamage:
 ConvertSpecialTrainerCardToPokemon:
 	ld c, a
 	ld a, [hl]
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	ret nz ; return if the card is not TRAINER type
+	; original: ret nz
+	ret c ; return if the card is not TRAINER type
+; OATS begin support trainer subtypes
 	push hl
 	ldh a, [hWhoseTurn]
 	ld h, a
@@ -7464,8 +7473,11 @@ CountKnockedOutPokemon:
 	call GetCardIDFromDeckIndex
 	call GetCardType
 	pop de
+; OATS begin support trainer subtypes
 	cp TYPE_TRAINER
-	jr z, .next ; jump if this is a trainer card (Clefairy Doll or Mysterious Fossil)
+	; original: jr z
+	jr nc, .next ; jump if this is a trainer card (Clefairy Doll or Mysterious Fossil)
+; OATS end support trainer subtypes
 	inc b
 .next
 	inc hl
