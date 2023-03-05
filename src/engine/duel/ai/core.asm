@@ -619,6 +619,16 @@ CheckIfCardCanBePlayed:
 	ret
 
 .trainer_card
+; OATS begin check SUPPORTER played this turn
+; card type in stored in a
+	; cp TYPE_TRAINER_UNUSED
+	; jr nz, .not_supporter_card
+	; ld a, [wAlreadyPlayedSupporter]
+	; or a
+	; jr z, .not_supporter_card  ; supporter not yet played
+	; ret  ; supporter played, c is not set
+; .not_supporter_card
+; OATS end SUPPORTER check
 	bank1call CheckCantUseTrainerDueToHeadache
 	ret c
 	call LoadNonPokemonCardEffectCommands
