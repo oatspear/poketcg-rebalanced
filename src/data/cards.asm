@@ -9846,7 +9846,7 @@ DarknessEnergyCard:
 	db CIRCLE ; rarity
 	db ENERGY | NONE ; sets
 	db DARKNESS_ENERGY
-	dw PsychicEnergyEffectCommands ; effect commands
+	dw DarknessEnergyEffectCommands ; effect commands
 	tx DarknessEnergyDescription ; description
 	dw NONE ; description (cont)
 
