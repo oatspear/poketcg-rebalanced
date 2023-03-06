@@ -197,6 +197,11 @@ MACRO duel_vars
 \1NumberOfPokemonInPlayArea::    ds $1
 
 \1ArenaCardStatus::              ds $1
+\1Bench1CardStatus::             ds $1
+\1Bench2CardStatus::             ds $1
+\1Bench3CardStatus::             ds $1
+\1Bench4CardStatus::             ds $1
+\1Bench5CardStatus::             ds $1
 
 ; $00   - player
 ; $01   - link
@@ -223,5 +228,5 @@ MACRO duel_vars
 ; see LAST_TURN_EFFECT_* constants.
 \1ArenaCardLastTurnEffect::      ds $1
 
-	ds $7
+	ds $2
 ENDM
