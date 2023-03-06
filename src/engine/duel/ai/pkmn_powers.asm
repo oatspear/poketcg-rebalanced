@@ -423,12 +423,20 @@ HandleAIPkmnPowers:
 	call GetTurnDuelistVariable
 	ld b, a
 	ld c, PLAY_AREA_ARENA
+; OATS check status of benched Pokemon too
+	; ld a, DUELVARS_ARENA_CARD_STATUS
+	; call GetTurnDuelistVariable
+	; and CNF_SLP_PRZ
+	; jr nz, .next_2
+
+.loop_play_area
+; OATS check status of benched Pokemon too
 	ld a, DUELVARS_ARENA_CARD_STATUS
+	add c
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
 	jr nz, .next_2
 
-.loop_play_area
 	ld a, DUELVARS_ARENA_CARD
 	add c
 	call GetTurnDuelistVariable
@@ -964,11 +972,19 @@ HandleAICowardice:
 
 	ld b, a
 	ld c, PLAY_AREA_ARENA
+; OATS check status of benched Pokemon too
+	; ld a, DUELVARS_ARENA_CARD_STATUS
+	; call GetTurnDuelistVariable
+	; and CNF_SLP_PRZ
+	; jr nz, .next
+.loop
+; OATS check status of benched Pokemon too
 	ld a, DUELVARS_ARENA_CARD_STATUS
+	add c
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
 	jr nz, .next
-.loop
+
 	ld a, DUELVARS_ARENA_CARD
 	add c
 	call GetTurnDuelistVariable

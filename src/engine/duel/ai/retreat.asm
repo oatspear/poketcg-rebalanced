@@ -24,16 +24,42 @@ AIDecideWhetherToRetreat:
 	or a
 	jr z, .check_ko_1 ; no status
 	and DOUBLE_POISONED
-	jr z, .check_cnf ; no poison
+	jr z, .check_other_status ; no poison
 	ld a, 2
 	call AddToAIScore
-.check_cnf
+; OATS any status condition allows for retreating
+.check_other_status
 	ld a, [hl]
 	and CNF_SLP_PRZ
-	cp CONFUSED
-	jr nz, .check_ko_1
+	; cp CONFUSED
+	; jr nz, .check_ko_1
+	jr z, .check_bench_status
 	ld a, 1
 	call AddToAIScore
+
+; OATS check bench for Pokémon that have no status conditions
+.check_bench_status
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	cp 1
+	jr z, .check_ko_1 ; skip if only one Pokemon in Play Area
+	ld b, a
+	ld c, PLAY_AREA_ARENA
+	inc c
+.loop_bench_status
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	add c
+	call GetTurnDuelistVariable
+	and a
+	jr z, .next_loop_bench_status
+; subtract from score for each Pokemon with status
+	ld a, 1
+	call SubFromAIScore
+.next_loop_bench_status
+	inc c
+	ld a, c
+	cp b
+	jr nz, .loop_bench_status
 
 .check_ko_1
 	xor a
@@ -781,13 +807,14 @@ AITryToRetreat:
 ; the necessary energy for retreat cost
 
 ; check status
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	jp z, .check_id
-	cp PARALYZED
-	jp z, .check_id
+; OATS status conditions no longer prevent retreat
+;	ld a, DUELVARS_ARENA_CARD_STATUS
+;	call GetTurnDuelistVariable
+;	and CNF_SLP_PRZ
+;	cp ASLEEP
+;	jp z, .check_id
+;	cp PARALYZED
+;	jp z, .check_id
 
 ; if an energy card hasn't been played yet,
 ; checks if the Pokémon needs just one more energy to retreat
@@ -836,12 +863,13 @@ AITryToRetreat:
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	ld b, a
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	jp z, .set_carry
-	cp PARALYZED
-	jp z, .set_carry
-	ld a, b
+; OATS status conditions no longer prevent retreat
+;	and CNF_SLP_PRZ
+;	cp ASLEEP
+;	jp z, .set_carry
+;	cp PARALYZED
+;	jp z, .set_carry
+;	ld a, b
 	ldh [hTemp_ffa0], a
 	ld a, $ff
 	ldh [hTempRetreatCostCards], a

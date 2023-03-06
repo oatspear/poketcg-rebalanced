@@ -282,12 +282,13 @@ AIDecideEvolution:
 
 ; if current card has a status condition, raise AI score
 .check_status
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	or a
-	jr z, .check_2nd_stage_hand
-	ld a, 4
-	call AddToAIScore
+; OATS evolving does not clear status conditions
+	; ld a, DUELVARS_ARENA_CARD_STATUS
+	; call GetTurnDuelistVariable
+	; or a
+	; jr z, .check_2nd_stage_hand
+	; ld a, 4
+	; call AddToAIScore
 
 ; if hand has 2nd stage card to evolve evolution card, raise AI score
 .check_2nd_stage_hand
