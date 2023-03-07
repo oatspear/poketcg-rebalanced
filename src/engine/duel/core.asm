@@ -5809,17 +5809,18 @@ ReturnRetreatCostCardsToArena:
 ; if successful, the retreated card is replaced with a bench Pokemon card
 AttemptRetreat:
 	call DiscardRetreatCostCards
-	ldh a, [hTemp_ffa0]
-	and CNF_SLP_PRZ
-	cp CONFUSED
-	jr nz, .success
-	ldtx de, ConfusionCheckRetreatText
-	call TossCoin
-	jr c, .success
-	ld a, 1
-	ld [wGotHeadsFromConfusionCheckDuringRetreat], a
-	scf
-	ret
+; OATS status conditions no longer prevent retreat
+	; ldh a, [hTemp_ffa0]
+	; and CNF_SLP_PRZ
+	; cp CONFUSED
+	; jr nz, .success
+	; ldtx de, ConfusionCheckRetreatText
+	; call TossCoin
+	; jr c, .success
+	; ld a, 1
+	; ld [wGotHeadsFromConfusionCheckDuringRetreat], a
+	; scf
+	; ret
 .success
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
