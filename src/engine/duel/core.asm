@@ -472,36 +472,37 @@ DuelMenu_Done:
 
 ; triggered by selecting the "Retreat" item in the duel menu
 DuelMenu_Retreat:
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	cp CONFUSED
-	ldh [hTemp_ffa0], a
-	jr nz, .not_confused
-	ld a, [wGotHeadsFromConfusionCheckDuringRetreat]
-	or a
-	jr nz, .unable_due_to_confusion
-	call CheckAbleToRetreat
-	jr c, .unable_to_retreat
-	call DisplayRetreatScreen
-	jr c, .done
-	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
-	call DrawWideTextBox_WaitForInput
-	call OpenPlayAreaScreenForSelection
-	jr c, .done
-	ld [wBenchSelectedPokemon], a
-	ld a, [wBenchSelectedPokemon]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, OPPACTION_ATTEMPT_RETREAT
-	call SetOppAction_SerialSendDuelData
-	call AttemptRetreat
-	jr nc, .done
-	call DrawDuelMainScene
+; OATS confusion no longer prevents retreat
+;	ld a, DUELVARS_ARENA_CARD_STATUS
+;	call GetTurnDuelistVariable
+;	and CNF_SLP_PRZ
+;	cp CONFUSED
+;	ldh [hTemp_ffa0], a
+;	jr nz, .not_confused
+;	ld a, [wGotTailsFromConfusionCheckDuringRetreat]
+;	or a
+;	jr nz, .unable_due_to_confusion
+;	call CheckAbleToRetreat
+;	jr c, .unable_to_retreat
+;	call DisplayRetreatScreen
+;	jr c, .done
+;	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
+;	call DrawWideTextBox_WaitForInput
+;	call OpenPlayAreaScreenForSelection
+;	jr c, .done
+;	ld [wBenchSelectedPokemon], a
+;	ld a, [wBenchSelectedPokemon]
+;	ldh [hTempPlayAreaLocation_ffa1], a
+;	ld a, OPPACTION_ATTEMPT_RETREAT
+;	call SetOppAction_SerialSendDuelData
+;	call AttemptRetreat
+;	jr nc, .done
+;	call DrawDuelMainScene
 
-.unable_due_to_confusion
-	ldtx hl, UnableToRetreatText
-	call DrawWideTextBox_WaitForInput
-	jp PrintDuelMenuAndHandleInput
+; .unable_due_to_confusion
+; 	ldtx hl, UnableToRetreatText
+; 	call DrawWideTextBox_WaitForInput
+; 	jp PrintDuelMenuAndHandleInput
 
 .not_confused
 	; note that the energy cards are discarded (DiscardRetreatCostCards), then returned
@@ -779,8 +780,9 @@ Func_4597:
 CheckAbleToRetreat:
 	call CheckCantRetreatDueToAcid
 	ret c
-	call CheckIfActiveCardParalyzedOrAsleep
-	ret c
+; OATS status conditions no longer prevent retreat
+	; call CheckIfActiveCardParalyzedOrAsleep
+	; ret c
 	call HasAlivePokemonInBench
 	jr c, .unable_to_retreat
 	ld a, DUELVARS_ARENA_CARD
@@ -980,7 +982,8 @@ EnergyDiscardCardListParameters:
 DuelMenu_Attack:
 	call HandleCantAttackSubstatus
 	jr c, .alert_cant_attack_and_cancel_menu
-	call CheckIfActiveCardParalyzedOrAsleep
+; OATS only Paralysis prevents attacking outright
+	call CheckIfActiveCardParalyzed  ; CheckIfActiveCardParalyzedOrAsleep
 	jr nc, .can_attack
 .alert_cant_attack_and_cancel_menu
 	call DrawWideTextBox_WaitForInput
@@ -1372,23 +1375,32 @@ CheckIfEnoughEnergiesOfType:
 	ret
 
 ; return carry and the corresponding text in hl if the turn holder's
-; arena Pokemon card is paralyzed or asleep.
-CheckIfActiveCardParalyzedOrAsleep:
+; arena Pokemon card is paralyzed.
+CheckIfActiveCardParalyzed:
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
 	cp PARALYZED
 	jr z, .paralyzed
-	cp ASLEEP
-	jr z, .asleep
 	or a
 	ret
 .paralyzed
 	ldtx hl, UnableDueToParalysisText
-	jr .return_with_status_condition
+	scf
+	ret
+
+; return carry and the corresponding text in hl if the turn holder's
+; arena Pokemon card is asleep.
+CheckIfActiveCardAsleep:
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	and CNF_SLP_PRZ
+	cp ASLEEP
+	jr z, .asleep
+	or a
+	ret
 .asleep
 	ldtx hl, UnableDueToSleepText
-.return_with_status_condition
 	scf
 	ret
 
@@ -5818,7 +5830,7 @@ AttemptRetreat:
 	; call TossCoin
 	; jr c, .success
 	; ld a, 1
-	; ld [wGotHeadsFromConfusionCheckDuringRetreat], a
+	; ld [wGotTailsFromConfusionCheckDuringRetreat], a
 	; scf
 	; ret
 .success
@@ -5826,7 +5838,7 @@ AttemptRetreat:
 	ld e, a
 	call SwapArenaWithBenchPokemon
 	xor a
-	ld [wGotHeadsFromConfusionCheckDuringRetreat], a
+	ld [wGotTailsFromConfusionCheckDuringRetreat], a
 	ret
 
 ; given a number between 0-255 in a, converts it to TX_SYMBOL format,
@@ -6635,17 +6647,22 @@ OppAction_BeginUseAttack:
 	and CNF_SLP_PRZ
 	cp CONFUSED
 	jr z, .has_status
+; OATS sleep also requires a coin flip
+	cp ASLEEP
+	jr z, .has_status
 	call ExchangeRNG
 	ret
 
 ; we make it here is attacker is affected by
 ; Sand Attack, Smokescreen, or confusion
+; OATS: or sleep
 .has_status
 	call DrawDuelMainScene
 	call PrintPokemonsAttackText
 	call WaitForWideTextBoxInput
 	call ExchangeRNG
 	call HandleSandAttackOrSmokescreenSubstatus
+	; FIXME handle sleep
 	ret nc ; return if attack is successful (won the coin toss)
 	call ClearNonTurnTemporaryDuelvars
 	; end the turn if the attack fails
@@ -6860,7 +6877,8 @@ HandleBetweenTurnsEvents:
 	; has status condition
 	call HandlePoisonDamage
 	jr c, .discard_pluspower
-	call HandleSleepCheck
+; OATS sleep check is no longer between turns
+	; call HandleSleepCheck
 	ld a, [hl]
 	and CNF_SLP_PRZ
 	cp PARALYZED
@@ -6884,13 +6902,15 @@ HandleBetweenTurnsEvents:
 	call GetCardIDFromDeckIndex
 	ld a, e
 	ld [wTempNonTurnDuelistCardID], a
-	ld l, DUELVARS_ARENA_CARD_STATUS
-	ld a, [hl]
-	or a
-	jr z, .asm_6c3a
-	call HandlePoisonDamage
-	jr c, .asm_6c3a
-	call HandleSleepCheck
+; OATS poison damage only for the turn holder
+	; ld l, DUELVARS_ARENA_CARD_STATUS
+	; ld a, [hl]
+	; or a
+	; jr z, .asm_6c3a
+	; call HandlePoisonDamage
+; OATS sleep check is no longer handled between turns
+	; jr c, .asm_6c3a
+	; call HandleSleepCheck
 .asm_6c3a
 	call DiscardAttachedDefenders
 	call SwapTurn
@@ -7672,7 +7692,7 @@ InitVariablesToBeginDuel:
 InitVariablesToBeginTurn:
 	xor a
 	ld [wAlreadyPlayedEnergyOrSupporter], a
-	ld [wGotHeadsFromConfusionCheckDuringRetreat], a
+	ld [wGotTailsFromConfusionCheckDuringRetreat], a
 	ld [wGotHeadsFromSandAttackOrSmokescreenCheck], a
 	ldh a, [hWhoseTurn]
 	ld [wWhoseTurn], a

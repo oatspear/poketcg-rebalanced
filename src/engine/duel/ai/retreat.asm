@@ -1,7 +1,7 @@
 ; determine AI score for retreating
 ; return carry if AI decides to retreat
 AIDecideWhetherToRetreat:
-	ld a, [wGotHeadsFromConfusionCheckDuringRetreat]
+	ld a, [wGotTailsFromConfusionCheckDuringRetreat]
 	or a
 	jp nz, .no_carry
 	xor a
