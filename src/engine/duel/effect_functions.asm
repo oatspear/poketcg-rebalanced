@@ -943,6 +943,7 @@ UpdateDevolvedCardHPAndStage: ; 2c431 (b:4431)
 	pop bc
 	ret
 
+; OATS possibly unreferenced after all changes.
 ; reset various status after devolving card.
 ResetDevolvedCardStatus: ; 2c45d (b:445d)
 ; if it's Arena card, clear status conditions
