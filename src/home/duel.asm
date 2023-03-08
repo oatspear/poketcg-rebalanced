@@ -957,6 +957,22 @@ CheckIfCanEvolveInto_BasicToStage2:
 	scf
 	ret
 
+; OATS similar to ClearAllStatusConditions but does not remove POISONED or ASLEEP.
+ClearStatusOnSwitch:
+	push hl
+	ldh a, [hWhoseTurn]
+	ld h, a
+	ld l, DUELVARS_ARENA_CARD_STATUS
+	ld a, [hl]
+	and CNF_SLP_PRZ
+	cp ASLEEP
+	jr z, ClearAllStatusConditions.done_status
+	ld a, [hl]
+	and PSN_DBLPSN
+	ld [hl], a ; preserve just the poison nybble
+	xor a
+	jr ClearAllStatusConditions.done_status
+
 ; clear the status, all substatuses, and temporary duelvars of the turn holder's
 ; arena Pokemon. called when sending a new Pokemon into the arena.
 ; does not reset Headache, since it targets a player rather than a Pokemon.
@@ -967,6 +983,7 @@ ClearAllStatusConditions:
 	xor a
 	ld l, DUELVARS_ARENA_CARD_STATUS
 	ld [hl], a ; NO_STATUS
+.done_status
 	ld l, DUELVARS_ARENA_CARD_SUBSTATUS1
 	ld [hl], a
 	ld l, DUELVARS_ARENA_CARD_SUBSTATUS2
@@ -1190,7 +1207,8 @@ ShiftTurnPokemonToFirstPlayAreaSlots:
 ; reset the status and all substatuses of the arena Pokemon before swapping.
 ; e is the play area location offset of the bench Pokemon (PLAY_AREA_*).
 SwapArenaWithBenchPokemon:
-	call ClearAllStatusConditions
+; OATS switching no longer clear all status conditions
+	call ClearStatusOnSwitch  ; ClearAllStatusConditions
 	ld d, PLAY_AREA_ARENA
 ;	fallthrough
 
