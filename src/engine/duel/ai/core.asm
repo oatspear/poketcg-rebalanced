@@ -348,7 +348,8 @@ CheckIfSelectedAttackIsUnusable:
 
 	bank1call HandleCantAttackSubstatus
 	ret c
-	bank1call CheckIfActiveCardParalyzedOrAsleep
+; OATS only paralysis guarantees a no-attack turn
+	bank1call CheckIfActiveCardParalyzed  ; CheckIfActiveCardParalyzedOrAsleep
 	ret c
 
 	ld a, DUELVARS_ARENA_CARD

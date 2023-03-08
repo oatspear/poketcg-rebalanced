@@ -989,6 +989,54 @@ ClearAllStatusConditions:
 	pop hl
 	ret
 
+; Removes status conditions from turn holder's target.
+; Input:
+;    a: [0, 5] (PLAY_AREA_* offsets)
+; Affects hl.
+ClearStatusFromTarget:
+	add DUELVARS_ARENA_CARD_STATUS
+	ld l, a
+	ldh a, [hWhoseTurn]
+	ld h, a
+	xor a
+	ld [hl], a ; NO_STATUS
+	ret
+
+; Returns the status conditions of the turn holder's target.
+; Input:
+;    a: [0, 5] (PLAY_AREA_* offsets)
+; Returns:
+;    a: status conditions
+;    hl: address to status conditions
+GetStatusConditionsOfTarget:
+	add DUELVARS_ARENA_CARD_STATUS
+	ld l, a
+	ldh a, [hWhoseTurn]
+	ld h, a
+	ld a, [hl]
+	ret
+
+; Loop over turn holder's Pokemon and return whether any have status conditions.
+; Returns:
+;    a: first status condition found
+;    hl: first Pokemon with status conditions
+; Sets z if no status, nz if status.
+CheckOwnedPokemonHaveStatus:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld b, a
+	xor a
+	ld c, a
+.loop
+	call GetStatusConditionsOfTarget
+	or a
+	ret nz
+	inc c
+	ld a, c
+	cp b
+	jr nz, .loop
+	ret
+
 ; Removes a Pokemon card from the hand and places it in the arena or first available bench slot.
 ; If the Pokemon is placed in the arena, the status conditions of the player's arena card are zeroed.
 ; input:

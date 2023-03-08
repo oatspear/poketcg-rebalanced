@@ -6843,10 +6843,12 @@ HandleBetweenTurnsEvents:
 	jr c, .something_to_handle
 	cp PARALYZED
 	jr z, .something_to_handle
-	call SwapTurn
-	call IsArenaPokemonAsleepOrPoisoned
-	call SwapTurn
-	jr c, .something_to_handle
+; OATS poison only ticks for the turn holder
+; OATS sleep checks are no longer done between turns
+	; call SwapTurn
+	; call IsArenaPokemonAsleepOrPoisoned
+	; call SwapTurn
+	; jr c, .something_to_handle
 	call DiscardAttachedPluspowers
 	call SwapTurn
 	call DiscardAttachedDefenders

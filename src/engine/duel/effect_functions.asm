@@ -168,16 +168,17 @@ IsPlayerTurn: ; 2c0c7 (b:40c7)
 ;	[wAIMaxDamage] <- [wDamage] + e
 ;	[wDamage]      <- [wDamage] + a
 UpdateExpectedAIDamage_AccountForPoison: ; 2c0d4 (b:40d4)
-	push af
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetNonTurnDuelistVariable
-	and POISONED | DOUBLE_POISONED
-	jr z, UpdateExpectedAIDamage.skip_push_af
-	pop af
-	ld a, [wDamage]
-	ld [wAIMinDamage], a
-	ld [wAIMaxDamage], a
-	ret
+; OATS poison ticks only for the turn holder
+	; push af
+	; ld a, DUELVARS_ARENA_CARD_STATUS
+	; call GetNonTurnDuelistVariable
+	; and POISONED | DOUBLE_POISONED
+	; jr z, UpdateExpectedAIDamage.skip_push_af
+	; pop af
+	; ld a, [wDamage]
+	; ld [wAIMinDamage], a
+	; ld [wAIMaxDamage], a
+	; ret
 
 ; Sets some variables for AI use
 ;	[wAIMinDamage] <- [wDamage] + d
