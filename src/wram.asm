@@ -647,7 +647,7 @@ wGotHeadsFromSandAttackOrSmokescreenCheck:: ; cc0a
 wAlreadyPlayedEnergyOrSupporter:: ; cc0b
 	ds $1
 
-; set to 1 if the confusion check coin toss in AttemptRetreat is heads
+; set to 1 if the confusion check coin toss in AttemptRetreat is tails
 wGotTailsFromConfusionCheckDuringRetreat:: ; cc0c
 	ds $1
 
@@ -775,8 +775,9 @@ wNoDamageOrEffect:: ; ccc7
 wNumberPrizeCardsToTake:: ; ccc8
 	ds $1
 
+; OATS I think this is unused anywhere.
 ; set to 1 if the coin toss in the confusion check is heads (CheckSelfConfusionDamage)
-wGotHeadsFromConfusionCheck:: ; ccc9
+wGotTailsFromConfusionCheck:: ; ccc9
 	ds $1
 
 ; used to store card indices of all stages, in order, of a Play Area Pokémon

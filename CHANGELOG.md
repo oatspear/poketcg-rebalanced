@@ -25,6 +25,13 @@
 - **Onix**: added resistance to Lightning.
 - **Aerodactyl**: changed weakness to Water.
 - Updated AI decks to include appropriate energy cards.
+- Evolving Pokémon no longer clears status conditions.
+- Retreating no longer clears status conditions.
+- Paralysis, Sleep and Confusion allow for a normal retreat.
+- Poison and Sleep remain on benched Pokémon, but no damage is taken from Poison, and Pokémon do not wake up on the Bench.
+- Sleep works similarly to Confusion; a coin is flipped before attacking in order to determine whether the Pokémon wakes up.
+- Poison only deals damage on the Pokémon owner's turn.
+- Confusion only deals 10 damage to self on tails.
 
 ### Fixed
 - AI wrongfully adds score twice for attaching energy to Arena card.

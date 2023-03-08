@@ -1239,6 +1239,9 @@ SwapPlayAreaPokemon:
 	call .swap_duelvar
 	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
 	call .swap_duelvar
+; OATS also swap status conditions
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call .swap_duelvar
 	set CARD_LOCATION_PLAY_AREA_F, d
 	set CARD_LOCATION_PLAY_AREA_F, e
 	ld l, DUELVARS_CARD_LOCATIONS
@@ -1588,6 +1591,8 @@ UseAttackOrPokemonPower:
 	call SendAttackDataToLinkOpponent
 	call HandleSandAttackOrSmokescreenSubstatus
 	jp c, ClearNonTurnTemporaryDuelvars_ResetCarry
+	bank1call HandleSleepCheck  ; call HandleSleepCheck
+	jp c, ClearNonTurnTemporaryDuelvars_ResetCarry
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
 	jp c, ReturnCarry
@@ -1703,7 +1708,7 @@ HandleConfusionDamageToSelf:
 	call DrawWideTextBox_PrintText
 	ld a, ATK_ANIM_CONFUSION_HIT
 	ld [wLoadedAttackAnimation], a
-	ld a, 20 ; damage
+	ld a, 10 ; damage
 	call DealConfusionDamageToSelf
 	call Func_1bb4
 	call Func_6e49
@@ -1790,10 +1795,10 @@ Func_189d:
 	ld de, 0
 	ret
 
-; return carry and 1 into wGotHeadsFromConfusionCheck if damage will be dealt to oneself due to confusion
+; return carry and 1 into wGotTailsFromConfusionCheck if damage will be dealt to oneself due to confusion
 CheckSelfConfusionDamage:
 	xor a
-	ld [wGotHeadsFromConfusionCheck], a
+	ld [wGotTailsFromConfusionCheck], a
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
@@ -1806,7 +1811,7 @@ CheckSelfConfusionDamage:
 	call TossCoin
 	jr c, .no_confusion_damage
 	ld a, 1
-	ld [wGotHeadsFromConfusionCheck], a
+	ld [wGotTailsFromConfusionCheck], a
 	scf
 	ret
 .no_confusion_damage
