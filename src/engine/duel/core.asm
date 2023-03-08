@@ -1404,67 +1404,6 @@ CheckIfActiveCardAsleep:
 	scf
 	ret
 
-; OATS FIXME try to get this to fit into home bank.
-; handles the sleep check for the Turn Duelist
-; heals sleep status if coin is heads, else
-; it plays sleeping animation
-; return carry if the turn holder's attack was unsuccessful
-HandleSleepCheck:
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	push hl
-	call CheckSleepStatus
-	ret nc
-
-	call TossCoin
-	ld a, DUEL_ANIM_SLEEP
-	ldtx hl, IsStillAsleepText
-	jr nc, .tails
-
-; coin toss was heads, cure sleep status
-	pop hl
-	push hl
-	ld a, PSN_DBLPSN
-	and [hl]
-	ld [hl], a
-	ld a, DUEL_ANIM_HEAL
-	ldtx hl, IsCuredOfSleepText
-
-.tails
-	push af
-	push hl
-	call Func_6c7e
-	pop hl
-	call Func_6ce4
-	pop af
-	call Func_6cab
-	pop hl
-	call WaitForWideTextBoxInput
-	scf
-	ret
-
-; return carry if the turn holder's arena card is asleep
-CheckSleepStatus:
-	ld a, [hl]
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	ret nz
-
-	ld a, [wTempTurnDuelistCardID]
-	ld e, a
-	call LoadCardDataToBuffer1_FromCardID
-	ld a, 18
-	call CopyCardNameAndLevel
-	ld [hl], TX_END
-	ld hl, wTxRam2
-	xor a
-	ld [hli], a
-	ld [hl], a
-	ldtx de, PokemonsSleepCheckText
-	scf
-	ret
-
-
 ; display the animation of the turn duelist drawing one card at the beginning of the turn
 ; if there isn't any card left in the deck, let the player know with a text message
 DisplayDrawOneCardScreen:

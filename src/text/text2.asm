@@ -19,7 +19,9 @@ ConfusionCheckRetreatText: ; 380ac (e:40ac)
 	done
 
 PokemonsSleepCheckText: ; 380db (e:40db)
-	text "<RAMTEXT>'s Sleep check."
+	; text "<RAMTEXT>'s Sleep check."
+	text "Sleep check!"
+	line "If Heads, wake up and attack."
 	done
 
 PoisonedIfHeadsConfusedIfTailsText: ; 380ed (e:40ed)
