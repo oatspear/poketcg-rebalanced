@@ -847,7 +847,7 @@ EvolvePokemonCard:
 	sub c
 	add [hl]
 	ld [hl], a
-	; reset status (if in arena) and set the flag that prevents it from evolving again this turn
+; reset status (if in arena) and set the flag that prevents it from evolving again this turn
 	ld a, e
 	add DUELVARS_ARENA_CARD_FLAGS
 	ld l, a
@@ -856,10 +856,11 @@ EvolvePokemonCard:
 	add DUELVARS_ARENA_CARD_CHANGED_TYPE
 	ld l, a
 	ld [hl], $00
-	ld a, e
-	or a
-	call z, ClearAllStatusConditions
-	; set the new evolution stage of the card
+; OATS evolution no longer clears status conditions
+	; ld a, e
+	; or a
+	; call z, ClearAllStatusConditions
+; set the new evolution stage of the card
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD_STAGE
 	call GetTurnDuelistVariable
