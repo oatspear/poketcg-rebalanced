@@ -838,7 +838,6 @@ EvolvePokemonCard:
 	ldh a, [hTempCardIndex_ff98]
 	call PutHandCardInPlayArea
 	; update the Pokemon's HP with the difference
-	ldh a, [hTempPlayAreaLocation_ff9d] ; derp
 	ld a, e
 	add DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
