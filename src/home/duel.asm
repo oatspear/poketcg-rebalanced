@@ -1583,6 +1583,7 @@ UseAttackOrPokemonPower:
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
 	call TryExecuteEffectCommandFunction
 	jp c, DrawWideTextBox_WaitForInput_ReturnCarry
+	; TODO move sleep check here
 	call CheckSandAttackOrSmokescreenSubstatus
 	jr c, .sand_attack_smokescreen
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
