@@ -1569,6 +1569,7 @@ Func_16f6:
 	ret
 
 ; Use an attack (from DuelMenu_Attack) or a Pokemon Power (from DuelMenu_PkmnPower)
+; Returns carry if the effect failed (e.g. smokescreen or prerequisites not met).
 UseAttackOrPokemonPower:
 	ld a, [wSelectedAttack]
 	ld [wPlayerAttackingAttackIndex], a
@@ -1583,7 +1584,6 @@ UseAttackOrPokemonPower:
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
 	call TryExecuteEffectCommandFunction
 	jp c, DrawWideTextBox_WaitForInput_ReturnCarry
-	; TODO move sleep check here
 	call CheckSandAttackOrSmokescreenSubstatus
 	jr c, .sand_attack_smokescreen
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
@@ -1594,8 +1594,6 @@ UseAttackOrPokemonPower:
 .sand_attack_smokescreen
 	call SendAttackDataToLinkOpponent
 	call HandleSandAttackOrSmokescreenSubstatus
-	jp c, ClearNonTurnTemporaryDuelvars_ResetCarry
-	call HandleSleepCheck
 	jp c, ClearNonTurnTemporaryDuelvars_ResetCarry
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
@@ -1739,64 +1737,6 @@ UsePokemonPower:
 	ld a, OPPACTION_DUEL_MAIN_SCENE
 	call SetOppAction_SerialSendDuelData
 	ret
-
-; handles the sleep check for the Turn Duelist
-; heals sleep status if coin is heads, else
-; it plays sleeping animation
-; return carry if the turn holder's attack was unsuccessful
-HandleSleepCheck:
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	; call CheckSleepStatus
-	; ret nc
-
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	ret nz
-	push hl
-	ld a, [wTempTurnDuelistCardID]
-	call LoadCardNameAndLevelFromCardIDToRam2
-	ldtx de, PokemonsSleepCheckText
-
-	call TossCoin
-	ld a, DUEL_ANIM_SLEEP
-	ldtx hl, IsStillAsleepText
-	jr nc, .tails
-
-; coin toss was heads, cure sleep status
-	pop hl
-	push hl
-	ld a, PSN_DBLPSN
-	and [hl]
-	ld [hl], a
-	ld a, DUEL_ANIM_HEAL
-	ldtx hl, IsCuredOfSleepText
-
-.tails
-	push af
-	push hl
-	call Func_6c7e
-	pop hl
-	call Func_6ce4
-	pop af
-	call Func_6cab
-	pop hl
-	call WaitForWideTextBoxInput
-	scf
-	ret
-
-; return carry if the turn holder's arena card is asleep
-;CheckSleepStatus:
-;	ld a, [hl]
-;	and CNF_SLP_PRZ
-;	cp ASLEEP
-;	ret nz
-
-;	ld a, [wTempTurnDuelistCardID]
-;	call LoadCardNameAndLevelFromCardIDToRam2
-;	ldtx de, PokemonsSleepCheckText
-;	scf
-;	ret
 
 ; called by UseAttackOrPokemonPower (on an attack only)
 ; in a link duel, it's used to send the other game data about the

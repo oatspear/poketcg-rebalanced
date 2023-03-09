@@ -1046,8 +1046,11 @@ DuelMenu_Attack:
 	call DoPracticeDuelAction
 	; if player did something wrong in the practice duel, jump in order to restart turn
 	jp c, RestartPracticeDuelTurn
+	call HandleSleepCheck
+	jr c, .skip_attack
 	call UseAttackOrPokemonPower
 	jp c, DuelMainInterface
+.skip_attack
 	ret
 
 .cannot_use_due_to_amnesia
@@ -1403,6 +1406,74 @@ CheckIfActiveCardAsleep:
 	ldtx hl, UnableDueToSleepText
 	scf
 	ret
+
+; handles the sleep check for the Turn Duelist
+; heals sleep status if coin is heads, else
+; it plays sleeping animation
+; return carry if the turn holder's attack was unsuccessful
+HandleSleepCheck:
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	; call CheckSleepStatus
+	; ret nc
+
+	and CNF_SLP_PRZ
+	cp ASLEEP
+	jr z, .asleep
+	or a  ; ensure no carry
+	ret
+
+.asleep
+	push hl
+	ldtx de, PokemonsSleepCheckText
+
+	call TossCoin
+	ld a, DUEL_ANIM_SLEEP
+	ldtx hl, IsStillAsleepText
+	jr nc, .tails
+
+; coin toss was heads, cure sleep status
+	pop hl
+	push hl
+	ld a, PSN_DBLPSN
+	and [hl]
+	ld [hl], a
+	ld a, DUEL_ANIM_HEAL
+	ldtx hl, IsCuredOfSleepText
+
+.tails
+	push af
+	push hl
+	call Func_6c7e
+	ld a, [wTempTurnDuelistCardID]
+	call LoadCardNameAndLevelFromCardIDToRam2
+	pop hl
+	; call Func_6ce4
+	call DrawWideTextBox_PrintText
+	pop af
+	call Func_6cab
+	pop hl
+	call WaitForWideTextBoxInput
+
+; return carry if tails
+	ld a, [wCoinTossNumHeads]
+	or a
+	ret nz
+	scf
+	ret
+
+; return carry if the turn holder's arena card is asleep
+;CheckSleepStatus:
+;	ld a, [hl]
+;	and CNF_SLP_PRZ
+;	cp ASLEEP
+;	ret nz
+
+;	ld a, [wTempTurnDuelistCardID]
+;	call LoadCardNameAndLevelFromCardIDToRam2
+;	ldtx de, PokemonsSleepCheckText
+;	scf
+;	ret
 
 ; display the animation of the turn duelist drawing one card at the beginning of the turn
 ; if there isn't any card left in the deck, let the player know with a text message
@@ -6665,9 +6736,9 @@ OppAction_BeginUseAttack:
 	call PrintPokemonsAttackText
 	call WaitForWideTextBoxInput
 	call ExchangeRNG
-	call HandleSandAttackOrSmokescreenSubstatus
-	jr c, .failed
 	call HandleSleepCheck
+	jr c, .failed
+	call HandleSandAttackOrSmokescreenSubstatus
 	ret nc ; return if attack is successful (won the coin toss)
 .failed
 	call ClearNonTurnTemporaryDuelvars
@@ -6841,14 +6912,14 @@ Func_6ba2:
 
 ; apply and/or refresh status conditions and other events that trigger between turns
 HandleBetweenTurnsEvents:
-	call IsArenaPokemonAsleepOrPoisoned
+	call IsArenaPokemonPoisoned
 	jr c, .something_to_handle
 	cp PARALYZED
 	jr z, .something_to_handle
 ; OATS poison only ticks for the turn holder
 ; OATS sleep checks are no longer done between turns
 	; call SwapTurn
-	; call IsArenaPokemonAsleepOrPoisoned
+	; call IsArenaPokemonPoisoned
 	; call SwapTurn
 	; jr c, .something_to_handle
 	call DiscardAttachedPluspowers
@@ -6947,21 +7018,16 @@ DiscardAttachedDefenders:
 	ld de, DEFENDER
 	jp MoveCardToDiscardPileIfInArena
 
-; return carry if the turn holder's arena Pokemon card is asleep, poisoned, or double poisoned.
-; also, if confused, paralyzed, or asleep, return the status condition in a.
-IsArenaPokemonAsleepOrPoisoned:
+; return carry if the turn holder's arena Pokemon card is poisoned or double poisoned.
+; also return the status condition in a.
+IsArenaPokemonPoisoned:
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	or a
 	ret z
-	; note that POISONED | DOUBLE_POISONED is the same as just DOUBLE_POISONED ($c0)
-	; poison status masking is normally done with PSN_DBLPSN ($f0)
-	and POISONED | DOUBLE_POISONED
-	jr nz, .set_carry
+	and PSN_DBLPSN
 	ld a, [hl]
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	jr z, .set_carry
+	jr nz, .set_carry
 	or a
 	ret
 .set_carry
