@@ -4727,6 +4727,8 @@ DisplayEnergyOrTrainerCardPage:
 _DisplayCardDetailScreen:
 	push hl
 	call DrawLargePictureOfCard
+; OATS can refactor everything until pop hl to
+; call LoadCardNameAndLevelFromCardIDToRam2.copy
 	ld a, 18
 	call CopyCardNameAndLevel
 	ld [hl], TX_END
@@ -6727,11 +6729,7 @@ OppAction_UsePokemonPower:
 	call DisplayUsePokemonPowerScreen
 	ldh a, [hTempCardIndex_ff9f]
 	call LoadCardNameToTxRam2
-	ld hl, wLoadedAttackName
-	ld a, [hli]
-	ld [wTxRam2_b], a
-	ld a, [hl]
-	ld [wTxRam2_b + 1], a
+	call LoadAttackNameToRam2b
 	ldtx hl, WillUseThePokemonPowerText
 	call DrawWideTextBox_WaitForInput_Bank1
 	call ExchangeRNG

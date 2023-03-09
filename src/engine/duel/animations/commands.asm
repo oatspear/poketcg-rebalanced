@@ -287,16 +287,19 @@ PrintDamageText:
 	jr z, .skip
 
 	ld a, [wTempNonTurnDuelistCardID]
-	ld e, a
-	ld d, $00
-	call LoadCardDataToBuffer1_FromCardID
-	ld a, 18
-	call CopyCardNameAndLevel
-	ld [hl], TX_END
-	ld hl, wTxRam2
-	xor a
-	ld [hli], a
-	ld [hl], a
+; OATS refactoring code
+	call LoadCardNameAndLevelFromCardIDToRam2
+	; ld e, a
+	; ld d, $00
+	; call LoadCardDataToBuffer1_FromCardID
+	; ld a, 18
+	; call CopyCardNameAndLevel
+	; ld [hl], TX_END
+	; ld hl, wTxRam2
+	; xor a
+	; ld [hli], a
+	; ld [hl], a
+
 	ld hl, wce7f
 	ld a, [hli]
 	ld h, [hl]

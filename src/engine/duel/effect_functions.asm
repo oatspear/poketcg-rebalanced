@@ -11181,15 +11181,17 @@ HealPlayAreaCardHP: ; 2febc (b:7ebc)
 ; print Pokemon card name and damage healed
 	push hl
 	call LoadTxRam3
-	ld hl, $0000
-	call LoadTxRam2
+; OATS trying to refactor some code
+	; ld hl, $0000
+	; call LoadTxRam2
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, 18
-	call CopyCardNameAndLevel
-	ld [hl], $00 ; terminating character on end of the name
+	call LoadCardNameAndLevelFromVarToRam2
+	; call GetTurnDuelistVariable
+	; call LoadCardDataToBuffer1_FromDeckIndex
+	; ld a, 18
+	; call CopyCardNameAndLevel
+	; ld [hl], $00 ; terminating character on end of the name
 	ldtx hl, PokemonHealedDamageText
 	call DrawWideTextBox_WaitForInput
 	pop de

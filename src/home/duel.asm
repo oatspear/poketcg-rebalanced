@@ -1746,13 +1746,15 @@ UsePokemonPower:
 HandleSleepCheck:
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
-	push hl
 	; call CheckSleepStatus
 	; ret nc
 
 	and CNF_SLP_PRZ
 	cp ASLEEP
 	ret nz
+	push hl
+	ld a, [wTempTurnDuelistCardID]
+	call LoadCardNameAndLevelFromCardIDToRam2
 	ldtx de, PokemonsSleepCheckText
 
 	call TossCoin
@@ -1789,17 +1791,8 @@ HandleSleepCheck:
 ;	cp ASLEEP
 ;	ret nz
 
-; OATS no longer need the name of the attacking Pokemon in the printed text.
-	; ld a, [wTempTurnDuelistCardID]
-	; ld e, a
-	; call LoadCardDataToBuffer1_FromCardID
-	; ld a, 18
-	; call CopyCardNameAndLevel
-	; ld [hl], TX_END
-	; ld hl, wTxRam2
-	; xor a
-	; ld [hli], a
-	; ld [hl], a
+;	ld a, [wTempTurnDuelistCardID]
+;	call LoadCardNameAndLevelFromCardIDToRam2
 ;	ldtx de, PokemonsSleepCheckText
 ;	scf
 ;	ret
@@ -2345,22 +2338,50 @@ DrawDuelMainScene_PrintPokemonsAttackText:
 ; attack's name is taken from wLoadedAttackName.
 PrintPokemonsAttackText:
 	ld a, DUELVARS_ARENA_CARD
+	call LoadCardNameAndLevelFromVarToRam2
+	call LoadAttackNameToRam2b
+	ldtx hl, PokemonsAttackText
+	call DrawWideTextBox_PrintText
+	ret
+
+; OATS refactoring a common pattern into its own function.
+; Loads Pokemon name and level into wDefaultText and then copies to wTxRam2,
+; so that it can be used with <RAMTEXT> text.
+; Input:
+;    a: DUELVARS_ARENA_CARD + offset
+LoadCardNameAndLevelFromVarToRam2:
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
+	jr LoadCardNameAndLevelFromCardIDToRam2.copy
+
+; Input:
+;    a: card ID
+LoadCardNameAndLevelFromCardIDToRam2:
+	ld e, a
+	call LoadCardDataToBuffer1_FromCardID
+
+.copy
 	ld a, 18
 	call CopyCardNameAndLevel
-	ld [hl], TX_END
 	; zero wTxRam2 so that the name & level text just loaded to wDefaultText is printed
+	ld [hl], TX_END
+
+	; ld hl, $0000
+	; call LoadTxRam2
 	ld hl, wTxRam2
 	xor a
 	ld [hli], a
-	ld [hli], a
-	ld a, [wLoadedAttackName]
-	ld [hli], a ; wTxRam2_b
-	ld a, [wLoadedAttackName + 1]
-	ld [hli], a
-	ldtx hl, PokemonsAttackText
-	call DrawWideTextBox_PrintText
+	ld [hl], a
+
+	; ldtx hl, (your text goes here)
+	ret
+
+LoadAttackNameToRam2b:
+	ld hl, wLoadedAttackName
+	ld a, [hli]
+	ld [wTxRam2_b], a
+	ld a, [hli]
+	ld [wTxRam2_b + 1], a
 	ret
 
 Func_1bb4:
@@ -2384,21 +2405,8 @@ Func_1bca:
 	jr z, .no_effect_from_status
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, 18
-	call CopyCardNameAndLevel
-	; zero wTxRam2 so that the name & level text just loaded to wDefaultText is printed
-	ld [hl], $0
-	ld hl, $0000
-	call LoadTxRam2
-	ld hl, wLoadedAttackName
-	ld de, wTxRam2_b
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
+	call LoadCardNameAndLevelFromVarToRam2
+	call LoadAttackNameToRam2b
 	ldtx hl, WasUnsuccessfulText
 	call DrawWideTextBox_PrintText
 	scf
