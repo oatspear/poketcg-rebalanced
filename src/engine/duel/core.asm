@@ -1445,8 +1445,8 @@ HandleSleepCheck:
 	push af
 	push hl
 	call Func_6c7e
-	ld a, [wTempTurnDuelistCardID]
-	call LoadCardNameAndLevelFromCardIDToRam2
+	ld a, DUELVARS_ARENA_CARD
+	call LoadCardNameAndLevelFromVarToRam2
 	pop hl
 	; call Func_6ce4
 	call DrawWideTextBox_PrintText
