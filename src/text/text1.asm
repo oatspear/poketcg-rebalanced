@@ -269,8 +269,10 @@ MayOnlyAttachOneEnergyCardText: ; 366d9 (d:66d9)
 	done
 
 MayOnlyUseOneSupporterCardText: ; 366d9 (d:66d9)
-	text "You may only use 1 Supporter card"
-	line "per turn."
+	; text "You may only use 1 Supporter card"
+	; line "per turn."
+	text "You already used a Supporter card"
+	line "this turn."
 	done
 
 UseThisPokemonPowerText: ; 36706 (d:6706)

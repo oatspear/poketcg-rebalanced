@@ -33,6 +33,7 @@
 - Poison only deals damage on the Pokémon owner's turn.
 - Confusion only deals 10 damage to self on tails.
 - A player can only retreat once per turn.
+- In the first turn of the game, a player can only either Attack or use a Supporter card.
 
 ### Fixed
 - AI wrongfully adds score twice for attaching energy to Arena card.

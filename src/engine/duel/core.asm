@@ -237,7 +237,6 @@ HandleTurn:
 	call GetTurnDuelistVariable
 	ld [wDuelistType], a
 	ld a, [wDuelTurns]
-; OATS TODO change mechanics for the first turn
 	cp 2
 	jr c, .skip_let_evolve ; jump if it's the turn holder's first turn
 	call SetAllPlayAreaPokemonCanEvolve
@@ -987,6 +986,18 @@ EnergyDiscardCardListParameters:
 
 ; triggered by selecting the "Attack" item in the duel menu
 DuelMenu_Attack:
+; OATS different logic for the first turn of the game:
+; either attack or Supporter
+	ld a, [wDuelTurns]
+	or a
+	jr nz, .not_first_turn
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_SUPPORTER_THIS_TURN
+	jr z, .not_first_turn
+	ldtx hl, MayOnlyUseOneSupporterCardText
+	jr .alert_cant_attack_and_cancel_menu
+
+.not_first_turn
 	call HandleCantAttackSubstatus
 	jr c, .alert_cant_attack_and_cancel_menu
 ; OATS only Paralysis prevents attacking outright
@@ -6722,6 +6733,17 @@ OppAction_BeginUseAttack:
 	call Func_16f6
 	ld a, $01
 	ld [wSkipDuelistIsThinkingDelay], a
+
+; OATS different logic for the first turn of the game:
+; either attack or Supporter
+	ld a, [wDuelTurns]
+	or a
+	jr nz, .not_first_turn
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_SUPPORTER_THIS_TURN
+	jr nz, .failed
+
+.not_first_turn
 	call CheckSandAttackOrSmokescreenSubstatus
 	jr c, .has_status
 	ld a, DUELVARS_ARENA_CARD_STATUS
