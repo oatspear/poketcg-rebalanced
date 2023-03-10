@@ -1085,30 +1085,23 @@ PutHandPokemonCardInPlayArea:
 	ld l, a
 	ld a, [wLoadedCard2HP]
 	ld [hl], a ; set card's HP
-	ld a, DUELVARS_ARENA_CARD_FLAGS
-	add e
-	ld l, a
-	ld [hl], $0
-	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
-	add e
-	ld l, a
-	ld [hl], $0
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
-	add e
-	ld l, a
-	ld [hl], $0
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
-	add e
-	ld l, a
-	ld [hl], $0
 	ld a, DUELVARS_ARENA_CARD_STAGE
 	add e
 	ld l, a
 	ld a, [wLoadedCard2Stage]
 	ld [hl], a ; set card's evolution stage
+; OATS reuse some code to save space
+	ld d, 0
+	ld a, DUELVARS_ARENA_CARD_FLAGS
+	call EmptyPlayAreaSlot.init_duelvar
+	call EmptyPlayAreaSlot.zero_vars
+; OATS status conditions apply to benched Pokemon too
+; and they are already handled in EmptyPlayAreaSlot.
+; Change call below to handle just the Active flags and substatuses.
 	ld a, e
 	or a
-	call z, ClearAllStatusConditions ; only call if Pokemon is being placed in the arena
+	; call z, ClearAllStatusConditions ; only call if Pokemon is being placed in the arena
+	call z, ClearAllStatusConditions.done_status
 	ld a, e
 	or a
 	ret
@@ -1169,11 +1162,15 @@ EmptyPlayAreaSlot:
 	call .init_duelvar
 	ld a, DUELVARS_ARENA_CARD_STAGE
 	call .init_duelvar
+.zero_vars
 	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
 	call .init_duelvar
 	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
 	call .init_duelvar
 	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
+; OATS must also reset status conditions
+	call .init_duelvar
+	ld a, DUELVARS_ARENA_CARD_STATUS
 .init_duelvar
 	add e
 	ld l, a
