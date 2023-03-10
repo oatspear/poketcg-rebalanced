@@ -970,7 +970,6 @@ ClearStatusOnSwitch:
 	ld a, [hl]
 	and PSN_DBLPSN
 	ld [hl], a ; preserve just the poison nybble
-	xor a
 	jr ClearAllStatusConditions.done_status
 
 ; clear the status, all substatuses, and temporary duelvars of the turn holder's
@@ -983,7 +982,9 @@ ClearAllStatusConditions:
 	xor a
 	ld l, DUELVARS_ARENA_CARD_STATUS
 	ld [hl], a ; NO_STATUS
+
 .done_status
+	xor a
 	ld l, DUELVARS_ARENA_CARD_SUBSTATUS1
 	ld [hl], a
 	ld l, DUELVARS_ARENA_CARD_SUBSTATUS2
