@@ -237,6 +237,7 @@ HandleTurn:
 	call GetTurnDuelistVariable
 	ld [wDuelistType], a
 	ld a, [wDuelTurns]
+; OATS TODO change mechanics for the first turn
 	cp 2
 	jr c, .skip_let_evolve ; jump if it's the turn holder's first turn
 	call SetAllPlayAreaPokemonCanEvolve
@@ -778,6 +779,12 @@ Func_4597:
 ; some status condition or due the bench containing no alive Pokemon.
 ; return carry if unable, nc if able.
 CheckAbleToRetreat:
+; OATS retreat only once per turn
+	ld a, [wAlreadyRetreatedThisTurn]
+	or a
+	ldtx hl, AlreadyRetreatedThisTurnText
+	jr nz, .done
+
 	call CheckCantRetreatDueToAcid
 	ret c
 ; OATS status conditions no longer prevent retreat
@@ -7714,6 +7721,7 @@ InitVariablesToBeginDuel:
 ; init variables that last a single player's turn
 InitVariablesToBeginTurn:
 	xor a
+	ld [wAlreadyRetreatedThisTurn], a
 	ld [wAlreadyPlayedEnergyOrSupporter], a
 	ld [wGotTailsFromConfusionCheckDuringRetreat], a
 	ld [wGotHeadsFromSandAttackOrSmokescreenCheck], a

@@ -1233,10 +1233,10 @@ wAISecondAttackDamage:: ; ce01
 wAIAttackIsNonDamaging:: ; ce02
 	ds $1
 
-; whether AI already retreated this turn or not.
+; whether the turn holder already retreated this turn or not.
 ;	- $0 has not retreated;
 ;	- $1 has retreated.
-wAIRetreatedThisTurn:: ; ce03
+wAlreadyRetreatedThisTurn:: ; ce03
 	ds $1
 
 ; used by AI to store information of VenusaurLv67

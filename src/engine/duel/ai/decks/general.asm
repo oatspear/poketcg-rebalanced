@@ -148,7 +148,7 @@ AIMainTurnLogic:
 
 ; handles AI retreating logic
 AIProcessRetreat:
-	ld a, [wAIRetreatedThisTurn]
+	ld a, [wAlreadyRetreatedThisTurn]
 	or a
 	ret nz ; return, already retreated this turn
 
@@ -159,10 +159,10 @@ AIProcessRetreat:
 	ret c ; return if no Bench Pokemon
 
 ; store Play Area to retreat to and
-; set wAIRetreatedThisTurn to true
+; set wAlreadyRetreatedThisTurn to true
 	ld [wAIPlayAreaCardToSwitch], a
 	ld a, $01
-	ld [wAIRetreatedThisTurn], a
+	ld [wAlreadyRetreatedThisTurn], a
 
 ; if AI can use Switch from hand, use it instead...
 	ld a, AI_TRAINER_CARD_PHASE_09

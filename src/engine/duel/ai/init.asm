@@ -21,7 +21,7 @@ InitAITurnVars:
 	ld [wPreviousAIFlags], a
 	ld [wAITriedAttack], a
 	ld [wcddc], a
-	ld [wAIRetreatedThisTurn], a
+	ld [wAlreadyRetreatedThisTurn], a
 
 ; checks if the Player used an attack last turn
 ; and if it was the second attack of their card.
