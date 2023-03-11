@@ -275,7 +275,7 @@ BulbasaurCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx SeedName ; category
@@ -479,7 +479,7 @@ CaterpieCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx WormName ; category
@@ -581,7 +581,7 @@ ButterfreeCard:
 	db 2
 	db ATK_ANIM_DRAIN ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIRE ; weakness
 	db WR_FIGHTING ; resistance
 	tx ButterflyName ; category
@@ -632,7 +632,7 @@ WeedleCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx HairyBugName ; category
@@ -734,7 +734,7 @@ BeedrillCard:
 	db 0
 	db ATK_ANIM_NEEDLES ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIRE ; weakness
 	db WR_FIGHTING ; resistance
 	tx PoisonBeeName ; category
@@ -785,7 +785,7 @@ EkansCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx SnakeName ; category
@@ -836,7 +836,7 @@ ArbokCard:
 	db 0
 	db ATK_ANIM_POISON_FANG ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx CobraName ; category
@@ -887,7 +887,7 @@ NidoranFCard:
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx PoisonPinName ; category
@@ -989,7 +989,7 @@ NidoqueenCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db WR_LIGHTNING ; resistance
 	tx DrillName ; category
@@ -1040,7 +1040,7 @@ NidoranMCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx PoisonPinName ; category
@@ -1142,7 +1142,7 @@ NidokingCard:
 	db 2
 	db ATK_ANIM_TOXIC ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db WR_LIGHTNING ; resistance
 	tx DrillName ; category
@@ -1244,7 +1244,7 @@ GolbatCard:
 	db 3
 	db ATK_ANIM_DRAIN ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx BatName ; category
@@ -1295,7 +1295,7 @@ OddishCard:
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx WeedName ; category
@@ -1448,7 +1448,7 @@ ParasCard:
 	db 0
 	db ATK_ANIM_SPORE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx MushroomName ; category
@@ -1550,7 +1550,7 @@ VenonatCard:
 	db 3
 	db ATK_ANIM_DRAIN ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx InsectName ; category
@@ -1601,7 +1601,7 @@ VenomothCard:
 	db 0
 	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIRE ; weakness
 	db WR_FIGHTING ; resistance
 	tx PoisonmothName ; category
@@ -1652,7 +1652,7 @@ BellsproutCard:
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx FlowerName ; category
@@ -1805,7 +1805,7 @@ GrimerCard:
 	db 0
 	db ATK_ANIM_PROTECT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx SludgeName ; category
@@ -1856,7 +1856,7 @@ MukCard:
 	db 0
 	db ATK_ANIM_GOO ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx SludgeName ; category
@@ -1907,7 +1907,7 @@ ExeggcuteCard:
 	db 1
 	db ATK_ANIM_DRAIN ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx EggName ; category
@@ -1958,7 +1958,7 @@ ExeggutorCard:
 	db MAX_ENERGY_BOOST_IS_NOT_LIMITED
 	db ATK_ANIM_BIG_HIT ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx CoconutName ; category
@@ -2009,7 +2009,7 @@ KoffingCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx PoisonGasName ; category
@@ -2111,7 +2111,7 @@ TangelaLv8Card:
 	db 0
 	db ATK_ANIM_POWDER_HIT_POISON ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx VineName ; category
@@ -2162,7 +2162,7 @@ TangelaLv12Card:
 	db 0
 	db ATK_ANIM_POISON_WHIP ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx VineName ; category
