@@ -100,7 +100,7 @@ PotionName: ; 64565 (19:4565)
 	done
 
 PotionDescription: ; 6456d (19:456d)
-	text "Remove 2 damage counters from 1 of"
+	text "Remove 3 damage counters from 1 of"
 	line "your Pokémon. If that Pokémon has"
 	line "fewer damage counters than that,"
 	line "remove all of them."
@@ -113,7 +113,7 @@ SuperPotionName: ; 645e8 (19:45e8)
 SuperPotionDescription: ; 645f6 (19:45f6)
 	text "Discard 1 Energy card attached to 1"
 	line "of your own Pokémon in order to"
-	line "remove 4 damage counters from that"
+	line "remove 6 damage counters from that"
 	line "Pokémon. If the Pokémon has fewer"
 	line "damage counters than that, remove"
 	line "all of them."
@@ -136,10 +136,8 @@ ReviveName: ; 64706 (19:4706)
 ReviveDescription: ; 6470e (19:470e)
 	text "Put 1 Basic Pokémon card from your"
 	line "discard pile onto your Bench."
-	line "Put damage counters on that Pokémon"
-	line "equal to half its HP (rounded down"
-	line "to the nearest 10). (You can't play"
-	line "Revive if your Bench is full.)"
+	line "(You can't play Revive if your"
+	line "Bench is full.)"
 	done
 
 MaintenanceName: ; 647da (19:47da)

@@ -8862,8 +8862,8 @@ SuperPotion_PlayerSelectEffect: ; 2f167 (b:7167)
 ; cap the healing damage if
 ; it would make it exceed max HP.
 	call GetCardDamageAndMaxHP
-	ld c, 40
-	cp 40
+	ld c, 60
+	cp 60
 	jr nc, .heal
 	ld c, a
 .heal
@@ -9228,8 +9228,8 @@ Potion_PlayerSelection: ; 2f3d1 (b:73d1)
 	or a
 	jr z, .read_input ; no damage, loop back to start
 ; cap damage
-	ld c, 20
-	cp 20
+	ld c, 30
+	cp 30
 	jr nc, .skip_cap
 	ld c, a
 .skip_cap
@@ -10612,14 +10612,15 @@ Revive_PlaceInPlayAreaEffect: ; 2fbb0 (b:7bb0)
 	call PutHandPokemonCardInPlayArea
 
 ; set HP to half, rounded up
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	srl a
-	bit 0, a
-	jr z, .rounded
-	add 5 ; round up HP to nearest 10
-.rounded
-	ld [hl], a
+; OATS no longer sets to half
+;	add DUELVARS_ARENA_CARD_HP
+;	call GetTurnDuelistVariable
+;	srl a
+;	bit 0, a
+;	jr z, .rounded
+;	add 5 ; round up HP to nearest 10
+;.rounded
+;	ld [hl], a
 	call IsPlayerTurn
 	ret c ; done if Player played Revive
 

@@ -157,9 +157,9 @@ AIPlay_Potion:
 	ldh [hTemp_ffa0], a
 	ld e, a
 	call GetCardDamageAndMaxHP
-	cp 20
+	cp 30
 	jr c, .play_card
-	ld a, 20
+	ld a, 30
 .play_card
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
@@ -187,9 +187,9 @@ AIDecide_Potion1:
 	ld h, a
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
-	cp 20 + 1 ; if damage <= 20
+	cp 30 + 1 ; if damage <= 20
 	jr c, .calculate_hp
-	ld a, 20 ; amount of Potion HP healing
+	ld a, 30 ; amount of Potion HP healing
 
 ; if damage done by defending Pokémon next turn will still
 ; KO this card after healing, return no carry.
@@ -225,9 +225,9 @@ AIDecide_Potion2:
 	ld h, a
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
-	cp 20 + 1  ; if damage <= 20
+	cp 30 + 1  ; if damage <= 20
 	jr c, .calculate_hp
-	ld a, 20
+	ld a, 30
 ; return if using healing prevents KO.
 .calculate_hp
 	ld l, a
@@ -347,9 +347,9 @@ AIPlay_SuperPotion:
 	ld a, [wAITrainerCardParameter]
 	ld e, a
 	call GetCardDamageAndMaxHP
-	cp 40
+	cp 60
 	jr c, .play_card
-	ld a, 40
+	ld a, 60
 .play_card
 	ldh [hTempRetreatCostCards], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
@@ -381,9 +381,9 @@ AIDecide_SuperPotion1:
 	ld h, a
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
-	cp 40 + 1 ; if damage < 40
+	cp 60 + 1 ; if damage < 40
 	jr c, .calculate_hp
-	ld a, 40
+	ld a, 60
 .calculate_hp
 	ld l, a
 	ld a, h
@@ -425,9 +425,9 @@ AIDecide_SuperPotion2:
 	ld h, a
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
-	cp 40 + 1 ; if damage < 40
+	cp 60 + 1 ; if damage < 40
 	jr c, .calculate_hp
-	ld a, 40
+	ld a, 60
 ; return if using healing prevents KO.
 .calculate_hp
 	ld l, a
@@ -4609,7 +4609,6 @@ AIPlay_Revive:
 	ret
 
 ; checks certain cards in Discard Pile to use Revive on.
-; suitable for Muscle For Brains deck only.
 AIDecide_Revive:
 ; skip if no cards in Discard Pile
 	call CreateDiscardPileCardList
@@ -4630,16 +4629,20 @@ AIDecide_Revive:
 	ld b, a
 	call LoadCardDataToBuffer1_FromDeckIndex
 
-	cp HITMONCHAN
-	jr z, .set_carry
-	cp HITMONLEE
-	jr z, .set_carry
-	cp TAUROS
-	jr z, .set_carry
-	cp KANGASKHAN
-	jr nz, .loop_discard_pile
+; OATS instead of looking for specific Pokemon species,
+; go for any Basic Pokemon with 60 HP or more.
+	ld a, [wLoadedCard1Type]
+	cp TYPE_PKMN + 1
+	jr nc, .loop_discard_pile  ; not a Pokemon
+	ld a, [wLoadedCard1Stage]
+	or a  ; cp BASIC
+	jr nz, .loop_discard_pile  ; not a Basic Pokemon
+	ld a, [wLoadedCard1HP]
+	cp 60
+	jr c, .loop_discard_pile  ; less than 60 HP
+	; fallthrough
 
-.set_carry
+; .set_carry
 	ld a, b
 	scf
 	ret
