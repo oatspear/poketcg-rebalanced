@@ -1216,7 +1216,7 @@ BillName: ; 634cd (18:74cd)
 	done
 
 BillDescription: ; 634d3 (18:74d3)
-	text "Draw 2 cards."
+	text "Draw 3 cards."
 	done
 
 MrFujiName: ; 634e2 (18:74e2)

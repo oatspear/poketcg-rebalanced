@@ -10294,9 +10294,9 @@ Pokedex_OrderDeckCardsEffect: ; 2f9aa (b:79aa)
 	ret
 
 BillEffect: ; 2f9c4 (b:79c4)
-	ld a, 2
+	ld a, 3
 	bank1call DisplayDrawNCardsScreen
-	ld c, 2
+	ld c, 3
 .loop_draw
 	call DrawCardFromDeck
 	jr c, .done

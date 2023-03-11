@@ -35,6 +35,7 @@
 - A player can only retreat once per turn.
 - In the first turn of the game, a player can only either Attack or use a Supporter card.
 - Changed the following cards to be Trainer Supporter cards: **Professor Oak**, **Imposter Professor Oak**, **Bill**, **Mr. Fuji**, **Lass**, **Pokémon Trader**, **Energy Retrieval**, **Super Energy Retrieval**, **Energy Removal**, **Super Energy Removal**, **Switch**, **Pokémon Center**, **Scoop Up**, **Computer Search**, **Item Finder**, **Gust of Wind**.
+- **Bill**: draws 3 cards.
 
 ### Fixed
 - AI wrongfully adds score twice for attaching energy to Arena card.
