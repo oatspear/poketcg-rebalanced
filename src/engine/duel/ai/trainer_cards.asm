@@ -3972,13 +3972,14 @@ AIDecide_ScoopUp:
 	jr c, .no_carry
 
 .cannot_ko
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	cp PARALYZED
-	jr z, .cannot_retreat
-	cp ASLEEP
-	jr z, .cannot_retreat
+; OATS status conditions no longer prevent retreat
+	; ld a, DUELVARS_ARENA_CARD_STATUS
+	; call GetTurnDuelistVariable
+	; and CNF_SLP_PRZ
+	; cp PARALYZED
+	; jr z, .cannot_retreat
+	; cp ASLEEP
+	; jr z, .cannot_retreat
 
 ; doesn't have a status that prevents retreat.
 ; so check if it has enough energy to retreat.
