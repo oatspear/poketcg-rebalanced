@@ -58,6 +58,10 @@ PokemonText: ; 36378 (d:6378)
 	text " Pokémon"
 	done
 
+SupporterText: ; 36378 (d:6378)
+	text "Supporter"
+	done
+
 MetresText: ; 36382 (d:6382)
 	textfw3 "m"
 	done

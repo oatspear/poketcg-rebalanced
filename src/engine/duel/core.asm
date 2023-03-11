@@ -4796,6 +4796,13 @@ DisplayEnergyOrTrainerCardPage:
 	lb de, 4, 3
 	ld hl, wLoadedCard1Name
 	call InitTextPrinting_ProcessTextFromPointerToID
+	; OATS print Supporter tag for Supporter cards
+	ld a, [wLoadedCard1Type]
+	cp TYPE_TRAINER_SUPPORTER
+	jr nz, .not_supporter_card
+	ld hl, CardPageSupporterTextData
+	call PlaceTextItems
+.not_supporter_card
 	; colorize the card image
 	lb de, 6, 4
 	call ApplyBGP6OrSGB3ToCardImage
@@ -4810,6 +4817,10 @@ DisplayEnergyOrTrainerCardPage:
 	pop hl
 	call PrintAttackOrNonPokemonCardDescription
 	ret
+
+CardPageSupporterTextData:
+	textitem 1, 4, SupporterText
+	db $ff
 
 ; display the card details of the card in wLoadedCard1
 ; print the text at hl

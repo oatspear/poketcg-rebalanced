@@ -17,6 +17,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LengthText                                         ; 0x000c
 	textpointer WeightText                                         ; 0x000d
 	textpointer PokemonText                                        ; 0x000e
+	textpointer SupporterText                                      ; 0x000e
 	textpointer MetresText                                         ; 0x000f
 	textpointer LbsText                                            ; 0x0010
 	textpointer PromostarRarityText                                ; 0x0011
