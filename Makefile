@@ -1,4 +1,4 @@
-rom := poketcg.gbc
+rom := poketcg_rebalanced.gbc
 
 rom_obj := \
 	src/main.o \
