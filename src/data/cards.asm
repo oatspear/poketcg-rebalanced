@@ -2315,7 +2315,7 @@ CharmanderCard:
 	db 3
 	db ATK_ANIM_SMALL_FLAME ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_WATER ; weakness
 	db NONE ; resistance
 	tx LizardName ; category
@@ -2417,7 +2417,7 @@ CharizardCard:
 	db 6
 	db ATK_ANIM_FIRE_SPIN ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_WATER ; weakness
 	db WR_FIGHTING ; resistance
 	tx FlameName ; category
@@ -2468,7 +2468,7 @@ VulpixCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_WATER ; weakness
 	db NONE ; resistance
 	tx FoxName ; category
@@ -2621,7 +2621,7 @@ GrowlitheCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_WATER ; weakness
 	db NONE ; resistance
 	tx PuppyName ; category
@@ -2723,7 +2723,7 @@ ArcanineLv45Card:
 	db 30
 	db ATK_ANIM_HIT_RECOIL ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db WR_WATER ; weakness
 	db NONE ; resistance
 	tx LegendaryName ; category
@@ -2774,7 +2774,7 @@ PonytaCard:
 	db 0
 	db ATK_ANIM_BIG_FLAME ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_WATER ; weakness
 	db NONE ; resistance
 	tx FireHorseName ; category
@@ -2825,7 +2825,7 @@ RapidashCard:
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_WATER ; weakness
 	db NONE ; resistance
 	tx FireHorseName ; category
@@ -2876,7 +2876,7 @@ MagmarLv24Card:
 	db 3
 	db ATK_ANIM_BIG_FLAME ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_WATER ; weakness
 	db NONE ; resistance
 	tx SpitfireName ; category
@@ -3080,7 +3080,7 @@ MoltresLv35Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx FlameName ; category
@@ -3131,7 +3131,7 @@ MoltresLv37Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx FlameName ; category
@@ -3182,7 +3182,7 @@ SquirtleCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx TinyTurtleName ; category
@@ -3284,7 +3284,7 @@ BlastoiseCard:
 	db MAX_ENERGY_BOOST_IS_LIMITED
 	db ATK_ANIM_HYDRO_PUMP ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx ShellfishName ; category
@@ -3335,7 +3335,7 @@ PsyduckCard:
 	db 0
 	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx DuckName ; category
@@ -3437,7 +3437,7 @@ PoliwagCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx TadpoleName ; category
@@ -3539,7 +3539,7 @@ PoliwrathCard:
 	db 3
 	db ATK_ANIM_WHIRLPOOL ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx TadpoleName ; category
@@ -3641,7 +3641,7 @@ TentacruelCard:
 	db 0
 	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx JellyfishName ; category
@@ -3692,7 +3692,7 @@ SeelCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx SeaLionName ; category
@@ -3743,7 +3743,7 @@ DewgongCard:
 	db 0
 	db ATK_ANIM_BEAM ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx SeaLionName ; category
@@ -3794,7 +3794,7 @@ ShellderCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx BivalveName ; category
@@ -3845,7 +3845,7 @@ CloysterCard:
 	db 0
 	db ATK_ANIM_NEEDLES ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx BivalveName ; category
@@ -3896,7 +3896,7 @@ KrabbyCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 2 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx RiverCrabName ; category
@@ -3947,7 +3947,7 @@ KinglerCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx PincerName ; category
@@ -4202,7 +4202,7 @@ StaryuCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx StarshapeName ; category
@@ -4304,7 +4304,7 @@ MagikarpCard:
 	db 0
 	db ATK_ANIM_BIG_HIT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx FishName ; category
@@ -4355,7 +4355,7 @@ GyaradosCard:
 	db 0
 	db ATK_ANIM_BUBBLES ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx AtrociousName ; category
@@ -4406,7 +4406,7 @@ LaprasCard:
 	db 0
 	db ATK_ANIM_CONFUSE_RAY ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx TransportName ; category
@@ -4559,7 +4559,7 @@ OmanyteCard:
 	db MAX_ENERGY_BOOST_IS_LIMITED
 	db ATK_ANIM_WATER_GUN ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_GRASS ; weakness
 	db NONE ; resistance
 	tx SpiralName ; category
@@ -4661,7 +4661,7 @@ ArticunoLv35Card:
 	db 10
 	db ATK_ANIM_BLIZZARD ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx FreezeName ; category
@@ -4712,7 +4712,7 @@ ArticunoLv37Card:
 	db 3
 	db ATK_ANIM_WHIRLWIND_ZIGZAG ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx FreezeName ; category
@@ -4763,7 +4763,7 @@ PikachuLv12Card:
 	db 0
 	db ATK_ANIM_THUNDERSHOCK ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx MouseName ; category
@@ -4814,7 +4814,7 @@ PikachuLv14Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx MouseName ; category
@@ -4865,7 +4865,7 @@ PikachuLv16Card:
 	db 0
 	db ATK_ANIM_THUNDERSHOCK ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx MouseName ; category
@@ -4967,7 +4967,7 @@ FlyingPikachuCard:
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx MouseName ; category
@@ -5018,7 +5018,7 @@ SurfingPikachuLv13Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx MouseName ; category
@@ -5069,7 +5069,7 @@ SurfingPikachuAltLv13Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx MouseName ; category
@@ -5222,7 +5222,7 @@ MagnemiteLv13Card:
 	db 40
 	db ATK_ANIM_SELFDESTRUCT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx MagnetName ; category
@@ -5273,7 +5273,7 @@ MagnemiteLv15Card:
 	db 0
 	db ATK_ANIM_MAGNETIC_STORM ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx MagnetName ; category
@@ -5375,7 +5375,7 @@ MagnetonLv35Card:
 	db 100
 	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx MagnetName ; category
@@ -5426,7 +5426,7 @@ VoltorbCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx BallName ; category
@@ -5579,7 +5579,7 @@ ElectabuzzLv20Card:
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx ElectricName ; category
@@ -5630,7 +5630,7 @@ ElectabuzzLv35Card:
 	db 0
 	db ATK_ANIM_THUNDERPUNCH ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx ElectricName ; category
@@ -5783,7 +5783,7 @@ ZapdosLv40Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx ElectricName ; category
@@ -5834,7 +5834,7 @@ ZapdosLv64Card:
 	db 9
 	db ATK_ANIM_THUNDERBOLT ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx ElectricName ; category
@@ -5885,7 +5885,7 @@ ZapdosLv68Card:
 	db 0
 	db ATK_ANIM_BIG_THUNDER ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx ElectricName ; category
@@ -5936,7 +5936,7 @@ SandshrewCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx MouseName ; category
@@ -6089,7 +6089,7 @@ DugtrioCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx MoleName ; category
@@ -6242,7 +6242,7 @@ MachopCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_PSYCHIC ; weakness
 	db NONE ; resistance
 	tx SuperpowerName ; category
@@ -6293,7 +6293,7 @@ MachokeCard:
 	db 20
 	db ATK_ANIM_HIT_RECOIL ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db WR_PSYCHIC ; weakness
 	db NONE ; resistance
 	tx SuperpowerName ; category
@@ -6344,7 +6344,7 @@ MachampCard:
 	db 0
 	db ATK_ANIM_SEISMIC_TOSS ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_PSYCHIC ; weakness
 	db NONE ; resistance
 	tx SuperpowerName ; category
@@ -6395,7 +6395,7 @@ GeodudeCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx RockName ; category
@@ -6446,7 +6446,7 @@ GravelerCard:
 	db 0
 	db ATK_ANIM_ROCK_THROW ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx RockName ; category
@@ -6497,7 +6497,7 @@ GolemCard:
 	db 100
 	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
 
-	db 4 ; retreat cost
+	db 2 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx MegatonName ; category
@@ -6548,7 +6548,7 @@ OnixCard:
 	db 0
 	db ATK_ANIM_PROTECT ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx RockSnakeName ; category
@@ -6599,7 +6599,7 @@ CuboneCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx LonelyName ; category
@@ -6701,7 +6701,7 @@ MarowakLv32Card:
 	db 0
 	db ATK_ANIM_CRY ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx BonekeeperName ; category
@@ -6803,7 +6803,7 @@ HitmonchanCard:
 	db 0
 	db ATK_ANIM_PUNCH ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_PSYCHIC ; weakness
 	db NONE ; resistance
 	tx PunchingName ; category
@@ -6854,7 +6854,7 @@ RhyhornCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx SpikeName ; category
@@ -6905,7 +6905,7 @@ RhydonCard:
 	db 20
 	db ATK_ANIM_HIT_RECOIL ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx DrillName ; category
@@ -6956,7 +6956,7 @@ KabutoCard:
 	db 0
 	db ATK_ANIM_SLASH ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_GRASS ; weakness
 	db NONE ; resistance
 	tx ShellfishName ; category
@@ -7058,7 +7058,7 @@ AerodactylCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_WATER ; weakness
 	db WR_FIGHTING ; resistance
 	tx FossilName ; category
@@ -7160,7 +7160,7 @@ KadabraCard:
 	db 0
 	db ATK_ANIM_PSYCHIC_HIT ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx PsiName ; category
@@ -7211,7 +7211,7 @@ AlakazamCard:
 	db 0
 	db ATK_ANIM_CONFUSE_RAY ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx PsiName ; category
@@ -7262,7 +7262,7 @@ SlowpokeLv9Card:
 	db 2
 	db ATK_ANIM_AMNESIA ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx DopeyName ; category
@@ -7313,7 +7313,7 @@ SlowpokeLv18Card:
 	db 2
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx DopeyName ; category
@@ -7670,7 +7670,7 @@ DrowzeeCard:
 	db 0
 	db ATK_ANIM_CONFUSE_RAY ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx HypnosisName ; category
@@ -7721,7 +7721,7 @@ HypnoCard:
 	db 10
 	db ATK_ANIM_DARK_MIND ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx HypnosisName ; category
@@ -7823,7 +7823,7 @@ JynxCard:
 	db 0
 	db ATK_ANIM_PSYCHIC_HIT ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx HumanShapeName ; category
@@ -7874,7 +7874,7 @@ MewtwoLv53Card:
 	db 2
 	db ATK_ANIM_BARRIER ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx GeneticName ; category
@@ -7925,7 +7925,7 @@ MewtwoLv60Card:
 	db 0
 	db ATK_ANIM_PSYCHIC_HIT ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx GeneticName ; category
@@ -7976,7 +7976,7 @@ MewtwoAltLV60Card:
 	db 0
 	db ATK_ANIM_PSYCHIC_HIT ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx GeneticName ; category
@@ -8027,7 +8027,7 @@ MewLv8Card:
 	db 0
 	db ATK_ANIM_PSYCHIC_HIT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx NewSpeciesName ; category
@@ -8129,7 +8129,7 @@ MewLv23Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx NewSpeciesName ; category
@@ -8180,7 +8180,7 @@ PidgeyCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx TinyBirdName ; category
@@ -8537,7 +8537,7 @@ FearowCard:
 	db 0
 	db ATK_ANIM_DRILL ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx BeakName ; category
@@ -8588,7 +8588,7 @@ ClefairyCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx FairyName ; category
@@ -8639,7 +8639,7 @@ ClefableCard:
 	db 20
 	db ATK_ANIM_PROTECT ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx FairyName ; category
@@ -8690,7 +8690,7 @@ JigglypuffLv12Card:
 	db 20
 	db ATK_ANIM_HIT_RECOIL ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx BalloonName ; category
@@ -8741,7 +8741,7 @@ JigglypuffLv13Card:
 	db 10
 	db ATK_ANIM_EXPAND ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx BalloonName ; category
@@ -8792,7 +8792,7 @@ JigglypuffLv14Card:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx BalloonName ; category
@@ -8843,7 +8843,7 @@ WigglytuffCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
 	db NONE ; resistance
 	tx BalloonName ; category
@@ -8894,7 +8894,7 @@ MeowthLv14Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx ScratchCatName ; category
@@ -8945,7 +8945,7 @@ MeowthLv15Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx ScratchCatName ; category
@@ -9047,7 +9047,7 @@ FarfetchdCard:
 	db 0
 	db ATK_ANIM_POT_SMASH ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx WildDuckName ; category
@@ -9200,7 +9200,7 @@ LickitungCard:
 	db 0
 	db ATK_ANIM_SUPERSONIC ; animation
 
-	db 3 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx LickingName ; category
@@ -9302,7 +9302,7 @@ KangaskhanCard:
 	db 0
 	db ATK_ANIM_PUNCH ; animation
 
-	db 3 ; retreat cost
+	db 2 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx ParentName ; category
@@ -9404,7 +9404,7 @@ DittoCard:
 	db 3
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx TransformName ; category
@@ -9455,7 +9455,7 @@ EeveeCard:
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx EvolutionName ; category
@@ -9557,7 +9557,7 @@ SnorlaxCard:
 	db 0
 	db ATK_ANIM_BIG_HIT ; animation
 
-	db 4 ; retreat cost
+	db 2 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx SleepingName ; category
@@ -9608,7 +9608,7 @@ DratiniCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db NONE ; weakness
 	db NONE ; resistance
 	tx DragonName ; category
@@ -9659,7 +9659,7 @@ DragonairCard:
 	db 0
 	db ATK_ANIM_HYPER_BEAM ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db NONE ; resistance
 	tx DragonName ; category

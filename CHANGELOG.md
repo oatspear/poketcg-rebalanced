@@ -39,6 +39,7 @@
 - **Potion**: heals 30 HP.
 - **Super Potion**: heals 60 HP.
 - **Revive**: revives a Pokémon with full HP.
+- Adjusted the retreat costs of many Pokémon to keep most Basic Pokémon at 0 cost, most Stage 1 at 1 COLORLESS and some Stage 2 or other heavy attackers at 2 COLORLESS.
 
 ### Fixed
 - AI wrongfully adds score twice for attaching energy to Arena card.
