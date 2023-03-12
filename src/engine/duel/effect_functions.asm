@@ -2584,7 +2584,7 @@ Heal_OncePerTurnCheck: ; 2cda8 (b:4da8)
 
 Heal_RemoveDamageEffect: ; 2cdc7 (b:4dc7)
 ; OATS no longer requires a coin flip
-	ldh a, 1
+	ld a, 1
 	ldh [hAIPkmnPowerEffectParam], a
 	; ldtx de, IfHeadsHealIsSuccessfulText
 	; call TossCoin_BankB
