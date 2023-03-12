@@ -271,7 +271,9 @@ ApplySubstatus2ToDefendingCard: ; 2c149 (b:4149)
 	call GetNonTurnDuelistVariable
 	pop af
 	ld [hl], a
-	ld l, $f6
+; OATS using $f6 (DUELVARS_DUELIST_TYPE) here makes the AI take control
+; of both players. Kinda fun to watch.
+	ld l, DUELVARS_ARENA_CARD_LAST_TURN_SUBSTATUS2
 	ld [hl], a
 	ret
 
