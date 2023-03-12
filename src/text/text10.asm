@@ -339,10 +339,10 @@ HealName: ; 58d17 (16:4d17)
 
 HealDescription: ; 58d1d (16:4d1d)
 	text "Once during your turn (before your"
-	line "attack), you may flip a coin. If"
-	line "heads, remove 1 damage counter from"
-	line "1 of your Pokémon. This power can't"
-	line "be used if Vileplume is Asleep,"
+	line "attack), you may remove 1 damage"
+	line "counter from 1 of your Pokémon."
+	line "This power can't be used if"
+	line "Vileplume is Asleep,"
 	line "Confused, or Paralyzed."
 	done
 

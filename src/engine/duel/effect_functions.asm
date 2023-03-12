@@ -2583,10 +2583,13 @@ Heal_OncePerTurnCheck: ; 2cda8 (b:4da8)
 	ret
 
 Heal_RemoveDamageEffect: ; 2cdc7 (b:4dc7)
-	ldtx de, IfHeadsHealIsSuccessfulText
-	call TossCoin_BankB
+; OATS no longer requires a coin flip
+	ldh a, 1
 	ldh [hAIPkmnPowerEffectParam], a
-	jr nc, .done
+	; ldtx de, IfHeadsHealIsSuccessfulText
+	; call TossCoin_BankB
+	; ldh [hAIPkmnPowerEffectParam], a
+	; jr nc, .done
 
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
@@ -2623,9 +2626,10 @@ Heal_RemoveDamageEffect: ; 2cdc7 (b:4dc7)
 	add DUELVARS_ARENA_CARD_FLAGS
 	call GetTurnDuelistVariable
 	set USED_PKMN_POWER_THIS_TURN_F, [hl]
-	ldh a, [hAIPkmnPowerEffectParam]
-	or a
-	ret z ; return if coin was tails
+; OATS no longer requires a coin flip
+	; ldh a, [hAIPkmnPowerEffectParam]
+	; or a
+	; ret z ; return if coin was tails
 
 	ldh a, [hPlayAreaEffectTarget]
 	add DUELVARS_ARENA_CARD_HP

@@ -248,6 +248,20 @@ BulbasaurCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx GrowlName ; name
+	tx GrowlDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db DAMAGE_NORMAL ; category
+	dw BulbasaurGrowlEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_SUPERSONIC ; animation
+
+	; attack 2
 	energy GRASS, 2 ; energies
 	tx LeechSeedName ; name
 	tx BulbasaursLeechSeedDescription ; description
@@ -260,20 +274,6 @@ BulbasaurCard:
 	db NONE ; flags 3
 	db 1
 	db ATK_ANIM_DRAIN ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_FIRE ; weakness
@@ -299,6 +299,20 @@ IvysaurCard:
 	tx BulbasaurName ; pre-evo name
 
 	; attack 1
+	energy GRASS, 2 ; energies
+	tx PoisonPowderName ; name
+	tx InflictPoisonDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw IvysaurPoisonPowderEffectCommands ; effect commands
+	db INFLICT_POISON ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_POWDER_HIT_POISON ; animation
+
+	; attack 2
 	energy GRASS, 1, COLORLESS, 2 ; energies
 	tx VineWhipName ; name
 	dw NONE ; description
@@ -311,20 +325,6 @@ IvysaurCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_WHIP ; animation
-
-	; attack 2
-	energy GRASS, 3 ; energies
-	tx PoisonPowderName ; name
-	tx InflictPoisonDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw IvysaurPoisonPowderEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_POWDER_HIT_POISON ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
@@ -364,7 +364,7 @@ VenusaurLv64Card:
 	db ATK_ANIM_SOLAR_POWER ; animation
 
 	; attack 2
-	energy GRASS, 4 ; energies
+	energy GRASS, 3 ; energies
 	tx MegaDrainName ; name
 	tx VenusaursMegaDrainDescription ; description
 	tx VenusaursMegaDrainDescriptionCont ; description (cont)
@@ -415,7 +415,7 @@ VenusaurLv67Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy GRASS, 4 ; energies
+	energy GRASS, 3 ; energies
 	tx SolarBeamName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -568,7 +568,7 @@ ButterfreeCard:
 	db ATK_ANIM_WHIRLWIND ; animation
 
 	; attack 2
-	energy GRASS, 4 ; energies
+	energy GRASS, 3 ; energies
 	tx MegaDrainName ; name
 	tx ButterfreesMegaDrainDescription ; description
 	tx ButterfreesMegaDrainDescriptionCont ; description (cont)
@@ -651,7 +651,7 @@ KakunaCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db KAKUNA
-	db 80 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx WeedleName ; pre-evo name
 
@@ -707,11 +707,11 @@ BeedrillCard:
 	tx KakunaName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 3 ; energies
+	energy COLORLESS, 2 ; energies
 	tx TwineedleName ; name
 	tx DoubleAttackX30Description ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_X ; category
 	dw BeedrillTwineedleEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -762,7 +762,7 @@ EkansCard:
 	tx SpitPoisonName ; name
 	tx MayInflictPoisonDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw EkansSpitPoisonEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
@@ -823,7 +823,7 @@ ArbokCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy DARKNESS, 2, COLORLESS, 1 ; energies
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx PoisonFangName ; name
 	tx InflictPoisonDescription ; description
 	dw NONE ; description (cont)
@@ -855,7 +855,7 @@ NidoranFCard:
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db NIDORANF
-	db 60 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -911,7 +911,7 @@ NidorinaCard:
 	tx NidoranFName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx SupersonicName ; name
 	tx MayInflictConfusionDescription ; description
 	dw NONE ; description (cont)
@@ -976,7 +976,7 @@ NidoqueenCard:
 	db ATK_ANIM_BOYFRIENDS ; animation
 
 	; attack 2
-	energy DARKNESS, 2, COLORLESS, 2 ; energies
+	energy DARKNESS, 1, COLORLESS, 2 ; energies
 	tx MegaPunchName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -1064,11 +1064,11 @@ NidorinoCard:
 	tx NidoranMName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1, COLORLESS, 2 ; energies
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx DoubleKickName ; name
 	tx DoubleAttackX30Description ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_X ; category
 	dw NidorinoDoubleKickEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -1078,7 +1078,7 @@ NidorinoCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy DARKNESS, 2, COLORLESS, 2 ; energies
+	energy DARKNESS, 2, COLORLESS, 1 ; energies
 	tx HornDrillName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -1115,7 +1115,7 @@ NidokingCard:
 	tx NidorinoName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1, COLORLESS, 2 ; energies
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx ThrashName ; name
 	tx ThrashDescription ; description
 	dw NONE ; description (cont)
@@ -1133,7 +1133,7 @@ NidokingCard:
 	tx ToxicName ; name
 	tx ToxicDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NidokingToxicEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
@@ -1166,7 +1166,7 @@ ZubatCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx SupersonicName ; name
 	tx MayInflictConfusionDescription ; description
 	dw NONE ; description (cont)
@@ -1217,6 +1217,20 @@ GolbatCard:
 	tx ZubatName ; pre-evo name
 
 	; attack 1
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	tx LeechLifeName ; name
+	tx GolbatsLeechLifeDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw GolbatLeechLifeEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
+	db NONE ; flags 3
+	db 3
+	db ATK_ANIM_DRAIN ; animation
+
+	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx WingAttackName ; name
 	dw NONE ; description
@@ -1229,20 +1243,6 @@ GolbatCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy DARKNESS, 2, COLORLESS, 1 ; energies
-	tx LeechLifeName ; name
-	tx GolbatsLeechLifeDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw GolbatLeechLifeEffectCommands ; effect commands
-	db NONE ; flags 1
-	db HEAL_USER ; flags 2
-	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_DRAIN ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -1282,7 +1282,7 @@ OddishCard:
 	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	; attack 2
-	energy GRASS, 2 ; energies
+	energy GRASS, 1 ; energies
 	tx SproutName ; name
 	tx SproutDescription ; description
 	dw NONE ; description (cont)
@@ -1323,7 +1323,7 @@ GloomCard:
 	tx PoisonPowderName ; name
 	tx InflictPoisonDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw GloomPoisonPowderEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
@@ -1333,7 +1333,7 @@ GloomCard:
 	db ATK_ANIM_POISON_POWDER ; animation
 
 	; attack 2
-	energy GRASS, 2 ; energies
+	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx FoulOdorName ; name
 	tx FoulOdorDescription ; description
 	dw NONE ; description (cont)
@@ -1384,11 +1384,11 @@ VileplumeCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy GRASS, 3 ; energies
+	energy GRASS, 2, COLORLESS, 1 ; energies
 	tx PetalDanceName ; name
 	tx PetalDanceDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 30 ; damage
 	db DAMAGE_X ; category
 	dw VileplumePetalDanceEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -1472,7 +1472,7 @@ ParasectCard:
 	tx ParasName ; pre-evo name
 
 	; attack 1
-	energy GRASS, 2 ; energies
+	energy GRASS, 1 ; energies
 	tx SporeName ; name
 	tx InflictSleepDescription ; description
 	dw NONE ; description (cont)
@@ -1629,7 +1629,7 @@ BellsproutCard:
 	tx VineWhipName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -1727,7 +1727,7 @@ VictreebelCard:
 	tx WeepinbellName ; pre-evo name
 
 	; attack 1
-	energy GRASS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx LureName ; name
 	tx VictreebelsLureDescription ; description
 	dw NONE ; description (cont)
@@ -1745,7 +1745,7 @@ VictreebelCard:
 	tx AcidName ; name
 	tx VictreebelsAcidDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw VictreebelAcidEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -1778,7 +1778,7 @@ GrimerCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
+	energy DARKNESS, 1 ; energies
 	tx NastyGooName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
@@ -1792,7 +1792,7 @@ GrimerCard:
 	db ATK_ANIM_GOO ; animation
 
 	; attack 2
-	energy DARKNESS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx MinimizeName ; name
 	tx GrimersMinimizeDescription ; description
 	dw NONE ; description (cont)
@@ -1843,7 +1843,7 @@ MukCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy DARKNESS, 3 ; energies
+	energy DARKNESS, 2, COLORLESS, 1 ; energies
 	tx SludgeName ; name
 	tx MayInflictPoisonDescription ; description
 	dw NONE ; description (cont)
@@ -1982,7 +1982,7 @@ KoffingCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 2 ; energies
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx FoulGasName ; name
 	tx FoulGasDescription ; description
 	dw NONE ; description (cont)
@@ -2033,7 +2033,7 @@ WeezingCard:
 	tx KoffingName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 2 ; energies
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx SmogName ; name
 	tx MayInflictPoisonDescription ; description
 	dw NONE ; description (cont)
@@ -2047,7 +2047,7 @@ WeezingCard:
 	db ATK_ANIM_SMOG ; animation
 
 	; attack 2
-	energy DARKNESS, 2, COLORLESS, 1 ; energies
+	energy DARKNESS, 1, COLORLESS, 2 ; energies
 	tx SelfdestructName ; name
 	tx WeezingsSelfdestructDescription ; description
 	dw NONE ; description (cont)
@@ -2079,12 +2079,12 @@ TangelaLv8Card:
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
 	db TANGELA_LV8
-	db 50 ; hp
+	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy GRASS, 1, COLORLESS, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx BindName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
@@ -2098,11 +2098,11 @@ TangelaLv8Card:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy GRASS, 3 ; energies
+	energy GRASS, 2 ; energies
 	tx PoisonPowderName ; name
 	tx InflictPoisonDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw TangelaPoisonPowderEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
@@ -2130,7 +2130,7 @@ TangelaLv12Card:
 	db CIRCLE ; rarity
 	db COLOSSEUM | GB ; sets
 	db TANGELA_LV12
-	db 50 ; hp
+	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -2149,7 +2149,7 @@ TangelaLv12Card:
 	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	; attack 2
-	energy GRASS, 2, COLORLESS, 1 ; energies
+	energy GRASS, 2 ; energies
 	tx PoisonWhipName ; name
 	tx InflictPoisonDescription ; description
 	dw NONE ; description (cont)
@@ -2237,7 +2237,7 @@ PinsirCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy GRASS, 2 ; energies
+	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx IronGripName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
@@ -2251,7 +2251,7 @@ PinsirCard:
 	db ATK_ANIM_HIT_EFFECT ; animation
 
 	; attack 2
-	energy GRASS, 2, COLORLESS, 2 ; energies
+	energy GRASS, 1, COLORLESS, 2 ; energies
 	tx GuillotineName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)

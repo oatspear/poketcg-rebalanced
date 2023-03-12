@@ -1,5 +1,108 @@
 # Pokémon TCG Rebalanced
 
+## Version 0.2
+
+### Pokémon Cards
+
+#### Bulbasaur
+- Added attack: **(C) Growl** - reduces damage taken by 10.
+
+#### Ivysaur
+- **Poison Powder**: reduced cost from (GGG) to (GG).
+
+#### Venusaur Lv64
+- **Mega Drain**: reduced cost from (GGGG) to (GGG).
+
+#### Venusaur Lv67
+- **Solar Beam**: reduced cost from (GGGG) to (GGG).
+
+#### Butterfree
+- **Mega Drain**: reduced cost from (GGGG) to (GGG).
+
+#### Kakuna
+- Reduced HP from 80 to 70.
+
+#### Beedrill
+- **Twineedle**: reduced cost from (CCC) to (CC) and damage from 30x to 20x.
+
+#### Ekans
+- **Spit Poison**: added 10 direct damage.
+
+#### Arbok
+- **Poison Fang**: reduced cost from (DDC) to (DC).
+
+#### Nidoran (F)
+- Reduced HP from 60 to 50.
+
+#### Nidorina
+- **Supersonic**: reduced cost from (D) to (C).
+
+#### Nidoqueen
+- **Mega Punch**: reduced cost from (DDCC) to (DCC).
+
+#### Nidorino
+- **Double Kick**: reduced cost from (DCC) to (DC) and damage from 30x to 20x.
+- **Horn Drill**: reduced cost from (DDCC) to (DDC).
+
+#### Nidoking
+- **Thrash**: reduced cost from (DCC) to (DC).
+- **Toxic**: increased damage from 20 to 30.
+
+#### Zubat
+- **Supersonic**: reduced cost from (CC) to (C).
+
+#### Golbat
+- **Leech Life**: reduced cost from (DDC) to (DC).
+
+#### Oddish
+- **Sprout**: reduced cost from (GG) to (G).
+
+#### Gloom
+- **Poison Powder**: added 10 direct damage.
+- **Foul Odor**: reduced cost from (GG) to (GC).
+
+#### Vileplume
+- **Heal**: no longer requires a coin flip.
+- **Petal Dance**: reduced cost from (GGG) to (GGC) and damage from 40x to 30x.
+
+#### Parasect
+- **Spore**: reduced cost from (GG) to (G).
+
+#### Bellsprout
+- **Vine Whip**: increased damage from 10 to 20.
+
+#### Victreebel
+- **Lure**: reduced cost from (G) to (C).
+- **Acid**: increased damage from 20 to 30.
+
+#### Grimer
+- **Nasty Goo**: increased cost from (C) to (D).
+- **Minimize**: reduced cost from (D) to (C).
+
+#### Muk
+- **Sludge**: reduced cost from (DDD) to (DDC).
+
+#### Koffing
+- **Foul Gas**: reduced cost from (DD) to (DC).
+
+#### Weezing
+- **Smog**: reduced cost from (DD) to (DC).
+- **Self-destruct**: reduced cost from (DDC) to (DCC).
+
+#### Tangela Lv8
+- Increased HP from 50 to 60.
+- **Bind**: reduced cost from (GC) to (CC).
+- **Poison Powder**: reduced cost from (GGG) to (GG) and damage from 20 to 10.
+
+#### Tangela Lv12
+- Increased HP from 50 to 60.
+- **Poison Whip**: reduced cost from (GGC) to (GG).
+
+#### Pinsir
+- **Iron Grip**: reduced cost from (GG) to (GC).
+- **Guillotine**: reduced cost from (GGCC) to (GCC).
+
+
 ## Version 0.1
 
 ### Added

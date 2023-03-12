@@ -1074,6 +1074,7 @@ PikachuSparkEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Spark_AISelectEffect
 	db  $00
 
+BulbasaurGrowlEffectCommands:
 PikachuLv16GrowlEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PikachuLv16GrowlEffect
 	db  $00
