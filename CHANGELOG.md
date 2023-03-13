@@ -122,8 +122,15 @@
 - **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
 
 #### Arcanine Lv45
+- Reduced HP from 100 to 90.
 - **Flamethrower**: increased damage from 50 to 60.
 - **Take Down**: reduced cost from (FFCC) to (CC), damage from 80 to 50 and recoil from 30 to 20.
+
+#### Magmar Lv24
+- Increased HP from 50 to 60.
+
+#### Magmar Lv31
+- **Smog**: reduced cost from (FF) to (FC).
 
 
 ## Version 0.1

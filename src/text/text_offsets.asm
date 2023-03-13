@@ -2324,7 +2324,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RapidashDescription                                ; 0x090b
 	textpointer MagmarName                                         ; 0x090c
 	textpointer FirePunchName                                      ; 0x090d
-	textpointer FirePunchDescription                               ; 0x090e
 	textpointer SpitfireName                                       ; 0x090f
 	textpointer MagmarLv24Description                             ; 0x0910
 	textpointer SmokescreenName                                    ; 0x0911

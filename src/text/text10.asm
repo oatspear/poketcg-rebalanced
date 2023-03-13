@@ -1064,11 +1064,6 @@ FirePunchName: ; 5a9b3 (16:69b3)
 	text "Fire Punch"
 	done
 
-FirePunchDescription: ; 5a9bf (16:69bf)
-	text "Discard 1 <FIRE> Energy card attached to"
-	line "Magmar in order to use this attack."
-	done
-
 SpitfireName: ; 5aa09 (16:6a09)
 	text "Spitfire"
 	done

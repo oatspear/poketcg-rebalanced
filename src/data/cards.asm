@@ -2691,7 +2691,7 @@ ArcanineLv45Card:
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db ARCANINE_LV45
-	db 100 ; hp
+	db 90 ; hp
 	db STAGE1 ; stage
 	tx GrowlitheName ; pre-evo name
 
@@ -2844,7 +2844,7 @@ MagmarLv24Card:
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db MAGMAR_LV24
-	db 50 ; hp
+	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -2865,7 +2865,7 @@ MagmarLv24Card:
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx FlamethrowerName ; name
-	tx FirePunchDescription ; description
+	tx FlamethrowerDescription ; description
 	dw NONE ; description (cont)
 	db 50 ; damage
 	db DAMAGE_NORMAL ; category
@@ -2914,7 +2914,7 @@ MagmarLv31Card:
 	db ATK_ANIM_DARK_GAS ; animation
 
 	; attack 2
-	energy FIRE, 2 ; energies
+	energy FIRE, 1, COLORLESS, 1 ; energies
 	tx SmogName ; name
 	tx MayInflictPoisonDescription ; description
 	dw NONE ; description (cont)
