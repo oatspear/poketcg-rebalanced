@@ -317,7 +317,7 @@ IvysaurCard:
 	tx VineWhipName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -2355,9 +2355,9 @@ CharmeleonCard:
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx FlamethrowerName ; name
-	tx CharmeleonsFlamethrowerDescription ; description
+	tx FlamethrowerDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 60 ; damage
 	db DAMAGE_NORMAL ; category
 	dw CharmeleonFlamethrowerEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -2441,7 +2441,7 @@ VulpixCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIRE, 2 ; energies
+	energy FIRE, 1 ; energies
 	tx ConfuseRayName ; name
 	tx MayInflictConfusionDescription ; description
 	dw NONE ; description (cont)
@@ -2455,18 +2455,18 @@ VulpixCard:
 	db ATK_ANIM_CONFUSE_RAY ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
+	energy FIRE, 1, COLORLESS, 1 ; energies
+	tx FlareName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_SMALL_FLAME ; animation
 
 	db 0 ; retreat cost
 	db WR_WATER ; weakness
@@ -2492,7 +2492,7 @@ NinetalesLv32Card:
 	tx VulpixName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx LureName ; name
 	tx NinetalesLureDescription ; description
 	dw NONE ; description (cont)
@@ -2506,7 +2506,7 @@ NinetalesLv32Card:
 	db ATK_ANIM_LURE ; animation
 
 	; attack 2
-	energy FIRE, 4 ; energies
+	energy FIRE, 3 ; energies
 	tx FireBlastName ; name
 	tx FireBlastDescription ; description
 	dw NONE ; description (cont)
@@ -2543,32 +2543,32 @@ NinetalesLv35Card:
 	tx VulpixName ; pre-evo name
 
 	; attack 1
-	energy FIRE, 2 ; energies
-	tx MixUpName ; name
-	tx MixUpDescription ; description
-	tx MixUpDescriptionCont ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw NinetalesMixUpEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
-
-	; attack 2
-	energy FIRE, 3 ; energies
-	tx DancingEmbersName ; name
-	tx DancingEmbersDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx QuickAttackName ; name
+	tx QuickAttack20Description ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_X ; category
-	dw NinetalesDancingEmbersEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw NinetalesQuickAttackEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_FIRE_SPIN ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
+
+	; attack 2
+	energy FIRE, 2, COLORLESS, 1 ; energies
+	tx FlamethrowerName ; name
+	tx FlamethrowerDescription ; description
+	dw NONE ; description (cont)
+	db 60 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NinetalesLv35FlamethrowerEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 3
+	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
@@ -2647,9 +2647,9 @@ ArcanineLv34Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx QuickAttackDescription ; description
+	tx QuickAttack20Description ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
 	dw ArcanineQuickAttackEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -2696,11 +2696,25 @@ ArcanineLv45Card:
 	tx GrowlitheName ; pre-evo name
 
 	; attack 1
-	energy FIRE, 2, COLORLESS, 1 ; energies
-	tx FlamethrowerName ; name
-	tx ArcaninesFlamethrowerDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx TakeDownName ; name
+	tx TakeDownDescription ; description
 	dw NONE ; description (cont)
 	db 50 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ArcanineTakeDownEffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 20
+	db ATK_ANIM_HIT_RECOIL ; animation
+
+	; attack 2
+	energy FIRE, 2, COLORLESS, 1 ; energies
+	tx FlamethrowerName ; name
+	tx FlamethrowerDescription ; description
+	dw NONE ; description (cont)
+	db 60 ; damage
 	db DAMAGE_NORMAL ; category
 	dw ArcanineFlamethrowerEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -2708,20 +2722,6 @@ ArcanineLv45Card:
 	db NONE ; flags 3
 	db 3
 	db ATK_ANIM_BIG_FLAME ; animation
-
-	; attack 2
-	energy FIRE, 2, COLORLESS, 2 ; energies
-	tx TakeDownName ; name
-	tx TakeDownDescription ; description
-	dw NONE ; description (cont)
-	db 80 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ArcanineTakeDownEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 30
-	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
@@ -3018,7 +3018,7 @@ FlareonLv28Card:
 	; attack 2
 	energy FIRE, 2, COLORLESS, 2 ; energies
 	tx FlamethrowerName ; name
-	tx FlareonsFlamethrowerDescription ; description
+	tx FlamethrowerDescription ; description
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category

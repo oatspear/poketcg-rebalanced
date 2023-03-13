@@ -382,8 +382,8 @@ GrowlName: ; 5d04a (17:504a)
 
 GrowlDescription: ; 5d051 (17:5051)
 	text "If the Defending Pokémon attacks"
-	line "Pikachu during your opponent's next"
-	line "turn, any damage done by the attack"
+	line "this Pokémon during the next turn,"
+	line "any damage done by the attack"
 	line "is reduced by 10 (after applying"
 	line "Weakness and Resistance). "
 	line "(Benching or evolving either Pokémon"

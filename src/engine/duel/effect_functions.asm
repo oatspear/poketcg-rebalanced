@@ -3543,22 +3543,22 @@ ArcanineFlamethrower_DiscardEffect: ; 2d379 (b:5379)
 	ret
 
 TakeDownEffect: ; 2d37f (b:537f)
-	ld a, 30
+	ld a, 20
 	call DealRecoilDamageToSelf
 	ret
 
 ArcanineQuickAttack_AIEffect: ; 2d385 (b:5385)
 	ld a, (10 + 30) / 2
-	lb de, 10, 30
+	lb de, 20, 30
 	jp SetExpectedAIDamage
 
 ArcanineQuickAttack_DamageBoostEffect: ; 2d38d (b:538d)
-	ld hl, 20
+	ld hl, 10
 	call LoadTxRam3
 	ldtx de, DamageCheckIfHeadsPlusDamageText
 	call TossCoin_BankB
 	ret nc ; return if tails
-	ld a, 20
+	ld a, 10
 	call AddToDamage
 	ret
 

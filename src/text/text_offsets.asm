@@ -2272,7 +2272,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer CharmanderDescription                              ; 0x08d7
 	textpointer CharmeleonName                                     ; 0x08d8
 	textpointer FlamethrowerName                                   ; 0x08d9
-	textpointer CharmeleonsFlamethrowerDescription                 ; 0x08da
+	textpointer FlamethrowerDescription                            ; 0x08da
 	textpointer FlameName                                          ; 0x08db
 	textpointer CharmeleonDescription                              ; 0x08dc
 	textpointer CharizardName                                      ; 0x08dd
@@ -2303,11 +2303,11 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ArcanineName                                       ; 0x08f6
 	textpointer QuickAttackName                                    ; 0x08f7
 	textpointer QuickAttackDescription                             ; 0x08f8
+	textpointer QuickAttack20Description                           ; 0x08f8
 	textpointer FlamesOfRageName                                   ; 0x08f9
 	textpointer FlamesOfRageDescription                            ; 0x08fa
 	textpointer LegendaryName                                      ; 0x08fb
 	textpointer ArcanineLv34Description                           ; 0x08fc
-	textpointer ArcaninesFlamethrowerDescription                   ; 0x08fd
 	textpointer TakeDownName                                       ; 0x08fe
 	textpointer TakeDownDescription                                ; 0x08ff
 	textpointer ArcanineLv45Description                           ; 0x0900
@@ -2336,7 +2336,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RageName                                           ; 0x0917
 	textpointer FlareonsRageDescription                            ; 0x0918
 	textpointer FlareonLv22Description                            ; 0x0919
-	textpointer FlareonsFlamethrowerDescription                    ; 0x091a
 	textpointer FlareonLv28Description                            ; 0x091b
 	textpointer MoltresName                                        ; 0x091c
 	textpointer WildfireName                                       ; 0x091d

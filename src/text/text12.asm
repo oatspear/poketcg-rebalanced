@@ -190,8 +190,7 @@ CurseDescription: ; 608c9 (18:48c9)
 	text "Once during your turn (before your"
 	line "attack), you may move 1 damage"
 	line "counter from 1 of your opponent's"
-	line "Pokémon to another (even if it would"
-	line "Knock Out the other Pokémon)."
+	line "Pokémon to another."
 	line "This power can't be used if Gengar"
 	line "is Asleep, Confused, or Paralyzed."
 	done
@@ -359,7 +358,7 @@ EnergyAbsorptionName: ; 61065 (18:5065)
 EnergyAbsorptionDescription: ; 61078 (18:5078)
 	text "Choose up to 2 Energy cards from"
 	line "your discard pile and attach them"
-	line "to Mewtwo."
+	line "to this Pokémon."
 	done
 
 PsyburnName: ; 610c7 (18:50c7)

@@ -9,6 +9,7 @@
 
 #### Ivysaur
 - **Poison Powder**: reduced cost from (GGG) to (GG).
+- **Vine Whip**: increased damage from 30 to 40.
 
 #### Venusaur Lv64
 - **Mega Drain**: reduced cost from (GGGG) to (GGG).
@@ -101,6 +102,28 @@
 #### Pinsir
 - **Iron Grip**: reduced cost from (GG) to (GC).
 - **Guillotine**: reduced cost from (GGCC) to (GCC).
+
+#### Charmeleon
+- **Flamethrower**: increased damage from 50 to 60.
+
+#### Vulpix
+- **Confuse Ray**: reduced cost from (FF) to (F).
+- Added attack: **Flare** (FC) - 20 damage.
+
+#### Ninetales Lv32
+- **Lure**: reduced cost from (CC) to (C).
+- **Fire Blast**: reduced cost from (FFFF) to (FFF).
+
+#### Ninetales Lv35
+- **Mix Up**: replaced with **Quick Attack** (CC) - 20 damage +10 if heads.
+- **Dancing Embers**: replaced with **Flamethrower** (FFC): 60 damage, discard 1 (F).
+
+#### Arcanine Lv34
+- **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
+
+#### Arcanine Lv45
+- **Flamethrower**: increased damage from 50 to 60.
+- **Take Down**: reduced cost from (FFCC) to (CC), damage from 80 to 50 and recoil from 30 to 20.
 
 
 ## Version 0.1

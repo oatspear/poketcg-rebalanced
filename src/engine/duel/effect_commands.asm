@@ -563,6 +563,7 @@ ArcanineTakeDownEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, TakeDownEffect
 	db  $00
 
+NinetalesQuickAttackEffectCommands:
 ArcanineQuickAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ArcanineQuickAttack_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, ArcanineQuickAttack_AIEffect
@@ -648,6 +649,7 @@ MagmarSmogEffectCommands:
 	dbw EFFECTCMDTYPE_AI, MagmarSmog_AIEffect
 	db  $00
 
+NinetalesLv35FlamethrowerEffectCommands:
 CharmeleonFlamethrowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CharmeleonFlamethrower_CheckEnergy
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CharmeleonFlamethrower_PlayerSelectEffect

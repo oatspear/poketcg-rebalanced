@@ -776,10 +776,11 @@ EmberName: ; 59e0e (16:5e0e)
 	text "Ember"
 	done
 
+FlamethrowerDescription:
 EmberDescription: ; 59e15 (16:5e15)
-	text "Discard 1 <FIRE> Energy card attached to"
-	line "Charmander in order to use this"
-	line "attack."
+	text "Discard 1 <FIRE> Energy card attached"
+	line "to this Pokémon in order to use"
+	line "this attack."
 	done
 
 LizardName: ; 59e63 (16:5e63)
@@ -799,12 +800,6 @@ CharmeleonName: ; 59eda (16:5eda)
 
 FlamethrowerName: ; 59ee6 (16:5ee6)
 	text "Flamethrower"
-	done
-
-CharmeleonsFlamethrowerDescription: ; 59ef4 (16:5ef4)
-	text "Discard 1 <FIRE> Energy card attached to"
-	line "Charmeleon in order to use this"
-	line "attack."
 	done
 
 FlameName: ; 59f42 (16:5f42)
@@ -963,6 +958,13 @@ QuickAttackDescription: ; 5a56a (16:656a)
 	line "damage."
 	done
 
+QuickAttack20Description: ; 5a56a (16:656a)
+	text "Flip a coin. If heads, this attack"
+	line "does 20 damage plus 10 more damage;"
+	line "if tails, this attack does 20"
+	line "damage."
+	done
+
 FlamesOfRageName: ; 5a5d8 (16:65d8)
 	text "Flames of Rage"
 	done
@@ -985,18 +987,13 @@ ArcanineLv34Description: ; 5a694 (16:6694)
 	line "flies when it runs."
 	done
 
-ArcaninesFlamethrowerDescription: ; 5a6ed (16:66ed)
-	text "Discard 1 <FIRE> Energy card attached to"
-	line "Arcanine in order to use this"
-	line "attack."
-	done
-
 TakeDownName: ; 5a739 (16:6739)
 	text "Take Down"
 	done
 
 TakeDownDescription: ; 5a744 (16:6744)
-	text "Arcanine does 30 damage to itself."
+	text "This Pokémon does 20 damage to"
+	line "itself."
 	done
 
 ArcanineLv45Description: ; 5a768 (16:6768)
@@ -1125,11 +1122,6 @@ FlareonLv22Description: ; 5abe1 (16:6be1)
 	text "It has a flame chamber inside its"
 	line "body. It inhales, then blows out"
 	line "fire that is over 3,000 degrees."
-	done
-
-FlareonsFlamethrowerDescription: ; 5ac46 (16:6c46)
-	text "Discard 1 <FIRE> Energy card attached to"
-	line "Flareon in order to use this attack."
 	done
 
 FlareonLv28Description: ; 5ac91 (16:6c91)
