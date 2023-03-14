@@ -1248,11 +1248,11 @@ HydroPumpName: ; 5b267 (16:7267)
 	done
 
 HydroPumpDescription: ; 5b273 (16:7273)
-	text "Does 40 damage plus 10 more damage"
+	text "Does 50 damage plus 20 more damage"
 	line "for each <WATER> Energy attached to"
 	line "Blastoise but not used to pay for"
-	line "this attack's Energy cost. You can't"
-	line "add more than 20 damage in this way."
+	line "this attack's Energy cost, up to"
+	line "2 extra <WATER> Energy."
 	done
 
 ShellfishName: ; 5b322 (16:7322)

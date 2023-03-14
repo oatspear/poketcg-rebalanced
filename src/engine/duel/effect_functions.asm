@@ -2847,7 +2847,9 @@ RainDanceEffect: ; 2cf46 (b:4f46)
 	ret
 
 HydroPumpEffect: ; 2cf48 (b:4f48)
-	lb bc, 3, 0
+	lb bc, 2, 1
+	call ApplyExtraWaterEnergyDamageBonus
+	lb bc, 2, 1
 	jp ApplyExtraWaterEnergyDamageBonus
 
 KinglerFlail_AIEffect: ; 2cf4e (b:4f4e)
@@ -3268,7 +3270,7 @@ PoliwhirlDoubleslap_MultiplierEffect: ; 2d1c8 (b:51c8)
 	ret
 
 PoliwrathWaterGunEffect: ; 2d1e0 (b:51e0)
-	lb bc, 2, 1
+	lb bc, 1, 1
 	jp ApplyExtraWaterEnergyDamageBonus
 
 Whirlpool_PlayerSelectEffect: ; 2d1e6 (b:51e6)

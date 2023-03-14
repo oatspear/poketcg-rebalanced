@@ -563,6 +563,7 @@ ArcanineTakeDownEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, TakeDownEffect
 	db  $00
 
+FlareonQuickAttackEffectCommands:
 NinetalesQuickAttackEffectCommands:
 ArcanineQuickAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ArcanineQuickAttack_DamageBoostEffect
@@ -619,11 +620,6 @@ MoltresWildfireEffectCommands:
 MoltresLv35DiveBombEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MoltresLv35DiveBomb_Success50PercentEffect
 	dbw EFFECTCMDTYPE_AI, MoltresLv35DiveBomb_AIEffect
-	db  $00
-
-FlareonQuickAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FlareonQuickAttack_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, FlareonQuickAttack_AIEffect
 	db  $00
 
 FlareonFlamethrowerEffectCommands:

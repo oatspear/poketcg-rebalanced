@@ -132,6 +132,55 @@
 #### Magmar Lv31
 - **Smog**: reduced cost from (FF) to (FC).
 
+#### Flareon Lv22
+- Increased HP from 60 to 70.
+- **Rage**: reduced cost from (CCC) to (CC).
+
+#### Flareon Lv22
+- **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
+- **Flamethrower**: reduced cost from (FFCC) to (FFC).
+
+#### Moltres Lv35
+- **Dive Bomb**: reduced cost from (FFFF) to (FFC).
+
+#### Moltres Lv35
+- **Dive Bomb**: reduced cost from (FFF) to (FFC).
+
+#### Squirtle
+- **Withdraw**: reduced cost from (WC) to (CC).
+
+#### Wartortle
+- **Withdraw**: reduced cost from (WC) to (CC).
+
+#### Blastoise
+- **Hydro Pump**: reduced cost from (WWW) to (WWC), increased base damage from 40 to 50 and bonus damage from +10 to +20.
+
+#### Golduck
+- **Psyshock**: increased damage from 10 to 20.
+
+#### Poliwhirl
+- **Amnesia**: reduced cost from (WW) to (WC).
+- **Doubleslap**: reduced cost from (WWC) to (WCC).
+
+#### Poliwrath
+- **Water Gun**: reduced cost from (WWC) to (WC).
+- **Whirlpool**: reduced cost from (WWCC) to (WWC) and damage from 40 to 30.
+
+#### Tentacool
+- Increased HP from 30 to 40.
+- **Cowardice**: replaced with **Poison Sting** (W) - 10 damage, flip a coin - if heads applies Poison.
+- **Acid**: increased cost from (W) to (WC) and added a coin flip - if heads the opponent cannot retreat.
+
+#### Tentacruel
+- **Supersonic**: reduced cost from (W) to (C).
+- **Jellyfish Sting**: increased damage from 10 to 20.
+
+#### Seel
+- **Headbutt**: reduced cost from (W) to (C).
+
+#### Dewgong
+- **Ice Beam**: reduced cost from (WWCC) to (WC) and damage from 30 to 20.
+
 
 ## Version 0.1
 
