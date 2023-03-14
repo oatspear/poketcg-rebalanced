@@ -121,6 +121,7 @@
 - **Dancing Embers**: replaced with **Flamethrower** (FFC): 60 damage, discard 1 (F).
 
 #### Arcanine Lv34
+- Increased HP from 70 to 80.
 - **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
 
 #### Arcanine Lv45
@@ -205,6 +206,35 @@
 #### Seaking
 - **Horn Attack**: reduced cost from (W) to (C) and increased damage from 10 to 20.
 - **Waterfall**: increased cost from (WC) to (WW) and damage from 30 to 40.
+
+#### Starmie
+- **Recover**: reduced cost from (WW) to (W).
+- **Star Freeze**: reduced cost from (WCC) to (WC).
+
+#### Gyarados
+- **Dragon Rage**: reduced cost from (WWW) to (WCC) and damage from 50 to 40.
+- **Bubblebeam**: reduced cost from (WWWW) to (WWW) and increased damage from 40 to 50.
+
+#### Lapras
+- **Confuse Ray**: reduced cost from (WW) to (C) and damage from 10 to 0.
+
+#### Vaporeon Lv29
+- Increased HP from 60 to 70.
+
+#### Vaporeon Lv42
+- **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
+- **Water Gun**: reduced cost from (WWC) to (WW).
+
+#### Omastar
+- **Water Gun**: increased cost from (WC) to (WW) and base damage from 20 to 30.
+- **Spike Cannon**: reduced cost from (WW) to (CC).
+
+#### Articuno Lv35
+- **Freeze Dry**: reduced cost from (WWW) to (WC) and damage from 30 to 20.
+- **Blizzard**: reduced cost from (WWWW) to (WWW).
+
+#### Articuno Lv37
+- **Ice Breath**: target Pokémon is no longer chosen at random.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: can choose any Basic Pokémon from deck without coin flip.

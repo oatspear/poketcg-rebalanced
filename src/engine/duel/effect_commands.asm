@@ -395,11 +395,6 @@ ShellderSupersonicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ShellderSupersonicEffect
 	db  $00
 
-VaporeonQuickAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VaporeonQuickAttack_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, VaporeonQuickAttack_AIEffect
-	db  $00
-
 VaporeonWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VaporeonWaterGunEffect
 	dbw EFFECTCMDTYPE_AI, VaporeonWaterGunEffect
@@ -505,8 +500,11 @@ ArticunoQuickfreezeEffectCommands:
 	db  $00
 
 ArticunoIceBreathEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IceBreath_ZeroDamage
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IceBreath_RandomPokemonDamageEffect
+	; dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IceBreath_ZeroDamage
+	; dbw EFFECTCMDTYPE_AFTER_DAMAGE, IceBreath_RandomPokemonDamageEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IceBreath_BenchDamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, IceBreath_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, IceBreath_AISelectEffect
 	db  $00
 
 VaporeonFocusEnergyEffectCommands:
@@ -524,6 +522,7 @@ ArcanineTakeDownEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, TakeDownEffect
 	db  $00
 
+VaporeonQuickAttackEffectCommands:
 FlareonQuickAttackEffectCommands:
 NinetalesQuickAttackEffectCommands:
 ArcanineQuickAttackEffectCommands:

@@ -317,7 +317,7 @@ IceBreathName: ; 5cd57 (17:4d57)
 
 IceBreathDescription: ; 5cd63 (17:4d63)
 	text "Does 40 damage to 1 of your"
-	line "opponent's Pokémon chosen at random."
+	line "opponent's Pokémon."
 	line "Don't apply Weakness and Resistance"
 	line "for this attack. (Any other effects"
 	line "that would happen after applying"

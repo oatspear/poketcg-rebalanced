@@ -3046,9 +3046,21 @@ IceBreath_ZeroDamage: ; 2d329 (b:5329)
 	call SetDefiniteDamage
 	ret
 
-IceBreath_RandomPokemonDamageEffect: ; 2d32e (b:532e)
+; IceBreath_RandomPokemonDamageEffect: ; 2d32e (b:532e)
+; 	call SwapTurn
+; 	call PickRandomPlayAreaCard
+; 	ld b, a
+; 	ld de, 40
+; 	call DealDamageToPlayAreaPokemon_RegularAnim
+; 	call SwapTurn
+; 	ret
+
+IceBreath_BenchDamageEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z
 	call SwapTurn
-	call PickRandomPlayAreaCard
+	ldh a, [hTemp_ffa0]
 	ld b, a
 	ld de, 40
 	call DealDamageToPlayAreaPokemon_RegularAnim
@@ -6210,6 +6222,7 @@ ThunderJolt_RecoilEffect: ; 2e529 (b:6529)
 	call DealRecoilDamageToSelf
 	ret
 
+IceBreath_PlayerSelectEffect:
 Spark_PlayerSelectEffect: ; 2e539 (b:6539)
 	ld a, $ff
 	ldh [hTemp_ffa0], a
@@ -6236,6 +6249,7 @@ Spark_PlayerSelectEffect: ; 2e539 (b:6539)
 	call SwapTurn
 	ret
 
+IceBreath_AISelectEffect:
 Spark_AISelectEffect: ; 2e562 (b:6562)
 	ld a, $ff
 	ldh [hTemp_ffa0], a
