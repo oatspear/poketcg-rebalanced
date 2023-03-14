@@ -296,20 +296,12 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseAndDiscard2FireEnergyCardsText               ; 0x011f
 	textpointer DiscardOppDeckAsManyFireEnergyCardsText            ; 0x0120
 	textpointer ChooseAndDiscard2EnergyCardsText                   ; 0x0121
-	textpointer ChooseAKrabbyFromDeckText                          ; 0x0122
 	textpointer ChooseDiscardEnergyCardFromOpponentText            ; 0x0123
 	textpointer ChooseAttackOpponentWillNotBeAbleToUseText         ; 0x0124
-	textpointer ChooseBasicFightingPokemonFromDeckText             ; 0x0125
-	textpointer ChooseAnOddishFromDeckText                         ; 0x0126
-	textpointer ChooseAnOddishText                                 ; 0x0127
-	textpointer ChooseAKrabbyText                                  ; 0x0128
+	textpointer ChooseBasicPokemonFromDeckText                     ; 0x0125
 	textpointer ChooseBasicEnergyCardText                          ; 0x0129
-	textpointer ChooseNidoranFromDeckText                          ; 0x012a
-	textpointer ChooseNidoranText                                  ; 0x012b
-	textpointer ChooseBasicFightingPokemonText                     ; 0x012c
+	textpointer ChooseBasicPokemonText                             ; 0x012c
 	textpointer ProcedureForEnergyTransferText                     ; 0x012d
-	textpointer ChooseABellsproutFromDeckText                      ; 0x012e
-	textpointer ChooseABellsproutText                              ; 0x012f
 	textpointer ChoosePkmnToRemoveDamageCounterText                ; 0x0130
 	textpointer ProcedureForCurseText                              ; 0x0131
 	textpointer Choose2EnergyCardsFromDiscardPileToAttachText      ; 0x0132
@@ -329,7 +321,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer OddishText                                         ; 0x0140
 	textpointer BellsproutText                                     ; 0x0141
 	textpointer KrabbyText                                         ; 0x0142
-	textpointer FightingPokemonDeckText                            ; 0x0143
+	textpointer BasicPokemonDeckText                               ; 0x0143
 	textpointer BasicEnergyText                                    ; 0x0144
 	textpointer PeekWasUsedToLookInYourHandText                    ; 0x0145
 	textpointer CardPeekWasUsedOnText                              ; 0x0146
@@ -2131,8 +2123,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NidoranFName                                       ; 0x084a
 	textpointer FurySwipesName                                     ; 0x084b
 	textpointer TripleAttackX10Description                         ; 0x084c
-	textpointer CallForFamilyName                                  ; 0x084d
-	textpointer NidoranFsCallForFamilyDescription                  ; 0x084e
 	textpointer PoisonPinName                                      ; 0x084f
 	textpointer NidoranFDescription                                ; 0x0850
 	textpointer NidorinaName                                       ; 0x0851
@@ -2169,8 +2159,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GolbatsLeechLifeDescription                        ; 0x0870
 	textpointer GolbatDescription                                  ; 0x0871
 	textpointer OddishName                                         ; 0x0872
-	textpointer SproutName                                         ; 0x0873
-	textpointer SproutDescription                                  ; 0x0874
+	; textpointer SproutName                                         ; 0x0873
+	; textpointer SproutDescription                                  ; 0x0874
 	textpointer WeedName                                           ; 0x0875
 	textpointer OddishDescription                                  ; 0x0876
 	textpointer GloomName                                          ; 0x0877
@@ -2205,7 +2195,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PoisonmothName                                     ; 0x0894
 	textpointer VenomothDescription                                ; 0x0895
 	textpointer BellsproutName                                     ; 0x0896
-	textpointer BellsproutsCallForFamilyDescription                ; 0x0897
 	textpointer BellsproutDescription                              ; 0x0898
 	textpointer WeepinbellName                                     ; 0x0899
 	textpointer RazorLeafName                                      ; 0x089a
@@ -2347,11 +2336,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SquirtleName                                       ; 0x0924
 	textpointer BubbleName                                         ; 0x0925
 	textpointer WithdrawName                                       ; 0x0926
-	textpointer SquirtlesWithdrawDescription                       ; 0x0927
+	textpointer WithdrawDescription                                ; 0x0927
 	textpointer TinyTurtleName                                     ; 0x0928
 	textpointer SquirtleDescription                                ; 0x0929
 	textpointer WartortleName                                      ; 0x092a
-	textpointer WartortlesWithdrawDescription                      ; 0x092b
 	textpointer TurtleName                                         ; 0x092c
 	textpointer WartortleDescription                               ; 0x092d
 	textpointer BlastoiseName                                      ; 0x092e
@@ -2409,11 +2397,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ShellderDescription                                ; 0x0962
 	textpointer CloysterName                                       ; 0x0963
 	textpointer ClampName                                          ; 0x0964
-	textpointer ClampDescription                                   ; 0x0965
 	textpointer SpikeCannonName                                    ; 0x0966
 	textpointer CloysterDescription                                ; 0x0967
 	textpointer KrabbyName                                         ; 0x0968
-	textpointer KrabbysCallForFamilyDescription                    ; 0x0969
 	textpointer RiverCrabName                                      ; 0x096a
 	textpointer KrabbyDescription                                  ; 0x096b
 	textpointer KinglerName                                        ; 0x096c
@@ -2641,8 +2627,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer CuboneDescription                                  ; 0x0a4a
 	textpointer MarowakName                                        ; 0x0a4b
 	textpointer BonemerangName                                     ; 0x0a4c
-	textpointer CallforFriendName                                  ; 0x0a4d
-	textpointer CallforFriendDescription                           ; 0x0a4e
+	textpointer CallForFriendName                                  ; 0x0a4d
+	textpointer CallForFriendDescription                           ; 0x0a4e
 	textpointer BonekeeperName                                     ; 0x0a4f
 	textpointer MarowakLv26Description                            ; 0x0a50
 	textpointer BoneAttackName                                     ; 0x0a51
@@ -2829,7 +2815,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BalloonName                                        ; 0x0b06
 	textpointer JigglypuffLv12Description                         ; 0x0b07
 	textpointer FriendshipSongName                                 ; 0x0b08
-	textpointer FriendshipSongDescription                          ; 0x0b09
 	textpointer ExpandName                                         ; 0x0b0a
 	textpointer ExpandDescription                                  ; 0x0b0b
 	textpointer JigglypuffLv13Description                         ; 0x0b0c

@@ -224,11 +224,6 @@ ChooseAndDiscard2EnergyCardsText: ; 388ca (e:48ca)
 	line "2 Energy cards."
 	done
 
-ChooseAKrabbyFromDeckText: ; 388ee (e:48ee)
-	text "Choose a Krabby"
-	line "from the Deck."
-	done
-
 ChooseDiscardEnergyCardFromOpponentText: ; 3890e (e:490e)
 	text "Choose and Discard an Energy card"
 	line "from the opponent's Active Pokémon."
@@ -239,22 +234,9 @@ ChooseAttackOpponentWillNotBeAbleToUseText: ; 38955 (e:4955)
 	line "not be able to use on the next turn."
 	done
 
-ChooseBasicFightingPokemonFromDeckText: ; 3899f (e:499f)
-	text "Choose a Basic Fighting Pokémon"
+ChooseBasicPokemonFromDeckText: ; 3899f (e:499f)
+	text "Choose a Basic Pokémon"
 	line "from the Deck."
-	done
-
-ChooseAnOddishFromDeckText: ; 389cf (e:49cf)
-	text "Choose an Oddish"
-	line "from the Deck."
-	done
-
-ChooseAnOddishText: ; 389f0 (e:49f0)
-	text "Choose an Oddish"
-	done
-
-ChooseAKrabbyText: ; 38a02 (e:4a02)
-	text "Choose a Krabby."
 	done
 
 ChooseBasicEnergyCardText: ; 38a14 (e:4a14)
@@ -262,19 +244,8 @@ ChooseBasicEnergyCardText: ; 38a14 (e:4a14)
 	line "Energy card."
 	done
 
-ChooseNidoranFromDeckText: ; 38a31 (e:4a31)
-	text "Choose a Nidoran♀ or a"
-	line "Nidoran♂ from the Deck."
-	done
-
-ChooseNidoranText: ; 38a61 (e:4a61)
-	text "Choose a Nidoran♀"
-	line "or a Nidoran♂."
-	done
-
-ChooseBasicFightingPokemonText: ; 38a83 (e:4a83)
-	text "Choose a Basic"
-	line "Fighting Pokémon"
+ChooseBasicPokemonText: ; 38a83 (e:4a83)
+	text "Choose a Basic Pokémon"
 	done
 
 ProcedureForEnergyTransferText: ; 38aa4 (e:4aa4)
@@ -289,15 +260,6 @@ ProcedureForEnergyTransferText: ; 38aa4 (e:4aa4)
 	line "3. Repeat steps 1 and 2."
 	line ""
 	line "4. Press the B Button to end."
-	done
-
-ChooseABellsproutFromDeckText: ; 38b8f (e:4b8f)
-	text "Choose a Bellsprout"
-	line "from the Deck."
-	done
-
-ChooseABellsproutText: ; 38bb3 (e:4bb3)
-	text "Choose a Bellsprout."
 	done
 
 ChoosePkmnToRemoveDamageCounterText: ; 38bc9 (e:4bc9)
@@ -443,8 +405,8 @@ KrabbyText: ; 392f0 (e:52f0)
 	text "Krabby"
 	done
 
-FightingPokemonDeckText: ; 392f8 (e:52f8)
-	text "Fighting Pokémon"
+BasicPokemonDeckText: ; 392f8 (e:52f8)
+	text "Basic Pokémon"
 	done
 
 BasicEnergyText: ; 3930a (e:530a)

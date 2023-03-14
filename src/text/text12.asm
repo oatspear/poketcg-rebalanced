@@ -705,14 +705,6 @@ FriendshipSongName: ; 61fa8 (18:5fa8)
 	text "Friendship Song"
 	done
 
-FriendshipSongDescription: ; 61fb9 (18:5fb9)
-	text "Flip a coin. If heads, put a Basic"
-	line "Pokémon card chosen at random from"
-	line "your deck onto your Bench. (You"
-	line "can't use this attack if your Bench"
-	line "is full.)"
-	done
-
 ExpandName: ; 6204e (18:604e)
 	text "Expand"
 	done

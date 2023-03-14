@@ -75,6 +75,7 @@ PinsirIronGripEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
+CloysterClampEffectCommands:
 CaterpieStringShotEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
@@ -156,13 +157,6 @@ OddishStunSporeEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
-OddishSproutEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Sprout_CheckDeckAndPlayArea
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Sprout_PutInPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Sprout_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Sprout_AISelectEffect
-	db  $00
-
 ExeggutorTeleportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Teleport_CheckBench
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_SwitchEffect
@@ -193,13 +187,6 @@ NidoqueenBoyfriendsEffectCommands:
 NidoranFFurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, NidoranFFurySwipes_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, NidoranFFurySwipes_AIEffect
-	db  $00
-
-NidoranFCallForFamilyEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, NidoranFCallForFamily_CheckDeckAndPlayArea
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NidoranFCallForFamily_PutInPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, NidoranFCallForFamily_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, NidoranFCallForFamily_AISelectEffect
 	db  $00
 
 NidoranMHornHazardEffectCommands:
@@ -275,13 +262,6 @@ MukToxicGasEffectCommands:
 MukSludgeEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Poison50PercentEffect
 	dbw EFFECTCMDTYPE_AI, Sludge_AIEffect
-	db  $00
-
-BellsproutCallForFamilyEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, BellsproutCallForFamily_CheckDeckAndPlayArea
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, BellsproutCallForFamily_PutInPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, BellsproutCallForFamily_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, BellsproutCallForFamily_AISelectEffect
 	db  $00
 
 WeezingSmogEffectCommands:
@@ -360,10 +340,6 @@ OmanyteWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_AI, OmanyteWaterGunEffect
 	db  $00
 
-WartortleWithdrawEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WartortleWithdrawEffect
-	db  $00
-
 BlastoiseRainDanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RainDanceEffect
 	db  $00
@@ -380,13 +356,6 @@ GyaradosBubblebeamEffectCommands:
 KinglerFlailEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, KinglerFlail_HPCheck
 	dbw EFFECTCMDTYPE_AI, KinglerFlail_AIEffect
-	db  $00
-
-KrabbyCallForFamilyEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, KrabbyCallForFamily_CheckDeckAndPlayArea
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, KrabbyCallForFamily_PutInPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, KrabbyCallForFamily_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, KrabbyCallForFamily_AISelectEffect
 	db  $00
 
 MagikarpFlailEffectCommands:
@@ -426,10 +395,6 @@ ShellderSupersonicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ShellderSupersonicEffect
 	db  $00
 
-ShellderHideInShellEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HideInShellEffect
-	db  $00
-
 VaporeonQuickAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VaporeonQuickAttack_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, VaporeonQuickAttack_AIEffect
@@ -460,8 +425,8 @@ SquirtleBubbleEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
-SquirtleWithdrawEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SquirtleWithdrawEffect
+WithdrawEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WithdrawEffect
 	db  $00
 
 HorseaSmokescreenEffectCommands:
@@ -503,10 +468,6 @@ PoliwrathWhirlpoolEffectCommands:
 PoliwagWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoliwagWaterGunEffect
 	dbw EFFECTCMDTYPE_AI, PoliwagWaterGunEffect
-	db  $00
-
-CloysterClampEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ClampEffect
 	db  $00
 
 CloysterSpikeCannonEffectCommands:
@@ -930,11 +891,11 @@ MarowakBonemerangEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Bonemerang_AIEffect
 	db  $00
 
-MarowakCallforFriendEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, MarowakCallForFamily_CheckDeckAndPlayArea
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MarowakCallForFamily_PutInPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MarowakCallForFamily_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, MarowakCallForFamily_AISelectEffect
+CallForFriendEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CallForFriend_CheckDeckAndPlayArea
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CallForFriend_PutInPlayAreaEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, CallForFriend_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, CallForFriend_AISelectEffect
 	db  $00
 
 MachokeKarateChopEffectCommands:
@@ -1395,11 +1356,6 @@ PidgeotSlicingWindEffectCommands:
 PidgeotGaleEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Gale_LoadAnimation
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Gale_SwitchEffect
-	db  $00
-
-JigglypuffFriendshipSongEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FriendshipSong_BenchCheck
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FriendshipSong_AddToBench50PercentEffect
 	db  $00
 
 JigglypuffExpandEffectCommands:

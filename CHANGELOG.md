@@ -34,6 +34,7 @@
 
 #### Nidoran (F)
 - Reduced HP from 60 to 50.
+- **Call for Family**: replaced with **Call for Friend**: choose any Basic Pokémon from deck.
 
 #### Nidorina
 - **Supersonic**: reduced cost from (D) to (C).
@@ -56,7 +57,7 @@
 - **Leech Life**: reduced cost from (DDC) to (DC).
 
 #### Oddish
-- **Sprout**: reduced cost from (GG) to (G).
+- **Sprout**: replaced with **Call for Friend** (G): choose any Basic Pokémon from deck.
 
 #### Gloom
 - **Poison Powder**: added 10 direct damage.
@@ -71,6 +72,7 @@
 
 #### Bellsprout
 - **Vine Whip**: increased damage from 10 to 20.
+- **Call for Family**: replaced with **Call for Friend**: choose any Basic Pokémon from deck.
 
 #### Victreebel
 - **Lure**: reduced cost from (G) to (C).
@@ -180,6 +182,32 @@
 
 #### Dewgong
 - **Ice Beam**: reduced cost from (WWCC) to (WC) and damage from 30 to 20.
+
+#### Shellder
+- Increased HP from 30 to 40.
+- **Supersonic**: reduced cost from (W) to (C).
+- **Hide in Shell**: renamed to **Withdraw**.
+
+#### Cloyster
+- Increased HP from 50 to 60.
+- **Clamp**: reduced cost from (WW) to (WC), damage from 30 to 20 and removed failure on tails.
+
+#### Krabby
+- **Call for Family**: replaced with **Call for Friend**: choose any Basic Pokémon from deck.
+- **Iron Grip**: added chance of Paralysis to be consistent with other uses of Iron Grip.
+
+#### Kingler
+- **Crabhammer**: reduced cost from (WWC) to (WCC).
+
+#### Goldeen
+- **Horn Attack**: reduced cost from (W) to (C).
+
+#### Seaking
+- **Horn Attack**: reduced cost from (W) to (C) and increased damage from 10 to 20.
+- **Waterfall**: increased cost from (WC) to (WW) and damage from 30 to 40.
+
+#### Jigglypuff Lv13
+- **Friendship Song**: can choose any Basic Pokémon from deck without coin flip.
 
 
 ## Version 0.1

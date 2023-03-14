@@ -1140,12 +1140,12 @@ BonemerangName: ; 5f332 (17:7332)
 	text "Bonemerang"
 	done
 
-CallforFriendName: ; 5f33e (17:733e)
+CallForFriendName: ; 5f33e (17:733e)
 	text "Call for Friend"
 	done
 
-CallforFriendDescription: ; 5f34f (17:734f)
-	text "Search your deck for a <FIGHTING> Basic"
+CallForFriendDescription: ; 5f34f (17:734f)
+	text "Search your deck for a Basic"
 	line "Pokémon card and put it onto your"
 	line "Bench. Shuffle your deck afterward."
 	line "(You can't use this attack if your"

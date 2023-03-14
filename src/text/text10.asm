@@ -94,18 +94,6 @@ TripleAttackX10Description: ; 582fc (16:42fc)
 	line "damage times the number of heads."
 	done
 
-CallForFamilyName: ; 58341 (16:4341)
-	text "Call for Family"
-	done
-
-NidoranFsCallForFamilyDescription: ; 58352 (16:4352)
-	text "Search your deck for a Basic Pokémon"
-	line "named Nidoran♀ or Nidoran♂ and put"
-	line "it onto your Bench. Shuffle your"
-	line "deck afterward. (You can't use this"
-	line "attack if your Bench is full.)"
-	done
-
 PoisonPinName: ; 583ff (16:43ff)
 	text "Poison Pin"
 	done
@@ -292,11 +280,7 @@ SproutName: ; 58b3a (16:4b3a)
 	done
 
 SproutDescription: ; 58b42 (16:4b42)
-	text "Search your deck for a Basic Pokémon"
-	line "named Oddish and put it onto your"
-	line "Bench. Shuffle your deck afterward."
-	line "(You can't use this attack if your"
-	line "Bench is full.)"
+	text "TODO"
 	done
 
 WeedName: ; 58be1 (16:4be1)
@@ -470,14 +454,6 @@ VenomothDescription: ; 59284 (16:5284)
 
 BellsproutName: ; 592e5 (16:52e5)
 	text "Bellsprout"
-	done
-
-BellsproutsCallForFamilyDescription: ; 592f1 (16:52f1)
-	text "Search your deck for a Basic Pokémon"
-	line "named Bellsprout and put it onto"
-	line "your Bench. Shuffle your deck"
-	line "afterward. (You can't use this"
-	line "attack if your Bench is full.)"
 	done
 
 BellsproutDescription: ; 59394 (16:5394)
@@ -1182,11 +1158,11 @@ WithdrawName: ; 5af41 (16:6f41)
 	text "Withdraw"
 	done
 
-SquirtlesWithdrawDescription: ; 5af4b (16:6f4b)
+WithdrawDescription: ; 5af4b (16:6f4b)
 	text "Flip a coin. If heads, prevent all"
-	line "damage done to Squirtle during your"
-	line "opponent's next turn. (Any other"
-	line "effects of attacks still happen.)"
+	line "damage done to this Pokémon until"
+	line "your next turn. (Any other effects"
+	line "of attacks still happen.)"
 	done
 
 TinyTurtleName: ; 5afd6 (16:6fd6)
@@ -1201,13 +1177,6 @@ SquirtleDescription: ; 5afe3 (16:6fe3)
 
 WartortleName: ; 5b045 (16:7045)
 	text "Wartortle"
-	done
-
-WartortlesWithdrawDescription: ; 5b050 (16:7050)
-	text "Flip a coin. If heads, prevent all"
-	line "damage done to Wartortle during your"
-	line "opponent's next turn. (Any other"
-	line "effects of attacks still happen.)"
 	done
 
 TurtleName: ; 5b0dc (16:70dc)
@@ -1497,13 +1466,6 @@ ClampName: ; 5bc7e (16:7c7e)
 	text "Clamp"
 	done
 
-ClampDescription: ; 5bc85 (16:7c85)
-	text "Flip a coin. If heads, the Defending"
-	line "Pokémon is now Paralyzed. If tails,"
-	line "this attack does nothing (not even"
-	line "damage)."
-	done
-
 SpikeCannonName: ; 5bcfb (16:7cfb)
 	text "Spike Cannon"
 	done
@@ -1516,14 +1478,6 @@ CloysterDescription: ; 5bd09 (16:7d09)
 
 KrabbyName: ; 5bd63 (16:7d63)
 	text "Krabby"
-	done
-
-KrabbysCallForFamilyDescription: ; 5bd6b (16:7d6b)
-	text "Search your deck for a Basic Pokémon"
-	line "named Krabby and put it onto your"
-	line "Bench. Shuffle your deck afterward."
-	line "(You can't use this attack if your"
-	line "Bench is full.)"
 	done
 
 RiverCrabName: ; 5be0a (16:7e0a)

@@ -874,13 +874,13 @@ NidoranFCard:
 	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
 	; attack 2
-	energy DARKNESS, 2 ; energies
-	tx CallForFamilyName ; name
-	tx NidoranFsCallForFamilyDescription ; description
+	energy DARKNESS, 1 ; energies
+	tx CallForFriendName ; name
+	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw NidoranFCallForFamilyEffectCommands ; effect commands
+	dw CallForFriendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -1283,12 +1283,12 @@ OddishCard:
 
 	; attack 2
 	energy GRASS, 1 ; energies
-	tx SproutName ; name
-	tx SproutDescription ; description
+	tx CallForFriendName ; name
+	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw OddishSproutEffectCommands ; effect commands
+	dw CallForFriendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -1640,12 +1640,12 @@ BellsproutCard:
 
 	; attack 2
 	energy GRASS, 1 ; energies
-	tx CallForFamilyName ; name
-	tx BellsproutsCallForFamilyDescription ; description
+	tx CallForFriendName ; name
+	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw BellsproutCallForFamilyEffectCommands ; effect commands
+	dw CallForFriendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -3171,11 +3171,11 @@ SquirtleCard:
 	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx WithdrawName ; name
-	tx SquirtlesWithdrawDescription ; description
+	tx WithdrawDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw SquirtleWithdrawEffectCommands ; effect commands
+	dw WithdrawEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -3208,11 +3208,11 @@ WartortleCard:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx WithdrawName ; name
-	tx WartortlesWithdrawDescription ; description
+	tx WithdrawDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw WartortleWithdrawEffectCommands ; effect commands
+	dw WithdrawEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -3762,12 +3762,12 @@ ShellderCard:
 	db CIRCLE ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db SHELLDER
-	db 30 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx SupersonicName ; name
 	tx MayInflictConfusionDescription ; description
 	dw NONE ; description (cont)
@@ -3782,12 +3782,12 @@ ShellderCard:
 
 	; attack 2
 	energy WATER, 1 ; energies
-	tx HideInShellName ; name
-	tx HideInShellDescription ; description
+	tx WithdrawName ; name
+	tx WithdrawDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw ShellderHideInShellEffectCommands ; effect commands
+	dw WithdrawEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -3813,16 +3813,16 @@ CloysterCard:
 	db DIAMOND ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db CLOYSTER
-	db 50 ; hp
+	db 60 ; hp
 	db STAGE1 ; stage
 	tx ShellderName ; pre-evo name
 
 	; attack 1
-	energy WATER, 2 ; energies
+	energy WATER, 1, COLORLESS, 1 ; energies
 	tx ClampName ; name
-	tx ClampDescription ; description
+	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw CloysterClampEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
@@ -3870,12 +3870,12 @@ KrabbyCard:
 
 	; attack 1
 	energy WATER, 1 ; energies
-	tx CallForFamilyName ; name
-	tx KrabbysCallForFamilyDescription ; description
+	tx CallForFriendName ; name
+	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw KrabbyCallForFamilyEffectCommands ; effect commands
+	dw CallForFriendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -3885,16 +3885,16 @@ KrabbyCard:
 	; attack 2
 	energy WATER, 1, COLORLESS, 1 ; energies
 	tx IronGripName ; name
-	dw NONE ; description
+	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	dw PinsirIronGripEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_HIT_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -3934,7 +3934,7 @@ KinglerCard:
 	db ATK_ANIM_BIG_HIT ; animation
 
 	; attack 2
-	energy WATER, 2, COLORLESS, 1 ; energies
+	energy WATER, 1, COLORLESS, 2 ; energies
 	tx CrabhammerName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -4073,7 +4073,7 @@ GoldeenCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx HornAttackName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -4124,11 +4124,11 @@ SeakingCard:
 	tx GoldeenName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx HornAttackName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -4138,11 +4138,11 @@ SeakingCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 1 ; energies
+	energy WATER, 2 ; energies
 	tx WaterfallName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -6638,12 +6638,12 @@ MarowakLv26Card:
 
 	; attack 2
 	energy FIGHTING, 2, COLORLESS, 1 ; energies
-	tx CallforFriendName ; name
-	tx CallforFriendDescription ; description
+	tx CallForFriendName ; name
+	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MarowakCallforFriendEffectCommands ; effect commands
+	dw CallForFriendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -8716,11 +8716,11 @@ JigglypuffLv13Card:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx FriendshipSongName ; name
-	tx FriendshipSongDescription ; description
+	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw JigglypuffFriendshipSongEffectCommands ; effect commands
+	dw CallForFriendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3

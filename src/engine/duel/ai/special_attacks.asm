@@ -12,17 +12,17 @@ HandleSpecialAIAttacks:
 	ld a, e
 
 	cp NIDORANF
-	jr z, .NidoranFCallForFamily
+	jr z, .CallForFriend
 	cp ODDISH
-	jr z, .CallForFamily
+	jr z, .CallForFriend
 	cp BELLSPROUT
-	jr z, .CallForFamily
+	jr z, .CallForFriend
 	cp EXEGGUTOR
 	jp z, .Teleport
 	cp SCYTHER
 	jp z, .SwordsDanceAndFocusEnergy
 	cp KRABBY
-	jr z, .CallForFamily
+	jr z, .CallForFriend
 	cp VAPOREON_LV29
 	jp z, .SwordsDanceAndFocusEnergy
 	cp ELECTRODE_LV42
@@ -59,78 +59,9 @@ HandleSpecialAIAttacks:
 	xor a
 	ret
 
-; if any of card ID in a is found in deck,
-; return a score of $80 + slots available in bench.
-.CallForFamily:
-	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
-	jr nc, .zero_score
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	cp MAX_BENCH_POKEMON
-	jr nc, .zero_score
-	ld b, a
-	ld a, MAX_BENCH_POKEMON
-	sub b
-	add $80
-	ret
-
-; if any of NidoranM or NidoranF is found in deck,
-; return a score of $80 + slots available in bench.
-.NidoranFCallForFamily:
-	ld e, NIDORANM
-	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
-	jr c, .found_nidoran
-	ld e, NIDORANF
-	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
-	jr nc, .zero_score
-.found_nidoran
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	cp MAX_PLAY_AREA_POKEMON
-	jr nc, .zero_score
-	ld b, a
-	ld a, MAX_PLAY_AREA_POKEMON
-	sub b
-	add $80
-	ret
-
-; checks for certain card IDs of Fighting color in deck.
-; if any of them are found, return a score of
-; $80 + slots available in bench.
-.CallForFriend:
-	ld e, GEODUDE
-	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
-	jr c, .found_fighting_card
-	ld e, ONIX
-	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
-	jr c, .found_fighting_card
-	ld e, CUBONE
-	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
-	jr c, .found_fighting_card
-	ld e, RHYHORN
-	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
-	jr c, .found_fighting_card
-	jr .zero_score
-.found_fighting_card
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	cp MAX_BENCH_POKEMON
-	jr nc, .zero_score
-	ld b, a
-	ld a, MAX_BENCH_POKEMON
-	sub b
-	add $80
-	ret
-
 ; if any basic cards are found in deck,
 ; return a score of $80 + slots available in bench.
+.CallForFriend:
 .FriendshipSong:
 	call CheckIfAnyBasicPokemonInDeck
 	jr nc, .zero_score
