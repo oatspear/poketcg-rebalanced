@@ -4819,7 +4819,7 @@ DisplayEnergyOrTrainerCardPage:
 	ret
 
 CardPageSupporterTextData:
-	textitem 1, 4, SupporterText
+	textitem 1, 5, SupporterText
 	db $ff
 
 ; display the card details of the card in wLoadedCard1
