@@ -245,7 +245,8 @@ ChooseBasicEnergyCardText: ; 38a14 (e:4a14)
 	done
 
 ChooseBasicPokemonText: ; 38a83 (e:4a83)
-	text "Choose a Basic Pokémon"
+	text "Choose a Basic"
+	line "Pokémon."
 	done
 
 ProcedureForEnergyTransferText: ; 38aa4 (e:4aa4)
