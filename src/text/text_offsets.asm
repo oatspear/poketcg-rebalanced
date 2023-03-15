@@ -2505,18 +2505,18 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RaichuLv45Description                             ; 0x09d0
 	textpointer MagnemiteName                                      ; 0x09d1
 	textpointer ThunderWaveName                                    ; 0x09d2
-	textpointer MagnemitesSelfdestructDescription                  ; 0x09d3
+	textpointer Selfdestruct40Description                          ; 0x09d3
 	textpointer MagnetName                                         ; 0x09d4
 	textpointer MagnemiteLv13Description                          ; 0x09d5
 	textpointer MagneticStormName                                  ; 0x09d6
 	textpointer MagneticStormDescription                           ; 0x09d7
 	textpointer MagnemiteLv15Description                          ; 0x09d8
 	textpointer MagnetonName                                       ; 0x09d9
-	textpointer MagnetonLv28sSelfdestructDescription              ; 0x09da
+	textpointer Selfdestruct80Bench20Description                   ; 0x09da
 	textpointer MagnetonLv28Description                           ; 0x09db
 	textpointer SonicboomName                                      ; 0x09dc
 	textpointer SonicboomDescription                               ; 0x09dd
-	textpointer MagnetonLv35sSelfdestructDescription              ; 0x09de
+	textpointer Selfdestruct100Bench20Description                  ; 0x09de
 	textpointer MagnetonLv35Description                           ; 0x09df
 	textpointer VoltorbName                                        ; 0x09e0
 	textpointer BallName                                           ; 0x09e1

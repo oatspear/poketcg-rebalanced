@@ -236,6 +236,51 @@
 #### Articuno Lv37
 - **Ice Breath**: target Pokémon is no longer chosen at random.
 
+#### Pikachu Lv16
+- Reduced HP from 60 to 50.
+- **Thundershock**: reduced cost from (LL) to (LC).
+
+#### Surfing Pikachu
+- **Surf**: reduced cost from (WW) to (WC) and damage from 30 to 20.
+
+#### Raichu Lv40
+- **Thunder**: reduced cost from (LLLC) to (LLL).
+
+#### Raichu Lv45
+- **Gigashock**: reduced cost from (LLLL) to (LLL).
+
+#### Magnemite Lv13
+- **Self-destruct**: removed.
+- New attack: **Sonicboom** (CC): deal 20 damage without applying W/R.
+
+#### Magnemite Lv15
+- **Magnetic Storm**: removed.
+- New attack: **Spark** (LL): 20 direct damage, plus 10 to a benched Pokémon.
+
+#### Magneton Lv28
+- **Thunder Wave**: reduced cost from (LLC) to (LC) and damage from 30 to 20.
+- **Self-destruct**: removed.
+- New attack: **Chain Lightning** (LLL): 40 direct damage plus 10 to each same-colored Pokémon.
+
+#### Magneton Lv35
+- **Sonicboom**: increased cost from (LC) to (CCC) and damage from 20 to 40.
+- **Self-destruct**: removed.
+- New attack: **Energy Spike** (L): attach a basic Energy from the deck to a Pokémon.
+
+#### Voltorb
+- New attack: **Self-desctruct** (LC): 40 damage, 40 recoil, 10 damage to all benched.
+
+#### Electrode Lv35
+- **Sonicboom**: removed.
+- **Energy Spike**: removed.
+- New attack: **Spark** (L): 20 damage plus 10 damage to a benched Pokémon.
+- New attack: **Self-destruct** (LCC): 80 damage, 80 recoil, 20 damage to all benched.
+
+#### Electrode Lv42
+- **Tackle**: reduced cost from (CC) to (C).
+- **Chain Lightning**: removed.
+- New attack: **Self-destruct** (LLC): 100 damage, 100 recoil, 20 damage to all benched.
+
 #### Jigglypuff Lv13
 - **Friendship Song**: can choose any Basic Pokémon from deck without coin flip.
 

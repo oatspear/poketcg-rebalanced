@@ -491,11 +491,11 @@ ThunderWaveName: ; 5d591 (17:5591)
 	text "Thunder Wave"
 	done
 
-MagnemitesSelfdestructDescription: ; 5d59f (17:559f)
+Selfdestruct40Description: ; 5d59f (17:559f)
 	text "Does 10 damage to each Pokémon on"
 	line "each player's Bench. (Don't apply"
 	line "Weakness and Resistance for Benched"
-	line "Pokémon.) Magnemite does 40 damage"
+	line "Pokémon.) Also does 40 damage"
 	line "to itself."
 	done
 
@@ -529,12 +529,12 @@ MagnetonName: ; 5d76e (17:576e)
 	text "Magneton"
 	done
 
-MagnetonLv28sSelfdestructDescription: ; 5d778 (17:5778)
+Selfdestruct80Bench20Description: ; 5d778 (17:5778)
 	text "Does 20 damage to each Pokémon on"
 	line "each player's Bench. (Don't apply"
 	line "Weakness and Resistance for Benched"
-	line "Pokémon.)"
-	line "Magneton does 80 damage to itself."
+	line "Pokémon.) Also does 80 damage"
+	line "to itself."
 	done
 
 MagnetonLv28Description: ; 5d80e (17:580e)
@@ -555,11 +555,11 @@ SonicboomDescription: ; 5d876 (17:5876)
 	line "happen.)"
 	done
 
-MagnetonLv35sSelfdestructDescription: ; 5d907 (17:5907)
+Selfdestruct100Bench20Description: ; 5d907 (17:5907)
 	text "Does 20 damage to each Pokémon on"
 	line "each player's Bench. (Don't apply"
 	line "Weakness and Resistance for Benched"
-	line "Pokémon.) Magneton does 100 damage"
+	line "Pokémon.) Also does 100 damage"
 	line "to itself."
 	done
 

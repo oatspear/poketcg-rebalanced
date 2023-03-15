@@ -4793,7 +4793,7 @@ PikachuLv14Card:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PikachuSparkEffectCommands ; effect commands
+	dw SparkEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -4833,7 +4833,7 @@ PikachuLv16Card:
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db PIKACHU_LV16
-	db 60 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -4852,7 +4852,7 @@ PikachuLv16Card:
 	db ATK_ANIM_SUPERSONIC ; animation
 
 	; attack 2
-	energy LIGHTNING, 2 ; energies
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx ThundershockName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
@@ -4884,7 +4884,7 @@ PikachuAltLv16Card:
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db PIKACHU_ALT_LV16
-	db 60 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -4903,7 +4903,7 @@ PikachuAltLv16Card:
 	db ATK_ANIM_SUPERSONIC ; animation
 
 	; attack 2
-	energy LIGHTNING, 2 ; energies
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx ThundershockName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
@@ -4916,7 +4916,7 @@ PikachuAltLv16Card:
 	db 0
 	db ATK_ANIM_THUNDERSHOCK ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx MouseName ; category
@@ -4991,11 +4991,11 @@ SurfingPikachuLv13Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy WATER, 2 ; energies
+	energy WATER, 1, COLORLESS, 1 ; energies
 	tx SurfName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -5042,11 +5042,11 @@ SurfingPikachuAltLv13Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy WATER, 2 ; energies
+	energy WATER, 1, COLORLESS, 1 ; energies
 	tx SurfName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -5107,7 +5107,7 @@ RaichuLv40Card:
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
-	energy LIGHTNING, 3, COLORLESS, 1 ; energies
+	energy LIGHTNING, 3 ; energies
 	tx ThunderName ; name
 	tx RaichusThunderDescription ; description
 	dw NONE ; description (cont)
@@ -5144,7 +5144,7 @@ RaichuLv45Card:
 	tx PikachuName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 4 ; energies
+	energy LIGHTNING, 3 ; energies
 	tx GigashockName ; name
 	tx GigashockDescription ; description
 	dw NONE ; description (cont)
@@ -5209,18 +5209,18 @@ MagnemiteLv13Card:
 	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx SelfdestructName ; name
-	tx MagnemitesSelfdestructDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx SonicboomName ; name
+	tx SonicboomDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MagnemiteSelfdestructEffectCommands ; effect commands
-	db HIGH_RECOIL ; flags 1
+	dw SonicboomEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 40
-	db ATK_ANIM_SELFDESTRUCT ; animation
+	db 0
+	db ATK_ANIM_TEAR ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5260,18 +5260,18 @@ MagnemiteLv15Card:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx MagneticStormName ; name
-	tx MagneticStormDescription ; description
+	energy LIGHTNING, 2 ; energies
+	tx SparkName ; name
+	tx SparkDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw MagnemiteMagneticStormEffectCommands ; effect commands
-	db NONE ; flags 1
-	db FLAG_2_BIT_5 ; flags 2
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw SparkEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_MAGNETIC_STORM ; animation
+	db 10
+	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5297,11 +5297,11 @@ MagnetonLv28Card:
 	tx MagnemiteName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 2, COLORLESS, 1 ; energies
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx ThunderWaveName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw MagnetonThunderWaveEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
@@ -5311,18 +5311,18 @@ MagnetonLv28Card:
 	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	; attack 2
-	energy LIGHTNING, 2, COLORLESS, 2 ; energies
-	tx SelfdestructName ; name
-	tx MagnetonLv28sSelfdestructDescription ; description
+	energy LIGHTNING, 3 ; energies
+	tx ChainLightningName ; name
+	tx ChainLightningDescription ; description
 	dw NONE ; description (cont)
-	db 80 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MagnetonLv28SelfdestructEffectCommands ; effect commands
-	db HIGH_RECOIL ; flags 1
+	dw ChainLightningEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
-	db 80
-	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_CHAIN_LIGHTNING ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5348,32 +5348,32 @@ MagnetonLv35Card:
 	tx MagnemiteName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	energy LIGHTNING, 1 ; energies
+	tx EnergySpikeName ; name
+	tx EnergySpikeDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw EnergySpikeEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy COLORLESS, 3 ; energies
 	tx SonicboomName ; name
 	tx SonicboomDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MagnetonSonicboomEffectCommands ; effect commands
+	dw SonicboomEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_TEAR ; animation
-
-	; attack 2
-	energy LIGHTNING, 4 ; energies
-	tx SelfdestructName ; name
-	tx MagnetonLv35sSelfdestructDescription ; description
-	dw NONE ; description (cont)
-	db 100 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MagnetonLv35SelfdestructEffectCommands ; effect commands
-	db HIGH_RECOIL ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 100
-	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5413,18 +5413,18 @@ VoltorbCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx SelfdestructName ; name
+	tx Selfdestruct40Description ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	dw Selfdestruct40Bench10EffectCommands ; effect commands
+	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
+	db 40
+	db ATK_ANIM_SELFDESTRUCT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5450,32 +5450,32 @@ ElectrodeLv35Card:
 	tx VoltorbName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 2 ; energies
-	tx SonicboomName ; name
-	tx SonicboomDescription ; description
+	energy LIGHTNING, 1 ; energies
+	tx SparkName ; name
+	tx SparkDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ElectrodeSonicboomEffectCommands ; effect commands
-	db NONE ; flags 1
+	dw SparkEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_TEAR ; animation
+	db 10
+	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
 
 	; attack 2
-	energy LIGHTNING, 3 ; energies
-	tx EnergySpikeName ; name
-	tx EnergySpikeDescription ; description
+	energy LIGHTNING, 1, COLORLESS, 2 ; energies
+	tx SelfdestructName ; name
+	tx Selfdestruct80Bench20Description ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw ElectrodeEnergySpikeEffectCommands ; effect commands
-	db NONE ; flags 1
+	db 80 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Selfdestruct80Bench20EffectCommands ; effect commands
+	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db NONE ; flags 3
+	db 80
+	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5501,7 +5501,7 @@ ElectrodeLv42Card:
 	tx VoltorbName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx TackleName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -5515,18 +5515,18 @@ ElectrodeLv42Card:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy LIGHTNING, 3 ; energies
-	tx ChainLightningName ; name
-	tx ChainLightningDescription ; description
+	energy LIGHTNING, 2, COLORLESS, 1 ; energies
+	tx SelfdestructName ; name
+	tx Selfdestruct100Bench20Description ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 100 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ElectrodeChainLightningEffectCommands ; effect commands
-	db NONE ; flags 1
+	dw Selfdestruct100Bench20EffectCommands ; effect commands
+	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_CHAIN_LIGHTNING ; animation
+	db NONE ; flags 3
+	db 100
+	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

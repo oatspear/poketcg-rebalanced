@@ -269,10 +269,6 @@ WeezingSmogEffectCommands:
 	dbw EFFECTCMDTYPE_AI, WeezingSmog_AIEffect
 	db  $00
 
-WeezingSelfdestructEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, WeezingSelfdestructEffect
-	db  $00
-
 VenomothShiftEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Shift_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Shift_ChangeColorEffect
@@ -906,10 +902,6 @@ MachokeSubmissionEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SubmissionEffect
 	db  $00
 
-GolemSelfdestructEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GolemSelfdestructEffect
-	db  $00
-
 GravelerHardenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, GravelerHardenEffect
 	db  $00
@@ -985,8 +977,24 @@ MagnemiteThunderWaveEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
-MagnemiteSelfdestructEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MagnemiteSelfdestructEffect
+Selfdestruct40Bench10EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct40Bench10Effect
+	db  $00
+
+Selfdestruct80Bench20EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct80Bench20Effect
+	db  $00
+
+Selfdestruct100Bench20EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct100Bench20Effect
+	db  $00
+
+WeezingSelfdestructEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct60Bench10Effect
+	db  $00
+
+GolemSelfdestructEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct100Bench20Effect
 	db  $00
 
 ZapdosThunderEffectCommands:
@@ -1026,7 +1034,7 @@ PikachuThunderJoltEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderJolt_RecoilEffect
 	db  $00
 
-PikachuSparkEffectCommands:
+SparkEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Spark_BenchDamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Spark_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Spark_AISelectEffect
@@ -1049,7 +1057,7 @@ PikachuAltLv16ThundershockEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
-ElectrodeChainLightningEffectCommands:
+ChainLightningEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ChainLightningEffect
 	db  $00
 
@@ -1072,18 +1080,10 @@ MagnetonThunderWaveEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
-MagnetonLv28SelfdestructEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MagnetonLv28SelfdestructEffect
-	db  $00
-
-MagnetonSonicboomEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MagnetonSonicboom_UnaffectedByColorEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MagnetonSonicboom_NullEffect
-	dbw EFFECTCMDTYPE_AI, MagnetonSonicboom_UnaffectedByColorEffect
-	db  $00
-
-MagnetonLv35SelfdestructEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MagnetonLv35SelfdestructEffect
+SonicboomEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Sonicboom_UnaffectedByColorEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Sonicboom_NullEffect
+	dbw EFFECTCMDTYPE_AI, Sonicboom_UnaffectedByColorEffect
 	db  $00
 
 ZapdosPealOfThunderEffectCommands:
@@ -1099,13 +1099,7 @@ MagnemiteMagneticStormEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MagneticStormEffect
 	db  $00
 
-ElectrodeSonicboomEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ElectrodeSonicboom_UnaffectedByColorEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ElectrodeSonicboom_NullEffect
-	dbw EFFECTCMDTYPE_AI, ElectrodeSonicboom_UnaffectedByColorEffect
-	db  $00
-
-ElectrodeEnergySpikeEffectCommands:
+EnergySpikeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergySpike_DeckCheck
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergySpike_AttachEnergyEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySpike_PlayerSelectEffect

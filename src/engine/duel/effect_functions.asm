@@ -2122,21 +2122,6 @@ WeezingSmog_AIEffect: ; 2cce2 (b:4ce2)
 	lb de, 0, 10
 	jp UpdateExpectedAIDamage_AccountForPoison
 
-WeezingSelfdestructEffect: ; 2ccea (b:4cea)
-	ld a, 60
-	call DealRecoilDamageToSelf
-	ld a, $01
-	ld [wIsDamageToSelf], a
-	ld a, 10
-	call DealDamageToAllBenchedPokemon
-	call SwapTurn
-	xor a
-	ld [wIsDamageToSelf], a
-	ld a, 10
-	call DealDamageToAllBenchedPokemon
-	call SwapTurn
-	ret
-
 Shift_OncePerTurnCheck: ; 2cd09 (b:4d09)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
@@ -5683,21 +5668,6 @@ SubmissionEffect: ; 2e1d1 (b:61d1)
 	call DealRecoilDamageToSelf
 	ret
 
-GolemSelfdestructEffect: ; 2e1d7 (b:61d7)
-	ld a, 100
-	call DealRecoilDamageToSelf
-	ld a, $01
-	ld [wIsDamageToSelf], a
-	ld a, 20
-	call DealDamageToAllBenchedPokemon
-	call SwapTurn
-	xor a
-	ld [wIsDamageToSelf], a
-	ld a, 20
-	call DealDamageToAllBenchedPokemon
-	call SwapTurn
-	ret
-
 GravelerHardenEffect: ; 2e1f6 (b:61f6)
 	ld a, SUBSTATUS1_HARDEN
 	call ApplySubstatus1ToDefendingCard
@@ -6005,8 +5975,13 @@ ElectabuzzQuickAttack_DamageBoostEffect: ; 2e3c8 (b:63c8)
 	call AddToDamage
 	ret
 
-MagnemiteSelfdestructEffect: ; 2e3db (b:63db)
+Selfdestruct40Bench10Effect: ; 2e3db (b:63db)
 	ld a, 40
+	jr Selfdestruct60Bench10Effect.recoil
+
+Selfdestruct60Bench10Effect: ; 2ccea (b:4cea)
+	ld a, 60
+.recoil
 	call DealRecoilDamageToSelf
 
 	ld a, $01
@@ -6018,6 +5993,30 @@ MagnemiteSelfdestructEffect: ; 2e3db (b:63db)
 	xor a
 	ld [wIsDamageToSelf], a
 	ld a, 10
+	call DealDamageToAllBenchedPokemon
+	call SwapTurn
+	ret
+
+Selfdestruct80Bench20Effect: ; 2e739 (b:6739)
+	ld a, 80
+	jr Selfdestruct100Bench20Effect.recoil
+
+Selfdestruct100Bench20Effect: ; 2e75f (b:675f)
+	ld a, 100
+.recoil
+	call DealRecoilDamageToSelf
+
+; own bench
+	ld a, $01
+	ld [wIsDamageToSelf], a
+	ld a, 20
+	call DealDamageToAllBenchedPokemon
+
+; opponent's bench
+	call SwapTurn
+	xor a
+	ld [wIsDamageToSelf], a
+	ld a, 20
 	call DealDamageToAllBenchedPokemon
 	call SwapTurn
 	ret
@@ -6592,50 +6591,12 @@ Gigashock_BenchDamageEffect: ; 2e71f (b:671f)
 	call SwapTurn
 	ret
 
-MagnetonLv28SelfdestructEffect: ; 2e739 (b:6739)
-	ld a, 80
-	call DealRecoilDamageToSelf
-
-; own bench
-	ld a, $01
-	ld [wIsDamageToSelf], a
-	ld a, 20
-	call DealDamageToAllBenchedPokemon
-
-; opponent's bench
-	call SwapTurn
-	xor a
-	ld [wIsDamageToSelf], a
-	ld a, 20
-	call DealDamageToAllBenchedPokemon
-	call SwapTurn
-	ret
-
-MagnetonSonicboom_UnaffectedByColorEffect: ; 2e758 (b:6758)
+Sonicboom_UnaffectedByColorEffect: ; 2e758 (b:6758)
 	ld hl, wDamage + 1
 	set UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, [hl]
 	ret
 
-MagnetonSonicboom_NullEffect: ; 2e75e (b:675e)
-	ret
-
-MagnetonLv35SelfdestructEffect: ; 2e75f (b:675f)
-	ld a, 100
-	call DealRecoilDamageToSelf
-
-; own bench
-	ld a, $01
-	ld [wIsDamageToSelf], a
-	ld a, 20
-	call DealDamageToAllBenchedPokemon
-
-; opponent's bench
-	call SwapTurn
-	xor a
-	ld [wIsDamageToSelf], a
-	ld a, 20
-	call DealDamageToAllBenchedPokemon
-	call SwapTurn
+Sonicboom_NullEffect: ; 2e75e (b:675e)
 	ret
 
 PealOfThunder_InitialEffect: ; 2e77e (b:677e)
@@ -6826,14 +6787,6 @@ MagneticStormEffect: ; 2e7d5 (b:67d5)
 	call DrawWideTextBox_WaitForInput
 	xor a
 	call Func_2c10b
-	ret
-
-ElectrodeSonicboom_UnaffectedByColorEffect: ; 2e870 (b:6870)
-	ld hl, wDamage + 1
-	set UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, [hl]
-	ret
-
-ElectrodeSonicboom_NullEffect: ; 2e876 (b:6876)
 	ret
 
 ; return carry if no cards in Deck
