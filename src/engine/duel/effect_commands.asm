@@ -928,11 +928,6 @@ SandshrewSandAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SandAttackEffect
 	db  $00
 
-SandslashFurySwipesEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SandslashFurySwipes_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, SandslashFurySwipes_AIEffect
-	db  $00
-
 DugtrioEarthquakeEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EarthquakeEffect
 	db  $00
@@ -1012,6 +1007,7 @@ ZapdosThunderstormEffectCommands:
 	db  $00
 
 JolteonPinMissileEffectCommands:
+SandslashFurySwipesEffectCommands:
 KangaskhanCometPunchEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TripleAttackX20X10_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, TripleAttackX20X10_AIEffect

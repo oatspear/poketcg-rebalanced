@@ -299,6 +299,9 @@
 - **Thunder**: reduced cost from (LLLC) to (LLC).
 - **Thunderbolt**: reduced cost from (LLLL) to (LL) and damage from 100 to 50.
 
+#### Sandslash
+- **Fury Swipes**: increased cost from (FF) to (FFC) and damage from 20x Heads to 20x Heads and 10x Tails.
+
 #### Jigglypuff Lv13
 - **Friendship Song**: can choose any Basic Pokémon from deck without coin flip.
 

@@ -5974,9 +5974,9 @@ SandslashCard:
 	db ATK_ANIM_SLASH ; animation
 
 	; attack 2
-	energy FIGHTING, 2 ; energies
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
 	tx FurySwipesName ; name
-	tx TripleAttackX20Description ; description
+	tx TripleAttackX20X10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_X ; category
