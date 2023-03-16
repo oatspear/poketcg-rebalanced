@@ -518,6 +518,7 @@ ArcanineTakeDownEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, TakeDownEffect
 	db  $00
 
+JolteonQuickAttackEffectCommands:
 VaporeonQuickAttackEffectCommands:
 FlareonQuickAttackEffectCommands:
 NinetalesQuickAttackEffectCommands:
@@ -1010,14 +1011,10 @@ ZapdosThunderstormEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderstormEffect
 	db  $00
 
-JolteonQuickAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, JolteonQuickAttack_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, JolteonQuickAttack_AIEffect
-	db  $00
-
 JolteonPinMissileEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PinMissile_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, PinMissile_AIEffect
+KangaskhanCometPunchEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TripleAttackX20X10_MultiplierEffect
+	dbw EFFECTCMDTYPE_AI, TripleAttackX20X10_AIEffect
 	db  $00
 
 FlyingPikachuThundershockEffectCommands:
@@ -1165,11 +1162,6 @@ FarfetchdLeekSlapEffectCommands:
 
 KangaskhanFetchEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FetchEffect
-	db  $00
-
-KangaskhanCometPunchEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CometPunch_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, CometPunch_AIEffect
 	db  $00
 
 TaurosStompEffectCommands:

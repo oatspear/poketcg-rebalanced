@@ -281,8 +281,21 @@
 - **Chain Lightning**: removed.
 - New attack: **Self-destruct** (LLC): 100 damage, 100 recoil, 20 damage to all benched.
 
+#### Electabuzz Lv35
+- **Thunder Punch**: increased cost from (LC) to (LCC).
+
+#### Jolteon Lv24
+- Increased HP from 60 to 70.
+- **Stun Needle**: reduced cost from (CCCC) to (CCC).
+
+#### Jolteon Lv29
+- **Pin Missile**: 3 coin flips; 10 damage per tails and 20 per heads.
+
 #### Jigglypuff Lv13
 - **Friendship Song**: can choose any Basic Pokémon from deck without coin flip.
+
+#### Kangaskhan
+- **Comet Punch**: 3 coin flips; 10 damage per tails and 20 per heads.
 
 
 ## Version 0.1

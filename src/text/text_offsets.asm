@@ -2544,7 +2544,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LightningName                                      ; 0x09f7
 	textpointer JolteonLv24Description                            ; 0x09f8
 	textpointer PinMissileName                                     ; 0x09f9
-	textpointer QuadrupleAttackX20Description                      ; 0x09fa
+	textpointer TripleAttackX20X10Description                      ; 0x09fa
 	textpointer JolteonLv29Description                            ; 0x09fb
 	textpointer ZapdosName                                         ; 0x09fc
 	textpointer ThunderstormName                                   ; 0x09fd

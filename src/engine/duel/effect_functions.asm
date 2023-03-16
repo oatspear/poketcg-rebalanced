@@ -6166,18 +6166,20 @@ JolteonQuickAttack_DamageBoostEffect: ; 2e4c3 (b:64c3)
 	call AddToDamage
 	ret
 
-PinMissile_AIEffect: ; 2e4d6 (b:64d6)
-	ld a, (20 * 4) / 2
-	lb de, 0, 80
+TripleAttackX20X10_AIEffect: ; 2e4d6 (b:64d6)
+	ld a, (15 * 3)
+	lb de, 30, 60
 	jp SetExpectedAIDamage
 
-PinMissile_MultiplierEffect: ; 2e4de (b:64de)
+TripleAttackX20X10_MultiplierEffect: ; 2e4de (b:64de)
 	ld hl, 20
 	call LoadTxRam3
 	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 4
+	ld a, 3
 	call TossCoinATimes_BankB
-	add a ; a = 2 * heads
+	; tails = 10, heads = 20
+	; result = (tails + 2 * heads) = coins + heads
+	add 3
 	call ATimes10
 	call SetDefiniteDamage
 	ret
@@ -7294,22 +7296,6 @@ FetchEffect: ; 2eb40 (b:6b40)
 	ret nz
 	; show card on screen if it was Player
 	bank1call OpenCardPage_FromHand
-	ret
-
-CometPunch_AIEffect: ; 2eb5d (b:6b5d)
-	ld a, (20 * 4) / 2
-	lb de, 0, 80
-	jp SetExpectedAIDamage
-
-CometPunch_MultiplierEffect: ; 2eb65 (b:6b65)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 4
-	call TossCoinATimes_BankB
-	add a
-	call ATimes10
-	call SetDefiniteDamage
 	ret
 
 TaurosStomp_AIEffect: ; 2eb7b (b:6b7b)

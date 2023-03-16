@@ -5617,7 +5617,7 @@ ElectabuzzLv35Card:
 	db ATK_ANIM_THUNDERSHOCK ; animation
 
 	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	energy LIGHTNING, 1, COLORLESS, 2 ; energies
 	tx ThunderpunchName ; name
 	tx ThunderpunchDescription ; description
 	dw NONE ; description (cont)
@@ -5649,7 +5649,7 @@ JolteonLv24Card:
 	db DIAMOND ; rarity
 	db MYSTERY | GB ; sets
 	db JOLTEON_LV24
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
 
@@ -5668,7 +5668,7 @@ JolteonLv24Card:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy COLORLESS, 4 ; energies
+	energy COLORLESS, 3 ; energies
 	tx StunNeedleName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
@@ -5707,9 +5707,9 @@ JolteonLv29Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx QuickAttackDescription ; description
+	tx QuickAttack20Description ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
 	dw JolteonQuickAttackEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -5721,7 +5721,7 @@ JolteonLv29Card:
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx PinMissileName ; name
-	tx QuadrupleAttackX20Description ; description
+	tx TripleAttackX20X10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_X ; category
@@ -9291,7 +9291,7 @@ KangaskhanCard:
 	; attack 2
 	energy COLORLESS, 4 ; energies
 	tx CometPunchName ; name
-	tx QuadrupleAttackX20Description ; description
+	tx TripleAttackX20X10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_X ; category

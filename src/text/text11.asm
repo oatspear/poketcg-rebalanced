@@ -708,9 +708,9 @@ PinMissileName: ; 5e020 (17:6020)
 	text "Pin Missile"
 	done
 
-QuadrupleAttackX20Description: ; 5e02d (17:602d)
-	text "Flip 4 coins. This attack does 20"
-	line "damage times the number of heads."
+TripleAttackX20X10Description: ; 5e02d (17:602d)
+	text "Flip 4 coins. Does 20 damage for"
+	line "each Heads and 10 for each Tails."
 	done
 
 JolteonLv29Description: ; 5e072 (17:6072)
