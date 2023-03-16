@@ -6021,24 +6021,6 @@ Selfdestruct100Bench20Effect: ; 2e75f (b:675f)
 	call SwapTurn
 	ret
 
-ZapdosThunder_Recoil50PercentEffect: ; 2e3fa (b:63fa)
-	ld hl, 30
-	call LoadTxRam3
-	ldtx de, IfTailsDamageToYourselfTooText
-	call TossCoin_BankB
-	ldh [hTemp_ffa0], a
-	ret
-
-ZapdosThunder_RecoilEffect: ; 2e409 (b:6409)
-	ld hl, 30
-	call LoadTxRam3
-	ldh a, [hTemp_ffa0]
-	or a
-	ret nz ; return if got heads
-	ld a, 30
-	call DealRecoilDamageToSelf
-	ret
-
 ThunderboltEffect: ; 2e419 (b:6419)
 	xor a
 	call CreateArenaOrBenchEnergyCardList
@@ -6343,6 +6325,7 @@ RaichuAgilityEffect: ; 2e5dc (b:65dc)
 	call ApplySubstatus1ToDefendingCard
 	ret
 
+ZapdosThunder_Recoil50PercentEffect: ; 2e3fa (b:63fa)
 RaichuThunder_Recoil50PercentEffect: ; 2e5ee (b:65ee)
 	ld hl, 30
 	call LoadTxRam3
@@ -6351,6 +6334,7 @@ RaichuThunder_Recoil50PercentEffect: ; 2e5ee (b:65ee)
 	ldh [hTemp_ffa0], a
 	ret
 
+ZapdosThunder_RecoilEffect: ; 2e409 (b:6409)
 RaichuThunder_RecoilEffect: ; 2e5fd (b:65fd)
 	ld hl, 30
 	call LoadTxRam3

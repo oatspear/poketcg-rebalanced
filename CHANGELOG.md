@@ -244,7 +244,7 @@
 - **Surf**: reduced cost from (WW) to (WC) and damage from 30 to 20.
 
 #### Raichu Lv40
-- **Thunder**: reduced cost from (LLLC) to (LLL).
+- **Thunder**: reduced cost from (LLLC) to (LLC).
 
 #### Raichu Lv45
 - **Gigashock**: reduced cost from (LLLL) to (LLL).
@@ -290,6 +290,14 @@
 
 #### Jolteon Lv29
 - **Pin Missile**: 3 coin flips; 10 damage per tails and 20 per heads.
+
+#### Zapdos Lv40
+- **Thunderstorm**: reduced cost from (LLLL) to (LLL).
+- Retreat cost changed to zero.
+
+#### Zapdos Lv64
+- **Thunder**: reduced cost from (LLLC) to (LLC).
+- **Thunderbolt**: reduced cost from (LLLL) to (LL) and damage from 100 to 50.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: can choose any Basic Pokémon from deck without coin flip.

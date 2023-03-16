@@ -5107,7 +5107,7 @@ RaichuLv40Card:
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
-	energy LIGHTNING, 3 ; energies
+	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx ThunderName ; name
 	tx RaichusThunderDescription ; description
 	dw NONE ; description (cont)
@@ -5756,7 +5756,7 @@ ZapdosLv40Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 4 ; energies
+	energy LIGHTNING, 3 ; energies
 	tx ThunderstormName ; name
 	tx ThunderstormDescription ; description
 	dw NONE ; description (cont)
@@ -5783,7 +5783,7 @@ ZapdosLv40Card:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 0 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx ElectricName ; category
@@ -5807,7 +5807,21 @@ ZapdosLv64Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 3, COLORLESS, 1 ; energies
+	energy LIGHTNING, 2 ; energies
+	tx ThunderboltName ; name
+	tx ThunderboltDescription ; description
+	dw NONE ; description (cont)
+	db 50 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ZapdosThunderboltEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 9
+	db ATK_ANIM_THUNDERBOLT ; animation
+
+	; attack 2
+	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx ThunderName ; name
 	tx ZapdosThunderDescription ; description
 	dw NONE ; description (cont)
@@ -5819,20 +5833,6 @@ ZapdosLv64Card:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_THUNDER ; animation
-
-	; attack 2
-	energy LIGHTNING, 4 ; energies
-	tx ThunderboltName ; name
-	tx ThunderboltDescription ; description
-	dw NONE ; description (cont)
-	db 100 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ZapdosThunderboltEffectCommands ; effect commands
-	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
-	db NONE ; flags 3
-	db 9
-	db ATK_ANIM_THUNDERBOLT ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness
