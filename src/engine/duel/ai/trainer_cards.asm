@@ -58,14 +58,9 @@ _AIProcessHandTrainerCards:
 	ldh [hTempCardIndex_ff9f], a
 
 ; OATS can only play one Supporter per turn
-	ld a, [wLoadedCard1Type]
-	cp TYPE_TRAINER_SUPPORTER
-	jr nz, .not_supporter_card
-	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	and PLAYED_SUPPORTER_THIS_TURN
-	jr nz, .next_in_data
+	call AICheckCanPlayTrainerInBuffer1
+	jp c, .next_in_data
 
-.not_supporter_card
 ; if Headache effects prevent playing card
 ; move on to the next item in list.
 	bank1call CheckCantUseTrainerDueToHeadache
@@ -157,6 +152,19 @@ _AIProcessHandTrainerCards:
 .pop_hl
 	pop hl
 	jp .loop_hand
+
+AICheckCanPlayTrainerInBuffer1:
+	ld a, [wLoadedCard1Type]
+	cp TYPE_TRAINER_SUPPORTER
+	jr nz, .can_play_card
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_SUPPORTER_THIS_TURN
+	jr z, .can_play_card
+	scf
+	ret
+.can_play_card
+	or a
+	ret
 
 ; makes AI use Potion card.
 AIPlay_Potion:
