@@ -475,14 +475,14 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_shift
 	cp VENOMOTH
-	jr nz, .check_peek
+	jr nz, .check_strange_behavior ; .check_peek
 	call HandleAIShift
 	jr .next_1
-.check_peek
-	cp MANKEY
-	jr nz, .check_strange_behavior
-	call HandleAIPeek
-	jr .next_1
+;.check_peek
+;	cp MANKEY
+;	jr nz, .check_strange_behavior
+;	call HandleAIPeek
+;	jr .next_1
 .check_strange_behavior
 	cp SLOWBRO
 	jr nz, .check_curse

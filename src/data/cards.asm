@@ -1013,6 +1013,20 @@ NidoranMCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx HornAttackName ; name
+	dw NONE ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
+
+	; attack 2
 	energy DARKNESS, 1 ; energies
 	tx HornHazardName ; name
 	tx MayDoNothingDescription ; description
@@ -1020,20 +1034,6 @@ NidoranMCard:
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NidoranMHornHazardEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -2953,11 +2953,11 @@ FlareonLv22Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx RageName ; name
-	tx FlareonsRageDescription ; description
+	tx RageDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw FlareonRageEffectCommands ; effect commands
+	dw RageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db BOOST_IF_TAKEN_DAMAGE ; flags 3
@@ -6011,8 +6011,8 @@ DiglettCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
-	tx DigName ; name
+	energy COLORLESS, 1 ; energies
+	tx ScratchName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
@@ -6022,21 +6022,21 @@ DiglettCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_SLASH ; animation
 
 	; attack 2
-	energy FIGHTING, 2 ; energies
-	tx MudSlapName ; name
-	dw NONE ; description
+	energy FIGHTING, 1 ; energies
+	tx DigName ; name
+	tx Deal20ToBenchDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw DiglettDigEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db 3
+	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_GRASS ; weakness
@@ -6062,11 +6062,11 @@ DugtrioCard:
 	tx DiglettName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx SlashName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -6076,7 +6076,7 @@ DugtrioCard:
 	db ATK_ANIM_SLASH ; animation
 
 	; attack 2
-	energy FIGHTING, 4 ; energies
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
 	tx EarthquakeName ; name
 	tx EarthquakeDescription ; description
 	dw NONE ; description (cont)
@@ -6108,37 +6108,37 @@ MankeyCard:
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db MANKEY
-	db 30 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx PeekName ; name
-	tx PeekDescription ; description
-	tx PeekDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw MankeyPeekEffectCommands ; effect commands
+	energy FIGHTING, 1 ; energies
+	tx KarateChopName ; name
+	tx KarateChopDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_MINUS ; category
+	dw KarateChopEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_5 ; flags 2
+	db FLAG_2_BIT_7 ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy COLORLESS, 1 ; energies
-	tx ScratchName ; name
-	dw NONE ; description
+	energy COLORLESS, 2 ; energies
+	tx RageName ; name
+	tx RageDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db DAMAGE_PLUS ; category
+	dw RageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db BOOST_IF_TAKEN_DAMAGE ; flags 3
 	db 0
-	db ATK_ANIM_SLASH ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_PSYCHIC ; weakness
@@ -6272,7 +6272,7 @@ MachokeCard:
 	dw NONE ; description (cont)
 	db 50 ; damage
 	db DAMAGE_MINUS ; category
-	dw MachokeKarateChopEffectCommands ; effect commands
+	dw KarateChopEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_7 ; flags 2
 	db NONE ; flags 3
@@ -6588,11 +6588,11 @@ CuboneCard:
 	; attack 2
 	energy FIGHTING, 2 ; energies
 	tx RageName ; name
-	tx CubonesRageDescription ; description
+	tx RageDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw CuboneRageEffectCommands ; effect commands
+	dw RageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db BOOST_IF_TAKEN_DAMAGE ; flags 3
@@ -6727,7 +6727,7 @@ HitmonleeCard:
 	; attack 1
 	energy FIGHTING, 2 ; energies
 	tx StretchKickName ; name
-	tx StretchKickDescription ; description
+	tx Deal20ToBenchDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -9138,11 +9138,11 @@ DodrioCard:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx RageName ; name
-	tx DodriosRageDescription ; description
+	tx RageDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw DodrioRageEffectCommands ; effect commands
+	dw RageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db BOOST_IF_TAKEN_DAMAGE ; flags 3

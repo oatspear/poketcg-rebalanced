@@ -1084,11 +1084,6 @@ RageName: ; 5ab93 (16:6b93)
 	text "Rage"
 	done
 
-FlareonsRageDescription: ; 5ab99 (16:6b99)
-	text "Does 10 damage plus 10 more damage"
-	line "for each damage counter on Flareon."
-	done
-
 FlareonLv22Description: ; 5abe1 (16:6be1)
 	text "It has a flame chamber inside its"
 	line "body. It inhales, then blows out"

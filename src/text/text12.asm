@@ -884,11 +884,6 @@ RetreatAidDescription: ; 627a3 (18:67a3)
 	line "Pokémon."
 	done
 
-DodriosRageDescription: ; 627ee (18:67ee)
-	text "Does 10 damage plus 10 more damage"
-	line "for each damage counter on Dodrio."
-	done
-
 TriplebirdName: ; 62835 (18:6835)
 	text "Triplebird"
 	done

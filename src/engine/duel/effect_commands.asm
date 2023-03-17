@@ -625,9 +625,9 @@ VulpixConfuseRayEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect
 	db  $00
 
-FlareonRageEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FlareonRage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, FlareonRage_AIEffect
+RageEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
 	db  $00
 
 NinetalesMixUpEffectCommands:
@@ -877,11 +877,6 @@ CuboneSnivelEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SnivelEffect
 	db  $00
 
-CuboneRageEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CuboneRage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, CuboneRage_AIEffect
-	db  $00
-
 MarowakBonemerangEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Bonemerang_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, Bonemerang_AIEffect
@@ -894,7 +889,7 @@ CallForFriendEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, CallForFriend_AISelectEffect
 	db  $00
 
-MachokeKarateChopEffectCommands:
+KarateChopEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, KarateChop_DamageSubtractionEffect
 	dbw EFFECTCMDTYPE_AI, KarateChop_AIEffect
 	db  $00
@@ -917,6 +912,7 @@ RhyhornLeerEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeerEffect
 	db  $00
 
+DiglettDigEffectCommands:
 HitmonleeStretchKickEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StretchKick_CheckBench
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StretchKick_BenchDamageEffect
@@ -929,17 +925,17 @@ SandshrewSandAttackEffectCommands:
 	db  $00
 
 DugtrioEarthquakeEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EarthquakeEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Earthquake10Effect
 	db  $00
 
 AerodactylPrehistoricPowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PrehistoricPowerEffect
 	db  $00
 
-MankeyPeekEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Peek_OncePerTurnCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Peek_SelectEffect
-	db  $00
+; MankeyPeekEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Peek_OncePerTurnCheck
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Peek_SelectEffect
+; 	db  $00
 
 MarowakBoneAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BoneAttackEffect
@@ -1177,11 +1173,6 @@ DoduoFuryAttackEffectCommands:
 
 DodrioRetreatAidEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RetreatAidEffect
-	db  $00
-
-DodrioRageEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DodrioRage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, DodrioRage_AIEffect
 	db  $00
 
 MeowthPayDayEffectCommands:

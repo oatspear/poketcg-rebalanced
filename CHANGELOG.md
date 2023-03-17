@@ -42,6 +42,9 @@
 #### Nidoqueen
 - **Mega Punch**: reduced cost from (DDCC) to (DCC).
 
+#### Nidoran (M)
+- New attack: **Horn Attack** (C): 10 damage
+
 #### Nidorino
 - **Double Kick**: reduced cost from (DCC) to (DC) and damage from 30x to 20x.
 - **Horn Drill**: reduced cost from (DDCC) to (DDC).
@@ -137,7 +140,7 @@
 
 #### Flareon Lv22
 - Increased HP from 60 to 70.
-- **Rage**: reduced cost from (CCC) to (CC).
+- **Rage**: reduced cost from (CCC) to (CC) and increased base damage to 20.
 
 #### Flareon Lv22
 - **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
@@ -301,6 +304,22 @@
 
 #### Sandslash
 - **Fury Swipes**: increased cost from (FF) to (FFC) and damage from 20x Heads to 20x Heads and 10x Tails.
+
+#### Diglett
+- **Mud Slap**: removed.
+- **Dig**: deals 20 to a benched Pokémon.
+- New attack: **Scratch** (C): 10 damage.
+
+#### Dugtrio
+- **Slash**: reduced cost from (FFC) to (CC) and damage from 40 to 20.
+- **Earthquake**: reduced cost from (FFFF) to (FFC); also does 10 damage to *all* benched Pokémon.
+
+#### Mankey
+- Increased HP from 30 to 40.
+- **Peek**: removed.
+- **Scratch**: removed.
+- New attack: **Karate Chop** (F): 30 minus 10 for each damage counter.
+- New attack: **Rage** (CC): deals 10 plus 10 for each damage counter.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.

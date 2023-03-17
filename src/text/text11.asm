@@ -856,7 +856,7 @@ EarthquakeName: ; 5e70d (17:670d)
 	done
 
 EarthquakeDescription: ; 5e719 (17:6719)
-	text "Does 10 damage to each of your own"
+	text "Does 10 damage to each player's"
 	line "Benched Pokémon. (Don't apply"
 	line "Weakness and Resistance for Benched"
 	line "Pokémon.)"
@@ -947,8 +947,8 @@ KarateChopName: ; 5eaac (17:6aac)
 	done
 
 KarateChopDescription: ; 5eab9 (17:6ab9)
-	text "Does 50 damage minus 10 damage for"
-	line "each damage counter on Machoke."
+	text "Does 10 less damage for each"
+	line "damage counter on this Pokémon."
 	done
 
 SubmissionName: ; 5eafd (17:6afd)
@@ -1117,9 +1117,9 @@ SnivelDescription: ; 5f1a3 (17:71a3)
 	line "effect.)"
 	done
 
-CubonesRageDescription: ; 5f27f (17:727f)
-	text "Does 10 damage plus 10 more damage"
-	line "for each damage counter on Cubone."
+RageDescription: ; 5f27f (17:727f)
+	text "Does 10 additional damage for each"
+	line "damage counter on this Pokémon."
 	done
 
 LonelyName: ; 5f2c6 (17:72c6)
@@ -1200,7 +1200,7 @@ StretchKickName: ; 5f625 (17:7625)
 	text "Stretch Kick"
 	done
 
-StretchKickDescription: ; 5f633 (17:7633)
+Deal20ToBenchDescription: ; 5f633 (17:7633)
 	text "If your opponent has any Benched"
 	line "Pokémon, choose 1 of them and this"
 	line "attack does 20 damage to it."

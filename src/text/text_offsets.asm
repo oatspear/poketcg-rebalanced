@@ -2322,7 +2322,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EeveeName                                          ; 0x0915
 	textpointer BiteName                                           ; 0x0916
 	textpointer RageName                                           ; 0x0917
-	textpointer FlareonsRageDescription                            ; 0x0918
 	textpointer FlareonLv22Description                            ; 0x0919
 	textpointer FlareonLv28Description                            ; 0x091b
 	textpointer MoltresName                                        ; 0x091c
@@ -2622,7 +2621,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer CuboneName                                         ; 0x0a45
 	textpointer SnivelName                                         ; 0x0a46
 	textpointer SnivelDescription                                  ; 0x0a47
-	textpointer CubonesRageDescription                             ; 0x0a48
+	textpointer RageDescription                                    ; 0x0a48
 	textpointer LonelyName                                         ; 0x0a49
 	textpointer CuboneDescription                                  ; 0x0a4a
 	textpointer MarowakName                                        ; 0x0a4b
@@ -2638,7 +2637,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MarowakLv32Description                            ; 0x0a55
 	textpointer HitmonleeName                                      ; 0x0a56
 	textpointer StretchKickName                                    ; 0x0a57
-	textpointer StretchKickDescription                             ; 0x0a58
+	textpointer Deal20ToBenchDescription                           ; 0x0a58
 	textpointer HighJumpKickName                                   ; 0x0a59
 	textpointer KickingName                                        ; 0x0a5a
 	textpointer HitmonleeDescription                               ; 0x0a5b
@@ -2850,7 +2849,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DodrioName                                         ; 0x0b2a
 	textpointer RetreatAidName                                     ; 0x0b2b
 	textpointer RetreatAidDescription                              ; 0x0b2c
-	textpointer DodriosRageDescription                             ; 0x0b2d
 	textpointer TriplebirdName                                     ; 0x0b2e
 	textpointer DodrioDescription                                  ; 0x0b2f
 	textpointer LickitungName                                      ; 0x0b30

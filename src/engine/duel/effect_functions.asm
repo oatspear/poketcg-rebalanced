@@ -3579,11 +3579,11 @@ EnergyBurnCheck_Unreferenced: ; 2d620 (b:5620)
 	scf
 	ret
 
-FlareonRage_AIEffect: ; 2d638 (b:5638)
-	call FlareonRage_DamageBoostEffect
+Rage_AIEffect: ; 2d638 (b:5638)
+	call Rage_DamageBoostEffect
 	jp SetDefiniteAIDamage
 
-FlareonRage_DamageBoostEffect: ; 2d63e (b:563e)
+Rage_DamageBoostEffect: ; 2d63e (b:563e)
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
 	call AddToDamage
@@ -5500,16 +5500,6 @@ SnivelEffect: ; 2e0cb (b:60cb)
 	call ApplySubstatus2ToDefendingCard
 	ret
 
-CuboneRage_AIEffect: ; 2e0d1 (b:60d1)
-	call CuboneRage_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-CuboneRage_DamageBoostEffect: ; 2e0d7 (b:60d7)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call AddToDamage
-	ret
-
 Bonemerang_AIEffect: ; 2e0e0 (b:60e0)
 	ld a, 60 / 2
 	lb de, 0, 60
@@ -5745,29 +5735,6 @@ SandAttackEffect: ; 2e26b (b:626b)
 	call ApplySubstatus2ToDefendingCard
 	ret
 
-SandslashFurySwipes_AIEffect: ; 2e271 (b:6271)
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-SandslashFurySwipes_MultiplierEffect: ; 2e279 (b:6279)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 3
-	call TossCoinATimes_BankB
-	add a
-	call ATimes10
-	call SetDefiniteDamage
-	ret
-
-EarthquakeEffect: ; 2e28f (b:628f)
-	ld a, $01
-	ld [wIsDamageToSelf], a
-	ld a, 10
-	call DealDamageToAllBenchedPokemon
-	ret
-
 PrehistoricPowerEffect: ; 2e29a (b:629a)
 	scf
 	ret
@@ -5983,7 +5950,9 @@ Selfdestruct60Bench10Effect: ; 2ccea (b:4cea)
 	ld a, 60
 .recoil
 	call DealRecoilDamageToSelf
+	; fallthrough
 
+Earthquake10Effect:
 	ld a, $01
 	ld [wIsDamageToSelf], a
 	ld a, 10
@@ -7332,16 +7301,6 @@ FuryAttack_MultiplierEffect: ; 2ebc2 (b:6bc2)
 
 RetreatAidEffect: ; 2ebd7 (b:6bd7)
 	scf
-	ret
-
-DodrioRage_AIEffect: ; 2ebd9 (b:6bd9)
-	call DodrioRage_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-DodrioRage_DamageBoostEffect: ; 2ebdf (b:6bdf)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call AddToDamage
 	ret
 
 PayDayEffect: ; 2ebe8 (b:6be8)
