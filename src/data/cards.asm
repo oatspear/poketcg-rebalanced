@@ -874,7 +874,7 @@ NidoranFCard:
 	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
 	; attack 2
-	energy DARKNESS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx CallForFriendName ; name
 	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
@@ -1282,7 +1282,7 @@ OddishCard:
 	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	; attack 2
-	energy GRASS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx CallForFriendName ; name
 	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
@@ -1639,7 +1639,7 @@ BellsproutCard:
 	db ATK_ANIM_WHIP ; animation
 
 	; attack 2
-	energy GRASS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx CallForFriendName ; name
 	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
@@ -2255,7 +2255,7 @@ PinsirCard:
 	tx GuillotineName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -3869,7 +3869,7 @@ KrabbyCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx CallForFriendName ; name
 	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
@@ -3884,17 +3884,17 @@ KrabbyCard:
 
 	; attack 2
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx IronGripName ; name
-	tx MayInflictParalysisDescription ; description
+	tx GuillotineName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PinsirIronGripEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw NONE ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT_EFFECT ; animation
+	db ATK_ANIM_TEAR ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -4379,20 +4379,6 @@ LaprasCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx ConfuseRayName ; name
-	tx MayInflictConfusionDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw LaprasConfuseRayEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_CONFUSE_RAY ; animation
-
-	; attack 2
 	energy WATER, 1 ; energies
 	tx WaterGunName ; name
 	tx LaprasWaterGunDescription ; description
@@ -4405,6 +4391,20 @@ LaprasCard:
 	db NONE ; flags 3
 	db MAX_ENERGY_BOOST_IS_LIMITED
 	db ATK_ANIM_WATER_GUN ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
+	tx ConfuseRayName ; name
+	tx MayInflictConfusionDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw LaprasConfuseRayEffectCommands ; effect commands
+	db INFLICT_CONFUSION ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_CONFUSE_RAY ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -8715,7 +8715,7 @@ JigglypuffLv13Card:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx FriendshipSongName ; name
+	tx CallForFriendName ; name
 	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
@@ -8725,7 +8725,7 @@ JigglypuffLv13Card:
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
