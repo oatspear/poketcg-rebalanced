@@ -57,6 +57,11 @@ _AIProcessHandTrainerCards:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 
+; OATS can only play one Supporter per turn
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_SUPPORTER_THIS_TURN
+	jr nz, .next_in_data
+
 ; if Headache effects prevent playing card
 ; move on to the next item in list.
 	bank1call CheckCantUseTrainerDueToHeadache
