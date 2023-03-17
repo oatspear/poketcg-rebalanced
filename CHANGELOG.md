@@ -34,7 +34,7 @@
 
 #### Nidoran (F)
 - Reduced HP from 60 to 50.
-- **Call for Family**: replaced with **Call for Friend**: choose any Basic Pokémon from deck.
+- **Call for Family**: replaced with **Call for Friend** (C): choose any Basic Pokémon from deck.
 
 #### Nidorina
 - **Supersonic**: reduced cost from (D) to (C).
@@ -57,7 +57,7 @@
 - **Leech Life**: reduced cost from (DDC) to (DC).
 
 #### Oddish
-- **Sprout**: replaced with **Call for Friend** (G): choose any Basic Pokémon from deck.
+- **Sprout**: replaced with **Call for Friend** (C): choose any Basic Pokémon from deck.
 
 #### Gloom
 - **Poison Powder**: added 10 direct damage.
@@ -72,7 +72,7 @@
 
 #### Bellsprout
 - **Vine Whip**: increased damage from 10 to 20.
-- **Call for Family**: replaced with **Call for Friend**: choose any Basic Pokémon from deck.
+- **Call for Family**: replaced with **Call for Friend** (C): choose any Basic Pokémon from deck.
 
 #### Victreebel
 - **Lure**: reduced cost from (G) to (C).
@@ -103,7 +103,7 @@
 
 #### Pinsir
 - **Iron Grip**: reduced cost from (GG) to (GC).
-- **Guillotine**: reduced cost from (GGCC) to (GCC).
+- **Guillotine**: reduced cost from (GGCC) to (GCC) and damage from 50 to 40.
 
 #### Charmeleon
 - **Flamethrower**: increased damage from 50 to 60.
@@ -194,8 +194,8 @@
 - **Clamp**: reduced cost from (WW) to (WC), damage from 30 to 20 and removed failure on tails.
 
 #### Krabby
-- **Call for Family**: replaced with **Call for Friend**: choose any Basic Pokémon from deck.
-- **Iron Grip**: added chance of Paralysis to be consistent with other uses of Iron Grip.
+- **Call for Family**: replaced with **Call for Friend** (C): choose any Basic Pokémon from deck.
+- **Iron Grip**: renamed to **Guillotine**.
 
 #### Kingler
 - **Crabhammer**: reduced cost from (WWC) to (WCC).
@@ -216,7 +216,7 @@
 - **Bubblebeam**: reduced cost from (WWWW) to (WWW) and increased damage from 40 to 50.
 
 #### Lapras
-- **Confuse Ray**: reduced cost from (WW) to (C) and damage from 10 to 0.
+- **Confuse Ray**: reduced cost from (WW) to (CC).
 
 #### Vaporeon Lv29
 - Increased HP from 60 to 70.
@@ -303,7 +303,8 @@
 - **Fury Swipes**: increased cost from (FF) to (FFC) and damage from 20x Heads to 20x Heads and 10x Tails.
 
 #### Jigglypuff Lv13
-- **Friendship Song**: can choose any Basic Pokémon from deck without coin flip.
+- **Friendship Song**: removed.
+- New attack: **Call for Friend** (C): can choose any Basic Pokémon from deck to put on Bench.
 
 #### Kangaskhan
 - **Comet Punch**: 3 coin flips; 10 damage per tails and 20 per heads.
