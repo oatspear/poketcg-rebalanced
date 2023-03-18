@@ -49,6 +49,8 @@ HandleSpecialAIAttacks:
 	jp z, .Fetch
 	cp DUGTRIO
 	jp z, .Earthquake
+	cp GRAVELER
+	jp z, .Earthquake
 	cp ELECTRODE_LV35
 	jp z, .EnergySpike
 	cp GOLDUCK

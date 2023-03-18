@@ -848,9 +848,9 @@ GeodudeStoneBarrageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, StoneBarrage_AIEffect
 	db  $00
 
-OnixHardenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OnixHardenEffect
-	db  $00
+; OnixHardenEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OnixHardenEffect
+; 	db  $00
 
 PrimeapeFurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PrimeapeFurySwipes_MultiplierEffect
@@ -924,7 +924,7 @@ SandshrewSandAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SandAttackEffect
 	db  $00
 
-DugtrioEarthquakeEffectCommands:
+Earthquake10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Earthquake10Effect
 	db  $00
 
@@ -987,6 +987,10 @@ WeezingSelfdestructEffectCommands:
 
 GolemSelfdestructEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct100Bench20Effect
+	db  $00
+
+RockSlideEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, RockSlide10Effect
 	db  $00
 
 ZapdosThunderEffectCommands:
@@ -1330,6 +1334,7 @@ PidgeotGaleEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Gale_SwitchEffect
 	db  $00
 
+GraniteHeadEffectCommands:
 JigglypuffExpandEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ExpandEffect
 	db  $00

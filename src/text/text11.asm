@@ -8,12 +8,12 @@ SeadraName: ; 5c05d (17:405d)
 	text "Seadra"
 	done
 
-SeadrasWaterGunDescription: ; 5c065 (17:4065)
-	text "Does 20 damage plus 10 more damage"
-	line "for each <WATER> Energy attached to"
-	line "Seadra but not used to pay for this"
-	line "attack's Energy cost. You can't add"
-	line "more than 20 damage in this way."
+WaterGunDescription: ; 5ca47 (17:4a47)
+	text "Does 10 additional damage for each"
+	line "<WATER> Energy attached to this"
+	line "Pokémon but not used to pay for"
+	line "this attack's Energy cost, up to"
+	line "20 additional damage."
 	done
 
 SeadrasAgilityDescription: ; 5c111 (17:4111)
@@ -157,14 +157,6 @@ LaprasName: ; 5c58f (17:458f)
 	text "Lapras"
 	done
 
-LaprasWaterGunDescription: ; 5c597 (17:4597)
-	text "Does 10 damage plus 10 more damage"
-	line "for each <WATER> Energy attached to"
-	line "Lapras but not used to pay for this"
-	line "attack's Energy cost. You can't add"
-	line "more than 20 damage in this way."
-	done
-
 TransportName: ; 5c643 (17:4643)
 	text "Transport"
 	done
@@ -199,14 +191,6 @@ VaporeonLv29Description: ; 5c717 (17:4717)
 	line "and become invisible in water."
 	done
 
-VaporeonsWaterGunDescription: ; 5c77b (17:477b)
-	text "Does 30 damage plus 10 more damage"
-	line "for each <WATER> Energy attached to"
-	line "Vaporeon but not used to pay for"
-	line "this attack's Energy cost. You can't"
-	line "add more than 20 damage in this way."
-	done
-
 VaporeonLv42Description: ; 5c829 (17:4829)
 	text "Lives close to water. Its long tail"
 	line "is ridged with a fin that is often"
@@ -232,14 +216,6 @@ ClairvoyanceDescription: ; 5c8b5 (17:48b5)
 	line "Confused, or Paralyzed."
 	done
 
-OmanytesWaterGunDescription: ; 5c932 (17:4932)
-	text "Does 10 damage plus 10 more damage"
-	line "for each <WATER> Energy attached to"
-	line "Omanyte but not used to pay for this"
-	line "attack's Energy cost. You can't add"
-	line "more than 20 damage in this way."
-	done
-
 SpiralName: ; 5c9df (17:49df)
 	text "Spiral"
 	done
@@ -252,14 +228,6 @@ OmanyteDescription: ; 5c9e7 (17:49e7)
 
 OmastarName: ; 5ca3e (17:4a3e)
 	text "Omastar"
-	done
-
-OmastarsWaterGunDescription: ; 5ca47 (17:4a47)
-	text "Does 20 damage plus 10 more damage"
-	line "for each <WATER> Energy attached to"
-	line "Omastar but not used to pay for this"
-	line "attack's Energy cost. You can't add"
-	line "more than 20 damage in this way."
 	done
 
 OmastarDescription: ; 5caf4 (17:4af4)
@@ -1058,8 +1026,15 @@ GolemName: ; 5ef4c (17:6f4c)
 	text "Golem"
 	done
 
-AvalancheName: ; 5ef53 (17:6f53)
-	text "Avalanche"
+RockSlideName: ; 5ef53 (17:6f53)
+	text "Rock Slide"
+	done
+
+RockSlideDescription: ; 5ef5e (17:6f5e)
+	text "Does 10 damage to each Pokémon on"
+	line "the opponent's Bench. (Don't apply"
+	line "Weakness and Resistance for Benched"
+	line "Pokémon.)"
 	done
 
 GolemsSelfdestructDescription: ; 5ef5e (17:6f5e)
@@ -1082,6 +1057,10 @@ GolemDescription: ; 5effb (17:6ffb)
 
 OnixName: ; 5f05d (17:705d)
 	text "Onix"
+	done
+
+GraniteHeadName: ; 5ee18 (17:6e18)
+	text "Granite Head"
 	done
 
 OnixsHardenDescription: ; 5f063 (17:7063)

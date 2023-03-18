@@ -709,11 +709,11 @@ ExpandName: ; 6204e (18:604e)
 	text "Expand"
 	done
 
-ExpandDescription: ; 62056 (18:6056)
-	text "All damage done to Jigglypuff during"
-	line "your opponent's next turn is reduced"
-	line "by 10 (after applying Weakness and"
-	line "Resistance)."
+ReduceDamageTakenBy10Description: ; 62056 (18:6056)
+	text "All damage done to this Pokémon"
+	line "during your opponent's next turn"
+	line "is reduced by 10 (after applying"
+	line "Weakness and Resistance)."
 	done
 
 JigglypuffLv13Description: ; 620d1 (18:60d1)

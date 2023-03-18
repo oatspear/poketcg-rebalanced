@@ -2412,7 +2412,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DragonName                                         ; 0x0974
 	textpointer HorseaDescription                                  ; 0x0975
 	textpointer SeadraName                                         ; 0x0976
-	textpointer SeadrasWaterGunDescription                         ; 0x0977
+	textpointer WaterGunDescription                                ; 0x0977
 	textpointer SeadrasAgilityDescription                          ; 0x0978
 	textpointer SeadraDescription                                  ; 0x0979
 	textpointer GoldeenName                                        ; 0x097a
@@ -2443,7 +2443,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AtrociousName                                      ; 0x0993
 	textpointer GyaradosDescription                                ; 0x0994
 	textpointer LaprasName                                         ; 0x0995
-	textpointer LaprasWaterGunDescription                          ; 0x0996
 	textpointer TransportName                                      ; 0x0997
 	textpointer LaprasDescription                                  ; 0x0998
 	textpointer VaporeonName                                       ; 0x0999
@@ -2451,17 +2450,14 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FocusEnergyDescription                             ; 0x099b
 	textpointer BubbleJetName                                      ; 0x099c
 	textpointer VaporeonLv29Description                           ; 0x099d
-	textpointer VaporeonsWaterGunDescription                       ; 0x099e
 	textpointer VaporeonLv42Description                           ; 0x099f
 	textpointer OmanyteName                                        ; 0x09a0
 	textpointer MysteriousFossilName                               ; 0x09a1
 	textpointer ClairvoyanceName                                   ; 0x09a2
 	textpointer ClairvoyanceDescription                            ; 0x09a3
-	textpointer OmanytesWaterGunDescription                        ; 0x09a4
 	textpointer SpiralName                                         ; 0x09a5
 	textpointer OmanyteDescription                                 ; 0x09a6
 	textpointer OmastarName                                        ; 0x09a7
-	textpointer OmastarsWaterGunDescription                        ; 0x09a8
 	textpointer OmastarDescription                                 ; 0x09a9
 	textpointer ArticunoName                                       ; 0x09aa
 	textpointer FreezeDryName                                      ; 0x09ab
@@ -2611,11 +2607,13 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RockThrowName                                      ; 0x0a3a
 	textpointer GravelerDescription                                ; 0x0a3b
 	textpointer GolemName                                          ; 0x0a3c
-	textpointer AvalancheName                                      ; 0x0a3d
+	textpointer RockSlideName                                      ; 0x0a3d
+	textpointer RockSlideDescription                               ; 0x0a3d
 	textpointer GolemsSelfdestructDescription                      ; 0x0a3e
 	textpointer MegatonName                                        ; 0x0a3f
 	textpointer GolemDescription                                   ; 0x0a40
 	textpointer OnixName                                           ; 0x0a41
+	textpointer GraniteHeadName                                    ; 0x0a41
 	textpointer OnixsHardenDescription                             ; 0x0a42
 	textpointer RockSnakeName                                      ; 0x0a43
 	textpointer OnixDescription                                    ; 0x0a44
@@ -2816,7 +2814,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer JigglypuffLv12Description                         ; 0x0b07
 	textpointer FriendshipSongName                                 ; 0x0b08
 	textpointer ExpandName                                         ; 0x0b0a
-	textpointer ExpandDescription                                  ; 0x0b0b
+	textpointer ReduceDamageTakenBy10Description                   ; 0x0b0b
 	textpointer JigglypuffLv13Description                         ; 0x0b0c
 	textpointer LullabyName                                        ; 0x0b0d
 	textpointer JigglypuffLv14Description                         ; 0x0b0e

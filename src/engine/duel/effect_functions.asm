@@ -2095,11 +2095,6 @@ CheckIfCardHasGrassEnergyAttached: ; 2cc0a (b:4c0a)
 	or a
 	ret
 
-GrimerMinimizeEffect: ; 2cc30 (b:4c30)
-	ld a, SUBSTATUS1_REDUCE_BY_20
-	call ApplySubstatus1ToAttackingCard
-	ret
-
 ToxicGasEffect: ; 2cc36 (b:4c36)
 	scf
 	ret
@@ -5927,13 +5922,17 @@ Selfdestruct60Bench10Effect: ; 2ccea (b:4cea)
 	call DealRecoilDamageToSelf
 	; fallthrough
 
+; deal 10 damage to all benched Pokémon
 Earthquake10Effect:
 	ld a, $01
 	ld [wIsDamageToSelf], a
 	ld a, 10
 	call DealDamageToAllBenchedPokemon
-	call SwapTurn
+	; fallthrough
 
+; deal 10 damage to each of the opponent's benched Pokémon
+RockSlide10Effect:
+	call SwapTurn
 	xor a
 	ld [wIsDamageToSelf], a
 	ld a, 10
@@ -7393,7 +7392,8 @@ ClefableMetronome_UseAttackEffect: ; 2ec82 (b:6c82)
 	call HandlePlayerMetronomeEffect
 	ret
 
-ClefableMinimizeEffect: ; 2ec88 (b:6c88)
+GrimerMinimizeEffect:
+ClefableMinimizeEffect:
 	ld a, SUBSTATUS1_REDUCE_BY_20
 	call ApplySubstatus1ToAttackingCard
 	ret
@@ -8249,6 +8249,7 @@ FriendshipSong_AddToBench50PercentEffect: ; 2f119 (b:7119)
 	call Func_2c0bd
 	ret
 
+GraniteHeadEffect:
 ExpandEffect: ; 2f153 (b:7153)
 	ld a, SUBSTATUS1_REDUCE_BY_10
 	call ApplySubstatus1ToAttackingCard

@@ -3169,7 +3169,7 @@ SquirtleCard:
 	db ATK_ANIM_BUBBLES ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx WithdrawName ; name
 	tx WithdrawDescription ; description
 	dw NONE ; description (cont)
@@ -3206,7 +3206,7 @@ WartortleCard:
 	tx SquirtleName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx WithdrawName ; name
 	tx WithdrawDescription ; description
 	dw NONE ; description (cont)
@@ -4024,7 +4024,7 @@ SeadraCard:
 	; attack 1
 	energy WATER, 1, COLORLESS, 1 ; energies
 	tx WaterGunName ; name
-	tx SeadrasWaterGunDescription ; description
+	tx WaterGunDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
@@ -4381,7 +4381,7 @@ LaprasCard:
 	; attack 1
 	energy WATER, 1 ; energies
 	tx WaterGunName ; name
-	tx LaprasWaterGunDescription ; description
+	tx WaterGunDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
@@ -4497,7 +4497,7 @@ VaporeonLv42Card:
 	; attack 2
 	energy WATER, 2 ; energies
 	tx WaterGunName ; name
-	tx VaporeonsWaterGunDescription ; description
+	tx WaterGunDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_PLUS ; category
@@ -4548,7 +4548,7 @@ OmanyteCard:
 	; attack 2
 	energy WATER, 1 ; energies
 	tx WaterGunName ; name
-	tx OmanytesWaterGunDescription ; description
+	tx WaterGunDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
@@ -4585,7 +4585,7 @@ OmastarCard:
 	; attack 1
 	energy WATER, 2 ; energies
 	tx WaterGunName ; name
-	tx OmastarsWaterGunDescription ; description
+	tx WaterGunDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_PLUS ; category
@@ -6082,7 +6082,7 @@ DugtrioCard:
 	dw NONE ; description (cont)
 	db 70 ; damage
 	db DAMAGE_NORMAL ; category
-	dw DugtrioEarthquakeEffectCommands ; effect commands
+	dw Earthquake10EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -6368,7 +6368,7 @@ GeodudeCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	energy FIGHTING, 1 ; energies
 	tx StoneBarrageName ; name
 	tx StoneBarrageDescription ; description
 	dw NONE ; description (cont)
@@ -6419,25 +6419,11 @@ GravelerCard:
 	tx GeodudeName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2 ; energies
-	tx HardenName ; name
-	tx GravelersHardenDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw GravelerHardenEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PROTECT ; animation
-
-	; attack 2
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
 	tx RockThrowName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -6445,6 +6431,20 @@ GravelerCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_ROCK_THROW ; animation
+
+	; attack 2
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	tx EarthquakeName ; name
+	tx EarthquakeDescription ; description
+	dw NONE ; description (cont)
+	db 60 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Earthquake10EffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
@@ -6465,26 +6465,26 @@ GolemCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	db GOLEM
-	db 80 ; hp
+	db 90 ; hp
 	db STAGE2 ; stage
 	tx GravelerName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 3, COLORLESS, 1 ; energies
-	tx AvalancheName ; name
-	dw NONE ; description
+	energy FIGHTING, 2 ; energies
+	tx RockSlideName ; name
+	tx RockSlideDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	dw RockSlideEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 10
 	db ATK_ANIM_ROCK_THROW ; animation
 
 	; attack 2
-	energy FIGHTING, 4 ; energies
+	energy FIGHTING, 1, COLORLESS, 3 ; energies
 	tx SelfdestructName ; name
 	tx GolemsSelfdestructDescription ; description
 	dw NONE ; description (cont)
@@ -6516,7 +6516,7 @@ OnixCard:
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
 	db ONIX
-	db 90 ; hp
+	db 80 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -6535,18 +6535,18 @@ OnixCard:
 	db ATK_ANIM_ROCK_THROW ; animation
 
 	; attack 2
-	energy FIGHTING, 2 ; energies
-	tx HardenName ; name
-	tx OnixsHardenDescription ; description
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	tx GraniteHeadName ; name
+	tx ReduceDamageTakenBy10Description ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw OnixHardenEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw GraniteHeadEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PROTECT ; animation
+	db 10
+	db ATK_ANIM_ROCK_THROW ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
@@ -8730,7 +8730,7 @@ JigglypuffLv13Card:
 	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx ExpandName ; name
-	tx ExpandDescription ; description
+	tx ReduceDamageTakenBy10Description ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category

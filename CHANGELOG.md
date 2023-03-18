@@ -153,10 +153,10 @@
 - **Dive Bomb**: reduced cost from (FFF) to (FFC).
 
 #### Squirtle
-- **Withdraw**: reduced cost from (WC) to (CC).
+- **Withdraw**: reduced cost from (WC) to (C).
 
 #### Wartortle
-- **Withdraw**: reduced cost from (WC) to (CC).
+- **Withdraw**: reduced cost from (WC) to (C).
 
 #### Blastoise
 - **Hydro Pump**: reduced cost from (WWW) to (WWC), increased base damage from 40 to 50 and bonus damage from +10 to +20.
@@ -335,6 +335,25 @@
 #### Machamp
 - **Seismic Toss**: removed.
 - New attack: **Submission** (FFC): 70 damage, 20 damage recoil.
+
+#### Geodude
+- **Stone Barrage**: reduced cost from (FC) to (F).
+
+#### Graveler
+- **Harden**: removed.
+- **Rock Throw**: reduced cost from (FFC) to (FC) and damage from 40 to 30.
+- New attack: **Earthquake** (FFC): 60 damage, plus 10 to *all* benched Pokémon.
+
+#### Golem
+- Increased HP from 80 to 90.
+- **Avalanche**: removed.
+- **Self-destruct**: reduced cost from (FFFF) to (FCCC).
+- New attack: **Rock Slide** (FF): 40 damage, plus 10 to *opponent's* benched Pokémon.
+
+#### Onix
+- Reduced HP from 90 to 80.
+- **Harden**: removed.
+- New attack: **Granite Head** (FC): 20 damage, reduce damage taken by 10.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
