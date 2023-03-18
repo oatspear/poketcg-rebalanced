@@ -321,6 +321,21 @@
 - New attack: **Karate Chop** (F): 30 minus 10 for each damage counter.
 - New attack: **Rage** (CC): deals 10 plus 10 for each damage counter.
 
+#### Primeape
+- **Fury Swipes**: removed.
+- **Tantrum**: reduced cost from (FFC) to (FF).
+- New attack: **Rage** (CCC): 30 plus 10 for each damage counter.
+
+#### Machoke
+- **Karate Chop**: removed.
+- **Submission**: removed.
+- New attack: **Focus Energy** (C): doubles damage dealt during the next turn.
+- New attack: **Seismic Toss** (FFC): 50 damage.
+
+#### Machamp
+- **Seismic Toss**: removed.
+- New attack: **Submission** (FFC): 70 damage, 20 damage recoil.
+
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
 - New attack: **Call for Friend** (C): can choose any Basic Pokémon from deck to put on Bench.

@@ -25,6 +25,8 @@ HandleSpecialAIAttacks:
 	jr z, .CallForFriend
 	cp VAPOREON_LV29
 	jp z, .SwordsDanceAndFocusEnergy
+	cp MACHOKE
+	jp z, .SwordsDanceAndFocusEnergy
 	cp ELECTRODE_LV42
 	jp z, .ChainLightning
 	cp MAROWAK_LV26

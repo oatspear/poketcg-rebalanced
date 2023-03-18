@@ -253,7 +253,7 @@ Func_2c12e: ; 2c12e (b:412e)
 	ret
 
 ; apply a status condition of type 1 identified by register a to the target
-ApplySubstatus1ToDefendingCard: ; 2c140 (b:4140)
+ApplySubstatus1ToAttackingCard: ; 2c140 (b:4140)
 	push af
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
 	call GetTurnDuelistVariable
@@ -1558,7 +1558,7 @@ KakunaStiffenEffect: ; 2c7a0 (b:47a0)
 	ld a, ATK_ANIM_PROTECT
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_NO_DAMAGE_STIFFEN
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 KakunaPoisonPowder_AIEffect: ; 2c7b4 (b:47b4)
@@ -1588,7 +1588,7 @@ SwordsDanceEffect: ; 2c7d0 (b:47d0)
 	cp SCYTHER
 	ret nz
 	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ; If heads, defending Pokemon becomes confused
@@ -1659,7 +1659,7 @@ MetapodStiffenEffect: ; 2c836 (b:4836)
 	ld a, ATK_ANIM_PROTECT
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_NO_DAMAGE_STIFFEN
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ; returns carry if no Pokemon on Bench
@@ -1757,14 +1757,6 @@ Thrash_ModifierEffect: ; 2c973 (b:4973)
 	ret nc
 	ld a, 10
 	call AddToDamage
-	ret
-
-Thrash_RecoilEffect: ; 2c982 (b:4982)
-	ldh a, [hTemp_ffa0]
-	or a
-	ret nz
-	ld a, 10
-	call DealRecoilDamageToSelf
 	ret
 
 Toxic_AIEffect: ; 2c98c (b:498c)
@@ -2105,7 +2097,7 @@ CheckIfCardHasGrassEnergyAttached: ; 2cc0a (b:4c0a)
 
 GrimerMinimizeEffect: ; 2cc30 (b:4c30)
 	ld a, SUBSTATUS1_REDUCE_BY_20
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ToxicGasEffect: ; 2cc36 (b:4c36)
@@ -2614,7 +2606,7 @@ SeadraAgilityEffect: ; 2d08b (b:508b)
 	ld a, ATK_ANIM_AGILITY_PROTECT
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_AGILITY
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ShellderSupersonicEffect: ; 2d09d (b:509d)
@@ -2694,7 +2686,7 @@ WithdrawEffect: ; 2d120 (b:5120)
 	ld a, ATK_ANIM_PROTECT
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_NO_DAMAGE_10
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 HorseaSmokescreenEffect: ; 2d134 (b:5134)
@@ -3053,11 +3045,12 @@ IceBreath_BenchDamageEffect:
 	ret
 
 FocusEnergyEffect: ; 2d33f (b:533f)
-	ld a, [wTempTurnDuelistCardID]
-	cp VAPOREON_LV29
-	ret nz ; return if no VaporeonLv29
+; OATS Focus Energy applies to any Pokémon
+	; ld a, [wTempTurnDuelistCardID]
+	; cp VAPOREON_LV29
+	; ret nz ; return if no VaporeonLv29
 	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 PlayerPickFireEnergyCardToDiscard: ; 2d34b (b:534b)
@@ -3095,11 +3088,6 @@ ArcanineFlamethrower_AISelectEffect: ; 2d375 (b:5375)
 ArcanineFlamethrower_DiscardEffect: ; 2d379 (b:5379)
 	ldh a, [hTempList]
 	call PutCardInDiscardPile
-	ret
-
-TakeDownEffect: ; 2d37f (b:537f)
-	ld a, 20
-	call DealRecoilDamageToSelf
 	ret
 
 ArcanineQuickAttack_AIEffect: ; 2d385 (b:5385)
@@ -3193,7 +3181,7 @@ RapidashAgilityEffect: ; 2d413 (b:5413)
 	ld a, ATK_ANIM_AGILITY_PROTECT
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_AGILITY
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ; returns carry if Opponent has no Pokemon in bench
@@ -4171,7 +4159,7 @@ DestinyBond_DiscardEffect: ; 2d981 (b:5981)
 
 DestinyBond_DestinyBondEffect: ; 2d987 (b:5987)
 	ld a, SUBSTATUS1_DESTINY_BOND
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ; returns carry if no Energy cards in Discard Pile.
@@ -4971,7 +4959,7 @@ Barrier_DiscardEffect: ; 2ddb9 (b:5db9)
 
 Barrier_BarrierEffect: ; 2ddbf (b:5dbf)
 	ld a, SUBSTATUS1_BARRIER
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 MewtwoAltLV60EnergyAbsorption_CheckDiscardPile: ; 2ddc5 (b:5dc5)
@@ -5438,7 +5426,7 @@ StoneBarrage_MultiplierEffect: ; 2e052 (b:6052)
 
 OnixHardenEffect: ; 2e075 (b:6075)
 	ld a, SUBSTATUS1_HARDEN
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 PrimeapeFurySwipes_AIEffect: ; 2e07b (b:607b)
@@ -5653,14 +5641,9 @@ KarateChop_DamageSubtractionEffect: ; 2e1ba (b:61ba)
 	call SetDefiniteDamage
 	ret
 
-SubmissionEffect: ; 2e1d1 (b:61d1)
-	ld a, 20
-	call DealRecoilDamageToSelf
-	ret
-
 GravelerHardenEffect: ; 2e1f6 (b:61f6)
 	ld a, SUBSTATUS1_HARDEN
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 Ram_SelectSwitchEffect: ; 2e1fc (b:61fc)
@@ -5914,17 +5897,9 @@ Thunderpunch_ModifierEffect: ; 2e3a1 (b:63a1)
 	call AddToDamage
 	ret
 
-Thunderpunch_RecoilEffect: ; 2e3b0 (b:63b0)
-	ldh a, [hTemp_ffa0]
-	or a
-	ret nz ; return if got heads
-	ld a, 10
-	call DealRecoilDamageToSelf
-	ret
-
 LightScreenEffect: ; 2e3ba (b:63ba)
 	ld a, SUBSTATUS1_HALVE_DAMAGE
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ElectabuzzQuickAttack_AIEffect: ; 2e3c0 (b:63c0)
@@ -6153,7 +6128,7 @@ Fly_Success50PercentEffect: ; 2e4fc (b:64fc)
 	ld a, ATK_ANIM_AGILITY_PROTECT
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_FLY
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ThunderJolt_Recoil50PercentEffect: ; 2e51a (b:651a)
@@ -6167,10 +6142,24 @@ ThunderJolt_Recoil50PercentEffect: ; 2e51a (b:651a)
 ThunderJolt_RecoilEffect: ; 2e529 (b:6529)
 	ld hl, 10
 	call LoadTxRam3
+	; fallthrough
+
+Thrash_RecoilEffect: ; 2c982 (b:4982)
+Thunderpunch_RecoilEffect: ; 2e3b0 (b:63b0)
 	ldh a, [hTemp_ffa0]
 	or a
-	ret nz ; return if was heads
+	ret nz ; return if got heads
+	; fallthrough
+
+Recoil10Effect:
 	ld a, 10
+	call DealRecoilDamageToSelf
+	ret
+
+TakeDownEffect:
+JigglypuffDoubleEdgeEffect:
+Recoil20Effect:
+	ld a, 20
 	call DealRecoilDamageToSelf
 	ret
 
@@ -6291,7 +6280,7 @@ RaichuAgilityEffect: ; 2e5dc (b:65dc)
 	ld a, ATK_ANIM_AGILITY_PROTECT
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_AGILITY
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ZapdosThunder_Recoil50PercentEffect: ; 2e3fa (b:63fa)
@@ -7151,7 +7140,7 @@ FearowAgilityEffect: ; 2eab8 (b:6ab8)
 	ld a, ATK_ANIM_AGILITY_PROTECT
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_AGILITY
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ; return carry if cannot use Step In
@@ -7406,7 +7395,7 @@ ClefableMetronome_UseAttackEffect: ; 2ec82 (b:6c82)
 
 ClefableMinimizeEffect: ; 2ec88 (b:6c88)
 	ld a, SUBSTATUS1_REDUCE_BY_20
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 HurricaneEffect: ; 2ec8e (b:6c8e)
@@ -7618,11 +7607,6 @@ FirstAid_DamageCheck: ; 2ed94 (b:6d94)
 FirstAid_HealEffect: ; 2ed9f (b:6d9f)
 	lb de, 0, 10
 	call ApplyAndAnimateHPRecovery
-	ret
-
-JigglypuffDoubleEdgeEffect: ; 2eda6 (b:6da6)
-	ld a, 20
-	call DealRecoilDamageToSelf
 	ret
 
 PounceEffect: ; 2edac (b:6dac)
@@ -7856,7 +7840,7 @@ ScrunchEffect: ; 2eee7 (b:6ee7)
 	ld a, ATK_ANIM_SCRUNCH
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_NO_DAMAGE_17
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ChanseyDoubleEdgeEffect: ; 2eefb (b:6efb)
@@ -8267,7 +8251,7 @@ FriendshipSong_AddToBench50PercentEffect: ; 2f119 (b:7119)
 
 ExpandEffect: ; 2f153 (b:7153)
 	ld a, SUBSTATUS1_REDUCE_BY_10
-	call ApplySubstatus1ToDefendingCard
+	call ApplySubstatus1ToAttackingCard
 	ret
 
 ; returns carry if either there are no damage counters

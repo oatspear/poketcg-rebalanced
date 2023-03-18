@@ -4436,7 +4436,7 @@ VaporeonLv29Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw VaporeonFocusEnergyEffectCommands ; effect commands
+	dw FocusEnergyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -6165,20 +6165,6 @@ PrimeapeCard:
 
 	; attack 1
 	energy FIGHTING, 2 ; energies
-	tx FurySwipesName ; name
-	tx TripleAttackX20Description ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_X ; category
-	dw PrimeapeFurySwipesEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_MULTIPLE_SLASH ; animation
-
-	; attack 2
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
 	tx TantrumName ; name
 	tx TantrumDescription ; description
 	dw NONE ; description (cont)
@@ -6190,6 +6176,20 @@ PrimeapeCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_RAMPAGE ; animation
+
+	; attack 2
+	energy COLORLESS, 3 ; energies
+	tx RageName ; name
+	tx RageDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw RageEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_PSYCHIC ; weakness
@@ -6266,32 +6266,32 @@ MachokeCard:
 	tx MachopName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
-	tx KarateChopName ; name
-	tx KarateChopDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx FocusEnergyName ; name
+	tx FocusEnergyDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_MINUS ; category
-	dw KarateChopEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw FocusEnergyEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_7 ; flags 2
-	db NONE ; flags 3
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy FIGHTING, 2, COLORLESS, 2 ; energies
-	tx SubmissionName ; name
-	tx SubmissionDescription ; description
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	tx SeismicTossName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MachokeSubmissionEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
+	dw NONE ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 20
-	db ATK_ANIM_HIT_RECOIL ; animation
+	db 0
+	db ATK_ANIM_SEISMIC_TOSS ; animation
 
 	db 1 ; retreat cost
 	db WR_PSYCHIC ; weakness
@@ -6331,18 +6331,18 @@ MachampCard:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy FIGHTING, 3, COLORLESS, 1 ; energies
-	tx SeismicTossName ; name
-	dw NONE ; description
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	tx SubmissionName ; name
+	tx Recoil20Description ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 70 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	dw MachampSubmissionEffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SEISMIC_TOSS ; animation
+	db 10
+	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 2 ; retreat cost
 	db WR_PSYCHIC ; weakness

@@ -503,7 +503,7 @@ ArticunoIceBreathEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, IceBreath_AISelectEffect
 	db  $00
 
-VaporeonFocusEnergyEffectCommands:
+FocusEnergyEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FocusEnergyEffect
 	db  $00
 
@@ -894,8 +894,8 @@ KarateChopEffectCommands:
 	dbw EFFECTCMDTYPE_AI, KarateChop_AIEffect
 	db  $00
 
-MachokeSubmissionEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SubmissionEffect
+MachampSubmissionEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil20Effect
 	db  $00
 
 GravelerHardenEffectCommands:

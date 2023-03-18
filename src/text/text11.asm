@@ -184,9 +184,9 @@ FocusEnergyName: ; 5c6b4 (17:46b4)
 	done
 
 FocusEnergyDescription: ; 5c6c2 (17:46c2)
-	text "During your next turn, Vaporeon's"
-	line "Bite attack's base damage is"
-	line "doubled."
+	text "During your next turn, this"
+	line "Pokémon's attack's base damage"
+	line "is doubled."
 	done
 
 BubbleJetName: ; 5c70b (17:470b)
@@ -955,8 +955,12 @@ SubmissionName: ; 5eafd (17:6afd)
 	text "Submission"
 	done
 
-SubmissionDescription: ; 5eb09 (17:6b09)
-	text "Machoke does 20 damage to itself."
+Recoil10Description: ; 5eb09 (17:6b09)
+	text "Also does 10 damage to itself."
+	done
+
+Recoil20Description:
+	text "Also does 20 damage to itself."
 	done
 
 MachokeDescription: ; 5eb2c (17:6b2c)
