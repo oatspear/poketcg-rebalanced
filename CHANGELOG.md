@@ -46,8 +46,8 @@
 - New attack: **Horn Attack** (C): 10 damage
 
 #### Nidorino
-- **Double Kick**: reduced cost from (DCC) to (DC) and damage from 30x to 20x.
-- **Horn Drill**: reduced cost from (DDCC) to (DDC).
+- **Double Kick**: reduced cost from (DCC) to (DC).
+- **Horn Drill**: reduced cost from (DDCC) to (DCC).
 
 #### Nidoking
 - **Thrash**: reduced cost from (DCC) to (DC).
@@ -318,7 +318,7 @@
 - Increased HP from 30 to 40.
 - **Peek**: removed.
 - **Scratch**: removed.
-- New attack: **Karate Chop** (F): 30 minus 10 for each damage counter.
+- New attack: **Karate Chop** (F): 20 minus 10 for each damage counter.
 - New attack: **Rage** (CC): deals 10 plus 10 for each damage counter.
 
 #### Primeape
@@ -327,14 +327,13 @@
 - New attack: **Rage** (CCC): 20 plus 10 for each damage counter.
 
 #### Machoke
-- **Karate Chop**: removed.
+- **Karate Chop**: reduced cost from (FFC) to (F) and base damage from 50 to 40.
 - **Submission**: removed.
-- New attack: **Focus Energy** (C): doubles damage dealt during the next turn.
 - New attack: **Seismic Toss** (FFC): 50 damage.
 
 #### Machamp
 - **Seismic Toss**: removed.
-- New attack: **Submission** (FFC): 70 damage, 20 damage recoil.
+- New attack: **Submission** (FFC): 80 damage, 20 damage recoil.
 
 #### Geodude
 - **Stone Barrage**: reduced cost from (FC) to (F).

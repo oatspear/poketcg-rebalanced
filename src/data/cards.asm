@@ -1068,7 +1068,7 @@ NidorinoCard:
 	tx DoubleKickName ; name
 	tx DoubleAttackX30Description ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_X ; category
 	dw NidorinoDoubleKickEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -1078,7 +1078,7 @@ NidorinoCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy DARKNESS, 2, COLORLESS, 1 ; energies
+	energy DARKNESS, 1, COLORLESS, 2 ; energies
 	tx HornDrillName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -6117,7 +6117,7 @@ MankeyCard:
 	tx KarateChopName ; name
 	tx KarateChopDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_MINUS ; category
 	dw KarateChopEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -6266,18 +6266,18 @@ MachokeCard:
 	tx MachopName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx FocusEnergyName ; name
-	tx FocusEnergyDescription ; description
+	energy FIGHTING, 1 ; energies
+	tx KarateChopName ; name
+	tx KarateChopDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw FocusEnergyEffectCommands ; effect commands
+	db 40 ; damage
+	db DAMAGE_MINUS ; category
+	dw KarateChopEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db FLAG_2_BIT_7 ; flags 2
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
 	energy FIGHTING, 2, COLORLESS, 1 ; energies
@@ -6335,13 +6335,13 @@ MachampCard:
 	tx SubmissionName ; name
 	tx Recoil20Description ; description
 	dw NONE ; description (cont)
-	db 70 ; damage
+	db 80 ; damage
 	db DAMAGE_NORMAL ; category
 	dw MachampSubmissionEffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 20
 	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 2 ; retreat cost
