@@ -2624,6 +2624,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LonelyName                                         ; 0x0a49
 	textpointer CuboneDescription                                  ; 0x0a4a
 	textpointer MarowakName                                        ; 0x0a4b
+	textpointer BattleArmorName                                    ; 0x0a6c
+	textpointer BattleArmorDescription                             ; 0x0a4c
 	textpointer BonemerangName                                     ; 0x0a4c
 	textpointer CallForFriendName                                  ; 0x0a4d
 	textpointer CallForFriendDescription                           ; 0x0a4e

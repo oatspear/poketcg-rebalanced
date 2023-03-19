@@ -199,13 +199,18 @@ NidorinaSupersonicEffectCommands:
 	db  $00
 
 NidorinaDoubleKickEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, NidorinaDoubleKick_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, NidorinaDoubleKick_AIEffect
-	db  $00
+;	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX30_MultiplierEffect
+;	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
+;	db  $00
+
+MarowakBonemerangEffectCommands:
+;	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX20X10_MultiplierEffect
+;	dbw EFFECTCMDTYPE_AI, DoubleAttackX20X10_AIEffect
+;	db  $00
 
 NidorinoDoubleKickEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, NidorinoDoubleKick_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, NidorinoDoubleKick_AIEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX30_MultiplierEffect
+	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
 	db  $00
 
 ButterfreeWhirlwindEffectCommands:
@@ -865,6 +870,10 @@ MachampStrikesBackEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StrikesBackEffect
 	db  $00
 
+BattleArmorEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, BattleArmorEffect
+	db  $00
+
 KabutoKabutoArmorEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, KabutoArmorEffect
 	db  $00
@@ -875,11 +884,6 @@ KabutopsAbsorbEffectCommands:
 
 CuboneSnivelEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SnivelEffect
-	db  $00
-
-MarowakBonemerangEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Bonemerang_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, Bonemerang_AIEffect
 	db  $00
 
 CallForFriendEffectCommands:

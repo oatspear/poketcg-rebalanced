@@ -2955,7 +2955,7 @@ FlareonLv22Card:
 	tx RageName ; name
 	tx RageDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
 	dw RageEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -6182,7 +6182,7 @@ PrimeapeCard:
 	tx RageName ; name
 	tx RageDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
 	dw RageEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -6521,20 +6521,6 @@ OnixCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
-	tx RockThrowName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_ROCK_THROW ; animation
-
-	; attack 2
 	energy FIGHTING, 1, COLORLESS, 1 ; energies
 	tx GraniteHeadName ; name
 	tx ReduceDamageTakenBy10Description ; description
@@ -6547,6 +6533,20 @@ OnixCard:
 	db NONE ; flags 3
 	db 10
 	db ATK_ANIM_ROCK_THROW ; animation
+
+	; attack 2
+	energy FIGHTING, 1, COLORLESS, 2 ; energies
+	tx RageName ; name
+	tx RageDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw RageEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
@@ -6586,7 +6586,7 @@ CuboneCard:
 	db ATK_ANIM_CRY ; animation
 
 	; attack 2
-	energy FIGHTING, 2 ; energies
+	energy COLORLESS, 2 ; energies
 	tx RageName ; name
 	tx RageDescription ; description
 	dw NONE ; description (cont)
@@ -6623,7 +6623,21 @@ MarowakLv26Card:
 	tx CuboneName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2 ; energies
+	energy 0 ; energies
+	tx BattleArmorName ; name
+	tx BattleArmorDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw KabutoKabutoArmorEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
 	tx BonemerangName ; name
 	tx DoubleAttackX30Description ; description
 	dw NONE ; description (cont)
@@ -6635,20 +6649,6 @@ MarowakLv26Card:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_BONEMERANG ; animation
-
-	; attack 2
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
-	tx CallForFriendName ; name
-	tx CallForFriendDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw CallForFriendEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness

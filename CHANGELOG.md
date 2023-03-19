@@ -140,7 +140,7 @@
 
 #### Flareon Lv22
 - Increased HP from 60 to 70.
-- **Rage**: reduced cost from (CCC) to (CC) and increased base damage to 20.
+- **Rage**: reduced cost from (CCC) to (CC).
 
 #### Flareon Lv22
 - **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
@@ -324,7 +324,7 @@
 #### Primeape
 - **Fury Swipes**: removed.
 - **Tantrum**: reduced cost from (FFC) to (FF).
-- New attack: **Rage** (CCC): 30 plus 10 for each damage counter.
+- New attack: **Rage** (CCC): 20 plus 10 for each damage counter.
 
 #### Machoke
 - **Karate Chop**: removed.
@@ -352,8 +352,18 @@
 
 #### Onix
 - Reduced HP from 90 to 80.
+- **Rock Throw**: removed.
 - **Harden**: removed.
 - New attack: **Granite Head** (FC): 20 damage, reduce damage taken by 10.
+- New attack: **Rage** (FCC): 10 damage plus 10 for each damage counter.
+
+#### Cubone
+- **Rage**: reduced cost from (FF) to (CC).
+
+#### Marowak Lv26
+- **Call for Friend**: removed.
+- **Bonemerang**: reduced cost from (FF) to (FC).
+- New Pokémon Power: **Battle Armor**: takes 20 less damage from attacks.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.

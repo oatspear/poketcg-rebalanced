@@ -1834,30 +1834,12 @@ NidorinaSupersonicEffect: ; 2caac (b:4aac)
 	call nc, SetNoEffectFromStatus
 	ret
 
-NidorinaDoubleKick_AIEffect: ; 2cab3 (b:4ab3)
+DoubleAttackX30_AIEffect: ; 2cad3 (b:4ad3)
 	ld a, 60 / 2
 	lb de, 0, 60
 	jp SetExpectedAIDamage
 
-NidorinaDoubleKick_MultiplierEffect: ; 2cabb (b:4abb)
-	ld hl, 30
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	ld e, a
-	add a
-	add e
-	call ATimes10
-	call SetDefiniteDamage
-	ret
-
-NidorinoDoubleKick_AIEffect: ; 2cad3 (b:4ad3)
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-NidorinoDoubleKick_MultiplierEffect: ; 2cabb (b:4abb)
+DoubleAttackX30_MultiplierEffect: ; 2cabb (b:4abb)
 	ld hl, 30
 	call LoadTxRam3
 	ldtx de, DamageCheckIfHeadsXDamageText
@@ -5453,9 +5435,7 @@ TantrumEffect: ; 2e099 (b:6099)
 	ret
 
 StrikesBackEffect: ; 2e0af (b:60af)
-	scf
-	ret
-
+BattleArmorEffect:
 KabutoArmorEffect: ; 2e0b1 (b:60b1)
 	scf
 	ret
@@ -5483,20 +5463,20 @@ SnivelEffect: ; 2e0cb (b:60cb)
 	call ApplySubstatus2ToDefendingCard
 	ret
 
-Bonemerang_AIEffect: ; 2e0e0 (b:60e0)
-	ld a, 60 / 2
-	lb de, 0, 60
+DoubleAttackX20X10_AIEffect: ; 2e4d6 (b:64d6)
+	ld a, (15 * 2)
+	lb de, 20, 40
 	jp SetExpectedAIDamage
 
-Bonemerang_MultiplierEffect: ; 2e0e8 (b:60e8)
-	ld hl, 30
+DoubleAttackX20X10_MultiplierEffect:
+	ld hl, 20
 	call LoadTxRam3
 	ldtx de, DamageCheckIfHeadsXDamageText
 	ld a, 2
 	call TossCoinATimes_BankB
-	ld e, a
-	add a ; a = 2 * heads
-	add e ; a = 3 * heads
+	; tails = 10, heads = 20
+	; result = (tails + 2 * heads) = coins + heads
+	add 2
 	call ATimes10
 	call SetDefiniteDamage
 	ret

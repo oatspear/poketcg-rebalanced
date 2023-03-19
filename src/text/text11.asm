@@ -1119,6 +1119,16 @@ MarowakName: ; 5f329 (17:7329)
 	text "Marowak"
 	done
 
+BattleArmorName: ; 5fa55 (17:7a55)
+	text "Battle Armor"
+	done
+
+BattleArmorDescription:
+	text "This Pokémon takes 20 less damage"
+	line "from attacks (after applying"
+	line "Weakness and Resistance)."
+	done
+
 BonemerangName: ; 5f332 (17:7332)
 	text "Bonemerang"
 	done
