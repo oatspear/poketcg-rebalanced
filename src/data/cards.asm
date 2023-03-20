@@ -2698,11 +2698,11 @@ ArcanineLv45Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx TakeDownName ; name
-	tx TakeDownDescription ; description
+	tx Recoil20Description ; description
 	dw NONE ; description (cont)
 	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ArcanineTakeDownEffectCommands ; effect commands
+	dw Recoil20EffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -6337,7 +6337,7 @@ MachampCard:
 	dw NONE ; description (cont)
 	db 80 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MachampSubmissionEffectCommands ; effect commands
+	dw Recoil20EffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -6739,25 +6739,25 @@ HitmonleeCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2 ; energies
-	tx StretchKickName ; name
-	tx Deal20ToBenchDescription ; description
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	tx RollingKickName ; name
+	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw HitmonleeStretchKickEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Paralysis50PercentEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_STRETCH_KICK ; animation
+	db 0
+	db ATK_ANIM_HIT_EFFECT ; animation
 
 	; attack 2
-	energy FIGHTING, 3 ; energies
+	energy FIGHTING, 1, COLORLESS, 2 ; energies
 	tx HighJumpKickName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -6842,24 +6842,10 @@ RhyhornCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx LeerName ; name
-	tx LeerDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw RhyhornLeerEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
-
-	; attack 2
-	energy FIGHTING, 1, COLORLESS, 2 ; energies
 	tx HornAttackName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -6867,6 +6853,20 @@ RhyhornCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
+
+	; attack 2
+	energy FIGHTING, 1, COLORLESS, 2 ; energies
+	tx TakeDownName ; name
+	tx Recoil10Description ; description
+	dw NONE ; description (cont)
+	db 40 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Recoil10EffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
@@ -6892,7 +6892,7 @@ RhydonCard:
 	tx RhyhornName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1, COLORLESS, 2 ; energies
+	energy COLORLESS, 2 ; energies
 	tx HornAttackName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -6906,7 +6906,7 @@ RhydonCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy FIGHTING, 4 ; energies
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
 	tx RamName ; name
 	tx RamDescription ; description
 	tx RamDescriptionCont ; description (cont)
@@ -6938,7 +6938,7 @@ KabutoCard:
 	db CIRCLE ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db KABUTO
-	db 30 ; hp
+	db 40 ; hp
 	db STAGE1 ; stage
 	tx MysteriousFossilName ; pre-evo name
 
@@ -6989,12 +6989,12 @@ KabutopsCard:
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db KABUTOPS
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE2 ; stage
 	tx KabutoName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2 ; energies
+	energy FIGHTING, 1 ; energies
 	tx SharpSickleName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -7008,11 +7008,11 @@ KabutopsCard:
 	db ATK_ANIM_TEAR ; animation
 
 	; attack 2
-	energy FIGHTING, 4 ; energies
+	energy WATER, 1, COLORLESS, 2 ; energies
 	tx AbsorbName ; name
 	tx AbsorbDescription ; description
-	tx AbsorbDescriptionCont ; description (cont)
-	db 40 ; damage
+	dw NONE ; description (cont)
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
 	dw KabutopsAbsorbEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -8693,11 +8693,11 @@ JigglypuffLv12Card:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx DoubleEdgeName ; name
-	tx JigglypuffsDoubleEdgeDescription ; description
+	tx Recoil20Description ; description
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw JigglypuffDoubleEdgeEffectCommands ; effect commands
+	dw Recoil20EffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

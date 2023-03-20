@@ -6080,8 +6080,6 @@ Recoil10Effect:
 	call DealRecoilDamageToSelf
 	ret
 
-TakeDownEffect:
-JigglypuffDoubleEdgeEffect:
 Recoil20Effect:
 	ld a, 20
 	call DealRecoilDamageToSelf

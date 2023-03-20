@@ -967,11 +967,6 @@ TakeDownName: ; 5a739 (16:6739)
 	text "Take Down"
 	done
 
-TakeDownDescription: ; 5a744 (16:6744)
-	text "This Pokémon does 20 damage to"
-	line "itself."
-	done
-
 ArcanineLv45Description: ; 5a768 (16:6768)
 	text "A Pokémon that has been long admired"
 	line "for its beauty. It runs gracefully,"

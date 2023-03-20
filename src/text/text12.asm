@@ -686,10 +686,6 @@ DoubleEdgeName: ; 61f05 (18:5f05)
 	text "Double-edge"
 	done
 
-JigglypuffsDoubleEdgeDescription: ; 61f12 (18:5f12)
-	text "Jigglypuff does 20 damage to itself."
-	done
-
 BalloonName: ; 61f38 (18:5f38)
 	text "Balloon"
 	done

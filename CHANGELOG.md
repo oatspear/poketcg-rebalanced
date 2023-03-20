@@ -372,6 +372,28 @@
 - **Bone Attack**: reduced cost from (FC) to (C); deals 20 to a Benched Pokémon.
 - New attack: **Vengeance**: 30 damage, +20 for each Basic Pokémon in discard, up to +60.
 
+#### Hitmonlee
+- **Stretch Kick**: removed.
+- New attack: **Rolling Kick** (FC): 20 damage; flip a coin for Paralysis.
+- **High Jump Kick**: reduced cost from (FFF) to (FCC) and damage from 50 to 40.
+
+#### Rhyhorn
+- **Leer**: removed.
+- **Horn Attack**: reduced cost from (FCC) to (C) and damage from 30 to 10.
+- New attack: **Take Down** (FCC): 40 damage, 10 damage recoil.
+
+#### Rhydon
+- **Horn Attack**: reduced cost from (FCC) to (CC).
+- **Ram**: reduced cost from (FFFF) to (FFC).
+
+#### Kabuto
+- Increased HP from 30 to 40.
+
+#### Kabutops
+- Increased HP from 60 to 70.
+- **Sharp Sickle**: reduced cost from (FF) to (F).
+- **Absorb**: changed cost from (FFFF) to (WCC) and increased damage from 40 to 50.
+
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
 - New attack: **Call for Friend** (C): can choose any Basic Pokémon from deck to put on Bench.

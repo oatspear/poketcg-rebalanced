@@ -2298,7 +2298,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LegendaryName                                      ; 0x08fb
 	textpointer ArcanineLv34Description                           ; 0x08fc
 	textpointer TakeDownName                                       ; 0x08fe
-	textpointer TakeDownDescription                                ; 0x08ff
 	textpointer ArcanineLv45Description                           ; 0x0900
 	textpointer PonytaName                                         ; 0x0901
 	textpointer SmashKickName                                      ; 0x0902
@@ -2637,7 +2636,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer VengeanceDescription                               ; 0x0a54
 	textpointer MarowakLv32Description                            ; 0x0a55
 	textpointer HitmonleeName                                      ; 0x0a56
-	textpointer StretchKickName                                    ; 0x0a57
+	textpointer RollingKickName                                    ; 0x0a57
 	textpointer Deal20ToBenchDescription                           ; 0x0a58
 	textpointer HighJumpKickName                                   ; 0x0a59
 	textpointer KickingName                                        ; 0x0a5a
@@ -2666,7 +2665,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SharpSickleName                                    ; 0x0a71
 	textpointer AbsorbName                                         ; 0x0a72
 	textpointer AbsorbDescription                                  ; 0x0a73
-	textpointer AbsorbDescriptionCont                              ; 0x0a74
 	textpointer KabutopsDescription                                ; 0x0a75
 	textpointer AerodactylName                                     ; 0x0a76
 	textpointer PrehistoricPowerName                               ; 0x0a77
@@ -2811,7 +2809,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FirstAidName                                       ; 0x0b02
 	textpointer FirstAidDescription                                ; 0x0b03
 	textpointer DoubleEdgeName                                     ; 0x0b04
-	textpointer JigglypuffsDoubleEdgeDescription                   ; 0x0b05
 	textpointer BalloonName                                        ; 0x0b06
 	textpointer JigglypuffLv12Description                         ; 0x0b07
 	textpointer FriendshipSongName                                 ; 0x0b08

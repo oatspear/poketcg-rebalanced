@@ -1181,8 +1181,8 @@ HitmonleeName: ; 5f61a (17:761a)
 	text "Hitmonlee"
 	done
 
-StretchKickName: ; 5f625 (17:7625)
-	text "Stretch Kick"
+RollingKickName: ; 5f625 (17:7625)
+	text "Rolling Kick"
 	done
 
 Deal20ToBenchDescription: ; 5f633 (17:7633)
@@ -1327,17 +1327,11 @@ AbsorbName: ; 5fc07 (17:7c07)
 
 AbsorbDescription: ; 5fc0f (17:7c0f)
 	text "Remove a number of damage counters"
-	line "from Kabutops equal to half the"
-	line "damage done to the Defending"
+	line "from this Pokémon equal to half"
+	line "the damage done to the Defending"
 	line "Pokémon (after applying Weakness"
 	line "and Resistance)"
 	line "(rounded up to the nearest 10)."
-	done
-
-AbsorbDescriptionCont: ; 5fcc1 (17:7cc1)
-	text "If Kabutops has fewer damage"
-	line "counters than that, remove all of"
-	line "them."
 	done
 
 KabutopsDescription: ; 5fd07 (17:7d07)
