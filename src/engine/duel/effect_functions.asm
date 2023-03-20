@@ -6282,7 +6282,7 @@ RaichuThunder_RecoilEffect: ; 2e5fd (b:65fd)
 	call DealRecoilDamageToSelf
 	ret
 
-Gigashock_PlayerSelectEffect: ; 2e60d (b:660d)
+SelectUpTo2Benched_PlayerSelectEffect: ; 2e60d (b:660d)
 	call SwapTurn
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -6294,7 +6294,7 @@ Gigashock_PlayerSelectEffect: ; 2e60d (b:660d)
 	ret
 
 .has_bench
-	ldtx hl, ChooseUpTo3PkmnOnBenchToGiveDamageText
+	ldtx hl, ChooseUpTo2PkmnOnBenchToGiveDamageText
 	call DrawWideTextBox_WaitForInput
 
 ; init number of items in list and cursor position
@@ -6332,7 +6332,7 @@ Gigashock_PlayerSelectEffect: ; 2e60d (b:660d)
 ; mark this Play Area location
 	ldh a, [hCurMenuItem]
 	inc a
-	ld b, SYM_LIGHTNING
+	ld b, SYM_HP_NOK
 	call DrawSymbolOnPlayAreaCursor
 ; store it in the list of chosen Bench Pokemon
 	call GetNextPositionInTempList
@@ -6340,11 +6340,11 @@ Gigashock_PlayerSelectEffect: ; 2e60d (b:660d)
 	inc a
 	ld [hl], a
 
-; check if 3 were chosen already
+; check if 2 were chosen already
 	ldh a, [hCurSelectionItem]
 	ld c, a
-	cp 3
-	jr nc, .chosen ; check if already chose 3
+	cp 2
+	jr nc, .chosen ; check if already chose 2
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -6410,12 +6410,12 @@ Gigashock_PlayerSelectEffect: ; 2e60d (b:660d)
 	or a
 	ret
 
-Gigashock_AISelectEffect: ; 2e6c3 (b:66c3)
-; if Bench has 3 Pokemon or less, no need for selection,
+SelectUpTo2Benched_AISelectEffect: ; 2e6c3 (b:66c3)
+; if Bench has 2 Pokemon or less, no need for selection,
 ; since AI will choose them all.
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
-	cp MAX_PLAY_AREA_POKEMON - 1
+	cp 3 + 1  ; 3 benched + arena
 	jr nc, .start_selection
 
 ; select them all
@@ -6433,8 +6433,8 @@ Gigashock_AISelectEffect: ; 2e6c3 (b:66c3)
 	ret
 
 .start_selection
-; has more than 3 Bench cards, proceed to sort them
-; by lowest remaining HP to highest, and pick first 3.
+; has more than 2 Bench cards, proceed to sort them
+; by lowest remaining HP to highest, and pick first 2.
 	call SwapTurn
 	dec a
 	ld c, a
@@ -6497,7 +6497,7 @@ Gigashock_AISelectEffect: ; 2e6c3 (b:66c3)
 	call SwapTurn
 	ret
 
-Gigashock_BenchDamageEffect: ; 2e71f (b:671f)
+SelectUpTo2Benched_BenchDamageEffect: ; 2e71f (b:671f)
 	call SwapTurn
 	ld hl, hTempList
 .loop_selection
@@ -8229,7 +8229,7 @@ FriendshipSong_AddToBench50PercentEffect: ; 2f119 (b:7119)
 	call Func_2c0bd
 	ret
 
-GraniteHeadEffect:
+RockHeadEffect:
 ExpandEffect: ; 2f153 (b:7153)
 	ld a, SUBSTATUS1_REDUCE_BY_10
 	call ApplySubstatus1ToAttackingCard

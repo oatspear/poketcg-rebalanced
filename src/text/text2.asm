@@ -189,8 +189,8 @@ ChoosePkmnInTheBenchToGiveDamageText: ; 38769 (e:4769)
 	line "to give damage to."
 	done
 
-ChooseUpTo3PkmnOnBenchToGiveDamageText: ; 3879b (e:479b)
-	text "Choose up to 3 Pokémon on the"
+ChooseUpTo2PkmnOnBenchToGiveDamageText: ; 3879b (e:479b)
+	text "Choose up to 2 Pokémon on the"
 	line "Bench to give damage to."
 	done
 

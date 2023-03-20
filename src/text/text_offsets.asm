@@ -289,7 +289,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DrawCardsFromTheDeckText                           ; 0x0118
 	textpointer CannotDrawCardBecauseNoCardsInDeckText             ; 0x0119
 	textpointer ChoosePkmnInTheBenchToGiveDamageText               ; 0x011a
-	textpointer ChooseUpTo3PkmnOnBenchToGiveDamageText             ; 0x011b
+	textpointer ChooseUpTo2PkmnOnBenchToGiveDamageText             ; 0x011b
 	textpointer Choose1BasicEnergyCardFromDeckText                 ; 0x011c
 	textpointer ChoosePokemonToAttachEnergyCardText                ; 0x011d
 	textpointer Text011e                                           ; 0x011e
@@ -2495,8 +2495,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThunderName                                        ; 0x09cb
 	textpointer RaichusThunderDescription                          ; 0x09cc
 	textpointer RaichuLv40Description                             ; 0x09cd
-	textpointer GigashockName                                      ; 0x09ce
-	textpointer GigashockDescription                               ; 0x09cf
+	textpointer GigashockName                                    ; 0x09ce
+	textpointer DamageUpTo2BenchedDescription                      ; 0x09cf
 	textpointer RaichuLv45Description                             ; 0x09d0
 	textpointer MagnemiteName                                      ; 0x09d1
 	textpointer ThunderWaveName                                    ; 0x09d2
@@ -2608,12 +2608,12 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GravelerDescription                                ; 0x0a3b
 	textpointer GolemName                                          ; 0x0a3c
 	textpointer RockSlideName                                      ; 0x0a3d
-	textpointer RockSlideDescription                               ; 0x0a3d
+	; textpointer RockSlideDescription                               ; 0x0a3d
 	textpointer GolemsSelfdestructDescription                      ; 0x0a3e
 	textpointer MegatonName                                        ; 0x0a3f
 	textpointer GolemDescription                                   ; 0x0a40
 	textpointer OnixName                                           ; 0x0a41
-	textpointer GraniteHeadName                                    ; 0x0a41
+	textpointer RockHeadName                                    ; 0x0a41
 	textpointer OnixsHardenDescription                             ; 0x0a42
 	textpointer RockSnakeName                                      ; 0x0a43
 	textpointer OnixDescription                                    ; 0x0a44

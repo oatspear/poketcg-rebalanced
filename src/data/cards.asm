@@ -5144,32 +5144,32 @@ RaichuLv45Card:
 	tx PikachuName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 3 ; energies
-	tx GigashockName ; name
-	tx GigashockDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx EnergyConversionName ; name
+	tx EnergyConversionDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw EnergyConversionEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 10
+	db ATK_ANIM_ENERGY_CONVERSION ; animation
+
+	; attack 2
+	energy LIGHTNING, 2, COLORLESS, 1 ; energies
+	tx GigashockName ; name
+	tx DamageUpTo2BenchedDescription ; description
+	dw NONE ; description (cont)
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw RaichuGigashockEffectCommands ; effect commands
+	dw DamageUpTo2Benched10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 10
 	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -6472,11 +6472,11 @@ GolemCard:
 	; attack 1
 	energy FIGHTING, 2 ; energies
 	tx RockSlideName ; name
-	tx RockSlideDescription ; description
+	tx DamageUpTo2BenchedDescription ; description
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw RockSlideEffectCommands ; effect commands
+	dw DamageUpTo2Benched10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -6520,14 +6520,28 @@ OnixCard:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; tunneling
+	; energy FIGHTING, 1 ; energies
+	; tx TunnelingName ; name
+	; tx DamageUpTo2BenchedDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db RESIDUAL ; category
+	; dw DamageUpTo2Benched10EffectCommands ; effect commands
+	; db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	; db FLAG_2_BIT_6 ; flags 2
+	; db NONE ; flags 3
+	; db 3
+	; db ATK_ANIM_NONE ; animation
+
 	; attack 1
 	energy FIGHTING, 1, COLORLESS, 1 ; energies
-	tx GraniteHeadName ; name
+	tx RockHeadName ; name
 	tx ReduceDamageTakenBy10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw GraniteHeadEffectCommands ; effect commands
+	dw RockHeadEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -7459,7 +7473,7 @@ GastlyLv17Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw GastlyEnergyConversionEffectCommands ; effect commands
+	dw EnergyConversionEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3

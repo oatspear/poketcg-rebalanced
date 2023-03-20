@@ -250,7 +250,8 @@
 - **Thunder**: reduced cost from (LLLC) to (LLC).
 
 #### Raichu Lv45
-- **Gigashock**: reduced cost from (LLLL) to (LLL).
+- **Gigashock**: reduced cost from (LLLL) to (LLC), increased base damage from 30 to 40 and reduced Bench targets from 3 to 2.
+- New attack: **Energy Conversion** (C): take 10 damage, put 2 Basic Energy from discard pile into hand.
 
 #### Magnemite Lv13
 - **Self-destruct**: removed.
@@ -347,13 +348,13 @@
 - Increased HP from 80 to 90.
 - **Avalanche**: removed.
 - **Self-destruct**: reduced cost from (FFFF) to (FCCC).
-- New attack: **Rock Slide** (FF): 40 damage, plus 10 to *opponent's* benched Pokémon.
+- New attack: **Rock Slide** (FF): 40 damage, plus 10 to 2 of the opponent's benched Pokémon.
 
 #### Onix
 - Reduced HP from 90 to 80.
 - **Rock Throw**: removed.
 - **Harden**: removed.
-- New attack: **Granite Head** (FC): 20 damage, reduce damage taken by 10.
+- New attack: **Rock Head** (FC): 20 damage, reduce damage taken by 10.
 - New attack: **Rage** (FCC): 10 damage plus 10 for each damage counter.
 
 #### Cubone

@@ -435,14 +435,11 @@ GigashockName: ; 5d43c (17:543c)
 	text "Gigashock"
 	done
 
-GigashockDescription: ; 5d447 (17:5447)
-	text "Choose 3 of your opponent's Benched"
-	line "Pokémon and this attack does 10"
-	line "damage to each of them. (Don't apply"
-	line "Weakness and Resistance for Benched"
-	line "Pokémon.) If your opponent has fewer"
-	line "than 3 Benched Pokémon, do the"
-	line "damage to each of them."
+DamageUpTo2BenchedDescription: ; 5d447 (17:5447)
+	text "Choose up to 2 of your opponent's"
+	line "Benched Pokémon. Deal 10 damage to"
+	line "each. (Don't apply Weakness and"
+	line "Resistance for Benched Pokémon.)"
 	done
 
 RaichuLv45Description: ; 5d531 (17:5531)
@@ -1030,12 +1027,12 @@ RockSlideName: ; 5ef53 (17:6f53)
 	text "Rock Slide"
 	done
 
-RockSlideDescription: ; 5ef5e (17:6f5e)
-	text "Does 10 damage to each Pokémon on"
-	line "the opponent's Bench. (Don't apply"
-	line "Weakness and Resistance for Benched"
-	line "Pokémon.)"
-	done
+; RockSlideDescription: ; 5ef5e (17:6f5e)
+; 	text "Does 10 damage to each Pokémon on"
+; 	line "the opponent's Bench. (Don't apply"
+; 	line "Weakness and Resistance for Benched"
+; 	line "Pokémon.)"
+; 	done
 
 GolemsSelfdestructDescription: ; 5ef5e (17:6f5e)
 	text "Does 20 damage to each Pokémon on"
@@ -1059,8 +1056,8 @@ OnixName: ; 5f05d (17:705d)
 	text "Onix"
 	done
 
-GraniteHeadName: ; 5ee18 (17:6e18)
-	text "Granite Head"
+RockHeadName: ; 5ee18 (17:6e18)
+	text "Rock Head"
 	done
 
 OnixsHardenDescription: ; 5f063 (17:7063)

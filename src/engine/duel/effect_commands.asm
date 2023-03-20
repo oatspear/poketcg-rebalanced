@@ -686,7 +686,7 @@ GastlyLickEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
-GastlyEnergyConversionEffectCommands:
+EnergyConversionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyConversion_CheckEnergy
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyConversion_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyConversion_PlayerSelectEffect
@@ -993,9 +993,9 @@ GolemSelfdestructEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct100Bench20Effect
 	db  $00
 
-RockSlideEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, RockSlide10Effect
-	db  $00
+; RockSlideEffectCommands:
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, RockSlide10Effect
+; 	db  $00
 
 ZapdosThunderEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ZapdosThunder_Recoil50PercentEffect
@@ -1067,10 +1067,10 @@ RaichuThunderEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, RaichuThunder_RecoilEffect
 	db  $00
 
-RaichuGigashockEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Gigashock_BenchDamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Gigashock_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Gigashock_AISelectEffect
+DamageUpTo2Benched10EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectUpTo2Benched_BenchDamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SelectUpTo2Benched_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SelectUpTo2Benched_AISelectEffect
 	db  $00
 
 MagnetonThunderWaveEffectCommands:
@@ -1338,7 +1338,7 @@ PidgeotGaleEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Gale_SwitchEffect
 	db  $00
 
-GraniteHeadEffectCommands:
+RockHeadEffectCommands:
 JigglypuffExpandEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ExpandEffect
 	db  $00
