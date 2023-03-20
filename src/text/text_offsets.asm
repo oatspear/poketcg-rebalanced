@@ -2632,9 +2632,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BonekeeperName                                     ; 0x0a4f
 	textpointer MarowakLv26Description                            ; 0x0a50
 	textpointer BoneAttackName                                     ; 0x0a51
-	textpointer BoneAttackDescription                              ; 0x0a52
-	textpointer WailName                                           ; 0x0a53
-	textpointer WailDescription                                    ; 0x0a54
+	; textpointer BoneAttackDescription                              ; 0x0a52
+	textpointer VengeanceName                                      ; 0x0a53
+	textpointer VengeanceDescription                               ; 0x0a54
 	textpointer MarowakLv32Description                            ; 0x0a55
 	textpointer HitmonleeName                                      ; 0x0a56
 	textpointer StretchKickName                                    ; 0x0a57

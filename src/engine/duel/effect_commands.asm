@@ -916,6 +916,7 @@ RhyhornLeerEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeerEffect
 	db  $00
 
+MarowakBoneAttackEffectCommands:
 DiglettDigEffectCommands:
 HitmonleeStretchKickEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StretchKick_CheckBench
@@ -941,13 +942,14 @@ AerodactylPrehistoricPowerEffectCommands:
 ; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Peek_SelectEffect
 ; 	db  $00
 
-MarowakBoneAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BoneAttackEffect
-	db  $00
+; WailEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Wail_BenchCheck
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Wail_FillBenchEffect
+; 	db  $00
 
-MarowakWailEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Wail_BenchCheck
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Wail_FillBenchEffect
+VengeanceEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Vengeance_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Vengeance_AIEffect
 	db  $00
 
 ElectabuzzThundershockEffectCommands:

@@ -5781,81 +5781,26 @@ BoneAttackEffect: ; 2e30f (b:630f)
 	call ApplySubstatus2ToDefendingCard
 	ret
 
-; return carry if neither Play Area
-; has room for more Bench Pokemon.
-Wail_BenchCheck: ; 2e31c (b:631c)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	cp MAX_PLAY_AREA_POKEMON
-	jr c, .no_carry
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp MAX_PLAY_AREA_POKEMON
-	jr c, .no_carry
-	ldtx hl, NoSpaceOnTheBenchText
-	scf
-	ret
-.no_carry
-	or a
-	ret
+Vengeance_AIEffect:
+	call Vengeance_DamageBoostEffect
+	jp SetDefiniteAIDamage
 
-Wail_FillBenchEffect: ; 2e335 (b:6335)
-	call SwapTurn
-	call .FillBench
-	call SwapTurn
-	call .FillBench
-
-; display both Play Areas
-	ldtx hl, BasicPokemonWasPlacedOnEachBenchText
-	call DrawWideTextBox_WaitForInput
-	bank1call HasAlivePokemonInPlayArea
-	bank1call OpenPlayAreaScreenForSelection
-	call SwapTurn
-	bank1call HasAlivePokemonInPlayArea
-	bank1call OpenPlayAreaScreenForSelection
-	call SwapTurn
-	ret
-
-.FillBench ; 2e35a (b:635a)
-	call CreateDeckCardList
-	ret c
-	ld hl, wDuelTempList
-	call ShuffleCards
-
-; if no more space in the Bench, then return.
-.check_bench
-	push hl
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	pop hl
-	cp MAX_PLAY_AREA_POKEMON
-	jr nc, .done
-
-; there's still space, so look for the next
-; Basic Pokemon card to put in the Bench.
+Vengeance_DamageBoostEffect:
+; add 20 damage
+	call CreateBasicPokemonCardListFromDiscardPile
+	ret c  ; return if there are no Basic Pokémon in discard pile
+	xor a
+	ld b, 3  ; cap at 3 bonuses
+	; c has the total number of Basic Pokémon in discard pile
 .loop
-	ld a, [hli]
-	ldh [hTempCardIndex_ff98], a
-	cp $ff
-	jr z, .done
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
-	jr nc, .loop ; is Pokemon card?
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .loop ; is Basic?
-; place card in Bench
-	push hl
-	ldh a, [hTempCardIndex_ff98]
-	call SearchCardInDeckAndAddToHand
-	call AddCardToHand
-	call PutHandPokemonCardInPlayArea
-	pop hl
-	jr .check_bench
-
+	add 20
+	dec c
+	jr z, .done  ; no more Pokémon
+	dec b
+	jr z, .done  ; reached cap
+	jr .loop
 .done
-	call Func_2c0bd
+	call AddToDamage
 	ret
 
 Thunderpunch_AIEffect: ; 2e399 (b:6399)
@@ -10058,6 +10003,8 @@ Revive_PlaceInPlayAreaEffect: ; 2fbb0 (b:7bb0)
 ; makes list in wDuelTempList with all Basic Pokemon cards
 ; that are in Turn Duelist's Discard Pile.
 ; if list turns out empty, return carry.
+; OATS additionally return
+;   - c the total number of Basic Pokémon
 CreateBasicPokemonCardListFromDiscardPile: ; 2fbd6 (b:7bd6)
 ; gets hl to point at end of Discard Pile cards
 ; and iterates the cards in reverse order.
@@ -10068,6 +10015,7 @@ CreateBasicPokemonCardListFromDiscardPile: ; 2fbd6 (b:7bd6)
 	ld l, a
 	ld de, wDuelTempList
 	inc b
+	ld c, 0
 	jr .next_discard_pile_card
 
 .check_card
@@ -10081,6 +10029,7 @@ CreateBasicPokemonCardListFromDiscardPile: ; 2fbd6 (b:7bd6)
 	jr nz, .next_discard_pile_card ; if not Basic stage, skip
 
 ; write this card's index to wDuelTempList
+	inc c
 	ld a, [hl]
 	ld [de], a
 	inc de

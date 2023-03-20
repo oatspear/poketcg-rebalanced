@@ -1088,13 +1088,12 @@ SnivelName: ; 5f19b (17:719b)
 	done
 
 SnivelDescription: ; 5f1a3 (17:71a3)
-	text "If the Defending Pokémon attacks"
-	line "Cubone during your opponent's next"
-	line "turn, any damage done by the attack"
-	line "is reduced by 20 (after applying"
-	line "Weakness and Resistance). (Benching"
-	line "or evolving either Pokémon ends this"
-	line "effect.)"
+	text "Reduce any attack damage done by the"
+	line "Defending Pokémon to this Pokémon"
+	line "during your opponent's next turn by"
+	line "20 (after applying Weakness and"
+	line "Resistance). (Benching or evolving"
+	line "either Pokémon ends this effect.)"
 	done
 
 RageDescription: ; 5f27f (17:727f)
@@ -1156,24 +1155,20 @@ BoneAttackName: ; 5f45b (17:745b)
 	text "Bone Attack"
 	done
 
-BoneAttackDescription: ; 5f468 (17:7468)
-	text "Flip a coin. If heads, the Defending"
-	line "Pokémon can't attack during your"
-	line "opponent's next turn."
+; BoneAttackDescription: ; 5f468 (17:7468)
+; 	text "Flip a coin. If heads, the Defending"
+; 	line "Pokémon can't attack during your"
+; 	line "opponent's next turn."
+; 	done
+
+VengeanceName: ; 5f4c5 (17:74c5)
+	text "Vengeance"
 	done
 
-WailName: ; 5f4c5 (17:74c5)
-	text "Wail"
-	done
-
-WailDescription: ; 5f4cb (17:74cb)
-	text "Each player fills his or her Bench"
-	line "with Basic Pokémon chosen at random"
-	line "from his or her deck. If a player"
-	line "has fewer Basic Pokémon than that in"
-	line "his or deck, he or she chooses all"
-	line "of them. Each player shuffles his"
-	line "or her deck afterward."
+VengeanceDescription: ; 5f4cb (17:74cb)
+	text "Does 20 additional damage for each"
+	line "Basic Pokémon in your discard pile,"
+	line "up to 60 additional damage."
 	done
 
 MarowakLv32Description: ; 5f5b6 (17:75b6)

@@ -6481,7 +6481,7 @@ GolemCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 10
-	db ATK_ANIM_ROCK_THROW ; animation
+	db ATK_ANIM_STONE_BARRAGE ; animation
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 3 ; energies
@@ -6587,17 +6587,17 @@ CuboneCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx SnivelName ; name
-	tx SnivelDescription ; description
+	tx CallForFriendName ; name
+	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw CuboneSnivelEffectCommands ; effect commands
+	db RESIDUAL ; category
+	dw CallForFriendEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_CRY ; animation
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
@@ -6688,32 +6688,32 @@ MarowakLv32Card:
 	tx CuboneName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx BoneAttackName ; name
-	tx BoneAttackDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MarowakBoneAttackEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_BONEMERANG ; animation
-
-	; attack 2
-	energy FIGHTING, 3 ; energies
-	tx WailName ; name
-	tx WailDescription ; description
+	tx Deal20ToBenchDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MarowakWailEffectCommands ; effect commands
+	dw MarowakBoneAttackEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 3
+	db 3
+	db ATK_ANIM_BONEMERANG ; animation
+
+	; attack 2
+	energy FIGHTING, 1, COLORLESS, 2 ; energies
+	tx VengeanceName ; name
+	tx VengeanceDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw VengeanceEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_CRY ; animation
+	db ATK_ANIM_RAMPAGE ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
@@ -9443,17 +9443,17 @@ EeveeCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx TailWagName ; name
-	tx TailWagDescription ; description
+	tx SnivelName ; name
+	tx SnivelDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw EeveeTailWagEffectCommands ; effect commands
+	dw CuboneSnivelEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
+	db 10
+	db ATK_ANIM_CRY ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies

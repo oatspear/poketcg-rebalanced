@@ -358,16 +358,27 @@
 - New attack: **Rage** (FCC): 10 damage plus 10 for each damage counter.
 
 #### Cubone
+- **Snivel**: removed.
 - **Rage**: reduced cost from (FF) to (CC).
+- New attack: **Call for Friend** (C): put a Basic Pokémon from the deck on the bench.
 
 #### Marowak Lv26
 - **Call for Friend**: removed.
 - **Bonemerang**: reduced cost from (FF) to (FC).
 - New Pokémon Power: **Battle Armor**: takes 20 less damage from attacks.
 
+#### Marowak Lv32
+- **Wail**: removed.
+- **Bone Attack**: reduced cost from (FC) to (C); deals 20 to a Benched Pokémon.
+- New attack: **Vengeance**: 30 damage, +20 for each Basic Pokémon in discard, up to +60.
+
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
 - New attack: **Call for Friend** (C): can choose any Basic Pokémon from deck to put on Bench.
+
+#### Eevee
+- **Tail Wag**: removed.
+- New attack: **Snivel** (C): reduce incoming damage by 20.
 
 #### Kangaskhan
 - **Comet Punch**: 3 coin flips; 10 damage per tails and 20 per heads.

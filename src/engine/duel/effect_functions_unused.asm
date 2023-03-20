@@ -229,3 +229,82 @@ Gigashock_BenchDamageEffect: ; 2e71f (b:671f)
 .done
 	call SwapTurn
 	ret
+
+
+
+; return carry if neither Play Area
+; has room for more Bench Pokemon.
+Wail_BenchCheck: ; 2e31c (b:631c)
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	cp MAX_PLAY_AREA_POKEMON
+	jr c, .no_carry
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	cp MAX_PLAY_AREA_POKEMON
+	jr c, .no_carry
+	ldtx hl, NoSpaceOnTheBenchText
+	scf
+	ret
+.no_carry
+	or a
+	ret
+
+Wail_FillBenchEffect: ; 2e335 (b:6335)
+	call SwapTurn
+	call .FillBench
+	call SwapTurn
+	call .FillBench
+
+; display both Play Areas
+	ldtx hl, BasicPokemonWasPlacedOnEachBenchText
+	call DrawWideTextBox_WaitForInput
+	bank1call HasAlivePokemonInPlayArea
+	bank1call OpenPlayAreaScreenForSelection
+	call SwapTurn
+	bank1call HasAlivePokemonInPlayArea
+	bank1call OpenPlayAreaScreenForSelection
+	call SwapTurn
+	ret
+
+.FillBench ; 2e35a (b:635a)
+	call CreateDeckCardList
+	ret c
+	ld hl, wDuelTempList
+	call ShuffleCards
+
+; if no more space in the Bench, then return.
+.check_bench
+	push hl
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	pop hl
+	cp MAX_PLAY_AREA_POKEMON
+	jr nc, .done
+
+; there's still space, so look for the next
+; Basic Pokemon card to put in the Bench.
+.loop
+	ld a, [hli]
+	ldh [hTempCardIndex_ff98], a
+	cp $ff
+	jr z, .done
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY
+	jr nc, .loop ; is Pokemon card?
+	ld a, [wLoadedCard2Stage]
+	or a
+	jr nz, .loop ; is Basic?
+; place card in Bench
+	push hl
+	ldh a, [hTempCardIndex_ff98]
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+	call PutHandPokemonCardInPlayArea
+	pop hl
+	jr .check_bench
+
+.done
+	call Func_2c0bd
+	ret
