@@ -2056,9 +2056,9 @@ AISelectSpecialAttackParameters:
 	jr z, .EnergyAbsorption
 	cp MEWTWO_LV60
 	jr z, .EnergyAbsorption
-	cp EXEGGUTOR
+	cp ABRA
 	jr z, .Teleport
-	cp ELECTRODE_LV35
+	cp MAGNETON_LV35
 	jr z, .EnergySpike
 	; fallthrough
 

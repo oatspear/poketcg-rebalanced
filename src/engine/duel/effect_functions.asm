@@ -2610,52 +2610,6 @@ VaporeonWaterGunEffect: ; 2d0d3 (b:50d3)
 	lb bc, 2, 1
 	jp ApplyExtraWaterEnergyDamageBonus
 
-; returns carry if Arena card has no Water Energy attached
-; or if it doesn't have any damage counters.
-StarmieRecover_CheckEnergyHP: ; 2d0d9 (b:50d9)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + WATER]
-	ldtx hl, NotEnoughWaterEnergyText
-	cp 1
-	ret c ; return if not enough energy
-	call GetCardDamageAndMaxHP
-	ldtx hl, NoDamageCountersText
-	cp 10
-	ret ; return carry if no damage
-
-StarmieRecover_PlayerSelectEffect: ; 2d0f0 (b:50f0)
-	ld a, TYPE_ENERGY_WATER
-	call CreateListOfEnergyAttachedToArena
-	xor a ; PLAY_AREA_ARENA
-	bank1call DisplayEnergyDiscardScreen
-.loop_input
-	bank1call HandleEnergyDiscardMenuInput
-	jr c, .loop_input
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a ; store card chosen
-	ret
-
-StarmieRecover_AISelectEffect: ; 2d103 (b:5103)
-	ld a, TYPE_ENERGY_WATER
-	call CreateListOfEnergyAttachedToArena
-	ld a, [wDuelTempList] ; pick first card
-	ldh [hTemp_ffa0], a
-	ret
-
-StarmieRecover_DiscardEffect: ; 2d10e (b:510e)
-	ldh a, [hTemp_ffa0]
-	call PutCardInDiscardPile
-	ret
-
-StarmieRecover_HealEffect: ; 2d114 (b:5114)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	ld e, a ; all damage for recovery
-	ld d, 0
-	call ApplyAndAnimateHPRecovery
-	ret
-
 WithdrawEffect: ; 2d120 (b:5120)
 	ldtx de, IfHeadsNoDamageNextTurnText
 	call TossCoin_BankB
@@ -5247,13 +5201,13 @@ SlowpokeAmnesia_DisableEffect: ; 2df85 (b:5f85)
 	call ApplyAmnesiaToAttack
 	ret
 
-; returns carry if Arena card has no Psychic Energy attached
+; returns carry if Arena card has no Energies attached
 ; or if it doesn't have any damage counters.
-KadabraRecover_CheckEnergyHP: ; 2df89 (b:5f89)
+Recover_CheckEnergyHP: ; 2df89 (b:5f89)
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + PSYCHIC]
-	ldtx hl, NotEnoughPsychicEnergyText
+	ld a, [wTotalAttachedEnergies]
+	ldtx hl, NoEnergyCardsText
 	cp 1
 	ret c ; return if not enough energy
 	call GetCardDamageAndMaxHP
@@ -5261,30 +5215,30 @@ KadabraRecover_CheckEnergyHP: ; 2df89 (b:5f89)
 	cp 10
 	ret ; return carry if no damage
 
-KadabraRecover_PlayerSelectEffect: ; 2dfa0 (b:5fa0)
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
+Recover_PlayerSelectEffect: ; 2dfa0 (b:5fa0)
+	xor a ; PLAY_AREA_ARENA
+	bank1call CreateArenaOrBenchEnergyCardList
 	xor a ; PLAY_AREA_ARENA
 	bank1call DisplayEnergyDiscardScreen
 	bank1call HandleEnergyDiscardMenuInput
-	ret c
+	ret c ; exit if B was pressed
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTemp_ffa0], a ; store card chosen
 	ret
 
-KadabraRecover_AISelectEffect: ; 2dfb2 (b:5fb2)
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
+Recover_AISelectEffect: ; 2dfb2 (b:5fb2)
+	xor a ; PLAY_AREA_ARENA
+	bank1call CreateArenaOrBenchEnergyCardList
 	ld a, [wDuelTempList] ; pick first card
 	ldh [hTemp_ffa0], a
 	ret
 
-KadabraRecover_DiscardEffect: ; 2dfbd (b:5fbd)
+Recover_DiscardEffect: ; 2dfbd (b:5fbd)
 	ldh a, [hTemp_ffa0]
 	call PutCardInDiscardPile
 	ret
 
-KadabraRecover_HealEffect: ; 2dfc3 (b:5fc3)
+Recover_HealEffect: ; 2dfc3 (b:5fc3)
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
 	ld e, a ; all damage for recovery
@@ -5541,10 +5495,10 @@ CallForFriend_PlayerSelectEffect: ; 2e110 (b:6110)
 	jr nz, .next
 	ld a, l
 	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard1Type]
+	ld a, [wLoadedCard2Type]
 	cp TYPE_PKMN + 1
 	jr nc, .next ; go to the next card
-	ld a, [wLoadedCard1Stage]
+	ld a, [wLoadedCard2Stage]
 	or a
 	jr z, .play_sfx ; found, go back to top loop
 .next
@@ -8879,6 +8833,11 @@ MrFuji_ReturnToDeckEffect: ; 2f58f (b:758f)
 ; get Play Area location's card index
 	ldh a, [hTemp_ffa0]
 	add DUELVARS_ARENA_CARD
+	; fallthrough
+
+; Return the Pokémon in the location given in a
+; and all cards attached to it to the turn holder's deck.
+ReturnToDeckEffect:
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff98], a
 

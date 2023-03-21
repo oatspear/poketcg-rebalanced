@@ -17,7 +17,9 @@ HandleSpecialAIAttacks:
 	jr z, .CallForFriend
 	cp BELLSPROUT
 	jr z, .CallForFriend
-	cp EXEGGUTOR
+	cp CUBONE
+	jr z, .CallForFriend
+	cp ABRA
 	jp z, .Teleport
 	cp SCYTHER
 	jp z, .SwordsDanceAndFocusEnergy
@@ -25,22 +27,18 @@ HandleSpecialAIAttacks:
 	jr z, .CallForFriend
 	cp VAPOREON_LV29
 	jp z, .SwordsDanceAndFocusEnergy
-	cp ELECTRODE_LV42
+	cp MAGNETON_LV28
 	jp z, .ChainLightning
-	cp MAROWAK_LV26
-	jr z, .CallForFriend
 	cp MEW_LV23
 	jp z, .DevolutionBeam
 	cp JIGGLYPUFF_LV13
-	jp z, .FriendshipSong
+	jp z, .CallForFriend
 	cp PORYGON
 	jp z, .Conversion
 	cp MEWTWO_ALT_LV60
 	jp z, .EnergyAbsorption
 	cp MEWTWO_LV60
 	jp z, .EnergyAbsorption
-	cp NINETALES_LV35
-	jp z, .MixUp
 	cp ZAPDOS_LV68
 	jp z, .BigThunder
 	cp KANGASKHAN
@@ -49,7 +47,7 @@ HandleSpecialAIAttacks:
 	jp z, .Earthquake
 	cp GRAVELER
 	jp z, .Earthquake
-	cp ELECTRODE_LV35
+	cp MAGNETON_LV35
 	jp z, .EnergySpike
 	cp GOLDUCK
 	jp z, .HyperBeam
@@ -64,7 +62,6 @@ HandleSpecialAIAttacks:
 ; if any basic cards are found in deck,
 ; return a score of $80 + slots available in bench.
 .CallForFriend:
-.FriendshipSong:
 	call CheckIfAnyBasicPokemonInDeck
 	jr nc, .zero_score
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -192,7 +189,7 @@ HandleSpecialAIAttacks:
 ; otherwise, if it finds an evolution card in hand that
 ; can evolve a card in player's deck, encourage.
 ; if encouraged, returns a score of $80 + 3.
-.MixUp:
+.MixUp:  ; unused
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetNonTurnDuelistVariable
 	or a

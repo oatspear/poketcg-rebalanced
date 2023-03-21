@@ -132,7 +132,7 @@ MetapodStiffenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MetapodStiffenEffect
 	db  $00
 
-ExeggutorTeleportEffectCommands:
+TeleportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Teleport_CheckBench
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_SwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
@@ -354,14 +354,6 @@ ShellderSupersonicEffectCommands:
 VaporeonWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VaporeonWaterGunEffect
 	dbw EFFECTCMDTYPE_AI, VaporeonWaterGunEffect
-	db  $00
-
-StarmieRecoverEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StarmieRecover_CheckEnergyHP
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StarmieRecover_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StarmieRecover_HealEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, StarmieRecover_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, StarmieRecover_AISelectEffect
 	db  $00
 
 WithdrawEffectCommands:
@@ -710,7 +702,7 @@ AlakazamDamageSwapEffectCommands:
 	db  $00
 
 AlakazamConfuseRayEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ConfusionEffect
 	db  $00
 
 MewPsywaveEffectCommands:
@@ -784,12 +776,12 @@ SlowpokeAmnesiaEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, SlowpokeAmnesia_AISelectEffect
 	db  $00
 
-KadabraRecoverEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, KadabraRecover_CheckEnergyHP
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, KadabraRecover_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, KadabraRecover_HealEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, KadabraRecover_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, KadabraRecover_AISelectEffect
+RecoverEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Recover_CheckEnergyHP
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Recover_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recover_HealEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Recover_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Recover_AISelectEffect
 	db  $00
 
 JynxDoubleslapEffectCommands:

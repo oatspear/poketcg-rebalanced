@@ -589,13 +589,13 @@ ExeggutorName: ; 59881 (16:5881)
 	text "Exeggutor"
 	done
 
-TeleportName: ; 5988c (16:588c)
-	text "Teleport"
+TeleportBlastName: ; 5988c (16:588c)
+	text "Teleportation Blast"
 	done
 
 TeleportDescription: ; 59896 (16:5896)
-	text "Switch Exeggutor with 1 of your"
-	line "Benched Pokémon."
+	text "Switch this Pokémon with one of"
+	line "your Benched Pokémon."
 	done
 
 BigEggsplosionName: ; 598c8 (16:58c8)

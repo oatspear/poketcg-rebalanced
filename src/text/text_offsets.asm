@@ -2222,7 +2222,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EggName                                            ; 0x08b0
 	textpointer ExeggcuteDescription                               ; 0x08b1
 	textpointer ExeggutorName                                      ; 0x08b2
-	textpointer TeleportName                                       ; 0x08b3
+	textpointer TeleportBlastName                                  ; 0x08b3
 	textpointer TeleportDescription                                ; 0x08b4
 	textpointer BigEggsplosionName                                 ; 0x08b5
 	textpointer BigEggsplosionDescription                          ; 0x08b6
@@ -2427,7 +2427,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer StaryuDescription                                  ; 0x0984
 	textpointer StarmieName                                        ; 0x0985
 	textpointer RecoverName                                        ; 0x0986
-	textpointer StarmiesRecoverDescription                         ; 0x0987
+	textpointer RecoverDescription                                 ; 0x0987
 	textpointer StarFreezeName                                     ; 0x0988
 	textpointer MysteriousName                                     ; 0x0989
 	textpointer StarmieDescription                                 ; 0x098a
@@ -2675,7 +2675,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PsiName                                            ; 0x0a7c
 	textpointer AbraDescription                                    ; 0x0a7d
 	textpointer KadabraName                                        ; 0x0a7e
-	textpointer KadabrasRecoverDescription                         ; 0x0a7f
+	textpointer InflictConfusionDescription                        ; 0x0a7f
 	textpointer SuperPsiName                                       ; 0x0a80
 	textpointer KadabraDescription                                 ; 0x0a81
 	textpointer AlakazamName                                       ; 0x0a82

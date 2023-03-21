@@ -87,11 +87,9 @@ RecoverName: ; 5c352 (17:4352)
 	text "Recover"
 	done
 
-StarmiesRecoverDescription: ; 5c35b (17:435b)
-	text "Discard 1 <WATER> Energy card attached to"
-	line "Starmie in order to use this attack."
-	line "Remove all damage counters from"
-	line "Starmie."
+RecoverDescription: ; 5c35b (17:435b)
+	text "Discard an Energy from this Pokémon."
+	line "Then, heal all damage from it."
 	done
 
 StarFreezeName: ; 5c3cf (17:43cf)
@@ -1383,11 +1381,9 @@ KadabraName: ; 5fed3 (17:7ed3)
 	text "Kadabra"
 	done
 
-KadabrasRecoverDescription: ; 5fedc (17:7edc)
-	text "Discard 1 <PSYCHIC> Energy card attached to"
-	line "Kadabra in order to use this attack."
-	line "Remove all damage counters from"
-	line "Kadabra."
+InflictConfusionDescription:
+	text "The Defending Pokémon is now"
+	line "Confused."
 	done
 
 SuperPsiName: ; 5ff50 (17:7f50)

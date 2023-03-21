@@ -1931,20 +1931,6 @@ ExeggutorCard:
 	tx ExeggcuteName ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 1 ; energies
-	tx TeleportName ; name
-	tx TeleportDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw ExeggutorTeleportEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
-
-	; attack 2
 	energy COLORLESS, 1 ; energies
 	tx BigEggsplosionName ; name
 	tx BigEggsplosionDescription ; description
@@ -1957,6 +1943,20 @@ ExeggutorCard:
 	db NONE ; flags 3
 	db MAX_ENERGY_BOOST_IS_NOT_LIMITED
 	db ATK_ANIM_BIG_HIT ; animation
+
+	; attack 2
+	energy PSYCHIC, 1 ; energies
+	tx PsyshockName ; name
+	tx MayInflictParalysisDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Paralysis50PercentEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PSYCHIC_HIT ; animation
 
 	db 2 ; retreat cost
 	db WR_FIRE ; weakness
@@ -4226,13 +4226,13 @@ StarmieCard:
 	tx StaryuName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx RecoverName ; name
-	tx StarmiesRecoverDescription ; description
+	tx RecoverDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw StarmieRecoverEffectCommands ; effect commands
+	dw RecoverEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -7102,7 +7102,7 @@ AbraCard:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw AbraPsyshockEffectCommands ; effect commands
+	dw Paralysis50PercentEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7110,18 +7110,18 @@ AbraCard:
 	db ATK_ANIM_PSYCHIC_HIT ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
+	energy PSYCHIC, 1 ; energies
+	tx TeleportBlastName ; name
+	tx TeleportDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw TeleportEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -7147,13 +7147,13 @@ KadabraCard:
 	tx AbraName ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx RecoverName ; name
-	tx KadabrasRecoverDescription ; description
+	tx RecoverDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw KadabraRecoverEffectCommands ; effect commands
+	dw RecoverEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -7161,11 +7161,11 @@ KadabraCard:
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy PSYCHIC, 2, COLORLESS, 1 ; energies
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
 	tx SuperPsiName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -7212,9 +7212,9 @@ AlakazamCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy PSYCHIC, 3 ; energies
+	energy PSYCHIC, 1, COLORLESS, 2 ; energies
 	tx ConfuseRayName ; name
-	tx MayInflictConfusionDescription ; description
+	tx InflictConfusionDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category

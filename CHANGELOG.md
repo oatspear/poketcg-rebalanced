@@ -95,6 +95,10 @@
 - **Smog**: reduced cost from (DD) to (DC).
 - **Self-destruct**: reduced cost from (DDC) to (DCC).
 
+#### Exeggutor
+- **Teleport**: removed.
+- New attack: **Psyshock** (P): 20 damage; flip a coin, paralysis if Heads.
+
 #### Tangela Lv8
 - Increased HP from 50 to 60.
 - **Bind**: reduced cost from (GC) to (CC).
@@ -211,7 +215,7 @@
 - **Waterfall**: increased cost from (WC) to (WW) and damage from 30 to 40.
 
 #### Starmie
-- **Recover**: reduced cost from (WW) to (W).
+- **Recover**: reduced cost from (WW) to (C) and can discard any type of Energy.
 - **Star Freeze**: reduced cost from (WCC) to (WC).
 
 #### Gyarados
@@ -393,6 +397,16 @@
 - Increased HP from 60 to 70.
 - **Sharp Sickle**: reduced cost from (FF) to (F).
 - **Absorb**: changed cost from (FFFF) to (WCC) and increased damage from 40 to 50.
+
+#### Abra
+- New attack: **Teleportation Blast** (P): 10 damage, switch with a Benched Pokémon after attacking.
+
+#### Kadabra
+- **Recover**: reduced cost from (PP) to (C) and can discard any type of Energy.
+- **Super Psi**: reduced cost from (PPC) to (PC) and damage from 50 to 30.
+
+#### Alakazam
+- **Confuse Ray**: reduced cost from (PPP) to (PCC) and inflicts Confusion without a coin flip.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
