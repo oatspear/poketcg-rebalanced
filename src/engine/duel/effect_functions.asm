@@ -8320,6 +8320,7 @@ EnergyRemoval_PlayerSelection: ; 2f25f (b:725f)
 	call SwapTurn
 	call HandlePokemonAndEnergySelectionScreen
 	call SwapTurn
+	call c, CancelSupporterCard
 	ret
 
 EnergyRemoval_AISelection: ; 2f26f (b:726f)
@@ -8363,6 +8364,7 @@ EnergyRetrieval_PlayerHandSelection: ; 2f2a0 (b:72a0)
 	bank1call DisplayCardList
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTempList], a
+	call c, CancelSupporterCard
 	ret
 
 EnergyRetrieval_PlayerDiscardPileSelection: ; 2f2b9 (b:72b9)
@@ -8623,7 +8625,9 @@ ItemFinder_HandDiscardPileCheck: ; 2f43b (b:743b)
 
 ItemFinder_PlayerSelection: ; 2f44a (b:744a)
 	call HandlePlayerSelection2HandCardsToDiscard
-	ret c ; was operation cancelled?
+	; was operation cancelled?
+	call c, CancelSupporterCard
+	ret c
 
 ; cards were selected to discard from hand.
 ; now to choose a Trainer card from Discard Pile.
@@ -8767,6 +8771,7 @@ ComputerSearch_HandDeckCheck: ; 2f513 (b:7513)
 
 ComputerSearch_PlayerDiscardHandSelection: ; 2f52a (b:752a)
 	call HandlePlayerSelection2HandCardsToDiscard
+	call c, CancelSupporterCard
 	ret
 
 ComputerSearch_PlayerDeckSelection: ; 2f52e (b:752e)
@@ -8827,6 +8832,7 @@ MrFuji_PlayerSelection: ; 2f57e (b:757e)
 	bank1call OpenPlayAreaScreenForSelection
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
+	call c, CancelSupporterCard
 	ret
 
 MrFuji_ReturnToDeckEffect: ; 2f58f (b:758f)
@@ -8918,6 +8924,7 @@ Switch_PlayerSelection: ; 2f5f9 (b:75f9)
 	bank1call OpenPlayAreaScreenForSelection
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
+	call c, CancelSupporterCard
 	ret
 
 Switch_SwitchEffect: ; 2f60a (b:760a)
@@ -9222,6 +9229,7 @@ ScoopUp_PlayerSelection: ; 2f7a0 (b:77a0)
 ; handle Player selection
 	bank1call HasAlivePokemonInPlayArea
 	bank1call OpenPlayAreaScreenForSelection
+	call c, CancelSupporterCard
 	ret c ; exit if B was pressed
 
 	ldh [hTemp_ffa0], a
@@ -9342,6 +9350,7 @@ PokemonTrader_PlayerHandSelection: ; 2f838 (b:7838)
 	ldtx de, DuelistHandText
 	bank1call SetCardListHeaderText
 	bank1call DisplayCardList
+	call c, CancelSupporterCard
 	ldh [hTemp_ffa0], a
 	ret
 
@@ -10171,6 +10180,7 @@ SuperEnergyRemoval_PlayerSelection: ; 2fce4 (b:7ce4)
 	ldtx hl, ChoosePokemonInYourAreaThenPokemonInYourOppText
 	call DrawWideTextBox_WaitForInput
 	call HandlePokemonAndEnergySelectionScreen
+	call c, CancelSupporterCard
 	ret c ; return if operation was cancelled
 
 	ldtx hl, ChoosePokemonToRemoveEnergyFromText
@@ -10185,6 +10195,7 @@ SuperEnergyRemoval_PlayerSelection: ; 2fce4 (b:7ce4)
 	jr nc, .opp_pkmn_selected
 	; B was pressed
 	call SwapTurn
+	call CancelSupporterCard
 	ret ; return if operation was cancelled
 .opp_pkmn_selected
 	ld e, a
@@ -10300,6 +10311,7 @@ SuperEnergyRetrieval_HandEnergyCheck: ; 2fda4 (b:7da4)
 
 SuperEnergyRetrieval_PlayerHandSelection: ; 2fdb6 (b:7db6)
 	call HandlePlayerSelection2HandCardsToDiscard
+	call c, CancelSupporterCard
 	ret
 
 SuperEnergyRetrieval_PlayerDiscardPileSelection: ; 2fdba (b:7dba)
@@ -10456,6 +10468,7 @@ GustOfWind_PlayerSelection: ; 2fe79 (b:7e79)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	call SwapTurn
+	call c, CancelSupporterCard
 	ret
 
 GustOfWind_SwitchEffect: ; 2fe90 (b:7e90)
@@ -10534,4 +10547,12 @@ HealPlayAreaCardHP: ; 2febc (b:7ebc)
 	call GetTurnDuelistVariable
 	add e
 	ld [hl], a
+	ret
+
+CancelSupporterCard:
+	push af  ; retain flags
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and ~PLAYED_SUPPORTER_THIS_TURN  ; clear this flag
+	ld [wAlreadyPlayedEnergyOrSupporter], a
+	pop af
 	ret
