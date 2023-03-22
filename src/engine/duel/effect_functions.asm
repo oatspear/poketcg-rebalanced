@@ -522,11 +522,25 @@ CheckIfPlayAreaHasAnyDamage: ; 2c25b (b:425b)
 	scf
 	ret
 
+CreateSupporterCardListFromDiscardPile:
+	ld c, TYPE_TRAINER_SUPPORTER
+	jr CreateTrainerCardListFromDiscardPile_
+
+CreateItemCardListFromDiscardPile:
+	ld c, TYPE_TRAINER
+	jr CreateTrainerCardListFromDiscardPile_
+
 ; makes a list in wDuelTempList with the deck indices
 ; of Trainer cards found in Turn Duelist's Discard Pile.
 ; returns carry set if no Trainer cards found, and loads
 ; corresponding text to notify this.
-CreateTrainerCardListFromDiscardPile: ; 2c26e (b:426e)
+; input:
+;    c - trainer card subtype to look for, or $ff for any trainer card
+CreateTrainerCardListFromDiscardPile:
+	ld c, $ff
+	; fallthrough
+
+CreateTrainerCardListFromDiscardPile_:
 ; get number of cards in Discard Pile
 ; and have hl point to the end of the
 ; Discard Pile list in wOpponentDeckCards.
@@ -549,6 +563,14 @@ CreateTrainerCardListFromDiscardPile: ; 2c26e (b:426e)
 	jr c, .next_card  ; original: jr nz
 ; OATS end support trainer subtypes
 
+	ld a, c
+	cp $ff  ; anything goes
+	jr z, .store
+	ld a, [wLoadedCard2Type]
+	cp c  ; apply filter
+	jr nz, .next_card
+
+.store
 	ld a, [hl]
 	ld [de], a
 	inc de
@@ -5098,68 +5120,51 @@ SpacingOut_Success50PercentEffect: ; 2dee0 (b:5ee0)
 	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
 	call TossCoin_BankB
 	ldh [hTemp_ffa0], a
-	jp nc, SetWasUnsuccessful
 	ld a, ATK_ANIM_RECOVER
 	ld [wLoadedAttackAnimation], a
 	ret
 
 SpacingOut_HealEffect: ; 2def1 (b:5ef1)
-	ldh a, [hTemp_ffa0]
-	or a
-	ret z ; coin toss was tails
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
 	or a
 	ret z ; no damage counters
+	ld e, 10
+	ldh a, [hTemp_ffa0]
+	or a
+	jr z, .heal ; coin toss was tails
+	ld e, 20
+.heal
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
-	add 10
+	add e
+	cp c  ; c contains max HP from GetCardDamageAndMaxHP
+	jr c, .store
+	ld a, c  ; cap HP
+.store
 	ld [hl], a
 	ret
 
 ; sets carry if no Trainer cards in the Discard Pile.
 Scavenge_CheckDiscardPile: ; 2df05 (b:5f05)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + PSYCHIC]
-	ldtx hl, NotEnoughPsychicEnergyText
-	cp 1
-	ret c ; return if no Psychic energy attached
-	call CreateTrainerCardListFromDiscardPile
-	ldtx hl, ThereAreNoTrainerCardsInDiscardPileText ; this is redundant
-	ret
-
-Scavenge_PlayerSelectEnergyEffect: ; 2df1a (b:5f1a)
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
-	xor a ; PLAY_AREA_ARENA
-	bank1call DisplayEnergyDiscardScreen
-	bank1call HandleEnergyDiscardMenuInput
-	ret c
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
-	or a
+	; ld e, PLAY_AREA_ARENA
+	; call GetPlayAreaCardAttachedEnergies
+	; ld a, [wAttachedEnergies + PSYCHIC]
+	; ldtx hl, NotEnoughPsychicEnergyText
+	; cp 1
+	; ret c ; return if no Psychic energy attached
+	call CreateItemCardListFromDiscardPile
 	ret
 
 Scavenge_AISelectEffect: ; 2df2d (b:5f2d)
-; AI picks first Energy card in list
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
-	ld a, [wDuelTempList]
-	ldh [hTemp_ffa0], a
 ; AI picks first Trainer card in list
-	call CreateTrainerCardListFromDiscardPile
+	call CreateItemCardListFromDiscardPile
 	ld a, [wDuelTempList]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
-Scavenge_DiscardEffect: ; 2df40 (b:5f40)
-	ldh a, [hTemp_ffa0]
-	call PutCardInDiscardPile
-	ret
-
 Scavenge_PlayerSelectTrainerEffect: ; 2df46 (b:5f46)
-	call CreateTrainerCardListFromDiscardPile
+	call CreateItemCardListFromDiscardPile
 	bank1call Func_5591
 	ldtx hl, PleaseSelectCardText
 	ldtx de, PlayerDiscardPileText

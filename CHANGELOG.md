@@ -408,6 +408,15 @@
 #### Alakazam
 - **Confuse Ray**: reduced cost from (PPP) to (PCC) and inflicts Confusion without a coin flip.
 
+#### Slowpoke Lv9
+- Increased HP from 40 to 50.
+- **Amnesia**: reduced cost from (PP) to (PC).
+
+#### Slowpoke Lv18
+- Reduced HP from 50 to 40.
+- **Spacing Out**: heals 20 if heads or 10 if tails.
+- **Scavenge**: reduced cost from (PP) to (P), no longer discards Energy, can only pick non-Supporter cards.
+
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
 - New attack: **Call for Friend** (C): can choose any Basic Pokémon from deck to put on Bench.

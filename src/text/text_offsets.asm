@@ -12,7 +12,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WeaknessText                                       ; 0x0008
 	textpointer ResistanceText                                     ; 0x0009
 	textpointer PKMNPWRText                                        ; 0x000a
-	; textpointer Text000b                                           ; 0x000b
 	textpointer NumberText                                         ; 0x000b
 	textpointer LengthText                                         ; 0x000c
 	textpointer WeightText                                         ; 0x000d
@@ -2409,6 +2408,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HorseaName                                         ; 0x0972
 	textpointer OpponentAttackMayDoNothingDescription              ; 0x0973
 	textpointer DragonName                                         ; 0x0974
+	textpointer RestName                                           ; 0x0974
+	textpointer RestDescription                                    ; 0x0974
+	textpointer ConfusionWaveName                                  ; 0x0974
+	textpointer ConfusionWaveDescription                           ; 0x0974
 	textpointer HorseaDescription                                  ; 0x0975
 	textpointer SeadraName                                         ; 0x0976
 	textpointer WaterGunDescription                                ; 0x0977

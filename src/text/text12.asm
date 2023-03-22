@@ -40,10 +40,10 @@ SpacingOutName: ; 60225 (18:4225)
 	done
 
 SpacingOutDescription: ; 60232 (18:4232)
-	text "Flip a coin. If heads, remove a"
-	line "damage counter from Slowpoke. This"
-	line "attack can't be used if Slowpoke"
-	line "has no damage counters on it."
+	text "Flip a coin. If heads, heal 20"
+	line "damage from this Pokémon."
+	line "If tails, heal 10 damage from"
+	line "this Pokémon."
 	done
 
 ScavengeName: ; 602b5 (18:42b5)
@@ -51,10 +51,9 @@ ScavengeName: ; 602b5 (18:42b5)
 	done
 
 ScavengeDescription: ; 602bf (18:42bf)
-	text "Discard 1 <PSYCHIC> Energy card attached"
-	line "to Slowpoke in order to use this"
-	line "attack. Put a Trainer card from your"
-	line "discard pile into your hand."
+	text "Put a non-Supporter Trainer card"
+	line "from your discard pile into"
+	line "your hand."
 	done
 
 SlowbroName: ; 60345 (18:4345)

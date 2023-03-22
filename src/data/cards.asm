@@ -7244,7 +7244,7 @@ SlowpokeLv9Card:
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db SLOWPOKE_LV9
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -7263,7 +7263,7 @@ SlowpokeLv9Card:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy PSYCHIC, 2 ; energies
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
 	tx AmnesiaName ; name
 	tx SlowpokesAmnesiaDescription ; description
 	dw NONE ; description (cont)
@@ -7295,7 +7295,7 @@ SlowpokeLv18Card:
 	db CIRCLE ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db SLOWPOKE_LV18
-	db 50 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -7306,7 +7306,7 @@ SlowpokeLv18Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw SlowpokeSpacingOutEffectCommands ; effect commands
+	dw SpacingOutEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
@@ -7314,13 +7314,13 @@ SlowpokeLv18Card:
 	db ATK_ANIM_NONE ; animation
 
 	; attack 2
-	energy PSYCHIC, 2 ; energies
+	energy PSYCHIC, 1 ; energies
 	tx ScavengeName ; name
 	tx ScavengeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw SlowpokeScavengeEffectCommands ; effect commands
+	dw ScavengeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -8397,6 +8397,19 @@ RattataCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_NONE ; animation
+
+	; energy PSYCHIC, 2 ; energies
+	; tx ScavengeName ; name
+	; tx ScavengeDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db RESIDUAL ; category
+	; dw SlowpokeScavengeEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db DISCARD_ENERGY ; flags 2
+	; db NONE ; flags 3
+	; db 2
+	; db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness

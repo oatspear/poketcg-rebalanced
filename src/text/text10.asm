@@ -1523,4 +1523,21 @@ DragonName: ; 5bfd7 (16:7fd7)
 	text "Dragon"
 	done
 
-	ds $21
+RestName:
+	text "Rest"
+	done
+
+RestDescription:
+	text "Remove all Special Conditions and"
+	line "3 damage counters from this Pokémon."
+	line "This Pokémon is now Asleep."
+	done
+
+ConfusionWaveName:
+	text "Confusion Wave"
+	done
+
+ConfusionWaveDescription:
+	text "Both this Pokémon and the Defending"
+	line "Pokémon are now Confused."
+	done
