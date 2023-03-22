@@ -1421,6 +1421,20 @@ ParasCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy GRASS, 1 ; energies
+	tx SporeName ; name
+	tx InflictSleepDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db DAMAGE_NORMAL ; category
+	dw InflictSleepEffectCommands ; effect commands
+	db INFLICT_SLEEP ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_SPORE ; animation
+
+	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx ScratchName ; name
 	dw NONE ; description
@@ -1433,20 +1447,6 @@ ParasCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_SLASH ; animation
-
-	; attack 2
-	energy GRASS, 2 ; energies
-	tx SporeName ; name
-	tx InflictSleepDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ParasSporeEffectCommands ; effect commands
-	db INFLICT_SLEEP ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SPORE ; animation
 
 	db 0 ; retreat cost
 	db WR_FIRE ; weakness
@@ -1478,7 +1478,7 @@ ParasectCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ParasectSporeEffectCommands ; effect commands
+	dw InflictSleepEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -1886,7 +1886,7 @@ ExeggcuteCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ExeggcuteHypnosisEffectCommands ; effect commands
+	dw InflictSleepEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -3412,7 +3412,7 @@ PoliwagCard:
 	; attack 1
 	energy WATER, 1 ; energies
 	tx WaterGunName ; name
-	tx PoliwagsWaterGunDescription ; description
+	tx WaterGunDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
@@ -3461,13 +3461,13 @@ PoliwhirlCard:
 	tx PoliwagName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1, COLORLESS, 1 ; energies
+	energy WATER, 1 ; energies
 	tx AmnesiaName ; name
-	tx PoliwhirlsAmnesiaDescription ; description
+	tx AmnesiaDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PoliwhirlAmnesiaEffectCommands ; effect commands
+	dw AmnesiaEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -3514,7 +3514,7 @@ PoliwrathCard:
 	; attack 1
 	energy WATER, 1, COLORLESS, 1 ; energies
 	tx WaterGunName ; name
-	tx PoliwrathsWaterGunDescription ; description
+	tx WaterGunDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_PLUS ; category
@@ -7263,13 +7263,13 @@ SlowpokeLv9Card:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	energy PSYCHIC, 1 ; energies
 	tx AmnesiaName ; name
-	tx SlowpokesAmnesiaDescription ; description
+	tx AmnesiaDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SlowpokeAmnesiaEffectCommands ; effect commands
+	dw AmnesiaEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -7346,30 +7346,30 @@ SlowbroCard:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db SLOWBRO
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx SlowpokeName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx StrangeBehaviorName ; name
-	tx StrangeBehaviorDescription ; description
+	energy WATER, 1 ; energies
+	tx WaterGunName ; name
+	tx WaterGunDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw SlowbroStrangeBehaviorEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw WaterGun1WEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db MAX_ENERGY_BOOST_IS_LIMITED
+	db ATK_ANIM_WATER_GUN ; animation
 
 	; attack 2
-	energy PSYCHIC, 2 ; energies
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
 	tx PsyshockName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw SlowbroPsyshockEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
@@ -7404,11 +7404,11 @@ GastlyLv8Card:
 	; attack 1
 	energy DARKNESS, 1 ; energies
 	tx SleepingGasName ; name
-	tx MayInflictSleepDescription ; description
+	tx InflictSleepDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw GastlySleepingGasEffectCommands ; effect commands
+	dw InflictSleepEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7453,6 +7453,20 @@ GastlyLv17Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx EnergyConversionName ; name
+	tx EnergyConversionDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw EnergyConversionEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 10
+	db ATK_ANIM_ENERGY_CONVERSION ; animation
+
+	; attack 2
 	energy DARKNESS, 1 ; energies
 	tx LickName ; name
 	tx MayInflictParalysisDescription ; description
@@ -7465,20 +7479,6 @@ GastlyLv17Card:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_GOO ; animation
-
-	; attack 2
-	energy DARKNESS, 2 ; energies
-	tx EnergyConversionName ; name
-	tx EnergyConversionDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw EnergyConversionEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 10
-	db ATK_ANIM_ENERGY_CONVERSION ; animation
 
 	db 0 ; retreat cost
 	db NONE ; weakness
@@ -7524,7 +7524,7 @@ HaunterLv17Card:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw HaunterNightmareEffectCommands ; effect commands
+	dw InflictSleepEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7561,7 +7561,7 @@ HaunterLv22Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw HaunterHypnosisEffectCommands ; effect commands
+	dw InflictSleepEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7620,13 +7620,13 @@ GengarCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy DARKNESS, 3 ; energies
+	energy DARKNESS, 2 ; energies
 	tx DarkMindName ; name
 	tx DarkMindDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw GengarDarkMindEffectCommands ; effect commands
+	dw DarkMindEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7671,18 +7671,18 @@ DrowzeeCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy PSYCHIC, 2 ; energies
-	tx ConfuseRayName ; name
-	tx MayInflictConfusionDescription ; description
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	tx HypnosisName ; name
+	tx InflictSleepDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw DrowzeeConfuseRayEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
+	dw InflictSleepEffectCommands ; effect commands
+	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_CONFUSE_RAY ; animation
+	db ATK_ANIM_HYPNOSIS ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -7703,37 +7703,37 @@ HypnoCard:
 	db STAR ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db HYPNO
-	db 90 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx DrowzeeName ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 1 ; energies
-	tx ProphecyName ; name
-	tx ProphecyDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw HypnoProphecyEffectCommands ; effect commands
-	db NONE ; flags 1
-	db FLAG_2_BIT_5 ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
-
-	; attack 2
-	energy PSYCHIC, 3 ; energies
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
 	tx DarkMindName ; name
 	tx DarkMindDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw HypnoDarkMindEffectCommands ; effect commands
+	dw DarkMindEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 10
 	db ATK_ANIM_DARK_MIND ; animation
+
+	; attack 2
+	energy PSYCHIC, 2, COLORLESS, 1 ; energies
+	tx HypnoblastName ; name
+	tx InflictSleepDescription ; description
+	dw NONE ; description (cont)
+	db 40 ; damage
+	db DAMAGE_NORMAL ; category
+	dw InflictSleepEffectCommands ; effect commands
+	db INFLICT_SLEEP ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HYPNOSIS ; animation
 
 	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -7810,7 +7810,7 @@ JynxCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx DoubleslapName ; name
 	tx DoubleAttackX10Description ; description
 	dw NONE ; description (cont)
@@ -7824,11 +7824,11 @@ JynxCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy PSYCHIC, 2, COLORLESS, 1 ; energies
+	energy PSYCHIC, 1, COLORLESS, 2 ; energies
 	tx MeditateName ; name
 	tx JynxsMeditateDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
 	dw JynxMeditateEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -8798,7 +8798,7 @@ JigglypuffLv14Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw JigglypuffLullabyEffectCommands ; effect commands
+	dw InflictSleepEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -8849,7 +8849,7 @@ WigglytuffCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw WigglytuffLullabyEffectCommands ; effect commands
+	dw InflictSleepEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

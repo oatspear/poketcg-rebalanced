@@ -2217,6 +2217,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MukDescription                                     ; 0x08ac
 	textpointer ExeggcuteName                                      ; 0x08ad
 	textpointer HypnosisName                                       ; 0x08ae
+	textpointer HypnoblastName                                     ; 0x08ae
 	textpointer ExeggcutesLeechSeedDescription                     ; 0x08af
 	textpointer EggName                                            ; 0x08b0
 	textpointer ExeggcuteDescription                               ; 0x08b1
@@ -2359,16 +2360,14 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GolduckDescription                                 ; 0x093f
 	textpointer PoliwagName                                        ; 0x0940
 	textpointer WaterGunName                                       ; 0x0941
-	textpointer PoliwagsWaterGunDescription                        ; 0x0942
 	textpointer TadpoleName                                        ; 0x0943
 	textpointer PoliwagDescription                                 ; 0x0944
 	textpointer PoliwhirlName                                      ; 0x0945
 	textpointer AmnesiaName                                        ; 0x0946
-	textpointer PoliwhirlsAmnesiaDescription                       ; 0x0947
+	textpointer AmnesiaDescription                                 ; 0x0947
 	textpointer DoubleslapName                                     ; 0x0948
 	textpointer PoliwhirlsDescription                              ; 0x0949
 	textpointer PoliwrathName                                      ; 0x094a
-	textpointer PoliwrathsWaterGunDescription                      ; 0x094b
 	textpointer WhirlpoolName                                      ; 0x094c
 	textpointer PoliwrathDescription                               ; 0x094d
 	textpointer TentacoolName                                      ; 0x094e
@@ -2686,7 +2685,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DamageSwapDescription                              ; 0x0a84
 	textpointer AlakazamDescription                                ; 0x0a85
 	textpointer SlowpokeName                                       ; 0x0a86
-	textpointer SlowpokesAmnesiaDescription                        ; 0x0a87
 	textpointer DopeyName                                          ; 0x0a88
 	textpointer SlowpokeLv9Description                            ; 0x0a89
 	textpointer SpacingOutName                                     ; 0x0a8a

@@ -115,10 +115,6 @@ BeedrillPoisonStingEffectCommands:
 	dbw EFFECTCMDTYPE_AI, BeedrillPoisonSting_AIEffect
 	db  $00
 
-ExeggcuteHypnosisEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
-	db  $00
-
 ExeggcuteLeechSeedEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ExeggcuteLeechSeedEffect
 	db  $00
@@ -196,14 +192,6 @@ ButterfreeWhirlwindEffectCommands:
 
 ButterfreeMegaDrainEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ButterfreeMegaDrainEffect
-	db  $00
-
-ParasSporeEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
-	db  $00
-
-ParasectSporeEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
 	db  $00
 
 WeedlePoisonStingEffectCommands:
@@ -299,6 +287,7 @@ OmanyteClairvoyanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClairvoyanceEffect
 	db  $00
 
+WaterGun1WEffectCommands:
 OmanyteWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OmanyteWaterGunEffect
 	dbw EFFECTCMDTYPE_AI, OmanyteWaterGunEffect
@@ -373,11 +362,11 @@ TentacruelJellyfishStingEffectCommands:
 	dbw EFFECTCMDTYPE_AI, JellyfishSting_AIEffect
 	db  $00
 
-PoliwhirlAmnesiaEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PoliwhirlAmnesia_CheckAttacks
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, PoliwhirlAmnesia_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoliwhirlAmnesia_DisableEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, PoliwhirlAmnesia_AISelectEffect
+AmnesiaEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Amnesia_CheckAttacks
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Amnesia_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Amnesia_DisableEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Amnesia_AISelectEffect
 	db  $00
 
 PoliwhirlDoubleslapEffectCommands:
@@ -628,22 +617,18 @@ GengarCurseEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Curse_PlayerSelectEffect
 	db  $00
 
-GengarDarkMindEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GengarDarkMind_DamageBenchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, GengarDarkMind_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, GengarDarkMind_AISelectEffect
-	db  $00
-
-GastlySleepingGasEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepingGasEffect
+DarkMindEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DarkMind_DamageBenchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DarkMind_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DarkMind_AISelectEffect
 	db  $00
 
 GastlyDestinyBondEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DestinyBond_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DestinyBond_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DestinyBond_DestinyBondEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DestinyBond_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DestinyBond_AISelectEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckAnyEnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ApplyDestinyBondEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
 EnergyConversionEffectCommands:
@@ -653,7 +638,7 @@ EnergyConversionEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyConversion_AISelectEffect
 	db  $00
 
-HaunterHypnosisEffectCommands:
+InflictSleepEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
 	db  $00
 
@@ -665,21 +650,11 @@ HaunterTransparencyEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, TransparencyEffect
 	db  $00
 
-HaunterNightmareEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
-	db  $00
-
 HypnoProphecyEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Prophecy_CheckDeck
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Prophecy_ReorderDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Prophecy_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Prophecy_AISelectEffect
-	db  $00
-
-HypnoDarkMindEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HypnoDarkMind_DamageBenchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, HypnoDarkMind_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, HypnoDarkMind_AISelectEffect
 	db  $00
 
 DrowzeeConfuseRayEffectCommands:
@@ -769,19 +744,12 @@ ScavengeEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Scavenge_AISelectEffect
 	db  $00
 
-SlowpokeAmnesiaEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SlowpokeAmnesia_CheckAttacks
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SlowpokeAmnesia_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SlowpokeAmnesia_DisableEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, SlowpokeAmnesia_AISelectEffect
-	db  $00
-
 RecoverEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Recover_CheckEnergyHP
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Recover_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recover_HealEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Recover_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Recover_AISelectEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
 JynxDoubleslapEffectCommands:
@@ -1156,17 +1124,9 @@ ClefairyMetronomeEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, ClefairyMetronome_AISelectEffect
 	db  $00
 
-WigglytuffLullabyEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
-	db  $00
-
 WigglytuffDoTheWaveEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoTheWaveEffect
 	dbw EFFECTCMDTYPE_AI, DoTheWaveEffect
-	db  $00
-
-JigglypuffLullabyEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
 	db  $00
 
 JigglypuffFirstAidEffectCommands:

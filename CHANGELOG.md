@@ -70,6 +70,9 @@
 - **Heal**: no longer requires a coin flip.
 - **Petal Dance**: reduced cost from (GGG) to (GGC) and damage from 40x to 30x.
 
+#### Paras
+- **Spore**: reduced cost from (GG) to (G).
+
 #### Parasect
 - **Spore**: reduced cost from (GG) to (G).
 
@@ -169,7 +172,7 @@
 - **Psyshock**: increased damage from 10 to 20.
 
 #### Poliwhirl
-- **Amnesia**: reduced cost from (WW) to (WC).
+- **Amnesia**: reduced cost from (WW) to (W).
 - **Doubleslap**: reduced cost from (WWC) to (WCC).
 
 #### Poliwrath
@@ -255,7 +258,7 @@
 
 #### Raichu Lv45
 - **Gigashock**: reduced cost from (LLLL) to (LLC), increased base damage from 30 to 40 and reduced Bench targets from 3 to 2.
-- New attack: **Energy Conversion** (C): take 10 damage, put 2 Basic Energy from discard pile into hand.
+- New attack: **Energy Conversion** (C): put 2 Basic Energy from discard pile into hand.
 
 #### Magnemite Lv13
 - **Self-destruct**: removed.
@@ -410,12 +413,42 @@
 
 #### Slowpoke Lv9
 - Increased HP from 40 to 50.
-- **Amnesia**: reduced cost from (PP) to (PC).
+- **Amnesia**: reduced cost from (PP) to (P).
 
 #### Slowpoke Lv18
 - Reduced HP from 50 to 40.
 - **Spacing Out**: heals 20 if heads or 10 if tails.
 - **Scavenge**: reduced cost from (PP) to (P), no longer discards Energy, can only pick non-Supporter cards.
+
+#### Slowbro
+- Increased HP from 60 to 70.
+- **Strange Behaviour**: removed.
+- New attack: **Water Gun** (W): 20 damage, plus 10 per extra energy up to 20.
+- **Psyshock**: reduced cost from (PP) to (PC) and increased damage from 20 to 30.
+
+#### Gastly Lv8
+- **Sleeping Gas**: inflicts Sleep without a coin flip.
+- **Destiny Bond**: discards any type of Energy.
+
+#### Gastly Lv17
+- **Energy Conversion**: reduced cost from (DD) to (C) and removed recoil.
+
+#### Gengar
+- **Dark Mind**: reduced cost from (DDD) to (DD) and increased base damage from 30 to 40.
+
+#### Drowzee
+- **Confuse Ray**: removed.
+- New attack: **Hypnosis** (PC): inflicts Sleep.
+
+#### Hypno
+- Decreased HP from 90 to 80.
+- **Prophecy**: removed.
+- **Dark Mind**: reduced cost from (PPP) to (PC) and base damage from 30 to 20.
+- New attack: **Hypnoblast** (PPC): 40 damage, inflicts Sleep.
+
+#### Jynx
+- **Doubleslap**: reduced cost from (P) to (C).
+- **Meditate**: reduced cost from (PPC) to (PCC) and base damage from 20 to 10.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.

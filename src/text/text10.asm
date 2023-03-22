@@ -569,6 +569,10 @@ HypnosisName: ; 597bc (16:57bc)
 	text "Hypnosis"
 	done
 
+HypnoblastName:
+	text "Hypnoblast"
+	done
+
 ExeggcutesLeechSeedDescription: ; 597c6 (16:57c6)
 	text "Unless all damage from this attack"
 	line "is prevented, you may remove 1"
@@ -1279,14 +1283,6 @@ WaterGunName: ; 5b53c (16:753c)
 	text "Water Gun"
 	done
 
-PoliwagsWaterGunDescription: ; 5b547 (16:7547)
-	text "Does 10 damage plus 10 more damage"
-	line "for each <WATER> Energy attached to"
-	line "Poliwag but not used to pay for"
-	line "this attack's Energy cost. You can't"
-	line "add more than 20 damage in this way."
-	done
-
 TadpoleName: ; 5b5f4 (16:75f4)
 	text "Tadpole"
 	done
@@ -1305,11 +1301,11 @@ AmnesiaName: ; 5b66b (16:766b)
 	text "Amnesia"
 	done
 
-PoliwhirlsAmnesiaDescription: ; 5b674 (16:7674)
-	text "Choose 1 of the Defending Pokémon's"
-	line "attacks. That Pokémon can't use that"
-	line "attack during your opponent's next"
-	line "turn."
+AmnesiaDescription: ; 5b674 (16:7674)
+	text "Choose one of the Defending"
+	line "Pokémon's attacks. That Pokémon"
+	line "can't use that attack during your"
+	line "opponent's next turn."
 	done
 
 DoubleslapName: ; 5b6e7 (16:76e7)
@@ -1324,15 +1320,6 @@ PoliwhirlsDescription: ; 5b6f3 (16:76f3)
 
 PoliwrathName: ; 5b74f (16:774f)
 	text "Poliwrath"
-	done
-
-PoliwrathsWaterGunDescription: ; 5b75a (16:775a)
-	text "Does 30 damage plus 10 more damage"
-	line "for each <WATER> Energy attached to"
-	line "Poliwrath but not used to pay for"
-	line "this attack's Energy cost. You"
-	line "can't add more than 20 damage in"
-	line "this way."
 	done
 
 WhirlpoolName: ; 5b809 (16:7809)

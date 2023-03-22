@@ -2658,7 +2658,7 @@ JellyfishSting_AIEffect: ; 2d141 (b:5141)
 	jp UpdateExpectedAIDamage_AccountForPoison
 
 ; returns carry if Defending Pokemon has no attacks
-PoliwhirlAmnesia_CheckAttacks: ; 2d149 (b:5149)
+Amnesia_CheckAttacks: ; 2d149 (b:5149)
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
@@ -2680,16 +2680,16 @@ PoliwhirlAmnesia_CheckAttacks: ; 2d149 (b:5149)
 	or a
 	ret
 
-PoliwhirlAmnesia_PlayerSelectEffect: ; 2d16f (b:516f)
+Amnesia_PlayerSelectEffect: ; 2d16f (b:516f)
 	call PlayerPickAttackForAmnesia
 	ret
 
-PoliwhirlAmnesia_AISelectEffect: ; 2d173 (b:5173)
+Amnesia_AISelectEffect: ; 2d173 (b:5173)
 	call AIPickAttackForAmnesia
 	ldh [hTemp_ffa0], a
 	ret
 
-PoliwhirlAmnesia_DisableEffect: ; 2d179 (b:5179)
+Amnesia_DisableEffect: ; 2d179 (b:5179)
 	call ApplyAmnesiaToAttack
 	ret
 
@@ -4024,7 +4024,7 @@ Curse_TransferDamageEffect: ; 2d8bb (b:58bb)
 	bank1call Func_6e49
 	ret
 
-GengarDarkMind_PlayerSelectEffect: ; 2d903 (b:5903)
+DarkMind_PlayerSelectEffect: ; 2d903 (b:5903)
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	cp 2
@@ -4049,7 +4049,7 @@ GengarDarkMind_PlayerSelectEffect: ; 2d903 (b:5903)
 	call SwapTurn
 	ret
 
-GengarDarkMind_AISelectEffect: ; 2d92a (b:592a)
+DarkMind_AISelectEffect: ; 2d92a (b:592a)
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -4061,7 +4061,7 @@ GengarDarkMind_AISelectEffect: ; 2d92a (b:592a)
 	ldh [hTemp_ffa0], a
 	ret
 
-GengarDarkMind_DamageBenchEffect: ; 2d93c (b:593c)
+DarkMind_DamageBenchEffect: ; 2d93c (b:593c)
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	ret z ; no target chosen
@@ -4072,45 +4072,7 @@ GengarDarkMind_DamageBenchEffect: ; 2d93c (b:593c)
 	call SwapTurn
 	ret
 
-SleepingGasEffect: ; 2d94f (b:594f)
-	call Sleep50PercentEffect
-	call nc, SetNoEffectFromStatus
-	ret
-
-DestinyBond_CheckEnergy: ; 2d956 (b:5956)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + PSYCHIC]
-	ldtx hl, NotEnoughPsychicEnergyText
-	cp 1
-	ret
-
-DestinyBond_PlayerSelectEffect: ; 2d964 (b:5964)
-; handle input and display of Energy card list
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
-	xor a
-	bank1call DisplayEnergyDiscardScreen
-	bank1call HandleEnergyDiscardMenuInput
-	ret c
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTempList], a
-	ret
-
-DestinyBond_AISelectEffect: ; 2d976 (b:5976)
-; pick first card in list
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
-	ld a, [wDuelTempList]
-	ldh [hTempList], a
-	ret
-
-DestinyBond_DiscardEffect: ; 2d981 (b:5981)
-	ldh a, [hTempList]
-	call PutCardInDiscardPile
-	ret
-
-DestinyBond_DestinyBondEffect: ; 2d987 (b:5987)
+ApplyDestinyBondEffect: ; 2d987 (b:5987)
 	ld a, SUBSTATUS1_DESTINY_BOND
 	call ApplySubstatus1ToAttackingCard
 	ret
@@ -4146,10 +4108,6 @@ EnergyConversion_AISelectEffect: ; 2d99b (b:599b)
 	ret
 
 EnergyConversion_AddToHandEffect: ; 2d9b4 (b:59b4)
-; damage itself
-	ld a, 10
-	call DealRecoilDamageToSelf
-
 ; loop cards that were chosen
 ; until $ff is reached,
 ; and move them to the hand.
@@ -4433,54 +4391,6 @@ HandleProphecyScreen: ; 2da76 (b:5a76)
 	ld [hl], $00
 	bank1call Func_5744
 	jr .loop_selection
-
-HypnoDarkMind_PlayerSelectEffect: ; 2db2b (b:5b2b)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	jr nc, .has_bench
-; no bench Pokemon to damage.
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ret
-
-.has_bench
-; opens Play Area screen to select Bench Pokemon
-; to damage, and store it before returning.
-	ldtx hl, ChoosePkmnInTheBenchToGiveDamageText
-	call DrawWideTextBox_WaitForInput
-	call SwapTurn
-	bank1call HasAlivePokemonInBench
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	call SwapTurn
-	ret
-
-HypnoDarkMind_AISelectEffect: ; 2db52 (b:5b52)
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	ret c ; return if no Bench Pokemon
-; just pick Pokemon with lowest remaining HP.
-	call GetBenchPokemonWithLowestHP
-	ldh [hTemp_ffa0], a
-	ret
-
-HypnoDarkMind_DamageBenchEffect: ; 2db64 (b:5b64)
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret z ; no target chosen
-	call SwapTurn
-	ld b, a
-	ld de, 10
-	call DealDamageToPlayAreaPokemon_RegularAnim
-	call SwapTurn
-	ret
 
 InvisibleWallEffect: ; 2db77 (b:5b77)
 	scf
@@ -5187,40 +5097,25 @@ Scavenge_AddToHandEffect: ; 2df5f (b:5f5f)
 	bank1call DisplayCardDetailScreen
 	ret
 
-; returns carry if Defending Pokemon has no attacks
-SlowpokeAmnesia_CheckAttacks: ; 2df74 (b:5f74)
-	call CheckIfDefendingPokemonHasAnyAttack
-	ldtx hl, NoAttackMayBeChoosenText
-	ret
-
-SlowpokeAmnesia_PlayerSelectEffect: ; 2df7b (b:5f7b)
-	call PlayerPickAttackForAmnesia
-	ret
-
-SlowpokeAmnesia_AISelectEffect: ; 2df7f (b:5f7f)
-	call AIPickAttackForAmnesia
-	ldh [hTemp_ffa0], a
-	ret
-
-SlowpokeAmnesia_DisableEffect: ; 2df85 (b:5f85)
-	call ApplyAmnesiaToAttack
-	ret
-
 ; returns carry if Arena card has no Energies attached
 ; or if it doesn't have any damage counters.
 Recover_CheckEnergyHP: ; 2df89 (b:5f89)
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	ldtx hl, NoDamageCountersText
+	cp 10
+	ret c ; return carry if no damage
+	; fallthrough
+
+CheckAnyEnergiesAttached:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wTotalAttachedEnergies]
 	ldtx hl, NoEnergyCardsText
 	cp 1
-	ret c ; return if not enough energy
-	call GetCardDamageAndMaxHP
-	ldtx hl, NoDamageCountersText
-	cp 10
-	ret ; return carry if no damage
+	ret ; return carry if not enough energy
 
-Recover_PlayerSelectEffect: ; 2dfa0 (b:5fa0)
+DiscardEnergy_PlayerSelectEffect: ; 2dfa0 (b:5fa0)
 	xor a ; PLAY_AREA_ARENA
 	bank1call CreateArenaOrBenchEnergyCardList
 	xor a ; PLAY_AREA_ARENA
@@ -5231,14 +5126,14 @@ Recover_PlayerSelectEffect: ; 2dfa0 (b:5fa0)
 	ldh [hTemp_ffa0], a ; store card chosen
 	ret
 
-Recover_AISelectEffect: ; 2dfb2 (b:5fb2)
+DiscardEnergy_AISelectEffect: ; 2dfb2 (b:5fb2)
 	xor a ; PLAY_AREA_ARENA
 	bank1call CreateArenaOrBenchEnergyCardList
 	ld a, [wDuelTempList] ; pick first card
 	ldh [hTemp_ffa0], a
 	ret
 
-Recover_DiscardEffect: ; 2dfbd (b:5fbd)
+DiscardEnergy_DiscardEffect: ; 2dfbd (b:5fbd)
 	ldh a, [hTemp_ffa0]
 	call PutCardInDiscardPile
 	ret

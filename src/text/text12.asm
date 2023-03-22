@@ -18,13 +18,6 @@ SlowpokeName: ; 6014b (18:414b)
 	text "Slowpoke"
 	done
 
-SlowpokesAmnesiaDescription: ; 60155 (18:4155)
-	text "Choose 1 of the Defending Pokémon's"
-	line "attacks. That Pokémon can't use"
-	line "that attack during your opponent's"
-	line "next turn."
-	done
-
 DopeyName: ; 601c8 (18:41c8)
 	text "Dopey"
 	done
@@ -102,10 +95,10 @@ DestinyBondName: ; 6050e (18:450e)
 	done
 
 DestinyBondDescription: ; 6051c (18:451c)
-	text "Discard 1 <PSYCHIC> Energy card attached to"
-	line "Gastly in order to use this attack."
-	line "If a Pokémon Knocks Out Gastly"
-	line "during your opponent's next turn,"
+	text "Discard an Energy card attached to"
+	line "this Pokémon. If a Pokémon Knocks"
+	line "Out this Pokémon during your"
+	line "opponent's next turn,"
 	line "Knock Out that Pokémon."
 	done
 
@@ -129,8 +122,7 @@ EnergyConversionName: ; 60629 (18:4629)
 
 EnergyConversionDescription: ; 6063c (18:463c)
 	text "Put up to 2 Energy cards from your"
-	line "discard pile into your hand. Gastly"
-	line "does 10 damage to itself."
+	line "discard pile into your hand."
 	done
 
 GastlyLv17Description: ; 6069e (18:469e)
