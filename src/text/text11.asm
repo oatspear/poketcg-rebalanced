@@ -672,7 +672,7 @@ PinMissileName: ; 5e020 (17:6020)
 	done
 
 TripleAttackX20X10Description: ; 5e02d (17:602d)
-	text "Flip 4 coins. Does 20 damage for"
+	text "Flip 3 coins. Does 20 damage for"
 	line "each Heads and 10 for each Tails."
 	done
 
