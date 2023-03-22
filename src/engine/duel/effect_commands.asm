@@ -184,12 +184,6 @@ NidorinoDoubleKickEffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
 	db  $00
 
-ButterfreeWhirlwindEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ButterfreeWhirlwind_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ButterfreeWhirlwind_CheckBench
-	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, ButterfreeWhirlwind_CheckBench
-	db  $00
-
 ButterfreeMegaDrainEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ButterfreeMegaDrainEffect
 	db  $00
@@ -321,12 +315,6 @@ PsyduckFurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_AI, PsyduckFurySwipes_AIEffect
 	db  $00
 
-GolduckHyperBeamEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GolduckHyperBeam_DiscardEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, GolduckHyperBeam_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, GolduckHyperBeam_AISelectEffect
-	db  $00
-
 SeadraWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SeadraWaterGunEffect
 	dbw EFFECTCMDTYPE_AI, SeadraWaterGunEffect
@@ -377,12 +365,6 @@ PoliwhirlDoubleslapEffectCommands:
 PoliwrathWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoliwrathWaterGunEffect
 	dbw EFFECTCMDTYPE_AI, PoliwrathWaterGunEffect
-	db  $00
-
-PoliwrathWhirlpoolEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlpool_DiscardEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlpool_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Whirlpool_AISelectEffect
 	db  $00
 
 PoliwagWaterGunEffectCommands:
@@ -1078,10 +1060,12 @@ DragonairSlamEffectCommands:
 	dbw EFFECTCMDTYPE_AI, DragonairSlam_AIEffect
 	db  $00
 
-DragonairHyperBeamEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DragonairHyperBeam_DiscardEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DragonairHyperBeam_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DragonairHyperBeam_AISelectEffect
+WhirlpoolEffectCommands:
+TwisterEffectCommands:
+HyperBeamEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HyperBeam_DiscardEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, HyperBeam_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, HyperBeam_AISelectEffect
 	db  $00
 
 ClefableMetronomeEffectCommands:
@@ -1096,12 +1080,6 @@ ClefableMinimizeEffectCommands:
 
 PidgeotHurricaneEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HurricaneEffect
-	db  $00
-
-PidgeottoWhirlwindEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PidgeottoWhirlwind_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PidgeottoWhirlwind_SelectEffect
-	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, PidgeottoWhirlwind_SelectEffect
 	db  $00
 
 PidgeottoMirrorMoveEffectCommands:
@@ -1142,10 +1120,10 @@ LickitungSupersonicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LickitungSupersonicEffect
 	db  $00
 
-PidgeyWhirlwindEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PidgeyWhirlwind_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PidgeyWhirlwind_SelectEffect
-	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, PidgeyWhirlwind_SelectEffect
+WhirlwindEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect
+	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect
 	db  $00
 
 PorygonConversion1EffectCommands:
@@ -1200,12 +1178,22 @@ DittoMorphEffectCommands:
 	db  $00
 
 PidgeotSlicingWindEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SlicingWindEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SlicingWind_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SlicingWind_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SlicingWind_AISelectEffect
 	db  $00
 
 PidgeotGaleEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Gale_LoadAnimation
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Gale_SwitchEffect
+	db  $00
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect
+	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect
+	db  $00
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Teleport_AISelectEffect
 	db  $00
 
 RockHeadEffectCommands:

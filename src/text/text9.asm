@@ -1426,11 +1426,9 @@ WhirlwindName: ; 57c8e (15:7c8e)
 	done
 
 WhirlwindDescription: ; 57c99 (15:7c99)
-	text "If your opponent has any Benched"
-	line "Pokémon, he or she chooses 1 of them"
-	line "and switches it with the Defending"
-	line "Pokémon. (Do the damage before"
-	line "switching the Pokémon.)"
+	text "Your opponent switches their"
+	line "Active Pokémon with one of their"
+	line "Benched Pokémon."
 	done
 
 ButterfreesMegaDrainDescription: ; 57d3a (15:7d3a)

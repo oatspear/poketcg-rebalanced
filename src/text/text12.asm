@@ -475,14 +475,13 @@ SlicingWindName: ; 615ad (18:55ad)
 	text "Slicing Wind"
 	done
 
-SlicingWildDescription: ; 615bb (18:55bb)
-	text "Does 30 damage to 1 of your"
-	line "opponent's Pokémon chosen at random."
-	line "Don't apply Weakness and Resistance"
-	line "for this attack. (Any other effects"
-	line "that would happen after applying"
-	line "Weakness and Resistance still"
-	line "happen.)"
+SlicingWindDescription: ; 615bb (18:55bb)
+	text "Does 30 damage to one of your"
+	line "opponent's Pokémon. Don't apply"
+	line "Weakness and Resistance."
+	line "(Any other effects that would"
+	line "happen after applying Weakness"
+	line "and Resistance still happen.)"
 	done
 
 GaleName: ; 6168d (18:568d)
@@ -515,6 +514,10 @@ HurricaneDescription: ; 617d7 (18:57d7)
 	line "Defending Pokémon and all cards"
 	line "attached to it to your opponent's"
 	line "hand."
+	done
+
+TwisterName:
+	text "Twister"
 	done
 
 Pidgeot2Description: ; 61860 (18:5860)

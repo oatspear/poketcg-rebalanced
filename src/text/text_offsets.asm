@@ -287,6 +287,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Draw1CardFromTheDeckText                           ; 0x0117
 	textpointer DrawCardsFromTheDeckText                           ; 0x0118
 	textpointer CannotDrawCardBecauseNoCardsInDeckText             ; 0x0119
+	textpointer ChoosePkmnToGiveDamageText                         ; 0x011a
 	textpointer ChoosePkmnInTheBenchToGiveDamageText               ; 0x011a
 	textpointer ChooseUpTo2PkmnOnBenchToGiveDamageText             ; 0x011b
 	textpointer Choose1BasicEnergyCardFromDeckText                 ; 0x011c
@@ -2773,12 +2774,13 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PidgeottoDescription                               ; 0x0add
 	textpointer PidgeotName                                        ; 0x0ade
 	textpointer SlicingWindName                                    ; 0x0adf
-	textpointer SlicingWildDescription                             ; 0x0ae0
+	textpointer SlicingWindDescription                             ; 0x0ae0
 	textpointer GaleName                                           ; 0x0ae1
 	textpointer GaleDescription                                    ; 0x0ae2
 	textpointer Pidgeot1Description                                ; 0x0ae3
 	textpointer HurricaneName                                      ; 0x0ae4
 	textpointer HurricaneDescription                               ; 0x0ae5
+	textpointer TwisterName                                        ; 0x0ae4
 	textpointer Pidgeot2Description                                ; 0x0ae6
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8

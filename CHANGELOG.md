@@ -450,6 +450,19 @@
 - **Doubleslap**: reduced cost from (P) to (C).
 - **Meditate**: reduced cost from (PPC) to (PCC) and base damage from 20 to 10.
 
+#### Pidgey
+- **Whirlwind**: reduced cost from (CC) to (C).
+
+#### Pidgeot Lv38
+- **Slicing Wind**: reduced cost from (CCC) to (CC); target is no longer random.
+- **Gale**: removed.
+- New attack: **Whirlwind** (CCC): 50 damage, opponent switches Pokémon.
+
+#### Pidgeot Lv40
+- **Wing Attack**: reduced cost from (CC) to (C) and increased damage from 20 to 30.
+- **Hurricane**: removed.
+- New attack: **Twister** (CCC): 50 damage, discard an Energy attached to Defending Pokémon.
+
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
 - New attack: **Call for Friend** (C): can choose any Basic Pokémon from deck to put on Bench.

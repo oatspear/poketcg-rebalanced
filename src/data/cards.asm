@@ -560,7 +560,7 @@ ButterfreeCard:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ButterfreeWhirlwindEffectCommands ; effect commands
+	dw WhirlwindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
@@ -3379,7 +3379,7 @@ GolduckCard:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw GolduckHyperBeamEffectCommands ; effect commands
+	dw HyperBeamEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -3532,7 +3532,7 @@ PoliwrathCard:
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PoliwrathWhirlpoolEffectCommands ; effect commands
+	dw WhirlpoolEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -8167,13 +8167,13 @@ PidgeyCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx WhirlwindName ; name
 	tx WhirlwindDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PidgeyWhirlwindEffectCommands ; effect commands
+	dw WhirlwindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
@@ -8224,7 +8224,7 @@ PidgeottoCard:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PidgeottoWhirlwindEffectCommands ; effect commands
+	dw WhirlwindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
@@ -8269,9 +8269,9 @@ Pidgeot1Card:
 	tx PidgeottoName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 3 ; energies
+	energy COLORLESS, 2 ; energies
 	tx SlicingWindName ; name
-	tx SlicingWildDescription ; description
+	tx SlicingWindDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -8283,18 +8283,18 @@ Pidgeot1Card:
 	db ATK_ANIM_WHIRLWIND_ZIGZAG ; animation
 
 	; attack 2
-	energy COLORLESS, 4 ; energies
-	tx GaleName ; name
-	tx GaleDescription ; description
+	energy COLORLESS, 3 ; energies
+	tx WhirlwindName ; name
+	tx WhirlwindDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PidgeotGaleEffectCommands ; effect commands
+	dw WhirlwindEffectCommands ; effect commands
 	db NONE ; flags 1
-	db SWITCH_OPPONENT_POKEMON | FLAG_2_BIT_7 ; flags 2
+	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_WHIRLWIND ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -8320,11 +8320,11 @@ Pidgeot2Card:
 	tx PidgeottoName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx WingAttackName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -8335,19 +8335,19 @@ Pidgeot2Card:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx HurricaneName ; name
-	tx HurricaneDescription ; description
+	tx TwisterName ; name
+	tx Discard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PidgeotHurricaneEffectCommands ; effect commands
+	dw TwisterEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_7 ; flags 2
-	db NONE ; flags 3
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_WHIRLWIND ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx BirdName ; category
@@ -9679,7 +9679,7 @@ DragonairCard:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw DragonairHyperBeamEffectCommands ; effect commands
+	dw HyperBeamEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3

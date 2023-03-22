@@ -1874,26 +1874,6 @@ DoubleAttackX30_MultiplierEffect: ; 2cabb (b:4abb)
 	call SetDefiniteDamage
 	ret
 
-ButterfreeWhirlwind_CheckBench: ; 2caf3 (b:4af3)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	jr nc, .has_bench
-	; no bench, do not do effect
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ret
-.has_bench
-	call DuelistSelectForcedSwitch
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	ret
-
-ButterfreeWhirlwind_SwitchEffect: ; 2cb09 (b:4b09)
-	ldh a, [hTemp_ffa0]
-	call HandleSwitchDefendingPokemonEffect
-	ret
-
 ButterfreeMegaDrainEffect: ; 2cb0f (b:4b0f)
 	ld hl, wDealtDamage
 	ld a, [hli]
@@ -2537,61 +2517,6 @@ PsyduckFurySwipes_MultiplierEffect: ; 2d01e (b:501e)
 	call TossCoinATimes_BankB
 	call ATimes10
 	call SetDefiniteDamage
-	ret
-
-GolduckHyperBeam_PlayerSelectEffect: ; 2d033 (b:5033)
-	call SwapTurn
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-	or a
-	jr z, .no_energy
-
-; draw Energy Card list screen
-	ldtx hl, ChooseDiscardEnergyCardFromOpponentText
-	call DrawWideTextBox_WaitForInput
-	xor a ; PLAY_AREA_ARENA
-	call CreateArenaOrBenchEnergyCardList
-	xor a ; PLAY_AREA_ARENA
-	bank1call DisplayEnergyDiscardScreen
-
-.loop_input
-	bank1call HandleEnergyDiscardMenuInput
-	jr c, .loop_input
-
-	call SwapTurn
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a ; store selected card to discard
-	ret
-
-.no_energy
-	call SwapTurn
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	or a
-	ret
-
-GolduckHyperBeam_AISelectEffect: ; 2d065 (b:5065)
-	call AIPickEnergyCardToDiscardFromDefendingPokemon
-	ldh [hTemp_ffa0], a
-	ret
-
-GolduckHyperBeam_DiscardEffect: ; 2d06b (b:506b)
-	call HandleNoDamageOrEffect
-	ret c ; return if attack had no effect
-
-	; check if energy card was chosen to discard
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret z ; return if none selected
-
-	; discard Defending card's energy
-	call SwapTurn
-	call PutCardInDiscardPile
-	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
-	call GetTurnDuelistVariable
-	ld [hl], LAST_TURN_EFFECT_DISCARD_ENERGY
-	call SwapTurn
 	ret
 
 SeadraWaterGunEffect: ; 2d085 (b:5085)
@@ -7104,20 +7029,21 @@ DragonairSlam_MultiplierEffect: ; 2ec14 (b:6c14)
 	call SetDefiniteDamage
 	ret
 
-DragonairHyperBeam_PlayerSelectEffect: ; 2ec2c (b:6c2c)
-	jp HandleEnergyDiscardEffectSelection
-
-DragonairHyperBeam_AISelectEffect: ; 2ec2f (b:6c2f)
+HyperBeam_AISelectEffect: ; 2ec2f (b:6c2f)
 	call AIPickEnergyCardToDiscardFromDefendingPokemon
 	ldh [hTemp_ffa0], a
 	ret
 
-DragonairHyperBeam_DiscardEffect: ; 2ec35 (b:6c35)
+HyperBeam_DiscardEffect: ; 2d06b (b:506b)
 	call HandleNoDamageOrEffect
-	ret c ; is unaffected
+	ret c ; return if attack had no effect
+
+	; check if energy card was chosen to discard
 	ldh a, [hTemp_ffa0]
 	cp $ff
-	ret z ; no energy card chosen
+	ret z ; return if none selected
+
+	; discard Defending card's energy
 	call SwapTurn
 	call PutCardInDiscardPile
 	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
@@ -7129,6 +7055,7 @@ DragonairHyperBeam_DiscardEffect: ; 2ec35 (b:6c35)
 ; handles screen for selecting an Energy card to discard
 ; that is attached to Defending Pokemon,
 ; and store the Player selection in [hTemp_ffa0].
+HyperBeam_PlayerSelectEffect:
 HandleEnergyDiscardEffectSelection: ; 2ec4f (b:6c4f)
 	call SwapTurn
 	xor a ; PLAY_AREA_ARENA
@@ -7221,7 +7148,7 @@ HurricaneEffect: ; 2ec8e (b:6c8e)
 	call SwapTurn
 	ret
 
-PidgeottoWhirlwind_SelectEffect: ; 2ecd3 (b:6cd3)
+Whirlwind_SelectEffect: ; 2ecd3 (b:6cd3)
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	cp 2
@@ -7236,7 +7163,7 @@ PidgeottoWhirlwind_SelectEffect: ; 2ecd3 (b:6cd3)
 	ldh [hTemp_ffa0], a
 	ret
 
-PidgeottoWhirlwind_SwitchEffect: ; 2ece9 (b:6ce9)
+Whirlwind_SwitchEffect: ; 2ece9 (b:6ce9)
 	ldh a, [hTemp_ffa0]
 	call HandleSwitchDefendingPokemonEffect
 	ret
@@ -7394,26 +7321,6 @@ PounceEffect: ; 2edac (b:6dac)
 LickitungSupersonicEffect: ; 2edb2 (b:6db2)
 	call Confusion50PercentEffect
 	call nc, SetNoEffectFromStatus
-	ret
-
-PidgeyWhirlwind_SelectEffect: ; 2edb9 (b:6db9)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	jr nc, .switch
-	; no Bench Pokemon
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ret
-.switch
-	call DuelistSelectForcedSwitch
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	ret
-
-PidgeyWhirlwind_SwitchEffect: ; 2edcf (b:6dcf)
-	ldh a, [hTemp_ffa0]
-	call HandleSwitchDefendingPokemonEffect
 	ret
 
 ; return carry if Defending card has no weakness
@@ -7930,20 +7837,59 @@ PickRandomBasicCardFromDeck: ; 2f098 (b:7098)
 	scf
 	ret
 
-SlicingWindEffect: ; 2f0bf (b:70bf)
+SlicingWind_PlayerSelectEffect:
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	cp 2
+	jr c, .done ; has no Bench Pokemon
+
+	ldtx hl, ChoosePkmnToGiveDamageText
+	call DrawWideTextBox_WaitForInput
 	call SwapTurn
-	call PickRandomPlayAreaCard
+	bank1call HasAlivePokemonInPlayArea
+
+.loop_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	call SwapTurn
+.done
+	or a
+	ret
+
+SlicingWind_AISelectEffect:
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	cp 2
+	jr c, .done ; has no Bench Pokemon
+; AI always picks Pokemon with lowest HP remaining
+	call GetBenchPokemonWithLowestHP
+	ldh [hTemp_ffa0], a
+.done
+	or a
+	ret
+
+SlicingWind_DamageEffect:
+	call SwapTurn
+	ldh a, [hTemp_ffa0]
 	ld b, a
 	ld de, 30
 	call DealDamageToPlayAreaPokemon_RegularAnim
 	call SwapTurn
 	ret
 
+; unused
 Gale_LoadAnimation: ; 2f0d0 (b:70d0)
 	ld a, ATK_ANIM_GALE
 	ld [wLoadedAttackAnimation], a
 	ret
 
+; unused
 Gale_SwitchEffect: ; 2f0d6 (b:70d6)
 ; if Defending card is unaffected by attack
 ; jump directly to switching this card only.
