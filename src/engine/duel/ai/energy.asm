@@ -410,10 +410,21 @@ DetermineAIScoreOfAttackEnergyRequirement: ; 16695 (5:6695)
 	ld a, [wLoadedAttackEffectParam]
 	cp MAX_ENERGY_BOOST_IS_LIMITED
 	jr z, .check_surplus_energy
+	cp ENERGY_BOOST_DARKNESS
+	jr z, .check_darkness_energy
 
 	; is MAX_ENERGY_BOOST_IS_NOT_LIMITED,
 	; which is equal to 3, add to score.
 	call AddToAIScore
+	jp .check_evolution
+
+.check_darkness_energy
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + DARKNESS]
+	or a
+	jr z, .asm_166cd  ; no Darkness Energy attached
 	jp .check_evolution
 
 .check_surplus_energy

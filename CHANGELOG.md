@@ -331,7 +331,7 @@
 
 #### Primeape
 - **Fury Swipes**: removed.
-- **Tantrum**: reduced cost from (FFC) to (FF).
+- **Tantrum**: reduced cost from (FFC) to (FF) and damage from 50 to 40.
 - New attack: **Rage** (CCC): 20 plus 10 for each damage counter.
 
 #### Machoke
@@ -453,15 +453,26 @@
 #### Pidgey
 - **Whirlwind**: reduced cost from (CC) to (C).
 
+#### Pidgeotto
+- **Mirror Move**: removed.
+- New attack: **Wing Attack** (C): 20 damage.
+
 #### Pidgeot Lv38
 - **Slicing Wind**: reduced cost from (CCC) to (CC); target is no longer random.
 - **Gale**: removed.
-- New attack: **Whirlwind** (CCC): 50 damage, opponent switches Pokémon.
+- New attack: **Twister** (CCC): 30 damage, discard an Energy attached to Defending Pokémon.
 
 #### Pidgeot Lv40
-- **Wing Attack**: reduced cost from (CC) to (C) and increased damage from 20 to 30.
-- **Hurricane**: removed.
-- New attack: **Twister** (CCC): 50 damage, discard an Energy attached to Defending Pokémon.
+- **Wing Attack**: removed.
+- New attack: **Whirlwind** (CCC): 50 damage, opponent switches Pokémon.
+
+#### Rattata
+- New attack: **Scavenge** (C): put a non-Supporter Trainer from discard pile into hand.
+
+#### Raticate
+- **Bite**: removed.
+- New attack: **Sneak Attack** (C): 20 damage, +10 if Darkness Energy is attached.
+- **Super Fang**: reduced cost from (CCC) to (CC).
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.

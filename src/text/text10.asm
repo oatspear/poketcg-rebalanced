@@ -1528,3 +1528,13 @@ ConfusionWaveDescription:
 	text "Both this Pokémon and the Defending"
 	line "Pokémon are now Confused."
 	done
+
+SneakAttackName:
+	text "Sneak Attack"
+	done
+
+SneakAttackDescription:
+	text "If this Pokémon has any <DARKNESS> Energy"
+	line "attached to it, this attack does"
+	line "10 additional damage."
+	done

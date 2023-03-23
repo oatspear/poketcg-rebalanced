@@ -2412,6 +2412,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RestDescription                                    ; 0x0974
 	textpointer ConfusionWaveName                                  ; 0x0974
 	textpointer ConfusionWaveDescription                           ; 0x0974
+	textpointer SneakAttackName                                    ; 0x0974
+	textpointer SneakAttackDescription                             ; 0x0974
 	textpointer HorseaDescription                                  ; 0x0975
 	textpointer SeadraName                                         ; 0x0976
 	textpointer WaterGunDescription                                ; 0x0977

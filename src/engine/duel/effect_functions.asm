@@ -1989,7 +1989,6 @@ EnergyTrans_TransferEffect: ; 2cb77 (b:4b77)
 	jr c, .play_sfx ; no Grass attached
 
 	ldh [hAIEnergyTransEnergyCard], a
-	ldh a, [hAIEnergyTransEnergyCard] ; useless
 	; temporarily take card away to draw Play Area
 	call AddCardToHand
 	bank1call PrintPlayAreaCardList_EnableLCD
@@ -2044,11 +2043,21 @@ EnergyTrans_AIEffect: ; 2cbfb (b:4bfb)
 	bank1call PrintPlayAreaCardList_EnableLCD
 	ret
 
-; returns carry if no Grass Energy cards
-; attached to card in Play Area location of a.
+CheckIfCardHasGrassEnergyAttached:
+	ld c, TYPE_ENERGY_GRASS
+	jr CheckIfCardHasSpecificEnergyAttached
+
+CheckIfCardHasDarknessEnergyAttached:
+	ld c, TYPE_ENERGY_DARKNESS
+	; jr CheckIfCardHasSpecificEnergyAttached
+	; fallthrough
+
+; returns carry if no Energy cards of the given type in c
+; are attached to card in Play Area location of a.
 ; input:
 ;	a = PLAY_AREA_* of location to check
-CheckIfCardHasGrassEnergyAttached: ; 2cc0a (b:4c0a)
+; c = TYPE_ENERGY_* constant
+CheckIfCardHasSpecificEnergyAttached:
 	or CARD_LOCATION_PLAY_AREA
 	ld e, a
 
@@ -2065,7 +2074,7 @@ CheckIfCardHasGrassEnergyAttached: ; 2cc0a (b:4c0a)
 	call GetCardType
 	pop hl
 	pop de
-	cp TYPE_ENERGY_GRASS
+	cp c
 	jr z, .no_carry
 .next
 	inc l
@@ -7976,6 +7985,21 @@ RockHeadEffect:
 ExpandEffect: ; 2f153 (b:7153)
 	ld a, SUBSTATUS1_REDUCE_BY_10
 	call ApplySubstatus1ToAttackingCard
+	ret
+
+SneakAttack_AIEffect: ; 2d0b8 (b:50b8)
+	call SneakAttack_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+SneakAttack_DamageBoostEffect: ; 2d0c0 (b:50c0)
+	xor a  ; PLAY_AREA_ARENA
+	call CheckIfCardHasDarknessEnergyAttached
+	jr c, .done
+	ld a, 10
+	call AddToDamage
+	ret
+.done
+	or a
 	ret
 
 ; returns carry if either there are no damage counters

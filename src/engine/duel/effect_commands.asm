@@ -1201,6 +1201,11 @@ JigglypuffExpandEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ExpandEffect
 	db  $00
 
+SneakAttackEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SneakAttack_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, SneakAttack_AIEffect
+	db  $00
+
 DoubleColorlessEnergyEffectCommands:
 	db  $00
 

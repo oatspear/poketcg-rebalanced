@@ -211,9 +211,9 @@ DEF FLAG_2_BIT_7_F             EQU %111
 
 ; CARD_DATA_ATTACK*_FLAG3 constants
 ; bit 1 covers a wide variety of effects
-; bits 2-7 are unused
-DEF BOOST_IF_TAKEN_DAMAGE_F    EQU %000
-DEF SPECIAL_AI_HANDLING_F      EQU %001
+; bits 3-7 are unused
+DEF BOOST_IF_TAKEN_DAMAGE_F    EQU 0
+DEF SPECIAL_AI_HANDLING_F      EQU 1
 
 ; CARD_DATA_ATTACK*_FLAG1_F constants
 DEF INFLICT_POISON           EQU $1 << INFLICT_POISON_F
@@ -238,7 +238,7 @@ DEF FLAG_2_BIT_7             EQU $1 << FLAG_2_BIT_7_F
 
 ; CARD_DATA_ATTACK*_FLAG3_F constants
 ; bit 1 covers a wide variety of effects
-; bits 2-7 are unused
+; bits 3-7 are unused
 DEF BOOST_IF_TAKEN_DAMAGE    EQU $1 << BOOST_IF_TAKEN_DAMAGE_F
 DEF SPECIAL_AI_HANDLING      EQU $1 << SPECIAL_AI_HANDLING_F
 
@@ -253,3 +253,4 @@ DEF SECOND_ATTACK              EQU $1
 ; has limit on attached energy cards boost.
 DEF MAX_ENERGY_BOOST_IS_LIMITED     EQU $2
 DEF MAX_ENERGY_BOOST_IS_NOT_LIMITED EQU $3
+DEF ENERGY_BOOST_DARKNESS           EQU $10

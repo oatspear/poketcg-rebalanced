@@ -6168,7 +6168,7 @@ PrimeapeCard:
 	tx TantrumName ; name
 	tx TantrumDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw PrimeapeTantrumEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -7322,7 +7322,7 @@ SlowpokeLv18Card:
 	db RESIDUAL ; category
 	dw ScavengeEffectCommands ; effect commands
 	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 2
 	db ATK_ANIM_GLOW_EFFECT ; animation
@@ -8218,6 +8218,20 @@ PidgeottoCard:
 	tx PidgeyName ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx WingAttackName ; name
+	dw NONE ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
+
+	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx WhirlwindName ; name
 	tx WhirlwindDescription ; description
@@ -8230,20 +8244,6 @@ PidgeottoCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_WHIRLWIND ; animation
-
-	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx MirrorMoveName ; name
-	tx PidgeottosMirrorMoveDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw PidgeottoMirrorMoveEffectCommands ; effect commands
-	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_MIRROR_MOVE ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -8284,15 +8284,15 @@ Pidgeot1Card:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx WhirlwindName ; name
-	tx WhirlwindDescription ; description
+	tx TwisterName ; name
+	tx Discard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw WhirlwindEffectCommands ; effect commands
+	dw TwisterEffectCommands ; effect commands
 	db NONE ; flags 1
-	db SWITCH_OPPONENT_POKEMON ; flags 2
-	db NONE ; flags 3
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_WHIRLWIND ; animation
 
@@ -8321,29 +8321,29 @@ Pidgeot2Card:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx WingAttackName ; name
-	dw NONE ; description
+	tx WhirlwindName ; name
+	tx WhirlwindDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw WhirlwindEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_WHIRLWIND ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx TwisterName ; name
-	tx Discard1EnergyFromTargetDescription ; description
+	tx HurricaneName ; name
+	tx HurricaneDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw TwisterEffectCommands ; effect commands
+	dw PidgeotHurricaneEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db FLAG_2_BIT_7 ; flags 2
+	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_WHIRLWIND ; animation
 
@@ -8385,31 +8385,18 @@ RattataCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
+	energy COLORLESS, 1 ; energies
+	tx ScavengeName ; name
+	tx ScavengeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db RESIDUAL ; category
+	dw ScavengeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
-
-	; energy PSYCHIC, 2 ; energies
-	; tx ScavengeName ; name
-	; tx ScavengeDescription ; description
-	; dw NONE ; description (cont)
-	; db 0 ; damage
-	; db RESIDUAL ; category
-	; dw SlowpokeScavengeEffectCommands ; effect commands
-	; db NONE ; flags 1
-	; db DISCARD_ENERGY ; flags 2
-	; db NONE ; flags 3
-	; db 2
-	; db ATK_ANIM_GLOW_EFFECT ; animation
+	db 2
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -8436,20 +8423,20 @@ RaticateCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx BiteName ; name
-	dw NONE ; description
+	tx SneakAttackName ; name
+	tx SneakAttackDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db DAMAGE_PLUS ; category
+	dw SneakAttackEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3
-	db 0
+	db ENERGY_BOOST_DARKNESS
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
+	energy COLORLESS, 2 ; energies
 	tx SuperFangName ; name
 	tx SuperFangDescription ; description
 	dw NONE ; description (cont)
