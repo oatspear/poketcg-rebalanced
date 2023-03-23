@@ -693,13 +693,13 @@ JigglypuffName: ; 61ec4 (18:5ec4)
 	text "Jigglypuff"
 	done
 
-FirstAidName: ; 61ed0 (18:5ed0)
-	text "First Aid"
+HealingMelodyName: ; 61ed0 (18:5ed0)
+	text "Healing Melody"
 	done
 
-FirstAidDescription: ; 61edb (18:5edb)
-	text "Remove 1 damage counter from"
-	line "Jigglypuff."
+HealingMelodyDescription: ; 61edb (18:5edb)
+	text "Heal 10 damage from each of your"
+	line "Pokémon."
 	done
 
 DoubleEdgeName: ; 61f05 (18:5f05)

@@ -497,6 +497,10 @@
 - **Minimize**: removed.
 - New attack: **Moonblast** (PC): 30 damage, reduce opponent attack by 10.
 
+#### Jigglypuff Lv12
+- **First Aid**: removed.
+- New attack: **Healing Melody** (P): heal 10 to all of the player's Pokémon.
+
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
 - New attack: **Call for Friend** (C): can choose any Basic Pokémon from deck to put on Bench.

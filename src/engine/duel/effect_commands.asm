@@ -1117,11 +1117,6 @@ WigglytuffDoTheWaveEffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoTheWaveEffect
 	db  $00
 
-JigglypuffFirstAidEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FirstAid_DamageCheck
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FirstAid_HealEffect
-	db  $00
-
 MoonblastEffectCommands:
 PersianPounceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PounceEffect
@@ -1168,6 +1163,10 @@ TrainerCardAsPokemonEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, TrainerCardAsPokemon_BenchCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TrainerCardAsPokemon_DiscardEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, TrainerCardAsPokemon_PlayerSelectSwitch
+	db  $00
+
+HealingMelodyEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HealingMelody_HealEffect
 	db  $00
 
 DragoniteHealingWindEffectCommands:

@@ -2815,8 +2815,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ClefablesMinimizeDescription                       ; 0x0aff
 	textpointer ClefableDescription                                ; 0x0b00
 	textpointer JigglypuffName                                     ; 0x0b01
-	textpointer FirstAidName                                       ; 0x0b02
-	textpointer FirstAidDescription                                ; 0x0b03
+	textpointer HealingMelodyName                                  ; 0x0b02
+	textpointer HealingMelodyDescription                           ; 0x0b03
 	textpointer DoubleEdgeName                                     ; 0x0b04
 	textpointer BalloonName                                        ; 0x0b06
 	textpointer JigglypuffLv12Description                         ; 0x0b07

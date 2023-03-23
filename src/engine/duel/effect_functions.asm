@@ -7356,19 +7356,6 @@ DoTheWaveEffect: ; 2ed87 (b:6d87)
 	call AddToDamage
 	ret
 
-; return carry if no damage counters
-FirstAid_DamageCheck: ; 2ed94 (b:6d94)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	ldtx hl, NoDamageCountersText
-	cp 10
-	ret
-
-FirstAid_HealEffect: ; 2ed9f (b:6d9f)
-	lb de, 0, 10
-	call ApplyAndAnimateHPRecovery
-	ret
-
 PounceEffect: ; 2edac (b:6dac)
 	ld a, SUBSTATUS2_POUNCE
 	call ApplySubstatus2ToDefendingCard
@@ -7698,6 +7685,32 @@ HealingWind_PlayAreaHealEffect: ; 2ef53 (b:6f53)
 	dec d
 	jr nz, .loop_play_area
 
+	ret
+
+HealingMelody_HealEffect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+
+; go through every Pokemon in the Play Area and heal 10 damage.
+.loop_play_area
+; check its damage
+	ld a, e
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .next_pkmn ; if no damage, skip Pokemon
+
+	push de
+	ld e, 10
+	ld d, $00
+	call HealPlayAreaCardHP
+	pop de
+.next_pkmn
+	inc e
+	dec d
+	jr nz, .loop_play_area
 	ret
 
 DragoniteLv41Slam_AIEffect: ; 2ef9c (b:6f9c)

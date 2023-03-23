@@ -8703,17 +8703,14 @@ JigglypuffLv12Card:
 	; Search your deck for a basic Energy card and attach it to 1 of your Pokémon.
 	; Shuffle your deck afterward.
 
-	; Healing Melody (P)
-	; Heal 10 damage from each of your Pokémon
-
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx FirstAidName ; name
-	tx FirstAidDescription ; description
+	energy PSYCHIC, 1 ; energies
+	tx HealingMelodyName ; name
+	tx HealingMelodyDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw JigglypuffFirstAidEffectCommands ; effect commands
+	dw HealingMelodyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
