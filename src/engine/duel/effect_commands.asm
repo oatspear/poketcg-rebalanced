@@ -1013,8 +1013,8 @@ SpearowMirrorMoveEffectCommands:
 	dbw EFFECTCMDTYPE_AI, SpearowMirrorMove_AIEffect
 	db  $00
 
-FearowAgilityEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FearowAgilityEffect
+UnableToRetreatEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
 	db  $00
 
 DragoniteStepInEffectCommands:
@@ -1122,6 +1122,7 @@ JigglypuffFirstAidEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FirstAid_HealEffect
 	db  $00
 
+MoonblastEffectCommands:
 PersianPounceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PounceEffect
 	db  $00

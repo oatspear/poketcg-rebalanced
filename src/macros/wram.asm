@@ -228,5 +228,8 @@ MACRO duel_vars
 ; see LAST_TURN_EFFECT_* constants.
 \1ArenaCardLastTurnEffect::      ds $1
 
-	ds $2
+; stores miscellaneous turn flags for various effects
+\1MiscTurnFlags::                    ds $1
+
+	ds $1
 ENDM

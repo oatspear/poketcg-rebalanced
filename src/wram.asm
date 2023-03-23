@@ -648,7 +648,11 @@ wAlreadyPlayedEnergyOrSupporter:: ; cc0b
 	ds $1
 
 ; set to 1 if the confusion check coin toss in AttemptRetreat is tails
-wGotTailsFromConfusionCheckDuringRetreat:: ; cc0c
+; wGotTailsFromConfusionCheckDuringRetreat:: ; cc0c
+;	ds $1
+
+; miscellaneous turn flags
+wMiscTurnFlags:: ; cc0c
 	ds $1
 
 ; DUELIST_TYPE_* of the turn holder

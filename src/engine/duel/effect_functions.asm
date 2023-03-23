@@ -1555,6 +1555,9 @@ AcidEffect: ; 2c77e (b:477e)
 	ldtx de, AcidCheckText
 	call TossCoin_BankB
 	ret nc
+	; fallthrough
+
+UnableToRetreatEffect:
 	ld a, SUBSTATUS2_UNABLE_RETREAT
 	call ApplySubstatus2ToDefendingCard
 	ret

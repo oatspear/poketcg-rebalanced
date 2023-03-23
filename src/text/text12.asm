@@ -585,15 +585,15 @@ PeckDescription: ; 61a21 (18:5a21)
 	line "does 20 more damage."
 	done
 
-ClawName: ; 61a21 (18:5a21)
-	text "Claw"
+FlapName:
+	text "Flap"
 	done
 
-SpearowsMirrorMoveDescription: ; 61a27 (18:5a27)
-	text "If Spearow was attacked last turn,"
-	line "do the final result of that attack"
-	line "on Spearow to the Defending Pokémon."
-	done
+; SpearowsMirrorMoveDescription: ; 61a27 (18:5a27)
+; 	text "If Spearow was attacked last turn,"
+; 	line "do the final result of that attack"
+; 	line "on Spearow to the Defending Pokémon."
+; 	done
 
 SpearowDescription: ; 61a93 (18:5a93)
 	text "Eats bugs in grassy areas. It has to"
@@ -605,11 +605,13 @@ FearowName: ; 61aee (18:5aee)
 	text "Fearow"
 	done
 
-FearowsAgilityDescription: ; 61af6 (18:5af6)
-	text "Flip a coin. If heads, during your"
-	line "opponent's next turn, prevent all"
-	line "effects of attacks, including"
-	line "damage, done to Fearow."
+ClutchName:
+	text "Clutch"
+	done
+
+ClutchDescription:
+	text "The Defending Pokémon can't retreat"
+	line "during your opponent's next turn."
 	done
 
 DrillPeckName: ; 61b72 (18:5b72)
@@ -636,6 +638,10 @@ SingName: ; 61bec (18:5bec)
 
 MetronomeName: ; 61bf2 (18:5bf2)
 	text "Metronome"
+	done
+
+MoonblastName: ; 61bf2 (18:5bf2)
+	text "Moonblast"
 	done
 
 ClefairysMetronomeDescription: ; 61bfd (18:5bfd)
@@ -811,14 +817,12 @@ PounceName: ; 6246d (18:646d)
 	text "Pounce"
 	done
 
-PounceDescription: ; 62475 (18:6475)
-	text "If the Defending Pokémon attacks"
-	line "Persian during your opponent's next"
-	line "turn, any damage done by the attack"
-	line "is reduced by 10 (after applying"
-	line "Weakness and Resistance). (Benching"
-	line "or evolving either Pokémon ends this"
-	line "effect.)"
+ReduceAttackBy10Description: ; 62475 (18:6475)
+	text "During your opponent's next turn,"
+	line "any damage done by attacks from the"
+	line "Defending Pokémon is reduced by 10"
+	line "(before applying Weakness and"
+	line "Resistance)."
 	done
 
 ClassyCatName: ; 62552 (18:6552)

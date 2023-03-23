@@ -483,7 +483,19 @@
 #### Spearow
 - **Peck**: +20 damage if opponent is Grass.
 - **Mirror Move**: removed.
-- New attack: **Claw** (C): 30 damage, flip a coin, does nothing if tails.
+- New attack: **Wing Attack** (CC): 20 damage.
+
+#### Fearow
+- **Agility**: removed.
+- New attack: **Clutch** (CC): 20 damage, opponent cannot retreat.
+- **Drill Peck**: reduced cost from (CCCC) to (CCC).
+
+#### Clefairy
+- **Metronome**: reduced cost from (CCC) to (CC).
+
+#### Clefable
+- **Minimize**: removed.
+- New attack: **Moonblast** (PC): 30 damage, reduce opponent attack by 10.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.

@@ -5942,7 +5942,7 @@ AttemptRetreat:
 	ld e, a
 	call SwapArenaWithBenchPokemon
 	xor a
-	ld [wGotTailsFromConfusionCheckDuringRetreat], a
+	; ld [wGotTailsFromConfusionCheckDuringRetreat], a
 	ret
 
 ; given a number between 0-255 in a, converts it to TX_SYMBOL format,
@@ -7756,7 +7756,8 @@ InitVariablesToBeginTurn:
 	xor a
 	ld [wAlreadyRetreatedThisTurn], a
 	ld [wAlreadyPlayedEnergyOrSupporter], a
-	ld [wGotTailsFromConfusionCheckDuringRetreat], a
+	; ld [wGotTailsFromConfusionCheckDuringRetreat], a
+	ld [wMiscTurnFlags], a
 	ld [wGotHeadsFromSandAttackOrSmokescreenCheck], a
 	ldh a, [hWhoseTurn]
 	ld [wWhoseTurn], a

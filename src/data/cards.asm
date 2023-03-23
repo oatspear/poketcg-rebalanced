@@ -8487,18 +8487,18 @@ SpearowCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy COLORLESS, 1 ; energies
-	tx ClawName ; name
-	tx MayDoNothingDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx WingAttackName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ClawEffectCommands ; effect commands
+	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -8524,21 +8524,21 @@ FearowCard:
 	tx SpearowName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 3 ; energies
-	tx AgilityName ; name
-	tx FearowsAgilityDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx ClutchName ; name
+	tx ClutchDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw FearowAgilityEffectCommands ; effect commands
+	dw UnableToRetreatEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 1
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
-	energy COLORLESS, 4 ; energies
+	energy COLORLESS, 3 ; energies
 	tx DrillPeckName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -8589,7 +8589,7 @@ ClefairyCard:
 	db ATK_ANIM_SING ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
+	energy COLORLESS, 2 ; energies
 	tx MetronomeName ; name
 	tx ClefairysMetronomeDescription ; description
 	dw NONE ; description (cont)
@@ -8625,6 +8625,23 @@ ClefableCard:
 	db STAGE1 ; stage
 	tx ClefairyName ; pre-evo name
 
+	; Moon Guidance
+	; Once during your turn (before your attack), you may flip a coin.
+	; If heads, search your deck for a card that evolves from 1 of your Pokémon
+	; and put it on that Pokémon. This counts as evolving your Pokémon.
+	; Shuffle your deck afterward.
+
+	; Moonlight
+	; Once during your turn (before your attack), you may put a card from your
+	; hand back on your deck. If you do, search your deck for a basic Energy card,
+	; show it to your opponent, and put it into your hand. This power can't be
+	; used if Clefable is affected by a Special Condition.
+
+	; Lunar Blessing
+	; Once during your turn, if your Active Pokémon has any Psychic Energy
+	; attached, you may heal 20 damage from it, and it recovers from a
+	; Special Condition.
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx MetronomeName ; name
@@ -8640,18 +8657,18 @@ ClefableCard:
 	db ATK_ANIM_NONE ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx MinimizeName ; name
-	tx ClefablesMinimizeDescription ; description
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	tx MoonblastName ; name
+	tx ReduceAttackBy10Description ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw ClefableMinimizeEffectCommands ; effect commands
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw MoonblastEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 20
-	db ATK_ANIM_PROTECT ; animation
+	db 10
+	db ATK_ANIM_CONFUSE_RAY ; animation
 
 	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -8829,6 +8846,19 @@ WigglytuffCard:
 	db STAGE1 ; stage
 	tx JigglypuffName ; pre-evo name
 
+	; Helping Hand
+	; Once during your turn (before your attack), you may flip a coin.
+	; If heads, your Active Pokémon is no longer Asleep, Confused, Paralyzed,
+	; or Poisoned (your choice).
+
+	; Dark Song (CC)
+	; Flip a coin. If heads, the Defending Pokémon is now Asleep.
+	; If tails, the Defending Pokémon is now Confused.
+
+	; Slap Awake (CCC) 20+
+	; If the Defending Pokémon is Asleep or Confused, this attack does +20 damage.
+	; Then, the Defending Pokémon is no longer Asleep or Confused.
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx LullabyName ; name
@@ -8999,7 +9029,7 @@ PersianCard:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx PounceName ; name
-	tx PounceDescription ; description
+	tx ReduceAttackBy10Description ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
