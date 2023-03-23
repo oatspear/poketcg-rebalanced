@@ -594,7 +594,7 @@ ExeggutorName: ; 59881 (16:5881)
 	done
 
 TeleportBlastName: ; 5988c (16:588c)
-	text "Teleportation Blast"
+	text "Teleport Blast"
 	done
 
 TeleportDescription: ; 59896 (16:5896)

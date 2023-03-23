@@ -2720,6 +2720,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GengarName                                         ; 0x0aa5
 	textpointer CurseName                                          ; 0x0aa6
 	textpointer CurseDescription                                   ; 0x0aa7
+	textpointer PainAmplifierName                                  ; 0x0aa6
+	textpointer PainAmplifierDescription                           ; 0x0aa7
 	textpointer DarkMindName                                       ; 0x0aa8
 	textpointer DarkMindDescription                                ; 0x0aa9
 	textpointer ShadowName                                         ; 0x0aaa
@@ -2793,6 +2795,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RaticateDescription                                ; 0x0aed
 	textpointer SpearowName                                        ; 0x0aee
 	textpointer PeckName                                           ; 0x0aef
+	textpointer PeckDescription                                    ; 0x0aef
+	textpointer ClawName                                           ; 0x0aef
 	textpointer SpearowsMirrorMoveDescription                      ; 0x0af0
 	textpointer SpearowDescription                                 ; 0x0af1
 	textpointer FearowName                                         ; 0x0af2

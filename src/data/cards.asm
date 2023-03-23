@@ -1033,7 +1033,7 @@ NidoranMCard:
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NidoranMHornHazardEffectCommands ; effect commands
+	dw HornHazardEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7505,12 +7505,12 @@ HaunterLv17Card:
 
 	; attack 1
 	energy 0 ; energies
-	tx TransparencyName ; name
-	tx TransparencyDescription ; description
+	tx CurseName ; name
+	tx CurseDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw HaunterTransparencyEffectCommands ; effect commands
+	dw CurseEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7606,25 +7606,25 @@ GengarCard:
 	tx HaunterName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx CurseName ; name
-	tx CurseDescription ; description
+	energy DARKNESS, 1 ; energies
+	tx PainAmplifierName ; name
+	tx PainAmplifierDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw GengarCurseEffectCommands ; effect commands
-	db NONE ; flags 1
+	db RESIDUAL ; category
+	dw PainAmplifierEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db 10
+	db ATK_ANIM_DARK_MIND ; animation
 
 	; attack 2
-	energy DARKNESS, 2 ; energies
+	energy DARKNESS, 2, COLORLESS, 1 ; energies
 	tx DarkMindName ; name
 	tx DarkMindDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 60 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DarkMindEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
@@ -8475,11 +8475,11 @@ SpearowCard:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx PeckName ; name
-	dw NONE ; description
+	tx PeckDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db DAMAGE_PLUS ; category
+	dw PeckEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -8487,18 +8487,18 @@ SpearowCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx MirrorMoveName ; name
-	tx SpearowsMirrorMoveDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx ClawName ; name
+	tx MayDoNothingDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SpearowMirrorMoveEffectCommands ; effect commands
+	dw ClawEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_MIRROR_MOVE ; animation
+	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness

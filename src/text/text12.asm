@@ -181,9 +181,19 @@ CurseDescription: ; 608c9 (18:48c9)
 	text "Once during your turn (before your"
 	line "attack), you may move 1 damage"
 	line "counter from 1 of your opponent's"
-	line "Pokémon to another."
-	line "This power can't be used if Gengar"
-	line "is Asleep, Confused, or Paralyzed."
+	line "Pokémon to another. This power"
+	line "can't be used if this Pokémon is"
+	line "Asleep, Confused, or Paralyzed."
+	done
+
+PainAmplifierName:
+	text "Pain Amplifier"
+	done
+
+PainAmplifierDescription:
+	text "Put a damage counter on each of"
+	line "your opponent's Pokémon that already"
+	line "has any damage counters on it."
 	done
 
 DarkMindName: ; 609b7 (18:49b7)
@@ -567,6 +577,16 @@ SpearowName: ; 61a18 (18:5a18)
 
 PeckName: ; 61a21 (18:5a21)
 	text "Peck"
+	done
+
+PeckDescription: ; 61a21 (18:5a21)
+	text "If your opponent's Active Pokémon"
+	line "is a <GRASS> Pokémon, this attack"
+	line "does 20 more damage."
+	done
+
+ClawName: ; 61a21 (18:5a21)
+	text "Claw"
 	done
 
 SpearowsMirrorMoveDescription: ; 61a27 (18:5a27)

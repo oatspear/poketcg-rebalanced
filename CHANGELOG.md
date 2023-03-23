@@ -433,8 +433,14 @@
 #### Gastly Lv17
 - **Energy Conversion**: reduced cost from (DD) to (C) and removed recoil.
 
+#### Haunter Lv17
+- **Transparency**: removed.
+- New power: **Curse**: once per turn, move 1 damage counter from one opponent Pokémon to another.
+
 #### Gengar
-- **Dark Mind**: reduced cost from (DDD) to (DD) and increased base damage from 30 to 40.
+- **Curse**: removed.
+- New attack: **Pain Amplifier** (D): deal 10 damage to opponent's damaged Pokémon.
+- **Dark Mind**: reduced cost from (DDD) to (DDC) and increased base damage from 30 to 60.
 
 #### Drowzee
 - **Confuse Ray**: removed.
@@ -473,6 +479,11 @@
 - **Bite**: removed.
 - New attack: **Sneak Attack** (C): 20 damage, +10 if Darkness Energy is attached.
 - **Super Fang**: reduced cost from (CCC) to (CC).
+
+#### Spearow
+- **Peck**: +20 damage if opponent is Grass.
+- **Mirror Move**: removed.
+- New attack: **Claw** (C): 30 damage, flip a coin, does nothing if tails.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.

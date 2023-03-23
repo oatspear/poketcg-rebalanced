@@ -160,7 +160,13 @@ NidoranFFurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_AI, NidoranFFurySwipes_AIEffect
 	db  $00
 
-NidoranMHornHazardEffectCommands:
+PeckEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Peck_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Peck_AIEffect
+	db  $00
+
+ClawEffectCommands:
+HornHazardEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HornHazard_NoDamage50PercentEffect
 	dbw EFFECTCMDTYPE_AI, HornHazard_AIEffect
 	db  $00
@@ -593,10 +599,14 @@ MoltresLv37DiveBombEffectCommands:
 	dbw EFFECTCMDTYPE_AI, MoltresLv37DiveBomb_AIEffect
 	db  $00
 
-GengarCurseEffectCommands:
+CurseEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Curse_CheckDamageAndBench
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Curse_TransferDamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Curse_PlayerSelectEffect
+	db  $00
+
+PainAmplifierEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PainAmplifier_DamageEffect
 	db  $00
 
 DarkMindEffectCommands:

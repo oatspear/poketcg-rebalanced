@@ -4006,6 +4006,34 @@ DarkMind_DamageBenchEffect: ; 2d93c (b:593c)
 	call SwapTurn
 	ret
 
+PainAmplifier_DamageEffect:
+	call SwapTurn
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a
+	xor a  ; PLAY_AREA_ARENA
+	ld b, a
+
+.loop
+	push bc
+	ld e, a
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .next  ; no damage
+	ld a, e  ; PLAY_AREA_*
+	ld b, a  ; input location
+	ld de, 10  ; input damage
+	call DealDamageToPlayAreaPokemon_RegularAnim
+
+.next
+	pop bc
+	inc b
+	ld a, b
+	dec c
+	jr nz, .loop
+	call SwapTurn
+	ret
+
 ApplyDestinyBondEffect: ; 2d987 (b:5987)
 	ld a, SUBSTATUS1_DESTINY_BOND
 	call ApplySubstatus1ToAttackingCard
@@ -6601,6 +6629,22 @@ EeveeQuickAttack_DamageBoostEffect: ; 2e96a (b:596a)
 	ldtx de, DamageCheckIfHeadsPlusDamageText
 	call TossCoin_BankB
 	ret nc ; return if tails
+	ld a, 20
+	call AddToDamage
+	ret
+
+Peck_AIEffect: ; 2e962 (b:5962)
+	call Peck_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+Peck_DamageBoostEffect: ; 2e595 (b:6595)
+	ld a, 10
+	call SetDefiniteDamage
+	call SwapTurn
+	call GetArenaCardColor
+	call SwapTurn
+	cp GRASS
+	ret nz ; no extra damage if not Grass
 	ld a, 20
 	call AddToDamage
 	ret
