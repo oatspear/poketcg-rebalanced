@@ -8693,6 +8693,19 @@ JigglypuffLv12Card:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; Evolution Song (C)
+	; Your opponent may choose 1 of his or her Pokémon and search his or her deck
+	; for a card that evolves from that Pokémon. Your opponent attaches that card
+	; to that Pokémon. This counts as evolving that Pokémon. Either way, you may
+	; do the same, and then each player who searched shuffles his or her deck.
+
+	; Gather Energy (C)
+	; Search your deck for a basic Energy card and attach it to 1 of your Pokémon.
+	; Shuffle your deck afterward.
+
+	; Healing Melody (P)
+	; Heal 10 damage from each of your Pokémon
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx FirstAidName ; name
@@ -8846,10 +8859,25 @@ WigglytuffCard:
 	db STAGE1 ; stage
 	tx JigglypuffName ; pre-evo name
 
-	; Helping Hand
-	; Once during your turn (before your attack), you may flip a coin.
-	; If heads, your Active Pokémon is no longer Asleep, Confused, Paralyzed,
-	; or Poisoned (your choice).
+	; Assistance / Helping Hand
+	; Once during your turn (before your attack), if Wigglytuff is on your Bench,
+	; you may remove 1 Special Condition from your Active Pokémon.
+
+	; Fluffy Fur
+	; If Wigglytuff is your Active Pokémon and is damaged by an opponent's attack
+	; (even if Wigglytuff is Knocked Out), the Attacking Pokémon is now Asleep.
+
+	; Good Night Melody
+	; Once during your turn (before your attack), you may use this power.
+	; Each Active Pokémon (both yours and your opponent's) is now Asleep.
+	; This power can't be used if Wigglytuff is affected by a Special Condition.
+
+	; Collect (C)
+	; Draw 3 cards.
+
+	; Pester (CC) 30+
+	; If the Defending Pokémon is affected by a Special Condition,
+	; this attack does 30 damage plus 20 more damage.
 
 	; Dark Song (CC)
 	; Flip a coin. If heads, the Defending Pokémon is now Asleep.
@@ -8858,6 +8886,16 @@ WigglytuffCard:
 	; Slap Awake (CCC) 20+
 	; If the Defending Pokémon is Asleep or Confused, this attack does +20 damage.
 	; Then, the Defending Pokémon is no longer Asleep or Confused.
+
+	; Punishing Slap (PCC) 40+
+	; If any of your opponent's Pokémon have any Darkness Energy attached to them,
+	; this attack does 40 more damage.
+
+	; Orb Polish (C)
+	; Put 3 Energy from your discard pile into your hand.
+
+	; Find Treasure (P)
+	; Search your deck for up to 2 cards and put them into your hand.
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
