@@ -1255,8 +1255,8 @@ LeechSeedName: ; 5755d (15:755d)
 
 BulbasaursLeechSeedDescription: ; 57569 (15:7569)
 	text "Unless all damage from this attack"
-	line "is prevented, you may remove 1"
-	line "damage counter from Bulbasaur."
+	line "is prevented, heal 10 damage from"
+	line "this Pokémon."
 	done
 
 SeedName: ; 575cb (15:75cb)
@@ -1320,19 +1320,12 @@ MegaDrainName: ; 577f9 (15:77f9)
 	text "Mega Drain"
 	done
 
-VenusaursMegaDrainDescription: ; 57805 (15:7805)
-	text "Remove a number of damage counters"
-	line "from Venusaur equal to half the"
+MegaDrainDescription: ; 57805 (15:7805)
+	text "Heal from this Pokémon half the"
 	line "damage done to the Defending Pokémon"
 	line "(after applying Weakness and"
 	line "Resistance) (rounded up to the"
 	line "nearest 10)."
-	done
-
-VenusaursMegaDrainDescriptionCont: ; 578b7 (15:78b7)
-	text "If Venusaur has fewer damage"
-	line "counters than that, remove all of"
-	line "them."
 	done
 
 VenusaurLv64Description: ; 578fd (15:78fd)
@@ -1348,11 +1341,10 @@ EnergyTransName: ; 57960 (15:7960)
 EnergyTransDescription: ; 5796e (15:796e)
 	text "As often as you like during your"
 	line "turn (before your attack), you may"
-	line "take 1 <GRASS> Energy card attached to 1"
-	line "of your Pokémon and attach it to a"
-	line "different one. This power can't be"
-	line "used if Venusaur is Asleep,"
-	line "Confused, or Paralyzed."
+	line "move 1 <GRASS> Energy card attached to"
+	line "one of your Pokémon to another. This"
+	line "power can't be used if this Pokémon is"
+	line "Asleep, Confused, or Paralyzed."
 	done
 
 SolarBeamName: ; 57a51 (15:7a51)
@@ -1392,15 +1384,16 @@ MetapodName: ; 57b78 (15:7b78)
 	text "Metapod"
 	done
 
-StiffenName: ; 57b81 (15:7b81)
-	text "Stiffen"
+HardenName: ; 5ee18 (17:6e18)
+	text "Harden"
 	done
 
-MetapodsStiffenDescription: ; 57b8a (15:7b8a)
-	text "Flip a coin. If heads, prevent all"
-	line "damage done to Metapod during your"
-	line "opponent's next turn. (Any other"
-	line "effects of attacks still happen.)"
+HardenDescription: ; 5ee20 (17:6e20)
+	text "During your opponent's next turn,"
+	line "whenever 30 or less damage is done"
+	line "to this Pokémon (after applying"
+	line "Weakness and Resistance), prevent"
+	line "that damage."
 	done
 
 StunSporeName: ; 57c14 (15:7c14)
@@ -1425,25 +1418,10 @@ WhirlwindName: ; 57c8e (15:7c8e)
 	text "Whirlwind"
 	done
 
-WhirlwindDescription: ; 57c99 (15:7c99)
+OpponentSwitchesPokemonDescription: ; 57c99 (15:7c99)
 	text "Your opponent switches their"
 	line "Active Pokémon with one of their"
 	line "Benched Pokémon."
-	done
-
-ButterfreesMegaDrainDescription: ; 57d3a (15:7d3a)
-	text "Remove a number of damage counters"
-	line "from Butterfree equal to half the"
-	line "damage done to the Defending Pokémon"
-	line "(after applying Weakness and"
-	line "Resistance) (rounded up to the"
-	line "nearest 10)."
-	done
-
-ButterfreesMegaDrainDescriptionCont: ; 57dee (15:7dee)
-	text "If Butterfree has fewer damage"
-	line "counters than that, remove all of"
-	line "them."
 	done
 
 ButterflyName: ; 57e36 (15:7e36)
@@ -1483,11 +1461,92 @@ KakunaName: ; 57f4f (15:7f4f)
 	text "Kakuna"
 	done
 
-KakunasStiffenDescription: ; 57f57 (15:7f57)
-	text "Flip a coin. If heads, prevent all"
-	line "damage done to Kakuna during your"
-	line "opponent's next turn. (Any other"
-	line "effects of attacks still happen.)"
+KakunaDescription: ; 58000 (16:4000)
+	text "Almost incapable of moving, this"
+	line "Pokémon can only harden its shell to"
+	line "protect itself from predators."
 	done
 
-	ds $20
+BeedrillName: ; 58066 (16:4066)
+	text "Beedrill"
+	done
+
+TwineedleName: ; 58070 (16:4070)
+	text "Twineedle"
+	done
+
+DoubleAttackX30Description: ; 5807b (16:407b)
+	text "Flip 2 coins. This attack does 30"
+	line "damage times the number of heads."
+	done
+
+PoisonBeeName: ; 580c0 (16:40c0)
+	text "Poison Bee"
+	done
+
+BeedrillDescription: ; 580cc (16:40cc)
+	text "Flies at high speed and attacks"
+	line "using the large, venomous stingers"
+	line "on its forelegs and tail."
+	done
+
+EkansName: ; 5812a (16:412a)
+	text "Ekans"
+	done
+
+SpitPoisonName: ; 58131 (16:4131)
+	text "Spit Poison"
+	done
+
+WrapName: ; 5813e (16:413e)
+	text "Wrap"
+	done
+
+SnakeName: ; 58144 (16:4144)
+	text "Snake"
+	done
+
+EkansDescription: ; 5814b (16:414b)
+	text "Moves silently and stealthily. Eats"
+	line "the eggs of birds, such as Pidgey"
+	line "and Spearow, whole."
+	done
+
+ArbokName: ; 581a6 (16:41a6)
+	text "Arbok"
+	done
+
+TerrorStrikeName: ; 581ad (16:41ad)
+	text "Terror Strike"
+	done
+
+PoisonFangName: ; 58277 (16:4277)
+	text "Poison Fang"
+	done
+
+CobraName: ; 58284 (16:4284)
+	text "Cobra"
+	done
+
+ArbokDescription: ; 5828b (16:428b)
+	text "It is rumored that the ferocious"
+	line "warning markings on its belly differ"
+	line "from area to area."
+	done
+
+NidoranFName: ; 582e5 (16:42e5)
+	text "Nidoran♀"
+	done
+
+FurySwipesName: ; 582ef (16:42ef)
+	text "Fury Swipes"
+	done
+
+TripleAttackX10Description: ; 582fc (16:42fc)
+	text "Flip 3 coins. This attack does 10"
+	line "damage times the number of heads."
+	done
+
+PoisonPinName: ; 583ff (16:43ff)
+	text "Poison Pin"
+	done

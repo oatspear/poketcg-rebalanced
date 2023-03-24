@@ -1462,41 +1462,6 @@ SpitPoison_Poison50PercentEffect: ; 2c6f8 (b:46f8)
 	call SetNoEffectFromStatus
 	ret
 
-; outputs in hTemp_ffa0 the result of the coin toss (0 = tails, 1 = heads).
-; in case it was heads, stores in hTempPlayAreaLocation_ffa1
-; the PLAY_AREA_* location of the Bench Pokemon that was selected for switch.
-TerrorStrike_50PercentSelectSwitchPokemon: ; 2c70a (b:470a)
-	xor a
-	ldh [hTemp_ffa0], a
-
-; return failure if no Pokemon to switch to
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	ret c
-
-; toss coin and store whether it was tails (0) or heads (1) in hTemp_ffa0.
-; return if it was tails.
-	ldtx de, IfHeadsChangeOpponentsActivePokemonText
-	call Func_2c08a
-	ldh [hTemp_ffa0], a
-	ret nc
-
-	call DuelistSelectForcedSwitch
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ret
-
-; if coin toss at hTemp_ffa0 was heads and it's possible,
-; switch the Defending Pokemon
-TerrorStrike_SwitchDefendingPokemon: ; 2c726 (b:4726)
-	ldh a, [hTemp_ffa0]
-	or a
-	ret z
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	call HandleSwitchDefendingPokemonEffect
-	ret
-
 PoisonFang_AIEffect: ; 2c730 (b:4730)
 	ld a, 10
 	lb de, 10, 10
@@ -1573,17 +1538,6 @@ FoulOdorEffect: ; 2c793 (b:4793)
 	call SwapTurn
 	call ConfusionEffect
 	call SwapTurn
-	ret
-
-; If heads, prevent all damage done to user next turn
-KakunaStiffenEffect: ; 2c7a0 (b:47a0)
-	ldtx de, IfHeadsNoDamageNextTurnText
-	call TossCoin_BankB
-	jp nc, SetWasUnsuccessful
-	ld a, ATK_ANIM_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_NO_DAMAGE_STIFFEN
-	call ApplySubstatus1ToAttackingCard
 	ret
 
 KakunaPoisonPowder_AIEffect: ; 2c7b4 (b:47b4)
@@ -1674,18 +1628,6 @@ FoulGas_PoisonOrConfusionEffect: ; 2c82a (b:482a)
 	call TossCoin_BankB
 	jp c, PoisonEffect
 	jp ConfusionEffect
-
-; an exact copy of KakunaStiffenEffect
-; If heads, prevent all damage done to user next turn
-MetapodStiffenEffect: ; 2c836 (b:4836)
-	ldtx de, IfHeadsNoDamageNextTurnText
-	call TossCoin_BankB
-	jp nc, SetWasUnsuccessful
-	ld a, ATK_ANIM_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_NO_DAMAGE_STIFFEN
-	call ApplySubstatus1ToAttackingCard
-	ret
 
 ; returns carry if no Pokemon on Bench
 Teleport_CheckBench: ; 2c8ec (b:48ec)
@@ -1877,7 +1819,7 @@ DoubleAttackX30_MultiplierEffect: ; 2cabb (b:4abb)
 	call SetDefiniteDamage
 	ret
 
-ButterfreeMegaDrainEffect: ; 2cb0f (b:4b0f)
+MegaDrainEffect: ; 2cb0f (b:4b0f)
 	ld hl, wDealtDamage
 	ld a, [hli]
 	ld h, [hl]
@@ -2373,24 +2315,6 @@ SolarPower_RemoveStatusEffect: ; 2ce82 (b:4e82)
 	bank1call DrawDuelHUDs
 	ret
 
-VenusaurMegaDrainEffect: ; 2ceb0 (b:4eb0)
-	ld hl, wDealtDamage
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	srl h
-	rr l
-	bit 0, l
-	jr z, .rounded
-	; round up to nearest 10
-	ld de, 10 / 2
-	add hl, de
-.rounded
-	ld e, l
-	ld d, h
-	call ApplyAndAnimateHPRecovery
-	ret
-
 ; applies the damage bonus for attacks that get bonus
 ; from extra Water energy cards.
 ; this bonus is always 10 more damage for each extra Water energy
@@ -2776,31 +2700,6 @@ CloysterSpikeCannon_MultiplierEffect: ; 2d24e (b:524e)
 	add e
 	call ATimes10
 	call SetDefiniteDamage
-	ret
-
-Blizzard_BenchDamage50PercentEffect: ; 2d266 (b:5266)
-	ldtx de, DamageToOppBenchIfHeadsDamageToYoursIfTailsText
-	call TossCoin_BankB
-	ldh [hTemp_ffa0], a ; store coin result
-	ret
-
-Blizzard_BenchDamageEffect: ; 2d26f (b:526f)
-	ldh a, [hTemp_ffa0]
-	or a
-	jr nz, .opp_bench
-
-; own bench
-	ld a, $01
-	ld [wIsDamageToSelf], a
-	ld a, 10
-	call DealDamageToAllBenchedPokemon
-	ret
-
-.opp_bench
-	call SwapTurn
-	ld a, 10
-	call DealDamageToAllBenchedPokemon
-	call SwapTurn
 	ret
 
 ; return carry if can use Cowardice
@@ -4874,115 +4773,6 @@ MewtwoLv60EnergyAbsorption_AddToHandEffect: ; 2de26 (b:5e26)
 	pop hl
 	jr .loop
 
-; returns carry if Strange Behavior cannot be used.
-StrangeBehavior_CheckDamage: ; 2de39 (b:5e39)
-; does Play Area have any damage counters?
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	call CheckIfPlayAreaHasAnyDamage
-	ldtx hl, NoPokemonWithDamageCountersText
-	jr c, .set_carry
-; can Slowbro receive any damage counters without KO-ing?
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	ldtx hl, CannotUseBecauseItWillBeKnockedOutText
-	cp 10 + 10
-	jr c, .set_carry
-; can Pkmn Power be used?
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
-	ret
-
-.set_carry
-	scf
-	ret
-
-StrangeBehavior_SelectAndSwapEffect: ; 2de5b (b:5e5b)
-	ld a, DUELVARS_DUELIST_TYPE
-	call GetTurnDuelistVariable
-	cp DUELIST_TYPE_PLAYER
-	jr z, .player
-
-; not player
-	bank1call Func_61a1
-	bank1call PrintPlayAreaCardList_EnableLCD
-	ret
-
-.player
-	ldtx hl, ProcedureForStrangeBehaviorText
-	bank1call DrawWholeScreenTextBox
-
-	xor a
-	ldh [hCurSelectionItem], a
-	bank1call Func_61a1
-.start
-	bank1call PrintPlayAreaCardList_EnableLCD
-	push af
-	ldh a, [hCurSelectionItem]
-	ld hl, PlayAreaSelectionMenuParameters
-	call InitializeMenuParameters
-	pop af
-
-	ld [wNumMenuItems], a
-.loop_input
-	call DoFrame
-	call HandleMenuInput
-	jr nc, .loop_input
-	cp -1
-	ret z ; return when B button is pressed
-
-	ldh [hCurSelectionItem], a
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ld hl, hTemp_ffa0
-	cp [hl]
-	jr z, .play_sfx ; can't select Slowbro itself
-
-	call GetCardDamageAndMaxHP
-	or a
-	jr z, .play_sfx ; can't select card without damage
-
-	call TryGiveDamageCounter_StrangeBehavior
-	jr c, .play_sfx
-	ld a, OPPACTION_6B15
-	call SetOppAction_SerialSendDuelData
-	jr .start
-
-.play_sfx
-	call Func_3794
-	jr .loop_input
-
-StrangeBehavior_SwapEffect: ; 2deb3 (b:5eb3)
-	call TryGiveDamageCounter_StrangeBehavior
-	ret c
-	bank1call PrintPlayAreaCardList_EnableLCD
-	or a
-	ret
-
-; tries to give the damage counter to the target
-; chosen by the Player (hTemp_ffa0).
-; if the damage counter would KO card, then do
-; not give the damage counter and return carry.
-TryGiveDamageCounter_StrangeBehavior: ; 2debc (b:5ebc)
-	ldh a, [hTemp_ffa0]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	sub 10
-	jr z, .set_carry  ; would bring HP to zero?
-; has enough HP to receive a damage counter
-	ld [hl], a
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	add DUELVARS_ARENA_CARD_HP
-	ld l, a
-	ld a, 10
-	add [hl]
-	ld [hl], a
-	or a
-	ret
-.set_carry
-	scf
-	ret
-
 ; returns carry if has no damage counters.
 SpacingOut_CheckDamage: ; 2ded5 (b:5ed5)
 	ld e, PLAY_AREA_ARENA
@@ -5220,11 +5010,6 @@ StoneBarrage_MultiplierEffect: ; 2e052 (b:6052)
 	ld [de], a
 	ret
 
-OnixHardenEffect: ; 2e075 (b:6075)
-	ld a, SUBSTATUS1_HARDEN
-	call ApplySubstatus1ToAttackingCard
-	ret
-
 PrimeapeFurySwipes_AIEffect: ; 2e07b (b:607b)
 	ld a, 60 / 2
 	lb de, 0, 60
@@ -5435,7 +5220,7 @@ KarateChop_DamageSubtractionEffect: ; 2e1ba (b:61ba)
 	call SetDefiniteDamage
 	ret
 
-GravelerHardenEffect: ; 2e1f6 (b:61f6)
+HardenEffect: ; 2e1f6 (b:61f6)
 	ld a, SUBSTATUS1_HARDEN
 	call ApplySubstatus1ToAttackingCard
 	ret
@@ -5675,7 +5460,7 @@ Earthquake10Effect:
 	; fallthrough
 
 ; deal 10 damage to each of the opponent's benched Pokémon
-RockSlide10Effect:
+DamageAllOpponentBenched10Effect:
 	call SwapTurn
 	xor a
 	ld [wIsDamageToSelf], a

@@ -241,7 +241,7 @@
 
 #### Articuno Lv35
 - **Freeze Dry**: reduced cost from (WWW) to (WC) and damage from 30 to 20.
-- **Blizzard**: reduced cost from (WWWW) to (WWW).
+- **Blizzard**: reduced cost from (WWWW) to (WWW), base damage from 50 to 40, only damages opponent Bench.
 
 #### Articuno Lv37
 - **Ice Breath**: target Pokémon is no longer chosen at random.
@@ -399,7 +399,7 @@
 #### Kabutops
 - Increased HP from 60 to 70.
 - **Sharp Sickle**: reduced cost from (FF) to (F).
-- **Absorb**: changed cost from (FFFF) to (WCC) and increased damage from 40 to 50.
+- **Absorb**: renamed to **Mega Drain**, changed cost from (FFFF) to (WCC) and increased damage from 40 to 50.
 
 #### Abra
 - New attack: **Teleportation Blast** (P): 10 damage, switch with a Benched Pokémon after attacking.
@@ -500,6 +500,8 @@
 #### Jigglypuff Lv12
 - **First Aid**: removed.
 - New attack: **Healing Melody** (P): heal 10 to all of the player's Pokémon.
+- **Double Edge**: removed.
+- New attack: **Expand** (CC): 10 damage, reduce incoming damage by 10.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.

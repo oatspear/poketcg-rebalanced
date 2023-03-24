@@ -1784,7 +1784,7 @@ Func_189d:
 	call SwapTurn
 	xor a
 	ld [wTempPlayAreaLocation_cceb], a
-	call HandleTransparency
+	; call HandleTransparency
 	call SwapTurn
 	pop de
 	ret nc

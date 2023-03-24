@@ -1,103 +1,3 @@
-KakunaDescription: ; 58000 (16:4000)
-	text "Almost incapable of moving, this"
-	line "Pokémon can only harden its shell to"
-	line "protect itself from predators."
-	done
-
-BeedrillName: ; 58066 (16:4066)
-	text "Beedrill"
-	done
-
-TwineedleName: ; 58070 (16:4070)
-	text "Twineedle"
-	done
-
-DoubleAttackX30Description: ; 5807b (16:407b)
-	text "Flip 2 coins. This attack does 30"
-	line "damage times the number of heads."
-	done
-
-PoisonBeeName: ; 580c0 (16:40c0)
-	text "Poison Bee"
-	done
-
-BeedrillDescription: ; 580cc (16:40cc)
-	text "Flies at high speed and attacks"
-	line "using the large, venomous stingers"
-	line "on its forelegs and tail."
-	done
-
-EkansName: ; 5812a (16:412a)
-	text "Ekans"
-	done
-
-SpitPoisonName: ; 58131 (16:4131)
-	text "Spit Poison"
-	done
-
-WrapName: ; 5813e (16:413e)
-	text "Wrap"
-	done
-
-SnakeName: ; 58144 (16:4144)
-	text "Snake"
-	done
-
-EkansDescription: ; 5814b (16:414b)
-	text "Moves silently and stealthily. Eats"
-	line "the eggs of birds, such as Pidgey"
-	line "and Spearow, whole."
-	done
-
-ArbokName: ; 581a6 (16:41a6)
-	text "Arbok"
-	done
-
-TerrorStrikeName: ; 581ad (16:41ad)
-	text "Terror Strike"
-	done
-
-TerrorStrikeDescription: ; 581bc (16:41bc)
-	text "Flip a coin. If heads and if your"
-	line "opponent has any Benched Pokémon,"
-	line "he or she chooses 1 of them and"
-	line "switches it with the Defending"
-	line "Pokémon."
-	line "(Do the damage before switching"
-	line "the Pokémon.)"
-	done
-
-PoisonFangName: ; 58277 (16:4277)
-	text "Poison Fang"
-	done
-
-CobraName: ; 58284 (16:4284)
-	text "Cobra"
-	done
-
-ArbokDescription: ; 5828b (16:428b)
-	text "It is rumored that the ferocious"
-	line "warning markings on its belly differ"
-	line "from area to area."
-	done
-
-NidoranFName: ; 582e5 (16:42e5)
-	text "Nidoran♀"
-	done
-
-FurySwipesName: ; 582ef (16:42ef)
-	text "Fury Swipes"
-	done
-
-TripleAttackX10Description: ; 582fc (16:42fc)
-	text "Flip 3 coins. This attack does 10"
-	line "damage times the number of heads."
-	done
-
-PoisonPinName: ; 583ff (16:43ff)
-	text "Poison Pin"
-	done
-
 NidoranFDescription: ; 5840b (16:440b)
 	text "Although small, its venomous barbs"
 	line "make this Pokémon dangerous."
@@ -933,16 +833,12 @@ QuickAttackName: ; 5a55c (16:655c)
 
 QuickAttackDescription: ; 5a56a (16:656a)
 	text "Flip a coin. If heads, this attack"
-	line "does 10 damage plus 20 more damage;"
-	line "if tails, this attack does 10"
-	line "damage."
+	line "does 20 additional damage."
 	done
 
-QuickAttack20Description: ; 5a56a (16:656a)
+Heads10BonusDamageDescription: ; 5a56a (16:656a)
 	text "Flip a coin. If heads, this attack"
-	line "does 20 damage plus 10 more damage;"
-	line "if tails, this attack does 20"
-	line "damage."
+	line "does 10 additional damage."
 	done
 
 FlamesOfRageName: ; 5a5d8 (16:65d8)
@@ -1007,22 +903,8 @@ StompName: ; 5a850 (16:6850)
 	text "Stomp"
 	done
 
-StompDescription: ; 5a857 (16:6857)
-	text "Flip a coin. If heads, this attack"
-	line "does 20 damage plus 10 more damage;"
-	line "if tails, this attack does 20"
-	line "damage."
-	done
-
 AgilityName: ; 5a8c5 (16:68c5)
 	text "Agility"
-	done
-
-RapidashsAgilityDescription: ; 5a8ce (16:68ce)
-	text "Flip a coin. If heads, during your"
-	line "opponent's next turn, prevent all"
-	line "effects of attacks, including"
-	line "damage, done to Rapidash."
 	done
 
 RapidashDescription: ; 5a94c (16:694c)
@@ -1051,13 +933,6 @@ MagmarLv24Description: ; 5aa13 (16:6a13)
 
 SmokescreenName: ; 5aa6e (16:6a6e)
 	text "Smokescreen"
-	done
-
-MagmarsSmokescreenDescription: ; 5aa7b (16:6a7b)
-	text "If the Defending Pokémon tries to"
-	line "attack during your opponent's next"
-	line "turn, your opponent flips a coin. If"
-	line "tails, that attack does nothing."
 	done
 
 MagmarLv31Description: ; 5ab07 (16:6b07)
@@ -1414,17 +1289,6 @@ ShellderName: ; 5bb6e (16:7b6e)
 	text "Shellder"
 	done
 
-HideInShellName: ; 5bb78 (16:7b78)
-	text "Hide in Shell"
-	done
-
-HideInShellDescription: ; 5bb87 (16:7b87)
-	text "Flip a coin. If heads, prevent all"
-	line "damage done to Shellder during your"
-	line "opponent's next turn. (Any other"
-	line "effects of attacks still happen.)"
-	done
-
 BivalveName: ; 5bc12 (16:7c12)
 	text "Bivalve"
 	done
@@ -1475,9 +1339,9 @@ FlailName: ; 5be7c (16:7e7c)
 	text "Flail"
 	done
 
-KinglersFlailDescription: ; 5be83 (16:7e83)
+FlailDescription: ; 5be83 (16:7e83)
 	text "Does 10 damage times the number of"
-	line "damage counters on Kingler."
+	line "damage counters on this Pokémon."
 	done
 
 CrabhammerName: ; 5bec3 (16:7ec3)
@@ -1537,4 +1401,294 @@ SneakAttackDescription:
 	text "If this Pokémon has any <DARKNESS> Energy"
 	line "attached to it, this attack does"
 	line "10 additional damage."
+	done
+
+HorseaDescription: ; 5c000 (17:4000)
+	text "Known to shoot down flying bugs with"
+	line "precision blasts of ink from the"
+	line "surface of the water."
+	done
+
+SeadraName: ; 5c05d (17:405d)
+	text "Seadra"
+	done
+
+WaterGunDescription: ; 5ca47 (17:4a47)
+	text "Does 10 additional damage for each"
+	line "<WATER> Energy attached to this"
+	line "Pokémon but not used to pay for"
+	line "this attack's Energy cost, up to"
+	line "20 additional damage."
+	done
+
+AgilityDescription: ; 5c111 (17:4111)
+	text "Flip a coin. If heads, during your"
+	line "opponent's next turn, prevent all "
+	line "effects of attacks, including"
+	line "damage, done to this Pokémon."
+	done
+
+SeadraDescription: ; 5c18e (17:418e)
+	text "Capable of swimming backward by"
+	line "rapidly flapping its wing-like"
+	line "pectoral fins and stout tail."
+	done
+
+GoldeenName: ; 5c1ec (17:41ec)
+	text "Goldeen"
+	done
+
+HornAttackName: ; 5c1f5 (17:41f5)
+	text "Horn Attack"
+	done
+
+GoldfishName: ; 5c202 (17:4202)
+	text "Goldfish"
+	done
+
+GoldeenDescription: ; 5c20c (17:420c)
+	text "Its tail fin billows like an elegant"
+	line "ballroom dress, giving it the"
+	line "nickname ”Water Queen.”"
+	done
+
+SeakingName: ; 5c268 (17:4268)
+	text "Seaking"
+	done
+
+WaterfallName: ; 5c271 (17:4271)
+	text "Waterfall"
+	done
+
+SeakingDescription: ; 5c27c (17:427c)
+	text "In the autumn spawning season, they"
+	line "can be seen swimming powerfully up"
+	line "rivers and creeks."
+	done
+
+StaryuName: ; 5c2d7 (17:42d7)
+	text "Staryu"
+	done
+
+SlapName: ; 5c2df (17:42df)
+	text "Slap"
+	done
+
+StarshapeName: ; 5c2e5 (17:42e5)
+	text "Starshape"
+	done
+
+StaryuDescription: ; 5c2f0 (17:42f0)
+	text "An enigmatic Pokémon that can"
+	line "effortlessly regenerate any"
+	line "appendage it loses in battle."
+	done
+
+StarmieName: ; 5c349 (17:4349)
+	text "Starmie"
+	done
+
+RecoverName: ; 5c352 (17:4352)
+	text "Recover"
+	done
+
+RecoverDescription: ; 5c35b (17:435b)
+	text "Discard an Energy from this Pokémon."
+	line "Then, heal all damage from it."
+	done
+
+StarFreezeName: ; 5c3cf (17:43cf)
+	text "Star Freeze"
+	done
+
+MysteriousName: ; 5c3dc (17:43dc)
+	text "Mysterious"
+	done
+
+StarmieDescription: ; 5c3e8 (17:43e8)
+	text "Its central core glows with the"
+	line "seven colors of the rainbow. Some"
+	line "people value this core as a gem."
+	done
+
+MagikarpName: ; 5c44c (17:444c)
+	text "Magikarp"
+	done
+
+TackleName: ; 5c456 (17:4456)
+	text "Tackle"
+	done
+
+FishName: ; 5c49f (17:449f)
+	text "Fish"
+	done
+
+MagikarpDescription: ; 5c4a5 (17:44a5)
+	text "In the distant past, it was stronger"
+	line "than its horribly weak descendants"
+	line "that exist today."
+	done
+
+GyaradosName: ; 5c500 (17:4500)
+	text "Gyarados"
+	done
+
+DragonRageName: ; 5c50a (17:450a)
+	text "Dragon Rage"
+	done
+
+BubblebeamName: ; 5c517 (17:4517)
+	text "Bubblebeam"
+	done
+
+AtrociousName: ; 5c523 (17:4523)
+	text "Atrocious"
+	done
+
+GyaradosDescription: ; 5c52e (17:452e)
+	text "Rarely seen in the wild. Huge and"
+	line "vicious, it is capable of destroying"
+	line "entire cities in a rage."
+	done
+
+LaprasName: ; 5c58f (17:458f)
+	text "Lapras"
+	done
+
+TransportName: ; 5c643 (17:4643)
+	text "Transport"
+	done
+
+LaprasDescription: ; 5c64e (17:464e)
+	text "A Pokémon that has been overhunted"
+	line "almost to extinction. It can ferry"
+	line "people across water."
+	done
+
+VaporeonName: ; 5c6aa (17:46aa)
+	text "Vaporeon"
+	done
+
+FocusEnergyName: ; 5c6b4 (17:46b4)
+	text "Focus Energy"
+	done
+
+FocusEnergyDescription: ; 5c6c2 (17:46c2)
+	text "During your next turn, this"
+	line "Pokémon's attack's base damage"
+	line "is doubled."
+	done
+
+BubbleJetName: ; 5c70b (17:470b)
+	text "Bubble Jet"
+	done
+
+VaporeonLv29Description: ; 5c717 (17:4717)
+	text "Its cell structure is similar to"
+	line "water molecules. It will melt away"
+	line "and become invisible in water."
+	done
+
+VaporeonLv42Description: ; 5c829 (17:4829)
+	text "Lives close to water. Its long tail"
+	line "is ridged with a fin that is often"
+	line "mistaken for a mermaid's."
+	done
+
+OmanyteName: ; 5c88b (17:488b)
+	text "Omanyte"
+	done
+
+MysteriousFossilName: ; 5c894 (17:4894)
+	text "Mysterious Fossil"
+	done
+
+ClairvoyanceName: ; 5c8a7 (17:48a7)
+	text "Clairvoyance"
+	done
+
+ClairvoyanceDescription: ; 5c8b5 (17:48b5)
+	text "Your opponent plays with his or her"
+	line "hand face up. This power stops"
+	line "working while Omanyte is Asleep,"
+	line "Confused, or Paralyzed."
+	done
+
+SpiralName: ; 5c9df (17:49df)
+	text "Spiral"
+	done
+
+OmanyteDescription: ; 5c9e7 (17:49e7)
+	text "Although long extinct, in rare"
+	line "cases, it can be genetically"
+	line "resurrected from fossils."
+	done
+
+OmastarName: ; 5ca3e (17:4a3e)
+	text "Omastar"
+	done
+
+OmastarDescription: ; 5caf4 (17:4af4)
+	text "A prehistoric Pokémon that died out"
+	line "when its heavy shell made it"
+	line "impossible for it to catch prey."
+	done
+
+ArticunoName: ; 5cb57 (17:4b57)
+	text "Articuno"
+	done
+
+FreezeDryName: ; 5cb61 (17:4b61)
+	text "Freeze Dry"
+	done
+
+BlizzardName: ; 5cb6d (17:4b6d)
+	text "Blizzard"
+	done
+
+DamageOpponentBench10Description: ; 5cb77 (17:4b77)
+	text "This attack does 10 damage to each of"
+	line "your opponent's Benched Pokémon."
+	line "(Don't apply Weakness and Resistance"
+	line "for Benched Pokémon.)"
+	done
+
+FreezeName: ; 5cc5b (17:4c5b)
+	text "Freeze"
+	done
+
+ArticunoLv35Description: ; 5cc63 (17:4c63)
+	text "A legendary bird Pokémon that is"
+	line "said to appear to doomed people who"
+	line "are lost in icy mountains."
+	done
+
+QuickfreezeName: ; 5ccc4 (17:4cc4)
+	text "Quickfreeze"
+	done
+
+QuickfreezeDescription: ; 5ccd1 (17:4cd1)
+	text "When you put Articuno into play"
+	line "during your turn (not during"
+	line "set-up), flip a coin. If heads, the"
+	line "Defending Pokémon is now Paralyzed."
+	done
+
+IceBreathName: ; 5cd57 (17:4d57)
+	text "Ice Breath"
+	done
+
+IceBreathDescription: ; 5cd63 (17:4d63)
+	text "Does 40 damage to 1 of your"
+	line "opponent's Pokémon. Don't apply"
+	line "Weakness and Resistance for this"
+	line "attack. (Any other effects that"
+	line "would happen after applying Weakness"
+	line "and Resistance still happen.)"
+	done
+
+ArticunoLv37Description: ; 5ce35 (17:4e35)
+	text "A legendary bird Pokémon. It freezes"
+	line "water that is contained in winter"
+	line "air and makes it snow."
 	done

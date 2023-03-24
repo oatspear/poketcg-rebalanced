@@ -164,7 +164,7 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	call nz, HandleDamageReductionExceptSubstatus2.pkmn_power
 	push de ; push damage from call above, which handles Invisible Wall and Kabuto Armor
 	call HandleNoDamageOrEffectSubstatus.pkmn_power
-	call nc, HandleTransparency
+	; call nc, HandleTransparency
 	pop de ; restore damage
 	ret nc
 	; if carry was set due to NShield or Transparency, damage is 0
@@ -244,8 +244,8 @@ HandleNShieldAndTransparency:
 	ld a, e
 	cp MEW_LV8
 	jr z, .nshield
-	cp HAUNTER_LV17
-	jr z, .transparency
+	; cp HAUNTER_LV17
+	; jr z, .transparency
 .done
 	pop de
 	or a
@@ -263,16 +263,16 @@ HandleNShieldAndTransparency:
 	pop de
 	scf
 	ret
-.transparency
-	xor a
-	ld [wDuelDisplayedScreen], a
-	ldtx de, TransparencyCheckText
-	call TossCoin
-	jr nc, .done
-	ld a, NO_DAMAGE_OR_EFFECT_TRANSPARENCY
-	ld [wNoDamageOrEffect], a
-	ldtx hl, NoDamageOrEffectDueToTransparencyText
-	jr .print_text
+; .transparency
+; 	xor a
+; 	ld [wDuelDisplayedScreen], a
+; 	ldtx de, TransparencyCheckText
+; 	call TossCoin
+; 	jr nc, .done
+; 	ld a, NO_DAMAGE_OR_EFFECT_TRANSPARENCY
+; 	ld [wNoDamageOrEffect], a
+; 	ldtx hl, NoDamageOrEffectDueToTransparencyText
+; 	jr .print_text
 
 ; return carry if the turn holder's arena Pokemon is under a condition that makes
 ; it unable to attack. also return in hl the text id to be displayed
@@ -410,30 +410,30 @@ HandleNoDamageOrEffectSubstatus:
 ; if the Pokemon being attacked is HAUNTER_LV17, and its Transparency is active,
 ; there is a 50% chance that any damage or effect is prevented
 ; return carry if damage is prevented
-HandleTransparency:
-	ld a, [wTempNonTurnDuelistCardID]
-	cp HAUNTER_LV17
-	jr z, .transparency
-.done
-	or a
-	ret
-.transparency
-	ld a, [wLoadedAttackCategory]
-	cp POKEMON_POWER
-	jr z, .done ; Transparency has no effect against Pkmn Powers
-	ld a, [wTempPlayAreaLocation_cceb]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
-	jr c, .done
-	xor a
-	ld [wDuelDisplayedScreen], a
-	ldtx de, TransparencyCheckText
-	call TossCoin
-	ret nc
-	ld a, NO_DAMAGE_OR_EFFECT_TRANSPARENCY
-	ld [wNoDamageOrEffect], a
-	ldtx hl, NoDamageOrEffectDueToTransparencyText
-	scf
-	ret
+; HandleTransparency:
+; 	ld a, [wTempNonTurnDuelistCardID]
+; 	cp HAUNTER_LV17
+; 	jr z, .transparency
+; .done
+; 	or a
+; 	ret
+; .transparency
+; 	ld a, [wLoadedAttackCategory]
+; 	cp POKEMON_POWER
+; 	jr z, .done ; Transparency has no effect against Pkmn Powers
+; 	ld a, [wTempPlayAreaLocation_cceb]
+; 	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+; 	jr c, .done
+; 	xor a
+; 	ld [wDuelDisplayedScreen], a
+; 	ldtx de, TransparencyCheckText
+; 	call TossCoin
+; 	ret nc
+; 	ld a, NO_DAMAGE_OR_EFFECT_TRANSPARENCY
+; 	ld [wNoDamageOrEffect], a
+; 	ldtx hl, NoDamageOrEffectDueToTransparencyText
+; 	scf
+; 	ret
 
 ; return carry and return the appropriate text id in hl if the target has an
 ; special status or power that prevents any damage or effect done to it this turn

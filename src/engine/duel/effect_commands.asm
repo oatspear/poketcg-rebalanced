@@ -40,12 +40,6 @@ EkansSpitPoisonEffectCommands:
 	dbw EFFECTCMDTYPE_AI, SpitPoison_AIEffect
 	db  $00
 
-ArbokTerrorStrikeEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, TerrorStrike_SwitchDefendingPokemon
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, TerrorStrike_50PercentSelectSwitchPokemon
-	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, TerrorStrike_50PercentSelectSwitchPokemon
-	db  $00
-
 ArbokPoisonFangEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
 	dbw EFFECTCMDTYPE_AI, PoisonFang_AIEffect
@@ -74,10 +68,6 @@ GloomPoisonPowderEffectCommands:
 
 GloomFoulOdorEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FoulOdorEffect
-	db  $00
-
-KakunaStiffenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, KakunaStiffenEffect
 	db  $00
 
 KakunaPoisonPowderEffectCommands:
@@ -122,10 +112,6 @@ ExeggcuteLeechSeedEffectCommands:
 KoffingFoulGasEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FoulGas_PoisonOrConfusionEffect
 	dbw EFFECTCMDTYPE_AI, FoulGas_AIEffect
-	db  $00
-
-MetapodStiffenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MetapodStiffenEffect
 	db  $00
 
 TeleportEffectCommands:
@@ -190,8 +176,8 @@ NidorinoDoubleKickEffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
 	db  $00
 
-ButterfreeMegaDrainEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ButterfreeMegaDrainEffect
+MegaDrainEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MegaDrainEffect
 	db  $00
 
 WeedlePoisonStingEffectCommands:
@@ -267,10 +253,6 @@ TangelaPoisonWhipEffectCommands:
 VenusaurSolarPowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SolarPower_CheckUse
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SolarPower_RemoveStatusEffect
-	db  $00
-
-VenusaurMegaDrainEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, VenusaurMegaDrainEffect
 	db  $00
 
 OmastarWaterGunEffectCommands:
@@ -414,11 +396,6 @@ SquirtleBubbleEffectCommands:
 ArticunoFreezeDryEffectCommands:
 Paralysis50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
-	db  $00
-
-ArticunoBlizzardEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Blizzard_BenchDamage50PercentEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Blizzard_BenchDamageEffect
 	db  $00
 
 TentacoolCowardiceEffectCommands:
@@ -715,12 +692,6 @@ MewtwoLv60EnergyAbsorptionEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, MewtwoLv60EnergyAbsorption_AISelectEffect
 	db  $00
 
-SlowbroStrangeBehaviorEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StrangeBehavior_CheckDamage
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StrangeBehavior_SelectAndSwapEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StrangeBehavior_SwapEffect
-	db  $00
-
 SpacingOutEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SpacingOut_CheckDamage
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpacingOut_Success50PercentEffect
@@ -765,10 +736,6 @@ GeodudeStoneBarrageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, StoneBarrage_AIEffect
 	db  $00
 
-; OnixHardenEffectCommands:
-; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OnixHardenEffect
-; 	db  $00
-
 PrimeapeFurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PrimeapeFurySwipes_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, PrimeapeFurySwipes_AIEffect
@@ -810,8 +777,8 @@ KarateChopEffectCommands:
 	dbw EFFECTCMDTYPE_AI, KarateChop_AIEffect
 	db  $00
 
-GravelerHardenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, GravelerHardenEffect
+HardenEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HardenEffect
 	db  $00
 
 RhydonRamEffectCommands:
@@ -839,6 +806,10 @@ SandshrewSandAttackEffectCommands:
 
 Earthquake10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Earthquake10Effect
+	db  $00
+
+BlizzardEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenched10Effect
 	db  $00
 
 AerodactylPrehistoricPowerEffectCommands:
@@ -894,10 +865,6 @@ WeezingSelfdestructEffectCommands:
 GolemSelfdestructEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct100Bench20Effect
 	db  $00
-
-; RockSlideEffectCommands:
-; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, RockSlide10Effect
-; 	db  $00
 
 ZapdosThunderEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ZapdosThunder_Recoil50PercentEffect
@@ -1127,6 +1094,7 @@ LickitungSupersonicEffectCommands:
 	db  $00
 
 WhirlwindEffectCommands:
+TerrorStrikeEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect
 	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect

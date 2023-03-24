@@ -366,11 +366,11 @@ VenusaurLv64Card:
 	; attack 2
 	energy GRASS, 3 ; energies
 	tx MegaDrainName ; name
-	tx VenusaursMegaDrainDescription ; description
-	tx VenusaursMegaDrainDescriptionCont ; description (cont)
+	tx MegaDrainDescription ; description
+	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw VenusaurMegaDrainEffectCommands ; effect commands
+	dw MegaDrainEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
@@ -504,12 +504,12 @@ MetapodCard:
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
-	tx StiffenName ; name
-	tx MetapodsStiffenDescription ; description
+	tx HardenName ; name
+	tx HardenDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MetapodStiffenEffectCommands ; effect commands
+	dw HardenEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -556,7 +556,7 @@ ButterfreeCard:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx WhirlwindName ; name
-	tx WhirlwindDescription ; description
+	tx OpponentSwitchesPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -570,11 +570,11 @@ ButterfreeCard:
 	; attack 2
 	energy GRASS, 3 ; energies
 	tx MegaDrainName ; name
-	tx ButterfreesMegaDrainDescription ; description
-	tx ButterfreesMegaDrainDescriptionCont ; description (cont)
+	tx MegaDrainDescription ; description
+	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ButterfreeMegaDrainEffectCommands ; effect commands
+	dw MegaDrainEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
@@ -657,12 +657,12 @@ KakunaCard:
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
-	tx StiffenName ; name
-	tx KakunasStiffenDescription ; description
+	tx HardenName ; name
+	tx HardenDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw KakunaStiffenEffectCommands ; effect commands
+	dw HardenEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -811,11 +811,11 @@ ArbokCard:
 	; attack 1
 	energy DARKNESS, 1 ; energies
 	tx TerrorStrikeName ; name
-	tx TerrorStrikeDescription ; description
+	tx OpponentSwitchesPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ArbokTerrorStrikeEffectCommands ; effect commands
+	dw TerrorStrikeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
@@ -2545,7 +2545,7 @@ NinetalesLv35Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx QuickAttack20Description ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
@@ -2647,7 +2647,7 @@ ArcanineLv34Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx QuickAttack20Description ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
@@ -2800,7 +2800,7 @@ RapidashCard:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx StompName ; name
-	tx StompDescription ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
@@ -2814,7 +2814,7 @@ RapidashCard:
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx AgilityName ; name
-	tx RapidashsAgilityDescription ; description
+	tx AgilityDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
@@ -2902,7 +2902,7 @@ MagmarLv31Card:
 	; attack 1
 	energy FIRE, 1 ; energies
 	tx SmokescreenName ; name
-	tx MagmarsSmokescreenDescription ; description
+	tx OpponentAttackMayDoNothingDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
@@ -3004,7 +3004,7 @@ FlareonLv28Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx QuickAttack20Description ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
@@ -3922,7 +3922,7 @@ KinglerCard:
 	; attack 1
 	energy WATER, 1 ; energies
 	tx FlailName ; name
-	tx KinglersFlailDescription ; description
+	tx FlailDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_X ; category
@@ -4038,7 +4038,7 @@ SeadraCard:
 	; attack 2
 	energy WATER, 1, COLORLESS, 2 ; energies
 	tx AgilityName ; name
-	tx SeadrasAgilityDescription ; description
+	tx AgilityDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -4293,7 +4293,7 @@ MagikarpCard:
 	; attack 2
 	energy WATER, 1 ; energies
 	tx FlailName ; name
-	tx MagikarpsFlailDescription ; description
+	tx FlailDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_X ; category
@@ -4483,7 +4483,7 @@ VaporeonLv42Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx QuickAttack20Description ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
@@ -4650,11 +4650,11 @@ ArticunoLv35Card:
 	; attack 2
 	energy WATER, 3 ; energies
 	tx BlizzardName ; name
-	tx BlizzardDescription ; description
+	tx DamageOpponentBench10Description ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ArticunoBlizzardEffectCommands ; effect commands
+	dw BlizzardEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -4789,7 +4789,7 @@ PikachuLv14Card:
 	; attack 1
 	energy LIGHTNING, 2 ; energies
 	tx SparkName ; name
-	tx SparkDescription ; description
+	tx Damage1BenchedPokemon10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -5095,7 +5095,7 @@ RaichuLv40Card:
 	; attack 1
 	energy LIGHTNING, 1, COLORLESS, 2 ; energies
 	tx AgilityName ; name
-	tx RaichusAgilityDescription ; description
+	tx AgilityDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -5109,7 +5109,7 @@ RaichuLv40Card:
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx ThunderName ; name
-	tx RaichusThunderDescription ; description
+	tx Recoil30IfTailsDescription ; description
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
@@ -5262,7 +5262,7 @@ MagnemiteLv15Card:
 	; attack 2
 	energy LIGHTNING, 2 ; energies
 	tx SparkName ; name
-	tx SparkDescription ; description
+	tx Damage1BenchedPokemon10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -5452,7 +5452,7 @@ ElectrodeLv35Card:
 	; attack 1
 	energy LIGHTNING, 1 ; energies
 	tx SparkName ; name
-	tx SparkDescription ; description
+	tx Damage1BenchedPokemon10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -5568,7 +5568,7 @@ ElectabuzzLv20Card:
 	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx ElectabuzzsQuickAttackDescription ; description
+	tx QuickAttackDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
@@ -5707,7 +5707,7 @@ JolteonLv29Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx QuickAttack20Description ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
@@ -5823,7 +5823,7 @@ ZapdosLv64Card:
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx ThunderName ; name
-	tx ZapdosThunderDescription ; description
+	tx Recoil30IfTailsDescription ; description
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
@@ -7009,8 +7009,8 @@ KabutopsCard:
 
 	; attack 2
 	energy WATER, 1, COLORLESS, 2 ; energies
-	tx AbsorbName ; name
-	tx AbsorbDescription ; description
+	tx MegaDrainName ; name
+	tx MegaDrainDescription ; description
 	dw NONE ; description (cont)
 	db 50 ; damage
 	db DAMAGE_NORMAL ; category
@@ -7622,7 +7622,7 @@ GengarCard:
 	; attack 2
 	energy DARKNESS, 2, COLORLESS, 1 ; energies
 	tx DarkMindName ; name
-	tx DarkMindDescription ; description
+	tx Damage1BenchedPokemon10Description ; description
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
@@ -7710,7 +7710,7 @@ HypnoCard:
 	; attack 1
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies
 	tx DarkMindName ; name
-	tx DarkMindDescription ; description
+	tx Damage1BenchedPokemon10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -7775,7 +7775,7 @@ MrMimeCard:
 	; attack 2
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies
 	tx MeditateName ; name
-	tx MrMimesMeditateDescription ; description
+	tx MeditateDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
@@ -7826,7 +7826,7 @@ JynxCard:
 	; attack 2
 	energy PSYCHIC, 1, COLORLESS, 2 ; energies
 	tx MeditateName ; name
-	tx JynxsMeditateDescription ; description
+	tx MeditateDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
@@ -8169,7 +8169,7 @@ PidgeyCard:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx WhirlwindName ; name
-	tx WhirlwindDescription ; description
+	tx OpponentSwitchesPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
@@ -8234,7 +8234,7 @@ PidgeottoCard:
 	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx WhirlwindName ; name
-	tx WhirlwindDescription ; description
+	tx OpponentSwitchesPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -8322,7 +8322,7 @@ Pidgeot2Card:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx WhirlwindName ; name
-	tx WhirlwindDescription ; description
+	tx OpponentSwitchesPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -8718,18 +8718,18 @@ JigglypuffLv12Card:
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx DoubleEdgeName ; name
-	tx Recoil20Description ; description
+	energy COLORLESS, 2 ; energies
+	tx ExpandName ; name
+	tx ReduceDamageTakenBy10Description ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Recoil20EffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db NONE ; flags 2
+	dw JigglypuffExpandEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 20
-	db ATK_ANIM_HIT_RECOIL ; animation
+	db 10
+	db ATK_ANIM_EXPAND ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -8769,18 +8769,18 @@ JigglypuffLv13Card:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx ExpandName ; name
-	tx ReduceDamageTakenBy10Description ; description
+	energy COLORLESS, 3 ; energies
+	tx DoubleEdgeName ; name
+	tx Recoil20Description ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw JigglypuffExpandEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	dw Recoil20EffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_EXPAND ; animation
+	db 20
+	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -9407,7 +9407,7 @@ TaurosCard:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx StompName ; name
-	tx StompDescription ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
