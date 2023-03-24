@@ -41,6 +41,7 @@ EkansSpitPoisonEffectCommands:
 	db  $00
 
 ArbokPoisonFangEffectCommands:
+PoisonClawsEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
 	dbw EFFECTCMDTYPE_AI, PoisonFang_AIEffect
 	db  $00
@@ -253,6 +254,11 @@ TangelaPoisonWhipEffectCommands:
 VenusaurSolarPowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SolarPower_CheckUse
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SolarPower_RemoveStatusEffect
+	db  $00
+
+HelpingHandEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, HelpingHand_CheckUse
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HelpingHand_RemoveStatusEffect
 	db  $00
 
 OmastarWaterGunEffectCommands:
@@ -1005,7 +1011,7 @@ FarfetchdLeekSlapEffectCommands:
 	dbw EFFECTCMDTYPE_AI, LeekSlap_AIEffect
 	db  $00
 
-KangaskhanFetchEffectCommands:
+Draw1CardEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FetchEffect
 	db  $00
 
@@ -1026,10 +1032,6 @@ DoduoFuryAttackEffectCommands:
 
 DodrioRetreatAidEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RetreatAidEffect
-	db  $00
-
-MeowthPayDayEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PayDayEffect
 	db  $00
 
 DragonairSlamEffectCommands:
@@ -1182,6 +1184,11 @@ JigglypuffExpandEffectCommands:
 SneakAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SneakAttack_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, SneakAttack_AIEffect
+	db  $00
+
+PunishingSlapEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PunishingSlap_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, PunishingSlap_AIEffect
 	db  $00
 
 DoubleColorlessEnergyEffectCommands:

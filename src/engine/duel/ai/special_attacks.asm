@@ -43,6 +43,8 @@ HandleSpecialAIAttacks:
 	jp z, .BigThunder
 	cp KANGASKHAN
 	jp z, .Fetch
+	cp MEOWTH_LV14
+	jp z, .Fetch
 	cp DUGTRIO
 	jp z, .Earthquake
 	cp GRAVELER

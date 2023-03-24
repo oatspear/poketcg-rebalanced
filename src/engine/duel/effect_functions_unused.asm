@@ -308,3 +308,22 @@ Wail_FillBenchEffect: ; 2e335 (b:6335)
 .done
 	call Func_2c0bd
 	ret
+
+
+PayDayEffect: ; 2ebe8 (b:6be8)
+	ldtx de, IfHeadsDraw1CardFromDeckText
+	call TossCoin_BankB
+	ret nc ; tails
+	ldtx hl, Draw1CardFromTheDeckText
+	call DrawWideTextBox_WaitForInput
+	bank1call DisplayDrawOneCardScreen
+	call DrawCardFromDeck
+	ret c ; empty deck
+	call AddCardToHand
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld a, [wDuelistType]
+	cp DUELIST_TYPE_PLAYER
+	ret nz
+	; show card on screen if it was Player
+	bank1call OpenCardPage_FromHand
+	ret

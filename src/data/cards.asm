@@ -8433,7 +8433,7 @@ RaticateCard:
 	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3
 	db ENERGY_BOOST_DARKNESS
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
@@ -8718,18 +8718,18 @@ JigglypuffLv12Card:
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx ExpandName ; name
-	tx ReduceDamageTakenBy10Description ; description
+	energy PSYCHIC, 1, COLORLESS, 2 ; energies
+	tx PunishingSlapName ; name
+	tx PunishingSlapDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw JigglypuffExpandEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_EXPAND ; animation
+	db 3
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -8769,18 +8769,18 @@ JigglypuffLv13Card:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx DoubleEdgeName ; name
-	tx Recoil20Description ; description
+	energy COLORLESS, 2 ; energies
+	tx ExpandName ; name
+	tx ReduceDamageTakenBy10Description ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Recoil20EffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db NONE ; flags 2
+	dw JigglypuffExpandEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 20
-	db ATK_ANIM_HIT_RECOIL ; animation
+	db 10
+	db ATK_ANIM_EXPAND ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -8856,10 +8856,6 @@ WigglytuffCard:
 	db STAGE1 ; stage
 	tx JigglypuffName ; pre-evo name
 
-	; Assistance / Helping Hand
-	; Once during your turn (before your attack), if Wigglytuff is on your Bench,
-	; you may remove 1 Special Condition from your Active Pokémon.
-
 	; Fluffy Fur
 	; If Wigglytuff is your Active Pokémon and is damaged by an opponent's attack
 	; (even if Wigglytuff is Knocked Out), the Attacking Pokémon is now Asleep.
@@ -8884,10 +8880,6 @@ WigglytuffCard:
 	; If the Defending Pokémon is Asleep or Confused, this attack does +20 damage.
 	; Then, the Defending Pokémon is no longer Asleep or Confused.
 
-	; Punishing Slap (PCC) 40+
-	; If any of your opponent's Pokémon have any Darkness Energy attached to them,
-	; this attack does 40 more damage.
-
 	; Orb Polish (C)
 	; Put 3 Energy from your discard pile into your hand.
 
@@ -8895,18 +8887,18 @@ WigglytuffCard:
 	; Search your deck for up to 2 cards and put them into your hand.
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx LullabyName ; name
-	tx InflictSleepDescription ; description
+	energy 0 ; energies
+	tx HelpingHandName ; name
+	tx HelpingHandDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw InflictSleepEffectCommands ; effect commands
-	db INFLICT_SLEEP ; flags 1
+	db POKEMON_POWER ; category
+	dw HelpingHandEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_LULLABY ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
@@ -8946,32 +8938,32 @@ MeowthLv14Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx CatPunchName ; name
-	tx CatPunchDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx CollectName ; name
+	tx Draw1CardDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MeowthCatPunchEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
-	db NONE ; flags 3
-	db 2
-	db ATK_ANIM_CAT_PUNCH ; animation
+	dw Draw1CardEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
+	energy COLORLESS, 2 ; energies
+	tx CatPunchName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_CAT_PUNCH ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -8996,14 +8988,26 @@ MeowthLv15Card:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; Nap (C)
+	; Heal 20 damage from this Pokémon.
+
+	; Search (C)
+	; Flip a coin. If heads, search your deck for an Item card, reveal it, and put it into your hand.
+
+	; Act Tough (C) 10+
+	; If this Pokémon has any Darkness Energy attached to it, this attack does 20 more damage.
+
+	; Fake Out (CC) 20
+	; Flip a coin. If heads, the Defending Pokémon is now Paralyzed.
+
 	; attack 1
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx PayDayName ; name
-	tx PayDayDescription ; description
+	tx Draw1CardDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MeowthPayDayEffectCommands ; effect commands
+	dw Draw1CardEffectCommands ; effect commands
 	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9047,33 +9051,61 @@ PersianCard:
 	db STAGE1 ; stage
 	tx MeowthName ; pre-evo name
 
+	; Suprise Slash (CC) 20
+	; Flip a coin. If heads look at your opponent's hand.
+	; If he or she has any Trainer cards there, choose 1 of them.
+	; Your opponent shuffles that card into his or her deck.
+
+	; Thick Skin
+	; Persian can't be affected by any Special Conditions.
+
+	; Poison Claws (C) 10
+	; The Defending Pokémon is now Poisoned.
+
+	; Shining Claws (CC) 30
+	; The Defending Pokémon is now Confused.
+
+	; Prowl
+	; Once during your turn, when you play Persian from your hand to evolve 1 of
+	; your Pokémon, you may search your deck for any 1 card and put it into your
+	; hand. Shuffle your deck afterward.
+
+	; Sharpen Claws (C)
+	; Flip 3 coins. For each heads, discard a card from your opponent's hand without looking.
+
+	; Nasty Plot (C)
+	; Search your deck for a card and put it into your hand. Shuffle your deck afterward.
+
+	; Shadow Claw (CC) 20
+	; Flip a coin. If heads, discard a random card from your opponent's hand.
+
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx ScratchName ; name
-	dw NONE ; description
+	energy COLORLESS, 1 ; energies
+	tx SneakAttackName ; name
+	tx SneakAttackDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db DAMAGE_PLUS ; category
+	dw SneakAttackEffectCommands ; effect commands
 	db NONE ; flags 1
+	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 3
+	db ENERGY_BOOST_DARKNESS
+	db ATK_ANIM_QUICK_ATTACK ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
+	tx PoisonClawsName ; name
+	tx InflictPoisonDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw PoisonClawsEffectCommands ; effect commands
+	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_SLASH ; animation
-
-	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx PounceName ; name
-	tx ReduceAttackBy10Description ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw PersianPounceEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -9356,11 +9388,11 @@ KangaskhanCard:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx FetchName ; name
-	tx FetchDescription ; description
+	tx Draw1CardDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw KangaskhanFetchEffectCommands ; effect commands
+	dw Draw1CardEffectCommands ; effect commands
 	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3

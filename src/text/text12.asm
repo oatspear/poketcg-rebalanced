@@ -237,16 +237,6 @@ CatPunchName: ; 6227c (18:627c)
 	text "Cat Punch"
 	done
 
-CatPunchDescription: ; 62287 (18:6287)
-	text "Does 20 damage to 1 of your"
-	line "opponent's Pokémon chosen at random."
-	line "Don't apply Weakness and Resistance"
-	line "for this attack. (Any other effects"
-	line "that would happen after applying"
-	line "Weakness and Resistance still"
-	line "happen.)"
-	done
-
 ScratchCatName: ; 62359 (18:6359)
 	text "Scratch Cat"
 	done
@@ -259,10 +249,6 @@ MeowthLv14Description: ; 62366 (18:6366)
 
 PayDayName: ; 623d3 (18:63d3)
 	text "Pay Day"
-	done
-
-PayDayDescription: ; 623dc (18:63dc)
-	text "Flip a coin. If heads, draw a card."
 	done
 
 MeowthLv15Description: ; 62401 (18:6401)
@@ -421,7 +407,7 @@ FetchName: ; 62a4e (18:6a4e)
 	text "Fetch"
 	done
 
-FetchDescription: ; 62a55 (18:6a55)
+Draw1CardDescription: ; 62a55 (18:6a55)
 	text "Draw a card."
 	done
 
@@ -652,6 +638,35 @@ DragoniteDescription: ; 633d1 (18:73d1)
 	text "An extremely rarely seen marine"
 	line "Pokémon. Its intelligence is said"
 	line "to match that of humans."
+	done
+
+PunishingSlapName: ; 631e4 (18:71e4)
+	text "Punishing Slap"
+	done
+
+PunishingSlapDescription: ; 631f2 (18:71f2)
+	text "If the Defending Pokémon has any"
+	line "<DARKNESS> Energy attached to it,"
+	line "this attack does 20 more damage."
+	done
+
+HelpingHandName: ; 631e4 (18:71e4)
+	text "Helping Hand"
+	done
+
+HelpingHandDescription: ; 631f2 (18:71f2)
+	text "Once during your turn (before your"
+	line "attack), if this Pokémon is on your"
+	line "Bench, you may remove all Special"
+	line "Conditions from your Active Pokémon."
+	done
+
+CollectName: ; 631e4 (18:71e4)
+	text "Collect"
+	done
+
+PoisonClawsName: ; 631e4 (18:71e4)
+	text "Poison Claws"
 	done
 
 ProfessorOakName: ; 6342d (18:742d)

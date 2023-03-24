@@ -52,9 +52,8 @@ ApplyStatusEffect: ; 2c035 (b:4035)
 	cp SNORLAX
 	jr nz, .can_induce_status
 	call SwapTurn
-	xor a
 	; ...unless already so, or if affected by Muk's Toxic Gas
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	call SwapTurn
 	jr c, .can_induce_status
 
@@ -1860,8 +1859,7 @@ BulbasaurLeechSeedEffect: ; 2cb37 (b:4b37)
 EnergyTrans_CheckPlayArea: ; 2cb44 (b:4b44)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret c ; cannot use Pkmn Power
 
 ; search in Play Area for at least 1 Grass Energy type
@@ -2054,8 +2052,7 @@ Shift_OncePerTurnCheck: ; 2cd09 (b:4d09)
 	call GetTurnDuelistVariable
 	and USED_PKMN_POWER_THIS_TURN
 	jr nz, .already_used
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret
 .already_used
 	ldtx hl, OnlyOncePerTurnText
@@ -2163,8 +2160,7 @@ Heal_OncePerTurnCheck: ; 2cda8 (b:4da8)
 	ldtx hl, NoPokemonWithDamageCountersText
 	ret c ; no damage counters to heal
 
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret
 
 .already_used
@@ -2265,8 +2261,7 @@ SolarPower_CheckUse: ; 2ce53 (b:4e53)
 	and USED_PKMN_POWER_THIS_TURN
 	jr nz, .already_used
 
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret c ; can't use PKMN due to status or Toxic Gas
 
 ; return carry if none of the Arena cards have status conditions
@@ -2312,6 +2307,61 @@ SolarPower_RemoveStatusEffect: ; 2ce82 (b:4e82)
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetNonTurnDuelistVariable
 	ld [hl], NO_STATUS
+	bank1call DrawDuelHUDs
+	ret
+
+HelpingHand_CheckUse: ; 2ce53 (b:4e53)
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ldtx hl, CanOnlyBeUsedOnTheBenchText
+	or a
+	jr z, .set_carry
+
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .already_used
+
+	call CheckCannotUseDueToStatus
+	ret c ; can't use PKMN due to status or Toxic Gas
+
+; return carry if the Arena card does not have status conditions
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	or a
+	jr z, .no_status
+	ret
+
+.already_used
+	ldtx hl, OnlyOncePerTurnText
+	scf
+	ret
+
+.no_status
+	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
+.set_carry
+	scf
+	ret
+
+HelpingHand_RemoveStatusEffect: ; 2ce82 (b:4e82)
+	ld a, ATK_ANIM_HEAL
+	ld [wLoadedAttackAnimation], a
+	bank1call Func_7415
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+
+	ldh a, [hTemp_ffa0]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+	ld l, DUELVARS_ARENA_CARD_STATUS
+	ld [hl], NO_STATUS
+
 	bank1call DrawDuelHUDs
 	ret
 
@@ -2706,7 +2756,7 @@ CloysterSpikeCannon_MultiplierEffect: ; 2d24e (b:524e)
 Cowardice_Check: ; 2d28b (b:528b)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret c ; return if cannot use
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -3339,8 +3389,7 @@ FireSpin_DiscardEffect: ; 2d614 (b:5614)
 ; or if Arena card is not Charizard.
 ; this is unused.
 EnergyBurnCheck_Unreferenced: ; 2d620 (b:5620)
-	xor a
-	bank1call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret c
 	ld a, DUELVARS_ARENA_CARD
 	push de
@@ -3714,8 +3763,7 @@ Curse_CheckDamageAndBench: ; 2d7fc (b:57fc)
 
 ; return carry if Pkmn Power cannot be used due
 ; to Toxic Gas or status.
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret
 
 .set_carry
@@ -4279,8 +4327,7 @@ DamageSwap_CheckDamage: ; 2db8e (b:5b8e)
 	ldh [hTemp_ffa0], a
 	call CheckIfPlayAreaHasAnyDamage
 	jr c, .no_damage
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret
 .no_damage
 	ldtx hl, NoPokemonWithDamageCountersText
@@ -5309,8 +5356,7 @@ Peek_OncePerTurnCheck: ; 2e29c (b:629c)
 	call GetTurnDuelistVariable
 	and USED_PKMN_POWER_THIS_TURN
 	jr nz, .already_used
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret
 .already_used
 	ldtx hl, OnlyOncePerTurnText
@@ -6699,8 +6745,7 @@ StepIn_BenchCheck: ; 2eaca (b:6aca)
 	and USED_PKMN_POWER_THIS_TURN
 	jr nz, .set_carry
 
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	ret
 
 .set_carry
@@ -6832,24 +6877,6 @@ FuryAttack_MultiplierEffect: ; 2ebc2 (b:6bc2)
 
 RetreatAidEffect: ; 2ebd7 (b:6bd7)
 	scf
-	ret
-
-PayDayEffect: ; 2ebe8 (b:6be8)
-	ldtx de, IfHeadsDraw1CardFromDeckText
-	call TossCoin_BankB
-	ret nc ; tails
-	ldtx hl, Draw1CardFromTheDeckText
-	call DrawWideTextBox_WaitForInput
-	bank1call DisplayDrawOneCardScreen
-	call DrawCardFromDeck
-	ret c ; empty deck
-	call AddCardToHand
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, [wDuelistType]
-	cp DUELIST_TYPE_PLAYER
-	ret nz
-	; show card on screen if it was Player
-	bank1call OpenCardPage_FromHand
 	ret
 
 DragonairSlam_AIEffect: ; 2ec0c (b:6c0c)
@@ -7840,11 +7867,21 @@ SneakAttack_DamageBoostEffect: ; 2d0c0 (b:50c0)
 	xor a  ; PLAY_AREA_ARENA
 	call CheckIfCardHasDarknessEnergyAttached
 	jr c, .done
-	ld a, 10
+	ld a, 20
 	call AddToDamage
 	ret
 .done
 	or a
+	ret
+
+PunishingSlap_AIEffect: ; 2d0b8 (b:50b8)
+	call PunishingSlap_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+PunishingSlap_DamageBoostEffect: ; 2d0c0 (b:50c0)
+	call SwapTurn
+	call SneakAttack_DamageBoostEffect
+	call SwapTurn
 	ret
 
 ; returns carry if either there are no damage counters
@@ -7996,8 +8033,7 @@ ImakuniEffect: ; 2f216 (b:7216)
 ; cannot confuse Snorlax if its Pkmn Power is active
 	cp SNORLAX
 	jr nz, .success
-	xor a
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckCannotUseDueToStatus
 	jr c, .success
 	; fallthrough if Thick Skinned is active
 

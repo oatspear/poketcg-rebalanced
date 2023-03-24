@@ -477,7 +477,7 @@
 
 #### Raticate
 - **Bite**: removed.
-- New attack: **Sneak Attack** (C): 20 damage, +10 if Darkness Energy is attached.
+- New attack: **Sneak Attack** (C): 20 damage, +20 if Darkness Energy is attached.
 - **Super Fang**: reduced cost from (CCC) to (CC).
 
 #### Spearow
@@ -501,11 +501,28 @@
 - **First Aid**: removed.
 - New attack: **Healing Melody** (P): heal 10 to all of the player's Pokémon.
 - **Double Edge**: removed.
-- New attack: **Expand** (CC): 10 damage, reduce incoming damage by 10.
+- New attack: **Punishing Slap** (PCC): 20 damage, plus 20 against Pokémon with Darkness Energy.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
 - New attack: **Call for Friend** (C): can choose any Basic Pokémon from deck to put on Bench.
+
+#### Wigglytuff
+- **Lullaby**: removed.
+- New Pokémon Power: **Helping Hand**: when on the Bench, heal special conditions from the Active Pokémon.
+
+#### Meowth Lv14
+- New attack: **Collect** (C): draw a card.
+- **Cat Punch**: 20 damage, no additional effect.
+
+#### Meowth Lv15
+- **Pay Day**: reduced cost from (CC) to (C), draws a card without coin flip.
+
+#### Persian
+- **Scratch**: removed.
+- New attack: **Sneak Attack** (C): 20 damage, +20 if Darkness Energy is attached.
+- **Pounce**: removed.
+- New attack: **Poison Claws** (CC): 10 damage, inflicts Poison.
 
 #### Eevee
 - **Tail Wag**: removed.

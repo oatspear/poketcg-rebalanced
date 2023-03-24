@@ -1400,7 +1400,7 @@ SneakAttackName:
 SneakAttackDescription:
 	text "If this Pokémon has any <DARKNESS> Energy"
 	line "attached to it, this attack does"
-	line "10 additional damage."
+	line "20 additional damage."
 	done
 
 HorseaDescription: ; 5c000 (17:4000)

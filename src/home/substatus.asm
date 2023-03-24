@@ -421,8 +421,7 @@ HandleNoDamageOrEffectSubstatus:
 ; 	ld a, [wLoadedAttackCategory]
 ; 	cp POKEMON_POWER
 ; 	jr z, .done ; Transparency has no effect against Pkmn Powers
-; 	ld a, [wTempPlayAreaLocation_cceb]
-; 	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+; 	call CheckCannotUseDueToStatus
 ; 	jr c, .done
 ; 	xor a
 ; 	ld [wDuelDisplayedScreen], a

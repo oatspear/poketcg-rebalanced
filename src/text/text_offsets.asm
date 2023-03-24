@@ -2808,11 +2808,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WigglytuffDescription                              ; 0x0b12
 	textpointer MeowthName                                         ; 0x0b13
 	textpointer CatPunchName                                       ; 0x0b14
-	textpointer CatPunchDescription                                ; 0x0b15
 	textpointer ScratchCatName                                     ; 0x0b16
 	textpointer MeowthLv14Description                             ; 0x0b17
 	textpointer PayDayName                                         ; 0x0b18
-	textpointer PayDayDescription                                  ; 0x0b19
 	textpointer MeowthLv15Description                             ; 0x0b1a
 	textpointer PersianName                                        ; 0x0b1b
 	textpointer PounceName                                         ; 0x0b1c
@@ -2845,7 +2843,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChanseyDescription                                 ; 0x0b38
 	textpointer KangaskhanName                                     ; 0x0b39
 	textpointer FetchName                                          ; 0x0b3a
-	textpointer FetchDescription                                   ; 0x0b3b
+	textpointer Draw1CardDescription                               ; 0x0b3b
 	textpointer CometPunchName                                     ; 0x0b3c
 	textpointer ParentName                                         ; 0x0b3d
 	textpointer KangaskhanDescription                              ; 0x0b3e
@@ -2890,6 +2888,12 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer StepInDescription                                  ; 0x0b65
 	textpointer DoubleAttackX40Description                         ; 0x0b66
 	textpointer DragoniteDescription                               ; 0x0b67
+	textpointer PunishingSlapName
+	textpointer PunishingSlapDescription
+	textpointer HelpingHandName
+	textpointer HelpingHandDescription
+	textpointer CollectName
+	textpointer PoisonClawsName
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a
