@@ -477,11 +477,11 @@
 
 #### Raticate
 - **Bite**: removed.
-- New attack: **Sneak Attack** (C): 20 damage, +20 if Darkness Energy is attached.
+- New attack: **Sneak Attack** (C): 20 damage, +10 if Darkness Energy is attached.
 - **Super Fang**: reduced cost from (CCC) to (CC).
 
 #### Spearow
-- **Peck**: +20 damage if opponent is Grass.
+- **Peck**: +10 damage if opponent is Grass.
 - **Mirror Move**: removed.
 - New attack: **Wing Attack** (CC): 20 damage.
 
@@ -501,7 +501,7 @@
 - **First Aid**: removed.
 - New attack: **Healing Melody** (P): heal 10 to all of the player's Pokémon.
 - **Double Edge**: removed.
-- New attack: **Punishing Slap** (PCC): 20 damage, plus 20 against Pokémon with Darkness Energy.
+- New attack: **Punishing Slap** (PC): 20 damage, plus 10 against Pokémon with Darkness Energy.
 
 #### Jigglypuff Lv13
 - **Friendship Song**: removed.
@@ -520,9 +520,9 @@
 
 #### Persian
 - **Scratch**: removed.
-- New attack: **Sneak Attack** (C): 20 damage, +20 if Darkness Energy is attached.
+- New attack: **Sneak Attack** (C): 20 damage, +10 if Darkness Energy is attached.
 - **Pounce**: removed.
-- New attack: **Poison Claws** (CC): 10 damage, inflicts Poison.
+- New attack: **Poison Claws** (CC): 20 damage, inflicts Poison.
 
 #### Eevee
 - **Tail Wag**: removed.

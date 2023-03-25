@@ -6479,7 +6479,7 @@ Peck_DamageBoostEffect: ; 2e595 (b:6595)
 	call SwapTurn
 	cp GRASS
 	ret nz ; no extra damage if not Grass
-	ld a, 20
+	ld a, 10
 	call AddToDamage
 	ret
 
@@ -7867,7 +7867,7 @@ SneakAttack_DamageBoostEffect: ; 2d0c0 (b:50c0)
 	xor a  ; PLAY_AREA_ARENA
 	call CheckIfCardHasDarknessEnergyAttached
 	jr c, .done
-	ld a, 20
+	ld a, 10
 	call AddToDamage
 	ret
 .done

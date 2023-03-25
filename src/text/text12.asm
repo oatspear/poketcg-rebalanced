@@ -44,7 +44,7 @@ PeckName: ; 61a21 (18:5a21)
 PeckDescription: ; 61a21 (18:5a21)
 	text "If your opponent's Active Pokémon"
 	line "is a <GRASS> Pokémon, this attack"
-	line "does 20 more damage."
+	line "does 10 more damage."
 	done
 
 FlapName:
@@ -647,7 +647,7 @@ PunishingSlapName: ; 631e4 (18:71e4)
 PunishingSlapDescription: ; 631f2 (18:71f2)
 	text "If the Defending Pokémon has any"
 	line "<DARKNESS> Energy attached to it,"
-	line "this attack does 20 more damage."
+	line "this attack does 10 more damage."
 	done
 
 HelpingHandName: ; 631e4 (18:71e4)

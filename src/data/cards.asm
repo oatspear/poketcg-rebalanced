@@ -8718,7 +8718,7 @@ JigglypuffLv12Card:
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy PSYCHIC, 1, COLORLESS, 2 ; energies
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
 	tx PunishingSlapName ; name
 	tx PunishingSlapDescription ; description
 	dw NONE ; description (cont)
@@ -9098,7 +9098,7 @@ PersianCard:
 	tx PoisonClawsName ; name
 	tx InflictPoisonDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw PoisonClawsEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
