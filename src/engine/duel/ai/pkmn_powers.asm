@@ -928,7 +928,7 @@ HandleAICowardice:
 	call GetCardIDFromDeckIndex
 	ld a, e
 	push bc
-	cp TENTACOOL
+	cp FARFETCHD
 	call z, .CheckWhetherToUseCowardice
 	pop bc
 	jr nc, .next
@@ -950,13 +950,12 @@ HandleAICowardice:
 ; checks whether AI uses Cowardice.
 ; return carry if Pkmn Power was used.
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Tentacool.
+;	c = Play Area location (PLAY_AREA_*) of Farfetch'd.
 .CheckWhetherToUseCowardice ; 22671 (8:6671)
 	ld a, c
 	ldh [hTemp_ffa0], a
 	ld e, a
 	call GetCardDamageAndMaxHP
-.asm_22678
 	or a
 	ret z ; return if has no damage counters
 
@@ -964,11 +963,8 @@ HandleAICowardice:
 	or a
 	jr nz, .is_benched
 
-	; this part is buggy if AIDecideBenchPokemonToSwitchTo returns carry
-	; but since this was already checked beforehand, this never happens.
-	; so jr c, .asm_22678 can be safely removed.
 	farcall AIDecideBenchPokemonToSwitchTo
-	jr c, .asm_22678 ; bug, this jumps in the middle of damage checking
+	; assert nc
 	jr .use_cowardice
 .is_benched
 	ld a, $ff

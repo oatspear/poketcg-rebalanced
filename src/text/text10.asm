@@ -1218,11 +1218,11 @@ CowardiceName: ; 5b885 (16:7885)
 CowardiceDescription: ; 5b890 (16:7890)
 	text "At any time during your turn"
 	line "(before your attack), you may return"
-	line "Tentacool to your hand. (Discard all"
-	line "cards attached to Tentacool.) This"
+	line "this Pokémon to your hand. (Discard"
+	line "all cards attached to it.) This"
 	line "power can't be used the turn you put"
-	line "Tentacool into play or if Tentacool"
-	line "is Asleep, Confused, or Paralyzed."
+	line "this Pokémon into play or if it is"
+	line "Asleep, Confused, or Paralyzed."
 	done
 
 JellyfishName: ; 5b987 (16:7987)

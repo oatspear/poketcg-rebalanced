@@ -404,7 +404,7 @@ Paralysis50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
-TentacoolCowardiceEffectCommands:
+CowardiceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Cowardice_Check
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Cowardice_RemoveFromPlayAreaEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Cowardice_PlayerSelectEffect

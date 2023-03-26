@@ -524,6 +524,10 @@
 - **Pounce**: removed.
 - New attack: **Poison Claws** (CC): 20 damage, inflicts Poison.
 
+#### Farfetch'd
+- **Pot Smash**: removed.
+- New Pokémon Power: **Cowardice**: discard all attached cards and return to hand.
+
 #### Eevee
 - **Tail Wag**: removed.
 - New attack: **Snivel** (C): reduce incoming damage by 20.
