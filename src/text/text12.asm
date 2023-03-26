@@ -360,8 +360,8 @@ LickitungName: ; 6289f (18:689f)
 	text "Lickitung"
 	done
 
-TongueWrapName: ; 628aa (18:68aa)
-	text "Tongue Wrap"
+TongueStretchName: ; 628aa (18:68aa)
+	text "Tongue Stretch"
 	done
 
 LickingName: ; 628b7 (18:68b7)
@@ -376,21 +376,6 @@ LickitungDescription: ; 628c0 (18:68c0)
 
 ChanseyName: ; 62926 (18:6926)
 	text "Chansey"
-	done
-
-ScrunchName: ; 6292f (18:692f)
-	text "Scrunch"
-	done
-
-ScrunchDescription: ; 62938 (18:6938)
-	text "Flip a coin. If heads, prevent all"
-	line "damage done to Chansey during your"
-	line "opponent's next turn. (Any other"
-	line "effects of attacks still happen.)"
-	done
-
-ChanseysDoubleEdgeDescription: ; 629c2 (18:69c2)
-	text "Chansey does 80 damage to itself."
 	done
 
 ChanseyDescription: ; 629e5 (18:69e5)

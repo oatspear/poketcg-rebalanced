@@ -2834,13 +2834,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TriplebirdName                                     ; 0x0b2e
 	textpointer DodrioDescription                                  ; 0x0b2f
 	textpointer LickitungName                                      ; 0x0b30
-	textpointer TongueWrapName                                     ; 0x0b31
+	textpointer TongueStretchName                                  ; 0x0b31
 	textpointer LickingName                                        ; 0x0b32
 	textpointer LickitungDescription                               ; 0x0b33
 	textpointer ChanseyName                                        ; 0x0b34
-	textpointer ScrunchName                                        ; 0x0b35
-	textpointer ScrunchDescription                                 ; 0x0b36
-	textpointer ChanseysDoubleEdgeDescription                      ; 0x0b37
 	textpointer ChanseyDescription                                 ; 0x0b38
 	textpointer KangaskhanName                                     ; 0x0b39
 	textpointer FetchName                                          ; 0x0b3a

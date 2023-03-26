@@ -528,6 +528,17 @@
 - **Pot Smash**: removed.
 - New Pokémon Power: **Cowardice**: discard all attached cards and return to hand.
 
+#### Lickitung
+- Reduced HP from 90 to 70.
+- **Tongue Wrap**: renamed to **Lick**.
+- **Supersonic**: removed.
+- New attack: **Tongue Stretch** (CC): deal 20 to one of the opponent's Benched Pokémon.
+
+#### Chansey
+- Reduced HP from 120 to 100.
+- **Scrunch**: removed.
+- New Pokémon Power: **Heal**: once per turn, heal 10 damage from a Pokémon.
+
 #### Eevee
 - **Tail Wag**: removed.
 - New attack: **Snivel** (C): reduce incoming damage by 20.

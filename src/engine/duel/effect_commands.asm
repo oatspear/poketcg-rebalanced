@@ -236,7 +236,7 @@ TangelaPoisonPowderEffectCommands:
 	dbw EFFECTCMDTYPE_AI, TangelaPoisonPowder_AIEffect
 	db  $00
 
-VileplumeHealEffectCommands:
+PokemonPowerHealEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Heal_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal_RemoveDamageEffect
 	db  $00
@@ -384,7 +384,6 @@ PikachuAltLv16ThundershockEffectCommands:
 MagnetonThunderWaveEffectCommands:
 JolteonStunNeedleEffectCommands:
 SnorlaxBodySlamEffectCommands:
-LickitungTongueWrapEffectCommands:
 EkansWrapEffectCommands:
 PinsirIronGripEffectCommands:
 CloysterClampEffectCommands:
@@ -800,6 +799,7 @@ RhyhornLeerEffectCommands:
 MarowakBoneAttackEffectCommands:
 DiglettDigEffectCommands:
 HitmonleeStretchKickEffectCommands:
+Deal20ToBenchEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StretchKick_CheckBench
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StretchKick_BenchDamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StretchKick_PlayerSelectEffect

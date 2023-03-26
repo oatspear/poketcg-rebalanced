@@ -1376,7 +1376,7 @@ VileplumeCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw VileplumeHealEffectCommands ; effect commands
+	dw PokemonPowerHealEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
@@ -9279,18 +9279,18 @@ LickitungCard:
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db LICKITUNG
-	db 90 ; hp
+	db 70 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx TongueWrapName ; name
+	tx LickName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw LickitungTongueWrapEffectCommands ; effect commands
+	dw Paralysis50PercentEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9299,17 +9299,17 @@ LickitungCard:
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
-	tx SupersonicName ; name
-	tx MayInflictConfusionDescription ; description
+	tx TongueStretchName ; name
+	tx Deal20ToBenchDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw LickitungSupersonicEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
-	db NONE ; flags 2
+	db RESIDUAL ; category
+	dw Deal20ToBenchEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SUPERSONIC ; animation
+	db 3
+	db ATK_ANIM_STRETCH_KICK ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -9330,36 +9330,36 @@ ChanseyCard:
 	db STAR ; rarity
 	db COLOSSEUM | NONE ; sets
 	db CHANSEY
-	db 120 ; hp
+	db 100 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx ScrunchName ; name
-	tx ScrunchDescription ; description
+	energy 0 ; energies
+	tx HealName ; name
+	tx HealDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw ChanseyScrunchEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw PokemonPowerHealEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
+	db 1
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 4 ; energies
+	energy COLORLESS, 2 ; energies
 	tx DoubleEdgeName ; name
-	tx ChanseysDoubleEdgeDescription ; description
+	tx Recoil20Description ; description
 	dw NONE ; description (cont)
-	db 80 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw ChanseyDoubleEdgeEffectCommands ; effect commands
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 80
+	db 20
 	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 1 ; retreat cost
