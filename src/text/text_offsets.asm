@@ -285,6 +285,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChangedTheResistanceOfPokemonToColorText           ; 0x0115
 	textpointer ChangedTheColorOfText                              ; 0x0116
 	textpointer Draw1CardFromTheDeckText                           ; 0x0117
+	textpointer Draw2CardsFromTheDeckText                          ; 0x0117
 	textpointer DrawCardsFromTheDeckText                           ; 0x0118
 	textpointer CannotDrawCardBecauseNoCardsInDeckText             ; 0x0119
 	textpointer ChoosePkmnToGiveDamageText                         ; 0x011a
@@ -2844,6 +2845,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer KangaskhanName                                     ; 0x0b39
 	textpointer FetchName                                          ; 0x0b3a
 	textpointer Draw1CardDescription                               ; 0x0b3b
+	textpointer Draw2CardsDescription
 	textpointer CometPunchName                                     ; 0x0b3c
 	textpointer ParentName                                         ; 0x0b3d
 	textpointer KangaskhanDescription                              ; 0x0b3e

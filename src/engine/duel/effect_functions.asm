@@ -6812,7 +6812,29 @@ LeekSlap_NoDamage50PercentEffect: ; 2eb34 (b:6b34)
 	call SetDefiniteDamage
 	ret
 
-FetchEffect: ; 2eb40 (b:6b40)
+CollectEffect:
+	ldtx hl, Draw2CardsFromTheDeckText
+	call DrawWideTextBox_WaitForInput
+	ld a, 2
+	bank1call DisplayDrawNCardsScreen
+	ld c, 2
+.loop_draw
+	call DrawCardFromDeck
+	jr c, .done
+	ldh [hTempCardIndex_ff98], a
+	call AddCardToHand
+	call IsPlayerTurn
+	jr nc, .skip_display_screen
+	push bc
+	bank1call DisplayPlayerDrawCardScreen
+	pop bc
+.skip_display_screen
+	dec c
+	jr nz, .loop_draw
+.done
+	ret
+
+FetchEffect:
 	ldtx hl, Draw1CardFromTheDeckText
 	call DrawWideTextBox_WaitForInput
 	bank1call DisplayDrawOneCardScreen

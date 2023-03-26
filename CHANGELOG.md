@@ -512,7 +512,7 @@
 - New Pokémon Power: **Helping Hand**: when on the Bench, heal special conditions from the Active Pokémon.
 
 #### Meowth Lv14
-- New attack: **Collect** (C): draw a card.
+- New attack: **Collect** (C): draw 2 cards.
 - **Cat Punch**: 20 damage, no additional effect.
 
 #### Meowth Lv15

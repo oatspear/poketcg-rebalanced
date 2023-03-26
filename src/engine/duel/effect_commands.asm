@@ -1015,6 +1015,10 @@ Draw1CardEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FetchEffect
 	db  $00
 
+Draw2CardsEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CollectEffect
+	db  $00
+
 TaurosStompEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TaurosStomp_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, TaurosStomp_AIEffect

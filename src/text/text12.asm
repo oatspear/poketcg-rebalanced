@@ -411,6 +411,10 @@ Draw1CardDescription: ; 62a55 (18:6a55)
 	text "Draw a card."
 	done
 
+Draw2CardsDescription: ; 62a55 (18:6a55)
+	text "Draw 2 cards."
+	done
+
 CometPunchName: ; 62a63 (18:6a63)
 	text "Comet Punch"
 	done
