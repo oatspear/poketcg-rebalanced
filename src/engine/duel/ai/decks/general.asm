@@ -170,7 +170,9 @@ AIProcessRetreat:
 	ld a, [wPreviousAIFlags]
 	and AI_FLAG_USED_SWITCH
 	jr nz, .used_switch
-; ... else try retreating normally.
+; ... else try Energy Transfer to help retreating normally.
+	ld a, AI_ENERGY_TRANS_RETREAT ; retreat
+	farcall HandleAIEnergyTrans
 	ld a, [wAIPlayAreaCardToSwitch]
 	call AITryToRetreat
 	ret
@@ -180,15 +182,4 @@ AIProcessRetreat:
 	ld a, [wPreviousAIFlags]
 	and ~AI_FLAG_USED_SWITCH ; clear Switch flag
 	ld [wPreviousAIFlags], a
-
-; bug, this doesn't make sense being here, since at this point
-; Switch Trainer card was already used to retreat the Pokemon.
-; what the routine will do is just transfer Energy cards to
-; the Arena Pokemon for the purpose of retreating, and
-; then not actually retreat, resulting in unusual behaviour.
-; this would only work placed right after the AI checks whether
-; they have Switch card in hand to use and doesn't have one.
-; (and probably that was the original intention.)
-	ld a, AI_ENERGY_TRANS_RETREAT ; retreat
-	farcall HandleAIEnergyTrans
 	ret

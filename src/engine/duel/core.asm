@@ -504,7 +504,7 @@ DuelMenu_Retreat:
 ; 	call DrawWideTextBox_WaitForInput
 ; 	jp PrintDuelMenuAndHandleInput
 
-.not_confused
+;.not_confused
 	; note that the energy cards are discarded (DiscardRetreatCostCards), then returned
 	; (ReturnRetreatCostCardsToArena), then discarded again for good (AttemptRetreat).
 	; It's done this way so that the retreating Pokemon is listed with its energies updated
@@ -5937,10 +5937,13 @@ AttemptRetreat:
 	; ld [wGotTailsFromConfusionCheckDuringRetreat], a
 	; scf
 	; ret
-.success
+;.success
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 	call SwapArenaWithBenchPokemon
+; retreat only once per turn
+	ld a, $01
+	ld [wAlreadyRetreatedThisTurn], a
 	xor a
 	; ld [wGotTailsFromConfusionCheckDuringRetreat], a
 	ret
