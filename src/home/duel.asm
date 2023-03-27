@@ -957,7 +957,7 @@ CheckIfCanEvolveInto_BasicToStage2:
 	scf
 	ret
 
-; OATS similar to ClearAllStatusConditions but does not remove POISONED or ASLEEP.
+; OATS similar to ClearAllStatusConditions but does not remove POISONED, ASLEEP or PARALYZED.
 ClearStatusOnSwitch:
 	push hl
 	ldh a, [hWhoseTurn]
@@ -965,8 +965,8 @@ ClearStatusOnSwitch:
 	ld l, DUELVARS_ARENA_CARD_STATUS
 	ld a, [hl]
 	and CNF_SLP_PRZ
-	cp ASLEEP
-	jr z, ClearAllStatusConditions.done_status
+	cp CONFUSED
+	jr nz, ClearAllStatusConditions.done_status  ; only clear confusion
 	ld a, [hl]
 	and PSN_DBLPSN
 	ld [hl], a ; preserve just the poison nybble

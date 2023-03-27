@@ -6965,6 +6965,7 @@ HandleBetweenTurnsEvents:
 	; call IsArenaPokemonPoisoned
 	; call SwapTurn
 	; jr c, .something_to_handle
+	call ClearParalysisFromBenchedPokemon
 	call DiscardAttachedPluspowers
 	call SwapTurn
 	call DiscardAttachedDefenders
@@ -6972,9 +6973,7 @@ HandleBetweenTurnsEvents:
 	ret
 
 .something_to_handle
-	; either:
-	; 1. turn holder's arena Pokemon is paralyzed, asleep, poisoned or double poisoned
-	; 2. non-turn holder's arena Pokemon is asleep, poisoned or double poisoned
+	; turn holder's arena Pokemon is paralyzed, poisoned or double poisoned
 	call Func_3b21
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
@@ -7013,6 +7012,7 @@ HandleBetweenTurnsEvents:
 	call WaitForWideTextBoxInput
 
 .discard_pluspower
+	call ClearParalysisFromBenchedPokemon
 	call DiscardAttachedPluspowers
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
@@ -7033,6 +7033,31 @@ HandleBetweenTurnsEvents:
 	call DiscardAttachedDefenders
 	call SwapTurn
 	call Func_6e4c
+	ret
+
+ClearParalysisFromBenchedPokemon:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	dec a
+	ret z  ; no Pokémon on the bench
+
+	ld e, a
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	ld a, e
+	ld l, a
+.loop
+; preserve Poison and Sleep (and Confusion?) on the Bench
+	ld a, [hl]
+	and CNF_SLP_PRZ
+	cp PARALYZED
+	jr nz, .next
+	ld a, DOUBLE_POISONED
+	and [hl]
+	ld [hl], a
+.next
+	dec l
+	jr nz, .loop
 	ret
 
 ; discard any PLUSPOWER attached to the turn holder's arena and/or bench Pokemon
