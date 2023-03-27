@@ -552,6 +552,11 @@ ChooseCardFromYourHandToSwitchText: ; 39775 (e:5775)
 	line "Hand to Switch."
 	done
 
+ChooseCardFromYourHandToAttachText: ; 39775 (e:5775)
+	text "Choose a card from your"
+	line "Hand to attach."
+	done
+
 ChooseCardToSwitchText: ; 3979e (e:579e)
 	text "Choose a card to"
 	line "Switch."

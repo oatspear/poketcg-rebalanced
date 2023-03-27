@@ -9706,18 +9706,18 @@ DratiniCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
+	energy COLORLESS, 1 ; energies
+	tx DragonDanceName ; name
+	tx AttachEnergyFromHandDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db RESIDUAL ; category
+	dw DragonDanceEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db NONE ; weakness

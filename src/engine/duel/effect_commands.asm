@@ -1147,6 +1147,13 @@ HealingMelodyEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HealingMelody_HealEffect
 	db  $00
 
+DragonDanceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, AttachEnergyFromHand_HandCheck
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AttachEnergyFromHand_AttachEnergyEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, AttachEnergyFromHand_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, AttachEnergyFromHand_AISelectEffect
+	db  $00
+
 DragoniteHealingWindEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, HealingWind_InitialEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, HealingWind_PlayAreaHealEffect

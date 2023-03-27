@@ -650,12 +650,21 @@ HelpingHandDescription: ; 631f2 (18:71f2)
 	line "Conditions from your Active Pokémon."
 	done
 
-CollectName: ; 631e4 (18:71e4)
+CollectName:
 	text "Collect"
 	done
 
-PoisonClawsName: ; 631e4 (18:71e4)
+PoisonClawsName:
 	text "Poison Claws"
+	done
+
+DragonDanceName:
+	text "Dragon Dance"
+	done
+
+AttachEnergyFromHandDescription:
+	text "Attach a Basic Energy card in your"
+	line "hand to 1 of your Pokémon."
 	done
 
 ProfessorOakName: ; 6342d (18:742d)

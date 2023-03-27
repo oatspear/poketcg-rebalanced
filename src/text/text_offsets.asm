@@ -350,6 +350,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseBasicPokemonToEvolveText                     ; 0x015c
 	textpointer ChoosePokemonToScoopUpText                         ; 0x015d
 	textpointer ChooseCardFromYourHandToSwitchText                 ; 0x015e
+	textpointer ChooseCardFromYourHandToAttachText                 ; 0x015e
 	textpointer ChooseCardToSwitchText                             ; 0x015f
 	textpointer ChooseBasicOrEvolutionPokemonCardFromDeckText      ; 0x0160
 	textpointer ChoosePokemonCardText                              ; 0x0161
@@ -2893,6 +2894,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HelpingHandDescription
 	textpointer CollectName
 	textpointer PoisonClawsName
+	textpointer DragonDanceName
+	textpointer AttachEnergyFromHandDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

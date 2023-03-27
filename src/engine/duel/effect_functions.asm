@@ -7552,6 +7552,95 @@ HealingMelody_HealEffect:
 	jr nz, .loop_play_area
 	ret
 
+; return carry if no energy cards in hand,
+AttachEnergyFromHand_HandCheck:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	ldtx hl, NoCardsInHandText
+	cp 1
+	ret c ; return if no cards in hand
+	ld c, $01
+	call Helper_CreateEnergyCardListFromHand
+	ldtx hl, NoEnergyCardsText
+	ret
+	; ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	; call GetTurnDuelistVariable
+	; ldtx hl, EffectNoPokemonOnTheBenchText
+	; cp 2
+	; ret
+
+AttachEnergyFromHand_PlayerSelectEffect:
+; print text box
+	ldtx hl, ChooseCardFromYourHandToAttachText
+	call DrawWideTextBox_WaitForInput
+
+; create list with all Energy cards in hand
+	ld c, $01
+	call Helper_CreateEnergyCardListFromHand
+	bank1call Func_5591
+
+; handle Player selection (from hand)
+	ldtx hl, ChooseBasicEnergyCardText
+	ldtx de, DuelistHandText
+	bank1call SetCardListHeaderText
+.loop_hand_input
+	bank1call DisplayCardList
+	jr c, .loop_hand_input
+	ldh [hTemp_ffa0], a
+
+; handle Player selection (bench)
+	call EmptyScreen
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	call DrawWideTextBox_WaitForInput
+
+; choose a Pokemon in Play Area to attach card
+	bank1call HasAlivePokemonInPlayArea
+.loop_play_area_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_play_area_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret
+
+AttachEnergyFromHand_AISelectEffect:
+; AI doesn't select any card
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+
+AttachEnergyFromHand_AttachEnergyEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	jr z, .done
+
+; attach card to the selected Pokemon
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
+	ldh a, [hTemp_ffa0]
+	call PutHandCardInPlayArea
+	call IsPlayerTurn
+	jr c, .done
+
+; not Player, so show detail screen
+; and which Pokemon was chosen to attach Energy.
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld hl, wLoadedCard1Name
+	ld de, wTxRam2_b
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	ldh a, [hTemp_ffa0]
+	ldtx hl, AttachedEnergyToPokemonText
+	bank1call DisplayCardDetailScreen
+
+.done
+	ret
+
 DragoniteLv41Slam_AIEffect: ; 2ef9c (b:6f9c)
 	ld a, (30 * 2) / 2
 	lb de, 0, 60
@@ -10340,7 +10429,7 @@ CancelSupporterCard:
 ; if (c == 0), all energy cards are allowed;
 ; if (c != 0), double colorless energy cards are not included.
 ; returns carry if no energy cards were found.
-CreateEnergyCardListFromHand:
+Helper_CreateEnergyCardListFromHand:
 	call CreateHandCardList
 	ret c ; return if no hand cards
 

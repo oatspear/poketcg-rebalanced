@@ -51,6 +51,8 @@ HandleSpecialAIAttacks:
 	jp z, .Earthquake
 	cp MAGNETON_LV35
 	jp z, .EnergySpike
+	cp DRATINI
+	jp z, .DragonDance
 	cp GOLDUCK
 	jp z, .HyperBeam
 	cp DRAGONAIR
@@ -310,6 +312,16 @@ HandleSpecialAIAttacks:
 	ld e, LIGHTNING_ENERGY
 	call CheckIfAnyCardIDinLocation
 	jp nc, .zero_score
+	call AIProcessButDontPlayEnergy_SkipEvolution
+	jp nc, .zero_score
+	ld a, $83
+	ret
+
+; if there's any lightning energy cards in deck,
+; return a score of $80 + 3.
+.DragonDance:
+	call CreateEnergyCardListFromHand
+	jp c, .zero_score
 	call AIProcessButDontPlayEnergy_SkipEvolution
 	jp nc, .zero_score
 	ld a, $83

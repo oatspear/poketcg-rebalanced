@@ -551,6 +551,9 @@
 #### Snorlax
 - **Body Slam**: reduced cost from (CCCC) to (CCC).
 
+#### Dratini
+- New attack: **Dragon Dance** (C): attach an energy from hand to one Pokémon.
+
 
 ## Version 0.1
 
