@@ -10334,3 +10334,49 @@ CancelSupporterCard:
 	ld [wAlreadyPlayedEnergyOrSupporter], a
 	pop af
 	ret
+
+; makes a list in wDuelTempList with the deck indices
+; of energy cards found in Turn Duelist's Hand.
+; if (c == 0), all energy cards are allowed;
+; if (c != 0), double colorless energy cards are not included.
+; returns carry if no energy cards were found.
+CreateEnergyCardListFromHand:
+	call CreateHandCardList
+	ret c ; return if no hand cards
+
+	ld hl, wDuelTempList
+	ld e, l
+	ld d, h
+.loop_hand
+	ld a, [hl]
+	cp $ff
+	jr z, .done
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	and TYPE_ENERGY
+	jr z, .next_hand_card
+; if (c != $00), then we dismiss Double Colorless energy cards found.
+	ld a, c
+	or a
+	jr z, .copy
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_DOUBLE_COLORLESS
+	jr nc, .next_hand_card
+.copy
+	ld a, [hl]
+	ld [de], a
+	inc de
+.next_hand_card
+	inc hl
+	jr .loop_hand
+
+.done
+	ld a, $ff ; terminating byte
+	ld [de], a
+	ld a, [wDuelTempList]
+	cp $ff
+	scf
+	ret z ; return carry if empty
+	; not empty
+	or a
+	ret
