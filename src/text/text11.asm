@@ -494,9 +494,9 @@ EarthquakeName: ; 5e70d (17:670d)
 
 EarthquakeDescription: ; 5e719 (17:6719)
 	text "Does 10 damage to each player's"
-	line "Benched Pokémon. (Don't apply"
-	line "Weakness and Resistance for Benched"
-	line "Pokémon.)"
+	line "Benched Pokémon."
+	line "(Don't apply Weakness and Resistance"
+	line "for Benched Pokémon.)"
 	done
 
 DugtrioDescription: ; 5e789 (17:6789)
@@ -831,7 +831,8 @@ RollingKickName: ; 5f625 (17:7625)
 Deal20ToBenchDescription: ; 5f633 (17:7633)
 	text "This attack does 20 damage to 1 of"
 	line "your opponent's Benched Pokémon."
-	line "(Don't apply Weakness and Resistance)"
+	line "(Don't apply Weakness and Resistance"
+	line "for Benched Pokémon)"
 	done
 
 HighJumpKickName: ; 5f6d0 (17:76d0)
