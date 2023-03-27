@@ -455,8 +455,13 @@ VaporeonQuickAttackEffectCommands:
 FlareonQuickAttackEffectCommands:
 NinetalesQuickAttackEffectCommands:
 ArcanineQuickAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ArcanineQuickAttack_DamageBoostEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heads10BonusDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, ArcanineQuickAttack_AIEffect
+	db  $00
+
+KangaskhanCometPunchEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heads10BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, CometPunch_AIEffect
 	db  $00
 
 ArcanineFlamesOfRageEffectCommands:
@@ -887,7 +892,6 @@ ZapdosThunderstormEffectCommands:
 
 JolteonPinMissileEffectCommands:
 SandslashFurySwipesEffectCommands:
-KangaskhanCometPunchEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TripleAttackX20X10_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, TripleAttackX20X10_AIEffect
 	db  $00

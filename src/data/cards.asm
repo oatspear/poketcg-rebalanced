@@ -9381,7 +9381,7 @@ KangaskhanCard:
 	db STAR ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	db KANGASKHAN
-	db 90 ; hp
+	db 80 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -9400,12 +9400,12 @@ KangaskhanCard:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy COLORLESS, 4 ; energies
+	energy COLORLESS, 3 ; energies
 	tx CometPunchName ; name
-	tx TripleAttackX20X10Description ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_X ; category
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
 	dw KangaskhanCometPunchEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
@@ -9464,7 +9464,7 @@ TaurosCard:
 	db 0
 	db ATK_ANIM_RAMPAGE ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx WildBullName ; category

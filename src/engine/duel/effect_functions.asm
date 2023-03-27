@@ -2934,7 +2934,7 @@ ArcanineQuickAttack_AIEffect: ; 2d385 (b:5385)
 	lb de, 20, 30
 	jp SetExpectedAIDamage
 
-ArcanineQuickAttack_DamageBoostEffect: ; 2d38d (b:538d)
+Heads10BonusDamage_DamageBoostEffect: ; 2d38d (b:538d)
 	ld hl, 10
 	call LoadTxRam3
 	ldtx de, DamageCheckIfHeadsPlusDamageText
@@ -2943,6 +2943,11 @@ ArcanineQuickAttack_DamageBoostEffect: ; 2d38d (b:538d)
 	ld a, 10
 	call AddToDamage
 	ret
+
+CometPunch_AIEffect:
+	ld a, (30 + 40) / 2
+	lb de, 30, 40
+	jp SetExpectedAIDamage
 
 ; return carry if has less than 2 Fire Energy cards
 FlamesOfRage_CheckEnergy: ; 2d3a0 (b:53a0)

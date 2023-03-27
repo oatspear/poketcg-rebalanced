@@ -540,6 +540,10 @@
 - New Pokémon Power: **Heal**: once per turn, heal 10 damage from a Pokémon.
 - **Double Edge**: reduced cost from (CCCC) to (CC), damage from 80 to 40 and recoil from 80 to 20.
 
+#### Kangaskhan
+- Reduced HP from 90 to 80.
+- **Comet Punch**: reduced cost from (CCCC) to (CCC); base damage 30; flip a coin, +10 damage if heads.
+
 #### Eevee
 - **Tail Wag**: removed.
 - New attack: **Snivel** (C): reduce incoming damage by 20.
