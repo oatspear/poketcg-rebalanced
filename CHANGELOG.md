@@ -538,6 +538,7 @@
 - Reduced HP from 120 to 100.
 - **Scrunch**: removed.
 - New Pokémon Power: **Heal**: once per turn, heal 10 damage from a Pokémon.
+- **Double Edge**: reduced cost from (CCCC) to (CC), damage from 80 to 40 and recoil from 80 to 20.
 
 #### Eevee
 - **Tail Wag**: removed.
