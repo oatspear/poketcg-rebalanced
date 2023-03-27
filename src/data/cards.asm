@@ -9655,7 +9655,7 @@ SnorlaxCard:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy COLORLESS, 4 ; energies
+	energy COLORLESS, 3 ; energies
 	tx BodySlamName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)

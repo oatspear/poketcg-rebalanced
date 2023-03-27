@@ -548,8 +548,8 @@
 - **Tail Wag**: removed.
 - New attack: **Snivel** (C): reduce incoming damage by 20.
 
-#### Kangaskhan
-- **Comet Punch**: 3 coin flips; 10 damage per tails and 20 per heads.
+#### Snorlax
+- **Body Slam**: reduced cost from (CCCC) to (CCC).
 
 
 ## Version 0.1
