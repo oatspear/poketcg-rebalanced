@@ -999,11 +999,6 @@ DragoniteStepInEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StepIn_SwitchEffect
 	db  $00
 
-DragoniteLv45SlamEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DragoniteLv45Slam_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, DragoniteLv45Slam_AIEffect
-	db  $00
-
 SnorlaxThickSkinnedEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ThickSkinnedEffect
 	db  $00
@@ -1159,9 +1154,9 @@ DragoniteHealingWindEffectCommands:
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, HealingWind_PlayAreaHealEffect
 	db  $00
 
-DragoniteLv41SlamEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DragoniteLv41Slam_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, DragoniteLv41Slam_AIEffect
+DoubleAttackX40EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX40_MultiplierEffect
+	dbw EFFECTCMDTYPE_AI, DoubleAttackX40_AIEffect
 	db  $00
 
 MeowthCatPunchEffectCommands:

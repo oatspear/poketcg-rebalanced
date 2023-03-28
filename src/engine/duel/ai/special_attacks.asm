@@ -51,6 +51,8 @@ HandleSpecialAIAttacks:
 	jp z, .Earthquake
 	cp MAGNETON_LV35
 	jp z, .EnergySpike
+	cp DRAGONITE_LV45
+	jp z, .EnergySpike
 	cp DRATINI
 	jp z, .DragonDance
 	cp GOLDUCK

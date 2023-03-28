@@ -9882,11 +9882,11 @@ DragoniteLv41Card:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx SlamName ; name
-	tx DoubleAttackX30Description ; description
+	tx DoubleAttackX40Description ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_X ; category
-	dw DragoniteLv41SlamEffectCommands ; effect commands
+	dw DoubleAttackX40EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9917,32 +9917,32 @@ DragoniteLv45Card:
 	tx DragonairName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx StepInName ; name
-	tx StepInDescription ; description
+	energy FIRE, 1, WATER, 1 ; energies
+	tx DragonClawName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw DragoniteStepInEffectCommands ; effect commands
+	db 50 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_SLASH ; animation
 
 	; attack 2
-	energy COLORLESS, 4 ; energies
-	tx SlamName ; name
-	tx DoubleAttackX40Description ; description
+	energy WATER, 1, LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx EnergyHurricaneName ; name
+	tx EnergySpikeDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_X ; category
-	dw DragoniteLv45SlamEffectCommands ; effect commands
+	db 60 ; damage
+	db DAMAGE_NORMAL ; category
+	dw EnergySpikeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness
