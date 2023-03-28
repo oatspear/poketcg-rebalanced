@@ -7990,14 +7990,40 @@ SneakAttack_DamageBoostEffect: ; 2d0c0 (b:50c0)
 	or a
 	ret
 
-PunishingSlap_AIEffect: ; 2d0b8 (b:50b8)
+PunishingSlap_AIEffect:
 	call PunishingSlap_DamageBoostEffect
 	jp SetDefiniteAIDamage
 
-PunishingSlap_DamageBoostEffect: ; 2d0c0 (b:50c0)
+PunishingSlap_DamageBoostEffect:
 	call SwapTurn
 	call SneakAttack_DamageBoostEffect
 	call SwapTurn
+	ret
+
+DragonRage_AIEffect:
+	call DragonRage_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+DragonRage_DamageBoostEffect:
+	xor a  ; PLAY_AREA_ARENA
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+
+; count how many types of Energy there are (colorless does not count)
+	ld b, 0
+	ld c, NUM_TYPES - 1
+	ld hl, wAttachedEnergies
+.loop
+	ld a, [hli]
+	or a
+	jr z, .next
+	inc b
+.next
+	dec c
+	jr nz, .loop
+	ld a, b
+	call ATimes10
+	call AddToDamage
 	ret
 
 ; returns carry if either there are no damage counters

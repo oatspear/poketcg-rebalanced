@@ -4327,14 +4327,18 @@ GyaradosCard:
 	db STAGE1 ; stage
 	tx MagikarpName ; pre-evo name
 
+	; Dragon Vortex (C) 20x
+	; Does 20 damage times the number of Water Energy Cards & Electric Energy cards
+	; in your discard pile. Then, shuffle all of those cards back into your deck.
+
 	; attack 1
-	energy WATER, 1, COLORLESS, 2 ; energies
+	energy COLORLESS, 2 ; energies
 	tx DragonRageName ; name
-	dw NONE ; description
+	tx DragonRageDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw DragonRageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -4342,11 +4346,11 @@ GyaradosCard:
 	db ATK_ANIM_DRAGON_RAGE ; animation
 
 	; attack 2
-	energy WATER, 3 ; energies
+	energy WATER, 2, COLORLESS, 1 ; energies
 	tx BubblebeamName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw GyaradosBubblebeamEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
@@ -9743,21 +9747,21 @@ DragonairCard:
 	tx DratiniName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 3 ; energies
-	tx SlamName ; name
-	tx DoubleAttackX30Description ; description
+	energy COLORLESS, 2 ; energies
+	tx DragonRageName ; name
+	tx DragonRageDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_X ; category
-	dw DragonairSlamEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw DragonRageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_DRAGON_RAGE ; animation
 
 	; attack 2
-	energy COLORLESS, 4 ; energies
+	energy COLORLESS, 3 ; energies
 	tx HyperBeamName ; name
 	tx Discard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)

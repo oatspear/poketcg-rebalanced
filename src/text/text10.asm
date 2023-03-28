@@ -1533,10 +1533,6 @@ GyaradosName: ; 5c500 (17:4500)
 	text "Gyarados"
 	done
 
-DragonRageName: ; 5c50a (17:450a)
-	text "Dragon Rage"
-	done
-
 BubblebeamName: ; 5c517 (17:4517)
 	text "Bubblebeam"
 	done
@@ -1691,4 +1687,12 @@ ArticunoLv37Description: ; 5ce35 (17:4e35)
 	text "A legendary bird Pokémon. It freezes"
 	line "water that is contained in winter"
 	line "air and makes it snow."
+	done
+
+PikachuName: ; 5ce94 (17:4e94)
+	text "Pikachu"
+	done
+
+GnawName: ; 5ce9d (17:4e9d)
+	text "Gnaw"
 	done

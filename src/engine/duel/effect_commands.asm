@@ -1206,6 +1206,11 @@ PunishingSlapEffectCommands:
 	dbw EFFECTCMDTYPE_AI, PunishingSlap_AIEffect
 	db  $00
 
+DragonRageEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DragonRage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, DragonRage_AIEffect
+	db  $00
+
 DoubleColorlessEnergyEffectCommands:
 	db  $00
 

@@ -1,11 +1,3 @@
-PikachuName: ; 5ce94 (17:4e94)
-	text "Pikachu"
-	done
-
-GnawName: ; 5ce9d (17:4e9d)
-	text "Gnaw"
-	done
-
 ThunderJoltName: ; 5cea3 (17:4ea3)
 	text "Thunder Jolt"
 	done

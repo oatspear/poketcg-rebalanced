@@ -2433,7 +2433,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FishName                                           ; 0x098e
 	textpointer MagikarpDescription                                ; 0x098f
 	textpointer GyaradosName                                       ; 0x0990
-	textpointer DragonRageName                                     ; 0x0991
 	textpointer BubblebeamName                                     ; 0x0992
 	textpointer AtrociousName                                      ; 0x0993
 	textpointer GyaradosDescription                                ; 0x0994
@@ -2895,6 +2894,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer CollectName
 	textpointer PoisonClawsName
 	textpointer DragonDanceName
+	textpointer DragonRageName
+	textpointer DragonRageDescription
 	textpointer AttachEnergyFromHandDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69

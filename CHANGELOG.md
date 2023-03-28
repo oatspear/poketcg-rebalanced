@@ -222,7 +222,8 @@
 - **Star Freeze**: reduced cost from (WCC) to (WC).
 
 #### Gyarados
-- **Dragon Rage**: reduced cost from (WWW) to (WCC) and damage from 50 to 40.
+- **Dragon Rage**: reworked.
+- New attack: **Dragon Rage** (CC): 20 damage, +10 for each type of Basic Energy attached.
 - **Bubblebeam**: reduced cost from (WWWW) to (WWW) and increased damage from 40 to 50.
 
 #### Lapras
@@ -553,6 +554,11 @@
 
 #### Dratini
 - New attack: **Dragon Dance** (C): attach an energy from hand to one Pokémon.
+
+#### Dragonair
+- **Slam**: removed.
+- New attack: **Dragon Rage** (CC): 10 damage, +10 for each type of Basic Energy attached.
+- **Hyper Beam**: reduced cost from (CCCC) to (CCC).
 
 
 ## Version 0.1

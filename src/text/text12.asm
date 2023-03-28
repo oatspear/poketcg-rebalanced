@@ -662,6 +662,16 @@ DragonDanceName:
 	text "Dragon Dance"
 	done
 
+DragonRageName:
+	text "Dragon Rage"
+	done
+
+DragonRageDescription:
+	text "Deals 10 additional damage for each"
+	line "type of Basic Energy attached to"
+	line "this Pokémon."
+	done
+
 AttachEnergyFromHandDescription:
 	text "Attach a Basic Energy card in your"
 	line "hand to 1 of your Pokémon."
