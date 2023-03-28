@@ -9746,6 +9746,37 @@ DragonairCard:
 	db STAGE1 ; stage
 	tx DratiniName ; pre-evo name
 
+	; Evolutionary Light
+	; Once during your turn (before your attack), if Dragonair is your Active Pokémon,
+	; you may search your deck for an Evolution card. Show it to your opponent
+	; and put it into your hand. Shuffle your deck afterward.
+	; This power can't be used if Dragonair is affected by a Special Condition.
+
+	; Healing Melody (G)
+	; Heal 10 damage from each of your Pokémon.
+
+	; Shed Skin (G)
+	; Heal 30 damage from this Pokémon.
+
+	; Dragon's Wish (C)
+	; During your next turn, you may attach any number of Energy cards from your hand onto this Pokémon
+
+	; Wrap (CC) 20
+	; Flip a coin. If heads, your opponent's Active Pokémon is now Paralyzed.
+
+	; Spiral Wave (WL) 20x
+	; Flip a coin until you get tails. This attack does 20 damage times the number of heads.
+
+	; Destructive Whirlpool (WLCC) 60
+	; Discard an Energy attached to your opponent's Active Pokémon.
+
+	; Twister (WL) 30
+	; Flip 2 coins. For each heads, discard an Energy attached to your opponent's Active Pokémon.
+	; If both are tails, this attack does nothing.
+
+	; Dragon Pulse (GLC) 70
+	; Discard the top card from your deck.
+
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx DragonRageName ; name
@@ -9796,6 +9827,43 @@ DragoniteLv41Card:
 	db 100 ; hp
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
+
+	; Pokémon Power: Top Accelerator
+	; Once during your turn (before your attack), you may reveal the top card of your deck.
+	; If that card is a basic Energy card, attach it to 1 of your Pokémon.
+	; If that card isn't a basic Energy card, discard it.
+	; This power can't be used if Dragonite is affected by a Special Condition.
+
+	; Pokémon Power: Dragon Wind
+	; Once during your turn (before your attack), if Dragonite is your Active Pokémon,
+	; you may switch 1 of your opponent's Benched Pokémon with the Defending Pokémon.
+	; This power can't be used if Dragonite is affected by a Special Condition.
+
+	; Slam (GLC) 60x
+	; Flip 2 coins. This attack does 60 damage times the number of heads.
+
+	; Energy Hurricane (WLCC) 180
+	; Search your deck for up to 3 basic Energy cards and attach them to your
+	; Pokémon in any way you like. Then, shuffle your deck.
+
+	; Dragon Claw (WLC) 60
+	; Dragon Claw (FWCC) 80
+
+	; Outrage (WCC) 30+
+	; This attack does 10 more damage for each damage counter on this Pokémon.
+
+	; Dragon Pulse (CC) 60
+	; Discard the top 2 cards of your deck.
+
+	; Dragon Finish (FFWW)
+	; Discard 2 basic Fire Energy cards or 2 basic Water Energy cards attached to Dragonite.
+	; If you discarded 2 basic Fire Energy cards, this attack does 100 damage to
+	; the Defending Pokémon. If you discarded 2 basic Water Energy cards, this attack
+	; does 100 damage to 1 of your opponent's Benched Pokémon.
+	; (Don't apply Weakness and Resistance for Benched Pokémon.)
+
+	; Speed Impact (CCC) 100-
+	; Does 100 damage minus 20 damage for each Energy attached to the Defending Pokémon.
 
 	; attack 1
 	energy 0 ; energies
