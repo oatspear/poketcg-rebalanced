@@ -7038,14 +7038,13 @@ HandleBetweenTurnsEvents:
 ClearParalysisFromBenchedPokemon:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
+	ld e, a
 	dec a
 	ret z  ; no Pokémon on the bench
 
-	ld e, a
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
-	ld a, e
-	ld l, a
+	jr .next  ; skip arena Pokémon
 .loop
 ; preserve Poison and Sleep (and Confusion?) on the Bench
 	ld a, [hl]
@@ -7056,7 +7055,8 @@ ClearParalysisFromBenchedPokemon:
 	and [hl]
 	ld [hl], a
 .next
-	dec l
+	inc hl
+	dec e
 	jr nz, .loop
 	ret
 
