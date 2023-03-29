@@ -4535,6 +4535,19 @@ OmanyteCard:
 	db STAGE1 ; stage
 	tx MysteriousFossilName ; pre-evo name
 
+	; Call Up / Prehistoric Dream
+	; Once during your turn (before your attack), you may flip a coin.
+	; If heads, search your discard pile for Mysterious Fossil and put it onto
+	; your Bench. This power can't be used if Omanyte is affected by a Special Condition.
+
+	; Wash Over (Wc) 20
+	; Does 10 damage to 2 of your opponent's Benched Pokémon.
+	; (Don't apply Weakness and Resistance for Benched Pokémon.)
+
+	; Work Together (WC) 10+
+	; This attack does 10 damage plus 10 more damage for each Omanyte, Omastar,
+	; Kabuto, and Kabutops on your Bench.
+
 	; attack 1
 	energy 0 ; energies
 	tx ClairvoyanceName ; name
@@ -4585,6 +4598,47 @@ OmastarCard:
 	db 70 ; hp
 	db STAGE2 ; stage
 	tx OmanyteName ; pre-evo name
+
+	; Prehistoric Water (W)
+	; If your opponent has any evolved Pokémon in play, choose 1 of them and flip
+	; a coin. If heads, your opponent takes the highest Stage Evolution card on
+	; that Pokémon and shuffles it into his or her deck.
+
+	; Poké-Power: Primal Swirl
+	; Once during your turn, when you play Omastar from your hand to evolve 1 of
+	; your Pokémon, you may remove the highest Stage Evolution card from each of
+	; your opponent's Benched Evolved Pokémon and put those cards back into his or
+	; her hand. You can't use more than 1 Primal Swirl Poké-Power each turn.
+
+	; Pull Down (C)
+	; If your opponent has any Evolved Pokémon in play, remove the highest Stage
+	; Evolution card from each of them and put those cards back into his or her hand.
+
+	; Dark Tentacle (WC) 30
+	; During your opponent's next turn, the Defending Pokémon can't evolve
+	; except from effects of attacks or Pokémon Powers.
+	; (Benching that Pokémon ends this effect.)
+
+	; Primal Tentacle (WC) 30+
+	; Does 30 damage plus 10 more damage for each Mysterious Fossil in your discard pile.
+
+	; Drag Off (C) 10
+	; Before doing damage, you may choose 1 of your opponent's Benched Pokémon and
+	; switch it with 1 of the Defending Pokémon.
+	; Your opponent chooses the Defending Pokémon to switch.
+
+	; Hydrocannon (CC) 30+
+	; Does 30 damage plus 20 more damage for each Water Energy attached to Omastar
+	; but not used to pay for this attack's Energy cost.
+	; You can't add more than 40 damage in this way.
+
+	; Ability: Fossil Bind
+	; As long as you have fewer Pokémon in play than your opponent, they can't
+	; play any Item cards from their hand.
+
+	; Tentacle Lock (Wcc) 50
+	; If the Defending Pokémon is an Evolution Pokémon, it can't attack during
+	; your opponent's next turn.
 
 	; attack 1
 	energy WATER, 2 ; energies
@@ -6640,6 +6694,27 @@ MarowakLv26Card:
 	db STAGE1 ; stage
 	tx CuboneName ; pre-evo name
 
+	; Pokémon Power: Ancient Guidance
+	; Once during your turn (before your attack), you may flip a coin.
+	; If heads, search your deck for Mysterious Fossil and put it onto your Bench.
+	; Shuffle your deck afterward. This power can't be used if Kabuto is affected by a Special Condition.
+
+	; Pokémon Power: Fossilization
+	; Once during your turn (before your attack), you may flip a coin.
+	; If heads, take all Evolution cards attached to 1 of your Pokémon in play
+	; that evolves from Mysterious Fossil and put them into your hand.
+	; (This doesn't count as devolving that Pokémon.)
+	; This power can't be used if Kabuto is Asleep, Confused, or Paralyzed.
+
+	; Poké-Body: Thick Shell
+	; All damage done by attacks to Kabuto from Evolved Pokémon is reduced by 10
+	; (after applying Weakness and Resistance).
+
+	; Team Assembly (C)
+	; Search your deck for Omanyte, Kabuto, or any Basic Pokémon and put as many
+	; of them as you like onto your Bench. Shuffle your deck afterward.
+	; Treat the new Benched Pokémon as Basic Pokémon.
+
 	; attack 1
 	energy 0 ; energies
 	tx BattleArmorName ; name
@@ -6997,6 +7072,17 @@ KabutopsCard:
 	db STAGE2 ; stage
 	tx KabutoName ; pre-evo name
 
+	; Extra Claws (FCC) 50+
+	; If the Defending Pokémon is an Evolved Pokémon, this attack does 30 additional damage.
+
+	; Chop Up (FFC) 60
+	; Does 10 damage to each of your opponent's Benched Pokémon that has any damage
+	; counters on it. (Don't apply Weakness and Resistance for Benched Pokémon.)
+
+	; Primal Scythe (F) 20+
+	; You may discard Mysterious Fossil from your hand.
+	; If you do, this attack does 40 additional damage.
+
 	; attack 1
 	energy FIGHTING, 1 ; energies
 	tx SharpSickleName ; name
@@ -7047,6 +7133,31 @@ AerodactylCard:
 	db 60 ; hp
 	db STAGE1 ; stage
 	tx MysteriousFossilName ; pre-evo name
+
+	; Poké-Body 	Primal Stare
+	; As long as Omastar is your Active Pokémon, your opponent can't play Basic
+	; Pokémon or Evolution cards from his or her hand to evolve his or her Active Pokémon.
+
+	; Primal Aura
+	; As long as Kabutops is your Active Pokémon, neither player can play Basic Pokémon
+	; or Evolution cards from his or her hand to evolve Benched Pokémon.
+
+	; Ability: Fossilized Memories
+	; As long as this Pokémon is your Active Pokémon, your opponent can't play any
+	; Supporter cards from their hand.
+
+	; Poké-Body: Primal Claw
+	; After your opponent's Pokémon uses a Poké-Power, put 2 damage counters on that Pokémon.
+
+	; Ancient Scream
+	; Your Pokémon's attacks do 10 more damage to the Active Pokémon (before applying Weakness and Resistance).
+
+	; Fossil Fangs (CCC) 40+
+	; If you don't have any Evolved Pokémon on your Bench, this attack does 40 more damage.
+
+	; Primal Winds
+	; As long as this Pokémon is your Active Pokémon, your opponent's Basic Pokémon's
+	; attacks cost Colorless more.
 
 	; attack 1
 	energy 0 ; energies
