@@ -677,6 +677,14 @@ AttachEnergyFromHandDescription:
 	line "hand to 1 of your Pokémon."
 	done
 
+EnergyHurricaneName:
+	text "Energy Hurricane"
+	done
+
+DragonClawName:
+	text "Dragon Claw"
+	done
+
 ProfessorOakName: ; 6342d (18:742d)
 	text "Professor Oak"
 	done

@@ -560,6 +560,15 @@
 - New attack: **Dragon Rage** (CC): 10 damage, +10 for each type of Basic Energy attached.
 - **Hyper Beam**: reduced cost from (CCCC) to (CCC).
 
+#### Dragonite Lv41
+- **Slam**: increased damage from 30x to 40x.
+
+#### Dragonite Lv45
+- **Step In**: removed.
+- New attack: **Dragon Claw** (FW): 50 damage.
+- **Slam**: removed.
+- New attack: **Energy Hurricane** (WLC): 60 damage, search deck for an Energy and attach to a Pokémon.
+
 
 ## Version 0.1
 

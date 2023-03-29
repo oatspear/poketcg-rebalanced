@@ -6766,12 +6766,12 @@ StepIn_SwitchEffect: ; 2eae8 (b:6ae8)
 	set USED_PKMN_POWER_THIS_TURN_F, [hl]
 	ret
 
-DragoniteLv45Slam_AIEffect: ; 2eaf6 (b:6af6)
+DoubleAttackX40_AIEffect: ; 2eaf6 (b:6af6)
 	ld a, (40 * 2) / 2
 	lb de, 0, 80
 	jp SetExpectedAIDamage
 
-DragoniteLv45Slam_MultiplierEffect: ; 2eafe (b:6afe)
+DoubleAttackX40_MultiplierEffect: ; 2eafe (b:6afe)
 	ld hl, 40
 	call LoadTxRam3
 	ldtx de, DamageCheckIfHeadsXDamageText
