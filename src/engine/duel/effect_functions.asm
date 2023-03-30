@@ -132,16 +132,16 @@ Func_2c0a8: ; 2c0a8 (b:40a8)
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_6B30
 	call SetOppAction_SerialSendDuelData
-	bank1call Func_4f2d
+	bank1call AnimateShuffleDeck
 	ld c, a
 	pop af
 	ldh [hTemp_ffa0], a
 	ld a, c
 	ret
 
-Func_2c0bd: ; 2c0bd (b:40bd)
+SyncShuffleDeck: ; 2c0bd (b:40bd)
 	call ExchangeRNG
-	bank1call Func_4f2d
+	bank1call AnimateShuffleDeck
 	call ShuffleDeck
 	ret
 
@@ -3451,7 +3451,7 @@ MixUpEffect: ; 2d647 (b:5647)
 	ldtx hl, ThePkmnCardsInHandAndDeckWereShuffledText
 	call DrawWideTextBox_WaitForInput
 
-	call Func_2c0bd
+	call SyncShuffleDeck
 	call CreateDeckCardList
 	pop bc
 	ldh a, [hCurSelectionItem]
@@ -3543,7 +3543,7 @@ Firegiver_AddToHandEffect: ; 2d6c2 (b:56c2)
 	; return if none found
 	ldtx hl, ThereWasNoFireEnergyText
 	call DrawWideTextBox_WaitForInput
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 .found
@@ -3624,7 +3624,7 @@ Firegiver_AddToHandEffect: ; 2d6c2 (b:56c2)
 	call LoadTxRam3
 	ldtx hl, DrewFireEnergyFromTheHandText
 	call DrawWideTextBox_WaitForInput
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 MoltresLv37DiveBomb_AIEffect: ; 2d76e (b:576e)
@@ -5247,7 +5247,7 @@ CallForFriend_PutInPlayAreaEffect: ; 2e194 (b:6194)
 	ldtx hl, PlacedOnTheBenchText
 	bank1call DisplayCardDetailScreen
 .shuffle
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 KarateChop_AIEffect: ; 2e1b4 (b:61b4)
@@ -6428,7 +6428,7 @@ EnergySpike_AttachEnergyEffect: ; 2e8f6 (b:68f6)
 	bank1call DisplayCardDetailScreen
 
 .done
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 JolteonDoubleKick_AIEffect: ; 2e930 (b:6930)
@@ -7954,7 +7954,7 @@ FriendshipSong_AddToBench50PercentEffect: ; 2f119 (b:7119)
 	ld a, ATK_ANIM_FRIENDSHIP_SONG
 	call Func_2c12e
 	call .none_came_text
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 .put_in_bench
@@ -7966,7 +7966,7 @@ FriendshipSong_AddToBench50PercentEffect: ; 2f119 (b:7119)
 	ldh a, [hTempCardIndex_ff98]
 	ldtx hl, CameToTheBenchText
 	bank1call DisplayCardDetailScreen
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 RockHeadEffect:
@@ -8383,7 +8383,7 @@ EnergySearch_AddToHandEffect: ; 2f372 (b:7372)
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 .done
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 ; check if card index in a is a Basic Energy card.
@@ -8484,7 +8484,7 @@ GamblerEffect: ; 2f3f9 (b:73f9)
 	jr .loop_return_deck
 
 .check_coin_toss
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ld c, 8
 	ldh a, [hTemp_ffa0]
 	or a
@@ -8633,7 +8633,7 @@ ImposterProfessorOakEffect: ; 2f4e1 (b:74e1)
 
 ; then draw 7 cards from the deck.
 .done_return
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ld a, 7
 	bank1call DisplayDrawNCardsScreen
 	ld c, 7
@@ -8693,7 +8693,7 @@ ComputerSearch_DiscardAddToHandEffect: ; 2f545 (b:7545)
 	ld a, [hl]
 	call SearchCardInDeckAndAddToHand
 	call AddCardToHand
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 ; return carry if Bench is full.
@@ -8787,7 +8787,7 @@ ReturnToDeckEffect:
 	ldtx hl, PokemonAndAllAttachedCardsWereReturnedToDeckText
 	call DrawWideTextBox_WaitForInput
 .done
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 PlusPowerEffect: ; 2f5e0 (b:75e0)
@@ -9303,7 +9303,7 @@ PokemonTrader_TradeCardsEffect: ; 2f88d (b:788d)
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 .done
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 ; makes list in wDuelTempList with all Pokemon cards
@@ -9591,7 +9591,7 @@ LassEffect: ; 2f9e3 (b:79e3)
 ; show card list
 	ldh a, [hCurSelectionItem]
 	or a
-	call nz, Func_2c0bd ; only show list if there were any Trainer cards
+	call nz, SyncShuffleDeck ; only show list if there were any Trainer cards
 	ret
 
 .DisplayLinkOrCPUHand ; 2fa31 (b:7a31)
@@ -9653,7 +9653,7 @@ Maintenance_ReturnToDeckAndDrawEffect: ; 2fa85 (b:7a85)
 	ldh a, [hTempList + 1]
 	call RemoveCardFromHand
 	call ReturnCardToDeck
-	call Func_2c0bd
+	call SyncShuffleDeck
 
 ; draw one card
 	ld a, 1
@@ -9750,7 +9750,7 @@ PokeBall_AddToHandEffect: ; 2fb15 (b:7b15)
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 .done
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 ; return carry if no cards in the Discard Pile

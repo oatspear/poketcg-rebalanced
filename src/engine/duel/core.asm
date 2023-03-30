@@ -2366,7 +2366,7 @@ PlayShuffleAndDrawCardsAnimation:
 	pop bc
 	ret
 
-Func_4f2d:
+AnimateShuffleDeck:
 	ld a, [wDuelDisplayedScreen]
 	cp SHUFFLE_DECK
 	jr z, .skip_draw_scene
@@ -6884,7 +6884,7 @@ OppAction_6b30:
 	push af
 	ldh a, [hTemp_ffa0]
 	ldh [hWhoseTurn], a
-	call Func_4f2d
+	call AnimateShuffleDeck
 	pop af
 	ldh [hWhoseTurn], a
 	ret

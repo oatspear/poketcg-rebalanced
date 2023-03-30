@@ -306,7 +306,7 @@ Wail_FillBenchEffect: ; 2e335 (b:6335)
 	jr .check_bench
 
 .done
-	call Func_2c0bd
+	call SyncShuffleDeck
 	ret
 
 
@@ -326,4 +326,31 @@ PayDayEffect: ; 2ebe8 (b:6be8)
 	ret nz
 	; show card on screen if it was Player
 	bank1call OpenCardPage_FromHand
+	ret
+
+
+Old_ProfessorOakEffect:
+; discard hand
+	call CreateHandCardList
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+.discard_loop
+	ld a, [hli]
+	cp $ff
+	jr z, .draw_cards
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+	jr .discard_loop
+
+.draw_cards
+	ld a, 7
+	bank1call DisplayDrawNCardsScreen
+	ld c, 7
+.draw_loop
+	call DrawCardFromDeck
+	jr c, .done
+	call AddCardToHand
+	dec c
+	jr nz, .draw_loop
+.done
 	ret
