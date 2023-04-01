@@ -569,6 +569,12 @@
 - **Slam**: removed.
 - New attack: **Energy Hurricane** (WLC): 60 damage, search deck for an Energy and attach to a Pokémon.
 
+#### Professor Oak
+- Shuffles your hand into the deck and draws 5 cards.
+
+#### Imposter Professor Oak
+- Both players shuffle their hands into their decks and draw 4 cards.
+
 
 ## Version 0.1
 

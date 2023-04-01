@@ -8402,30 +8402,10 @@ CheckIfCardIsBasicEnergy: ; 2f38f (b:738f)
 	scf
 	ret
 
-ProfessorOakEffect: ; 2f3a1 (b:73a1)
-; discard hand
-	call CreateHandCardList
-	call SortCardsInDuelTempListByID
-	ld hl, wDuelTempList
-.discard_loop
-	ld a, [hli]
-	cp $ff
-	jr z, .draw_cards
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
-	jr .discard_loop
-
-.draw_cards
-	ld a, 7
-	bank1call DisplayDrawNCardsScreen
-	ld c, 7
-.draw_loop
-	call DrawCardFromDeck
-	jr c, .done
-	call AddCardToHand
-	dec c
-	jr nz, .draw_loop
-.done
+; shuffle hand back into deck and draw N cards
+ProfessorOakEffect:
+	ld a, 5
+	call ShuffleHandAndDrawNCards
 	ret
 
 Potion_DamageCheck: ; 2f3ca (b:73ca)
@@ -8616,8 +8596,21 @@ FullHeal_ClearStatusEffect: ; 2f4d1 (b:74d1)
 	bank1call DrawDuelHUDs
 	ret
 
-ImposterProfessorOakEffect: ; 2f4e1 (b:74e1)
+ImposterProfessorOakEffect:
+	ld a, 4  ; player draws 4 cards
+	call ShuffleHandAndDrawNCards
 	call SwapTurn
+	ld a, 4  ; opponent draws 4 cards
+	call ShuffleHandAndDrawNCards
+	call SwapTurn
+	ret
+
+; shuffle all cards currently in hand back into the deck
+; then draw N cards
+; input:
+;  a - how many cards to draw
+ShuffleHandAndDrawNCards:
+	push af
 	call CreateHandCardList
 	call SortCardsInDuelTempListByID
 
@@ -8631,12 +8624,12 @@ ImposterProfessorOakEffect: ; 2f4e1 (b:74e1)
 	call ReturnCardToDeck
 	jr .loop_return_deck
 
-; then draw 7 cards from the deck.
+; then draw N cards from the deck.
 .done_return
 	call SyncShuffleDeck
-	ld a, 7
-	bank1call DisplayDrawNCardsScreen
-	ld c, 7
+	pop af  ; a contains the number of cards from the input
+	ld c, a  ; store in c to use later
+	bank1call DisplayDrawNCardsScreen  ; preserves bc
 .loop_draw
 	call DrawCardFromDeck
 	jr c, .done
@@ -8644,7 +8637,6 @@ ImposterProfessorOakEffect: ; 2f4e1 (b:74e1)
 	dec c
 	jr nz, .loop_draw
 .done
-	call SwapTurn
 	ret
 
 ; return carry if not enough cards in hand to discard

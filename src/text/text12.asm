@@ -690,8 +690,8 @@ ProfessorOakName: ; 6342d (18:742d)
 	done
 
 ProfessorOakDescription: ; 6343c (18:743c)
-	text "Discard your hand, then draw 7"
-	line "cards."
+	text "Shuffle your hand into your deck,"
+	line "then draw 5 cards."
 	done
 
 ImposterProfessorOakName: ; 63463 (18:7463)
@@ -699,9 +699,8 @@ ImposterProfessorOakName: ; 63463 (18:7463)
 	done
 
 ImposterProfessorOakDescription: ; 6347b (18:747b)
-	text "Your opponent shuffles his or her"
-	line "hand into his or her deck, then"
-	line "draws 7 cards."
+	text "Both players shuffle their hands"
+	line "into their decks, then draw 4 cards."
 	done
 
 BillName: ; 634cd (18:74cd)
