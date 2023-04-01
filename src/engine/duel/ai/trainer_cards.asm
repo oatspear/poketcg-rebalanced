@@ -2307,10 +2307,10 @@ AIPlay_ProfessorOak:
 ; sets carry if AI determines a score of playing
 ; Professor Oak is over a certain threshold.
 AIDecide_ProfessorOak:
-; return if cards in deck <= 6
+; return if cards in deck <= 5
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
-	cp DECK_SIZE - 6
+	cp DECK_SIZE - 5
 	ret nc
 
 	ld a, [wOpponentDeckID]
@@ -2321,10 +2321,10 @@ AIDecide_ProfessorOak:
 	cp WONDERS_OF_SCIENCE_DECK_ID
 	jp z, .HandleWondersOfScienceDeck
 
-; return if cards in deck <= 14
+; return if cards in deck <= 12
 .check_cards_deck
 	ld a, [hl]
-	cp DECK_SIZE - 14
+	cp DECK_SIZE - 12
 	ret nc
 
 ; initialize score
@@ -3204,31 +3204,21 @@ AIPlay_ImposterProfessorOak:
 	bank1call AIMakeDecision
 	ret
 
-; sets carry depending on player's number of cards
-; in deck in in hand.
+; sets carry depending on player's number of cards in hand.
 AIDecide_ImposterProfessorOak:
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetNonTurnDuelistVariable
-	cp DECK_SIZE - 14
-	jr c, .more_than_14_cards
-
-; if player has less than 14 cards in deck, only
-; set carry if number of cards in their hands < 6
+; if the AI has 6 or more cards in hand, no carry
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	cp 6
+	jr nc, .no_carry
+; if player has 6 or more cards in hand, set carry
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetNonTurnDuelistVariable
 	cp 6
-	jr c, .set_carry
+	jr nc, .set_carry
 .no_carry
 	or a
 	ret
-
-; if player has more than 14 cards in deck, only
-; set carry if number of cards in their hands >= 9
-.more_than_14_cards
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetNonTurnDuelistVariable
-	cp 9
-	jr c, .no_carry
 .set_carry
 	scf
 	ret
