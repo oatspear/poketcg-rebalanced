@@ -4168,38 +4168,8 @@ Prophecy_ReorderDeckEffect: ; 2da41 (b:5a41)
 ; the top 3 cards of Deck.
 ; the resulting list is output in order in hTempList.
 HandleProphecyScreen: ; 2da76 (b:5a76)
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ld b, a
-	ld a, DECK_SIZE
-	sub [hl] ; a = number of cards in deck
-
-; store in c the number of cards that will be reordered.
-; this number is 3, unless the deck as fewer cards than
-; that in which case it will be the number of cards remaining.
 	ld c, 3
-	cp c
-	jr nc, .got_number_cards
-	ld c, a ; store number of remaining cards in c
-.got_number_cards
-	ld a, c
-	inc a
-	ld [wNumberOfCardsToOrder], a
-
-; store in wDuelTempList the cards
-; at top of Deck to be reordered.
-	ld a, b
-	add DUELVARS_DECK_CARDS
-	ld l, a
-	ld de, wDuelTempList
-.loop_top_cards
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .loop_top_cards
-	ld a, $ff ; terminating byte
-	ld [de], a
+	call Helper_TopNCardsOfDeck
 
 .start
 	call CountCardsInDuelTempList
@@ -9347,33 +9317,9 @@ Pokedex_PlayerSelection: ; 2f8ed (b:78ed)
 
 ; cap the number of cards to reorder up to
 ; number of cards left in the deck (maximum of 5)
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ld b, a
-	ld a, DECK_SIZE
-	sub [hl]
-	ld c, 5
-	cp c
-	jr nc, .no_cap
-	ld c, a
-.no_cap
-
 ; fill wDuelTempList with cards that are going to be sorted
-	ld a, c
-	inc a
-	ld [wNumberOfCardsToOrder], a
-	ld a, b
-	add DUELVARS_DECK_CARDS
-	ld l, a
-	ld de, wDuelTempList
-.loop_cards_to_order
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .loop_cards_to_order
-	ld a, $ff ; terminating byte
-	ld [de], a
+	ld c, 5
+	call Helper_TopNCardsOfDeck
 
 .clear_list
 ; wDuelTempList + 10 will be filled with numbers from 1
@@ -10486,4 +10432,44 @@ Helper_CreateEnergyCardListFromHand:
 	ret z ; return carry if empty
 	; not empty
 	or a
+	ret
+
+; Stores the top N cards of deck in wDuelTempList
+; (or however many cards are left in the deck).
+; Stores the actual number of cards in wNumberOfCardsToOrder.
+; input:
+;  c - number of cards to look at
+; affects: bc, hl, de
+Helper_TopNCardsOfDeck:
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	ld b, a
+	ld a, DECK_SIZE
+	sub [hl] ; a = number of cards in deck
+
+; input c: the number of cards (N) that will be reordered or looked at.
+; This number is N, unless the deck as fewer cards than
+; that, in which case it will be the number of cards remaining.
+	; ld c, N
+	cp c
+	jr nc, .got_number_cards
+	ld c, a ; store number of remaining cards in c
+.got_number_cards
+	ld a, c
+	inc a
+	ld [wNumberOfCardsToOrder], a
+
+; store in wDuelTempList the cards at top of deck to be reordered.
+	ld a, b
+	add DUELVARS_DECK_CARDS
+	ld l, a
+	ld de, wDuelTempList
+.loop_top_cards
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .loop_top_cards
+	ld a, $ff ; terminating byte
+	ld [de], a
 	ret
