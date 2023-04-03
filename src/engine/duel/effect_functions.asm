@@ -7380,7 +7380,7 @@ ScrunchEffect: ; 2eee7 (b:6ee7)
 	ret
 
 ChanseyDoubleEdgeEffect: ; 2eefb (b:6efb)
-	ld a, 80
+	ld a, 20
 	call DealRecoilDamageToSelf
 	ret
 
