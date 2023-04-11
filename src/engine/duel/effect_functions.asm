@@ -1607,15 +1607,6 @@ BeedrillPoisonSting_AIEffect: ; 2c80d (b:480d)
 	lb de, 0, 10
 	jp UpdateExpectedAIDamage_AccountForPoison
 
-ExeggcuteLeechSeedEffect: ; 2c815 (b:4815)
-	ld hl, wDealtDamage
-	ld a, [hli]
-	or a
-	ret z ; return if no damage dealt
-	ld de, 10
-	call ApplyAndAnimateHPRecovery
-	ret
-
 FoulGas_AIEffect: ; 2c822 (b:4822)
 	ld a, 5
 	lb de, 0, 10
@@ -1846,12 +1837,12 @@ IvysaurPoisonPowder_AIEffect: ; 2cb2f (b:4b2f)
 	lb de, 10, 10
 	jp UpdateExpectedAIDamage_AccountForPoison
 
-BulbasaurLeechSeedEffect: ; 2cb37 (b:4b37)
+Heal10DamageEffect:
 	ld hl, wDealtDamage
 	ld a, [hli]
-	or [hl]
+	or a
 	ret z ; return if no damage dealt
-	lb de, 0, 10
+	ld de, 10
 	call ApplyAndAnimateHPRecovery
 	ret
 
@@ -7496,6 +7487,7 @@ HealingWind_PlayAreaHealEffect: ; 2ef53 (b:6f53)
 
 	ret
 
+FungalGrowth_HealEffect:
 HealingMelody_HealEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable

@@ -285,6 +285,16 @@ SlashName: ; 58f87 (16:4f87)
 	text "Slash"
 	done
 
+FungalGrowthName:
+	text "Fungal Growth"
+	done
+
+FungalGrowthDescription:
+	text "Heal 10 damage from each of your"
+	line "Pokémon. The Defending Pokémon is"
+	line "now Asleep."
+	done
+
 ParasectDescription: ; 58f8e (16:4f8e)
 	text "A host-parasite pair in which the"
 	line "parasite mushroom has taken over"
@@ -471,12 +481,6 @@ HypnosisName: ; 597bc (16:57bc)
 
 HypnoblastName:
 	text "Hypnoblast"
-	done
-
-ExeggcutesLeechSeedDescription: ; 597c6 (16:57c6)
-	text "Unless all damage from this attack"
-	line "is prevented, you may remove 1"
-	line "damage counter from Exeggcute."
 	done
 
 EggName: ; 59828 (16:5828)

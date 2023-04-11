@@ -106,10 +106,6 @@ BeedrillPoisonStingEffectCommands:
 	dbw EFFECTCMDTYPE_AI, BeedrillPoisonSting_AIEffect
 	db  $00
 
-ExeggcuteLeechSeedEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ExeggcuteLeechSeedEffect
-	db  $00
-
 KoffingFoulGasEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FoulGas_PoisonOrConfusionEffect
 	dbw EFFECTCMDTYPE_AI, FoulGas_AIEffect
@@ -191,8 +187,8 @@ IvysaurPoisonPowderEffectCommands:
 	dbw EFFECTCMDTYPE_AI, IvysaurPoisonPowder_AIEffect
 	db  $00
 
-BulbasaurLeechSeedEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, BulbasaurLeechSeedEffect
+LeechSeedEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal10DamageEffect
 	db  $00
 
 VenusaurEnergyTransEffectCommands:
@@ -1204,6 +1200,11 @@ PunishingSlapEffectCommands:
 DragonRageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DragonRage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, DragonRage_AIEffect
+	db  $00
+
+FungalGrowthEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FungalGrowth_HealEffect
 	db  $00
 
 DoubleColorlessEnergyEffectCommands:

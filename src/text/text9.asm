@@ -1253,10 +1253,8 @@ LeechSeedName: ; 5755d (15:755d)
 	text "Leech Seed"
 	done
 
-BulbasaursLeechSeedDescription: ; 57569 (15:7569)
-	text "Unless all damage from this attack"
-	line "is prevented, heal 10 damage from"
-	line "this Pokémon."
+Heal10DamageDescription:
+	text "Heal 10 damage from this Pokémon."
 	done
 
 SeedName: ; 575cb (15:75cb)

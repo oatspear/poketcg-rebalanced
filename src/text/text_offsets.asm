@@ -2060,7 +2060,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DoubleColorlessEnergyDescription                   ; 0x0809
 	textpointer BulbasaurName                                      ; 0x080a
 	textpointer LeechSeedName                                      ; 0x080b
-	textpointer BulbasaursLeechSeedDescription                     ; 0x080c
+	textpointer Heal10DamageDescription                            ; 0x080c
 	textpointer SeedName                                           ; 0x080d
 	textpointer BulbasaurDescription                               ; 0x080e
 	textpointer IvysaurName                                        ; 0x080f
@@ -2179,6 +2179,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ParasDescription                                   ; 0x0887
 	textpointer ParasectName                                       ; 0x0888
 	textpointer SlashName                                          ; 0x0889
+	textpointer FungalGrowthName
+	textpointer FungalGrowthDescription
 	textpointer ParasectDescription                                ; 0x088a
 	textpointer VenonatName                                        ; 0x088b
 	textpointer VenonatLeechLifeDescription                        ; 0x088c
@@ -2216,7 +2218,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ExeggcuteName                                      ; 0x08ad
 	textpointer HypnosisName                                       ; 0x08ae
 	textpointer HypnoblastName                                     ; 0x08ae
-	textpointer ExeggcutesLeechSeedDescription                     ; 0x08af
 	textpointer EggName                                            ; 0x08b0
 	textpointer ExeggcuteDescription                               ; 0x08b1
 	textpointer ExeggutorName                                      ; 0x08b2

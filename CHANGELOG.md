@@ -5,7 +5,8 @@
 ### Pokémon Cards
 
 #### Bulbasaur
-- Added attack: **(C) Growl** - reduces damage taken by 10.
+- New attack: **Growl** (C): reduces damage taken by 10.
+- **Leech Seed**: reduced cost from (GG) to (GC).
 
 #### Ivysaur
 - **Poison Powder**: reduced cost from (GGG) to (GG).
@@ -75,6 +76,8 @@
 
 #### Parasect
 - **Spore**: reduced cost from (GG) to (G).
+- **Slash**: removed.
+- New attack: **Fungal Growth** (GGC): 20 damage, inflicts sleep, heal 10 from all of the user's Pokémon.
 
 #### Bellsprout
 - **Vine Whip**: increased damage from 10 to 20.
@@ -97,6 +100,9 @@
 #### Weezing
 - **Smog**: reduced cost from (DD) to (DC).
 - **Self-destruct**: reduced cost from (DDC) to (DCC).
+
+#### Exeggcute
+- **Leech Seed**: reduced cost from (GG) to (GC).
 
 #### Exeggutor
 - **Teleport**: removed.
