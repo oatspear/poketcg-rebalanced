@@ -1180,13 +1180,13 @@ ZubatCard:
 	db ATK_ANIM_SUPERSONIC ; animation
 
 	; attack 2
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	energy DARKNESS, 1 ; energies
 	tx LeechLifeName ; name
-	tx ZubatsLeechLifeDescription ; description
+	tx LeechLifeDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ZubatLeechLifeEffectCommands ; effect commands
+	dw LeechLifeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
@@ -1219,11 +1219,11 @@ GolbatCard:
 	; attack 1
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx LeechLifeName ; name
-	tx GolbatsLeechLifeDescription ; description
+	tx LeechLifeDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw GolbatLeechLifeEffectCommands ; effect commands
+	dw LeechLifeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
@@ -1490,7 +1490,7 @@ ParasectCard:
 	tx FungalGrowthName ; name
 	tx FungalGrowthDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw FungalGrowthEffectCommands ; effect commands
 	db INFLICT_SLEEP | HEAL_USER ; flags 1
@@ -1537,13 +1537,13 @@ VenonatCard:
 	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	; attack 2
-	energy GRASS, 1, COLORLESS, 1 ; energies
+	energy GRASS, 1 ; energies
 	tx LeechLifeName ; name
-	tx VenonatLeechLifeDescription ; description
+	tx LeechLifeDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw VenonatLeechLifeEffectCommands ; effect commands
+	dw LeechLifeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3

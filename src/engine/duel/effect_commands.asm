@@ -76,12 +76,8 @@ KakunaPoisonPowderEffectCommands:
 	dbw EFFECTCMDTYPE_AI, KakunaPoisonPowder_AIEffect
 	db  $00
 
-GolbatLeechLifeEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GolbatLeechLifeEffect
-	db  $00
-
-VenonatLeechLifeEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, VenonatLeechLifeEffect
+LeechLifeEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, LeechLifeEffect
 	db  $00
 
 ScytherSwordsDanceEffectCommands:
@@ -90,10 +86,6 @@ ScytherSwordsDanceEffectCommands:
 
 ZubatSupersonicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ZubatSupersonicEffect
-	db  $00
-
-ZubatLeechLifeEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ZubatLeechLifeEffect
 	db  $00
 
 BeedrillTwineedleEffectCommands:
@@ -1204,7 +1196,7 @@ DragonRageEffectCommands:
 
 FungalGrowthEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FungalGrowth_HealEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, LeechLifeEffect
 	db  $00
 
 DoubleColorlessEnergyEffectCommands:

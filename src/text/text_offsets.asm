@@ -2148,12 +2148,11 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NidokingDescription                                ; 0x0868
 	textpointer ZubatName                                          ; 0x0869
 	textpointer LeechLifeName                                      ; 0x086a
-	textpointer ZubatsLeechLifeDescription                         ; 0x086b
+	textpointer LeechLifeDescription                               ; 0x086b
 	textpointer BatName                                            ; 0x086c
 	textpointer ZubatDescription                                   ; 0x086d
 	textpointer GolbatName                                         ; 0x086e
 	textpointer WingAttackName                                     ; 0x086f
-	textpointer GolbatsLeechLifeDescription                        ; 0x0870
 	textpointer GolbatDescription                                  ; 0x0871
 	textpointer OddishName                                         ; 0x0872
 	; textpointer SproutName                                         ; 0x0873
@@ -2183,7 +2182,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FungalGrowthDescription
 	textpointer ParasectDescription                                ; 0x088a
 	textpointer VenonatName                                        ; 0x088b
-	textpointer VenonatLeechLifeDescription                        ; 0x088c
 	textpointer InsectName                                         ; 0x088d
 	textpointer VenonatDescription                                 ; 0x088e
 	textpointer VenomothName                                       ; 0x088f

@@ -129,13 +129,10 @@ LeechLifeName: ; 588a7 (16:48a7)
 	text "Leech Life"
 	done
 
-ZubatsLeechLifeDescription: ; 588b3 (16:48b3)
-	text "Remove a number of damage counters"
-	line "from Zubat equal to the damage done"
-	line "to the Defending Pokémon (after"
-	line "applying Weakness and Resistance)."
-	line "If Zubat has fewer damage counters"
-	line "than that, remove all of them."
+LeechLifeDescription: ; 588b3 (16:48b3)
+	text "Heal from this Pokémon the same"
+	line "amount of damage you did to the"
+	line "Defending Pokémon."
 	done
 
 BatName: ; 58980 (16:4980)
@@ -154,15 +151,6 @@ GolbatName: ; 589e9 (16:49e9)
 
 WingAttackName: ; 589f1 (16:49f1)
 	text "Wing Attack"
-	done
-
-GolbatsLeechLifeDescription: ; 589fe (16:49fe)
-	text "Remove a number of damage counters"
-	line "from Golbat equal to the damage done"
-	line "to the Defending Pokémon (after"
-	line "applying Weakness and Resistance)."
-	line "If Golbat has fewer damage counters"
-	line "than that, remove all of them."
 	done
 
 GolbatDescription: ; 58acd (16:4acd)
@@ -290,9 +278,10 @@ FungalGrowthName:
 	done
 
 FungalGrowthDescription:
-	text "Heal 10 damage from each of your"
-	line "Pokémon. The Defending Pokémon is"
-	line "now Asleep."
+	text "Heal from this Pokémon the same"
+	line "amount of damage you did to the"
+	line "Defending Pokémon. The Defending"
+	line "Pokémon is now Asleep."
 	done
 
 ParasectDescription: ; 58f8e (16:4f8e)
@@ -303,15 +292,6 @@ ParasectDescription: ; 58f8e (16:4f8e)
 
 VenonatName: ; 58ff5 (16:4ff5)
 	text "Venonat"
-	done
-
-VenonatLeechLifeDescription: ; 58ffe (16:4ffe)
-	text "Remove a number of damage counters"
-	line "from Venonat equal to the damage"
-	line "done to the Defending Pokémon (after"
-	line "applying Weakness and Resistance)."
-	line "If Venonat has fewer damage counters"
-	line "than that, remove all of them."
 	done
 
 InsectName: ; 590cf (16:50cf)

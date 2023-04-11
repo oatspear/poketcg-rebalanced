@@ -56,6 +56,7 @@
 
 #### Zubat
 - **Supersonic**: reduced cost from (CC) to (C).
+- **Leech Life**: reduced cost from (DC) to (D).
 
 #### Golbat
 - **Leech Life**: reduced cost from (DDC) to (DC).
@@ -77,7 +78,10 @@
 #### Parasect
 - **Spore**: reduced cost from (GG) to (G).
 - **Slash**: removed.
-- New attack: **Fungal Growth** (GGC): 20 damage, inflicts sleep, heal 10 from all of the user's Pokémon.
+- New attack: **Fungal Growth** (GGC): 20 damage, inflicts sleep, heal same amount of damage from the user.
+
+#### Venonat
+- **Leech Life**: reduced cost from (GC) to (G).
 
 #### Bellsprout
 - **Vine Whip**: increased damage from 10 to 20.

@@ -1544,15 +1544,7 @@ KakunaPoisonPowder_AIEffect: ; 2c7b4 (b:47b4)
 	lb de, 0, 10
 	jp UpdateExpectedAIDamage_AccountForPoison
 
-GolbatLeechLifeEffect: ; 2c7bc (b:47bc)
-	ld hl, wDealtDamage
-	ld e, [hl]
-	inc hl ; wDamageEffectiveness
-	ld d, [hl]
-	call ApplyAndAnimateHPRecovery
-	ret
-
-VenonatLeechLifeEffect: ; 2c7c6 (b:47c6)
+LeechLifeEffect:
 	ld hl, wDealtDamage
 	ld e, [hl]
 	inc hl ; wDamageEffectiveness
@@ -1573,14 +1565,6 @@ SwordsDanceEffect: ; 2c7d0 (b:47d0)
 ZubatSupersonicEffect: ; 2c7dc (b:47dc)
 	call Confusion50PercentEffect
 	call nc, SetNoEffectFromStatus
-	ret
-
-ZubatLeechLifeEffect: ; 2c7e3 (b:47e3)
-	ld hl, wDealtDamage
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	call ApplyAndAnimateHPRecovery
 	ret
 
 Twineedle_AIEffect: ; 2c7ed (b:47ed)
@@ -7487,7 +7471,6 @@ HealingWind_PlayAreaHealEffect: ; 2ef53 (b:6f53)
 
 	ret
 
-FungalGrowth_HealEffect:
 HealingMelody_HealEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
