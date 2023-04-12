@@ -2179,6 +2179,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ParasDescription                                   ; 0x0887
 	textpointer ParasectName                                       ; 0x0888
 	textpointer SlashName                                          ; 0x0889
+	textpointer EnergySporesName
+	textpointer Attach2EnergyFromDiscardToAnyPkmnDescription
 	textpointer FungalGrowthName
 	textpointer FungalGrowthDescription
 	textpointer ParasectDescription                                ; 0x088a

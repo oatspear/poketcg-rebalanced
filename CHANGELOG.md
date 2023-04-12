@@ -76,8 +76,9 @@
 - **Spore**: reduced cost from (GG) to (G).
 
 #### Parasect
-- **Spore**: reduced cost from (GG) to (G).
+- **Spore**: removed.
 - **Slash**: removed.
+- New attack: **Energy Spores** (C): attach 2 energy from discard pile to one Pokémon.
 - New attack: **Fungal Growth** (GCC): 20 damage, inflicts sleep, heal same amount of damage from the user.
 
 #### Venonat

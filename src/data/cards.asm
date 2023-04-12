@@ -1472,18 +1472,18 @@ ParasectCard:
 	tx ParasName ; pre-evo name
 
 	; attack 1
-	energy GRASS, 1 ; energies
-	tx SporeName ; name
-	tx InflictSleepDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx EnergySporesName ; name
+	tx Attach2EnergyFromDiscardToAnyPkmnDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw InflictSleepEffectCommands ; effect commands
-	db INFLICT_SLEEP ; flags 1
+	db RESIDUAL ; category
+	dw EnergySporesEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_SPORE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy GRASS, 1, COLORLESS, 2 ; energies

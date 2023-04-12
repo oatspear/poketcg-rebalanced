@@ -273,6 +273,16 @@ SlashName: ; 58f87 (16:4f87)
 	text "Slash"
 	done
 
+EnergySporesName:
+	text "Energy Spores"
+	done
+
+Attach2EnergyFromDiscardToAnyPkmnDescription:
+	text "Choose up to 2 Basic Energy cards"
+	line "from your discard pile and attach"
+	line "them to one of your Pokémon."
+	done
+
 FungalGrowthName:
 	text "Fungal Growth"
 	done
