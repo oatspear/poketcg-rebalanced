@@ -78,7 +78,7 @@
 #### Parasect
 - **Spore**: reduced cost from (GG) to (G).
 - **Slash**: removed.
-- New attack: **Fungal Growth** (GGC): 20 damage, inflicts sleep, heal same amount of damage from the user.
+- New attack: **Fungal Growth** (GCC): 20 damage, inflicts sleep, heal same amount of damage from the user.
 
 #### Venonat
 - **Leech Life**: reduced cost from (GC) to (G).

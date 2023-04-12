@@ -4686,17 +4686,17 @@ Barrier_BarrierEffect: ; 2ddbf (b:5dbf)
 	call ApplySubstatus1ToAttackingCard
 	ret
 
-MewtwoAltLV60EnergyAbsorption_CheckDiscardPile: ; 2ddc5 (b:5dc5)
+EnergyAbsorption_CheckDiscardPile:
 	call CreateEnergyCardListFromDiscardPile_AllEnergy
 	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
 	ret
 
-MewtwoAltLV60EnergyAbsorption_PlayerSelectEffect: ; 2ddcc (b:5dcc)
+EnergyAbsorption_PlayerSelectEffect:
 	ldtx hl, Choose2EnergyCardsFromDiscardPileToAttachText
 	call HandleEnergyCardsInDiscardPileSelection
 	ret
 
-MewtwoAltLV60EnergyAbsorption_AISelectEffect: ; 2ddd3 (b:5dd3)
+EnergyAbsorption_AISelectEffect:
 ; AI picks first 2 energy cards
 	call CreateEnergyCardListFromDiscardPile_AllEnergy
 	ld hl, wDuelTempList
@@ -4715,49 +4715,7 @@ MewtwoAltLV60EnergyAbsorption_AISelectEffect: ; 2ddd3 (b:5dd3)
 	ld [de], a
 	ret
 
-MewtwoAltLV60EnergyAbsorption_AddToHandEffect: ; 2ddec (b:5dec)
-	ld hl, hTempList
-.loop
-	ld a, [hli]
-	cp $ff
-	ret z
-	push hl
-	call MoveDiscardPileCardToHand
-	call GetTurnDuelistVariable
-	ld [hl], CARD_LOCATION_ARENA
-	pop hl
-	jr .loop
-
-MewtwoLv60EnergyAbsorption_CheckDiscardPile: ; 2ddff (b:5dff)
-	call CreateEnergyCardListFromDiscardPile_AllEnergy
-	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
-	ret
-
-MewtwoLv60EnergyAbsorption_PlayerSelectEffect: ; 2de06 (b:5e06)
-	ldtx hl, Choose2EnergyCardsFromDiscardPileToAttachText
-	call HandleEnergyCardsInDiscardPileSelection
-	ret
-
-MewtwoLv60EnergyAbsorption_AISelectEffect: ; 2de0d (b:5e0d)
-; AI picks first 2 energy cards
-	call CreateEnergyCardListFromDiscardPile_AllEnergy
-	ld hl, wDuelTempList
-	ld de, hTempList
-	ld c, 2
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .done
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .loop
-.done
-	ld a, $ff ; terminating byte
-	ld [de], a
-	ret
-
-MewtwoLv60EnergyAbsorption_AddToHandEffect: ; 2de26 (b:5e26)
+EnergyAbsorption_AddToHandEffect:
 	ld hl, hTempList
 .loop
 	ld a, [hli]

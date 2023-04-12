@@ -1486,7 +1486,7 @@ ParasectCard:
 	db ATK_ANIM_SPORE ; animation
 
 	; attack 2
-	energy GRASS, 2, COLORLESS, 1 ; energies
+	energy GRASS, 1, COLORLESS, 2 ; energies
 	tx FungalGrowthName ; name
 	tx FungalGrowthDescription ; description
 	dw NONE ; description (cont)
@@ -8033,7 +8033,7 @@ MewtwoLv60Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MewtwoLv60EnergyAbsorptionEffectCommands ; effect commands
+	dw EnergyAbsorptionEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -8084,7 +8084,7 @@ MewtwoAltLV60Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MewtwoAltLV60EnergyAbsorptionEffectCommands ; effect commands
+	dw EnergyAbsorptionEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3

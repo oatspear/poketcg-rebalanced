@@ -676,18 +676,11 @@ MewtwoBarrierEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Barrier_AISelectEffect
 	db  $00
 
-MewtwoAltLV60EnergyAbsorptionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, MewtwoAltLV60EnergyAbsorption_CheckDiscardPile
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MewtwoAltLV60EnergyAbsorption_AddToHandEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MewtwoAltLV60EnergyAbsorption_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, MewtwoAltLV60EnergyAbsorption_AISelectEffect
-	db  $00
-
-MewtwoLv60EnergyAbsorptionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, MewtwoLv60EnergyAbsorption_CheckDiscardPile
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MewtwoLv60EnergyAbsorption_AddToHandEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MewtwoLv60EnergyAbsorption_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, MewtwoLv60EnergyAbsorption_AISelectEffect
+EnergyAbsorptionEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyAbsorption_CheckDiscardPile
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyAbsorption_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyAbsorption_AISelectEffect
 	db  $00
 
 SpacingOutEffectCommands:
