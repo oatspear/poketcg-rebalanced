@@ -7534,7 +7534,7 @@ AttachEnergyFromHand_AISelectEffect:
 AttachEnergyFromHand_AttachEnergyEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
-	jr z, .done
+	ret z
 
 ; attach card to the selected Pokemon
 	ldh a, [hTempPlayAreaLocation_ffa1]
