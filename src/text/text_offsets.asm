@@ -100,6 +100,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FinishedTurnWithoutAttackingText                   ; 0x005d
 	textpointer DuelistTurnText                                    ; 0x005e
 	textpointer AttachedEnergyToPokemonText                        ; 0x005f
+	textpointer GenericAttachedEnergyToPokemonText
 	textpointer PokemonEvolvedIntoPokemonText                      ; 0x0060
 	textpointer PlacedOnTheBenchText                               ; 0x0061
 	textpointer PlacedInTheArenaText                               ; 0x0062

@@ -439,6 +439,11 @@ AttachedEnergyToPokemonText: ; 36aa5 (d:6aa5)
 	line "to <RAMTEXT>."
 	done
 
+GenericAttachedEnergyToPokemonText:
+	text "Attached Energy"
+	line "to <RAMTEXT>."
+	done
+
 PokemonEvolvedIntoPokemonText: ; 36ab7 (d:6ab7)
 	text "<RAMTEXT> evolved"
 	line "into <RAMTEXT>."

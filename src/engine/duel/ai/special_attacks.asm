@@ -55,6 +55,8 @@ HandleSpecialAIAttacks:
 	jp z, .EnergySpike
 	cp DRATINI
 	jp z, .DragonDance
+	cp PARASECT
+	jp z, .EnergySpores
 	cp GOLDUCK
 	jp z, .HyperBeam
 	cp DRAGONAIR
@@ -319,11 +321,21 @@ HandleSpecialAIAttacks:
 	ld a, $83
 	ret
 
-; if there's any lightning energy cards in deck,
+; if there's any energy cards in hand,
 ; return a score of $80 + 3.
 .DragonDance:
 	call CreateEnergyCardListFromHand
 	jp c, .zero_score
+	call AIProcessButDontPlayEnergy_SkipEvolution
+	jp nc, .zero_score
+	ld a, $83
+	ret
+
+.EnergySpores:
+	ld a, CARD_LOCATION_DISCARD_PILE
+	ld e, GRASS_ENERGY
+	call CheckIfAnyCardIDinLocation
+	jp nc, .zero_score
 	call AIProcessButDontPlayEnergy_SkipEvolution
 	jp nc, .zero_score
 	ld a, $83

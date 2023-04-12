@@ -3666,11 +3666,12 @@ GetEnergyAttachedMultiplierDamage: ; 2d78c (b:578c)
 ; the Player can select up to 2 cards from the list.
 ; these cards are given in $ff-terminated list
 ; in hTempList.
-HandleEnergyCardsInDiscardPileSelection: ; 2d7bc (b:57bc)
+HandleEnergyCardsInDiscardPileSelection:
 	push hl
 	xor a
 	ldh [hCurSelectionItem], a
-	call CreateEnergyCardListFromDiscardPile_AllEnergy
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	; call CreateEnergyCardListFromDiscardPile_AllEnergy
 	pop hl
 	jr c, .finish
 
@@ -3970,18 +3971,20 @@ ApplyDestinyBondEffect: ; 2d987 (b:5987)
 	ret
 
 ; returns carry if no Energy cards in Discard Pile.
-EnergyConversion_CheckEnergy: ; 2d98d (b:598d)
-	call CreateEnergyCardListFromDiscardPile_AllEnergy
+EnergyConversion_CheckEnergy:
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	; call CreateEnergyCardListFromDiscardPile_AllEnergy
 	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
 	ret
 
-EnergyConversion_PlayerSelectEffect: ; 2d994 (b:5994)
+EnergyConversion_PlayerSelectEffect:
 	ldtx hl, Choose2EnergyCardsFromDiscardPileForHandText
 	call HandleEnergyCardsInDiscardPileSelection
 	ret
 
-EnergyConversion_AISelectEffect: ; 2d99b (b:599b)
-	call CreateEnergyCardListFromDiscardPile_AllEnergy
+EnergyConversion_AISelectEffect:
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	; call CreateEnergyCardListFromDiscardPile_AllEnergy
 	ld hl, wDuelTempList
 	ld de, hTempList
 	ld c, 2
@@ -4686,8 +4689,10 @@ Barrier_BarrierEffect: ; 2ddbf (b:5dbf)
 	call ApplySubstatus1ToAttackingCard
 	ret
 
+EnergySpores_CheckDiscardPile:
 EnergyAbsorption_CheckDiscardPile:
-	call CreateEnergyCardListFromDiscardPile_AllEnergy
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	; call CreateEnergyCardListFromDiscardPile_AllEnergy
 	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
 	ret
 
@@ -4698,7 +4703,8 @@ EnergyAbsorption_PlayerSelectEffect:
 
 EnergyAbsorption_AISelectEffect:
 ; AI picks first 2 energy cards
-	call CreateEnergyCardListFromDiscardPile_AllEnergy
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	; call CreateEnergyCardListFromDiscardPile_AllEnergy
 	ld hl, wDuelTempList
 	ld de, hTempList
 	ld c, 2
@@ -4715,7 +4721,44 @@ EnergyAbsorption_AISelectEffect:
 	ld [de], a
 	ret
 
-EnergyAbsorption_AddToHandEffect:
+EnergyAbsorption_AttachToPokemonEffect:
+	ld c, CARD_LOCATION_ARENA
+	jp SetCardLocationsFromDiscardPileToPlayArea
+
+EnergySpores_PlayerSelectEffect:
+; select up to 2 energies from discard pile
+	call EnergyAbsorption_PlayerSelectEffect
+; select target Pokémon in play area
+	jp Helper_ChooseAPokemonInPlayArea
+
+EnergySpores_AISelectEffect:
+; select up to 2 energies from discard pile
+	call EnergyAbsorption_AISelectEffect
+; special handling picks a suitable Pokémon in hTempPlayAreaLocation_ff9d
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret
+
+AttachEnergyFromDiscard_AttachToPokemonEffect:
+; attach card(s) to the selected Pokemon
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld c, a
+	call SetCardLocationsFromDiscardPileToPlayArea
+
+	call IsPlayerTurn
+	jr c, .done
+
+; not Player, so show detail screen
+; and which Pokemon was chosen to attach Energy.
+	call Helper_GenericShowAttachedEnergyToPokemon
+
+.done
+	or a
+	ret
+
+; input:
+;   c: PLAY_AREA_* location
+SetCardLocationsFromDiscardPileToPlayArea:
 	ld hl, hTempList
 .loop
 	ld a, [hli]
@@ -4724,7 +4767,8 @@ EnergyAbsorption_AddToHandEffect:
 	push hl
 	call MoveDiscardPileCardToHand
 	call GetTurnDuelistVariable
-	ld [hl], CARD_LOCATION_ARENA
+	ld a, c
+	ld [hl], a
 	pop hl
 	jr .loop
 
@@ -6315,20 +6359,7 @@ EnergySpike_AttachEnergyEffect: ; 2e8f6 (b:68f6)
 
 ; not Player, so show detail screen
 ; and which Pokemon was chosen to attach Energy.
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld hl, wLoadedCard1Name
-	ld de, wTxRam2_b
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	ldh a, [hTemp_ffa0]
-	ldtx hl, AttachedEnergyToPokemonText
-	bank1call DisplayCardDetailScreen
+	call Helper_ShowAttachedEnergyToPokemon
 
 .done
 	call SyncShuffleDeck
@@ -7491,19 +7522,8 @@ AttachEnergyFromHand_PlayerSelectEffect:
 	jr c, .loop_hand_input
 	ldh [hTemp_ffa0], a
 
-; handle Player selection (bench)
-	call EmptyScreen
-	ldtx hl, ChoosePokemonToAttachEnergyCardText
-	call DrawWideTextBox_WaitForInput
-
-; choose a Pokemon in Play Area to attach card
-	bank1call HasAlivePokemonInPlayArea
-.loop_play_area_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_play_area_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ret
+; handle Player selection (play area)
+	jp Helper_ChooseAPokemonInPlayArea
 
 AttachEnergyFromHand_AISelectEffect:
 ; AI doesn't select any card
@@ -7522,27 +7542,11 @@ AttachEnergyFromHand_AttachEnergyEffect:
 	ldh a, [hTemp_ffa0]
 	call PutHandCardInPlayArea
 	call IsPlayerTurn
-	jr c, .done
+	ret c
 
 ; not Player, so show detail screen
 ; and which Pokemon was chosen to attach Energy.
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld hl, wLoadedCard1Name
-	ld de, wTxRam2_b
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	ldh a, [hTemp_ffa0]
-	ldtx hl, AttachedEnergyToPokemonText
-	bank1call DisplayCardDetailScreen
-
-.done
-	ret
+	jp Helper_ShowAttachedEnergyToPokemon
 
 DragoniteLv41Slam_AIEffect: ; 2ef9c (b:6f9c)
 	ld a, (30 * 2) / 2
@@ -10405,4 +10409,53 @@ Helper_TopNCardsOfDeck:
 	jr nz, .loop_top_cards
 	ld a, $ff ; terminating byte
 	ld [de], a
+	ret
+
+Helper_ChooseAPokemonInPlayArea:
+	call EmptyScreen
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	call DrawWideTextBox_WaitForInput
+; choose a Pokemon in Play Area
+	bank1call HasAlivePokemonInPlayArea
+.loop_play_area_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_play_area_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret
+
+Helper_ShowAttachedEnergyToPokemon:
+; show detail screen and which Pokemon was chosen to attach Energy
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld hl, wLoadedCard1Name
+	ld de, wTxRam2_b
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	ldh a, [hTemp_ffa0]
+	ldtx hl, AttachedEnergyToPokemonText
+	bank1call DisplayCardDetailScreen
+	ret
+
+Helper_GenericShowAttachedEnergyToPokemon:
+; show detail screen and which Pokemon was chosen to attach Energy
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld hl, wLoadedCard1Name
+	ld de, wTxRam2_b
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ldtx hl, GenericAttachedEnergyToPokemonText
+	bank1call DisplayCardDetailScreen
 	ret

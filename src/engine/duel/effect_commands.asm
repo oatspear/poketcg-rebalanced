@@ -678,9 +678,16 @@ MewtwoBarrierEffectCommands:
 
 EnergyAbsorptionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyAbsorption_CheckDiscardPile
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AddToHandEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AttachToPokemonEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyAbsorption_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyAbsorption_AISelectEffect
+	db  $00
+
+EnergySporesEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergySpores_CheckDiscardPile
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AttachEnergyFromDiscard_AttachToPokemonEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySpores_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySpores_AISelectEffect
 	db  $00
 
 SpacingOutEffectCommands:

@@ -1136,8 +1136,8 @@ EnergyConversionName: ; 60629 (18:4629)
 	done
 
 EnergyConversionDescription: ; 6063c (18:463c)
-	text "Put up to 2 Energy cards from your"
-	line "discard pile into your hand."
+	text "Put up to 2 Basic Energy cards from"
+	line "your discard pile into your hand."
 	done
 
 GastlyLv17Description: ; 6069e (18:469e)
@@ -1356,9 +1356,9 @@ EnergyAbsorptionName: ; 61065 (18:5065)
 	done
 
 EnergyAbsorptionDescription: ; 61078 (18:5078)
-	text "Choose up to 2 Energy cards from"
-	line "your discard pile and attach them"
-	line "to this Pokémon."
+	text "Choose up to 2 Basic Energy cards"
+	line "from your discard pile and attach"
+	line "them to this Pokémon."
 	done
 
 PsyburnName: ; 610c7 (18:50c7)

@@ -209,8 +209,8 @@ Choose1BasicEnergyCardFromDeckText: ; 387d3 (e:47d3)
 	done
 
 ChoosePokemonToAttachEnergyCardText: ; 387fe (e:47fe)
-	text "Choose a Pokémon to attach"
-	line "the Energy card to."
+	text "Choose a Pokémon to attach the"
+	line "Energy to."
 	done
 
 Text011e: ; 3882e (e:482e)
@@ -291,12 +291,12 @@ ProcedureForCurseText: ; 38bfe (e:4bfe)
 	line "3. Press the B Button to cancel."
 	done
 
-Choose2EnergyCardsFromDiscardPileToAttachText: ; 38cda (e:4cda)
+Choose2EnergyCardsFromDiscardPileToAttachText:
 	text "Choose 2 Energy cards from the"
-	line "Discard Pileto attach to a Pokémon."
+	line "Discard Pile to attach to a Pokémon."
 	done
 
-Choose2EnergyCardsFromDiscardPileForHandText: ; 38d1e (e:4d1e)
+Choose2EnergyCardsFromDiscardPileForHandText:
 	text "Choose 2 Energy cards from the"
 	line "Discard Pile for your Hand."
 	done
