@@ -4722,7 +4722,7 @@ EnergyAbsorption_AISelectEffect:
 	ret
 
 EnergyAbsorption_AttachToPokemonEffect:
-	ld c, CARD_LOCATION_ARENA
+	ld e, CARD_LOCATION_ARENA
 	jp SetCardLocationsFromDiscardPileToPlayArea
 
 EnergySpores_PlayerSelectEffect:
@@ -4742,7 +4742,8 @@ EnergySpores_AISelectEffect:
 AttachEnergyFromDiscard_AttachToPokemonEffect:
 ; attach card(s) to the selected Pokemon
 	ldh a, [hTempPlayAreaLocation_ffa1]
-	ld c, a
+	or CARD_LOCATION_PLAY_AREA
+	ld e, a
 	call SetCardLocationsFromDiscardPileToPlayArea
 
 	call IsPlayerTurn
@@ -4757,7 +4758,7 @@ AttachEnergyFromDiscard_AttachToPokemonEffect:
 	ret
 
 ; input:
-;   c: PLAY_AREA_* location
+;   e: CARD_LOCATION_* constant
 SetCardLocationsFromDiscardPileToPlayArea:
 	ld hl, hTempList
 .loop
@@ -4767,7 +4768,7 @@ SetCardLocationsFromDiscardPileToPlayArea:
 	push hl
 	call MoveDiscardPileCardToHand
 	call GetTurnDuelistVariable
-	ld a, c
+	ld a, e
 	ld [hl], a
 	pop hl
 	jr .loop
