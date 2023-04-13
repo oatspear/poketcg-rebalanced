@@ -700,6 +700,10 @@ YouCanSelectMoreCardsQuitText: ; 39b73 (e:5b73)
 	text "You can select <RAMNUM> more cards. Quit?"
 	done
 
+AreYouDoneSelectingCardsText:
+	text "Are you done selecting cards?"
+	done
+
 ThereWasNoEffectText: ; 39b97 (e:5b97)
 	text "There was no effect!"
 	done

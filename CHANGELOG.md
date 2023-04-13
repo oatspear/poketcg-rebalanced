@@ -78,7 +78,7 @@
 #### Parasect
 - **Spore**: removed.
 - **Slash**: removed.
-- New attack: **Energy Spores** (C): attach 2 energy from discard pile to one Pokémon.
+- New attack: **Energy Spores** (C): attach 2 energy from discard pile to any of your Pokémon.
 - New attack: **Fungal Growth** (GCC): 20 damage, inflicts sleep, heal same amount of damage from the user.
 
 #### Venonat

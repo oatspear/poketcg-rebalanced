@@ -111,6 +111,19 @@ hPlayAreaEffectTarget:: ; ffa2
 hAIEnergyTransPlayAreaLocation:: ; ffa3
 	ds $1
 
+hMultiPurposeByte1:: ; ffa4
+	ds $1
+
+hMultiPurposeByte2:: ; ffa5
+	ds $1
+
+hMultiPurposeByte3:: ; ffa6
+	ds $1
+
+hMultiPurposeByte4:: ; ffa7
+hHowManyCardsToSelectOneByOne::
+	ds $1
+
 ENDU
 
 NEXTU

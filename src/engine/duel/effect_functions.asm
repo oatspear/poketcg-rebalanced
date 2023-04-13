@@ -3677,13 +3677,7 @@ HandleEnergyCardsInDiscardPileSelection:
 
 	call DrawWideTextBox_WaitForInput
 .loop
-; draws Discard Pile screen and textbox,
-; and handles Player input
-	bank1call InitAndDrawCardListScreenLayout
-	ldtx hl, ChooseAnEnergyCardText
-	ldtx de, PlayerDiscardPileText
-	bank1call SetCardListHeaderText
-	bank1call DisplayCardList
+	call Helper_ChooseAnEnergyCardFromList
 	jr nc, .selected
 
 ; Player is trying to exit screen,
@@ -3711,6 +3705,76 @@ HandleEnergyCardsInDiscardPileSelection:
 	call GetNextPositionInTempList
 	ld [hl], $ff
 	or a
+	ret
+
+; Draws list of Energy Cards in Discard Pile for Player to select from.
+; Output deck index or $ff in hTemp_ffa0 and a.
+; Return carry if there are no cards to choose.
+HandleSelectBasicEnergyFromDiscardPile_NoCancel:
+	push hl
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	pop hl
+	jr nc, .select_card
+; return terminating byte
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	scf
+	ret
+
+.select_card
+	call DrawWideTextBox_WaitForInput
+.loop
+	call Helper_ChooseAnEnergyCardFromList
+	jr c, .loop
+
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+; Draws list of Energy Cards in Discard Pile for Player to select from.
+; input: hHowManyCardsToSelectOneByOne - how many cards still left to choose
+; Output deck index or $ff in hTemp_ffa0 and a.
+; Return carry if cancelled or if there are no cards to choose.
+HandleSelectBasicEnergyFromDiscardPile_AllowCancel:
+	push hl
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	pop hl
+	jr nc, .select_card
+.not_chosen
+; return terminating byte
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	scf
+	ret
+
+.select_card
+	call DrawWideTextBox_WaitForInput
+.loop
+	call Helper_ChooseAnEnergyCardFromList
+	jr nc, .selected
+
+; Player is trying to exit screen, prompt to confirm.
+	ldh a, [hHowManyCardsToSelectOneByOne]
+	call AskWhetherToQuitSelectingCards
+	jr c, .loop
+	jr .not_chosen
+
+.selected
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+; Draws Discard Pile screen and textbox, and handles Player input.
+; Returns carry if B is pressed to exit the card list screen.
+; Otherwise, returns the selected card (deck index) at hTempCardIndex_ff98 and at a.
+Helper_ChooseAnEnergyCardFromList:
+	bank1call InitAndDrawCardListScreenLayout
+	ldtx hl, ChooseAnEnergyCardText
+	ldtx de, PlayerDiscardPileText
+	bank1call SetCardListHeaderText
+	bank1call DisplayCardList
 	ret
 
 ; returns carry if Pkmn Power cannot be used, and
@@ -4696,11 +4760,13 @@ EnergyAbsorption_CheckDiscardPile:
 	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
 	ret
 
+EnergySpores_PlayerSelectEffect:
 EnergyAbsorption_PlayerSelectEffect:
 	ldtx hl, Choose2EnergyCardsFromDiscardPileToAttachText
 	call HandleEnergyCardsInDiscardPileSelection
 	ret
 
+EnergySpores_AISelectEffect:
 EnergyAbsorption_AISelectEffect:
 ; AI picks first 2 energy cards
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
@@ -4725,35 +4791,38 @@ EnergyAbsorption_AttachToPokemonEffect:
 	ld e, CARD_LOCATION_ARENA
 	jp SetCardLocationsFromDiscardPileToPlayArea
 
-EnergySpores_PlayerSelectEffect:
-; select up to 2 energies from discard pile
-	call EnergyAbsorption_PlayerSelectEffect
-; select target Pokémon in play area
-	jp Helper_ChooseAPokemonInPlayArea
-
-EnergySpores_AISelectEffect:
-; select up to 2 energies from discard pile
-	call EnergyAbsorption_AISelectEffect
-; special handling picks a suitable Pokémon in hTempPlayAreaLocation_ff9d
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ret
-
 AttachEnergyFromDiscard_AttachToPokemonEffect:
-; attach card(s) to the selected Pokemon
-	ldh a, [hTempPlayAreaLocation_ffa1]
+	call IsPlayerTurn
+	jr c, .player_turn
+
+; AI energy attachment selection
+; special attack handling already picks a suitable Pokémon
+	ldh a, [hTempPlayAreaLocation_ff9d]
 	or CARD_LOCATION_PLAY_AREA
 	ld e, a
 	call SetCardLocationsFromDiscardPileToPlayArea
+; show detail screen and which Pokemon was chosen to attach Energy
+	jp Helper_GenericShowAttachedEnergyToPokemon
 
-	call IsPlayerTurn
-	jr c, .done
-
-; not Player, so show detail screen
-; and which Pokemon was chosen to attach Energy.
-	call Helper_GenericShowAttachedEnergyToPokemon
-
-.done
+.player_turn
+	ld hl, hTempList
+.loop
+	ld a, [hl]
+	cp $ff
+	ret z
+	push hl
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	bank1call DisplayCardDetailScreen
+; select target Pokémon in play area
+	call Helper_ChooseAPokemonInPlayArea
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+; attach card(s) to the selected Pokemon
+	or CARD_LOCATION_PLAY_AREA
+	ld e, a
+	pop hl
+	ld a, [hli]
+	call Helper_AttachCardFromDiscardPile
+	jr .loop
 	or a
 	ret
 
@@ -4765,13 +4834,20 @@ SetCardLocationsFromDiscardPileToPlayArea:
 	ld a, [hli]
 	cp $ff
 	ret z
+	call Helper_AttachCardFromDiscardPile
+	jr .loop
+
+; input:
+;   a: deck index of discarded card to attach
+;   e: CARD_LOCATION_* constant
+Helper_AttachCardFromDiscardPile:
 	push hl
 	call MoveDiscardPileCardToHand
 	call GetTurnDuelistVariable
 	ld a, e
 	ld [hl], a
 	pop hl
-	jr .loop
+	ret
 
 ; returns carry if has no damage counters.
 SpacingOut_CheckDamage: ; 2ded5 (b:5ed5)
@@ -7524,7 +7600,9 @@ AttachEnergyFromHand_PlayerSelectEffect:
 	ldh [hTemp_ffa0], a
 
 ; handle Player selection (play area)
-	jp Helper_ChooseAPokemonInPlayArea
+	call Helper_ChooseAPokemonInPlayArea_EmptyScreen
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret
 
 AttachEnergyFromHand_AISelectEffect:
 ; AI doesn't select any card
@@ -10412,8 +10490,9 @@ Helper_TopNCardsOfDeck:
 	ld [de], a
 	ret
 
-Helper_ChooseAPokemonInPlayArea:
+Helper_ChooseAPokemonInPlayArea_EmptyScreen:
 	call EmptyScreen
+Helper_ChooseAPokemonInPlayArea:
 	ldtx hl, ChoosePokemonToAttachEnergyCardText
 	call DrawWideTextBox_WaitForInput
 ; choose a Pokemon in Play Area
@@ -10422,7 +10501,8 @@ Helper_ChooseAPokemonInPlayArea:
 	bank1call OpenPlayAreaScreenForSelection
 	jr c, .loop_play_area_input
 	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempPlayAreaLocation_ffa1], a
+	; ldh [hTempPlayAreaLocation_ffa1], a
+	; using hTempPlayAreaLocation_ffa1 invalidates the use of hTempList
 	ret
 
 Helper_ShowAttachedEnergyToPokemon:
@@ -10445,18 +10525,19 @@ Helper_ShowAttachedEnergyToPokemon:
 
 Helper_GenericShowAttachedEnergyToPokemon:
 ; show detail screen and which Pokemon was chosen to attach Energy
-	ldh a, [hTempPlayAreaLocation_ffa1]
+	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
+	ld c, a  ; deck index of Pokémon card
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld hl, wLoadedCard1Name
-	ld de, wTxRam2_b
+	ld de, wTxRam2
 	ld a, [hli]
 	ld [de], a
 	inc de
 	ld a, [hli]
 	ld [de], a
-	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld a, c
 	ldtx hl, GenericAttachedEnergyToPokemonText
 	bank1call DisplayCardDetailScreen
 	ret

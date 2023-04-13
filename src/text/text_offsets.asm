@@ -382,6 +382,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PokemonDevolvedToText                              ; 0x017a
 	textpointer ThereWasNoFireEnergyText                           ; 0x017b
 	textpointer YouCanSelectMoreCardsQuitText                      ; 0x017c
+	textpointer AreYouDoneSelectingCardsText ; unreferenced
 	textpointer ThereWasNoEffectText                               ; 0x017d
 	textpointer ThereWasNoEffectFromToxicText                      ; 0x017e
 	textpointer ThereWasNoEffectFromPoisonText                     ; 0x017f

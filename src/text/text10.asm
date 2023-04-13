@@ -280,7 +280,8 @@ EnergySporesName:
 Attach2EnergyFromDiscardToAnyPkmnDescription:
 	text "Choose up to 2 Basic Energy cards"
 	line "from your discard pile and attach"
-	line "them to one of your Pokémon."
+	line "them to your Pokémon in any way"
+	line "you like."
 	done
 
 FungalGrowthName:
