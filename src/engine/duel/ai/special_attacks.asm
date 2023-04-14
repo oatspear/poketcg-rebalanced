@@ -61,6 +61,8 @@ HandleSpecialAIAttacks:
 	jp z, .HyperBeam
 	cp DRAGONAIR
 	jp z, .HyperBeam
+	cp NINETALES_LV35
+	jp z, .HyperBeam
 
 ; return zero score.
 .zero_score

@@ -2279,9 +2279,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NinetalesLureDescription                           ; 0x08e8
 	textpointer FireBlastName                                      ; 0x08e9
 	textpointer NinetalesLv32Description                          ; 0x08eb
-	textpointer MixUpName                                          ; 0x08ec
-	textpointer MixUpDescription                                   ; 0x08ed
-	textpointer MixUpDescriptionCont                               ; 0x08ee
+	textpointer FireFangName                                       ; 0x08ec
 	textpointer DancingEmbersName                                  ; 0x08ef
 	textpointer DancingEmbersDescription                           ; 0x08f0
 	textpointer NinetalesLv35Description                          ; 0x08f1

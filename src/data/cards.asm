@@ -2557,17 +2557,17 @@ NinetalesLv35Card:
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
-	energy FIRE, 2, COLORLESS, 1 ; energies
-	tx FlamethrowerName ; name
-	tx Discard1EnergyDescription ; description
+	energy FIRE, 2 ; energies
+	tx FireFangName ; name
+	tx IfHeadsDiscard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw FlamethrowerEffectCommands ; effect commands
+	dw FireFangEffectCommands ; effect commands
 	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
-	db NONE ; flags 3
-	db 3
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
 	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost

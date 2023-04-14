@@ -756,24 +756,8 @@ NinetalesLv32Description: ; 5a28a (16:628a)
 	line "result in a 1,000-year curse."
 	done
 
-MixUpName: ; 5a2ec (16:62ec)
-	text "Mix-Up"
-	done
-
-MixUpDescription: ; 5a2f4 (16:62f4)
-	text "If your opponent has any Basic"
-	line "Pokémon or Evolution cards in his"
-	line "or her hand, your opponent shuffles"
-	line "them into his or her deck. Then,"
-	line "your opponent puts an equal number"
-	line "of Basic Pokémon or Evolution cards"
-	line "chosen at random from his or"
-	done
-
-MixUpDescriptionCont: ; 5a3df (16:63df)
-	text "her deck into his or her hand. Your"
-	line "opponent shuffles his or her deck"
-	line "afterward."
+FireFangName: ; 5a2ec (16:62ec)
+	text "Fire Fang"
 	done
 
 DancingEmbersName: ; 5a431 (16:6431)
