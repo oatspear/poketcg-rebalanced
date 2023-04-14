@@ -4746,7 +4746,7 @@ Recover_CheckEnergyHP: ; 2df89 (b:5f89)
 	; fallthrough
 
 ; ------------------------------------------------------------------------------
-; Enegy Discard
+; Energy Discard
 ; ------------------------------------------------------------------------------
 
 CheckAnyEnergiesAttached:
@@ -4840,6 +4840,87 @@ Discard2Energies_DiscardEffect:
 	call PutCardInDiscardPile
 	ld a, [hli]
 	call PutCardInDiscardPile
+	ret
+
+; ------------------------------------------------------------------------------
+; Energy Discard (Opponent)
+; ------------------------------------------------------------------------------
+
+; handles screen for selecting an Energy card to discard
+; that is attached to Defending Pokemon,
+; and store the Player selection in [hTemp_ffa0].
+DiscardOpponentEnergy_PlayerSelectEffect:
+	call SwapTurn
+	xor a ; PLAY_AREA_ARENA
+	call CreateArenaOrBenchEnergyCardList
+	jr c, .no_energy
+	ldtx hl, ChooseDiscardEnergyCardFromOpponentText
+	call DrawWideTextBox_WaitForInput
+	xor a ; PLAY_AREA_ARENA
+	bank1call DisplayEnergyDiscardScreen
+
+.loop_input
+	bank1call HandleEnergyDiscardMenuInput
+	jr c, .loop_input
+
+	call SwapTurn
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a ; store selected card to discard
+	ret
+
+.no_energy
+	call SwapTurn
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+
+DiscardOpponentEnergy_AISelectEffect:
+	call AIPickEnergyCardToDiscardFromDefendingPokemon
+	ldh [hTemp_ffa0], a
+	ret
+
+DiscardOpponentEnergy_DiscardEffect:
+	call HandleNoDamageOrEffect
+	ret c ; return if attack had no effect
+
+	; check if energy card was chosen to discard
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z ; return if none selected
+
+	; discard Defending card's energy
+	call SwapTurn
+	call PutCardInDiscardPile
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
+	call GetTurnDuelistVariable
+	ld [hl], LAST_TURN_EFFECT_DISCARD_ENERGY
+	call SwapTurn
+	ret
+
+DiscardOpponentEnergyIfHeads_50PercentEffect:
+	ldtx de, IfHeadsDiscard1EnergyFromTargetText
+	call TossCoin_BankB
+	ldh [hTemp_ffa0], a
+	ret
+
+DiscardOpponentEnergyIfHeads_PlayerSelectEffect:
+; check the result of the previous coin flip
+	ldh a, [hTemp_ffa0]
+	or a
+	jr nz, DiscardOpponentEnergy_PlayerSelectEffect
+; no energy chosen if tails
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+
+DiscardOpponentEnergyIfHeads_AISelectEffect:
+; check the result of the previous coin flip
+	ldh a, [hTemp_ffa0]
+	or a
+	jr nz, DiscardOpponentEnergy_AISelectEffect
+; no energy chosen if tails
+	ld a, $ff
+	ldh [hTemp_ffa0], a
 	ret
 
 ; ------------------------------------------------------------------------------
@@ -6444,7 +6525,7 @@ MirrorMoveEffects: ; 2e98c (b:698c)
 	ret z ; no effect
 ; handle Energy card discard effect
 	cp LAST_TURN_EFFECT_DISCARD_ENERGY
-	jp z, HandleEnergyDiscardEffectSelection
+	jp z, DiscardOpponentEnergy_PlayerSelectEffect
 	ret
 
 .AISelection
@@ -6808,58 +6889,6 @@ DragonairSlam_MultiplierEffect: ; 2ec14 (b:6c14)
 	add e
 	call ATimes10
 	call SetDefiniteDamage
-	ret
-
-HyperBeam_AISelectEffect: ; 2ec2f (b:6c2f)
-	call AIPickEnergyCardToDiscardFromDefendingPokemon
-	ldh [hTemp_ffa0], a
-	ret
-
-HyperBeam_DiscardEffect: ; 2d06b (b:506b)
-	call HandleNoDamageOrEffect
-	ret c ; return if attack had no effect
-
-	; check if energy card was chosen to discard
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret z ; return if none selected
-
-	; discard Defending card's energy
-	call SwapTurn
-	call PutCardInDiscardPile
-	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
-	call GetTurnDuelistVariable
-	ld [hl], LAST_TURN_EFFECT_DISCARD_ENERGY
-	call SwapTurn
-	ret
-
-; handles screen for selecting an Energy card to discard
-; that is attached to Defending Pokemon,
-; and store the Player selection in [hTemp_ffa0].
-HyperBeam_PlayerSelectEffect:
-HandleEnergyDiscardEffectSelection: ; 2ec4f (b:6c4f)
-	call SwapTurn
-	xor a ; PLAY_AREA_ARENA
-	call CreateArenaOrBenchEnergyCardList
-	jr c, .no_energy
-	ldtx hl, ChooseDiscardEnergyCardFromOpponentText
-	call DrawWideTextBox_WaitForInput
-	xor a ; PLAY_AREA_ARENA
-	bank1call DisplayEnergyDiscardScreen
-
-.loop_input
-	bank1call HandleEnergyDiscardMenuInput
-	jr c, .loop_input
-
-	call SwapTurn
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a ; store selected card to discard
-	ret
-
-.no_energy
-	call SwapTurn
-	ld a, $ff
-	ldh [hTemp_ffa0], a
 	ret
 
 ; return carry if Defending Pokemon has no attacks

@@ -1124,10 +1124,15 @@ HyperBeamName: ; 5b462 (16:7462)
 	text "Hyper Beam"
 	done
 
-Discard1EnergyFromTargetDescription: ; 5b46e (16:746e)
-	text "If the Defending Pokémon has any"
-	line "Energy cards attached to it, choose"
-	line "1 of them and discard it."
+Discard1EnergyFromTargetDescription:
+	text "Discard an Energy card from the"
+	line "Defending Pokémon."
+	done
+
+IfHeadsDiscard1EnergyFromTargetDescription:
+	text "Flip a coin. If Heads, discard an"
+	line "Energy card from the Defending"
+	line "Pokémon."
 	done
 
 GolduckDescription: ; 5b4ce (16:74ce)

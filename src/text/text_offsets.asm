@@ -250,6 +250,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Text00f2                                           ; 0x00f2
 	textpointer DamageCheckIfHeadsPlusDamageText                   ; 0x00f3
 	textpointer DamageCheckIfHeadsXDamageText                      ; 0x00f4
+	textpointer IfHeadsDiscard1EnergyFromTargetText
 	textpointer AlreadyRetreatedThisTurnText                       ; 0x00f4
 	textpointer AcidCheckText                                      ; 0x00f5
 	; textpointer TransparencyCheckText                              ; 0x00f6
@@ -2352,7 +2353,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GolduckName                                        ; 0x093b
 	textpointer PsyshockName                                       ; 0x093c
 	textpointer HyperBeamName                                      ; 0x093d
-	textpointer Discard1EnergyFromTargetDescription                ; 0x093e
+	textpointer Discard1EnergyFromTargetDescription
+	textpointer IfHeadsDiscard1EnergyFromTargetDescription
 	textpointer GolduckDescription                                 ; 0x093f
 	textpointer PoliwagName                                        ; 0x0940
 	textpointer WaterGunName                                       ; 0x0941

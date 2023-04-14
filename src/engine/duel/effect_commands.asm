@@ -999,9 +999,16 @@ DragonairSlamEffectCommands:
 WhirlpoolEffectCommands:
 TwisterEffectCommands:
 HyperBeamEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HyperBeam_DiscardEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, HyperBeam_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, HyperBeam_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergy_AISelectEffect
+	db  $00
+
+FireFangEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardOpponentEnergyIfHeads_50PercentEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergyIfHeads_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergyIfHeads_AISelectEffect
 	db  $00
 
 ClefableMetronomeEffectCommands:

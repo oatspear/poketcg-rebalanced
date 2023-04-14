@@ -1174,6 +1174,11 @@ DamageCheckIfHeadsXDamageText: ; 37fcd (d:7fcd)
 	line "If Heads, x <RAMNUM> damage!!"
 	done
 
+IfHeadsDiscard1EnergyFromTargetText:
+	text "If Heads, discard an Energy"
+	line "from the Defending Pokémon!"
+	done
+
 AlreadyRetreatedThisTurnText:
 	text "Already retreated this turn."
 	done
