@@ -384,7 +384,7 @@ ThunderboltName: ; 5e290 (17:6290)
 
 ThunderboltDescription: ; 5e29d (17:629d)
 	text "Discard all Energy cards attached to"
-	line "Zapdos in order to use this attack."
+	line "this Pokémon."
 	done
 
 ZapdosLv64Description: ; 5e2e7 (17:62e7)
