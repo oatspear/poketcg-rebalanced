@@ -2882,28 +2882,6 @@ AIPickFireEnergyCardToDiscard: ; 2d35a (b:535a)
 	ldh [hTempList], a ; pick first in list
 	ret
 
-; returns carry if Arena card has no Fire Energy cards
-ArcanineFlamethrower_CheckEnergy: ; 2d363 (b:5363)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies]
-	ldtx hl, NotEnoughFireEnergyText
-	cp 1
-	ret
-
-ArcanineFlamethrower_PlayerSelectEffect: ; 2d371 (b:5371)
-	call PlayerPickFireEnergyCardToDiscard
-	ret
-
-ArcanineFlamethrower_AISelectEffect: ; 2d375 (b:5375)
-	call AIPickFireEnergyCardToDiscard
-	ret
-
-ArcanineFlamethrower_DiscardEffect: ; 2d379 (b:5379)
-	ldh a, [hTempList]
-	call PutCardInDiscardPile
-	ret
-
 ArcanineQuickAttack_AIEffect: ; 2d385 (b:5385)
 	ld a, (10 + 30) / 2
 	lb de, 20, 30
@@ -3038,50 +3016,6 @@ NinetalesLure_SwitchEffect: ; 2d44f (b:544f)
 	call SwapTurn
 	xor a
 	ld [wDuelDisplayedScreen], a
-	ret
-
-; return carry if no Fire energy cards
-FireBlast_CheckEnergy: ; 2d463 (b:5463)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ldtx hl, NotEnoughFireEnergyText
-	ld a, [wAttachedEnergies]
-	cp 1
-	ret
-
-FireBlast_PlayerSelectEffect: ; 2d471 (b:5471)
-	call PlayerPickFireEnergyCardToDiscard
-	ret
-
-FireBlast_AISelectEffect: ; 2d475 (b:5475)
-	call AIPickFireEnergyCardToDiscard
-	ret
-
-FireBlast_DiscardEffect: ; 2d479 (b:5479)
-	ldh a, [hTempList]
-	call PutCardInDiscardPile
-	ret
-
-; return carry if no Fire energy cards
-Ember_CheckEnergy: ; 2d47f (b:547f)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ldtx hl, NotEnoughFireEnergyText
-	ld a, [wAttachedEnergies]
-	cp 1
-	ret
-
-Ember_PlayerSelectEffect: ; 2d48d (b:548d)
-	call PlayerPickFireEnergyCardToDiscard
-	ret
-
-Ember_AISelectEffect: ; 2d491 (b:5491)
-	call AIPickFireEnergyCardToDiscard
-	ret
-
-Ember_DiscardEffect: ; 2d495 (b:5495)
-	ldh a, [hTempList]
-	call PutCardInDiscardPile
 	ret
 
 ; return carry if no Fire energy cards
@@ -3224,50 +3158,6 @@ FlareonQuickAttack_DamageBoostEffect: ; 2d549 (b:5549)
 	call AddToDamage
 	ret
 
-; return carry if no Fire Energy attached
-FlareonFlamethrower_CheckEnergy: ; 2d55c (b:555c)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ldtx hl, NotEnoughFireEnergyText
-	ld a, [wAttachedEnergies]
-	cp 1
-	ret
-
-FlareonFlamethrower_PlayerSelectEffect: ; 2d56a (b:556a)
-	call PlayerPickFireEnergyCardToDiscard
-	ret
-
-FlareonFlamethrower_AISelectEffect: ; 2d56e (b:556e)
-	call AIPickFireEnergyCardToDiscard
-	ret
-
-FlareonFlamethrower_DiscardEffect: ; 2d572 (b:5572)
-	ldh a, [hTempList]
-	call PutCardInDiscardPile
-	ret
-
-; return carry if no Fire Energy attached
-MagmarFlamethrower_CheckEnergy: ; 2d578 (b:5578)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ldtx hl, NotEnoughFireEnergyText
-	ld a, [wAttachedEnergies]
-	cp 1
-	ret
-
-MagmarFlamethrower_PlayerSelectEffect: ; 2d586 (b:5586)
-	call PlayerPickFireEnergyCardToDiscard
-	ret
-
-MagmarFlamethrower_AISelectEffect: ; 2d58a (b:558a)
-	call AIPickFireEnergyCardToDiscard
-	ret
-
-MagmarFlamethrower_DiscardEffect: ; 2d58e (b:558e)
-	ldh a, [hTempList]
-	call PutCardInDiscardPile
-	ret
-
 MagmarSmokescreenEffect: ; 2d594 (b:5594)
 	ld a, SUBSTATUS2_SMOKESCREEN
 	call ApplySubstatus2ToDefendingCard
@@ -3278,91 +3168,8 @@ MagmarSmog_AIEffect: ; 2d59a (b:559a)
 	lb de, 0, 10
 	jp UpdateExpectedAIDamage_AccountForPoison
 
-; return carry if no Fire Energy attached
-CharmeleonFlamethrower_CheckEnergy: ; 2d5a2 (b:55a2)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ldtx hl, NotEnoughFireEnergyText
-	ld a, [wAttachedEnergies]
-	cp 1
-	ret
-
-CharmeleonFlamethrower_PlayerSelectEffect: ; 2d5b0 (b:55b0)
-	call PlayerPickFireEnergyCardToDiscard
-	ret
-
-CharmeleonFlamethrower_AISelectEffect: ; 2d5b4 (b:55b4)
-	call AIPickFireEnergyCardToDiscard
-	ret
-
-CharmeleonFlamethrower_DiscardEffect: ; 2d5b8 (b:55b8)
-	ldh a, [hTempList]
-	call PutCardInDiscardPile
-	ret
-
 EnergyBurnEffect: ; 2d5be (b:55be)
 	scf
-	ret
-
-; return carry if has less than 2 Fire Energy cards
-FireSpin_CheckEnergy: ; 2d5c0 (b:55c0)
-	xor a ; PLAY_AREA_ARENA
-	call CreateArenaOrBenchEnergyCardList
-	call CountCardsInDuelTempList
-	ldtx hl, NotEnoughEnergyCardsText
-	cp 2
-	ret
-
-FireSpin_PlayerSelectEffect: ; 2d5cd (b:55cd)
-	ldtx hl, ChooseAndDiscard2EnergyCardsText
-	call DrawWideTextBox_WaitForInput
-
-	xor a
-	ldh [hCurSelectionItem], a
-	xor a
-	call CreateArenaOrBenchEnergyCardList
-	call SortCardsInDuelTempListByID
-	xor a
-	bank1call DisplayEnergyDiscardScreen
-
-	ld a, 2
-	ld [wEnergyDiscardMenuDenominator], a
-.loop_input
-	bank1call HandleEnergyDiscardMenuInput
-	ret c
-	call GetNextPositionInTempList
-	ldh a, [hTempCardIndex_ff98]
-	ld [hl], a
-	ld hl, wEnergyDiscardMenuNumerator
-	inc [hl]
-	ldh a, [hCurSelectionItem]
-	cp 2
-	jr nc, .done
-	ldh a, [hTempCardIndex_ff98]
-	call RemoveCardFromDuelTempList
-	bank1call DisplayEnergyDiscardMenu
-	jr .loop_input
-.done
-; return when 2 have been chosen
-	or a
-	ret
-
-FireSpin_AISelectEffect: ; 2d606 (b:5606)
-	xor a ; PLAY_AREA_ARENA
-	call CreateArenaOrBenchEnergyCardList
-	ld hl, wDuelTempList
-	ld a, [hli]
-	ldh [hTempList], a
-	ld a, [hl]
-	ldh [hTempList + 1], a
-	ret
-
-FireSpin_DiscardEffect: ; 2d614 (b:5614)
-	ld hl, hTempList
-	ld a, [hli]
-	call PutCardInDiscardPile
-	ld a, [hli]
-	call PutCardInDiscardPile
 	ret
 
 ; returns carry if Pkmn Power cannot be used
@@ -4938,6 +4745,10 @@ Recover_CheckEnergyHP: ; 2df89 (b:5f89)
 	ret c ; return carry if no damage
 	; fallthrough
 
+; ------------------------------------------------------------------------------
+; Enegy Discard
+; ------------------------------------------------------------------------------
+
 CheckAnyEnergiesAttached:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
@@ -4946,7 +4757,7 @@ CheckAnyEnergiesAttached:
 	cp 1
 	ret ; return carry if not enough energy
 
-DiscardEnergy_PlayerSelectEffect: ; 2dfa0 (b:5fa0)
+DiscardEnergy_PlayerSelectEffect:
 	xor a ; PLAY_AREA_ARENA
 	bank1call CreateArenaOrBenchEnergyCardList
 	xor a ; PLAY_AREA_ARENA
@@ -4957,17 +4768,81 @@ DiscardEnergy_PlayerSelectEffect: ; 2dfa0 (b:5fa0)
 	ldh [hTemp_ffa0], a ; store card chosen
 	ret
 
-DiscardEnergy_AISelectEffect: ; 2dfb2 (b:5fb2)
+DiscardEnergy_AISelectEffect:
 	xor a ; PLAY_AREA_ARENA
 	bank1call CreateArenaOrBenchEnergyCardList
 	ld a, [wDuelTempList] ; pick first card
 	ldh [hTemp_ffa0], a
 	ret
 
-DiscardEnergy_DiscardEffect: ; 2dfbd (b:5fbd)
+DiscardEnergy_DiscardEffect:
 	ldh a, [hTemp_ffa0]
 	call PutCardInDiscardPile
 	ret
+
+; return carry if has less than 2 Energy cards
+Check2EnergiesAttached:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	ldtx hl, NotEnoughEnergyCardsText
+	cp 2
+	ret
+
+Discard2Energies_PlayerSelectEffect:
+	ldtx hl, ChooseAndDiscard2EnergyCardsText
+	call DrawWideTextBox_WaitForInput
+
+	xor a
+	ldh [hCurSelectionItem], a
+	; xor a ; PLAY_AREA_ARENA
+	call CreateArenaOrBenchEnergyCardList
+	call SortCardsInDuelTempListByID
+	xor a ; PLAY_AREA_ARENA
+	bank1call DisplayEnergyDiscardScreen
+
+	ld a, 2
+	ld [wEnergyDiscardMenuDenominator], a
+.loop_input
+	bank1call HandleEnergyDiscardMenuInput
+	ret c
+	call GetNextPositionInTempList
+	ldh a, [hTempCardIndex_ff98]
+	ld [hl], a
+	ld hl, wEnergyDiscardMenuNumerator
+	inc [hl]
+	ldh a, [hCurSelectionItem]
+	cp 2
+	jr nc, .done
+	ldh a, [hTempCardIndex_ff98]
+	call RemoveCardFromDuelTempList
+	bank1call DisplayEnergyDiscardMenu
+	jr .loop_input
+.done
+; return when 2 have been chosen
+	or a
+	ret
+
+Discard2Energies_AISelectEffect:
+; select the first two Energies
+	xor a ; PLAY_AREA_ARENA
+	call CreateArenaOrBenchEnergyCardList
+	ld hl, wDuelTempList
+	ld a, [hli]
+	ldh [hTempList], a
+	ld a, [hl]
+	ldh [hTempList + 1], a
+	ret
+
+Discard2Energies_DiscardEffect:
+	ld hl, hTempList
+	ld a, [hli]
+	call PutCardInDiscardPile
+	ld a, [hli]
+	call PutCardInDiscardPile
+	ret
+
+; ------------------------------------------------------------------------------
 
 Recover_HealEffect: ; 2dfc3 (b:5fc3)
 	ld e, PLAY_AREA_ARENA

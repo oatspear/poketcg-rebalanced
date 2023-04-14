@@ -126,8 +126,11 @@
 - **Iron Grip**: reduced cost from (GG) to (GC).
 - **Guillotine**: reduced cost from (GGCC) to (GCC) and damage from 50 to 40.
 
+#### Charmander
+- **Ember**: can discard any Energy card.
+
 #### Charmeleon
-- **Flamethrower**: increased damage from 50 to 60.
+- **Flamethrower**: reduced cost from (FFC) to (FCC); can discard any Energy card.
 
 #### Vulpix
 - **Confuse Ray**: reduced cost from (FF) to (F).
@@ -135,11 +138,13 @@
 
 #### Ninetales Lv32
 - **Lure**: reduced cost from (CC) to (C).
-- **Fire Blast**: reduced cost from (FFFF) to (FFF).
+- **Fire Blast**: reduced cost from (FFFF) to (FCC); discard any 2 Energy cards.
 
 #### Ninetales Lv35
-- **Mix Up**: replaced with **Quick Attack** (CC) - 20 damage +10 if heads.
-- **Dancing Embers**: replaced with **Flamethrower** (FFC): 60 damage, discard 1 (F).
+- **Mix Up**: removed.
+- **Dancing Embers**: removed.
+- New attack: **Quick Attack** (CC) - 20 damage +10 if heads.
+- New attack: **Flamethrower** (FFC): 60 damage, discard 1 Energy.
 
 #### Arcanine Lv34
 - Increased HP from 70 to 80.
@@ -147,11 +152,12 @@
 
 #### Arcanine Lv45
 - Reduced HP from 100 to 90.
-- **Flamethrower**: increased damage from 50 to 60.
+- **Flamethrower**: can discard any Energy card; reduced cost from (FFC) to (FCC).
 - **Take Down**: reduced cost from (FFCC) to (CC), damage from 80 to 50 and recoil from 30 to 20.
 
 #### Magmar Lv24
 - Increased HP from 50 to 60.
+- **Flamethrower**: can discard any Energy card.
 
 #### Magmar Lv31
 - **Smog**: reduced cost from (FF) to (FC).
@@ -160,9 +166,9 @@
 - Increased HP from 60 to 70.
 - **Rage**: reduced cost from (CCC) to (CC).
 
-#### Flareon Lv22
+#### Flareon Lv28
 - **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
-- **Flamethrower**: reduced cost from (FFCC) to (FFC).
+- **Flamethrower**: reduced cost from (FFCC) to (FFC); can discard any Energy card.
 
 #### Moltres Lv35
 - **Dive Bomb**: reduced cost from (FFFF) to (FFC).

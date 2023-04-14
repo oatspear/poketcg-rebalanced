@@ -2304,11 +2304,11 @@ CharmanderCard:
 	; attack 2
 	energy FIRE, 1, COLORLESS, 1 ; energies
 	tx EmberName ; name
-	tx EmberDescription ; description
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw CharmanderEmberEffectCommands ; effect commands
+	dw EmberEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -2353,13 +2353,13 @@ CharmeleonCard:
 	db ATK_ANIM_SLASH ; animation
 
 	; attack 2
-	energy FIRE, 2, COLORLESS, 1 ; energies
+	energy FIRE, 1, COLORLESS, 2 ; energies
 	tx FlamethrowerName ; name
-	tx FlamethrowerDescription ; description
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw CharmeleonFlamethrowerEffectCommands ; effect commands
+	dw FlamethrowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -2406,11 +2406,11 @@ CharizardCard:
 	; attack 2
 	energy FIRE, 4 ; energies
 	tx FireSpinName ; name
-	tx FireSpinDescription ; description
+	tx Discard2EnergiesDescription ; description
 	dw NONE ; description (cont)
 	db 100 ; damage
 	db DAMAGE_NORMAL ; category
-	dw CharizardFireSpinEffectCommands ; effect commands
+	dw FireSpinEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -2506,17 +2506,17 @@ NinetalesLv32Card:
 	db ATK_ANIM_LURE ; animation
 
 	; attack 2
-	energy FIRE, 3 ; energies
+	energy FIRE, 1, COLORLESS, 2 ; energies
 	tx FireBlastName ; name
-	tx FireBlastDescription ; description
+	tx Discard2EnergiesDescription ; description
 	dw NONE ; description (cont)
 	db 80 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NinetalesFireBlastEffectCommands ; effect commands
+	dw FireBlastEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 6
 	db ATK_ANIM_FIRE_SPIN ; animation
 
 	db 1 ; retreat cost
@@ -2559,11 +2559,11 @@ NinetalesLv35Card:
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx FlamethrowerName ; name
-	tx FlamethrowerDescription ; description
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NinetalesLv35FlamethrowerEffectCommands ; effect commands
+	dw FlamethrowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -2710,13 +2710,13 @@ ArcanineLv45Card:
 	db ATK_ANIM_HIT_RECOIL ; animation
 
 	; attack 2
-	energy FIRE, 2, COLORLESS, 1 ; energies
+	energy FIRE, 1, COLORLESS, 2 ; energies
 	tx FlamethrowerName ; name
-	tx FlamethrowerDescription ; description
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ArcanineFlamethrowerEffectCommands ; effect commands
+	dw FlamethrowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -2865,11 +2865,11 @@ MagmarLv24Card:
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx FlamethrowerName ; name
-	tx FlamethrowerDescription ; description
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
 	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MagmarFlamethrowerEffectCommands ; effect commands
+	dw FlamethrowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -3018,11 +3018,11 @@ FlareonLv28Card:
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx FlamethrowerName ; name
-	tx FlamethrowerDescription ; description
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
-	dw FlareonFlamethrowerEffectCommands ; effect commands
+	dw FlamethrowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3

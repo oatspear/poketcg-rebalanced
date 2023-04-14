@@ -2257,19 +2257,18 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PinsirDescription                                  ; 0x08d2
 	textpointer CharmanderName                                     ; 0x08d3
 	textpointer EmberName                                          ; 0x08d4
-	textpointer EmberDescription                                   ; 0x08d5
+	textpointer Discard1EnergyDescription
 	textpointer LizardName                                         ; 0x08d6
 	textpointer CharmanderDescription                              ; 0x08d7
 	textpointer CharmeleonName                                     ; 0x08d8
 	textpointer FlamethrowerName                                   ; 0x08d9
-	textpointer FlamethrowerDescription                            ; 0x08da
 	textpointer FlameName                                          ; 0x08db
 	textpointer CharmeleonDescription                              ; 0x08dc
 	textpointer CharizardName                                      ; 0x08dd
 	textpointer EnergyBurnName                                     ; 0x08de
 	textpointer EnergyBurnDescription                              ; 0x08df
 	textpointer FireSpinName                                       ; 0x08e0
-	textpointer FireSpinDescription                                ; 0x08e1
+	textpointer Discard2EnergiesDescription
 	textpointer CharizardDescription                               ; 0x08e2
 	textpointer VulpixName                                         ; 0x08e3
 	textpointer ConfuseRayName                                     ; 0x08e4
@@ -2278,7 +2277,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NinetalesName                                      ; 0x08e7
 	textpointer NinetalesLureDescription                           ; 0x08e8
 	textpointer FireBlastName                                      ; 0x08e9
-	textpointer FireBlastDescription                               ; 0x08ea
 	textpointer NinetalesLv32Description                          ; 0x08eb
 	textpointer MixUpName                                          ; 0x08ec
 	textpointer MixUpDescription                                   ; 0x08ed

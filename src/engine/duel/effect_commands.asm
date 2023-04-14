@@ -423,13 +423,6 @@ FocusEnergyEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FocusEnergyEffect
 	db  $00
 
-ArcanineFlamethrowerEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ArcanineFlamethrower_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ArcanineFlamethrower_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, ArcanineFlamethrower_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, ArcanineFlamethrower_AISelectEffect
-	db  $00
-
 Recoil10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil10Effect
 	db  $00
@@ -477,18 +470,12 @@ NinetalesLureEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, NinetalesLure_AISelectEffect
 	db  $00
 
-NinetalesFireBlastEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FireBlast_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FireBlast_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, FireBlast_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, FireBlast_AISelectEffect
-	db  $00
-
-CharmanderEmberEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Ember_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Ember_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Ember_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Ember_AISelectEffect
+EmberEffectCommands:
+FlamethrowerEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckAnyEnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
 MoltresWildfireEffectCommands:
@@ -504,20 +491,6 @@ MoltresLv35DiveBombEffectCommands:
 	dbw EFFECTCMDTYPE_AI, MoltresLv35DiveBomb_AIEffect
 	db  $00
 
-FlareonFlamethrowerEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FlareonFlamethrower_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FlareonFlamethrower_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, FlareonFlamethrower_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, FlareonFlamethrower_AISelectEffect
-	db  $00
-
-MagmarFlamethrowerEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, MagmarFlamethrower_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, MagmarFlamethrower_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, MagmarFlamethrower_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, MagmarFlamethrower_AISelectEffect
-	db  $00
-
 MagmarSmokescreenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MagmarSmokescreenEffect
 	db  $00
@@ -527,23 +500,16 @@ MagmarSmogEffectCommands:
 	dbw EFFECTCMDTYPE_AI, MagmarSmog_AIEffect
 	db  $00
 
-NinetalesLv35FlamethrowerEffectCommands:
-CharmeleonFlamethrowerEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CharmeleonFlamethrower_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CharmeleonFlamethrower_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, CharmeleonFlamethrower_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, CharmeleonFlamethrower_AISelectEffect
-	db  $00
-
 CharizardEnergyBurnEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyBurnEffect
 	db  $00
 
-CharizardFireSpinEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FireSpin_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FireSpin_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, FireSpin_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, FireSpin_AISelectEffect
+FireBlastEffectCommands:
+FireSpinEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Check2EnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discard2Energies_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Discard2Energies_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Discard2Energies_AISelectEffect
 	db  $00
 
 VulpixConfuseRayEffectCommands:

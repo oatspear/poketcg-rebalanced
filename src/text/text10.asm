@@ -651,11 +651,9 @@ EmberName: ; 59e0e (16:5e0e)
 	text "Ember"
 	done
 
-FlamethrowerDescription:
-EmberDescription: ; 59e15 (16:5e15)
-	text "Discard 1 <FIRE> Energy card attached"
-	line "to this Pokémon in order to use"
-	line "this attack."
+Discard1EnergyDescription:
+	text "Discard an Energy card attached to"
+	line "this Pokémon."
 	done
 
 LizardName: ; 59e63 (16:5e63)
@@ -709,10 +707,9 @@ FireSpinName: ; 5a095 (16:6095)
 	text "Fire Spin"
 	done
 
-FireSpinDescription: ; 5a0a0 (16:60a0)
+Discard2EnergiesDescription:
 	text "Discard 2 Energy cards attached to"
-	line "Charizard in order to use this"
-	line "attack."
+	line "this Pokémon."
 	done
 
 CharizardDescription: ; 5a0eb (16:60eb)
@@ -751,12 +748,6 @@ NinetalesLureDescription: ; 5a1cb (16:61cb)
 
 FireBlastName: ; 5a231 (16:6231)
 	text "Fire Blast"
-	done
-
-FireBlastDescription: ; 5a23d (16:623d)
-	text "Discard 1 <FIRE> Energy card attached"
-	line "to Ninetales in order to use this"
-	line "attack."
 	done
 
 NinetalesLv32Description: ; 5a28a (16:628a)
