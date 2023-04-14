@@ -2557,9 +2557,9 @@ NinetalesLv35Card:
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
-	energy FIRE, 2 ; energies
+	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx FireFangName ; name
-	tx IfHeadsDiscard1EnergyFromTargetDescription ; description
+	tx Discard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category

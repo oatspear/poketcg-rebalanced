@@ -144,7 +144,7 @@
 - **Mix Up**: removed.
 - **Dancing Embers**: removed.
 - New attack: **Quick Attack** (CC) - 20 damage +10 if heads.
-- New attack: **Fire Fang** (FF): 30 damage; if heads, discard 1 Energy from opponent.
+- New attack: **Fire Fang** (FFC): 30 damage; discard 1 Energy from opponent.
 
 #### Arcanine Lv34
 - Increased HP from 70 to 80.
