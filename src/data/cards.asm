@@ -2456,16 +2456,16 @@ VulpixCard:
 
 	; attack 2
 	energy FIRE, 1, COLORLESS, 1 ; energies
-	tx FlareName ; name
-	dw NONE ; description
+	tx EmberName ; name
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw EmberEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 3
 	db ATK_ANIM_SMALL_FLAME ; animation
 
 	db 0 ; retreat cost

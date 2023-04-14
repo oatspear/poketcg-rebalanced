@@ -134,7 +134,7 @@
 
 #### Vulpix
 - **Confuse Ray**: reduced cost from (FF) to (F).
-- Added attack: **Flare** (FC) - 20 damage.
+- Added attack: **Ember** (FC) - 30 damage, discard 1 Energy card.
 
 #### Ninetales Lv32
 - **Lure**: reduced cost from (CC) to (C).
