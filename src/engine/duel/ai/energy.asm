@@ -164,13 +164,13 @@ AIProcessEnergyCards: ; 164fc (5:64fc)
 	call AddToAIScore
 
 ; if there's no Muk in any Play Area
-; and there's VenusaurLv67 in own Play Area,
+; and there's Ivysaur in own Play Area,
 ; add to AI score
 .check_venusaur
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .check_if_active
-	ld a, VENUSAUR_LV67
+	ld a, IVYSAUR
 	call CountPokemonIDInPlayArea
 	jr nc, .check_if_active
 	ld a, 1

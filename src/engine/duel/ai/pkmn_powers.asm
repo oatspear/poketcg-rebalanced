@@ -18,9 +18,9 @@ HandleAIEnergyTrans:
 	dec a
 	ret z ; return if no Bench cards
 
-	ld a, VENUSAUR_LV67
+	ld a, IVYSAUR
 	call CountPokemonIDInPlayArea
-	ret nc ; return if no VenusaurLv67 found in own Play Area
+	ret nc ; return if no Ivysaur found in own Play Area
 
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
