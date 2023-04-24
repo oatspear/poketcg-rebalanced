@@ -6439,6 +6439,12 @@ Firestarter_OncePerTurnCheck:
 	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
 	ret c
 
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ldtx hl, EffectNoPokemonOnTheBenchText
+	cp 2
+	ret c ; return if no bench
+
 	ldh a, [hTemp_ffa0]
 	call CheckCannotUseDueToStatus_Anywhere
 	ret
@@ -6465,7 +6471,7 @@ Firestarter_AttachEnergyEffect:
 	ldtx hl, ChoosePokemonToAttachEnergyCardText
 	call DrawWideTextBox_WaitForInput
 ; choose a Pokemon in Play Area to attach card
-	bank1call HasAlivePokemonInPlayArea
+	bank1call HasAlivePokemonInBench
 .loop_input
 	bank1call OpenPlayAreaScreenForSelection
 	jr c, .loop_input
