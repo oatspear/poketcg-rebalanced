@@ -1816,9 +1816,9 @@ WeedlePoisonSting_AIEffect: ; 2cb27 (b:4b27)
 	lb de, 0, 10
 	jp UpdateExpectedAIDamage_AccountForPoison
 
-IvysaurPoisonPowder_AIEffect: ; 2cb2f (b:4b2f)
-	ld a, 10
-	lb de, 10, 10
+IvysaurPoisonWhip_AIEffect:
+	ld a, 20
+	lb de, 20, 20
 	jp UpdateExpectedAIDamage_AccountForPoison
 
 Heal10DamageEffect:

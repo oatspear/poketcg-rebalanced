@@ -174,16 +174,16 @@ WeedlePoisonStingEffectCommands:
 	dbw EFFECTCMDTYPE_AI, WeedlePoisonSting_AIEffect
 	db  $00
 
-IvysaurPoisonPowderEffectCommands:
+IvysaurPoisonWhipEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	dbw EFFECTCMDTYPE_AI, IvysaurPoisonPowder_AIEffect
+	dbw EFFECTCMDTYPE_AI, IvysaurPoisonWhip_AIEffect
 	db  $00
 
 LeechSeedEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal10DamageEffect
 	db  $00
 
-VenusaurEnergyTransEffectCommands:
+EnergyTransEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergyTrans_CheckPlayArea
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyTrans_TransferEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyTrans_AIEffect

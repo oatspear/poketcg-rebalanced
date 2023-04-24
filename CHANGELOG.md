@@ -9,14 +9,18 @@
 - **Leech Seed**: reduced cost from (GG) to (GC).
 
 #### Ivysaur
-- **Poison Powder**: reduced cost from (GGG) to (GG).
-- **Vine Whip**: increased damage from 30 to 40.
+- **Poison Powder**: removed.
+- **Vine Whip**: removed.
+- New Pokémon Power: **Energy Trans**.
+- New attack: **Poison Whip** (GCC): 20 damage, inflicts Poison.
 
 #### Venusaur Lv64
 - **Mega Drain**: reduced cost from (GGGG) to (GGG).
 
 #### Venusaur Lv67
-- **Solar Beam**: reduced cost from (GGGG) to (GGG).
+- **Energy Trans**: removed.
+- **Solar Beam**: reduced cost from (GGGG) to (GGC).
+- New attack: **Body Slam** (CCC): 30 damage, inflicts Paralysis if Heads.
 
 #### Butterfree
 - **Mega Drain**: reduced cost from (GGGG) to (GGG).

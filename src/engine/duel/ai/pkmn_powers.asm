@@ -60,7 +60,7 @@ HandleAIEnergyTrans:
 	ldh [hTempCardIndex_ff9f], a
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp VENUSAUR_LV67
+	cp IVYSAUR
 	jr z, .use_pkmn_power
 
 	ld a, b
@@ -289,7 +289,7 @@ AIEnergyTransTransferEnergyToBench:
 	ret nc
 
 ; AI decided that an energy card is needed
-; so look for VenusaurLv67 in Play Area
+; so look for Ivysaur in Play Area
 ; so that its PKMN Power can be used.
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -303,7 +303,7 @@ AIEnergyTransTransferEnergyToBench:
 	ld [wAIVenusaurLv67DeckIndex], a
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp VENUSAUR_LV67
+	cp IVYSAUR
 	jr z, .use_pkmn_power
 
 	ld a, b
