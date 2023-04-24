@@ -37,7 +37,7 @@ AIMainTurnLogic:
 	farcall HandleAIAntiMewtwoDeckStrategy
 	jp nc, .try_attack
 ; handle Pkmn Powers
-	farcall HandleAIGoGoRainDanceEnergy
+	farcall HandleAIRainDanceEnergy
 	farcall HandleAIDamageSwap
 	farcall HandleAIPkmnPowers
 	ret c ; return if turn ended
@@ -82,7 +82,7 @@ AIMainTurnLogic:
 	farcall HandleAIDamageSwap
 	farcall HandleAIPkmnPowers
 	ret c ; return if turn ended
-	farcall HandleAIGoGoRainDanceEnergy
+	farcall HandleAIRainDanceEnergy
 	ld a, AI_ENERGY_TRANS_ATTACK
 	farcall HandleAIEnergyTrans
 ; process Trainer cards phases 13 and 15
@@ -129,7 +129,7 @@ AIMainTurnLogic:
 	farcall HandleAIDamageSwap
 	farcall HandleAIPkmnPowers
 	ret c ; return if turn ended
-	farcall HandleAIGoGoRainDanceEnergy
+	farcall HandleAIRainDanceEnergy
 	ld a, AI_ENERGY_TRANS_ATTACK
 	farcall HandleAIEnergyTrans
 	ld a, AI_TRAINER_CARD_PHASE_13

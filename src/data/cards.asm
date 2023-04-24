@@ -302,7 +302,7 @@ IvysaurCard:
 	energy 0 ; energies
 	tx EnergyTransName ; name
 	tx EnergyTransDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw EnergyTransEffectCommands ; effect commands
@@ -353,7 +353,7 @@ VenusaurLv64Card:
 	energy 0 ; energies
 	tx SolarPowerName ; name
 	tx SolarPowerDescription ; description
-	tx SolarPowerDescriptionCont ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw VenusaurSolarPowerEffectCommands ; effect commands
@@ -3206,18 +3206,18 @@ WartortleCard:
 	tx SquirtleName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx WithdrawName ; name
-	tx WithdrawDescription ; description
-	dw NONE ; description (cont)
+	energy 0 ; energies
+	tx RainDanceName ; name
+	tx RainDanceDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw WithdrawEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw RainDanceEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy WATER, 1, COLORLESS, 2 ; energies
@@ -3257,31 +3257,31 @@ BlastoiseCard:
 	tx WartortleName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx RainDanceName ; name
-	tx RainDanceDescription ; description
-	tx RainDanceDescriptionCont ; description (cont)
+	energy WATER, 1 ; energies
+	tx AquaLauncherName ; name
+	tx Deal30ToAnyPokemonDescription ; description
+	dw NONE ; description (cont)
 	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw BlastoiseRainDanceEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
+	db RESIDUAL ; category
+	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db 2
+	db ATK_ANIM_WATER_GUN ; animation
 
 	; attack 2
-	energy WATER, 2, COLORLESS, 1 ; energies
+	energy COLORLESS, 3 ; energies
 	tx HydroPumpName ; name
 	tx HydroPumpDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 40 ; damage
 	db DAMAGE_PLUS ; category
-	dw BlastoiseHydroPumpEffectCommands ; effect commands
+	dw HydroPumpEffectCommands ; effect commands
 	db NONE ; flags 1
 	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
+	db MAX_ENERGY_BOOST_IS_NOT_LIMITED
 	db ATK_ANIM_HYDRO_PUMP ; animation
 
 	db 2 ; retreat cost
@@ -6722,7 +6722,7 @@ MarowakLv26Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw KabutoKabutoArmorEffectCommands ; effect commands
+	dw BattleArmorEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -8386,11 +8386,11 @@ Pidgeot1Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx SlicingWindName ; name
-	tx SlicingWindDescription ; description
+	tx Deal30ToAnyPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw PidgeotSlicingWindEffectCommands ; effect commands
+	dw Deal30ToAnyPokemonEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3

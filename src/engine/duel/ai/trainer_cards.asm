@@ -2355,24 +2355,24 @@ AIDecide_ProfessorOak:
 
 .check_energy_cards
 	farcall CreateEnergyCardListFromHand
-	jr nc, .handle_blastoise
+	jr nc, .handle_wartortle
 
 ; no energy cards in hand
 	ld a, [wce06]
 	add $28
 	ld [wce06], a
 
-.handle_blastoise
+.handle_wartortle
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .check_hand
 
 ; no Muk in Play Area
-	ld a, BLASTOISE
+	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
 	jr nc, .check_hand
 
-; at least one Blastoise in AI Play Area
+; at least one Wartortle in AI Play Area
 	ld a, WATER_ENERGY
 	farcall LookForCardIDInHand
 	jr nc, .check_hand
@@ -2643,17 +2643,17 @@ AIDecide_EnergyRetrieval:
 	farcall CreateEnergyCardListFromHand
 	jp nc, .no_carry
 
-; handle Go Go Rain Dance deck
+; handle Rain Dance deck
 ; return no carry if there's no Muk card in play and
-; if there's no Blastoise card in Play Area
+; if there's no Wartortle card in Play Area
 ; if there's a Muk in play, continue as normal
-	ld a, [wOpponentDeckID]
-	cp GO_GO_RAIN_DANCE_DECK_ID
-	jr nz, .start
+	; ld a, [wOpponentDeckID]
+	; cp GO_GO_RAIN_DANCE_DECK_ID
+	; jr nz, .start
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .start
-	ld a, BLASTOISE
+	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
 	jp nc, .no_carry
 
@@ -2905,17 +2905,17 @@ AIDecide_SuperEnergyRetrieval:
 	farcall CreateEnergyCardListFromHand
 	jp nc, .no_carry
 
-; handle Go Go Rain Dance deck
+; handle Rain Dance deck
 ; return no carry if there's no Muk card in play and
 ; if there's no Blastoise card in Play Area
 ; if there's a Muk in play, continue as normal
-	ld a, [wOpponentDeckID]
-	cp GO_GO_RAIN_DANCE_DECK_ID
-	jr nz, .start
+	; ld a, [wOpponentDeckID]
+	; cp GO_GO_RAIN_DANCE_DECK_ID
+	; jr nz, .start
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .start
-	ld a, BLASTOISE
+	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
 	jp nc, .no_carry
 

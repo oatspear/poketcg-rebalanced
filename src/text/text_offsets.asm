@@ -2061,6 +2061,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PsychicEnergyDescription                           ; 0x0807
 	textpointer DoubleColorlessEnergyName                          ; 0x0808
 	textpointer DoubleColorlessEnergyDescription                   ; 0x0809
+	textpointer PokemonPowerDescriptionCont
 	textpointer BulbasaurName                                      ; 0x080a
 	textpointer LeechSeedName                                      ; 0x080b
 	textpointer Heal10DamageDescription                            ; 0x080c
@@ -2074,7 +2075,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer VenusaurName                                       ; 0x0814
 	textpointer SolarPowerName                                     ; 0x0815
 	textpointer SolarPowerDescription                              ; 0x0816
-	textpointer SolarPowerDescriptionCont                          ; 0x0817
 	textpointer MegaDrainName                                      ; 0x0818
 	textpointer MegaDrainDescription                               ; 0x0819
 	textpointer VenusaurLv64Description                           ; 0x081b
@@ -2338,7 +2338,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BlastoiseName                                      ; 0x092e
 	textpointer RainDanceName                                      ; 0x092f
 	textpointer RainDanceDescription                               ; 0x0930
-	textpointer RainDanceDescriptionCont                           ; 0x0931
+	textpointer AquaLauncherName
 	textpointer HydroPumpName                                      ; 0x0932
 	textpointer HydroPumpDescription                               ; 0x0933
 	textpointer ShellfishName                                      ; 0x0934
@@ -2756,7 +2756,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PidgeottoDescription                               ; 0x0add
 	textpointer PidgeotName                                        ; 0x0ade
 	textpointer SlicingWindName                                    ; 0x0adf
-	textpointer SlicingWindDescription                             ; 0x0ae0
+	textpointer Deal30ToAnyPokemonDescription
 	textpointer GaleName                                           ; 0x0ae1
 	textpointer GaleDescription                                    ; 0x0ae2
 	textpointer Pidgeot1Description                                ; 0x0ae3

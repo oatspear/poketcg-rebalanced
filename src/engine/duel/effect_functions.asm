@@ -2433,11 +2433,19 @@ RainDanceEffect: ; 2cf46 (b:4f46)
 	scf
 	ret
 
-HydroPumpEffect: ; 2cf48 (b:4f48)
-	lb bc, 2, 1
-	call ApplyExtraWaterEnergyDamageBonus
-	lb bc, 2, 1
-	jp ApplyExtraWaterEnergyDamageBonus
+HydroPumpEffect:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+; 10 extra damage for each Water Energy
+	ld a, [wAttachedEnergies + WATER]
+	call ATimes10
+	call AddToDamage ; add 10 * a to damage
+; set attack damage
+	ld a, [wDamage]
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	ret
 
 KinglerFlail_AIEffect: ; 2cf4e (b:4f4e)
 	call KinglerFlail_HPCheck
@@ -7724,7 +7732,7 @@ PickRandomBasicCardFromDeck: ; 2f098 (b:7098)
 	scf
 	ret
 
-SlicingWind_PlayerSelectEffect:
+Deal30Damage_PlayerSelectEffect:
 	xor a  ; PLAY_AREA_ARENA
 	ldh [hTemp_ffa0], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -7747,7 +7755,7 @@ SlicingWind_PlayerSelectEffect:
 	or a
 	ret
 
-SlicingWind_AISelectEffect:
+Deal30Damage_AISelectEffect:
 	xor a  ; PLAY_AREA_ARENA
 	ldh [hTemp_ffa0], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -7761,7 +7769,7 @@ SlicingWind_AISelectEffect:
 	or a
 	ret
 
-SlicingWind_DamageEffect:
+Deal30Damage_DamageEffect:
 	call SwapTurn
 	ldh a, [hTemp_ffa0]
 	ld b, a

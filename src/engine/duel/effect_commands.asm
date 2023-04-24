@@ -269,11 +269,11 @@ OmanyteWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_AI, OmanyteWaterGunEffect
 	db  $00
 
-BlastoiseRainDanceEffectCommands:
+RainDanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RainDanceEffect
 	db  $00
 
-BlastoiseHydroPumpEffectCommands:
+HydroPumpEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HydroPumpEffect
 	dbw EFFECTCMDTYPE_AI, HydroPumpEffect
 	db  $00
@@ -1129,10 +1129,10 @@ DittoMorphEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MorphEffect
 	db  $00
 
-PidgeotSlicingWindEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SlicingWind_DamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SlicingWind_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, SlicingWind_AISelectEffect
+Deal30ToAnyPokemonEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal30Damage_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Deal30Damage_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Deal30Damage_AISelectEffect
 	db  $00
 
 PidgeotGaleEffectCommands:

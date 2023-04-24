@@ -707,9 +707,12 @@ UpdateSubstatusConditions_EndOfTurn:
 	res SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
 	ret
 
-; return carry if turn holder has Blastoise and its Rain Dance Pkmn Power is active
+; return carry if turn holder has Wartortle and its Rain Dance Pkmn Power is active
 IsRainDanceActive:
-	ld a, BLASTOISE
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and USED_RAIN_DANCE_THIS_TURN
+	ret nz ; return if Rain Dance was already used this turn
+	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Pkmn Power-capable Blastoise found in turn holder's play area
 	ld a, MUK
@@ -717,18 +720,17 @@ IsRainDanceActive:
 	ccf
 	ret
 
-; return carry if card at [hTempCardIndex_ff98] is a water energy card AND
-; if card at [hTempPlayAreaLocation_ff9d] is a water Pokemon card.
-CheckRainDanceScenario:
+; return carry if card at [hTempCardIndex_ff98] is a water energy card.
+CheckRainDanceScenario:  ; unreferenced
 	ldh a, [hTempCardIndex_ff98]
 	call GetCardIDFromDeckIndex
 	call GetCardType
 	cp TYPE_ENERGY_WATER
 	jr nz, .done
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call GetPlayAreaCardColor
-	cp TYPE_PKMN_WATER
-	jr nz, .done
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+	; call GetPlayAreaCardColor
+	; cp TYPE_PKMN_WATER
+	; jr nz, .done
 	scf
 	ret
 .done

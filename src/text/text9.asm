@@ -1245,6 +1245,12 @@ DoubleColorlessEnergyDescription: ; 57496 (15:7496)
 	line "pay colored Energy costs."
 	done
 
+PokemonPowerDescriptionCont:
+	text "This power can't be used if this"
+	line "Pokémon is Asleep, Confused, or"
+	line "Paralyzed."
+	done
+
 BulbasaurName: ; 57552 (15:7552)
 	text "Bulbasaur"
 	done
@@ -1308,12 +1314,6 @@ SolarPowerDescription: ; 57705 (15:7705)
 	line "Poisoned."
 	done
 
-SolarPowerDescriptionCont: ; 577b0 (15:77b0)
-	text "This power can't be used if"
-	line "Venusaur is Asleep, Confused,"
-	line "or Paralyzed."
-	done
-
 MegaDrainName: ; 577f9 (15:77f9)
 	text "Mega Drain"
 	done
@@ -1340,9 +1340,7 @@ EnergyTransDescription: ; 5796e (15:796e)
 	text "As often as you like during your"
 	line "turn (before your attack), you may"
 	line "move 1 <GRASS> Energy card attached to"
-	line "one of your Pokémon to another. This"
-	line "power can't be used if this Pokémon is"
-	line "Asleep, Confused, or Paralyzed."
+	line "one of your Pokémon to another."
 	done
 
 SolarBeamName: ; 57a51 (15:7a51)

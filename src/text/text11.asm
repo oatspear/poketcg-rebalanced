@@ -1484,7 +1484,7 @@ SlicingWindName: ; 615ad (18:55ad)
 	text "Slicing Wind"
 	done
 
-SlicingWindDescription: ; 615bb (18:55bb)
+Deal30ToAnyPokemonDescription:
 	text "This attack does 30 damage to 1"
 	line "of your opponent's Pokémon."
 	line "(Don't apply Weakness and Resistance"

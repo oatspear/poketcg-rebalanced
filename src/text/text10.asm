@@ -1037,30 +1037,24 @@ RainDanceName: ; 5b159 (16:7159)
 	done
 
 RainDanceDescription: ; 5b165 (16:7165)
-	text "As often as you like during your"
-	line "turn (before your attack), you may"
+	text "Once during your turn, you may"
 	line "attach 1 <WATER> Energy card to 1 of"
-	line "your <WATER> Pokémon. (This doesn't use"
+	line "your Pokémon. (This doesn't use"
 	line "up your 1 Energy card attachment"
 	line "for the turn.)"
 	done
 
-RainDanceDescriptionCont: ; 5b21d (16:721d)
-	text "This power can't be used if"
-	line "Blastoise is Asleep, Confused, or"
-	line "Paralyzed."
+AquaLauncherName:
+	text "Aqua Launcher"
 	done
 
-HydroPumpName: ; 5b267 (16:7267)
+HydroPumpName:
 	text "Hydro Pump"
 	done
 
-HydroPumpDescription: ; 5b273 (16:7273)
-	text "Does 50 damage plus 20 more damage"
-	line "for each <WATER> Energy attached to"
-	line "Blastoise but not used to pay for"
-	line "this attack's Energy cost, up to"
-	line "2 extra <WATER> Energy."
+HydroPumpDescription:
+	text "Does 10 additional damage for each"
+	line "<WATER> Energy attached to this Pokémon."
 	done
 
 ShellfishName: ; 5b322 (16:7322)

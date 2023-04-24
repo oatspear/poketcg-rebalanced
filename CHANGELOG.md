@@ -184,10 +184,13 @@
 - **Withdraw**: reduced cost from (WC) to (C).
 
 #### Wartortle
-- **Withdraw**: reduced cost from (WC) to (C).
+- **Withdraw**: removed.
+- New Pokémon Power: **Rain Dance**: allows playing an additional Water Energy from hand per turn.
 
 #### Blastoise
-- **Hydro Pump**: reduced cost from (WWW) to (WWC), increased base damage from 40 to 50 and bonus damage from +10 to +20.
+- **Rain Dance**: removed.
+- **Hydro Pump**: reduced cost from (WWW) to (CCC) and damage from 50 to 40; deals 10 bonus damage for each attached Water Energy (uncapped).
+- New attack: **Aqua Launcher** (W): deal 30 damage to one of the opponent's Pokémon.
 
 #### Golduck
 - **Psyshock**: increased damage from 10 to 20.

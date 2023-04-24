@@ -616,14 +616,21 @@ PlayEnergyCard:
 	call HasAlivePokemonInPlayArea
 	call OpenPlayAreaScreenForSelection ; choose card to play energy card on
 	jp c, DuelMainInterface ; exit if no card was chosen
-	call CheckRainDanceScenario
-	jr c, .play_energy
+; set rain dance played this turn
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	and PLAYED_ENERGY_THIS_TURN  ; or a
-	jr z, .play_energy_set_played
-	ldtx hl, MayOnlyAttachOneEnergyCardText
-	call DrawWideTextBox_WaitForInput
-	jp OpenPlayerHandScreen
+	or USED_RAIN_DANCE_THIS_TURN
+	ld [wAlreadyPlayedEnergyOrSupporter], a
+	jr .play_energy
+; redundant: Water Energy check already done
+	; call CheckRainDanceScenario
+	; jr c, .play_energy
+; not a Water energy: redundant?
+	; ld a, [wAlreadyPlayedEnergyOrSupporter]
+	; and PLAYED_ENERGY_THIS_TURN  ; or a
+	; jr z, .play_energy_set_played
+	; ldtx hl, MayOnlyAttachOneEnergyCardText
+	; call DrawWideTextBox_WaitForInput
+	; jp OpenPlayerHandScreen
 
 .already_played_energy
 	ldtx hl, MayOnlyAttachOneEnergyCardText
