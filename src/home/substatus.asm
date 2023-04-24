@@ -547,15 +547,23 @@ CountPokemonIDInPlayArea:
 	jr nz, .check_bench
 	inc c
 .check_bench
+	ld b, 1
 	ld a, DUELVARS_BENCH
 	call GetTurnDuelistVariable
 .next_bench_slot
 	ld a, [hli]
 	cp -1
 	jr z, .done
+; check if it is the right Pokémon
 	call GetCardIDFromDeckIndex
 	ld a, [wTempPokemonID_ce7c]
 	cp e
+	jr nz, .skip
+; check if the Pokémon is affected with a status condition
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	add b
+	call GetTurnDuelistVariable
+	and CNF_SLP_PRZ
 	jr nz, .skip
 	inc c
 .skip
