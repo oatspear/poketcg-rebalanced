@@ -479,6 +479,12 @@ IsClairvoyanceActive:
 	call CountPokemonIDInPlayArea
 	ret
 
+; returns carry if turn holder's card in location a is paralyzed, asleep, confused,
+; and/or toxic gas in play, meaning that attack and/or pkmn power cannot be used
+CheckCannotUseDueToStatus_Anywhere:
+	add DUELVARS_ARENA_CARD_STATUS
+	jr CheckCannotUseDueToStatus_OnlyToxicGasIfANon0.status_check
+
 ; returns carry if turn holder's arena card is paralyzed, asleep, confused,
 ; and/or toxic gas in play, meaning that attack and/or pkmn power cannot be used
 CheckCannotUseDueToStatus:
@@ -489,6 +495,7 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0:
 	or a
 	jr nz, .check_toxic_gas
 	ld a, DUELVARS_ARENA_CARD_STATUS
+.status_check
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
 	ldtx hl, CannotUseDueToStatusText

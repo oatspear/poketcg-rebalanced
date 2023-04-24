@@ -591,25 +591,34 @@ CreateTrainerCardListFromDiscardPile_:
 	scf
 	ret
 
+DEF ALL_ENERGY_ALLOWED EQU $ff
+
+; makes a list in wDuelTempList with the deck indices
+; of all Fire energy cards found in Turn Duelist's Discard Pile.
+CreateEnergyCardListFromDiscardPile_OnlyFire:
+	ld c, TYPE_ENERGY_FIRE
+	jr CreateEnergyCardListFromDiscardPile
+
 ; makes a list in wDuelTempList with the deck indices
 ; of all basic energy cards found in Turn Duelist's Discard Pile.
-CreateEnergyCardListFromDiscardPile_OnlyBasic: ; 2c2a0 (b:42a0)
-	ld c, $01
+CreateEnergyCardListFromDiscardPile_OnlyBasic:
+	ld c, $00
 	jr CreateEnergyCardListFromDiscardPile
 
 ; makes a list in wDuelTempList with the deck indices
 ; of all energy cards (including Double Colorless)
 ; found in Turn Duelist's Discard Pile.
-CreateEnergyCardListFromDiscardPile_AllEnergy: ; 2c2a4 (b:42a4)
-	ld c, $00
+CreateEnergyCardListFromDiscardPile_AllEnergy:
+	ld c, ALL_ENERGY_ALLOWED
 ;	fallthrough
 
 ; makes a list in wDuelTempList with the deck indices
 ; of energy cards found in Turn Duelist's Discard Pile.
-; if (c == 0), all energy cards are allowed;
-; if (c != 0), double colorless energy cards are not included.
+; if (c == ALL_ENERGY_ALLOWED), all energy cards are allowed;
+; if (c == 0), double colorless energy cards are not included;
+; otherwise, only energies of type c are allowed.
 ; returns carry if no energy cards were found.
-CreateEnergyCardListFromDiscardPile: ; 2c2a6 (b:42a6)
+CreateEnergyCardListFromDiscardPile:
 ; get number of cards in Discard Pile
 ; and have hl point to the end of the
 ; Discard Pile list in wOpponentDeckCards.
@@ -630,12 +639,19 @@ CreateEnergyCardListFromDiscardPile: ; 2c2a6 (b:42a6)
 	and TYPE_ENERGY
 	jr z, .next_card
 
-; if (c != $00), then we dismiss Double Colorless
-; energy cards found.
+; if (c == $ff), then we include all energy cards.
+; if (c == $00), then we dismiss Double Colorless energy cards found.
 	ld a, c
-	or a
+	cp ALL_ENERGY_ALLOWED
 	jr z, .copy
+	or a
 	ld a, [wLoadedCard2Type]
+	jr z, .only_basic_allowed
+	cp c  ; only type c allowed
+	jr z, .copy
+	jr .next_card
+
+.only_basic_allowed
 	cp TYPE_ENERGY_DOUBLE_COLORLESS
 	jr nc, .next_card
 
@@ -2135,7 +2151,8 @@ Heal_OncePerTurnCheck: ; 2cda8 (b:4da8)
 	ldtx hl, NoPokemonWithDamageCountersText
 	ret c ; no damage counters to heal
 
-	call CheckCannotUseDueToStatus
+	ldh a, [hTemp_ffa0]
+	call CheckCannotUseDueToStatus_Anywhere
 	ret
 
 .already_used
@@ -6404,6 +6421,93 @@ EnergySpike_AttachEnergyEffect: ; 2e8f6 (b:68f6)
 
 .done
 	call SyncShuffleDeck
+	ret
+
+Firestarter_OncePerTurnCheck:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .already_used
+
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and USED_FIRESTARTER_THIS_TURN
+	jr nz, .already_used
+
+	call CreateEnergyCardListFromDiscardPile_OnlyFire
+	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
+	ret c
+
+	ldh a, [hTemp_ffa0]
+	call CheckCannotUseDueToStatus_Anywhere
+	ret
+
+.already_used
+	ldtx hl, OnlyOncePerTurnText
+	scf
+	ret
+
+Firestarter_AttachEnergyEffect:
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_LINK_OPP
+	jr z, .link_opp
+	and DUELIST_TYPE_AI_OPP
+	jr z, .player
+
+; AI Pokémon selection logic goes here
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ff9d], a
+	jr .attach
+
+.player
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	call DrawWideTextBox_WaitForInput
+; choose a Pokemon in Play Area to attach card
+	bank1call HasAlivePokemonInPlayArea
+.loop_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	; ldh [hPlayAreaEffectTarget], a
+	ld e, a
+	call SerialSend8Bytes
+	jr .attach
+
+.link_opp
+	call SerialRecv8Bytes
+	ldh [hTempPlayAreaLocation_ff9d], a
+	; fallthrough
+
+.attach
+; flag Firestarter as being used
+	ldh a, [hTemp_ffa0]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	or USED_FIRESTARTER_THIS_TURN
+	ld [wAlreadyPlayedEnergyOrSupporter], a
+
+; pick Fire Energy from Discard Pile
+	call CreateEnergyCardListFromDiscardPile_OnlyFire
+;   a: deck index of discarded card to attach
+;   e: CARD_LOCATION_* constant
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	or CARD_LOCATION_PLAY_AREA
+	ld e, a
+	ld a, [wDuelTempList]
+	call Helper_AttachCardFromDiscardPile
+
+	call IsPlayerTurn
+	jr c, .done
+	call Helper_GenericShowAttachedEnergyToPokemon
+
+.done
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call Func_2c10b
+	call ExchangeRNG
 	ret
 
 JolteonDoubleKick_AIEffect: ; 2e930 (b:6930)

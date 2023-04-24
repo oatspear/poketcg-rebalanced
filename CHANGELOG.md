@@ -134,7 +134,9 @@
 - **Ember**: can discard any Energy card.
 
 #### Charmeleon
+- **Slash**: removed.
 - **Flamethrower**: reduced cost from (FFC) to (FCC); can discard any Energy card.
+- New Pokémon Power: **Firestarter**: once per turn, attach a Fire Energy from the Discard Pile to one Pokémon.
 
 #### Vulpix
 - **Confuse Ray**: reduced cost from (FF) to (F).

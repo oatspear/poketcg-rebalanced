@@ -2339,18 +2339,18 @@ CharmeleonCard:
 	tx CharmanderName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 3 ; energies
-	tx SlashName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	energy 0 ; energies
+	tx FirestarterName ; name
+	tx FirestarterDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw FirestarterEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db NONE ; flags 3    ; SPECIAL_AI_HANDLING
 	db 0
-	db ATK_ANIM_SLASH ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy FIRE, 1, COLORLESS, 2 ; energies

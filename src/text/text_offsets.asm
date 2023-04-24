@@ -2263,6 +2263,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer CharmanderDescription                              ; 0x08d7
 	textpointer CharmeleonName                                     ; 0x08d8
 	textpointer FlamethrowerName                                   ; 0x08d9
+	textpointer FirestarterName
+	textpointer FirestarterDescription
 	textpointer FlameName                                          ; 0x08db
 	textpointer CharmeleonDescription                              ; 0x08dc
 	textpointer CharizardName                                      ; 0x08dd

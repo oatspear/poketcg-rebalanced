@@ -244,6 +244,11 @@ VenusaurSolarPowerEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SolarPower_RemoveStatusEffect
 	db  $00
 
+FirestarterEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Firestarter_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Firestarter_AttachEnergyEffect
+	db  $00
+
 HelpingHandEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, HelpingHand_CheckUse
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HelpingHand_RemoveStatusEffect
