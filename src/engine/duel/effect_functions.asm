@@ -7602,7 +7602,7 @@ AttachEnergyFromHand_HandCheck:
 	; cp 2
 	; ret
 
-AttachEnergyFromHand_PlayerSelectEffect:
+Helper_AttachEnergyFromHand_PlayerSelectEffect:
 ; print text box
 	ldtx hl, ChooseCardFromYourHandToAttachText
 	call DrawWideTextBox_WaitForInput
@@ -7620,9 +7620,19 @@ AttachEnergyFromHand_PlayerSelectEffect:
 	bank1call DisplayCardList
 	jr c, .loop_hand_input
 	ldh [hTemp_ffa0], a
+	ret
 
+AttachEnergyFromHand_PlayerSelectEffect:
+	call Helper_AttachEnergyFromHand_PlayerSelectEffect
 ; handle Player selection (play area)
 	call Helper_ChooseAPokemonInPlayArea_EmptyScreen
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret
+
+AttachEnergyFromHand_OnlyActive_PlayerSelectEffect:
+	call Helper_AttachEnergyFromHand_PlayerSelectEffect
+; always choose Active Pokémon
+	xor a  ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
