@@ -2158,8 +2158,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WingAttackName                                     ; 0x086f
 	textpointer GolbatDescription                                  ; 0x0871
 	textpointer OddishName                                         ; 0x0872
-	; textpointer SproutName                                         ; 0x0873
-	; textpointer SproutDescription                                  ; 0x0874
+	textpointer GrowthName                                         ; 0x0873
+	textpointer GrowthDescription                                  ; 0x0874
 	textpointer WeedName                                           ; 0x0875
 	textpointer OddishDescription                                  ; 0x0876
 	textpointer GloomName                                          ; 0x0877

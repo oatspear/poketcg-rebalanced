@@ -66,7 +66,8 @@
 - **Leech Life**: reduced cost from (DDC) to (DC).
 
 #### Oddish
-- **Sprout**: replaced with **Call for Friend** (C): choose any Basic Pokémon from deck.
+- **Sprout**: removed.
+- New attack: **Call for Friend** (C): place a Basic Pokémon from deck on the Bench.
 
 #### Gloom
 - **Poison Powder**: added 10 direct damage.
@@ -89,8 +90,9 @@
 - **Leech Life**: reduced cost from (GC) to (G).
 
 #### Bellsprout
-- **Vine Whip**: increased damage from 10 to 20.
-- **Call for Family**: replaced with **Call for Friend** (C): choose any Basic Pokémon from deck.
+- **Call for Friend**: removed.
+- **Vine Whip**: increased cost from (G) to (GC) and damage from 10 to 20.
+- New attack: **Growth** (C): attach an Energy from the hand to this Pokémon.
 
 #### Victreebel
 - **Lure**: reduced cost from (G) to (C).

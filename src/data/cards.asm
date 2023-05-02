@@ -1625,7 +1625,21 @@ BellsproutCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy GRASS, 1 ; energies
+	energy COLORLESS, 1 ; energies
+	tx GrowthName ; name
+	tx GrowthDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw GrowthEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx VineWhipName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -1637,20 +1651,6 @@ BellsproutCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_WHIP ; animation
-
-	; attack 2
-	energy COLORLESS, 1 ; energies
-	tx CallForFriendName ; name
-	tx CallForFriendDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw CallForFriendEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIRE ; weakness

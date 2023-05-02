@@ -15,8 +15,6 @@ HandleSpecialAIAttacks:
 	jr z, .CallForFriend
 	cp ODDISH
 	jr z, .CallForFriend
-	cp BELLSPROUT
-	jr z, .CallForFriend
 	cp CUBONE
 	jr z, .CallForFriend
 	cp ABRA
@@ -39,6 +37,8 @@ HandleSpecialAIAttacks:
 	jp z, .EnergyAbsorption
 	cp MEWTWO_LV60
 	jp z, .EnergyAbsorption
+	cp BELLSPROUT
+	jp z, .Growth
 	cp ZAPDOS_LV68
 	jp z, .BigThunder
 	cp KANGASKHAN
@@ -188,6 +188,18 @@ HandleSpecialAIAttacks:
 	call CheckIfAnyCardIDinLocation
 	jp nc, .zero_score
 	ld a, $82
+	ret
+
+; if the Pokémon has less than 2 Energies attached to it,
+; return a score of $80 + 3.
+.Growth:
+	call CreateEnergyCardListFromHand
+	jp c, .zero_score
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	cp 2
+	jp nc, .zero_score
+	ld a, $83
 	ret
 
 ; if player has cards in hand, AI calls Random:

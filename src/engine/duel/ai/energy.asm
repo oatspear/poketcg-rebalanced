@@ -134,7 +134,7 @@ AIProcessEnergyCards: ; 164fc (5:64fc)
 	ld [wTempAI], a
 	ld a, [wAIEnergyAttachLogicFlags]
 	and AI_ENERGY_FLAG_SKIP_EVOLUTION
-	jr nz, .check_venusaur
+	jr nz, .check_ivysaur
 
 ; check if energy needed is found in hand
 ; and if there's an evolution in hand or deck
@@ -154,19 +154,19 @@ AIProcessEnergyCards: ; 164fc (5:64fc)
 	ld [wTempAI], a ; store evolution card found
 	ld a, 2
 	call AddToAIScore
-	jr .check_venusaur
+	jr .check_ivysaur
 
 .no_evolution_in_hand
 	ld a, [wCurCardCanAttack]
 	call CheckForEvolutionInDeck
-	jr nc, .check_venusaur
+	jr nc, .check_ivysaur
 	ld a, 1
 	call AddToAIScore
 
 ; if there's no Muk in any Play Area
 ; and there's Ivysaur in own Play Area,
 ; add to AI score
-.check_venusaur
+.check_ivysaur
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .check_if_active

@@ -163,12 +163,13 @@ OddishName: ; 58b32 (16:4b32)
 	text "Oddish"
 	done
 
-SproutName: ; 58b3a (16:4b3a)
-	text "Sprout"
+GrowthName:
+	text "Growth"
 	done
 
-SproutDescription: ; 58b42 (16:4b42)
-	text "TODO"
+GrowthDescription:
+	text "Attach a Basic Energy card from"
+	line "your hand to this Pokémon."
 	done
 
 WeedName: ; 58be1 (16:4be1)
