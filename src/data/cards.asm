@@ -1314,37 +1314,37 @@ GloomCard:
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db GLOOM
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx OddishName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
-	tx PoisonPowderName ; name
-	tx InflictPoisonDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw GloomPoisonPowderEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
-	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_POISON_POWDER ; animation
-
-	; attack 2
-	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx FoulOdorName ; name
 	tx FoulOdorDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw GloomFoulOdorEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
+	dw FoulOdorEffectCommands ; effect commands
+	db INFLICT_POISON | INFLICT_CONFUSION ; flags 1
 	db FLAG_2_BIT_7 ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_FOUL_ODOR ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
+	tx AromatherapyName ; name
+	tx AromatherapyDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw AromatherapyEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
+	db NONE ; flags 3
+	db 1
+	db ATK_ANIM_RECOVER ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
@@ -1365,7 +1365,7 @@ VileplumeCard:
 	db STAR ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db VILEPLUME
-	db 80 ; hp
+	db 90 ; hp
 	db STAGE2 ; stage
 	tx GloomName ; pre-evo name
 

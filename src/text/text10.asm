@@ -186,14 +186,24 @@ GloomName: ; 58c4e (16:4c4e)
 	text "Gloom"
 	done
 
+AromatherapyName:
+	text "Aromatherapy"
+	done
+
+AromatherapyDescription:
+	text "Heal 20 damage from each of your"
+	line "Pokémon."
+	done
+
 FoulOdorName: ; 58c55 (16:4c55)
 	text "Foul Odor"
 	done
 
 FoulOdorDescription: ; 58c60 (16:4c60)
 	text "Both the Defending Pokémon and"
-	line "Gloom are now Confused (after doing"
-	line "damage)."
+	line "this Pokémon are now Confused."
+	line "The Defending Pokémon is now"
+	line "Poisoned."
 	done
 
 GloomDescription: ; 58cad (16:4cad)

@@ -70,10 +70,13 @@
 - New attack: **Call for Friend** (C): place a Basic Pokémon from deck on the Bench.
 
 #### Gloom
-- **Poison Powder**: added 10 direct damage.
-- **Foul Odor**: reduced cost from (GG) to (GC).
+- Increased HP from 60 to 70.
+- **Poison Powder**: removed.
+- New attack: **Aromatherapy** (CC): heal 20 damage from all of your Pokémon.
+- **Foul Odor**: reduced cost from (GG) to (G) and damage from 20 to 10; also Poisons target.
 
 #### Vileplume
+- Increased HP from 80 to 90.
 - **Heal**: no longer requires a coin flip.
 - **Petal Dance**: reduced cost from (GGG) to (GGC) and damage from 40x to 30x.
 

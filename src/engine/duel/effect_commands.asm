@@ -74,12 +74,7 @@ FlytrapEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageEffect
 	db  $00
 
-GloomPoisonPowderEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	dbw EFFECTCMDTYPE_AI, GloomPoisonPowder_AIEffect
-	db  $00
-
-GloomFoulOdorEffectCommands:
+FoulOdorEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FoulOdorEffect
 	db  $00
 
@@ -1111,7 +1106,11 @@ TrainerCardAsPokemonEffectCommands:
 	db  $00
 
 HealingMelodyEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HealingMelody_HealEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal10DamageToAll_HealEffect
+	db  $00
+
+AromatherapyEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageToAll_HealEffect
 	db  $00
 
 GrowthEffectCommands:

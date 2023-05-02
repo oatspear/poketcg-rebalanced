@@ -2163,6 +2163,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WeedName                                           ; 0x0875
 	textpointer OddishDescription                                  ; 0x0876
 	textpointer GloomName                                          ; 0x0877
+	textpointer AromatherapyName
+	textpointer AromatherapyDescription
 	textpointer FoulOdorName                                       ; 0x0878
 	textpointer FoulOdorDescription                                ; 0x0879
 	textpointer GloomDescription                                   ; 0x087a

@@ -1,3 +1,7 @@
+; ------------------------------------------------------------------------------
+; Status Effects
+; ------------------------------------------------------------------------------
+
 Poison50PercentEffect: ; 2c000 (b:4000)
 	ldtx de, PoisonCheckText
 	call TossCoin_BankB
@@ -86,6 +90,20 @@ ApplyStatusEffect: ; 2c035 (b:4035)
 	scf
 	ret
 
+; Defending Pokémon and user become confused.
+; Defending Pokémon also becomes Poisoned.
+FoulOdorEffect:
+	call PoisonEffect
+	call ConfusionEffect
+	call SwapTurn
+	call ConfusionEffect
+	call SwapTurn
+	ret
+
+; ------------------------------------------------------------------------------
+; Coin Flip
+; ------------------------------------------------------------------------------
+
 TossCoin_BankB: ; 2c07e (b:407e)
 	call TossCoin
 	ret
@@ -93,6 +111,8 @@ TossCoin_BankB: ; 2c07e (b:407e)
 TossCoinATimes_BankB: ; 2c082 (b:4082)
 	call TossCoinATimes
 	ret
+
+; ------------------------------------------------------------------------------
 
 CommentedOut_2c086: ; 2c086 (b:4086)
 	ret
@@ -145,8 +165,12 @@ SyncShuffleDeck: ; 2c0bd (b:40bd)
 	call ShuffleDeck
 	ret
 
+; ------------------------------------------------------------------------------
+; Checks and Tests
+; ------------------------------------------------------------------------------
+
 ; return carry if Player is the Turn Duelist
-IsPlayerTurn: ; 2c0c7 (b:40c7)
+IsPlayerTurn:
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
 	cp DUELIST_TYPE_PLAYER
@@ -156,6 +180,25 @@ IsPlayerTurn: ; 2c0c7 (b:40c7)
 .player
 	scf
 	ret
+
+; returns carry if Play Area has no damage counters.
+CheckIfPlayAreaHasAnyDamage:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+.loop_play_area
+	call GetCardDamageAndMaxHP
+	or a
+	ret nz ; found damage
+	inc e
+	dec d
+	jr nz, .loop_play_area
+	; no damage found
+	scf
+	ret
+
+; ------------------------------------------------------------------------------
 
 ; Stores information about the attack damage for AI purposes
 ; taking into account poison damage between turns.
@@ -451,12 +494,16 @@ HandleNoDamageOrEffect: ; 2c216 (b:4216)
 	scf
 	ret
 
+; ------------------------------------------------------------------------------
+; Healing
+; ------------------------------------------------------------------------------
+
 ; applies HP recovery on Pokemon after an attack
 ; with HP recovery effect, and handles its animation.
 ; input:
 ;	d = damage effectiveness
 ;	e = HP amount to recover
-ApplyAndAnimateHPRecovery: ; 2c221 (b:4221)
+ApplyAndAnimateHPRecovery:
 	push de
 	ld hl, wccbd
 	ld [hl], e
@@ -504,22 +551,155 @@ ApplyAndAnimateHPRecovery: ; 2c221 (b:4221)
 	bank1call WaitAttackAnimation
 	ret
 
-; returns carry if Play Area has no damage counters.
-CheckIfPlayAreaHasAnyDamage: ; 2c25b (b:425b)
+; heals amount of damage in register e for card in
+; Play Area location in [hTempPlayAreaLocation_ff9d].
+; plays healing animation and prints text with card's name.
+; input:
+;	   a: amount of HP to heal
+;	  [hTempPlayAreaLocation_ff9d]: Play Area location of card to heal
+HealPlayAreaCardHP:
+	ld e, a
+	ld d, $00
+
+; play heal animation
+	push de
+	bank1call Func_7415
+	ld a, ATK_ANIM_HEALING_WIND_PLAY_AREA
+	ld [wLoadedAttackAnimation], a
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $01
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+	pop hl
+
+; print Pokemon card name and damage healed
+	push hl
+	call LoadTxRam3
+; OATS trying to refactor some code
+	; ld hl, $0000
+	; call LoadTxRam2
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD
+	call LoadCardNameAndLevelFromVarToRam2
+	; call GetTurnDuelistVariable
+	; call LoadCardDataToBuffer1_FromDeckIndex
+	; ld a, 18
+	; call CopyCardNameAndLevel
+	; ld [hl], $00 ; terminating character on end of the name
+	ldtx hl, PokemonHealedDamageText
+	call DrawWideTextBox_WaitForInput
+	pop de
+
+; heal the target Pokemon
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	add e
+	ld [hl], a
+	ret
+
+Heal10DamageToAll_HealEffect:
+	ld c, 10
+	jr HealDamageToAll
+
+Heal20DamageToAll_HealEffect:
+	ld c, 20
+	jr HealDamageToAll
+
+; Heals some damage to all friendly Pokémon in Play Area (Active and Benched).
+; input:
+;   c - amount to heal
+HealDamageToAll:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+
+; go through every Pokemon in the Play Area and heal 10 damage.
+.loop_play_area
+; check its damage
+	ld a, e
+	ldh [hTempPlayAreaLocation_ff9d], a
+	push bc
+	call GetCardDamageAndMaxHP
+	pop bc
+	or a
+	jr z, .next_pkmn ; if no damage, skip Pokemon
+
+	cp c
+	jr c, .heal ; is damage lower than amount to heal?
+	ld a, c     ; heal at most c damage
+.heal
+	push de
+	call HealPlayAreaCardHP
+	pop de
+.next_pkmn
+	inc e
+	dec d
+	jr nz, .loop_play_area
+	ret
+
+HealingWind_InitialEffect:
+	scf
+	ret
+
+HealingWind_PlayAreaHealEffect:
+; play initial animation
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+	ld a, ATK_ANIM_HEALING_WIND_PLAY_AREA
+	ld [wLoadedAttackAnimation], a
+
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld d, a
 	ld e, PLAY_AREA_ARENA
 .loop_play_area
+	push de
+	ld a, e
+	ldh [hTempPlayAreaLocation_ff9d], a
 	call GetCardDamageAndMaxHP
 	or a
-	ret nz ; found damage
+	jr z, .next_pkmn ; skip if no damage
+
+; if less than 20 damage, cap recovery at 10 damage
+	ld de, 20
+	cp e
+	jr nc, .heal
+	ld e, a
+
+.heal
+; add HP to this card
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	add e
+	ld [hl], a
+
+; play heal animation
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $01
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+.next_pkmn
+	pop de
 	inc e
 	dec d
 	jr nz, .loop_play_area
-	; no damage found
-	scf
 	ret
+
+; ------------------------------------------------------------------------------
 
 CreateSupporterCardListFromDiscardPile:
 	ld c, TYPE_TRAINER_SUPPORTER
@@ -1544,19 +1724,6 @@ UnableToRetreat50PercentEffect:
 UnableToRetreatEffect:
 	ld a, SUBSTATUS2_UNABLE_RETREAT
 	call ApplySubstatus2ToDefendingCard
-	ret
-
-GloomPoisonPowder_AIEffect: ; 2c78b (b:478b)
-	ld a, 10
-	lb de, 10, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
-
-; Defending Pokemon and user become confused
-FoulOdorEffect: ; 2c793 (b:4793)
-	call ConfusionEffect
-	call SwapTurn
-	call ConfusionEffect
-	call SwapTurn
 	ret
 
 KakunaPoisonPowder_AIEffect: ; 2c7b4 (b:47b4)
@@ -7476,91 +7643,6 @@ TrainerCardAsPokemon_DiscardEffect: ; 2ef3c (b:6f3c)
 	call ShiftAllPokemonToFirstPlayAreaSlots
 	ret
 
-HealingWind_InitialEffect: ; 2ef51 (b:6f51)
-	scf
-	ret
-
-HealingWind_PlayAreaHealEffect: ; 2ef53 (b:6f53)
-; play initial animation
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld b, a
-	ld c, $00
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-	ld a, ATK_ANIM_HEALING_WIND_PLAY_AREA
-	ld [wLoadedAttackAnimation], a
-
-
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld d, a
-	ld e, PLAY_AREA_ARENA
-.loop_play_area
-	push de
-	ld a, e
-	ldh [hTempPlayAreaLocation_ff9d], a
-	call GetCardDamageAndMaxHP
-	or a
-	jr z, .next_pkmn ; skip if no damage
-
-; if less than 20 damage, cap recovery at 10 damage
-	ld de, 20
-	cp e
-	jr nc, .heal
-	ld e, a
-
-.heal
-; add HP to this card
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	add e
-	ld [hl], a
-
-; play heal animation
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld b, a
-	ld c, $01
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-.next_pkmn
-	pop de
-	inc e
-	dec d
-	jr nz, .loop_play_area
-
-	ret
-
-HealingMelody_HealEffect:
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld d, a
-	ld e, PLAY_AREA_ARENA
-
-; go through every Pokemon in the Play Area and heal 10 damage.
-.loop_play_area
-; check its damage
-	ld a, e
-	ldh [hTempPlayAreaLocation_ff9d], a
-	call GetCardDamageAndMaxHP
-	or a
-	jr z, .next_pkmn ; if no damage, skip Pokemon
-
-	push de
-	ld e, 10
-	ld d, $00
-	call HealPlayAreaCardHP
-	pop de
-.next_pkmn
-	inc e
-	dec d
-	jr nz, .loop_play_area
-	ret
-
 ; return carry if no energy cards in hand,
 AttachEnergyFromHand_HandCheck:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
@@ -10361,56 +10443,6 @@ Func_2fea9: ; 2fea9 (b:7ea9)
 	ld h, a
 	bank1call PlayAttackAnimation
 	bank1call WaitAttackAnimation
-	ret
-
-; heals amount of damage in register e for card in
-; Play Area location in [hTempPlayAreaLocation_ff9d].
-; plays healing animation and prints text with card's name.
-; input:
-;	e = amount of HP to heal
-;	[hTempPlayAreaLocation_ff9d] = Play Area location of card to heal
-HealPlayAreaCardHP: ; 2febc (b:7ebc)
-	ld e, a
-	ld d, $00
-
-; play heal animation
-	push de
-	bank1call Func_7415
-	ld a, ATK_ANIM_HEALING_WIND_PLAY_AREA
-	ld [wLoadedAttackAnimation], a
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld b, a
-	ld c, $01
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-	pop hl
-
-; print Pokemon card name and damage healed
-	push hl
-	call LoadTxRam3
-; OATS trying to refactor some code
-	; ld hl, $0000
-	; call LoadTxRam2
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD
-	call LoadCardNameAndLevelFromVarToRam2
-	; call GetTurnDuelistVariable
-	; call LoadCardDataToBuffer1_FromDeckIndex
-	; ld a, 18
-	; call CopyCardNameAndLevel
-	; ld [hl], $00 ; terminating character on end of the name
-	ldtx hl, PokemonHealedDamageText
-	call DrawWideTextBox_WaitForInput
-	pop de
-
-; heal the target Pokemon
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	add e
-	ld [hl], a
 	ret
 
 CancelSupporterCard:
