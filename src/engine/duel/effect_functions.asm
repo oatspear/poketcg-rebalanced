@@ -1488,7 +1488,7 @@ WeepinbellPoisonPowder_AIEffect: ; 2c738 (b:4738)
 	jp UpdateExpectedAIDamage_AccountForPoison
 
 ; return carry if there are no Pokemon cards in the non-turn holder's bench
-VictreebelLure_AssertPokemonInBench: ; 2c740 (b:4740)
+Lure_AssertPokemonInBench:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	ldtx hl, EffectNoPokemonOnTheBenchText
@@ -1497,7 +1497,7 @@ VictreebelLure_AssertPokemonInBench: ; 2c740 (b:4740)
 
 ; return in hTempPlayAreaLocation_ffa1 the PLAY_AREA_* location
 ; of the Bench Pokemon that was selected for switch
-VictreebelLure_SelectSwitchPokemon: ; 2c74b (b:474b)
+Lure_SelectSwitchPokemon:
 	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
@@ -1512,14 +1512,14 @@ VictreebelLure_SelectSwitchPokemon: ; 2c74b (b:474b)
 
 ; Return in hTemp_ffa0 the PLAY_AREA_* of the non-turn holder's Pokemon card in bench with the lowest (remaining) HP.
 ; if multiple cards are tied for the lowest HP, the one with the highest PLAY_AREA_* is returned.
-VictreebelLure_GetBenchPokemonWithLowestHP: ; 2c764 (b:4764)
+Lure_GetBenchPokemonWithLowestHP:
 	call GetBenchPokemonWithLowestHP
 	ldh [hTemp_ffa0], a
 	ret
 
 ; Defending Pokemon is swapped out for the one with the PLAY_AREA_* at hTemp_ffa0
 ; unless Mew's Neutralizing Shield or Haunter's Transparency prevents it.
-VictreebelLure_SwitchDefendingPokemon: ; 2c76a (b:476a)
+Lure_SwitchDefendingPokemon:
 	call SwapTurn
 	ldh a, [hTemp_ffa0]
 	ld e, a
@@ -1530,9 +1530,13 @@ VictreebelLure_SwitchDefendingPokemon: ; 2c76a (b:476a)
 	ld [wDuelDisplayedScreen], a
 	ret
 
+PoisonLure_SwitchEffect:
+	call Lure_SwitchDefendingPokemon
+	jp PoisonEffect
+
 ; If heads, defending Pokemon can't retreat next turn
-AcidEffect: ; 2c77e (b:477e)
-	ldtx de, AcidCheckText
+UnableToRetreat50PercentEffect:
+	ldtx de, TrapCheckText
 	call TossCoin_BankB
 	ret nc
 	; fallthrough
@@ -1843,6 +1847,15 @@ Heal10DamageEffect:
 	or a
 	ret z ; return if no damage dealt
 	ld de, 10
+	call ApplyAndAnimateHPRecovery
+	ret
+
+Heal20DamageEffect:
+	ld hl, wDealtDamage
+	ld a, [hli]
+	or a
+	ret z ; return if no damage dealt
+	ld de, 20
 	call ApplyAndAnimateHPRecovery
 	ret
 
@@ -3004,43 +3017,6 @@ RapidashAgilityEffect: ; 2d413 (b:5413)
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_AGILITY
 	call ApplySubstatus1ToAttackingCard
-	ret
-
-; returns carry if Opponent has no Pokemon in bench
-NinetalesLure_CheckBench: ; 2d425 (b:5425)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	ldtx hl, EffectNoPokemonOnTheBenchText
-	cp 2
-	ret
-
-NinetalesLure_PlayerSelectEffect: ; 2d430 (b:5430)
-	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
-	call DrawWideTextBox_WaitForInput
-	call SwapTurn
-	bank1call HasAlivePokemonInBench
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	call SwapTurn
-	ret
-
-NinetalesLure_AISelectEffect: ; 2d449 (b:5449)
-	call GetBenchPokemonWithLowestHP
-	ldh [hTemp_ffa0], a
-	ret
-
-NinetalesLure_SwitchEffect: ; 2d44f (b:544f)
-	call SwapTurn
-	ldh a, [hTemp_ffa0]
-	ld e, a
-	call HandleNShieldAndTransparency
-	call nc, SwapArenaWithBenchPokemon
-	call SwapTurn
-	xor a
-	ld [wDuelDisplayedScreen], a
 	ret
 
 ; return carry if no Fire energy cards

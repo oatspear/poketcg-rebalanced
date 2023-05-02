@@ -252,7 +252,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DamageCheckIfHeadsXDamageText                      ; 0x00f4
 	textpointer IfHeadsDiscard1EnergyFromTargetText
 	textpointer AlreadyRetreatedThisTurnText                       ; 0x00f4
-	textpointer AcidCheckText                                      ; 0x00f5
+	textpointer TrapCheckText                                      ; 0x00f5
 	; textpointer TransparencyCheckText                              ; 0x00f6
 	textpointer ConfusionCheckDamageText                           ; 0x00f7
 	textpointer ConfusionCheckRetreatText                          ; 0x00f8
@@ -2204,9 +2204,14 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WeepinbellDescription                              ; 0x089c
 	textpointer VictreebelName                                     ; 0x089d
 	textpointer LureName                                           ; 0x089e
-	textpointer VictreebelsLureDescription                         ; 0x089f
-	textpointer AcidName                                           ; 0x08a0
-	textpointer VictreebelsAcidDescription                         ; 0x08a1
+	textpointer LureDescription                                    ; 0x089f
+	textpointer PoisonLureName
+	textpointer PoisonLureDescription
+	textpointer CorrosiveAcidName
+	textpointer AcidName
+	textpointer AcidDescription
+	textpointer FlytrapName
+	textpointer FlytrapDescription
 	textpointer VictreebelDescription                              ; 0x08a2
 	textpointer GrimerName                                         ; 0x08a3
 	textpointer NastyGooName                                       ; 0x08a4
@@ -2278,7 +2283,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FoxName                                            ; 0x08e5
 	textpointer VulpixDescription                                  ; 0x08e6
 	textpointer NinetalesName                                      ; 0x08e7
-	textpointer NinetalesLureDescription                           ; 0x08e8
 	textpointer FireBlastName                                      ; 0x08e9
 	textpointer NinetalesLv32Description                          ; 0x08eb
 	textpointer FireFangName                                       ; 0x08ec

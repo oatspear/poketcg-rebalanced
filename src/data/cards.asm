@@ -1677,31 +1677,31 @@ WeepinbellCard:
 
 	; attack 1
 	energy GRASS, 1 ; energies
-	tx PoisonPowderName ; name
-	tx MayInflictPoisonDescription ; description
+	tx PoisonLureName ; name
+	tx PoisonLureDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw WeepinbellPoisonPowderEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw PoisonLureEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
-	db NONE ; flags 2
+	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
+	db ATK_ANIM_LURE ; animation
 
 	; attack 2
-	energy GRASS, 2 ; energies
-	tx RazorLeafName ; name
-	dw NONE ; description
+	energy GRASS, 1, COLORLESS 1 ; energies
+	tx CorrosiveAcidName ; name
+	tx IfHeadsDiscard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw CorrosiveAcidEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_WHIP ; animation
+	db ATK_ANIM_GOO ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
@@ -1722,37 +1722,80 @@ VictreebelCard:
 	db STAR ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db VICTREEBEL
-	db 80 ; hp
+	db 90 ; hp
 	db STAGE2 ; stage
 	tx WeepinbellName ; pre-evo name
 
-	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx LureName ; name
-	tx VictreebelsLureDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw VictreebelLureEffectCommands ; effect commands
-	db NONE ; flags 1
-	db SWITCH_OPPONENT_POKEMON ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_LURE ; animation
+	; Poké-Body: Tangling Tendrils
+	; As long as Victreebel is your Active Pokémon, your opponent's Active Pokémon's Retreat Cost is CC more.
 
-	; attack 2
-	energy GRASS, 2 ; energies
-	tx AcidName ; name
-	tx VictreebelsAcidDescription ; description
+	; Pokémon Power: Fragrance Trap
+	; Once during your turn (before your attack), you may flip a coin.
+	; If heads, switch 1 of your opponent's Benched Pokémon with their Active Pokémon.
+
+	; Pokémon Power: Wafting Scent
+	; Once during your turn, before your attack, you may discard a Grass Energy
+	; attached to this Pokémon. If you do, your opponent's Active Pokémon is now Confused and Poisoned.
+
+	; Reactive Poison (G) 10
+	; This attack does 60 more damage for each Special Condition affecting your opponent's Active Pokémon.
+
+	; Gastro Acid (GCC) 60
+	; The Defending Pokémon has no Abilities until the end of your next turn.
+
+	; Panic Vine (G) 40
+	; Your opponent's Active Pokémon is now Confused.
+	; During your opponent's next turn, that Pokémon cannot retreat.
+
+	; Burning Scent (C)
+	; The Defending Pokémon is now Burned and Poisoned.
+	; Before applying these effects, you may switch the Defending Pokémon with 1 of your opponent's Benched Pokémon.
+	; The new Defending Pokémon is now Burned and Poisoned.
+
+	; Energy Dissolve (GCC) 50
+	; Discard an Energy attached to the Defending Pokémon at the end of your opponent's next turn.
+
+	; Acidic Drain (GC) 30
+	; The Defending Pokémon is now Poisoned and Burned.
+	; Remove 3 damage counters from Victreebel.
+
+	; Pollen Hazard (G) 20
+	; Your opponent's Active Pokémon is now Poisoned, Burned, and Confused.
+
+	; Stick and Absorb (GCC) 40
+	; Heal 20 damage from this Pokémon.
+	; The Defending Pokémon can't retreat during your opponent's next turn.
+
+	; Corrosive Acid (GGC) 50
+	; Flip a coin. If heads, your opponent's Active Pokémon is now Burned.
+
+	; attack 1
+	energy GRASS, 1 ; energies
+	tx RazorLeafName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw VictreebelAcidEffectCommands ; effect commands
+	dw NONE ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_SLASH ; animation
+
+	; attack 2
+	energy GRASS, 2, COLORLESS, 1 ; energies
+	tx FlytrapName ; name
+	tx FlytrapDescription ; description
+	dw NONE ; description (cont)
+	db 40 ; damage
+	db DAMAGE_NORMAL ; category
+	dw FlytrapEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER | FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 1
-	db ATK_ANIM_GOO ; animation
+	db ATK_ANIM_DRAIN ; animation
 
 	db 2 ; retreat cost
 	db WR_FIRE ; weakness
@@ -2494,11 +2537,11 @@ NinetalesLv32Card:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx LureName ; name
-	tx NinetalesLureDescription ; description
+	tx LureDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw NinetalesLureEffectCommands ; effect commands
+	dw LureEffectCommands ; effect commands
 	db NONE ; flags 1
 	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
@@ -3579,11 +3622,11 @@ TentacoolCard:
 	; attack 2
 	energy WATER, 1, COLORLESS, 1 ; energies
 	tx AcidName ; name
-	tx VictreebelsAcidDescription ; description
+	tx AcidDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw VictreebelAcidEffectCommands ; effect commands
+	dw AcidEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3

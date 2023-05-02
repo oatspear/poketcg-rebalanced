@@ -387,24 +387,47 @@ VictreebelName: ; 59481 (16:5481)
 	text "Victreebel"
 	done
 
-LureName: ; 5948d (16:548d)
+LureName:
 	text "Lure"
 	done
 
-VictreebelsLureDescription: ; 59493 (16:5493)
-	text "If your opponent has any Benched"
-	line "Pokémon, choose 1 of them and switch"
-	line "it with his or her Active Pokémon."
+LureDescription:
+	text "Switch 1 of your opponent's Benched"
+	line "Pokémon with their Active Pokémon."
 	done
 
-AcidName: ; 594fd (16:54fd)
+PoisonLureName:
+	text "Poison Lure"
+	done
+
+PoisonLureDescription:
+	text "Switch 1 of your opponent's Benched"
+	line "Pokémon with their Active Pokémon."
+	line "The new Defending Pokémon is now"
+	line "Poisoned."
+	done
+
+CorrosiveAcidName:
+	text "Corrosive Acid"
+	done
+
+AcidName:
 	text "Acid"
 	done
 
-VictreebelsAcidDescription: ; 59503 (16:5503)
-	text "Flip a coin. If heads, the Defending"
-	line "Pokémon can't retreat during your"
-	line "opponent's next turn."
+AcidDescription:
+	text "The Defending Pokémon can't retreat"
+	line "during your opponent's next turn."
+	done
+
+FlytrapName:
+	text "Flytrap"
+	done
+
+FlytrapDescription:
+	text "Heal 20 damage from this Pokémon."
+	line "The Defending Pokémon can't retreat"
+	line "during your opponent's next turn."
 	done
 
 VictreebelDescription: ; 59561 (16:5561)
@@ -749,12 +772,6 @@ VulpixDescription: ; 5a163 (16:6163)
 
 NinetalesName: ; 5a1c0 (16:61c0)
 	text "Ninetails"
-	done
-
-NinetalesLureDescription: ; 5a1cb (16:61cb)
-	text "If your opponent has any Benched"
-	line "Pokémon, choose 1 of them and switch"
-	line "it with the Defending Pokémon."
 	done
 
 FireBlastName: ; 5a231 (16:6231)

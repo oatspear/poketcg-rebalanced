@@ -11,26 +11,16 @@ HandleSpecialAIAttacks:
 	call GetCardIDFromDeckIndex
 	ld a, e
 
-	cp NIDORANF
-	jr z, .CallForFriend
-	cp ODDISH
-	jr z, .CallForFriend
-	cp CUBONE
-	jr z, .CallForFriend
 	cp ABRA
 	jp z, .Teleport
 	cp SCYTHER
 	jp z, .SwordsDanceAndFocusEnergy
-	cp KRABBY
-	jr z, .CallForFriend
 	cp VAPOREON_LV29
 	jp z, .SwordsDanceAndFocusEnergy
 	cp MAGNETON_LV28
 	jp z, .ChainLightning
 	cp MEW_LV23
 	jp z, .DevolutionBeam
-	cp JIGGLYPUFF_LV13
-	jp z, .CallForFriend
 	cp PORYGON
 	jp z, .Conversion
 	cp MEWTWO_ALT_LV60
@@ -61,8 +51,20 @@ HandleSpecialAIAttacks:
 	jp z, .HyperBeam
 	cp DRAGONAIR
 	jp z, .HyperBeam
+	cp WEEPINBELL
+	jp z, .HyperBeam
 	cp NINETALES_LV35
 	jp z, .HyperBeam
+	cp NIDORANF
+	jr z, .CallForFriend
+	cp ODDISH
+	jr z, .CallForFriend
+	cp CUBONE
+	jr z, .CallForFriend
+	cp KRABBY
+	jr z, .CallForFriend
+	cp JIGGLYPUFF_LV13
+	jr z, .CallForFriend
 
 ; return zero score.
 .zero_score

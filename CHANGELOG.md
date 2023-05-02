@@ -94,9 +94,18 @@
 - **Vine Whip**: increased cost from (G) to (GC) and damage from 10 to 20.
 - New attack: **Growth** (C): attach an Energy from the hand to this Pokémon.
 
+#### Weepinbell
+- **Poison Powder**: removed.
+- **Razor Leaf**: removed.
+- New attack: **Poison Lure** (G): switch the Defending Pokémon and Poison the new Defending Pokémon.
+- New attack: **Corrosive Acid** (GCC): 20 damage; if Heads, discard an Energy from the Defending Pokémon.
+
 #### Victreebel
-- **Lure**: reduced cost from (G) to (C).
-- **Acid**: increased damage from 20 to 30.
+- Increased HP from 80 to 90.
+- **Lure**: removed.
+- **Acid**: removed.
+- New attack: **Razor Leaf** (G): 30 damage.
+- New attack: **Flytrap** (GGC): 40 damage; heal 20 damage; opponent cannot retreat.
 
 #### Grimer
 - **Nasty Goo**: increased cost from (C) to (D).

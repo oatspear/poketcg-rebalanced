@@ -1,5 +1,5 @@
-AcidCheckText: ; 38000 (e:4000)
-	text "Acid check! If Heads,"
+TrapCheckText:
+	text "Trap check! If Heads,"
 	line "unable to Retreat during next turn."
 	done
 
