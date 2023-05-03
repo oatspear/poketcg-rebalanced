@@ -360,7 +360,7 @@ KnockOutText: ; 36861 (d:6861)
 	done
 
 DamageToSelfDueToConfusionText: ; 3686c (d:686c)
-	text "20 damage to Self due to Confusion."
+	text "10 damage due to Confusion."
 	done
 
 ChooseEnergyCardToDiscardText: ; 36891 (d:6891)
@@ -498,7 +498,7 @@ ThereAreNoBasicPokemonInHand: ; 36bf1 (d:6bf1)
 
 NeitherPlayerHasBasicPkmnText: ; 36c1a (d:6c1a)
 	text "Neither player has any Basic"
-	line "Pokémon in his or her hand."
+	line "Pokémon in their hand."
 	done
 
 ReturnCardsToDeckAndDrawAgainText: ; 36c54 (d:6c54)

@@ -1699,7 +1699,7 @@ ClearNonTurnTemporaryDuelvars_ResetCarry:
 	ret
 
 ; called when attacker deals damage to itself due to confusion
-; display the corresponding animation and deal 20 damage to self
+; display the corresponding animation and deal 10 damage to self
 HandleConfusionDamageToSelf:
 	bank1call DrawDuelMainScene
 	ld a, 1
