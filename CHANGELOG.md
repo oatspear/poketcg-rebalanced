@@ -66,8 +66,8 @@
 - **Leech Life**: reduced cost from (DDC) to (DC).
 
 #### Oddish
-- **Sprout**: removed.
-- New attack: **Call for Friend** (C): place a Basic Pokémon from deck on the Bench.
+- **Stun Spore**: reduced cost from (G) to (C) and removed direct damage.
+- **Sprout**: searches the Deck for any Grass type card and adds it to the hand.
 
 #### Gloom
 - Increased HP from 60 to 70.
@@ -77,8 +77,9 @@
 
 #### Vileplume
 - Increased HP from 80 to 90.
-- **Heal**: no longer requires a coin flip.
-- **Petal Dance**: reduced cost from (GGG) to (GGC) and damage from 40x to 30x.
+- **Heal**: removed.
+- New attack: **Allergic Pollen** (G): 20 damage, opponent cannot use Trainer cards.
+- **Petal Dance**: reduced cost from (GGG) to (GGC); 40 base damage, Confusion to both Pokémon; if heads +20 damage; if tails, heal 20 to all Pokémon.
 
 #### Paras
 - **Spore**: reduced cost from (GG) to (G).

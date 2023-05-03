@@ -1268,13 +1268,13 @@ OddishCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy GRASS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx StunSporeName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw OddishStunSporeEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Paralysis50PercentEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -1282,13 +1282,13 @@ OddishCard:
 	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	; attack 2
-	energy COLORLESS, 1 ; energies
-	tx CallForFriendName ; name
-	tx CallForFriendDescription ; description
+	energy GRASS, 1 ; energies
+	tx SproutName ; name
+	tx SproutDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw CallForFriendEffectCommands ; effect commands
+	dw SproutEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -1370,29 +1370,29 @@ VileplumeCard:
 	tx GloomName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx HealName ; name
-	tx HealDescription ; description
+	energy GRASS, 1 ; energies
+	tx AllergicPollenName ; name
+	tx HeadacheDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw PokemonPowerHealEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw HeadacheEffectCommands ; effect commands
 	db NONE ; flags 1
-	db HEAL_USER ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 1
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db 2
+	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	; attack 2
 	energy GRASS, 2, COLORLESS, 1 ; energies
 	tx PetalDanceName ; name
 	tx PetalDanceDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_X ; category
-	dw VileplumePetalDanceEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
+	db 40 ; damage
+	db DAMAGE_PLUS ; category
+	dw PetalDanceEffectCommands ; effect commands
+	db INFLICT_CONFUSION ; flags 1
+	db HEAL_USER | FLAG_2_BIT_7 ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PETAL_DANCE ; animation
@@ -3357,7 +3357,7 @@ PsyduckCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw PsyduckHeadacheEffectCommands ; effect commands
+	dw HeadacheEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3

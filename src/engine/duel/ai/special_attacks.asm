@@ -57,14 +57,14 @@ HandleSpecialAIAttacks:
 	jp z, .HyperBeam
 	cp NIDORANF
 	jr z, .CallForFriend
-	cp ODDISH
-	jr z, .CallForFriend
 	cp CUBONE
 	jr z, .CallForFriend
 	cp KRABBY
 	jr z, .CallForFriend
 	cp JIGGLYPUFF_LV13
 	jr z, .CallForFriend
+	cp ODDISH
+	jr z, .Sprout
 
 ; return zero score.
 .zero_score
@@ -84,6 +84,14 @@ HandleSpecialAIAttacks:
 	ld a, MAX_PLAY_AREA_POKEMON
 	sub b
 	add $80
+	ret
+
+; if any Grass cards are found in deck,
+; return a score of $80 + 2.
+.Sprout:
+	call CheckIfAnyGrassCardInDeck
+	jr nc, .zero_score
+	ld a, $82
 	ret
 
 ; if AI decides to retreat, return a score of $80 + 10.
@@ -442,6 +450,35 @@ CheckIfAnyBasicPokemonInDeck:
 	jr nc, .next
 	ld a, [wLoadedCard2Stage]
 	or a
+	jr z, .set_carry
+.next
+	inc e
+	ld a, DECK_SIZE
+	cp e
+	jr nz, .loop
+	or a
+	ret
+.set_carry
+	scf
+	ret
+
+; returns carry if there are any Grass-type cards in deck.
+CheckIfAnyGrassCardInDeck:
+	ld e, 0
+.loop
+	ld a, DUELVARS_CARD_LOCATIONS
+	add e
+	call GetTurnDuelistVariable
+	cp CARD_LOCATION_DECK
+	jr nz, .next
+	push de
+	ld a, e
+	call LoadCardDataToBuffer2_FromDeckIndex
+	pop de
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_GRASS
+	jr z, .set_carry
+	cp TYPE_PKMN_GRASS
 	jr z, .set_carry
 .next
 	inc e

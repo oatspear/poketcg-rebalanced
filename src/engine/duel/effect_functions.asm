@@ -601,18 +601,18 @@ HealPlayAreaCardHP:
 	ld [hl], a
 	ret
 
-Heal10DamageToAll_HealEffect:
+Heal10DamageFromAll_HealEffect:
 	ld c, 10
-	jr HealDamageToAll
+	jr HealDamageFromAll
 
-Heal20DamageToAll_HealEffect:
+Heal20DamageFromAll_HealEffect:
 	ld c, 20
-	jr HealDamageToAll
+	jr HealDamageFromAll
 
 ; Heals some damage to all friendly Pokémon in Play Area (Active and Benched).
 ; input:
 ;   c - amount to heal
-HealDamageToAll:
+HealDamageFromAll:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld d, a
@@ -885,13 +885,14 @@ CheckIfDeckIsEmpty: ; 2c2e0 (b:42e0)
 ;	SEARCHEFFECT_BASIC_POKEMON = search for any Basic Pokemon
 ;	SEARCHEFFECT_BASIC_ENERGY = search for any Basic Energy
 ;	SEARCHEFFECT_POKEMON = search for any Pokemon card
+;	SEARCHEFFECT_GRASS_CARD = search for any Grass card
 ; input:
-;	d = SEARCHEFFECT_* constant
-;	e = (optional) card ID to search for in deck
-;	hl = text to print if Deck has card(s)
+;	  d = SEARCHEFFECT_* constant
+;	  e = (optional) card ID to search for in deck
+;	  hl = text to print if Deck has card(s)
 ; output:
-;	carry set if refused to look at deck
-LookForCardsInDeck: ; 2c2ec (b:42ec)
+;	  carry set if refused to look at deck
+LookForCardsInDeck:
 	push hl
 	push bc
 	ld a, [wDuelTempList]
@@ -923,14 +924,14 @@ LookForCardsInDeck: ; 2c2ec (b:42ec)
 	dw .SearchDeckForBasicPokemon
 	dw .SearchDeckForBasicEnergy
 	dw .SearchDeckForPokemon
+	dw .SearchDeckForGrassCard
 
-.set_carry ; 2c321 (b:4321)
+.set_carry
 	scf
 	ret
 
-; returns carry if no card with
-; same card ID as e is found in Deck
-.SearchDeckForCardID ; 2c323 (b:4323)
+; returns carry if no card with same card ID as e is found in Deck
+.SearchDeckForCardID
 	ld hl, wDuelTempList
 .loop_deck_e
 	ld a, [hli]
@@ -946,7 +947,7 @@ LookForCardsInDeck: ; 2c2ec (b:42ec)
 	ret
 
 ; returns carry if no NidoranM or NidoranF card is found in Deck
-.SearchDeckForNidoran ; 2c336 (b:4336)
+.SearchDeckForNidoran
 	ld hl, wDuelTempList
 .loop_deck_nidoran
 	ld a, [hli]
@@ -963,7 +964,7 @@ LookForCardsInDeck: ; 2c2ec (b:42ec)
 	ret
 
 ; returns carry if no Basic Pokemon is found in Deck
-.SearchDeckForBasicPokemon ; 2c34c (b:434c)
+.SearchDeckForBasicPokemon
 	ld hl, wDuelTempList
 .loop_deck_basic_pkmn
 	ld a, [hli]
@@ -979,7 +980,7 @@ LookForCardsInDeck: ; 2c2ec (b:42ec)
 	ret
 
 ; returns carry if no Basic Energy cards are found in Deck
-.SearchDeckForBasicEnergy ; 2c365 (b:4365)
+.SearchDeckForBasicEnergy
 	ld hl, wDuelTempList
 .loop_deck_energy
 	ld a, [hli]
@@ -995,7 +996,7 @@ LookForCardsInDeck: ; 2c2ec (b:42ec)
 	ret
 
 ; returns carry if no Pokemon cards are found in Deck
-.SearchDeckForPokemon ; 2c37d (b:437d)
+.SearchDeckForPokemon
 	ld hl, wDuelTempList
 .loop_deck_pkmn
 	ld a, [hli]
@@ -1008,13 +1009,30 @@ LookForCardsInDeck: ; 2c2ec (b:42ec)
 	or a
 	ret
 
+; returns carry if no Grass cards are found in Deck
+.SearchDeckForGrassCard
+	ld hl, wDuelTempList
+.loop_deck_grass
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_ENERGY_GRASS
+	jr z, .found_grass_card
+	cp TYPE_PKMN_GRASS
+	jr nz, .loop_deck_grass
+.found_grass_card
+	or a
+	ret
+
 ; handles the Player selection of attack
 ; to use, i.e. Amnesia or Metronome on.
 ; returns carry if none selected.
 ; outputs:
-;	d = card index of defending card
-;	e = attack index selected
-HandleDefendingPokemonAttackSelection: ; 2c391 (b:4391)
+;	  d = card index of defending card
+;	  e = attack index selected
+HandleDefendingPokemonAttackSelection:
 	bank1call DrawDuelMainScene
 	call SwapTurn
 	xor a
@@ -2399,22 +2417,25 @@ Heal_RemoveDamageEffect: ; 2cdc7 (b:4dc7)
 	call ExchangeRNG
 	ret
 
-PetalDance_AIEffect: ; 2ce23 (b:4e23)
-	ld a, 120 / 2
-	lb de, 0, 120
+PetalDance_AIEffect:
+	ld a, 60 / 2
+	lb de, 30, 60
 	jp SetExpectedAIDamage
 
-PetalDance_MultiplierEffect: ; 2ce2b (b:4e2b)
-	ld hl, 40
+PetalDance_BonusEffect:
+	ld hl, 20
 	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 3
-	call TossCoinATimes_BankB
-	add a
-	add a
-	call ATimes10
-	; a = 4 * 10 * heads
-	call SetDefiniteDamage
+	ldtx de, DamageCheckIfHeadsPlusDamageText
+	call TossCoin_BankB
+	jr nc, .tails
+; bonus damage if heads
+	ld a, 20
+	call AddToDamage
+	jr .confusion
+.tails
+	call Heal20DamageFromAll_HealEffect
+.confusion
+	call ConfusionEffect
 	call SwapTurn
 	call ConfusionEffect
 	call SwapTurn
@@ -5398,6 +5419,116 @@ CallForFriend_PutInPlayAreaEffect: ; 2e194 (b:6194)
 	call SyncShuffleDeck
 	ret
 
+; ------------------------------------------------------------------------------
+; Card Searching
+; ------------------------------------------------------------------------------
+
+; Searches the Deck for either a Grass Energy or Grass Pokémon
+; and adds that card to the Hand.
+Sprout_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+
+	call CreateDeckCardList
+	ldtx hl, ChooseGrassCardFromDeckText
+	ldtx bc, GrassCardText
+	lb de, SEARCHEFFECT_GRASS_CARD, $00
+	call LookForCardsInDeck
+	ret c
+
+; draw Deck list interface and print text
+	bank1call Func_5591
+	ldtx hl, ChooseGrassCardFromDeckText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+
+.loop
+	bank1call DisplayCardList
+	jr c, .pressed_b
+
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_GRASS
+	jr z, .got_card  ; is it a Grass Energy?
+	cp TYPE_PKMN_GRASS
+	jr nz, .play_sfx ; is it a Grass Pokémon?
+.got_card
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+.play_sfx
+	; play SFX and loop back
+	call Func_3794
+	jr .loop
+
+.pressed_b
+; figure if Player can exit the screen without selecting,
+; that is, if the Deck has no Grass-type cards.
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.loop_b_press
+	ld a, [hl]
+	cp CARD_LOCATION_DECK
+	jr nz, .next
+	ld a, l
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_GRASS
+	jr z, .play_sfx ; found, go back to top loop
+	cp TYPE_PKMN_GRASS
+	jr z, .play_sfx ; found, go back to top loop
+.next
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_b_press
+
+; no valid card in Deck, can safely exit screen
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+Sprout_AISelectEffect:
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z ; none found
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_GRASS
+	jr z, .found
+	cp TYPE_PKMN_GRASS
+	jr nz, .loop_deck
+.found
+	ret
+
+; Adds the selected card to the turn holder's Hand.
+Sprout_AddToHandEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	jr z, .done ; skip if no Grass-type card was chosen
+
+; add Grass-type card to the hand and show it on screen if
+; it wasn't the Player who used the attack.
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+	call IsPlayerTurn
+	jr c, .done
+	ldh a, [hTemp_ffa0]
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
+.done
+	call SyncShuffleDeck
+	ret
+
+; ------------------------------------------------------------------------------
+
 KarateChop_AIEffect: ; 2e1b4 (b:61b4)
 	call KarateChop_DamageSubtractionEffect
 	jp SetDefiniteAIDamage
@@ -6459,7 +6590,8 @@ MagneticStormEffect: ; 2e7d5 (b:67d5)
 	ret
 
 ; return carry if no cards in Deck
-EnergySpike_DeckCheck: ; 2e877 (b:6877)
+Sprout_DeckCheck:
+EnergySpike_DeckCheck:
 	call CheckIfDeckIsEmpty
 	ret
 

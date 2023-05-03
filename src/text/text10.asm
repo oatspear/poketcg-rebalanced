@@ -172,6 +172,16 @@ GrowthDescription:
 	line "your hand to this Pokémon."
 	done
 
+SproutName:
+	text "Sprout"
+	done
+
+SproutDescription:
+	text "Search your Deck for a <GRASS> Energy"
+	line "or a <GRASS> Pokémon and add it to"
+	line "your hand."
+	done
+
 WeedName: ; 58be1 (16:4be1)
 	text "Weed"
 	done
@@ -229,15 +239,20 @@ HealDescription: ; 58d1d (16:4d1d)
 	line "Confused, or Paralyzed."
 	done
 
-PetalDanceName: ; 58de2 (16:4de2)
+AllergicPollenName:
+	text "Allergic Pollen"
+	done
+
+PetalDanceName:
 	text "Petal Dance"
 	done
 
-PetalDanceDescription: ; 58def (16:4def)
-	text "Flip 3 coins. This attack does 40"
-	line "damage times the number of heads."
-	line "Vileplume is now Confused (after"
-	line "doing damage)."
+PetalDanceDescription:
+	text "Flip a coin. If heads, this attack"
+	line "does 20 more damage. If tails, heal"
+	line "20 damage from each of your Pokémon."
+	line "Both the Defending Pokémon and"
+	line "this Pokémon are now Confused."
 	done
 
 FlowerName: ; 58e64 (16:4e64)

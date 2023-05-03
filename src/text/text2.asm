@@ -258,6 +258,11 @@ ChooseBasicPokemonText: ; 38a83 (e:4a83)
 	line "Pokémon."
 	done
 
+ChooseGrassCardFromDeckText:
+	text "Choose a <GRASS> Card"
+	line "from the Deck."
+	done
+
 ProcedureForEnergyTransferText: ; 38aa4 (e:4aa4)
 	text "Procedure for Energy Transfer:"
 	line ""
@@ -421,6 +426,10 @@ BasicPokemonDeckText: ; 392f8 (e:52f8)
 
 BasicEnergyText: ; 3930a (e:530a)
 	text "Basic Energy"
+	done
+
+GrassCardText:
+	text "<GRASS> Card"
 	done
 
 PeekWasUsedToLookInYourHandText: ; 39318 (e:5318)

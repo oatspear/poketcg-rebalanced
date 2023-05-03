@@ -74,6 +74,13 @@ FlytrapEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageEffect
 	db  $00
 
+SproutEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Sprout_DeckCheck
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Sprout_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Sprout_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Sprout_AISelectEffect
+	db  $00
+
 FoulOdorEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FoulOdorEffect
 	db  $00
@@ -236,8 +243,8 @@ PokemonPowerHealEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal_RemoveDamageEffect
 	db  $00
 
-VileplumePetalDanceEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PetalDance_MultiplierEffect
+PetalDanceEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PetalDance_BonusEffect
 	dbw EFFECTCMDTYPE_AI, PetalDance_AIEffect
 	db  $00
 
@@ -300,7 +307,7 @@ MagikarpFlailEffectCommands:
 	dbw EFFECTCMDTYPE_AI, MagikarpFlail_AIEffect
 	db  $00
 
-PsyduckHeadacheEffectCommands:
+HeadacheEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HeadacheEffect
 	db  $00
 
@@ -390,7 +397,6 @@ CloysterClampEffectCommands:
 CaterpieStringShotEffectCommands:
 VenonatStunSporeEffectCommands:
 MetapodStunSporeEffectCommands:
-OddishStunSporeEffectCommands:
 GrimerNastyGooEffectCommands:
 TangelaBindEffectCommands:
 TangelaStunSporeEffectCommands:
@@ -1106,11 +1112,11 @@ TrainerCardAsPokemonEffectCommands:
 	db  $00
 
 HealingMelodyEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal10DamageToAll_HealEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal10DamageFromAll_HealEffect
 	db  $00
 
 AromatherapyEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageToAll_HealEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageFromAll_HealEffect
 	db  $00
 
 GrowthEffectCommands:

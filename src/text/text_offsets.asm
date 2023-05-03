@@ -304,6 +304,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseBasicPokemonFromDeckText                     ; 0x0125
 	textpointer ChooseBasicEnergyCardText                          ; 0x0129
 	textpointer ChooseBasicPokemonText                             ; 0x012c
+	textpointer ChooseGrassCardFromDeckText
 	textpointer ProcedureForEnergyTransferText                     ; 0x012d
 	textpointer ChoosePkmnToRemoveDamageCounterText                ; 0x0130
 	textpointer ProcedureForCurseText                              ; 0x0131
@@ -326,6 +327,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer KrabbyText                                         ; 0x0142
 	textpointer BasicPokemonDeckText                               ; 0x0143
 	textpointer BasicEnergyText                                    ; 0x0144
+	textpointer GrassCardText
 	textpointer PeekWasUsedToLookInYourHandText                    ; 0x0145
 	textpointer CardPeekWasUsedOnText                              ; 0x0146
 	textpointer PokemonAndAllAttachedCardsReturnedToHandText       ; 0x0147
@@ -2158,8 +2160,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WingAttackName                                     ; 0x086f
 	textpointer GolbatDescription                                  ; 0x0871
 	textpointer OddishName                                         ; 0x0872
-	textpointer GrowthName                                         ; 0x0873
-	textpointer GrowthDescription                                  ; 0x0874
+	textpointer GrowthName
+	textpointer GrowthDescription
+	textpointer SproutName
+	textpointer SproutDescription
 	textpointer WeedName                                           ; 0x0875
 	textpointer OddishDescription                                  ; 0x0876
 	textpointer GloomName                                          ; 0x0877
@@ -2171,6 +2175,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer VileplumeName                                      ; 0x087b
 	textpointer HealName                                           ; 0x087c
 	textpointer HealDescription                                    ; 0x087d
+	textpointer AllergicPollenName
 	textpointer PetalDanceName                                     ; 0x087e
 	textpointer PetalDanceDescription                              ; 0x087f
 	textpointer FlowerName                                         ; 0x0880
