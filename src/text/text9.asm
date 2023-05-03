@@ -681,15 +681,14 @@ Text07a9: ; 562c4 (15:62c4)
 Text07aa: ; 562ee (15:62ee)
 	text "You see? Isn't Rock good?"
 	line "Isn't Rock wonderful?"
-	line "'Fess up and admit the greatness"
+	line "Admit the greatness"
 	line "of Rock Pokémon!"
 	done
 
 Text07ab: ; 56351 (15:6351)
 	text "Yes!"
 	line "Our last duel was wonderful!"
-	line "You wish to have another"
-	line "wonderful duel?"
+	line "You wish to duel again?"
 	done
 
 Text07ac: ; 5639d (15:639d)
@@ -1343,9 +1342,26 @@ EnergyTransDescription: ; 5796e (15:796e)
 	line "one of your Pokémon to another."
 	done
 
+PollenFrenzyName:
+	text "Pollen Frenzy"
+	done
+
+PollenFrenzyDescription:
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is now Paralyzed and"
+	line "Poisoned. If tails, the Defending"
+	line "Pokémon is now Asleep and Poisoned."
+	done
+
 SolarBeamName: ; 57a51 (15:7a51)
 	text "Solarbeam"
 	done
+
+; SolarBeamDescription:
+; 	text "Deal 10 additional damage for each"
+; 	line "<GRASS> or <FIRE> Energy attached to"
+; 	line "this Pokémon."
+; 	done
 
 VenusaurLv67Description: ; 57a5c (15:7a5c)
 	text "This plant blooms when it is"

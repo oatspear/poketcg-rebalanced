@@ -861,7 +861,7 @@ ThereAreNoBasicEnergyCardsInDiscardPileText: ; 3749e (d:749e)
 	done
 
 NoCardsLeftInTheDeckText: ; 374d4 (d:74d4)
-	text "There are no cards left in the Deck."
+	text "The Deck is empty."
 	done
 
 NoSpaceOnTheBenchText: ; 374fa (d:74fa)
@@ -879,8 +879,7 @@ CantEvolvePokemonInSameTurnItsPlacedText: ; 37546 (d:7546)
 	done
 
 NotAffectedByPoisonSleepParalysisOrConfusionText: ; 37583 (d:7583)
-	text "Not affected by Poison,"
-	line "Sleep, Paralysis, or Confusion."
+	text "Not affected by Status Conditions."
 	done
 
 NotEnoughCardsInHandText: ; 375bc (d:75bc)
@@ -1037,7 +1036,7 @@ PrinterIsNotConnectedText: ; 37a6d (d:7a6d)
 
 BatteriesHaveLostTheirChargeText: ; 37a96 (d:7a96)
 	text "Error 01:"
-	line "Batteries have lost their charge."
+	line "Empty batteries."
 	done
 
 PrinterPaperIsJammedText: ; 37ac7 (d:7ac7)
@@ -1094,6 +1093,11 @@ VenomPowderCheckText: ; 37cdf (d:7cdf)
 	text "Venom Powder check! If Heads,"
 	line "opponent is Poisoned & Confused."
 	done
+
+; ParalysisSleepCheckText:
+; 	text "Status check! If Heads, opponent"
+; 	line "is Paralyzed. If tails, Asleep."
+; 	done
 
 IfTailsYourPokemonBecomesConfusedText: ; 37d1f (d:7d1f)
 	text "If Tails,  your Pokémon"
@@ -1156,8 +1160,8 @@ CardCheckIfHeads8CardsIfTails1CardText: ; 37f24 (d:7f24)
 	done
 
 IfHeadsNoDamageNextTurnText: ; 37f56 (d:7f56)
-	text "If Heads, you will not receive"
-	line "damage during opponent's next turn!"
+	text "If Heads, prevent damage"
+	line "during opponent's next turn!"
 	done
 
 Text00f2: ; 37f9a (d:7f9a)

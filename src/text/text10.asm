@@ -231,12 +231,8 @@ HealName: ; 58d17 (16:4d17)
 	done
 
 HealDescription: ; 58d1d (16:4d1d)
-	text "Once during your turn (before your"
-	line "attack), you may remove 1 damage"
-	line "counter from 1 of your Pokémon."
-	line "This power can't be used if"
-	line "Vileplume is Asleep,"
-	line "Confused, or Paralyzed."
+	text "Once during your turn, you may heal"
+	line "10 damage from 1 of your Pokémon."
 	done
 
 AllergicPollenName:
@@ -248,9 +244,10 @@ PetalDanceName:
 	done
 
 PetalDanceDescription:
-	text "Flip a coin. If heads, this attack"
-	line "does 20 more damage. If tails, heal"
-	line "20 damage from each of your Pokémon."
+	text "Flip 2 coins. This attack does 20"
+	line "additional damage for each heads."
+	line "For each tails, heal 10 damage from"
+	line "each of your Pokémon."
 	line "Both the Defending Pokémon and"
 	line "this Pokémon are now Confused."
 	done

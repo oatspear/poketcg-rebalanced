@@ -401,25 +401,25 @@ VenusaurLv67Card:
 	tx IvysaurName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 3 ; energies
-	tx BodySlamName ; name
-	tx MayInflictParalysisDescription ; description
+	energy GRASS, 1, COLORLESS, 1 ; energies
+	tx PollenFrenzyName ; name
+	tx PollenFrenzyDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw PollenFrenzyEffectCommands ; effect commands
+	db INFLICT_POISON | INFLICT_PARALYSIS | INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_BIG_HIT ; animation
+	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	; attack 2
-	energy GRASS, 2, COLORLESS, 1 ; energies
+	energy GRASS, 3 ; energies
 	tx SolarBeamName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 70 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -1319,20 +1319,6 @@ GloomCard:
 	tx OddishName ; pre-evo name
 
 	; attack 1
-	energy GRASS, 1 ; energies
-	tx FoulOdorName ; name
-	tx FoulOdorDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw FoulOdorEffectCommands ; effect commands
-	db INFLICT_POISON | INFLICT_CONFUSION ; flags 1
-	db FLAG_2_BIT_7 ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_FOUL_ODOR ; animation
-
-	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx AromatherapyName ; name
 	tx AromatherapyDescription ; description
@@ -1345,6 +1331,20 @@ GloomCard:
 	db NONE ; flags 3
 	db 1
 	db ATK_ANIM_RECOVER ; animation
+
+	; attack 2
+	energy GRASS, 2 ; energies
+	tx FoulOdorName ; name
+	tx FoulOdorDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw FoulOdorEffectCommands ; effect commands
+	db INFLICT_POISON | INFLICT_CONFUSION ; flags 1
+	db FLAG_2_BIT_7 ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_FOUL_ODOR ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
@@ -1388,7 +1388,7 @@ VileplumeCard:
 	tx PetalDanceName ; name
 	tx PetalDanceDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 30 ; damage
 	db DAMAGE_PLUS ; category
 	dw PetalDanceEffectCommands ; effect commands
 	db INFLICT_CONFUSION ; flags 1
@@ -1690,7 +1690,7 @@ WeepinbellCard:
 	db ATK_ANIM_LURE ; animation
 
 	; attack 2
-	energy GRASS, 1, COLORLESS 1 ; energies
+	energy GRASS, 1, COLORLESS, 2 ; energies
 	tx CorrosiveAcidName ; name
 	tx IfHeadsDiscard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
@@ -9496,7 +9496,7 @@ ChanseyCard:
 	energy 0 ; energies
 	tx HealName ; name
 	tx HealDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw PokemonPowerHealEffectCommands ; effect commands

@@ -2082,6 +2082,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer VenusaurLv64Description                           ; 0x081b
 	textpointer EnergyTransName                                    ; 0x081c
 	textpointer EnergyTransDescription                             ; 0x081d
+	textpointer PollenFrenzyName
+	textpointer PollenFrenzyDescription
 	textpointer SolarBeamName                                      ; 0x081e
 	textpointer VenusaurLv67Description                           ; 0x081f
 	textpointer CaterpieName                                       ; 0x0820

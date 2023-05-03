@@ -19,8 +19,8 @@
 
 #### Venusaur Lv67
 - **Energy Trans**: removed.
-- **Solar Beam**: reduced cost from (GGGG) to (GGC).
-- New attack: **Body Slam** (CCC): 30 damage, inflicts Paralysis if Heads.
+- New attack: **Pollen Frenzy** (GC): 20 damage; if heads, inflicts Poison + Paralysis; if tails, inflicts Poison + Sleep.
+- **Solar Beam**: reduced cost from (GGGG) to (GGG); increased damage from 60 to 70.
 
 #### Butterfree
 - **Mega Drain**: reduced cost from (GGGG) to (GGG).
@@ -73,13 +73,14 @@
 - Increased HP from 60 to 70.
 - **Poison Powder**: removed.
 - New attack: **Aromatherapy** (CC): heal 20 damage from all of your Pokémon.
-- **Foul Odor**: reduced cost from (GG) to (G) and damage from 20 to 10; also Poisons target.
+- **Foul Odor**: also Poisons the target.
 
 #### Vileplume
 - Increased HP from 80 to 90.
 - **Heal**: removed.
 - New attack: **Allergic Pollen** (G): 20 damage, opponent cannot use Trainer cards.
-- **Petal Dance**: reduced cost from (GGG) to (GGC); 40 base damage, Confusion to both Pokémon; if heads +20 damage; if tails, heal 20 to all Pokémon.
+- **Petal Dance**: reworked.
+- New **Petal Dance** (GGC): 30 damage, flip 2 coins. +20 damage for each heads, heal 10 to all Pokémon for each tails. Both Pokémon are Confused.
 
 #### Paras
 - **Spore**: reduced cost from (GG) to (G).
