@@ -419,6 +419,11 @@ CowardiceEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Cowardice_PlayerSelectEffect
 	db  $00
 
+AdaptiveEvolutionEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, AdaptiveEvolution_InitialEffect
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, AdaptiveEvolution_AllowEvolutionEffect
+	db  $00
+
 LaprasWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LaprasWaterGunEffect
 	dbw EFFECTCMDTYPE_AI, LaprasWaterGunEffect

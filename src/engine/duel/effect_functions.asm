@@ -1,4 +1,18 @@
 ; ------------------------------------------------------------------------------
+; Dummy Functions
+; ------------------------------------------------------------------------------
+
+Sonicboom_NullEffect:
+	ret
+
+AdaptiveEvolution_InitialEffect:
+Firegiver_InitialEffect:
+Quickfreeze_InitialEffect:
+PealOfThunder_InitialEffect:
+	scf
+	ret
+
+; ------------------------------------------------------------------------------
 ; Status Effects
 ; ------------------------------------------------------------------------------
 
@@ -125,6 +139,17 @@ TossCoin_BankB: ; 2c07e (b:407e)
 
 TossCoinATimes_BankB: ; 2c082 (b:4082)
 	call TossCoinATimes
+	ret
+
+; ------------------------------------------------------------------------------
+; Pokémon Evolution
+; ------------------------------------------------------------------------------
+
+AdaptiveEvolution_AllowEvolutionEffect:
+	ldh a, [hTempPlayAreaLocation_ff9d]  ; triggering Pokémon
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set CAN_EVOLVE_THIS_TURN_F, [hl]
 	ret
 
 ; ------------------------------------------------------------------------------
@@ -3048,10 +3073,6 @@ LaprasWaterGunEffect: ; 2d2eb (b:52eb)
 	lb bc, 1, 0
 	jp ApplyExtraWaterEnergyDamageBonus
 
-Quickfreeze_InitialEffect: ; 2d2f1 (b:52f1)
-	scf
-	ret
-
 Quickfreeze_Paralysis50PercentEffect: ; 2d2f3 (b:52f3)
 	ldtx de, ParalysisCheckText
 	call TossCoin_BankB
@@ -3491,10 +3512,6 @@ DancingEmbers_MultiplierEffect: ; 2d6ab (b:56ab)
 	call TossCoinATimes_BankB
 	call ATimes10
 	call SetDefiniteDamage
-	ret
-
-Firegiver_InitialEffect: ; 2d6c0 (b:56c0)
-	scf
 	ret
 
 Firegiver_AddToHandEffect: ; 2d6c2 (b:56c2)
@@ -6418,13 +6435,6 @@ Sonicboom_UnaffectedByColorEffect: ; 2e758 (b:6758)
 	set UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, [hl]
 	ret
 
-Sonicboom_NullEffect: ; 2e75e (b:675e)
-	ret
-
-PealOfThunder_InitialEffect: ; 2e77e (b:677e)
-	scf
-	ret
-
 PealOfThunder_RandomlyDamageEffect: ; 2e780 (b:6780)
 	call ExchangeRNG
 	ld de, 30 ; damage to inflict
@@ -9252,7 +9262,7 @@ PokemonBreeder_EvolveEffect: ; 2f6f4 (b:76f4)
 	call PlaySFX
 	ldtx hl, PokemonEvolvedIntoPokemonText
 	call DrawWideTextBox_WaitForInput
-	bank1call Func_161e
+	bank1call OnPokemonPlayedInitVariablesAndPowers
 	pop af
 	ldh [hTempCardIndex_ff9f], a
 	ret

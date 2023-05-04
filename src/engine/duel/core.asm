@@ -674,7 +674,7 @@ PlayPokemonCard:
 	call LoadTxRam2
 	ldtx hl, PlacedOnTheBenchText
 	call DrawWideTextBox_WaitForInput
-	call Func_161e
+	call OnPokemonPlayedInitVariablesAndPowers
 	or a
 	ret
 
@@ -738,7 +738,7 @@ PlayPokemonCard:
 	call SetOppAction_SerialSendDuelData
 	call PrintPlayAreaCardList_EnableLCD
 	call PrintPokemonEvolvedIntoPokemon
-	call Func_161e
+	call OnPokemonPlayedInitVariablesAndPowers
 .done
 	or a
 	ret
@@ -6666,7 +6666,7 @@ OppAction_EvolvePokemonCard:
 	call DrawLargePictureOfCard
 	call EvolvePokemonCardIfPossible
 	call PrintPokemonEvolvedIntoPokemon
-	call Func_161e
+	call OnPokemonPlayedInitVariablesAndPowers
 	call DrawDuelMainScene
 	ret
 
@@ -6682,7 +6682,7 @@ OppAction_PlayBasicPokemonCard:
 	ldh a, [hTemp_ffa0]
 	ldtx hl, PlacedOnTheBenchText
 	call DisplayCardDetailScreen
-	call Func_161e
+	call OnPokemonPlayedInitVariablesAndPowers
 	call DrawDuelMainScene
 	ret
 

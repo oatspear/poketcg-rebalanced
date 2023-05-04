@@ -1407,7 +1407,7 @@ GetNonTurnDuelistVariable:
 ; when playing a Pokemon card, initializes some variables according to the
 ; card played, and checks if the played card has Pokemon Power to show it to
 ; the player, and possibly to use it if it triggers when the card is played.
-Func_161e:
+OnPokemonPlayedInitVariablesAndPowers:
 	ldh a, [hTempCardIndex_ff98]
 	call ClearChangedTypesIfMuk
 	ldh a, [hTempCardIndex_ff98]
