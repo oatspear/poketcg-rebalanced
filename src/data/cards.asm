@@ -452,6 +452,21 @@ CaterpieCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	; depends: SetAdaptiveEvolutionPokemonCanEvolve
+	energy 0 ; energies
+	tx AdaptiveEvolutionName ; name
+	tx AdaptiveEvolutionDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw AdaptiveEvolutionEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_NONE ; animation
+
+	; attack 2
 	energy GRASS, 1 ; energies
 	tx StringShotName ; name
 	tx MayInflictParalysisDescription ; description
@@ -464,20 +479,6 @@ CaterpieCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_STRING_SHOT ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_FIRE ; weakness
@@ -503,6 +504,21 @@ MetapodCard:
 	tx CaterpieName ; pre-evo name
 
 	; attack 1
+	; depends: SetAdaptiveEvolutionPokemonCanEvolve
+	energy 0 ; energies
+	tx AdaptiveEvolutionName ; name
+	tx AdaptiveEvolutionDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw AdaptiveEvolutionEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_NONE ; animation
+
+	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx HardenName ; name
 	tx HardenDescription ; description
@@ -515,20 +531,6 @@ MetapodCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_NONE ; animation
-
-	; attack 2
-	energy GRASS, 2 ; energies
-	tx StunSporeName ; name
-	tx MayInflictParalysisDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MetapodStunSporeEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	db 2 ; retreat cost
 	db WR_FIRE ; weakness
@@ -605,6 +607,21 @@ WeedleCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	; depends: SetAdaptiveEvolutionPokemonCanEvolve
+	energy 0 ; energies
+	tx AdaptiveEvolutionName ; name
+	tx AdaptiveEvolutionDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw AdaptiveEvolutionEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_NONE ; animation
+
+	; attack 2
 	energy GRASS, 1 ; energies
 	tx PoisonStingName ; name
 	tx MayInflictPoisonDescription ; description
@@ -617,20 +634,6 @@ WeedleCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_NEEDLES ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_FIRE ; weakness

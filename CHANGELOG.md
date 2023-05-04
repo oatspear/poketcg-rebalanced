@@ -22,8 +22,18 @@
 - New attack: **Pollen Frenzy** (GC): 20 damage; if heads, inflicts Poison + Paralysis; if tails, inflicts Poison + Sleep.
 - **Solar Beam**: reduced cost from (GGGG) to (GGG); increased damage from 60 to 70.
 
+#### Caterpie
+- New Pokémon Power: **Adaptive Evolution**: can evolve on the first turn.
+
+#### Metapod
+- **Stun Spore**: removed.
+- New Pokémon Power: **Adaptive Evolution**: can evolve on the first turn.
+
 #### Butterfree
 - **Mega Drain**: reduced cost from (GGGG) to (GGG).
+
+#### Weedle
+- New Pokémon Power: **Adaptive Evolution**: can evolve on the first turn.
 
 #### Kakuna
 - Reduced HP from 80 to 70.

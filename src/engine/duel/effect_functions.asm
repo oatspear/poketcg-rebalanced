@@ -152,6 +152,11 @@ AdaptiveEvolution_AllowEvolutionEffect:
 	set CAN_EVOLVE_THIS_TURN_F, [hl]
 	ret
 
+; PoisonEvolution_EvolveEffect:
+; 	lb de, SEARCHEFFECT_CARD_ID, BEEDRILL
+; 	call LookForCardsInDeck
+; 	ret c
+
 ; ------------------------------------------------------------------------------
 
 CommentedOut_2c086: ; 2c086 (b:4086)

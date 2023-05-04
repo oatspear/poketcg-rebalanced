@@ -17,6 +17,15 @@ MayInflictConfusionDescription: ; 58480 (16:4480)
 	line "Pokémon is now Confused."
 	done
 
+AdaptiveEvolutionName:
+	text "Adaptive Evolution"
+	done
+
+AdaptiveEvolutionDescription:
+	text "This Pokémon can evolve during your"
+	line "first turn or the turn you play it."
+	done
+
 DoubleKickName: ; 584bf (16:44bf)
 	text "Double Kick"
 	done

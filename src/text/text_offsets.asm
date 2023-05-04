@@ -2132,6 +2132,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NidorinaName                                       ; 0x0851
 	textpointer SupersonicName                                     ; 0x0852
 	textpointer MayInflictConfusionDescription                     ; 0x0853
+	textpointer AdaptiveEvolutionName
+	textpointer AdaptiveEvolutionDescription
 	textpointer DoubleKickName                                     ; 0x0854
 	textpointer NidorinaDescription                                ; 0x0855
 	textpointer NidoqueenName                                      ; 0x0856
