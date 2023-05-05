@@ -95,7 +95,9 @@ HandleDamageReductionExceptSubstatus2:
 	cp MR_MIME
 	jr z, .prevent_less_than_30_damage ; invisible wall
 	cp MAROWAK_LV26
-	jr z, .reduce_damage_by_20 ; battle armor
+	jr z, .reduce_damage_by_20 ; Battle Armor
+	cp KAKUNA
+	jr z, .reduce_damage_by_20 ; Exoskeleton
 	cp KABUTO
 	jr z, .halve_damage2 ; kabuto armor
 	ret

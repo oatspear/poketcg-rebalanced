@@ -2179,6 +2179,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AromatherapyDescription
 	textpointer SilverWhirlwindName
 	textpointer SilverWhirlwindDescription
+	textpointer PoisonEvolutionName
+	textpointer PoisonEvolutionDescription
+	textpointer ExoskeletonName
 	textpointer FoulOdorName                                       ; 0x0878
 	textpointer FoulOdorDescription                                ; 0x0879
 	textpointer GloomDescription                                   ; 0x087a

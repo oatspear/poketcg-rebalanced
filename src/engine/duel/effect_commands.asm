@@ -85,11 +85,6 @@ FoulOdorEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FoulOdorEffect
 	db  $00
 
-KakunaPoisonPowderEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Poison50PercentEffect
-	dbw EFFECTCMDTYPE_AI, KakunaPoisonPowder_AIEffect
-	db  $00
-
 LeechLifeEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, LeechLifeEffect
 	db  $00
@@ -103,6 +98,11 @@ ZubatSupersonicEffectCommands:
 	db  $00
 
 PoisonEvolutionEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PoisonEvolution_PreconditionsCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEvolution_PoisonEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PoisonEvolution_EvolveEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PoisonEvolution_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, PoisonEvolution_AISelectEffect
 	db  $00
 
 BeedrillTwineedleEffectCommands:

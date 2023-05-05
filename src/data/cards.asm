@@ -659,32 +659,33 @@ KakunaCard:
 	tx WeedleName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx HardenName ; name
-	tx HardenDescription ; description
+	; depends: HandleDamageReductionExceptSubstatus2
+	energy 0 ; energies
+	tx ExoskeletonName ; name
+	tx BattleArmorDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw HardenEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw BattleArmorEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
-	tx PoisonPowderName ; name
-	tx MayInflictPoisonDescription ; description
+	tx PoisonEvolutionName ; name
+	tx PoisonEvolutionDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw KakunaPoisonPowderEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw PoisonEvolutionEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 2 ; retreat cost
 	db WR_FIRE ; weakness
@@ -6762,6 +6763,7 @@ MarowakLv26Card:
 	; Treat the new Benched Pokémon as Basic Pokémon.
 
 	; attack 1
+	; depends: HandleDamageReductionExceptSubstatus2
 	energy 0 ; energies
 	tx BattleArmorName ; name
 	tx BattleArmorDescription ; description

@@ -122,12 +122,10 @@ PollenFrenzy_Status50PercentEffect:
 	jr nc, .tails
 ; heads
 	call ParalysisEffect
-	jr .poison
+	jp PoisonEffect
 .tails
 	call SleepEffect
-.poison
-	call PoisonEffect
-	ret
+	jp PoisonEffect
 
 ; If heads, defending Pokémon becomes asleep.
 ; If tails, defending Pokémon becomes poisoned.
@@ -135,6 +133,13 @@ SleepOrPoisonEffect:
 	ldtx de, AsleepIfHeadsPoisonedIfTailsText
 	call TossCoin_BankB
 	jp c, SleepEffect
+	jp PoisonEffect
+
+; Poisons the Defending Pokémon if an evolution card was chosen.
+PoisonEvolution_PoisonEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z ; skip if no evolution card was chosen
 	jp PoisonEffect
 
 ; ------------------------------------------------------------------------------
@@ -160,10 +165,19 @@ AdaptiveEvolution_AllowEvolutionEffect:
 	set CAN_EVOLVE_THIS_TURN_F, [hl]
 	ret
 
-; PoisonEvolution_EvolveEffect:
-; 	lb de, SEARCHEFFECT_CARD_ID, BEEDRILL
-; 	call LookForCardsInDeck
-; 	ret c
+PoisonEvolution_PreconditionsCheck:
+	call CheckIfDeckIsEmpty
+	ldtx hl, NoCardsLeftInTheDeckText
+	ret c
+	; ld a, DUELVARS_ARENA_CARD_FLAGS
+	; call GetTurnDuelistVariable
+	; ldtx hl, CannotBeUsedInTurnWhichWasPlayedText
+	; and CAN_EVOLVE_THIS_TURN
+	; scf
+	; ret z ; return if was played this turn
+	bank1call IsPrehistoricPowerActive
+	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
+	ret
 
 PoisonEvolution_PlayerSelectEffect:
 	ld a, $ff
@@ -193,18 +207,8 @@ PoisonEvolution_PlayerSelectEffect:
 ; Evolution card selected
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTemp_ffa0], a
-	call EmptyScreen
-	; TODO from this point onward - what to do with selected card
-	ldtx hl, ChoosePokemonToAttachEnergyCardText
-	call DrawWideTextBox_WaitForInput
-
-; choose a Pokemon in Play Area to attach card
-	bank1call HasAlivePokemonInPlayArea
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempPlayAreaLocation_ffa1], a
+	; xor a  ; PLAY_AREA_ARENA
+	; ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
 .play_sfx
@@ -213,7 +217,7 @@ PoisonEvolution_PlayerSelectEffect:
 
 .try_cancel
 ; Player tried exiting screen, if there are
-; any Basic Energy cards, Player is forced to select them.
+; any Beedrill cards, Player is forced to select them.
 ; otherwise, they can safely exit.
 	ld a, DUELVARS_CARD_LOCATIONS
 	call GetTurnDuelistVariable
@@ -223,11 +227,9 @@ PoisonEvolution_PlayerSelectEffect:
 	jr nz, .next_card
 	ld a, l
 	call GetCardIDFromDeckIndex
-	call GetCardType
-	and TYPE_ENERGY
-	jr z, .next_card
-	cp TYPE_ENERGY_DOUBLE_COLORLESS
-	jr c, .play_sfx
+	ld a, e
+	cp BEEDRILL
+	jr z, .play_sfx
 .next_card
 	inc l
 	ld a, l
@@ -237,6 +239,85 @@ PoisonEvolution_PlayerSelectEffect:
 
 	ld a, $ff
 	ldh [hTemp_ffa0], a
+	ret
+
+; selects the first Beedrill card in the Deck
+PoisonEvolution_AISelectEffect:
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z ; none found
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp BEEDRILL
+	jr nz, .loop_deck
+	ret
+
+; Adds the selected card to the turn holder's Hand (temporarily)
+; and then evolves the Active Pokémon using the selected card.
+PoisonEvolution_EvolveEffect:
+; check if a card was chosen from the deck
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	jr z, .done ; skip if no evolution card was chosen
+
+; add evolution card to the hand and skip showing it on screen
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+
+; proceed into Breeder-like evolution code
+	ldh a, [hTempCardIndex_ff9f]
+	push af
+; store deck index of evolution card in [hTempCardIndex_ff98]
+	ldh a, [hTemp_ffa0]
+	ldh [hTempCardIndex_ff98], a
+; store play area slot of the evolving card in [hTempPlayAreaLocation_ff9d]
+	; ldh a, [hTempPlayAreaLocation_ffa1]
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ff9d], a
+
+; load the evolving Pokémon card name to RAM
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld hl, wLoadedCard1Name
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call LoadTxRam2
+
+	call EvolvePokemonCard
+
+; load evolved Pokémon card name to RAM
+; TODO FIXME optimize: maybe unnecessary to load card again from EvolvePokemonCard
+	ldh a, [hTempCardIndex_ff98]
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld a, 18
+	call CopyCardNameAndLevel
+	xor a
+	ld [hl], a ; $0 character
+	ld hl, wTxRam2_b
+	ld [hli], a
+	ld [hl], a
+
+; display Pokemon picture and play sfx,
+; print the corresponding card names.
+	bank1call DrawLargePictureOfCard
+	ld a, $5e
+	call PlaySFX
+	ldtx hl, PokemonEvolvedIntoPokemonText
+	call DrawWideTextBox_WaitForInput
+; FIXME this is harmless, but probably turn off Pokémon Powers in general code
+; this is the one that changes hTempCardIndex_ff9f
+	bank1call OnPokemonPlayedInitVariablesAndPowers
+	pop af
+	ldh [hTempCardIndex_ff9f], a
+
+.done
+	call SyncShuffleDeck
 	ret
 
 ; ------------------------------------------------------------------------------
@@ -991,12 +1072,12 @@ LookForCardsInDeck:
 ;   hl: pointer to a "Choose X card text"
 ; example:
 ;   ldtx hl, ChooseBasicEnergyCardText
-DisplayPlayerDeckForSearch:
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, ChooseBasicEnergyCardText
-	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
-	ret
+; DisplayPlayerDeckForSearch:
+; 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+; 	ldtx hl, ChooseBasicEnergyCardText
+; 	ldtx de, DuelistDeckText
+; 	bank1call SetCardListHeaderText
+; 	ret
 
 ; ------------------------------------------------------------------------------
 
@@ -6731,6 +6812,7 @@ MagneticStormEffect: ; 2e7d5 (b:67d5)
 ; return carry if no cards in Deck
 Sprout_DeckCheck:
 EnergySpike_DeckCheck:
+DeckIsNotEmptyCheck:
 	call CheckIfDeckIsEmpty
 	ret
 

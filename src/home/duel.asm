@@ -869,10 +869,6 @@ EvolvePokemonCard:
 	or a
 	ret
 
-; never executed
-	scf
-	ret
-
 ; check if the turn holder's Pokemon card at e can evolve into the turn holder's Pokemon card d.
 ; e is the play area location offset (PLAY_AREA_*) of the Pokemon trying to evolve.
 ; d is the deck index (0-59) of the Pokemon card that was selected to be the evolution target.

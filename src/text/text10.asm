@@ -226,6 +226,22 @@ SilverWhirlwindDescription:
 	line "one of their Benched Pokémon."
 	done
 
+PoisonEvolutionName:
+	text "Poison Evolution"
+	done
+
+PoisonEvolutionDescription:
+	text "Search your deck for a card that"
+	line "evolves from this Pokémon and place"
+	line "it on this Pokémon. This counts as"
+	line "evolving this Pokémon. The"
+	line "Defending Pokémon is now Poisoned."
+	done
+
+ExoskeletonName:
+	text "Exoskeleton"
+	done
+
 FoulOdorName: ; 58c55 (16:4c55)
 	text "Foul Odor"
 	done
