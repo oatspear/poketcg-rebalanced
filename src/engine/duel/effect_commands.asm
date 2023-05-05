@@ -102,6 +102,9 @@ ZubatSupersonicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ZubatSupersonicEffect
 	db  $00
 
+PoisonEvolutionEffectCommands:
+	db  $00
+
 BeedrillTwineedleEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Twineedle_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, Twineedle_AIEffect
@@ -422,6 +425,13 @@ CowardiceEffectCommands:
 AdaptiveEvolutionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, AdaptiveEvolution_InitialEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, AdaptiveEvolution_AllowEvolutionEffect
+	db  $00
+
+SilverWhirlwindEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepOrPoisonEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect
+	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect
 	db  $00
 
 LaprasWaterGunEffectCommands:

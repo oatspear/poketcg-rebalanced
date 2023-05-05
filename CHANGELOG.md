@@ -30,7 +30,11 @@
 - New Pokémon Power: **Adaptive Evolution**: can evolve on the first turn.
 
 #### Butterfree
-- **Mega Drain**: reduced cost from (GGGG) to (GGG).
+- Increased HP from 70 to 80.
+- **Whirlwind**: removed.
+- **Mega Drain**: removed.
+- New attack: **Healing Wind** (C): heals 20 to all friendly Pokémon.
+- New attack: **Silver Whirlwind** (GCC): 30 damage, opponent switches Pokémon; if heads, defending Pokémon is also Asleep, if tails it is Poisoned.
 
 #### Weedle
 - New Pokémon Power: **Adaptive Evolution**: can evolve on the first turn.

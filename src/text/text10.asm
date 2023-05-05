@@ -214,11 +214,11 @@ AromatherapyDescription:
 	line "Pokémon."
 	done
 
-SilverWindName:
-	text "Silver Wind"
+SilverWhirlwindName:
+	text "Silver Whirlwind"
 	done
 
-SilverWindDescription:
+SilverWhirlwindDescription:
 	text "Flip a coin. If heads, the Defending"
 	line "Pokémon is Asleep. If tails, it is"
 	line "Poisoned. Then, your opponent"

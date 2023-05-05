@@ -551,7 +551,7 @@ ButterfreeCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db BUTTERFREE
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE2 ; stage
 	tx MetapodName ; pre-evo name
 
@@ -570,14 +570,14 @@ ButterfreeCard:
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy GRASS, 2, COLORLESS, 1 ; energies
-	tx SilverWindName ; name
-	tx SilverWindDescription ; description
+	energy GRASS, 1, COLORLESS, 2 ; energies
+	tx SilverWhirlwindName ; name
+	tx SilverWhirlwindDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw WhirlwindEffectCommands ; effect commands
-	db NONE ; flags 1
+	dw SilverWhirlwindEffectCommands ; effect commands
+	db INFLICT_POISON | INFLICT_SLEEP ; flags 1
 	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
 	db 0

@@ -258,6 +258,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ConfusionCheckRetreatText                          ; 0x00f8
 	textpointer PokemonsSleepCheckText                             ; 0x00f9
 	textpointer PoisonedIfHeadsConfusedIfTailsText                 ; 0x00fa
+	textpointer AsleepIfHeadsPoisonedIfTailsText
 	textpointer IfHeadsDoNotReceiveDamageOrEffectText              ; 0x00fb
 	textpointer IfHeadsOpponentCannotAttackText                    ; 0x00fc
 	textpointer AttackUnsuccessfulText                             ; 0x00fd
@@ -304,6 +305,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseBasicPokemonFromDeckText                     ; 0x0125
 	textpointer ChooseBasicEnergyCardText                          ; 0x0129
 	textpointer ChooseBasicPokemonText                             ; 0x012c
+	textpointer ChooseEvolvedPokemonFromDeckText
+	textpointer ChooseEvolvedPokemonText
 	textpointer ChooseGrassCardFromDeckText
 	textpointer ProcedureForEnergyTransferText                     ; 0x012d
 	textpointer ChoosePkmnToRemoveDamageCounterText                ; 0x0130
@@ -327,6 +330,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer KrabbyText                                         ; 0x0142
 	textpointer BasicPokemonDeckText                               ; 0x0143
 	textpointer BasicEnergyText                                    ; 0x0144
+	textpointer EvolvedPokemonText
 	textpointer GrassCardText
 	textpointer PeekWasUsedToLookInYourHandText                    ; 0x0145
 	textpointer CardPeekWasUsedOnText                              ; 0x0146
@@ -2173,8 +2177,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GloomName                                          ; 0x0877
 	textpointer AromatherapyName
 	textpointer AromatherapyDescription
-	textpointer SilverWindName
-	textpointer SilverWindDescription
+	textpointer SilverWhirlwindName
+	textpointer SilverWhirlwindDescription
 	textpointer FoulOdorName                                       ; 0x0878
 	textpointer FoulOdorDescription                                ; 0x0879
 	textpointer GloomDescription                                   ; 0x087a

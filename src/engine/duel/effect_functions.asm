@@ -129,6 +129,14 @@ PollenFrenzy_Status50PercentEffect:
 	call PoisonEffect
 	ret
 
+; If heads, defending Pokémon becomes asleep.
+; If tails, defending Pokémon becomes poisoned.
+SleepOrPoisonEffect:
+	ldtx de, AsleepIfHeadsPoisonedIfTailsText
+	call TossCoin_BankB
+	jp c, SleepEffect
+	jp PoisonEffect
+
 ; ------------------------------------------------------------------------------
 ; Coin Flip
 ; ------------------------------------------------------------------------------
@@ -157,10 +165,81 @@ AdaptiveEvolution_AllowEvolutionEffect:
 ; 	call LookForCardsInDeck
 ; 	ret c
 
-; ------------------------------------------------------------------------------
+PoisonEvolution_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
 
-CommentedOut_2c086: ; 2c086 (b:4086)
+; search cards in Deck
+	call CreateDeckCardList
+	ldtx hl, ChooseEvolvedPokemonFromDeckText
+	ldtx bc, EvolvedPokemonText
+	lb de, SEARCHEFFECT_CARD_ID, BEEDRILL
+	call LookForCardsInDeck
+	ret c
+
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, ChooseEvolvedPokemonText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+
+.select_card
+	bank1call DisplayCardList
+	jr c, .try_cancel
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp BEEDRILL
+	jr nz, .select_card ; not a valid Evolution card
+
+; Evolution card selected
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	call EmptyScreen
+	; TODO from this point onward - what to do with selected card
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	call DrawWideTextBox_WaitForInput
+
+; choose a Pokemon in Play Area to attach card
+	bank1call HasAlivePokemonInPlayArea
+.loop_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
+
+.play_sfx
+	call Func_3794
+	jr .select_card
+
+.try_cancel
+; Player tried exiting screen, if there are
+; any Basic Energy cards, Player is forced to select them.
+; otherwise, they can safely exit.
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.loop_deck
+	ld a, [hl]
+	cp CARD_LOCATION_DECK
+	jr nz, .next_card
+	ld a, l
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	and TYPE_ENERGY
+	jr z, .next_card
+	cp TYPE_ENERGY_DOUBLE_COLORLESS
+	jr c, .play_sfx
+.next_card
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_deck
+	; can exit
+
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+
+; ------------------------------------------------------------------------------
 
 Func_2c087: ; 2c087 (b:4087)
 	xor a
@@ -745,6 +824,181 @@ HealingWind_PlayAreaHealEffect:
 	ret
 
 ; ------------------------------------------------------------------------------
+; Compound Attacks
+; ------------------------------------------------------------------------------
+
+
+; ------------------------------------------------------------------------------
+; Deck Search
+; ------------------------------------------------------------------------------
+
+; searches through Deck in wDuelTempList looking for
+; a certain card or cards, and prints text depending
+; on whether at least one was found.
+; if none were found, asks the Player whether to look
+; in the Deck anyway, and returns carry if No is selected.
+; uses SEARCHEFFECT_* as input which determines what to search for:
+;	SEARCHEFFECT_CARD_ID = search for card ID in e
+;	SEARCHEFFECT_NIDORAN = search for either NidoranM or NidoranF
+;	SEARCHEFFECT_BASIC_POKEMON = search for any Basic Pokemon
+;	SEARCHEFFECT_BASIC_ENERGY = search for any Basic Energy
+;	SEARCHEFFECT_POKEMON = search for any Pokemon card
+;	SEARCHEFFECT_GRASS_CARD = search for any Grass card
+; input:
+;	  d = SEARCHEFFECT_* constant
+;	  e = (optional) card ID to search for in deck
+;	  hl = text to print if Deck has card(s)
+; output:
+;	  carry set if refused to look at deck
+LookForCardsInDeck:
+	push hl
+	push bc
+	ld a, [wDuelTempList]
+	cp $ff
+	jr z, .none_in_deck
+	ld a, d
+	ld hl, .search_table
+	call JumpToFunctionInTable
+	jr c, .none_in_deck
+	pop bc
+	pop hl
+	call DrawWideTextBox_WaitForInput
+	or a
+	ret
+
+.none_in_deck
+	pop hl
+	call LoadTxRam2
+	pop hl
+	ldtx hl, ThereIsNoInTheDeckText
+	call DrawWideTextBox_WaitForInput
+	ldtx hl, WouldYouLikeToCheckTheDeckText
+	call YesOrNoMenuWithText_SetCursorToYes
+	ret
+
+.search_table
+	dw .SearchDeckForCardID
+	dw .SearchDeckForNidoran
+	dw .SearchDeckForBasicPokemon
+	dw .SearchDeckForBasicEnergy
+	dw .SearchDeckForPokemon
+	dw .SearchDeckForGrassCard
+
+.set_carry
+	scf
+	ret
+
+; returns carry if no card with same card ID as e is found in Deck
+.SearchDeckForCardID
+	ld hl, wDuelTempList
+.loop_deck_e
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	push de
+	call GetCardIDFromDeckIndex
+	ld a, e
+	pop de
+	cp e
+	jr nz, .loop_deck_e
+	or a
+	ret
+
+; returns carry if no NidoranM or NidoranF card is found in Deck
+.SearchDeckForNidoran
+	ld hl, wDuelTempList
+.loop_deck_nidoran
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp NIDORANF
+	jr z, .found_nidoran
+	cp NIDORANM
+	jr nz, .loop_deck_nidoran
+.found_nidoran
+	or a
+	ret
+
+; returns carry if no Basic Pokemon is found in Deck
+.SearchDeckForBasicPokemon
+	ld hl, wDuelTempList
+.loop_deck_basic_pkmn
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_PKMN + 1
+	jr nc, .loop_deck_basic_pkmn  ; not a Pokemon
+	ld a, [wLoadedCard2Stage]
+	or a  ; BASIC
+	jr nz, .loop_deck_basic_pkmn
+	ret
+
+; returns carry if no Basic Energy cards are found in Deck
+.SearchDeckForBasicEnergy
+	ld hl, wDuelTempList
+.loop_deck_energy
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_ENERGY_DOUBLE_COLORLESS
+	jr z, .loop_deck_energy
+	and TYPE_ENERGY
+	jr z, .loop_deck_energy
+	or a
+	ret
+
+; returns carry if no Pokemon cards are found in Deck
+.SearchDeckForPokemon
+	ld hl, wDuelTempList
+.loop_deck_pkmn
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_ENERGY
+	jr nc, .loop_deck_pkmn
+	or a
+	ret
+
+; returns carry if no Grass cards are found in Deck
+.SearchDeckForGrassCard
+	ld hl, wDuelTempList
+.loop_deck_grass
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_ENERGY_GRASS
+	jr z, .found_grass_card
+	cp TYPE_PKMN_GRASS
+	jr nz, .loop_deck_grass
+.found_grass_card
+	or a
+	ret
+
+; Displays a list of all cards currently in the Player's deck.
+; Expects the Player to choose one card.
+; Meant to be called right after LookForCardsInDeck.
+; input:
+;   hl: pointer to a "Choose X card text"
+; example:
+;   ldtx hl, ChooseBasicEnergyCardText
+DisplayPlayerDeckForSearch:
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, ChooseBasicEnergyCardText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+	ret
+
+; ------------------------------------------------------------------------------
 
 CreateSupporterCardListFromDiscardPile:
 	ld c, TYPE_TRAINER_SUPPORTER
@@ -917,158 +1171,6 @@ CheckIfDeckIsEmpty: ; 2c2e0 (b:42e0)
 	ldtx hl, NoCardsLeftInTheDeckText
 	cp DECK_SIZE
 	ccf
-	ret
-
-; searches through Deck in wDuelTempList looking for
-; a certain card or cards, and prints text depending
-; on whether at least one was found.
-; if none were found, asks the Player whether to look
-; in the Deck anyway, and returns carry if No is selected.
-; uses SEARCHEFFECT_* as input which determines what to search for:
-;	SEARCHEFFECT_CARD_ID = search for card ID in e
-;	SEARCHEFFECT_NIDORAN = search for either NidoranM or NidoranF
-;	SEARCHEFFECT_BASIC_POKEMON = search for any Basic Pokemon
-;	SEARCHEFFECT_BASIC_ENERGY = search for any Basic Energy
-;	SEARCHEFFECT_POKEMON = search for any Pokemon card
-;	SEARCHEFFECT_GRASS_CARD = search for any Grass card
-; input:
-;	  d = SEARCHEFFECT_* constant
-;	  e = (optional) card ID to search for in deck
-;	  hl = text to print if Deck has card(s)
-; output:
-;	  carry set if refused to look at deck
-LookForCardsInDeck:
-	push hl
-	push bc
-	ld a, [wDuelTempList]
-	cp $ff
-	jr z, .none_in_deck
-	ld a, d
-	ld hl, .search_table
-	call JumpToFunctionInTable
-	jr c, .none_in_deck
-	pop bc
-	pop hl
-	call DrawWideTextBox_WaitForInput
-	or a
-	ret
-
-.none_in_deck
-	pop hl
-	call LoadTxRam2
-	pop hl
-	ldtx hl, ThereIsNoInTheDeckText
-	call DrawWideTextBox_WaitForInput
-	ldtx hl, WouldYouLikeToCheckTheDeckText
-	call YesOrNoMenuWithText_SetCursorToYes
-	ret
-
-.search_table
-	dw .SearchDeckForCardID
-	dw .SearchDeckForNidoran
-	dw .SearchDeckForBasicPokemon
-	dw .SearchDeckForBasicEnergy
-	dw .SearchDeckForPokemon
-	dw .SearchDeckForGrassCard
-
-.set_carry
-	scf
-	ret
-
-; returns carry if no card with same card ID as e is found in Deck
-.SearchDeckForCardID
-	ld hl, wDuelTempList
-.loop_deck_e
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	push de
-	call GetCardIDFromDeckIndex
-	ld a, e
-	pop de
-	cp e
-	jr nz, .loop_deck_e
-	or a
-	ret
-
-; returns carry if no NidoranM or NidoranF card is found in Deck
-.SearchDeckForNidoran
-	ld hl, wDuelTempList
-.loop_deck_nidoran
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp NIDORANF
-	jr z, .found_nidoran
-	cp NIDORANM
-	jr nz, .loop_deck_nidoran
-.found_nidoran
-	or a
-	ret
-
-; returns carry if no Basic Pokemon is found in Deck
-.SearchDeckForBasicPokemon
-	ld hl, wDuelTempList
-.loop_deck_basic_pkmn
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
-	jr nc, .loop_deck_basic_pkmn  ; not a Pokemon
-	ld a, [wLoadedCard2Stage]
-	or a  ; BASIC
-	jr nz, .loop_deck_basic_pkmn
-	ret
-
-; returns carry if no Basic Energy cards are found in Deck
-.SearchDeckForBasicEnergy
-	ld hl, wDuelTempList
-.loop_deck_energy
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	cp TYPE_ENERGY_DOUBLE_COLORLESS
-	jr z, .loop_deck_energy
-	and TYPE_ENERGY
-	jr z, .loop_deck_energy
-	or a
-	ret
-
-; returns carry if no Pokemon cards are found in Deck
-.SearchDeckForPokemon
-	ld hl, wDuelTempList
-.loop_deck_pkmn
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	cp TYPE_ENERGY
-	jr nc, .loop_deck_pkmn
-	or a
-	ret
-
-; returns carry if no Grass cards are found in Deck
-.SearchDeckForGrassCard
-	ld hl, wDuelTempList
-.loop_deck_grass
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	cp TYPE_ENERGY_GRASS
-	jr z, .found_grass_card
-	cp TYPE_PKMN_GRASS
-	jr nz, .loop_deck_grass
-.found_grass_card
-	or a
 	ret
 
 ; handles the Player selection of attack
@@ -4946,7 +5048,7 @@ Scavenge_AISelectEffect: ; 2df2d (b:5f2d)
 
 Scavenge_PlayerSelectTrainerEffect: ; 2df46 (b:5f46)
 	call CreateItemCardListFromDiscardPile
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, PleaseSelectCardText
 	ldtx de, PlayerDiscardPileText
 	bank1call SetCardListHeaderText
@@ -5373,7 +5475,7 @@ CallForFriend_PlayerSelectEffect: ; 2e110 (b:6110)
 	ret c
 
 ; draw Deck list interface and print text
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseBasicPokemonText
 	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
@@ -5481,7 +5583,7 @@ Sprout_PlayerSelectEffect:
 	ret c
 
 ; draw Deck list interface and print text
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseGrassCardFromDeckText
 	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
@@ -6644,7 +6746,7 @@ EnergySpike_PlayerSelectEffect: ; 2e87b (b:687b)
 	call LookForCardsInDeck
 	ret c
 
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseBasicEnergyCardText
 	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
@@ -7837,7 +7939,7 @@ Helper_SelectEnergyFromHand:
 ; create list with all Energy cards in hand
 	ld c, $01
 	call Helper_CreateEnergyCardListFromHand
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 
 ; handle Player selection (from hand)
 	ldtx hl, ChooseBasicEnergyCardText
@@ -8507,7 +8609,7 @@ EnergyRetrieval_PlayerHandSelection: ; 2f2a0 (b:72a0)
 	call CreateHandCardList
 	ldh a, [hTempCardIndex_ff9f]
 	call RemoveCardFromDuelTempList
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	bank1call DisplayCardList
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTempList], a
@@ -8590,7 +8692,7 @@ EnergySearch_PlayerSelection: ; 2f328 (b:7328)
 	call LookForCardsInDeck
 	ret c ; skip showing deck
 
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseBasicEnergyCardText
 	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
@@ -8759,7 +8861,7 @@ ItemFinder_PlayerSelection: ; 2f44a (b:744a)
 ; cards were selected to discard from hand.
 ; now to choose a Trainer card from Discard Pile.
 	call CreateTrainerCardListFromDiscardPile
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseCardToPlaceInHandText
 	ldtx de, PlayerDiscardPileText
 	bank1call SetCardListHeaderText
@@ -8915,7 +9017,7 @@ ComputerSearch_PlayerDiscardHandSelection: ; 2f52a (b:752a)
 
 ComputerSearch_PlayerDeckSelection: ; 2f52e (b:752e)
 	call CreateDeckCardList
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseCardToPlaceInHandText
 	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
@@ -9153,7 +9255,7 @@ PokemonFlute_PlayerSelection: ; 2f672 (b:7672)
 	call CreateBasicPokemonCardListFromDiscardPile
 
 ; display selection screen and store Player's selection
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChoosePokemonToPlaceInPlayText
 	ldtx de, PlayerDiscardPileText
 	bank1call SetCardListHeaderText
@@ -9196,7 +9298,7 @@ PokemonBreeder_HandPlayAreaCheck: ; 2f6b3 (b:76b3)
 PokemonBreeder_PlayerSelection: ; 2f6c1 (b:76c1)
 ; create hand list of playable Stage2 cards
 	call CreatePlayableStage2PokemonCardListFromHand
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 
 ; handle Player selection of Stage2 card
 	ldtx hl, PleaseSelectCardText
@@ -9482,7 +9584,7 @@ PokemonTrader_PlayerHandSelection: ; 2f838 (b:7838)
 
 ; create list with all Pokemon cards in hand
 	call CreatePokemonCardListFromHand
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 
 ; handle Player selection
 	ldtx hl, ChooseCardToSwitchText
@@ -9504,7 +9606,7 @@ PokemonTrader_PlayerDeckSelection: ; 2f853 (b:7853)
 	ldtx hl, ChooseBasicOrEvolutionPokemonCardFromDeckText
 	call DrawWideTextBox_WaitForInput
 	call CreateDeckCardList
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChoosePokemonCardText
 	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
@@ -9913,7 +10015,7 @@ PokeBall_PlayerSelection: ; 2fab9 (b:7ab9)
 	jr c, .no_pkmn ; return if Player chose not to check deck
 
 ; handle input
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChoosePokemonCardText
 	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
@@ -9989,7 +10091,7 @@ Recycle_PlayerSelection: ; 2fb41 (b:7b41)
 	jr nc, .tails
 
 	call CreateDiscardPileCardList
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, PleaseSelectCardText
 	ldtx de, PlayerDiscardPileText
 	bank1call SetCardListHeaderText
@@ -10042,7 +10144,7 @@ Revive_PlayerSelection: ; 2fb93 (b:7b93)
 	ldtx hl, ChooseBasicPokemonToPlaceOnBenchText
 	call DrawWideTextBox_WaitForInput
 	call CreateBasicPokemonCardListFromDiscardPile
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 
 ; display screen to select Pokemon
 	ldtx hl, PleaseSelectCardText
@@ -10544,7 +10646,7 @@ HandlePlayerSelection2HandCards: ; 2fe3a (b:7e3a)
 	pop hl
 .loop
 	push hl
-	bank1call Func_5591
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	pop hl
 	bank1call SetCardListInfoBoxText
 	push hl

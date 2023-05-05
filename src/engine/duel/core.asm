@@ -3252,7 +3252,7 @@ SetCardListInfoBoxText:
 	ld [wCardListInfoBoxText + 1], a
 	ret
 
-Func_5591:
+InitAndDrawCardListScreenLayout_MenuTypeSelectCheck:
 	call InitAndDrawCardListScreenLayout
 	ld a, SELECT_CHECK
 	ld [wCardListItemSelectionMenuType], a

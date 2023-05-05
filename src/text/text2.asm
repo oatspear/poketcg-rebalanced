@@ -29,6 +29,11 @@ PoisonedIfHeadsConfusedIfTailsText: ; 380ed (e:40ed)
 	line "and Confused if Tails."
 	done
 
+AsleepIfHeadsPoisonedIfTailsText:
+	text "Opponent is Asleep if Heads,"
+	line "and Poisoned if Tails."
+	done
+
 IfHeadsDoNotReceiveDamageOrEffectText: ; 38124 (e:4124)
 	text "If Heads, do not receive damage"
 	line "or effect of opponent's next Attack!"
@@ -258,6 +263,16 @@ ChooseBasicPokemonText: ; 38a83 (e:4a83)
 	line "Pokémon."
 	done
 
+ChooseEvolvedPokemonFromDeckText:
+	text "Choose an Evolution"
+	line "from the Deck."
+	done
+
+ChooseEvolvedPokemonText:
+	text "Choose a valid"
+	line "Evolution."
+	done
+
 ChooseGrassCardFromDeckText:
 	text "Choose a <GRASS> Card"
 	line "from the Deck."
@@ -426,6 +441,10 @@ BasicPokemonDeckText: ; 392f8 (e:52f8)
 
 BasicEnergyText: ; 3930a (e:530a)
 	text "Basic Energy"
+	done
+
+EvolvedPokemonText:
+	text "Evolved Pkmn"
 	done
 
 GrassCardText:
