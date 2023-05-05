@@ -214,6 +214,18 @@ AromatherapyDescription:
 	line "Pokémon."
 	done
 
+SilverWindName:
+	text "Silver Wind"
+	done
+
+SilverWindDescription:
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is Asleep. If tails, it is"
+	line "Poisoned. Then, your opponent"
+	line "switches their Active Pokémon with"
+	line "one of their Benched Pokémon."
+	done
+
 FoulOdorName: ; 58c55 (16:4c55)
 	text "Foul Odor"
 	done

@@ -556,11 +556,25 @@ ButterfreeCard:
 	tx MetapodName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx WhirlwindName ; name
-	tx OpponentSwitchesPokemonDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx HealingWindName ; name
+	tx AromatherapyDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw AromatherapyEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
+	db NONE ; flags 3
+	db 1
+	db ATK_ANIM_RECOVER ; animation
+
+	; attack 2
+	energy GRASS, 2, COLORLESS, 1 ; energies
+	tx SilverWindName ; name
+	tx SilverWindDescription ; description
+	dw NONE ; description (cont)
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw WhirlwindEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -568,20 +582,6 @@ ButterfreeCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_WHIRLWIND ; animation
-
-	; attack 2
-	energy GRASS, 3 ; energies
-	tx MegaDrainName ; name
-	tx MegaDrainDescription ; description
-	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MegaDrainEffectCommands ; effect commands
-	db NONE ; flags 1
-	db HEAL_USER ; flags 2
-	db NONE ; flags 3
-	db 2
-	db ATK_ANIM_DRAIN ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
