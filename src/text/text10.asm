@@ -231,11 +231,11 @@ PoisonEvolutionName:
 	done
 
 PoisonEvolutionDescription:
-	text "Search your deck for a card that"
-	line "evolves from this Pokémon and place"
-	line "it on this Pokémon. This counts as"
-	line "evolving this Pokémon. The"
-	line "Defending Pokémon is now Poisoned."
+	text "The Defending Pokémon is now"
+	line "Poisoned. Search your deck for a"
+	line "card that evolves from this Pokémon"
+	line "and place it on this Pokémon. This"
+	line "counts as evolving this Pokémon."
 	done
 
 ExoskeletonName:

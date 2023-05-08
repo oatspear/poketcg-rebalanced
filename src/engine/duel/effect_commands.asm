@@ -99,7 +99,7 @@ ZubatSupersonicEffectCommands:
 
 PoisonEvolutionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PoisonEvolution_PreconditionsCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEvolution_PoisonEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PoisonEvolution_EvolveEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PoisonEvolution_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, PoisonEvolution_AISelectEffect
