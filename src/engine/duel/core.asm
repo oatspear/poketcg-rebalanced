@@ -7830,8 +7830,6 @@ SetAdaptiveEvolutionPokemonCanEvolve:
 	ld a, e
 	cp CATERPIE
 	jr z, .can_evolve
-	cp METAPOD
-	jr z, .can_evolve
 	cp WEEDLE
 	jr nz, .next
 .can_evolve

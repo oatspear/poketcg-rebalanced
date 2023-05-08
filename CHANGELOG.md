@@ -26,8 +26,10 @@
 - New Pokémon Power: **Adaptive Evolution**: can evolve on the first turn.
 
 #### Metapod
+- **Stiffen**: removed.
 - **Stun Spore**: removed.
-- New Pokémon Power: **Adaptive Evolution**: can evolve on the first turn.
+- New attack: **Harden** (C): prevents 30 or less damage.
+- New attack: **Hatch** (GC): heal 30 damage and status, search deck for Butterfree and evolve.
 
 #### Butterfree
 - Increased HP from 70 to 80.
@@ -41,6 +43,10 @@
 
 #### Kakuna
 - Reduced HP from 80 to 70.
+- **Stiffen**: removed.
+- **Poison Powder**: removed.
+- New Pokémon Power: **Exoskeleton** reduces damage taken by 20.
+- New attack: **Poison Evolution** (GC): Poison the target; search deck for Beedrill and evolve.
 
 #### Beedrill
 - **Twineedle**: reduced cost from (CCC) to (CC) and damage from 30x to 20x.

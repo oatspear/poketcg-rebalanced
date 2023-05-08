@@ -504,22 +504,7 @@ MetapodCard:
 	tx CaterpieName ; pre-evo name
 
 	; attack 1
-	; depends: SetAdaptiveEvolutionPokemonCanEvolve
-	energy 0 ; energies
-	tx AdaptiveEvolutionName ; name
-	tx AdaptiveEvolutionDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw AdaptiveEvolutionEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx HardenName ; name
 	tx HardenDescription ; description
 	dw NONE ; description (cont)
@@ -531,6 +516,21 @@ MetapodCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_NONE ; animation
+
+	; attack 2
+	energy GRASS, 1, COLORLESS, 1 ; energies
+	tx HatchName ; name
+	tx HatchDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw HardenEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
 
 	db 2 ; retreat cost
 	db WR_FIRE ; weakness
@@ -674,7 +674,7 @@ KakunaCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy GRASS, 2 ; energies
+	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx PoisonEvolutionName ; name
 	tx PoisonEvolutionDescription ; description
 	dw NONE ; description (cont)
@@ -1879,7 +1879,7 @@ MukCard:
 	energy 0 ; energies
 	tx ToxicGasName ; name
 	tx ToxicGasDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw MukToxicGasEffectCommands ; effect commands

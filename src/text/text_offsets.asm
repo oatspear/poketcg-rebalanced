@@ -2179,6 +2179,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AromatherapyDescription
 	textpointer SilverWhirlwindName
 	textpointer SilverWhirlwindDescription
+	textpointer HatchName
+	textpointer HatchDescription
 	textpointer PoisonEvolutionName
 	textpointer PoisonEvolutionDescription
 	textpointer ExoskeletonName

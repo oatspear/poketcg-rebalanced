@@ -165,31 +165,45 @@ AdaptiveEvolution_AllowEvolutionEffect:
 	set CAN_EVOLVE_THIS_TURN_F, [hl]
 	ret
 
-PoisonEvolution_PreconditionsCheck:
-	call CheckIfDeckIsEmpty
-	ldtx hl, NoCardsLeftInTheDeckText
-	ret c
+; PoisonEvolution_PreconditionsCheck:
+	; call CheckIfDeckIsEmpty
+	; ret
 	; ld a, DUELVARS_ARENA_CARD_FLAGS
 	; call GetTurnDuelistVariable
 	; ldtx hl, CannotBeUsedInTurnWhichWasPlayedText
 	; and CAN_EVOLVE_THIS_TURN
 	; scf
 	; ret z ; return if was played this turn
-	bank1call IsPrehistoricPowerActive
-	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
-	ret
+
+Hatch_PlayerSelectEffect:
+	ld a, BUTTERFREE
+	jr EvolutionFromDeck_PlayerSelectEffect
 
 PoisonEvolution_PlayerSelectEffect:
-	ld a, $ff
+	ld a, BEEDRILL
+	; jr EvolutionFromDeck_PlayerSelectEffect
+	; fallthrough
+
+; Allows the Player to select a card with given ID in the deck.
+; input:
+;   a: ID of the card to look for (e.g. BEEDRILL)
+EvolutionFromDeck_PlayerSelectEffect:
+; temporary storage for card ID
 	ldh [hTemp_ffa0], a
+
+	bank1call IsPrehistoricPowerActive
+	; ldtx hl, UnableToEvolveDueToPrehistoricPowerText
+	jr c, .none_in_deck
 
 ; search cards in Deck
 	call CreateDeckCardList
 	ldtx hl, ChooseEvolvedPokemonFromDeckText
 	ldtx bc, EvolvedPokemonText
-	lb de, SEARCHEFFECT_CARD_ID, BEEDRILL
+	ldh a, [hTemp_ffa0]
+	ld d, SEARCHEFFECT_CARD_ID
+	ld e, a
 	call LookForCardsInDeck
-	ret c
+	jr c, .none_in_deck
 
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseEvolvedPokemonText
@@ -199,9 +213,9 @@ PoisonEvolution_PlayerSelectEffect:
 .select_card
 	bank1call DisplayCardList
 	jr c, .try_cancel
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp BEEDRILL
+	call GetCardIDFromDeckIndex  ; result (ID) in e
+	ldh a, [hTemp_ffa0]
+	cp e
 	jr nz, .select_card ; not a valid Evolution card
 
 ; Evolution card selected
@@ -226,9 +240,9 @@ PoisonEvolution_PlayerSelectEffect:
 	cp CARD_LOCATION_DECK
 	jr nz, .next_card
 	ld a, l
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp BEEDRILL
+	call GetCardIDFromDeckIndex  ; result (ID) in e
+	ldh a, [hTemp_ffa0]
+	cp e
 	jr z, .play_sfx
 .next_card
 	inc l
@@ -236,13 +250,34 @@ PoisonEvolution_PlayerSelectEffect:
 	cp DECK_SIZE
 	jr c, .loop_deck
 	; can exit
-
+.none_in_deck
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 	ret
 
-; selects the first Beedrill card in the Deck
+Hatch_AISelectEffect:
+	ld a, BUTTERFREE
+	jr EvolutionFromDeck_AISelectEffect
+
 PoisonEvolution_AISelectEffect:
+	ld a, BEEDRILL
+	; jr EvolutionFromDeck_AISelectEffect
+	; fallthrough
+
+; selects the first suitable card in the Deck
+; input:
+;  a: ID of the card to look for
+EvolutionFromDeck_AISelectEffect:
+; temporary storage of card ID
+	ldh [hTemp_ffa0], a
+
+	bank1call IsPrehistoricPowerActive
+	jr nc, .search
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+
+.search
 	call CreateDeckCardList
 	ld hl, wDuelTempList
 .loop_deck
@@ -250,15 +285,25 @@ PoisonEvolution_AISelectEffect:
 	ldh [hTemp_ffa0], a
 	cp $ff
 	ret z ; none found
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp BEEDRILL
+	call GetCardIDFromDeckIndex  ; result (ID) in e
+	ldh a, [hTemp_ffa0]
+	cp e
 	jr nz, .loop_deck
 	ret
 
+; Evolves and heals the user.
+Hatch_EvolveEffect:
+	ld e, 30
+	call HealUserHP_NoAnimation
+	call ClearAllStatusConditions
+	jr EvolutionFromDeck_EvolveEffect
+
+PoisonEvolution_EvolveEffect:
+	; fallthrough
+
 ; Adds the selected card to the turn holder's Hand (temporarily)
 ; and then evolves the Active Pokémon using the selected card.
-PoisonEvolution_EvolveEffect:
+EvolutionFromDeck_EvolveEffect:
 ; check if a card was chosen from the deck
 	ldh a, [hTemp_ffa0]
 	cp $ff
@@ -754,6 +799,26 @@ ApplyAndAnimateHPRecovery:
 .skip_cap
 	ld [hl], e ; apply new HP to arena card
 	bank1call WaitAttackAnimation
+	ret
+
+; input:
+;   e: amount to heal
+HealUserHP_NoAnimation:
+	push de
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	or a
+	pop de
+	ret z ; no damage counters
+
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	add e
+	cp c  ; c contains max HP from GetCardDamageAndMaxHP
+	jr c, .store
+	ld a, c  ; cap HP
+.store
+	ld [hl], a
 	ret
 
 ; heals amount of damage in register e for card in

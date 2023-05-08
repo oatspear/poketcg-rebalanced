@@ -226,6 +226,18 @@ SilverWhirlwindDescription:
 	line "one of their Benched Pokémon."
 	done
 
+HatchName:
+	text "Hatch"
+	done
+
+HatchDescription:
+	text "Heal 30 damage from this Pokémon and"
+	line "remove all Special Conditions on it."
+	line "Then, search your deck for a card"
+	line "that evolves from this Pokémon and"
+	line "attach it to this Pokémon."
+	done
+
 PoisonEvolutionName:
 	text "Poison Evolution"
 	done
@@ -234,8 +246,7 @@ PoisonEvolutionDescription:
 	text "The Defending Pokémon is now"
 	line "Poisoned. Search your deck for a"
 	line "card that evolves from this Pokémon"
-	line "and place it on this Pokémon. This"
-	line "counts as evolving this Pokémon."
+	line "and attach it to this Pokémon."
 	done
 
 ExoskeletonName:
@@ -534,9 +545,7 @@ ToxicGasName: ; 596cc (16:56cc)
 
 ToxicGasDescription: ; 596d7 (16:56d7)
 	text "Ignore all Pokémon Powers other"
-	line "than Toxic Gases. This power stops"
-	line "working while Muk is Asleep,"
-	line "Confused, or Paralyzed."
+	line "than Toxic Gases."
 	done
 
 MukDescription: ; 59750 (16:5750)
