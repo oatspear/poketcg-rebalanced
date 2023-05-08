@@ -5317,6 +5317,7 @@ DiscardOpponentEnergyIfHeads_50PercentEffect:
 	ldtx de, IfHeadsDiscard1EnergyFromTargetText
 	call TossCoin_BankB
 	ldh [hTemp_ffa0], a
+	or a  ; reset carry, otherwise heads cancels the attack
 	ret
 
 DiscardOpponentEnergyIfHeads_PlayerSelectEffect:
