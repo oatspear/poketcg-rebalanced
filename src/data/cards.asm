@@ -515,7 +515,7 @@ MetapodCard:
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_PROTECT ; animation
 
 	; attack 2
 	energy GRASS, 1, COLORLESS, 1 ; energies
