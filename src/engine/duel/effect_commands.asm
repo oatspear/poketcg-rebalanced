@@ -112,16 +112,6 @@ PoisonEvolutionEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, PoisonEvolution_AISelectEffect
 	db  $00
 
-BeedrillTwineedleEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Twineedle_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, Twineedle_AIEffect
-	db  $00
-
-BeedrillPoisonStingEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Poison50PercentEffect
-	dbw EFFECTCMDTYPE_AI, BeedrillPoisonSting_AIEffect
-	db  $00
-
 KoffingFoulGasEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FoulGas_PoisonOrConfusionEffect
 	dbw EFFECTCMDTYPE_AI, FoulGas_AIEffect
@@ -145,9 +135,9 @@ NidokingThrashEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Thrash_AIEffect
 	db  $00
 
-NidokingToxicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Toxic_DoublePoisonEffect
-	dbw EFFECTCMDTYPE_AI, Toxic_AIEffect
+ToxicEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoublePoisonEffect
+	; dbw EFFECTCMDTYPE_AI, Toxic_AIEffect
 	db  $00
 
 NidoqueenBoyfriendsEffectCommands:
@@ -179,18 +169,19 @@ NidorinaDoubleKickEffectCommands:
 ;	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
 ;	db  $00
 
-MarowakBonemerangEffectCommands:
-;	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX20X10_MultiplierEffect
-;	dbw EFFECTCMDTYPE_AI, DoubleAttackX20X10_AIEffect
-;	db  $00
+TwineedleEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX20X10_MultiplierEffect
+	dbw EFFECTCMDTYPE_AI, DoubleAttackX20X10_AIEffect
+	db  $00
 
+MarowakBonemerangEffectCommands:
 NidorinoDoubleKickEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX30_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
 	db  $00
 
-MegaDrainEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MegaDrainEffect
+Heal20DamageEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageEffect
 	db  $00
 
 WeedlePoisonStingEffectCommands:
@@ -204,6 +195,7 @@ IvysaurPoisonWhipEffectCommands:
 	db  $00
 
 LeechSeedEffectCommands:
+Heal10DamageEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal10DamageEffect
 	db  $00
 
@@ -1120,10 +1112,6 @@ PorygonConversion2EffectCommands:
 
 ChanseyScrunchEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ScrunchEffect
-	db  $00
-
-ChanseyDoubleEdgeEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ChanseyDoubleEdgeEffect
 	db  $00
 
 RaticateSuperFangEffectCommands:

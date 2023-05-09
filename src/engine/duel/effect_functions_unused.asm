@@ -354,3 +354,22 @@ Old_ProfessorOakEffect:
 	jr nz, .draw_loop
 .done
 	ret
+
+
+MegaDrainEffect: ; 2cb0f (b:4b0f)
+	ld hl, wDealtDamage
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	srl h
+	rr l
+	bit 0, l
+	jr z, .rounded
+	; round up to nearest 10
+	ld de, 10 / 2
+	add hl, de
+.rounded
+	ld e, l
+	ld d, h
+	call ApplyAndAnimateHPRecovery
+	ret

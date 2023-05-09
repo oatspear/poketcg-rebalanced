@@ -1305,24 +1305,28 @@ SolarPowerName: ; 576f8 (15:76f8)
 	done
 
 SolarPowerDescription: ; 57705 (15:7705)
-	text "Once during your turn (before your"
-	line "attack), you may use this power."
-	line "Your Active Pokémon and the"
-	line "Defending Pokémon are no longer"
-	line "Asleep, Confused, Paralyzed, or"
-	line "Poisoned."
+	text "Once during your turn, you may use"
+	line "this power. Your Active Pokémon and"
+	line "the Defending Pokémon are no longer"
+	line "affected by Special Conditions."
 	done
 
 MegaDrainName: ; 577f9 (15:77f9)
 	text "Mega Drain"
 	done
 
-MegaDrainDescription: ; 57805 (15:7805)
+Heal20DamageDescription:
+	text "Heal 20 damage from this Pokémon."
+	done
+
+Heal30DamageDescription:
+	text "Heal 30 damage from this Pokémon."
+	done
+
+HealHalfDamageDealtDescription:
 	text "Heal from this Pokémon half the"
-	line "damage done to the Defending Pokémon"
-	line "(after applying Weakness and"
-	line "Resistance) (rounded up to the"
-	line "nearest 10)."
+	line "damage dealt with this attack"
+	line "(rounded up to the nearest 10)."
 	done
 
 VenusaurLv64Description: ; 578fd (15:78fd)

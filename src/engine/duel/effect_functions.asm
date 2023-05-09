@@ -25,7 +25,8 @@ PoisonEffect: ; 2c007 (b:4007)
 	lb bc, CNF_SLP_PRZ, POISONED
 	jr ApplyStatusEffect
 
-DoublePoisonEffect: ; 2c00c (b:400c)
+; Defending Pokémon becomes double poisoned (takes 20 damage per turn rather than 10)
+DoublePoisonEffect:
 	lb bc, CNF_SLP_PRZ, DOUBLE_POISONED
 	jr ApplyStatusEffect
 
@@ -747,6 +748,33 @@ HandleNoDamageOrEffect: ; 2c216 (b:4216)
 ; ------------------------------------------------------------------------------
 ; Healing
 ; ------------------------------------------------------------------------------
+
+Heal10DamageEffect:
+	ld hl, wDealtDamage
+	ld a, [hli]
+	or a
+	ret z ; return if no damage dealt
+	ld de, 10
+	call ApplyAndAnimateHPRecovery
+	ret
+
+Heal20DamageEffect:
+	ld hl, wDealtDamage
+	ld a, [hli]
+	or a
+	ret z ; return if no damage dealt
+	ld de, 20
+	call ApplyAndAnimateHPRecovery
+	ret
+
+Heal30DamageEffect:
+	ld hl, wDealtDamage
+	ld a, [hli]
+	or a
+	ret z ; return if no damage dealt
+	ld de, 30
+	call ApplyAndAnimateHPRecovery
+	ret
 
 ; applies HP recovery on Pokemon after an attack
 ; with HP recovery effect, and handles its animation.
@@ -2065,30 +2093,6 @@ ZubatSupersonicEffect: ; 2c7dc (b:47dc)
 	call nc, SetNoEffectFromStatus
 	ret
 
-Twineedle_AIEffect: ; 2c7ed (b:47ed)
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-; Flip 2 coins; deal 30x number of heads
-Twineedle_MultiplierEffect: ; 2c7f5 (b:47f5)
-	ld hl, 30
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	ld e, a
-	add a
-	add e
-	call ATimes10
-	call SetDefiniteDamage
-	ret
-
-BeedrillPoisonSting_AIEffect: ; 2c80d (b:480d)
-	ld a, 5
-	lb de, 0, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
-
 FoulGas_AIEffect: ; 2c822 (b:4822)
 	ld a, 5
 	lb de, 0, 10
@@ -2198,15 +2202,10 @@ Thrash_ModifierEffect: ; 2c973 (b:4973)
 	call AddToDamage
 	ret
 
-Toxic_AIEffect: ; 2c98c (b:498c)
-	ld a, 20
-	lb de, 20, 20
-	jp UpdateExpectedAIDamage
-
-; Defending Pokémon becomes double poisoned (takes 20 damage per turn rather than 10)
-Toxic_DoublePoisonEffect: ; 2c994 (b:4994)
-	call DoublePoisonEffect
-	ret
+; Toxic_AIEffect:
+; 	ld a, 20
+; 	lb de, 20, 20
+; 	jp UpdateExpectedAIDamage
 
 BoyfriendsEffect: ; 2c998 (b:4998)
 	ld a, DUELVARS_ARENA_CARD
@@ -2291,24 +2290,6 @@ DoubleAttackX30_MultiplierEffect: ; 2cabb (b:4abb)
 	call SetDefiniteDamage
 	ret
 
-MegaDrainEffect: ; 2cb0f (b:4b0f)
-	ld hl, wDealtDamage
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	srl h
-	rr l
-	bit 0, l
-	jr z, .rounded
-	; round up to nearest 10
-	ld de, 10 / 2
-	add hl, de
-.rounded
-	ld e, l
-	ld d, h
-	call ApplyAndAnimateHPRecovery
-	ret
-
 WeedlePoisonSting_AIEffect: ; 2cb27 (b:4b27)
 	ld a, 5
 	lb de, 0, 10
@@ -2318,24 +2299,6 @@ IvysaurPoisonWhip_AIEffect:
 	ld a, 20
 	lb de, 20, 20
 	jp UpdateExpectedAIDamage_AccountForPoison
-
-Heal10DamageEffect:
-	ld hl, wDealtDamage
-	ld a, [hli]
-	or a
-	ret z ; return if no damage dealt
-	ld de, 10
-	call ApplyAndAnimateHPRecovery
-	ret
-
-Heal20DamageEffect:
-	ld hl, wDealtDamage
-	ld a, [hli]
-	or a
-	ret z ; return if no damage dealt
-	ld de, 20
-	call ApplyAndAnimateHPRecovery
-	ret
 
 ; returns carry if no Grass Energy in Play Area
 EnergyTrans_CheckPlayArea: ; 2cb44 (b:4b44)
@@ -8002,11 +7965,6 @@ ScrunchEffect: ; 2eee7 (b:6ee7)
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_NO_DAMAGE_17
 	call ApplySubstatus1ToAttackingCard
-	ret
-
-ChanseyDoubleEdgeEffect: ; 2eefb (b:6efb)
-	ld a, 20
-	call DealRecoilDamageToSelf
 	ret
 
 SuperFang_AIEffect: ; 2ef01 (b:6f01)

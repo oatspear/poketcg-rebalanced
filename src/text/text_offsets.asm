@@ -2082,7 +2082,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SolarPowerName                                     ; 0x0815
 	textpointer SolarPowerDescription                              ; 0x0816
 	textpointer MegaDrainName                                      ; 0x0818
-	textpointer MegaDrainDescription                               ; 0x0819
+	textpointer Heal20DamageDescription
+	textpointer Heal30DamageDescription
+	textpointer HealHalfDamageDealtDescription
 	textpointer VenusaurLv64Description                           ; 0x081b
 	textpointer EnergyTransName                                    ; 0x081c
 	textpointer EnergyTransDescription                             ; 0x081d
@@ -2139,6 +2141,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AdaptiveEvolutionName
 	textpointer AdaptiveEvolutionDescription
 	textpointer DoubleKickName                                     ; 0x0854
+	textpointer DoubleAttackX20X10Description
 	textpointer NidorinaDescription                                ; 0x0855
 	textpointer NidoqueenName                                      ; 0x0856
 	textpointer BoyfriendsName                                     ; 0x0857

@@ -15,7 +15,9 @@
 - New attack: **Poison Whip** (GCC): 20 damage, inflicts Poison.
 
 #### Venusaur Lv64
-- **Mega Drain**: reduced cost from (GGGG) to (GGG).
+- **Solar Power**: removed.
+- **Mega Drain**: reduced cost from (GGGG) to (GG); always heals 20 damage.
+- New attack: **Double Edge** (CCC): 60 damage, 20 recoil.
 
 #### Venusaur Lv67
 - **Energy Trans**: removed.
@@ -49,7 +51,9 @@
 - New attack: **Poison Evolution** (GC): Poison the target; search deck for Beedrill and evolve.
 
 #### Beedrill
-- **Twineedle**: reduced cost from (CCC) to (CC) and damage from 30x to 20x.
+- **Twineedle**: reduced cost from (CCC) to (CC) and damage from 30x to 20x per heads and 10x per tails.
+- **Poison Sting**: removed.
+- New attack: **Toxic** (GGC): 40 damage, inflicts double poison.
 
 #### Ekans
 - **Spit Poison**: added 10 direct damage.
@@ -76,7 +80,7 @@
 
 #### Nidoking
 - **Thrash**: reduced cost from (DCC) to (DC).
-- **Toxic**: increased damage from 20 to 30.
+- **Toxic**: reduced cost from (DDD) to (DDC), increased damage from 20 to 40.
 
 #### Zubat
 - **Supersonic**: reduced cost from (CC) to (C).

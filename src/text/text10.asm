@@ -30,6 +30,12 @@ DoubleKickName: ; 584bf (16:44bf)
 	text "Double Kick"
 	done
 
+DoubleAttackX20X10Description:
+	text "Flip 2 coins. This attack deals"
+	line "20 damage for each Heads and"
+	line "10 damage for each Tails."
+	done
+
 NidorinaDescription: ; 584cc (16:44cc)
 	text "The female's horn develops slowly."
 	line "Prefers physical attacks such as"
@@ -117,11 +123,9 @@ ToxicName: ; 587b5 (16:47b5)
 	done
 
 ToxicDescription: ; 587bc (16:47bc)
-	text "The Defending Pokémon is now"
-	line "Poisoned. It now takes 20 Poison"
-	line "damage instead of 10 after each"
-	line "player's turn (even if it was"
-	line "already Poisoned)."
+	text "The Defending Pokémon is now Badly"
+	line "Poisoned. It takes 20 Poison damage"
+	line "instead of 10."
 	done
 
 NidokingDescription: ; 5884c (16:484c)
@@ -395,13 +399,10 @@ ShiftName: ; 5913f (16:513f)
 	done
 
 ShiftDescription: ; 59146 (16:5146)
-	text "Once during your turn (before your"
-	line "attack), you may change the type of"
-	line "Venomoth to the type of any other"
-	line "Pokémon in play other than"
-	line "Colorless."
-	line "This power can't be used if Venomoth"
-	line "is Asleep, Confused, or Paralyzed."
+	text "Once during your turn, you may"
+	line "change the type of this Pokémon to"
+	line "the type of any other Pokémon in"
+	line "play, other than Colorless."
 	done
 
 VenomPowderName: ; 5921e (16:521e)

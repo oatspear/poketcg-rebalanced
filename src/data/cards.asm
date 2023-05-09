@@ -350,32 +350,32 @@ VenusaurLv64Card:
 	tx IvysaurName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx SolarPowerName ; name
-	tx SolarPowerDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw VenusaurSolarPowerEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SOLAR_POWER ; animation
-
-	; attack 2
-	energy GRASS, 3 ; energies
+	energy GRASS, 2 ; energies
 	tx MegaDrainName ; name
-	tx MegaDrainDescription ; description
+	tx Heal20DamageDescription ; description
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MegaDrainEffectCommands ; effect commands
+	dw Heal20DamageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 2
 	db ATK_ANIM_DRAIN ; animation
+
+	; attack 2
+	energy COLORLESS, 3 ; energies
+	tx DoubleEdgeName ; name
+	tx Recoil20Description ; description
+	dw NONE ; description (cont)
+	db 60 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Recoil20EffectCommands ; effect commands
+	db HIGH_RECOIL ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 20
+	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 2 ; retreat cost
 	db WR_FIRE ; weakness
@@ -713,11 +713,11 @@ BeedrillCard:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx TwineedleName ; name
-	tx DoubleAttackX30Description ; description
+	tx DoubleAttackX20X10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_X ; category
-	dw BeedrillTwineedleEffectCommands ; effect commands
+	dw TwineedleEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -725,17 +725,17 @@ BeedrillCard:
 	db ATK_ANIM_NEEDLES ; animation
 
 	; attack 2
-	energy GRASS, 3 ; energies
-	tx PoisonStingName ; name
-	tx MayInflictPoisonDescription ; description
+	energy GRASS, 2, COLORLESS, 1 ; energies
+	tx ToxicName ; name
+	tx ToxicDescription ; description
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw BeedrillPoisonStingEffectCommands ; effect commands
+	dw ToxicEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
-	db NONE ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 2
 	db ATK_ANIM_NEEDLES ; animation
 
 	db 1 ; retreat cost
@@ -1133,13 +1133,13 @@ NidokingCard:
 	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
 	; attack 2
-	energy DARKNESS, 3 ; energies
+	energy DARKNESS, 2, COLORLESS, 1 ; energies
 	tx ToxicName ; name
 	tx ToxicDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NidokingToxicEffectCommands ; effect commands
+	dw ToxicEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -1581,7 +1581,7 @@ VenomothCard:
 	energy 0 ; energies
 	tx ShiftName ; name
 	tx ShiftDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw VenomothShiftEffectCommands ; effect commands
@@ -7148,7 +7148,7 @@ KabutopsCard:
 	; attack 2
 	energy WATER, 1, COLORLESS, 2 ; energies
 	tx MegaDrainName ; name
-	tx MegaDrainDescription ; description
+	tx HealHalfDamageDealtDescription ; description
 	dw NONE ; description (cont)
 	db 50 ; damage
 	db DAMAGE_NORMAL ; category
@@ -9518,7 +9518,7 @@ ChanseyCard:
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ChanseyDoubleEdgeEffectCommands ; effect commands
+	dw Recoil20EffectCommands ; effect commands
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
