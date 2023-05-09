@@ -97,6 +97,13 @@ ZubatSupersonicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ZubatSupersonicEffect
 	db  $00
 
+HatchEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Hatch_EvolveEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Hatch_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Hatch_AISelectEffect
+	db  $00
+
 PoisonEvolutionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
