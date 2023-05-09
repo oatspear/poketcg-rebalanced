@@ -127,7 +127,7 @@
 - **Poison Powder**: removed.
 - **Razor Leaf**: removed.
 - New attack: **Poison Lure** (G): switch the Defending Pokémon and Poison the new Defending Pokémon.
-- New attack: **Corrosive Acid** (GCC): 20 damage; if Heads, discard an Energy from the Defending Pokémon.
+- New attack: **Corrosive Acid** (GC): 20 damage; if Heads, discard an Energy from the Defending Pokémon.
 
 #### Victreebel
 - Increased HP from 80 to 90.

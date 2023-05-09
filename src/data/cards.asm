@@ -1694,11 +1694,11 @@ WeepinbellCard:
 	db ATK_ANIM_LURE ; animation
 
 	; attack 2
-	energy GRASS, 1, COLORLESS, 2 ; energies
+	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx CorrosiveAcidName ; name
 	tx IfHeadsDiscard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw CorrosiveAcidEffectCommands ; effect commands
 	db NONE ; flags 1
