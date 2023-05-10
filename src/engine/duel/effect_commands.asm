@@ -963,15 +963,15 @@ EeveeQuickAttackEffectCommands:
 	dbw EFFECTCMDTYPE_AI, EeveeQuickAttack_AIEffect
 	db  $00
 
-SpearowMirrorMoveEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SpearowMirrorMove_InitialEffect1
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SpearowMirrorMove_InitialEffect2
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpearowMirrorMove_BeforeDamage
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SpearowMirrorMove_AfterDamage
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SpearowMirrorMove_PlayerSelection
-	dbw EFFECTCMDTYPE_AI_SELECTION, SpearowMirrorMove_AISelection
-	dbw EFFECTCMDTYPE_AI, SpearowMirrorMove_AIEffect
-	db  $00
+; SpearowMirrorMoveEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SpearowMirrorMove_InitialEffect1
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SpearowMirrorMove_InitialEffect2
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpearowMirrorMove_BeforeDamage
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SpearowMirrorMove_AfterDamage
+; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SpearowMirrorMove_PlayerSelection
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, SpearowMirrorMove_AISelection
+; 	dbw EFFECTCMDTYPE_AI, SpearowMirrorMove_AIEffect
+; 	db  $00
 
 UnableToRetreatEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
@@ -1053,16 +1053,6 @@ ClefableMinimizeEffectCommands:
 
 PidgeotHurricaneEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HurricaneEffect
-	db  $00
-
-PidgeottoMirrorMoveEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PidgeottoMirrorMove_InitialEffect1
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, PidgeottoMirrorMove_InitialEffect2
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PidgeottoMirrorMove_BeforeDamage
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PidgeottoMirrorMove_AfterDamage
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PidgeottoMirrorMove_PlayerSelection
-	dbw EFFECTCMDTYPE_AI_SELECTION, PidgeottoMirrorMove_AISelection
-	dbw EFFECTCMDTYPE_AI, PidgeottoMirrorMove_AIEffect
 	db  $00
 
 ClefairySingEffectCommands:

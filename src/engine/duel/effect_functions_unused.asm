@@ -373,3 +373,267 @@ MegaDrainEffect: ; 2cb0f (b:4b0f)
 	ld d, h
 	call ApplyAndAnimateHPRecovery
 	ret
+
+
+
+;
+SpearowMirrorMove_AIEffect: ; 2e97d (b:697d)
+	jr MirrorMoveEffects.AIEffect
+
+SpearowMirrorMove_InitialEffect1: ; 2e97f (b:697f)
+	jr MirrorMoveEffects.InitialEffect1
+
+SpearowMirrorMove_InitialEffect2: ; 2e981 (b:6981)
+	jr MirrorMoveEffects.InitialEffect2
+
+SpearowMirrorMove_PlayerSelection: ; 2e983 (b:6983)
+	jr MirrorMoveEffects.PlayerSelection
+
+SpearowMirrorMove_AISelection: ; 2e985 (b:6985)
+	jr MirrorMoveEffects.AISelection
+
+SpearowMirrorMove_BeforeDamage: ; 2e987 (b:6987)
+	jr MirrorMoveEffects.BeforeDamage
+
+SpearowMirrorMove_AfterDamage: ; 2e989 (b:6989)
+	jp MirrorMoveEffects.AfterDamage
+
+; these are effect commands that Mirror Move uses
+; in order to mimic last turn's attack.
+; it covers all possible effect steps to perform its commands
+; (i.e. selection for Amnesia and Energy discarding attacks, etc)
+MirrorMoveEffects: ; 2e98c (b:698c)
+.AIEffect
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_DAMAGE
+	call GetTurnDuelistVariable
+	ld a, [hl]
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	ret
+
+.InitialEffect1
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_DAMAGE
+	call GetTurnDuelistVariable
+	ld a, [hli]
+	or [hl]
+	inc hl
+	or [hl]
+	inc hl
+	ret nz ; return if has last turn damage
+	ld a, [hli]
+	or a
+	ret nz ; return if has last turn status
+	; no attack received last turn
+	ldtx hl, YouDidNotReceiveAnAttackToMirrorMoveText
+	scf
+	ret
+
+.InitialEffect2
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
+	call GetTurnDuelistVariable
+	or a
+	ret z ; no effect
+	cp LAST_TURN_EFFECT_AMNESIA
+	jp z, PlayerPickAttackForAmnesia
+	or a
+	ret
+
+.PlayerSelection
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
+	call GetTurnDuelistVariable
+	or a
+	ret z ; no effect
+; handle Energy card discard effect
+	cp LAST_TURN_EFFECT_DISCARD_ENERGY
+	jp z, DiscardOpponentEnergy_PlayerSelectEffect
+	ret
+
+.AISelection
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
+	call GetTurnDuelistVariable
+	or a
+	ret z ; no effect
+	cp LAST_TURN_EFFECT_DISCARD_ENERGY
+	jr z, .discard_energy
+	cp LAST_TURN_EFFECT_AMNESIA
+	jr z, .pick_amnesia_attack
+	ret
+
+.discard_energy
+	call AIPickEnergyCardToDiscardFromDefendingPokemon
+	ldh [hTemp_ffa0], a
+	ret
+
+.pick_amnesia_attack
+	call AIPickAttackForAmnesia
+	ldh [hTemp_ffa0], a
+	ret
+
+.BeforeDamage
+; if was attacked with Amnesia, apply it to the selected attack
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
+	call GetTurnDuelistVariable
+	cp LAST_TURN_EFFECT_AMNESIA
+	jr z, .apply_amnesia
+
+; otherwise, check if there was last turn damage,
+; and write it to wDamage.
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_DAMAGE
+	call GetTurnDuelistVariable
+	ld de, wDamage
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hld]
+	ld [de], a
+	or [hl]
+	jr z, .no_damage
+	ld a, ATK_ANIM_HIT
+	ld [wLoadedAttackAnimation], a
+.no_damage
+	inc hl
+	inc hl ; DUELVARS_ARENA_CARD_LAST_TURN_STATUS
+; check if there was a status applied to Defending Pokemon
+; from the attack it used.
+	push hl
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetNonTurnDuelistVariable
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [hli]
+	or a
+	jr z, .no_status
+	push hl
+	push de
+	call .ExecuteStatusEffect
+	pop de
+	pop hl
+.no_status
+; hl is at DUELVARS_ARENA_CARD_LAST_TURN_SUBSTATUS2
+; apply substatus2 to self
+	ld e, DUELVARS_ARENA_CARD_SUBSTATUS2
+	ld a, [hli]
+	ld [de], a
+	ret
+
+.apply_amnesia
+	call ApplyAmnesiaToAttack
+	ret
+
+.AfterDamage: ; 2ea28 (b:6a28)
+	ld a, [wNoDamageOrEffect]
+	or a
+	ret nz ; is unaffected
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
+	call GetTurnDuelistVariable
+	cp LAST_TURN_EFFECT_DISCARD_ENERGY
+	jr nz, .change_weakness
+
+; execute Energy discard effect for card chosen
+	call SwapTurn
+	ldh a, [hTemp_ffa0]
+	call PutCardInDiscardPile
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
+	call GetTurnDuelistVariable
+	ld [hl], LAST_TURN_EFFECT_DISCARD_ENERGY
+	call SwapTurn
+
+.change_weakness
+	ld a, DUELVARS_ARENA_CARD_LAST_TURN_CHANGE_WEAK
+	call GetTurnDuelistVariable
+	ld a, [hl]
+	or a
+	ret z ; weakness wasn't changed last turn
+
+	push hl
+	call SwapTurn
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer2_FromDeckIndex
+	call SwapTurn
+	pop hl
+
+	ld a, [wLoadedCard2Weakness]
+	or a
+	ret z ; defending Pokemon has no weakness to change
+
+; apply same color weakness to Defending Pokemon
+	ld a, [hl]
+	push af
+	ld a, DUELVARS_ARENA_CARD_CHANGED_WEAKNESS
+	call GetNonTurnDuelistVariable
+	pop af
+	ld [hl], a
+
+; print message of weakness color change
+	ld c, -1
+.loop_color
+	inc c
+	rla
+	jr nc, .loop_color
+	ld a, c
+	call SwapTurn
+	push af
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+	pop af
+	call LoadCardNameAndInputColor
+	ldtx hl, ChangedTheWeaknessOfPokemonToColorText
+	call DrawWideTextBox_PrintText
+	call SwapTurn
+	ret
+
+.ExecuteStatusEffect: ; 2ea8f (b:6a8f)
+	ld c, a
+	and PSN_DBLPSN
+	jr z, .cnf_slp_prz
+	ld b, a
+	cp DOUBLE_POISONED
+	push bc
+	call z, DoublePoisonEffect
+	pop bc
+	ld a, b
+	cp POISONED
+	push bc
+	call z, PoisonEffect
+	pop bc
+.cnf_slp_prz
+	ld a, c
+	and CNF_SLP_PRZ
+	ret z
+	cp CONFUSED
+	jp z, ConfusionEffect
+	cp ASLEEP
+	jp z, SleepEffect
+	cp PARALYZED
+	jp z, ParalysisEffect
+	ret
+
+
+;
+PidgeottoMirrorMove_AIEffect: ; 2ecef (b:6cef)
+	jp MirrorMoveEffects.AIEffect
+
+PidgeottoMirrorMove_InitialEffect1: ; 2ecf2 (b:6cf2)
+	jp MirrorMoveEffects.InitialEffect1
+
+PidgeottoMirrorMove_InitialEffect2: ; 2ecf5 (b:6cf5)
+	jp MirrorMoveEffects.InitialEffect2
+
+PidgeottoMirrorMove_PlayerSelection: ; 2ecf8 (b:6cf8)
+	jp MirrorMoveEffects.PlayerSelection
+
+PidgeottoMirrorMove_AISelection: ; 2ecfb (b:6cfb)
+	jp MirrorMoveEffects.AISelection
+
+PidgeottoMirrorMove_BeforeDamage: ; 2ecfe (b:6cfe)
+	jp MirrorMoveEffects.BeforeDamage
+
+PidgeottoMirrorMove_AfterDamage: ; 2ed01 (b:6d01)
+	jp MirrorMoveEffects.AfterDamage
