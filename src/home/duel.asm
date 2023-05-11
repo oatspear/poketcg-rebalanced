@@ -1925,6 +1925,7 @@ DealConfusionDamageToSelf:
 ; - if the non-turn holder's arena card resists the turn holder's arena card color: reduce damage by 30
 ; - also apply Pluspower, Defender, and other kinds of damage reduction accordingly
 ; return resulting damage in de
+; OATS we have to tinker with this to implement BURN
 ApplyDamageModifiers_DamageToTarget:
 	xor a
 	ld [wDamageEffectiveness], a
@@ -2010,6 +2011,7 @@ InvertedPowersOf2:
 ; - if the turn holder's arena card is weak to its own color: double damage
 ; - if the turn holder's arena card resists its own color: reduce damage by 30
 ; return resulting damage in de
+; OATS we have to tinker with this to implement BURN
 ApplyDamageModifiers_DamageToSelf:
 	xor a
 	ld [wDamageEffectiveness], a
