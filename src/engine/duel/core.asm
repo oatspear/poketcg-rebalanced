@@ -6970,6 +6970,9 @@ HandleBetweenTurnsEvents:
 	jr c, .something_to_handle
 	cp PARALYZED
 	jr z, .something_to_handle
+	ld a, GLOOM  ; Healing Nectar
+	call CountPokemonIDInPlayArea
+	jr c, .something_to_handle ; a Pkmn Power-capable Gloom was found
 ; OATS poison only ticks for the turn holder
 ; OATS sleep checks are no longer done between turns
 	; call SwapTurn
@@ -6998,6 +7001,9 @@ HandleBetweenTurnsEvents:
 	call GetCardIDFromDeckIndex
 	ld a, e
 	ld [wTempNonTurnDuelistCardID], a
+; handle Gloom's Healing Nectar
+	call HandleHealingNectar
+; handle status
 	ld l, DUELVARS_ARENA_CARD_STATUS
 	ld a, [hl]
 	or a
@@ -7044,6 +7050,70 @@ HandleBetweenTurnsEvents:
 	call DiscardAttachedDefenders
 	call SwapTurn
 	call Func_6e4c
+	ret
+
+; go through every Pokemon in the Play Area and heal 10 damage
+; if it has a Grass Energy attached.
+HandleHealingNectar:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+
+.loop_play_area
+; check its attached energies
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + GRASS]
+	or a
+	jr z, .next_pkmn ; no Grass energy, skip Pokemon
+; check its damage
+	ld a, e
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .next_pkmn ; if no damage, skip Pokemon
+
+; code based on HealPlayAreaCardHP
+	push de
+	ld e, 10
+	ld d, $00
+
+; play heal animation
+	push de
+	call Func_7415
+	ld a, ATK_ANIM_HEALING_WIND_PLAY_AREA
+	ld [wLoadedAttackAnimation], a
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $01
+	ldh a, [hWhoseTurn]
+	ld h, a
+	call PlayAttackAnimation
+	call WaitAttackAnimation
+	pop hl
+
+; print Pokemon card name and damage healed
+	push hl
+	call LoadTxRam3
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD
+	call LoadCardNameAndLevelFromVarToRam2
+	ldtx hl, PokemonHealedDamageText
+	call DrawWideTextBox_WaitForInput
+	pop de
+
+; heal the target Pokemon
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	add e
+	ld [hl], a
+
+	pop de
+.next_pkmn
+	inc e
+	dec d
+	jr nz, .loop_play_area
 	ret
 
 ClearParalysisFromBenchedPokemon:

@@ -90,21 +90,20 @@
 - **Leech Life**: reduced cost from (DDC) to (DC).
 
 #### Oddish
-- **Stun Spore**: reduced cost from (G) to (C) and removed direct damage.
 - **Sprout**: searches the Deck for any Grass type card and adds it to the hand.
 
 #### Gloom
 - Increased HP from 60 to 70.
 - **Poison Powder**: removed.
-- New attack: **Aromatherapy** (CC): heal 20 damage from all of your Pokémon.
 - **Foul Odor**: also Poisons the target.
+- New Pokémon Power: **Healing Nectar**: heal 10 damage from all of your Pokémon with Grass Energy attached at the end of your turns.
 
 #### Vileplume
 - Increased HP from 80 to 90.
 - **Heal**: removed.
-- New attack: **Allergic Pollen** (G): 20 damage, opponent cannot use Trainer cards.
 - **Petal Dance**: reworked.
-- New **Petal Dance** (GGC): 30 damage, flip 2 coins. +20 damage for each heads, heal 10 to all Pokémon for each tails. Both Pokémon are Confused.
+- New attack: **Allergic Pollen** (GC): 20 damage, opponent cannot use Trainer cards.
+- New attack: **Petal Dance** (GGC): 30 damage, flip 2 coins. +20 damage for each heads, heal 10 to all Pokémon for each tails. Both Pokémon are Confused.
 
 #### Paras
 - **Spore**: reduced cost from (GG) to (G).

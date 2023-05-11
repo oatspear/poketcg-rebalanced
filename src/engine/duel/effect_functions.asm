@@ -9,6 +9,8 @@ AdaptiveEvolution_InitialEffect:
 Firegiver_InitialEffect:
 Quickfreeze_InitialEffect:
 PealOfThunder_InitialEffect:
+ThickSkinnedEffect:
+SetCarryNullEffect:
 	scf
 	ret
 
@@ -7153,10 +7155,6 @@ DoubleAttackX40_MultiplierEffect: ; 2eafe (b:6afe)
 	add a
 	call ATimes10
 	call SetDefiniteDamage
-	ret
-
-ThickSkinnedEffect: ; 2eb15 (b:6b15)
-	scf
 	ret
 
 LeekSlap_AIEffect: ; 2eb17 (b:6b17)

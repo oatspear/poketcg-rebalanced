@@ -35,6 +35,10 @@ EffectCommands: ; 186f7 (6:46f7)
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+HealingNectarEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SetCarryNullEffect
+	db  $00
+
 EkansSpitPoisonEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpitPoison_Poison50PercentEffect
 	dbw EFFECTCMDTYPE_AI, SpitPoison_AIEffect

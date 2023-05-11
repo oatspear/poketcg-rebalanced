@@ -213,9 +213,19 @@ AromatherapyName:
 	text "Aromatherapy"
 	done
 
-AromatherapyDescription:
+Heal20DamageFromAllDescription:
 	text "Heal 20 damage from each of your"
 	line "Pokémon."
+	done
+
+HealingNectarName:
+	text "Healing Nectar"
+	done
+
+HealingNectarDescription:
+	text "Heal 10 damage from each of your"
+	line "Pokémon with <GRASS> Energy attached"
+	line "at the end of your turns."
 	done
 
 SilverWhirlwindName:
@@ -257,11 +267,11 @@ ExoskeletonName:
 	text "Exoskeleton"
 	done
 
-FoulOdorName: ; 58c55 (16:4c55)
+FoulOdorName:
 	text "Foul Odor"
 	done
 
-FoulOdorDescription: ; 58c60 (16:4c60)
+FoulOdorDescription:
 	text "Both the Defending Pokémon and"
 	line "this Pokémon are now Confused."
 	line "The Defending Pokémon is now"
@@ -797,13 +807,8 @@ EnergyBurnName: ; 59fab (16:5fab)
 	done
 
 EnergyBurnDescription: ; 59fb8 (16:5fb8)
-	text "As often as you like during your"
-	line "turn (before your attack), you may"
-	line "turn all Energy attached to"
-	line "Charizard into <FIRE> Energy for the"
-	line "rest of the turn. This power can't"
-	line "be used if Charizard is Asleep,"
-	line "Confused, or Paralyzed."
+	text "All Energies attached to this"
+	line "Pokémon count as <FIRE> Energy."
 	done
 
 FireSpinName: ; 5a095 (16:6095)

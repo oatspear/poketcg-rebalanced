@@ -558,7 +558,7 @@ ButterfreeCard:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx HealingWindName ; name
-	tx AromatherapyDescription ; description
+	tx Heal20DamageFromAllDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -1272,12 +1272,12 @@ OddishCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
+	energy GRASS, 1 ; energies
 	tx StunSporeName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
 	dw Paralysis50PercentEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
@@ -1331,18 +1331,18 @@ GloomCard:
 	; Both the Defending Pokémon and Gloom are now Asleep (after doing damage).
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx AromatherapyName ; name
-	tx AromatherapyDescription ; description
-	dw NONE ; description (cont)
+	energy 0 ; energies
+	tx HealingNectarName ; name
+	tx HealingNectarDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw AromatherapyEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw HealingNectarEffectCommands ; effect commands
 	db NONE ; flags 1
-	db HEAL_USER ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 1
-	db ATK_ANIM_RECOVER ; animation
+	db 0
+	db ATK_ANIM_NONE ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
@@ -1428,7 +1428,7 @@ VileplumeCard:
 	; The Defending Pokémon is now Poisoned and Asleep.
 
 	; attack 1
-	energy GRASS, 1 ; energies
+	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx AllergicPollenName ; name
 	tx HeadacheDescription ; description
 	dw NONE ; description (cont)
@@ -2494,7 +2494,7 @@ CharizardCard:
 	energy 0 ; energies
 	tx EnergyBurnName ; name
 	tx EnergyBurnDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw CharizardEnergyBurnEffectCommands ; effect commands
