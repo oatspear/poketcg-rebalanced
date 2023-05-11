@@ -1331,18 +1331,18 @@ GloomCard:
 	; Both the Defending Pokémon and Gloom are now Asleep (after doing damage).
 
 	; attack 1
-	energy 0 ; energies
-	tx HealingNectarName ; name
-	tx HealingNectarDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw HealingNectarEffectCommands ; effect commands
+	energy GRASS, 1 ; energies
+	tx AllergicPollenName ; name
+	tx HeadacheDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw HeadacheEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
+	db 2
+	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
@@ -1429,17 +1429,17 @@ VileplumeCard:
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 1 ; energies
-	tx AllergicPollenName ; name
-	tx HeadacheDescription ; description
+	tx MegaDrainName ; name
+	tx Heal20DamageDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw HeadacheEffectCommands ; effect commands
+	dw Heal20DamageEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 2
-	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
+	db ATK_ANIM_DRAIN ; animation
 
 	; attack 2
 	energy GRASS, 2, COLORLESS, 1 ; energies

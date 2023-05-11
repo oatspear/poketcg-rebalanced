@@ -2180,8 +2180,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GloomName                                          ; 0x0877
 	textpointer AromatherapyName
 	textpointer Heal20DamageFromAllDescription
-	textpointer HealingNectarName
-	textpointer HealingNectarDescription
+	; textpointer HealingNectarName                                ; unreferenced
+	; textpointer HealingNectarDescription                         ; unreferenced
 	textpointer SilverWhirlwindName
 	textpointer SilverWhirlwindDescription
 	textpointer HatchName

@@ -218,15 +218,17 @@ Heal20DamageFromAllDescription:
 	line "Pokémon."
 	done
 
-HealingNectarName:
-	text "Healing Nectar"
-	done
+; unreferenced
+;HealingNectarName:
+;	text "Healing Nectar"
+;	done
 
-HealingNectarDescription:
-	text "Heal 10 damage from each of your"
-	line "Pokémon with <GRASS> Energy attached"
-	line "at the end of your turns."
-	done
+; unreferenced
+;HealingNectarDescription:
+;	text "Heal 10 damage, at the end of your"
+;	line "turns, from each of your Benched"
+;	line "Pokémon with attached Energies."
+;	done
 
 SilverWhirlwindName:
 	text "Silver Whirlwind"
