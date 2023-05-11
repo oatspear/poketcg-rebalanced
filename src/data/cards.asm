@@ -1322,6 +1322,14 @@ GloomCard:
 	db STAGE1 ; stage
 	tx OddishName ; pre-evo name
 
+	; Pokémon Power: Irresistible Aroma
+	; Once during your turn (before your attack), if your opponent's Bench isn't full,
+	; you may flip a coin. If heads, your opponent reveals their hand.
+	; Put a Basic Pokémon you find there onto their Bench.
+
+	; Sleep Sap (CC) 20
+	; Both the Defending Pokémon and Gloom are now Asleep (after doing damage).
+
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx AromatherapyName ; name
@@ -1372,6 +1380,52 @@ VileplumeCard:
 	db 90 ; hp
 	db STAGE2 ; stage
 	tx GloomName ; pre-evo name
+
+	; Pokémon Power [GX]: Fragrant Flower Garden
+	; Once during your turn (before your attack), you may heal 30 damage from each of your Pokémon.
+
+	; Pokémon Power: Varied Pollen
+	; Once during your turn (before your attack), you may flip a coin. If heads,
+	; choose Asleep, Burned, Confused or Poisoned. Your opponent's Active Pokémon
+	; is now affected by that Special Condition.
+
+	; Pokémon Power: Disgusting Pollen
+	; As long as this Pokémon is in play as your Active Pokémon, your opponent's
+	; Basic Pokémon can't attack.
+
+	; Pokémon Power: Irritating Pollen
+	; Each player can't play any Iterm cards from his or her hand.
+
+	; Pokémon Power: Energy Reaction
+	; Once during your turn (before your attack), when you attach a Grass or Darkness Energy
+	; from your hand to Vileplume (excluding effects of attacks or Poké-Powers),
+	; you may use this power. If you attach a Grass Energy card, the Defending Pokémon
+	; is now Asleep. If you attach a Psychic Energy card, the Defending Pokémon is
+	; now Poisoned. This power can't be used if Vileplume is affected by a Special Condition.
+
+	; Pokémon Power: Pollen Defense
+	; If an attack does damage to Vileplume while it's your Active Pokémon (even if
+	; it's Knocked Out), flip a coin. If heads, your opponent's Active Pokémon is now
+	; Confused. This power works even while Erika's Vileplume is Asleep, Confused, or Paralyzed.
+
+	; Poison Scent (G)
+	; Flip a coin. If heads, the Defending Pokémon is now Poisoned and Confused.
+	; If tails, the Defending Pokémon is now Poisoned and Asleep.
+
+	; Disturbing Pollen (GCC) 50
+	; Flip a coin. If heads, your opponent can't play any Trainer cards from his
+	; or her hand during your opponent's next turn.
+
+	; Allergy Storm (GCC) 50
+	; Flip a coin. If heads, during your opponent's next turn, they can't play any
+	; Supporter cards from their hand. If tails, during your opponent's next turn,
+	; they can't play any Item cards from their hand.
+
+	; Massive Bloom (GC) 80-
+	; This attack does 10 less damage for each damage counter on this Pokémon.
+
+	; Pollen Spray (GCCC) 40
+	; The Defending Pokémon is now Poisoned and Asleep.
 
 	; attack 1
 	energy GRASS, 1 ; energies
