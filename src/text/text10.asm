@@ -308,12 +308,9 @@ PetalDanceName:
 	done
 
 PetalDanceDescription:
-	text "Flip 2 coins. This attack does 20"
-	line "additional damage for each heads."
-	line "For each tails, heal 10 damage from"
-	line "each of your Pokémon."
-	line "Both the Defending Pokémon and"
-	line "this Pokémon are now Confused."
+	text "Heal 20 damage from each of your"
+	line "Pokémon. This Pokémon is now"
+	line "Confused."
 	done
 
 FlowerName: ; 58e64 (16:4e64)
@@ -1716,8 +1713,8 @@ BlizzardName: ; 5cb6d (17:4b6d)
 	done
 
 DamageOpponentBench10Description: ; 5cb77 (17:4b77)
-	text "This attack does 10 damage to each of"
-	line "your opponent's Benched Pokémon."
+	text "This attack does 10 damage to each"
+	line "of your opponent's Benched Pokémon."
 	line "(Don't apply Weakness and Resistance"
 	line "for Benched Pokémon.)"
 	done

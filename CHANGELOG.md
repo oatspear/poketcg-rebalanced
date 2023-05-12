@@ -96,14 +96,14 @@
 - Increased HP from 60 to 70.
 - **Poison Powder**: removed.
 - **Foul Odor**: also Poisons the target.
-- New Pokémon Power: **Healing Nectar**: heal 10 damage from all of your Pokémon with Grass Energy attached at the end of your turns.
+- New attack: **Aromatherapy** (C): heal 20 damage from all of your Pokémon.
 
 #### Vileplume
-- Increased HP from 80 to 90.
+- Increased HP from 80 to 100.
 - **Heal**: removed.
 - **Petal Dance**: reworked.
 - New attack: **Allergic Pollen** (GC): 20 damage, opponent cannot use Trainer cards.
-- New attack: **Petal Dance** (GGC): 30 damage, flip 2 coins. +20 damage for each heads, heal 10 to all Pokémon for each tails. Both Pokémon are Confused.
+- New attack: **Petal Dance** (GGC): 50 damage; heal 20 to all Pokémon; Vileplume is Confused.
 
 #### Paras
 - **Spore**: reduced cost from (GG) to (G).

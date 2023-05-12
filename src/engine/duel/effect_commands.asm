@@ -250,8 +250,7 @@ PokemonPowerHealEffectCommands:
 	db  $00
 
 PetalDanceEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PetalDance_BonusEffect
-	dbw EFFECTCMDTYPE_AI, PetalDance_AIEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PetalDance_BonusEffect
 	db  $00
 
 TangelaPoisonWhipEffectCommands:

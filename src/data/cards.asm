@@ -1331,18 +1331,18 @@ GloomCard:
 	; Both the Defending Pokémon and Gloom are now Asleep (after doing damage).
 
 	; attack 1
-	energy GRASS, 1 ; energies
-	tx AllergicPollenName ; name
-	tx HeadacheDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx AromatherapyName ; name
+	tx Heal20DamageFromAllDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw HeadacheEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw AromatherapyEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 2
-	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
@@ -1377,7 +1377,7 @@ VileplumeCard:
 	db STAR ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db VILEPLUME
-	db 90 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx GloomName ; pre-evo name
 
@@ -1429,28 +1429,28 @@ VileplumeCard:
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 1 ; energies
-	tx MegaDrainName ; name
-	tx Heal20DamageDescription ; description
+	tx AllergicPollenName ; name
+	tx HeadacheDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Heal20DamageEffectCommands ; effect commands
+	dw HeadacheEffectCommands ; effect commands
 	db NONE ; flags 1
-	db HEAL_USER ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 2
-	db ATK_ANIM_DRAIN ; animation
+	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
 
 	; attack 2
 	energy GRASS, 2, COLORLESS, 1 ; energies
 	tx PetalDanceName ; name
 	tx PetalDanceDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 50 ; damage
 	db DAMAGE_PLUS ; category
 	dw PetalDanceEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
-	db HEAL_USER | FLAG_2_BIT_7 ; flags 2
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PETAL_DANCE ; animation

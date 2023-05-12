@@ -2675,32 +2675,8 @@ Heal_RemoveDamageEffect: ; 2cdc7 (b:4dc7)
 	call ExchangeRNG
 	ret
 
-PetalDance_AIEffect:
-	ld a, 70 / 2
-	lb de, 30, 70
-	jp SetExpectedAIDamage
-
 PetalDance_BonusEffect:
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	ld c, a  ; number of heads
-; heads: +20 damage
-	add a
-	call ATimes10
-	call AddToDamage
-; tails: +10 group healing
-	ld a, 2  ; a = coins
-	sub c    ; a = coins - heads = tails
-	or a     ; a == 0 ?
-	jr z, .confusion
-	call ATimes10
-	ld c, a
-	call HealDamageFromAll
-.confusion
-	call ConfusionEffect
+	call Heal20DamageFromAll_HealEffect
 	call SwapTurn
 	call ConfusionEffect
 	call SwapTurn
