@@ -6970,9 +6970,8 @@ HandleBetweenTurnsEvents:
 	jr c, .something_to_handle
 	cp PARALYZED
 	jr z, .something_to_handle
-;	ld a, GLOOM  ; Healing Nectar
-;	call CountPokemonIDInPlayArea
-;	jr nc, .nothing_to_handle ; no Pkmn Power-capable Gloom was found
+;	call PreprocessHealingNectar
+;	jr c, .something_to_handle
 ; OATS poison only ticks for the turn holder
 ; OATS sleep checks are no longer done between turns
 	; call SwapTurn
@@ -7054,13 +7053,47 @@ HandleBetweenTurnsEvents:
 	ret
 
 ; unreferenced
-; go through every Pokemon in the Play Area and heal 10 damage
-; if it has a Grass Energy attached.
-;HandleHealingNectar:
+;PreprocessHealingNectar:
+;	ld a, GLOOM  ; Healing Nectar
+;	call CountPokemonIDInPlayArea
+;	ret nc  ; no Pkmn Power-capable Gloom was found
+;
 ;	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 ;	call GetTurnDuelistVariable
+;	dec a
+;	ret z  ; no Pokémon on the bench
 ;	ld d, a
-;	ld e, PLAY_AREA_ARENA
+;	ld e, PLAY_AREA_BENCH_1
+;	ld hl, hTempList
+;	ld c, 0
+;
+;.loop_play_area
+;	call GetCardDamageAndMaxHP
+;	ld [hl], a  ; store damage in hTempList
+;	or a
+;	jr z, .next ; no damage, skip
+;	inc c  ; store total damaged Pokémon
+;.next
+;	inc hl
+;	inc e
+;	dec d
+;	jr nz, .loop_play_area
+;
+;	ld [hl], $ff  ; terminating byte
+;	xor a
+;	cp c  ; set carry if there are some damaged Pokémon
+;	ret
+
+; unreferenced
+; go through every Pokemon in the Bench and heal 10 damage
+; if it has a Grass Energy attached.
+;HandleHealingNectar:
+;	ld a, GLOOM  ; Healing Nectar
+;	call CountPokemonIDInPlayArea
+;	ret nc  ; no Pkmn Power-capable Gloom was found
+;
+;	ld hl, hTempList
+;	ld e, PLAY_AREA_BENCH_1
 ;
 ;.loop_play_area
 ;; check its attached energies
