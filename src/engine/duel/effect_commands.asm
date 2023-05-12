@@ -306,14 +306,9 @@ HydroPumpEffectCommands:
 	dbw EFFECTCMDTYPE_AI, HydroPumpEffect
 	db  $00
 
-KinglerFlailEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, KinglerFlail_HPCheck
-	dbw EFFECTCMDTYPE_AI, KinglerFlail_AIEffect
-	db  $00
-
-MagikarpFlailEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MagikarpFlail_HPCheck
-	dbw EFFECTCMDTYPE_AI, MagikarpFlail_AIEffect
+FlailEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Flail_HPCheck
+	dbw EFFECTCMDTYPE_AI, Flail_AIEffect
 	db  $00
 
 HeadacheEffectCommands:
@@ -628,6 +623,11 @@ DrowzeeConfuseRayEffectCommands:
 
 MrMimeInvisibleWallEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, InvisibleWallEffect
+	db  $00
+
+RendEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rend_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Rend_AIEffect
 	db  $00
 
 MrMimeMeditateEffectCommands:
@@ -1058,7 +1058,7 @@ PidgeotHurricaneEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HurricaneEffect
 	db  $00
 
-ClefairySingEffectCommands:
+SingEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SingEffect
 	db  $00
 
@@ -1083,6 +1083,7 @@ LickitungSupersonicEffectCommands:
 	db  $00
 
 WhirlwindEffectCommands:
+WaterfallEffectCommands:
 TerrorStrikeEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect

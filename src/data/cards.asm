@@ -4027,7 +4027,7 @@ KinglerCard:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_X ; category
-	dw KinglerFlailEffectCommands ; effect commands
+	dw FlailEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db BOOST_IF_TAKEN_DAMAGE ; flags 3
@@ -4175,10 +4175,24 @@ GoldeenCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
+	tx FlailName ; name
+	tx FlailDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw FlailEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	db 0
+	db ATK_ANIM_BIG_HIT ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
 	tx HornAttackName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -4186,20 +4200,6 @@ GoldeenCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -4220,14 +4220,14 @@ SeakingCard:
 	db DIAMOND ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	db SEAKING
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx GoldeenName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx HornAttackName ; name
-	dw NONE ; description
+	energy COLORLESS, 2 ; energies
+	tx RendName ; name
+	tx Bonus20IfOpponentIsDamagedDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -4239,11 +4239,11 @@ SeakingCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy WATER, 2 ; energies
+	energy WATER, 2, COLORLESS, 1 ; energies
 	tx WaterfallName ; name
-	dw NONE ; description
+	tx OpponentSwitchesPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -4398,7 +4398,7 @@ MagikarpCard:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_X ; category
-	dw MagikarpFlailEffectCommands ; effect commands
+	dw FlailEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db BOOST_IF_TAKEN_DAMAGE ; flags 3
@@ -4484,32 +4484,32 @@ LaprasCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
-	tx WaterGunName ; name
-	tx WaterGunDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx HealingMelodyName ; name
+	tx HealingMelodyDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw LaprasWaterGunEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw HealingMelodyEffectCommands ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
-	db ATK_ANIM_WATER_GUN ; animation
+	db 1
+	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx ConfuseRayName ; name
-	tx MayInflictConfusionDescription ; description
+	energy WATER, 2, COLORLESS, 1 ; energies
+	tx SurfName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw LaprasConfuseRayEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
+	dw NONE ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_CONFUSE_RAY ; animation
+	db ATK_ANIM_WATER_JETS ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -6439,7 +6439,7 @@ MachokeCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	energy FIGHTING, 1, COLORLESS, 2 ; energies
 	tx SeismicTossName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -8798,7 +8798,7 @@ ClefairyCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ClefairySingEffectCommands ; effect commands
+	dw SingEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

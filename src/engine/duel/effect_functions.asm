@@ -2906,21 +2906,11 @@ HydroPumpEffect:
 	ld [wAIMaxDamage], a
 	ret
 
-KinglerFlail_AIEffect: ; 2cf4e (b:4f4e)
-	call KinglerFlail_HPCheck
+Flail_AIEffect:
+	call Flail_HPCheck
 	jp SetDefiniteAIDamage
 
-KinglerFlail_HPCheck: ; 2cf54 (b:4f54)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call SetDefiniteDamage
-	ret
-
-MagikarpFlail_AIEffect: ; 2cfff (b:4fff)
-	call MagikarpFlail_HPCheck
-	jp SetDefiniteAIDamage
-
-MagikarpFlail_HPCheck: ; 2d005 (b:5005)
+Flail_HPCheck:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
 	call SetDefiniteDamage
@@ -4552,6 +4542,22 @@ HandleProphecyScreen: ; 2da76 (b:5a76)
 
 InvisibleWallEffect: ; 2db77 (b:5b77)
 	scf
+	ret
+
+Rend_AIEffect:
+	call Rend_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+Rend_DamageBoostEffect:
+; add 20 damage if the Defending Pokémon has damage counters
+	call SwapTurn
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	call SwapTurn
+	or a
+	ret z
+	ld a, 20
+	call AddToDamage
 	ret
 
 MrMimeMeditate_AIEffect: ; 2db79 (b:5b79)

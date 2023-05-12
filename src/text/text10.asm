@@ -1526,6 +1526,16 @@ SeakingName: ; 5c268 (17:4268)
 	text "Seaking"
 	done
 
+RendName:
+	text "Rend"
+	done
+
+Bonus20IfOpponentIsDamagedDescription:
+	text "This attack does 20 more damage if"
+	line "the Defending Pokémon already had"
+	line "damage counters on it."
+	done
+
 WaterfallName: ; 5c271 (17:4271)
 	text "Waterfall"
 	done

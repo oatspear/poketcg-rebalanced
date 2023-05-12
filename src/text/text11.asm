@@ -609,7 +609,7 @@ StrikesBackName: ; 5eb99 (17:6b99)
 StrikesBackDescription: ; 5eba7 (17:6ba7)
 	text "Whenever your opponent's attack"
 	line "damages Machamp (even if Machamp is"
-	line "Knocked Out), this power does 10"
+	line "Knocked Out), this power does 20"
 	line "damage to the attacking Pokémon."
 	line "(Don't apply Weakness and"
 	line "Resistance.) "

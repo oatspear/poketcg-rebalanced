@@ -276,11 +276,14 @@
 - **Crabhammer**: reduced cost from (WWC) to (WCC).
 
 #### Goldeen
-- **Horn Attack**: reduced cost from (W) to (C).
+- **Horn Attack**: increased cost from (W) to (CC) and damage from 10 to 20.
+- New attack: **Flail** (c): 10 damage times number of damage counters.
 
 #### Seaking
-- **Horn Attack**: reduced cost from (W) to (C) and increased damage from 10 to 20.
-- **Waterfall**: increased cost from (WC) to (WW) and damage from 30 to 40.
+- Increased HP from 70 to 80.
+- **Horn Attack**: removed.
+- New attack: **Rend** (CC): 20 damage, +20 if Defending Pokémon is damaged.
+- **Waterfall**: increased cost from (WC) to (WWC) and damage from 30 to 50; also switches Defending Pokémon.
 
 #### Starmie
 - **Recover**: reduced cost from (WW) to (C) and can discard any type of Energy.
@@ -292,7 +295,10 @@
 - **Bubblebeam**: reduced cost from (WWWW) to (WWW) and increased damage from 40 to 50.
 
 #### Lapras
-- **Confuse Ray**: reduced cost from (WW) to (CC).
+- **Water Gun**: removed.
+- **Confuse Ray**: removed.
+- New attack: **Healing Melody** (C): Heal 10 damage from each of your Pokémon.
+- New attack: **Surf** (WWC): 40 damage.
 
 #### Vaporeon Lv29
 - Increased HP from 60 to 70.
@@ -403,9 +409,10 @@
 #### Machoke
 - **Karate Chop**: reduced cost from (FFC) to (F) and base damage from 50 to 40.
 - **Submission**: removed.
-- New attack: **Seismic Toss** (FFC): 50 damage.
+- New attack: **Seismic Toss** (FCC): 50 damage.
 
 #### Machamp
+- **Strikes Back**: damage increased from 10 to 20.
 - **Seismic Toss**: removed.
 - New attack: **Submission** (FFC): 80 damage, 20 damage recoil.
 

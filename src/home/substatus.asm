@@ -174,7 +174,7 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	ret
 
 ; when MACHAMP is damaged, if its Strikes Back is active, the
-; attacking Pokemon (turn holder's arena Pokemon) takes 10 damage.
+; attacking Pokemon (turn holder's arena Pokemon) takes 20 damage.
 ; ignore if damage taken at de is 0.
 ; used to bounce back a damaging attack.
 HandleStrikesBack_AgainstDamagingAttack:
@@ -210,11 +210,11 @@ HandleStrikesBack_AgainstDamagingAttack:
 	call GetTurnDuelistVariable
 	push af
 	push hl
-	ld de, 10
+	ld de, 20
 	call SubtractHP
 	ld a, [wLoadedCard2ID]
 	ld [wTempNonTurnDuelistCardID], a
-	ld hl, 10
+	ld hl, 20
 	call LoadTxRam3
 	ld hl, wLoadedCard2Name
 	ld a, [hli]
@@ -786,7 +786,7 @@ HandleDestinyBondSubstatus:
 	ret
 
 ; when MACHAMP is damaged, if its Strikes Back is active, the
-; attacking Pokemon (turn holder's arena Pokemon) takes 10 damage.
+; attacking Pokemon (turn holder's arena Pokemon) takes 20 damage.
 ; used to bounce back an attack of the RESIDUAL category
 HandleStrikesBack_AgainstResidualAttack:
 	ld a, [wTempNonTurnDuelistCardID]
@@ -804,7 +804,7 @@ HandleStrikesBack_AgainstResidualAttack:
 	call CheckCannotUseDueToStatus
 	call SwapTurn
 	ret c
-	ld hl, 10 ; damage to be dealt to attacker
+	ld hl, 20 ; damage to be dealt to attacker
 	call ApplyStrikesBack_AgainstResidualAttack
 	call nc, WaitForWideTextBoxInput
 	ret

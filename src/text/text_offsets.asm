@@ -2450,6 +2450,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GoldfishName                                       ; 0x097c
 	textpointer GoldeenDescription                                 ; 0x097d
 	textpointer SeakingName                                        ; 0x097e
+	textpointer RendName
+	textpointer Bonus20IfOpponentIsDamagedDescription
 	textpointer WaterfallName                                      ; 0x097f
 	textpointer SeakingDescription                                 ; 0x0980
 	textpointer StaryuName                                         ; 0x0981
