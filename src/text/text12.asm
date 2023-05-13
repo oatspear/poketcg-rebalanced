@@ -695,6 +695,16 @@ AscensionDescription:
 	line "attach it to this Pokémon."
 	done
 
+RagingStormName:
+	text "Raging Storm"
+	done
+
+RagingStormDescription:
+	text "This attack does 50 more damage if"
+	line "the opponent has taken more Prize"
+	line "cards than you."
+	done
+
 ProfessorOakName: ; 6342d (18:742d)
 	text "Professor Oak"
 	done

@@ -165,6 +165,16 @@ PeckEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Peck_AIEffect
 	db  $00
 
+RagingStormEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RagingStorm_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, RagingStorm_AIEffect
+	db  $00
+
+CrabhammerEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Crabhammer_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Crabhammer_AIEffect
+	db  $00
+
 ClawEffectCommands:
 HornHazardEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HornHazard_NoDamage50PercentEffect

@@ -1418,6 +1418,11 @@ CrabhammerName: ; 5bec3 (16:7ec3)
 	text "Crabhammer"
 	done
 
+CrabhammerDescription:
+	text "This attack does 40 more damage if"
+	line "the Defending Pokémon is Basic."
+	done
+
 PincerName: ; 5becf (16:7ecf)
 	text "Pincer"
 	done

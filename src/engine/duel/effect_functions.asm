@@ -3364,6 +3364,37 @@ CometPunch_AIEffect:
 	lb de, 30, 40
 	jp SetExpectedAIDamage
 
+RagingStorm_AIEffect:
+	call RagingStorm_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+; +50 damage if the opponent has less Prize cards than the user
+RagingStorm_DamageBoostEffect:
+	call CountPrizes
+	ld c, a
+	call SwapTurn
+	call CountPrizes
+	call SwapTurn
+	cp c
+	ret nc  ; opponent Prizes >= user Prizes
+	ld a, 50
+	call AddToDamage
+	ret
+
+Crabhammer_AIEffect:
+	call Crabhammer_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+; +40 damage versus Basic Pokémon
+Crabhammer_DamageBoostEffect:
+	ld a, DUELVARS_ARENA_CARD_STAGE
+	call GetNonTurnDuelistVariable
+	and a
+	ret nz  ; not a BASIC Pokémon
+	ld a, 40
+	call AddToDamage
+	ret
+
 ; return carry if has less than 2 Fire Energy cards
 FlamesOfRage_CheckEnergy: ; 2d3a0 (b:53a0)
 	ld e, PLAY_AREA_ARENA

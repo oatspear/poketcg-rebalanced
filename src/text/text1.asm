@@ -611,7 +611,7 @@ HavePokemonPowerText: ; 36ebe (d:6ebe)
 	done
 
 UnableToUsePkmnPowerDueToToxicGasText: ; 36ed5 (d:6ed5)
-	text "Unable to us Pokémon Power due to"
+	text "Unable to use Pokémon Power due to"
 	line "the effect of Toxic Gas."
 	done
 
@@ -796,8 +796,6 @@ YourDataWasDestroyedSomehowText: ; 372bd (d:72bd)
 	text "Your Data was destroyed"
 	line "somehow."
 	line ""
-	line "The game cannot be continued"
-	line "in its present condition."
 	line "Please restart the game after"
 	line "the Data is reset."
 	done
@@ -1120,23 +1118,13 @@ FlipUntilFailAppears10DamageForEachHeadsText: ; 37d92 (d:7d92)
 	done
 
 IfHeadPlus10IfTails10ToYourselfText: ; 37dc9 (d:7dc9)
-	text "If Heads, + 10 damage!"
-	line "If Tails, +10 damage to yourself!"
+	text "Heads: +10 damage"
+	line "Tails: 10 damage to yourself"
 	done
 
 DamageToOppBenchIfHeadsDamageToYoursIfTailsText: ; 37e03 (d:7e03)
-	text "10 damage to opponent's Bench if"
-	line "Heads, damage to yours if Tails."
-	done
-
-IfHeadsChangeOpponentsActivePokemonText: ; 37e46 (d:7e46)
-	text "If Heads, change opponent's"
-	line "Active Pokémon."
-	done
-
-IfHeadsHealIsSuccessfulText: ; 37e73 (d:7e73)
-	text "If Heads,"
-	line "Heal is successful."
+	text "Heads: damage to opponent's Bench"
+	line "Tails: damage to your Bench"
 	done
 
 IfTailsDamageToYourselfTooText: ; 37e92 (d:7e92)

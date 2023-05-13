@@ -269,11 +269,16 @@
 - **Clamp**: reduced cost from (WW) to (WC), damage from 30 to 20 and removed failure on tails.
 
 #### Krabby
-- **Call for Family**: replaced with **Call for Friend** (C): choose any Basic Pokémon from deck.
-- **Iron Grip**: renamed to **Guillotine**.
+- **Call for Family**: removed.
+- **Iron Grip**: removed.
+- New attack: **Bubble** (W): 10 damage; flip a coin, Paralysis if Heads.
+- New attack: **Guillotine** (CC): 20 damage.
 
 #### Kingler
-- **Crabhammer**: reduced cost from (WWC) to (WCC).
+- Increased HP from 60 to 70.
+- **Flail**: removed.
+- New attack **Rend** (CC): 20 damage, +20 damage if the Defending Pokémon has taken damage.
+- **Crabhammer**: +40 damage if the Defending Pokémon is a Basic Pokémon.
 
 #### Goldeen
 - **Horn Attack**: increased cost from (W) to (CC) and damage from 10 to 20.
@@ -298,7 +303,7 @@
 - **Dragon Rage**: reworked.
 - New attack: **Dragon Rage** (CC): 20 damage, +10 for each type of Basic Energy attached.
 - **Bubblebeam**: removed.
-- New attack: **Hyper Beam** (WWCC): 50 damage, discard 1 Energy from opponent.
+- New attack: **Raging Storm** (WWCC): 50 damage, +50 damage if the opponent has taken more Prizes.
 
 #### Lapras
 - **Water Gun**: removed.

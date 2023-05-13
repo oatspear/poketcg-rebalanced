@@ -240,8 +240,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FlipUntilFailAppears10DamageForEachHeadsText       ; 0x00e8
 	textpointer IfHeadPlus10IfTails10ToYourselfText                ; 0x00e9
 	textpointer DamageToOppBenchIfHeadsDamageToYoursIfTailsText    ; 0x00ea
-	textpointer IfHeadsChangeOpponentsActivePokemonText            ; 0x00eb
-	textpointer IfHeadsHealIsSuccessfulText                        ; 0x00ec
 	textpointer IfTailsDamageToYourselfTooText                     ; 0x00ed
 	textpointer SuccessCheckIfHeadsAttackIsSuccessfulText          ; 0x00ee
 	textpointer TrainerCardSuccessCheckText                        ; 0x00ef
@@ -2429,6 +2427,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FlailName                                          ; 0x096d
 	textpointer FlailDescription                                   ; 0x096e
 	textpointer CrabhammerName                                     ; 0x096f
+	textpointer CrabhammerDescription
 	textpointer PincerName                                         ; 0x0970
 	textpointer KinglerDescription                                 ; 0x0971
 	textpointer HorseaName                                         ; 0x0972
@@ -2937,6 +2936,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DragonClawName
 	textpointer AscensionName
 	textpointer AscensionDescription
+	textpointer RagingStormName
+	textpointer RagingStormDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

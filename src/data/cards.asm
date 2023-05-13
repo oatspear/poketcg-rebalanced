@@ -3970,21 +3970,21 @@ KrabbyCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx CallForFriendName ; name
-	tx CallForFriendDescription ; description
+	energy WATER, 1 ; energies
+	tx BubbleName ; name
+	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw CallForFriendEffectCommands ; effect commands
-	db NONE ; flags 1
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Paralysis50PercentEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_BUBBLES ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx GuillotineName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -4016,32 +4016,32 @@ KinglerCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	db KINGLER
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx KrabbyName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
-	tx FlailName ; name
-	tx FlailDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx RendName ; name
+	tx Bonus20IfOpponentIsDamagedDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_X ; category
-	dw FlailEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_BIG_HIT ; animation
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 2 ; energies
+	energy WATER, 2, COLORLESS, 1 ; energies
 	tx CrabhammerName ; name
-	dw NONE ; description
+	tx CrabhammerDescription ; description
 	dw NONE ; description (cont)
 	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db DAMAGE_PLUS ; category
+	dw CrabhammerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -4230,7 +4230,7 @@ SeakingCard:
 	tx Bonus20IfOpponentIsDamagedDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_NORMAL ; category
+	db DAMAGE_PLUS ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
@@ -4448,17 +4448,18 @@ GyaradosCard:
 
 	; attack 2
 	energy WATER, 2, COLORLESS, 2 ; energies
-	tx HyperBeamName ; name
-	tx Discard1EnergyFromTargetDescription ; description
+	tx RagingStormName ; name
+	tx RagingStormDescription ; description
 	dw NONE ; description (cont)
 	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw HyperBeamEffectCommands ; effect commands
+	db DAMAGE_PLUS ; category
+	dw RagingStormEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HYPER_BEAM ; animation
+	db ATK_ANIM_THUNDERSTORM ; animation
+	; db ATK_ANIM_WHIRLPOOL ; alt animation
 
 	db 2 ; retreat cost
 	db WR_LIGHTNING ; weakness
