@@ -685,6 +685,16 @@ DragonClawName:
 	text "Dragon Claw"
 	done
 
+AscensionName:
+	text "Ascension"
+	done
+
+AscensionDescription:
+	text "Search your deck for a card that"
+	line "evolves from this Pokémon and"
+	line "attach it to this Pokémon."
+	done
+
 ProfessorOakName: ; 6342d (18:742d)
 	text "Professor Oak"
 	done

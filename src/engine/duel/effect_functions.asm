@@ -178,6 +178,10 @@ AdaptiveEvolution_AllowEvolutionEffect:
 	; scf
 	; ret z ; return if was played this turn
 
+Ascension_PlayerSelectEffect:
+	ld a, GYARADOS
+	jr EvolutionFromDeck_PlayerSelectEffect
+
 Hatch_PlayerSelectEffect:
 	ld a, BUTTERFREE
 	jr EvolutionFromDeck_PlayerSelectEffect
@@ -258,6 +262,10 @@ EvolutionFromDeck_PlayerSelectEffect:
 	ldh [hTemp_ffa0], a
 	ret
 
+Ascension_AISelectEffect:
+	ld a, GYARADOS
+	jr EvolutionFromDeck_AISelectEffect
+
 Hatch_AISelectEffect:
 	ld a, BUTTERFREE
 	jr EvolutionFromDeck_AISelectEffect
@@ -301,6 +309,7 @@ Hatch_EvolveEffect:
 	call ClearAllStatusConditions
 	jr EvolutionFromDeck_EvolveEffect
 
+Ascension_EvolveEffect:
 PoisonEvolution_EvolveEffect:
 	; fallthrough
 

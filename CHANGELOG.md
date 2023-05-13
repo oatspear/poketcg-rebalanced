@@ -289,10 +289,16 @@
 - **Recover**: reduced cost from (WW) to (C) and can discard any type of Energy.
 - **Star Freeze**: reduced cost from (WCC) to (WC).
 
+#### Magikarp
+- **Tackle**: removed.
+- **Flail**: reduced cost from (W) to (C).
+- New attack: **Ascension** (WC): search for Gyarados in the Deck and evolve Magikarp.
+
 #### Gyarados
 - **Dragon Rage**: reworked.
 - New attack: **Dragon Rage** (CC): 20 damage, +10 for each type of Basic Energy attached.
-- **Bubblebeam**: reduced cost from (WWWW) to (WWW) and increased damage from 40 to 50.
+- **Bubblebeam**: removed.
+- New attack: **Hyper Beam** (WWCC): 50 damage, discard 1 Energy from opponent.
 
 #### Lapras
 - **Water Gun**: removed.
