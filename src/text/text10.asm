@@ -917,11 +917,10 @@ FlamesOfRageName: ; 5a5d8 (16:65d8)
 	done
 
 FlamesOfRageDescription: ; 5a5e8 (16:65e8)
-	text "Discard 2 <FIRE> Energy cards attached"
-	line "to Arcanine in order to use this"
-	line "attack. This attack does 40 damage"
-	line "plus 10 more damage for each damage"
-	line "counter on Arcanine."
+	text "Discard 2 Energy cards attached to"
+	line "this Pokémon. This attack does 10"
+	line "more damage for each damage counter"
+	line "on this Pokémon."
 	done
 
 LegendaryName: ; 5a689 (16:6689)

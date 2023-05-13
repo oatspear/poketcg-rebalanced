@@ -233,7 +233,7 @@ EvolutionFromDeck_PlayerSelectEffect:
 	ret
 
 .play_sfx
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .select_card
 
 .try_cancel
@@ -379,14 +379,15 @@ EvolutionFromDeck_EvolveEffect:
 
 ; ------------------------------------------------------------------------------
 
-Func_2c087: ; 2c087 (b:4087)
-	xor a
-	jr Func_2c08c
+; unreferenced
+;Serial_TossZeroCoins:
+;	xor a
+;	jr Serial_TossCoinATimes
 
-Func_2c08a: ; 2c08a (b:408a)
+Serial_TossCoin:
 	ld a, $1
 
-Func_2c08c: ; 2c08c (b:408c)
+Serial_TossCoinATimes:
 	push de
 	push af
 	ld a, OPPACTION_TOSS_COIN_A_TIMES
@@ -1024,7 +1025,7 @@ HealingWind_PlayAreaHealEffect:
 ; in the Deck anyway, and returns carry if No is selected.
 ; uses SEARCHEFFECT_* as input which determines what to search for:
 ;	SEARCHEFFECT_CARD_ID = search for card ID in e
-;	SEARCHEFFECT_NIDORAN = search for either NidoranM or NidoranF
+;	SEARCHEFFECT_POKEMON_OR_BASIC_ENERGY = search for either a Pokémon or a Basic Energy
 ;	SEARCHEFFECT_BASIC_POKEMON = search for any Basic Pokemon
 ;	SEARCHEFFECT_BASIC_ENERGY = search for any Basic Energy
 ;	SEARCHEFFECT_POKEMON = search for any Pokemon card
@@ -1042,7 +1043,7 @@ LookForCardsInDeck:
 	cp $ff
 	jr z, .none_in_deck
 	ld a, d
-	ld hl, .search_table
+	ld hl, CardSearch_FunctionTable
 	call JumpToFunctionInTable
 	jr c, .none_in_deck
 	pop bc
@@ -1061,22 +1062,23 @@ LookForCardsInDeck:
 	call YesOrNoMenuWithText_SetCursorToYes
 	ret
 
-.search_table
-	dw .SearchDeckForCardID
-	dw .SearchDeckForNidoran
-	dw .SearchDeckForBasicPokemon
-	dw .SearchDeckForBasicEnergy
-	dw .SearchDeckForPokemon
-	dw .SearchDeckForGrassCard
+
+CardSearch_FunctionTable:
+	dw .SearchDuelTempListForCardID
+	dw .SearchDuelTempListForPokemonOrBasicEnergy
+	dw .SearchDuelTempListForBasicPokemon
+	dw .SearchDuelTempListForBasicEnergy
+	dw .SearchDuelTempListForPokemon
+	dw .SearchDuelTempListForGrassCard
 
 .set_carry
 	scf
 	ret
 
-; returns carry if no card with same card ID as e is found in Deck
-.SearchDeckForCardID
+; returns carry if no card with same card ID as e is found
+.SearchDuelTempListForCardID
 	ld hl, wDuelTempList
-.loop_deck_e
+.loop_list_e
 	ld a, [hli]
 	cp $ff
 	jr z, .set_carry
@@ -1085,77 +1087,75 @@ LookForCardsInDeck:
 	ld a, e
 	pop de
 	cp e
-	jr nz, .loop_deck_e
+	jr nz, .loop_list_e
 	or a
 	ret
 
-; returns carry if no NidoranM or NidoranF card is found in Deck
-.SearchDeckForNidoran
+; returns carry if no Pokémon or Basic Energy card is found
+.SearchDuelTempListForPokemonOrBasicEnergy
 	ld hl, wDuelTempList
-.loop_deck_nidoran
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp NIDORANF
-	jr z, .found_nidoran
-	cp NIDORANM
-	jr nz, .loop_deck_nidoran
-.found_nidoran
-	or a
-	ret
-
-; returns carry if no Basic Pokemon is found in Deck
-.SearchDeckForBasicPokemon
-	ld hl, wDuelTempList
-.loop_deck_basic_pkmn
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
-	jr nc, .loop_deck_basic_pkmn  ; not a Pokemon
-	ld a, [wLoadedCard2Stage]
-	or a  ; BASIC
-	jr nz, .loop_deck_basic_pkmn
-	ret
-
-; returns carry if no Basic Energy cards are found in Deck
-.SearchDeckForBasicEnergy
-	ld hl, wDuelTempList
-.loop_deck_energy
+.loop_list_pkmn_or_basic_energy
 	ld a, [hli]
 	cp $ff
 	jr z, .set_carry
 	call GetCardIDFromDeckIndex
 	call GetCardType
 	cp TYPE_ENERGY_DOUBLE_COLORLESS
-	jr z, .loop_deck_energy
-	and TYPE_ENERGY
-	jr z, .loop_deck_energy
+	jr .loop_list_pkmn_or_basic_energy
+.found_pkmn_or_basic_energy
 	or a
 	ret
 
-; returns carry if no Pokemon cards are found in Deck
-.SearchDeckForPokemon
+; returns carry if no Basic Pokemon is found
+.SearchDuelTempListForBasicPokemon
 	ld hl, wDuelTempList
-.loop_deck_pkmn
+.loop_list_basic_pkmn
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_PKMN + 1
+	jr nc, .loop_list_basic_pkmn  ; not a Pokemon
+	ld a, [wLoadedCard2Stage]
+	or a  ; BASIC
+	jr nz, .loop_list_basic_pkmn
+	ret
+
+; returns carry if no Basic Energy cards are found
+.SearchDuelTempListForBasicEnergy
+	ld hl, wDuelTempList
+.loop_list_energy
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_ENERGY_DOUBLE_COLORLESS
+	jr z, .loop_list_energy
+	and TYPE_ENERGY
+	jr z, .loop_list_energy
+	or a
+	ret
+
+; returns carry if no Pokemon cards are found
+.SearchDuelTempListForPokemon
+	ld hl, wDuelTempList
+.loop_list_pkmn
 	ld a, [hli]
 	cp $ff
 	jr z, .set_carry
 	call GetCardIDFromDeckIndex
 	call GetCardType
 	cp TYPE_ENERGY
-	jr nc, .loop_deck_pkmn
+	jr nc, .loop_list_pkmn
 	or a
 	ret
 
-; returns carry if no Grass cards are found in Deck
-.SearchDeckForGrassCard
+; returns carry if no Grass cards are found
+.SearchDuelTempListForGrassCard
 	ld hl, wDuelTempList
-.loop_deck_grass
+.loop_list_grass
 	ld a, [hli]
 	cp $ff
 	jr z, .set_carry
@@ -1164,7 +1164,7 @@ LookForCardsInDeck:
 	cp TYPE_ENERGY_GRASS
 	jr z, .found_grass_card
 	cp TYPE_PKMN_GRASS
-	jr nz, .loop_deck_grass
+	jr nz, .loop_list_grass
 .found_grass_card
 	or a
 	ret
@@ -2430,7 +2430,7 @@ EnergyTrans_TransferEffect: ; 2cb77 (b:4b77)
 	jr .draw_play_area
 
 .play_sfx
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .loop_input_take
 
 EnergyTrans_AIEffect: ; 2cbfb (b:4bfb)
@@ -3395,55 +3395,11 @@ Crabhammer_DamageBoostEffect:
 	call AddToDamage
 	ret
 
-; return carry if has less than 2 Fire Energy cards
-FlamesOfRage_CheckEnergy: ; 2d3a0 (b:53a0)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies]
-	ldtx hl, NotEnoughFireEnergyText
-	cp 2
-	ret
-
-FlamesOfRage_PlayerSelectEffect: ; 2d3ae (b:53ae)
-	ldtx hl, ChooseAndDiscard2FireEnergyCardsText
-	call DrawWideTextBox_WaitForInput
-
-	xor a
-	ldh [hCurSelectionItem], a
-	call CreateListOfFireEnergyAttachedToArena
-	xor a
-	bank1call DisplayEnergyDiscardScreen
-.loop_input
-	bank1call HandleEnergyDiscardMenuInput
-	ret c
-	call GetNextPositionInTempList
-	ldh a, [hTempCardIndex_ff98]
-	ld [hl], a
-	call RemoveCardFromDuelTempList
-	ldh a, [hCurSelectionItem]
-	cp 2
-	ret nc ; return when 2 have been chosen
-	bank1call DisplayEnergyDiscardMenu
-	jr .loop_input
-
-FlamesOfRage_AISelectEffect: ; 2d3d5 (b:53d5)
-	call AIPickFireEnergyCardToDiscard
-	ld a, [wDuelTempList + 1]
-	ldh [hTempList + 1], a
-	ret
-
-FlamesOfRage_DiscardEffect: ; 2d3de (b:53de)
-	ldh a, [hTempList]
-	call PutCardInDiscardPile
-	ldh a, [hTempList + 1]
-	call PutCardInDiscardPile
-	ret
-
-FlamesOfRage_AIEffect: ; 2d3e9 (b:53e9)
+FlamesOfRage_AIEffect:
 	call FlamesOfRage_DamageBoostEffect
 	jp SetDefiniteAIDamage
 
-FlamesOfRage_DamageBoostEffect: ; 2d3ef (b:53ef)
+FlamesOfRage_DamageBoostEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
 	call AddToDamage
@@ -3648,94 +3604,14 @@ EnergyBurnCheck_Unreferenced: ; 2d620 (b:5620)
 	scf
 	ret
 
-Rage_AIEffect: ; 2d638 (b:5638)
+Rage_AIEffect:
 	call Rage_DamageBoostEffect
 	jp SetDefiniteAIDamage
 
-Rage_DamageBoostEffect: ; 2d63e (b:563e)
+Rage_DamageBoostEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
 	call AddToDamage
-	ret
-
-MixUpEffect: ; 2d647 (b:5647)
-	call SwapTurn
-	call CreateHandCardList
-	call SortCardsInDuelTempListByID
-
-; first go through Hand to place
-; all Pkmn cards in it in the Deck.
-	ld hl, wDuelTempList
-	ld c, 0
-.loop_hand
-	ld a, [hl]
-	cp $ff
-	jr z, .done_hand
-	call .CheckIfCardIsPkmnCard
-	jr nc, .next_hand
-	; found Pkmn card, place in deck
-	inc c
-	ld a, [hl]
-	call RemoveCardFromHand
-	call ReturnCardToDeck
-.next_hand
-	inc hl
-	jr .loop_hand
-
-.done_hand
-	ld a, c
-	ldh [hCurSelectionItem], a
-	push bc
-	ldtx hl, ThePkmnCardsInHandAndDeckWereShuffledText
-	call DrawWideTextBox_WaitForInput
-
-	call SyncShuffleDeck
-	call CreateDeckCardList
-	pop bc
-	ldh a, [hCurSelectionItem]
-	or a
-	jr z, .done ; if no cards were removed from Hand, return
-
-; c holds the number of cards that were placed in the Deck.
-; now pick Pkmn cards from the Deck to place in Hand.
-	ld hl, wDuelTempList
-.loop_deck
-	ld a, [hl]
-	call .CheckIfCardIsPkmnCard
-	jr nc, .next_deck
-	dec c
-	ld a, [hl]
-	call SearchCardInDeckAndAddToHand
-	call AddCardToHand
-.next_deck
-	inc hl
-	ld a, c
-	or a
-	jr nz, .loop_deck
-.done
-	call SwapTurn
-	ret
-
-; returns carry if card index in a is Pkmn card
-.CheckIfCardIsPkmnCard: ; 2d69a (b:569a)
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
-	ret
-
-DancingEmbers_AIEffect: ; 2d6a3 (b:56a3)
-	ld a, 80 / 2
-	lb de, 0, 80
-	jp SetExpectedAIDamage
-
-DancingEmbers_MultiplierEffect: ; 2d6ab (b:56ab)
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 8
-	call TossCoinATimes_BankB
-	call ATimes10
-	call SetDefiniteDamage
 	ret
 
 Firegiver_AddToHandEffect: ; 2d6c2 (b:56c2)
@@ -4103,7 +3979,7 @@ Curse_PlayerSelectEffect: ; 2d834 (b:5834)
 	or a
 	jr nz, .picked_first ; test if has damage
 	; play sfx
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .loop_input_first
 
 .picked_first
@@ -4714,7 +4590,7 @@ DamageSwap_SelectAndSwapEffect: ; 2dba2 (b:5ba2)
 	jr .start
 
 .no_damage
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .loop_input_first
 
 ; tries to give damage counter to hPlayAreaEffectTarget,
@@ -5291,8 +5167,9 @@ Discard2Energies_PlayerSelectEffect:
 	or a
 	ret
 
-Discard2Energies_AISelectEffect:
 ; select the first two Energies
+; TODO avoid Energies of the same type as the user
+Discard2Energies_AISelectEffect:
 	xor a ; PLAY_AREA_ARENA
 	call CreateArenaOrBenchEnergyCardList
 	ld hl, wDuelTempList
@@ -5632,7 +5509,7 @@ CallForFriend_PlayerSelectEffect: ; 2e110 (b:6110)
 
 .play_sfx
 	; play SFX and loop back
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .loop
 
 .pressed_b
@@ -5740,7 +5617,7 @@ Sprout_PlayerSelectEffect:
 
 .play_sfx
 	; play SFX and loop back
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .loop
 
 .pressed_b
@@ -6482,7 +6359,7 @@ SelectUpTo2Benched_PlayerSelectEffect: ; 2e60d (b:660d)
 	call .CheckIfChosenAlready
 	jr nc, .not_chosen
 	; play SFX
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .loop_input
 
 .not_chosen
@@ -6912,7 +6789,7 @@ EnergySpike_PlayerSelectEffect: ; 2e87b (b:687b)
 	ret
 
 .play_sfx
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .select_card
 
 .try_cancel
@@ -8574,7 +8451,7 @@ EnergySearch_PlayerSelection: ; 2f328 (b:7328)
 	or a
 	ret
 .play_sfx
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .read_input
 
 .try_exit
@@ -9860,7 +9737,7 @@ Maintenance_ReturnToDeckAndDrawEffect: ; 2fa85 (b:7a85)
 	ret
 
 ; return carry if no cards in deck
-PokeBall_DeckCheck: ; 2faad (b:7aad)
+PokeBall_DeckCheck:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
 	ldtx hl, NoCardsLeftInTheDeckText
@@ -9868,17 +9745,20 @@ PokeBall_DeckCheck: ; 2faad (b:7aad)
 	ccf
 	ret
 
-PokeBall_PlayerSelection: ; 2fab9 (b:7ab9)
-	ld de, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call Func_2c08a
-	ldh [hTempList], a ; store coin result
-	ret nc
+PokeBall_PlayerSelection:
+; OATS skip coin toss
+; re-enabling coin requires changing [hTemp_ffa0] to [hTempList + 1] below
+	; ld de, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	; call Serial_TossCoin
+	; ldh [hTempList], a ; store coin result
+	; ret nc
 
 ; create list of all Pokemon cards in deck to search for
 	call CreateDeckCardList
-	ldtx hl, ChooseBasicOrEvolutionPokemonCardFromDeckText
-	ldtx bc, EvolutionCardText
-	lb de, SEARCHEFFECT_POKEMON, 0
+	; ldtx hl, ChooseBasicOrEvolutionPokemonCardFromDeckText
+	ldtx hl, ChooseBasicPokemonFromDeckText
+	ldtx bc, BasicPokemonDeckText
+	lb de, SEARCHEFFECT_BASIC_POKEMON, 0
 	call LookForCardsInDeck
 	jr c, .no_pkmn ; return if Player chose not to check deck
 
@@ -9895,19 +9775,24 @@ PokeBall_PlayerSelection: ; 2fab9 (b:7ab9)
 	ld a, [wLoadedCard2Type]
 	cp TYPE_ENERGY
 	jr nc, .play_sfx ; can't select non-Pokemon card
+	ld a, [wLoadedCard2Stage]
+	and a  ; cp BASIC
+	jr nz, .play_sfx ; can't select non-Basic Pokemon card
 	ldh a, [hTempCardIndex_ff98]
-	ldh [hTempList + 1], a
+	; ldh [hTempList + 1], a
+	ldh [hTemp_ffa0], a
 	or a
 	ret
 
 .no_pkmn
 	ld a, $ff
-	ldh [hTempList + 1], a
+	; ldh [hTempList + 1], a
+	ldh [hTemp_ffa0], a
 	or a
 	ret
 
 .play_sfx
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .read_input
 
 .try_exit
@@ -9920,15 +9805,20 @@ PokeBall_PlayerSelection: ; 2fab9 (b:7ab9)
 	call LoadCardDataToBuffer2_FromDeckIndex
 	ld a, [wLoadedCard2Type]
 	cp TYPE_ENERGY
-	jr nc, .loop
+	jr nc, .loop  ; not a Pokémon
+	ld a, [wLoadedCard2Stage]
+	and a
+	jr nz, .loop  ; not Basic
 	jr .read_input
 
-PokeBall_AddToHandEffect: ; 2fb15 (b:7b15)
-	ldh a, [hTempList]
-	or a
-	ret z ; return if coin toss was tails
+PokeBall_AddToHandEffect:
+; no coin toss
+	; ldh a, [hTempList]
+	; or a
+	; ret z ; return if coin toss was tails
 
-	ldh a, [hTempList + 1]
+	; ldh a, [hTempList + 1]
+	ldh a, [hTemp_ffa0]
 	cp $ff
 	jr z, .done ; skip if no Pokemon was chosen
 
@@ -9938,7 +9828,8 @@ PokeBall_AddToHandEffect: ; 2fb15 (b:7b15)
 	call AddCardToHand
 	call IsPlayerTurn
 	jr c, .done
-	ldh a, [hTempList + 1]
+	; ldh a, [hTempList + 1]
+	ldh a, [hTemp_ffa0]
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 .done
@@ -9946,16 +9837,16 @@ PokeBall_AddToHandEffect: ; 2fb15 (b:7b15)
 	ret
 
 ; return carry if no cards in the Discard Pile
-Recycle_DiscardPileCheck: ; 2fb36 (b:7b36)
+Recycle_DiscardPileCheck:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_DISCARD_PILE
 	call GetTurnDuelistVariable
 	ldtx hl, ThereAreNoCardsInTheDiscardPileText
 	cp 1
 	ret
 
-Recycle_PlayerSelection: ; 2fb41 (b:7b41)
+Recycle_PlayerSelection:
 	ld de, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call Func_2c08a
+	call Serial_TossCoin
 	jr nc, .tails
 
 	call CreateDiscardPileCardList

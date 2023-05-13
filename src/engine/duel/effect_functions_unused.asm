@@ -41,7 +41,7 @@ Gigashock_PlayerSelectEffect: ; 2e60d (b:660d)
 	call .CheckIfChosenAlready
 	jr nc, .not_chosen
 	; play SFX
-	call Func_3794
+	call PlaySFX_InvalidChoice
 	jr .loop_input
 
 .not_chosen
@@ -637,3 +637,134 @@ PidgeottoMirrorMove_BeforeDamage: ; 2ecfe (b:6cfe)
 
 PidgeottoMirrorMove_AfterDamage: ; 2ed01 (b:6d01)
 	jp MirrorMoveEffects.AfterDamage
+
+
+
+FlamesOfRage_PlayerSelectEffect:
+	ldtx hl, ChooseAndDiscard2FireEnergyCardsText
+	call DrawWideTextBox_WaitForInput
+
+	xor a
+	ldh [hCurSelectionItem], a
+	call CreateListOfFireEnergyAttachedToArena
+	xor a
+	bank1call DisplayEnergyDiscardScreen
+.loop_input
+	bank1call HandleEnergyDiscardMenuInput
+	ret c
+	call GetNextPositionInTempList
+	ldh a, [hTempCardIndex_ff98]
+	ld [hl], a
+	call RemoveCardFromDuelTempList
+	ldh a, [hCurSelectionItem]
+	cp 2
+	ret nc ; return when 2 have been chosen
+	bank1call DisplayEnergyDiscardMenu
+	jr .loop_input
+
+; return carry if has less than 2 Fire Energy cards
+FlamesOfRage_CheckEnergy:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies]
+	ldtx hl, NotEnoughFireEnergyText
+	cp 2
+	ret
+
+FlamesOfRage_AISelectEffect: ; 2d3d5 (b:53d5)
+	call AIPickFireEnergyCardToDiscard
+	ld a, [wDuelTempList + 1]
+	ldh [hTempList + 1], a
+	ret
+
+FlamesOfRage_DiscardEffect: ; 2d3de (b:53de)
+	ldh a, [hTempList]
+	call PutCardInDiscardPile
+	ldh a, [hTempList + 1]
+	call PutCardInDiscardPile
+	ret
+
+
+
+;
+MixUpEffect: ; 2d647 (b:5647)
+	call SwapTurn
+	call CreateHandCardList
+	call SortCardsInDuelTempListByID
+
+; first go through Hand to place
+; all Pkmn cards in it in the Deck.
+	ld hl, wDuelTempList
+	ld c, 0
+.loop_hand
+	ld a, [hl]
+	cp $ff
+	jr z, .done_hand
+	call .CheckIfCardIsPkmnCard
+	jr nc, .next_hand
+	; found Pkmn card, place in deck
+	inc c
+	ld a, [hl]
+	call RemoveCardFromHand
+	call ReturnCardToDeck
+.next_hand
+	inc hl
+	jr .loop_hand
+
+.done_hand
+	ld a, c
+	ldh [hCurSelectionItem], a
+	push bc
+	ldtx hl, ThePkmnCardsInHandAndDeckWereShuffledText
+	call DrawWideTextBox_WaitForInput
+
+	call SyncShuffleDeck
+	call CreateDeckCardList
+	pop bc
+	ldh a, [hCurSelectionItem]
+	or a
+	jr z, .done ; if no cards were removed from Hand, return
+
+; c holds the number of cards that were placed in the Deck.
+; now pick Pkmn cards from the Deck to place in Hand.
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hl]
+	call .CheckIfCardIsPkmnCard
+	jr nc, .next_deck
+	dec c
+	ld a, [hl]
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+.next_deck
+	inc hl
+	ld a, c
+	or a
+	jr nz, .loop_deck
+.done
+	call SwapTurn
+	ret
+
+; returns carry if card index in a is Pkmn card
+.CheckIfCardIsPkmnCard: ; 2d69a (b:569a)
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY
+	ret
+
+
+;
+DancingEmbers_AIEffect: ; 2d6a3 (b:56a3)
+	ld a, 80 / 2
+	lb de, 0, 80
+	jp SetExpectedAIDamage
+
+DancingEmbers_MultiplierEffect: ; 2d6ab (b:56ab)
+	ld hl, 10
+	call LoadTxRam3
+	ldtx de, DamageCheckIfHeadsXDamageText
+	ld a, 8
+	call TossCoinATimes_BankB
+	call ATimes10
+	call SetDefiniteDamage
+	ret

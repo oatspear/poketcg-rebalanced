@@ -497,12 +497,12 @@ KangaskhanCometPunchEffectCommands:
 	db  $00
 
 ArcanineFlamesOfRageEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FlamesOfRage_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FlamesOfRage_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FlamesOfRage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, FlamesOfRage_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, FlamesOfRage_AISelectEffect
-	dbw EFFECTCMDTYPE_AI, FlamesOfRage_AIEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Check2EnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discard2Energies_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Discard2Energies_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Discard2Energies_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
 	db  $00
 
 RapidashStompEffectCommands:
@@ -563,15 +563,6 @@ VulpixConfuseRayEffectCommands:
 RageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
-	db  $00
-
-NinetalesMixUpEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MixUpEffect
-	db  $00
-
-NinetalesDancingEmbersEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DancingEmbers_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, DancingEmbers_AIEffect
 	db  $00
 
 MoltresFiregiverEffectCommands:

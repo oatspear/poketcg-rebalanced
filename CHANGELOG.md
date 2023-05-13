@@ -194,6 +194,7 @@
 #### Arcanine Lv34
 - Increased HP from 70 to 80.
 - **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
+- **Flames of Rage**: can discard any 2 Energy cards.
 
 #### Arcanine Lv45
 - Reduced HP from 100 to 90.
@@ -667,6 +668,9 @@
 
 #### Imposter Professor Oak
 - Both players shuffle their hands into their decks and draw 4 cards.
+
+#### Pokéball
+- No coin flip; can only choose Basic Pokémon.
 
 
 ## Version 0.1

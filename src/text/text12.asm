@@ -912,12 +912,10 @@ PokeBallName: ; 63f2e (18:7f2e)
 	done
 
 PokeBallDescription: ; 63f39 (18:7f39)
-	text "Flip a coin. If heads, you may"
-	line "search your deck for any Basic"
-	line "Pokémon or Evolution card. Show that"
-	line "card to your opponent, then put it"
-	line "into your hand. Shuffle your deck"
-	line "afterward."
+	text "Search your deck for a Basic"
+	line "Pokémon. Show it to your opponent,"
+	line "then put it into your hand."
+	line "Shuffle your deck afterward."
 	done
 
 ScoopUpName: ; 63fed (18:7fed)
