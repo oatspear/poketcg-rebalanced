@@ -1168,18 +1168,26 @@ DoubleAttackX40EffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX40_AIEffect
 	db  $00
 
-MeowthCatPunchEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CatPunchEffect
-	db  $00
-
 DittoMorphEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MorphEffect
 	db  $00
 
+Deal10ToAnyPokemonEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal10Damage_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
+	db  $00
+
+Deal20ToAnyPokemonEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20Damage_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
+	db  $00
+
 Deal30ToAnyPokemonEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal30Damage_DamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Deal30Damage_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Deal30Damage_AISelectEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
 	db  $00
 
 PidgeotGaleEffectCommands:

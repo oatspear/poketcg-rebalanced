@@ -7912,17 +7912,6 @@ Func_2efce: ; 2efce (b:6fce)
 	jr nz, .asm_2efd9
 	ret
 
-CatPunchEffect: ; 2efe0 (b:6fe0)
-	call SwapTurn
-	call PickRandomPlayAreaCard
-	ld b, a
-	ld a, ATK_ANIM_CAT_PUNCH_PLAY_AREA
-	ld [wLoadedAttackAnimation], a
-	ld de, 20
-	call DealDamageToPlayAreaPokemon
-	call SwapTurn
-	ret
-
 MorphEffect: ; 2eff6 (b:6ff6)
 	call ExchangeRNG
 	call .PickRandomBasicPokemonFromDeck
@@ -8057,7 +8046,7 @@ PickRandomBasicCardFromDeck: ; 2f098 (b:7098)
 	scf
 	ret
 
-Deal30Damage_PlayerSelectEffect:
+DealTargetedDamage_PlayerSelectEffect:
 	xor a  ; PLAY_AREA_ARENA
 	ldh [hTemp_ffa0], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -8080,7 +8069,7 @@ Deal30Damage_PlayerSelectEffect:
 	or a
 	ret
 
-Deal30Damage_AISelectEffect:
+DealTargetedDamage_AISelectEffect:
 	xor a  ; PLAY_AREA_ARENA
 	ldh [hTemp_ffa0], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -8094,11 +8083,23 @@ Deal30Damage_AISelectEffect:
 	or a
 	ret
 
+Deal10Damage_DamageEffect:
+	ld de, 10
+	jr DealDEDamage_DamageEffect
+
+Deal20Damage_DamageEffect:
+	ld de, 20
+	jr DealDEDamage_DamageEffect
+
 Deal30Damage_DamageEffect:
+	ld de, 30
+	; fallthrough
+
+DealDEDamage_DamageEffect:
 	call SwapTurn
 	ldh a, [hTemp_ffa0]
 	ld b, a
-	ld de, 30
+	; ld de, 30
 	call DealDamageToPlayAreaPokemon_RegularAnim
 	call SwapTurn
 	ret

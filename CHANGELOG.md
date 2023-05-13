@@ -280,6 +280,16 @@
 - New attack **Rend** (CC): 20 damage, +20 damage if the Defending Pokémon has taken damage.
 - **Crabhammer**: +40 damage if the Defending Pokémon is a Basic Pokémon.
 
+#### Horsea
+- New attack: **Water Gun** (W): 10 damage, +10 for each extra Water Energy up to +20.
+
+#### Seadra
+- Increased HP from 60 to 70.
+- **Water Gun**: removed.
+- **Agility**: removed.
+- New attack: **Aqua Launcher** (WC): 30 damage to one of the opponent's Pokémon.
+- New attack: **Twister** (WWC): 40 damage, discard an Energy from the opponent.
+
 #### Goldeen
 - **Horn Attack**: increased cost from (W) to (CC) and damage from 10 to 20.
 - New attack: **Flail** (c): 10 damage times number of damage counters.
@@ -288,7 +298,7 @@
 - Increased HP from 70 to 80.
 - **Horn Attack**: removed.
 - New attack: **Rend** (CC): 20 damage, +20 if Defending Pokémon is damaged.
-- **Waterfall**: increased cost from (WC) to (WWC) and damage from 30 to 50; also switches Defending Pokémon.
+- **Waterfall**: increased cost from (WC) to (WCC) and damage from 30 to 40; also switches Defending Pokémon.
 
 #### Starmie
 - **Recover**: reduced cost from (WW) to (C) and can discard any type of Energy.
