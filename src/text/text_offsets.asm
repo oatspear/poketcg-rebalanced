@@ -260,11 +260,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer IfHeadsDoNotReceiveDamageOrEffectText              ; 0x00fb
 	textpointer IfHeadsOpponentCannotAttackText                    ; 0x00fc
 	textpointer AttackUnsuccessfulText                             ; 0x00fd
-	textpointer UnableToRetreatDueToAcidText                       ; 0x00fe
+	textpointer UnableToRetreatDueToTrapText
 	textpointer UnableToUseTrainerDueToHeadacheText                ; 0x00ff
-	textpointer UnableToAttackDueToTailWagText                     ; 0x0100
-	textpointer UnableToAttackDueToLeerText                        ; 0x0101
-	textpointer UnableToAttackDueToBoneAttackText                  ; 0x0102
+	textpointer UnableToAttackDueToEffectText
 	textpointer UnableToUseAttackDueToAmnesiaText                  ; 0x0103
 	textpointer KnockedOutDueToDestinyBondText                     ; 0x0104
 	textpointer ReceivesDamageDueToStrikesBackText                 ; 0x0105
@@ -320,6 +318,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseOppAttackToBeUsedWithMetronomeText           ; 0x013a
 	textpointer ThereIsNoInTheDeckText                             ; 0x013b
 	textpointer WouldYouLikeToCheckTheDeckText                     ; 0x013c
+	textpointer ThereAreNoEligibleCardsInTheDiscardPileText
 	textpointer PleaseSelectTheDeckText                            ; 0x013d
 	textpointer PleaseSelectThePlayAreaText                        ; 0x013e
 	textpointer NidoranMNidoranFText                               ; 0x013f

@@ -768,3 +768,26 @@ DancingEmbers_MultiplierEffect: ; 2d6ab (b:56ab)
 	call ATimes10
 	call SetDefiniteDamage
 	ret
+
+
+; If heads, defending Pokemon can't retreat next turn
+UnableToRetreat50PercentEffect:
+	ldtx de, TrapCheckText
+	call TossCoin_BankB
+	ret nc
+	; fallthrough to UnableToRetreatEffect
+
+
+
+;
+PoisonFang_AIEffect: ; 2c730 (b:4730)
+	ld a, 10
+	lb de, 10, 10
+	jp UpdateExpectedAIDamage_AccountForPoison
+
+
+;
+SpitPoison_AIEffect: ; 2c6f0 (b:46f0)
+	ld a, 10 / 2
+	lb de, 0, 10
+	jp SetExpectedAIDamage

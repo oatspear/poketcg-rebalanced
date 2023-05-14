@@ -25,13 +25,13 @@ PokemonsSleepCheckText: ; 380db (e:40db)
 	done
 
 PoisonedIfHeadsConfusedIfTailsText: ; 380ed (e:40ed)
-	text "Opponent is Poisoned if Heads,"
-	line "and Confused if Tails."
+	text "Heads: Opponent is Poisoned"
+	line "Tails: Opponent is Confused"
 	done
 
 AsleepIfHeadsPoisonedIfTailsText:
-	text "Opponent is Asleep if Heads,"
-	line "and Poisoned if Tails."
+	text "Heads: Opponent is Asleep"
+	line "Tails: Opponent is Poisoned"
 	done
 
 IfHeadsDoNotReceiveDamageOrEffectText: ; 38124 (e:4124)
@@ -48,9 +48,9 @@ AttackUnsuccessfulText: ; 38197 (e:4197)
 	text "Attack unsuccessful."
 	done
 
-UnableToRetreatDueToAcidText: ; 381ad (e:41ad)
-	text "Unable to Retreat due to"
-	line "the effects of Acid."
+UnableToRetreatDueToTrapText:
+	text "Unable to Retreat due to a"
+	line "Trapping effect."
 	done
 
 UnableToUseTrainerDueToHeadacheText: ; 381dc (e:41dc)
@@ -58,19 +58,9 @@ UnableToUseTrainerDueToHeadacheText: ; 381dc (e:41dc)
 	line "due to the effects of Headache."
 	done
 
-UnableToAttackDueToTailWagText: ; 3821a (e:421a)
+UnableToAttackDueToEffectText:
 	text "Unable to Attack due to"
-	line "the effects of Tail wag."
-	done
-
-UnableToAttackDueToLeerText: ; 3824c (e:424c)
-	text "Unable to Attack due to"
-	line "the effects of Leer."
-	done
-
-UnableToAttackDueToBoneAttackText: ; 3827a (e:427a)
-	text "Unable to Attack due to"
-	line "the effects of Bone attack."
+	line "a substatus effect."
 	done
 
 UnableToUseAttackDueToAmnesiaText: ; 382af (e:42af)
@@ -407,6 +397,11 @@ ThereIsNoInTheDeckText: ; 39215 (e:5215)
 
 WouldYouLikeToCheckTheDeckText: ; 39231 (e:5231)
 	text "Would you like to check the Deck?"
+	done
+
+ThereAreNoEligibleCardsInTheDiscardPileText:
+	text "There are no eligible cards"
+	line "in the Discard Pile."
 	done
 
 PleaseSelectTheDeckText: ; 39254 (e:5254)

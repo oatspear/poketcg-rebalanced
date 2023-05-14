@@ -41,18 +41,13 @@ HealingNectarEffectCommands:
 
 EkansSpitPoisonEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpitPoison_Poison50PercentEffect
-	dbw EFFECTCMDTYPE_AI, SpitPoison_AIEffect
+	; dbw EFFECTCMDTYPE_AI, SpitPoison_AIEffect
 	db  $00
 
 ArbokPoisonFangEffectCommands:
 PoisonClawsEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	dbw EFFECTCMDTYPE_AI, PoisonFang_AIEffect
-	db  $00
-
-WeepinbellPoisonPowderEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Poison50PercentEffect
-	dbw EFFECTCMDTYPE_AI, WeepinbellPoisonPowder_AIEffect
+	; dbw EFFECTCMDTYPE_AI, PoisonFang_AIEffect
 	db  $00
 
 LureEffectCommands:

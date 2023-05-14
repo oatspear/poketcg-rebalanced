@@ -283,13 +283,13 @@ HandleCantAttackSubstatus:
 	call GetTurnDuelistVariable
 	or a
 	ret z
-	ldtx hl, UnableToAttackDueToTailWagText
+	ldtx hl, UnableToAttackDueToEffectText
 	cp SUBSTATUS2_TAIL_WAG
 	jr z, .return_with_cant_attack
-	ldtx hl, UnableToAttackDueToLeerText
+	; ldtx hl, UnableToAttackDueToEffectText
 	cp SUBSTATUS2_LEER
 	jr z, .return_with_cant_attack
-	ldtx hl, UnableToAttackDueToBoneAttackText
+	; ldtx hl, UnableToAttackDueToEffectText
 	cp SUBSTATUS2_BONE_ATTACK
 	jr z, .return_with_cant_attack
 	or a
@@ -635,7 +635,7 @@ CheckCantRetreatDueToAcid:
 	or a
 	ret
 .cant_retreat
-	ldtx hl, UnableToRetreatDueToAcidText
+	ldtx hl, UnableToRetreatDueToTrapText
 	scf
 	ret
 
