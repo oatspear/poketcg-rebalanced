@@ -71,11 +71,16 @@ _AIProcessHandTrainerCards:
 	call TryExecuteEffectCommandFunction
 	jp c, .next_in_data
 
+; OATS TODO remove this random chance, use best AI at all times
 ; AI can randomly choose not to play card.
 	farcall AIChooseRandomlyNotToDoAction
 	jr c, .next_in_data
 
 ; call routine to decide whether to play Trainer card
+; NOTE: this calls functions like AIDecide_Pokeball, etc., and these
+; are called *after* running EFFECTCMDTYPE_INITIAL_EFFECT_1, meaning that
+; we can build card lists and such in the initial effect and then assume
+; that they are prebuilt in the decision function.
 	pop de
 	pop hl
 	push hl
@@ -4260,13 +4265,14 @@ AIPlay_Recycle:
 	ret
 
 ; lists cards to look for in the Discard Pile.
-; has priorities for Ghost Deck, and a "default" priority list
-; (which is the Fire Charge deck, since it's the only other
-; deck that runs a Recycle card in it.)
+; has priorities for Fire Charge and Ghost Deck, and a "default" priority list
+; assume:
+;   - EFFECTCMDTYPE_INITIAL_EFFECT_1 already ran and did not return carry,
+;     meaning that wDuelTempList is prebuilt and there are eligible cards.
 AIDecide_Recycle:
 ; no use checking if no cards in Discard Pile
-	call CreateDiscardPileCardList
-	jr c, .no_carry
+	; call CreateDiscardPileCardList
+	; jr c, .no_carry
 
 	ld a, $ff
 	ld [wce08], a
@@ -4278,8 +4284,47 @@ AIDecide_Recycle:
 ; handle Ghost deck differently
 	ld hl, wDuelTempList
 	ld a, [wOpponentDeckID]
+	cp FIRE_CHARGE_DECK_ID
+	jr z, .loop_1
 	cp GHOST_DECK_ID
 	jr z, .loop_2
+
+; default priority list
+.default_loop
+	ld a, [hli]
+	cp $ff
+	jr z, .done
+
+	ld b, a
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld a, [wLoadedCard1Type]
+
+; basic energy card
+	cp TYPE_ENERGY
+	jr c, .stage2_pkmn
+	ld a, b
+	ld [wce08 + 3], a
+	jr .default_loop
+
+.stage2_pkmn
+	ld a, [wLoadedCard1Stage]
+	cp STAGE2
+	jr nz, .stage1_pkmn
+	ld a, b
+	ld [wce08], a
+	jr .default_loop
+
+.stage1_pkmn
+	cp STAGE1
+	jr nz, .basic_pkmn
+	ld a, b
+	ld [wce08 + 1], a
+	jr .default_loop
+
+.basic_pkmn
+	ld a, b
+	ld [wce08 + 2], a
+	jr .default_loop
 
 ; priority list for Fire Charge deck
 .loop_1
@@ -4290,8 +4335,8 @@ AIDecide_Recycle:
 	ld b, a
 	call LoadCardDataToBuffer1_FromDeckIndex
 
-; double colorless
-	cp DOUBLE_COLORLESS_ENERGY
+; fire energy
+	cp FIRE_ENERGY
 	jr nz, .chansey
 	ld a, b
 	ld [wce08], a
@@ -4380,6 +4425,7 @@ AIDecide_Recycle:
 	ld a, b
 	ld [wce08 + 4], a
 	jr .loop_2
+
 
 AIPlay_Lass:
 	ld a, [wCurrentAIFlags]
@@ -4803,17 +4849,18 @@ AIDecide_ClefairyDollOrMysteriousFossil:
 AIPlay_Pokeball:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
-	ldtx de, TrainerCardSuccessCheckText
-	bank1call TossCoin
-	ldh [hTemp_ffa0], a
-	jr nc, .asm_219bc
+; OATS no coin flip
+;	ldtx de, TrainerCardSuccessCheckText
+;	bank1call TossCoin
+;	ldh [hTemp_ffa0], a
+;	jr nc, .asm_219bc
 	ld a, [wAITrainerCardParameter]
 	ldh [hTempPlayAreaLocation_ffa1], a
-	jr .asm_219c0
-.asm_219bc
-	ld a, $ff
-	ldh [hTempPlayAreaLocation_ffa1], a
-.asm_219c0
+;	jr .asm_219c0
+;.asm_219bc
+;	ld a, $ff
+;	ldh [hTempPlayAreaLocation_ffa1], a
+;.asm_219c0
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
@@ -4858,10 +4905,10 @@ AIDecide_Pokeball:
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation
 	ret c
-	ld e, RHYDON
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
-	ret c
+	; ld e, RHYDON
+	; ld a, CARD_LOCATION_DECK
+	; call LookForCardIDInLocation
+	; ret c
 	ld e, ONIX
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation
@@ -4985,38 +5032,45 @@ AIDecide_Pokeball:
 ; it does this for both the NidoranM (first)
 ; and NidoranF (second) families.
 .lovely_nidoran
-	ld b, NIDORANM
-	ld a, NIDORINO
-	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
+	; ld b, NIDORANM
+	; ld a, NIDORINO
+	; call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
+	; ret c
+	; ld b, NIDORINO
+	; ld a, NIDOKING
+	; call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
+	; ret c
+	; ld a, NIDORANM
+	; ld b, NIDORINO
+	; call LookForCardIDInDeck_GivenCardIDInHand
+	; ret c
+	; ld a, NIDORINO
+	; ld b, NIDOKING
+	; call LookForCardIDInDeck_GivenCardIDInHand
+	; ret c
+	; ld b, NIDORANF
+	; ld a, NIDORINA
+	; call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
+	; ret c
+	; ld b, NIDORINA
+	; ld a, NIDOQUEEN
+	; call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
+	; ret c
+	; ld a, NIDORANF
+	; ld b, NIDORINA
+	; call LookForCardIDInDeck_GivenCardIDInHand
+	; ret c
+	; ld a, NIDORINA
+	; ld b, NIDOQUEEN
+	; call LookForCardIDInDeck_GivenCardIDInHand
+	; ret c
+	ld e, NIDORANM
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation
 	ret c
-	ld b, NIDORINO
-	ld a, NIDOKING
-	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
-	ret c
-	ld a, NIDORANM
-	ld b, NIDORINO
-	call LookForCardIDInDeck_GivenCardIDInHand
-	ret c
-	ld a, NIDORINO
-	ld b, NIDOKING
-	call LookForCardIDInDeck_GivenCardIDInHand
-	ret c
-	ld b, NIDORANF
-	ld a, NIDORINA
-	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
-	ret c
-	ld b, NIDORINA
-	ld a, NIDOQUEEN
-	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
-	ret c
-	ld a, NIDORANF
-	ld b, NIDORINA
-	call LookForCardIDInDeck_GivenCardIDInHand
-	ret c
-	ld a, NIDORINA
-	ld b, NIDOQUEEN
-	call LookForCardIDInDeck_GivenCardIDInHand
-	ret c
+	ld e, NIDORANF
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation
 	ret
 
 AIPlay_ComputerSearch:

@@ -672,6 +672,9 @@
 #### Pokéball
 - No coin flip; can only choose Basic Pokémon.
 
+#### Recycle
+- No coin flip; can only choose Pokémon or Basic Energy.
+
 
 ## Version 0.1
 

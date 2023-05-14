@@ -1393,7 +1393,7 @@ PokeBallEffectCommands:
 
 RecycleEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Recycle_DiscardPileCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Recycle_AddToHandEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Recycle_AddToDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Recycle_PlayerSelection
 	db  $00
 

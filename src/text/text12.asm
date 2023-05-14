@@ -1096,12 +1096,12 @@ GamblerDescription: ; 648f6 (19:48f6)
 	line "If tails, draw 1 card."
 	done
 
-RecycleName: ; 64955 (19:4955)
+RecycleName:
 	text "Recycle"
 	done
 
-RecycleDescription: ; 6495e (19:495e)
-	text "Flip a coin. If heads, put a card"
-	line "in your discard pile on top of your"
-	line "deck."
+RecycleDescription:
+	text "Put a Pokémon or Basic Energy card"
+	line "in your discard pile on the top of"
+	line "your deck."
 	done

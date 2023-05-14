@@ -791,3 +791,30 @@ SpitPoison_AIEffect: ; 2c6f0 (b:46f0)
 	ld a, 10 / 2
 	lb de, 0, 10
 	jp SetExpectedAIDamage
+
+
+;
+Recycle_PlayerSelection:
+	ld de, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call Serial_TossCoin
+	jr nc, .tails
+
+	call CreateDiscardPileCardList
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, PleaseSelectCardText
+	ldtx de, PlayerDiscardPileText
+	bank1call SetCardListHeaderText
+.read_input
+	bank1call DisplayCardList
+	jr c, .read_input ; can't cancel with B button
+
+; Discard Pile card was chosen
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTempList], a
+	ret
+
+.tails
+	ld a, $ff
+	ldh [hTempList], a
+	or a
+	ret

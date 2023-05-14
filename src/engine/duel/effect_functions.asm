@@ -3376,7 +3376,7 @@ Prophecy_ReorderDeckEffect: ; 2da41 (b:5a41)
 ; the resulting list is output in order in hTempList.
 HandleProphecyScreen: ; 2da76 (b:5a76)
 	ld c, 3
-	call Helper_TopNCardsOfDeck
+	call CreateCardListTopNCardsFromDeck
 
 .start
 	call CountCardsInDuelTempList
@@ -8480,7 +8480,7 @@ Pokedex_PlayerSelection: ; 2f8ed (b:78ed)
 ; number of cards left in the deck (maximum of 5)
 ; fill wDuelTempList with cards that are going to be sorted
 	ld c, 5
-	call Helper_TopNCardsOfDeck
+	call CreateCardListTopNCardsFromDeck
 
 .clear_list
 ; wDuelTempList + 10 will be filled with numbers from 1
@@ -8866,20 +8866,23 @@ PokeBall_AddToHandEffect:
 	call SyncShuffleDeck
 	ret
 
-; return carry if no cards in the Discard Pile
+; return carry if no eligible cards in the Discard Pile
 Recycle_DiscardPileCheck:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_DISCARD_PILE
 	call GetTurnDuelistVariable
 	ldtx hl, ThereAreNoCardsInTheDiscardPileText
 	cp 1
+	ret c
+	call CreateDiscardPileCardList
+	call RemoveTrainerCardsFromCardList
+	call CountCardsInDuelTempList
+	cp 1
 	ret
 
 Recycle_PlayerSelection:
-	ld de, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call Serial_TossCoin
-	jr nc, .tails
-
-	call CreateDiscardPileCardList
+; assume: wDuelTempList is initialized from Recycle_DiscardPileCheck
+	; call CreateDiscardPileCardList
+	; call RemoveTrainerCardsFromCardList
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, PleaseSelectCardText
 	ldtx de, PlayerDiscardPileText
@@ -8890,27 +8893,21 @@ Recycle_PlayerSelection:
 
 ; Discard Pile card was chosen
 	ldh a, [hTempCardIndex_ff98]
-	ldh [hTempList], a
+	ldh [hTemp_ffa0], a
 	ret
 
-.tails
-	ld a, $ff
-	ldh [hTempList], a
-	or a
-	ret
-
-Recycle_AddToHandEffect: ; 2fb68 (b:7b68)
-	ldh a, [hTempList]
+Recycle_AddToDeckEffect:
+	ldh a, [hTemp_ffa0]
 	cp $ff
 	ret z ; return if no card was selected
 
-; add card to hand and show in screen if
+; put card on top of the deck and show it on screen if
 ; it wasn't the Player who played the Trainer card.
 	call MoveDiscardPileCardToHand
 	call ReturnCardToDeck
 	call IsPlayerTurn
 	ret c
-	ldh a, [hTempList]
+	ldh a, [hTemp_ffa0]
 	ldtx hl, CardWasChosenText
 	bank1call DisplayCardDetailScreen
 	ret
@@ -8970,56 +8967,6 @@ Revive_PlaceInPlayAreaEffect: ; 2fbb0 (b:7bb0)
 	ldh a, [hTemp_ffa0]
 	ldtx hl, PlacedOnTheBenchText
 	bank1call DisplayCardDetailScreen
-	ret
-
-; makes list in wDuelTempList with all Basic Pokemon cards
-; that are in Turn Duelist's Discard Pile.
-; if list turns out empty, return carry.
-; OATS additionally return
-;   - c the total number of Basic Pokémon
-CreateBasicPokemonCardListFromDiscardPile: ; 2fbd6 (b:7bd6)
-; gets hl to point at end of Discard Pile cards
-; and iterates the cards in reverse order.
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_DISCARD_PILE
-	call GetTurnDuelistVariable
-	ld b, a
-	add DUELVARS_DECK_CARDS
-	ld l, a
-	ld de, wDuelTempList
-	inc b
-	ld c, 0
-	jr .next_discard_pile_card
-
-.check_card
-	ld a, [hl]
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
-	jr nc, .next_discard_pile_card ; if not Pokemon card, skip
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .next_discard_pile_card ; if not Basic stage, skip
-
-; write this card's index to wDuelTempList
-	inc c
-	ld a, [hl]
-	ld [de], a
-	inc de
-.next_discard_pile_card
-	dec l
-	dec b
-	jr nz, .check_card
-
-; done with the loop.
-	ld a, $ff ; terminating byte
-	ld [de], a
-	ld a, [wDuelTempList]
-	cp $ff
-	jr z, .set_carry
-	or a
-	ret
-.set_carry
-	scf
 	ret
 
 ; return carry if Turn Duelist has no Evolution cards in Play Area
@@ -9559,45 +9506,6 @@ Helper_CreateEnergyCardListFromHand:
 	or a
 	ret
 
-; Stores the top N cards of deck in wDuelTempList
-; (or however many cards are left in the deck).
-; Stores the actual number of cards in wNumberOfCardsToOrder.
-; input:
-;  c - number of cards to look at
-; affects: bc, hl, de
-Helper_TopNCardsOfDeck:
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ld b, a
-	ld a, DECK_SIZE
-	sub [hl] ; a = number of cards in deck
-
-; input c: the number of cards (N) that will be reordered or looked at.
-; This number is N, unless the deck as fewer cards than
-; that, in which case it will be the number of cards remaining.
-	; ld c, N
-	cp c
-	jr nc, .got_number_cards
-	ld c, a ; store number of remaining cards in c
-.got_number_cards
-	ld a, c
-	inc a
-	ld [wNumberOfCardsToOrder], a
-
-; store in wDuelTempList the cards at top of deck to be reordered.
-	ld a, b
-	add DUELVARS_DECK_CARDS
-	ld l, a
-	ld de, wDuelTempList
-.loop_top_cards
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .loop_top_cards
-	ld a, $ff ; terminating byte
-	ld [de], a
-	ret
 
 Helper_ChooseAPokemonInPlayArea_EmptyScreen:
 	call EmptyScreen
