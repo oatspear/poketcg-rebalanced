@@ -4862,18 +4862,8 @@ AIDecide_ClefairyDollOrMysteriousFossil:
 AIPlay_Pokeball:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
-; OATS no coin flip
-;	ldtx de, TrainerCardSuccessCheckText
-;	bank1call TossCoin
-;	ldh [hTemp_ffa0], a
-;	jr nc, .asm_219bc
 	ld a, [wAITrainerCardParameter]
 	ldh [hTempPlayAreaLocation_ffa1], a
-;	jr .asm_219c0
-;.asm_219bc
-;	ld a, $ff
-;	ldh [hTempPlayAreaLocation_ffa1], a
-;.asm_219c0
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
