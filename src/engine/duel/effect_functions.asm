@@ -7408,6 +7408,26 @@ Maintenance_PlayerDiscardPileSelection:
 ; Move Selected Cards
 ; ------------------------------------------------------------------------------
 
+PokeBall_AddToHandEffect:
+ComputerSearch_AddToHandEffect:
+SelectedCards_AddToHandFromDeck:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	jr z, .done ; skip if no card was chosen
+
+; add selected card to hand and show on screen if it isn't the Player's turn
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+	call IsPlayerTurn
+	jr c, .done
+	ldh a, [hTemp_ffa0]
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
+.done
+	call SyncShuffleDeck
+	ret
+
+
 Maintenance_DiscardAndAddToHandEffect:
 SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
 ; discard the first card in hTempList
@@ -7817,54 +7837,58 @@ ShuffleHandAndDrawNCards:
 .done
 	ret
 
-; return carry if not enough cards in hand to discard
-; or if there are no cards left in the deck.
-ComputerSearch_HandDeckCheck: ; 2f513 (b:7513)
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetTurnDuelistVariable
-	ldtx hl, NotEnoughCardsInHandText
-	cp 3
-	ret c
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ldtx hl, NoCardsLeftInTheDeckText
-	cp DECK_SIZE
-	ccf
-	ret
 
-ComputerSearch_PlayerDiscardHandSelection: ; 2f52a (b:752a)
-	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
-	call c, CancelSupporterCard
-	ret
-
-ComputerSearch_PlayerDeckSelection: ; 2f52e (b:752e)
+ComputerSearch_PlayerSelection:
+; create list of all Pokemon cards in deck to search for
 	call CreateDeckCardList
+	; ldtx hl, ChooseBasicOrEvolutionPokemonCardFromDeckText
+	ldtx hl, ChooseSupporterCardFromDeckText
+	ldtx bc, SupporterText
+	lb de, SEARCHEFFECT_CARD_TYPE, TYPE_TRAINER_SUPPORTER
+	call LookForCardsInDeck
+	jr c, .no_cards ; return if Player chose not to check deck
+
+; handle input
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, ChooseCardToPlaceInHandText
+	ldtx hl, ChooseSupporterCardText
 	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
-.loop_input
+.read_input
 	bank1call DisplayCardList
-	jr c, .loop_input ; can't exit with B button
-	ldh [hTempList + 2], a
+	jr c, .try_exit ; B was pressed, check if Player can cancel operation
+	ldh a, [hTempCardIndex_ff98]
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_TRAINER_SUPPORTER
+	jr nz, .play_sfx ; can't select non-Supporter card
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	or a
 	ret
 
-ComputerSearch_DiscardAddToHandEffect: ; 2f545 (b:7545)
-; discard cards from hand
-	ld hl, hTempList
-	ld a, [hli]
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
-	ld a, [hli]
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
-
-; add card from deck to hand
-	ld a, [hl]
-	call SearchCardInDeckAndAddToHand
-	call AddCardToHand
-	call SyncShuffleDeck
+.no_cards
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	or a
 	ret
+
+.play_sfx
+	call PlaySFX_InvalidChoice
+	jr .read_input
+
+.try_exit
+; Player can only exit screen if there are no cards to choose
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .no_cards
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_TRAINER_SUPPORTER
+	jr nz, .loop  ; not a Supporter
+	jr .read_input
+
 
 ; return carry if Bench is full.
 ClefairyDoll_BenchCheck: ; 2f561 (b:7561)
@@ -8745,14 +8769,6 @@ Maintenance_ReturnToDeckAndDrawEffect: ; 2fa85 (b:7a85)
 	bank1call DisplayPlayerDrawCardScreen
 	ret
 
-; return carry if no cards in deck
-PokeBall_DeckCheck:
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ldtx hl, NoCardsLeftInTheDeckText
-	cp DECK_SIZE
-	ccf
-	ret
 
 PokeBall_PlayerSelection:
 ; OATS skip coin toss
@@ -8820,30 +8836,6 @@ PokeBall_PlayerSelection:
 	jr nz, .loop  ; not Basic
 	jr .read_input
 
-PokeBall_AddToHandEffect:
-; no coin toss
-	; ldh a, [hTempList]
-	; or a
-	; ret z ; return if coin toss was tails
-
-	; ldh a, [hTempList + 1]
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	jr z, .done ; skip if no Pokemon was chosen
-
-; add Pokemon card to hand and show in screen if
-; it wasn't the Player who played the Trainer card.
-	call SearchCardInDeckAndAddToHand
-	call AddCardToHand
-	call IsPlayerTurn
-	jr c, .done
-	; ldh a, [hTempList + 1]
-	ldh a, [hTemp_ffa0]
-	ldtx hl, WasPlacedInTheHandText
-	bank1call DisplayCardDetailScreen
-.done
-	call SyncShuffleDeck
-	ret
 
 ; return carry if no eligible cards in the Discard Pile
 Recycle_DiscardPileCheck:

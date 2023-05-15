@@ -287,9 +287,11 @@ DEF PRIZES_5    EQU $05
 DEF PRIZES_6    EQU $06
 
 ; constants to use as input to LookForCardInDeck
-DEF SEARCHEFFECT_CARD_ID                 EQU $0
-DEF SEARCHEFFECT_POKEMON_OR_BASIC_ENERGY EQU $1
-DEF SEARCHEFFECT_BASIC_POKEMON           EQU $2
-DEF SEARCHEFFECT_BASIC_ENERGY            EQU $3
-DEF SEARCHEFFECT_POKEMON                 EQU $4
-DEF SEARCHEFFECT_GRASS_CARD              EQU $5
+	const_def
+ 	const SEARCHEFFECT_CARD_ID                  ; $00
+ 	const SEARCHEFFECT_POKEMON_OR_BASIC_ENERGY  ; $01
+ 	const SEARCHEFFECT_BASIC_POKEMON            ; $02
+ 	const SEARCHEFFECT_BASIC_ENERGY             ; $03
+ 	const SEARCHEFFECT_POKEMON                  ; $04
+	const SEARCHEFFECT_CARD_TYPE                ; $05
+ 	const SEARCHEFFECT_GRASS_CARD               ; $07

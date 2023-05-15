@@ -921,16 +921,14 @@ ScoopUpDescription: ; 64000 (19:4000)
 	line "attached to that card.)"
 	done
 
-ComputerSearchName: ; 6407d (19:407d)
+ComputerSearchName:
 	text "Computer Search"
 	done
 
-ComputerSearchDescription: ; 6408e (19:408e)
-	text "Discard 2 of the other cards from"
-	line "your hand in order to search your"
-	line "deck for any card and put it into"
-	line "your hand. Shuffle your deck"
-	line "afterward."
+ComputerSearchDescription:
+	text "Search your deck for a Supporter"
+	line "card and put it into your hand."
+	line "Shuffle your deck afterward."
 	done
 
 PokedexName: ; 6411d (19:411d)

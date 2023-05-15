@@ -303,6 +303,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseBasicPokemonText                             ; 0x012c
 	textpointer ChooseEvolvedPokemonFromDeckText
 	textpointer ChooseEvolvedPokemonText
+	textpointer ChooseSupporterCardFromDeckText
+	textpointer ChooseSupporterCardText
 	textpointer ChooseGrassCardFromDeckText
 	textpointer ProcedureForEnergyTransferText                     ; 0x012d
 	textpointer ChoosePkmnToRemoveDamageCounterText                ; 0x0130

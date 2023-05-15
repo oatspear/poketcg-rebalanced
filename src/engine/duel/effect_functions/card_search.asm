@@ -60,7 +60,7 @@ LookForCardsInDeck:
 ;	SEARCHEFFECT_GRASS_CARD = search for any Grass card
 ; input:
 ;	  d = SEARCHEFFECT_* constant
-;	  e = (optional) card ID to search for
+;	  e = (optional) card ID or Type to search for
 ;	  hl = text to print if Discard Pile has card(s)
 ; output:
 ;	  carry set if there are no eligible cards
@@ -92,6 +92,7 @@ CardSearch_FunctionTable:
 	dw .SearchDuelTempListForBasicPokemon
 	dw .SearchDuelTempListForBasicEnergy
 	dw .SearchDuelTempListForPokemon
+	dw .SearchDuelTempListForCardType
 	dw .SearchDuelTempListForGrassCard
 
 .set_carry
@@ -175,13 +176,29 @@ CardSearch_FunctionTable:
 	or a
 	ret
 
+; returns carry if no Trainer Item cards are found
+.SearchDuelTempListForCardType
+	ld hl, wDuelTempList
+.loop_list_card_type
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	push de
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	pop de
+	cp e
+	jr nz, .loop_list_card_type
+	or a
+	ret
+
 ; returns carry if no Grass cards are found
 .SearchDuelTempListForGrassCard
 	ld hl, wDuelTempList
 .loop_list_grass
 	ld a, [hli]
 	cp $ff
-	jr z, .set_carry
+	jp z, .set_carry
 	call GetCardIDFromDeckIndex
 	call GetCardType
 	cp TYPE_ENERGY_GRASS

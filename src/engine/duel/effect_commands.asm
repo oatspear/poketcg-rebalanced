@@ -1308,10 +1308,9 @@ ImposterProfessorOakEffectCommands:
 	db  $00
 
 ComputerSearchEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ComputerSearch_HandDeckCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ComputerSearch_PlayerDiscardHandSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ComputerSearch_DiscardAddToHandEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ComputerSearch_PlayerDeckSelection
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ComputerSearch_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ComputerSearch_PlayerSelection
 	db  $00
 
 ClefairyDollEffectCommands:
@@ -1387,7 +1386,7 @@ MaintenanceEffectCommands:
 	db  $00
 
 PokeBallEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PokeBall_DeckCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PokeBall_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PokeBall_PlayerSelection
 	db  $00

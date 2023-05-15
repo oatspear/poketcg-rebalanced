@@ -915,3 +915,54 @@ PokemonCenter_HealDiscardEnergyEffect: ; 2f618 (b:7618)
 	dec d
 	jr nz, .loop_play_area
 	ret
+
+
+;
+; return carry if not enough cards in hand to discard
+; or if there are no cards left in the deck.
+ComputerSearch_HandDeckCheck: ; 2f513 (b:7513)
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	ldtx hl, NotEnoughCardsInHandText
+	cp 3
+	ret c
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	ldtx hl, NoCardsLeftInTheDeckText
+	cp DECK_SIZE
+	ccf
+	ret
+
+ComputerSearch_PlayerDiscardHandSelection: ; 2f52a (b:752a)
+	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
+	call c, CancelSupporterCard
+	ret
+
+ComputerSearch_PlayerDeckSelection: ; 2f52e (b:752e)
+	call CreateDeckCardList
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, ChooseCardToPlaceInHandText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+.loop_input
+	bank1call DisplayCardList
+	jr c, .loop_input ; can't exit with B button
+	ldh [hTempList + 2], a
+	ret
+
+ComputerSearch_DiscardAddToHandEffect: ; 2f545 (b:7545)
+; discard cards from hand
+	ld hl, hTempList
+	ld a, [hli]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+	ld a, [hli]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+
+; add card from deck to hand
+	ld a, [hl]
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+	call SyncShuffleDeck
+	ret

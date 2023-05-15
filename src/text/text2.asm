@@ -263,6 +263,16 @@ ChooseEvolvedPokemonText:
 	line "Evolution."
 	done
 
+ChooseSupporterCardFromDeckText:
+	text "Choose a Supporter"
+	line "from the Deck."
+	done
+
+ChooseSupporterCardText:
+	text "Choose a"
+	line "Supporter."
+	done
+
 ChooseGrassCardFromDeckText:
 	text "Choose a <GRASS> Card"
 	line "from the Deck."
