@@ -8386,6 +8386,20 @@ PidgeyCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
+	tx CollectName ; name
+	tx Draw2CardsDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Draw2CardsEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy COLORLESS, 1 ; energies
 	tx WhirlwindName ; name
 	tx OpponentSwitchesPokemonDescription ; description
 	dw NONE ; description (cont)
@@ -8397,20 +8411,6 @@ PidgeyCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_WHIRLWIND ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -8584,7 +8584,7 @@ RattataCard:
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db RATTATA
-	db 30 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 

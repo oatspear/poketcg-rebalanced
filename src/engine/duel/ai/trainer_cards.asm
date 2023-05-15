@@ -4156,110 +4156,123 @@ AIPlay_Maintenance:
 	ld [wCurrentAIFlags], a
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
+; discard the first card in hTempList
 	ld a, [wce1a]
-	ldh [hTemp_ffa0], a
+	ldh [hTempList], a
+; add the second card in hTempList to the hand
 	ld a, [wce1b]
-	ldh [hTempPlayAreaLocation_ffa1], a
+	ldh [hTempList + 1], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
 
 ; AI logic for playing Maintenance
+; assume:
+;   - EFFECTCMDTYPE_INITIAL_EFFECT_1 check already ran, Item cards in
+;     Discard Pile are already listed in wDuelTempList.
 AIDecide_Maintenance:
-; Imakuni? has his own thing
-	ld a, [wOpponentDeckID]
-	cp IMAKUNI_DECK_ID
-	jr z, .imakuni
-
-; skip if number of cars in hand < 4.
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetTurnDuelistVariable
-	cp 4
-	jr c, .no_carry
-
-; list out all the hand cards and remove
-; wAITrainerCardToPlay from list.Then find any duplicate cards.
-	call CreateHandCardList
-	ld hl, wDuelTempList
-	ld a, [wAITrainerCardToPlay]
-	call FindAndRemoveCardFromList
-; if duplicates are not found, return no carry.
-	call FindDuplicateCards
-	jp c, .no_carry
-
-; store the first duplicate card and remove it from the list.
-; run duplicate check again.
-	ld [wce1a], a
-	ld hl, wDuelTempList
-	call FindAndRemoveCardFromList
-; if duplicates are not found, return no carry.
-	call FindDuplicateCards
-	jp c, .no_carry
-
-; store the second duplicate card and return carry.
-	ld [wce1b], a
-	scf
-	ret
-
-.no_carry
-	or a
-	ret
-
-.imakuni
-; has a 2 in 10 chance of not skipping.
-	ld a, 10
-	call Random
-	cp 2
-	jr nc, .no_carry
-
 ; skip if number of cards in hand < 3.
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetTurnDuelistVariable
 	cp 3
 	jr c, .no_carry
 
-; shuffle hand cards
-	call CreateHandCardList
+; initialize a priority list
+; (original uses wce1a onwards, but that seems to be an output)
+	ld a, $ff
+	ld [wce08], a
+	ld [wce08 + 1], a
+	ld [wce08 + 2], a
+	ld [wce08 + 3], a
+	ld [wce08 + 4], a
+
 	ld hl, wDuelTempList
-	call CountCardsInDuelTempList
-	call ShuffleCards
-
-; go through each card and find
-; cards that are different from wAITrainerCardToPlay.
-; if found, add those cards to wce1a and wce1a+1.
-	ld a, [wAITrainerCardToPlay]
-	ld b, a
-	ld c, 2
-	ld de, wce1a
-
-.loop
+; default priority list
+.default_loop
 	ld a, [hli]
 	cp $ff
-	jr z, .no_carry
-	cp b
-	jr z, .loop
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .loop
+	jr z, .done
 
-; two cards were found, return carry.
+	ld b, a
+	call GetCardIDFromDeckIndex
+	ld a, e
+
+; first card to look for
+	cp DEFENDER
+	jr nz, .card2
+	ld a, b
+	ld [wce08], a
+	jr .default_loop
+
+.card2
+	cp PLUSPOWER
+	jr nz, .card3
+	ld a, b
+	ld [wce08 + 1], a
+	jr .default_loop
+
+.card3
+	cp POTION
+	jr nz, .card4
+	ld a, b
+	ld [wce08 + 2], a
+	jr .default_loop
+
+.card4
+	cp FULL_HEAL
+	jr nz, .card5
+	ld a, b
+	ld [wce08 + 3], a
+	jr .default_loop
+
+.card5
+	cp FULL_HEAL
+	jr nz, .default_loop
+	ld a, b
+	ld [wce08 + 4], a
+	jr .default_loop
+
+.no_carry
+	or a
+	ret
+
+; loop through wce08 and set carry
+; on the first that was found in Discard Pile.
+; if none were found, return no carry.
+.done
+	ld hl, wce08
+	ld b, 5
+.loop_found
+	ld a, [hli]
+	cp $ff
+	jr nz, .process_hand_cards
+	dec b
+	jr nz, .loop_found
+	jr .no_carry
+
+.process_hand_cards
+; store the selected item card from discard pile
+	ld [wce1b], a
+; list out all the hand cards and remove
+; wAITrainerCardToPlay from list. Then find any duplicate cards.
+	call CreateHandCardList
+	ld hl, wDuelTempList
+	ld a, [wAITrainerCardToPlay]
+	call FindAndRemoveCardFromList
+; if duplicates are not found, return no carry.
+	call FindDuplicateCards
+	jr c, .no_carry
+
+; store the first duplicate card and return carry.
+	ld [wce1a], a
 	scf
 	ret
 
 AIPlay_Recycle:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
-	ldtx de, TrainerCardSuccessCheckText
-	bank1call TossCoin
-	jr nc, .asm_216ae
 	ld a, [wAITrainerCardParameter]
 	ldh [hTemp_ffa0], a
-	jr .asm_216b2
-.asm_216ae
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-.asm_216b2
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret

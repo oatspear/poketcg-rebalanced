@@ -818,3 +818,42 @@ Recycle_PlayerSelection:
 	ldh [hTempList], a
 	or a
 	ret
+
+
+
+;
+; return carry if not enough cards in hand for effect
+Maintenance_HandCheck: ; 2fa70 (b:7a70)
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	ldtx hl, NotEnoughCardsInHandText
+	cp 3
+	ret
+
+Maintenance_PlayerSelection: ; 2fa7b (b:7a7b)
+	ldtx hl, Choose2HandCardsFromHandToReturnToDeckText
+	ldtx de, ChooseTheCardToPutBackText
+	call HandlePlayerSelection2HandCardsExcludeSelf
+	ret
+
+Maintenance_ReturnToDeckAndDrawEffect: ; 2fa85 (b:7a85)
+; return both selected cards to the deck
+	ldh a, [hTempList]
+	call RemoveCardFromHand
+	call ReturnCardToDeck
+	ldh a, [hTempList + 1]
+	call RemoveCardFromHand
+	call ReturnCardToDeck
+	call SyncShuffleDeck
+
+; draw one card
+	ld a, 1
+	bank1call DisplayDrawNCardsScreen
+	call DrawCardFromDeck
+	ldh [hTempCardIndex_ff98], a
+	call AddCardToHand
+	call IsPlayerTurn
+	ret nc
+	; show card on screen if played by Player
+	bank1call DisplayPlayerDrawCardScreen
+	ret

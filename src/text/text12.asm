@@ -1064,14 +1064,15 @@ ReviveDescription: ; 6470e (19:470e)
 	line "Bench is full.)"
 	done
 
-MaintenanceName: ; 647da (19:47da)
+MaintenanceName:
 	text "Maintenance"
 	done
 
-MaintenanceDescription: ; 647e7 (19:47e7)
-	text "Shuffle 2 of the other cards from"
-	line "your hand into your deck in order"
-	line "to draw a card."
+MaintenanceDescription:
+	text "Discard a card from your hand."
+	line "Choose a non-Supporter Trainer card"
+	line "from your Discard Pile and add it"
+	line "to your hand."
 	done
 
 PokemonFluteName: ; 6483c (19:483c)

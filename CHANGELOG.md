@@ -553,6 +553,7 @@
 
 #### Pidgey
 - **Whirlwind**: reduced cost from (CC) to (C).
+- New attack: **Collect** (C): draw 2 cards.
 
 #### Pidgeotto
 - **Mirror Move**: removed.
@@ -568,6 +569,7 @@
 - New attack: **Whirlwind** (CCC): 50 damage, opponent switches Pokémon.
 
 #### Rattata
+- Increased HP from 30 to 40.
 - New attack: **Scavenge** (C): put a non-Supporter Trainer from discard pile into hand.
 
 #### Raticate

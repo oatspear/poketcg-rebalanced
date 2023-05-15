@@ -701,7 +701,7 @@ ScavengeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Scavenge_CheckDiscardPile
 	; dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Scavenge_PlayerSelectEnergyEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Scavenge_AddToHandEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Scavenge_PlayerSelectTrainerEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PlayerSelectAndStoreItemCardFromDiscardPile
 	; dbw EFFECTCMDTYPE_DISCARD_ENERGY, Scavenge_DiscardEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Scavenge_AISelectEffect
 	db  $00
@@ -1380,9 +1380,10 @@ LassEffectCommands:
 	db  $00
 
 MaintenanceEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Maintenance_HandCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Maintenance_PlayerSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Maintenance_ReturnToDeckAndDrawEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Maintenance_CheckHandAndDiscardPile
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Maintenance_PlayerHandCardSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Maintenance_DiscardAndAddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Maintenance_PlayerDiscardPileSelection
 	db  $00
 
 PokeBallEffectCommands:

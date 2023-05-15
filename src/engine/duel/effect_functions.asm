@@ -125,13 +125,49 @@ CheckIfPlayAreaHasAnyDamage:
 	ret
 
 ; returns carry if Deck is empty
-CheckIfDeckIsEmpty: ; 2c2e0 (b:42e0)
+CheckIfDeckIsEmpty:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
 	ldtx hl, NoCardsLeftInTheDeckText
 	cp DECK_SIZE
 	ccf
 	ret
+
+; returns carry if there are less than 4 cards in hand
+CheckHandSizeGreaterThan3:
+	ld c, 4
+	jr CheckHandSizeGreaterThanC
+
+; returns carry if there are less than 3 cards in hand
+CheckHandSizeGreaterThan2:
+	ld c, 3
+	jr CheckHandSizeGreaterThanC
+
+; returns carry if there are less than 2 cards in hand
+CheckHandSizeGreaterThan1:
+	ld c, 2
+	; jr CheckHandSizeGreaterThanC
+	; fallthrough
+
+; returns carry if there are less than c cards in hand
+; input:
+;   c: threshold number of cards
+; output:
+;   a: number of cards in hand
+;   carry: set if the number of cards in hand is less than input c
+;   hl: error text
+CheckHandSizeGreaterThanC:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	cp c
+	ldtx hl, NotEnoughCardsInHandText
+	ret
+
+
+Maintenance_CheckHandAndDiscardPile:
+	call CheckHandSizeGreaterThan1
+	ret c
+	jp CreateItemCardListFromDiscardPile
 
 ; ------------------------------------------------------------------------------
 
@@ -4068,37 +4104,17 @@ SpacingOut_HealEffect: ; 2def1 (b:5ef1)
 	ret
 
 ; sets carry if no Trainer cards in the Discard Pile.
-Scavenge_CheckDiscardPile: ; 2df05 (b:5f05)
-	; ld e, PLAY_AREA_ARENA
-	; call GetPlayAreaCardAttachedEnergies
-	; ld a, [wAttachedEnergies + PSYCHIC]
-	; ldtx hl, NotEnoughPsychicEnergyText
-	; cp 1
-	; ret c ; return if no Psychic energy attached
-	call CreateItemCardListFromDiscardPile
-	ret
+Scavenge_CheckDiscardPile:
+	jp CreateItemCardListFromDiscardPile
 
-Scavenge_AISelectEffect: ; 2df2d (b:5f2d)
+Scavenge_AISelectEffect:
 ; AI picks first Trainer card in list
 	call CreateItemCardListFromDiscardPile
 	ld a, [wDuelTempList]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
-Scavenge_PlayerSelectTrainerEffect: ; 2df46 (b:5f46)
-	call CreateItemCardListFromDiscardPile
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, PleaseSelectCardText
-	ldtx de, PlayerDiscardPileText
-	bank1call SetCardListHeaderText
-.loop_input
-	bank1call DisplayCardList
-	jr c, .loop_input
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ret
-
-Scavenge_AddToHandEffect: ; 2df5f (b:5f5f)
+Scavenge_AddToHandEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	call MoveDiscardPileCardToHand
 	call AddCardToHand
@@ -7366,30 +7382,72 @@ EnergyRemoval_DiscardEffect: ; 2f273 (b:7273)
 	call SwapTurn
 	ret
 
+; ------------------------------------------------------------------------------
+; UI, Menus and Prompts
+; ------------------------------------------------------------------------------
+
+INCLUDE "engine/duel/effect_functions/ui_card_selection.asm"
+
+
+Maintenance_PlayerHandCardSelection:
+PlayerSelectAndStoreHandCardToDiscard:
+	call HandlePlayerSelection1HandCardToDiscardExcludeSelf
+	ldh [hTempList], a
+	ret
+
+EnergyRetrieval_PlayerHandSelection:
+PlayerSelectAndStoreHandCardToDiscard_SupporterTrainer:
+	call HandlePlayerSelection1HandCardToDiscardExcludeSelf
+	ldh [hTempList], a
+	call c, CancelSupporterCard
+	ret
+
+
+Maintenance_PlayerDiscardPileSelection:
+	call HandlePlayerSelectionItemTrainerFromDiscardPile
+	ldh [hTempList + 1], a
+	ld a, $ff  ; terminating byte
+	ldh [hTempList + 2], a
+	ret
+
+; ------------------------------------------------------------------------------
+; Move Selected Cards
+; ------------------------------------------------------------------------------
+
+Maintenance_DiscardAndAddToHandEffect:
+SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
+; discard the first card in hTempList
+	ldh a, [hTempList]
+	cp $ff
+	ret z
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+; add the second card in hTempList to the hand
+	ldh a, [hTempList + 1]
+	cp $ff
+	ret z
+	call MoveDiscardPileCardToHand
+	call AddCardToHand
+	call IsPlayerTurn
+	ret c
+; display card on screen
+	ldh a, [hTempList + 1]
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
+	ret
+
+
+; ------------------------------------------------------------------------------
+
 ; return carry if no other card in hand to discard
 ; or if there are no Basic Energy cards in Discard Pile.
-EnergyRetrieval_HandEnergyCheck: ; 2f28e (b:728e)
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetTurnDuelistVariable
-	cp 2
-	ldtx hl, NotEnoughCardsInHandText
+EnergyRetrieval_HandEnergyCheck:
+	call CheckHandSizeGreaterThan1
 	ret c ; return if doesn't have another card to discard
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
 	ldtx hl, ThereAreNoBasicEnergyCardsInDiscardPileText
 	ret
 
-EnergyRetrieval_PlayerHandSelection: ; 2f2a0 (b:72a0)
-	ldtx hl, ChooseCardToDiscardFromHandText
-	call DrawWideTextBox_WaitForInput
-	call CreateHandCardList
-	ldh a, [hTempCardIndex_ff9f]
-	call RemoveCardFromDuelTempList
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	bank1call DisplayCardList
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTempList], a
-	call c, CancelSupporterCard
-	ret
 
 EnergyRetrieval_PlayerDiscardPileSelection: ; 2f2b9 (b:72b9)
 	ld a, 1 ; start at 1 due to card selected from hand
@@ -7427,7 +7485,7 @@ EnergyRetrieval_PlayerDiscardPileSelection: ; 2f2b9 (b:72b9)
 	or a
 	ret
 
-EnergyRetrieval_DiscardAndAddToHandEffect: ; 2f2f8 (b:72f8)
+EnergyRetrieval_DiscardAndAddToHandEffect:
 	ld hl, hTempList
 	ld a, [hli]
 	call RemoveCardFromHand
@@ -7628,7 +7686,7 @@ ItemFinder_HandDiscardPileCheck: ; 2f43b (b:743b)
 	ret
 
 ItemFinder_PlayerSelection: ; 2f44a (b:744a)
-	call HandlePlayerSelection2HandCardsToDiscard
+	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
 	; was operation cancelled?
 	call c, CancelSupporterCard
 	ret c
@@ -7786,7 +7844,7 @@ ComputerSearch_HandDeckCheck: ; 2f513 (b:7513)
 	ret
 
 ComputerSearch_PlayerDiscardHandSelection: ; 2f52a (b:752a)
-	call HandlePlayerSelection2HandCardsToDiscard
+	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
 	call c, CancelSupporterCard
 	ret
 
@@ -8730,18 +8788,8 @@ LassEffect: ; 2f9e3 (b:79e3)
 	call DrawWideTextBox_WaitForInput
 	ret
 
-; return carry if not enough cards in hand for effect
-Maintenance_HandCheck: ; 2fa70 (b:7a70)
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetTurnDuelistVariable
-	ldtx hl, NotEnoughCardsInHandText
-	cp 3
-	ret
-
-Maintenance_PlayerSelection: ; 2fa7b (b:7a7b)
-	ldtx hl, Choose2HandCardsFromHandToReturnToDeckText
-	ldtx de, ChooseTheCardToPutBackText
-	call HandlePlayerSelection2HandCards
+Maintenance_PlayerSelection:
+	call HandlePlayerSelection1HandCardToDiscardExcludeSelf
 	ret
 
 Maintenance_ReturnToDeckAndDrawEffect: ; 2fa85 (b:7a85)
@@ -9263,7 +9311,7 @@ SuperEnergyRetrieval_HandEnergyCheck: ; 2fda4 (b:7da4)
 	ret
 
 SuperEnergyRetrieval_PlayerHandSelection: ; 2fdb6 (b:7db6)
-	call HandlePlayerSelection2HandCardsToDiscard
+	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
 	call c, CancelSupporterCard
 	ret
 
@@ -9351,58 +9399,6 @@ GetNextPositionInTempList_TrainerEffects: ; 2fe25 (b:7e25)
 	pop de
 	ret
 
-; handles screen for Player to select 2 cards from the hand to discard.
-; first prints text informing Player to choose cards to discard
-; then runs HandlePlayerSelection2HandCards routine.
-HandlePlayerSelection2HandCardsToDiscard: ; 2fe34 (b:7e34)
-	ldtx hl, Choose2CardsFromHandToDiscardText
-	ldtx de, ChooseTheCardToDiscardText
-;	fallthrough
-
-; handles screen for Player to select 2 cards from the hand
-; to activate some Trainer card effect.
-; assumes Trainer card index being used is in [hTempCardIndex_ff9f].
-; stores selection of cards in hTempList.
-; returns carry if Player cancels operation.
-; input:
-;	hl = text to print in text box;
-;	de = text to print in screen header.
-HandlePlayerSelection2HandCards: ; 2fe3a (b:7e3a)
-	push de
-	call DrawWideTextBox_WaitForInput
-
-; remove the Trainer card being used from list
-; of cards to select from hand.
-	call CreateHandCardList
-	ldh a, [hTempCardIndex_ff9f]
-	call RemoveCardFromDuelTempList
-
-	xor a
-	ldh [hCurSelectionItem], a
-	pop hl
-.loop
-	push hl
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	pop hl
-	bank1call SetCardListInfoBoxText
-	push hl
-	bank1call DisplayCardList
-	pop hl
-	jr c, .set_carry ; was B pressed?
-	push hl
-	call GetNextPositionInTempList_TrainerEffects
-	ldh a, [hTempCardIndex_ff98]
-	ld [hl], a
-	call RemoveCardFromDuelTempList
-	pop hl
-	ldh a, [hCurSelectionItem]
-	cp 2
-	jr c, .loop ; is selection over?
-	or a
-	ret
-.set_carry
-	scf
-	ret
 
 ; return carry if non-turn duelist has no benched Pokemon
 GustOfWind_BenchCheck: ; 2fe6e (b:7e6e)
