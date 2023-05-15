@@ -677,6 +677,9 @@
 #### Recycle
 - No coin flip; can only choose Pokémon or Basic Energy.
 
+#### Maintenance
+- Discard a card, put a non-Supporter Trainer from discard pile into hand.
+
 
 ## Version 0.1
 
