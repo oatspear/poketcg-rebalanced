@@ -857,3 +857,61 @@ Maintenance_ReturnToDeckAndDrawEffect: ; 2fa85 (b:7a85)
 	; show card on screen if played by Player
 	bank1call DisplayPlayerDrawCardScreen
 	ret
+
+
+
+;
+
+PokemonCenter_HealDiscardEnergyEffect: ; 2f618 (b:7618)
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+
+; go through every Pokemon in the Play Area
+; and heal all damage & discard their Energy cards.
+.loop_play_area
+; check its damage
+	ld a, e
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .next_pkmn ; if no damage, skip Pokemon
+
+; heal all its damage
+	push de
+	ld e, a
+	ld d, $00
+	call HealPlayAreaCardHP
+
+; loop all cards in deck and for all the Energy cards
+; that are attached to this Play Area location Pokemon,
+; place them in the Discard Pile.
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	or CARD_LOCATION_PLAY_AREA
+	ld e, a
+	ld a, $00
+	call GetTurnDuelistVariable
+.loop_deck
+	ld a, [hl]
+	cp e
+	jr nz, .next_card_deck ; not attached to card, skip
+	ld a, l
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	and TYPE_ENERGY
+	jr z, .next_card_deck ; not Energy, skip
+	ld a, l
+	call PutCardInDiscardPile
+.next_card_deck
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_deck
+
+	pop de
+.next_pkmn
+	inc e
+	dec d
+	jr nz, .loop_play_area
+	ret

@@ -1273,7 +1273,7 @@ ProfessorOakEffectCommands:
 	db  $00
 
 PotionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Potion_DamageCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfPlayAreaHasAnyDamage
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Potion_PlayerSelection
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Potion_HealEffect
 	db  $00
@@ -1336,8 +1336,8 @@ SwitchEffectCommands:
 	db  $00
 
 PokemonCenterEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PokemonCenter_DamageCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PokemonCenter_HealDiscardEnergyEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfPlayAreaHasAnyDamage
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal10DamageFromAll_HealEffect
 	db  $00
 
 PokemonFluteEffectCommands:

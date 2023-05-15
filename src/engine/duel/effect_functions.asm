@@ -107,7 +107,8 @@ IsPlayerTurn:
 	scf
 	ret
 
-; returns carry if Play Area has no damage counters.
+; returns carry if Play Area has no damage counters
+; and sets the error message in hl
 CheckIfPlayAreaHasAnyDamage:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -121,6 +122,7 @@ CheckIfPlayAreaHasAnyDamage:
 	dec d
 	jr nz, .loop_play_area
 	; no damage found
+	ldtx hl, NoPokemonWithDamageCountersText
 	scf
 	ret
 
@@ -1670,7 +1672,7 @@ TangelaPoisonPowder_AIEffect: ; 2cda0 (b:4da0)
 	lb de, 0, 10
 	jp UpdateExpectedAIDamage_AccountForPoison
 
-Heal_OncePerTurnCheck: ; 2cda8 (b:4da8)
+Heal_OncePerTurnCheck:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	add DUELVARS_ARENA_CARD_FLAGS
@@ -1679,7 +1681,6 @@ Heal_OncePerTurnCheck: ; 2cda8 (b:4da8)
 	jr nz, .already_used
 
 	call CheckIfPlayAreaHasAnyDamage
-	ldtx hl, NoPokemonWithDamageCountersText
 	ret c ; no damage counters to heal
 
 	ldh a, [hTemp_ffa0]
@@ -3004,8 +3005,7 @@ Curse_CheckDamageAndBench: ; 2d7fc (b:57fc)
 	call SwapTurn
 	call CheckIfPlayAreaHasAnyDamage
 	call SwapTurn
-	ldtx hl, NoPokemonWithDamageCountersText
-	jr c, .set_carry
+	ret c
 
 ; return carry if Pkmn Power cannot be used due
 ; to Toxic Gas or status.
@@ -3560,13 +3560,8 @@ DamageSwap_CheckDamage: ; 2db8e (b:5b8e)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	call CheckIfPlayAreaHasAnyDamage
-	jr c, .no_damage
-	call CheckCannotUseDueToStatus
-	ret
-.no_damage
-	ldtx hl, NoPokemonWithDamageCountersText
-	scf
-	ret
+	ret c
+	jp CheckCannotUseDueToStatus
 
 DamageSwap_SelectAndSwapEffect: ; 2dba2 (b:5ba2)
 	ld a, DUELVARS_DUELIST_TYPE
@@ -7177,7 +7172,6 @@ DragonRage_DamageBoostEffect:
 ; or no Energy cards attached in the Play Area.
 SuperPotion_DamageEnergyCheck: ; 2f159 (b:7159)
 	call CheckIfPlayAreaHasAnyDamage
-	ldtx hl, NoPokemonWithDamageCountersText
 	ret c ; no damage counters
 	call CheckIfThereAreAnyEnergyCardsAttached
 	ldtx hl, ThereIsNoEnergyCardAttachedText
@@ -7597,11 +7591,6 @@ ProfessorOakEffect:
 	call ShuffleHandAndDrawNCards
 	ret
 
-Potion_DamageCheck: ; 2f3ca (b:73ca)
-	call CheckIfPlayAreaHasAnyDamage
-	ldtx hl, NoPokemonWithDamageCountersText
-	ret
-
 Potion_PlayerSelection: ; 2f3d1 (b:73d1)
 	bank1call HasAlivePokemonInPlayArea
 .read_input
@@ -8007,64 +7996,6 @@ Switch_SwitchEffect: ; 2f60a (b:760a)
 	call SwapArenaWithBenchPokemon
 	ret
 
-PokemonCenter_DamageCheck: ; 2f611 (b:7611)
-	call CheckIfPlayAreaHasAnyDamage
-	ldtx hl, NoPokemonWithDamageCountersText
-	ret
-
-PokemonCenter_HealDiscardEnergyEffect: ; 2f618 (b:7618)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld d, a
-	ld e, PLAY_AREA_ARENA
-
-; go through every Pokemon in the Play Area
-; and heal all damage & discard their Energy cards.
-.loop_play_area
-; check its damage
-	ld a, e
-	ldh [hTempPlayAreaLocation_ff9d], a
-	call GetCardDamageAndMaxHP
-	or a
-	jr z, .next_pkmn ; if no damage, skip Pokemon
-
-; heal all its damage
-	push de
-	ld e, a
-	ld d, $00
-	call HealPlayAreaCardHP
-
-; loop all cards in deck and for all the Energy cards
-; that are attached to this Play Area location Pokemon,
-; place them in the Discard Pile.
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	or CARD_LOCATION_PLAY_AREA
-	ld e, a
-	ld a, $00
-	call GetTurnDuelistVariable
-.loop_deck
-	ld a, [hl]
-	cp e
-	jr nz, .next_card_deck ; not attached to card, skip
-	ld a, l
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	and TYPE_ENERGY
-	jr z, .next_card_deck ; not Energy, skip
-	ld a, l
-	call PutCardInDiscardPile
-.next_card_deck
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop_deck
-
-	pop de
-.next_pkmn
-	inc e
-	dec d
-	jr nz, .loop_play_area
-	ret
 
 ; return carry if non-Turn Duelist has full Bench
 ; or if they have no Basic Pokemon cards in Discard Pile.

@@ -155,11 +155,11 @@ JigglypuffName: ; 61ec4 (18:5ec4)
 	text "Jigglypuff"
 	done
 
-HealingMelodyName: ; 61ed0 (18:5ed0)
+HealingMelodyName:
 	text "Healing Melody"
 	done
 
-HealingMelodyDescription: ; 61edb (18:5edb)
+Heal10DamageFromAllDescription:
 	text "Heal 10 damage from each of your"
 	line "Pokémon."
 	done
@@ -895,16 +895,8 @@ SwitchDescription: ; 63e52 (18:7e52)
 	line "with your Active Pokémon."
 	done
 
-PokemonCenterName: ; 63e8e (18:7e8e)
+PokemonCenterName:
 	text "Pokémon Center"
-	done
-
-PokemonCenterDescription: ; 63e9e (18:7e9e)
-	text "Remove all damage counters from all"
-	line "of your own Pokémon with damage"
-	line "counters on them, then discard all"
-	line "Energy cards attached to those"
-	line "Pokémon."
 	done
 
 PokeBallName: ; 63f2e (18:7f2e)
@@ -1019,28 +1011,23 @@ DevolutionSprayDescriptionCont: ; 644cb (19:44cb)
 	line "had evolved it)."
 	done
 
-PotionName: ; 64565 (19:4565)
+PotionName:
 	text "Potion"
 	done
 
-PotionDescription: ; 6456d (19:456d)
-	text "Remove 3 damage counters from 1 of"
-	line "your Pokémon. If that Pokémon has"
-	line "fewer damage counters than that,"
-	line "remove all of them."
+PotionDescription:
+	text "Heal 30 damage from 1 of your"
+	line "Pokémon."
 	done
 
-SuperPotionName: ; 645e8 (19:45e8)
+SuperPotionName:
 	text "Super Potion"
 	done
 
-SuperPotionDescription: ; 645f6 (19:45f6)
+SuperPotionDescription:
 	text "Discard 1 Energy card attached to 1"
-	line "of your own Pokémon in order to"
-	line "remove 6 damage counters from that"
-	line "Pokémon. If the Pokémon has fewer"
-	line "damage counters than that, remove"
-	line "all of them."
+	line "of your Pokémon. Then, heal 60"
+	line "damage from that Pokémon."
 	done
 
 FullHealName: ; 646af (19:46af)

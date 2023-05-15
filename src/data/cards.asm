@@ -4484,7 +4484,7 @@ LaprasCard:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx HealingMelodyName ; name
-	tx HealingMelodyDescription ; description
+	tx Heal10DamageFromAllDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -8919,9 +8919,9 @@ JigglypuffLv12Card:
 	; Shuffle your deck afterward.
 
 	; attack 1
-	energy PSYCHIC, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx HealingMelodyName ; name
-	tx HealingMelodyDescription ; description
+	tx Heal10DamageFromAllDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -10432,14 +10432,14 @@ SwitchCard:
 	dw NONE ; description (cont)
 
 PokemonCenterCard:
-	db TYPE_TRAINER_SUPPORTER ; type
+	db TYPE_TRAINER ; type
 	gfx PokemonCenterCardGfx ; gfx
 	tx PokemonCenterName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | NONE ; sets
 	db POKEMON_CENTER
 	dw PokemonCenterEffectCommands ; effect commands
-	tx PokemonCenterDescription ; description
+	tx Heal10DamageFromAllDescription ; description
 	dw NONE ; description (cont)
 
 PokeBallCard:

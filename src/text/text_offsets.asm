@@ -2826,8 +2826,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ClefablesMinimizeDescription                       ; 0x0aff
 	textpointer ClefableDescription                                ; 0x0b00
 	textpointer JigglypuffName                                     ; 0x0b01
-	textpointer HealingMelodyName                                  ; 0x0b02
-	textpointer HealingMelodyDescription                           ; 0x0b03
+	textpointer HealingMelodyName
+	textpointer Heal10DamageFromAllDescription
 	textpointer DoubleEdgeName                                     ; 0x0b04
 	textpointer BalloonName                                        ; 0x0b06
 	textpointer JigglypuffLv12Description                         ; 0x0b07
@@ -2971,7 +2971,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SwitchName                                         ; 0x0b87
 	textpointer SwitchDescription                                  ; 0x0b88
 	textpointer PokemonCenterName                                  ; 0x0b89
-	textpointer PokemonCenterDescription                           ; 0x0b8a
 	textpointer PokeBallName                                       ; 0x0b8b
 	textpointer PokeBallDescription                                ; 0x0b8c
 	textpointer ScoopUpName                                        ; 0x0b8d

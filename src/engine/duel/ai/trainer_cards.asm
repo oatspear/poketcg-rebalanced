@@ -3111,95 +3111,30 @@ AIPlay_PokemonCenter:
 	ret
 
 AIDecide_PokemonCenter:
-	xor a
-	ldh [hTempPlayAreaLocation_ff9d], a
-
-; return if active Pokemon can KO player's card.
-	farcall CheckIfAnyAttackKnocksOutDefendingCard
-	jr nc, .start
-	farcall CheckIfSelectedAttackIsUnusable
-	jr nc, .no_carry
-	farcall LookForEnergyNeededForAttackInHand
-	jr c, .no_carry
-
-.start
-	xor a
-	ld [wce06], a
-	ld [wce08], a
-	ld [wce0f], a
-
+; return carry if there are at least 3 damaged Pokémon
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
+	cp 3
+	jr nc, .check_play_area
+	or a
+	ret
+.check_play_area
 	ld d, a
 	ld e, PLAY_AREA_ARENA
-
+	ld c, 0
 .loop_play_area
-	ld a, DUELVARS_ARENA_CARD
-	add e
-	push de
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, e ; useless instruction
-	pop de
-
-; get this Pokemon's current HP in number of counters
-; and add it to the total.
-	ld a, [wLoadedCard1HP]
-	call ConvertHPToCounters
-	ld b, a
-	ld a, [wce06]
-	add b
-	ld [wce06], a
-
-; get this Pokemon's current damage counters
-; and add it to the total.
 	call GetCardDamageAndMaxHP
-	call ConvertHPToCounters
-	ld b, a
-	ld a, [wce08]
-	add b
-	ld [wce08], a
-
-; get this Pokemon's number of attached energy cards
-; and add it to the total.
-; if there's overflow, return no carry.
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-	ld b, a
-	ld a, [wce0f]
-	add b
-	jr c, .no_carry
-	ld [wce0f], a
-
+	or a
+	jr z, .no_damage
+	inc c
+.no_damage
 	inc e
 	dec d
 	jr nz, .loop_play_area
-
-; if (number of damage counters / 2) < (total energy cards attached)
-; return no carry.
-	ld a, [wce08]
-	srl a
-	ld hl, wce0f
-	cp [hl]
-	jr c, .no_carry
-
-; if (number of HP counters * 6 / 10) >= (number of damage counters)
-; return no carry.
-	ld a, [wce06]
-	ld l, a
-	ld h, 6
-	call HtimesL
-	call CalculateWordTensDigit
-	ld a, l
-	ld hl, wce08
-	cp [hl]
-	jr nc, .no_carry
-
-	scf
-	ret
-
-.no_carry
-	or a
+; end of loop
+; set carry if 2 < c, i.e., has at least 3 damaged Pokémon
+	ld a, 2
+	cp c
 	ret
 
 AIPlay_ImposterProfessorOak:

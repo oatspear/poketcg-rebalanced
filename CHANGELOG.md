@@ -596,8 +596,8 @@
 
 #### Jigglypuff Lv12
 - **First Aid**: removed.
-- New attack: **Healing Melody** (P): heal 10 to all of the player's Pokémon.
 - **Double Edge**: removed.
+- New attack: **Healing Melody** (C): heal 10 to all of the player's Pokémon.
 - New attack: **Punishing Slap** (PC): 20 damage, plus 10 against Pokémon with Darkness Energy.
 
 #### Jigglypuff Lv13
@@ -679,6 +679,9 @@
 
 #### Maintenance
 - Discard a card, put a non-Supporter Trainer from discard pile into hand.
+
+#### Pokémon Center
+- Heal 10 damage from each of your Pokémon, no Energy cost.
 
 
 ## Version 0.1
