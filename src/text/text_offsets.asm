@@ -2500,6 +2500,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer IceBreathName                                      ; 0x09b2
 	textpointer IceBreathDescription                               ; 0x09b3
 	textpointer ArticunoLv37Description                           ; 0x09b4
+	textpointer OnlyWorksOnEvolvedPokemonText
 	textpointer PikachuName                                        ; 0x09b5
 	textpointer GnawName                                           ; 0x09b6
 	textpointer ThunderJoltName                                    ; 0x09b7
@@ -2939,6 +2940,12 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AscensionDescription
 	textpointer RagingStormName
 	textpointer RagingStormDescription
+	textpointer VaporEssenceName
+	textpointer VaporEssenceDescription
+	textpointer JoltEssenceName
+	textpointer JoltEssenceDescription
+	textpointer FlareEssenceName
+	textpointer FlareEssenceDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

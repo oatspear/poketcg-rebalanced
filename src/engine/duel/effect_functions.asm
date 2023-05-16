@@ -1569,7 +1569,11 @@ WeezingSmog_AIEffect: ; 2cce2 (b:4ce2)
 	lb de, 0, 10
 	jp UpdateExpectedAIDamage_AccountForPoison
 
-Shift_OncePerTurnCheck: ; 2cd09 (b:4d09)
+; ------------------------------------------------------------------------------
+; Color Manipulation
+; ------------------------------------------------------------------------------
+
+Shift_OncePerTurnCheck:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	add DUELVARS_ARENA_CARD_FLAGS
@@ -1582,6 +1586,28 @@ Shift_OncePerTurnCheck: ; 2cd09 (b:4d09)
 	ldtx hl, OnlyOncePerTurnText
 	scf
 	ret
+
+
+VaporEssence_OncePerTurnCheck:
+JoltEssence_OncePerTurnCheck:
+FlareEssence_OncePerTurnCheck:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	; add DUELVARS_ARENA_CARD_FLAGS
+	; call GetTurnDuelistVariable
+	; and USED_PKMN_POWER_THIS_TURN
+	; jr nz, .already_used
+	call CheckCannotUseDueToStatus_Anywhere
+	ret c
+	ld a, DUELVARS_ARENA_CARD_STAGE
+	call GetTurnDuelistVariable
+	ldtx hl, OnlyWorksOnEvolvedPokemonText
+	cp STAGE1
+	ret
+; .already_used
+	; ldtx hl, OnlyOncePerTurnText
+	; scf
+	; ret
+
 
 Shift_PlayerSelectEffect: ; 2cd21 (b:4d21)
 	ldtx hl, ChoosePokemonWishToColorChangeText
@@ -1627,27 +1653,70 @@ Shift_PlayerSelectEffect: ; 2cd21 (b:4d21)
 	scf
 	ret
 
-Shift_ChangeColorEffect: ; 2cd5d (b:4d5d)
-	ldh a, [hTemp_ffa0]
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-
+Shift_ChangeColorEffect:
 	ldh a, [hTemp_ffa0]
 	add DUELVARS_ARENA_CARD_FLAGS
 	call GetTurnDuelistVariable
 	set USED_PKMN_POWER_THIS_TURN_F, [hl]
 
 	ldh a, [hTemp_ffa0]
+	ld e, a
+	ldh a, [hAIPkmnPowerEffectParam]
+	ld d, a
+	jr ColorShift_ChangeColorEffect
+
+VaporEssence_ChangeColorEffect:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+
+	ld e, PLAY_AREA_ARENA
+	ld d, WATER
+	jr ColorShift_ChangeColorEffect
+
+JoltEssence_ChangeColorEffect:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+
+	ld e, PLAY_AREA_ARENA
+	ld d, LIGHTNING
+	jr ColorShift_ChangeColorEffect
+
+FlareEssence_ChangeColorEffect:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+
+	ld e, PLAY_AREA_ARENA
+	ld d, FIRE
+	jr ColorShift_ChangeColorEffect
+
+; changes the effective color of a Pokémon in play
+; input:
+;   e: offset of play area Pokémon
+;   d: selected color (type) constant
+ColorShift_ChangeColorEffect:
+	ld a, e
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+
+	ld a, e
 	add DUELVARS_ARENA_CARD_CHANGED_TYPE
 	ld l, a
-	ldh a, [hAIPkmnPowerEffectParam]
+	ld a, d
 	or HAS_CHANGED_COLOR
 	ld [hl], a
 	call LoadCardNameAndInputColor
 	ldtx hl, ChangedTheColorOfText
 	call DrawWideTextBox_WaitForInput
 	ret
+
+
 
 VenomPowder_AIEffect: ; 2cd84 (b:4d84)
 	ld a, 5

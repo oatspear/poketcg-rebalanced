@@ -705,6 +705,36 @@ RagingStormDescription:
 	line "cards than you."
 	done
 
+VaporEssenceName:
+	text "Vapor Essence"
+	done
+
+VaporEssenceDescription:
+	text "If your Active Pokémon is an evolved"
+	line "Pokémon, you may change its type"
+	line "to <WATER>."
+	done
+
+JoltEssenceName:
+	text "Jolt Essence"
+	done
+
+JoltEssenceDescription:
+	text "If your Active Pokémon is an evolved"
+	line "Pokémon, you may change its type"
+	line "to <LIGHTNING>."
+	done
+
+FlareEssenceName:
+	text "Flare Essence"
+	done
+
+FlareEssenceDescription:
+	text "If your Active Pokémon is an evolved"
+	line "Pokémon, you may change its type"
+	line "to <FIRE>."
+	done
+
 ProfessorOakName: ; 6342d (18:742d)
 	text "Professor Oak"
 	done

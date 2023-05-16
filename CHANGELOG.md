@@ -210,7 +210,8 @@
 
 #### Flareon Lv22
 - Increased HP from 60 to 70.
-- **Rage**: reduced cost from (CCC) to (CC).
+- **Bite**: removed.
+- New Pokémon Power: **Flare Essence**: changes the type of an evolved Active Pokémon to Fire.
 
 #### Flareon Lv28
 - **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
@@ -324,6 +325,8 @@
 
 #### Vaporeon Lv29
 - Increased HP from 60 to 70.
+- **Focus Energy**: removed.
+- New Pokémon Power: **Vapor Essence**: changes the type of an evolved Active Pokémon to Water.
 
 #### Vaporeon Lv42
 - **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
@@ -391,7 +394,9 @@
 
 #### Jolteon Lv24
 - Increased HP from 60 to 70.
+- **Double Kick**: removed.
 - **Stun Needle**: reduced cost from (CCCC) to (CCC).
+- New Pokémon Power: **Jolt Essence**: changes the type of an evolved Active Pokémon to Lightning.
 
 #### Jolteon Lv29
 - **Pin Missile**: 3 coin flips; 10 damage per tails and 20 per heads.

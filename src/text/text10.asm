@@ -1773,6 +1773,10 @@ ArticunoLv37Description: ; 5ce35 (17:4e35)
 	line "air and makes it snow."
 	done
 
+OnlyWorksOnEvolvedPokemonText:
+	text "Only works on evolved Pokémon."
+	done
+
 PikachuName: ; 5ce94 (17:4e94)
 	text "Pikachu"
 	done

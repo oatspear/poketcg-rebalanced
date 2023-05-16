@@ -240,6 +240,21 @@ WeezingSmogEffectCommands:
 	dbw EFFECTCMDTYPE_AI, WeezingSmog_AIEffect
 	db  $00
 
+VaporEssenceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, VaporEssence_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VaporEssence_ChangeColorEffect
+	db  $00
+
+JoltEssenceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, JoltEssence_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, JoltEssence_ChangeColorEffect
+	db  $00
+
+FlareEssenceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FlareEssence_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FlareEssence_ChangeColorEffect
+	db  $00
+
 VenomothShiftEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Shift_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Shift_ChangeColorEffect
