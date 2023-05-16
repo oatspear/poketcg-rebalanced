@@ -899,14 +899,14 @@ PokemonCenterName:
 	text "Pokémon Center"
 	done
 
-PokeBallName: ; 63f2e (18:7f2e)
+PokeBallName:
 	text "Poké Ball"
 	done
 
-PokeBallDescription: ; 63f39 (18:7f39)
+PokeBallDescription:
 	text "Search your deck for a Basic"
-	line "Pokémon. Show it to your opponent,"
-	line "then put it into your hand."
+	line "Pokémon. Reveal it, then put"
+	line "it into your hand."
 	line "Shuffle your deck afterward."
 	done
 
