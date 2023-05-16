@@ -32,7 +32,7 @@ HandleAIStrangeBehavior:
 
 .use_strange_behavior
 	push af
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision

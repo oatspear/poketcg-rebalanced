@@ -926,9 +926,10 @@ ComputerSearchName:
 	done
 
 ComputerSearchDescription:
-	text "Search your deck for a Supporter"
-	line "card and put it into your hand."
-	line "Shuffle your deck afterward."
+	text "Look at the top 7 cards of your"
+	line "deck. You may reveal a Supporter"
+	line "card you find there and put it into"
+	line "your hand. Then, shuffle your deck."
 	done
 
 PokedexName: ; 6411d (19:411d)

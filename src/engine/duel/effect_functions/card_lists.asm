@@ -270,46 +270,6 @@ CreateListOfEnergyAttachedToArena: ; 2c199 (b:4199)
 ; Deck Lists
 ; ------------------------------------------------------------------------------
 
-; Stores the top N cards of deck in wDuelTempList
-; (or however many cards are left in the deck).
-; Stores the actual number of cards in wNumberOfCardsToOrder.
-; input:
-;  c - number of cards to look at
-; affects: bc, hl, de
-CreateCardListTopNCardsFromDeck:
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ld b, a
-	ld a, DECK_SIZE
-	sub [hl] ; a = number of cards in deck
-
-; input c: the number of cards (N) that will be reordered or looked at.
-; This number is N, unless the deck as fewer cards than
-; that, in which case it will be the number of cards remaining.
-	; ld c, N
-	cp c
-	jr nc, .got_number_cards
-	ld c, a ; store number of remaining cards in c
-.got_number_cards
-	ld a, c
-	inc a
-	ld [wNumberOfCardsToOrder], a
-
-; store in wDuelTempList the cards at top of deck to be reordered.
-	ld a, b
-	add DUELVARS_DECK_CARDS
-	ld l, a
-	ld de, wDuelTempList
-.loop_top_cards
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .loop_top_cards
-	ld a, $ff ; terminating byte
-	ld [de], a
-	ret
-
 
 ; ------------------------------------------------------------------------------
 ; Hand Lists

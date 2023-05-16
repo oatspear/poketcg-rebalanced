@@ -1264,7 +1264,7 @@ wAISetupBasicPokemonCount:: ; ce06
 wce07:: ; ce07
 	ds $1
 
-wce08:: ; ce08
+wAITempVars:: ; ce08
 ; number of Energy cards when
 ; setting up AI Boss deck
 wAISetupEnergyCount:: ; ce08

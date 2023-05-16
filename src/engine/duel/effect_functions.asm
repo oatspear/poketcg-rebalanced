@@ -3411,8 +3411,10 @@ Prophecy_ReorderDeckEffect: ; 2da41 (b:5a41)
 ; the top 3 cards of Deck.
 ; the resulting list is output in order in hTempList.
 HandleProphecyScreen: ; 2da76 (b:5a76)
-	ld c, 3
-	call CreateCardListTopNCardsFromDeck
+	ld b, 3
+	call CreateDeckCardListTopNCards
+	inc a
+	ld [wNumberOfCardsToOrder], a
 
 .start
 	call CountCardsInDuelTempList
@@ -7839,15 +7841,9 @@ ShuffleHandAndDrawNCards:
 
 
 ComputerSearch_PlayerSelection:
-; create list of all Pokemon cards in deck to search for
-	call CreateDeckCardList
-	; ldtx hl, ChooseBasicOrEvolutionPokemonCardFromDeckText
-	ldtx hl, ChooseSupporterCardFromDeckText
-	ldtx bc, SupporterText
-	lb de, SEARCHEFFECT_CARD_TYPE, TYPE_TRAINER_SUPPORTER
-	call LookForCardsInDeck
-	jr c, .no_cards ; return if Player chose not to check deck
-
+; create the list of the top 7 cards in deck
+	ld b, 7
+	call CreateDeckCardListTopNCards
 ; handle input
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseSupporterCardText
@@ -7855,7 +7851,8 @@ ComputerSearch_PlayerSelection:
 	bank1call SetCardListHeaderText
 .read_input
 	bank1call DisplayCardList
-	jr c, .try_exit ; B was pressed, check if Player can cancel operation
+; if B was pressed, either there are no Supporters or Player does not want any
+	jr c, .no_cards
 	ldh a, [hTempCardIndex_ff98]
 	call LoadCardDataToBuffer2_FromDeckIndex
 	ld a, [wLoadedCard2Type]
@@ -7874,19 +7871,6 @@ ComputerSearch_PlayerSelection:
 
 .play_sfx
 	call PlaySFX_InvalidChoice
-	jr .read_input
-
-.try_exit
-; Player can only exit screen if there are no cards to choose
-	ld hl, wDuelTempList
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .no_cards
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_TRAINER_SUPPORTER
-	jr nz, .loop  ; not a Supporter
 	jr .read_input
 
 
@@ -8492,8 +8476,10 @@ Pokedex_PlayerSelection: ; 2f8ed (b:78ed)
 ; cap the number of cards to reorder up to
 ; number of cards left in the deck (maximum of 5)
 ; fill wDuelTempList with cards that are going to be sorted
-	ld c, 5
-	call CreateCardListTopNCardsFromDeck
+	ld b, 5
+	call CreateDeckCardListTopNCards
+	inc a
+	ld [wNumberOfCardsToOrder], a
 
 .clear_list
 ; wDuelTempList + 10 will be filled with numbers from 1

@@ -1156,7 +1156,7 @@ AIDecide_GustOfWind:
 	ld a, $ff
 	ld [wce06], a
 	xor a
-	ld [wce08], a
+	ld [wAITempVars], a
 	ld e, a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
@@ -1181,11 +1181,11 @@ AIDecide_GustOfWind:
 	ld a, b
 	ld [wce06], a
 	ld a, e
-	ld [wce08], a
+	ld [wAITempVars], a
 	jr .loop_2
 
 .check_found
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	or a
 	jr z, .no_carry
 ; a card was found
@@ -1531,7 +1531,7 @@ AIDecide_EnergyRemoval:
 .check_bench_damage
 	xor a
 	ld [wce06], a
-	ld [wce08], a
+	ld [wAITempVars], a
 
 	ld e, PLAY_AREA_BENCH_1
 .loop_2
@@ -1550,7 +1550,7 @@ AIDecide_EnergyRemoval:
 	jr .loop_2
 
 .found_damage
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	or a
 	jr z, .no_carry ; skip if none found
 	ld e, a
@@ -1610,7 +1610,7 @@ AIDecide_EnergyRemoval:
 
 ; stores in wce06 the highest damaging attack
 ; for the card in play area location in e
-; and stores this card's location in wce08
+; and stores this card's location in wAITempVars
 .FindHighestDamagingAttack
 	push de
 	ld a, e
@@ -1629,7 +1629,7 @@ AIDecide_EnergyRemoval:
 	ld [wce06], a ; store this damage value
 	pop de
 	ld a, e
-	ld [wce08], a ; store this location
+	ld [wAITempVars], a ; store this location
 	jr .second_attack
 
 .skip_1
@@ -1653,7 +1653,7 @@ AIDecide_EnergyRemoval:
 	ld [wce06], a ; store this damage value
 	pop de
 	ld a, e
-	ld [wce08], a ; store this location
+	ld [wAITempVars], a ; store this location
 	ret
 .skip_2
 	pop de
@@ -1796,7 +1796,7 @@ AIDecide_SuperEnergyRemoval:
 .check_bench_damage
 	xor a
 	ld [wce06], a
-	ld [wce08], a
+	ld [wAITempVars], a
 
 	ld e, PLAY_AREA_BENCH_1
 .loop_4
@@ -1817,7 +1817,7 @@ AIDecide_SuperEnergyRemoval:
 	jr .loop_4
 
 .found_damage
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	or a
 	jr z, .no_carry
 	jr .pick_energy
@@ -1896,7 +1896,7 @@ AIDecide_SuperEnergyRemoval:
 
 ; stores in wce06 the highest damaging attack
 ; for the card in play area location in e
-; and stores this card's location in wce08
+; and stores this card's location in wAITempVars
 .FindHighestDamagingAttack
 	push de
 	ld a, e
@@ -1915,7 +1915,7 @@ AIDecide_SuperEnergyRemoval:
 	ld [wce06], a ; store this damage value
 	pop de
 	ld a, e
-	ld [wce08], a ; store this location
+	ld [wAITempVars], a ; store this location
 	jr .second_attack
 
 .skip_1
@@ -1939,7 +1939,7 @@ AIDecide_SuperEnergyRemoval:
 	ld [wce06], a ; store this damage value
 	pop de
 	ld a, e
-	ld [wce08], a ; store this location
+	ld [wAITempVars], a ; store this location
 	ret
 .skip_2
 	pop de
@@ -1961,7 +1961,7 @@ AIDecide_PokemonBreeder:
 	jp c, .done
 
 	ld a, 7
-	ld hl, wce08
+	ld hl, wAITempVars
 	call ClearMemory_Bank8
 
 	xor a
@@ -2036,8 +2036,8 @@ AIDecide_PokemonBreeder:
 ; 4 high bits of a = HP counters Pokemon still has
 ; 4 low  bits of a = number of energy cards attached
 
-; store this score in wce08 + PLAY_AREA*
-	ld hl, wce08
+; store this score in wAITempVars + PLAY_AREA*
+	ld hl, wAITempVars
 	ld c, e
 	ld b, $00
 	add hl, bc
@@ -2067,9 +2067,9 @@ AIDecide_PokemonBreeder:
 	ld e, $00
 	ld d, $00
 
-; find highest score in wce08
+; find highest score in wAITempVars
 .loop_score_1
-	ld hl, wce08
+	ld hl, wAITempVars
 	add hl, de
 	ld a, [wce06]
 	cp [hl]
@@ -2103,7 +2103,7 @@ AIDecide_PokemonBreeder:
 
 .check_evolution_and_dragonite
 	ld a, 7
-	ld hl, wce08
+	ld hl, wAITempVars
 	call ClearMemory_Bank8
 
 	xor a
@@ -2162,10 +2162,10 @@ AIDecide_PokemonBreeder:
 	ld e, $00
 	ld d, $00
 
-; find highest score in wce08 with at least
+; find highest score in wAITempVars with at least
 ; 2 energy cards attached
 .loop_score_2
-	ld hl, wce08
+	ld hl, wAITempVars
 	add hl, de
 	ld a, [wce06]
 	cp [hl]
@@ -2431,7 +2431,7 @@ AIDecide_ProfessorOak:
 .not_in_hand
 ; check if a card that can evolve was found at all
 ; if not, go to the next card in the Play Area
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	cp $01
 	jr nz, .next_play_area
 
@@ -2474,11 +2474,11 @@ AIDecide_ProfessorOak:
 
 ; return carry if there's a card in the hand that
 ; can evolve the card in Play Area location in e.
-; sets wce08 to $01 if any card is found that can
+; sets wAITempVars to $01 if any card is found that can
 ; evolve regardless of card location.
 .LookForEvolution
 	xor a
-	ld [wce08], a
+	ld [wAITempVars], a
 	ld d, 0
 
 ; loop through the whole deck to check if there's
@@ -2497,12 +2497,12 @@ AIDecide_ProfessorOak:
 	or a
 	ret
 
-; a card was found that can evolve, set wce08 to $01
+; a card was found that can evolve, set wAITempVars to $01
 ; and if the card is in the hand, return carry.
 ; otherwise resume looping through deck.
 .can_evolve
 	ld a, $01
-	ld [wce08], a
+	ld [wAITempVars], a
 	ld a, DUELVARS_CARD_LOCATIONS
 	add d
 	call GetTurnDuelistVariable
@@ -2939,7 +2939,7 @@ AIDecide_SuperEnergyRetrieval:
 	call FindDuplicateCards
 	jp c, .no_carry
 
-	ld [wce08], a
+	ld [wAITempVars], a
 	ld a, CARD_LOCATION_DISCARD_PILE
 	call FindBasicEnergyCardsInLocation
 	jp c, .no_carry
@@ -3079,7 +3079,7 @@ AIDecide_SuperEnergyRetrieval:
 	or a
 	ret
 .set_carry
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	ld [wce1a], a
 	ld a, [wce06]
 	scf
@@ -3468,10 +3468,10 @@ AIDecide_Pokedex:
 	call .GetCardType
 
 ; load this card's deck index and type in memory
-; wce08 = card types
+; wAITempVars = card types
 ; wce0f = card deck indices
 	push hl
-	ld hl, wce08
+	ld hl, wAITempVars
 	add hl, de
 	ld [hl], a
 	ld hl, wce0f
@@ -3483,14 +3483,14 @@ AIDecide_Pokedex:
 	dec b
 	jr nz, .next_card
 
-; terminate the wce08 list
+; terminate the wAITempVars list
 	ld a, $ff
-	ld [wce08 + 5], a
+	ld [wAITempVars + 5], a
 
 	ld de, wce1a
 
 ; find Pokemon
-	ld hl, wce08
+	ld hl, wAITempVars
 	ld c, -1
 	ld b, $00
 
@@ -3517,7 +3517,7 @@ AIDecide_Pokedex:
 ; run through the stored cards
 ; and look for any Trainer cards.
 .find_trainers
-	ld hl, wce08
+	ld hl, wAITempVars
 	ld c, -1
 	ld b, $00
 
@@ -3542,7 +3542,7 @@ AIDecide_Pokedex:
 	jr .loop_trainers
 
 .find_energy
-	ld hl, wce08
+	ld hl, wAITempVars
 	ld c, -1
 	ld b, $00
 
@@ -3600,10 +3600,10 @@ PickPokedexCards:
 	call .GetCardType
 
 ; load this card's deck index and type in memory
-; wce08 = card types
+; wAITempVars = card types
 ; wce0f = card deck indices
 	push hl
-	ld hl, wce08
+	ld hl, wAITempVars
 	add hl, de
 	ld [hl], a
 	ld hl, wce0f
@@ -3615,14 +3615,14 @@ PickPokedexCards:
 	dec b
 	jr nz, .next_card
 
-; terminate the wce08 list
+; terminate the wAITempVars list
 	ld a, $ff
-	ld [wce08 + 5], a
+	ld [wAITempVars + 5], a
 
 	ld de, wce1a
 
 ; find energy
-	ld hl, wce08
+	ld hl, wAITempVars
 	ld c, -1
 	ld b, $00
 
@@ -3647,7 +3647,7 @@ PickPokedexCards:
 	jr .loop_energy
 
 .find_pokemon
-	ld hl, wce08
+	ld hl, wAITempVars
 	ld c, -1
 	ld b, $00
 
@@ -3674,7 +3674,7 @@ PickPokedexCards:
 ; run through the stored cards
 ; and look for any Trainer cards.
 .find_trainers
-	ld hl, wce08
+	ld hl, wAITempVars
 	ld c, -1
 	ld b, $00
 
@@ -3817,7 +3817,7 @@ AIPlay_MrFuji:
 AIDecide_MrFuji:
 	ld a, $ff
 	ld [wce06], a
-	ld [wce08], a
+	ld [wAITempVars], a
 
 ; if just one Pokemon in Play Area, skip.
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -3858,7 +3858,7 @@ AIDecide_MrFuji:
 ; HP < 1/3 max HP
 
 ; if value is less than the one found before, store this one.
-	ld hl, wce08
+	ld hl, wAITempVars
 	cp [hl]
 	jr nc, .next
 	ld [hl], a
@@ -4114,11 +4114,11 @@ AIDecide_Maintenance:
 ; initialize a priority list
 ; (original uses wce1a onwards, but that seems to be an output)
 	ld a, $ff
-	ld [wce08], a
-	ld [wce08 + 1], a
-	ld [wce08 + 2], a
-	ld [wce08 + 3], a
-	ld [wce08 + 4], a
+	ld [wAITempVars], a
+	ld [wAITempVars + 1], a
+	ld [wAITempVars + 2], a
+	ld [wAITempVars + 3], a
+	ld [wAITempVars + 4], a
 
 	ld hl, wDuelTempList
 ; default priority list
@@ -4135,46 +4135,46 @@ AIDecide_Maintenance:
 	cp DEFENDER
 	jr nz, .card2
 	ld a, b
-	ld [wce08], a
+	ld [wAITempVars], a
 	jr .default_loop
 
 .card2
 	cp PLUSPOWER
 	jr nz, .card3
 	ld a, b
-	ld [wce08 + 1], a
+	ld [wAITempVars + 1], a
 	jr .default_loop
 
 .card3
 	cp POTION
 	jr nz, .card4
 	ld a, b
-	ld [wce08 + 2], a
+	ld [wAITempVars + 2], a
 	jr .default_loop
 
 .card4
 	cp FULL_HEAL
 	jr nz, .card5
 	ld a, b
-	ld [wce08 + 3], a
+	ld [wAITempVars + 3], a
 	jr .default_loop
 
 .card5
 	cp FULL_HEAL
 	jr nz, .default_loop
 	ld a, b
-	ld [wce08 + 4], a
+	ld [wAITempVars + 4], a
 	jr .default_loop
 
 .no_carry
 	or a
 	ret
 
-; loop through wce08 and set carry
+; loop through wAITempVars and set carry
 ; on the first that was found in Discard Pile.
 ; if none were found, return no carry.
 .done
-	ld hl, wce08
+	ld hl, wAITempVars
 	ld b, 5
 .loop_found
 	ld a, [hli]
@@ -4222,11 +4222,11 @@ AIDecide_Recycle:
 	; jr c, .no_carry
 
 	ld a, $ff
-	ld [wce08], a
-	ld [wce08 + 1], a
-	ld [wce08 + 2], a
-	ld [wce08 + 3], a
-	ld [wce08 + 4], a
+	ld [wAITempVars], a
+	ld [wAITempVars + 1], a
+	ld [wAITempVars + 2], a
+	ld [wAITempVars + 3], a
+	ld [wAITempVars + 4], a
 
 ; handle Ghost deck differently
 	ld hl, wDuelTempList
@@ -4250,7 +4250,7 @@ AIDecide_Recycle:
 	cp TYPE_ENERGY
 	jr c, .stage2_pkmn
 	ld a, b
-	ld [wce08 + 3], a
+	ld [wAITempVars + 3], a
 	jr .default_loop
 
 .stage2_pkmn
@@ -4258,19 +4258,19 @@ AIDecide_Recycle:
 	cp STAGE2
 	jr nz, .stage1_pkmn
 	ld a, b
-	ld [wce08], a
+	ld [wAITempVars], a
 	jr .default_loop
 
 .stage1_pkmn
 	cp STAGE1
 	jr nz, .basic_pkmn
 	ld a, b
-	ld [wce08 + 1], a
+	ld [wAITempVars + 1], a
 	jr .default_loop
 
 .basic_pkmn
 	ld a, b
-	ld [wce08 + 2], a
+	ld [wAITempVars + 2], a
 	jr .default_loop
 
 ; priority list for Fire Charge deck
@@ -4286,35 +4286,35 @@ AIDecide_Recycle:
 	cp FIRE_ENERGY
 	jr nz, .chansey
 	ld a, b
-	ld [wce08], a
+	ld [wAITempVars], a
 	jr .loop_1
 
 .chansey
 	cp CHANSEY
 	jr nz, .tauros
 	ld a, b
-	ld [wce08 + 1], a
+	ld [wAITempVars + 1], a
 	jr .loop_1
 
 .tauros
 	cp TAUROS
 	jr nz, .jigglypuff
 	ld a, b
-	ld [wce08 + 2], a
+	ld [wAITempVars + 2], a
 	jr .loop_1
 
 .jigglypuff
 	cp JIGGLYPUFF_LV12
 	jr nz, .loop_1
 	ld a, b
-	ld [wce08 + 3], a
+	ld [wAITempVars + 3], a
 	jr .loop_1
 
-; loop through wce08 and set carry
+; loop through wAITempVars and set carry
 ; on the first that was found in Discard Pile.
 ; if none were found, return no carry.
 .done
-	ld hl, wce08
+	ld hl, wAITempVars
 	ld b, 5
 .loop_found
 	ld a, [hli]
@@ -4342,35 +4342,35 @@ AIDecide_Recycle:
 	cp GASTLY_LV17
 	jr nz, .gastly1
 	ld a, b
-	ld [wce08], a
+	ld [wAITempVars], a
 	jr .loop_2
 
 .gastly1
 	cp GASTLY_LV8
 	jr nz, .zubat
 	ld a, b
-	ld [wce08 + 1], a
+	ld [wAITempVars + 1], a
 	jr .loop_2
 
 .zubat
 	cp ZUBAT
 	jr nz, .ditto
 	ld a, b
-	ld [wce08 + 2], a
+	ld [wAITempVars + 2], a
 	jr .loop_2
 
 .ditto
 	cp DITTO
 	jr nz, .meowth
 	ld a, b
-	ld [wce08 + 3], a
+	ld [wAITempVars + 3], a
 	jr .loop_2
 
 .meowth
 	cp MEOWTH_LV15
 	jr nz, .loop_2
 	ld a, b
-	ld [wce08 + 4], a
+	ld [wAITempVars + 4], a
 	jr .loop_2
 
 
@@ -4538,7 +4538,7 @@ AIPlay_Gambler:
 	ld a, [hli]
 	ld [wce06], a
 	ld a, [hli]
-	ld [wce08], a
+	ld [wAITempVars], a
 	ld a, [hl]
 	ld [wce0f], a
 	ld a, $50
@@ -4552,7 +4552,7 @@ AIPlay_Gambler:
 	ld hl, wRNG1
 	ld a, [wce06]
 	ld [hli], a
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	ld [hli], a
 	ld a, [wce0f]
 	ld [hl], a
@@ -4678,7 +4678,7 @@ AIDecide_PokemonFlute:
 
 	ld a, $ff
 	ld [wce06], a
-	ld [wce08], a
+	ld [wAITempVars], a
 
 ; find Basic stage Pokemon with lowest HP in Discard Pile
 	ld hl, wDuelTempList
@@ -4710,7 +4710,7 @@ AIDecide_PokemonFlute:
 ; if lower, store this one
 	ld [wce06], a
 	ld a, b
-	ld [wce08], a
+	ld [wAITempVars], a
 	jr .loop_1
 
 .done
@@ -4719,7 +4719,7 @@ AIDecide_PokemonFlute:
 	cp 50
 	jr nc, .no_carry
 ; otherwise output its deck index in a and set carry.
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	scf
 	ret
 .no_carry
@@ -5017,16 +5017,12 @@ AIPlay_ComputerSearch:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, [wAITrainerCardParameter]
-	ldh [hTempRetreatCostCards], a
-	ld a, [wce1a]
 	ldh [hTemp_ffa0], a
-	ld a, [wce1b]
-	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
 
-; use the decision routines of specific cards to know if the
+; TODO: use the decision routines of specific cards to know if the
 ; current game state is advantageous for that Supporter card
 AIDecide_ComputerSearch:
 ; checks what Deck ID AI is playing and handle
@@ -5041,52 +5037,29 @@ AIDecide_ComputerSearch:
 	; cp ANGER_DECK_ID
 	; jp z, AIDecide_ComputerSearch_Anger
 
-	call AIDecide_ImposterProfessorOak
-	jr nc, .card2
+; no carry if there are fewer than 7 cards left in the deck
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	cp DECK_SIZE - 7
+	ret nc
 
-	ld e, IMPOSTER_PROFESSOR_OAK
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
-	ret c
+; otherwise, play the card and grab the first Supporter
+	ld b, 7
+	call CreateDeckCardListTopNCards
+	ld hl, wDuelTempList
 
-.card2
-	call AIDecide_ProfessorOak
-	jr nc, .card3
-
-	ld e, PROFESSOR_OAK
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
-	ret c
-
-.card3
-	call AIDecide_Bill
-	jr nc, .card4
-
-	ld e, BILL
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
-	ret c
-
-.card4
-	call AIDecide_PokemonTrader
-	jr nc, .card5
-
-	ld e, POKEMON_TRADER
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
-	ret c
-
-.card5
-	call AIDecide_PokemonBreeder
-	jr nc, .no_carry
-
-	ld e, POKEMON_BREEDER
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
-	ret c
-
-.no_carry
-	or a
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .done
+	ld b, a
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_TRAINER_SUPPORTER
+	jr nz, .loop
+	ld a, b
+.done
+	scf
 	ret
 
 
@@ -5718,4 +5691,33 @@ AIDecide_PokemonTrader_Flamethrower:
 	ret
 .set_carry
 	scf
+	ret
+
+
+; ------------------------------------------------------------------------------
+; Helper Functions
+; ------------------------------------------------------------------------------
+
+; sets up a number of variables to iterate through the top N cards in deck
+; input:
+;   b: number of cards to look at
+; output:
+;   hl: pointing to the first card in deck
+;   b: min(b, number of cards in deck)
+;   c: number of cards not in deck
+;   a: number of cards in deck
+;   carry: set if number of cards in deck is less than input b
+; preserves: de
+SetLoopVars_TopBCardsInDeck:
+	; ld b, 7
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	ld c, a
+	add DUELVARS_DECK_CARDS
+	ld l, a
+	ld a, DECK_SIZE
+	sub c  ; got number of cards in deck
+	cp b
+	ret nc
+	ld b, a
 	ret

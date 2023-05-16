@@ -683,6 +683,9 @@
 #### Pokémon Center
 - Heal 10 damage from each of your Pokémon, no Energy cost.
 
+#### Computer Search
+- Looks at the top 7 deck cards; may pick a Supporter from those.
+
 
 ## Version 0.1
 

@@ -440,7 +440,7 @@ HandleAIPkmnPowers:
 	ld a, DUELVARS_ARENA_CARD
 	add c
 	call GetTurnDuelistVariable
-	ld [wce08], a
+	ld [wAITempVars], a
 
 	push af
 	push bc
@@ -522,7 +522,7 @@ HandleAIHeal:
 	call .CheckHealTarget
 	ret nc ; return if no target to heal
 	push af
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
@@ -649,7 +649,7 @@ HandleAIShift:
 	ret nc ; return if no color found
 
 .found
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
@@ -777,7 +777,7 @@ HandleAIPeek:
 
 .use_peek
 	push af
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
@@ -882,7 +882,7 @@ HandleAICurse:
 	ld a, e
 	ldh [hAIPkmnPowerEffectParam], a
 	call SwapTurn
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
@@ -924,7 +924,7 @@ HandleAICowardice:
 	ld a, DUELVARS_ARENA_CARD
 	add c
 	call GetTurnDuelistVariable
-	ld [wce08], a
+	ld [wAITempVars], a
 	call GetCardIDFromDeckIndex
 	ld a, e
 	push bc
@@ -970,7 +970,7 @@ HandleAICowardice:
 	ld a, $ff
 .use_cowardice
 	push af
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
@@ -1032,16 +1032,16 @@ HandleAIDamageSwap:
 ; Alakazam is Arena card
 	xor a
 .is_in_bench
-	ld [wce08], a
+	ld [wAITempVars], a
 	call .CheckForDamageSwapTargetInBench
 	ret c ; return if not found
 
 ; use Damage Swap
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff9f], a
-	ld a, [wce08]
+	ld a, [wAITempVars]
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision

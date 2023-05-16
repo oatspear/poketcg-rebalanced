@@ -404,6 +404,7 @@ CreateDeckCardList:
 	sub [hl]
 	ld c, a
 	ld b, a ; c = b = DECK_SIZE - [DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK]
+.got_number_cards
 	ld a, [hl]
 	add DUELVARS_DECK_CARDS
 	ld l, a ; l = DUELVARS_DECK_CARDS + [DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK]
@@ -427,6 +428,29 @@ CreateDeckCardList:
 	ld [wDuelTempList], a
 	scf
 	ret
+
+; Stores the top N cards of deck in wDuelTempList
+; (or however many cards are left in the deck).
+; input:
+;   b: number of cards to look at
+; output:
+;   c: number of cards in deck
+;   a: number of cards in deck
+;   carry: set if the turn holder has no cards left in the deck
+; assumes:
+;   - input: 0 < b < $80
+CreateDeckCardListTopNCards:
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	cp DECK_SIZE
+	jr nc, CreateDeckCardList.no_cards_left_in_deck
+	ld a, DECK_SIZE
+	sub [hl] ; a = number of cards in deck
+	ld c, a  ; c = DECK_SIZE - [DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK]
+	cp b
+	jr nc, CreateDeckCardList.got_number_cards
+	ld b, a ; b = DECK_SIZE - [DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK]
+	jr CreateDeckCardList.got_number_cards
 
 ; fill wDuelTempList with the turn holder's energy cards
 ; in the arena or in a bench slot (their 0-59 deck indexes).
@@ -497,6 +521,7 @@ CreateHandCardList:
 	ret nz
 	scf
 	ret
+
 
 ; sort the turn holder's hand cards by ID (highest to lowest ID)
 ; makes use of wDuelTempList
