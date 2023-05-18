@@ -255,7 +255,7 @@ FlareEssenceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FlareEssence_ChangeColorEffect
 	db  $00
 
-VenomothShiftEffectCommands:
+ShiftEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Shift_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Shift_ChangeColorEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Shift_PlayerSelectEffect
@@ -1108,18 +1108,22 @@ TerrorStrikeEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect
 	db  $00
 
-PorygonConversion1EffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Conversion1_WeaknessCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Conversion1_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Conversion1_ChangeWeaknessEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Conversion1_AISelectEffect
-	db  $00
+; PorygonConversion1EffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Conversion1_WeaknessCheck
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Conversion1_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Conversion1_ChangeWeaknessEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, Conversion1_AISelectEffect
+; 	db  $00
+;
+; PorygonConversion2EffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Conversion2_ResistanceCheck
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Conversion2_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Conversion2_ChangeResistanceEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, Conversion2_AISelectEffect
+; 	db  $00
 
-PorygonConversion2EffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Conversion2_ResistanceCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Conversion2_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Conversion2_ChangeResistanceEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Conversion2_AISelectEffect
+ConversionBeamEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ConversionBeam_ChangeResistanceEffect
 	db  $00
 
 ChanseyScrunchEffectCommands:

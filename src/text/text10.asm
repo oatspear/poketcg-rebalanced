@@ -403,11 +403,11 @@ VenomothName: ; 59135 (16:5135)
 	text "Venomoth"
 	done
 
-ShiftName: ; 5913f (16:513f)
+ShiftName:
 	text "Shift"
 	done
 
-ShiftDescription: ; 59146 (16:5146)
+ShiftDescription:
 	text "Once during your turn, you may"
 	line "change the type of this Pokémon to"
 	line "the type of any other Pokémon in"

@@ -499,25 +499,35 @@ PorygonName: ; 62e9d (18:6e9d)
 	text "Porygon"
 	done
 
-Conversion1Name: ; 62ea6 (18:6ea6)
-	text "Conversion 1"
+; Conversion1Name:
+; 	text "Conversion 1"
+; 	done
+;
+; Conversion1Description:
+; 	text "If the Defending Pokémon has a"
+; 	line "Weakness, you may change it to a"
+; 	line "type of your choice other than"
+; 	line "Colorless."
+; 	done
+
+; Conversion2Name:
+; 	text "Conversion 2"
+; 	done
+;
+; Conversion2Description:
+; 	text "Change this Pokémon's Resistance to"
+; 	line "a type of your choice other than"
+; 	line "Colorless."
+; 	done
+
+ConversionBeamName:
+	text "Conversion Beam"
 	done
 
-Conversion1Description: ; 62eb4 (18:6eb4)
-	text "If the Defending Pokémon has a"
-	line "Weakness, you may change it to a"
-	line "type of your choice other than"
-	line "Colorless."
-	done
-
-Conversion2Name: ; 62f1f (18:6f1f)
-	text "Conversion 2"
-	done
-
-Conversion2Description: ; 62f2d (18:6f2d)
-	text "Change Porygon's Resistance to a"
-	line "type of your choice other than"
-	line "Colorless."
+ConversionBeamDescription:
+	text "Change this Pokémon's Resistance to"
+	line "the type of the Defending Pokémon,"
+	line "unless it is Colorless."
 	done
 
 VirtualName: ; 62f79 (18:6f79)

@@ -1444,7 +1444,7 @@ VileplumeCard:
 	tx PetalDanceDescription ; description
 	dw NONE ; description (cont)
 	db 50 ; damage
-	db DAMAGE_PLUS ; category
+	db DAMAGE_NORMAL ; category
 	dw PetalDanceEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
@@ -1628,26 +1628,49 @@ VenomothCard:
 	db STAGE1 ; stage
 	tx VenonatName ; pre-evo name
 
+	; Pokémon Power: Protective Dust
+	; Prevent all effects of attacks (except damage) done to this Pokémon.
+
+	; Pokémon Power: Dangerous Scales
+	; If this Pokémon is in the Active spot and is damaged by an opponent's attack,
+	; the Attacking Pokémon is now Asleep and Poisoned.
+
+	; Disturbance Dive (GG) 50
+	; Prevent all effects of attacks, excluding damage, done to this Pokémon
+	; during your opponent's next turn.
+
+	; Dizzying Wind (G)
+	; Whenever your opponent plays a Trainer card from their hand during their
+	; next turn, they flip a coin. If tails, that card has no effect.
+
+	; Noxious Scales (GCC) 50
+	; The Defending Pokémon is now Confused and Poisoned.
+
+	; Assassin Flight (C)
+	; You can only use this attack if the opponent's Active Pokémon is affected by
+	; a Special Condition. This attack does 90 damage to one of your opponent's
+	; Benched Pokémon (do not apply Weakness and Resistance for Benched Pokémon).
+
 	; attack 1
-	energy 0 ; energies
-	tx ShiftName ; name
-	tx ShiftDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw VenomothShiftEffectCommands ; effect commands
+	energy GRASS, 1 ; energies
+	tx LeechLifeName ; name
+	tx LeechLifeDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw LeechLifeEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db 3
+	db ATK_ANIM_DRAIN ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
 	tx VenomPowderName ; name
 	tx VenomPowderDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw VenomothVenomPowderEffectCommands ; effect commands
 	db INFLICT_POISON | INFLICT_CONFUSION ; flags 1
@@ -9800,37 +9823,37 @@ PorygonCard:
 	db DIAMOND ; rarity
 	db LABORATORY | NONE ; sets
 	db PORYGON
-	db 30 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx Conversion1Name ; name
-	tx Conversion1Description ; description
-	dw NONE ; description (cont)
+	energy 0 ; energies
+	tx ShiftName ; name
+	tx ShiftDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw PorygonConversion1EffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw ShiftEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx Conversion2Name ; name
-	tx Conversion2Description ; description
+	energy COLORLESS, 3 ; energies
+	tx ConversionBeamName ; name
+	tx ConversionBeamDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw PorygonConversion2EffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ConversionBeamEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_BEAM ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

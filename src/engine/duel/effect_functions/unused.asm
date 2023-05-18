@@ -966,3 +966,202 @@ ComputerSearch_DiscardAddToHandEffect: ; 2f545 (b:7545)
 	call AddCardToHand
 	call SyncShuffleDeck
 	ret
+
+
+
+;
+; return carry if Defending card has no weakness
+Conversion1_WeaknessCheck: ; 2edd5 (b:6dd5)
+	call SwapTurn
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer2_FromDeckIndex
+	call SwapTurn
+	ld a, [wLoadedCard2Weakness]
+	or a
+	ret nz
+	ldtx hl, NoWeaknessText
+	scf
+	ret
+
+Conversion1_PlayerSelectEffect: ; 2eded (b:6ded)
+	ldtx hl, ChooseWeaknessYouWishToChangeText
+	xor a ; PLAY_AREA_ARENA
+	call HandleColorChangeScreen
+	ldh [hTemp_ffa0], a
+	ret
+
+Conversion1_AISelectEffect: ; 2edf7 (b:6df7)
+	call AISelectConversionColor
+	ret
+
+Conversion1_ChangeWeaknessEffect: ; 2edfb (b:6dfb)
+	call HandleNoDamageOrEffect
+	ret c ; is unaffected
+
+; apply changed weakness
+	ld a, DUELVARS_ARENA_CARD_CHANGED_WEAKNESS
+	call GetNonTurnDuelistVariable
+	ldh a, [hTemp_ffa0]
+	call TranslateColorToWR
+	ld [hl], a
+	ld l, DUELVARS_ARENA_CARD_LAST_TURN_CHANGE_WEAK
+	ld [hl], a
+
+; print text box
+	call SwapTurn
+	ldtx hl, ChangedTheWeaknessOfPokemonToColorText
+	call PrintArenaCardNameAndColorText
+	call SwapTurn
+
+; apply substatus
+	ld a, SUBSTATUS2_CONVERSION2
+	call ApplySubstatus2ToDefendingCard
+	ret
+
+
+;
+; returns carry if Active Pokemon has no Resistance.
+Conversion2_ResistanceCheck: ; 2ee1f (b:6e1f)
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Resistance]
+	or a
+	ret nz
+	ldtx hl, NoResistanceText
+	scf
+	ret
+
+Conversion2_PlayerSelectEffect: ; 2ee31 (b:6e31)
+	ldtx hl, ChooseResistanceYouWishToChangeText
+	ld a, $80
+	call HandleColorChangeScreen
+	ldh [hTemp_ffa0], a
+	ret
+
+Conversion2_AISelectEffect: ; 2ee3c (b:6e3c)
+; AI will choose Defending Pokemon's color
+; unless it is colorless.
+	call SwapTurn
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+	call SwapTurn
+	ld a, [wLoadedCard1Type]
+	cp COLORLESS
+	jr z, .is_colorless
+	ldh [hTemp_ffa0], a
+	ret
+
+.is_colorless
+	call SwapTurn
+	call AISelectConversionColor
+	call SwapTurn
+	ret
+
+Conversion2_ChangeResistanceEffect: ; 2ee5e (b:6e5e)
+; apply changed resistance
+	ld a, DUELVARS_ARENA_CARD_CHANGED_RESISTANCE
+	call GetTurnDuelistVariable
+	ldh a, [hTemp_ffa0]
+	call TranslateColorToWR
+	ld [hl], a
+	ldtx hl, ChangedTheResistanceOfPokemonToColorText
+;	fallthrough
+
+; prints text that requires card name and color,
+; with the card name of the Turn Duelist's Arena Pokemon
+; and color in [hTemp_ffa0].
+; input:
+;	hl = text to print
+PrintArenaCardNameAndColorText: ; 2ee6c (b:6e6c)
+	push hl
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ldh a, [hTemp_ffa0]
+	call LoadCardNameAndInputColor
+	pop hl
+	call DrawWideTextBox_PrintText
+	ret
+
+; handles AI logic for selecting a new color
+; for weakness/resistance.
+; - if within the context of Conversion1, looks
+; in own Bench for a non-colorless card that can attack.
+; - if within the context of Conversion2, looks
+; in Player's Bench for a non-colorless card that can attack.
+AISelectConversionColor: ; 2ee7f (b:6e7f)
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+	jr .next_pkmn_atk
+
+; look for a non-colorless Bench Pokemon
+; that has enough energy to use an attack.
+.loop_atk
+	push de
+	call GetPlayAreaCardAttachedEnergies
+	ld a, e
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	ld d, a
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld a, [wLoadedCard1Type]
+	cp COLORLESS
+	jr z, .skip_pkmn_atk ; skip colorless Pokemon
+	ld e, FIRST_ATTACK_OR_PKMN_POWER
+	bank1call _CheckIfEnoughEnergiesToAttack
+	jr nc, .found
+	ld e, SECOND_ATTACK
+	bank1call _CheckIfEnoughEnergiesToAttack
+	jr nc, .found
+.skip_pkmn_atk
+	pop de
+.next_pkmn_atk
+	inc e
+	dec d
+	jr nz, .loop_atk
+
+; none found in Bench.
+; next, look for a non-colorless Bench Pokemon
+; that has any Energy cards attached.
+	ld d, e ; number of Play Area Pokemon
+	ld e, PLAY_AREA_ARENA
+	jr .next_pkmn_energy
+
+.loop_energy
+	push de
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	or a
+	jr z, .skip_pkmn_energy
+	ld a, e
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	ld d, a
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld a, [wLoadedCard1Type]
+	cp COLORLESS
+	jr nz, .found
+.skip_pkmn_energy
+	pop de
+.next_pkmn_energy
+	inc e
+	dec d
+	jr nz, .loop_energy
+
+; otherwise, just select a random energy.
+	ld a, NUM_COLORED_TYPES
+	call Random
+	ldh [hTemp_ffa0], a
+	ret
+
+.found
+	pop de
+	ld a, [wLoadedCard1Type]
+	and TYPE_PKMN
+	ldh [hTemp_ffa0], a
+	ret

@@ -650,6 +650,13 @@
 - **Tail Wag**: removed.
 - New attack: **Snivel** (C): reduce incoming damage by 20.
 
+#### Porygon
+- Increased HP from 30 to 50.
+- **Conversion 1**: removed.
+- **Conversion 2**: removed.
+- New Pokémon Power: **Shift**: change user's type to the type of another Pokémon in play.
+- New attack: **Conversion Beam** (CCC): 20 damage, change user's Resistance to the type of opponent (except Colorless).
+
 #### Snorlax
 - **Body Slam**: reduced cost from (CCCC) to (CCC).
 

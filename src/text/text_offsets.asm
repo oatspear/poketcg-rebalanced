@@ -2899,10 +2899,12 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EvolutionName                                      ; 0x0b4c
 	textpointer EeveeDescription                                   ; 0x0b4d
 	textpointer PorygonName                                        ; 0x0b4e
-	textpointer Conversion1Name                                    ; 0x0b4f
-	textpointer Conversion1Description                             ; 0x0b50
-	textpointer Conversion2Name                                    ; 0x0b51
-	textpointer Conversion2Description                             ; 0x0b52
+	; textpointer Conversion1Name
+	; textpointer Conversion1Description
+	; textpointer Conversion2Name
+	; textpointer Conversion2Description
+	textpointer ConversionBeamName
+	textpointer ConversionBeamDescription
 	textpointer VirtualName                                        ; 0x0b53
 	textpointer PorygonDescription                                 ; 0x0b54
 	textpointer SnorlaxName                                        ; 0x0b55
