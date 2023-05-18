@@ -171,6 +171,23 @@ Maintenance_CheckHandAndDiscardPile:
 	ret c
 	jp CreateItemCardListFromDiscardPile
 
+
+; return carry if opponent's Arena cards has no status conditions
+CheckOpponentHasStatus:
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetNonTurnDuelistVariable
+	or a
+	ret nz
+	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
+	scf
+	ret
+
+
+AssassinFlight_CheckBenchAndStatus:
+	call CheckOpponentHasStatus
+	ret c
+	jp StretchKick_CheckBench
+
 ; ------------------------------------------------------------------------------
 
 ; Stores information about the attack damage for AI purposes
@@ -1718,17 +1735,25 @@ ColorShift_ChangeColorEffect:
 
 
 
-VenomPowder_AIEffect: ; 2cd84 (b:4d84)
-	ld a, 5
-	lb de, 0, 10
-	jp UpdateExpectedAIDamage
+; VenomPowder_AIEffect: ; 2cd84 (b:4d84)
+; 	ld a, 5
+; 	lb de, 0, 10
+; 	jp UpdateExpectedAIDamage
 
-VenomPowder_PoisonConfusion50PercentEffect: ; 2cd8c (b:4d8c)
-	ldtx de, VenomPowderCheckText
-	call TossCoin_BankB
-	ret nc ; return if tails
+; VenomPowder_PoisonConfusion50PercentEffect: ; 2cd8c (b:4d8c)
+; 	ldtx de, VenomPowderCheckText
+; 	call TossCoin_BankB
+; 	ret nc ; return if tails
+;
+; ; heads
+; 	call PoisonEffect
+; 	call ConfusionEffect
+; 	ret c
+; 	ld a, CONFUSED | POISONED
+; 	ld [wNoEffectFromWhichStatus], a
+; 	ret
 
-; heads
+VenomPowder_PoisonConfusionEffect:
 	call PoisonEffect
 	call ConfusionEffect
 	ret c
@@ -4857,14 +4882,15 @@ LeerEffect: ; 2e21d (b:621d)
 	ret
 
 ; return carry if opponent has no Bench Pokemon.
-StretchKick_CheckBench: ; 2e231 (b:6231)
+StretchKick_CheckBench:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	ldtx hl, EffectNoPokemonOnTheBenchText
 	cp 2
 	ret
 
-StretchKick_PlayerSelectEffect: ; 2e23c (b:623c)
+AssassinFlight_PlayerSelectEffect:
+StretchKick_PlayerSelectEffect:
 	ldtx hl, ChoosePkmnInTheBenchToGiveDamageText
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
@@ -4877,13 +4903,14 @@ StretchKick_PlayerSelectEffect: ; 2e23c (b:623c)
 	call SwapTurn
 	ret
 
-StretchKick_AISelectEffect: ; 2e255 (b:6255)
+AssassinFlight_AISelectEffect:
+StretchKick_AISelectEffect:
 ; chooses Bench Pokemon with least amount of remaining HP
 	call GetBenchPokemonWithLowestHP
 	ldh [hTemp_ffa0], a
 	ret
 
-StretchKick_BenchDamageEffect: ; 2e25b (b:625b)
+StretchKick_BenchDamageEffect:
 	call SwapTurn
 	ldh a, [hTemp_ffa0]
 	ld b, a
@@ -4891,6 +4918,16 @@ StretchKick_BenchDamageEffect: ; 2e25b (b:625b)
 	call DealDamageToPlayAreaPokemon_RegularAnim
 	call SwapTurn
 	ret
+
+AssassinFlight_BenchDamageEffect:
+	call SwapTurn
+	ldh a, [hTemp_ffa0]
+	ld b, a
+	ld de, 50
+	call DealDamageToPlayAreaPokemon_RegularAnim
+	call SwapTurn
+	ret
+
 
 SandAttackEffect: ; 2e26b (b:626b)
 	ld a, SUBSTATUS2_SAND_ATTACK

@@ -117,6 +117,11 @@
 #### Venonat
 - **Leech Life**: reduced cost from (GC) to (G).
 
+#### Venomoth
+- **Shift**: removed.
+- **Venom Powder**: 30 damage, no coin flip required.
+- New attack: **Assassin Flight** (C): 50 damage to a benched Pokémon, only if opponent's Active Pokémon is affected by a Special Condition.
+
 #### Bellsprout
 - **Call for Friend**: removed.
 - **Vine Whip**: increased cost from (G) to (GC) and damage from 10 to 20.

@@ -269,6 +269,18 @@ ExoskeletonName:
 	text "Exoskeleton"
 	done
 
+AssassinFlightName:
+	text "Assassin Flight"
+	done
+
+AssassinFlightDescription:
+	text "You can only use this attack if the"
+	line "opponent's Active Pokémon is"
+	line "affected by a Special Condition."
+	line "Deal 50 damage to 1 of the"
+	line "opponent's Benched Pokémon."
+	done
+
 FoulOdorName:
 	text "Foul Odor"
 	done
@@ -414,14 +426,13 @@ ShiftDescription:
 	line "play, other than Colorless."
 	done
 
-VenomPowderName: ; 5921e (16:521e)
+VenomPowderName:
 	text "Venom Powder"
 	done
 
-VenomPowderDescription: ; 5922c (16:522c)
-	text "Flip a coin. If heads, the Defending"
-	line "Pokémon is now Confused and"
-	line "Poisoned."
+VenomPowderDescription:
+	text "The Defending Pokémon is now"
+	line "Confused and Poisoned."
 	done
 
 PoisonmothName: ; 59278 (16:5278)

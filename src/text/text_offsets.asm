@@ -2188,6 +2188,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PoisonEvolutionName
 	textpointer PoisonEvolutionDescription
 	textpointer ExoskeletonName
+	textpointer AssassinFlightName
+	textpointer AssassinFlightDescription
 	textpointer FoulOdorName                                       ; 0x0878
 	textpointer FoulOdorDescription                                ; 0x0879
 	textpointer GloomDescription                                   ; 0x087a

@@ -185,6 +185,13 @@ NidorinaDoubleKickEffectCommands:
 ;	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
 ;	db  $00
 
+AssassinFlightEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, AssassinFlight_CheckBenchAndStatus
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AssassinFlight_BenchDamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, AssassinFlight_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, AssassinFlight_AISelectEffect
+	db  $00
+
 TwineedleEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX20X10_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX20X10_AIEffect
@@ -262,8 +269,8 @@ ShiftEffectCommands:
 	db  $00
 
 VenomothVenomPowderEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VenomPowder_PoisonConfusion50PercentEffect
-	dbw EFFECTCMDTYPE_AI, VenomPowder_AIEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VenomPowder_PoisonConfusionEffect
+	; dbw EFFECTCMDTYPE_AI, VenomPowder_AIEffect
 	db  $00
 
 TangelaPoisonPowderEffectCommands:

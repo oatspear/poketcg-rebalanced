@@ -1652,25 +1652,25 @@ VenomothCard:
 	; Benched Pokémon (do not apply Weakness and Resistance for Benched Pokémon).
 
 	; attack 1
-	energy GRASS, 1 ; energies
-	tx LeechLifeName ; name
-	tx LeechLifeDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx AssassinFlightName ; name
+	tx AssassinFlightDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw LeechLifeEffectCommands ; effect commands
-	db NONE ; flags 1
-	db HEAL_USER ; flags 2
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw AssassinFlightEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 3
-	db ATK_ANIM_DRAIN ; animation
+	db ATK_ANIM_GALE ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
 	tx VenomPowderName ; name
 	tx VenomPowderDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw VenomothVenomPowderEffectCommands ; effect commands
 	db INFLICT_POISON | INFLICT_CONFUSION ; flags 1
