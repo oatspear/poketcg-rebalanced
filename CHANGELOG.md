@@ -51,8 +51,9 @@
 - New attack: **Poison Evolution** (GC): Poison the target; search deck for Beedrill and evolve.
 
 #### Beedrill
-- **Twineedle**: reduced cost from (CCC) to (CC) and damage from 30x to 20x per heads and 10x per tails.
+- **Twineedle**: removed.
 - **Poison Sting**: removed.
+- New attack: **Assassin Flight** (C): 50 damage to a Benched Pokémon if the opponent's Active Pokémon has status.
 - New attack: **Toxic** (GGC): 40 damage, inflicts double poison.
 
 #### Ekans
@@ -90,7 +91,7 @@
 - **Leech Life**: reduced cost from (DDC) to (DC).
 
 #### Oddish
-- **Sprout**: searches the Deck for any Grass type card and adds it to the hand.
+- **Sprout**: reduced cost from (G) to (C); searches the Deck for any Grass type card and adds it to the hand.
 
 #### Gloom
 - Increased HP from 60 to 70.
@@ -145,7 +146,7 @@
 - **Minimize**: reduced cost from (D) to (C).
 
 #### Muk
-- **Sludge**: reduced cost from (DDD) to (DDC).
+- **Sludge**: reduced cost from (DDD) to (DDC); increased damage from 30 to 40; inflicts Poison.
 
 #### Koffing
 - **Foul Gas**: reduced cost from (DD) to (DC).
@@ -168,7 +169,10 @@
 
 #### Tangela Lv12
 - Increased HP from 50 to 60.
-- **Poison Whip**: reduced cost from (GGC) to (GG).
+- **Stun Spore**: removed.
+- **Poison Whip**: removed.
+- New attack: **Nutrition Support** (G): attach a Basic Energy from deck to one Pokémon and heal 10 damage from it.
+- New attack: **Grass Knot** (GC): 10 damage, +20 damage for each energy in the opponent's retreat cost.
 
 #### Pinsir
 - **Iron Grip**: reduced cost from (GG) to (GC).

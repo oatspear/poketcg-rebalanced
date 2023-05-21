@@ -5890,12 +5890,12 @@ MagneticStormEffect: ; 2e7d5 (b:67d5)
 
 ; return carry if no cards in Deck
 Sprout_DeckCheck:
-EnergySpike_DeckCheck:
 DeckIsNotEmptyCheck:
 	call CheckIfDeckIsEmpty
 	ret
 
-EnergySpike_PlayerSelectEffect: ; 2e87b (b:687b)
+NutritionSupport_PlayerSelectEffect:
+EnergySpike_PlayerSelectEffect:
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 
@@ -5969,13 +5969,14 @@ EnergySpike_PlayerSelectEffect: ; 2e87b (b:687b)
 	ldh [hTemp_ffa0], a
 	ret
 
-EnergySpike_AISelectEffect: ; 2e8f1 (b:68f1)
+NutritionSupport_AISelectEffect:
+EnergySpike_AISelectEffect:
 ; AI doesn't select any card
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 	ret
 
-EnergySpike_AttachEnergyEffect: ; 2e8f6 (b:68f6)
+EnergySpike_AttachEnergyEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	jr z, .done
@@ -5997,6 +5998,13 @@ EnergySpike_AttachEnergyEffect: ; 2e8f6 (b:68f6)
 .done
 	call SyncShuffleDeck
 	ret
+
+NutritionSupport_AttachEnergyEffect:
+	call EnergySpike_AttachEnergyEffect
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ldh [hTempPlayAreaLocation_ff9d], a
+	ld a, 10
+	jp HealPlayAreaCardHP
 
 Firestarter_OncePerTurnCheck:
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -6147,6 +6155,21 @@ Peck_DamageBoostEffect: ; 2e595 (b:6595)
 	ld a, 10
 	call AddToDamage
 	ret
+
+GrassKnot_AIEffect:
+	call GrassKnot_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+; +20 damage per retreat cost of opponent
+GrassKnot_DamageBoostEffect:
+	call SwapTurn
+	xor a ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call GetPlayAreaCardRetreatCost  ; retreat cost in a
+	call SwapTurn
+	add a  ; x20 per retreat cost
+	call ATimes10
+	jp AddToDamage
 
 FearowAgilityEffect: ; 2eab8 (b:6ab8)
 	ldtx de, IfHeadsDoNotReceiveDamageOrEffectText

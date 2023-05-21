@@ -745,6 +745,27 @@ FlareEssenceDescription:
 	line "to <FIRE>."
 	done
 
+NutritionSupportName:
+	text "Nutrition Support"
+	done
+
+NutritionSupportDescription:
+	text "Search your deck for a basic Energy"
+	line "card and attach it to 1 of your"
+	line "Pokémon. Heal 10 damage from that"
+	line "Pokémon. Then, shuffle your deck."
+	done
+
+GrassKnotName:
+	text "Grass Knot"
+	done
+
+GrassKnotDescription:
+	text "This attack does 20 more damage for"
+	line "each <COLORLESS> in the Defending Pokémon's"
+	line "Retreat Cost."
+	done
+
 ProfessorOakName: ; 6342d (18:742d)
 	text "Professor Oak"
 	done

@@ -708,18 +708,18 @@ BeedrillCard:
 	tx KakunaName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx TwineedleName ; name
-	tx DoubleAttackX20X10Description ; description
+	energy COLORLESS, 1 ; energies
+	tx AssassinFlightName ; name
+	tx AssassinFlightDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_X ; category
-	dw TwineedleEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw AssassinFlightEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NEEDLES ; animation
+	db 3
+	db ATK_ANIM_GALE ; animation
 
 	; attack 2
 	energy GRASS, 2, COLORLESS, 1 ; energies
@@ -1269,6 +1269,20 @@ OddishCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx SproutName ; name
+	tx SproutDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw SproutEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
 	energy GRASS, 1 ; energies
 	tx StunSporeName ; name
 	tx MayInflictParalysisDescription ; description
@@ -1281,20 +1295,6 @@ OddishCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
-
-	; attack 2
-	energy GRASS, 1 ; energies
-	tx SproutName ; name
-	tx SproutDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw SproutEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIRE ; weakness
@@ -1966,11 +1966,11 @@ MukCard:
 	; attack 2
 	energy DARKNESS, 2, COLORLESS, 1 ; energies
 	tx SludgeName ; name
-	tx MayInflictPoisonDescription ; description
+	tx InflictPoisonDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MukSludgeEffectCommands ; effect commands
+	dw InflictPoisonEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -2257,31 +2257,31 @@ TangelaLv12Card:
 
 	; attack 1
 	energy GRASS, 1 ; energies
-	tx StunSporeName ; name
-	tx MayInflictParalysisDescription ; description
+	tx NutritionSupportName ; name
+	tx NutritionSupportDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw TangelaStunSporeEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw NutritionSupportEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy GRASS, 2 ; energies
-	tx PoisonWhipName ; name
-	tx InflictPoisonDescription ; description
+	energy GRASS, 1, COLORLESS, 1 ; energies
+	tx GrassKnotName ; name
+	tx GrassKnotDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw TangelaPoisonWhipEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
+	db DAMAGE_PLUS ; category
+	dw GrassKnotEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_POISON_WHIP ; animation
+	db ATK_ANIM_WHIP ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness

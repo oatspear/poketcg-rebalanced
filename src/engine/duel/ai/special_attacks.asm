@@ -43,6 +43,8 @@ HandleSpecialAIAttacks:
 	jp z, .EnergySpike
 	cp DRAGONITE_LV45
 	jp z, .EnergySpike
+	cp TANGELA_LV12
+	jp z, .EnergySpike
 	cp DRATINI
 	jp z, .DragonDance
 	cp PARASECT
@@ -212,81 +214,6 @@ HandleSpecialAIAttacks:
 	ld a, $83
 	ret
 
-; if player has cards in hand, AI calls Random:
-; - 1/3 chance to encourage attack regardless;
-; - 1/3 chance to dismiss attack regardless;
-; - 1/3 change to make some checks to player's hand.
-; AI tallies number of basic cards in hand, and if this
-; number is >= 2, encourage attack.
-; otherwise, if it finds an evolution card in hand that
-; can evolve a card in player's deck, encourage.
-; if encouraged, returns a score of $80 + 3.
-.MixUp:  ; unused
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetNonTurnDuelistVariable
-	or a
-	ret z
-
-	ld a, 3
-	call Random
-	or a
-	jr z, .encourage_mix_up
-	dec a
-	ret z
-	call SwapTurn
-	call CreateHandCardList
-	call SwapTurn
-	or a
-	ret z ; return if no hand cards (again)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 3
-	jr nc, .mix_up_check_play_area
-
-	ld hl, wDuelTempList
-	ld b, 0
-.loop_mix_up_hand
-	ld a, [hli]
-	cp $ff
-	jr z, .tally_basic_cards
-	push bc
-	call SwapTurn
-	call LoadCardDataToBuffer2_FromDeckIndex
-	call SwapTurn
-	pop bc
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
-	jr nc, .loop_mix_up_hand
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .loop_mix_up_hand
-	; is a basic Pokémon card
-	inc b
-	jr .loop_mix_up_hand
-.tally_basic_cards
-	ld a, b
-	cp 2
-	jr nc, .encourage_mix_up
-
-; less than 2 basic cards in hand
-.mix_up_check_play_area
-	ld a, DUELVARS_ARENA_CARD
-	call GetNonTurnDuelistVariable
-.loop_mix_up_play_area
-	ld a, [hli]
-	cp $ff
-	jp z, .zero_score
-	push hl
-	call SwapTurn
-	call CheckForEvolutionInList
-	call SwapTurn
-	pop hl
-	jr nc, .loop_mix_up_play_area
-
-.encourage_mix_up
-	ld a, $83
-	ret
-
 ; return score of $80 + 3.
 .BigThunder:
 	ld a, $83
@@ -337,8 +264,7 @@ HandleSpecialAIAttacks:
 ; return a score of $80 + 3.
 .EnergySpike:
 	ld a, CARD_LOCATION_DECK
-	ld e, LIGHTNING_ENERGY
-	call CheckIfAnyCardIDinLocation
+	call CheckIfAnyBasicEnergyInLocation
 	jp nc, .zero_score
 	call AIProcessButDontPlayEnergy_SkipEvolution
 	jp nc, .zero_score

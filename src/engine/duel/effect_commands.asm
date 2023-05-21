@@ -46,6 +46,7 @@ EkansSpitPoisonEffectCommands:
 
 ArbokPoisonFangEffectCommands:
 PoisonClawsEffectCommands:
+InflictPoisonEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
 	; dbw EFFECTCMDTYPE_AI, PoisonFang_AIEffect
 	db  $00
@@ -160,6 +161,11 @@ PeckEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Peck_AIEffect
 	db  $00
 
+GrassKnotEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, GrassKnot_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, GrassKnot_AIEffect
+	db  $00
+
 RagingStormEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RagingStorm_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, RagingStorm_AIEffect
@@ -237,11 +243,6 @@ MukToxicGasEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ToxicGasEffect
 	db  $00
 
-MukSludgeEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Poison50PercentEffect
-	dbw EFFECTCMDTYPE_AI, Sludge_AIEffect
-	db  $00
-
 WeezingSmogEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Poison50PercentEffect
 	dbw EFFECTCMDTYPE_AI, WeezingSmog_AIEffect
@@ -285,11 +286,6 @@ PokemonPowerHealEffectCommands:
 
 PetalDanceEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PetalDance_BonusEffect
-	db  $00
-
-TangelaPoisonWhipEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	dbw EFFECTCMDTYPE_AI, PoisonWhip_AIEffect
 	db  $00
 
 VenusaurSolarPowerEffectCommands:
@@ -970,8 +966,15 @@ MagnemiteMagneticStormEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MagneticStormEffect
 	db  $00
 
+NutritionSupportEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NutritionSupport_AttachEnergyEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, NutritionSupport_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, NutritionSupport_AISelectEffect
+	db  $00
+
 EnergySpikeEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergySpike_DeckCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergySpike_AttachEnergyEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySpike_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySpike_AISelectEffect

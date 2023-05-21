@@ -1075,6 +1075,41 @@ CheckIfAnyCardIDinLocation:
 	scf
 	ret
 
+; returns carry if a Basic Energy card is found in card location in a
+; input:
+;	a = card location to look in
+; output:
+;	a = deck index of card found, if any
+CheckIfAnyBasicEnergyInLocation:
+	ld b, a
+	lb de, 0, 0
+.loop
+	ld a, DUELVARS_CARD_LOCATIONS
+	add e
+	call GetTurnDuelistVariable
+	cp b
+	jr nz, .next
+	ld a, e
+	push de
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	pop de
+	cp TYPE_ENERGY_DOUBLE_COLORLESS
+	jr z, .next
+	and TYPE_ENERGY
+	jr z, .set_carry
+.next
+	inc e
+	ld a, DECK_SIZE
+	cp e
+	jr nz, .loop
+	or a
+	ret
+.set_carry
+	ld a, e
+	scf
+	ret
+
 ; counts total number of energy cards in opponent's hand
 ; plus all the cards attached in Turn Duelist's Play Area.
 ; output:
