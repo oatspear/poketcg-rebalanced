@@ -69,6 +69,10 @@ AcidEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
 	db  $00
 
+PanicVineEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PanicVine_ConfusionTrapEffect
+	db  $00
+
 FlytrapEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageEffect
@@ -79,6 +83,13 @@ SproutEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Sprout_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Sprout_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Sprout_AISelectEffect
+	db  $00
+
+UltravisionEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Ultravision_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Ultravision_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Ultravision_AISelectEffect
 	db  $00
 
 FoulOdorEffectCommands:
@@ -429,7 +440,6 @@ EkansWrapEffectCommands:
 PinsirIronGripEffectCommands:
 CloysterClampEffectCommands:
 CaterpieStringShotEffectCommands:
-VenonatStunSporeEffectCommands:
 MetapodStunSporeEffectCommands:
 GrimerNastyGooEffectCommands:
 TangelaBindEffectCommands:

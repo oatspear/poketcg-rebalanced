@@ -116,7 +116,9 @@
 - New attack: **Fungal Growth** (GCC): 20 damage, inflicts sleep, heal same amount of damage from the user.
 
 #### Venonat
+- **Stun Spore**: removed.
 - **Leech Life**: reduced cost from (GC) to (G).
+- New attack: **Ultravision** (G): choose a card from the top 7 deck cards.
 
 #### Venomoth
 - **Shift**: removed.
@@ -164,8 +166,9 @@
 
 #### Tangela Lv8
 - Increased HP from 50 to 60.
-- **Bind**: reduced cost from (GC) to (CC).
-- **Poison Powder**: reduced cost from (GGG) to (GG) and damage from 20 to 10.
+- **Bind**: reduced cost from (GC) to (CC) and damage from 20 to 10.
+- **Poison Powder**: removed.
+- New attack: **Panic Vine** (GCC): 10 damage; inflicts Confusion; opponent cannot retreat.
 
 #### Tangela Lv12
 - Increased HP from 50 to 60.

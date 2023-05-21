@@ -766,6 +766,26 @@ GrassKnotDescription:
 	line "Retreat Cost."
 	done
 
+PanicVineName:
+	text "Panic Vine"
+	done
+
+PanicVineDescription:
+	text "The Defending Pokémon is now"
+	line "Confused. It is unable to retreat"
+	line "during your opponent's next turn."
+	done
+
+UltravisionName:
+	text "Ultravision"
+	done
+
+UltravisionDescription:
+	text "Choose a card from the top 7 cards"
+	line "of your deck and add it to your"
+	line "hand. Shuffle your deck afterwards."
+	done
+
 ProfessorOakName: ; 6342d (18:742d)
 	text "Professor Oak"
 	done

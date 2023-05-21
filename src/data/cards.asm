@@ -1579,17 +1579,17 @@ VenonatCard:
 
 	; attack 1
 	energy GRASS, 1 ; energies
-	tx StunSporeName ; name
-	tx MayInflictParalysisDescription ; description
+	tx UltravisionName ; name
+	tx UltravisionDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw VenonatStunSporeEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw UltravisionEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db NONE ; SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_POWDER_EFFECT_CHANCE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy GRASS, 1 ; energies
@@ -2209,7 +2209,7 @@ TangelaLv8Card:
 	tx BindName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw TangelaBindEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
@@ -2219,15 +2219,15 @@ TangelaLv8Card:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy GRASS, 2 ; energies
-	tx PoisonPowderName ; name
-	tx InflictPoisonDescription ; description
+	energy GRASS, 1, COLORLESS, 2 ; energies
+	tx PanicVineName ; name
+	tx PanicVineDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw TangelaPoisonPowderEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
-	db NONE ; flags 2
+	db INFLICT_CONFUSION ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_POWDER_HIT_POISON ; animation

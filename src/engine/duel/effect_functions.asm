@@ -448,12 +448,162 @@ INCLUDE "engine/duel/effect_functions/healing.asm"
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
 
+PanicVine_ConfusionTrapEffect:
+	call UnableToRetreatEffect
+	jp ConfusionEffect
+
 
 ; ------------------------------------------------------------------------------
 ; Card Search
 ; ------------------------------------------------------------------------------
 
 INCLUDE "engine/duel/effect_functions/card_search.asm"
+
+
+; Searches the Deck for either a Grass Energy or Grass Pokémon
+; and adds that card to the Hand.
+Sprout_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+
+	call CreateDeckCardList
+	ldtx hl, ChooseGrassCardFromDeckText
+	ldtx bc, GrassCardText
+	lb de, SEARCHEFFECT_GRASS_CARD, $00
+	call LookForCardsInDeck
+	ret c
+
+; draw Deck list interface and print text
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, ChooseGrassCardFromDeckText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+
+.loop
+	bank1call DisplayCardList
+	jr c, .pressed_b
+
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_GRASS
+	jr z, .got_card  ; is it a Grass Energy?
+	cp TYPE_PKMN_GRASS
+	jr nz, .play_sfx ; is it a Grass Pokémon?
+.got_card
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+.play_sfx
+	; play SFX and loop back
+	call PlaySFX_InvalidChoice
+	jr .loop
+
+.pressed_b
+; figure if Player can exit the screen without selecting,
+; that is, if the Deck has no Grass-type cards.
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.loop_b_press
+	ld a, [hl]
+	cp CARD_LOCATION_DECK
+	jr nz, .next
+	ld a, l
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_GRASS
+	jr z, .play_sfx ; found, go back to top loop
+	cp TYPE_PKMN_GRASS
+	jr z, .play_sfx ; found, go back to top loop
+.next
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_b_press
+
+; no valid card in Deck, can safely exit screen
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+Sprout_AISelectEffect:
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z ; none found
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_GRASS
+	jr z, .found
+	cp TYPE_PKMN_GRASS
+	jr nz, .loop_deck
+.found
+	ret
+
+; Adds the selected card to the turn holder's Hand.
+Ultravision_AddToHandEffect:
+Sprout_AddToHandEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	jr z, .done ; skip if no Grass-type card was chosen
+
+; add Grass-type card to the hand and show it on screen if
+; it wasn't the Player who used the attack.
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+	call IsPlayerTurn
+	jr c, .done
+	ldh a, [hTemp_ffa0]
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
+.done
+	call SyncShuffleDeck
+	ret
+
+
+; Looks at the top 7 cards and allows the Player to choose a card.
+Ultravision_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+
+	ld b, 7
+	call CreateDeckCardListTopNCards
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, ChooseCardToPlaceInHandText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+.loop_input
+	bank1call DisplayCardList
+	jr c, .loop_input ; can't exit with B button
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+; selects the first Trainer or Energy card that shows up
+; FIXME improve
+Ultravision_AISelectEffect:
+	ld b, 7
+	call CreateDeckCardListTopNCards
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	jr z, .anything ; none found
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY
+	ret nc
+	jr .loop_deck
+.anything
+	ld a, [wDuelTempList]
+	ldh [hTemp_ffa0], a
+	ret
 
 
 ; ------------------------------------------------------------------------------
@@ -4710,114 +4860,6 @@ CallForFriend_PutInPlayAreaEffect: ; 2e194 (b:6194)
 	ldtx hl, PlacedOnTheBenchText
 	bank1call DisplayCardDetailScreen
 .shuffle
-	call SyncShuffleDeck
-	ret
-
-; ------------------------------------------------------------------------------
-; Card Searching
-; ------------------------------------------------------------------------------
-
-; Searches the Deck for either a Grass Energy or Grass Pokémon
-; and adds that card to the Hand.
-Sprout_PlayerSelectEffect:
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-
-	call CreateDeckCardList
-	ldtx hl, ChooseGrassCardFromDeckText
-	ldtx bc, GrassCardText
-	lb de, SEARCHEFFECT_GRASS_CARD, $00
-	call LookForCardsInDeck
-	ret c
-
-; draw Deck list interface and print text
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, ChooseGrassCardFromDeckText
-	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
-
-.loop
-	bank1call DisplayCardList
-	jr c, .pressed_b
-
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY_GRASS
-	jr z, .got_card  ; is it a Grass Energy?
-	cp TYPE_PKMN_GRASS
-	jr nz, .play_sfx ; is it a Grass Pokémon?
-.got_card
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
-	or a
-	ret
-
-.play_sfx
-	; play SFX and loop back
-	call PlaySFX_InvalidChoice
-	jr .loop
-
-.pressed_b
-; figure if Player can exit the screen without selecting,
-; that is, if the Deck has no Grass-type cards.
-	ld a, DUELVARS_CARD_LOCATIONS
-	call GetTurnDuelistVariable
-.loop_b_press
-	ld a, [hl]
-	cp CARD_LOCATION_DECK
-	jr nz, .next
-	ld a, l
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY_GRASS
-	jr z, .play_sfx ; found, go back to top loop
-	cp TYPE_PKMN_GRASS
-	jr z, .play_sfx ; found, go back to top loop
-.next
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop_b_press
-
-; no valid card in Deck, can safely exit screen
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	or a
-	ret
-
-Sprout_AISelectEffect:
-	call CreateDeckCardList
-	ld hl, wDuelTempList
-.loop_deck
-	ld a, [hli]
-	ldh [hTemp_ffa0], a
-	cp $ff
-	ret z ; none found
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY_GRASS
-	jr z, .found
-	cp TYPE_PKMN_GRASS
-	jr nz, .loop_deck
-.found
-	ret
-
-; Adds the selected card to the turn holder's Hand.
-Sprout_AddToHandEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	jr z, .done ; skip if no Grass-type card was chosen
-
-; add Grass-type card to the hand and show it on screen if
-; it wasn't the Player who used the attack.
-	call SearchCardInDeckAndAddToHand
-	call AddCardToHand
-	call IsPlayerTurn
-	jr c, .done
-	ldh a, [hTemp_ffa0]
-	ldtx hl, WasPlacedInTheHandText
-	bank1call DisplayCardDetailScreen
-.done
 	call SyncShuffleDeck
 	ret
 
