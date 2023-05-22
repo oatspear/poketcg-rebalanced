@@ -2058,7 +2058,7 @@ ExeggutorCard:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_X ; category
-	dw ExeggutorBigEggsplosionEffectCommands ; effect commands
+	dw BigEggsplosionEffectCommands ; effect commands
 	db NONE ; flags 1
 	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3

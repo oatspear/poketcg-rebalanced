@@ -610,15 +610,15 @@ TeleportDescription: ; 59896 (16:5896)
 	line "your Benched Pokémon."
 	done
 
-BigEggsplosionName: ; 598c8 (16:58c8)
+BigEggsplosionName:
 	text "Big Eggsplosion"
 	done
 
-BigEggsplosionDescription: ; 598d9 (16:58d9)
-	text "Flip a number of coins equal to the"
-	line "number of Energy attached to"
-	line "Exeggutor. This attack does 20"
-	line "damage times the number of heads."
+BigEggsplosionDescription:
+	text "Flip a coin for each Energy attached"
+	line "to this Pokémon. This attack does 20"
+	line "damage for each Heads and 10 damage"
+	line "for each Tails, up to 200 damage."
 	done
 
 CoconutName: ; 5995c (16:595c)

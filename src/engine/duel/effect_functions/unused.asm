@@ -1165,3 +1165,53 @@ AISelectConversionColor: ; 2ee7f (b:6e7f)
 	and TYPE_PKMN
 	ldh [hTemp_ffa0], a
 	ret
+
+
+;
+BigEggsplosion_AIEffect:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	call SetDamageToATimes20
+	inc h
+	jr nz, .capped
+	ld l, 255
+.capped
+	ld a, l
+	ld [wAIMaxDamage], a
+	srl a
+	ld [wAIMinDamage], a
+	ld l, a
+	srl a
+	add l
+	ld [wDamage], a
+	ret
+
+; Flip coins equal to attached energies; deal 20 damage per heads
+BigEggsplosion_MultiplierEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld hl, 20
+	call LoadTxRam3
+	ld a, [wTotalAttachedEnergies]
+	ldtx de, DamageCheckIfHeadsXDamageText
+	call TossCoinATimes_BankB
+; fallthrough
+
+; set damage to 20*a. Also return result in hl
+SetDamageToATimes20:
+	ld l, a
+	ld h, $00
+	ld e, l
+	ld d, h
+	add hl, hl
+	add hl, hl
+	add hl, de
+	add hl, hl
+	add hl, hl
+	ld a, l
+	ld [wDamage], a
+	ld a, h
+	ld [wDamage + 1], a
+	ret

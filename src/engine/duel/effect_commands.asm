@@ -142,7 +142,7 @@ TeleportEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Teleport_AISelectEffect
 	db  $00
 
-ExeggutorBigEggsplosionEffectCommands:
+BigEggsplosionEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BigEggsplosion_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, BigEggsplosion_AIEffect
 	db  $00

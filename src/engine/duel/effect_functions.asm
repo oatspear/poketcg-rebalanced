@@ -1387,51 +1387,73 @@ Teleport_SwitchEffect: ; 2c91a (b:491a)
 	ld [wDuelDisplayedScreen], a
 	ret
 
-BigEggsplosion_AIEffect: ; 2c925 (b:4925)
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
+BigEggsplosion_AIEffect:
+	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wTotalAttachedEnergies]
-	call SetDamageToATimes20
-	inc h
-	jr nz, .capped
-	ld l, 255
-.capped
-	ld a, l
-	ld [wAIMaxDamage], a
-	srl a
-	ld [wDamage], a
-	xor a
-	ld [wAIMinDamage], a
-	ret
+; cap if number of coins/energies >= 20
+	cp 20
+	jr c, .test10
+	ld a, 200
+	jp SetDefiniteAIDamage
 
-; Flip coins equal to attached energies; deal 20x number of heads
-BigEggsplosion_MultiplierEffect: ; 2c944 (b:4944)
+.test10
+	cp 10
+	jr c, .otherwise
+	call ATimes10
+	ld d, a
+	ld e, 200
+	ld a, 200
+	sub d
+	srl a
+	add d
+	; ld a, 150
+	; lb de, 100, 200
+	jp SetExpectedAIDamage
+
+.otherwise
+; tails = 10, heads = 20
+; result = (tails + 2 * heads) = coins + heads
+	call ATimes10
+	ld d, a
+	rla
+	ld e, a
+	ld a, d
+	srl a
+	add d
+	; ld a, 150
+	; lb de, 100, 200
+	jp SetExpectedAIDamage
+
+; Flip coins equal to attached energies;
+; deal 20 damage per heads and 10 damage per tails
+; cap at 200 damage
+BigEggsplosion_MultiplierEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
 	ld hl, 20
 	call LoadTxRam3
 	ld a, [wTotalAttachedEnergies]
+; cap if number of coins/energies >= 20
+	cp 20
+	jr nc, .cap
+
 	ldtx de, DamageCheckIfHeadsXDamageText
 	call TossCoinATimes_BankB
-;	fallthrough
+; cap if number of heads >= 10
+	cp 10
+	jr nc, .cap
 
-; set damage to 20*a. Also return result in hl
-SetDamageToATimes20: ; 2c958 (b:4958)
-	ld l, a
-	ld h, $00
-	ld e, l
-	ld d, h
-	add hl, hl
-	add hl, hl
-	add hl, de
-	add hl, hl
-	add hl, hl
-	ld a, l
-	ld [wDamage], a
-	ld a, h
-	ld [wDamage + 1], a
-	ret
+; tails = 10, heads = 20
+; result = (tails + 2 * heads) = coins + heads
+	ld hl, wTotalAttachedEnergies
+	add [hl]
+	call ATimes10
+	jp SetDefiniteDamage
+
+.cap
+	ld a, 200
+	jp SetDefiniteDamage
 
 
 TropicalStorm_AIEffect:
