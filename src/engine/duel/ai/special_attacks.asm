@@ -43,6 +43,8 @@ HandleSpecialAIAttacks:
 	jp z, .EnergySpike
 	cp DRAGONITE_LV45
 	jp z, .EnergySpike
+	cp EXEGGCUTE
+	jp z, .EnergySpike
 	cp TANGELA_LV12
 	jp z, .EnergySpike
 	cp DRATINI
