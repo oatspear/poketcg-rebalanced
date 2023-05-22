@@ -1433,6 +1433,33 @@ SetDamageToATimes20: ; 2c958 (b:4958)
 	ld [wDamage + 1], a
 	ret
 
+
+TropicalStorm_AIEffect:
+	call TropicalStorm_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+TropicalStorm_DamageBoostEffect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+
+; go through every Pokemon in the Play Area and boost damage based on energy
+.loop_play_area
+; check its attached energies
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	or a
+	jr z, .next_pkmn
+	ld a, 20
+	call AddToDamage
+.next_pkmn
+	inc e
+	dec d
+	jr nz, .loop_play_area
+	ret
+
+
 Thrash_AIEffect: ; 2c96b (b:496b)
 	ld a, (30 + 40) / 2
 	lb de, 30, 40

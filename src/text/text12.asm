@@ -786,6 +786,16 @@ UltravisionDescription:
 	line "hand. Shuffle your deck afterwards."
 	done
 
+TropicalStormName:
+	text "Tropical Storm"
+	done
+
+TropicalStormDescription:
+	text "This attack deals 20 damage for"
+	line "each of your Pokémon with any"
+	line "attached energies."
+	done
+
 ProfessorOakName: ; 6342d (18:742d)
 	text "Professor Oak"
 	done

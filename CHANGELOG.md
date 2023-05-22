@@ -158,11 +158,15 @@
 - **Self-destruct**: reduced cost from (DDC) to (DCC).
 
 #### Exeggcute
-- **Leech Seed**: reduced cost from (GG) to (GC).
+- **Hypnosis**: removed.
+- **Leech Seed**: removed.
+- New attack: **Nutrition Support** (G): attach energy from deck to 1 Pokémon and heal 10 damage.
+- New attack: **Psyshock** (PC): 20 damage; flip a coin, Paralysis if Heads.
 
 #### Exeggutor
+- Reduced Retreat Cost from (CC) to (C).
 - **Teleport**: removed.
-- New attack: **Psyshock** (P): 20 damage; flip a coin, paralysis if Heads.
+- New attack: **Tropical Storm** (GG): 20 damage for each friendly Pokémon with energies.
 
 #### Tangela Lv8
 - Increased HP from 50 to 60.

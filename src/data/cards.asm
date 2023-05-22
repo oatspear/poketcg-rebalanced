@@ -2066,20 +2066,20 @@ ExeggutorCard:
 	db ATK_ANIM_BIG_HIT ; animation
 
 	; attack 2
-	energy PSYCHIC, 1 ; energies
-	tx PsyshockName ; name
-	tx MayInflictParalysisDescription ; description
+	energy GRASS, 2 ; energies
+	tx TropicalStormName ; name
+	tx TropicalStormDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	db DAMAGE_X ; category
+	dw TropicalStormEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PSYCHIC_HIT ; animation
+	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx CoconutName ; category

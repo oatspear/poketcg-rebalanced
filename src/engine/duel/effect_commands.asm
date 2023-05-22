@@ -147,6 +147,11 @@ ExeggutorBigEggsplosionEffectCommands:
 	dbw EFFECTCMDTYPE_AI, BigEggsplosion_AIEffect
 	db  $00
 
+TropicalStormEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TropicalStorm_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, TropicalStorm_AIEffect
+	db  $00
+
 NidokingThrashEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Thrash_ModifierEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Thrash_RecoilEffect
