@@ -6095,7 +6095,7 @@ NutritionSupport_AttachEnergyEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ldh [hTempPlayAreaLocation_ff9d], a
 	ld a, 10
-	jp HealPlayAreaCardHP
+	jp HealPlayAreaCardHP_IfDamaged
 
 Firestarter_OncePerTurnCheck:
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -7300,8 +7300,7 @@ SuperPotion_HealEffect: ; 2f1b5 (b:71b5)
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ldh [hTempPlayAreaLocation_ff9d], a
 	ldh a, [hPlayAreaEffectTarget]
-	call HealPlayAreaCardHP
-	ret
+	jp HealPlayAreaCardHP
 
 ; checks if there is at least one Energy card
 ; attached to some card in the Turn Duelist's Play Area.
@@ -7702,8 +7701,7 @@ Potion_HealEffect: ; 2f3ef (b:73ef)
 	ldh a, [hTemp_ffa0]
 	ldh [hTempPlayAreaLocation_ff9d], a
 	ldh a, [hTempPlayAreaLocation_ffa1]
-	call HealPlayAreaCardHP
-	ret
+	jp HealPlayAreaCardHP
 
 GamblerEffect: ; 2f3f9 (b:73f9)
 	ldtx de, CardCheckIfHeads8CardsIfTails1CardText

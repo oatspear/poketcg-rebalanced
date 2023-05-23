@@ -103,6 +103,23 @@ HealUserHP_NoAnimation:
 	ret
 
 ; heals amount of damage in register e for card in
+; Play Area location in [hTempPlayAreaLocation_ff9d], only if there is any
+; damage to heal.
+; plays healing animation and prints text with card's name.
+; input:
+;	   a: amount of HP to heal
+;	  [hTempPlayAreaLocation_ff9d]: Play Area location of card to heal
+HealPlayAreaCardHP_IfDamaged:
+	ld d, a
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetCardDamageAndMaxHP
+	or a
+	ret z ; no damage
+	ld a, d
+	; fallthrough
+
+; heals amount of damage in register e for card in
 ; Play Area location in [hTempPlayAreaLocation_ff9d].
 ; plays healing animation and prints text with card's name.
 ; input:
