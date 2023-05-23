@@ -170,7 +170,7 @@
 
 #### Tangela Lv8
 - Increased HP from 50 to 60.
-- **Bind**: reduced cost from (GC) to (CC) and damage from 20 to 10.
+- **Bind**: reduced cost from (GC) to (CC) and damage from 20 to 10; inflicts Paralysis if opponent is Basic.
 - **Poison Powder**: removed.
 - New attack: **Panic Vine** (GCC): 10 damage; inflicts Confusion; opponent cannot retreat.
 

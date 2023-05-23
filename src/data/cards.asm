@@ -2207,11 +2207,11 @@ TangelaLv8Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx BindName ; name
-	tx MayInflictParalysisDescription ; description
+	tx ParalysisIfBasicDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw TangelaBindEffectCommands ; effect commands
+	dw BindEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

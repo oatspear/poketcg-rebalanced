@@ -686,7 +686,7 @@ TangelaName: ; 59bbe (16:5bbe)
 	text "Tangela"
 	done
 
-BindName: ; 59bc7 (16:5bc7)
+BindName:
 	text "Bind"
 	done
 

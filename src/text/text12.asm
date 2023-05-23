@@ -796,6 +796,11 @@ TropicalStormDescription:
 	line "attached energies."
 	done
 
+ParalysisIfBasicDescription:
+	text "If the Defending Pokémon is a"
+	line "Basic Pokémon, it is now Paralyzed."
+	done
+
 ProfessorOakName: ; 6342d (18:742d)
 	text "Professor Oak"
 	done

@@ -447,7 +447,6 @@ CloysterClampEffectCommands:
 CaterpieStringShotEffectCommands:
 MetapodStunSporeEffectCommands:
 GrimerNastyGooEffectCommands:
-TangelaBindEffectCommands:
 TangelaStunSporeEffectCommands:
 GyaradosBubblebeamEffectCommands:
 GolduckPsyshockEffectCommands:
@@ -456,6 +455,10 @@ SquirtleBubbleEffectCommands:
 ArticunoFreezeDryEffectCommands:
 Paralysis50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
+	db  $00
+
+BindEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ParalysisIfBasicEffect
 	db  $00
 
 CowardiceEffectCommands:
