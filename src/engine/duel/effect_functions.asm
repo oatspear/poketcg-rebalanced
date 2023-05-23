@@ -1465,6 +1465,7 @@ TropicalStorm_DamageBoostEffect:
 	call GetTurnDuelistVariable
 	ld d, a
 	ld e, PLAY_AREA_ARENA
+	ld c, 0
 
 ; go through every Pokemon in the Play Area and boost damage based on energy
 .loop_play_area
@@ -1473,13 +1474,17 @@ TropicalStorm_DamageBoostEffect:
 	ld a, [wTotalAttachedEnergies]
 	or a
 	jr z, .next_pkmn
-	ld a, 20
-	call AddToDamage
+	inc c
 .next_pkmn
 	inc e
 	dec d
 	jr nz, .loop_play_area
-	ret
+	ld a, c
+	or a
+	ret z  ; done if zero
+	rla            ; a = a * 2
+	call ATimes10  ; a = a * 10
+	jp SetDefiniteDamage  ; a == c * 20
 
 
 Thrash_AIEffect: ; 2c96b (b:496b)
