@@ -2233,7 +2233,7 @@ ApplyExtraWaterEnergyDamageBonus: ; 2cec8 (b:4ec8)
 	ret
 
 OmastarWaterGunEffect: ; 2cf05 (b:4f05)
-	lb bc, 1, 1
+	lb bc, 2, 0
 	jr ApplyExtraWaterEnergyDamageBonus
 
 OmastarSpikeCannon_AIEffect: ; 2cf0a (b:4f0a)
