@@ -118,7 +118,7 @@
 #### Venonat
 - **Stun Spore**: removed.
 - **Leech Life**: reduced cost from (GC) to (G).
-- New attack: **Ultravision** (G): choose a card from the top 7 deck cards.
+- New attack: **Ultravision** (G): choose a card from the top 3 deck cards.
 
 #### Venomoth
 - **Shift**: removed.
