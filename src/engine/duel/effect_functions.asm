@@ -2346,7 +2346,7 @@ VaporeonQuickAttack_DamageBoostEffect: ; 2d0c0 (b:50c0)
 	ret
 
 VaporeonWaterGunEffect: ; 2d0d3 (b:50d3)
-	lb bc, 2, 1
+	lb bc, 2, 0
 	jp ApplyExtraWaterEnergyDamageBonus
 
 WithdrawEffect: ; 2d120 (b:5120)
