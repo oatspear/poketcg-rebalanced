@@ -10488,7 +10488,7 @@ ScoopUpCard:
 	dw NONE ; description (cont)
 
 ComputerSearchCard:
-	db TYPE_TRAINER_SUPPORTER ; type
+	db TYPE_TRAINER ; type
 	gfx ComputerSearchCardGfx ; gfx
 	tx ComputerSearchName ; name
 	db STAR ; rarity
