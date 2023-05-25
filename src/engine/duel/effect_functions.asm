@@ -566,12 +566,12 @@ Sprout_AddToHandEffect:
 	ret
 
 
-; Looks at the top 3 cards and allows the Player to choose a card.
+; Looks at the top 4 cards and allows the Player to choose a card.
 Ultravision_PlayerSelectEffect:
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 
-	ld b, 3
+	ld b, 4
 	call CreateDeckCardListTopNCards
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseCardToPlaceInHandText
@@ -587,7 +587,7 @@ Ultravision_PlayerSelectEffect:
 ; selects the first Trainer or Energy card that shows up
 ; FIXME improve
 Ultravision_AISelectEffect:
-	ld b, 3
+	ld b, 4
 	call CreateDeckCardListTopNCards
 	ld hl, wDuelTempList
 .loop_deck
