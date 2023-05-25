@@ -58,10 +58,9 @@ _AddStarterDeck:
 	ld a, c
 	ld l, a
 	res CARD_NOT_OWNED_F, [hl]
-	inc [hl]
-	inc [hl]
-	inc [hl]
-	inc [hl]
+	ld a, [hl]
+	add 16
+	ld [hl], a
 	dec c
 	jr nz, .loop_debug_collection
 ; end OATS DEBUG
