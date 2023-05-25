@@ -693,6 +693,8 @@
 - **Slam**: removed.
 - New attack: **Energy Hurricane** (WLC): 60 damage, search deck for an Energy and attach to a Pokémon.
 
+### Trainer Cards
+
 #### Professor Oak
 - Shuffles your hand into the deck and draws 5 cards.
 
@@ -713,6 +715,12 @@
 
 #### Computer Search
 - Looks at the top 7 deck cards; may pick a Supporter from those.
+
+### Miscellaneous
+
+#### Deck Building
+
+- Added a menu option to reset the deck to 0 cards, to make editing easier.
 
 
 ## Version 0.1

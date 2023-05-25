@@ -1672,8 +1672,8 @@ DismantleText: ; 3baa5 (e:7aa5)
 	text "Dismantle"
 	done
 
-ModifyText: ; 3bab0 (e:7ab0)
-	text "Modify"
+ResetText: ; 3bab0 (e:7ab0)
+	text "Reset"
 	done
 
 SaveText: ; 3bab8 (e:7ab8)

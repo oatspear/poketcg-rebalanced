@@ -570,7 +570,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThereIsNoDeckHereText                              ; 0x022f
 	textpointer ConfirmText                                        ; 0x0230
 	textpointer DismantleText                                      ; 0x0231
-	textpointer ModifyText                                         ; 0x0232
+	textpointer ResetText                                          ; 0x0232
 	textpointer SaveText                                           ; 0x0233
 	textpointer NameText                                           ; 0x0234
 	textpointer ThereIsOnly1DeckSoCannotBeDismantledText           ; 0x0235

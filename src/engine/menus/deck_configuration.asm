@@ -593,7 +593,7 @@ HandleDeckConfigurationMenu:
 
 .func_table
 	dw ConfirmDeckConfiguration ; Confirm
-	dw ModifyDeckConfiguration  ; Modify
+	dw ResetDeckConfiguration   ; Reset
 	dw ChangeDeckName           ; Name
 	dw SaveDeckConfiguration    ; Save
 	dw DismantleDeck            ; Dismantle
@@ -621,9 +621,20 @@ ConfirmDeckConfiguration:
 	ld [wCardListCursorPos], a
 	ret
 
-ModifyDeckConfiguration:
+; Removes all cards from the deck, without commiting changes to SRAM.
+ResetDeckConfiguration:
+	ld a, DECK_SIZE
+	ld hl, wCurDeckCards
+	call ClearNBytesFromHL
+	ld a, NUM_FILTERS
+	ld hl, wCardFilterCounts
+	call ClearNBytesFromHL
+	xor a
+	ld [wTotalCardCount], a
+; do old Modify behaviour (exit menu)
 	add sp, $2
 	jr HandleDeckConfigurationMenu.draw_icons
+
 
 ; returns carry set if player chose to go back
 CancelDeckModifications:
@@ -1008,7 +1019,7 @@ DrawCardTypeIcons:
 DeckBuildMenuData:
 	; x, y, text id
 	textitem  2, 2, ConfirmText
-	textitem  9, 2, ModifyText
+	textitem  9, 2, ResetText
 	textitem 16, 2, NameText
 	textitem  2, 4, SaveText
 	textitem  9, 4, DismantleText
