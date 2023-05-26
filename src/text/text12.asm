@@ -801,6 +801,11 @@ ParalysisIfBasicDescription:
 	line "Basic Pokémon, it is now Paralyzed."
 	done
 
+IsCuredOfStatusAndEffectsText:
+	text "<RAMTEXT> is cured of"
+	line "Special Conditions and effects."
+	done
+
 ProfessorOakName: ; 6342d (18:742d)
 	text "Professor Oak"
 	done

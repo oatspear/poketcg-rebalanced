@@ -130,6 +130,25 @@ HealPlayAreaCardHP:
 	ld d, $00
 
 ; play heal animation
+	call PlayHealingAnimation_PlayAreaPokemon
+
+; heal the target Pokemon
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	add e
+	ld [hl], a
+	ret
+
+
+; plays a healing animation for a play area Pokémon
+; (shows the Play Area screen and the arrow up with healing animation)
+; input:
+;   de: amount of damage to heal
+;   [hTempPlayAreaLocation_ff9d]: PLAY_AREA_* offset of card to heal
+; preserves: de
+PlayHealingAnimation_PlayAreaPokemon:
+; play heal animation
 	push de
 	bank1call Func_7415
 	ld a, ATK_ANIM_HEALING_WIND_PLAY_AREA
@@ -160,14 +179,8 @@ HealPlayAreaCardHP:
 	ldtx hl, PokemonHealedDamageText
 	call DrawWideTextBox_WaitForInput
 	pop de
-
-; heal the target Pokemon
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	add e
-	ld [hl], a
 	ret
+
 
 Heal10DamageFromAll_HealEffect:
 	ld c, 10
@@ -266,3 +279,63 @@ HealingWind_PlayAreaHealEffect:
 	dec d
 	jr nz, .loop_play_area
 	ret
+
+; ------------------------------------------------------------------------------
+; Status and Effects
+; ------------------------------------------------------------------------------
+
+; plays a healing animation for a play area Pokémon
+; input:
+;   [hTempPlayAreaLocation_ff9d]: PLAY_AREA_* offset of card to heal
+; preserves: de
+PlayStatusClearAnimation_PlayAreaPokemon:
+	push de
+	bank1call Func_7415
+	ld a, ATK_ANIM_GLOW_PLAY_AREA
+	ld [wLoadedAttackAnimation], a
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $01
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+
+; print Pokemon card name
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD
+	call LoadCardNameAndLevelFromVarToRam2
+	ldtx hl, IsCuredOfStatusAndEffectsText
+	call DrawWideTextBox_WaitForInput
+	pop de
+	ret
+
+
+; Removes status conditions from turn holder's target.
+; Input:
+;    a: [0, 5] (PLAY_AREA_* offsets)
+; Affects hl.
+ClearStatusFromTarget:
+	call ClearStatusFromTarget_NoAnim
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call PlayStatusClearAnimation_PlayAreaPokemon
+	ret
+
+; Removes status conditions from turn holder's target.
+; Input:
+;    a: [0, 5] (PLAY_AREA_* offsets)
+; Affects hl.
+ClearStatusFromTarget_NoAnim:
+	add DUELVARS_ARENA_CARD_STATUS
+	ld l, a
+	ldh a, [hWhoseTurn]
+	ld h, a
+	xor a
+	ld [hl], a ; NO_STATUS
+	ret
+
+ClearEffectsFromArenaPokemon:
+	push hl
+	ldh a, [hWhoseTurn]
+	ld h, a
+	jp ClearAllStatusConditions.done_status  ; pop hl

@@ -134,7 +134,7 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_MagneticStorm       ; ATK_ANIM_MAGNETIC_STORM
 	dw AttackAnimation_PoisonWhip          ; ATK_ANIM_POISON_WHIP
 	dw AttackAnimation_ThunderWave         ; ATK_ANIM_THUNDER_WAVE
-	dw AttackAnimation_ThunderWave         ; ATK_ANIM_112
+	dw AttackAnimation_GlowPlayArea        ; ATK_ANIM_GLOW_PLAY_AREA
 	dw AttackAnimation_Spore               ; ATK_ANIM_SPORE
 	dw AttackAnimation_Hypnosis            ; ATK_ANIM_HYPNOSIS
 	dw AttackAnimation_EnergyConversion    ; ATK_ANIM_ENERGY_CONVERSION
@@ -643,6 +643,12 @@ AttackAnimation_DevolutionBeam:
 	anim_normal         DUEL_ANIM_FLASH
 	anim_unknown        $04
 	anim_unknown2       DUEL_ANIM_70
+	anim_end
+
+AttackAnimation_GlowPlayArea:
+	anim_unknown        $04
+	anim_unknown2       DUEL_ANIM_70
+	; anim_normal         DUEL_ANIM_FLASH
 	anim_end
 
 AttackAnimation_5543:

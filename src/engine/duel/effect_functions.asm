@@ -2130,7 +2130,8 @@ HelpingHand_CheckUse: ; 2ce53 (b:4e53)
 	and USED_PKMN_POWER_THIS_TURN
 	jr nz, .already_used
 
-	call CheckCannotUseDueToStatus
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
 	ret c ; can't use PKMN due to status or Toxic Gas
 
 ; return carry if the Arena card does not have status conditions
@@ -7392,7 +7393,7 @@ ImakuniEffect: ; 2f216 (b:7216)
 .failed
 ; play confusion animation and print failure text
 	ld a, ATK_ANIM_IMAKUNI_CONFUSION
-	call Func_2fea9
+	call PlayAnimationForTrainerEffect
 	ldtx hl, ThereWasNoEffectText
 	call DrawWideTextBox_WaitForInput
 	ret
@@ -7400,7 +7401,7 @@ ImakuniEffect: ; 2f216 (b:7216)
 .success
 ; play confusion animation and confuse card
 	ld a, ATK_ANIM_IMAKUNI_CONFUSION
-	call Func_2fea9
+	call PlayAnimationForTrainerEffect
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and PSN_DBLPSN
@@ -7855,7 +7856,7 @@ FullHeal_StatusCheck: ; 2f4c5 (b:74c5)
 
 FullHeal_ClearStatusEffect: ; 2f4d1 (b:74d1)
 	ld a, ATK_ANIM_FULL_HEAL
-	call Func_2fea9
+	call PlayAnimationForTrainerEffect
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	ld [hl], NO_STATUS
@@ -9398,7 +9399,7 @@ GustOfWind_PlayerSelection: ; 2fe79 (b:7e79)
 GustOfWind_SwitchEffect: ; 2fe90 (b:7e90)
 ; play whirlwind animation
 	ld a, ATK_ANIM_GUST_OF_WIND
-	call Func_2fea9
+	call PlayAnimationForTrainerEffect
 
 ; switch Arena card
 	call SwapTurn
@@ -9413,7 +9414,7 @@ GustOfWind_SwitchEffect: ; 2fe90 (b:7e90)
 
 ; input:
 ;	a = attack animation to play
-Func_2fea9: ; 2fea9 (b:7ea9)
+PlayAnimationForTrainerEffect: ; 2fea9 (b:7ea9)
 	ld [wLoadedAttackAnimation], a
 	bank1call Func_7415
 	ld bc, $0
