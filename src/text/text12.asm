@@ -806,11 +806,32 @@ IsCuredOfStatusAndEffectsText:
 	line "Special Conditions and effects."
 	done
 
-ProfessorOakName: ; 6342d (18:742d)
+HealingEnergyName:
+	text "Healing Energy"
+	done
+
+HealingEnergyDescription:
+	text "If you play an Energy card from"
+	line "your hand to attach it to 1 of"
+	line "your Pokémon, heal 10 damage from"
+	line "that Pokémon."
+	done
+
+SoftboiledName:
+	text "Softboiled"
+	done
+
+SoftboiledDescription:
+	text "Heal 30 damage from 1 of your"
+	line "Benched Pokémon and remove all"
+	line "Special Conditions from it."
+	done
+
+ProfessorOakName:
 	text "Professor Oak"
 	done
 
-ProfessorOakDescription: ; 6343c (18:743c)
+ProfessorOakDescription:
 	text "Shuffle your hand into your deck,"
 	line "then draw 5 cards."
 	done

@@ -219,10 +219,10 @@ Heal20DamageFromAll_HealEffect:
 ;   c - amount to heal
 HealDamageFromAll:
 ; play the global healing wind animation
-	push bc
-	ld a, ATK_ANIM_HEALING_WIND
-	call PlayAttackAnimation_AdhocEffect
-	pop bc
+	; push bc
+	; ld a, ATK_ANIM_HEALING_WIND
+	; call PlayAttackAnimation_AdhocEffect
+	; pop bc
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable

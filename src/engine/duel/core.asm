@@ -615,7 +615,7 @@ PlayEnergyCard:
 	call CountPokemonIDInPlayArea
 	jr nc, .done_energy_effects  ; no Pkmn Power-capable Chansey was found
 	ld a, 10  ; heal 10 HP
-	call HealPlayAreaCardHP_IfDamaged
+	farcall HealPlayAreaCardHP_IfDamaged
 ; end of Potion Energy effect
 .done_energy_effects
 	jp DuelMainInterface
@@ -6670,7 +6670,7 @@ OppAction_PlayEnergyCard:
 	call CountPokemonIDInPlayArea
 	jr nc, .done_energy_effects  ; no Pkmn Power-capable Chansey was found
 	ld a, 10  ; heal 10 HP
-	call HealPlayAreaCardHP_IfDamaged
+	farcall HealPlayAreaCardHP_IfDamaged
 ; end of Potion Energy effect
 .done_energy_effects
 	jp DrawDuelMainScene

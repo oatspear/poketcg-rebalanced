@@ -25,7 +25,7 @@ PointerTable_AttackAnimation:
 	dw NULL                                ; ATK_ANIM_NONE
 	dw AttackAnimation_Hit                 ; ATK_ANIM_HIT
 	dw AttackAnimation_BigHit              ; ATK_ANIM_BIG_HIT
-	dw AttackAnimation_Hit                 ; ATK_ANIM_3
+	dw AttackAnimation_AgilityNoHit        ; ATK_ANIM_AGILITY_NO_HIT
 	dw AttackAnimation_Hit                 ; ATK_ANIM_HIT_RECOIL
 	dw AttackAnimation_Hit                 ; ATK_ANIM_HIT_EFFECT
 	dw AttackAnimation_ThunderShock        ; ATK_ANIM_THUNDERSHOCK
@@ -181,6 +181,11 @@ AttackAnimation_BigHit:
 	anim_opponent       DUEL_ANIM_BIG_HIT
 	anim_normal         DUEL_ANIM_SHAKE2
 	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
+	anim_end
+
+AttackAnimation_AgilityNoHit:
+	anim_player         DUEL_ANIM_GLOW
+	anim_normal         DUEL_ANIM_QUICK_ATTACK
 	anim_end
 
 AttackAnimation_ThunderShock:

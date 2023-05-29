@@ -36,6 +36,7 @@ EffectCommands: ; 186f7 (6:46f7)
 ;	SpitPoison_AIEffect              ;
 
 HealingNectarEffectCommands:
+HealingEnergyEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SetCarryNullEffect
 	db  $00
 

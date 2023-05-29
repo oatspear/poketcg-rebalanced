@@ -2962,6 +2962,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TropicalStormDescription
 	textpointer ParalysisIfBasicDescription
 	textpointer IsCuredOfStatusAndEffectsText
+	textpointer HealingEnergyName
+	textpointer HealingEnergyDescription
+	textpointer SoftboiledName
+	textpointer SoftboiledDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

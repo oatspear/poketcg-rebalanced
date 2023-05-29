@@ -469,17 +469,18 @@ HandleAIPkmnPowers:
 	push bc
 
 ; check heal
-	cp VILEPLUME
-	jr nz, .check_shift
+	cp GLOOM
+	; jr nz, .check_shift
+	jr nz, .check_curse
 	call HandleAIHeal
 	jr .next_1
-.check_shift
-	cp VENOMOTH
-	jr nz, .check_curse
+; .check_shift
+	; cp VENOMOTH
+	; jr nz, .check_curse
 	; .check_strange_behavior
 	; .check_peek
-	call HandleAIShift
-	jr .next_1
+	; call HandleAIShift
+	; jr .next_1
 ;.check_peek
 ;	cp MANKEY
 ;	jr nz, .check_strange_behavior
@@ -515,7 +516,7 @@ HandleAIPkmnPowers:
 
 ; checks whether AI uses Heal on Pokemon in Play Area.
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Vileplume.
+;	c = Play Area location (PLAY_AREA_*) of Gloom.
 HandleAIHeal:
 	ld a, c
 	ldh [hTemp_ffa0], a

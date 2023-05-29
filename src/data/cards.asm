@@ -564,7 +564,8 @@ ButterfreeCard:
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 1
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_RECOVER ; animation
+	; db ATK_ANIM_NONE ; animation
 
 	; attack 2
 	energy GRASS, 1, COLORLESS, 2 ; energies
@@ -719,7 +720,7 @@ BeedrillCard:
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 3
-	db ATK_ANIM_GALE ; animation
+	db ATK_ANIM_AGILITY_NO_HIT ; animation
 
 	; attack 2
 	energy GRASS, 2, COLORLESS, 1 ; energies
@@ -1328,18 +1329,30 @@ GloomCard:
 	; Both the Defending Pokémon and Gloom are now Asleep (after doing damage).
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx AromatherapyName ; name
-	tx Heal20DamageFromAllDescription ; description
-	dw NONE ; description (cont)
+	; energy COLORLESS, 1 ; energies
+	; tx AromatherapyName ; name
+	; tx Heal20DamageFromAllDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db RESIDUAL ; category
+	; dw AromatherapyEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db HEAL_USER ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_RECOVER ; animation
+	energy 0 ; energies
+	tx HealName ; name
+	tx HealDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw AromatherapyEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw PokemonPowerHealEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
+	db 1
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
@@ -1663,7 +1676,7 @@ VenomothCard:
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 3
-	db ATK_ANIM_GALE ; animation
+	db ATK_ANIM_AGILITY_NO_HIT ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
@@ -4516,7 +4529,7 @@ LaprasCard:
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 1
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
 	energy WATER, 2, COLORLESS, 1 ; energies
@@ -8953,7 +8966,7 @@ JigglypuffLv12Card:
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 1
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies
@@ -9574,12 +9587,12 @@ ChanseyCard:
 
 	; attack 1
 	energy 0 ; energies
-	tx HealName ; name
-	tx HealDescription ; description
+	tx HealingEnergyName ; name
+	tx HealingEnergyDescription ; description
 	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw PokemonPowerHealEffectCommands ; effect commands
+	dw HealingEnergyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3

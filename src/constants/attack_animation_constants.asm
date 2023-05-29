@@ -5,7 +5,7 @@
 	const ATK_ANIM_NONE                   ; $00
 	const ATK_ANIM_HIT                    ; $01
 	const ATK_ANIM_BIG_HIT                ; $02
-	const ATK_ANIM_3                      ; $03
+	const ATK_ANIM_AGILITY_NO_HIT         ; $03
 	const ATK_ANIM_HIT_RECOIL             ; $04
 	const ATK_ANIM_HIT_EFFECT             ; $05
 	const ATK_ANIM_THUNDERSHOCK           ; $06

@@ -8957,6 +8957,7 @@ Recycle_DiscardPileCheck:
 	call RemoveTrainerCardsFromCardList
 	call CountCardsInDuelTempList
 	cp 1
+	ldtx hl, ThereAreNoCardsInTheDiscardPileText
 	ret
 
 Recycle_PlayerSelection:
