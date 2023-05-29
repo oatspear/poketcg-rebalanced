@@ -66,7 +66,7 @@ ApplyAndAnimateHPRecovery:
 	call GetTurnDuelistVariable
 	add e
 	ld e, a
-	ld a, 0
+	xor a
 	adc d
 	ld d, a
 	; de = damage dealt + current HP
@@ -102,7 +102,7 @@ HealUserHP_NoAnimation:
 	ld [hl], a
 	ret
 
-; heals amount of damage in register e for card in
+; heals amount of damage in register a for card in
 ; Play Area location in [hTempPlayAreaLocation_ff9d], only if there is any
 ; damage to heal.
 ; plays healing animation and prints text with card's name.
@@ -119,9 +119,10 @@ HealPlayAreaCardHP_IfDamaged:
 	ld a, d
 	; fallthrough
 
-; heals amount of damage in register e for card in
+; heals amount of damage in register a for card in
 ; Play Area location in [hTempPlayAreaLocation_ff9d].
 ; plays healing animation and prints text with card's name.
+; uses: a, de, hl
 ; input:
 ;	   a: amount of HP to heal
 ;	  [hTempPlayAreaLocation_ff9d]: Play Area location of card to heal
@@ -139,6 +140,27 @@ HealPlayAreaCardHP:
 	add e
 	ld [hl], a
 	ret
+
+	; call GetCardDamageAndMaxHP
+	; ld b, $00
+	; ld a, DUELVARS_ARENA_CARD_HP
+	; call GetTurnDuelistVariable
+	; add e
+	; ld e, a
+	; xor a
+	; adc d
+	; ld d, a
+; de = damage dealt + current HP
+; bc = max HP of card
+	; call CompareDEtoBC
+	; jr c, .skip_cap
+; cap de to value in bc
+	; ld e, c
+	; ld d, b
+; .skip_cap
+	; ld [hl], e ; apply new HP to arena card
+	; ret
+
 
 
 ; plays a healing animation for a play area Pokémon
@@ -190,7 +212,7 @@ Heal20DamageFromAll_HealEffect:
 	ld c, 20
 	jr HealDamageFromAll
 
-; Heals some damage to all friendly Pokémon in Play Area (Active and Benched).
+; Heals some damage from all friendly Pokémon in Play Area (Active and Benched).
 ; input:
 ;   c - amount to heal
 HealDamageFromAll:
@@ -199,7 +221,7 @@ HealDamageFromAll:
 	ld d, a
 	ld e, PLAY_AREA_ARENA
 
-; go through every Pokemon in the Play Area and heal 10 damage.
+; go through every Pokemon in the Play Area and heal c damage.
 .loop_play_area
 ; check its damage
 	ld a, e

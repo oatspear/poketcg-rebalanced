@@ -1130,25 +1130,23 @@ SuperPotionDescription:
 	line "damage from that Pokémon."
 	done
 
-FullHealName: ; 646af (19:46af)
+FullHealName:
 	text "Full Heal"
 	done
 
-FullHealDescription: ; 646ba (19:46ba)
-	text "Your Active Pokémon is no longer"
-	line "Asleep, Confused, Paralyzed, or"
-	line "Poisoned."
+FullHealDescription:
+	text "Remove all Special Conditions and"
+	line "effects of attacks from 1 of your"
+	line "Pokémon."
 	done
 
-ReviveName: ; 64706 (19:4706)
+ReviveName:
 	text "Revive"
 	done
 
-ReviveDescription: ; 6470e (19:470e)
+ReviveDescription:
 	text "Put 1 Basic Pokémon card from your"
 	line "discard pile onto your Bench."
-	line "(You can't play Revive if your"
-	line "Bench is full.)"
 	done
 
 MaintenanceName:

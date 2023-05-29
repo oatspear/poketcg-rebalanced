@@ -2040,11 +2040,6 @@ VenomPowder_PoisonConfusionEffect:
 	ld [wNoEffectFromWhichStatus], a
 	ret
 
-TangelaPoisonPowder_AIEffect: ; 2cda0 (b:4da0)
-	ld a, 5
-	lb de, 0, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
-
 Heal_OncePerTurnCheck:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a

@@ -290,11 +290,6 @@ VenomothVenomPowderEffectCommands:
 	; dbw EFFECTCMDTYPE_AI, VenomPowder_AIEffect
 	db  $00
 
-TangelaPoisonPowderEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	dbw EFFECTCMDTYPE_AI, TangelaPoisonPowder_AIEffect
-	db  $00
-
 PokemonPowerHealEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Heal_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal_RemoveDamageEffect
@@ -447,7 +442,6 @@ CloysterClampEffectCommands:
 CaterpieStringShotEffectCommands:
 MetapodStunSporeEffectCommands:
 GrimerNastyGooEffectCommands:
-TangelaStunSporeEffectCommands:
 GyaradosBubblebeamEffectCommands:
 GolduckPsyshockEffectCommands:
 DewgongIceBeamEffectCommands:

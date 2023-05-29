@@ -716,6 +716,9 @@
 #### Computer Search
 - Looks at the top 7 deck cards; may pick a Supporter from those.
 
+#### Full Heal
+- Removes status and effects from any of the user's Pokémon, even if Benched.
+
 ### Miscellaneous
 
 #### Deck Building

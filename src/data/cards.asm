@@ -2225,12 +2225,12 @@ TangelaLv8Card:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw TangelaPoisonPowderEffectCommands ; effect commands
+	dw PanicVineEffectCommands ; effect commands
 	db INFLICT_CONFUSION ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_POWDER_HIT_POISON ; animation
+	db ATK_ANIM_WHIP ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness

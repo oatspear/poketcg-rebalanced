@@ -3727,47 +3727,49 @@ AIDecide_FullHeal:
 	jr z, .no_carry
 
 	and CNF_SLP_PRZ
-	cp PARALYZED
-	jr z, .paralyzed
-	cp ASLEEP
-	jr z, .asleep
-	cp CONFUSED
-	jr z, .confused
+	; cp PARALYZED
+	; jr z, .paralyzed
+	; cp ASLEEP
+	; jr z, .asleep
+	; cp CONFUSED
+	; jr z, .confused
+	jr nz, .no_scoop_up_prz
 	; if either PSN or DBLPSN, fallthrough
 
 .set_carry
 	scf
 	ret
 
-.asleep
+; .asleep
 ; set carry if any of the following
 ; cards are in the Play Area.
-	ld a, GASTLY_LV8
-	ld b, PLAY_AREA_ARENA
-	call LookForCardIDInPlayArea_Bank8
-	jr c, .set_carry
-	ld a, GASTLY_LV17
-	ld b, PLAY_AREA_ARENA
-	call LookForCardIDInPlayArea_Bank8
-	jr c, .set_carry
-	ld a, HAUNTER_LV22
-	ld b, PLAY_AREA_ARENA
-	call LookForCardIDInPlayArea_Bank8
-	jr c, .set_carry
+	; ld a, GASTLY_LV8
+	; ld b, PLAY_AREA_ARENA
+	; call LookForCardIDInPlayArea_Bank8
+	; jr c, .set_carry
+	; ld a, GASTLY_LV17
+	; ld b, PLAY_AREA_ARENA
+	; call LookForCardIDInPlayArea_Bank8
+	; jr c, .set_carry
+	; ld a, HAUNTER_LV22
+	; ld b, PLAY_AREA_ARENA
+	; call LookForCardIDInPlayArea_Bank8
+	; jr c, .set_carry
 
 ; otherwise fallthrough
 
-.paralyzed
+; .paralyzed
 ; if Scoop Up is in hand and decided to be played, skip.
-	ld a, SCOOP_UP
-	call LookForCardIDInHandList_Bank8
-	jr nc, .no_scoop_up_prz
-	call AIDecide_ScoopUp
-	jr c, .no_carry
+	; ld a, SCOOP_UP
+	; call LookForCardIDInHandList_Bank8
+	; jr nc, .no_scoop_up_prz
+	; call AIDecide_ScoopUp
+	; jr c, .no_carry
 
 .no_scoop_up_prz
 ; if card can damage defending Pokemon...
 	xor a ; PLAY_AREA_ARENA
+	ldh [hTemp_ffa0], a
 	farcall CheckIfCanDamageDefendingPokemon
 	jr nc, .no_carry
 ; ...and can play an energy card to retreat, set carry.
@@ -3784,25 +3786,25 @@ AIDecide_FullHeal:
 	or a
 	ret
 
-.confused
+; .confused
 ; if Scoop Up is in hand and decided to be played, skip.
-	ld a, SCOOP_UP
-	call LookForCardIDInHandList_Bank8
-	jr nc, .no_scoop_up_cnf
-	call AIDecide_ScoopUp
-	jr c, .no_carry
+	; ld a, SCOOP_UP
+	; call LookForCardIDInHandList_Bank8
+	; jr nc, .no_scoop_up_cnf
+	; call AIDecide_ScoopUp
+	; jr c, .no_carry
 
-.no_scoop_up_cnf
+; .no_scoop_up_cnf
 ; if card can damage defending Pokemon...
-	xor a ; PLAY_AREA_ARENA
-	farcall CheckIfCanDamageDefendingPokemon
-	jr nc, .no_carry
+	; xor a ; PLAY_AREA_ARENA
+	; farcall CheckIfCanDamageDefendingPokemon
+	; jr nc, .no_carry
 ; ...and can play an energy card to retreat, set carry.
-	ld a, [wAIPlayEnergyCardForRetreat]
-	or a
-	jr nz, .set_carry
+	; ld a, [wAIPlayEnergyCardForRetreat]
+	; or a
+	; jr nz, .set_carry
 ; if not, return no carry.
-	jr .no_carry
+	; jr .no_carry
 
 AIPlay_MrFuji:
 	ld a, [wAITrainerCardToPlay]

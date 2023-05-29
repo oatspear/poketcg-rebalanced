@@ -63,6 +63,16 @@ _AddStarterDeck:
 	ld [hl], a
 	dec c
 	jr nz, .loop_debug_collection
+; add a few extra energies
+	ld c, DARKNESS_ENERGY
+.loop_debug_energies
+	ld a, c
+	ld l, a
+	ld a, [hl]
+	add 30
+	ld [hl], a
+	dec c
+	jr nz, .loop_debug_energies
 ; end OATS DEBUG
 
 	call DisableSRAM
