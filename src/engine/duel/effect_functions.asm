@@ -7467,7 +7467,7 @@ ImakuniEffect: ; 2f216 (b:7216)
 .failed
 ; play confusion animation and print failure text
 	ld a, ATK_ANIM_IMAKUNI_CONFUSION
-	call PlayAnimationForTrainerEffect
+	call PlayAttackAnimation_AdhocEffect
 	ldtx hl, ThereWasNoEffectText
 	call DrawWideTextBox_WaitForInput
 	ret
@@ -7475,7 +7475,7 @@ ImakuniEffect: ; 2f216 (b:7216)
 .success
 ; play confusion animation and confuse card
 	ld a, ATK_ANIM_IMAKUNI_CONFUSION
-	call PlayAnimationForTrainerEffect
+	call PlayAttackAnimation_AdhocEffect
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and PSN_DBLPSN
@@ -9455,7 +9455,7 @@ GustOfWind_PlayerSelection: ; 2fe79 (b:7e79)
 GustOfWind_SwitchEffect: ; 2fe90 (b:7e90)
 ; play whirlwind animation
 	ld a, ATK_ANIM_GUST_OF_WIND
-	call PlayAnimationForTrainerEffect
+	call PlayAttackAnimation_AdhocEffect
 
 ; switch Arena card
 	call SwapTurn
@@ -9468,9 +9468,10 @@ GustOfWind_SwitchEffect: ; 2fe90 (b:7e90)
 	ld [wDuelDisplayedScreen], a
 	ret
 
+; plays animation on turn holder's side (e.g. for play area animations)
 ; input:
 ;	a = attack animation to play
-PlayAnimationForTrainerEffect: ; 2fea9 (b:7ea9)
+PlayAttackAnimation_AdhocEffect:
 	ld [wLoadedAttackAnimation], a
 	bank1call Func_7415
 	ld bc, $0

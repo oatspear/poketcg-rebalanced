@@ -564,7 +564,7 @@ ButterfreeCard:
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 1
-	db ATK_ANIM_RECOVER ; animation
+	db ATK_ANIM_NONE ; animation
 
 	; attack 2
 	energy GRASS, 1, COLORLESS, 2 ; energies
@@ -1339,7 +1339,7 @@ GloomCard:
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HEALING_WIND ; animation
+	db ATK_ANIM_NONE ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
@@ -4516,7 +4516,7 @@ LaprasCard:
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 1
-	db ATK_ANIM_RECOVER ; animation
+	db ATK_ANIM_NONE ; animation
 
 	; attack 2
 	energy WATER, 2, COLORLESS, 1 ; energies
@@ -8953,7 +8953,7 @@ JigglypuffLv12Card:
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
 	db 1
-	db ATK_ANIM_RECOVER ; animation
+	db ATK_ANIM_NONE ; animation
 
 	; attack 2
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies
