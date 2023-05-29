@@ -1346,7 +1346,8 @@ MysteriousFossilEffectCommands:
 	db  $00
 
 FullHealEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FullHeal_StatusCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FullHeal_CheckPlayAreaStatus
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FullHeal_PlayerSelection
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FullHeal_ClearStatusEffect
 	db  $00
 

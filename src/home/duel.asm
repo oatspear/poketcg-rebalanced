@@ -1022,8 +1022,8 @@ ClearAllStatusConditions:
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld [hli], a
-	ld [hli], a
+	; ld [hli], a
+	; ld [hli], a
 	ld [hl], a
 	pop hl
 	ret

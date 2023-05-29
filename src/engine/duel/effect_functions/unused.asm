@@ -1215,3 +1215,25 @@ SetDamageToATimes20:
 	ld a, h
 	ld [wDamage + 1], a
 	ret
+
+
+
+;
+; return carry if Arena card has no status to heal.
+FullHeal_StatusCheck: ; 2f4c5 (b:74c5)
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	or a
+	ret nz
+	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
+	scf
+	ret
+
+FullHeal_ClearStatusEffect: ; 2f4d1 (b:74d1)
+	ld a, ATK_ANIM_FULL_HEAL
+	call PlayAnimationForTrainerEffect
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	ld [hl], NO_STATUS
+	bank1call DrawDuelHUDs
+	ret

@@ -284,18 +284,29 @@ HealingWind_PlayAreaHealEffect:
 ; Status and Effects
 ; ------------------------------------------------------------------------------
 
+; plays a healing animation for the arena Pokémon
+; preserves: de
+PlayStatusClearAnimation_ArenaPokemon:
+	ld bc, $0
+	ld a, ATK_ANIM_FULL_HEAL
+	jr _PlayStatusClearAnimation
+
 ; plays a healing animation for a play area Pokémon
 ; input:
 ;   [hTempPlayAreaLocation_ff9d]: PLAY_AREA_* offset of card to heal
 ; preserves: de
 PlayStatusClearAnimation_PlayAreaPokemon:
-	push de
-	bank1call Func_7415
-	ld a, ATK_ANIM_GLOW_PLAY_AREA
-	ld [wLoadedAttackAnimation], a
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld b, a
 	ld c, $01
+	ld a, ATK_ANIM_GLOW_PLAY_AREA
+	; jr _PlayStatusClearAnimation
+	; fallthrough
+
+_PlayStatusClearAnimation:
+	push de
+	ld [wLoadedAttackAnimation], a
+	bank1call Func_7415
 	ldh a, [hWhoseTurn]
 	ld h, a
 	bank1call PlayAttackAnimation
@@ -316,10 +327,15 @@ PlayStatusClearAnimation_PlayAreaPokemon:
 ;    a: [0, 5] (PLAY_AREA_* offsets)
 ; Affects hl.
 ClearStatusFromTarget:
-	call ClearStatusFromTarget_NoAnim
 	ldh [hTempPlayAreaLocation_ff9d], a
-	call PlayStatusClearAnimation_PlayAreaPokemon
-	ret
+	call ClearStatusFromTarget_NoAnim
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	or a
+	jr nz, PlayStatusClearAnimation_PlayAreaPokemon
+; arena Pokémon additionally clears all substatus effects from attacks
+	; call ClearEffectsFromArenaPokemon
+	call ClearSubstatus2FromArenaPokemon
+	jr PlayStatusClearAnimation_ArenaPokemon
 
 ; Removes status conditions from turn holder's target.
 ; Input:
@@ -339,3 +355,17 @@ ClearEffectsFromArenaPokemon:
 	ldh a, [hWhoseTurn]
 	ld h, a
 	jp ClearAllStatusConditions.done_status  ; pop hl
+
+; clears SUBSTATUS2 effects (harmful) from arena Pokémon
+ClearSubstatus2FromArenaPokemon:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
+	call GetTurnDuelistVariable
+	xor a
+	ld [hl], a
+	; ld l, DUELVARS_ARENA_CARD_CHANGED_WEAKNESS
+	; ld [hl], a
+	; ld l, DUELVARS_ARENA_CARD_CHANGED_RESISTANCE
+	; ld [hl], a
+	; ld l, DUELVARS_ARENA_CARD_CHANGED_TYPE
+	; ld [hl], a
+	ret

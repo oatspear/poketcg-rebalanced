@@ -126,6 +126,50 @@ CheckIfPlayAreaHasAnyDamage:
 	scf
 	ret
 
+
+; Loop over turn holder's Pokemon and return whether any have status conditions.
+; Returns:
+;    a: first status condition found or zero if none found
+;    hl: first Pokémon status variable with status conditions or error text
+;    carry: set if no Pokémon have status conditions
+CheckIfPlayAreaHasAnyStatus:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld b, a
+	or a
+	jr z, .set_carry  ; no Pokémon in play area
+
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	or a
+	ret nz  ; arena Pokémon has status
+
+	ld c, 0
+	jr .next
+.loop
+	ld a, [hl]  ; get status
+	or a
+	ret nz  ; this Pokémon has status
+.next
+	inc c
+	ld a, c
+	ld l, a
+	cp b
+	jr nz, .loop
+.set_carry
+	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
+	scf
+	ret
+
+
+FullHeal_CheckPlayAreaStatus:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
+	call GetTurnDuelistVariable
+	or a
+	ret nz  ; substatus found
+	jp CheckIfPlayAreaHasAnyStatus
+
+
 ; returns carry if Deck is empty
 CheckIfDeckIsEmpty:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
@@ -442,6 +486,37 @@ HandleNoDamageOrEffect: ; 2c216 (b:4216)
 ; ------------------------------------------------------------------------------
 
 INCLUDE "engine/duel/effect_functions/healing.asm"
+
+
+; select the Pokémon with status to heal
+FullHeal_PlayerSelection:
+	bank1call HasAlivePokemonInPlayArea
+.read_input
+	bank1call OpenPlayAreaScreenForSelection
+	ret c ; exit is B was pressed
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+
+	add DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	or a
+	ret nz  ; Pokémon has status
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	or a  ; arena Pokémon?
+	jr nz, .read_input ; not arena, loop back to start
+
+	ld l, DUELVARS_ARENA_CARD_SUBSTATUS2
+	ld a, [hl]
+	or a
+	jr z, .read_input ; no status, loop back to start
+	ret
+
+FullHeal_ClearStatusEffect:
+	ldh a, [hTemp_ffa0]
+	call ClearStatusFromTarget
+	bank1call DrawDuelHUDs
+	ret
 
 
 ; ------------------------------------------------------------------------------
@@ -1604,7 +1679,7 @@ IvysaurPoisonWhip_AIEffect:
 EnergyTrans_CheckPlayArea: ; 2cb44 (b:4b44)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
-	call CheckCannotUseDueToStatus
+	call CheckCannotUseDueToStatus_Anywhere
 	ret c ; cannot use Pkmn Power
 
 ; search in Play Area for at least 1 Grass Energy type
@@ -1801,8 +1876,8 @@ Shift_OncePerTurnCheck:
 	call GetTurnDuelistVariable
 	and USED_PKMN_POWER_THIS_TURN
 	jr nz, .already_used
-	call CheckCannotUseDueToStatus
-	ret
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	jp CheckCannotUseDueToStatus_Anywhere
 .already_used
 	ldtx hl, OnlyOncePerTurnText
 	scf
@@ -2069,7 +2144,8 @@ SolarPower_CheckUse: ; 2ce53 (b:4e53)
 	and USED_PKMN_POWER_THIS_TURN
 	jr nz, .already_used
 
-	call CheckCannotUseDueToStatus
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
 	ret c ; can't use PKMN due to status or Toxic Gas
 
 ; return carry if none of the Arena cards have status conditions
@@ -2563,7 +2639,7 @@ CloysterSpikeCannon_MultiplierEffect: ; 2d24e (b:524e)
 Cowardice_Check: ; 2d28b (b:528b)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
-	call CheckCannotUseDueToStatus
+	call CheckCannotUseDueToStatus_Anywhere
 	ret c ; return if cannot use
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -3308,7 +3384,8 @@ Curse_CheckDamageAndBench: ; 2d7fc (b:57fc)
 
 ; return carry if Pkmn Power cannot be used due
 ; to Toxic Gas or status.
-	call CheckCannotUseDueToStatus
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
 	ret
 
 .set_carry
@@ -3862,7 +3939,8 @@ DamageSwap_CheckDamage: ; 2db8e (b:5b8e)
 	ldh [hTemp_ffa0], a
 	call CheckIfPlayAreaHasAnyDamage
 	ret c
-	jp CheckCannotUseDueToStatus
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	jp CheckCannotUseDueToStatus_Anywhere
 
 DamageSwap_SelectAndSwapEffect: ; 2dba2 (b:5ba2)
 	ld a, DUELVARS_DUELIST_TYPE
@@ -5043,8 +5121,8 @@ Peek_OncePerTurnCheck: ; 2e29c (b:629c)
 	call GetTurnDuelistVariable
 	and USED_PKMN_POWER_THIS_TURN
 	jr nz, .already_used
-	call CheckCannotUseDueToStatus
-	ret
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	jp CheckCannotUseDueToStatus_Anywhere
 .already_used
 	ldtx hl, OnlyOncePerTurnText
 	scf
@@ -6292,7 +6370,8 @@ StepIn_BenchCheck: ; 2eaca (b:6aca)
 	and USED_PKMN_POWER_THIS_TURN
 	jr nz, .set_carry
 
-	call CheckCannotUseDueToStatus
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
 	ret
 
 .set_carry
@@ -7681,7 +7760,7 @@ ProfessorOakEffect:
 	call ShuffleHandAndDrawNCards
 	ret
 
-Potion_PlayerSelection: ; 2f3d1 (b:73d1)
+Potion_PlayerSelection:
 	bank1call HasAlivePokemonInPlayArea
 .read_input
 	bank1call OpenPlayAreaScreenForSelection
@@ -7844,24 +7923,6 @@ MysteriousFossil_PlaceInPlayAreaEffect: ; 2f4bf (b:74bf)
 	call PutHandPokemonCardInPlayArea
 	ret
 
-; return carry if Arena card has no status to heal.
-FullHeal_StatusCheck: ; 2f4c5 (b:74c5)
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	or a
-	ret nz
-	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
-	scf
-	ret
-
-FullHeal_ClearStatusEffect: ; 2f4d1 (b:74d1)
-	ld a, ATK_ANIM_FULL_HEAL
-	call PlayAnimationForTrainerEffect
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	ld [hl], NO_STATUS
-	bank1call DrawDuelHUDs
-	ret
 
 ImposterProfessorOakEffect:
 	ld a, 4  ; player draws 4 cards
