@@ -131,7 +131,9 @@ HealPlayAreaCardHP:
 	ld d, $00
 
 ; play heal animation
+	push bc
 	call PlayHealingAnimation_PlayAreaPokemon
+	pop bc
 
 ; heal the target Pokemon
 	ldh a, [hTempPlayAreaLocation_ff9d]
