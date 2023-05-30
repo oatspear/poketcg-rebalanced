@@ -817,14 +817,14 @@ HealingEnergyDescription:
 	line "that Pokémon."
 	done
 
-SoftboiledName:
-	text "Softboiled"
+NaturalRemedyName:
+	text "Natural Remedy"
 	done
 
-SoftboiledDescription:
-	text "Heal 30 damage from 1 of your"
-	line "Benched Pokémon and remove all"
-	line "Special Conditions from it."
+NaturalRemedyDescription:
+	text "Heal 30 damage and remove all"
+	line "Special Conditions from 1 of"
+	line "your Pokémon."
 	done
 
 ProfessorOakName:

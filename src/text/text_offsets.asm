@@ -307,7 +307,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseSupporterCardText
 	textpointer ChooseGrassCardFromDeckText
 	textpointer ProcedureForEnergyTransferText                     ; 0x012d
-	textpointer ChoosePkmnToRemoveDamageCounterText                ; 0x0130
+	textpointer ChoosePkmnToHealText
 	textpointer ProcedureForCurseText                              ; 0x0131
 	textpointer Choose2EnergyCardsFromDiscardPileToAttachText      ; 0x0132
 	textpointer Choose2EnergyCardsFromDiscardPileForHandText       ; 0x0133
@@ -2964,8 +2964,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer IsCuredOfStatusAndEffectsText
 	textpointer HealingEnergyName
 	textpointer HealingEnergyDescription
-	textpointer SoftboiledName
-	textpointer SoftboiledDescription
+	textpointer NaturalRemedyName
+	textpointer NaturalRemedyDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

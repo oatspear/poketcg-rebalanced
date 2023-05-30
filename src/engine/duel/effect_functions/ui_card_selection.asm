@@ -109,3 +109,51 @@ PlayerSelectAndStoreItemCardFromDiscardPile:
 	call HandlePlayerSelectionItemTrainerFromDiscardPile
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
+
+
+; ------------------------------------------------------------------------------
+; Choose Pokémon In Play Area
+; ------------------------------------------------------------------------------
+
+HandlePlayerSelectionPokemonInPlayArea:
+	bank1call HasAlivePokemonInPlayArea
+.loop_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ret
+
+HandlePlayerSelectionPokemonInBench:
+	bank1call HasAlivePokemonInBench
+	jr HandlePlayerSelectionPokemonInPlayArea.loop_input
+
+HandlePlayerSelectionOpponentPokemonInPlayArea:
+	call SwapTurn
+	call HandlePlayerSelectionPokemonInPlayArea
+	jp SwapTurn
+
+HandlePlayerSelectionOpponentPokemonInBench:
+	call SwapTurn
+	call HandlePlayerSelectionPokemonInBench
+	jp SwapTurn
+
+
+PlayerSelectAndStorePokemonInPlayArea:
+	call HandlePlayerSelectionPokemonInPlayArea
+	ldh [hTemp_ffa0], a
+	ret
+
+PlayerSelectAndStorePokemonInBench:
+	call HandlePlayerSelectionPokemonInBench
+	ldh [hTemp_ffa0], a
+	ret
+
+PlayerSelectAndStoreOpponentPokemonInPlayArea:
+	call HandlePlayerSelectionOpponentPokemonInPlayArea
+	ldh [hTemp_ffa0], a
+	ret
+
+PlayerSelectAndStoreOpponentPokemonInBench:
+	call HandlePlayerSelectionOpponentPokemonInBench
+	ldh [hTemp_ffa0], a
+	ret

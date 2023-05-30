@@ -292,9 +292,8 @@ ProcedureForEnergyTransferText: ; 38aa4 (e:4aa4)
 	line "4. Press the B Button to end."
 	done
 
-ChoosePkmnToRemoveDamageCounterText: ; 38bc9 (e:4bc9)
-	text "Choose a Pokémon to remove"
-	line "the Damage counter from."
+ChoosePkmnToHealText:
+	text "Choose a Pokémon to heal."
 	done
 
 ProcedureForCurseText: ; 38bfe (e:4bfe)

@@ -1040,10 +1040,16 @@ AIPickAttackForAmnesia: ; 2c532 (b:4532)
 	call SwapTurn
 	ret
 
-; Return in a the PLAY_AREA_* of the non-turn holder's Pokemon card in bench with the lowest (remaining) HP.
-; if multiple cards are tied for the lowest HP, the one with the highest PLAY_AREA_* is returned.
-GetBenchPokemonWithLowestHP: ; 2c564 (b:4564)
+; Return in a the PLAY_AREA_* of the non-turn holder's Pokemon card
+; in bench with the lowest (remaining) HP.
+; if multiple cards are tied for the lowest HP, the one with
+; the highest PLAY_AREA_* is returned.
+GetOpponentBenchPokemonWithLowestHP:
 	call SwapTurn
+	call GetBenchPokemonWithLowestHP
+	jp SwapTurn
+
+GetBenchPokemonWithLowestHP:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld c, a
@@ -1359,8 +1365,8 @@ Lure_SelectSwitchPokemon:
 
 ; Return in hTemp_ffa0 the PLAY_AREA_* of the non-turn holder's Pokemon card in bench with the lowest (remaining) HP.
 ; if multiple cards are tied for the lowest HP, the one with the highest PLAY_AREA_* is returned.
-Lure_GetBenchPokemonWithLowestHP:
-	call GetBenchPokemonWithLowestHP
+Lure_GetOpponentBenchPokemonWithLowestHP:
+	call GetOpponentBenchPokemonWithLowestHP
 	ldh [hTemp_ffa0], a
 	ret
 
@@ -2077,13 +2083,9 @@ Heal_RemoveDamageEffect: ; 2cdc7 (b:4dc7)
 	jr nz, .done
 
 ; player
-	ldtx hl, ChoosePkmnToRemoveDamageCounterText
+	ldtx hl, ChoosePkmnToHealText
 	call DrawWideTextBox_WaitForInput
-	bank1call HasAlivePokemonInPlayArea
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
+	call HandlePlayerSelectionPokemonInPlayArea
 	ldh [hPlayAreaEffectTarget], a
 	ld e, a
 	call GetCardDamageAndMaxHP
@@ -3558,7 +3560,7 @@ DarkMind_AISelectEffect: ; 2d92a (b:592a)
 	cp 2
 	ret c ; return if no Bench Pokemon
 ; just pick Pokemon with lowest remaining HP.
-	call GetBenchPokemonWithLowestHP
+	call GetOpponentBenchPokemonWithLowestHP
 	ldh [hTemp_ffa0], a
 	ret
 
@@ -5076,7 +5078,7 @@ StretchKick_PlayerSelectEffect:
 AssassinFlight_AISelectEffect:
 StretchKick_AISelectEffect:
 ; chooses Bench Pokemon with least amount of remaining HP
-	call GetBenchPokemonWithLowestHP
+	call GetOpponentBenchPokemonWithLowestHP
 	ldh [hTemp_ffa0], a
 	ret
 
@@ -5508,12 +5510,6 @@ Spark_PlayerSelectEffect: ; 2e539 (b:6539)
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
 	bank1call HasAlivePokemonInBench
-
-	; the following two instructions can be removed
-	; since Player selection will overwrite it.
-	ld a, PLAY_AREA_BENCH_1
-	ldh [hTempPlayAreaLocation_ff9d], a
-
 .loop_input
 	bank1call OpenPlayAreaScreenForSelection
 	jr c, .loop_input
@@ -5531,7 +5527,7 @@ Spark_AISelectEffect: ; 2e562 (b:6562)
 	cp 2
 	ret c ; has no Bench Pokemon
 ; AI always picks Pokemon with lowest HP remaining
-	call GetBenchPokemonWithLowestHP
+	call GetOpponentBenchPokemonWithLowestHP
 	ldh [hTemp_ffa0], a
 	ret
 
@@ -7140,7 +7136,7 @@ DealTargetedDamage_AISelectEffect:
 	cp 2
 	jr c, .done ; has no Bench Pokemon
 ; AI always picks Pokemon with lowest HP remaining
-	call GetBenchPokemonWithLowestHP
+	call GetOpponentBenchPokemonWithLowestHP
 	ldh [hTemp_ffa0], a
 .done
 	or a
@@ -7527,6 +7523,13 @@ EnergyRemoval_DiscardEffect: ; 2f273 (b:7273)
 INCLUDE "engine/duel/effect_functions/ui_card_selection.asm"
 
 
+; select a Pokémon to heal damage and status
+NaturalRemedy_PlayerSelection:
+	ldtx hl, ChoosePkmnToHealText
+	call DrawWideTextBox_WaitForInput
+	jp PlayerSelectAndStorePokemonInPlayArea
+
+
 Maintenance_PlayerHandCardSelection:
 PlayerSelectAndStoreHandCardToDiscard:
 	call HandlePlayerSelection1HandCardToDiscardExcludeSelf
@@ -7592,6 +7595,51 @@ SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
 	ldh a, [hTempList + 1]
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
+	ret
+
+
+; ------------------------------------------------------------------------------
+; AI Logic
+; ------------------------------------------------------------------------------
+
+NaturalRemedy_AISelectEffect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a   ; loop counter
+	ld d, 30  ; current max damage (heal at least 30)
+	ld e, PLAY_AREA_ARENA  ; location iterator
+	ld b, $ff  ; location of max damage
+	ld l, DUELVARS_ARENA_CARD_STATUS
+; find Play Area location with most amount of damage
+.loop
+	push bc
+	ld b, 0  ; score
+; status conditions are worth 20 damage
+	ld a, [hli]
+	or a
+	jr z, .get_damage
+	ld b, 20
+.get_damage
+; e already has the current PLAY_AREA_* offset
+	call GetCardDamageAndMaxHP
+; add score from status conditions
+	add b
+	pop bc
+	or a
+	jr z, .next ; skip if nothing to heal (redundant)
+; compare to current max damage
+	cp d
+	jr c, .next ; skip if stored damage is higher
+; store new target Pokémon
+	ld d, a
+	ld b, e
+.next
+	inc e  ; next location
+	dec c  ; decrement counter
+	jr nz, .loop
+; return selected location (or $ff) in a and [hTemp_ffa0]
+	ld a, b
+	ldh [hTemp_ffa0], a
 	ret
 
 
