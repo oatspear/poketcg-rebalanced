@@ -1222,14 +1222,14 @@ PidgeotGaleEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Gale_LoadAnimation
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Gale_SwitchEffect
 	db  $00
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect
-	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect
-	db  $00
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Teleport_AISelectEffect
-	db  $00
+;	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
+;	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect
+;	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect
+;	db  $00
+;	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_SwitchEffect
+;	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
+;	dbw EFFECTCMDTYPE_AI_SELECTION, Teleport_AISelectEffect
+;	db  $00
 
 RockHeadEffectCommands:
 JigglypuffExpandEffectCommands:
@@ -1254,6 +1254,13 @@ DragonRageEffectCommands:
 FungalGrowthEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, LeechLifeEffect
+	db  $00
+
+NaturalRemedyEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfPlayAreaHasAnyDamageOrStatus
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NaturalRemedy_HealEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, NaturalRemedy_PlayerSelection
+	dbw EFFECTCMDTYPE_AI_SELECTION, NaturalRemedy_AISelectEffect
 	db  $00
 
 DoubleColorlessEnergyEffectCommands:

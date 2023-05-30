@@ -9600,18 +9600,18 @@ ChanseyCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx DoubleEdgeName ; name
-	tx Recoil20Description ; description
+	energy COLORLESS, 3 ; energies
+	tx NaturalRemedyName ; name
+	tx NaturalRemedyDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Recoil20EffectCommands ; effect commands
-	db HIGH_RECOIL ; flags 1
-	db NONE ; flags 2
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw NaturalRemedyEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 20
-	db ATK_ANIM_HIT_RECOIL ; animation
+	db 30
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

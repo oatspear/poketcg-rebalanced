@@ -400,8 +400,6 @@ GetAIScoreOfAttack:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp CHANSEY
-	jr z, .chansey
 	cp MAGNEMITE_LV13
 	jr z, .magnemite1_or_weezing
 	cp WEEZING

@@ -167,7 +167,13 @@ FullHeal_CheckPlayAreaStatus:
 	call GetTurnDuelistVariable
 	or a
 	ret nz  ; substatus found
-	jp CheckIfPlayAreaHasAnyStatus
+	jr CheckIfPlayAreaHasAnyStatus
+
+
+CheckIfPlayAreaHasAnyDamageOrStatus:
+	call CheckIfPlayAreaHasAnyDamage
+	ret c
+	jr CheckIfPlayAreaHasAnyStatus
 
 
 ; returns carry if Deck is empty
@@ -526,6 +532,18 @@ FullHeal_ClearStatusEffect:
 PanicVine_ConfusionTrapEffect:
 	call UnableToRetreatEffect
 	jp ConfusionEffect
+
+
+NaturalRemedy_HealEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z
+	ldh [hTempPlayAreaLocation_ff9d], a
+	ld a, 30  ; HP
+	call HealPlayAreaCardHP_IfDamaged
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	jp c, ClearStatusFromTarget
+	jp ClearStatusFromTarget_NoAnim
 
 
 ; ------------------------------------------------------------------------------
@@ -2066,7 +2084,7 @@ Heal_OncePerTurnCheck:
 	scf
 	ret
 
-Heal_RemoveDamageEffect: ; 2cdc7 (b:4dc7)
+Heal_RemoveDamageEffect:
 ; OATS no longer requires a coin flip
 	ld a, 1
 	ldh [hAIPkmnPowerEffectParam], a
@@ -2085,13 +2103,8 @@ Heal_RemoveDamageEffect: ; 2cdc7 (b:4dc7)
 ; player
 	ldtx hl, ChoosePkmnToHealText
 	call DrawWideTextBox_WaitForInput
-	call HandlePlayerSelectionPokemonInPlayArea
+	call HandlePlayerSelectionDamagedPokemonInPlayArea
 	ldh [hPlayAreaEffectTarget], a
-	ld e, a
-	call GetCardDamageAndMaxHP
-	or a
-	jr z, .loop_input ; has no damage counters
-	ldh a, [hTempPlayAreaLocation_ff9d]
 	call SerialSend8Bytes
 	jr .done
 
@@ -2101,23 +2114,16 @@ Heal_RemoveDamageEffect: ; 2cdc7 (b:4dc7)
 	; fallthrough
 
 .done
-; flag Pkmn Power as being used regardless of coin outcome
+; flag Pkmn Power as being used
 	ldh a, [hTemp_ffa0]
 	add DUELVARS_ARENA_CARD_FLAGS
 	call GetTurnDuelistVariable
 	set USED_PKMN_POWER_THIS_TURN_F, [hl]
-; OATS no longer requires a coin flip
-	; ldh a, [hAIPkmnPowerEffectParam]
-	; or a
-	; ret z ; return if coin was tails
-
+; heal the selected Pokémon
 	ldh a, [hPlayAreaEffectTarget]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	add 10 ; remove 1 damage counter
-	ld [hl], a
-	ldh a, [hPlayAreaEffectTarget]
-	call Func_2c10b
+	ldh [hTempPlayAreaLocation_ff9d], a
+	ld a, 10  ; HP
+	call HealPlayAreaCardHP
 	call ExchangeRNG
 	ret
 
@@ -7527,7 +7533,19 @@ INCLUDE "engine/duel/effect_functions/ui_card_selection.asm"
 NaturalRemedy_PlayerSelection:
 	ldtx hl, ChoosePkmnToHealText
 	call DrawWideTextBox_WaitForInput
-	jp PlayerSelectAndStorePokemonInPlayArea
+.read_input
+	call PlayerSelectAndStorePokemonInPlayArea
+	ld e, a
+	call GetCardDamageAndMaxHP
+	or a
+	jr nz, .done
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	add e
+	call GetTurnDuelistVariable
+	or a
+	jr z, .read_input ; no damage, no status, loop back to start
+.done
+	ret
 
 
 Maintenance_PlayerHandCardSelection:

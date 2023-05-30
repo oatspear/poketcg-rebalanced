@@ -127,6 +127,22 @@ HandlePlayerSelectionPokemonInBench:
 	bank1call HasAlivePokemonInBench
 	jr HandlePlayerSelectionPokemonInPlayArea.loop_input
 
+
+; uses de and bc
+HandlePlayerSelectionDamagedPokemonInPlayArea:
+	bank1call HasAlivePokemonInPlayArea
+.loop_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .loop_input ; has no damage counters
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ret
+
+
 HandlePlayerSelectionOpponentPokemonInPlayArea:
 	call SwapTurn
 	call HandlePlayerSelectionPokemonInPlayArea

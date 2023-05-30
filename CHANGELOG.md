@@ -97,7 +97,7 @@
 - Increased HP from 60 to 70.
 - **Poison Powder**: removed.
 - **Foul Odor**: also Poisons the target.
-- New attack: **Aromatherapy** (C): heal 20 damage from all of your Pokémon.
+- New Pokémon Power: **Heal**: once per turn, heal 10 damage from one Pokémon.
 
 #### Vileplume
 - Increased HP from 80 to 100.
@@ -655,8 +655,9 @@
 #### Chansey
 - Reduced HP from 120 to 80.
 - **Scrunch**: removed.
-- New Pokémon Power: **Heal**: once per turn, heal 10 damage from a Pokémon.
-- **Double Edge**: reduced cost from (CCCC) to (CC), damage from 80 to 40 and recoil from 80 to 20.
+- **Double Edge**: removed.
+- New Pokémon Power: **Healing Energy**: Energy played from hand heals 10 damage.
+- New attack: **Natural Remedy** (CCC): heals a Pokémon for 30 and cures status.
 
 #### Kangaskhan
 - Reduced HP from 90 to 70.

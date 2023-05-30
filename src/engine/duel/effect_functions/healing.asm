@@ -109,15 +109,20 @@ HealUserHP_NoAnimation:
 ; input:
 ;	   a: amount of HP to heal
 ;	  [hTempPlayAreaLocation_ff9d]: Play Area location of card to heal
+; output:
+;    carry: set if not damaged
 HealPlayAreaCardHP_IfDamaged:
 	ld d, a
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld e, a
 	call GetCardDamageAndMaxHP
 	or a
-	ret z ; no damage
+	jr z, .set_carry ; no damage
 	ld a, d
-	; fallthrough
+	jr HealPlayAreaCardHP
+.set_carry
+	scf
+	ret
 
 ; heals amount of damage in register a for card in
 ; Play Area location in [hTempPlayAreaLocation_ff9d].
