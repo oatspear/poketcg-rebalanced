@@ -63,7 +63,7 @@ ENDM
 	deck_const POISON_DECK                 ; $32
 	deck_const ANGER_DECK                  ; $33
 	deck_const FLAMETHROWER_DECK           ; $34
-	deck_const RESHUFFLE_DECK              ; $35
+	deck_const FIRE_DRAW_DECK              ; $35
 	deck_const IMAKUNI_DECK                ; $36
 DEF NUM_VALID_DECKS EQU const_value
 DEF NUM_DECK_IDS EQU const_value - 2

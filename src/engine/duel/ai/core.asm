@@ -2536,7 +2536,7 @@ AIChooseRandomlyNotToDoAction:
 	jr z, .carry_50_percent
 	cp KALEIDOSCOPE_DECK_ID
 	jr z, .carry_50_percent
-	cp RESHUFFLE_DECK_ID
+	cp FIRE_DRAW_DECK_ID
 	jr z, .carry_50_percent
 
 ; carry 25 percent

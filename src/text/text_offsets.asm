@@ -515,7 +515,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SoundoftheWavesDeckName                            ; 0x01f8
 	textpointer AngerDeckName                                      ; 0x01f9
 	textpointer FlamethrowerDeckName                               ; 0x01fa
-	textpointer ReshuffleDeckName                                  ; 0x01fb
+	textpointer FireDrawDeckName                                  ; 0x01fb
 	textpointer ExcavationDeckName                                 ; 0x01fc
 	textpointer BlisteringPokemonDeckName                          ; 0x01fd
 	textpointer HardPokemonDeckName                                ; 0x01fe

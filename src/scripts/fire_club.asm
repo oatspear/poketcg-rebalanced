@@ -80,7 +80,7 @@ Script_Jonathan:
 
 .ows_ef0a
 	print_npc_text Text06b6
-	start_duel PRIZES_4, RESHUFFLE_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_4, FIRE_DRAW_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatJonathan:

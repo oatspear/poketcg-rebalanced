@@ -352,7 +352,7 @@ DeckIDDuelConfigurations:
 	tx ClubMemberText ; rank
 	tx ChallengeMachineFireIconText ; element
 
-	db RESHUFFLE_DECK_ID ; deck ID
+	db FIRE_DRAW_DECK_ID ; deck ID
 	db JONATHAN_PIC ; NPC portrait
 	tx JonathanNPCName ; name text ID
 	db PRIZES_4 ; number of prize cards

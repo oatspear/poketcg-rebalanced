@@ -1398,8 +1398,8 @@ FlamethrowerDeckName: ; 3b614 (e:7614)
 	text "Flamethrower"
 	done
 
-ReshuffleDeckName: ; 3b622 (e:7622)
-	text "Reshuffle"
+FireDrawDeckName: ; 3b622 (e:7622)
+	text "Fire Draw"
 	done
 
 ExcavationDeckName: ; 3b62d (e:762d)

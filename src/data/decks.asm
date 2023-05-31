@@ -53,7 +53,7 @@ DeckPointers:
 	dw PoisonDeck
 	dw AngerDeck
 	dw FlamethrowerDeck
-	dw ReshuffleDeck
+	dw FireDrawDeck
 	dw ImakuniDeck
 	dw NULL
 	assert_table_length NUM_VALID_DECKS + 1
@@ -1563,23 +1563,25 @@ EtceteraDeck:
 
 FlowerGardenDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,            24
+	card_item GRASS_ENERGY,            18
 	card_item DOUBLE_COLORLESS_ENERGY,  2
 	card_item BULBASAUR,                3
 	card_item IVYSAUR,                  2
-	card_item VENUSAUR_LV67,            2
+	card_item VENUSAUR_LV67,            1
 	card_item ODDISH,                   3
 	card_item GLOOM,                    2
-	card_item VILEPLUME,                2
+	card_item VILEPLUME,                1
 	card_item BELLSPROUT,               2
 	card_item WEEPINBELL,               1
 	card_item VICTREEBEL,               1
 	card_item TANGELA_LV8,              2
-	card_item TANGELA_LV12,             1
+	card_item TANGELA_LV12,             2
 	card_item LICKITUNG,                2
+	card_item PROFESSOR_OAK,            2
+	card_item BILL,                     4
 	card_item POKEMON_TRADER,           2
-	card_item POKEMON_BREEDER,          3
-	card_item ENERGY_SEARCH,            1
+	card_item POKEMON_BREEDER,          2
+	card_item ENERGY_SEARCH,            3
 	card_item SWITCH,                   2
 	card_item POTION,                   2
 	card_item FULL_HEAL,                1
@@ -1796,46 +1798,39 @@ FlamethrowerDeck:
 	deck_list_end
 	tx FlamethrowerDeckName
 
-ReshuffleDeck:
+FireDrawDeck:
 	deck_list_start
-	card_item FIRE_ENERGY,             23
-	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item VULPIX,                   4
-	card_item NINETALES_LV35,           3
-	card_item GROWLITHE,                2
-	card_item ARCANINE_LV45,            1
-	card_item PIDGEY,                   4
-	card_item PIDGEOTTO,                3
-	card_item PIDGEOT_LV38,             2
-	card_item LICKITUNG,                2
-	card_item KANGASKHAN,               1
-	card_item TAUROS,                   1
-	card_item BILL,                     2
-	card_item ENERGY_RETRIEVAL,         2
-	card_item ENERGY_REMOVAL,           2
-	card_item SUPER_ENERGY_REMOVAL,     1
-	card_item SWITCH,                   2
-	card_item POKEMON_CENTER,           1
-	card_item POTION,                   2
-	;deck_list_end
-	db 0
-	tx ReshuffleDeckName
+	card_item FIRE_ENERGY,     24
+	card_item CHARMANDER,       4
+	card_item CHARMELEON,       4
+	card_item VULPIX,           4
+	card_item NINETALES_LV32,   4
+	card_item MEOWTH_LV14,      2
+	card_item MEOWTH_LV15,      2
+	card_item PIDGEY,           4
+	card_item KANGASKHAN,       2
+	card_item BILL,             4
+	card_item PROFESSOR_OAK,    2
+	card_item POKE_BALL,        2
+	card_item PLUSPOWER,        1
+	card_item GUST_OF_WIND,     1
+	deck_list_end
+	tx FireDrawDeckName
 
 ImakuniDeck:
 	deck_list_start
-	card_item WATER_ENERGY,   10
-	card_item PSYCHIC_ENERGY, 16
-	card_item PSYDUCK,         4
-	card_item GOLDUCK,         3
-	card_item SLOWPOKE_LV9,    2
-	card_item SLOWPOKE_LV18,   2
-	card_item SLOWBRO,         3
+	card_item PSYCHIC_ENERGY, 24
+	card_item SLOWPOKE_LV9,    3
+	card_item SLOWPOKE_LV18,   1
+	card_item SLOWBRO,         4
 	card_item DROWZEE,         4
-	card_item HYPNO,           3
-	card_item FARFETCHD,       4
+	card_item HYPNO,           4
+	card_item LICKITUNG,       2
+	card_item PORYGON,         2
+	card_item MR_MIME,         4
 	card_item IMAKUNI_CARD,    4
-	card_item MAINTENANCE,     2
-	card_item POKEMON_FLUTE,   2
-	card_item GAMBLER,         1
+	card_item PROFESSOR_OAK,   2
+	card_item BILL,            4
+	card_item POKE_BALL,       2
 	deck_list_end
 	tx ImakuniDeckName
