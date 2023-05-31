@@ -222,7 +222,7 @@ Maintenance_CheckHandAndDiscardPile:
 	jp CreateItemCardListFromDiscardPile
 
 
-; return carry if opponent's Arena cards has no status conditions
+; return carry if opponent's Arena card has no status conditions
 CheckOpponentHasStatus:
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetNonTurnDuelistVariable
@@ -237,6 +237,59 @@ AssassinFlight_CheckBenchAndStatus:
 	call CheckOpponentHasStatus
 	ret c
 	jp StretchKick_CheckBench
+
+
+CheckIfPlayAreaHasAnyEnergies:
+	call CheckIfThereAreAnyEnergyCardsAttached
+	ldtx hl, NoEnergyCardsAttachedToPokemonInYourPlayAreaText
+	ret
+
+
+CheckIfCardHasGrassEnergyAttached:
+	ld c, TYPE_ENERGY_GRASS
+	jr CheckIfCardHasSpecificEnergyAttached
+
+CheckIfCardHasDarknessEnergyAttached:
+	ld c, TYPE_ENERGY_DARKNESS
+	; jr CheckIfCardHasSpecificEnergyAttached
+	; fallthrough
+
+; returns carry if no Energy cards of the given type in c
+; are attached to card in Play Area location of a.
+; input:
+;	a = PLAY_AREA_* of location to check
+; c = TYPE_ENERGY_* constant
+CheckIfCardHasSpecificEnergyAttached:
+	or CARD_LOCATION_PLAY_AREA
+	ld e, a
+
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.loop
+	ld a, [hl]
+	cp e
+	jr nz, .next
+	push de
+	push hl
+	ld a, l
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	pop hl
+	pop de
+	cp c
+	jr z, .no_carry
+.next
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop
+	scf
+	ret
+.no_carry
+	ld a, l
+	or a
+	ret
+
 
 ; ------------------------------------------------------------------------------
 
@@ -1830,50 +1883,6 @@ EnergyTrans_AIEffect: ; 2cbfb (b:4bfb)
 	bank1call PrintPlayAreaCardList_EnableLCD
 	ret
 
-CheckIfCardHasGrassEnergyAttached:
-	ld c, TYPE_ENERGY_GRASS
-	jr CheckIfCardHasSpecificEnergyAttached
-
-CheckIfCardHasDarknessEnergyAttached:
-	ld c, TYPE_ENERGY_DARKNESS
-	; jr CheckIfCardHasSpecificEnergyAttached
-	; fallthrough
-
-; returns carry if no Energy cards of the given type in c
-; are attached to card in Play Area location of a.
-; input:
-;	a = PLAY_AREA_* of location to check
-; c = TYPE_ENERGY_* constant
-CheckIfCardHasSpecificEnergyAttached:
-	or CARD_LOCATION_PLAY_AREA
-	ld e, a
-
-	ld a, DUELVARS_CARD_LOCATIONS
-	call GetTurnDuelistVariable
-.loop
-	ld a, [hl]
-	cp e
-	jr nz, .next
-	push de
-	push hl
-	ld a, l
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	pop hl
-	pop de
-	cp c
-	jr z, .no_carry
-.next
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop
-	scf
-	ret
-.no_carry
-	ld a, l
-	or a
-	ret
 
 ToxicGasEffect: ; 2cc36 (b:4c36)
 	scf
@@ -6101,11 +6110,7 @@ EnergySpike_PlayerSelectEffect:
 	call DrawWideTextBox_WaitForInput
 
 ; choose a Pokemon in Play Area to attach card
-	bank1call HasAlivePokemonInPlayArea
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
+	call HandlePlayerSelectionPokemonInPlayArea
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
@@ -7569,6 +7574,36 @@ Maintenance_PlayerDiscardPileSelection:
 	ldh [hTempList + 2], a
 	ret
 
+
+EnergySwitch_PlayerSelection:
+	ldtx hl, ChoosePokemonToRemoveEnergyFromText
+	call DrawWideTextBox_WaitForInput
+	call HandlePokemonAndEnergySelectionScreen
+	; call c, CancelSupporterCard
+	ret c  ; gave up on using the card
+; choose a Pokemon in Play Area to attach card
+	call EmptyScreen
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	call DrawWideTextBox_WaitForInput
+.loop_input
+	call HandlePlayerSelectionPokemonInBench
+; cannot choose the same Pokémon
+	ld e, a
+	ldh a, [hTemp_ffa0]
+	cp e
+	jr nz, .got_pkmn
+	call PlaySFX_InvalidChoice
+	jr .loop_input
+.got_pkmn
+; target location is already in [hTempPlayAreaLocation_ff9d]
+; move energy to [hTempList]
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ldh [hTempList], a
+	ld a, $ff
+	ldh [hTempList + 1], a
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Move Selected Cards
 ; ------------------------------------------------------------------------------
@@ -7613,6 +7648,33 @@ SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
 	ldh a, [hTempList + 1]
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
+	ret
+
+
+; input:
+;   [hTempPlayAreaLocation_ff9d]: target location to move cards to
+;   [hTempList]: list of cards to move
+EnergySwitch_TransferEffect:
+SelectedCards_MoveWithinPlayArea:
+; get target location to assign to cards in list
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	ld d, 0
+	ld hl, hTempList
+; relocate all cards in [hTempList + 1] onward
+.loop
+	ld a, [hli]
+	cp $ff
+	ret z
+	call AddCardToHand
+	call PutHandCardInPlayArea  ; location in e
+	inc d
+	jr .loop
+
+; if not Player, show which Pokemon was chosen to attach Energy
+	call IsPlayerTurn
+	ret c
+	call Helper_GenericShowAttachedEnergyToPokemon
 	ret
 
 

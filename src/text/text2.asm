@@ -1,3 +1,7 @@
+AlreadyRetreatedThisTurnText:
+	text "Already retreated this turn."
+	done
+
 TrapCheckText:
 	text "Trap check! If Heads,"
 	line "unable to Retreat during next turn."
@@ -1920,5 +1924,3 @@ ThisDeckCanOnlyBeBuiltIfYouDismantleText: ; 3bf9e (e:7f9e)
 	text "This Deck can only be built if"
 	line "you dismantle another Deck."
 	done
-
-	ds $26

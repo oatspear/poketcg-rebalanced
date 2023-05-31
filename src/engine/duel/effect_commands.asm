@@ -1465,6 +1465,12 @@ SuperEnergyRemovalEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperEnergyRemoval_DiscardEffect
 	db  $00
 
+EnergySwitchEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfPlayAreaHasAnyEnergies
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergySwitch_PlayerSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergySwitch_TransferEffect
+	db  $00
+
 SuperEnergyRetrievalEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SuperEnergyRetrieval_HandEnergyCheck
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SuperEnergyRetrieval_PlayerHandSelection

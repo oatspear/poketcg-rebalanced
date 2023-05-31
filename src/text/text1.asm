@@ -1170,7 +1170,3 @@ IfHeadsDiscard1EnergyFromTargetText:
 	text "If Heads, discard an Energy"
 	line "from the Defending Pokémon!"
 	done
-
-AlreadyRetreatedThisTurnText:
-	text "Already retreated this turn."
-	done

@@ -2997,6 +2997,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EnergyRemovalDescription                           ; 0x0b84
 	textpointer SuperEnergyRemovalName                             ; 0x0b85
 	textpointer SuperEnergyRemovalDescription                      ; 0x0b86
+	textpointer EnergySwitchName
+	textpointer EnergySwitchDescription
 	textpointer SwitchName                                         ; 0x0b87
 	textpointer SwitchDescription                                  ; 0x0b88
 	textpointer PokemonCenterName                                  ; 0x0b89

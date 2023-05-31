@@ -1008,6 +1008,15 @@ SuperEnergyRemovalDescription: ; 63d9c (18:7d9c)
 	line "to it. Discard those Energy cards."
 	done
 
+EnergySwitchName:
+	text "Energy Switch"
+	done
+
+EnergySwitchDescription:
+	text "Move 1 Energy from 1 of your Pokémon"
+	line "to 1 of your Benched Pokémon."
+	done
+
 SwitchName: ; 63e4a (18:7e4a)
 	text "Switch"
 	done
