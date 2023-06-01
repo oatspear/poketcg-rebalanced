@@ -7421,36 +7421,6 @@ CheckIfThereAreAnyEnergyCardsAttached: ; 2f1c4 (b:71c4)
 	or a
 	ret
 
-; handles Player selection for Pokemon in Play Area,
-; then opens screen to choose one of the energy cards
-; attached to that selected Pokemon.
-; outputs the selection in:
-;	[hTemp_ffa0] = play area location
-;	[hTempPlayAreaLocation_ffa1] = index of energy card
-HandlePokemonAndEnergySelectionScreen: ; 2f1e7 (b:71e7)
-	bank1call HasAlivePokemonInPlayArea
-	bank1call OpenPlayAreaScreenForSelection
-	ret c ; exit if B is pressed
-	ld e, a
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-	or a
-	jr nz, .has_energy
-	ldtx hl, NoEnergyCardsText
-	call DrawWideTextBox_WaitForInput
-	jr HandlePokemonAndEnergySelectionScreen ; loop back to start
-
-.has_energy
-	ldh a, [hCurMenuItem]
-	bank1call CreateArenaOrBenchEnergyCardList
-	ldh a, [hCurMenuItem]
-	bank1call DisplayEnergyDiscardScreen
-	bank1call HandleEnergyDiscardMenuInput
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ret
 
 ImakuniEffect: ; 2f216 (b:7216)
 	ld a, DUELVARS_ARENA_CARD
@@ -7578,7 +7548,7 @@ Maintenance_PlayerDiscardPileSelection:
 EnergySwitch_PlayerSelection:
 	ldtx hl, ChoosePokemonToRemoveEnergyFromText
 	call DrawWideTextBox_WaitForInput
-	call HandlePokemonAndEnergySelectionScreen
+	call HandlePokemonAndBasicEnergySelectionScreen
 	; call c, CancelSupporterCard
 	ret c  ; gave up on using the card
 ; choose a Pokemon in Play Area to attach card

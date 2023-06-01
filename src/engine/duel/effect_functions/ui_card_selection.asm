@@ -173,3 +173,77 @@ PlayerSelectAndStoreOpponentPokemonInBench:
 	call HandlePlayerSelectionOpponentPokemonInBench
 	ldh [hTemp_ffa0], a
 	ret
+
+
+; ------------------------------------------------------------------------------
+; Choose Cards in Play Area
+; ------------------------------------------------------------------------------
+
+; handles Player selection for Pokemon in Play Area,
+; then opens screen to choose one of the energy cards
+; attached to that selected Pokemon.
+; outputs the selection in:
+;	[hTemp_ffa0] = play area location
+;	[hTempPlayAreaLocation_ffa1] = index of energy card
+HandlePokemonAndEnergySelectionScreen:
+	bank1call HasAlivePokemonInPlayArea
+	bank1call OpenPlayAreaScreenForSelection
+	ret c ; exit if B is pressed
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	or a
+	jr nz, .has_energy
+	ldtx hl, NoEnergyCardsText
+	call DrawWideTextBox_WaitForInput
+	jr HandlePokemonAndEnergySelectionScreen ; loop back to start
+
+.has_energy
+	ldh a, [hCurMenuItem]
+	bank1call CreateArenaOrBenchEnergyCardList
+	ldh a, [hCurMenuItem]
+	bank1call DisplayEnergyDiscardScreen
+	bank1call HandleEnergyDiscardMenuInput
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret
+
+; handles Player selection for Pokemon in Play Area,
+; then opens screen to choose one of the Basic energy cards
+; attached to that selected Pokemon.
+; outputs the selection in:
+;	[hTemp_ffa0] = play area location
+;	[hTempPlayAreaLocation_ffa1] = index of energy card
+HandlePokemonAndBasicEnergySelectionScreen:
+	bank1call HasAlivePokemonInPlayArea
+	bank1call OpenPlayAreaScreenForSelection
+	ret c ; exit if B is pressed
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	or a
+	jr z, .no_energy
+	ld e, a
+	ld a, [wAttachedEnergies + COLORLESS]
+	cp e
+	jr z, .no_energy  ; only has colorless energy
+
+	ldh a, [hCurMenuItem]
+	bank1call CreateArenaOrBenchEnergyCardList
+	ld c, DOUBLE_COLORLESS_ENERGY
+	call RemoveCardIDFromCardList
+	ldh a, [hCurMenuItem]
+	bank1call DisplayEnergyDiscardScreen
+	bank1call HandleEnergyDiscardMenuInput
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret
+
+.no_energy
+	ldtx hl, NoEnergyCardsText
+	call DrawWideTextBox_WaitForInput
+	jr HandlePokemonAndBasicEnergySelectionScreen ; loop back to start
