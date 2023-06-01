@@ -7586,7 +7586,7 @@ EnergySwitch_PlayerSelection:
 	ldtx hl, ChoosePokemonToAttachEnergyCardText
 	call DrawWideTextBox_WaitForInput
 .loop_input
-	call HandlePlayerSelectionPokemonInBench
+	call HandlePlayerSelectionPokemonInPlayArea
 ; cannot choose the same Pokémon
 	ld e, a
 	ldh a, [hTemp_ffa0]

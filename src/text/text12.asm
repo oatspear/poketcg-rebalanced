@@ -1013,8 +1013,8 @@ EnergySwitchName:
 	done
 
 EnergySwitchDescription:
-	text "Move 1 Energy from 1 of your Pokémon"
-	line "to 1 of your Benched Pokémon."
+	text "Move a Basic Energy from 1 of your"
+	line "Pokémon to another of your Pokémon."
 	done
 
 SwitchName: ; 63e4a (18:7e4a)
