@@ -1145,7 +1145,6 @@ GetBenchPokemonWithLowestHP:
 	jr nz, .loop_bench
 
 	ld a, d
-	call SwapTurn
 	ret
 
 ; handles drawing and selection of screen for
