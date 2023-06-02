@@ -7571,6 +7571,7 @@ EnergySwitch_PlayerSelection:
 	ldh [hTempList], a
 	ld a, $ff
 	ldh [hTempList + 1], a
+	or a
 	ret
 
 
