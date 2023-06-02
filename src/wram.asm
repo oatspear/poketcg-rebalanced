@@ -1243,11 +1243,11 @@ wAIAttackIsNonDamaging:: ; ce02
 wAlreadyRetreatedThisTurn:: ; ce03
 	ds $1
 
-; used by AI to store information of VenusaurLv67
+; used by AI to store information of Ivysaur
 ; while handling Energy Trans logic.
-wAIVenusaurLv67DeckIndex:: ; ce04
+wAIIvysaurDeckIndex:: ; ce04
 	ds $1
-wAIVenusaurLv67PlayAreaLocation:: ; ce05
+wAIIvysaurPlayAreaLocation:: ; ce05
 	ds $1
 
 wce06:: ; ce06

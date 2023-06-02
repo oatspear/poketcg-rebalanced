@@ -970,3 +970,43 @@ AICheckIfAttackIsHighRecoil: ; 22bad (8:6bad)
 	call CheckLoadedAttackFlag
 	ccf
 	ret
+
+
+; takes in e (de) the ID of the card to count
+; outputs in a the number of cards with given ID currently attached to Bench
+CountCardIDInBench:
+	ld a, e
+	ld [wTempCardIDToLook], a
+	lb de, 0, 0
+.count_loop
+	ld a, DUELVARS_CARD_LOCATIONS
+	add e
+	call GetTurnDuelistVariable
+	and %00011111
+	cp CARD_LOCATION_BENCH_1
+	jr c, .count_next
+
+; is in bench
+	ld a, e
+	push de
+	call GetCardIDFromDeckIndex
+	ld a, [wTempCardIDToLook]
+	cp e
+	pop de
+	jr nz, .count_next
+	inc d
+.count_next
+	inc e
+	ld a, DECK_SIZE
+	cp e
+	jr nz, .count_loop
+	ld a, d
+	ret
+
+
+; input: d: frames to wait
+AIDelayFrames_D:
+	call DoFrame
+	dec d
+	jr nz, AIDelayFrames_D
+	ret

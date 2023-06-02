@@ -47,7 +47,7 @@ HandleAIEnergyTrans:
 .TransferEnergyToArena
 	ld [wAINumberOfEnergyTransCards], a
 
-; look for VenusaurLv67 in Play Area
+; look for Ivysaur in Play Area
 ; so that its PKMN Power can be used.
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -112,10 +112,7 @@ HandleAIEnergyTrans:
 
 	push de
 	ld d, 30
-.small_delay_loop
-	call DoFrame
-	dec d
-	jr nz, .small_delay_loop
+	call AIDelayFrames_D
 
 	ld a, OPPACTION_6B15
 	bank1call AIMakeDecision
@@ -133,10 +130,7 @@ HandleAIEnergyTrans:
 ; and return to main scene.
 .done_transfer
 	ld d, 60
-.big_delay_loop
-	call DoFrame
-	dec d
-	jr nz, .big_delay_loop
+	call AIDelayFrames_D
 	ld a, OPPACTION_DUEL_MAIN_SCENE
 	bank1call AIMakeDecision
 	ret
@@ -183,7 +177,8 @@ HandleAIEnergyTrans:
 ; if there's enough Grass energy cards in Bench
 ; to satisfy the attack energy cost, return carry.
 	push bc
-	call .CountGrassEnergyInBench
+	ld e, GRASS_ENERGY
+	call CountCardIDInBench
 	pop bc
 	cp c
 	jr c, .attack_false
@@ -194,40 +189,12 @@ HandleAIEnergyTrans:
 .is_exeggutor
 ; in case it's Exeggutor in Arena, return carry
 ; if there are any Grass energy cards in Bench.
-	call .CountGrassEnergyInBench
+	ld e, GRASS_ENERGY
+	call CountCardIDInBench
 	or a
 	jr z, .attack_false
 
 	scf
-	ret
-
-; outputs in a the number of Grass energy cards
-; currently attached to Bench cards.
-.CountGrassEnergyInBench ; 22286 (8:6286)
-	lb de, 0, 0
-.count_loop
-	ld a, DUELVARS_CARD_LOCATIONS
-	add e
-	call GetTurnDuelistVariable
-	and %00011111
-	cp CARD_LOCATION_BENCH_1
-	jr c, .count_next
-
-; is in bench
-	ld a, e
-	push de
-	call GetCardIDFromDeckIndex
-	ld a, e
-	pop de
-	cp GRASS_ENERGY
-	jr nz, .count_next
-	inc d
-.count_next
-	inc e
-	ld a, DECK_SIZE
-	cp e
-	jr nz, .count_loop
-	ld a, d
 	ret
 
 ; returns carry if there are enough Grass energy cards in Bench
@@ -250,7 +217,8 @@ HandleAIEnergyTrans:
 	sub c
 	ld c, a
 	push bc
-	call .CountGrassEnergyInBench
+	ld e, GRASS_ENERGY
+	call CountCardIDInBench
 	pop bc
 	cp c
 	jr c, .retreat_false ; return if less cards than needed
@@ -300,7 +268,7 @@ AIEnergyTransTransferEnergyToBench:
 	add b
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff9f], a
-	ld [wAIVenusaurLv67DeckIndex], a
+	ld [wAIIvysaurDeckIndex], a
 	call GetCardIDFromDeckIndex
 	ld a, e
 	cp IVYSAUR
@@ -317,7 +285,7 @@ AIEnergyTransTransferEnergyToBench:
 .use_pkmn_power
 	ld a, b
 	ldh [hTemp_ffa0], a
-	ld [wAIVenusaurLv67PlayAreaLocation], a
+	ld [wAIIvysaurPlayAreaLocation], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
 	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
@@ -327,7 +295,7 @@ AIEnergyTransTransferEnergyToBench:
 .loop_energy
 	xor a
 	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, [wAIVenusaurLv67PlayAreaLocation]
+	ld a, [wAIIvysaurPlayAreaLocation]
 	ldh [hTemp_ffa0], a
 
 	; returns when Arena card has no Grass energy cards attached.
@@ -375,12 +343,9 @@ AIEnergyTransTransferEnergyToBench:
 	ldh [hAIEnergyTransPlayAreaLocation], a
 
 	ld d, 30
-.small_delay_loop
-	call DoFrame
-	dec d
-	jr nz, .small_delay_loop
+	call AIDelayFrames_D
 
-	ld a, [wAIVenusaurLv67DeckIndex]
+	ld a, [wAIIvysaurDeckIndex]
 	ldh [hTempCardIndex_ff9f], a
 	ld d, a
 	ld e, FIRST_ATTACK_OR_PKMN_POWER
@@ -393,10 +358,7 @@ AIEnergyTransTransferEnergyToBench:
 ; and return to main scene.
 .done_transfer
 	ld d, 60
-.big_delay_loop
-	call DoFrame
-	dec d
-	jr nz, .big_delay_loop
+	call AIDelayFrames_D
 	ld a, OPPACTION_DUEL_MAIN_SCENE
 	bank1call AIMakeDecision
 	ret
@@ -1053,10 +1015,7 @@ HandleAIDamageSwap:
 	ld e, a
 .loop_damage
 	ld d, 30
-.small_delay_loop
-	call DoFrame
-	dec d
-	jr nz, .small_delay_loop
+	call AIDelayFrames_D
 
 	push de
 	call .CheckForDamageSwapTargetInBench
@@ -1074,10 +1033,7 @@ HandleAIDamageSwap:
 .done
 ; return to main scene
 	ld d, 60
-.big_delay_loop
-	call DoFrame
-	dec d
-	jr nz, .big_delay_loop
+	call AIDelayFrames_D
 	ld a, OPPACTION_DUEL_MAIN_SCENE
 	bank1call AIMakeDecision
 	ret
