@@ -28,7 +28,7 @@ DeckAIPointerTable:
 	dw AIActionTable_PowerfulRonald      ; POWERFUL_RONALD_DECK
 	dw AIActionTable_InvincibleRonald    ; INVINCIBLE_RONALD_DECK
 	dw AIActionTable_LegendaryRonald     ; LEGENDARY_RONALD_DECK
-	dw AIActionTable_GeneralNoRetreat    ; MUSCLES_FOR_BRAINS_DECK
+	dw AIActionTable_GeneralDecks        ; MUSCLES_FOR_BRAINS_DECK
 	dw AIActionTable_GeneralDecks        ; HEATED_BATTLE_DECK
 	dw AIActionTable_GeneralDecks        ; LOVE_TO_BATTLE_DECK
 	dw AIActionTable_GeneralDecks        ; EXCAVATION_DECK
@@ -52,5 +52,5 @@ DeckAIPointerTable:
 	dw AIActionTable_GeneralDecks        ; ANGER_DECK
 	dw AIActionTable_GeneralDecks        ; FLAMETHROWER_DECK
 	dw AIActionTable_GeneralDecks        ; FIRE_DRAW_DECK
-	dw AIActionTable_GeneralNoRetreat    ; IMAKUNI_DECK
+	dw AIActionTable_GeneralDecks        ; IMAKUNI_DECK
 	assert_table_length NUM_DECK_IDS

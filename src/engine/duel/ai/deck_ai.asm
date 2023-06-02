@@ -63,7 +63,6 @@ ENDM
 
 INCLUDE "engine/duel/ai/decks/general.asm"
 INCLUDE "engine/duel/ai/decks/sams_practice.asm"
-INCLUDE "engine/duel/ai/decks/general_no_retreat.asm"
 INCLUDE "engine/duel/ai/decks/legendary_moltres.asm"
 INCLUDE "engine/duel/ai/decks/legendary_zapdos.asm"
 INCLUDE "engine/duel/ai/decks/legendary_articuno.asm"

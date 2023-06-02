@@ -1,5 +1,3 @@
-INCLUDE "engine/duel/ai/decks/unreferenced.asm"
-
 ; returns carry if damage dealt from any of
 ; a card's attacks KOs defending Pokémon
 ; outputs index of the attack that KOs
