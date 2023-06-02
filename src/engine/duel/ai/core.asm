@@ -2510,7 +2510,7 @@ CheckIfNotABossDeckID:
 ; not to play Trainer card or use PKMN Power
 ; probability to return carry:
 ; - 0% for boss decks;
-; - 25% for all other decks.
+; - 12.5% for all other decks.
 AIChooseRandomlyNotToDoAction:
 ; boss decks always use Trainer cards.
 	push hl
@@ -2522,7 +2522,7 @@ AIChooseRandomlyNotToDoAction:
 	ret
 
 .carry_25_percent
-	ld a, 4
+	ld a, 8
 	call Random
 	cp 1
 	pop de
