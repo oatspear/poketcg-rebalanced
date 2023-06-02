@@ -7,7 +7,7 @@
 ;	- AI_ENERGY_TRANS_TO_BENCH: transfers all Grass Energy cards from
 ;	Arena Pokemon to Bench in case Arena card will be KO'd.
 HandleAIEnergyTrans:
-	ld [wce06], a
+	ld [wAIEnergyTransRoutine], a
 
 ; choose to randomly return
 	farcall AIChooseRandomlyNotToDoAction
@@ -26,7 +26,7 @@ HandleAIEnergyTrans:
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if Muk found in any Play Area
 
-	ld a, [wce06]
+	ld a, [wAIEnergyTransRoutine]
 	cp AI_ENERGY_TRANS_RETREAT
 	jr z, .check_retreat
 

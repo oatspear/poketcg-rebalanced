@@ -1251,6 +1251,8 @@ wAIVenusaurLv67PlayAreaLocation:: ; ce05
 	ds $1
 
 wce06:: ; ce06
+; temporary storage of Energy Trans routine to execute.
+wAIEnergyTransRoutine:: ; ce06
 ; number of cards to be transferred by AI using Energy Trans.
 wAINumberOfEnergyTransCards:: ; ce06
 ; used for storing weakness of Player's Arena card
