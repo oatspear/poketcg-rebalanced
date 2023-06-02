@@ -2506,49 +2506,25 @@ CheckIfNotABossDeckID:
 	scf
 	ret
 
-; probability to return carry:
-; - 50% if deck AI is playing is on the list;
-; - 25% for all other decks;
-; - 0% for boss decks.
 ; used for certain decks to randomly choose
 ; not to play Trainer card or use PKMN Power
+; probability to return carry:
+; - 0% for boss decks;
+; - 25% for all other decks.
 AIChooseRandomlyNotToDoAction:
 ; boss decks always use Trainer cards.
 	push hl
 	push de
 	call CheckIfNotABossDeckID
-	jr c, .check_deck
+	jr c, .carry_25_percent
 	pop de
 	pop hl
 	ret
 
-.check_deck
-	ld a, [wOpponentDeckID]
-	cp MUSCLES_FOR_BRAINS_DECK_ID
-	jr z, .carry_50_percent
-	cp BLISTERING_POKEMON_DECK_ID
-	jr z, .carry_50_percent
-	cp WATERFRONT_POKEMON_DECK_ID
-	jr z, .carry_50_percent
-	cp BOOM_BOOM_SELFDESTRUCT_DECK_ID
-	jr z, .carry_50_percent
-	cp KALEIDOSCOPE_DECK_ID
-	jr z, .carry_50_percent
-	cp FIRE_DRAW_DECK_ID
-	jr z, .carry_50_percent
-
-; carry 25 percent
+.carry_25_percent
 	ld a, 4
 	call Random
 	cp 1
-	pop de
-	pop hl
-	ret
-
-.carry_50_percent
-	ld a, 4
-	call Random
-	cp 2
 	pop de
 	pop hl
 	ret

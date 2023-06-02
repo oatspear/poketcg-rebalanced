@@ -1,5 +1,5 @@
 ; handle AI routines for Energy Trans.
-; uses AI_ENERGY_TRANS_* constants as input:
+; uses AI_ENERGY_TRANS_* constants as input (in a):
 ;	- AI_ENERGY_TRANS_RETREAT: transfers enough Grass Energy cards to
 ;	Arena Pokemon for it to be able to pay the Retreat Cost;
 ;	- AI_ENERGY_TRANS_ATTACK: transfers enough Grass Energy cards to

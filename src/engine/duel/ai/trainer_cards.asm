@@ -71,7 +71,6 @@ _AIProcessHandTrainerCards:
 	call TryExecuteEffectCommandFunction
 	jp c, .next_in_data
 
-; OATS TODO remove this random chance, use best AI at all times
 ; AI can randomly choose not to play card.
 	farcall AIChooseRandomlyNotToDoAction
 	jr c, .next_in_data
