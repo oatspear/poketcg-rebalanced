@@ -5419,18 +5419,18 @@ AIPlay_EnergySwitch:
 	bank1call AIMakeDecision
 	ret
 
-AIDecide_EnergySwitch_Attack:
+AIDecide_EnergySwitch_Retreat:
 ; no carry if there are no Pokémon in the Bench
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	dec a
 	ret z
 
-	call .CheckEnoughEnergyCardsForAttack
+	call .CheckEnoughEnergyCardsForRetreatCost
 	ret nc
 
 ; transfer 1 energy card of input type de from the Bench to the Arena card
-; .TransferEnergyToArena
+.do_transfer
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 
@@ -5445,7 +5445,64 @@ AIDecide_EnergySwitch_Attack:
 	ret
 
 
-; Checks if the Arena card needs energy for its second attack.
+; Returns carry if the Arena card needs one more energy to retreat
+; and there is one available on the Bench.
+; Output the number of energy cards still needed in a.
+.CheckEnoughEnergyCardsForRetreatCost
+	xor a ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call GetPlayAreaCardRetreatCost
+	ld b, a
+	ld e, PLAY_AREA_ARENA
+	farcall CountNumberOfEnergyCardsAttached
+	cp b
+	ret nc  ; return if enough to retreat
+
+	ld c, a  ; number of energy cards attached to Arena
+	ld a, b  ; how many cards we need
+	sub c
+	cp 2
+	ret nc   ; return if we need more than 1 card
+
+; see if there's enough energy cards in the Bench to satisfy retreat cost
+	jr AIDecide_EnergySwitch_Attack.get_any_energy
+
+
+AIDecide_EnergySwitch_Attack:
+; no carry if there are no Pokémon in the Bench
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	dec a
+	ret z
+
+	ld a, FIRST_ATTACK_OR_PKMN_POWER
+	ld [wSelectedAttack], a
+	call .CheckEnoughEnergyCardsForAttack
+	jr c, .do_transfer
+
+	ld a, SECOND_ATTACK
+	ld [wSelectedAttack], a
+	call .CheckEnoughEnergyCardsForAttack
+	ret nc
+
+; transfer 1 energy card of input type de from the Bench to the Arena card
+.do_transfer
+	xor a ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ff9d], a
+
+; look for energy cards of type e currently attached to a Bench card
+	call LookForCardIDInBench
+	ret nc  ; not found?
+
+	ldh [hTempList], a
+	ld a, $ff
+	ldh [hTempList + 1], a  ; terminating byte
+	; scf
+	ret
+
+
+; Checks if the Arena card needs energy for its attack in [wSelectedAttack].
+; Can be FIRST_ATTACK_OR_PKMN_POWER or SECOND_ATTACK.
 ; Return carry if transferring 1 energy from Bench would be enough to use it.
 ; Outputs the amount of energy needed in a.
 ; Outputs the type of energy needed in de.
@@ -5459,8 +5516,6 @@ AIDecide_EnergySwitch_Attack:
 
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
-	ld a, SECOND_ATTACK
-	ld [wSelectedAttack], a
 	farcall CheckEnergyNeededForAttack
 	ret nc  ; return if no energy needed
 
@@ -5479,6 +5534,7 @@ AIDecide_EnergySwitch_Attack:
 	jr z, .check_basic
 
 ; grab any available energy
+.get_any_energy
 	ld b, NUM_COLORED_TYPES
 	ld c, 1  ; redundant?
 	ld d, 0
