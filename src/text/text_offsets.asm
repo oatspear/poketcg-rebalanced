@@ -2995,8 +2995,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EnergySearchDescription                            ; 0x0b82
 	textpointer EnergyRemovalName                                  ; 0x0b83
 	textpointer EnergyRemovalDescription                           ; 0x0b84
-	textpointer SuperEnergyRemovalName                             ; 0x0b85
-	textpointer SuperEnergyRemovalDescription                      ; 0x0b86
 	textpointer EnergySwitchName
 	textpointer EnergySwitchDescription
 	textpointer SwitchName                                         ; 0x0b87

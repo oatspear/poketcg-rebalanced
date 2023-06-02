@@ -210,7 +210,7 @@ CardPointers:
 	dw SuperEnergyRetrievalCard
 	dw EnergySearchCard
 	dw EnergyRemovalCard
-	dw SuperEnergyRemovalCard
+	dw EnergySwitchCard
 	dw SwitchCard
 	dw PokemonCenterCard
 	dw PokeBallCard
@@ -10445,20 +10445,20 @@ EnergyRemovalCard:
 	tx EnergyRemovalDescription ; description
 	dw NONE ; description (cont)
 
-SuperEnergyRemovalCard:
-	db TYPE_TRAINER_SUPPORTER ; type
-	gfx SuperEnergyRemovalCardGfx ; gfx
-	tx SuperEnergyRemovalName ; name
-	db STAR ; rarity
+EnergySwitchCard:
+	db TYPE_TRAINER ; type
+	gfx SwitchCardGfx ; gfx
+	tx EnergySwitchName ; name
+	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
-	db SUPER_ENERGY_REMOVAL
-	dw SuperEnergyRemovalEffectCommands ; effect commands
-	tx SuperEnergyRemovalDescription ; description
+	db ENERGY_SWITCH
+	dw EnergySwitchEffectCommands ; effect commands
+	tx EnergySwitchDescription ; description
 	dw NONE ; description (cont)
 
 SwitchCard:
 	db TYPE_TRAINER_SUPPORTER ; type
-	gfx SwitchCardGfx ; gfx
+	gfx ScoopUpCardGfx ; gfx
 	tx SwitchName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets

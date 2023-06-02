@@ -524,6 +524,41 @@ LookForCardIDInLocation: ; 229d0 (8:69d0)
 	scf
 	ret
 
+; returns in a the deck index of the first instance of card with ID
+; equal to the ID in e in any bench location.
+; returns carry if found.
+; input:
+;   e = card ID to look for
+; preserves: bc
+LookForCardIDInBench:
+	ld d, 0
+.loop
+	ld a, DUELVARS_CARD_LOCATIONS
+	add d
+	call GetTurnDuelistVariable
+	cp CARD_LOCATION_BENCH_1
+	jr c, .next
+	ld a, d  ; save current deck index
+	push de
+	call GetCardIDFromDeckIndex
+	ld a, e  ; get card ID
+	pop de
+	cp e
+	jr z, .found
+.next
+	inc d
+	ld a, DECK_SIZE
+	cp d
+	jr nz, .loop
+; not found
+	or a
+	ret
+.found
+	ld a, d
+	scf
+	ret
+
+
 ; return carry if card ID loaded in a is found in hand
 ; and outputs in a the deck index of that card
 ; input:

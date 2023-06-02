@@ -723,7 +723,7 @@ GetCardInDuelTempList:
 	ret
 
 ; returns, in register de, the id of the card with the deck index (0-59) specified by register a
-; preserves af and hl
+; preserves bc, af and hl
 GetCardIDFromDeckIndex:
 	push af
 	push hl

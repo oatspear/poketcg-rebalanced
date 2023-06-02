@@ -208,7 +208,7 @@
 	const SUPER_ENERGY_RETRIEVAL      ; $cf
 	const ENERGY_SEARCH               ; $d0
 	const ENERGY_REMOVAL              ; $d1
-	const SUPER_ENERGY_REMOVAL        ; $d2
+	const ENERGY_SWITCH               ; $d2
 	const SWITCH                      ; $d3
 	const POKEMON_CENTER              ; $d4
 	const POKE_BALL                   ; $d5

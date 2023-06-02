@@ -720,6 +720,12 @@
 #### Full Heal
 - Removes status and effects from any of the user's Pokémon, even if Benched.
 
+#### Super Energy Removal
+- Removed.
+
+#### New Trainer Cards
+- New card: **Energy Switch**: moves a Basic energy from 1 Pokémon to another.
+
 ### Miscellaneous
 
 #### AI

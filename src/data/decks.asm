@@ -1033,10 +1033,9 @@ GoGoRainDanceDeck:
 	card_item ENERGY_RETRIEVAL,        1
 	card_item SUPER_ENERGY_RETRIEVAL,  1
 	card_item ENERGY_REMOVAL,          2
-	card_item SUPER_ENERGY_REMOVAL,    1
+	card_item ENERGY_SWITCH,           2
 	card_item SWITCH,                  2
 	card_item POTION,                  2
-	card_item GAMBLER,                 1
 	deck_list_end
 	tx GoGoRainDanceDeckName
 
@@ -1658,8 +1657,8 @@ NapTimeDeck:
 
 StrangePowerDeck:
 	deck_list_start
-	card_item PSYCHIC_ENERGY,          25
-	card_item DOUBLE_COLORLESS_ENERGY,  1
+	card_item PSYCHIC_ENERGY,          22
+	card_item DOUBLE_COLORLESS_ENERGY,  3
 	card_item SLOWPOKE_LV9,             3
 	card_item SLOWBRO,                  2
 	card_item DROWZEE,                  4
@@ -1673,7 +1672,7 @@ StrangePowerDeck:
 	card_item POKEMON_TRADER,           2
 	card_item ENERGY_RETRIEVAL,         2
 	card_item ENERGY_REMOVAL,           2
-	card_item SUPER_ENERGY_REMOVAL,     1
+	card_item ENERGY_SWITCH,            2
 	card_item PLUSPOWER,                2
 	card_item ITEM_FINDER,              1
 	card_item GUST_OF_WIND,             1

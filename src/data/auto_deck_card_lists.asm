@@ -293,7 +293,7 @@ ParalyzeCardList:
 
 EnergyRemovalCardList:
 	deck_list_start
-	card_item WATER_ENERGY,            15
+	card_item WATER_ENERGY,            14
 	card_item PSYCHIC_ENERGY,           8
 	card_item DOUBLE_COLORLESS_ENERGY,  3
 	card_item PSYDUCK,                  3
@@ -306,11 +306,9 @@ EnergyRemovalCardList:
 	card_item DRATINI,                  3
 	card_item DRAGONAIR,                2
 	card_item PROFESSOR_OAK,            1
-	card_item BILL,                     1
-	card_item LASS,                     1
+	card_item BILL,                     2
 	card_item ENERGY_SEARCH,            2
-	card_item ENERGY_REMOVAL,           2
-	card_item SUPER_ENERGY_REMOVAL,     1
+	card_item ENERGY_REMOVAL,           4
 	deck_list_end
 
 RainDancerCardList:
@@ -329,7 +327,7 @@ RainDancerCardList:
 	card_item ENERGY_RETRIEVAL,        1
 	card_item SUPER_ENERGY_RETRIEVAL,  1
 	card_item ENERGY_REMOVAL,          2
-	card_item SUPER_ENERGY_REMOVAL,    1
+	card_item ENERGY_SWITCH,           1
 	card_item SWITCH,                  2
 	card_item POTION,                  2
 	card_item GAMBLER,                 1
@@ -674,7 +672,7 @@ StrangePowerCardList:
 	card_item POKEMON_TRADER,           2
 	card_item ENERGY_RETRIEVAL,         2
 	card_item ENERGY_REMOVAL,           2
-	card_item SUPER_ENERGY_REMOVAL,     1
+	card_item ENERGY_SWITCH,            1
 	card_item PLUSPOWER,                2
 	card_item ITEM_FINDER,              1
 	card_item GUST_OF_WIND,             1

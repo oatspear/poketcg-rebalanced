@@ -1658,291 +1658,6 @@ AIDecide_EnergyRemoval:
 	pop de
 	ret
 
-AIPlay_SuperEnergyRemoval:
-	ld a, [wAITrainerCardToPlay]
-	ldh [hTempCardIndex_ff9f], a
-	ld a, [wAITrainerCardParameter]
-	ldh [hTemp_ffa0], a
-	ld a, [wce1a]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, [wce1b]
-	ldh [hTempRetreatCostCards], a
-	ld a, [wce1c]
-	ldh [hTempRetreatCostCards + 1], a
-	ld a, [wce1d]
-	ldh [hTempRetreatCostCards + 2], a
-	ld a, $ff
-	ldh [hTempRetreatCostCards + 3], a
-	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
-	bank1call AIMakeDecision
-	ret
-
-; picks two energy cards in the player's Play Area to remove
-AIDecide_SuperEnergyRemoval:
-	ld e, PLAY_AREA_BENCH_1
-.loop_1
-; first find an Arena card with a color energy card
-; to discard for card effect
-; return immediately if no Arena cards
-	ld a, DUELVARS_ARENA_CARD
-	add e
-	call GetTurnDuelistVariable
-	cp $ff
-	jr z, .exit
-
-	ld d, a
-	push de
-	call .LookForNonDoubleColorless
-	pop de
-	jr c, .not_double_colorless
-	inc e
-	jr .loop_1
-
-; returns carry if an energy card other than double colorless
-; is found attached to the card in play area location e
-.LookForNonDoubleColorless
-	ld a, e
-	call CreateArenaOrBenchEnergyCardList
-	ld hl, wDuelTempList
-.loop_2
-	ld a, [hli]
-	cp $ff
-	ret z
-	call LoadCardDataToBuffer1_FromDeckIndex
-	cp DOUBLE_COLORLESS_ENERGY
-	; any basic energy card
-	; will set carry flag here
-	jr nc, .loop_2
-	ret
-
-.exit
-	or a
-	ret
-
-; card in Play Area location e was found with
-; a basic energy card
-.not_double_colorless
-	ld a, e
-	ld [wce0f], a
-
-; check if the current active card can KO player's card
-; if it's possible to KO, then do not consider the player's
-; active card to remove its attached energy
-	xor a ; PLAY_AREA_ARENA
-	ldh [hTempPlayAreaLocation_ff9d], a
-	farcall CheckIfAnyAttackKnocksOutDefendingCard
-	jr nc, .cannot_ko
-	farcall CheckIfSelectedAttackIsUnusable
-	jr nc, .can_ko
-	farcall LookForEnergyNeededForAttackInHand
-	jr nc, .cannot_ko
-
-.can_ko
-	; start checking from the bench
-	call SwapTurn
-	ld e, PLAY_AREA_BENCH_1
-	jr .loop_3
-.cannot_ko
-	; start checking from the arena card
-	call SwapTurn
-	ld e, PLAY_AREA_ARENA
-
-; loop each card and check if it has enough energy to use any attack
-; if it does, then proceed to pick energy cards to remove
-.loop_3
-	ld a, DUELVARS_ARENA_CARD
-	add e
-	call GetTurnDuelistVariable
-	cp $ff
-	jr z, .no_carry
-
-	ld d, a
-	call .CheckIfFewerThanTwoEnergyCards
-	jr c, .next_1
-	call .CheckIfNotEnoughEnergyToAttack
-	jr nc, .found_card ; jump if enough energy to attack
-.next_1
-	inc e
-	jr .loop_3
-
-.found_card
-; a play area card was picked to remove energy
-; if this is not the Arena Card, then check
-; entire bench to pick the highest damage
-	ld a, e
-	or a
-	jr nz, .check_bench_damage
-
-; store the picked energy card to remove in wce1a
-; and set carry
-.pick_energy
-	ld [wce1b], a
-	call PickTwoAttachedEnergyCards
-	ld [wce1c], a
-	ld a, b
-	ld [wce1d], a
-	call SwapTurn
-	ld a, [wce0f]
-	push af
-	call AIPickEnergyCardToDiscard
-	ld [wce1a], a
-	pop af
-	scf
-	ret
-
-; check what attack on player's Play Area is highest damaging
-; and pick an energy card attached to that Pokemon to remove
-.check_bench_damage
-	xor a
-	ld [wce06], a
-	ld [wAITempVars], a
-
-	ld e, PLAY_AREA_BENCH_1
-.loop_4
-	ld a, DUELVARS_ARENA_CARD
-	add e
-	call GetTurnDuelistVariable
-	cp $ff
-	jr z, .found_damage
-
-	ld d, a
-	call .CheckIfFewerThanTwoEnergyCards
-	jr c, .next_2
-	call .CheckIfNotEnoughEnergyToAttack
-	jr c, .next_2
-	call .FindHighestDamagingAttack
-.next_2
-	inc e
-	jr .loop_4
-
-.found_damage
-	ld a, [wAITempVars]
-	or a
-	jr z, .no_carry
-	jr .pick_energy
-.no_carry
-	call SwapTurn
-	or a
-	ret
-
-; returns carry if the number of energy cards attached
-; is fewer than 2, or if all energy combined yields
-; fewer than 2 energy
-.CheckIfFewerThanTwoEnergyCards
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-	cp 2
-	ret c ; return if fewer than 2 attached cards
-
-; count all energy attached
-; i.e. colored energy card = 1
-; and double colorless energy card = 2
-	xor a
-	ld b, NUM_COLORED_TYPES
-	ld hl, wAttachedEnergies
-.loop_5
-	add [hl]
-	inc hl
-	dec b
-	jr nz, .loop_5
-	ld b, [hl]
-	srl b
-	add b
-	cp 2
-	ret
-
-; returns carry if this card does not
-; have enough energy for either of its attacks
-.CheckIfNotEnoughEnergyToAttack
-	push de
-	xor a ; FIRST_ATTACK_OR_PKMN_POWER
-	ld [wSelectedAttack], a
-	ld a, e
-	ldh [hTempPlayAreaLocation_ff9d], a
-	farcall CheckEnergyNeededForAttack
-	jr nc, .enough_energy
-	pop de
-
-	push de
-	ld a, SECOND_ATTACK
-	ld [wSelectedAttack], a
-	ld a, e
-	ldh [hTempPlayAreaLocation_ff9d], a
-	farcall CheckEnergyNeededForAttack
-	jr nc, .check_surplus
-	pop de
-
-; neither attack has enough energy
-	scf
-	ret
-
-.enough_energy
-	pop de
-	or a
-	ret
-
-; first attack doesn't have enough energy (or is just a Pokemon Power)
-; but second attack has enough energy to be used
-; check if there's surplus energy for attack and, if so,
-; return carry if this surplus energy is at least 2
-.check_surplus
-	farcall CheckIfNoSurplusEnergyForAttack
-	cp 2
-	jr c, .enough_energy
-	pop de
-	scf
-	ret
-
-; stores in wce06 the highest damaging attack
-; for the card in play area location in e
-; and stores this card's location in wAITempVars
-.FindHighestDamagingAttack
-	push de
-	ld a, e
-	ldh [hTempPlayAreaLocation_ff9d], a
-
-	xor a ; FIRST_ATTACK_OR_PKMN_POWER
-	farcall EstimateDamage_VersusDefendingCard
-	ld a, [wDamage]
-	or a
-	jr z, .skip_1
-	ld e, a
-	ld a, [wce06]
-	cp e
-	jr nc, .skip_1
-	ld a, e
-	ld [wce06], a ; store this damage value
-	pop de
-	ld a, e
-	ld [wAITempVars], a ; store this location
-	jr .second_attack
-
-.skip_1
-	pop de
-
-.second_attack
-	push de
-	ld a, e
-	ldh [hTempPlayAreaLocation_ff9d], a
-
-	ld a, SECOND_ATTACK
-	farcall EstimateDamage_VersusDefendingCard
-	ld a, [wDamage]
-	or a
-	jr z, .skip_2
-	ld e, a
-	ld a, [wce06]
-	cp e
-	jr nc, .skip_2
-	ld a, e
-	ld [wce06], a ; store this damage value
-	pop de
-	ld a, e
-	ld [wAITempVars], a ; store this location
-	ret
-.skip_2
-	pop de
-	ret
 
 AIPlay_PokemonBreeder:
 	ld a, [wAITrainerCardToPlay]
@@ -5693,6 +5408,139 @@ AIDecide_PokemonTrader_Flamethrower:
 .set_carry
 	scf
 	ret
+
+
+AIPlay_EnergySwitch:
+	ld a, [wAITrainerCardToPlay]
+	ldh [hTempCardIndex_ff9f], a
+	; ld a, [wAITrainerCardParameter]
+	; ldh [hTemp_ffa0], a
+	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
+	bank1call AIMakeDecision
+	ret
+
+AIDecide_EnergySwitch_Attack:
+; no carry if there are no Pokémon in the Bench
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	dec a
+	ret z
+
+	call .CheckEnoughEnergyCardsForAttack
+	ret nc
+
+; transfer 1 energy card of input type de from the Bench to the Arena card
+; .TransferEnergyToArena
+	xor a ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ff9d], a
+
+; look for energy cards of type e currently attached to a Bench card
+	call LookForCardIDInBench
+	ret nc  ; not found?
+
+	ldh [hTempList], a
+	ld a, $ff
+	ldh [hTempList + 1], a  ; terminating byte
+	; scf
+	ret
+
+
+; Checks if the Arena card needs energy for its second attack.
+; Return carry if transferring 1 energy from Bench would be enough to use it.
+; Outputs the amount of energy needed in a.
+; Outputs the type of energy needed in de.
+.CheckEnoughEnergyCardsForAttack
+	; ld a, DUELVARS_ARENA_CARD
+	; call GetTurnDuelistVariable
+	; call GetCardIDFromDeckIndex
+	; ld a, e
+	; cp EXEGGUTOR
+	; jr z, .is_exeggutor
+
+	xor a ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ff9d], a
+	ld a, SECOND_ATTACK
+	ld [wSelectedAttack], a
+	farcall CheckEnergyNeededForAttack
+	ret nc  ; return if no energy needed
+
+; return if more than 1 energy is needed or if it's not a valid attack
+	ld a, c
+	add b
+	or a
+	ret z
+	cp 2
+	ret nc
+
+; at this point, exactly 1 energy is needed to enable the attack
+; check if it's a colorless energy...
+	ld a, c
+	or a
+	jr z, .check_basic
+
+; grab any available energy
+	ld b, NUM_COLORED_TYPES
+	ld c, 1  ; redundant?
+	ld d, 0
+	ld hl, .card_id
+.loop_energy_cards
+	ld a, [hli]
+	ld e, a
+	call .count_if_enough
+	ret c  ; return if energy found
+	dec b
+	jr nz, .loop_energy_cards
+	or a  ; redundant
+	ret
+
+.card_id
+	db FIRE_ENERGY
+	db GRASS_ENERGY
+	db LIGHTNING_ENERGY
+	db WATER_ENERGY
+	db FIGHTING_ENERGY
+	db PSYCHIC_ENERGY
+	db DARKNESS_ENERGY
+
+; ...otherwise it's a basic energy
+.check_basic
+	ld a, b  ; redundant
+	or a     ; redundant
+	ret z    ; redundant
+
+	; ld c, b
+	ld c, 1
+	; energy card ID already in de
+	; fallthrough
+
+.count_if_enough
+; if there's enough energy cards in Bench of ID given in de
+; to satisfy the attack energy cost, return carry.
+	push bc
+	; ld e, GRASS_ENERGY
+	push de
+	call CountCardIDInBench
+	pop de
+	pop bc
+	cp c
+	jr c, .return_false
+	ld a, c
+	scf
+	ret
+.return_false
+	or a
+	ret
+
+; in case it's Exeggutor in Arena, return carry
+; if there are any Grass energy cards in Bench.
+; .is_exeggutor
+	; ld e, GRASS_ENERGY
+	; call CountCardIDInBench
+	; or a
+	; jr z, .return_false
+	; scf
+	; ret
+
 
 
 ; ------------------------------------------------------------------------------

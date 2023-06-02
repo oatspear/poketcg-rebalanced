@@ -996,18 +996,6 @@ EnergyRemovalDescription: ; 63d37 (18:7d37)
 	line "discard it."
 	done
 
-SuperEnergyRemovalName: ; 63d86 (18:7d86)
-	text "Super Energy Removal"
-	done
-
-SuperEnergyRemovalDescription: ; 63d9c (18:7d9c)
-	text "Discard 1 Energy card attached to 1"
-	line "of your own Pokémon in order to"
-	line "choose 1 of your opponent's Pokémon"
-	line "and up to 2 Energy cards attached"
-	line "to it. Discard those Energy cards."
-	done
-
 EnergySwitchName:
 	text "Energy Switch"
 	done

@@ -1237,3 +1237,139 @@ FullHeal_ClearStatusEffect: ; 2f4d1 (b:74d1)
 	ld [hl], NO_STATUS
 	bank1call DrawDuelHUDs
 	ret
+
+
+
+;
+
+; returns carry if neither duelist has any energy cards attached
+SuperEnergyRemoval_EnergyCheck: ; 2fcd0 (b:7cd0)
+	call CheckIfThereAreAnyEnergyCardsAttached
+	ldtx hl, NoEnergyCardsAttachedToPokemonInYourPlayAreaText
+	ret c
+	call SwapTurn
+	call CheckIfThereAreAnyEnergyCardsAttached
+	ldtx hl, NoEnergyCardsAttachedToPokemonInOppPlayAreaText
+	call SwapTurn
+	ret
+
+SuperEnergyRemoval_PlayerSelection: ; 2fce4 (b:7ce4)
+; handle selection of Energy to discard in own Play Area
+	ldtx hl, ChoosePokemonInYourAreaThenPokemonInYourOppText
+	call DrawWideTextBox_WaitForInput
+	call HandlePokemonAndEnergySelectionScreen
+	call c, CancelSupporterCard
+	ret c ; return if operation was cancelled
+
+	ldtx hl, ChoosePokemonToRemoveEnergyFromText
+	call DrawWideTextBox_WaitForInput
+
+	call SwapTurn
+	ld a, 3
+	ldh [hCurSelectionItem], a
+.select_opp_pkmn
+	bank1call HasAlivePokemonInPlayArea
+	bank1call OpenPlayAreaScreenForSelection
+	jr nc, .opp_pkmn_selected
+	; B was pressed
+	call SwapTurn
+	call CancelSupporterCard
+	ret ; return if operation was cancelled
+.opp_pkmn_selected
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	or a
+	jr nz, .has_energy ; has any energy cards attached?
+	; no energy, loop back
+	ldtx hl, NoEnergyCardsText
+	call DrawWideTextBox_WaitForInput
+	jr .select_opp_pkmn
+
+.has_energy
+; store this Pokemon's Play Area location
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hPlayAreaEffectTarget], a
+; store which energy card to discard from it
+	bank1call CreateArenaOrBenchEnergyCardList
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	bank1call DisplayEnergyDiscardScreen
+	ld a, 2
+	ld [wEnergyDiscardMenuDenominator], a
+
+.loop_discard_energy_selection
+	bank1call HandleEnergyDiscardMenuInput
+	jr nc, .energy_selected
+	; B pressed
+	ld a, 5
+	call AskWhetherToQuitSelectingCards
+	jr nc, .done ; finish operation
+	; player selected to continue selection
+	ld a, [wEnergyDiscardMenuNumerator]
+	push af
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	bank1call DisplayEnergyDiscardScreen
+	ld a, 2
+	ld [wEnergyDiscardMenuDenominator], a
+	pop af
+	ld [wEnergyDiscardMenuNumerator], a
+	jr .loop_discard_energy_selection
+
+.energy_selected
+; store energy cards to discard from opponent
+	call GetNextPositionInTempList_TrainerEffects
+	ldh a, [hTempCardIndex_ff98]
+	ld [hl], a
+	call RemoveCardFromDuelTempList
+	ld hl, wEnergyDiscardMenuNumerator
+	inc [hl]
+	ldh a, [hCurSelectionItem]
+	cp 5
+	jr nc, .done ; no more energy cards to select
+	ld a, [wDuelTempList]
+	cp $ff
+	jr z, .done ; no more energy cards to select
+	bank1call DisplayEnergyDiscardMenu
+	jr .loop_discard_energy_selection
+
+.done
+	call GetNextPositionInTempList_TrainerEffects
+	ld [hl], $ff
+	call SwapTurn
+	or a
+	ret
+
+SuperEnergyRemoval_DiscardEffect: ; 2fd73 (b:7d73)
+	ld hl, hTempList + 1
+
+; discard energy card of own Play Area
+	ld a, [hli]
+	call PutCardInDiscardPile
+
+; iterate and discard opponent's energy cards
+	inc hl
+	call SwapTurn
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .done_discard
+	call PutCardInDiscardPile
+	jr .loop
+
+.done_discard
+; if it's Player's turn, return...
+	call SwapTurn
+	call IsPlayerTurn
+	ret c
+; ...otherwise show Play Area of affected Pokemon
+; in opponent's Play Area
+	ldh a, [hTemp_ffa0]
+	call Func_2c10b
+; in player's Play Area
+	xor a
+	ld [wDuelDisplayedScreen], a
+	call SwapTurn
+	ldh a, [hPlayAreaEffectTarget]
+	call Func_2c10b
+	call SwapTurn
+	ret
