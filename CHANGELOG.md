@@ -722,6 +722,11 @@
 
 ### Miscellaneous
 
+#### AI
+
+- Some decks did not consider retreating at all. This was fixed.
+- Some non-Boss decks had a 25% chance of not using Trainer cards or Pokémon Powers, while a select few had a 50% chance. This was normalized to a 12.5% chance for all non-Boss decks.
+
 #### Deck Building
 
 - Added a menu option to reset the deck to 0 cards, to make editing easier.
