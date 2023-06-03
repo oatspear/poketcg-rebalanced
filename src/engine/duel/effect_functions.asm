@@ -7621,7 +7621,7 @@ SelectedCards_MoveWithinPlayArea:
 	ld e, a
 	ld d, 0
 	ld hl, hTempList
-; relocate all cards in [hTempList + 1] onward
+; relocate all cards in [hTempList]
 .loop
 	ld a, [hli]
 	cp $ff
