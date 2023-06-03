@@ -7625,13 +7625,16 @@ SelectedCards_MoveWithinPlayArea:
 .loop
 	ld a, [hli]
 	cp $ff
-	ret z
+	jr z, .done
 	call AddCardToHand
+	push hl
 	call PutHandCardInPlayArea  ; location in e
+	pop hl
 	inc d
 	jr .loop
 
 ; if not Player, show which Pokemon was chosen to attach Energy
+.done
 	call IsPlayerTurn
 	ret c
 	call Helper_GenericShowAttachedEnergyToPokemon

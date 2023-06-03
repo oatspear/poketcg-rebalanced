@@ -107,6 +107,7 @@ HealUserHP_NoAnimation:
 ; plays healing animation and prints text with card's name.
 ; uses: a, de, hl
 ; preserves: bc
+; uses: [hTempPlayAreaLocation_ff9d]
 ; input:
 ;	   d: amount of HP to heal
 ;	   e: PLAY_AREA_* of card to heal
@@ -127,22 +128,19 @@ HealPlayAreaCardHP:
 
 .damaged
 	cp d
-	jr c, .got_amount_to_heal ; is damage lower than amount to heal?
-	ld a, d                   ; else, heal at most d damage
+	jr nc, .got_amount_to_heal  ; is damage higher than amount to heal?
+	ld d, a                     ; else, heal at most a damage
 .got_amount_to_heal
-	ld e, a
-	ld d, $00
-
 ; play heal animation
 	push bc
 	call PlayHealingAnimation_PlayAreaPokemon
 	pop bc
 
 ; heal the target Pokemon
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
+	ld a, DUELVARS_ARENA_CARD_HP
 	add e
+	call GetTurnDuelistVariable
+	add d
 	ld [hl], a
 	ret
 
@@ -171,38 +169,33 @@ HealPlayAreaCardHP:
 ; plays a healing animation for a play area Pokémon
 ; (shows the Play Area screen and the arrow up with healing animation)
 ; input:
-;   de: amount of damage to heal
-;   [hTempPlayAreaLocation_ff9d]: PLAY_AREA_* offset of card to heal
+;   d: amount of damage to heal
+;   e: PLAY_AREA_* location of card to heal
 ; preserves: de
 PlayHealingAnimation_PlayAreaPokemon:
 ; play heal animation
 	push de
+	ld b, e
+	ld c, $01
+	ld e, d
+	ld d, $00
 	bank1call Func_7415
 	ld a, ATK_ANIM_HEALING_WIND_PLAY_AREA
 	ld [wLoadedAttackAnimation], a
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld b, a
-	ld c, $01
 	ldh a, [hWhoseTurn]
 	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-	pop hl
+	bank1call PlayAttackAnimation  ; requires damage to heal in de, not d
+	bank1call WaitAttackAnimation  ; preserves de
+	ld l, e
+	ld h, d
 
 ; print Pokemon card name and damage healed
-	push hl
 	call LoadTxRam3
-; OATS trying to refactor some code
-	; ld hl, $0000
-	; call LoadTxRam2
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD
+	pop de
+	push de
+	ld a, DUELVARS_ARENA_CARD
+	add e
 	call LoadCardNameAndLevelFromVarToRam2
-	; call GetTurnDuelistVariable
-	; call LoadCardDataToBuffer1_FromDeckIndex
-	; ld a, 18
-	; call CopyCardNameAndLevel
-	; ld [hl], $00 ; terminating character on end of the name
 	ldtx hl, PokemonHealedDamageText
 	call DrawWideTextBox_WaitForInput
 	pop de

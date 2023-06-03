@@ -176,13 +176,6 @@ AIPlay_Potion:
 	ldh [hTempCardIndex_ff9f], a
 	ld a, [wAITrainerCardParameter]
 	ldh [hTemp_ffa0], a
-	ld e, a
-	call GetCardDamageAndMaxHP
-	cp 30
-	jr c, .play_card
-	ld a, 30
-.play_card
-	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
@@ -208,7 +201,7 @@ AIDecide_Potion1:
 	ld h, a
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
-	cp 30 + 1 ; if damage <= 20
+	cp 30 + 1 ; if damage <= 30
 	jr c, .calculate_hp
 	ld a, 30 ; amount of Potion HP healing
 
@@ -272,7 +265,7 @@ AIDecide_Potion2:
 	ld e, PLAY_AREA_BENCH_1
 	jr .loop
 
-; find Play Area Pokémon with more than 10 damage.
+; find Play Area Pokémon with more than 20 damage.
 ; skip Pokémon if it has a BOOST_IF_TAKEN_DAMAGE attack.
 .start_from_active
 	ld e, PLAY_AREA_ARENA
@@ -365,14 +358,6 @@ AIPlay_SuperPotion:
 	ldh [hTempPlayAreaLocation_ffa1], a
 	call AIPickEnergyCardToDiscard
 	ldh [hTemp_ffa0], a
-	ld a, [wAITrainerCardParameter]
-	ld e, a
-	call GetCardDamageAndMaxHP
-	cp 60
-	jr c, .play_card
-	ld a, 60
-.play_card
-	ldh [hTempRetreatCostCards], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
