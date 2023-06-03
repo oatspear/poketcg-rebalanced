@@ -102,36 +102,34 @@ HealUserHP_NoAnimation:
 	ld [hl], a
 	ret
 
-; heals amount of damage in register a for card in
-; Play Area location in [hTempPlayAreaLocation_ff9d], only if there is any
-; damage to heal.
-; plays healing animation and prints text with card's name.
-; input:
-;	   a: amount of HP to heal
-;	  [hTempPlayAreaLocation_ff9d]: Play Area location of card to heal
-; output:
-;    carry: set if not damaged
-HealPlayAreaCardHP_IfDamaged:
-	ld d, a
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
-	call GetCardDamageAndMaxHP
-	or a
-	jr z, .set_carry ; no damage
-	ld a, d
-	jr HealPlayAreaCardHP
-.set_carry
-	scf
-	ret
-
-; heals amount of damage in register a for card in
+; heals up to the amount of damage in register a for card in
 ; Play Area location in [hTempPlayAreaLocation_ff9d].
 ; plays healing animation and prints text with card's name.
 ; uses: a, de, hl
+; preserves: bc
 ; input:
-;	   a: amount of HP to heal
-;	  [hTempPlayAreaLocation_ff9d]: Play Area location of card to heal
+;	   d: amount of HP to heal
+;	   e: PLAY_AREA_* of card to heal
+; output:
+;    carry: set if not damaged
 HealPlayAreaCardHP:
+; check its damage
+	; ld d, a
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+	; ld e, a
+	push bc
+	call GetCardDamageAndMaxHP
+	pop bc
+	or a
+	jr nz, .damaged
+	scf
+	ret
+
+.damaged
+	cp d
+	jr c, .got_amount_to_heal ; is damage lower than amount to heal?
+	ld a, d                   ; else, heal at most d damage
+.got_amount_to_heal
 	ld e, a
 	ld d, $00
 
@@ -212,55 +210,55 @@ PlayHealingAnimation_PlayAreaPokemon:
 
 
 Heal10DamageFromAll_HealEffect:
-	ld c, 10
-	jr HealDamageFromAll
+	ld d, 10
+	jr HealNDamageFromAll
 
 Heal20DamageFromAll_HealEffect:
-	ld c, 20
-	jr HealDamageFromAll
+	ld d, 20
+	jr HealNDamageFromAll
+
+Heal30DamageFromAll_HealEffect:
+	ld d, 30
+	; jr HealNDamageFromAll
+	; fallthrough
 
 ; Heals some damage from all friendly Pokémon in Play Area (Active and Benched).
 ; input:
-;   c - amount to heal
-HealDamageFromAll:
-; play the global healing wind animation
-	; push bc
+;   d - amount to heal
+; uses: a, de, hl
+; preserves: bc
+; output:
+;   carry: set if no Pokémon had damage to heal
+HealNDamageFromAll:
+	push bc
+; play the global healing wind animation (uses bc)
 	; ld a, ATK_ANIM_HEALING_WIND
 	; call PlayAttackAnimation_AdhocEffect
-	; pop bc
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
-	ld d, a
+	ld b, 0  ; how many were healed
+	ld c, a  ; loop counter
 	ld e, PLAY_AREA_ARENA
 
 ; go through every Pokemon in the Play Area and heal c damage.
 .loop_play_area
-; check its damage
-	ld a, e
-	ldh [hTempPlayAreaLocation_ff9d], a
-	push bc
-	call GetCardDamageAndMaxHP
-	pop bc
-	or a
-	jr z, .next_pkmn ; if no damage, skip Pokemon
-
-	cp c
-	jr c, .heal ; is damage lower than amount to heal?
-	ld a, c     ; heal at most c damage
-.heal
 	push de
 	call HealPlayAreaCardHP
 	pop de
-.next_pkmn
+	jr c, .no_damage
+	inc b
+.no_damage
 	inc e
-	dec d
+	dec c
 	jr nz, .loop_play_area
-	ret
-
-HealingWind_InitialEffect:
+	ld a, b
+	pop bc
+	or a
+	ret nz  ; some were healed
 	scf
-	ret
+	ret  ; none healed
+
 
 HealingWind_PlayAreaHealEffect:
 ; play initial animation

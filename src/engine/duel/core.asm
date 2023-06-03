@@ -610,14 +610,7 @@ PlayEnergyCard:
 	ld a, OPPACTION_PLAY_ENERGY
 	call SetOppAction_SerialSendDuelData
 	call PrintAttachedEnergyToPokemon
-; OATS introduce Potion Energy effect
-	ld a, CHANSEY  ; Softboiled
-	call CountPokemonIDInPlayArea
-	jr nc, .done_energy_effects  ; no Pkmn Power-capable Chansey was found
-	ld a, 10  ; heal 10 HP
-	farcall HealPlayAreaCardHP_IfDamaged
-; end of Potion Energy effect
-.done_energy_effects
+	call HandleOnPlayEnergyEffects
 	jp DuelMainInterface
 
 .rain_dance_active
@@ -6665,14 +6658,7 @@ OppAction_PlayEnergyCard:
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	or PLAYED_ENERGY_THIS_TURN
 	ld [wAlreadyPlayedEnergyOrSupporter], a
-; OATS introduce Potion Energy effect
-	ld a, CHANSEY  ; Softboiled
-	call CountPokemonIDInPlayArea
-	jr nc, .done_energy_effects  ; no Pkmn Power-capable Chansey was found
-	ld a, 10  ; heal 10 HP
-	farcall HealPlayAreaCardHP_IfDamaged
-; end of Potion Energy effect
-.done_energy_effects
+	call HandleOnPlayEnergyEffects
 	jp DrawDuelMainScene
 
 ; evolve a Pokemon card in the arena or in the bench
@@ -6978,6 +6964,22 @@ Func_6ba2:
 	ret z
 	call WaitForWideTextBoxInput
 	ret
+
+
+
+HandleOnPlayEnergyEffects:
+; OATS introduce Potion Energy effect
+	ld a, CHANSEY  ; Softboiled
+	call CountPokemonIDInPlayArea
+	jr nc, .full_heal_energy  ; no Pkmn Power-capable Chansey was found
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a   ; location
+	ld d, 10  ; damage
+	farcall HealPlayAreaCardHP
+.full_heal_energy
+	ret
+
+
 
 ; apply and/or refresh status conditions and other events that trigger between turns
 HandleBetweenTurnsEvents:

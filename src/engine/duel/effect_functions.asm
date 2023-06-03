@@ -9,6 +9,7 @@ AdaptiveEvolution_InitialEffect:
 Firegiver_InitialEffect:
 Quickfreeze_InitialEffect:
 PealOfThunder_InitialEffect:
+HealingWind_InitialEffect:
 ThickSkinnedEffect:
 SetCarryNullEffect:
 	scf
@@ -591,10 +592,10 @@ NaturalRemedy_HealEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	ret z
-	ldh [hTempPlayAreaLocation_ff9d], a
-	ld a, 30  ; HP
-	call HealPlayAreaCardHP_IfDamaged
-	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a   ; location
+	ld d, 30  ; damage
+	call HealPlayAreaCardHP
+	ldh a, [hTemp_ffa0]
 	jp c, ClearStatusFromTarget
 	jp ClearStatusFromTarget_NoAnim
 
@@ -2129,8 +2130,8 @@ Heal_RemoveDamageEffect:
 	set USED_PKMN_POWER_THIS_TURN_F, [hl]
 ; heal the selected Pokémon
 	ldh a, [hPlayAreaEffectTarget]
-	ldh [hTempPlayAreaLocation_ff9d], a
-	ld a, 10  ; HP
+	ld e, a   ; location
+	ld d, 10  ; damage
 	call HealPlayAreaCardHP
 	call ExchangeRNG
 	ret
@@ -6178,9 +6179,10 @@ EnergySpike_AttachEnergyEffect:
 NutritionSupport_AttachEnergyEffect:
 	call EnergySpike_AttachEnergyEffect
 	ldh a, [hTempPlayAreaLocation_ffa1]
-	ldh [hTempPlayAreaLocation_ff9d], a
-	ld a, 10
-	jp HealPlayAreaCardHP_IfDamaged
+	ld e, a   ; location
+	ld d, 10  ; damage
+	jp HealPlayAreaCardHP
+
 
 Firestarter_OncePerTurnCheck:
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -7365,28 +7367,16 @@ SuperPotion_PlayerSelectEffect: ; 2f167 (b:7167)
 	ldh [hTemp_ffa0], a
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTempPlayAreaLocation_ffa1], a
-	ld e, a
-
-; cap the healing damage if
-; it would make it exceed max HP.
-	call GetCardDamageAndMaxHP
-	ld c, 60
-	cp 60
-	jr nc, .heal
-	ld c, a
-.heal
-	ld a, c
-	ldh [hPlayAreaEffectTarget], a
-	or a
 	ret
 
-SuperPotion_HealEffect: ; 2f1b5 (b:71b5)
+SuperPotion_HealEffect:
 	ldh a, [hTemp_ffa0]
 	call PutCardInDiscardPile
 	ldh a, [hTempPlayAreaLocation_ffa1]
-	ldh [hTempPlayAreaLocation_ff9d], a
-	ldh a, [hPlayAreaEffectTarget]
+	ld e, a   ; location
+	ld d, 60  ; damage
 	jp HealPlayAreaCardHP
+
 
 ; checks if there is at least one Energy card
 ; attached to some card in the Turn Duelist's Play Area.
@@ -7864,22 +7854,14 @@ Potion_PlayerSelection:
 	call GetCardDamageAndMaxHP
 	or a
 	jr z, .read_input ; no damage, loop back to start
-; cap damage
-	ld c, 30
-	cp 30
-	jr nc, .skip_cap
-	ld c, a
-.skip_cap
-	ld a, c
-	ldh [hTempPlayAreaLocation_ffa1], a
-	or a
 	ret
 
-Potion_HealEffect: ; 2f3ef (b:73ef)
+Potion_HealEffect:
 	ldh a, [hTemp_ffa0]
-	ldh [hTempPlayAreaLocation_ff9d], a
-	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
+	ld d, 30
 	jp HealPlayAreaCardHP
+
 
 GamblerEffect: ; 2f3f9 (b:73f9)
 	ldtx de, CardCheckIfHeads8CardsIfTails1CardText
@@ -9438,7 +9420,8 @@ GustOfWind_SwitchEffect: ; 2fe90 (b:7e90)
 
 ; plays animation on turn holder's side (e.g. for play area animations)
 ; input:
-;	a = attack animation to play
+;	  a: attack animation to play
+; preserves: de
 PlayAttackAnimation_AdhocEffect:
 	ld [wLoadedAttackAnimation], a
 	bank1call Func_7415
