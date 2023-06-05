@@ -205,7 +205,7 @@
 	const CLEFAIRY_DOLL               ; $cc
 	const MYSTERIOUS_FOSSIL           ; $cd
 	const ENERGY_RETRIEVAL            ; $ce
-	const SUPER_ENERGY_RETRIEVAL      ; $cf
+	const ENERGY_RECYCLER      ; $cf
 	const ENERGY_SEARCH               ; $d0
 	const ENERGY_REMOVAL              ; $d1
 	const ENERGY_SWITCH               ; $d2

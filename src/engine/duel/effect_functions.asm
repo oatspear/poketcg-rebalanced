@@ -3674,7 +3674,7 @@ EnergyConversion_AddToHandEffect: ; 2d9b4 (b:59b4)
 .done
 	call IsPlayerTurn
 	ret c
-	bank1call Func_4b38
+	bank1call DisplayCardListDetails
 	ret
 
 ; return carry if Defending Pokemon is not asleep
@@ -4358,6 +4358,7 @@ Barrier_BarrierEffect: ; 2ddbf (b:5dbf)
 
 EnergySpores_CheckDiscardPile:
 EnergyAbsorption_CheckDiscardPile:
+EnergyRecycler_CheckDiscardPile:
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
 	; call CreateEnergyCardListFromDiscardPile_AllEnergy
 	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
@@ -7753,7 +7754,7 @@ EnergyRetrieval_DiscardAndAddToHandEffect:
 .done
 	call IsPlayerTurn
 	ret c
-	bank1call Func_4b38
+	bank1call DisplayCardListDetails
 	ret
 
 ; return carry if no cards left in Deck.
@@ -8936,32 +8937,6 @@ LassEffect: ; 2f9e3 (b:79e3)
 	call DrawWideTextBox_WaitForInput
 	ret
 
-Maintenance_PlayerSelection:
-	call HandlePlayerSelection1HandCardToDiscardExcludeSelf
-	ret
-
-Maintenance_ReturnToDeckAndDrawEffect: ; 2fa85 (b:7a85)
-; return both selected cards to the deck
-	ldh a, [hTempList]
-	call RemoveCardFromHand
-	call ReturnCardToDeck
-	ldh a, [hTempList + 1]
-	call RemoveCardFromHand
-	call ReturnCardToDeck
-	call SyncShuffleDeck
-
-; draw one card
-	ld a, 1
-	bank1call DisplayDrawNCardsScreen
-	call DrawCardFromDeck
-	ldh [hTempCardIndex_ff98], a
-	call AddCardToHand
-	call IsPlayerTurn
-	ret nc
-	; show card on screen if played by Player
-	bank1call DisplayPlayerDrawCardScreen
-	ret
-
 
 PokeBall_PlayerSelection:
 ; OATS skip coin toss
@@ -9283,25 +9258,7 @@ DevolutionSpray_DevolutionEffect: ; 2fc99 (b:7c99)
 	ret
 
 
-; return carry if not enough cards in hand to
-; discard for Super Energy Retrieval effect
-; or if the Discard Pile has no basic Energy cards
-SuperEnergyRetrieval_HandEnergyCheck: ; 2fda4 (b:7da4)
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetTurnDuelistVariable
-	ldtx hl, NotEnoughCardsInHandText
-	cp 3
-	ret c
-	call CreateEnergyCardListFromDiscardPile_OnlyBasic
-	ldtx hl, ThereAreNoBasicEnergyCardsInDiscardPileText
-	ret
-
-SuperEnergyRetrieval_PlayerHandSelection: ; 2fdb6 (b:7db6)
-	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
-	call c, CancelSupporterCard
-	ret
-
-SuperEnergyRetrieval_PlayerDiscardPileSelection: ; 2fdba (b:7dba)
+EnergyRecycler_PlayerDiscardPileSelection:
 	ldtx hl, ChooseUpTo4FromDiscardPileText
 	call DrawWideTextBox_WaitForInput
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
@@ -9339,17 +9296,9 @@ SuperEnergyRetrieval_PlayerDiscardPileSelection: ; 2fdba (b:7dba)
 	or a
 	ret
 
-SuperEnergyRetrieval_DiscardAndAddToHandEffect: ; 2fdfa (b:7dfa)
-; discard 2 cards selected from the hand
-	ld hl, hTemp_ffa0
-	ld a, [hli]
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
-	ld a, [hli]
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
-
-; put selected cards in hand
+EnergyRecycler_ReturnToDeckEffect:
+; return selected cards to the deck
+	ld hl, hTempList
 	ld de, wDuelTempList
 .loop
 	ld a, [hli]
@@ -9357,17 +9306,22 @@ SuperEnergyRetrieval_DiscardAndAddToHandEffect: ; 2fdfa (b:7dfa)
 	inc de
 	cp $ff
 	jr z, .done
+	; this is kinda dumb and can probably be abbreviated
 	call MoveDiscardPileCardToHand
 	call AddCardToHand
+	call RemoveCardFromHand
+	call ReturnCardToDeck
 	jr .loop
 
 .done
+	call SyncShuffleDeck
 ; if Player played the card, exit
 	call IsPlayerTurn
 	ret c
 ; if not, show card list selected by Opponent
-	bank1call Func_4b38
+	bank1call DisplayCardListDetails
 	ret
+
 
 ; outputs in hl the next position
 ; in hTempList to place a new card,

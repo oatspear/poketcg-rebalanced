@@ -966,14 +966,14 @@ EnergyRetrievalDescription: ; 63bde (18:7bde)
 	line "from your discard pile."
 	done
 
-SuperEnergyRetrievalName: ; 63c3e (18:7c3e)
-	text "Super Energy Retrieval"
+EnergyRecyclerName:
+	text "Energy Recycler"
 	done
 
-SuperEnergyRetrievalDescription: ; 63c56 (18:7c56)
-	text "Trade 2 of the other cards in your"
-	line "hand for up to 4 basic Energy cards"
-	line "from your discard pile."
+EnergyRecyclerDescription:
+	text "Shuffle up to 4 basic Energy cards"
+	line "from your discard pile into your"
+	line "deck."
 	done
 
 EnergySearchName: ; 63cb6 (18:7cb6)

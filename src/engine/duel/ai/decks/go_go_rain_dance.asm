@@ -65,7 +65,7 @@ AIActionTable_GoGoRainDance:
 .list_prize
 	db GAMBLER
 	db ENERGY_RETRIEVAL
-	db SUPER_ENERGY_RETRIEVAL
+	db ENERGY_RECYCLER
 	db BLASTOISE
 	db $00
 

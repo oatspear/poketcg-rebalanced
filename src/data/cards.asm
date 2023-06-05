@@ -207,7 +207,7 @@ CardPointers:
 	dw ClefairyDollCard
 	dw MysteriousFossilCard
 	dw EnergyRetrievalCard
-	dw SuperEnergyRetrievalCard
+	dw EnergyRecyclerCard
 	dw EnergySearchCard
 	dw EnergyRemovalCard
 	dw EnergySwitchCard
@@ -10402,7 +10402,7 @@ MysteriousFossilCard:
 	tx MysteriousFossilDescriptionCont ; description (cont)
 
 EnergyRetrievalCard:
-	db TYPE_TRAINER_SUPPORTER ; type
+	db TYPE_TRAINER ; type
 	gfx EnergyRetrievalCardGfx ; gfx
 	tx EnergyRetrievalName ; name
 	db DIAMOND ; rarity
@@ -10412,15 +10412,15 @@ EnergyRetrievalCard:
 	tx EnergyRetrievalDescription ; description
 	dw NONE ; description (cont)
 
-SuperEnergyRetrievalCard:
-	db TYPE_TRAINER_SUPPORTER ; type
-	gfx SuperEnergyRetrievalCardGfx ; gfx
-	tx SuperEnergyRetrievalName ; name
-	db PROMOSTAR ; rarity
-	db PROMOTIONAL | PRO ; sets
-	db SUPER_ENERGY_RETRIEVAL
-	dw SuperEnergyRetrievalEffectCommands ; effect commands
-	tx SuperEnergyRetrievalDescription ; description
+EnergyRecyclerCard:
+	db TYPE_TRAINER ; type
+	gfx EnergyRecyclerCardGfx ; gfx
+	tx EnergyRecyclerName ; name
+	db CIRCLE ; rarity
+	db COLOSSEUM | NONE ; sets
+	db ENERGY_RECYCLER
+	dw EnergyRecyclerEffectCommands ; effect commands
+	tx EnergyRecyclerDescription ; description
 	dw NONE ; description (cont)
 
 EnergySearchCard:

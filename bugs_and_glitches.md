@@ -71,7 +71,7 @@ Each deck AI lists some card IDs that are not supposed to be placed as Prize car
 .list_prize ; 14fe6 (5:4fe6)
 	db GAMBLER
 	db ENERGY_RETRIEVAL
-	db SUPER_ENERGY_RETRIEVAL
+	db ENERGY_RECYCLER
 	db BLASTOISE
 	db $00
 ```

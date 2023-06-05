@@ -1908,8 +1908,8 @@ DragoniteLegendaryCardName: ; 3f8cf (f:78cf)
 	text "<Lv>41 DRAGONITE"
 	done
 
-SuperEnergyRetrievalTradeCardName: ; 3f8df (f:78df)
-	text "Super Energy Retrieval"
+EnergyRecyclerTradeCardName: ; 3f8df (f:78df)
+	text "Energy Recycler"
 	done
 
 FlyingPikachuTradeCardName: ; 3f8f7 (f:78f7)

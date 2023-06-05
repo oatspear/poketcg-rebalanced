@@ -721,11 +721,15 @@
 #### Full Heal
 - Removes status and effects from any of the user's Pokémon, even if Benched.
 
+#### Super Energy Retrieval
+- Removed.
+
 #### Super Energy Removal
 - Removed.
 
 #### New Trainer Cards
 - New card: **Energy Switch**: moves a Basic energy from 1 Pokémon to another.
+- New card: **Energy Recycler**: shuffles 4 Basic energy from discard pile into deck.
 
 ### Miscellaneous
 

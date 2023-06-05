@@ -2573,7 +2573,7 @@ FindDuplicateCards:
 	or a
 	ret
 
-AIPlay_SuperEnergyRetrieval:
+AIPlay_EnergyRecycler:
 	ld a, [wCurrentAIFlags]
 	or AI_FLAG_MODIFIED_HAND
 	ld [wCurrentAIFlags], a
@@ -2604,7 +2604,10 @@ AIPlay_SuperEnergyRetrieval:
 	bank1call AIMakeDecision
 	ret
 
-AIDecide_SuperEnergyRetrieval:
+AIDecide_EnergyRecycler:  ; FIXME TODO
+	or a
+	ret
+
 ; return no carry if no cards in hand
 	farcall CreateEnergyCardListFromHand
 	jp nc, .no_carry

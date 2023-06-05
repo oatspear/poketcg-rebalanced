@@ -1373,3 +1373,92 @@ SuperEnergyRemoval_DiscardEffect: ; 2fd73 (b:7d73)
 	call Func_2c10b
 	call SwapTurn
 	ret
+
+
+
+;
+; return carry if not enough cards in hand to
+; discard for Super Energy Retrieval effect
+; or if the Discard Pile has no basic Energy cards
+SuperEnergyRetrieval_HandEnergyCheck: ; 2fda4 (b:7da4)
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	ldtx hl, NotEnoughCardsInHandText
+	cp 3
+	ret c
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	ldtx hl, ThereAreNoBasicEnergyCardsInDiscardPileText
+	ret
+
+SuperEnergyRetrieval_PlayerHandSelection: ; 2fdb6 (b:7db6)
+	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
+	call c, CancelSupporterCard
+	ret
+
+SuperEnergyRetrieval_PlayerDiscardPileSelection: ; 2fdba (b:7dba)
+	ldtx hl, ChooseUpTo4FromDiscardPileText
+	call DrawWideTextBox_WaitForInput
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+
+.loop_discard_pile_selection
+	bank1call InitAndDrawCardListScreenLayout
+	ldtx hl, PleaseSelectCardText
+	ldtx de, PlayerDiscardPileText
+	bank1call SetCardListHeaderText
+	bank1call DisplayCardList
+	jr nc, .store_selected_card
+	; B pressed
+	ld a, 6
+	call AskWhetherToQuitSelectingCards
+	jr c, .loop_discard_pile_selection ; player selected to continue
+	jr .done
+
+.store_selected_card
+	ldh a, [hTempCardIndex_ff98]
+	call GetTurnDuelistVariable
+	call GetNextPositionInTempList_TrainerEffects
+	ldh a, [hTempCardIndex_ff98]
+	ld [hl], a ; store selected energy card
+	call RemoveCardFromDuelTempList
+	jr c, .done
+	; this shouldn't happen
+	ldh a, [hCurSelectionItem]
+	cp 6
+	jr c, .loop_discard_pile_selection
+
+.done
+; insert terminating byte
+	call GetNextPositionInTempList_TrainerEffects
+	ld [hl], $ff
+	or a
+	ret
+
+SuperEnergyRetrieval_DiscardAndAddToHandEffect: ; 2fdfa (b:7dfa)
+; discard 2 cards selected from the hand
+	ld hl, hTemp_ffa0
+	ld a, [hli]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+	ld a, [hli]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+
+; put selected cards in hand
+	ld de, wDuelTempList
+.loop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	cp $ff
+	jr z, .done
+	call MoveDiscardPileCardToHand
+	call AddCardToHand
+	jr .loop
+
+.done
+; if Player played the card, exit
+	call IsPlayerTurn
+	ret c
+; if not, show card list selected by Opponent
+	bank1call DisplayCardListDetails
+	ret

@@ -1793,7 +1793,7 @@ DisplayCardDetailScreen:
 	call _DisplayCardDetailScreen
 	ret
 
-Func_4b38:
+DisplayCardListDetails:
 	ld a, [wDuelTempList]
 	cp $ff
 	ret z

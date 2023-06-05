@@ -738,3 +738,218 @@ AIDecide_SuperEnergyRemoval:
 .skip_2
 	pop de
 	ret
+
+
+
+;
+
+AIPlay_SuperEnergyRetrieval:
+	ld a, [wCurrentAIFlags]
+	or AI_FLAG_MODIFIED_HAND
+	ld [wCurrentAIFlags], a
+	ld a, [wAITrainerCardToPlay]
+	ldh [hTempCardIndex_ff9f], a
+	ld a, [wAITrainerCardParameter]
+	ldh [hTemp_ffa0], a
+	ld a, [wce1a]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ld a, [wce1b]
+	ldh [hTempRetreatCostCards], a
+	ld a, [wce1c]
+	ldh [$ffa3], a
+	cp $ff
+	jr z, .asm_20fbb
+	ld a, [wce1d]
+	ldh [$ffa4], a
+	cp $ff
+	jr z, .asm_20fbb
+	ld a, [wce1e]
+	ldh [$ffa5], a
+	cp $ff
+	jr z, .asm_20fbb
+	ld a, $ff
+	ldh [$ffa6], a
+.asm_20fbb
+	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
+	bank1call AIMakeDecision
+	ret
+
+AIDecide_SuperEnergyRetrieval:
+; return no carry if no cards in hand
+	farcall CreateEnergyCardListFromHand
+	jp nc, .no_carry
+
+; handle Rain Dance deck
+; return no carry if there's no Muk card in play and
+; if there's no Blastoise card in Play Area
+; if there's a Muk in play, continue as normal
+	; ld a, [wOpponentDeckID]
+	; cp GO_GO_RAIN_DANCE_DECK_ID
+	; jr nz, .start
+	ld a, MUK
+	call CountPokemonIDInBothPlayAreas
+	jr c, .start
+	ld a, WARTORTLE
+	call CountPokemonIDInPlayArea
+	jp nc, .no_carry
+
+.start
+; find duplicate cards in hand
+	call CreateHandCardList
+	ld hl, wDuelTempList
+	call FindDuplicateCards
+	jp c, .no_carry
+
+; remove the duplicate card in hand
+; and run the hand check again
+	ld [wce06], a
+	ld hl, wDuelTempList
+	call FindAndRemoveCardFromList
+	call FindDuplicateCards
+	jp c, .no_carry
+
+	ld [wAITempVars], a
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call FindBasicEnergyCardsInLocation
+	jp c, .no_carry
+
+; some basic energy cards were found in Discard Pile
+	ld a, $ff
+	ld [wce1b], a
+	ld [wce1c], a
+	ld [wce1d], a
+	ld [wce1e], a
+	ld [wce1f], a
+
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+
+; first check if there are useful energy cards in the list
+; and choose them for retrieval first
+.loop_play_area
+	ld a, DUELVARS_ARENA_CARD
+	add e
+	push de
+
+; load this card's ID in wTempCardID
+; and this card's Type in wTempCardType
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	ld [wTempCardID], a
+	call LoadCardDataToBuffer1_FromCardID
+	pop de
+	ld a, [wLoadedCard1Type]
+	or TYPE_ENERGY
+	ld [wTempCardType], a
+
+; loop the energy cards in the Discard Pile
+; and check if they are useful for this Pokemon
+	ld hl, wDuelTempList
+.loop_energy_cards_1
+	ld a, [hli]
+	cp $ff
+	jr z, .next_play_area
+
+	ld b, a
+	push hl
+	farcall CheckIfEnergyIsUseful
+	pop hl
+	jr nc, .loop_energy_cards_1
+
+; first energy
+	ld a, [wce1b]
+	cp $ff
+	jr nz, .second_energy_1
+	ld a, b
+	ld [wce1b], a
+	call RemoveCardFromList
+	jr .next_play_area
+
+.second_energy_1
+	ld a, [wce1c]
+	cp $ff
+	jr nz, .third_energy_1
+	ld a, b
+	ld [wce1c], a
+	call RemoveCardFromList
+	jr .next_play_area
+
+.third_energy_1
+	ld a, [wce1d]
+	cp $ff
+	jr nz, .fourth_energy_1
+	ld a, b
+	ld [wce1d], a
+	call RemoveCardFromList
+	jr .next_play_area
+
+.fourth_energy_1
+	ld a, b
+	ld [wce1e], a
+	jr .set_carry
+
+.next_play_area
+	inc e
+	dec d
+	jr nz, .loop_play_area
+
+; next, if there are still energy cards left to choose,
+; loop through the energy cards again and select
+; them in order.
+	ld hl, wDuelTempList
+.loop_energy_cards_2
+	ld a, [hli]
+	cp $ff
+	jr z, .check_chosen
+	ld b, a
+	ld a, [wce1b]
+	cp $ff
+	jr nz, .second_energy_2
+	ld a, b
+
+; first energy
+	ld [wce1b], a
+	call RemoveCardFromList
+	jr .loop_energy_cards_2
+
+.second_energy_2
+	ld a, [wce1c]
+	cp $ff
+	jr nz, .third_energy_2
+	ld a, b
+	ld [wce1c], a
+	call RemoveCardFromList
+	jr .loop_energy_cards_2
+
+.third_energy_2
+	ld a, [wce1d]
+	cp $ff
+	jr nz, .fourth_energy
+	ld a, b
+	ld [wce1d], a
+	call RemoveCardFromList
+	jr .loop_energy_cards_2
+
+.fourth_energy
+	ld a, b
+	ld [wce1e], a
+	jr .set_carry
+
+; will set carry if at least one has been chosen
+.check_chosen
+	ld a, [wce1b]
+	cp $ff
+	jr nz, .set_carry
+
+.no_carry
+	or a
+	ret
+.set_carry
+	ld a, [wAITempVars]
+	ld [wce1a], a
+	ld a, [wce06]
+	scf
+	ret

@@ -1020,7 +1020,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MoltresLegendaryCardName                           ; 0x03f1
 	textpointer ArticunoLegendaryCardName                          ; 0x03f2
 	textpointer DragoniteLegendaryCardName                         ; 0x03f3
-	textpointer SuperEnergyRetrievalTradeCardName                  ; 0x03f4
+	textpointer EnergyRecyclerTradeCardName
 	textpointer FlyingPikachuTradeCardName                         ; 0x03f5
 	textpointer LightningAndFireDeckChoiceText                     ; 0x03f6
 	textpointer WaterAndFightingDeckChoiceText                     ; 0x03f7
@@ -2989,8 +2989,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MysteriousFossilDescriptionCont                    ; 0x0b7c
 	textpointer EnergyRetrievalName                                ; 0x0b7d
 	textpointer EnergyRetrievalDescription                         ; 0x0b7e
-	textpointer SuperEnergyRetrievalName                           ; 0x0b7f
-	textpointer SuperEnergyRetrievalDescription                    ; 0x0b80
+	textpointer EnergyRecyclerName
+	textpointer EnergyRecyclerDescription
 	textpointer EnergySearchName                                   ; 0x0b81
 	textpointer EnergySearchDescription                            ; 0x0b82
 	textpointer EnergyRemovalName                                  ; 0x0b83

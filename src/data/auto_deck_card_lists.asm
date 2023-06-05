@@ -325,7 +325,7 @@ RainDancerCardList:
 	card_item PROFESSOR_OAK,           2
 	card_item POKEMON_BREEDER,         1
 	card_item ENERGY_RETRIEVAL,        1
-	card_item SUPER_ENERGY_RETRIEVAL,  1
+	card_item ENERGY_RECYCLER,  1
 	card_item ENERGY_REMOVAL,          2
 	card_item ENERGY_SWITCH,           1
 	card_item SWITCH,                  2
@@ -630,7 +630,7 @@ DreamEaterHaunterCardList:
 	card_item PROFESSOR_OAK,           2
 	card_item BILL,                    2
 	card_item ENERGY_RETRIEVAL,        2
-	card_item SUPER_ENERGY_RETRIEVAL,  1
+	card_item ENERGY_RECYCLER,  1
 	card_item SWITCH,                  2
 	card_item COMPUTER_SEARCH,         1
 	card_item REVIVE,                  3
@@ -898,7 +898,7 @@ FirePokemonCardList:
 	card_item POKEMON_TRADER,           1
 	card_item POKEMON_BREEDER,          1
 	card_item ENERGY_RETRIEVAL,         1
-	card_item SUPER_ENERGY_RETRIEVAL,   1
+	card_item ENERGY_RECYCLER,   1
 	card_item SWITCH,                   1
 	card_item GUST_OF_WIND,             1
 	deck_list_end
@@ -1119,7 +1119,7 @@ LegendaryMoltresCardList:
 	card_item LASS,                    2
 	card_item POKEMON_TRADER,          1
 	card_item ENERGY_RETRIEVAL,        1
-	card_item SUPER_ENERGY_RETRIEVAL,  1
+	card_item ENERGY_RECYCLER,  1
 	card_item ENERGY_REMOVAL,          2
 	card_item SWITCH,                  2
 	card_item POTION,                  1
@@ -1181,7 +1181,7 @@ LegendaryDragoniteCardList:
 	card_item POKEMON_TRADER,           2
 	card_item POKEMON_BREEDER,          2
 	card_item ENERGY_RETRIEVAL,         1
-	card_item SUPER_ENERGY_RETRIEVAL,   1
+	card_item ENERGY_RECYCLER,   1
 	card_item SWITCH,                   2
 	card_item GAMBLER,                  1
 	deck_list_end

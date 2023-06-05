@@ -1465,11 +1465,10 @@ EnergySwitchEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergySwitch_TransferEffect
 	db  $00
 
-SuperEnergyRetrievalEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SuperEnergyRetrieval_HandEnergyCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SuperEnergyRetrieval_PlayerHandSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperEnergyRetrieval_DiscardAndAddToHandEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SuperEnergyRetrieval_PlayerDiscardPileSelection
+EnergyRecyclerEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyRecycler_CheckDiscardPile
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyRecycler_ReturnToDeckEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyRecycler_PlayerDiscardPileSelection
 	db  $00
 
 GustOfWindEffectCommands:

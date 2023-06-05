@@ -2334,7 +2334,7 @@ EnergyRetrievalCardGfx::
 	INCBIN "gfx/cards/energyretrieval.2bpp"
 	INCBIN "gfx/cards/energyretrieval.pal"
 
-SuperEnergyRetrievalCardGfx::
+EnergyRecyclerCardGfx::
 	INCBIN "gfx/cards/superenergyretrieval.2bpp"
 	INCBIN "gfx/cards/superenergyretrieval.pal"
 

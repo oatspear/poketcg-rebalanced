@@ -211,8 +211,8 @@ Script_SecondRonaldDuel:
 Script_BeatSecondRonaldDuel:
 	start_script
 	print_npc_text Text0651
-	give_card SUPER_ENERGY_RETRIEVAL
-	show_card_received_screen SUPER_ENERGY_RETRIEVAL
+	give_card ENERGY_RECYCLER
+	show_card_received_screen ENERGY_RECYCLER
 	print_npc_text Text0652
 	script_jump Script_LostToSecondRonaldDuel.ows_e959
 

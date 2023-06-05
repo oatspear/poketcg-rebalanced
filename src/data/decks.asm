@@ -905,7 +905,7 @@ LegendaryMoltresDeck:
 	card_item LASS,                    2
 	card_item POKEMON_TRADER,          1
 	card_item ENERGY_RETRIEVAL,        1
-	card_item SUPER_ENERGY_RETRIEVAL,  1
+	card_item ENERGY_RECYCLER,  1
 	card_item ENERGY_REMOVAL,          2
 	card_item SWITCH,                  2
 	card_item POTION,                  1
@@ -970,7 +970,7 @@ LegendaryDragoniteDeck:
 	card_item POKEMON_TRADER,           2
 	card_item POKEMON_BREEDER,          2
 	card_item ENERGY_RETRIEVAL,         1
-	card_item SUPER_ENERGY_RETRIEVAL,   1
+	card_item ENERGY_RECYCLER,   1
 	card_item SWITCH,                   2
 	card_item GAMBLER,                  1
 	deck_list_end
@@ -1031,7 +1031,7 @@ GoGoRainDanceDeck:
 	card_item PROFESSOR_OAK,           2
 	card_item POKEMON_BREEDER,         1
 	card_item ENERGY_RETRIEVAL,        1
-	card_item SUPER_ENERGY_RETRIEVAL,  1
+	card_item ENERGY_RECYCLER,  1
 	card_item ENERGY_REMOVAL,          2
 	card_item ENERGY_SWITCH,           2
 	card_item SWITCH,                  2
@@ -1193,7 +1193,7 @@ PowerfulRonaldDeck:
 	card_item KANGASKHAN,              2
 	card_item TAUROS,                  3
 	card_item ENERGY_RETRIEVAL,        2
-	card_item SUPER_ENERGY_RETRIEVAL,  1
+	card_item ENERGY_RECYCLER,  1
 	card_item ENERGY_SEARCH,           1
 	card_item ENERGY_REMOVAL,          2
 	card_item SWITCH,                  1
