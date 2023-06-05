@@ -1146,7 +1146,7 @@ TerrorStrikeEffectCommands:
 ; 	db  $00
 
 ConversionBeamEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ConversionBeam_ChangeResistanceEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ConversionBeam_ChangeWeaknessEffect
 	db  $00
 
 ChanseyScrunchEffectCommands:

@@ -432,17 +432,16 @@ HandleAIPkmnPowers:
 
 ; check heal
 	cp GLOOM
-	; jr nz, .check_shift
-	jr nz, .check_curse
+	jr nz, .check_shift
 	call HandleAIHeal
 	jr .next_1
-; .check_shift
-	; cp VENOMOTH
-	; jr nz, .check_curse
+.check_shift
+	cp PORYGON
+	jr nz, .check_curse
 	; .check_strange_behavior
 	; .check_peek
-	; call HandleAIShift
-	; jr .next_1
+	call HandleAIShift
+	jr .next_1
 ;.check_peek
 ;	cp MANKEY
 ;	jr nz, .check_strange_behavior

@@ -6752,26 +6752,27 @@ LickitungSupersonicEffect: ; 2edb2 (b:6db2)
 	call nc, SetNoEffectFromStatus
 	ret
 
-ConversionBeam_ChangeResistanceEffect:
-; Choose the Defending Pokemon's color unless it is colorless.
-	call SwapTurn
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-	call SwapTurn
-	ld a, [wLoadedCard1Type]
+ConversionBeam_ChangeWeaknessEffect:
+	call HandleNoDamageOrEffect
+	ret c ; is unaffected
+
+; Choose this Pokemon's color unless it is colorless.
+	call GetArenaCardColor
 	cp COLORLESS
 	ret z
 
-; apply changed resistance
-	ldh [hTemp_ffa0], a
-	ld a, DUELVARS_ARENA_CARD_CHANGED_RESISTANCE
-	call GetTurnDuelistVariable
-	ldh a, [hTemp_ffa0]
+; apply changed weakness
+	ld c, a
+	ld a, DUELVARS_ARENA_CARD_CHANGED_WEAKNESS
+	call GetNonTurnDuelistVariable
+	ld a, c
 	call TranslateColorToWR
 	ld [hl], a
-	ldtx hl, ChangedTheResistanceOfPokemonToColorText
-;	fallthrough
+	call SwapTurn
+	ldtx hl, ChangedTheWeaknessOfPokemonToColorText
+	call PrintArenaCardNameAndColorText
+	call SwapTurn
+	ret
 
 ; prints text that requires card name and color,
 ; with the card name of the Turn Duelist's Arena Pokemon

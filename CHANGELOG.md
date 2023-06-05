@@ -672,9 +672,10 @@
 - **Conversion 1**: removed.
 - **Conversion 2**: removed.
 - New Pokémon Power: **Shift**: change user's type to the type of another Pokémon in play.
-- New attack: **Conversion Beam** (CCC): 20 damage, change user's Resistance to the type of opponent (except Colorless).
+- New attack: **Conversion Beam** (CCC): 20 damage, change foe's Weakness to the current type of self (except Colorless).
 
 #### Snorlax
+- Reduced HP from 90 to 70.
 - **Body Slam**: reduced cost from (CCCC) to (CCC).
 
 #### Dratini
@@ -690,9 +691,9 @@
 
 #### Dragonite Lv45
 - **Step In**: removed.
-- New attack: **Dragon Claw** (FW): 50 damage.
 - **Slam**: removed.
-- New attack: **Energy Hurricane** (WLC): 60 damage, search deck for an Energy and attach to a Pokémon.
+- New attack: **Dragon Claw** (FC): 50 damage.
+- New attack: **Energy Hurricane** (WCC): 60 damage, search deck for an Energy and attach to a Pokémon.
 
 ### Trainer Cards
 

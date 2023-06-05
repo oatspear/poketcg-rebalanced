@@ -525,9 +525,9 @@ ConversionBeamName:
 	done
 
 ConversionBeamDescription:
-	text "Change this Pokémon's Resistance to"
-	line "the type of the Defending Pokémon,"
-	line "unless it is Colorless."
+	text "Change the Defending Pokémon's"
+	line "Weakness to the current type of this"
+	line "Pokémon, unless it is Colorless."
 	done
 
 VirtualName: ; 62f79 (18:6f79)

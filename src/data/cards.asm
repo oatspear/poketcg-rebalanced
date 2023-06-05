@@ -9887,7 +9887,7 @@ SnorlaxCard:
 	db STAR ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	db SNORLAX
-	db 90 ; hp
+	db 70 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -10164,7 +10164,7 @@ DragoniteLv45Card:
 	tx DragonairName ; pre-evo name
 
 	; attack 1
-	energy FIRE, 1, WATER, 1 ; energies
+	energy FIRE, 1, COLORLESS, 1 ; energies
 	tx DragonClawName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
@@ -10178,7 +10178,7 @@ DragoniteLv45Card:
 	db ATK_ANIM_SLASH ; animation
 
 	; attack 2
-	energy WATER, 1, LIGHTNING, 1, COLORLESS, 1 ; energies
+	energy WATER, 1, COLORLESS, 2 ; energies
 	tx EnergyHurricaneName ; name
 	tx EnergySpikeDescription ; description
 	dw NONE ; description (cont)
