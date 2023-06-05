@@ -34,7 +34,7 @@ Script_John:
 
 .ows_eec0
 	print_npc_text Text06a8
-	start_duel PRIZES_4, ANGER_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_4, EASY_TO_CATCH_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatJohn:

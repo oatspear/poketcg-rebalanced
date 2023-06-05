@@ -513,7 +513,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WaterfrontPokemonDeckName                          ; 0x01f6
 	textpointer LonelyFriendsDeckName                              ; 0x01f7
 	textpointer SoundoftheWavesDeckName                            ; 0x01f8
-	textpointer AngerDeckName                                      ; 0x01f9
+	textpointer EasyToCatchDeckName                                      ; 0x01f9
 	textpointer FlamethrowerDeckName                               ; 0x01fa
 	textpointer FireDrawDeckName                                  ; 0x01fb
 	textpointer ExcavationDeckName                                 ; 0x01fc

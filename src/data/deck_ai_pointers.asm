@@ -49,7 +49,7 @@ DeckAIPointerTable:
 	dw AIActionTable_GeneralDecks        ; FLYIN_POKEMON_DECK
 	dw AIActionTable_GeneralDecks        ; LOVELY_NIDORAN_DECK
 	dw AIActionTable_GeneralDecks        ; POISON_DECK
-	dw AIActionTable_GeneralDecks        ; ANGER_DECK
+	dw AIActionTable_GeneralDecks        ; EASY_TO_CATCH_DECK
 	dw AIActionTable_GeneralDecks        ; FLAMETHROWER_DECK
 	dw AIActionTable_GeneralDecks        ; FIRE_DRAW_DECK
 	dw AIActionTable_GeneralDecks        ; IMAKUNI_DECK

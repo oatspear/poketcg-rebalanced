@@ -793,7 +793,7 @@ JohnNPCHeader:
 	dw Script_John
 	tx JohnNPCName
 	db JOHN_PIC
-	db ANGER_DECK_ID
+	db EASY_TO_CATCH_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
 

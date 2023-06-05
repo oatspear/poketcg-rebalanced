@@ -4709,6 +4709,14 @@ AIDecide_Pokeball:
 	ld e, NIDORANF
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation
+	ret c
+	ld e, GASTLY_LV8
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation
+	ret c
+	ld e, GASTLY_LV17
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation
 	ret
 
 AIPlay_ComputerSearch:
@@ -4735,7 +4743,7 @@ AIDecide_ComputerSearch:
 	; jp z, AIDecide_ComputerSearch_WondersOfScience
 	; cp FIRE_CHARGE_DECK_ID
 	; jp z, AIDecide_ComputerSearch_FireCharge
-	; cp ANGER_DECK_ID
+	; cp EASY_TO_CATCH_DECK_ID
 	; jp z, AIDecide_ComputerSearch_Anger
 
 ; no carry if there are fewer than 7 cards left in the deck

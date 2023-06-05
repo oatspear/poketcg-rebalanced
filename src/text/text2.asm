@@ -1394,8 +1394,8 @@ SoundoftheWavesDeckName: ; 3b5f9 (e:75f9)
 	text "Sound of the Waves"
 	done
 
-AngerDeckName: ; 3b60d (e:760d)
-	text "Anger"
+EasyToCatchDeckName: ; 3b60d (e:760d)
+	text "Easy to Catch"
 	done
 
 FlamethrowerDeckName: ; 3b614 (e:7614)

@@ -61,7 +61,7 @@ ENDM
 	deck_const FLYIN_POKEMON_DECK          ; $30
 	deck_const LOVELY_NIDORAN_DECK         ; $31
 	deck_const POISON_DECK                 ; $32
-	deck_const ANGER_DECK                  ; $33
+	deck_const EASY_TO_CATCH_DECK                  ; $33
 	deck_const FLAMETHROWER_DECK           ; $34
 	deck_const FIRE_DRAW_DECK              ; $35
 	deck_const IMAKUNI_DECK                ; $36

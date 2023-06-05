@@ -215,7 +215,7 @@ OpponentTitlesAndDeckNames:
 	tx PoisonDeckName
 
 	tx FireClubMemberText
-	tx AngerDeckName
+	tx EasyToCatchDeckName
 
 	tx FireClubMemberText
 	tx FlamethrowerDeckName

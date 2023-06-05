@@ -51,7 +51,7 @@ DeckPointers:
 	dw FlyinPokemonDeck
 	dw LovelyNidoranDeck
 	dw PoisonDeck
-	dw AngerDeck
+	dw EasyToCatchDeck
 	dw FlamethrowerDeck
 	dw FireDrawDeck
 	dw ImakuniDeck
@@ -1705,95 +1705,75 @@ LovelyNidoranDeck:
 	deck_list_start
 	card_item DARKNESS_ENERGY, 24
 	card_item NIDORANF,         4
-	card_item NIDORINA,         2
-	card_item NIDOQUEEN,        2
-	card_item NIDORANM,         3
-	card_item NIDORINO,         2
-	card_item NIDOKING,         1
-	card_item GRIMER,           2
-	card_item MUK,              1
-	card_item KOFFING,          2
-	card_item WEEZING,          1
-	card_item MEOWTH_LV15,      2
-	card_item PERSIAN,          1
-	card_item FARFETCHD,        2
-	card_item DODUO,            2
+	card_item NIDOQUEEN,        4
+	card_item NIDORANM,         4
+	card_item NIDOKING,         4
+	card_item GASTLY_LV8,       2
+	card_item GASTLY_LV17,      2
+	card_item GENGAR,           3
 	card_item PROFESSOR_OAK,    1
-	card_item BILL,             2
-	card_item POKEMON_BREEDER,  2
-	card_item SWITCH,           1
+	card_item BILL,             4
+	card_item POKEMON_BREEDER,  4
+	card_item ENERGY_SWITCH,    2
 	card_item POKE_BALL,        2
-	card_item GAMBLER,          1
 	deck_list_end
 	tx LovelyNidoranDeckName
 
 PoisonDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,            8
-	card_item DARKNESS_ENERGY,        16
-	card_item WEEDLE,                  3
-	card_item KAKUNA,                  2
-	card_item BEEDRILL,                1
-	card_item EKANS,                   4
-	card_item ARBOK,                   3
-	card_item NIDORANM,                4
-	card_item NIDORINO,                3
-	card_item NIDOKING,                2
-	card_item KOFFING,                 3
-	card_item WEEZING,                 2
-	card_item PROFESSOR_OAK,           1
-	card_item IMPOSTER_PROFESSOR_OAK,  2
+	card_item GRASS_ENERGY,           24
+	card_item WEEDLE,                  4
+	card_item KAKUNA,                  3
+	card_item BEEDRILL,                3
+	card_item VENONAT,                 4
+	card_item VENOMOTH,                3
+	card_item MEOWTH_LV14,             3
+	card_item PERSIAN,                 2
+	card_item PROFESSOR_OAK,           2
+	card_item BILL,                    4
+	card_item POKEMON_TRADER,          2
 	card_item POKEMON_BREEDER,         1
 	card_item POTION,                  2
-	card_item FULL_HEAL,               2
-	card_item GAMBLER,                 1
+	card_item ENERGY_REMOVAL,          2
+	card_item DEFENDER,                1
 	deck_list_end
 	tx PoisonDeckName
 
-AngerDeck:
+EasyToCatchDeck:
 	deck_list_start
-	card_item FIRE_ENERGY,             10
-	card_item FIGHTING_ENERGY,          8
+	card_item FIGHTING_ENERGY,         17
 	card_item DOUBLE_COLORLESS_ENERGY,  4
-	card_item GROWLITHE,                3
-	card_item ARCANINE_LV34,            2
-	card_item CUBONE,                   3
-	card_item RATTATA,                  3
-	card_item RATICATE,                 2
-	card_item DODUO,                    3
-	card_item DODRIO,                   2
-	card_item TAUROS,                   3
+	card_item PIDGEY,                   4
+	card_item PIDGEOTTO,                4
+	card_item PIDGEOT_LV38,             2
+	card_item PIDGEOT_LV40,             2
+	card_item RATTATA,                  4
+	card_item RATICATE,                 4
+	card_item SPEAROW,                  4
+	card_item FEAROW,                   4
 	card_item PROFESSOR_OAK,            2
-	card_item BILL,                     3
-	card_item ENERGY_RETRIEVAL,         2
-	card_item COMPUTER_SEARCH,          2
-	card_item PLUSPOWER,                4
-	card_item DEFENDER,                 2
-	card_item GUST_OF_WIND,             2
+	card_item BILL,                     4
+	card_item ENERGY_SEARCH,            2
+	card_item COMPUTER_SEARCH,          1
+	card_item POKE_BALL,                2
 	deck_list_end
-	tx AngerDeckName
+	tx EasyToCatchDeckName
 
 FlamethrowerDeck:
 	deck_list_start
-	card_item FIRE_ENERGY,             22
-	card_item DOUBLE_COLORLESS_ENERGY,  4
-	card_item CHARMANDER,               2
-	card_item CHARMELEON,               2
-	card_item CHARIZARD,                1
-	card_item VULPIX,                   2
-	card_item NINETALES_LV32,           1
-	card_item GROWLITHE,                2
-	card_item ARCANINE_LV45,            1
-	card_item MAGMAR_LV24,              3
-	card_item FLAREON_LV28,             2
-	card_item EEVEE,                    3
-	card_item BILL,                     3
-	card_item POKEMON_TRADER,           1
-	card_item ENERGY_RETRIEVAL,         3
-	card_item SUPER_ENERGY_RETRIEVAL,   1
-	card_item SWITCH,                   2
-	card_item PLUSPOWER,                2
-	card_item GUST_OF_WIND,             3
+	card_item FIRE_ENERGY,             21
+	card_item CHARMANDER,               4
+	card_item CHARMELEON,               4
+	card_item CHARIZARD,                2
+	card_item GROWLITHE,                4
+	card_item ARCANINE_LV45,            4
+	card_item MAGMAR_LV24,              4
+	card_item FLAREON_LV28,             3
+	card_item EEVEE,                    4
+	card_item PROFESSOR_OAK,            1
+	card_item BILL,                     4
+	card_item POKEMON_TRADER,           3
+	card_item ENERGY_RETRIEVAL,         2
 	deck_list_end
 	tx FlamethrowerDeckName
 

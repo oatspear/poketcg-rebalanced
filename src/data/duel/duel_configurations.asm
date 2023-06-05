@@ -336,7 +336,7 @@ DeckIDDuelConfigurations:
 	tx ClubMemberText ; rank
 	tx ChallengeMachineGrassIconText ; element
 
-	db ANGER_DECK_ID ; deck ID
+	db EASY_TO_CATCH_DECK_ID ; deck ID
 	db JOHN_PIC ; NPC portrait
 	tx JohnNPCName ; name text ID
 	db PRIZES_4 ; number of prize cards
