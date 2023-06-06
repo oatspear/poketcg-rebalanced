@@ -10347,7 +10347,7 @@ LassCard:
 	dw NONE ; description (cont)
 
 ImakuniCard:
-	db TYPE_TRAINER ; type
+	db TYPE_TRAINER_SUPPORTER ; type
 	gfx ImakuniCardGfx ; gfx
 	tx ImakuniName ; name
 	db PROMOSTAR ; rarity
@@ -10369,7 +10369,7 @@ PokemonTraderCard:
 	dw NONE ; description (cont)
 
 PokemonBreederCard:
-	db TYPE_TRAINER ; type
+	db TYPE_TRAINER_SUPPORTER ; type
 	gfx PokemonBreederCardGfx ; gfx
 	tx PokemonBreederName ; name
 	db STAR ; rarity
