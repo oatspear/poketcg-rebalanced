@@ -2574,223 +2574,84 @@ FindDuplicateCards:
 	ret
 
 AIPlay_EnergyRecycler:
-	ld a, [wCurrentAIFlags]
-	or AI_FLAG_MODIFIED_HAND
-	ld [wCurrentAIFlags], a
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
-	ld a, [wAITrainerCardParameter]
-	ldh [hTemp_ffa0], a
 	ld a, [wce1a]
-	ldh [hTempPlayAreaLocation_ffa1], a
+	ldh [hTempList], a
 	ld a, [wce1b]
-	ldh [hTempRetreatCostCards], a
+	ldh [hTempList + 1], a
 	ld a, [wce1c]
-	ldh [$ffa3], a
-	cp $ff
-	jr z, .asm_20fbb
+	ldh [hTempList + 2], a
 	ld a, [wce1d]
-	ldh [$ffa4], a
-	cp $ff
-	jr z, .asm_20fbb
+	ldh [hTempList + 3], a
 	ld a, [wce1e]
-	ldh [$ffa5], a
-	cp $ff
-	jr z, .asm_20fbb
-	ld a, $ff
-	ldh [$ffa6], a
-.asm_20fbb
+	ldh [hTempList + 4], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
 
-AIDecide_EnergyRecycler:  ; FIXME TODO
-	or a
-	ret
+AIDecide_EnergyRecycler:
+; give up if there are still many energy cards in deck
+	ld a, CARD_LOCATION_DECK
+	call FindBasicEnergyCardsInLocation
+	cp 8
+	ret nc
 
-; return no carry if no cards in hand
-	farcall CreateEnergyCardListFromHand
-	jp nc, .no_carry
-
-; handle Rain Dance deck
-; return no carry if there's no Muk card in play and
-; if there's no Blastoise card in Play Area
-; if there's a Muk in play, continue as normal
-	; ld a, [wOpponentDeckID]
-	; cp GO_GO_RAIN_DANCE_DECK_ID
-	; jr nz, .start
-	ld a, MUK
-	call CountPokemonIDInBothPlayAreas
-	jr c, .start
-	ld a, WARTORTLE
-	call CountPokemonIDInPlayArea
-	jp nc, .no_carry
-
-.start
-; find duplicate cards in hand
-	call CreateHandCardList
-	ld hl, wDuelTempList
-	call FindDuplicateCards
-	jp c, .no_carry
-
-; remove the duplicate card in hand
-; and run the hand check again
-	ld [wce06], a
-	ld hl, wDuelTempList
-	call FindAndRemoveCardFromList
-	call FindDuplicateCards
-	jp c, .no_carry
-
-	ld [wAITempVars], a
+; give up if there are too few energy cards in discard pile
 	ld a, CARD_LOCATION_DISCARD_PILE
 	call FindBasicEnergyCardsInLocation
-	jp c, .no_carry
+	cp 4
+	jr c, .no_carry
+	ld c, a  ; loop counter - how many energies to select
 
 ; some basic energy cards were found in Discard Pile
+; output list (deck indices)
 	ld a, $ff
+	ld [wce1a], a
 	ld [wce1b], a
 	ld [wce1c], a
 	ld [wce1d], a
-	ld [wce1e], a
-	ld [wce1f], a
+	ld [wce1e], a  ; fifth element is always a terminator
 
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld d, a
-	ld e, PLAY_AREA_ARENA
-
-; first check if there are useful energy cards in the list
-; and choose them for retrieval first
-.loop_play_area
-	ld a, DUELVARS_ARENA_CARD
-	add e
+; try to choose a variety of energy types
+	ld de, wce1a
+.loop_1
+	ld b, FIRE_F
+.loop_2
+	ld a, b
 	push de
-
-; load this card's ID in wTempCardID
-; and this card's Type in wTempCardType
-	call GetTurnDuelistVariable
-	call GetCardIDFromDeckIndex
-	ld a, e
-	ld [wTempCardID], a
-	call LoadCardDataToBuffer1_FromCardID
+	farcall CheckEnergyFlagsNeededInList  ; carry if successful
+	ld a, d  ; deck index
 	pop de
-	ld a, [wLoadedCard1Type]
-	or TYPE_ENERGY
-	ld [wTempCardType], a
+	jr nc, .next
 
-; loop the energy cards in the Discard Pile
-; and check if they are useful for this Pokemon
+; found energy of current type
+	ld [de], a
+	inc de
+	dec c
+	jr z, .set_carry  ; got all energies
+
 	ld hl, wDuelTempList
-.loop_energy_cards_1
-	ld a, [hli]
-	cp $ff
-	jr z, .next_play_area
+	push bc
+	call FindAndRemoveCardFromList
+	pop bc
 
-	ld b, a
-	push hl
-	farcall CheckIfEnergyIsUseful
-	pop hl
-	jr nc, .loop_energy_cards_1
-
-; first energy
-	ld a, [wce1b]
-	cp $ff
-	jr nz, .second_energy_1
+.next
+	sla b
 	ld a, b
-	ld [wce1b], a
-	call RemoveCardFromList
-	jr .next_play_area
-
-.second_energy_1
-	ld a, [wce1c]
-	cp $ff
-	jr nz, .third_energy_1
-	ld a, b
-	ld [wce1c], a
-	call RemoveCardFromList
-	jr .next_play_area
-
-.third_energy_1
-	ld a, [wce1d]
-	cp $ff
-	jr nz, .fourth_energy_1
-	ld a, b
-	ld [wce1d], a
-	call RemoveCardFromList
-	jr .next_play_area
-
-.fourth_energy_1
-	ld a, b
-	ld [wce1e], a
-	jr .set_carry
-
-.next_play_area
-	inc e
-	dec d
-	jr nz, .loop_play_area
-
-; next, if there are still energy cards left to choose,
-; loop through the energy cards again and select
-; them in order.
-	ld hl, wDuelTempList
-.loop_energy_cards_2
-	ld a, [hli]
-	cp $ff
-	jr z, .check_chosen
-	ld b, a
-	ld a, [wce1b]
-	cp $ff
-	jr nz, .second_energy_2
-	ld a, b
-
-; first energy
-	ld [wce1b], a
-	call RemoveCardFromList
-	jr .loop_energy_cards_2
-
-.second_energy_2
-	ld a, [wce1c]
-	cp $ff
-	jr nz, .third_energy_2
-	ld a, b
-	ld [wce1c], a
-	call RemoveCardFromList
-	jr .loop_energy_cards_2
-
-.third_energy_2
-	ld a, [wce1d]
-	cp $ff
-	jr nz, .fourth_energy
-	ld a, b
-	ld [wce1d], a
-	call RemoveCardFromList
-	jr .loop_energy_cards_2
-
-.fourth_energy
-	ld a, b
-	ld [wce1e], a
-	jr .set_carry
-
-; will set carry if at least one has been chosen
-.check_chosen
-	ld a, [wce1b]
-	cp $ff
-	jr nz, .set_carry
+	cp COLORLESS_F
+	jr nz, .loop_2
+	jr .loop_1  ; loop back to first basic type
 
 .no_carry
 	or a
 	ret
 .set_carry
-	ld a, [wAITempVars]
-	ld [wce1a], a
-	ld a, [wce06]
+	ld a, [wce1a]
 	scf
 	ret
 
-; finds the card with deck index a in list hl,
-; and removes it from the list.
-; the card HAS to exist in the list, since this
-; routine does not check for the terminating byte $ff!
+; finds the card with deck index a in list hl, and removes it from the list
 ; input:
 ;   a  = card deck index to look
 ;   hl = pointer to list of cards
@@ -2799,6 +2660,8 @@ FindAndRemoveCardFromList:
 	ld b, a
 .loop_duplicate
 	ld a, [hli]
+	cp $ff
+	ret z
 	cp b
 	jr nz, .loop_duplicate
 	call RemoveCardFromList

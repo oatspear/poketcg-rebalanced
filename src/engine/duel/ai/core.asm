@@ -1592,6 +1592,7 @@ SortTempHandByIDList:
 ; looks for energy card(s) in list at wDuelTempList
 ; depending on energy flags set in a
 ; return carry if successful in finding card
+; return deck index in d
 ; input:
 ;	a = energy flags needed
 CheckEnergyFlagsNeededInList:
@@ -1601,6 +1602,7 @@ CheckEnergyFlagsNeededInList:
 	ld a, [hli]
 	cp $ff
 	jr z, .no_carry
+	ld d, a  ; store deck index
 	push de
 	call GetCardIDFromDeckIndex
 	ld a, e
@@ -1648,9 +1650,9 @@ CheckEnergyFlagsNeededInList:
 
 ; if energy card matches required energy, return carry
 .check_energy
-	ld d, e
+	; ld d, e
 	and e
-	ld e, d
+	; ld e, d
 	jr z, .next_card
 	scf
 	ret

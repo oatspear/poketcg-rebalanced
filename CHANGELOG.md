@@ -729,7 +729,7 @@
 
 #### New Trainer Cards
 - New card: **Energy Switch**: moves a Basic energy from 1 Pokémon to another.
-- New card: **Energy Recycler**: shuffles 4 Basic energy from discard pile into deck.
+- New card: **Energy Recycler**: shuffles up to 4 Basic energy from discard pile into deck.
 
 ### Miscellaneous
 
