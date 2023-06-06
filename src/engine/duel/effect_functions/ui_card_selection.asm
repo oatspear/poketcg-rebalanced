@@ -69,7 +69,7 @@ HandlePlayerSelection2HandCardsExcludeSelf:
 	pop hl
 	jr c, .set_carry ; was B pressed?
 	push hl
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ldh a, [hTempCardIndex_ff98]
 	ld [hl], a
 	call RemoveCardFromDuelTempList

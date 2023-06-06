@@ -1317,7 +1317,7 @@ SuperEnergyRemoval_PlayerSelection: ; 2fce4 (b:7ce4)
 
 .energy_selected
 ; store energy cards to discard from opponent
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ldh a, [hTempCardIndex_ff98]
 	ld [hl], a
 	call RemoveCardFromDuelTempList
@@ -1333,7 +1333,7 @@ SuperEnergyRemoval_PlayerSelection: ; 2fce4 (b:7ce4)
 	jr .loop_discard_energy_selection
 
 .done
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ld [hl], $ff
 	call SwapTurn
 	or a
@@ -1416,7 +1416,7 @@ SuperEnergyRetrieval_PlayerDiscardPileSelection: ; 2fdba (b:7dba)
 .store_selected_card
 	ldh a, [hTempCardIndex_ff98]
 	call GetTurnDuelistVariable
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ldh a, [hTempCardIndex_ff98]
 	ld [hl], a ; store selected energy card
 	call RemoveCardFromDuelTempList
@@ -1428,7 +1428,7 @@ SuperEnergyRetrieval_PlayerDiscardPileSelection: ; 2fdba (b:7dba)
 
 .done
 ; insert terminating byte
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ld [hl], $ff
 	or a
 	ret

@@ -7721,7 +7721,7 @@ EnergyRetrieval_PlayerDiscardPileSelection: ; 2f2b9 (b:72b9)
 	jr .done
 
 .selected
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ldh a, [hTempCardIndex_ff98]
 	ld [hl], a
 	call RemoveCardFromDuelTempList
@@ -7731,7 +7731,7 @@ EnergyRetrieval_PlayerDiscardPileSelection: ; 2f2b9 (b:72b9)
 	jr c, .select_card
 
 .done
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ld [hl], $ff ; terminating byte
 	or a
 	ret
@@ -9176,7 +9176,7 @@ DevolutionSpray_PlayerSelection: ; 2fc24 (b:7c24)
 ; overwrite the card data to new devolved stats
 	ld a, d
 	call UpdateDevolvedCardHPAndStage
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ld [hl], e
 	ld a, d
 	call LoadCardDataToBuffer2_FromDeckIndex
@@ -9185,7 +9185,7 @@ DevolutionSpray_PlayerSelection: ; 2fc24 (b:7c24)
 	jr nz, .repeat_devolution ; can do one more devolution
 
 .done_selection
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ld [hl], $ff ; terminating byte
 
 ; store this Play Area location in first item of temp list
@@ -9259,6 +9259,8 @@ DevolutionSpray_DevolutionEffect: ; 2fc99 (b:7c99)
 
 
 EnergyRecycler_PlayerDiscardPileSelection:
+	xor a
+	ldh [hCurSelectionItem], a
 	ldtx hl, ChooseUpTo4FromDiscardPileText
 	call DrawWideTextBox_WaitForInput
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
@@ -9279,7 +9281,7 @@ EnergyRecycler_PlayerDiscardPileSelection:
 .store_selected_card
 	ldh a, [hTempCardIndex_ff98]
 	call GetTurnDuelistVariable
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ldh a, [hTempCardIndex_ff98]
 	ld [hl], a ; store selected energy card
 	call RemoveCardFromDuelTempList
@@ -9291,7 +9293,7 @@ EnergyRecycler_PlayerDiscardPileSelection:
 
 .done
 ; insert terminating byte
-	call GetNextPositionInTempList_TrainerEffects
+	call GetNextPositionInTempList
 	ld [hl], $ff
 	or a
 	ret
@@ -9320,23 +9322,6 @@ EnergyRecycler_ReturnToDeckEffect:
 	ret c
 ; if not, show card list selected by Opponent
 	bank1call DisplayCardListDetails
-	ret
-
-
-; outputs in hl the next position
-; in hTempList to place a new card,
-; and increments hCurSelectionItem.
-; identical to GetNextPositionInTempList.
-GetNextPositionInTempList_TrainerEffects: ; 2fe25 (b:7e25)
-	push de
-	ld hl, hCurSelectionItem
-	ld a, [hl]
-	inc [hl]
-	ld e, a
-	ld d, $00
-	ld hl, hTempList
-	add hl, de
-	pop de
 	ret
 
 
