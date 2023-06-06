@@ -795,7 +795,7 @@ FirestarterName:
 FirestarterDescription:
 	text "Once per turn, you may attach a"
 	line "<FIRE> Energy card from your Discard"
-	line "Pile to one of your Pokémon."
+	line "Pile to one of your Benched Pokémon."
 	done
 
 FlameName: ; 59f42 (16:5f42)
