@@ -252,10 +252,6 @@ EnergyTransEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyTrans_PrintProcedure
 	db  $00
 
-GrimerMinimizeEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, GrimerMinimizeEffect
-	db  $00
-
 MukToxicGasEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ToxicGasEffect
 	db  $00
@@ -380,8 +376,8 @@ VaporeonWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_AI, VaporeonWaterGunEffect
 	db  $00
 
-WithdrawEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WithdrawEffect
+ReduceDamageTakenBy20EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceDamageTakenBy20Effect
 	db  $00
 
 HorseaSmokescreenEffectCommands:
@@ -446,7 +442,6 @@ GrimerNastyGooEffectCommands:
 GyaradosBubblebeamEffectCommands:
 GolduckPsyshockEffectCommands:
 DewgongIceBeamEffectCommands:
-SquirtleBubbleEffectCommands:
 ArticunoFreezeDryEffectCommands:
 Paralysis50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
@@ -921,24 +916,14 @@ FlyingPikachuFlyEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Fly_AIEffect
 	db  $00
 
-PikachuThunderJoltEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ThunderJolt_Recoil50PercentEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderJolt_RecoilEffect
-	db  $00
-
 SparkEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Spark_BenchDamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Spark_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Spark_AISelectEffect
 	db  $00
 
-BulbasaurGrowlEffectCommands:
-PikachuLv16GrowlEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PikachuLv16GrowlEffect
-	db  $00
-
-PikachuAltLv16GrowlEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PikachuAltLv16GrowlEffect
+GrowlEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, GrowlEffect
 	db  $00
 
 ChainLightningEffectCommands:
@@ -1089,10 +1074,6 @@ ClefableMetronomeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClefableMetronome_CheckAttacks
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ClefableMetronome_UseAttackEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, ClefableMetronome_AISelectEffect
-	db  $00
-
-ClefableMinimizeEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ClefableMinimizeEffect
 	db  $00
 
 PidgeotHurricaneEffectCommands:

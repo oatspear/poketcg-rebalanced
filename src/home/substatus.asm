@@ -39,9 +39,9 @@ HandleDamageReduction:
 	ret z
 	cp SUBSTATUS2_REDUCE_BY_20
 	jr z, .reduce_damage_by_20
-	cp SUBSTATUS2_POUNCE
-	jr z, .reduce_damage_by_10
 	cp SUBSTATUS2_GROWL
+	jr z, .reduce_damage_by_20
+	cp SUBSTATUS2_POUNCE
 	jr z, .reduce_damage_by_10
 	ret
 .reduce_damage_by_20
@@ -288,9 +288,6 @@ HandleCantAttackSubstatus:
 	jr z, .return_with_cant_attack
 	; ldtx hl, UnableToAttackDueToEffectText
 	cp SUBSTATUS2_LEER
-	jr z, .return_with_cant_attack
-	; ldtx hl, UnableToAttackDueToEffectText
-	cp SUBSTATUS2_BONE_ATTACK
 	jr z, .return_with_cant_attack
 	or a
 	ret

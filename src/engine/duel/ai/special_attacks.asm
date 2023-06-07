@@ -33,7 +33,11 @@ HandleSpecialAIAttacks:
 	jp z, .BigThunder
 	cp KANGASKHAN
 	jp z, .Fetch
+	cp PIKACHU_LV14
+	jp z, .Fetch
 	cp MEOWTH_LV14
+	jp z, .Fetch
+	cp PIDGEY
 	jp z, .Fetch
 	cp DUGTRIO
 	jp z, .Earthquake
@@ -221,12 +225,12 @@ HandleSpecialAIAttacks:
 	ld a, $83
 	ret
 
-; dismiss attack if cards in deck <= 20.
+; dismiss attack if cards in deck <= 15.
 ; otherwise return a score of $80 + 0.
 .Fetch:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
-	cp 41
+	cp 46
 	jp nc, .zero_score
 	ld a, $80
 	ret

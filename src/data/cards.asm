@@ -247,11 +247,11 @@ BulbasaurCard:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx GrowlName ; name
-	tx GrowlDescription ; description
+	tx ReduceDamageBy20Description ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw BulbasaurGrowlEffectCommands ; effect commands
+	dw GrowlEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -1928,11 +1928,11 @@ GrimerCard:
 	; attack 2
 	energy COLORLESS, 1 ; energies
 	tx MinimizeName ; name
-	tx GrimersMinimizeDescription ; description
+	tx ReduceDamageTakenBy20Description ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw GrimerMinimizeEffectCommands ; effect commands
+	dw ReduceDamageTakenBy20EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -3289,32 +3289,32 @@ SquirtleCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx WithdrawName ; name
+	tx ReduceDamageTakenBy20Description ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw ReduceDamageTakenBy20EffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PROTECT ; animation
+
+	; attack 2
 	energy WATER, 1 ; energies
 	tx BubbleName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SquirtleBubbleEffectCommands ; effect commands
+	dw Paralysis50PercentEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_BUBBLES ; animation
-
-	; attack 2
-	energy COLORLESS, 1 ; energies
-	tx WithdrawName ; name
-	tx WithdrawDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw WithdrawEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -3915,18 +3915,18 @@ ShellderCard:
 	db ATK_ANIM_SUPERSONIC ; animation
 
 	; attack 2
-	energy WATER, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx WithdrawName ; name
-	tx WithdrawDescription ; description
+	tx ReduceDamageTakenBy20Description ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw WithdrawEffectCommands ; effect commands
+	dw ReduceDamageTakenBy20EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_PROTECT ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -4924,7 +4924,7 @@ PikachuLv12Card:
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db PIKACHU_LV12
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -4944,12 +4944,12 @@ PikachuLv12Card:
 
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx ThunderJoltName ; name
-	tx ThunderJoltDescription ; description
+	tx VoltTackleName ; name
+	tx Recoil10Description ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PikachuThunderJoltEffectCommands ; effect commands
+	dw Recoil10EffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -4975,12 +4975,26 @@ PikachuLv14Card:
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db PIKACHU_LV14
-	db 50 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 2 ; energies
+	energy COLORLESS, 1 ; energies
+	tx CollectName ; name
+	tx Draw2CardsDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Draw2CardsEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx SparkName ; name
 	tx Damage1BenchedPokemon10Description ; description
 	dw NONE ; description (cont)
@@ -4992,20 +5006,6 @@ PikachuLv14Card:
 	db NONE ; flags 3
 	db 10
 	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5033,11 +5033,11 @@ PikachuLv16Card:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx GrowlName ; name
-	tx GrowlDescription ; description
+	tx ReduceDamageBy20Description ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PikachuLv16GrowlEffectCommands ; effect commands
+	dw GrowlEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -5084,11 +5084,11 @@ PikachuAltLv16Card:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx GrowlName ; name
-	tx GrowlDescription ; description
+	tx ReduceDamageBy20Description ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PikachuAltLv16GrowlEffectCommands ; effect commands
+	dw GrowlEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -8420,11 +8420,11 @@ PidgeyCard:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx CollectName ; name
-	tx Draw2CardsDescription ; description
+	tx Draw1CardDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw Draw2CardsEffectCommands ; effect commands
+	dw Draw1CardEffectCommands ; effect commands
 	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -9792,7 +9792,7 @@ EeveeCard:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx SnivelName ; name
-	tx SnivelDescription ; description
+	tx ReduceDamageBy20Description ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category

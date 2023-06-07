@@ -1462,3 +1462,44 @@ SuperEnergyRetrieval_DiscardAndAddToHandEffect: ; 2fdfa (b:7dfa)
 ; if not, show card list selected by Opponent
 	bank1call DisplayCardListDetails
 	ret
+
+
+;
+WithdrawEffect: ; 2d120 (b:5120)
+	ldtx de, IfHeadsNoDamageNextTurnText
+	call TossCoin_BankB
+	jp nc, SetWasUnsuccessful
+	ld a, ATK_ANIM_PROTECT
+	ld [wLoadedAttackAnimation], a
+	ld a, SUBSTATUS1_NO_DAMAGE_10
+	call ApplySubstatus1ToAttackingCard
+	ret
+
+
+;
+
+;
+ThunderJolt_Recoil50PercentEffect: ; 2e51a (b:651a)
+	ld hl, 10
+	call LoadTxRam3
+	ldtx de, IfTailsDamageToYourselfTooText
+	call TossCoin_BankB
+	ldh [hTemp_ffa0], a
+	ret
+
+ThunderJolt_RecoilEffect: ; 2e529 (b:6529)
+	ld hl, 10
+	call LoadTxRam3
+	jp Thrash_RecoilEffect
+
+
+
+;
+
+BoneAttackEffect: ; 2e30f (b:630f)
+	ldtx de, IfHeadsOpponentCannotAttackText
+	call TossCoin_BankB
+	ret nc
+	ld a, SUBSTATUS2_LEER
+	call ApplySubstatus2ToDefendingCard
+	ret

@@ -1,10 +1,5 @@
-ThunderJoltName: ; 5cea3 (17:4ea3)
-	text "Thunder Jolt"
-	done
-
-ThunderJoltDescription: ; 5ceb1 (17:4eb1)
-	text "Flip a coin. If tails, Pikachu does"
-	line "10 damage to itself."
+VoltTackleName:
+	text "Volt Tackle"
 	done
 
 MouseName: ; 5ceeb (17:4eeb)
@@ -34,18 +29,8 @@ PikachuLv14Description: ; 5cfeb (17:4feb)
 	line "and cause lightning storms."
 	done
 
-GrowlName: ; 5d04a (17:504a)
+GrowlName:
 	text "Growl"
-	done
-
-GrowlDescription: ; 5d051 (17:5051)
-	text "If the Defending Pokémon attacks"
-	line "this Pokémon during the next turn,"
-	line "any damage done by the attack"
-	line "is reduced by 10 (after applying"
-	line "Weakness and Resistance). "
-	line "(Benching or evolving either Pokémon"
-	line "ends this effect.)"
 	done
 
 ThundershockName: ; 5d12f (17:512f)
@@ -722,13 +707,13 @@ SnivelName: ; 5f19b (17:719b)
 	text "Snivel"
 	done
 
-SnivelDescription: ; 5f1a3 (17:71a3)
+ReduceDamageBy20Description:
 	text "Reduce any attack damage done by the"
 	line "Defending Pokémon to this Pokémon"
 	line "during your opponent's next turn by"
 	line "20 (after applying Weakness and"
-	line "Resistance). (Benching or evolving"
-	line "either Pokémon ends this effect.)"
+	line "Resistance). (Benching either"
+	line "Pokémon ends this effect.)"
 	done
 
 RageDescription: ; 5f27f (17:727f)

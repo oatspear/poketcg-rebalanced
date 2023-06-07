@@ -5,7 +5,7 @@
 ### Pokémon Cards
 
 #### Bulbasaur
-- New attack: **Growl** (C): reduces damage taken by 10.
+- New attack: **Growl** (C): reduces damage taken by 20.
 - **Leech Seed**: reduced cost from (GG) to (GC).
 
 #### Ivysaur
@@ -240,7 +240,7 @@
 - **Dive Bomb**: reduced cost from (FFF) to (FFC).
 
 #### Squirtle
-- **Withdraw**: reduced cost from (WC) to (C).
+- **Withdraw**: reduced cost from (WC) to (C); no coin flip; reduces incoming damage by 20.
 
 #### Wartortle
 - **Withdraw**: removed.
@@ -280,7 +280,8 @@
 #### Shellder
 - Increased HP from 30 to 40.
 - **Supersonic**: reduced cost from (W) to (C).
-- **Hide in Shell**: renamed to **Withdraw**.
+- **Hide in Shell**: removed.
+- New attack: **Withdraw** (C): reduces incoming damage by 20.
 
 #### Cloyster
 - Increased HP from 50 to 60.
@@ -359,8 +360,18 @@
 #### Articuno Lv37
 - **Ice Breath**: target Pokémon is no longer chosen at random.
 
+#### Pikachu Lv12
+- Increased HP from 40 to 50.
+- **Thunder Jolt**: renamed to **Volt Tackle**; always deals 10 recoil.
+
+#### Pikachu Lv14
+- Decreased HP from 50 to 40.
+- **Spark**: reduced cost from (LL) to (LC).
+- New attack: **Collect** (C): draw 2 cards.
+
 #### Pikachu Lv16
 - Reduced HP from 60 to 50.
+- **Growl**: damage reduction increased from 10 to 20.
 - **Thundershock**: reduced cost from (LL) to (LC).
 
 #### Surfing Pikachu
@@ -574,7 +585,7 @@
 
 #### Pidgey
 - **Whirlwind**: reduced cost from (CC) to (C).
-- New attack: **Collect** (C): draw 2 cards.
+- New attack: **Collect** (C): draw 1 card.
 
 #### Pidgeotto
 - **Mirror Move**: removed.

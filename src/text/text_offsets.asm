@@ -2244,7 +2244,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GrimerName                                         ; 0x08a3
 	textpointer NastyGooName                                       ; 0x08a4
 	textpointer MinimizeName                                       ; 0x08a5
-	textpointer GrimersMinimizeDescription                         ; 0x08a6
+	textpointer ReduceDamageTakenBy20Description
 	textpointer SludgeName                                         ; 0x08a7
 	textpointer GrimerDescription                                  ; 0x08a8
 	textpointer MukName                                            ; 0x08a9
@@ -2363,7 +2363,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SquirtleName                                       ; 0x0924
 	textpointer BubbleName                                         ; 0x0925
 	textpointer WithdrawName                                       ; 0x0926
-	textpointer WithdrawDescription                                ; 0x0927
 	textpointer TinyTurtleName                                     ; 0x0928
 	textpointer SquirtleDescription                                ; 0x0929
 	textpointer WartortleName                                      ; 0x092a
@@ -2505,15 +2504,13 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer OnlyWorksOnEvolvedPokemonText
 	textpointer PikachuName                                        ; 0x09b5
 	textpointer GnawName                                           ; 0x09b6
-	textpointer ThunderJoltName                                    ; 0x09b7
-	textpointer ThunderJoltDescription                             ; 0x09b8
+	textpointer VoltTackleName
 	textpointer MouseName                                          ; 0x09b9
 	textpointer PikachuLv12Description                            ; 0x09ba
 	textpointer SparkName                                          ; 0x09bb
 	textpointer Damage1BenchedPokemon10Description                 ; 0x09bc
 	textpointer PikachuLv14Description                            ; 0x09bd
 	textpointer GrowlName                                          ; 0x09be
-	textpointer GrowlDescription                                   ; 0x09bf
 	textpointer ThundershockName                                   ; 0x09c0
 	textpointer PikachuLv16Description                            ; 0x09c1
 	textpointer FlyingPikachuName                                  ; 0x09c2
@@ -2645,7 +2642,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer OnixDescription                                    ; 0x0a44
 	textpointer CuboneName                                         ; 0x0a45
 	textpointer SnivelName                                         ; 0x0a46
-	textpointer SnivelDescription                                  ; 0x0a47
+	textpointer ReduceDamageBy20Description
 	textpointer RageDescription                                    ; 0x0a48
 	textpointer LonelyName                                         ; 0x0a49
 	textpointer CuboneDescription                                  ; 0x0a4a
@@ -2828,7 +2825,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ClefairyDescription                                ; 0x0afc
 	textpointer ClefableName                                       ; 0x0afd
 	textpointer ClefablesMetronomeDescription                      ; 0x0afe
-	textpointer ClefablesMinimizeDescription                       ; 0x0aff
 	textpointer ClefableDescription                                ; 0x0b00
 	textpointer JigglypuffName                                     ; 0x0b01
 	textpointer HealingMelodyName

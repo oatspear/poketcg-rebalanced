@@ -21,6 +21,8 @@ SetCarryNullEffect:
 
 INCLUDE "engine/duel/effect_functions/status.asm"
 
+INCLUDE "engine/duel/effect_functions/substatus.asm"
+
 
 ; ------------------------------------------------------------------------------
 ; Coin Flip
@@ -386,41 +388,6 @@ Func_2c12e: ; 2c12e (b:412e)
 	ld h, a
 	bank1call PlayAttackAnimation
 	bank1call WaitAttackAnimation
-	ret
-
-; apply a status condition of type 1 identified by register a to the target
-ApplySubstatus1ToAttackingCard: ; 2c140 (b:4140)
-	push af
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
-	call GetTurnDuelistVariable
-	pop af
-	ld [hli], a
-	ret
-
-; apply a status condition of type 2 identified by register a to the target,
-; unless prevented by wNoDamageOrEffect
-ApplySubstatus2ToDefendingCard: ; 2c149 (b:4149)
-	push af
-	call CheckNoDamageOrEffect
-	jr c, .no_damage_orEffect
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
-	call GetNonTurnDuelistVariable
-	pop af
-	ld [hl], a
-; OATS using $f6 (DUELVARS_DUELIST_TYPE) here makes the AI take control
-; of both players. Kinda fun to watch.
-	ld l, DUELVARS_ARENA_CARD_LAST_TURN_SUBSTATUS2
-	ld [hl], a
-	ret
-
-.no_damage_orEffect
-	pop af
-	push hl
-	bank1call DrawDuelMainScene
-	pop hl
-	ld a, l
-	or h
-	call nz, DrawWideTextBox_PrintText
 	ret
 
 ; overwrites in wDamage, wAIMinDamage and wAIMaxDamage
@@ -1458,10 +1425,6 @@ PoisonLure_SwitchEffect:
 	call Lure_SwitchDefendingPokemon
 	jp PoisonEffect
 
-UnableToRetreatEffect:
-	ld a, SUBSTATUS2_UNABLE_RETREAT
-	call ApplySubstatus2ToDefendingCard
-	ret
 
 KakunaPoisonPowder_AIEffect: ; 2c7b4 (b:47b4)
 	ld a, 5
@@ -2438,15 +2401,6 @@ VaporeonWaterGunEffect: ; 2d0d3 (b:50d3)
 	lb bc, 2, 0
 	jp ApplyExtraWaterEnergyDamageBonus
 
-WithdrawEffect: ; 2d120 (b:5120)
-	ldtx de, IfHeadsNoDamageNextTurnText
-	call TossCoin_BankB
-	jp nc, SetWasUnsuccessful
-	ld a, ATK_ANIM_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_NO_DAMAGE_10
-	call ApplySubstatus1ToAttackingCard
-	ret
 
 HorseaSmokescreenEffect: ; 2d134 (b:5134)
 	ld a, SUBSTATUS2_SMOKESCREEN
@@ -5201,13 +5155,6 @@ Peek_SelectEffect: ; 2e2b4 (b:62b4)
 	call DrawWideTextBox_WaitForInput
 	ret
 
-BoneAttackEffect: ; 2e30f (b:630f)
-	ldtx de, IfHeadsOpponentCannotAttackText
-	call TossCoin_BankB
-	ret nc
-	ld a, SUBSTATUS2_BONE_ATTACK
-	call ApplySubstatus2ToDefendingCard
-	ret
 
 Vengeance_AIEffect:
 	call Vengeance_DamageBoostEffect
@@ -5483,18 +5430,6 @@ Fly_Success50PercentEffect: ; 2e4fc (b:64fc)
 	call ApplySubstatus1ToAttackingCard
 	ret
 
-ThunderJolt_Recoil50PercentEffect: ; 2e51a (b:651a)
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, IfTailsDamageToYourselfTooText
-	call TossCoin_BankB
-	ldh [hTemp_ffa0], a
-	ret
-
-ThunderJolt_RecoilEffect: ; 2e529 (b:6529)
-	ld hl, 10
-	call LoadTxRam3
-	; fallthrough
 
 Thrash_RecoilEffect: ; 2c982 (b:4982)
 Thunderpunch_RecoilEffect: ; 2e3b0 (b:63b0)
@@ -5559,12 +5494,7 @@ Spark_BenchDamageEffect: ; 2e574 (b:6574)
 	call SwapTurn
 	ret
 
-PikachuLv16GrowlEffect: ; 2e589 (b:6589)
-	ld a, SUBSTATUS2_GROWL
-	call ApplySubstatus2ToDefendingCard
-	ret
-
-PikachuAltLv16GrowlEffect: ; 2e58f (b:658f)
+GrowlEffect:
 	ld a, SUBSTATUS2_GROWL
 	call ApplySubstatus2ToDefendingCard
 	ret
@@ -6560,8 +6490,7 @@ ClefableMetronome_UseAttackEffect: ; 2ec82 (b:6c82)
 	call HandlePlayerMetronomeEffect
 	ret
 
-GrimerMinimizeEffect:
-ClefableMinimizeEffect:
+ReduceDamageTakenBy20Effect:
 	ld a, SUBSTATUS1_REDUCE_BY_20
 	call ApplySubstatus1ToAttackingCard
 	ret
