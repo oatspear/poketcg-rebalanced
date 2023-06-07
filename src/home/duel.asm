@@ -1264,6 +1264,10 @@ SwapPlayAreaPokemon:
 ; OATS also swap status conditions
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call .swap_duelvar
+; OATS set SUBSTATUS2 on the new Active Pokémon
+	ld l, DUELVARS_ARENA_CARD_SUBSTATUS2
+	ld [hl], SUBSTATUS2_BECAME_ACTIVE
+; ---------------------------------------------
 	set CARD_LOCATION_PLAY_AREA_F, d
 	set CARD_LOCATION_PLAY_AREA_F, e
 	ld l, DUELVARS_CARD_LOCATIONS

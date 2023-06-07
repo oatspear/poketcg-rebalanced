@@ -2838,6 +2838,28 @@ RapidashAgilityEffect: ; 2d413 (b:5413)
 	call ApplySubstatus1ToAttackingCard
 	ret
 
+
+DoubleDamageIfActiveThisTurnEffect:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
+	call GetTurnDuelistVariable
+	cp SUBSTATUS2_BECAME_ACTIVE
+	ret nz  ; did not move to active spot this turn
+; double damage
+	ld a, [wDamage + 1]
+	ld d, a
+	ld a, [wDamage]
+	ld e, a
+	or d
+	ret z  ; zero damage
+	sla e
+	rl d
+	ld a, e
+	ld [wDamage], a
+	ld a, d
+	ld [wDamage + 1], a
+	ret
+
+
 ; return carry if no Fire energy cards
 Wildfire_CheckEnergy: ; 2d49b (b:549b)
 	ld e, PLAY_AREA_ARENA
