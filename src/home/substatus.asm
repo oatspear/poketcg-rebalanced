@@ -531,7 +531,7 @@ CountPokemonIDInBothPlayAreas:
 
 ; return, in a, the amount of times that the Pokemon card with a given ID is found in the
 ; turn holder's play area. Also return carry if the Pokemon card is at least found once.
-; if the arena Pokemon is asleep, confused, or paralyzed (Pkmn Power-incapable), it doesn't count.
+; if the Pokemon is asleep, confused, or paralyzed (Pkmn Power-incapable), it doesn't count.
 ; input: a = Pokemon card ID to search
 CountPokemonIDInPlayArea:
 	push hl
