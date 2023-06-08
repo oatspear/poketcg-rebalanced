@@ -1683,7 +1683,7 @@ VenomothCard:
 	tx VenomPowderName ; name
 	tx VenomPowderDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw VenomothVenomPowderEffectCommands ; effect commands
 	db INFLICT_POISON | INFLICT_CONFUSION ; flags 1

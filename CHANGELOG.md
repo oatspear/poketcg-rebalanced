@@ -53,7 +53,7 @@
 #### Beedrill
 - **Twineedle**: removed.
 - **Poison Sting**: removed.
-- New attack: **Assassin Flight** (C): 50 damage to a Benched Pokémon if the opponent's Active Pokémon has status.
+- New attack: **Assassin Flight** (C): 40 damage to a Benched Pokémon if the opponent's Active Pokémon has status.
 - New attack: **Toxic** (GGC): 40 damage, inflicts double poison.
 
 #### Ekans
@@ -122,8 +122,8 @@
 
 #### Venomoth
 - **Shift**: removed.
-- **Venom Powder**: 30 damage, no coin flip required.
-- New attack: **Assassin Flight** (C): 50 damage to a benched Pokémon, only if opponent's Active Pokémon is affected by a Special Condition.
+- **Venom Powder**: 20 damage, inflicts Poison and Confusion.
+- New attack: **Assassin Flight** (C): 40 damage to a benched Pokémon, only if opponent's Active Pokémon is affected by a Special Condition.
 
 #### Bellsprout
 - **Call for Friend**: removed.

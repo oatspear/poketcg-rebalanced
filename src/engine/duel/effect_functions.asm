@@ -5105,7 +5105,7 @@ AssassinFlight_BenchDamageEffect:
 	call SwapTurn
 	ldh a, [hTemp_ffa0]
 	ld b, a
-	ld de, 50
+	ld de, 40
 	call DealDamageToPlayAreaPokemon_RegularAnim
 	call SwapTurn
 	ret
