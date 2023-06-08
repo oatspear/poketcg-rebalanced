@@ -180,7 +180,7 @@ SonicboomName: ; 5d86b (17:586b)
 	text "Sonicboom"
 	done
 
-SonicboomDescription: ; 5d876 (17:5876)
+SonicboomDescription:
 	text "Don't apply Weakness and Resistance"
 	line "for this attack."
 	done

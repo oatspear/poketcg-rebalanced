@@ -1566,3 +1566,7 @@ TripleAttackX10Description: ; 582fc (16:42fc)
 PoisonPinName: ; 583ff (16:43ff)
 	text "Poison Pin"
 	done
+
+SwiftName:
+	text "Swift"
+	done

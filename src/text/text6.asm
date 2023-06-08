@@ -1185,5 +1185,3 @@ Text05da: ; 4be3e (12:7e3e)
 	line "Powers, so read each card's text"
 	line "carefully."
 	done
-
-	ds $bc

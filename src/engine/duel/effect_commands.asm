@@ -512,6 +512,11 @@ ArcanineQuickAttackEffectCommands:
 	dbw EFFECTCMDTYPE_AI, ArcanineQuickAttack_AIEffect
 	db  $00
 
+QuickAttackEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurnDoubleDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, IfActiveThisTurnDoubleDamage_AIEffect
+	db  $00
+
 KangaskhanCometPunchEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heads10BonusDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, CometPunch_AIEffect

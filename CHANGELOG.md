@@ -204,12 +204,13 @@
 #### Ninetales Lv35
 - **Mix Up**: removed.
 - **Dancing Embers**: removed.
-- New attack: **Quick Attack** (CC) - 20 damage +10 if heads.
+- New attack: **Quick Attack** (CC): 20 damage, double damage if the Pokémon became Active this turn.
 - New attack: **Fire Fang** (FFC): 30 damage; discard 1 Energy from opponent.
 
 #### Arcanine Lv34
 - Increased HP from 70 to 80.
-- **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
+- **Quick Attack**: reworked.
+- New attack: **Quick Attack** (CC): 20 damage, double damage if the Pokémon became Active this turn.
 - **Flames of Rage**: can discard any 2 Energy cards.
 
 #### Arcanine Lv45
@@ -230,7 +231,8 @@
 - New Pokémon Power: **Flare Essence**: changes the type of an evolved Active Pokémon to Fire.
 
 #### Flareon Lv28
-- **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
+- **Quick Attack**: reworked.
+- New attack: **Quick Attack** (CC): 20 damage, double damage if the Pokémon became Active this turn.
 - **Flamethrower**: reduced cost from (FFCC) to (FFC); can discard any Energy card.
 
 #### Moltres Lv35
@@ -346,7 +348,8 @@
 - New Pokémon Power: **Vapor Essence**: changes the type of an evolved Active Pokémon to Water.
 
 #### Vaporeon Lv42
-- **Quick Attack**: increased damage from 10 (+20) to 20 (+10).
+- **Quick Attack**: reworked.
+- New attack: **Quick Attack** (CC): 20 damage, double damage if the Pokémon became Active this turn.
 - **Water Gun**: reduced cost from (WWC) to (WW).
 
 #### Omastar
@@ -367,12 +370,19 @@
 #### Pikachu Lv14
 - Decreased HP from 50 to 40.
 - **Spark**: reduced cost from (LL) to (LC).
-- New attack: **Collect** (C): draw 2 cards.
+- New attack: **Quick Attack** (C): 10 damage, double damage if the Pokémon became Active this turn.
 
 #### Pikachu Lv16
 - Reduced HP from 60 to 50.
 - **Growl**: damage reduction increased from 10 to 20.
 - **Thundershock**: reduced cost from (LL) to (LC).
+
+#### Pikachu Lv16 (Alt)
+- Reduced HP from 60 to 50.
+- **Growl**: removed.
+- **Thundershock**: removed.
+- New attack: **Collect** (C): draw 2 cards.
+- New attack: **Swift** (CC): 20 damage, do not apply Weakness and Resistance.
 
 #### Surfing Pikachu
 - **Surf**: reduced cost from (WW) to (WC) and damage from 30 to 20.
@@ -419,6 +429,10 @@
 #### Electabuzz Lv35
 - **Thunder Punch**: increased cost from (LC) to (LCC).
 
+#### Electabuzz Lv20
+- **Quick Attack**: reworked.
+- New attack: **Quick Attack** (CC): 20 damage, double damage if the Pokémon became Active this turn.
+
 #### Jolteon Lv24
 - Increased HP from 60 to 70.
 - **Double Kick**: removed.
@@ -427,6 +441,8 @@
 
 #### Jolteon Lv29
 - **Pin Missile**: 3 coin flips; 10 damage per tails and 20 per heads.
+- **Quick Attack**: reworked.
+- New attack: **Quick Attack** (CC): 20 damage, double damage if the Pokémon became Active this turn.
 
 #### Zapdos Lv40
 - **Thunderstorm**: reduced cost from (LLLL) to (LLL).
@@ -676,7 +692,9 @@
 
 #### Eevee
 - **Tail Wag**: removed.
-- New attack: **Snivel** (C): reduce incoming damage by 20.
+- **Quick Attack**: reworked.
+- New attack: **Quick Attack** (C): 10 damage, double damage if the Pokémon became Active this turn.
+- New attack: **Take Down** (CC): 30 damage, 10 recoil.
 
 #### Porygon
 - Increased HP from 30 to 50.

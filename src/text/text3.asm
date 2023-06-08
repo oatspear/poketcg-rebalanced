@@ -2030,5 +2030,3 @@ Text0404: ; 3ff4d (f:7f4d)
 	line "Mason Laboratory"
 	line "      Doctor Mason ;)"
 	done
-
-	ds $57

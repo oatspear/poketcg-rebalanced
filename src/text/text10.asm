@@ -923,6 +923,12 @@ Heads10BonusDamageDescription: ; 5a56a (16:656a)
 	line "does 10 additional damage."
 	done
 
+DoubleDamageIfActiveThisTurnDescription:
+	text "This attack does double damage if"
+	line "this Pokémon moved into the Active"
+	line "Spot this turn."
+	done
+
 FlamesOfRageName: ; 5a5d8 (16:65d8)
 	text "Flames of Rage"
 	done
@@ -1106,13 +1112,6 @@ BubbleName: ; 5af39 (16:6f39)
 
 WithdrawName: ; 5af41 (16:6f41)
 	text "Withdraw"
-	done
-
-WithdrawDescription: ; 5af4b (16:6f4b)
-	text "Flip a coin. If heads, prevent all"
-	line "damage done to this Pokémon until"
-	line "your next turn. (Any other effects"
-	line "of attacks still happen.)"
 	done
 
 TinyTurtleName: ; 5afd6 (16:6fd6)

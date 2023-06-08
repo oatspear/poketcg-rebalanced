@@ -2133,6 +2133,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FurySwipesName                                     ; 0x084b
 	textpointer TripleAttackX10Description                         ; 0x084c
 	textpointer PoisonPinName                                      ; 0x084f
+	textpointer SwiftName
 	textpointer NidoranFDescription                                ; 0x0850
 	textpointer NidorinaName                                       ; 0x0851
 	textpointer SupersonicName                                     ; 0x0852
@@ -2324,7 +2325,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ArcanineName                                       ; 0x08f6
 	textpointer QuickAttackName                                    ; 0x08f7
 	textpointer QuickAttackDescription                             ; 0x08f8
-	textpointer Heads10BonusDamageDescription                      ; 0x08f8
+	textpointer Heads10BonusDamageDescription
+	textpointer DoubleDamageIfActiveThisTurnDescription
 	textpointer FlamesOfRageName                                   ; 0x08f9
 	textpointer FlamesOfRageDescription                            ; 0x08fa
 	textpointer LegendaryName                                      ; 0x08fb

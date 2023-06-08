@@ -1020,5 +1020,3 @@ Text0523: ; 47f08 (11:7f08)
 	text "Hey, <RAMNAME>!"
 	line "What are you doing here?"
 	done
-
-	ds $d6

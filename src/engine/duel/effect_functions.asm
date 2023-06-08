@@ -2839,7 +2839,25 @@ RapidashAgilityEffect: ; 2d413 (b:5413)
 	ret
 
 
-DoubleDamageIfActiveThisTurnEffect:
+IfActiveThisTurn20BonusDamage_AIEffect:
+	call IfActiveThisTurn20BonusDamage_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+IfActiveThisTurn20BonusDamage_DamageBoostEffect:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
+	call GetTurnDuelistVariable
+	cp SUBSTATUS2_BECAME_ACTIVE
+	ret nz  ; did not move to active spot this turn
+	ld a, 20
+	call AddToDamage
+	ret
+
+
+IfActiveThisTurnDoubleDamage_AIEffect:
+	call IfActiveThisTurnDoubleDamage_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+IfActiveThisTurnDoubleDamage_DamageBoostEffect:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
 	call GetTurnDuelistVariable
 	cp SUBSTATUS2_BECAME_ACTIVE
