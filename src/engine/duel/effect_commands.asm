@@ -138,6 +138,8 @@ KoffingFoulGasEffectCommands:
 
 TeleportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Teleport_CheckBench
+	; fallthrough
+AgilityEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_SwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Teleport_AISelectEffect
@@ -363,10 +365,6 @@ SeadraWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_AI, SeadraWaterGunEffect
 	db  $00
 
-SeadraAgilityEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SeadraAgilityEffect
-	db  $00
-
 ShellderSupersonicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ShellderSupersonicEffect
 	db  $00
@@ -534,10 +532,6 @@ ArcanineFlamesOfRageEffectCommands:
 RapidashStompEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RapidashStomp_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, RapidashStomp_AIEffect
-	db  $00
-
-RapidashAgilityEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RapidashAgilityEffect
 	db  $00
 
 EmberEffectCommands:
@@ -791,10 +785,6 @@ KabutopsAbsorbEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AbsorbEffect
 	db  $00
 
-CuboneSnivelEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SnivelEffect
-	db  $00
-
 CallForFriendEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CallForFriend_CheckDeckAndPlayArea
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CallForFriend_PutInPlayAreaEffect
@@ -935,10 +925,6 @@ ChainLightningEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ChainLightningEffect
 	db  $00
 
-RaichuAgilityEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RaichuAgilityEffect
-	db  $00
-
 RaichuThunderEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RaichuThunder_Recoil50PercentEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, RaichuThunder_RecoilEffect
@@ -1074,6 +1060,11 @@ CorrosiveAcidEffectCommands:
  	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergyIfHeads_PlayerSelectEffect
  	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergyIfHeads_AISelectEffect
  	db  $00
+
+CombustionEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Combustion_DiscardDeckEffect
+	db  $00
+
 
 ClefableMetronomeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClefableMetronome_CheckAttacks

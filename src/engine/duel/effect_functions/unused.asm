@@ -1503,3 +1503,15 @@ BoneAttackEffect: ; 2e30f (b:630f)
 	ld a, SUBSTATUS2_LEER
 	call ApplySubstatus2ToDefendingCard
 	ret
+
+
+;
+SeadraAgilityEffect: ; 2d08b (b:508b)
+	ldtx de, IfHeadsDoNotReceiveDamageOrEffectText
+	call TossCoin_BankB
+	ret nc ; return if tails
+	ld a, ATK_ANIM_AGILITY_PROTECT
+	ld [wLoadedAttackAnimation], a
+	ld a, SUBSTATUS1_AGILITY
+	call ApplySubstatus1ToAttackingCard
+	ret

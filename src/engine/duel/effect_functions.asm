@@ -295,6 +295,23 @@ CheckIfCardHasSpecificEnergyAttached:
 
 
 ; ------------------------------------------------------------------------------
+; Discard Cards
+; ------------------------------------------------------------------------------
+
+INCLUDE "engine/duel/effect_functions/discard.asm"
+
+
+Wildfire_DiscardDeckEffect:
+	ldh a, [hTemp_ffa0]
+	jp DiscardFromOpponentsDeckEffect
+
+
+Combustion_DiscardDeckEffect:
+	ld a, 2
+	jp DiscardFromOpponentsDeckEffect
+
+
+; ------------------------------------------------------------------------------
 
 ; Stores information about the attack damage for AI purposes
 ; taking into account poison damage between turns.
@@ -1476,7 +1493,16 @@ Teleport_CheckBench: ; 2c8ec (b:48ec)
 	cp 2
 	ret
 
-Teleport_PlayerSelectEffect: ; 2c8f7 (b:48f7)
+Teleport_PlayerSelectEffect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	cp 2
+	jr nc, .select_pokemon
+.none
+	ld a, $ff
+	or a
+	jr .done
+.select_pokemon
 	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
 	call DrawWideTextBox_WaitForInput
 	bank1call HasAlivePokemonInBench
@@ -1484,20 +1510,25 @@ Teleport_PlayerSelectEffect: ; 2c8f7 (b:48f7)
 	ld [wcbd4], a
 .loop
 	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop
+	jr c, .none
 	ldh a, [hTempPlayAreaLocation_ff9d]
+.done
 	ldh [hTemp_ffa0], a
 	ret
 
-Teleport_AISelectEffect: ; 2c90f (b:490f)
+Teleport_AISelectEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	call Random
 	ldh [hTemp_ffa0], a
 	ret
 
-Teleport_SwitchEffect: ; 2c91a (b:491a)
+Teleport_SwitchEffect:
 	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z
+	or a
+	ret z
 	ld e, a
 	call SwapArenaWithBenchPokemon
 	xor a
@@ -2369,15 +2400,6 @@ SeadraWaterGunEffect: ; 2d085 (b:5085)
 	lb bc, 1, 1
 	jp ApplyExtraWaterEnergyDamageBonus
 
-SeadraAgilityEffect: ; 2d08b (b:508b)
-	ldtx de, IfHeadsDoNotReceiveDamageOrEffectText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, ATK_ANIM_AGILITY_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_AGILITY
-	call ApplySubstatus1ToAttackingCard
-	ret
 
 ShellderSupersonicEffect: ; 2d09d (b:509d)
 	call Confusion50PercentEffect
@@ -2830,16 +2852,6 @@ RapidashStomp_DamageBoostEffect: ; 2d400 (b:5400)
 	call AddToDamage
 	ret
 
-RapidashAgilityEffect: ; 2d413 (b:5413)
-	ldtx de, IfHeadsDoNotReceiveDamageOrEffectText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, ATK_ANIM_AGILITY_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_AGILITY
-	call ApplySubstatus1ToAttackingCard
-	ret
-
 
 IfActiveThisTurn20BonusDamage_AIEffect:
 	call IfActiveThisTurn20BonusDamage_DamageBoostEffect
@@ -2952,39 +2964,6 @@ Wildfire_DiscardEnergyEffect: ; 2d4e1 (b:54e1)
 	jr nz, .loop_discard
 	ret
 
-Wildfire_DiscardDeckEffect: ; 2d4f4 (b:54f4)
-	ldh a, [hTemp_ffa0]
-	ld c, a
-	ld b, $00
-	call SwapTurn
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ld a, DECK_SIZE
-	sub [hl]
-	cp c
-	jr nc, .start_discard
-	; only discard number of cards that are left in deck
-	ld c, a
-
-.start_discard
-	push bc
-	inc c
-	jr .check_remaining
-
-.loop
-	; discard top card from deck
-	call DrawCardFromDeck
-	call nc, PutCardInDiscardPile
-.check_remaining
-	dec c
-	jr nz, .loop
-
-	pop hl
-	call LoadTxRam3
-	ldtx hl, DiscardedCardsFromDeckText
-	call DrawWideTextBox_PrintText
-	call SwapTurn
-	ret
 
 MoltresLv35DiveBomb_AIEffect: ; 2d523 (b:5523)
 	ld a, 80 / 2
@@ -4869,10 +4848,6 @@ AbsorbEffect: ; 2e0b3 (b:60b3)
 	call ApplyAndAnimateHPRecovery
 	ret
 
-SnivelEffect: ; 2e0cb (b:60cb)
-	ld a, SUBSTATUS2_REDUCE_BY_20
-	call ApplySubstatus2ToDefendingCard
-	ret
 
 DoubleAttackX20X10_AIEffect: ; 2e4d6 (b:64d6)
 	ld a, (15 * 2)
@@ -5536,10 +5511,6 @@ Spark_BenchDamageEffect: ; 2e574 (b:6574)
 	call SwapTurn
 	ret
 
-GrowlEffect:
-	ld a, SUBSTATUS2_GROWL
-	call ApplySubstatus2ToDefendingCard
-	ret
 
 ChainLightningEffect: ; 2e595 (b:6595)
 	ld a, 10
@@ -5589,15 +5560,6 @@ ChainLightningEffect: ; 2e595 (b:6595)
 	jr nz, .check_damage
 	ret
 
-RaichuAgilityEffect: ; 2e5dc (b:65dc)
-	ldtx de, IfHeadsDoNotReceiveDamageOrEffectText
-	call TossCoin_BankB
-	ret nc ; skip if got tails
-	ld a, ATK_ANIM_AGILITY_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_AGILITY
-	call ApplySubstatus1ToAttackingCard
-	ret
 
 ZapdosThunder_Recoil50PercentEffect: ; 2e3fa (b:63fa)
 RaichuThunder_Recoil50PercentEffect: ; 2e5ee (b:65ee)
@@ -6322,15 +6284,6 @@ GrassKnot_DamageBoostEffect:
 	call ATimes10
 	jp AddToDamage
 
-FearowAgilityEffect: ; 2eab8 (b:6ab8)
-	ldtx de, IfHeadsDoNotReceiveDamageOrEffectText
-	call TossCoin_BankB
-	ret nc
-	ld a, ATK_ANIM_AGILITY_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_AGILITY
-	call ApplySubstatus1ToAttackingCard
-	ret
 
 ; return carry if cannot use Step In
 StepIn_BenchCheck: ; 2eaca (b:6aca)

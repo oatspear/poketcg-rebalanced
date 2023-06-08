@@ -1229,7 +1229,7 @@ ShiftTurnPokemonToFirstPlayAreaSlots:
 ; reset the status and all substatuses of the arena Pokemon before swapping.
 ; e is the play area location offset of the bench Pokemon (PLAY_AREA_*).
 SwapArenaWithBenchPokemon:
-; OATS switching no longer clear all status conditions
+; OATS switching no longer clears all status conditions
 	call ClearStatusOnSwitch  ; ClearAllStatusConditions
 	ld d, PLAY_AREA_ARENA
 ;	fallthrough

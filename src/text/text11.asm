@@ -703,10 +703,6 @@ CuboneName: ; 5f193 (17:7193)
 	text "Cubone"
 	done
 
-SnivelName: ; 5f19b (17:719b)
-	text "Snivel"
-	done
-
 ReduceDamageBy20Description:
 	text "Reduce any attack damage done by the"
 	line "Defending Pokémon to this Pokémon"

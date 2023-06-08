@@ -2933,31 +2933,31 @@ RapidashCard:
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
-	tx StompName ; name
-	tx Heads10BonusDamageDescription ; description
+	tx AgilityName ; name
+	tx SwitchThisPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw RapidashStompEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy FIRE, 2, COLORLESS, 1 ; energies
-	tx AgilityName ; name
-	tx AgilityDescription ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw RapidashAgilityEffectCommands ; effect commands
+	dw AgilityEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK | FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
+
+	; attack 2
+	energy FIRE, 2, COLORLESS, 1 ; energies
+	tx CombustionName ; name
+	tx Discard2CardsFromOpponentsDeckDescription ; description
+	dw NONE ; description (cont)
+	db 40 ; damage
+	db DAMAGE_NORMAL ; category
+	dw CombustionEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
@@ -5286,13 +5286,13 @@ RaichuLv40Card:
 	tx PikachuName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 1, COLORLESS, 2 ; energies
+	energy COLORLESS, 2 ; energies
 	tx AgilityName ; name
-	tx AgilityDescription ; description
+	tx SwitchThisPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw RaichuAgilityEffectCommands ; effect commands
+	dw AgilityEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -7363,7 +7363,7 @@ AbraCard:
 	; attack 2
 	energy PSYCHIC, 1 ; energies
 	tx TeleportBlastName ; name
-	tx TeleportDescription ; description
+	tx SwitchThisPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category

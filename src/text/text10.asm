@@ -605,7 +605,7 @@ TeleportBlastName: ; 5988c (16:588c)
 	text "Teleport Blast"
 	done
 
-TeleportDescription: ; 59896 (16:5896)
+SwitchThisPokemonDescription:
 	text "Switch this Pokémon with one of"
 	line "your Benched Pokémon."
 	done
@@ -990,7 +990,7 @@ StompName: ; 5a850 (16:6850)
 	text "Stomp"
 	done
 
-AgilityName: ; 5a8c5 (16:68c5)
+AgilityName:
 	text "Agility"
 	done
 
@@ -1503,13 +1503,6 @@ WaterGunDescription: ; 5ca47 (17:4a47)
 	line "Pokémon but not used to pay for"
 	line "this attack's Energy cost, up to"
 	line "20 additional damage."
-	done
-
-AgilityDescription: ; 5c111 (17:4111)
-	text "Flip a coin. If heads, during your"
-	line "opponent's next turn, prevent all "
-	line "effects of attacks, including"
-	line "damage, done to this Pokémon."
 	done
 
 SeadraDescription: ; 5c18e (17:418e)

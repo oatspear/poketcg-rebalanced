@@ -218,6 +218,12 @@
 - **Flamethrower**: can discard any Energy card; reduced cost from (FFC) to (FCC).
 - **Take Down**: reduced cost from (FFCC) to (CC), damage from 80 to 50 and recoil from 30 to 20.
 
+#### Rapidash
+- **Stomp**: removed.
+- **Agility**: reworked.
+- New attack: **Agility** (CC): 20 damage, switch this Pokémon with a Benched Pokémon.
+- New attack: **Combustion** (FFC): 40 damage, discard 2 cards from opponent's deck.
+
 #### Magmar Lv24
 - Increased HP from 50 to 60.
 - **Flamethrower**: can discard any Energy card.
@@ -388,6 +394,8 @@
 - **Surf**: reduced cost from (WW) to (WC) and damage from 30 to 20.
 
 #### Raichu Lv40
+- **Agility**: reworked.
+- New attack: **Agility** (CC): 20 damage, switch this Pokémon with a Benched Pokémon.
 - **Thunder**: reduced cost from (LLLC) to (LLC).
 
 #### Raichu Lv45

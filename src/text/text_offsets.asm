@@ -2134,6 +2134,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TripleAttackX10Description                         ; 0x084c
 	textpointer PoisonPinName                                      ; 0x084f
 	textpointer SwiftName
+	textpointer OverrunName
+	textpointer CombustionName
+	textpointer Discard2CardsFromOpponentsDeckDescription
 	textpointer NidoranFDescription                                ; 0x0850
 	textpointer NidorinaName                                       ; 0x0851
 	textpointer SupersonicName                                     ; 0x0852
@@ -2259,7 +2262,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ExeggcuteDescription                               ; 0x08b1
 	textpointer ExeggutorName                                      ; 0x08b2
 	textpointer TeleportBlastName                                  ; 0x08b3
-	textpointer TeleportDescription                                ; 0x08b4
+	textpointer SwitchThisPokemonDescription
 	textpointer BigEggsplosionName                                 ; 0x08b5
 	textpointer BigEggsplosionDescription                          ; 0x08b6
 	textpointer CoconutName                                        ; 0x08b7
@@ -2446,7 +2449,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HorseaDescription                                  ; 0x0975
 	textpointer SeadraName                                         ; 0x0976
 	textpointer WaterGunDescription                                ; 0x0977
-	textpointer AgilityDescription                                 ; 0x0978
 	textpointer SeadraDescription                                  ; 0x0979
 	textpointer GoldeenName                                        ; 0x097a
 	textpointer HornAttackName                                     ; 0x097b
@@ -2643,7 +2645,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RockSnakeName                                      ; 0x0a43
 	textpointer OnixDescription                                    ; 0x0a44
 	textpointer CuboneName                                         ; 0x0a45
-	textpointer SnivelName                                         ; 0x0a46
 	textpointer ReduceDamageBy20Description
 	textpointer RageDescription                                    ; 0x0a48
 	textpointer LonelyName                                         ; 0x0a49

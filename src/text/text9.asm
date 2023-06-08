@@ -1,27 +1,3 @@
-Text073f: ; 54000 (15:4000)
-	text "Who?"
-	line "Oh! It's you, <RAMNAME>..."
-	line "I couldn't believe that I could"
-	line "lose, but now..."
-	line "Now I understand."
-	line "The fun thing about the "
-	line "Pokémon Trading Card Game"
-	line "is not who wins or loses..."
-	line "I couldn't inherit the Legendary "
-	line "Pokémon Cards because all that "
-	line "was important to me was winning."
-	line "But now I understand!"
-	line "What's important..."
-	line "Is to love each card, to use all "
-	line "the different cards to build "
-	line "different types of Decks, and"
-	line "to play against different people!"
-	line "So...<RAMNAME>..."
-	line "Will you play with me again?"
-	line "With all sorts of different Decks?"
-	line "And this time, I not gonna lose!"
-	done
-
 Text0740: ; 54223 (15:4223)
 	text "Oh, hi <RAMNAME>..."
 	line "Do you want to Duel?"
@@ -1569,4 +1545,17 @@ PoisonPinName: ; 583ff (16:43ff)
 
 SwiftName:
 	text "Swift"
+	done
+
+OverrunName:
+	text "Overrun"
+	done
+
+CombustionName:
+	text "Combustion"
+	done
+
+Discard2CardsFromOpponentsDeckDescription:
+	text "Discard 2 cards from the top"
+	line "of your opponent's deck."
 	done

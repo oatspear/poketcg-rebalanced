@@ -47,6 +47,12 @@ ApplySubstatus2ToDefendingCard: ; 2c149 (b:4149)
 ; Substatus 2
 ; ------------------------------------------------------------------------------
 
+GrowlEffect:
+	ld a, SUBSTATUS2_GROWL
+	call ApplySubstatus2ToDefendingCard
+	ret
+
+
 UnableToRetreatEffect:
 	ld a, SUBSTATUS2_UNABLE_RETREAT
 	call ApplySubstatus2ToDefendingCard

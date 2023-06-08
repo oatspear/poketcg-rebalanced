@@ -1233,3 +1233,24 @@ Text073e: ; 53d5b (14:7d5b)
 	line "Duels are worthy of"
 	line "the Legendary Pokémon Cards."
 	done
+
+Text073f: ; 54000 (15:4000)
+	text "Who?"
+	line "Oh! It's you, <RAMNAME>..."
+	line "I couldn't believe that I could"
+	line "lose... But now I understand."
+	line "The fun thing about the Pokémon TCG"
+	line "is not winning or losing."
+	; line "I couldn't inherit the Legendary "
+	; line "Pokémon Cards because all that "
+	; line "was important to me was winning."
+	; line "But now I understand!"
+	line "What's important..."
+	line "Is to love the cards, to use all of"
+	line "them to build different types of"
+	line "Decks, and to play against different"
+	line "people!"
+	line "So...<RAMNAME>..."
+	line "Will you play with me again?"
+	line "This time, I'm not gonna lose!"
+	done
