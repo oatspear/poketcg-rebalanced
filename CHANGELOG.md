@@ -762,6 +762,10 @@
 
 ### Miscellaneous
 
+#### Options
+
+- Changed default text speed to fastest.
+
 #### AI
 
 - Some decks did not consider retreating at all. This was fixed.
