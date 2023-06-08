@@ -537,6 +537,8 @@ FullHeal_PlayerSelection:
 	ld a, [hl]
 	or a
 	jr z, .read_input ; no status, loop back to start
+	cp SUBSTATUS2_BECAME_ACTIVE
+	jr z, .read_input ; no status, loop back to start
 	ret
 
 FullHeal_ClearStatusEffect:
