@@ -175,7 +175,7 @@ FullHeal_CheckPlayAreaStatus:
 
 CheckIfPlayAreaHasAnyDamageOrStatus:
 	call CheckIfPlayAreaHasAnyDamage
-	ret c
+	ret nc  ; there is damage to heal
 	jr CheckIfPlayAreaHasAnyStatus
 
 
