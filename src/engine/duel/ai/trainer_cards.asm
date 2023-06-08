@@ -3279,6 +3279,8 @@ PickPokedexCards:
 AIPlay_FullHeal:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
