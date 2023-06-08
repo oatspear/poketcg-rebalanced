@@ -8520,7 +8520,7 @@ Pidgeot1Card:
 	tx PidgeottoName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx SlicingWindName ; name
 	tx Deal30ToAnyPokemonDescription ; description
 	dw NONE ; description (cont)
