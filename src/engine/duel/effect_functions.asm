@@ -574,8 +574,6 @@ FullHeal_PlayerSelection:
 	ld a, [hl]
 	or a
 	jr z, .read_input ; no status, loop back to start
-	cp SUBSTATUS2_BECAME_ACTIVE
-	jr z, .read_input ; no status, loop back to start
 	ret
 
 FullHeal_ClearStatusEffect:
@@ -2878,10 +2876,10 @@ IfActiveThisTurn20BonusDamage_AIEffect:
 	jp SetDefiniteAIDamage
 
 IfActiveThisTurn20BonusDamage_DamageBoostEffect:
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
-	cp SUBSTATUS2_BECAME_ACTIVE
-	ret nz  ; did not move to active spot this turn
+	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
+	ret z  ; did not move to active spot this turn
 	ld a, 20
 	call AddToDamage
 	ret
@@ -2892,10 +2890,10 @@ IfActiveThisTurnDoubleDamage_AIEffect:
 	jp SetDefiniteAIDamage
 
 IfActiveThisTurnDoubleDamage_DamageBoostEffect:
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
-	cp SUBSTATUS2_BECAME_ACTIVE
-	ret nz  ; did not move to active spot this turn
+	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
+	ret z  ; did not move to active spot this turn
 ; double damage
 	ld a, [wDamage + 1]
 	ld d, a

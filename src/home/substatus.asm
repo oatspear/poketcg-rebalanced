@@ -695,11 +695,13 @@ UpdateSubstatusConditions_StartOfTurn:
 	set SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
 	ret
 
-; clears the SUBSTATUS2, Headache, and updates the double damage condition of the player ending his turn
+; clears the SUBSTATUS2, Headache, and updates the double damage condition
+; and the "became active" condition of the player ending his turn
 UpdateSubstatusConditions_EndOfTurn:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	res SUBSTATUS3_HEADACHE, [hl]
+	res SUBSTATUS3_THIS_TURN_ACTIVE, [hl]
 	push hl
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
 	call GetTurnDuelistVariable
