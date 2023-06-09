@@ -207,6 +207,9 @@
 - New attack: **Combustion** (FC): 20 damage, discard 2 cards from opponent's deck.
 - New attack: **Fire Fang** (FFC): 30 damage; discard 1 Energy from opponent.
 
+#### Growlithe
+- New attack: **Fetch** (C): draw 1 card.
+
 #### Arcanine Lv34
 - Increased HP from 70 to 80.
 - **Quick Attack**: reworked.

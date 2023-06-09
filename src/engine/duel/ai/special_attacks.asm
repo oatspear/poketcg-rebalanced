@@ -31,6 +31,8 @@ HandleSpecialAIAttacks:
 	jp z, .Growth
 	cp ZAPDOS_LV68
 	jp z, .BigThunder
+	cp GROWLITHE
+	jp z, .Fetch
 	cp KANGASKHAN
 	jp z, .Fetch
 	cp PIKACHU_LV14
