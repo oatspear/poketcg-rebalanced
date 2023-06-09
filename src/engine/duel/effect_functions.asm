@@ -294,6 +294,21 @@ CheckIfCardHasSpecificEnergyAttached:
 	ret
 
 
+EnergySpores_CheckDiscardPile:
+EnergyAbsorption_CheckDiscardPile:
+EnergyRecycler_CheckDiscardPile:
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	; call CreateEnergyCardListFromDiscardPile_AllEnergy
+	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
+	ret
+
+
+CollectFire_CheckDiscardPile:
+	call CreateEnergyCardListFromDiscardPile_OnlyFire
+	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Discard Cards
 ; ------------------------------------------------------------------------------
@@ -308,6 +323,11 @@ Wildfire_DiscardDeckEffect:
 
 Combustion_DiscardDeckEffect:
 	ld a, 2
+	jp DiscardFromOpponentsDeckEffect
+
+
+SmallCombustion_DiscardDeckEffect:
+	ld a, 1
 	jp DiscardFromOpponentsDeckEffect
 
 
@@ -4331,13 +4351,6 @@ Barrier_BarrierEffect: ; 2ddbf (b:5dbf)
 	call ApplySubstatus1ToAttackingCard
 	ret
 
-EnergySpores_CheckDiscardPile:
-EnergyAbsorption_CheckDiscardPile:
-EnergyRecycler_CheckDiscardPile:
-	call CreateEnergyCardListFromDiscardPile_OnlyBasic
-	; call CreateEnergyCardListFromDiscardPile_AllEnergy
-	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
-	ret
 
 EnergySpores_PlayerSelectEffect:
 EnergyAbsorption_PlayerSelectEffect:
@@ -4350,9 +4363,24 @@ EnergyAbsorption_AISelectEffect:
 ; AI picks first 2 energy cards
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
 	; call CreateEnergyCardListFromDiscardPile_AllEnergy
+	ld a, 2
+	jr PickFirstNCardsFromList_SelectEffect
+
+
+Attach1FireEnergyFromDiscard_SelectEffect:
+; pick the first energy card
+	call CreateEnergyCardListFromDiscardPile_OnlyFire
+	ld a, 1
+	; jr PickFirstNCardsFromList_SelectEffect
+	; fallthrough
+
+
+; input:
+;   a: number of cards to pick from wDuelTempList
+PickFirstNCardsFromList_SelectEffect:
 	ld hl, wDuelTempList
 	ld de, hTempList
-	ld c, 2
+	ld c, a
 .loop
 	ld a, [hli]
 	cp $ff
@@ -4366,6 +4394,8 @@ EnergyAbsorption_AISelectEffect:
 	ld [de], a
 	ret
 
+
+CollectFire_AttachToPokemonEffect:
 EnergyAbsorption_AttachToPokemonEffect:
 	ld e, CARD_LOCATION_ARENA
 	jp SetCardLocationsFromDiscardPileToPlayArea

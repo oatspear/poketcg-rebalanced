@@ -73,6 +73,8 @@ HandleSpecialAIAttacks:
 	jr z, .CallForFriend
 	cp ODDISH
 	jr z, .Sprout
+	cp MOLTRES_LV35
+	jp z, .CollectFire
 
 ; return zero score.
 .zero_score
@@ -206,6 +208,18 @@ HandleSpecialAIAttacks:
 	call CheckIfAnyCardIDinLocation
 	jp nc, .zero_score
 	ld a, $82
+	ret
+
+.CollectFire:
+	ld e, FIRE_ENERGY
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call CheckIfAnyCardIDinLocation
+	jp nc, .zero_score
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	cp 3
+	jp nc, .zero_score
+	ld a, $83
 	ret
 
 ; if the Pokémon has less than 2 Energies attached to it,

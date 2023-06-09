@@ -226,14 +226,17 @@
 
 #### Magmar Lv24
 - Increased HP from 50 to 60.
+- **Fire Punch**: reduced cost from (FF) to (FC) and damage from 30 to 20.
 - **Flamethrower**: can discard any Energy card.
 
 #### Magmar Lv31
-- **Smog**: reduced cost from (FF) to (FC).
+- **Smog**: removed.
+- New attack: **Combustion** (FF): 20 damage, discard 1 card from opponent's deck.
 
 #### Flareon Lv22
 - Increased HP from 60 to 70.
 - **Bite**: removed.
+- **Rage**: reduced damage from 20+ to 10+.
 - New Pokémon Power: **Flare Essence**: changes the type of an evolved Active Pokémon to Fire.
 
 #### Flareon Lv28
@@ -242,9 +245,11 @@
 - **Flamethrower**: reduced cost from (FFCC) to (FFC); can discard any Energy card.
 
 #### Moltres Lv35
-- **Dive Bomb**: reduced cost from (FFFF) to (FFC).
+- **Dive Bomb**: removed.
+- **Wildfire**: increased cost from (F) to (FCC); also deals 30 damage.
+- New attack: **Collect Fire** (C): attach (F) from discard pile.
 
-#### Moltres Lv35
+#### Moltres Lv37
 - **Dive Bomb**: reduced cost from (FFF) to (FFC).
 
 #### Squirtle

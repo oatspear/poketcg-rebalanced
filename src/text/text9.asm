@@ -1555,7 +1555,21 @@ CombustionName:
 	text "Combustion"
 	done
 
+Discard1CardFromOpponentsDeckDescription:
+	text "Discard 1 card from the top"
+	line "of your opponent's deck."
+	done
+
 Discard2CardsFromOpponentsDeckDescription:
 	text "Discard 2 cards from the top"
 	line "of your opponent's deck."
+	done
+
+CollectFireName:
+	text "Collect Fire"
+	done
+
+Attach1FireEnergyFromDiscardDescription:
+	text "Attach a <FIRE> Energy from your discard"
+	line "pile to this Pokémon."
 	done

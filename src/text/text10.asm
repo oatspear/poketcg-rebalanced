@@ -1057,20 +1057,20 @@ FlareonLv28Description: ; 5ac91 (16:6c91)
 	line "over 1,600 degrees."
 	done
 
-MoltresName: ; 5aced (16:6ced)
+MoltresName:
 	text "Moltres"
 	done
 
-WildfireName: ; 5acf6 (16:6cf6)
+WildfireName:
 	text "Wildfire"
 	done
 
-WildfireDescription: ; 5ad00 (16:6d00)
+WildfireDescription:
 	text "You may discard any number of <FIRE>"
-	line "Energy cards attached to Moltres"
-	line "when you use this attack. If you do,"
-	line "discard that many cards from the top"
-	line "of your opponent's deck."
+	line "Energy cards attached to this"
+	line "Pokémon. If you do, discard that"
+	line "many cards from the top of your"
+	line "opponent's deck."
 	done
 
 DiveBombName: ; 5ada6 (16:6da6)

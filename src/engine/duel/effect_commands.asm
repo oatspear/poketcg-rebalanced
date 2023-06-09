@@ -542,7 +542,7 @@ FlamethrowerEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
-MoltresWildfireEffectCommands:
+WildfireEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Wildfire_CheckEnergy
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Wildfire_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Wildfire_DiscardDeckEffect
@@ -550,18 +550,8 @@ MoltresWildfireEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Wildfire_AISelectEffect
 	db  $00
 
-MoltresLv35DiveBombEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MoltresLv35DiveBomb_Success50PercentEffect
-	dbw EFFECTCMDTYPE_AI, MoltresLv35DiveBomb_AIEffect
-	db  $00
-
 MagmarSmokescreenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MagmarSmokescreenEffect
-	db  $00
-
-MagmarSmogEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Poison50PercentEffect
-	dbw EFFECTCMDTYPE_AI, MagmarSmog_AIEffect
 	db  $00
 
 CharizardEnergyBurnEffectCommands:
@@ -700,6 +690,12 @@ MewtwoBarrierEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Barrier_BarrierEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Barrier_DiscardEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Barrier_AISelectEffect
+	db  $00
+
+CollectFireEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CollectFire_CheckDiscardPile
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Attach1FireEnergyFromDiscard_SelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CollectFire_AttachToPokemonEffect
 	db  $00
 
 EnergyAbsorptionEffectCommands:
@@ -1060,6 +1056,10 @@ CorrosiveAcidEffectCommands:
  	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergyIfHeads_PlayerSelectEffect
  	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergyIfHeads_AISelectEffect
  	db  $00
+
+SmallCombustionEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SmallCombustion_DiscardDeckEffect
+	db  $00
 
 CombustionEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Combustion_DiscardDeckEffect

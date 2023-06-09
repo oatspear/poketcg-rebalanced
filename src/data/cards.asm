@@ -2983,11 +2983,11 @@ MagmarLv24Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIRE, 2 ; energies
+	energy FIRE, 1, COLORLESS, 1 ; energies
 	tx FirePunchName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -3048,18 +3048,18 @@ MagmarLv31Card:
 	db ATK_ANIM_DARK_GAS ; animation
 
 	; attack 2
-	energy FIRE, 1, COLORLESS, 1 ; energies
-	tx SmogName ; name
-	tx MayInflictPoisonDescription ; description
+	energy FIRE, 2 ; energies
+	tx CombustionName ; name
+	tx Discard1CardFromOpponentsDeckDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MagmarSmogEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
+	dw SmallCombustionEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_SMOG ; animation
+	db ATK_ANIM_SMALL_FLAME ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
@@ -3103,7 +3103,7 @@ FlareonLv22Card:
 	tx RageName ; name
 	tx RageDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
 	dw RageEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -3187,32 +3187,32 @@ MoltresLv35Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIRE, 1 ; energies
-	tx WildfireName ; name
-	tx WildfireDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx CollectFireName ; name
+	tx Attach1FireEnergyFromDiscardDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MoltresWildfireEffectCommands ; effect commands
+	dw CollectFireEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 1
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy FIRE, 1, COLORLESS, 2 ; energies
+	tx WildfireName ; name
+	tx WildfireDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw WildfireEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_5 ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
-
-	; attack 2
-	energy FIRE, 2, COLORLESS, 1 ; energies
-	tx DiveBombName ; name
-	tx MayDoNothingDescription ; description
-	dw NONE ; description (cont)
-	db 80 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MoltresLv35DiveBombEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness

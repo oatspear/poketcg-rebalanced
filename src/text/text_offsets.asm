@@ -2136,7 +2136,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SwiftName
 	textpointer OverrunName
 	textpointer CombustionName
+	textpointer Discard1CardFromOpponentsDeckDescription
 	textpointer Discard2CardsFromOpponentsDeckDescription
+	textpointer CollectFireName
+	textpointer Attach1FireEnergyFromDiscardDescription
 	textpointer NidoranFDescription                                ; 0x0850
 	textpointer NidorinaName                                       ; 0x0851
 	textpointer SupersonicName                                     ; 0x0852
