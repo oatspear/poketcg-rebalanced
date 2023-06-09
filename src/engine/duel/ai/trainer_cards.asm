@@ -4366,7 +4366,7 @@ AIPlay_Pokeball:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, [wAITrainerCardParameter]
-	ldh [hTempPlayAreaLocation_ffa1], a
+	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
