@@ -2677,18 +2677,18 @@ NinetalesLv35Card:
 	tx VulpixName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx QuickAttackName ; name
-	tx DoubleDamageIfActiveThisTurnDescription ; description
+	energy FIRE, 1, COLORLESS, 1 ; energies
+	tx CombustionName ; name
+	tx Discard2CardsFromOpponentsDeckDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw QuickAttackEffectCommands ; effect commands
+	db DAMAGE_NORMAL ; category
+	dw CombustionEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_BIG_FLAME ; animation
 
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies

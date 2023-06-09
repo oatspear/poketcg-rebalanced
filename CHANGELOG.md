@@ -204,7 +204,7 @@
 #### Ninetales Lv35
 - **Mix Up**: removed.
 - **Dancing Embers**: removed.
-- New attack: **Quick Attack** (CC): 20 damage, double damage if the Pokémon became Active this turn.
+- New attack: **Combustion** (FC): 20 damage, discard 2 cards from opponent's deck.
 - New attack: **Fire Fang** (FFC): 30 damage; discard 1 Energy from opponent.
 
 #### Arcanine Lv34
