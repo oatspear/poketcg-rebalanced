@@ -1120,9 +1120,11 @@ HandleAIRainDanceEnergy:
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	and USED_RAIN_DANCE_THIS_TURN
 	ret nz ; return if Rain Dance was used this turn
+
 	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
-	ret nc ; return if no Blastoise
+	ret nc ; return if no Wartortle
+
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
@@ -1131,4 +1133,66 @@ HandleAIRainDanceEnergy:
 .loop
 	farcall AIProcessAndTryToPlayEnergy
 	jr c, .loop
+	ret
+
+
+; handles AI logic for attaching energy cards
+; with the Firestarter Pokémon Power.
+HandleAIFirestarterEnergy:
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and USED_FIRESTARTER_THIS_TURN
+	ret nz  ; Firestarter was used this turn
+
+	ld a, CHARMELEON
+	call CountPokemonIDInPlayArea
+	ret nc  ; no Charmeleon
+
+	ld a, MUK
+	call CountPokemonIDInBothPlayAreas
+	ret c  ; Muk is in play
+
+	farcall CreateEnergyCardListFromDiscardPile_OnlyFire
+	ret c  ; no Fire energy
+
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	cp 2
+	ret c  ; no Bench
+
+	farcall AIProcessButDontPlayEnergy_SkipEvolutionAndArena
+	ret nc  ; no energy card attachment is needed
+; got the Bench card location in [hTempPlayAreaLocation_ff9d]
+
+; look for Charmeleon in Play Area to use its PKMN Power.
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	dec a
+	ld b, a
+.loop_play_area
+	ld a, DUELVARS_ARENA_CARD
+	add b
+	call GetTurnDuelistVariable
+	ldh [hTempCardIndex_ff9f], a
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp CHARMELEON
+	jr z, .use_pkmn_power
+
+	ld a, b
+	or a
+	ret z ; return when Play Area loop is ended
+
+	dec b
+	jr .loop_play_area
+
+.use_pkmn_power
+	ld a, b
+	ldh [hTemp_ffa0], a
+; got deck index of Charmeleon in [hTempCardIndex_ff9f]
+; got play area location of Charmeleon in [hTemp_ffa0]
+	ld a, OPPACTION_USE_PKMN_POWER
+	bank1call AIMakeDecision
+; execute the EFFECTCMDTYPE_BEFORE_DAMAGE command of the used Pokemon Power
+	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
+	bank1call AIMakeDecision
 	ret

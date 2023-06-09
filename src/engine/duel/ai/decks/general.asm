@@ -38,6 +38,7 @@ AIMainTurnLogic:
 	jp nc, .try_attack
 ; handle Pkmn Powers
 	farcall HandleAIRainDanceEnergy
+	farcall HandleAIFirestarterEnergy
 	farcall HandleAIDamageSwap
 	farcall HandleAIPkmnPowers
 	ret c ; return if turn ended
@@ -82,6 +83,7 @@ AIMainTurnLogic:
 	farcall HandleAIDamageSwap
 	farcall HandleAIPkmnPowers
 	ret c ; return if turn ended
+	farcall HandleAIFirestarterEnergy
 	farcall HandleAIRainDanceEnergy
 	ld a, AI_ENERGY_TRANS_ATTACK
 	farcall HandleAIEnergyTrans

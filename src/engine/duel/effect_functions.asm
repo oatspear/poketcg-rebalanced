@@ -6186,9 +6186,7 @@ Firestarter_AttachEnergyEffect:
 	and DUELIST_TYPE_AI_OPP
 	jr z, .player
 
-; AI Pokémon selection logic goes here
-	xor a  ; PLAY_AREA_ARENA
-	ldh [hTempPlayAreaLocation_ff9d], a
+; AI Pokémon selection logic is in HandleAIFirestarterEnergy
 	jr .attach
 
 .player

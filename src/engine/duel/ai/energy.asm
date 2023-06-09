@@ -593,7 +593,7 @@ DetermineAIScoreOfAttackEnergyRequirement: ; 16695 (5:6695)
 
 ; returns in hTempPlayAreaLocation_ff9d the Play Area location
 ; of the card with the highest Play Area AI score, unless
-; the highest score is below $85.
+; the highest score is below $80.
 ; if it succeeds in return a card location, set carry.
 ; if AI_ENERGY_FLAG_SKIP_ARENA_CARD is set in wAIEnergyAttachLogicFlags
 ; doesn't include the Arena card and there's no minimum score.
@@ -622,10 +622,10 @@ FindPlayAreaCardWithHighestAIScore: ; 167b5 (5:67b5)
 	dec b
 	jr nz, .loop_1
 
-; if highest AI score is below $85, return no carry.
+; if highest AI score is below $80, return no carry.
 ; else, store Play Area location and return carry.
 	ld a, e
-	cp $85
+	cp $80
 	jr c, .not_enough_score
 	ld a, d
 	ldh [hTempPlayAreaLocation_ff9d], a
