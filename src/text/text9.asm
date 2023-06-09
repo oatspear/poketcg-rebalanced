@@ -1570,6 +1570,6 @@ CollectFireName:
 	done
 
 Attach1FireEnergyFromDiscardDescription:
-	text "Attach a <FIRE> Energy from your discard"
-	line "pile to this Pokémon."
+	text "Attach a <FIRE> Energy from your"
+	line "discard pile to this Pokémon."
 	done
