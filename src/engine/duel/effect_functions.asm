@@ -1463,6 +1463,11 @@ PoisonLure_SwitchEffect:
 	jp PoisonEffect
 
 
+Lure_SwitchAndTrapDefendingPokemon:
+	call Lure_SwitchDefendingPokemon
+	jp UnableToRetreatEffect
+
+
 KakunaPoisonPowder_AIEffect: ; 2c7b4 (b:47b4)
 	ld a, 5
 	lb de, 0, 10

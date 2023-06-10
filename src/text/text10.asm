@@ -485,6 +485,8 @@ LureName:
 LureDescription:
 	text "Switch 1 of your opponent's Benched"
 	line "Pokémon with their Active Pokémon."
+	line "The new Active Pokémon can't retreat"
+	line "during your opponent's next turn."
 	done
 
 PoisonLureName:

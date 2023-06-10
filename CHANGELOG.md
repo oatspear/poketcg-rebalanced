@@ -198,7 +198,7 @@
 - Added attack: **Ember** (FC) - 30 damage, discard 1 Energy card.
 
 #### Ninetales Lv32
-- **Lure**: reduced cost from (CC) to (C).
+- **Lure**: reduced cost from (CC) to (F); the new Active Pokémon cannot retreat.
 - **Fire Blast**: reduced cost from (FFFF) to (FCC); discard any 2 Energy cards.
 
 #### Ninetales Lv35
@@ -225,7 +225,7 @@
 - **Stomp**: removed.
 - **Agility**: reworked.
 - New attack: **Agility** (CC): 20 damage, switch this Pokémon with a Benched Pokémon.
-- New attack: **Combustion** (FFC): 40 damage, discard 2 cards from opponent's deck.
+- New attack: **Overrun** (FFC): 30 damage, plus 30 to 1 Benched Pokémon.
 
 #### Magmar Lv24
 - Increased HP from 50 to 60.

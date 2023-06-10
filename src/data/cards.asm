@@ -2626,7 +2626,7 @@ NinetalesLv32Card:
 	tx VulpixName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
+	energy FIRE, 1 ; energies
 	tx LureName ; name
 	tx LureDescription ; description
 	dw NONE ; description (cont)
@@ -2947,17 +2947,17 @@ RapidashCard:
 
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
-	tx CombustionName ; name
-	tx Discard2CardsFromOpponentsDeckDescription ; description
+	tx OverrunName ; name
+	tx Deal30ToAnyPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw CombustionEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
+	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_BIG_FLAME ; animation
+	db 2
+	db ATK_ANIM_BIG_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
