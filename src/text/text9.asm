@@ -1547,6 +1547,16 @@ SwiftName:
 	text "Swift"
 	done
 
+RapidSpinName:
+	text "Rapid Spin"
+	done
+
+BothPlayersSwitchDescription:
+	text "Both players switch their"
+	line "Active Pokémon with one of"
+	line "their Benched Pokémon."
+	done
+
 OverrunName:
 	text "Overrun"
 	done

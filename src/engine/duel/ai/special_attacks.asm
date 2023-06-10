@@ -13,6 +13,8 @@ HandleSpecialAIAttacks:
 
 	cp ABRA
 	jp z, .Teleport
+	cp STARYU
+	jp z, .Staryu
 	cp SCYTHER
 	jp z, .SwordsDanceAndFocusEnergy
 	cp VAPOREON_LV29
@@ -21,8 +23,8 @@ HandleSpecialAIAttacks:
 	jp z, .ChainLightning
 	cp MEW_LV23
 	jp z, .DevolutionBeam
-	cp PORYGON
-	jp z, .Conversion
+	; cp PORYGON
+	; jp z, .Conversion
 	cp MEWTWO_ALT_LV60
 	jp z, .EnergyAbsorption
 	cp MEWTWO_LV60
@@ -69,7 +71,7 @@ HandleSpecialAIAttacks:
 	jr z, .CallForFriend
 	cp CUBONE
 	jr z, .CallForFriend
-	cp KRABBY
+	cp POLIWAG
 	jr z, .CallForFriend
 	cp JIGGLYPUFF_LV13
 	jr z, .CallForFriend
@@ -82,6 +84,12 @@ HandleSpecialAIAttacks:
 .zero_score
 	xor a
 	ret
+
+.Staryu
+	ld a, [wSelectedAttack]
+	or a
+	jr z, .Teleport
+	jp .Fetch
 
 ; if any basic cards are found in deck,
 ; return a score of $80 + slots available in bench.

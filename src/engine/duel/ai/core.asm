@@ -2070,6 +2070,8 @@ AISelectSpecialAttackParameters:
 	jr z, .EnergyAbsorption
 	cp ABRA
 	jr z, .Teleport
+	cp STARYU
+	jr z, .Teleport
 	cp MAGNETON_LV35
 	jr z, .EnergySpike
 	; fallthrough
@@ -2143,7 +2145,7 @@ AISelectSpecialAttackParameters:
 ; decide Bench card to switch to.
 	ld a, [wSelectedAttack]
 	or a
-	jp nz, .no_carry  ; can be jr
+	jr nz, .no_carry
 	call AIDecideBenchPokemonToSwitchTo
 	jr c, .no_carry
 	ldh [hTemp_ffa0], a

@@ -2134,6 +2134,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TripleAttackX10Description                         ; 0x084c
 	textpointer PoisonPinName                                      ; 0x084f
 	textpointer SwiftName
+	textpointer RapidSpinName
+	textpointer BothPlayersSwitchDescription
 	textpointer OverrunName
 	textpointer CombustionName
 	textpointer Discard1CardFromOpponentsDeckDescription
@@ -2463,7 +2465,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WaterfallName                                      ; 0x097f
 	textpointer SeakingDescription                                 ; 0x0980
 	textpointer StaryuName                                         ; 0x0981
-	textpointer SlapName                                           ; 0x0982
+	textpointer BigSplashName
 	textpointer StarshapeName                                      ; 0x0983
 	textpointer StaryuDescription                                  ; 0x0984
 	textpointer StarmieName                                        ; 0x0985

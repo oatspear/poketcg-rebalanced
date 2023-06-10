@@ -1559,8 +1559,8 @@ StaryuName: ; 5c2d7 (17:42d7)
 	text "Staryu"
 	done
 
-SlapName: ; 5c2df (17:42df)
-	text "Slap"
+BigSplashName:
+	text "Big Splash"
 	done
 
 StarshapeName: ; 5c2e5 (17:42e5)

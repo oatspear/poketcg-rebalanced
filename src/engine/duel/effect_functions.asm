@@ -6521,7 +6521,7 @@ ReduceDamageTakenBy20Effect:
 	call ApplySubstatus1ToAttackingCard
 	ret
 
-HurricaneEffect: ; 2ec8e (b:6c8e)
+HurricaneEffect:
 	call HandleNoDamageOrEffect
 	ret c ; is unaffected
 
@@ -6567,7 +6567,7 @@ HurricaneEffect: ; 2ec8e (b:6c8e)
 	call SwapTurn
 	ret
 
-Whirlwind_SelectEffect: ; 2ecd3 (b:6cd3)
+Whirlwind_SelectEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	cp 2
@@ -6582,10 +6582,30 @@ Whirlwind_SelectEffect: ; 2ecd3 (b:6cd3)
 	ldh [hTemp_ffa0], a
 	ret
 
-Whirlwind_SwitchEffect: ; 2ece9 (b:6ce9)
+Whirlwind_SwitchEffect:
 	ldh a, [hTemp_ffa0]
 	call HandleSwitchDefendingPokemonEffect
 	ret
+
+
+RapidSpin_PlayerSelectEffect:
+	call Teleport_PlayerSelectEffect
+	ldh a, [hTemp_ffa0]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jp Whirlwind_SelectEffect
+
+RapidSpin_AISelectEffect:
+	call Teleport_AISelectEffect
+	ldh a, [hTemp_ffa0]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jp Whirlwind_SelectEffect
+
+RapidSpin_SwitchEffect:
+	call Whirlwind_SwitchEffect
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ldh [hTemp_ffa0], a
+	jp Teleport_SwitchEffect
+
 
 SingEffect: ; 2ed04 (b:6d04)
 	call Sleep50PercentEffect

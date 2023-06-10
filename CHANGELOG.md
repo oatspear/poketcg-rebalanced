@@ -189,9 +189,13 @@
 - **Ember**: can discard any Energy card.
 
 #### Charmeleon
+- Reduced HP from 80 to 70.
 - **Slash**: removed.
 - **Flamethrower**: reduced cost from (FFC) to (FCC); can discard any Energy card.
 - New Pokémon Power: **Firestarter**: once per turn, attach a Fire Energy from the Discard Pile to one Pokémon.
+
+#### Charizard
+- Reduced HP from 120 to 100.
 
 #### Vulpix
 - **Confuse Ray**: reduced cost from (FF) to (F).
@@ -199,7 +203,7 @@
 
 #### Ninetales Lv32
 - **Lure**: reduced cost from (CC) to (F); the new Active Pokémon cannot retreat.
-- **Fire Blast**: reduced cost from (FFFF) to (FCC); discard any 2 Energy cards.
+- **Fire Blast**: reduced cost from (FFFF) to (FCC) and damage from 80 to 70; discard any 2 Energy cards.
 
 #### Ninetales Lv35
 - **Mix Up**: removed.
@@ -263,12 +267,16 @@
 - New Pokémon Power: **Rain Dance**: allows playing an additional Water Energy from hand per turn.
 
 #### Blastoise
+- Increased HP from 100 to 120.
 - **Rain Dance**: removed.
 - **Hydro Pump**: reduced cost from (WWW) to (CCC) and damage from 50 to 40; deals 10 bonus damage for each attached Water Energy (uncapped).
 - New attack: **Aqua Launcher** (W): deal 30 damage to one of the opponent's Pokémon.
 
 #### Golduck
 - **Psyshock**: increased damage from 10 to 20.
+
+#### Poliwag
+- New attack: **Call for Friend** (C): put 1 Basic Pokémon on Bench from deck.
 
 #### Poliwhirl
 - **Amnesia**: reduced cost from (WW) to (W).
@@ -335,9 +343,14 @@
 - New attack: **Rend** (CC): 20 damage, +20 if Defending Pokémon is damaged.
 - **Waterfall**: increased cost from (WC) to (WCC) and damage from 30 to 40; also switches Defending Pokémon.
 
+#### Staryu
+- **Slap**: removed.
+- New attack: **Rapid Spin** (C): 10 damage, both players switch Pokémon.
+- New attack: **Big Splash** (WC): 20 damage, draw 1 card.
+
 #### Starmie
 - **Recover**: reduced cost from (WW) to (C) and can discard any type of Energy.
-- **Star Freeze**: reduced cost from (WCC) to (WC).
+- **Star Freeze**: reduced cost from (WCC) to (WC); increased damage from 20 to 30.
 
 #### Magikarp
 - **Tackle**: removed.
@@ -561,6 +574,8 @@
 - **Absorb**: renamed to **Mega Drain**, changed cost from (FFFF) to (WCC) and increased damage from 40 to 50.
 
 #### Abra
+- Increased HP from 30 to 40.
+- **Psyshock**: increased cost from (P) to (PC) and damage from 10 to 20.
 - New attack: **Teleportation Blast** (P): 10 damage, switch with a Benched Pokémon after attacking.
 
 #### Kadabra

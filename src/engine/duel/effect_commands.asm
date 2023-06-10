@@ -147,6 +147,12 @@ AgilityEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Teleport_AISelectEffect
 	db  $00
 
+RapidSpinEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, RapidSpin_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, RapidSpin_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, RapidSpin_AISelectEffect
+	db  $00
+
 BigEggsplosionEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BigEggsplosion_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, BigEggsplosion_AIEffect

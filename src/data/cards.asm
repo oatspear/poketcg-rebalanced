@@ -2468,7 +2468,7 @@ CharmeleonCard:
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db CHARMELEON
-	db 80 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx CharmanderName ; pre-evo name
 
@@ -2519,7 +2519,7 @@ CharizardCard:
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db CHARIZARD
-	db 120 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx CharmeleonName ; pre-evo name
 
@@ -2644,7 +2644,7 @@ NinetalesLv32Card:
 	tx FireBlastName ; name
 	tx Discard2EnergiesDescription ; description
 	dw NONE ; description (cont)
-	db 80 ; damage
+	db 70 ; damage
 	db DAMAGE_NORMAL ; category
 	dw FireBlastEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -3386,7 +3386,7 @@ BlastoiseCard:
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db BLASTOISE
-	db 100 ; hp
+	db 120 ; hp
 	db STAGE2 ; stage
 	tx WartortleName ; pre-evo name
 
@@ -3544,6 +3544,20 @@ PoliwagCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx CallForFriendName ; name
+	tx CallForFriendDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw CallForFriendEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
 	energy WATER, 1 ; energies
 	tx WaterGunName ; name
 	tx WaterGunDescription ; description
@@ -3556,20 +3570,6 @@ PoliwagCard:
 	db NONE ; flags 3
 	db MAX_ENERGY_BOOST_IS_LIMITED
 	db ATK_ANIM_WATER_GUN ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -4309,32 +4309,32 @@ StaryuCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
-	tx SlapName ; name
-	dw NONE ; description
+	energy COLORLESS, 1 ; energies
+	tx RapidSpinName ; name
+	tx BothPlayersSwitchDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw RapidSpinEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
+	energy WATER, 1, COLORLESS, 1 ; energies
+	tx BigSplashName ; name
+	tx Draw1CardDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	dw Draw1CardEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -4378,7 +4378,7 @@ StarmieCard:
 	tx StarFreezeName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw StarmieStarFreezeEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
@@ -7342,25 +7342,11 @@ AbraCard:
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db ABRA
-	db 30 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 1 ; energies
-	tx PsyshockName ; name
-	tx MayInflictParalysisDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PSYCHIC_HIT ; animation
-
-	; attack 2
 	energy PSYCHIC, 1 ; energies
 	tx TeleportBlastName ; name
 	tx SwitchThisPokemonDescription ; description
@@ -7373,6 +7359,20 @@ AbraCard:
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	tx PsyshockName ; name
+	tx MayInflictParalysisDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Paralysis50PercentEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PSYCHIC_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
