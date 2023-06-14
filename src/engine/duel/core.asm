@@ -35,6 +35,35 @@ StartDuel_VSAIOpp:
 	ld [wPlayerDuelistType], a
 	ld a, [wNPCDuelDeckID]
 	ld [wOpponentDeckID], a
+
+; OATS DEBUG player override AI
+	ld a, [wTextSpeed]
+	cp 1
+	jr nz, .normal_loading_sequence
+; debug sequence
+; AI (player) gets second player deck
+	ld a, 1
+	call LoadSpecificPlayerDeck
+	call SwapTurn
+	call LoadOpponentDeck
+	ld hl, wPlayerDeck
+	ld de, wOpponentDeck
+	ld c, DECK_SIZE
+.loop_deck
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .loop_deck
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	ld a, DUELIST_TYPE_PLAYER
+	ld [hl], a
+	call SwapTurn
+	call LoadPlayerDeck
+	jr StartDuel
+
+.normal_loading_sequence
 	call LoadPlayerDeck
 	call SwapTurn
 	call LoadOpponentDeck
@@ -6325,11 +6354,17 @@ DiscardSavedDuelData:
 	call DisableSRAM
 	ret
 
+; loads a player deck using index a instead of selected deck
+LoadSpecificPlayerDeck:
+	call EnableSRAM
+	jr LoadPlayerDeck.got_deck
+
 ; loads a player deck (sDeck*Cards) from SRAM to wPlayerDeck
 ; sCurrentlySelectedDeck determines which sDeck*Cards source (0-3)
 LoadPlayerDeck:
 	call EnableSRAM
 	ld a, [sCurrentlySelectedDeck]
+.got_deck
 	ld l, a
 	ld h, sDeck2Cards - sDeck1Cards
 	call HtimesL
