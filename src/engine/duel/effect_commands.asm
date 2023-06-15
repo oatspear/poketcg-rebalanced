@@ -1400,7 +1400,7 @@ PokemonTraderEffectCommands:
 	db  $00
 
 PokedexEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Pokedex_DeckCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Pokedex_OrderDeckCardsEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Pokedex_PlayerSelection
 	db  $00

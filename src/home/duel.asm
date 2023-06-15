@@ -435,7 +435,8 @@ CreateDeckCardList:
 ;   b: number of cards to look at
 ; output:
 ;   c: number of cards in deck
-;   a: number of cards in deck
+;   b: number of cards to look at (capped by deck size)
+;   a: number of cards to look at (capped by deck size)
 ;   carry: set if the turn holder has no cards left in the deck
 ; assumes:
 ;   - input: 0 < b < $80
@@ -448,9 +449,14 @@ CreateDeckCardListTopNCards:
 	sub [hl] ; a = number of cards in deck
 	ld c, a  ; c = DECK_SIZE - [DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK]
 	cp b
-	jr nc, CreateDeckCardList.got_number_cards
+	push bc
+	jr nc, .got_number_cards
 	ld b, a ; b = DECK_SIZE - [DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK]
-	jr CreateDeckCardList.got_number_cards
+.got_number_cards
+	call CreateDeckCardList.got_number_cards
+	pop bc
+	ld a, b
+	ret
 
 ; fill wDuelTempList with the turn holder's energy cards
 ; in the arena or in a bench slot (their 0-59 deck indexes).

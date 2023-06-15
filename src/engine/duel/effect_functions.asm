@@ -188,6 +188,7 @@ CheckIfDeckIsEmpty:
 	ccf
 	ret
 
+
 ; returns carry if there are less than 4 cards in hand
 CheckHandSizeGreaterThan3:
 	ld c, 4
@@ -8642,14 +8643,6 @@ CreatePokemonCardListFromHand: ; 2f8b6 (b:78b6)
 	scf
 	ret
 
-; return carry if no cards in deck
-Pokedex_DeckCheck: ; 2f8e1 (b:78e1)
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ldtx hl, NoCardsLeftInTheDeckText
-	cp DECK_SIZE
-	ccf
-	ret
 
 Pokedex_PlayerSelection: ; 2f8ed (b:78ed)
 ; print text box
