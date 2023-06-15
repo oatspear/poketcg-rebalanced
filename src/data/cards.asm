@@ -10457,7 +10457,7 @@ EnergySwitchCard:
 	dw NONE ; description (cont)
 
 SwitchCard:
-	db TYPE_TRAINER_SUPPORTER ; type
+	db TYPE_TRAINER ; type
 	gfx ScoopUpCardGfx ; gfx
 	tx SwitchName ; name
 	db CIRCLE ; rarity

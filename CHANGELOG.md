@@ -787,6 +787,9 @@
 #### Super Energy Removal
 - Removed.
 
+#### Switch
+- No longer a Supporter card.
+
 #### New Trainer Cards
 - New card: **Energy Switch**: moves a Basic energy from 1 Pokémon to another.
 - New card: **Energy Recycler**: shuffles up to 4 Basic energy from discard pile into deck.
