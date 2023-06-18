@@ -329,32 +329,6 @@ PayDayEffect: ; 2ebe8 (b:6be8)
 	ret
 
 
-Old_ProfessorOakEffect:
-; discard hand
-	call CreateHandCardList
-	call SortCardsInDuelTempListByID
-	ld hl, wDuelTempList
-.discard_loop
-	ld a, [hli]
-	cp $ff
-	jr z, .draw_cards
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
-	jr .discard_loop
-
-.draw_cards
-	ld a, 7
-	bank1call DisplayDrawNCardsScreen
-	ld c, 7
-.draw_loop
-	call DrawCardFromDeck
-	jr c, .done
-	call AddCardToHand
-	dec c
-	jr nz, .draw_loop
-.done
-	ret
-
 
 MegaDrainEffect: ; 2cb0f (b:4b0f)
 	ld hl, wDealtDamage

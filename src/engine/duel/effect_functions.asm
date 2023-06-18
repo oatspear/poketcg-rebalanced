@@ -7818,8 +7818,36 @@ CheckIfCardIsBasicEnergy: ; 2f38f (b:738f)
 	scf
 	ret
 
-; shuffle hand back into deck and draw N cards
+
 ProfessorOakEffect:
+; discard hand
+	call CreateHandCardList
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+.discard_loop
+	ld a, [hli]
+	cp $ff
+	jr z, .draw_cards
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+	jr .discard_loop
+
+.draw_cards
+	ld a, 7
+	bank1call DisplayDrawNCardsScreen
+	ld c, 7
+.draw_loop
+	call DrawCardFromDeck
+	jr c, .done
+	call AddCardToHand
+	dec c
+	jr nz, .draw_loop
+.done
+	ret
+
+
+; shuffle hand back into deck and draw N cards
+New_ProfessorOakEffect:
 	ld a, 5
 	call ShuffleHandAndDrawNCards
 	ret

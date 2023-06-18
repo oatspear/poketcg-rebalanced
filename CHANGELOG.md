@@ -757,9 +757,6 @@
 
 ### Trainer Cards
 
-#### Professor Oak
-- Shuffles your hand into the deck and draws 5 cards.
-
 #### Imposter Professor Oak
 - Both players shuffle their hands into their decks and draw 4 cards.
 
