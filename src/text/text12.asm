@@ -832,18 +832,31 @@ ProfessorOakName:
 	done
 
 ProfessorOakDescription:
-	text "Shuffle your hand into your deck,"
-	line "then draw 5 cards."
+	text "Discard your hand. Draw 7 cards."
 	done
 
-ImposterProfessorOakName: ; 63463 (18:7463)
+; ProfessorOakDescription:
+; 	text "Shuffle your hand into your deck,"
+; 	line "then draw 5 cards."
+; 	done
+
+ImposterProfessorOakName:
 	text "Imposter Professor Oak"
 	done
 
-ImposterProfessorOakDescription: ; 6347b (18:747b)
-	text "Both players shuffle their hands"
-	line "into their decks, then draw 4 cards."
+ImposterProfessorOakDescription:
+	text "Each player shuffles their hand and"
+	line "puts it on the bottom of their deck."
+	line "If any cards were returned this way,"
+	line "your opponent draws 4 cards, and you"
+	line "draw 3 cards (5 cards if you have"
+	line "more Prize cards remaining)."
 	done
+
+; JudgeDescription:
+; 	text "Both players shuffle their hands"
+; 	line "into their decks, then draw 4 cards."
+; 	done
 
 BillName: ; 634cd (18:74cd)
 	text "Bill"

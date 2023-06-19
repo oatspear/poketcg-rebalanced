@@ -110,6 +110,18 @@ IsPlayerTurn:
 	scf
 	ret
 
+
+; Returns carry if the opponent has taken more prize cards than the turn holder.
+CheckTurnHolderHasMorePrizeCardsRemaining:
+	call CountPrizes
+	ld c, a
+	call SwapTurn
+	call CountPrizes
+	call SwapTurn
+	cp c
+	ret
+
+
 ; returns carry if Play Area has no damage counters
 ; and sets the error message in hl
 CheckIfPlayAreaHasAnyDamage:
@@ -2826,16 +2838,10 @@ RagingStorm_AIEffect:
 
 ; +50 damage if the opponent has less Prize cards than the user
 RagingStorm_DamageBoostEffect:
-	call CountPrizes
-	ld c, a
-	call SwapTurn
-	call CountPrizes
-	call SwapTurn
-	cp c
+	call CheckTurnHolderHasMorePrizeCardsRemaining
 	ret nc  ; opponent Prizes >= user Prizes
 	ld a, 50
-	call AddToDamage
-	ret
+	jp AddToDamage
 
 Crabhammer_AIEffect:
 	call Crabhammer_DamageBoostEffect
@@ -7619,6 +7625,44 @@ SelectedCards_MoveWithinPlayArea:
 	ret
 
 
+; add a card to the bottom of the turn holder's deck
+; input:
+;   a: the deck index (0-59) of the card
+ReturnCardToBottomOfDeck:
+	push af
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	dec a
+	ld [hl], a  ; decrement number of cards not in deck
+	ld a, DECK_SIZE
+	sub [hl]
+	dec a    ; how many cards there were in the deck before
+	ld b, a  ; how many cards to shift position
+	or a
+	jr z, .done_shift
+	ld a, [hl]
+	add DUELVARS_DECK_CARDS
+	ld l, a  ; point to the new top deck position
+	ld e, l
+	ld d, h
+	inc hl   ; point to the actual top deck card
+; shift all cards up to make space at the bottom
+.loop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .loop
+.done_shift
+	pop af
+	ld l, DUELVARS_DECK_CARDS + DECK_SIZE - 1  ; last card
+	ld [hl], a ; set the last deck card
+	ld l, a
+	ld [hl], CARD_LOCATION_DECK
+	ld a, l
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; AI Logic
 ; ------------------------------------------------------------------------------
@@ -7848,9 +7892,10 @@ ProfessorOakEffect:
 
 ; shuffle hand back into deck and draw N cards
 New_ProfessorOakEffect:
+	call ShuffleHandIntoDeckExcludeSelf
 	ld a, 5
-	call ShuffleHandAndDrawNCards
-	ret
+	jp DrawNCards_NoCardDetails
+
 
 Potion_PlayerSelection:
 	bank1call HasAlivePokemonInPlayArea
@@ -7990,8 +8035,8 @@ Defender_AttachDefenderEffect: ; 2f499 (b:7499)
 	ret c
 
 	ldh a, [hTemp_ffa0]
-	call Func_2c10b
-	ret
+	jp Func_2c10b
+
 
 ; return carry if Bench is full.
 MysteriousFossil_BenchCheck: ; 2f4b3 (b:74b3)
@@ -8004,29 +8049,57 @@ MysteriousFossil_BenchCheck: ; 2f4b3 (b:74b3)
 
 MysteriousFossil_PlaceInPlayAreaEffect: ; 2f4bf (b:74bf)
 	ldh a, [hTempCardIndex_ff9f]
-	call PutHandPokemonCardInPlayArea
-	ret
+	jp PutHandPokemonCardInPlayArea
 
 
 ImposterProfessorOakEffect:
-	ld a, 4  ; player draws 4 cards
-	call ShuffleHandAndDrawNCards
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	dec a  ; exclude this card
+	or a
+	jr nz, .has_cards  ; at least 1 player has cards in hand
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	or a
+	ret z  ; neither player has any cards in hand
+
+.has_cards
+	call ShuffleHandAndReturnToBottomOfDeckExcludeSelf
+	call CheckTurnHolderHasMorePrizeCardsRemaining
+	ld a, 3  ; player draws 3 cards
+	jr nc, .draw_cards
+	ld a, 5  ; player is losing, draws 5 cards
+.draw_cards
+	call DrawNCards_NoCardDetails
 	call SwapTurn
+	call ShuffleHandAndReturnToBottomOfDeck
 	ld a, 4  ; opponent draws 4 cards
-	call ShuffleHandAndDrawNCards
+	call DrawNCards_NoCardDetails
+	jp SwapTurn
+
+
+JudgeEffect:
+	call ShuffleHandIntoDeckExcludeSelf
+	ld a, 4  ; player draws 4 cards
+	call DrawNCards_NoCardDetails
 	call SwapTurn
-	ret
+	call ShuffleHandIntoDeck
+	ld a, 4  ; opponent draws 4 cards
+	call DrawNCards_NoCardDetails
+	jp SwapTurn
 
-; shuffle all cards currently in hand back into the deck
-; then draw N cards
-; input:
-;  a - how many cards to draw
-ShuffleHandAndDrawNCards:
-	push af
+
+; Returns all hand cards (excluding the Trainer card currently in use) to
+; the turn holder's deck and then shuffles the deck.
+ShuffleHandIntoDeckExcludeSelf:
+	call CreateHandCardListExcludeSelf
+	jr ShuffleHandIntoDeck.got_card_list
+
+; Returns all hand cards to the turn holder's deck and then shuffles the deck.
+ShuffleHandIntoDeck:
 	call CreateHandCardList
-	call SortCardsInDuelTempListByID
-
-; first return all cards in hand to the deck.
+.got_card_list
+	; call SortCardsInDuelTempListByID
 	ld hl, wDuelTempList
 .loop_return_deck
 	ld a, [hli]
@@ -8035,20 +8108,43 @@ ShuffleHandAndDrawNCards:
 	call RemoveCardFromHand
 	call ReturnCardToDeck
 	jr .loop_return_deck
-
-; then draw N cards from the deck.
 .done_return
-	call SyncShuffleDeck
-	pop af  ; a contains the number of cards from the input
+	jp SyncShuffleDeck
+
+
+; Shuffles all hand cards (excluding the Trainer card in use) and then puts
+; those cards at the bottom of the turn holder's deck.
+ShuffleHandAndReturnToBottomOfDeckExcludeSelf:
+	call CreateHandCardListExcludeSelf
+	jr ShuffleHandAndReturnToBottomOfDeck.got_card_list
+
+; Shuffles all hand cards and then puts those cards at the bottom of
+; the turn holder's deck.
+ShuffleHandAndReturnToBottomOfDeck:
+	call CreateHandCardList
+.got_card_list
+	ld hl, wDuelTempList
+	call ShuffleCards
+.loop_return_deck
+	ld a, [hli]
+	cp $ff
+	ret z
+	call RemoveCardFromHand
+	call ReturnCardToBottomOfDeck
+	jr .loop_return_deck
+
+
+; input:
+;   a: how many cards to draw
+DrawNCards_NoCardDetails:
 	ld c, a  ; store in c to use later
 	bank1call DisplayDrawNCardsScreen  ; preserves bc
 .loop_draw
 	call DrawCardFromDeck
-	jr c, .done
+	ret c
 	call AddCardToHand
 	dec c
 	jr nz, .loop_draw
-.done
 	ret
 
 

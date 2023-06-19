@@ -758,7 +758,7 @@
 ### Trainer Cards
 
 #### Imposter Professor Oak
-- Both players shuffle their hands into their decks and draw 4 cards.
+- Both players shuffle their hands and put them on the bottom of their decks. Then opponent draws 4, player draws 3 (or 5 if losing on Prizes).
 
 #### Pokéball
 - No coin flip; can only choose Basic Pokémon.
