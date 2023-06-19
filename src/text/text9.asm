@@ -1226,6 +1226,13 @@ PokemonPowerDescriptionCont:
 	line "Paralyzed."
 	done
 
+UniquePokemonPowerDescriptionCont:
+	text "This power can't be used if this"
+	line "Pokémon is Asleep, Confused, or"
+	line "Paralyzed. You can only use one"
+	line "Power with this name each turn."
+	done
+
 BulbasaurName: ; 57552 (15:7552)
 	text "Bulbasaur"
 	done

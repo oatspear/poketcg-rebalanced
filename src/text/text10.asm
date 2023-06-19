@@ -795,9 +795,9 @@ FirestarterName:
 	done
 
 FirestarterDescription:
-	text "Once per turn, you may attach a"
-	line "<FIRE> Energy card from your Discard"
-	line "Pile to one of your Benched Pokémon."
+	text "You may attach a <FIRE> Energy from"
+	line "your Discard Pile to 1 of your"
+	line "Benched Pokémon."
 	done
 
 FlameName: ; 59f42 (16:5f42)
@@ -1149,11 +1149,10 @@ RainDanceName: ; 5b159 (16:7159)
 	done
 
 RainDanceDescription: ; 5b165 (16:7165)
-	text "Once during your turn, you may"
-	line "attach 1 <WATER> Energy card to 1 of"
-	line "your Pokémon. (This doesn't use"
-	line "up your 1 Energy card attachment"
-	line "for the turn.)"
+	text "You may attach 1 extra <WATER> Energy"
+	line "to 1 of your Pokémon each turn."
+	line "(This doesn't use up your 1 Energy"
+	line "card attachment for the turn.)"
 	done
 
 AquaLauncherName:

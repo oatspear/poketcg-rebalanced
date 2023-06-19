@@ -2476,7 +2476,7 @@ CharmeleonCard:
 	energy 0 ; energies
 	tx FirestarterName ; name
 	tx FirestarterDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
+	tx UniquePokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw FirestarterEffectCommands ; effect commands
@@ -3343,7 +3343,7 @@ WartortleCard:
 	energy 0 ; energies
 	tx RainDanceName ; name
 	tx RainDanceDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
+	tx UniquePokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw RainDanceEffectCommands ; effect commands
