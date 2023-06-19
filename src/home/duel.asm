@@ -740,7 +740,7 @@ GetCardIDFromDeckIndex:
 	pop af
 	ret
 
-; remove card c from wDuelTempList (it contains a $ff-terminated list of deck indexes)
+; remove card a from wDuelTempList (it contains a $ff-terminated list of deck indexes)
 ; returns carry if no matches were found.
 RemoveCardFromDuelTempList:
 	push hl

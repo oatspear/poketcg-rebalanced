@@ -7629,6 +7629,7 @@ SelectedCards_MoveWithinPlayArea:
 ; input:
 ;   a: the deck index (0-59) of the card
 ReturnCardToBottomOfDeck:
+	push hl
 	push af
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
@@ -7660,6 +7661,7 @@ ReturnCardToBottomOfDeck:
 	ld l, a
 	ld [hl], CARD_LOCATION_DECK
 	ld a, l
+	pop hl
 	ret
 
 

@@ -275,10 +275,23 @@ CreateListOfEnergyAttachedToArena: ; 2c199 (b:4199)
 ; Hand Lists
 ; ------------------------------------------------------------------------------
 
+; Creates in wDuelTempList a list of the cards in hand except for the
+; Trainer card currently in use, which should be at [hTempCardIndex_ff9f].
+; Just like CreateHandCardList, returns carry if there are no cards in hand,
+; and returns in a the number of cards in wDuelTempList.
 CreateHandCardListExcludeSelf:
 	call CreateHandCardList
+	ret c
+	push af  ; save the number of cards in hand
 	ldh a, [hTempCardIndex_ff9f]
-	jp RemoveCardFromDuelTempList
+	call RemoveCardFromDuelTempList
+	jr c, .no_match
+	pop af
+	dec a  ; discount the removed card
+	ret
+.no_match
+	pop af
+	ret
 
 
 ; ------------------------------------------------------------------------------
