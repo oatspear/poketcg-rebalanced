@@ -2852,7 +2852,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DoTheWaveDescription                               ; 0x0b11
 	textpointer WigglytuffDescription                              ; 0x0b12
 	textpointer MeowthName                                         ; 0x0b13
-	textpointer CatPunchName                                       ; 0x0b14
 	textpointer ScratchCatName                                     ; 0x0b16
 	textpointer MeowthLv14Description                             ; 0x0b17
 	textpointer PayDayName                                         ; 0x0b18

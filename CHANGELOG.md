@@ -688,11 +688,13 @@
 - New Pokémon Power: **Helping Hand**: when on the Bench, heal special conditions from the Active Pokémon.
 
 #### Meowth Lv14
+- **Cat Punch**: removed.
 - New attack: **Collect** (C): draw 2 cards.
-- **Cat Punch**: 20 damage, no additional effect.
+- New attack: **Scratch** (CC): 20 damage.
 
 #### Meowth Lv15
 - **Pay Day**: reduced cost from (CC) to (C), draws a card without coin flip.
+- New attack: **Scavenge** (C): put a non-Supporter Trainer from discard pile into hand.
 
 #### Persian
 - **Scratch**: removed.

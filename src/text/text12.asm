@@ -233,10 +233,6 @@ MeowthName: ; 62274 (18:6274)
 	text "Meowth"
 	done
 
-CatPunchName: ; 6227c (18:627c)
-	text "Cat Punch"
-	done
-
 ScratchCatName: ; 62359 (18:6359)
 	text "Scratch Cat"
 	done
