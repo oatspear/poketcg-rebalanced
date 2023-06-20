@@ -2,7 +2,7 @@
 
 ## Development
 
-This Pokémon TCG (GB) mod has been developed by Oatspear.
+This Pokémon TCG (GB) mod was made by Oatspear.
 
 ## Design and Discussion
 
