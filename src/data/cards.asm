@@ -10358,10 +10358,10 @@ ImakuniCard:
 	dw NONE ; description (cont)
 
 PokemonTraderCard:
-	db TYPE_TRAINER_SUPPORTER ; type
-	gfx PokemonTraderCardGfx ; gfx
+	db TYPE_TRAINER ; type
+	gfx SwitchCardGfx ; gfx
 	tx PokemonTraderName ; name
-	db STAR ; rarity
+	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db POKEMON_TRADER
 	dw PokemonTraderEffectCommands ; effect commands

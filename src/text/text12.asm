@@ -831,11 +831,6 @@ ProfessorOakDescription:
 	text "Discard your hand. Draw 7 cards."
 	done
 
-; ProfessorOakDescription:
-; 	text "Shuffle your hand into your deck,"
-; 	line "then draw 5 cards."
-; 	done
-
 ImposterProfessorOakName:
 	text "Imposter Professor Oak"
 	done
@@ -872,16 +867,21 @@ MrFujiDescription: ; 634eb (18:74eb)
 	line "to it into your deck."
 	done
 
-LassName: ; 63544 (18:7544)
+LassName:
 	text "Lass"
 	done
 
-LassDescription: ; 6354a (18:754a)
-	text "You and your opponent show each"
-	line "other your hands, then shuffle all"
-	line "the Trainer cards from your hands"
-	line "into your decks."
+LassDescription:
+	text "Shuffle your hand into your deck."
+	line "Then, draw 5 cards."
 	done
+
+; LassDescription:
+; 	text "You and your opponent show each"
+; 	line "other your hands, then shuffle all"
+; 	line "the Trainer cards from your hands"
+; 	line "into your decks."
+; 	done
 
 ImakuniName: ; 635c1 (18:75c1)
 	text "Imakuni?"
@@ -896,16 +896,15 @@ ImakuniDescription: ; 635cb (18:75cb)
 	line "world,”Who is cuter-Pikachu or me?”"
 	done
 
-PokemonTraderName: ; 6369f (18:769f)
+PokemonTraderName:
 	text "Pokémon Trader"
 	done
 
-PokemonTraderDescription: ; 636af (18:76af)
-	text "Trade 1 of the Basic Pokémon or"
-	line "Evolution cards in your hand for 1"
-	line "of the Basic Pokémon or Evolution"
-	line "cards from your deck. Show both"
-	line "cards to your opponent."
+PokemonTraderDescription:
+	text "Reveal a Pokémon card in your hand"
+	line "and put it on top of your deck."
+	line "Search your deck for a Pokémon card,"
+	line "reveal it and put it into your hand."
 	line "Shuffle your deck afterward."
 	done
 

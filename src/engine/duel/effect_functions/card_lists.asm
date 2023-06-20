@@ -270,6 +270,76 @@ CreateListOfEnergyAttachedToArena: ; 2c199 (b:4199)
 ; Deck Lists
 ; ------------------------------------------------------------------------------
 
+CreateItemCardListFromDeck:
+	ld c, TYPE_TRAINER
+	jr CreateTrainerCardListFromDeck_
+
+; makes a list in wDuelTempList with the deck indices
+; of Trainer cards found in Turn Duelist's Deck.
+; returns carry set if no Trainer cards found, and loads
+; corresponding text to notify this.
+; input:
+;    c - trainer card subtype to look for, or $ff for any trainer card
+CreateTrainerCardListFromDeck:
+	ld c, $ff
+	; fallthrough
+
+CreateTrainerCardListFromDeck_:
+; get number of cards in Deck
+; and have hl point to the top of the
+; Deck list in wOpponentDeckCards.
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	ld a, DECK_SIZE
+	sub [hl]
+	ld b, a  ; number of cards in deck
+	ld a, [hl]
+	add DUELVARS_DECK_CARDS
+	ld l, a  ; top of deck
+	dec hl
+
+	ld de, wDuelTempList
+	inc b
+	jr .next_card
+
+.check_trainer
+	ld a, [hl]
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+; OATS begin support trainer subtypes
+	cp TYPE_TRAINER
+	jr c, .next_card
+; OATS end support trainer subtypes
+
+	ld a, c
+	cp $ff  ; anything goes
+	jr z, .store
+	ld a, [wLoadedCard2Type]
+	cp c  ; apply filter
+	jr nz, .next_card
+
+.store
+	ld a, [hl]
+	ld [de], a
+	inc de
+
+.next_card
+	inc hl
+	dec b
+	jr nz, .check_trainer
+
+	ld a, $ff ; terminating byte
+	ld [de], a
+	ld a, [wDuelTempList]
+	cp $ff
+	jr z, .no_trainers
+	or a
+	ret
+.no_trainers
+	ldtx hl, ThereAreNoTrainerCardsInDeckText
+	scf
+	ret
+
 
 ; ------------------------------------------------------------------------------
 ; Hand Lists

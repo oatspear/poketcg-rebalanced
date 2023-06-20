@@ -1233,6 +1233,11 @@ UniquePokemonPowerDescriptionCont:
 	line "Power with this name each turn."
 	done
 
+ThereAreNoTrainerCardsInDeckText:
+	text "There are no Trainer cards in"
+	line "the deck."
+	done
+
 BulbasaurName: ; 57552 (15:7552)
 	text "Bulbasaur"
 	done

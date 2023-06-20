@@ -2068,6 +2068,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DoubleColorlessEnergyDescription                   ; 0x0809
 	textpointer PokemonPowerDescriptionCont
 	textpointer UniquePokemonPowerDescriptionCont
+	textpointer ThereAreNoTrainerCardsInDeckText
 	textpointer BulbasaurName                                      ; 0x080a
 	textpointer LeechSeedName                                      ; 0x080b
 	textpointer Heal10DamageDescription                            ; 0x080c

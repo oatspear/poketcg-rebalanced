@@ -7893,7 +7893,7 @@ ProfessorOakEffect:
 
 
 ; shuffle hand back into deck and draw N cards
-New_ProfessorOakEffect:
+LassEffect:
 	call ShuffleHandIntoDeckExcludeSelf
 	ld a, 5
 	jp DrawNCards_NoCardDetails
@@ -7963,34 +7963,31 @@ GamblerEffect: ; 2f3f9 (b:73f9)
 	ret
 
 ; return carry if not enough cards in hand to discard
-; or if there are no cards in the Discard Pile
-ItemFinder_HandDiscardPileCheck: ; 2f43b (b:743b)
+ItemFinder_HandDiscardPileCheck:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetTurnDuelistVariable
 	ldtx hl, NotEnoughCardsInHandText
 	cp 3
-	ret c
-	call CreateTrainerCardListFromDiscardPile
 	ret
 
-ItemFinder_PlayerSelection: ; 2f44a (b:744a)
+ItemFinder_PlayerSelection:
 	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
 	; was operation cancelled?
 	call c, CancelSupporterCard
 	ret c
 
 ; cards were selected to discard from hand.
-; now to choose a Trainer card from Discard Pile.
-	call CreateTrainerCardListFromDiscardPile
+; now to choose a Trainer card from Deck.
+	call CreateItemCardListFromDeck
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseCardToPlaceInHandText
-	ldtx de, PlayerDiscardPileText
+	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
 	bank1call DisplayCardList
 	ldh [hTempList + 2], a ; placed after the 2 cards selected to discard
 	ret
 
-ItemFinder_DiscardAddToHandEffect: ; 2f463 (b:7463)
+ItemFinder_DiscardAddToHandEffect:
 ; discard cards from hand
 	ld hl, hTempList
 	ld a, [hli]
@@ -8000,7 +7997,8 @@ ItemFinder_DiscardAddToHandEffect: ; 2f463 (b:7463)
 	call RemoveCardFromHand
 	call PutCardInDiscardPile
 
-; place card from Discard Pile to hand
+; place card from Deck into hand
+; FIXME
 	ld a, [hl]
 	call MoveDiscardPileCardToHand
 	call AddCardToHand
@@ -8649,7 +8647,7 @@ ScoopUp_ReturnToHandEffect: ; 2f7c3 (b:77c3)
 
 ; return carry if no other cards in hand,
 ; or if there are no Pokemon cards in hand.
-PokemonTrader_HandDeckCheck: ; 2f826 (b:7826)
+PokemonTrader_HandDeckCheck:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetTurnDuelistVariable
 	ldtx hl, ThereAreNoCardsInHandThatYouCanChangeText
@@ -8659,7 +8657,7 @@ PokemonTrader_HandDeckCheck: ; 2f826 (b:7826)
 	ldtx hl, ThereAreNoCardsInHandThatYouCanChangeText
 	ret
 
-PokemonTrader_PlayerHandSelection: ; 2f838 (b:7838)
+PokemonTrader_PlayerHandSelection:
 ; print text box
 	ldtx hl, ChooseCardFromYourHandToSwitchText
 	call DrawWideTextBox_WaitForInput
@@ -8677,7 +8675,7 @@ PokemonTrader_PlayerHandSelection: ; 2f838 (b:7838)
 	ldh [hTemp_ffa0], a
 	ret
 
-PokemonTrader_PlayerDeckSelection: ; 2f853 (b:7853)
+PokemonTrader_PlayerDeckSelection:
 ; temporarily place chosen hand card in deck
 ; so it can be potentially chosen to be traded.
 	ldh a, [hTemp_ffa0]
@@ -8712,7 +8710,7 @@ PokemonTrader_PlayerDeckSelection: ; 2f853 (b:7853)
 	or a
 	ret
 
-PokemonTrader_TradeCardsEffect: ; 2f88d (b:788d)
+PokemonTrader_TradeCardsEffect:
 ; place hand card in deck
 	ldh a, [hTemp_ffa0]
 	call RemoveCardFromHand
@@ -8942,94 +8940,6 @@ BillEffect: ; 2f9c4 (b:79c4)
 .done
 	ret
 
-LassEffect: ; 2f9e3 (b:79e3)
-; first discard Lass card that was used
-	ldh a, [hTempCardIndex_ff9f]
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
-
-	ldtx hl, PleaseCheckTheOpponentsHandText
-	call DrawWideTextBox_WaitForInput
-
-	call .DisplayLinkOrCPUHand
-	; do for non-Turn Duelist
-	call SwapTurn
-	call .ShuffleDuelistHandTrainerCardsInDeck
-	call SwapTurn
-	; do for Turn Duelist
-;	fallthrough
-
-.ShuffleDuelistHandTrainerCardsInDeck
-	call CreateHandCardList
-	call SortCardsInDuelTempListByID
-	xor a
-	ldh [hCurSelectionItem], a
-	ld hl, wDuelTempList
-
-; go through all cards in hand
-; and any Trainer card is returned to deck.
-.loop_hand
-	ld a, [hli]
-	ldh [hTempCardIndex_ff98], a
-	cp $ff
-	jr z, .done
-	call GetCardIDFromDeckIndex
-	call GetCardType
-; OATS begin support trainer subtypes
-	cp TYPE_TRAINER
-	jr c, .loop_hand  ; original: jr nz
-; OATS end support trainer subtypes
-	ldh a, [hTempCardIndex_ff98]
-	call RemoveCardFromHand
-	call ReturnCardToDeck
-	push hl
-	ld hl, hCurSelectionItem
-	inc [hl]
-	pop hl
-	jr .loop_hand
-.done
-; show card list
-	ldh a, [hCurSelectionItem]
-	or a
-	call nz, SyncShuffleDeck ; only show list if there were any Trainer cards
-	ret
-
-.DisplayLinkOrCPUHand ; 2fa31 (b:7a31)
-	ld a, [wDuelType]
-	or a
-	jr z, .cpu_opp
-
-; link duel
-	ldh a, [hWhoseTurn]
-	push af
-	ld a, OPPONENT_TURN
-	ldh [hWhoseTurn], a
-	call .DisplayOppHand
-	pop af
-	ldh [hWhoseTurn], a
-	ret
-
-.cpu_opp
-	call SwapTurn
-	call .DisplayOppHand
-	call SwapTurn
-	ret
-
-.DisplayOppHand ; 2fa4f (b:7a4f)
-	call CreateHandCardList
-	jr c, .no_cards
-	bank1call InitAndDrawCardListScreenLayout
-	ldtx hl, ChooseTheCardYouWishToExamineText
-	ldtx de, DuelistHandText
-	bank1call SetCardListHeaderText
-	ld a, A_BUTTON | START
-	ld [wNoItemSelectionMenuKeys], a
-	bank1call DisplayCardList
-	ret
-.no_cards
-	ldtx hl, DuelistHasNoCardsInHandText
-	call DrawWideTextBox_WaitForInput
-	ret
 
 
 PokeBall_PlayerSelection:

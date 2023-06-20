@@ -762,6 +762,12 @@
 #### Imposter Professor Oak
 - Both players shuffle their hands and put them on the bottom of their decks. Then opponent draws 4, player draws 3 (or 5 if losing on Prizes).
 
+#### Lass
+- Shuffle hand into deck and draw 5 cards.
+
+#### Pokémon Trader
+- No longer a Supporter card.
+
 #### Pokéball
 - No coin flip; can only choose Basic Pokémon.
 

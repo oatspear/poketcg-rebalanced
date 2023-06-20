@@ -1489,3 +1489,149 @@ SeadraAgilityEffect: ; 2d08b (b:508b)
 	ld a, SUBSTATUS1_AGILITY
 	call ApplySubstatus1ToAttackingCard
 	ret
+
+
+
+;
+
+LassEffect: ; 2f9e3 (b:79e3)
+; first discard Lass card that was used
+	ldh a, [hTempCardIndex_ff9f]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+
+	ldtx hl, PleaseCheckTheOpponentsHandText
+	call DrawWideTextBox_WaitForInput
+
+	call .DisplayLinkOrCPUHand
+	; do for non-Turn Duelist
+	call SwapTurn
+	call .ShuffleDuelistHandTrainerCardsInDeck
+	call SwapTurn
+	; do for Turn Duelist
+;	fallthrough
+
+.ShuffleDuelistHandTrainerCardsInDeck
+	call CreateHandCardList
+	call SortCardsInDuelTempListByID
+	xor a
+	ldh [hCurSelectionItem], a
+	ld hl, wDuelTempList
+
+; go through all cards in hand
+; and any Trainer card is returned to deck.
+.loop_hand
+	ld a, [hli]
+	ldh [hTempCardIndex_ff98], a
+	cp $ff
+	jr z, .done
+	call GetCardIDFromDeckIndex
+	call GetCardType
+; OATS begin support trainer subtypes
+	cp TYPE_TRAINER
+	jr c, .loop_hand  ; original: jr nz
+; OATS end support trainer subtypes
+	ldh a, [hTempCardIndex_ff98]
+	call RemoveCardFromHand
+	call ReturnCardToDeck
+	push hl
+	ld hl, hCurSelectionItem
+	inc [hl]
+	pop hl
+	jr .loop_hand
+.done
+; show card list
+	ldh a, [hCurSelectionItem]
+	or a
+	call nz, SyncShuffleDeck ; only show list if there were any Trainer cards
+	ret
+
+.DisplayLinkOrCPUHand ; 2fa31 (b:7a31)
+	ld a, [wDuelType]
+	or a
+	jr z, .cpu_opp
+
+; link duel
+	ldh a, [hWhoseTurn]
+	push af
+	ld a, OPPONENT_TURN
+	ldh [hWhoseTurn], a
+	call .DisplayOppHand
+	pop af
+	ldh [hWhoseTurn], a
+	ret
+
+.cpu_opp
+	call SwapTurn
+	call .DisplayOppHand
+	call SwapTurn
+	ret
+
+.DisplayOppHand ; 2fa4f (b:7a4f)
+	call CreateHandCardList
+	jr c, .no_cards
+	bank1call InitAndDrawCardListScreenLayout
+	ldtx hl, ChooseTheCardYouWishToExamineText
+	ldtx de, DuelistHandText
+	bank1call SetCardListHeaderText
+	ld a, A_BUTTON | START
+	ld [wNoItemSelectionMenuKeys], a
+	bank1call DisplayCardList
+	ret
+.no_cards
+	ldtx hl, DuelistHasNoCardsInHandText
+	call DrawWideTextBox_WaitForInput
+	ret
+
+
+
+;
+; return carry if not enough cards in hand to discard
+; or if there are no cards in the Discard Pile
+ItemFinder_HandDiscardPileCheck:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	ldtx hl, NotEnoughCardsInHandText
+	cp 3
+	ret c
+	call CreateTrainerCardListFromDiscardPile
+	ret
+
+ItemFinder_PlayerSelection:
+	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
+	; was operation cancelled?
+	call c, CancelSupporterCard
+	ret c
+
+; cards were selected to discard from hand.
+; now to choose a Trainer card from Discard Pile.
+	call CreateTrainerCardListFromDiscardPile
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, ChooseCardToPlaceInHandText
+	ldtx de, PlayerDiscardPileText
+	bank1call SetCardListHeaderText
+	bank1call DisplayCardList
+	ldh [hTempList + 2], a ; placed after the 2 cards selected to discard
+	ret
+
+ItemFinder_DiscardAddToHandEffect:
+; discard cards from hand
+	ld hl, hTempList
+	ld a, [hli]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+	ld a, [hli]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+
+; place card from Discard Pile to hand
+	ld a, [hl]
+	call MoveDiscardPileCardToHand
+	call AddCardToHand
+	call IsPlayerTurn
+	ret c
+; display card in screen
+	ldh a, [hTempList + 2]
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
+	ret
