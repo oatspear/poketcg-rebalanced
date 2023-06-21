@@ -908,11 +908,24 @@ PokemonTraderDescription:
 	line "Shuffle your deck afterward."
 	done
 
-PokemonBreederName: ; 6376a (18:776a)
+PokemonBreederName:
 	text "Pokémon Breeder"
 	done
 
-PokemonBreederDescription: ; 6377b (18:777b)
+PokemonBreederDescription:
+	text "Choose 1 of your Pokémon in play and"
+	line "remove all Special Conditions on it."
+	line "Search your deck for a card that"
+	line "evolves from that Pokémon and attach"
+	line "it to that Pokémon (even if that"
+	line "Pokémon was played on this turn)."
+	done
+
+RareCandyName:
+	text "Rare Candy"
+	done
+
+RareCandyDescription:
 	text "Put a Stage 2 Evolution card from"
 	line "your hand on the matching Basic"
 	line "Pokémon. You can only play this card"

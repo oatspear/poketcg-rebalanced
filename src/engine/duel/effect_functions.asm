@@ -43,6 +43,176 @@ TossCoinATimes_BankB: ; 2c082 (b:4082)
 INCLUDE "engine/duel/effect_functions/evolution.asm"
 
 
+RareCandy_HandPlayAreaCheck:
+	call CreatePlayableStage2PokemonCardListFromHand
+	jr c, .cannot_evolve
+	bank1call IsPrehistoricPowerActive
+	ret
+.cannot_evolve
+	ldtx hl, ConditionsForEvolvingToStage2NotFulfilledText
+	scf
+	ret
+
+RareCandy_PlayerSelection:
+; create hand list of playable Stage2 cards
+	call CreatePlayableStage2PokemonCardListFromHand
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+
+; handle Player selection of Stage2 card
+	ldtx hl, PleaseSelectCardText
+	ldtx de, DuelistHandText
+	bank1call SetCardListHeaderText
+	bank1call DisplayCardList
+	ret c ; exit if B was pressed
+
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	ldtx hl, ChooseBasicPokemonToEvolveText
+	call DrawWideTextBox_WaitForInput
+
+; handle Player selection of Basic card to evolve
+	bank1call HasAlivePokemonInPlayArea
+.read_input
+	bank1call OpenPlayAreaScreenForSelection
+	ret c ; exit if B was pressed
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ld e, a
+	ldh a, [hTemp_ffa0]
+	ld d, a
+	call CheckIfCanEvolveInto_BasicToStage2
+	jr c, .read_input ; loop back if cannot evolve this card
+	or a
+	ret
+
+RareCandy_EvolveEffect:
+	ldh a, [hTempCardIndex_ff9f]
+	push af
+	ld hl, hTemp_ffa0
+	ld a, [hli]
+	ldh [hTempCardIndex_ff98], a
+	ld a, [hl] ; hTempPlayAreaLocation_ffa1
+	ldh [hTempPlayAreaLocation_ff9d], a
+
+; load the Basic Pokemon card name to RAM
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld hl, wLoadedCard1Name
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call LoadTxRam2
+
+; evolve card and overwrite its stage as STAGE2_WITHOUT_STAGE1
+	ldh a, [hTempCardIndex_ff98]
+	call EvolvePokemonCard
+	ld [hl], STAGE2_WITHOUT_STAGE1
+
+; load Stage2 Pokemon card name to RAM
+	ldh a, [hTempCardIndex_ff98]
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld a, 18
+	call CopyCardNameAndLevel
+	xor a
+	ld [hl], a ; $0 character
+	ld hl, wTxRam2_b
+	ld [hli], a
+	ld [hl], a
+
+; display Pokemon picture and play sfx,
+; print the corresponding card names.
+	bank1call DrawLargePictureOfCard
+	ld a, $5e
+	call PlaySFX
+	ldtx hl, PokemonEvolvedIntoPokemonText
+	call DrawWideTextBox_WaitForInput
+	bank1call OnPokemonPlayedInitVariablesAndPowers
+	pop af
+	ldh [hTempCardIndex_ff9f], a
+	ret
+
+; creates list in wDuelTempList of all Stage2 Pokemon cards
+; in the hand that can evolve a Basic Pokemon card in Play Area
+; through use of Pokemon Breeder.
+; returns carry if that list is empty.
+CreatePlayableStage2PokemonCardListFromHand: ; 2f73e (b:773e)
+	call CreateHandCardList
+	ret c ; return if no hand cards
+
+; check if hand Stage2 Pokemon cards can be made
+; to evolve a Basic Pokemon in the Play Area and, if so,
+; add it to the wDuelTempList.
+	ld hl, wDuelTempList
+	ld e, l
+	ld d, h
+.loop_hand
+	ld a, [hl]
+	cp $ff
+	jr z, .done
+	call .CheckIfCanEvolveAnyPlayAreaBasicCard
+	jr c, .next_hand_card
+	ld a, [hl]
+	ld [de], a
+	inc de
+.next_hand_card
+	inc hl
+	jr .loop_hand
+
+.done
+	ld a, $ff ; terminating byte
+	ld [de], a
+	ld a, [wDuelTempList]
+	cp $ff
+	scf
+	ret z ; return carry if empty
+	; not empty
+	or a
+	ret
+
+; return carry if Stage2 card in a cannot evolve any
+; of the Basic Pokemon in Play Area through Pokemon Breeder.
+.CheckIfCanEvolveAnyPlayAreaBasicCard
+	push de
+	ld d, a
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY
+	jr nc, .set_carry ; skip if not Pokemon card
+	ld a, [wLoadedCard2Stage]
+	cp STAGE2
+	jr nz, .set_carry ; skip if not Stage2
+
+; check if can evolve any Play Area cards
+	push hl
+	push bc
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a
+	ld e, PLAY_AREA_ARENA
+.loop_play_area
+	push bc
+	push de
+	call CheckIfCanEvolveInto_BasicToStage2
+	pop de
+	pop bc
+	jr nc, .done_play_area
+	inc e
+	dec c
+	jr nz, .loop_play_area
+; set carry
+	scf
+.done_play_area
+	pop bc
+	pop hl
+	pop de
+	ret
+.set_carry
+	pop de
+	scf
+	ret
+
+
 ; ------------------------------------------------------------------------------
 
 ; unreferenced
@@ -8359,174 +8529,11 @@ PokemonFlute_PlaceInPlayAreaText: ; 2f68f (b:768f)
 	call SwapTurn
 	ret
 
-PokemonBreeder_HandPlayAreaCheck: ; 2f6b3 (b:76b3)
-	call CreatePlayableStage2PokemonCardListFromHand
-	jr c, .cannot_evolve
-	bank1call IsPrehistoricPowerActive
-	ret
-.cannot_evolve
-	ldtx hl, ConditionsForEvolvingToStage2NotFulfilledText
-	scf
-	ret
 
-PokemonBreeder_PlayerSelection: ; 2f6c1 (b:76c1)
-; create hand list of playable Stage2 cards
-	call CreatePlayableStage2PokemonCardListFromHand
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 
-; handle Player selection of Stage2 card
-	ldtx hl, PleaseSelectCardText
-	ldtx de, DuelistHandText
-	bank1call SetCardListHeaderText
-	bank1call DisplayCardList
-	ret c ; exit if B was pressed
 
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
-	ldtx hl, ChooseBasicPokemonToEvolveText
-	call DrawWideTextBox_WaitForInput
 
-; handle Player selection of Basic card to evolve
-	bank1call HasAlivePokemonInPlayArea
-.read_input
-	bank1call OpenPlayAreaScreenForSelection
-	ret c ; exit if B was pressed
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ld e, a
-	ldh a, [hTemp_ffa0]
-	ld d, a
-	call CheckIfCanEvolveInto_BasicToStage2
-	jr c, .read_input ; loop back if cannot evolve this card
-	or a
-	ret
 
-PokemonBreeder_EvolveEffect: ; 2f6f4 (b:76f4)
-	ldh a, [hTempCardIndex_ff9f]
-	push af
-	ld hl, hTemp_ffa0
-	ld a, [hli]
-	ldh [hTempCardIndex_ff98], a
-	ld a, [hl] ; hTempPlayAreaLocation_ffa1
-	ldh [hTempPlayAreaLocation_ff9d], a
-
-; load the Basic Pokemon card name to RAM
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld hl, wLoadedCard1Name
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call LoadTxRam2
-
-; evolve card and overwrite its stage as STAGE2_WITHOUT_STAGE1
-	ldh a, [hTempCardIndex_ff98]
-	call EvolvePokemonCard
-	ld [hl], STAGE2_WITHOUT_STAGE1
-
-; load Stage2 Pokemon card name to RAM
-	ldh a, [hTempCardIndex_ff98]
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, 18
-	call CopyCardNameAndLevel
-	xor a
-	ld [hl], a ; $0 character
-	ld hl, wTxRam2_b
-	ld [hli], a
-	ld [hl], a
-
-; display Pokemon picture and play sfx,
-; print the corresponding card names.
-	bank1call DrawLargePictureOfCard
-	ld a, $5e
-	call PlaySFX
-	ldtx hl, PokemonEvolvedIntoPokemonText
-	call DrawWideTextBox_WaitForInput
-	bank1call OnPokemonPlayedInitVariablesAndPowers
-	pop af
-	ldh [hTempCardIndex_ff9f], a
-	ret
-
-; creates list in wDuelTempList of all Stage2 Pokemon cards
-; in the hand that can evolve a Basic Pokemon card in Play Area
-; through use of Pokemon Breeder.
-; returns carry if that list is empty.
-CreatePlayableStage2PokemonCardListFromHand: ; 2f73e (b:773e)
-	call CreateHandCardList
-	ret c ; return if no hand cards
-
-; check if hand Stage2 Pokemon cards can be made
-; to evolve a Basic Pokemon in the Play Area and, if so,
-; add it to the wDuelTempList.
-	ld hl, wDuelTempList
-	ld e, l
-	ld d, h
-.loop_hand
-	ld a, [hl]
-	cp $ff
-	jr z, .done
-	call .CheckIfCanEvolveAnyPlayAreaBasicCard
-	jr c, .next_hand_card
-	ld a, [hl]
-	ld [de], a
-	inc de
-.next_hand_card
-	inc hl
-	jr .loop_hand
-
-.done
-	ld a, $ff ; terminating byte
-	ld [de], a
-	ld a, [wDuelTempList]
-	cp $ff
-	scf
-	ret z ; return carry if empty
-	; not empty
-	or a
-	ret
-
-; return carry if Stage2 card in a cannot evolve any
-; of the Basic Pokemon in Play Area through Pokemon Breeder.
-.CheckIfCanEvolveAnyPlayAreaBasicCard
-	push de
-	ld d, a
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
-	jr nc, .set_carry ; skip if not Pokemon card
-	ld a, [wLoadedCard2Stage]
-	cp STAGE2
-	jr nz, .set_carry ; skip if not Stage2
-
-; check if can evolve any Play Area cards
-	push hl
-	push bc
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld c, a
-	ld e, PLAY_AREA_ARENA
-.loop_play_area
-	push bc
-	push de
-	call CheckIfCanEvolveInto_BasicToStage2
-	pop de
-	pop bc
-	jr nc, .done_play_area
-	inc e
-	dec c
-	jr nz, .loop_play_area
-; set carry
-	scf
-.done_play_area
-	pop bc
-	pop hl
-	pop de
-	ret
-.set_carry
-	pop de
-	scf
-	ret
 
 ; return carry if no cards in the Bench.
 ScoopUp_BenchCheck: ; 2f795 (b:7795)

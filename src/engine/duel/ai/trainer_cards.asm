@@ -1657,6 +1657,51 @@ AIPlay_PokemonBreeder:
 
 AIDecide_PokemonBreeder:
 	call IsPrehistoricPowerActive
+	jr c, .no_carry
+
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld b, a
+	ld c, 0
+
+.loop_play_area
+	xor a  ; PLAY_AREA_ARENA
+	add c
+	push bc
+	farcall EvolutionFromDeck_AISelectEffect
+	pop bc
+	ldh a, [hTemp_ffa0]
+	ld [wce1a], a
+	cp $ff  ; no suitable evolution in deck
+	jr nz, .set_carry
+	inc c
+	dec b
+	jr nz, .loop_play_area
+
+.no_carry
+	or a
+	ret
+
+.set_carry
+	xor a  ; PLAY_AREA_ARENA
+	add c
+	scf
+	ret
+
+
+AIPlay_RareCandy:
+	ld a, [wAITrainerCardToPlay]
+	ldh [hTempCardIndex_ff9f], a
+	ld a, [wAITrainerCardParameter]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ld a, [wce1a]
+	ldh [hTemp_ffa0], a
+	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
+	bank1call AIMakeDecision
+	ret
+
+AIDecide_RareCandy:
+	call IsPrehistoricPowerActive
 	jp c, .done
 
 	ld a, 7

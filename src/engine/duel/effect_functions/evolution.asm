@@ -2,9 +2,6 @@
 ; Pokémon Evolution
 ; ------------------------------------------------------------------------------
 
-; NOTE: there's a new SEARCH_EFFECT_* constant for evolutions of Pokémon in play
-
-
 AdaptiveEvolution_AllowEvolutionEffect:
 	ldh a, [hTempPlayAreaLocation_ff9d]  ; triggering Pokémon
 	add DUELVARS_ARENA_CARD_FLAGS
@@ -35,18 +32,23 @@ AdaptiveEvolution_AllowEvolutionEffect:
 ; 	; jr EvolutionFromDeck_PlayerSelectEffect
 ; 	; fallthrough
 
+PokemonBreeder_PlayerSelectEffect:
+	call HandlePlayerSelectionPokemonInPlayArea
+	jr EvolutionFromDeck_PlayerSelectEffect
+
+
 Ascension_PlayerSelectEffect:
 Hatch_PlayerSelectEffect:
 PoisonEvolution_PlayerSelectEffect:
 	xor a  ; PLAY_AREA_ARENA
 	; fallthrough
 
-; Allows the Player to select a card with given ID in the deck.
+; Allows the Player to select an evolution card in the deck.
 ; input:
 ;   a: PLAY_AREA_* of the card to evolve
 EvolutionFromDeck_PlayerSelectEffect:
 ; temporary storage for card location
-	ldh [hTemp_ffa0], a
+	ldh [hTempPlayAreaLocation_ffa1], a
 
 	bank1call IsPrehistoricPowerActive
 	; ldtx hl, UnableToEvolveDueToPrehistoricPowerText
@@ -56,7 +58,7 @@ EvolutionFromDeck_PlayerSelectEffect:
 	call CreateDeckCardList
 	ldtx hl, ChooseEvolvedPokemonFromDeckText
 	ldtx bc, EvolvedPokemonText
-	ldh a, [hTemp_ffa0]
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	; ld d, SEARCHEFFECT_CARD_ID
 	ld d, SEARCHEFFECT_EVOLUTION_OF_PLAY_AREA
 	ld e, a
@@ -73,7 +75,7 @@ EvolutionFromDeck_PlayerSelectEffect:
 	jr c, .try_cancel
 ; d: deck index (0-59) of the card selected to be the evolution target
 	ld d, a
-	ldh a, [hTemp_ffa0]
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 	call CheckIfCanEvolveInto
 	jr nc, .got_card
@@ -98,7 +100,7 @@ EvolutionFromDeck_PlayerSelectEffect:
 ; otherwise, they can safely exit.
 	ld a, DUELVARS_CARD_LOCATIONS
 	call GetTurnDuelistVariable
-	ldh a, [hTemp_ffa0]
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 .loop_deck
 	ld a, [hl]
@@ -121,25 +123,20 @@ EvolutionFromDeck_PlayerSelectEffect:
 	ldh [hTemp_ffa0], a
 	ret
 
+
 Ascension_AISelectEffect:
-	ld a, GYARADOS
-	jr EvolutionFromDeck_AISelectEffect
-
 Hatch_AISelectEffect:
-	ld a, BUTTERFREE
-	jr EvolutionFromDeck_AISelectEffect
-
 PoisonEvolution_AISelectEffect:
-	ld a, BEEDRILL
+	xor a  ; PLAY_AREA_ARENA
 	; jr EvolutionFromDeck_AISelectEffect
 	; fallthrough
 
 ; selects the first suitable card in the Deck
 ; input:
-;  a: ID of the card to look for
+;  a: PLAY_AREA_* of the card to evolve
 EvolutionFromDeck_AISelectEffect:
-; temporary storage of card ID
-	ldh [hTemp_ffa0], a
+; temporary storage of card location
+	ldh [hTempPlayAreaLocation_ffa1], a
 
 	bank1call IsPrehistoricPowerActive
 	jr nc, .search
@@ -150,23 +147,35 @@ EvolutionFromDeck_AISelectEffect:
 .search
 	call CreateDeckCardList
 	ld hl, wDuelTempList
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
 .loop_deck
 	ld a, [hli]
 	ldh [hTemp_ffa0], a
 	cp $ff
 	ret z ; none found
-	call GetCardIDFromDeckIndex  ; result (ID) in e
+; d: deck index (0-59) of the card selected to be the evolution target
+	ld d, a
+	call CheckIfCanEvolveInto
+	jr nc, .got_card
+	jr nz, .got_card  ; ignore first turn evolution
+	jr .loop_deck ; not a valid Evolution card
+.got_card
 	ldh a, [hTemp_ffa0]
-	cp e
-	jr nz, .loop_deck
+	or a
 	ret
+
 
 ; Evolves and heals the user.
 Hatch_EvolveEffect:
 	ld e, 30
 	call HealUserHP_NoAnimation
+	; fallthrough
+
+PokemonBreeder_EvolveEffect:
 	call ClearAllStatusConditions
-	jr EvolutionFromDeck_EvolveEffect
+	; jr EvolutionFromDeck_EvolveEffect
+	; fallthrough
 
 Ascension_EvolveEffect:
 PoisonEvolution_EvolveEffect:
@@ -191,8 +200,7 @@ EvolutionFromDeck_EvolveEffect:
 	ldh a, [hTemp_ffa0]
 	ldh [hTempCardIndex_ff98], a
 ; store play area slot of the evolving card in [hTempPlayAreaLocation_ff9d]
-	; ldh a, [hTempPlayAreaLocation_ffa1]
-	xor a  ; PLAY_AREA_ARENA
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	ldh [hTempPlayAreaLocation_ff9d], a
 
 ; load the evolving Pokémon card name to RAM

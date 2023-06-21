@@ -2985,8 +2985,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ImakuniDescription                                 ; 0x0b73
 	textpointer PokemonTraderName                                  ; 0x0b74
 	textpointer PokemonTraderDescription                           ; 0x0b75
-	textpointer PokemonBreederName                                 ; 0x0b76
-	textpointer PokemonBreederDescription                          ; 0x0b77
+	textpointer PokemonBreederName
+	textpointer PokemonBreederDescription
+	textpointer RareCandyName
+	textpointer RareCandyDescription
 	textpointer ClefairyDollName                                   ; 0x0b78
 	textpointer ClefairyDollDescription                            ; 0x0b79
 	textpointer ClefairyDollDescriptionCont                        ; 0x0b7a

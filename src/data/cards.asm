@@ -230,6 +230,7 @@ CardPointers:
 	dw PokemonFluteCard
 	dw GamblerCard
 	dw RecycleCard
+	dw RareCandyCard
 	dw NULL
 	assert_table_length NUM_CARDS + 2
 
@@ -10663,4 +10664,15 @@ RecycleCard:
 	db RECYCLE
 	dw RecycleEffectCommands ; effect commands
 	tx RecycleDescription ; description
+	dw NONE ; description (cont)
+
+RareCandyCard:
+	db TYPE_TRAINER ; type
+	gfx ReviveCardGfx ; gfx
+	tx RareCandyName ; name
+	db DIAMOND ; rarity
+	db EVOLUTION | NONE ; sets
+	db RARE_CANDY
+	dw RareCandyEffectCommands ; effect commands
+	tx RareCandyDescription ; description
 	dw NONE ; description (cont)

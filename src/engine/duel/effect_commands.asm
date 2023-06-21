@@ -1381,9 +1381,16 @@ PokemonFluteEffectCommands:
 	db  $00
 
 PokemonBreederEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PokemonBreeder_HandPlayAreaCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, PokemonBreeder_PlayerSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PokemonBreeder_EvolveEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PokemonBreeder_EvolveEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PokemonBreeder_PlayerSelectEffect
+	; dbw EFFECTCMDTYPE_AI_SELECTION, PokemonBreeder_AISelectEffect
+	db  $00
+
+RareCandyEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RareCandy_HandPlayAreaCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, RareCandy_PlayerSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RareCandy_EvolveEffect
 	db  $00
 
 ScoopUpEffectCommands:

@@ -228,6 +228,7 @@
 	const POKEMON_FLUTE               ; $e3
 	const GAMBLER                     ; $e4
 	const RECYCLE                     ; $e5
+	const RARE_CANDY                  ; $e6
 DEF NUM_CARDS EQU const_value - 1
 
 DEF ENERGY_IDS_START  EQU GRASS_ENERGY

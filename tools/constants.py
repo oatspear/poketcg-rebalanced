@@ -262,6 +262,7 @@ cards = {
 	0xe3: "POKEMON_FLUTE",
 	0xe4: "GAMBLER",
 	0xe5: "RECYCLE",
+	0xe6: "RARE_CANDY",
 	0xff: "$ff",
 }
 
