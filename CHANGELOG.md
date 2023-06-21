@@ -783,6 +783,10 @@
 #### Computer Search
 - Looks at the top 7 deck cards; may pick a Supporter from those.
 
+#### Item Finder
+- No longer a Supporter card.
+- Discards 1 card from the hand. Searches deck for any Item card.
+
 #### Full Heal
 - Removes status and effects from any of the user's Pokémon, even if Benched.
 

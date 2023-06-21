@@ -2,6 +2,9 @@
 ; Pokémon Evolution
 ; ------------------------------------------------------------------------------
 
+; NOTE: there's a new SEARCH_EFFECT_* constant for evolutions of Pokémon in play
+
+
 AdaptiveEvolution_AllowEvolutionEffect:
 	ldh a, [hTempPlayAreaLocation_ff9d]  ; triggering Pokémon
 	add DUELVARS_ARENA_CARD_FLAGS

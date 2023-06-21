@@ -2010,6 +2010,7 @@ AIPlay_ProfessorOak:
 
 ; sets carry if AI determines a score of playing
 ; Professor Oak is over a certain threshold.
+; WARNING: other decision routines reuse this logic
 AIDecide_ProfessorOak:
 ; return if cards in deck <= 7
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
@@ -2031,7 +2032,7 @@ AIDecide_ProfessorOak:
 	cp DECK_SIZE - 12
 	ret nc
 
-; initialize score
+.initialize_score
 	ld a, $1e
 	ld [wce06], a
 
@@ -2702,7 +2703,11 @@ AIDecide_PokemonCenter:
 	cp c
 	ret
 
+
 AIPlay_ImposterProfessorOak:
+	ld a, [wCurrentAIFlags]
+	or AI_FLAG_MODIFIED_HAND
+	ld [wCurrentAIFlags], a
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
@@ -2711,21 +2716,14 @@ AIPlay_ImposterProfessorOak:
 
 ; sets carry depending on player's number of cards in hand.
 AIDecide_ImposterProfessorOak:
-; if the AI has 6 or more cards in hand, no carry
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetTurnDuelistVariable
-	cp 6
-	jr nc, .no_carry
 ; if player has 6 or more cards in hand, set carry
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetNonTurnDuelistVariable
 	cp 6
-	jr c, .no_carry
+	jp c, AIDecide_Lass
 	scf
 	ret
-.no_carry
-	or a
-	ret
+
 
 AIPlay_EnergySearch:
 	ld a, [wAITrainerCardToPlay]
@@ -3954,36 +3952,13 @@ AIPlay_Lass:
 	ret
 
 AIDecide_Lass:
-; skip if player has less than 7 cards in hand
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetNonTurnDuelistVariable
-	cp 7
-	jr c, .no_carry
+; return if cards in deck <= 10
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	cp DECK_SIZE - 10
+	ret nc
+	jp AIDecide_ProfessorOak.initialize_score
 
-; look for Trainer cards in hand (except for Lass)
-; if any is found, return no carry.
-; otherwise, return carry.
-	call CreateHandCardList
-	ld hl, wDuelTempList
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	ld b, a
-	call LoadCardDataToBuffer1_FromDeckIndex
-	cp LASS
-	jr z, .loop
-	ld a, [wLoadedCard1Type]
-; OATS begin support trainer subtypes
-	cp TYPE_TRAINER
-	jr c, .loop  ; original: jr nz
-; OATS end support trainer subtypes
-.no_carry
-	or a
-	ret
-.set_carry
-	scf
-	ret
 
 AIPlay_ItemFinder:
 	ld a, [wCurrentAIFlags]
@@ -3992,9 +3967,9 @@ AIPlay_ItemFinder:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, [wce1a]
-	ldh [hTemp_ffa0], a
-	ld a, [wce1b]
-	ldh [hTempPlayAreaLocation_ffa1], a
+	ldh [hTempList], a
+	; ld a, [wce1b]
+	; ldh [hTempList + 1], a
 	ld a, [wAITrainerCardParameter]
 	ldh [hTempRetreatCostCards], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
@@ -4002,45 +3977,53 @@ AIPlay_ItemFinder:
 	ret
 
 ; checks whether there's Energy Removal in Discard Pile.
-; if so, find duplicate cards in hand to discard
-; that are not Mr Mime and Pokemon Trader cards.
-; this logic is suitable only for Strange Psyshock deck.
+; if so, find duplicate cards in hand to discard.
 AIDecide_ItemFinder:
-; skip if no Discard Pile.
-	call CreateDiscardPileCardList
+; skip if no Items in Deck
+	farcall CreateItemCardListFromDeck
 	jr c, .no_carry
 
-; look for Energy Removal in Discard Pile
+; look for useful items in Deck
 	ld hl, wDuelTempList
-.loop_discard_pile
+.loop_deck
 	ld a, [hli]
 	cp $ff
 	jr z, .no_carry
 	ld b, a
 	call LoadCardDataToBuffer1_FromDeckIndex
-	cp ENERGY_REMOVAL
-	jr nz, .loop_discard_pile
-; found, store this deck index
+	cp SWITCH
+	jr z, .found_item
+	cp ENERGY_SWITCH
+	jr z, .found_item
+	cp POKE_BALL
+	jr z, .found_item
+	cp POTION
+	jr z, .found_item
+	cp ENERGY_RETRIEVAL
+	jr z, .found_item
+	cp MYSTERIOUS_FOSSIL
+	jr nz, .loop_deck
+.found_item
+; store the ID of the selected card
+	ld [wce1b], a
+; store this deck index
 	ld a, b
 	ld [wce06], a
+; store the ID of the selected card in b
+	ld a, [wce1b]
+	ld b, a
 
-; before looking for cards to discard in hand,
-; remove any Mr Mime and Pokemon Trader cards.
-; this way these are guaranteed to not be discarded.
+; look for cards to discard in hand.
+; remove duplicates of the selected card
+; (don't discard one to fetch another of the same thing).
 	call CreateHandCardList
 	ld hl, wDuelTempList
 .loop_hand
 	ld a, [hli]
 	cp $ff
 	jr z, .choose_discard
-	ld b, a
 	call LoadCardDataToBuffer1_FromDeckIndex
-	cp MR_MIME
-	jr nz, .pkmn_trader
-	call RemoveCardFromList
-	jr .loop_hand
-.pkmn_trader
-	cp POKEMON_TRADER
+	cp b
 	jr nz, .loop_hand
 	call RemoveCardFromList
 	jr .loop_hand
@@ -4056,18 +4039,9 @@ AIDecide_ItemFinder:
 	call FindDuplicateCards
 	jp c, .no_carry
 
-; store the duplicate found in wce1a and
-; remove it from the hand list.
+; store the duplicate found
 	ld [wce1a], a
-	ld hl, wDuelTempList
-	call FindAndRemoveCardFromList
-; find duplicates again, if not found, return no carry.
-	call FindDuplicateCards
-	jp c, .no_carry
-
-; store the duplicate found in wce1b.
-; output the card to be recovered from the Discard Pile.
-	ld [wce1b], a
+; output the card to be fetched from the Deck
 	ld a, [wce06]
 	scf
 	ret

@@ -16,7 +16,7 @@
 ;	SEARCHEFFECT_GRASS_CARD = search for any Grass card
 ; input:
 ;	  d = SEARCHEFFECT_* constant
-;	  e = (optional) card ID to search for in deck
+;	  e = (optional) card ID, play area location or other search parameters
 ;	  hl = text to print if Deck has card(s)
 ;	  bc = variable text to fill <RAMTEXT> in hl
 ; output:
@@ -94,6 +94,7 @@ CardSearch_FunctionTable:
 	dw .SearchDuelTempListForPokemon
 	dw .SearchDuelTempListForCardType
 	dw .SearchDuelTempListForGrassCard
+	dw .SearchDuelTempListForEvolutionOfPlayAreaLocation
 
 .set_carry
 	scf
@@ -208,6 +209,30 @@ CardSearch_FunctionTable:
 .found_grass_card
 	or a
 	ret
+
+; returns carry if no card that evolves from e is found
+; e: PLAY_AREA_* of the Pokemon trying to evolve
+; returns in d the deck index of the evolution card found if any
+.SearchDuelTempListForEvolutionOfPlayAreaLocation
+	ld hl, wDuelTempList
+.loop_list_evolution_e
+	ld a, [hli]
+; d: deck index (0-59) of the card selected to be the evolution target
+	ld d, a
+	cp $ff
+	jp z, .set_carry
+	push hl
+	call CheckIfCanEvolveInto
+	pop hl
+	jr nc, .can_evolve
+	jr nz, .can_evolve  ; ignore "card was played this turn"
+	jr .loop_list_evolution_e
+.can_evolve
+	or a
+	ret
+
+
+
 
 ; Displays a list of all cards currently in the Player's deck.
 ; Expects the Player to choose one card.

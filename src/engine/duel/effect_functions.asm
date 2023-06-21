@@ -7572,16 +7572,21 @@ SelectedCards_AddToHandFromDeck:
 	ret
 
 
-Maintenance_DiscardAndAddToHandEffect:
-SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
+ItemFinder_DiscardAddToHandEffect:
+SelectedCards_Discard1AndAdd1ToHandFromDeck:
 ; discard the first card in hTempList
-	ldh a, [hTempList]
-	cp $ff
-	ret z
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
+	call SelectedCards_Discard1FromHand
 ; add the second card in hTempList to the hand
 	ldh a, [hTempList + 1]
+	ldh [hTempList], a
+	; ld a, $ff
+	; ldh [hTempList + 1], a
+	jr SelectedCards_AddToHandFromDeck
+
+
+SelectedCards_AddToHandFromDiscardPile:
+; add the first card in hTempList to the hand
+	ldh a, [hTempList]
 	cp $ff
 	ret z
 	call MoveDiscardPileCardToHand
@@ -7589,10 +7594,31 @@ SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
 	call IsPlayerTurn
 	ret c
 ; display card on screen
-	ldh a, [hTempList + 1]
+	ldh a, [hTempList]
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 	ret
+
+
+Maintenance_DiscardAndAddToHandEffect:
+SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
+; discard the first card in hTempList
+	call SelectedCards_Discard1FromHand
+; add the second card in hTempList to the hand
+	ldh a, [hTempList + 1]
+	ldh [hTempList], a
+	; ld a, $ff
+	; ldh [hTempList + 1], a
+	jr SelectedCards_AddToHandFromDiscardPile
+
+
+; discard the first card in hTempList
+SelectedCards_Discard1FromHand:
+	ldh a, [hTempList]
+	cp $ff
+	ret z
+	call RemoveCardFromHand
+	jp PutCardInDiscardPile
 
 
 ; input:
@@ -7962,53 +7988,21 @@ GamblerEffect: ; 2f3f9 (b:73f9)
 .done
 	ret
 
-; return carry if not enough cards in hand to discard
-ItemFinder_HandDiscardPileCheck:
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetTurnDuelistVariable
-	ldtx hl, NotEnoughCardsInHandText
-	cp 3
-	ret
 
 ItemFinder_PlayerSelection:
-	call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
+	; call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
+	call HandlePlayerSelection1HandCardToDiscardExcludeSelf
 	; was operation cancelled?
-	call c, CancelSupporterCard
+	; call c, CancelSupporterCard
 	ret c
 
-; cards were selected to discard from hand.
-; now to choose a Trainer card from Deck.
-	call CreateItemCardListFromDeck
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, ChooseCardToPlaceInHandText
-	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
-	bank1call DisplayCardList
-	ldh [hTempList + 2], a ; placed after the 2 cards selected to discard
+; cards were selected to discard from hand
+	ldh [hTempList], a
+; now to choose an Item card from Deck
+	call HandlePlayerSelectionItemTrainerFromDeck
+	ldh [hTempList + 1], a  ; placed after the selected cards to discard
 	ret
 
-ItemFinder_DiscardAddToHandEffect:
-; discard cards from hand
-	ld hl, hTempList
-	ld a, [hli]
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
-	ld a, [hli]
-	call RemoveCardFromHand
-	call PutCardInDiscardPile
-
-; place card from Deck into hand
-; FIXME
-	ld a, [hl]
-	call MoveDiscardPileCardToHand
-	call AddCardToHand
-	call IsPlayerTurn
-	ret c
-; display card in screen
-	ldh a, [hTempList + 2]
-	ldtx hl, WasPlacedInTheHandText
-	bank1call DisplayCardDetailScreen
-	ret
 
 Defender_PlayerSelection: ; 2f488 (b:7488)
 	ldtx hl, ChoosePokemonToAttachDefenderToText

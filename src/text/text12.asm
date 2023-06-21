@@ -1097,15 +1097,15 @@ DefenderDescription: ; 6427e (19:427e)
 	line "Resistance)."
 	done
 
-ItemFinderName: ; 64342 (19:4342)
+ItemFinderName:
 	text "Item Finder"
 	done
 
-ItemFinderDescription: ; 6434f (19:434f)
-	text "Discard 2 of the other cards from"
-	line "your hand in order to put a Trainer"
-	line "card from your discard pile into"
-	line "your hand."
+ItemFinderDescription:
+	text "Discard 1 card from your hand."
+	line "Search your deck for a non-Supporter"
+	line "Trainer card and put it into your"
+	line "hand. Shuffle your deck afterwards."
 	done
 
 GustOfWindName: ; 643c2 (19:43c2)
