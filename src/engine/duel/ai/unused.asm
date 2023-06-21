@@ -953,3 +953,142 @@ AIDecide_SuperEnergyRetrieval:
 	ld a, [wce06]
 	scf
 	ret
+
+
+;
+
+AIPlay_ItemFinder:
+	ld a, [wCurrentAIFlags]
+	or AI_FLAG_MODIFIED_HAND
+	ld [wCurrentAIFlags], a
+	ld a, [wAITrainerCardToPlay]
+	ldh [hTempCardIndex_ff9f], a
+	ld a, [wce1a]
+	ldh [hTemp_ffa0], a
+	ld a, [wce1b]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ld a, [wAITrainerCardParameter]
+	ldh [hTempRetreatCostCards], a
+	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
+	bank1call AIMakeDecision
+	ret
+
+; checks whether there's Energy Removal in Discard Pile.
+; if so, find duplicate cards in hand to discard
+; that are not Mr Mime and Pokemon Trader cards.
+; this logic is suitable only for Strange Psyshock deck.
+AIDecide_ItemFinder:
+; skip if no Discard Pile.
+	call CreateDiscardPileCardList
+	jr c, .no_carry
+
+; look for Energy Removal in Discard Pile
+	ld hl, wDuelTempList
+.loop_discard_pile
+	ld a, [hli]
+	cp $ff
+	jr z, .no_carry
+	ld b, a
+	call LoadCardDataToBuffer1_FromDeckIndex
+	cp ENERGY_REMOVAL
+	jr nz, .loop_discard_pile
+; found, store this deck index
+	ld a, b
+	ld [wce06], a
+
+; before looking for cards to discard in hand,
+; remove any Mr Mime and Pokemon Trader cards.
+; this way these are guaranteed to not be discarded.
+	call CreateHandCardList
+	ld hl, wDuelTempList
+.loop_hand
+	ld a, [hli]
+	cp $ff
+	jr z, .choose_discard
+	ld b, a
+	call LoadCardDataToBuffer1_FromDeckIndex
+	cp MR_MIME
+	jr nz, .pkmn_trader
+	call RemoveCardFromList
+	jr .loop_hand
+.pkmn_trader
+	cp POKEMON_TRADER
+	jr nz, .loop_hand
+	call RemoveCardFromList
+	jr .loop_hand
+
+; choose cards to discard from hand.
+.choose_discard
+	ld hl, wDuelTempList
+
+; do not discard wAITrainerCardToPlay
+	ld a, [wAITrainerCardToPlay]
+	call FindAndRemoveCardFromList
+; find any duplicates, if not found, return no carry.
+	call FindDuplicateCards
+	jp c, .no_carry
+
+; store the duplicate found in wce1a and
+; remove it from the hand list.
+	ld [wce1a], a
+	ld hl, wDuelTempList
+	call FindAndRemoveCardFromList
+; find duplicates again, if not found, return no carry.
+	call FindDuplicateCards
+	jp c, .no_carry
+
+; store the duplicate found in wce1b.
+; output the card to be recovered from the Discard Pile.
+	ld [wce1b], a
+	ld a, [wce06]
+	scf
+	ret
+
+.no_carry
+	or a
+	ret
+
+
+;
+
+AIPlay_Lass:
+	ld a, [wCurrentAIFlags]
+	or AI_FLAG_MODIFIED_HAND
+	ld [wCurrentAIFlags], a
+	ld a, [wAITrainerCardToPlay]
+	ldh [hTempCardIndex_ff9f], a
+	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
+	bank1call AIMakeDecision
+	ret
+
+AIDecide_Lass:
+; skip if player has less than 7 cards in hand
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	cp 7
+	jr c, .no_carry
+
+; look for Trainer cards in hand (except for Lass)
+; if any is found, return no carry.
+; otherwise, return carry.
+	call CreateHandCardList
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	ld b, a
+	call LoadCardDataToBuffer1_FromDeckIndex
+	cp LASS
+	jr z, .loop
+	ld a, [wLoadedCard1Type]
+; OATS begin support trainer subtypes
+	cp TYPE_TRAINER
+	jr c, .loop  ; original: jr nz
+; OATS end support trainer subtypes
+.no_carry
+	or a
+	ret
+.set_carry
+	scf
+	ret
