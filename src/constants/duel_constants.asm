@@ -295,3 +295,4 @@ DEF PRIZES_6    EQU $06
  	const SEARCHEFFECT_POKEMON                  ; $04
 	const SEARCHEFFECT_CARD_TYPE                ; $05
  	const SEARCHEFFECT_GRASS_CARD               ; $07
+ 	const SEARCHEFFECT_EVOLUTION_OF_PLAY_AREA   ; $08
