@@ -22,24 +22,30 @@ AdaptiveEvolution_AllowEvolutionEffect:
 	; scf
 	; ret z ; return if was played this turn
 
+; Ascension_PlayerSelectEffect:
+; 	ld a, GYARADOS
+; 	jr EvolutionFromDeck_PlayerSelectEffect
+;
+; Hatch_PlayerSelectEffect:
+; 	ld a, BUTTERFREE
+; 	jr EvolutionFromDeck_PlayerSelectEffect
+;
+; PoisonEvolution_PlayerSelectEffect:
+; 	ld a, BEEDRILL
+; 	; jr EvolutionFromDeck_PlayerSelectEffect
+; 	; fallthrough
+
 Ascension_PlayerSelectEffect:
-	ld a, GYARADOS
-	jr EvolutionFromDeck_PlayerSelectEffect
-
 Hatch_PlayerSelectEffect:
-	ld a, BUTTERFREE
-	jr EvolutionFromDeck_PlayerSelectEffect
-
 PoisonEvolution_PlayerSelectEffect:
-	ld a, BEEDRILL
-	; jr EvolutionFromDeck_PlayerSelectEffect
+	xor a  ; PLAY_AREA_ARENA
 	; fallthrough
 
 ; Allows the Player to select a card with given ID in the deck.
 ; input:
-;   a: ID of the card to look for (e.g. BEEDRILL)
+;   a: PLAY_AREA_* of the card to evolve
 EvolutionFromDeck_PlayerSelectEffect:
-; temporary storage for card ID
+; temporary storage for card location
 	ldh [hTemp_ffa0], a
 
 	bank1call IsPrehistoricPowerActive
@@ -51,7 +57,8 @@ EvolutionFromDeck_PlayerSelectEffect:
 	ldtx hl, ChooseEvolvedPokemonFromDeckText
 	ldtx bc, EvolvedPokemonText
 	ldh a, [hTemp_ffa0]
-	ld d, SEARCHEFFECT_CARD_ID
+	; ld d, SEARCHEFFECT_CARD_ID
+	ld d, SEARCHEFFECT_EVOLUTION_OF_PLAY_AREA
 	ld e, a
 	call LookForCardsInDeck
 	jr c, .none_in_deck
@@ -64,12 +71,17 @@ EvolutionFromDeck_PlayerSelectEffect:
 .select_card
 	bank1call DisplayCardList
 	jr c, .try_cancel
-	call GetCardIDFromDeckIndex  ; result (ID) in e
+; d: deck index (0-59) of the card selected to be the evolution target
+	ld d, a
 	ldh a, [hTemp_ffa0]
-	cp e
-	jr nz, .select_card ; not a valid Evolution card
+	ld e, a
+	call CheckIfCanEvolveInto
+	jr nc, .got_card
+	jr nz, .got_card  ; ignore first turn evolution
+	jr .select_card ; not a valid Evolution card
 
 ; Evolution card selected
+.got_card
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTemp_ffa0], a
 	; xor a  ; PLAY_AREA_ARENA
@@ -86,15 +98,18 @@ EvolutionFromDeck_PlayerSelectEffect:
 ; otherwise, they can safely exit.
 	ld a, DUELVARS_CARD_LOCATIONS
 	call GetTurnDuelistVariable
+	ldh a, [hTemp_ffa0]
+	ld e, a
 .loop_deck
 	ld a, [hl]
 	cp CARD_LOCATION_DECK
 	jr nz, .next_card
 	ld a, l
-	call GetCardIDFromDeckIndex  ; result (ID) in e
-	ldh a, [hTemp_ffa0]
-	cp e
-	jr z, .play_sfx
+; d: deck index (0-59) of the card selected to be the evolution target
+	ld d, a
+	call CheckIfCanEvolveInto
+	jr nc, .play_sfx
+	jr nz, .play_sfx
 .next_card
 	inc l
 	ld a, l
