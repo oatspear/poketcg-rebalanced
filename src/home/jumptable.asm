@@ -28,3 +28,9 @@ CallIndirect:
 
 CallHL:
 	jp hl
+
+
+; utility function that has nowhere else to go
+SetCarry:
+	scf
+	ret
