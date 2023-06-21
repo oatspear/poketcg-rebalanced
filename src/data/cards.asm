@@ -10545,7 +10545,7 @@ DefenderCard:
 	dw NONE ; description (cont)
 
 ItemFinderCard:
-	db TYPE_TRAINER_SUPPORTER ; type
+	db TYPE_TRAINER ; type
 	gfx ItemFinderCardGfx ; gfx
 	tx ItemFinderName ; name
 	db STAR ; rarity
