@@ -112,6 +112,28 @@ PlayerSelectAndStoreItemCardFromDiscardPile:
 
 
 ; ------------------------------------------------------------------------------
+; Choose Cards From Deck
+; ------------------------------------------------------------------------------
+
+; Handles screen for the Player to choose an Item Trainer card
+; from the Deck.
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+HandlePlayerSelectionItemTrainerFromDeck:
+	call CreateItemCardListFromDeck
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, ChooseCardToPlaceInHandText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+.loop_input
+	bank1call DisplayCardList
+	jr c, .loop_input
+	ldh a, [hTempCardIndex_ff98]
+	ret
+
+
+; ------------------------------------------------------------------------------
 ; Choose Pokémon In Play Area
 ; ------------------------------------------------------------------------------
 
