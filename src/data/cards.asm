@@ -10668,7 +10668,7 @@ RecycleCard:
 
 RareCandyCard:
 	db TYPE_TRAINER ; type
-	gfx ReviveCardGfx ; gfx
+	gfx RareCandyCardGfx ; gfx
 	tx RareCandyName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets

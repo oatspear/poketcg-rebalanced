@@ -2429,3 +2429,7 @@ GamblerCardGfx::
 RecycleCardGfx::
 	INCBIN "gfx/cards/recycle.2bpp"
 	INCBIN "gfx/cards/recycle.pal"
+
+RareCandyCardGfx::
+	INCBIN "gfx/cards/rarecandy.2bpp"
+	INCBIN "gfx/cards/rarecandy.pal"
