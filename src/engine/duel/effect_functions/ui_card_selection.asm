@@ -133,6 +133,40 @@ HandlePlayerSelectionItemTrainerFromDeck:
 	ret
 
 
+HandlePlayerSelectionPokemonFromTop5InDeck:
+; create the list of the top 5 cards in deck
+	ld b, 5
+	call CreateDeckCardListTopNCards
+; handle input
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, ChoosePokemonCardText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+.read_input
+	bank1call DisplayCardList
+; if B was pressed, either there are no Pokémon or Player does not want any
+	jr c, .no_cards
+	ldh a, [hTempCardIndex_ff98]
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY
+	jr nc, .play_sfx ; can't select non-Pokémon card
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+.no_cards
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+.play_sfx
+	call PlaySFX_InvalidChoice
+	jr .read_input
+
+
 ; ------------------------------------------------------------------------------
 ; Choose Pokémon In Play Area
 ; ------------------------------------------------------------------------------

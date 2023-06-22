@@ -1072,14 +1072,15 @@ ComputerSearchDescription:
 	line "your hand. Then, shuffle your deck."
 	done
 
-PokedexName: ; 6411d (19:411d)
+PokedexName:
 	text "Pokédex"
 	done
 
-PokedexDescription: ; 64126 (19:4126)
-	text "Look at up to 5 cards from the top"
-	line "of your deck and rearrange them as"
-	line "you like."
+PokedexDescription:
+	text "Look at the top 5 cards of your deck"
+	line "and rearrange them as you like."
+	line "If the top card is a Pokémon card,"
+	line "add it to your hand."
 	done
 
 PlusPowerName: ; 64177 (19:4177)

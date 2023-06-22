@@ -768,6 +768,9 @@
 #### Pokémon Trader
 - No longer a Supporter card.
 
+#### Pokémon Breeder
+- Chooses a Pokémon in play, removes status conditions and searches the deck for an evolution. If any is selected, the Pokémon evolves.
+
 #### Pokéball
 - No coin flip; can only choose Basic Pokémon.
 
@@ -782,6 +785,9 @@
 
 #### Computer Search
 - Looks at the top 7 deck cards; may pick a Supporter from those.
+
+#### Pokédex
+- After sorting the cards, if the top card is a Pokémon, add it to the hand.
 
 #### Item Finder
 - No longer a Supporter card.
@@ -802,6 +808,7 @@
 #### New Trainer Cards
 - New card: **Energy Switch**: moves a Basic energy from 1 Pokémon to another.
 - New card: **Energy Recycler**: shuffles up to 4 Basic energy from discard pile into deck.
+- New card: **Rare Candy**: item card with the original Pokémon Breeder effect.
 
 ### Miscellaneous
 

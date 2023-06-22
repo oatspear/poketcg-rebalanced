@@ -8769,7 +8769,7 @@ CreatePokemonCardListFromHand: ; 2f8b6 (b:78b6)
 	ret
 
 
-Pokedex_PlayerSelection: ; 2f8ed (b:78ed)
+Pokedex_PlayerSelection:
 ; print text box
 	ldtx hl, RearrangeThe5CardsAtTopOfDeckText
 	call DrawWideTextBox_WaitForInput
@@ -8897,7 +8897,8 @@ Pokedex_PlayerSelection: ; 2f8ed (b:78ed)
 	bank1call Func_5744
 	jr .read_input
 
-Pokedex_OrderDeckCardsEffect: ; 2f9aa (b:79aa)
+
+Pokedex_OrderDeckCardsEffect:
 ; place cards in order to the hand.
 	ld hl, hTempList
 	ld c, 0
@@ -8919,9 +8920,24 @@ Pokedex_OrderDeckCardsEffect: ; 2f9aa (b:79aa)
 	call ReturnCardToDeck
 	dec c
 	jr nz, .loop_place_deck
+
+; check if card at the top of the deck is a Pokémon card
+; a contains deck index from ReturnCardToDeck
+	ldh [hTemp_ffa0], a
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_PKMN + 1
+	ret nc  ; not a Pokémon
+
+; add Pokémon card to hand and show it on screen
+	ldh a, [hTemp_ffa0]
+	call AddCardToHand
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
 	ret
 
-BillEffect: ; 2f9c4 (b:79c4)
+
+BillEffect:
 	ld a, 3
 	bank1call DisplayDrawNCardsScreen
 	ld c, 3
