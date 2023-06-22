@@ -1382,7 +1382,7 @@ PokemonFluteEffectCommands:
 
 PokemonBreederEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PokemonBreeder_EvolveEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PokemonBreeder_EvolveEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PokemonBreeder_PlayerSelectEffect
 	; dbw EFFECTCMDTYPE_AI_SELECTION, PokemonBreeder_AISelectEffect
 	db  $00

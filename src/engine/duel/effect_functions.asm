@@ -134,7 +134,7 @@ RareCandy_EvolveEffect:
 
 ; creates list in wDuelTempList of all Stage2 Pokemon cards
 ; in the hand that can evolve a Basic Pokemon card in Play Area
-; through use of Pokemon Breeder.
+; through use of Rare Candy.
 ; returns carry if that list is empty.
 CreatePlayableStage2PokemonCardListFromHand: ; 2f73e (b:773e)
 	call CreateHandCardList
@@ -171,7 +171,7 @@ CreatePlayableStage2PokemonCardListFromHand: ; 2f73e (b:773e)
 	ret
 
 ; return carry if Stage2 card in a cannot evolve any
-; of the Basic Pokemon in Play Area through Pokemon Breeder.
+; of the Basic Pokemon in Play Area through Rare Candy.
 .CheckIfCanEvolveAnyPlayAreaBasicCard
 	push de
 	ld d, a

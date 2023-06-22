@@ -73,6 +73,7 @@ EvolutionFromDeck_PlayerSelectEffect:
 .select_card
 	bank1call DisplayCardList
 	jr c, .try_cancel
+	ldh [hTemp_ffa0], a
 ; d: deck index (0-59) of the card selected to be the evolution target
 	ld d, a
 	ldh a, [hTempPlayAreaLocation_ffa1]
@@ -84,10 +85,7 @@ EvolutionFromDeck_PlayerSelectEffect:
 
 ; Evolution card selected
 .got_card
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
-	; xor a  ; PLAY_AREA_ARENA
-	; ldh [hTempPlayAreaLocation_ffa1], a
+	or a
 	ret
 
 .play_sfx
@@ -121,6 +119,7 @@ EvolutionFromDeck_PlayerSelectEffect:
 .none_in_deck
 	ld a, $ff
 	ldh [hTemp_ffa0], a
+	or a
 	ret
 
 
