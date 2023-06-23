@@ -1081,7 +1081,7 @@ PokedexDescription:
 	line "deck. You may reveal a Pokémon card"
 	line "you find there and put it into your"
 	line "hand. Put the other cards back on"
-	line "top of your deck in any order."
+	line "the top of your deck in any order."
 	done
 
 PlusPowerName: ; 64177 (19:4177)
