@@ -137,6 +137,14 @@ HandlePlayerSelectionPokemonFromTop5InDeck:
 ; create the list of the top 5 cards in deck
 	ld b, 5
 	call CreateDeckCardListTopNCards
+	jr HandlePlayerSelectionPokemonFromDeck_
+
+HandlePlayerSelectionPokemonFromDeck:
+; create the list of cards in deck
+	call CreateDeckCardList
+	; fallthrough
+
+HandlePlayerSelectionPokemonFromDeck_:
 ; handle input
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChoosePokemonCardText
@@ -149,7 +157,7 @@ HandlePlayerSelectionPokemonFromTop5InDeck:
 	ldh a, [hTempCardIndex_ff98]
 	call LoadCardDataToBuffer2_FromDeckIndex
 	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
+	cp TYPE_PKMN + 1
 	jr nc, .play_sfx ; can't select non-Pokémon card
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTemp_ffa0], a
