@@ -8938,8 +8938,7 @@ Pokedex_AddToHandAndOrderDeckCardsEffect:
 	call AddCardToHand
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
-	ret
-
+	; fallthrough
 
 Pokedex_OrderDeckCardsEffect:
 ; place cards in order to the hand.
@@ -8963,20 +8962,6 @@ Pokedex_OrderDeckCardsEffect:
 	call ReturnCardToDeck
 	dec c
 	jr nz, .loop_place_deck
-
-; check if card at the top of the deck is a Pokémon card
-; a contains deck index from ReturnCardToDeck
-	ldh [hTemp_ffa0], a
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
-	ret nc  ; not a Pokémon
-
-; add Pokémon card to hand and show it on screen
-	ldh a, [hTemp_ffa0]
-	call AddCardToHand
-	ldtx hl, WasPlacedInTheHandText
-	bank1call DisplayCardDetailScreen
 	ret
 
 
