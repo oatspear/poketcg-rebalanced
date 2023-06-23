@@ -121,16 +121,34 @@ PlayerSelectAndStoreItemCardFromDiscardPile:
 ;   a: deck index of the selected card
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 HandlePlayerSelectionItemTrainerFromDeck:
-	call CreateItemCardListFromDeck
+; handle input
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseCardToPlaceInHandText
 	ldtx de, DuelistDeckText
 	bank1call SetCardListHeaderText
-.loop_input
+.read_input
 	bank1call DisplayCardList
-	jr c, .loop_input
+; if B was pressed, either there are no cards or Player does not want any
+	jr c, .no_cards
 	ldh a, [hTempCardIndex_ff98]
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_TRAINER
+	jr nz, .play_sfx ; can't select non-Item card
+	ldh a, [hTempCardIndex_ff98]
+	; ldh [hTemp_ffa0], a
+	or a
 	ret
+
+.no_cards
+	ld a, $ff
+	; ldh [hTemp_ffa0], a
+	or a
+	ret
+
+.play_sfx
+	call PlaySFX_InvalidChoice
+	jr .read_input
 
 
 HandlePlayerSelectionPokemonFromTop5InDeck:
