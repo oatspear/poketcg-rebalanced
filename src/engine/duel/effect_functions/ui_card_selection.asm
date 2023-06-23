@@ -311,3 +311,28 @@ HandlePokemonAndBasicEnergySelectionScreen:
 	ldtx hl, NoEnergyCardsText
 	call DrawWideTextBox_WaitForInput
 	jr HandlePokemonAndBasicEnergySelectionScreen ; loop back to start
+
+
+; ------------------------------------------------------------------------------
+; Helper Functions
+; ------------------------------------------------------------------------------
+
+InitializeListForReordering:
+; wDuelTempList + 10 will be filled with numbers
+; from 1 to N (whatever the maximum order card is),
+; so that the first item in that list corresponds to the first card
+; the second item corresponds to the second card, etc.
+; and the number in the list corresponds to the ordering number.
+	call CountCardsInDuelTempList
+	ld b, a
+	ld a, 1
+; fill order list with zeroes
+	ldh [hCurSelectionItem], a
+	ld hl, wDuelTempList + 10
+	xor a
+.loop_init
+	ld [hli], a
+	dec b
+	jr nz, .loop_init
+	ld [hl], $ff ; terminating byte
+	ret

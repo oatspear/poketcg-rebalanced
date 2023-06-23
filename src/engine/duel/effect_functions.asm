@@ -8770,10 +8770,6 @@ CreatePokemonCardListFromHand: ; 2f8b6 (b:78b6)
 
 
 Pokedex_PlayerSelection:
-; print text box
-	ldtx hl, RearrangeThe5CardsAtTopOfDeckText
-	call DrawWideTextBox_WaitForInput
-
 ; cap the number of cards to reorder up to
 ; number of cards left in the deck (maximum of 5)
 ; fill wDuelTempList with cards that are going to be sorted
@@ -8781,25 +8777,60 @@ Pokedex_PlayerSelection:
 	call CreateDeckCardListTopNCards
 	inc a
 	ld [wNumberOfCardsToOrder], a
+; initialize safety variables
+	ld a, $ff
+	ldh [hTempList + 5], a  ; terminator for the sorting list
+	ldh [hTempList + 6], a  ; placeholder for chosen Pokémon
+
+; check if there are any Pokémon
+	call CardSearch_FunctionTable.SearchDuelTempListForPokemon
+	jr c, .no_pokemon
+
+; print text box
+	ldtx hl, ChooseBasicOrEvolutionPokemonCardFromDeckText
+	call DrawWideTextBox_WaitForInput
+
+; let the Player choose a Pokémon to add to the hand
+	call HandlePlayerSelectionPokemonFromDeck_
+	ldh a, [hTempList]
+	cp $ff
+	jr z, .got_pkmn
+
+; store chosen Pokémon
+	ldh [hTempList + 6], a
+; remove selected card from the ordering list
+	call RemoveCardFromDuelTempList
+	ld a, $ff
+	ldh [hTempList], a  ; terminator for the sorting list
+	ldh [hTempList + 1], a  ; terminator for the sorting list
+	ld a, [wNumberOfCardsToOrder]
+	dec a
+	ld [wNumberOfCardsToOrder], a
+; check if there was only the selected Pokémon
+	dec a
+	or a
+	ret z
+; check if there are still multiple cards to reorder
+	cp 2
+	jr nc, .got_pkmn
+; there is only one more card, no need to reorder
+	ld a, [wDuelTempList]
+	ldh [hTempList], a
+	; [hTempList + 1] already has terminator
+	or a  ; remove carry flag
+	ret
+
+.got_pkmn
+	call EmptyScreen
+
+.no_pokemon
+; print text box
+	ldtx hl, RearrangeTheCardsAtTopOfDeckText
+	call DrawWideTextBox_WaitForInput
+
 
 .clear_list
-; wDuelTempList + 10 will be filled with numbers from 1
-; to 5 (or whatever the maximum order card is).
-; so that the first item in that list corresponds to the first card
-; the second item corresponds to the second card, etc.
-; and the number in the list corresponds to the ordering number.
-	call CountCardsInDuelTempList
-	ld b, a
-	ld a, 1
-; fill order list with zeroes
-	ldh [hCurSelectionItem], a
-	ld hl, wDuelTempList + 10
-	xor a
-.loop_init
-	ld [hli], a
-	dec b
-	jr nz, .loop_init
-	ld [hl], $ff ; terminating byte
+	call InitializeListForReordering
 
 ; display card list to order
 	bank1call InitAndDrawCardListScreenLayout
@@ -8896,6 +8927,18 @@ Pokedex_PlayerSelection:
 	ld [hl], $00 ; overwrite order number with 0
 	bank1call Func_5744
 	jr .read_input
+
+
+Pokedex_AddToHandAndOrderDeckCardsEffect:
+	ldh a, [hTempList + 6]
+	cp $ff
+	jr z, Pokedex_OrderDeckCardsEffect  ; none chosen
+
+; add Pokémon card to hand and show it on screen
+	call AddCardToHand
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
+	ret
 
 
 Pokedex_OrderDeckCardsEffect:

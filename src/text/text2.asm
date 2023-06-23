@@ -608,8 +608,8 @@ ChoosePokemonCardText: ; 397f1 (e:57f1)
 	line "a Pokémon card."
 	done
 
-RearrangeThe5CardsAtTopOfDeckText: ; 39809 (e:5809)
-	text "Rearrange the 5 cards at"
+RearrangeTheCardsAtTopOfDeckText:
+	text "Rearrange the cards at"
 	line "the top of the Deck."
 	done
 

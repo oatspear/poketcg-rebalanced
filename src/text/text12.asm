@@ -1077,10 +1077,11 @@ PokedexName:
 	done
 
 PokedexDescription:
-	text "Look at the top 5 cards of your deck"
-	line "and rearrange them as you like."
-	line "If the top card is a Pokémon card,"
-	line "add it to your hand."
+	text "Look at the top 5 cards of your"
+	line "deck. You may reveal a Pokémon card"
+	line "you find there and put it into your"
+	line "hand. Put the other cards back on"
+	line "top of your deck in any order."
 	done
 
 PlusPowerName: ; 64177 (19:4177)

@@ -361,7 +361,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseCardToSwitchText                             ; 0x015f
 	textpointer ChooseBasicOrEvolutionPokemonCardFromDeckText      ; 0x0160
 	textpointer ChoosePokemonCardText                              ; 0x0161
-	textpointer RearrangeThe5CardsAtTopOfDeckText                  ; 0x0162
+	textpointer RearrangeTheCardsAtTopOfDeckText
 	textpointer PleaseCheckTheOpponentsHandText                    ; 0x0163
 	textpointer EvolutionCardText                                  ; 0x0164
 	textpointer CardWasChosenText                                  ; 0x0165

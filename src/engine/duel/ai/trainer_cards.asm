@@ -3013,18 +3013,28 @@ AIDecide_EnergySearch:
 AIPlay_Pokedex:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
-	ld a, [wce1a]
-	ldh [hTemp_ffa0], a
-	ld a, [wce1b]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, [wce1c]
-	ldh [hTempRetreatCostCards], a
-	ld a, [wce1d]
-	ldh [$ffa3], a
-	ld a, [wce1e]
-	ldh [$ffa4], a
 	ld a, $ff
-	ldh [$ffa5], a
+	ldh [hTempList + 5], a
+	ldh [hTempList + 6], a
+	ld a, [wce1a]
+	ldh [hTempList], a
+; check if card at the top of the deck is a Pokémon card
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_PKMN + 1
+	jr nc, .other_cards  ; not a Pokémon
+; mark Pokémon card to add to hand
+	ldh a, [hTempList]
+	ldh [hTempList + 6], a
+.other_cards
+	ld a, [wce1b]
+	ldh [hTempList + 1], a
+	ld a, [wce1c]
+	ldh [hTempList + 2], a
+	ld a, [wce1d]
+	ldh [hTempList + 3], a
+	ld a, [wce1e]
+	ldh [hTempList + 4], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
