@@ -812,6 +812,10 @@
 
 ### Miscellaneous
 
+#### Game Mechanics
+
+- Weakness doubles the damage dealt if the initial damage is 30 or less. Otherwise, it grants a +30 bonus.
+
 #### Options
 
 - Changed default text speed to fastest.

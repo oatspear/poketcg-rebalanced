@@ -148,9 +148,7 @@ _CalculateDamage_VersusDefendingPokemon: ; 14462 (5:4462)
 	call SwapTurn
 	and b
 	jr z, .not_weak
-	; double de
-	sla e
-	rl d
+	call ApplyWeaknessToDamage_DE
 
 .not_weak
 ; handle resistance
@@ -374,9 +372,7 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 .unchanged_weak
 	and b
 	jr z, .not_weak
-	; double de
-	sla e
-	rl d
+	call ApplyWeaknessToDamage_DE
 
 .not_weak
 ; handle resistance

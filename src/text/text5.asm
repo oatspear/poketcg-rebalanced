@@ -320,13 +320,13 @@ Text04bf: ; 452bb (11:52bb)
 	text "Weakness and Resistance"
 	done
 
-Text04c0: ; 452d4 (11:52d4)
-	text "If a Pokémon has a Weakness,"
-	line "it takes double damage when attacked"
-	line "by Pokémon of a certain type!"
-	line "If a Water Pokémon attacks"
-	line "a Fire Pokémon, the Fire Pokémon"
-	line "will receive double damage!"
+Text04c0:
+	text "Pokémon with a Weakness take up to"
+	line "30 bonus damage when taking damage"
+	line "of the type they are weak to!"
+	line "If a Water Pokémon attacks a Fire"
+	line "Pokémon for 40 damage, the Fire"
+	line "Pokémon will receive 70 damage!"
 	line "If a Pokémon has a Resistance,"
 	line "it takes 30 less damage when"
 	line "attacked by Pokémon of a certain"

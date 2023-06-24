@@ -1997,8 +1997,7 @@ ApplyDamageModifiers_DamageToTarget:
 	call SwapTurn
 	and b
 	jr z, .not_weak
-	sla e
-	rl d
+	call ApplyWeaknessToDamage_DE
 	ld hl, wDamageEffectiveness
 	set WEAKNESS, [hl]
 .not_weak
@@ -2064,8 +2063,7 @@ ApplyDamageModifiers_DamageToSelf:
 	call GetArenaCardWeakness
 	and b
 	jr z, .not_weak
-	sla e
-	rl d
+	call ApplyWeaknessToDamage_DE
 	ld hl, wDamageEffectiveness
 	set WEAKNESS, [hl]
 .not_weak

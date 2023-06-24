@@ -874,11 +874,12 @@ PokemonPowerDescriptionText: ; 3e1f7 (f:61f7)
 	line "command, PKMN Power."
 	done
 
-WeaknessDescriptionText: ; 3e2c5 (f:62c5)
+WeaknessDescriptionText:
 	text "Some Pokémon have a Weakness."
-	line "If a Pokémon has a Weakness, it"
-	line "takes double damage when attacked by"
-	line "Pokémon of a certain type."
+	line "Pokémon with a Weakness, take up to"
+	line "30 bonus damage (depending on attack"
+	line "damage) when attacked by Pokémon of"
+	line "a certain type."
 	done
 
 ResistanceDescriptionText: ; 3e344 (f:6344)
