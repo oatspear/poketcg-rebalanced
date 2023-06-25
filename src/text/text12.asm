@@ -1206,8 +1206,9 @@ PokemonFluteName:
 	done
 
 PokemonFluteDescription:
-	text "All Pokémon Powers are disabled"
-	line "until the start of your next turn."
+	text "Choose 1 Basic Pokémon card from"
+	line "your opponent's discard pile and put"
+	line "it onto their Bench."
 	done
 
 GamblerName: ; 648ed (19:48ed)

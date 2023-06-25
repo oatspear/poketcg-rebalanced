@@ -8479,7 +8479,7 @@ Switch_SwitchEffect: ; 2f60a (b:760a)
 
 ; return carry if non-Turn Duelist has full Bench
 ; or if they have no Basic Pokemon cards in Discard Pile.
-PokemonFlute_BenchCheck: ; 2f659 (b:7659)
+PokemonFlute_BenchCheck:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	ldtx hl, NoSpaceOnTheBenchText
@@ -8493,7 +8493,7 @@ PokemonFlute_BenchCheck: ; 2f659 (b:7659)
 	call SwapTurn
 	ret
 
-PokemonFlute_PlayerSelection: ; 2f672 (b:7672)
+PokemonFlute_PlayerSelection:
 ; create Discard Pile list
 	call SwapTurn
 	call CreateBasicPokemonCardListFromDiscardPile
@@ -8509,7 +8509,7 @@ PokemonFlute_PlayerSelection: ; 2f672 (b:7672)
 	ldh [hTemp_ffa0], a
 	ret
 
-PokemonFlute_PlaceInPlayAreaText: ; 2f68f (b:768f)
+PokemonFlute_PlaceInPlayAreaText:
 ; place selected card in non-Turn Duelist's Bench
 	call SwapTurn
 	ldh a, [hTemp_ffa0]

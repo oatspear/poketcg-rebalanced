@@ -805,8 +805,6 @@
 #### Switch
 - No longer a Supporter card.
 
-#### Pokémon Flute
-- Disables Pokémon Powers until the user's next turn.
 
 #### New Trainer Cards
 - New card: **Energy Switch**: moves a Basic energy from 1 Pokémon to another.
