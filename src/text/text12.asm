@@ -1201,16 +1201,13 @@ MaintenanceDescription:
 	line "to your hand."
 	done
 
-PokemonFluteName: ; 6483c (19:483c)
+PokemonFluteName:
 	text "Pokémon Flute"
 	done
 
-PokemonFluteDescription: ; 6484b (19:484b)
-	text "Choose 1 Basic Pokémon card from"
-	line "your opponent's discard pile and put"
-	line "it onto his or her Bench. (You can't"
-	line "play Pokémon Flute if your"
-	line "opponent's Bench is full.)"
+PokemonFluteDescription:
+	text "All Pokémon Powers are disabled"
+	line "until the start of your next turn."
 	done
 
 GamblerName: ; 648ed (19:48ed)

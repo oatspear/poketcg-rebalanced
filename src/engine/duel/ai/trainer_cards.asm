@@ -2119,7 +2119,7 @@ AIDecide_ProfessorOak:
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	jr nz, .check_hand
 
 ; no Muk in Play Area

@@ -116,7 +116,7 @@ AIDoTurn_LegendaryRonald:
 	jr c, .skip_moltres_1 ; skip if Muk in play
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	jr nz, .skip_moltres_1 ; skip if Poké Flute in play
 	ld a, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5
@@ -175,7 +175,7 @@ AIDoTurn_LegendaryRonald:
 	jr c, .skip_moltres_2 ; skip if Muk in play
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	jr nz, .skip_moltres_2 ; skip if Poké Flute in play
 	ld a, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5

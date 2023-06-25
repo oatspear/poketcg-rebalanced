@@ -1470,9 +1470,14 @@ OnPokemonPlayedInitVariablesAndPowers:
 	jr z, .use_pokemon_power
 	ld a, $01 ; check only Muk
 	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
-	jr nc, .use_pokemon_power
+	jr c, .unable_to_use
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	jr z, .use_pokemon_power
+.unable_to_use
 	call DisplayUsePokemonPowerScreen
-	ldtx hl, UnableToUsePkmnPowerDueToToxicGasText
+	ldtx hl, UnableToUsePkmnPowerDueToDisableEffectText
 	call DrawWideTextBox_WaitForInput
 	call ExchangeRNG
 	ret

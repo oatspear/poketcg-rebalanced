@@ -610,9 +610,9 @@ HavePokemonPowerText: ; 36ebe (d:6ebe)
 	line "Pokémon Power."
 	done
 
-UnableToUsePkmnPowerDueToToxicGasText: ; 36ed5 (d:6ed5)
+UnableToUsePkmnPowerDueToDisableEffectText:
 	text "Unable to use Pokémon Power due to"
-	line "the effect of Toxic Gas."
+	line "a disabling effect."
 	done
 
 PlayCheck1Text: ; 36f11 (d:6f11)
@@ -1015,8 +1015,8 @@ OpponentIsNotAsleepText: ; 379f2 (d:79f2)
 	text "Opponent is not Asleep"
 	done
 
-UnableDueToToxicGasText: ; 37a0a (d:7a0a)
-	text "Unable to use due to Toxic Gas."
+UnableToUsePkmnPowerText:
+	text "Unable to use Pokémon Powers."
 	done
 
 Text00d5: ; 37a3a (d:7a3a)

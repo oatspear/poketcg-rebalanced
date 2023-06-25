@@ -136,7 +136,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThereAreNoPokemonInPlayAreaText                    ; 0x0080
 	textpointer WasKnockedOutText                                  ; 0x0081
 	textpointer HavePokemonPowerText                               ; 0x0082
-	textpointer UnableToUsePkmnPowerDueToToxicGasText              ; 0x0083
+	textpointer UnableToUsePkmnPowerDueToDisableEffectText
 	textpointer PlayCheck1Text                                     ; 0x0084
 	textpointer PlayCheck2Text                                     ; 0x0085
 	textpointer SelectCheckText                                    ; 0x0086
@@ -217,7 +217,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer CanOnlyBeUsedOnTheBenchText                        ; 0x00d1
 	textpointer ThereAreNoPokemonOnBenchText                       ; 0x00d2
 	textpointer OpponentIsNotAsleepText                            ; 0x00d3
-	textpointer UnableDueToToxicGasText                            ; 0x00d4
+	textpointer UnableToUsePkmnPowerText
 	textpointer Text00d5                                           ; 0x00d5
 	textpointer BackUpIsBrokenText                                 ; 0x00d6
 	textpointer PrinterIsNotConnectedText                          ; 0x00d7

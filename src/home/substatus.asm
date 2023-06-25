@@ -161,6 +161,10 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	ret z
 	ld a, [wTempPlayAreaLocation_cceb]
 	or a
 	call nz, HandleDamageReductionExceptSubstatus2.pkmn_power
@@ -190,6 +194,10 @@ HandleStrikesBack_AgainstDamagingAttack:
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	ret z
 	ld a, [wLoadedAttackCategory] ; category of attack used
 	cp POKEMON_POWER
 	ret z
@@ -474,6 +482,10 @@ IsClairvoyanceActive:
 	call CountPokemonIDInBothPlayAreas
 	ccf
 	ret nc
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	ret nz
 	ld a, OMANYTE
 	call CountPokemonIDInPlayArea
 	ret
@@ -503,7 +515,14 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0:
 .check_toxic_gas
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
-	ldtx hl, UnableDueToToxicGasText
+	jr c, .disabled
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	ret z
+	scf
+.disabled
+	ldtx hl, UnableToUsePkmnPowerText
 .done
 	ret
 
@@ -608,13 +627,17 @@ GetLoadedCard1RetreatCost:
 	ld a, c
 	or a
 	jr nz, .dodrio_found
-.muk_found
+.powers_disabled
 	ld a, [wLoadedCard1RetreatCost] ; return regular retreat cost
 	ret
 .dodrio_found
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
-	jr c, .muk_found
+	jr c, .powers_disabled
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	jr nz, .powers_disabled
 	ld a, [wLoadedCard1RetreatCost]
 	sub c ; apply Retreat Aid for each Pkmn Power-capable Dodrio
 	ret nc
@@ -652,6 +675,10 @@ IsPrehistoricPowerActive:
 	ld a, AERODACTYL
 	call CountPokemonIDInBothPlayAreas
 	ret nc
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	ret nz
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
@@ -698,6 +725,9 @@ UpdateSubstatusConditions_StartOfTurn:
 ; clears the SUBSTATUS2, Headache, and updates the double damage condition
 ; and the "became active" condition of the player ending his turn
 UpdateSubstatusConditions_EndOfTurn:
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	res TURN_FLAG_PKMN_POWERS_DISABLED_F, [hl]
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	res SUBSTATUS3_HEADACHE, [hl]
@@ -723,6 +753,10 @@ IsRainDanceActive:
 	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Pkmn Power-capable Wartortle found in turn holder's play area
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	ret nz
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	ccf

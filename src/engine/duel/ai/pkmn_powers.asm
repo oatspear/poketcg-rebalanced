@@ -28,7 +28,7 @@ HandleAIEnergyTrans:
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz ; return if Poké Flute in play
 
 	ld a, [wAIEnergyTransRoutine]
@@ -384,7 +384,7 @@ HandleAIPkmnPowers:
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz ; return no carry if Poké Flute in play
 
 	farcall AIChooseRandomlyNotToDoAction
@@ -872,7 +872,7 @@ HandleAICowardice:
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz ; return if Poké Flute in play
 
 	farcall AIChooseRandomlyNotToDoAction
@@ -980,7 +980,7 @@ HandleAIDamageSwap:
 	ret c ; return if there's Muk in play
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz ; return if Poké Flute in play
 
 ; only take damage off certain cards in Arena
@@ -1150,7 +1150,7 @@ HandleAIRainDanceEnergy:
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz ; return if Poké Flute in play
 
 ; play all the energy cards that is needed.
@@ -1177,7 +1177,7 @@ HandleAIFirestarterEnergy:
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz ; return if Poké Flute in play
 
 	farcall CreateEnergyCardListFromDiscardPile_OnlyFire
