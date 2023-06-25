@@ -771,6 +771,12 @@
 #### Pokémon Breeder
 - Chooses a Pokémon in play, removes status conditions and searches the deck for an evolution. If any is selected, the Pokémon evolves.
 
+#### Clefairy Doll
+- Increased HP from 10 to 30.
+
+#### Mysterious Fossil
+- Increased HP from 10 to 30.
+
 #### Pokéball
 - No coin flip; can only choose Basic Pokémon.
 

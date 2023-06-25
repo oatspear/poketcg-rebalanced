@@ -6979,7 +6979,7 @@ TrainerCardAsPokemon_BenchCheck: ; 2ef18 (b:6f18)
 	cp 2
 	ret
 
-TrainerCardAsPokemon_PlayerSelectSwitch: ; 2ef27 (b:6f27)
+TrainerCardAsPokemon_PlayerSelectSwitch:
 	ldh a, [hTemp_ffa0]
 	or a
 	ret nz ; no need to switch if it's not Arena card
@@ -6992,7 +6992,7 @@ TrainerCardAsPokemon_PlayerSelectSwitch: ; 2ef27 (b:6f27)
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
-TrainerCardAsPokemon_DiscardEffect: ; 2ef3c (b:6f3c)
+TrainerCardAsPokemon_DiscardEffect:
 	ldh a, [hTemp_ffa0]
 	ld e, a
 	call MovePlayAreaCardToDiscardPile
@@ -8203,7 +8203,8 @@ Defender_AttachDefenderEffect: ; 2f499 (b:7499)
 
 
 ; return carry if Bench is full.
-MysteriousFossil_BenchCheck: ; 2f4b3 (b:74b3)
+ClefairyDoll_BenchCheck:
+MysteriousFossil_BenchCheck:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	cp MAX_PLAY_AREA_POKEMON
@@ -8211,9 +8212,11 @@ MysteriousFossil_BenchCheck: ; 2f4b3 (b:74b3)
 	ldtx hl, NoSpaceOnTheBenchText
 	ret
 
-MysteriousFossil_PlaceInPlayAreaEffect: ; 2f4bf (b:74bf)
+ClefairyDoll_PlaceInPlayAreaEffect:
+MysteriousFossil_PlaceInPlayAreaEffect:
 	ldh a, [hTempCardIndex_ff9f]
 	jp PutHandPokemonCardInPlayArea
+
 
 
 ImposterProfessorOakEffect:
@@ -8345,20 +8348,6 @@ ComputerSearch_PlayerSelection:
 	call PlaySFX_InvalidChoice
 	jr .read_input
 
-
-; return carry if Bench is full.
-ClefairyDoll_BenchCheck: ; 2f561 (b:7561)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, NoSpaceOnTheBenchText
-	cp MAX_PLAY_AREA_POKEMON
-	ccf
-	ret
-
-ClefairyDoll_PlaceInPlayAreaEffect: ; 2f56d (b:756d)
-	ldh a, [hTempCardIndex_ff9f]
-	call PutHandPokemonCardInPlayArea
-	ret
 
 ; return carry if no Pokemon in the Bench.
 MrFuji_BenchCheck: ; 2f573 (b:7573)

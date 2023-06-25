@@ -7442,11 +7442,11 @@ ConvertSpecialTrainerCardToPokemon:
 	ret
 
 .trainer_to_pkmn_data
-	db 10                 ; CARD_DATA_HP
+	db 30                 ; CARD_DATA_HP
 	ds $07                ; CARD_DATA_ATTACK1_NAME - (CARD_DATA_HP + 1)
 	tx DiscardName        ; CARD_DATA_ATTACK1_NAME
 	tx DiscardDescription ; CARD_DATA_ATTACK1_DESCRIPTION
-	ds $03                ; CARD_DATA_ATTACK1_CATEGORY - (CARD_DATA_ATTACK1_DESCRIPTION + 2)
+	ds $03                ; CARD_DATA_ATTACK1_DESCRIPTION (cont), CARD_DATA_ATTACK1_DAMAGE
 	db POKEMON_POWER      ; CARD_DATA_ATTACK1_CATEGORY
 	dw TrainerCardAsPokemonEffectCommands ; CARD_DATA_ATTACK1_EFFECT_COMMANDS
 	ds $18                ; CARD_DATA_RETREAT_COST - (CARD_DATA_ATTACK1_EFFECT_COMMANDS + 2)

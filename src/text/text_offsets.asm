@@ -2990,10 +2990,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RareCandyName
 	textpointer RareCandyDescription
 	textpointer ClefairyDollName                                   ; 0x0b78
-	textpointer ClefairyDollDescription                            ; 0x0b79
-	textpointer ClefairyDollDescriptionCont                        ; 0x0b7a
-	textpointer MysteriousFossilDescription                        ; 0x0b7b
-	textpointer MysteriousFossilDescriptionCont                    ; 0x0b7c
+	textpointer TrainerCardAsPokemonDescription
+	textpointer TrainerCardAsPokemonDescriptionCont
 	textpointer EnergyRetrievalName                                ; 0x0b7d
 	textpointer EnergyRetrievalDescription                         ; 0x0b7e
 	textpointer EnergyRecyclerName

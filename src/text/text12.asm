@@ -933,48 +933,22 @@ RareCandyDescription:
 	line "that Pokémon anyway."
 	done
 
-ClefairyDollName: ; 6381c (18:781c)
+ClefairyDollName:
 	text "Clefairy Doll"
 	done
 
-ClefairyDollDescription: ; 6382b (18:782b)
-	text "Play Clefairy Doll as if it were a"
-	line "Basic Pokémon. While in play,"
-	line "Clefairy Doll counts as a Pokémon"
-	line "(instead of a Trainer card)."
-	line "Clefairy Doll has no attacks, can't"
-	line "retreat, and can't be Asleep,"
-	line "Confused, Paralyzed, or Poisoned."
+TrainerCardAsPokemonDescription:
+	text "Play this card as if it were a 30 HP"
+	line "<COLORLESS> Basic Pokémon. At any"
+	line "time during your turn (before your"
+	line "attack), you may discard this card."
+	line "This card cannot retreat or be"
+	line "affected by Special Conditions."
 	done
 
-ClefairyDollDescriptionCont: ; 63910 (18:7910)
-	text "If Clefairy Doll is Knocked Out, it"
-	line "doesn't count as a Knocked Out"
-	line "Pokémon. At any time during your"
-	line "turn before your attack, you may"
-	line "discard Clefairy Doll."
-	line "(Use GameBoy Pokémon Power menu"
-	line "option to do this.)"
-	done
-
-MysteriousFossilDescription: ; 639e1 (18:79e1)
-	text "Play Mysterious Fossil as if it were"
-	line "a Basic Pokémon. While in play,"
-	line "Mysterious Fossil counts as a"
-	line "Pokémon (instead of a Trainer card)."
-	line "Mysterious Fossil has no attacks,"
-	line "can't retreat, and can't be Asleep,"
-	line "Confused, Paralyzed, or Poisoned."
-	done
-
-MysteriousFossilDescriptionCont: ; 63ad2 (18:7ad2)
-	text "If Mysterious Fossil is Knocked Out,"
-	line "it doesn't count as a Knocked Out"
-	line "Pokémon. (Discard it anyway.) At any"
-	line "time during your turn before your"
-	line "attack, you may discard Mysterious"
-	line "Fossil from play. (Use GameBoy Poké-"
-	line "mon Power menu option to do this.)"
+TrainerCardAsPokemonDescriptionCont:
+	text "If this card is Knocked Out, it does"
+	line "not count as a Knocked Out Pokémon."
 	done
 
 EnergyRetrievalName: ; 63bcc (18:7bcc)

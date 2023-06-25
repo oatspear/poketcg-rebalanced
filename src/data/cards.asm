@@ -10388,8 +10388,8 @@ ClefairyDollCard:
 	db EVOLUTION | NONE ; sets
 	db CLEFAIRY_DOLL
 	dw ClefairyDollEffectCommands ; effect commands
-	tx ClefairyDollDescription ; description
-	tx ClefairyDollDescriptionCont ; description (cont)
+	tx TrainerCardAsPokemonDescription ; description
+	tx TrainerCardAsPokemonDescriptionCont ; description (cont)
 
 MysteriousFossilCard:
 	db TYPE_TRAINER ; type
@@ -10399,8 +10399,8 @@ MysteriousFossilCard:
 	db MYSTERY | FOSSIL ; sets
 	db MYSTERIOUS_FOSSIL
 	dw MysteriousFossilEffectCommands ; effect commands
-	tx MysteriousFossilDescription ; description
-	tx MysteriousFossilDescriptionCont ; description (cont)
+	tx TrainerCardAsPokemonDescription ; description
+	tx TrainerCardAsPokemonDescriptionCont ; description (cont)
 
 EnergyRetrievalCard:
 	db TYPE_TRAINER ; type
