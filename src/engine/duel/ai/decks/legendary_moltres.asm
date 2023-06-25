@@ -112,6 +112,10 @@ AIDoTurn_LegendaryMoltres:
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .skip_moltres ; skip if Muk in play
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	jr nz, .skip_moltres ; skip if Poké Flute in play
 	ld a, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres ; skip if no MoltresLv37 in hand

@@ -170,6 +170,10 @@ AIProcessEnergyCards: ; 164fc (5:64fc)
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .check_if_active
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	jr nz, .check_if_active ; skip if Poké Flute in play
 	ld a, IVYSAUR
 	call CountPokemonIDInPlayArea
 	jr nc, .check_if_active

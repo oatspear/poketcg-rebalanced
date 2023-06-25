@@ -8530,6 +8530,14 @@ PokemonFlute_PlaceInPlayAreaText: ; 2f68f (b:768f)
 	ret
 
 
+PokemonFlute_DisablePowersEffect:
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	set [hl], TURN_FLAG_PKMN_POWERS_DISABLED_F
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetNonTurnDuelistVariable
+	set [hl], TURN_FLAG_PKMN_POWERS_DISABLED_F
+	ret
 
 
 

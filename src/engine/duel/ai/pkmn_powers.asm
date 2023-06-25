@@ -26,6 +26,11 @@ HandleAIEnergyTrans:
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if Muk found in any Play Area
 
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	ret nz ; return if Poké Flute in play
+
 	ld a, [wAIEnergyTransRoutine]
 	cp AI_ENERGY_TRANS_RETREAT
 	jr z, .check_retreat
@@ -376,6 +381,11 @@ HandleAIPkmnPowers:
 	call CountPokemonIDInBothPlayAreas
 	ccf
 	ret nc ; return no carry if Muk is in play
+
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	ret nz ; return no carry if Poké Flute in play
 
 	farcall AIChooseRandomlyNotToDoAction
 	ccf
@@ -860,6 +870,11 @@ HandleAICowardice:
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
 
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	ret nz ; return if Poké Flute in play
+
 	farcall AIChooseRandomlyNotToDoAction
 	ret c ; randomly return
 
@@ -963,6 +978,10 @@ HandleAIDamageSwap:
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	ret nz ; return if Poké Flute in play
 
 ; only take damage off certain cards in Arena
 	ld a, DUELVARS_ARENA_CARD
@@ -1129,6 +1148,11 @@ HandleAIRainDanceEnergy:
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
 
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	ret nz ; return if Poké Flute in play
+
 ; play all the energy cards that is needed.
 .loop
 	farcall AIProcessAndTryToPlayEnergy
@@ -1150,6 +1174,11 @@ HandleAIFirestarterEnergy:
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c  ; Muk is in play
+
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	ret nz ; return if Poké Flute in play
 
 	farcall CreateEnergyCardListFromDiscardPile_OnlyFire
 	ret c  ; no Fire energy

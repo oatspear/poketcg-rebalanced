@@ -2117,6 +2117,11 @@ AIDecide_ProfessorOak:
 	call CountPokemonIDInBothPlayAreas
 	jr c, .check_hand
 
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	jr nz, .check_hand
+
 ; no Muk in Play Area
 	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
@@ -2400,12 +2405,13 @@ AIDecide_EnergyRetrieval:
 	; ld a, [wOpponentDeckID]
 	; cp GO_GO_RAIN_DANCE_DECK_ID
 	; jr nz, .start
-	ld a, MUK
-	call CountPokemonIDInBothPlayAreas
-	jr c, .start
-	ld a, WARTORTLE
-	call CountPokemonIDInPlayArea
-	jp nc, .no_carry
+
+	; ld a, MUK
+	; call CountPokemonIDInBothPlayAreas
+	; jr c, .start
+	; ld a, WARTORTLE
+	; call CountPokemonIDInPlayArea
+	; jp nc, .no_carry
 
 .start
 ; find duplicate cards in hand

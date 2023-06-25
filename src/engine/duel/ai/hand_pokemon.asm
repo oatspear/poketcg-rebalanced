@@ -504,6 +504,10 @@ AIDecideSpecialEvolutions:
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .lower_score
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	jr nz, .lower_score ; Poké Flute in play
 	ld a, 10
 	call AddToAIScore
 	ret
@@ -593,6 +597,10 @@ AIDecidePlayLegendaryBirds:
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .subtract
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	jr nz, .subtract ; Poké Flute in play
 	; checks if player's active card is Snorlax
 	ld a, DUELVARS_ARENA_CARD
 	call GetNonTurnDuelistVariable
@@ -625,4 +633,8 @@ AIDecidePlayLegendaryBirds:
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .subtract
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit a, TURN_FLAG_PKMN_POWERS_DISABLED_F
+	jr nz, .subtract ; Poké Flute in play
 	ret
