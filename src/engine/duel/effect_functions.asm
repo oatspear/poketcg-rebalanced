@@ -492,6 +492,35 @@ CollectFire_CheckDiscardPile:
 	ret
 
 
+; returns carry if the Pokémon Power has already been used in this turn.
+; inputs:
+;   [hTempPlayAreaLocation_ff9d]: PLAY_AREA_* of the Pokémon using the Power
+CheckPokemonPowerCanBeUsed:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .already_used
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
+	ret
+
+.already_used
+	ldtx hl, OnlyOncePerTurnText
+	scf
+	ret
+
+
+AbsorbWater_PreconditionCheck:
+	call CheckPokemonPowerCanBeUsed
+	ret c
+
+	call CreateEnergyCardListFromDiscardPile_OnlyWater
+	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Discard Cards
 ; ------------------------------------------------------------------------------
@@ -2104,6 +2133,7 @@ WeezingSmog_AIEffect: ; 2cce2 (b:4ce2)
 ; Color Manipulation
 ; ------------------------------------------------------------------------------
 
+DualTypeFighting_OncePerTurnCheck:
 Shift_OncePerTurnCheck:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
@@ -2184,6 +2214,15 @@ Shift_PlayerSelectEffect: ; 2cd21 (b:4d21)
 	scf
 	ret
 
+
+SetUsedPokemonPowerThisTurn:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+	ret
+
+
 Shift_ChangeColorEffect:
 	ldh a, [hTemp_ffa0]
 	add DUELVARS_ARENA_CARD_FLAGS
@@ -2197,34 +2236,35 @@ Shift_ChangeColorEffect:
 	jr ColorShift_ChangeColorEffect
 
 VaporEssence_ChangeColorEffect:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	set USED_PKMN_POWER_THIS_TURN_F, [hl]
-
+	call SetUsedPokemonPowerThisTurn
 	ld e, PLAY_AREA_ARENA
 	ld d, WATER
 	jr ColorShift_ChangeColorEffect
 
 JoltEssence_ChangeColorEffect:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	set USED_PKMN_POWER_THIS_TURN_F, [hl]
-
+	call SetUsedPokemonPowerThisTurn
 	ld e, PLAY_AREA_ARENA
 	ld d, LIGHTNING
 	jr ColorShift_ChangeColorEffect
 
 FlareEssence_ChangeColorEffect:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	set USED_PKMN_POWER_THIS_TURN_F, [hl]
-
+	call SetUsedPokemonPowerThisTurn
 	ld e, PLAY_AREA_ARENA
 	ld d, FIRE
 	jr ColorShift_ChangeColorEffect
+
+DualTypeFighting_ChangeColorEffect:
+	call SetUsedPokemonPowerThisTurn
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetPlayAreaCardColor
+	cp FIGHTING
+	jr z, ResetCardColorEffect
+
+; change color to Fighting
+	ld d, FIGHTING
+	jr ColorShift_ChangeColorEffect
+
 
 ; changes the effective color of a Pokémon in play
 ; input:
@@ -2247,6 +2287,34 @@ ColorShift_ChangeColorEffect:
 	call DrawWideTextBox_WaitForInput
 	ret
 
+
+; resets the effective color of the Areana Pokémon
+ResetArenaCardColorEffect:
+	xor a  ; PLAY_AREA_ARENA
+	ld e, a
+	; fallthrough
+
+; resets the effective color of a Pokémon in play
+; input:
+;   e: offset of play area Pokémon
+ResetCardColorEffect:
+	ld a, e
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+
+	ld a, e
+	add DUELVARS_ARENA_CARD_CHANGED_TYPE
+	ld l, a
+	res HAS_CHANGED_COLOR_F, [hl]
+
+	ld a, e
+	call GetPlayAreaCardColor
+	ld [hl], a
+	call LoadCardNameAndInputColor
+	ldtx hl, ChangedTheColorOfText
+	call DrawWideTextBox_WaitForInput
+	ret
 
 
 ; VenomPowder_AIEffect: ; 2cd84 (b:4d84)
@@ -3805,11 +3873,21 @@ EnergyConversion_CheckEnergy:
 	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
 	ret
 
+EnergySplash_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTempList], a
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	jr nc, EnergyConversion_PlayerSelectEffect
+	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
+	ccf  ; reset carry
+	ret
+
 EnergyConversion_PlayerSelectEffect:
 	ldtx hl, Choose2EnergyCardsFromDiscardPileForHandText
 	call HandleEnergyCardsInDiscardPileSelection
 	ret
 
+EnergySplash_AISelectEffect:
 EnergyConversion_AISelectEffect:
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
 	; call CreateEnergyCardListFromDiscardPile_AllEnergy
@@ -3830,7 +3908,8 @@ EnergyConversion_AISelectEffect:
 	ld [de], a
 	ret
 
-EnergyConversion_AddToHandEffect: ; 2d9b4 (b:59b4)
+EnergySplash_AddToHandEffect:
+EnergyConversion_AddToHandEffect:
 ; loop cards that were chosen
 ; until $ff is reached,
 ; and move them to the hand.
@@ -4544,6 +4623,13 @@ EnergyAbsorption_AISelectEffect:
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
 	; call CreateEnergyCardListFromDiscardPile_AllEnergy
 	ld a, 2
+	jr PickFirstNCardsFromList_SelectEffect
+
+
+Retrieve1WaterEnergyFromDiscard_SelectEffect:
+; pick the first energy card
+	call CreateEnergyCardListFromDiscardPile_OnlyWater
+	ld a, 1
 	jr PickFirstNCardsFromList_SelectEffect
 
 
@@ -7424,11 +7510,11 @@ ExpandEffect: ; 2f153 (b:7153)
 	call ApplySubstatus1ToAttackingCard
 	ret
 
-SneakAttack_AIEffect: ; 2d0b8 (b:50b8)
+SneakAttack_AIEffect:
 	call SneakAttack_DamageBoostEffect
 	jp SetDefiniteAIDamage
 
-SneakAttack_DamageBoostEffect: ; 2d0c0 (b:50c0)
+SneakAttack_DamageBoostEffect:
 	xor a  ; PLAY_AREA_ARENA
 	call CheckIfCardHasDarknessEnergyAttached
 	jr c, .done
@@ -7448,6 +7534,22 @@ PunishingSlap_DamageBoostEffect:
 	call SneakAttack_DamageBoostEffect
 	call SwapTurn
 	ret
+
+
+AquaPunch_AIEffect:
+	call AquaPunch_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+AquaPunch_DamageBoostEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + WATER]
+	call ATimes10
+	call AddToDamage
+	ld a, [wAttachedEnergies + FIGHTING]
+	call ATimes10
+	jp AddToDamage
+
 
 DragonRage_AIEffect:
 	call DragonRage_DamageBoostEffect
@@ -7770,6 +7872,16 @@ SelectedCards_AddToHandFromDiscardPile:
 	ret
 
 
+AbsorbWater_AddToHandEffect:
+	call CreateEnergyCardListFromDiscardPile_OnlyWater
+; choose the first energy in the list
+	ld a, [wDuelTempList]
+	ldh [hTempList], a
+	ld a, $ff
+	ldh [hTempList + 1], a
+	jr SelectedCards_AddToHandFromDiscardPile
+
+
 Maintenance_DiscardAndAddToHandEffect:
 SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
 ; discard the first card in hTempList
@@ -7777,8 +7889,8 @@ SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
 ; add the second card in hTempList to the hand
 	ldh a, [hTempList + 1]
 	ldh [hTempList], a
-	; ld a, $ff
-	; ldh [hTempList + 1], a
+	ld a, $ff
+	ldh [hTempList + 1], a
 	jr SelectedCards_AddToHandFromDiscardPile
 
 

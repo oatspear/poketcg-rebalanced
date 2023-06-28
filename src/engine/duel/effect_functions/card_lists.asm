@@ -81,6 +81,12 @@ CreateEnergyCardListFromDiscardPile_OnlyFire:
 	jr CreateEnergyCardListFromDiscardPile
 
 ; makes a list in wDuelTempList with the deck indices
+; of all Water energy cards found in Turn Duelist's Discard Pile.
+CreateEnergyCardListFromDiscardPile_OnlyWater:
+	ld c, TYPE_ENERGY_WATER
+	jr CreateEnergyCardListFromDiscardPile
+
+; makes a list in wDuelTempList with the deck indices
 ; of all basic energy cards found in Turn Duelist's Discard Pile.
 CreateEnergyCardListFromDiscardPile_OnlyBasic:
 	ld c, $00

@@ -2949,7 +2949,7 @@ RapidashCard:
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx OverrunName ; name
-	tx Deal30ToAnyPokemonDescription ; description
+	tx Damage1BenchedPokemon30Description ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
@@ -3591,32 +3591,32 @@ PoliwhirlCard:
 	db DIAMOND ; rarity
 	db LABORATORY | NONE ; sets
 	db POLIWHIRL
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx PoliwagName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
-	tx AmnesiaName ; name
-	tx AmnesiaDescription ; description
-	dw NONE ; description (cont)
+	energy 0 ; energies
+	tx AbsorbWaterName ; name
+	tx Retrieve1WaterEnergyFromDiscardDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw AmnesiaEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw AbsorbWaterEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_AMNESIA ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 2 ; energies
-	tx DoubleslapName ; name
-	tx DoubleAttackX30Description ; description
+	energy COLORLESS, 3 ; energies
+	tx DoTheWaveName ; name
+	tx DoTheWaveDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_X ; category
-	dw PoliwhirlDoubleslapEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw DoTheWaveEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -3642,34 +3642,34 @@ PoliwrathCard:
 	db STAR ; rarity
 	db LABORATORY | NONE ; sets
 	db POLIWRATH
-	db 90 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx PoliwhirlName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1, COLORLESS, 1 ; energies
-	tx WaterGunName ; name
-	tx WaterGunDescription ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_PLUS ; category
-	dw PoliwrathWaterGunEffectCommands ; effect commands
+	energy 0 ; energies
+	tx DualTypeFightingName ; name
+	tx DualTypeFightingDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DualTypeFightingEffectCommands ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
-	db ATK_ANIM_WATER_GUN ; animation
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy WATER, 2, COLORLESS, 1 ; energies
-	tx WhirlpoolName ; name
-	tx Discard1EnergyFromTargetDescription ; description
+	energy COLORLESS, 3 ; energies
+	tx AquaPunchName ; name
+	tx AquaPunchDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw WhirlpoolEffectCommands ; effect commands
+	db 40 ; damage
+	db DAMAGE_PLUS ; category
+	dw AquaPunchEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 3
 	db ATK_ANIM_WHIRLPOOL ; animation
@@ -4356,7 +4356,7 @@ StarmieCard:
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db STARMIE
-	db 60 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx StaryuName ; pre-evo name
 
@@ -4376,16 +4376,16 @@ StarmieCard:
 
 	; attack 2
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx StarFreezeName ; name
-	tx MayInflictParalysisDescription ; description
+	tx EnergySplashName ; name
+	tx EnergyConversionDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw StarmieStarFreezeEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw EnergySplashEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 10
 	db ATK_ANIM_BEAM ; animation
 
 	db 1 ; retreat cost
@@ -9159,7 +9159,7 @@ WigglytuffCard:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw WigglytuffDoTheWaveEffectCommands ; effect commands
+	dw DoTheWaveEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

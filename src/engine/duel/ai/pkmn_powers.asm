@@ -447,21 +447,19 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_shift
 	cp PORYGON
-	jr nz, .check_curse
-	; .check_strange_behavior
-	; .check_peek
+	jr nz, .check_absorb_water
 	call HandleAIShift
 	jr .next_1
-;.check_peek
-;	cp MANKEY
-;	jr nz, .check_strange_behavior
-;	call HandleAIPeek
-;	jr .next_1
-;.check_strange_behavior
-;	cp SLOWBRO
-;	jr nz, .check_curse
-;	call HandleAIStrangeBehavior
-;	jr .next_1
+.check_absorb_water
+	cp POLIWHIRL
+	jr nz, .check_dual_type_fighting
+	call HandleAIAbsorbWater
+	jr .next_1
+.check_dual_type_fighting
+	cp POLIWRATH
+	jr nz, .check_curse
+	call HandleAIDualTypeFighting
+	jr .next_1
 .check_curse
 	cp HAUNTER_LV17
 	jr nz, .next_1
@@ -864,6 +862,69 @@ HandleAICurse:
 	bank1call AIMakeDecision
 	ret
 
+
+; EFFECTCMDTYPE_INITIAL_EFFECT_2 has already been executed, so the AI knows
+; that there are Water Energies to retrieve.
+HandleAIAbsorbWater:
+	ld a, [wAITempVars]
+	ldh [hTempCardIndex_ff9f], a
+	ld a, OPPACTION_USE_PKMN_POWER
+	bank1call AIMakeDecision
+	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
+	bank1call AIMakeDecision
+	ld a, OPPACTION_DUEL_MAIN_SCENE
+	bank1call AIMakeDecision
+	ret
+
+
+HandleAIDualTypeFighting:
+	ld a, c
+	or a
+	ret nz ; return if this is not Arena card
+
+	ldh [hTemp_ffa0], a
+	call GetArenaCardColor
+	call TranslateColorToWR
+	ld b, a
+	call SwapTurn
+	call GetArenaCardWeakness
+	ld [wAIDefendingPokemonWeakness], a
+	call SwapTurn
+	or a
+	ret z ; return if Defending Pokemon has no weakness
+	and b
+	ret nz ; return if this is already Defending card's weakness type
+
+	ld a, b
+	cp WR_FIGHTING
+	jr nz, .other_color
+
+; already fighting type
+	call SwapTurn
+	call GetArenaCardResistance
+	call SwapTurn
+	cp WR_FIGHTING
+	jr z, .use_pkmn_power  ; change type if resistant to Fighting
+	ret
+
+.other_color
+	ld a, [wAIDefendingPokemonWeakness]
+	cp WR_FIGHTING
+	jr z, .use_pkmn_power  ; change type if weak to Fighting
+	ret
+
+.use_pkmn_power
+	ld a, [wAITempVars]
+	ldh [hTempCardIndex_ff9f], a
+	ld a, OPPACTION_USE_PKMN_POWER
+	bank1call AIMakeDecision
+	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
+	bank1call AIMakeDecision
+	ld a, OPPACTION_DUEL_MAIN_SCENE
+	bank1call AIMakeDecision
+	ret
+
+
 ; handles AI logic for Cowardice
 HandleAICowardice:
 	ld a, MUK
@@ -1223,5 +1284,7 @@ HandleAIFirestarterEnergy:
 	bank1call AIMakeDecision
 ; execute the EFFECTCMDTYPE_BEFORE_DAMAGE command of the used Pokemon Power
 	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
+	bank1call AIMakeDecision
+	ld a, OPPACTION_DUEL_MAIN_SCENE
 	bank1call AIMakeDecision
 	ret

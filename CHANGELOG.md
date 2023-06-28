@@ -279,12 +279,18 @@
 - New attack: **Call for Friend** (C): put 1 Basic Pokémon on Bench from deck.
 
 #### Poliwhirl
-- **Amnesia**: reduced cost from (WW) to (W).
-- **Doubleslap**: reduced cost from (WWC) to (WCC).
+- Increased HP from 60 to 70.
+- **Amnesia**: removed.
+- **Doubleslap**: removed.
+- New Pokémon Power: **Absorb Water**: once per turn, put 1 (W) from discard into hand.
+- New attack: **Do the Wave** (CCC): 10 damage, +10 damage for each Benched Pokémon.
 
 #### Poliwrath
-- **Water Gun**: reduced cost from (WWC) to (WC).
-- **Whirlpool**: reduced cost from (WWCC) to (WWC) and damage from 40 to 30.
+- Increased HP from 90 to 100.
+- **Water Gun**: removed.
+- **Whirlpool**: removed.
+- New Pokémon Power: **Fighting Type**: may change type to Fighting or revert to original type.
+- New attack: **Aqua Punch** (CCC): 40 damage, +10 damage for each attached (W) or (F).
 
 #### Tentacool
 - Increased HP from 30 to 40.
@@ -349,8 +355,10 @@
 - New attack: **Big Splash** (WC): 20 damage, draw 1 card.
 
 #### Starmie
+- Increased HP from 60 to 80.
 - **Recover**: reduced cost from (WW) to (C) and can discard any type of Energy.
-- **Star Freeze**: reduced cost from (WCC) to (WC); increased damage from 20 to 30.
+- **Star Freeze**: removed.
+- New attack: **Energy Splash** (WC): 30 damage, retrieves 2 Basic Energy from discard pile to hand.
 
 #### Magikarp
 - **Tackle**: removed.

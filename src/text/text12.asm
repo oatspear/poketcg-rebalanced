@@ -823,6 +823,46 @@ NaturalRemedyDescription:
 	line "your Pokémon."
 	done
 
+CollectFireName:
+	text "Collect Fire"
+	done
+
+Attach1FireEnergyFromDiscardDescription:
+	text "Attach a <FIRE> Energy from your"
+	line "discard pile to this Pokémon."
+	done
+
+AbsorbWaterName:
+	text "Absorb Water"
+	done
+
+Retrieve1WaterEnergyFromDiscardDescription:
+	text "Once during your turn, you may put"
+	line "a <WATER> Energy from your discard pile"
+	line "into your hand."
+	done
+
+DualTypeFightingName:
+	text "Fighting Type"
+	done
+
+DualTypeFightingDescription:
+	text "Once during your turn, you may"
+	line "change this Pokémon's type to <FIGHTING>."
+	line "If it is <FIGHTING> type already, you may"
+	line "revert it to its original type."
+	done
+
+AquaPunchName:
+	text "Aqua Punch"
+	done
+
+AquaPunchDescription:
+	text "This attack does 10 more damage for"
+	line "each <WATER> or <FIGHTING> energy attached"
+	line "to this Pokémon."
+	done
+
 ProfessorOakName:
 	text "Professor Oak"
 	done

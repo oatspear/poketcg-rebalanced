@@ -1573,6 +1573,13 @@ OverrunName:
 	text "Overrun"
 	done
 
+Damage1BenchedPokemon30Description:
+	text "This attack does 30 damage to 1 of"
+	line "your opponent's Benched Pokémon."
+	line "(Don't apply Weakness and Resistance"
+	line "for Benched Pokémon)"
+	done
+
 CombustionName:
 	text "Combustion"
 	done
@@ -1585,13 +1592,4 @@ Discard1CardFromOpponentsDeckDescription:
 Discard2CardsFromOpponentsDeckDescription:
 	text "Discard 2 cards from the top"
 	line "of your opponent's deck."
-	done
-
-CollectFireName:
-	text "Collect Fire"
-	done
-
-Attach1FireEnergyFromDiscardDescription:
-	text "Attach a <FIRE> Energy from your"
-	line "discard pile to this Pokémon."
 	done

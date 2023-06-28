@@ -286,6 +286,11 @@ FlareEssenceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FlareEssence_ChangeColorEffect
 	db  $00
 
+DualTypeFightingEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DualTypeFighting_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DualTypeFighting_ChangeColorEffect
+	db  $00
+
 ShiftEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Shift_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Shift_ChangeColorEffect
@@ -426,7 +431,6 @@ CloysterSpikeCannonEffectCommands:
 	dbw EFFECTCMDTYPE_AI, CloysterSpikeCannon_AIEffect
 	db  $00
 
-StarmieStarFreezeEffectCommands:
 AbraPsyshockEffectCommands:
 GastlyLickEffectCommands:
 MewPsyshockEffectCommands:
@@ -624,6 +628,12 @@ EnergyConversionEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyConversion_AISelectEffect
 	db  $00
 
+EnergySplashEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergySplash_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySplash_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySplash_AISelectEffect
+	db  $00
+
 InflictSleepEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
 	db  $00
@@ -704,6 +714,11 @@ CollectFireEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CollectFire_CheckDiscardPile
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Attach1FireEnergyFromDiscard_SelectEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CollectFire_AttachToPokemonEffect
+	db  $00
+
+AbsorbWaterEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, AbsorbWater_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AbsorbWater_AddToHandEffect
 	db  $00
 
 EnergyAbsorptionEffectCommands:
@@ -1094,7 +1109,7 @@ ClefairyMetronomeEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, ClefairyMetronome_AISelectEffect
 	db  $00
 
-WigglytuffDoTheWaveEffectCommands:
+DoTheWaveEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoTheWaveEffect
 	dbw EFFECTCMDTYPE_AI, DoTheWaveEffect
 	db  $00
@@ -1229,6 +1244,11 @@ SneakAttackEffectCommands:
 PunishingSlapEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PunishingSlap_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, PunishingSlap_AIEffect
+	db  $00
+
+AquaPunchEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AquaPunch_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, AquaPunch_AIEffect
 	db  $00
 
 DragonRageEffectCommands:

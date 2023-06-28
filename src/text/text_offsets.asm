@@ -2139,11 +2139,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RapidSpinName
 	textpointer BothPlayersSwitchDescription
 	textpointer OverrunName
+	textpointer Damage1BenchedPokemon30Description
 	textpointer CombustionName
 	textpointer Discard1CardFromOpponentsDeckDescription
 	textpointer Discard2CardsFromOpponentsDeckDescription
-	textpointer CollectFireName
-	textpointer Attach1FireEnergyFromDiscardDescription
 	textpointer NidoranFDescription                                ; 0x0850
 	textpointer NidorinaName                                       ; 0x0851
 	textpointer SupersonicName                                     ; 0x0852
@@ -2473,7 +2472,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer StarmieName                                        ; 0x0985
 	textpointer RecoverName                                        ; 0x0986
 	textpointer RecoverDescription                                 ; 0x0987
-	textpointer StarFreezeName                                     ; 0x0988
+	textpointer EnergySplashName
 	textpointer MysteriousName                                     ; 0x0989
 	textpointer StarmieDescription                                 ; 0x098a
 	textpointer MagikarpName                                       ; 0x098b
@@ -2971,6 +2970,14 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HealingEnergyDescription
 	textpointer NaturalRemedyName
 	textpointer NaturalRemedyDescription
+	textpointer CollectFireName
+	textpointer Attach1FireEnergyFromDiscardDescription
+	textpointer AbsorbWaterName
+	textpointer Retrieve1WaterEnergyFromDiscardDescription
+	textpointer DualTypeFightingName
+	textpointer DualTypeFightingDescription
+	textpointer AquaPunchName
+	textpointer AquaPunchDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

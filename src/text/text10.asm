@@ -1576,17 +1576,17 @@ StarmieName: ; 5c349 (17:4349)
 	text "Starmie"
 	done
 
-RecoverName: ; 5c352 (17:4352)
+RecoverName:
 	text "Recover"
 	done
 
-RecoverDescription: ; 5c35b (17:435b)
+RecoverDescription:
 	text "Discard an Energy from this Pokémon."
 	line "Then, heal all damage from it."
 	done
 
-StarFreezeName: ; 5c3cf (17:43cf)
-	text "Star Freeze"
+EnergySplashName:
+	text "Energy Splash"
 	done
 
 MysteriousName: ; 5c3dc (17:43dc)
