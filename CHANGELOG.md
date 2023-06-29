@@ -797,6 +797,10 @@
 #### Pokémon Center
 - Heal 10 damage from each of your Pokémon, no Energy cost.
 
+#### Scoop Up
+- Renamed to **Scoop Up Net**.
+- Returns Pokémon and its evolutions, rather than Basic only.
+
 #### Computer Search
 - Looks at the top 7 deck cards; may pick a Supporter from those.
 

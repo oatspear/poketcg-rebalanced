@@ -214,7 +214,7 @@ CardPointers:
 	dw SwitchCard
 	dw PokemonCenterCard
 	dw PokeBallCard
-	dw ScoopUpCard
+	dw ScoopUpNetCard
 	dw ComputerSearchCard
 	dw PokedexCard
 	dw PlusPowerCard
@@ -10490,15 +10490,15 @@ PokeBallCard:
 	tx PokeBallDescription ; description
 	dw NONE ; description (cont)
 
-ScoopUpCard:
-	db TYPE_TRAINER_SUPPORTER ; type
-	gfx ScoopUpCardGfx ; gfx
-	tx ScoopUpName ; name
+ScoopUpNetCard:
+	db TYPE_TRAINER ; type
+	gfx ScoopUpNetCardGfx ; gfx
+	tx ScoopUpNetName ; name
 	db STAR ; rarity
 	db COLOSSEUM | NONE ; sets
 	db SCOOP_UP
-	dw ScoopUpEffectCommands ; effect commands
-	tx ScoopUpDescription ; description
+	dw ScoopUpNetEffectCommands ; effect commands
+	tx ScoopUpNetDescription ; description
 	dw NONE ; description (cont)
 
 ComputerSearchCard:

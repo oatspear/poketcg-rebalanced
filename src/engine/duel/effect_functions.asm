@@ -292,6 +292,15 @@ CheckTurnHolderHasMorePrizeCardsRemaining:
 	ret
 
 
+; return carry if no cards in the Bench.
+CheckBenchIsNotEmpty:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ldtx hl, EffectNoPokemonOnTheBenchText
+	cp 2
+	ret
+
+
 ; returns carry if Play Area has no damage counters
 ; and sets the error message in hl
 CheckIfPlayAreaHasAnyDamage:
@@ -8643,16 +8652,7 @@ PokemonFlute_DisablePowersEffect:
 
 
 
-
-; return carry if no cards in the Bench.
-ScoopUp_BenchCheck: ; 2f795 (b:7795)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, EffectNoPokemonOnTheBenchText
-	cp 2
-	ret
-
-ScoopUp_PlayerSelection: ; 2f7a0 (b:77a0)
+ScoopUpNet_PlayerSelection:
 ; print text box
 	ldtx hl, ChoosePokemonToScoopUpText
 	call DrawWideTextBox_WaitForInput
@@ -8660,7 +8660,7 @@ ScoopUp_PlayerSelection: ; 2f7a0 (b:77a0)
 ; handle Player selection
 	bank1call HasAlivePokemonInPlayArea
 	bank1call OpenPlayAreaScreenForSelection
-	call c, CancelSupporterCard
+	; call c, CancelSupporterCard
 	ret c ; exit if B was pressed
 
 	ldh [hTemp_ffa0], a
@@ -8676,14 +8676,15 @@ ScoopUp_PlayerSelection: ; 2f7a0 (b:77a0)
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
-ScoopUp_ReturnToHandEffect: ; 2f7c3 (b:77c3)
+
+ScoopUpNet_ReturnToHandEffect:
 ; store chosen card location to Scoop Up
 	ldh a, [hTemp_ffa0]
 	or CARD_LOCATION_PLAY_AREA
 	ld e, a
 
-; find Basic Pokemon card that is in the selected Play Area location
-; and add it to the hand, discarding all cards attached.
+; find Pokémon cards that are in the selected Play Area location
+; and add them to the hand, discarding all cards attached.
 	ld a, DUELVARS_CARD_LOCATIONS
 	call GetTurnDuelistVariable
 .loop
@@ -8695,16 +8696,13 @@ ScoopUp_ReturnToHandEffect: ; 2f7c3 (b:77c3)
 	ld a, [wLoadedCard2Type]
 	cp TYPE_ENERGY
 	jr nc, .next_card ; skip if not Pokemon card
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .next_card  ; skip if not Basic stage
+	; ld a, [wLoadedCard2Stage]
+	; or a
+	; jr nz, .next_card  ; skip if not Basic stage
 ; found
 	ld a, l
 	ldh [hTempCardIndex_ff98], a
 	call AddCardToHand
-	; optimization: break loop here, since
-	; no two Basic Pokemon cards may occupy
-	; the same Play Area location.
 .next_card
 	inc l
 	ld a, l
@@ -8718,11 +8716,14 @@ ScoopUp_ReturnToHandEffect: ; 2f7c3 (b:77c3)
 	ld e, a
 	call MovePlayAreaCardToDiscardPile
 
-; if the Pokemon was in the Arena, clear status
+; clear status from Pokémon location
+	ldh a, [hTemp_ffa0]
+	call ClearStatusFromTarget_NoAnim
+; arena Pokémon additionally clears all substatus effects
 	ldh a, [hTemp_ffa0]
 	or a
 	jr nz, .skip_clear_status
-	call ClearAllStatusConditions
+	call ClearAllStatusConditions.done_status
 .skip_clear_status
 
 ; if card was not played by Player, show detail screen
@@ -8754,6 +8755,8 @@ ScoopUp_ReturnToHandEffect: ; 2f7c3 (b:77c3)
 	call SwapPlayAreaPokemon
 	call ShiftAllPokemonToFirstPlayAreaSlots
 	ret
+
+
 
 ; return carry if no other cards in hand,
 ; or if there are no Pokemon cards in hand.

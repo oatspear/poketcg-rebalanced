@@ -1064,15 +1064,14 @@ PokeBallDescription:
 	line "Shuffle your deck afterward."
 	done
 
-ScoopUpName: ; 63fed (18:7fed)
-	text "Scoop Up"
+ScoopUpNetName:
+	text "Scoop Up Net"
 	done
 
-ScoopUpDescription: ; 64000 (19:4000)
+ScoopUpNetDescription:
 	text "Choose 1 of your Pokémon in play"
-	line "and return its Basic Pokémon card to"
-	line "your hand. (Discard all cards"
-	line "attached to that card.)"
+	line "and return it to your hand."
+	line "(Discard all cards attached to it.)"
 	done
 
 ComputerSearchName:

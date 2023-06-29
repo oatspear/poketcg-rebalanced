@@ -2433,3 +2433,7 @@ RecycleCardGfx::
 RareCandyCardGfx::
 	INCBIN "gfx/cards/rarecandy.2bpp"
 	INCBIN "gfx/cards/rarecandy.pal"
+
+ScoopUpNetCardGfx::
+	INCBIN "gfx/cards/scoopupnet.2bpp"
+	INCBIN "gfx/cards/scoopupnet.pal"

@@ -3014,8 +3014,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PokemonCenterName                                  ; 0x0b89
 	textpointer PokeBallName                                       ; 0x0b8b
 	textpointer PokeBallDescription                                ; 0x0b8c
-	textpointer ScoopUpName                                        ; 0x0b8d
-	textpointer ScoopUpDescription                                 ; 0x0b8e
+	textpointer ScoopUpNetName
+	textpointer ScoopUpNetDescription
 	textpointer ComputerSearchName                                 ; 0x0b8f
 	textpointer ComputerSearchDescription                          ; 0x0b90
 	textpointer PokedexName                                        ; 0x0b91

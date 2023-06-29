@@ -1414,10 +1414,10 @@ RareCandyEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RareCandy_EvolveEffect
 	db  $00
 
-ScoopUpEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ScoopUp_BenchCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ScoopUp_PlayerSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ScoopUp_ReturnToHandEffect
+ScoopUpNetEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ScoopUpNet_PlayerSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ScoopUpNet_ReturnToHandEffect
 	db  $00
 
 PokemonTraderEffectCommands:
