@@ -218,7 +218,7 @@
 	const PLUSPOWER                   ; $d9
 	const DEFENDER                    ; $da
 	const ITEM_FINDER                 ; $db
-	const GUST_OF_WIND                ; $dc
+	const BLUE_OAK                ; $dc
 	const DEVOLUTION_SPRAY            ; $dd
 	const POTION                      ; $de
 	const SUPER_POTION                ; $df

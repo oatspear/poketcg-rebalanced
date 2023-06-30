@@ -48,7 +48,7 @@ BenchAttackCardList:
 	card_item PLUSPOWER,         2
 	card_item DEFENDER,          2
 	card_item ITEM_FINDER,       1
-	card_item GUST_OF_WIND,      1
+	card_item BLUE_OAK,      1
 	card_item MAINTENANCE,       1
 	deck_list_end
 
@@ -106,7 +106,7 @@ FirstStrikeCardList:
 	card_item DEFENDER,         2
 	card_item PLUSPOWER,        2
 	card_item SWITCH,           2
-	card_item GUST_OF_WIND,     3
+	card_item BLUE_OAK,     3
 	card_item BILL,             4
 	deck_list_end
 
@@ -267,7 +267,7 @@ OnTheBeachCardList:
 	card_item BILL,              2
 	card_item ENERGY_RETRIEVAL,  2
 	card_item ENERGY_REMOVAL,    2
-	card_item GUST_OF_WIND,      2
+	card_item BLUE_OAK,      2
 	card_item POTION,            3
 	deck_list_end
 
@@ -386,7 +386,7 @@ PokemonFluteCardList:
 	card_item COMPUTER_SEARCH,   1
 	card_item PLUSPOWER,         3
 	card_item ITEM_FINDER,       2
-	card_item GUST_OF_WIND,      4
+	card_item BLUE_OAK,      4
 	card_item POKEMON_FLUTE,     4
 	deck_list_end
 
@@ -416,7 +416,7 @@ YellowFlashCardList:
 	card_item POKE_BALL,         2
 	card_item PLUSPOWER,         2
 	card_item DEFENDER,          2
-	card_item GUST_OF_WIND,      1
+	card_item BLUE_OAK,      1
 	deck_list_end
 
 ElectricShockCardList:
@@ -438,7 +438,7 @@ ElectricShockCardList:
 	card_item PLUSPOWER,                2
 	card_item DEFENDER,                 3
 	card_item ITEM_FINDER,              2
-	card_item GUST_OF_WIND,             3
+	card_item BLUE_OAK,             3
 	deck_list_end
 
 ZappingSelfdestructCardList:
@@ -456,7 +456,7 @@ ZappingSelfdestructCardList:
 	card_item BILL,                     2
 	card_item SWITCH,                   2
 	card_item DEFENDER,                 4
-	card_item GUST_OF_WIND,             1
+	card_item BLUE_OAK,             1
 	card_item POTION,                   4
 	deck_list_end
 
@@ -559,7 +559,7 @@ KaleidoscopeCardList:
 	card_item MR_FUJI,                  2
 	card_item ENERGY_SEARCH,            2
 	card_item SWITCH,                   4
-	card_item GUST_OF_WIND,             2
+	card_item BLUE_OAK,             2
 	deck_list_end
 
 FlowerPowerCardList:
@@ -675,7 +675,7 @@ StrangePowerCardList:
 	card_item ENERGY_SWITCH,            1
 	card_item PLUSPOWER,                2
 	card_item ITEM_FINDER,              1
-	card_item GUST_OF_WIND,             1
+	card_item BLUE_OAK,             1
 	card_item FULL_HEAL,                1
 	deck_list_end
 
@@ -692,7 +692,7 @@ StrangePsyshockCardList:
 	card_item PROFESSOR_OAK,   2
 	card_item POKEMON_CENTER,  2
 	card_item ENERGY_REMOVAL,  3
-	card_item GUST_OF_WIND,    3
+	card_item BLUE_OAK,    3
 	card_item SCOOP_UP,        4
 	card_item SWITCH,          4
 	card_item GAMBLER,         1
@@ -829,7 +829,7 @@ ReplaceEmAllCardList:
 	card_item PROFESSOR_OAK,           2
 	card_item IMPOSTER_PROFESSOR_OAK,  2
 	card_item LASS,                    2
-	card_item GUST_OF_WIND,            3
+	card_item BLUE_OAK,            3
 	deck_list_end
 
 ChariSaurCardList:
@@ -900,7 +900,7 @@ FirePokemonCardList:
 	card_item ENERGY_RETRIEVAL,         1
 	card_item ENERGY_RECYCLER,   1
 	card_item SWITCH,                   1
-	card_item GUST_OF_WIND,             1
+	card_item BLUE_OAK,             1
 	deck_list_end
 
 FireChargeCardList:
@@ -1030,7 +1030,7 @@ BulbasaurAndFriendsCardList:
 	card_item POKE_BALL,        1
 	card_item PLUSPOWER,        2
 	card_item DEFENDER,         1
-	card_item GUST_OF_WIND,     1
+	card_item BLUE_OAK,     1
 	card_item POTION,           2
 	card_item FULL_HEAL,        2
 	deck_list_end
@@ -1064,7 +1064,7 @@ PsychicMachampCardList:
 	card_item PROFESSOR_OAK,    1
 	card_item BILL,             2
 	card_item SWITCH,           1
-	card_item GUST_OF_WIND,     1
+	card_item BLUE_OAK,     1
 	card_item POTION,           2
 	card_item FULL_HEAL,        1
 	deck_list_end

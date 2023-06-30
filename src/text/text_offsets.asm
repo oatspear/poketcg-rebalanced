@@ -3026,8 +3026,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DefenderDescription                                ; 0x0b96
 	textpointer ItemFinderName                                     ; 0x0b97
 	textpointer ItemFinderDescription                              ; 0x0b98
-	textpointer GustOfWindName                                     ; 0x0b99
-	textpointer GustOfWindDescription                              ; 0x0b9a
+	textpointer BlueOakName
+	textpointer BlueOakDescription
 	textpointer DevolutionSprayName                                ; 0x0b9b
 	textpointer DevolutionSprayDescription                         ; 0x0b9c
 	textpointer DevolutionSprayDescriptionCont                     ; 0x0b9d

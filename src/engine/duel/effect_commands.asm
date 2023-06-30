@@ -1484,8 +1484,8 @@ EnergyRecyclerEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyRecycler_PlayerDiscardPileSelection
 	db  $00
 
-GustOfWindEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, GustOfWind_BenchCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, GustOfWind_PlayerSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, GustOfWind_SwitchEffect
+BlueOakEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, BlueOak_BenchCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, BlueOak_PlayerSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BlueOak_SwitchEffect
 	db  $00

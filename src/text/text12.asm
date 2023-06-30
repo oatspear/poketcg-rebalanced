@@ -1136,14 +1136,14 @@ ItemFinderDescription:
 	line "hand. Shuffle your deck afterwards."
 	done
 
-GustOfWindName: ; 643c2 (19:43c2)
-	text "Gust of Wind"
+BlueOakName:
+	text "Blue Oak"
 	done
 
-GustOfWindDescription: ; 643d0 (19:43d0)
+BlueOakDescription:
 	text "Choose 1 of your opponent's Benched"
-	line "Pokémon and switch it with his or"
-	line "her Active Pokémon."
+	line "Pokémon and switch it with their"
+	line "Active Pokémon."
 	done
 
 DevolutionSprayName: ; 6442b (19:442b)

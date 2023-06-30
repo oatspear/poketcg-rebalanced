@@ -220,7 +220,7 @@ CardPointers:
 	dw PlusPowerCard
 	dw DefenderCard
 	dw ItemFinderCard
-	dw GustOfWindCard
+	dw BlueOakCard
 	dw DevolutionSprayCard
 	dw PotionCard
 	dw SuperPotionCard
@@ -10556,15 +10556,15 @@ ItemFinderCard:
 	tx ItemFinderDescription ; description
 	dw NONE ; description (cont)
 
-GustOfWindCard:
+BlueOakCard:
 	db TYPE_TRAINER_SUPPORTER ; type
-	gfx GustOfWindCardGfx ; gfx
-	tx GustOfWindName ; name
-	db CIRCLE ; rarity
+	gfx BlueOakCardGfx ; gfx
+	tx BlueOakName ; name
+	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
-	db GUST_OF_WIND
-	dw GustOfWindEffectCommands ; effect commands
-	tx GustOfWindDescription ; description
+	db BLUE_OAK
+	dw BlueOakEffectCommands ; effect commands
+	tx BlueOakDescription ; description
 	dw NONE ; description (cont)
 
 DevolutionSprayCard:

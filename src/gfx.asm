@@ -2390,9 +2390,9 @@ ItemFinderCardGfx::
 	INCBIN "gfx/cards/itemfinder.2bpp"
 	INCBIN "gfx/cards/itemfinder.pal"
 
-GustOfWindCardGfx::
-	INCBIN "gfx/cards/gustofwind.2bpp"
-	INCBIN "gfx/cards/gustofwind.pal"
+;GustOfWindCardGfx::
+;	INCBIN "gfx/cards/gustofwind.2bpp"
+;	INCBIN "gfx/cards/gustofwind.pal"
 
 DevolutionSprayCardGfx::
 	INCBIN "gfx/cards/devolutionspray.2bpp"
@@ -2437,3 +2437,7 @@ RareCandyCardGfx::
 ScoopUpNetCardGfx::
 	INCBIN "gfx/cards/scoopupnet.2bpp"
 	INCBIN "gfx/cards/scoopupnet.pal"
+
+BlueOakCardGfx::
+	INCBIN "gfx/cards/blueoak.2bpp"
+	INCBIN "gfx/cards/blueoak.pal"

@@ -805,11 +805,15 @@
 - Looks at the top 7 deck cards; may pick a Supporter from those.
 
 #### Pokédex
-- After sorting the cards, if the top card is a Pokémon, add it to the hand.
+- Choose a Pokémon from the top 5 cards to add to the hand.
+- Reorder the remaining cards and put them back on the deck.
 
 #### Item Finder
 - No longer a Supporter card.
 - Discards 1 card from the hand. Searches deck for any Item card.
+
+#### Gust Of Wind
+- Renamed to **Blue Oak**.
 
 #### Full Heal
 - Removes status and effects from any of the user's Pokémon, even if Benched.
