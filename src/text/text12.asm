@@ -1011,11 +1011,11 @@ EnergyRecyclerDescription:
 	line "deck."
 	done
 
-EnergySearchName: ; 63cb6 (18:7cb6)
+EnergySearchName:
 	text "Energy Search"
 	done
 
-EnergySearchDescription: ; 63cc5 (18:7cc5)
+EnergySearchDescription:
 	text "Search your deck for a basic Energy"
 	line "card and put it into your hand."
 	line "Shuffle your deck afterward."

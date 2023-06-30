@@ -2269,8 +2269,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ExeggutorName                                      ; 0x08b2
 	textpointer TeleportBlastName                                  ; 0x08b3
 	textpointer SwitchThisPokemonDescription
-	textpointer BigEggsplosionName                                 ; 0x08b5
-	textpointer BigEggsplosionDescription                          ; 0x08b6
+	textpointer EggsplosionName
+	textpointer EggsplosionDescription
+	textpointer BigEggsplosionName
+	textpointer BigEggsplosionDescription
 	textpointer CoconutName                                        ; 0x08b7
 	textpointer ExeggutorDescription                               ; 0x08b8
 	textpointer KoffingName                                        ; 0x08b9
@@ -2808,6 +2810,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HurricaneDescription                               ; 0x0ae5
 	textpointer TwisterName                                        ; 0x0ae4
 	textpointer Pidgeot2Description                                ; 0x0ae6
+	textpointer SynthesisName
+	textpointer SynthesisDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9

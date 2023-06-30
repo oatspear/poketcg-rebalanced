@@ -1513,3 +1513,14 @@ Pidgeot2Description: ; 61860 (18:5860)
 	line "of water at high speed to pick off"
 	line "unwary prey such as Magikarp."
 	done
+
+SynthesisName:
+	text "Synthesis"
+	done
+
+SynthesisDescription:
+	text "Once during your turn, you may"
+	line "search your deck for a Basic Energy"
+	line "card and put it into your hand."
+	line "Shuffle your deck afterward."
+	done

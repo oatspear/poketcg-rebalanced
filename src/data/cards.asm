@@ -2029,18 +2029,18 @@ ExeggcuteCard:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	tx PsyshockName ; name
-	tx MayInflictParalysisDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx EggsplosionName ; name
+	tx EggsplosionDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
+	db 10 ; damage
+	db DAMAGE_X ; category
 	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
+	db NONE ; flags 1
+	db ATTACHED_ENERGY_BOOST | HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 1
-	db ATK_ANIM_PSYCHIC_HIT ; animation
+	db MAX_ENERGY_BOOST_IS_LIMITED
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIRE ; weakness
@@ -2066,11 +2066,25 @@ ExeggutorCard:
 	tx ExeggcuteName ; pre-evo name
 
 	; attack 1
+	energy 0 ; energies
+	tx SynthesisName ; name
+	tx SynthesisDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw SynthesisEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
 	energy COLORLESS, 1 ; energies
 	tx BigEggsplosionName ; name
 	tx BigEggsplosionDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_X ; category
 	dw BigEggsplosionEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -2079,19 +2093,18 @@ ExeggutorCard:
 	db MAX_ENERGY_BOOST_IS_NOT_LIMITED
 	db ATK_ANIM_BIG_HIT ; animation
 
-	; attack 2
-	energy GRASS, 2 ; energies
-	tx TropicalStormName ; name
-	tx TropicalStormDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_X ; category
-	dw TropicalStormEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_MULTIPLE_SLASH ; animation
+	; energy GRASS, 2 ; energies
+	; tx TropicalStormName ; name
+	; tx TropicalStormDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_X ; category
+	; dw TropicalStormEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_MULTIPLE_SLASH ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness

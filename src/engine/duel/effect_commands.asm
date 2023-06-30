@@ -153,6 +153,12 @@ RapidSpinEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, RapidSpin_AISelectEffect
 	db  $00
 
+EggsplosionEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Eggsplosion_MultiplierEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Eggsplosion_HealEffect
+	dbw EFFECTCMDTYPE_AI, Eggsplosion_AIEffect
+	db  $00
+
 BigEggsplosionEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BigEggsplosion_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, BigEggsplosion_AIEffect
@@ -539,11 +545,6 @@ ArcanineFlamesOfRageEffectCommands:
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Discard2Energies_DiscardEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Discard2Energies_AISelectEffect
 	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
-	db  $00
-
-RapidashStompEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RapidashStomp_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, RapidashStomp_AIEffect
 	db  $00
 
 EmberEffectCommands:
@@ -1268,6 +1269,12 @@ NaturalRemedyEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, NaturalRemedy_AISelectEffect
 	db  $00
 
+SynthesisEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Synthesis_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Synthesis_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySearch_PlayerSelection
+	db  $00
+
 DoubleColorlessEnergyEffectCommands:
 	db  $00
 
@@ -1317,7 +1324,7 @@ EnergyRetrievalEffectCommands:
 	db  $00
 
 EnergySearchEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergySearch_DeckCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergySearch_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySearch_PlayerSelection
 	db  $00

@@ -8,8 +8,7 @@ Heal10DamageEffect:
 	or a
 	ret z ; return if no damage dealt
 	ld de, 10
-	call ApplyAndAnimateHPRecovery
-	ret
+	jr ApplyAndAnimateHPRecovery
 
 Heal20DamageEffect:
 	ld hl, wDealtDamage
@@ -17,8 +16,7 @@ Heal20DamageEffect:
 	or a
 	ret z ; return if no damage dealt
 	ld de, 20
-	call ApplyAndAnimateHPRecovery
-	ret
+	jr ApplyAndAnimateHPRecovery
 
 Heal30DamageEffect:
 	ld hl, wDealtDamage
@@ -26,8 +24,12 @@ Heal30DamageEffect:
 	or a
 	ret z ; return if no damage dealt
 	ld de, 30
-	call ApplyAndAnimateHPRecovery
-	ret
+	jr ApplyAndAnimateHPRecovery
+
+HealADamageEffect:
+	ld d, 0
+	ld e, a
+	jr ApplyAndAnimateHPRecovery
 
 ; applies HP recovery on Pokemon after an attack
 ; with HP recovery effect, and handles its animation.

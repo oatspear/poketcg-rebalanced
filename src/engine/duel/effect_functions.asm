@@ -530,6 +530,11 @@ AbsorbWater_PreconditionCheck:
 	ret
 
 
+Synthesis_PreconditionCheck:
+	call CheckIfDeckIsEmpty
+	ret c
+	jr CheckPokemonPowerCanBeUsed
+
 ; ------------------------------------------------------------------------------
 ; Discard Cards
 ; ------------------------------------------------------------------------------
@@ -1779,72 +1784,90 @@ Teleport_SwitchEffect:
 	ld [wDuelDisplayedScreen], a
 	ret
 
-BigEggsplosion_AIEffect:
+
+Eggsplosion_AIEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wTotalAttachedEnergies]
-; cap if number of coins/energies >= 20
-	cp 20
-	jr c, .test10
-	ld a, 200
-	jp SetDefiniteAIDamage
-
-.test10
-	cp 10
-	jr c, .otherwise
+; cap if number of coins/energies >= 3
+	cp 3
+	jr c, .got_number
+	ld a, 3
+.got_number
+; tails = heal 10, heads = deal 10
 	call ATimes10
-	ld d, a
-	ld e, 200
-	ld a, 200
-	sub d
-	srl a
-	add d
-	; ld a, 150
-	; lb de, 100, 200
-	jp SetExpectedAIDamage
-
-.otherwise
-; tails = 10, heads = 20
-; result = (tails + 2 * heads) = coins + heads
-	call ATimes10
-	ld d, a
-	rla
+	ld d, 0
 	ld e, a
-	ld a, d
 	srl a
-	add d
-	; ld a, 150
-	; lb de, 100, 200
+	; ld a, 15
+	; lb de, 0, 30
 	jp SetExpectedAIDamage
 
 ; Flip coins equal to attached energies;
-; deal 20 damage per heads and 10 damage per tails
-; cap at 200 damage
-BigEggsplosion_MultiplierEffect:
+; deal 10 damage per heads and heal 10 damage per tails
+; cap at 30 damage
+Eggsplosion_MultiplierEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
-	ld hl, 20
+	ld hl, 10
 	call LoadTxRam3
 	ld a, [wTotalAttachedEnergies]
-; cap if number of coins/energies >= 20
-	cp 20
-	jr nc, .cap
+; cap if number of coins/energies >= 3
+	cp 3
+	jr c, .got_number
+	ld a, 3
 
+.got_number
+	ld c, a
+	push bc
 	ldtx de, DamageCheckIfHeadsXDamageText
 	call TossCoinATimes_BankB
-; cap if number of heads >= 10
-	cp 10
-	jr nc, .cap
 
-; tails = 10, heads = 20
-; result = (tails + 2 * heads) = coins + heads
-	ld hl, wTotalAttachedEnergies
-	add [hl]
+; deal 10 damage per heads
+	pop bc
+	ld b, a  ; store number of heads
 	call ATimes10
-	jp SetDefiniteDamage
+	call SetDefiniteDamage
+; heal 10 damage per tails (store for later)
+	ld a, c
+	sub b
+	ldh [hTemp_ffa0], a
+	ret
 
+; heal 10 damage for each tails, stored in [hTemp_ffa0]
+Eggsplosion_HealEffect:
+	ldh a, [hTemp_ffa0]
+	call ATimes10
+	jp HealADamageEffect
+
+
+BigEggsplosion_AIEffect:
+	call BigEggsplosion_MultiplierEffect
+	jp SetDefiniteAIDamage
+
+; Deal 10 damage for each energy attached to both Active Pokémon.
+; cap at 200 damage
+BigEggsplosion_MultiplierEffect:
+; get energies attached to self
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	ld d, a
+; get energies attached to opponent
+	call SwapTurn
+	call GetPlayAreaCardAttachedEnergies
+	call SwapTurn
+	ld a, [wTotalAttachedEnergies]
+; add both
+	add d
+	jr c, .cap  ; overflow
+; cap if number of energies >= 20
+	cp 21
+	jr c, .got_energies
 .cap
-	ld a, 200
+	ld a, 20
+.got_energies
+	call ATimes10
 	jp SetDefiniteDamage
 
 
@@ -3111,21 +3134,6 @@ FlamesOfRage_AIEffect:
 FlamesOfRage_DamageBoostEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
-	call AddToDamage
-	ret
-
-RapidashStomp_AIEffect: ; 2d3f8 (b:53f8)
-	ld a, (20 + 30) / 2
-	lb de, 20, 30
-	jp SetExpectedAIDamage
-
-RapidashStomp_DamageBoostEffect: ; 2d400 (b:5400)
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, 10
 	call AddToDamage
 	ret
 
@@ -8096,16 +8104,9 @@ EnergyRetrieval_DiscardAndAddToHandEffect:
 	bank1call DisplayCardListDetails
 	ret
 
-; return carry if no cards left in Deck.
-EnergySearch_DeckCheck: ; 2f31c (b:731c)
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	cp DECK_SIZE
-	ccf
-	ldtx hl, NoCardsLeftInTheDeckText
-	ret
 
-EnergySearch_PlayerSelection: ; 2f328 (b:7328)
+
+EnergySearch_PlayerSelection:
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 	call CreateDeckCardList
@@ -8148,7 +8149,7 @@ EnergySearch_PlayerSelection: ; 2f328 (b:7328)
 	or a
 	ret
 
-EnergySearch_AddToHandEffect: ; 2f372 (b:7372)
+EnergySearch_AddToHandEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	jr z, .done
@@ -8164,6 +8165,12 @@ EnergySearch_AddToHandEffect: ; 2f372 (b:7372)
 .done
 	call SyncShuffleDeck
 	ret
+
+
+Synthesis_AddToHandEffect:
+	call SetUsedPokemonPowerThisTurn
+	jr EnergySearch_AddToHandEffect
+
 
 ; check if card index in a is a Basic Energy card.
 ; returns carry in case it's not.

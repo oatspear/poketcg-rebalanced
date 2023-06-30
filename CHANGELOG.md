@@ -161,12 +161,13 @@
 - **Hypnosis**: removed.
 - **Leech Seed**: removed.
 - New attack: **Nutrition Support** (G): attach energy from deck to 1 Pokémon and heal 10 damage.
-- New attack: **Psyshock** (PC): 20 damage; flip a coin, Paralysis if Heads.
+- New attack: **Eggsplosion** (C): flip a coin for each energy; 10 damage for each Heads; heal 10 for each Tails.
 
 #### Exeggutor
 - Reduced Retreat Cost from (CC) to (C).
 - **Teleport**: removed.
-- New attack: **Tropical Storm** (GG): 20 damage for each friendly Pokémon with energies.
+- **Big Eggsplosion**: deal 10 damage for each energy attached to both Active Pokémon.
+- New Pokémon Power: **Synthesis**: search deck for 1 basic energy and add to the hand.
 
 #### Tangela Lv8
 - Increased HP from 50 to 60.

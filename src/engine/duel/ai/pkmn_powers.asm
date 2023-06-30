@@ -442,8 +442,13 @@ HandleAIPkmnPowers:
 
 ; check heal
 	cp GLOOM
-	jr nz, .check_shift
+	jr nz, .check_synthesis
 	call HandleAIHeal
+	jr .next_1
+.check_synthesis
+	cp EXEGGUTOR
+	jr nz, .check_shift
+	call HandleAISynthesis
 	jr .next_1
 .check_shift
 	cp PORYGON
@@ -587,6 +592,33 @@ HandleAIHeal:
 .not_found
 	or a
 	ret
+
+
+; similar to the logic of Energy Search, but this is more eager
+HandleAISynthesis:
+	ld a, CARD_LOCATION_DECK
+	call FindBasicEnergyCardsInLocation
+	ret c  ; no energy cards in deck
+
+; if any of the energy cards in deck is useful store it and use power
+	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
+	jr nc, .use_pkmn_power
+
+; otherwise pick the first energy in the list
+	ld a, [wDuelTempList]
+
+.use_pkmn_power
+	ldh [hTemp_ffa0], a
+	ld a, [wAITempVars]
+	ldh [hTempCardIndex_ff9f], a
+	ld a, OPPACTION_USE_PKMN_POWER
+	bank1call AIMakeDecision
+	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
+	bank1call AIMakeDecision
+	ld a, OPPACTION_DUEL_MAIN_SCENE
+	bank1call AIMakeDecision
+	ret
+
 
 ; checks whether AI uses Shift.
 ; input:

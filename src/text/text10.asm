@@ -612,15 +612,26 @@ SwitchThisPokemonDescription:
 	line "your Benched Pokémon."
 	done
 
+EggsplosionName:
+	text "Eggsplosion"
+	done
+
+EggsplosionDescription:
+	text "Flip a coin for each Energy"
+	line "(up to 3) attached to this Pokémon."
+	line "This attack does 10 damage"
+	line "for each Heads. Heal 10 damage"
+	line "from this Pokémon for each Tails."
+	done
+
 BigEggsplosionName:
 	text "Big Eggsplosion"
 	done
 
 BigEggsplosionDescription:
-	text "Flip a coin for each Energy attached"
-	line "to this Pokémon. This attack does 20"
-	line "damage for each Heads and 10 damage"
-	line "for each Tails, up to 200 damage."
+	text "This attack does 10 damage for each"
+	line "Energy attached to this Pokémon and"
+	line "to the Defending Pokémon."
 	done
 
 CoconutName: ; 5995c (16:595c)

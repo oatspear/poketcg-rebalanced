@@ -192,10 +192,6 @@ CheckIfEnergyIsUseful:
 	ld a, [wTempCardID]
 
 	ld d, PSYCHIC_ENERGY
-	cp EXEGGCUTE
-	jr z, .check_energy
-	cp EXEGGUTOR
-	jr z, .check_energy
 	cp PSYDUCK
 	jr z, .check_energy
 	cp GOLDUCK
