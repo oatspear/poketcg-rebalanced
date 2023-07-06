@@ -1309,11 +1309,11 @@ ImakuniEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ImakuniEffect
 	db  $00
 
-EnergyRemovalEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyRemoval_EnergyCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergyRemoval_PlayerSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyRemoval_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyRemoval_AISelection
+RocketGruntsEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RocketGrunts_EnergyCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, RocketGrunts_PlayerSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RocketGrunts_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, RocketGrunts_AISelection
 	db  $00
 
 EnergyRetrievalEffectCommands:

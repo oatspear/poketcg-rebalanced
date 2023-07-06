@@ -7724,14 +7724,14 @@ ImakuniEffect: ; 2f216 (b:7216)
 	ret
 
 ; returns carry if opponent has no energy cards attached
-EnergyRemoval_EnergyCheck: ; 2f252 (b:7252)
+RocketGrunts_EnergyCheck: ; 2f252 (b:7252)
 	call SwapTurn
 	call CheckIfThereAreAnyEnergyCardsAttached
 	ldtx hl, NoEnergyAttachedToOpponentsActiveText
 	call SwapTurn
 	ret
 
-EnergyRemoval_PlayerSelection: ; 2f25f (b:725f)
+RocketGrunts_PlayerSelection: ; 2f25f (b:725f)
 	ldtx hl, ChoosePokemonToRemoveEnergyFromText
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
@@ -7740,11 +7740,11 @@ EnergyRemoval_PlayerSelection: ; 2f25f (b:725f)
 	call c, CancelSupporterCard
 	ret
 
-EnergyRemoval_AISelection: ; 2f26f (b:726f)
+RocketGrunts_AISelection: ; 2f26f (b:726f)
 	call AIPickEnergyCardToDiscardFromDefendingPokemon
 	ret
 
-EnergyRemoval_DiscardEffect: ; 2f273 (b:7273)
+RocketGrunts_DiscardEffect: ; 2f273 (b:7273)
 	call SwapTurn
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	call PutCardInDiscardPile

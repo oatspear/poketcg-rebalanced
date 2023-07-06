@@ -209,7 +209,7 @@ CardPointers:
 	dw EnergyRetrievalCard
 	dw EnergyRecyclerCard
 	dw EnergySearchCard
-	dw EnergyRemovalCard
+	dw RocketGruntsCard
 	dw EnergySwitchCard
 	dw SwitchCard
 	dw PokemonCenterCard
@@ -10448,20 +10448,20 @@ EnergySearchCard:
 	tx EnergySearchDescription ; description
 	dw NONE ; description (cont)
 
-EnergyRemovalCard:
+RocketGruntsCard:
 	db TYPE_TRAINER_SUPPORTER ; type
-	gfx EnergyRemovalCardGfx ; gfx
-	tx EnergyRemovalName ; name
+	gfx RocketGruntsCardGfx ; gfx
+	tx RocketGruntsName ; name
 	db CIRCLE ; rarity
 	db MYSTERY | NONE ; sets
 	db ENERGY_REMOVAL
-	dw EnergyRemovalEffectCommands ; effect commands
-	tx EnergyRemovalDescription ; description
+	dw RocketGruntsEffectCommands ; effect commands
+	tx RocketGruntsDescription ; description
 	dw NONE ; description (cont)
 
 EnergySwitchCard:
 	db TYPE_TRAINER ; type
-	gfx SwitchCardGfx ; gfx
+	gfx EnergySwitchCardGfx ; gfx
 	tx EnergySwitchName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets

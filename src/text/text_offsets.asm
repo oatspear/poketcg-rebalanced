@@ -3009,8 +3009,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EnergyRecyclerDescription
 	textpointer EnergySearchName                                   ; 0x0b81
 	textpointer EnergySearchDescription                            ; 0x0b82
-	textpointer EnergyRemovalName                                  ; 0x0b83
-	textpointer EnergyRemovalDescription                           ; 0x0b84
+	textpointer RocketGruntsName                                  ; 0x0b83
+	textpointer RocketGruntsDescription                           ; 0x0b84
 	textpointer EnergySwitchName
 	textpointer EnergySwitchDescription
 	textpointer SwitchName                                         ; 0x0b87

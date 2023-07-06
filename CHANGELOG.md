@@ -822,6 +822,9 @@
 #### Super Energy Retrieval
 - Removed.
 
+#### Energy Removal
+- Renamed to **Rocket Grunts**.
+
 #### Super Energy Removal
 - Removed.
 

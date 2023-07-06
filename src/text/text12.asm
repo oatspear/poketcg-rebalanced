@@ -1021,11 +1021,11 @@ EnergySearchDescription:
 	line "Shuffle your deck afterward."
 	done
 
-EnergyRemovalName: ; 63d27 (18:7d27)
-	text "Energy Removal"
+RocketGruntsName:
+	text "Rocket Grunts"
 	done
 
-EnergyRemovalDescription: ; 63d37 (18:7d37)
+RocketGruntsDescription:
 	text "Choose 1 Energy card attached to 1"
 	line "of your opponent's Pokémon and"
 	line "discard it."

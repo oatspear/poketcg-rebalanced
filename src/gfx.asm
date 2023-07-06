@@ -2342,15 +2342,22 @@ EnergySearchCardGfx::
 	INCBIN "gfx/cards/energysearch.2bpp"
 	INCBIN "gfx/cards/energysearch.pal"
 
-EnergyRemovalCardGfx::
-	INCBIN "gfx/cards/energyremoval.2bpp"
-	INCBIN "gfx/cards/energyremoval.pal"
+RocketGruntsCardGfx::
+	INCBIN "gfx/cards/rocketgrunts.2bpp"
+	INCBIN "gfx/cards/rocketgrunts.pal"
 
-SuperEnergyRemovalCardGfx::
-	INCBIN "gfx/cards/superenergyremoval.2bpp"
-	INCBIN "gfx/cards/superenergyremoval.pal"
+EnergySwitchCardGfx::
+	INCBIN "gfx/cards/energyswitch.2bpp"
+	INCBIN "gfx/cards/energyswitch.pal"
 
-	ds $58
+; EnergyRemovalCardGfx::
+; 	INCBIN "gfx/cards/energyremoval.2bpp"
+; 	INCBIN "gfx/cards/energyremoval.pal"
+
+; SuperEnergyRemovalCardGfx::
+; 	INCBIN "gfx/cards/superenergyremoval.2bpp"
+; 	INCBIN "gfx/cards/superenergyremoval.pal"
+
 
 SECTION "Card Gfx 11", ROMX
 
