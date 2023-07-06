@@ -9494,14 +9494,14 @@ EnergyRecycler_ReturnToDeckEffect:
 
 
 ; return carry if non-turn duelist has no benched Pokemon
-BlueOak_BenchCheck: ; 2fe6e (b:7e6e)
+Giovanni_BenchCheck: ; 2fe6e (b:7e6e)
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	ldtx hl, EffectNoPokemonOnTheBenchText
 	cp 2
 	ret
 
-BlueOak_PlayerSelection: ; 2fe79 (b:7e79)
+Giovanni_PlayerSelection: ; 2fe79 (b:7e79)
 	ldtx hl, ChooseAPokemonToSwitchWithActivePokemonText
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
@@ -9513,7 +9513,7 @@ BlueOak_PlayerSelection: ; 2fe79 (b:7e79)
 	call c, CancelSupporterCard
 	ret
 
-BlueOak_SwitchEffect: ; 2fe90 (b:7e90)
+Giovanni_SwitchEffect: ; 2fe90 (b:7e90)
 ; play whirlwind animation
 	ld a, ATK_ANIM_GUST_OF_WIND
 	call PlayAttackAnimation_AdhocEffect

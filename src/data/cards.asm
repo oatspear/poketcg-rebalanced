@@ -220,7 +220,7 @@ CardPointers:
 	dw PlusPowerCard
 	dw DefenderCard
 	dw ItemFinderCard
-	dw BlueOakCard
+	dw GiovanniCard
 	dw DevolutionSprayCard
 	dw PotionCard
 	dw SuperPotionCard
@@ -10569,15 +10569,15 @@ ItemFinderCard:
 	tx ItemFinderDescription ; description
 	dw NONE ; description (cont)
 
-BlueOakCard:
+GiovanniCard:
 	db TYPE_TRAINER_SUPPORTER ; type
-	gfx BlueOakCardGfx ; gfx
-	tx BlueOakName ; name
+	gfx GiovanniCardGfx ; gfx
+	tx GiovanniName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db BLUE_OAK
-	dw BlueOakEffectCommands ; effect commands
-	tx BlueOakDescription ; description
+	dw GiovanniEffectCommands ; effect commands
+	tx GiovanniDescription ; description
 	dw NONE ; description (cont)
 
 DevolutionSprayCard:

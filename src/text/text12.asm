@@ -1136,11 +1136,11 @@ ItemFinderDescription:
 	line "hand. Shuffle your deck afterwards."
 	done
 
-BlueOakName:
-	text "Blue Oak"
+GiovanniName:
+	text "Giovanni"
 	done
 
-BlueOakDescription:
+GiovanniDescription:
 	text "Choose 1 of your opponent's Benched"
 	line "Pokémon and switch it with their"
 	line "Active Pokémon."

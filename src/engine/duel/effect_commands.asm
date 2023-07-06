@@ -1491,8 +1491,8 @@ EnergyRecyclerEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyRecycler_PlayerDiscardPileSelection
 	db  $00
 
-BlueOakEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, BlueOak_BenchCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, BlueOak_PlayerSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BlueOak_SwitchEffect
+GiovanniEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Giovanni_BenchCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Giovanni_PlayerSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Giovanni_SwitchEffect
 	db  $00

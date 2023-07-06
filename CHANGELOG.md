@@ -814,7 +814,7 @@
 - Discards 1 card from the hand. Searches deck for any Item card.
 
 #### Gust Of Wind
-- Renamed to **Blue Oak**.
+- Renamed to **Boss's Orders**.
 
 #### Full Heal
 - Removes status and effects from any of the user's Pokémon, even if Benched.

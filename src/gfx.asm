@@ -2438,6 +2438,12 @@ ScoopUpNetCardGfx::
 	INCBIN "gfx/cards/scoopupnet.2bpp"
 	INCBIN "gfx/cards/scoopupnet.pal"
 
-BlueOakCardGfx::
-	INCBIN "gfx/cards/blueoak.2bpp"
-	INCBIN "gfx/cards/blueoak.pal"
+GiovanniCardGfx::
+	INCBIN "gfx/cards/giovanni.2bpp"
+	INCBIN "gfx/cards/giovanni.pal"
+
+; Section grows too big here
+
+; BlueOakCardGfx::
+; 	INCBIN "gfx/cards/blueoak.2bpp"
+; 	INCBIN "gfx/cards/blueoak.pal"
