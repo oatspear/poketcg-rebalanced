@@ -336,24 +336,8 @@ HelpingHandEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HelpingHand_RemoveStatusEffect
 	db  $00
 
-OmastarWaterGunEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OmastarWaterGunEffect
-	dbw EFFECTCMDTYPE_AI, OmastarWaterGunEffect
-	db  $00
-
-OmastarSpikeCannonEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OmastarSpikeCannon_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, OmastarSpikeCannon_AIEffect
-	db  $00
-
 OmanyteClairvoyanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClairvoyanceEffect
-	db  $00
-
-WaterGun1WEffectCommands:
-OmanyteWaterGunEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OmanyteWaterGunEffect
-	dbw EFFECTCMDTYPE_AI, OmanyteWaterGunEffect
 	db  $00
 
 RainDanceEffectCommands:
@@ -379,20 +363,6 @@ PsyduckFurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_AI, PsyduckFurySwipes_AIEffect
 	db  $00
 
-SeadraWaterGunEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SeadraWaterGunEffect
-	dbw EFFECTCMDTYPE_AI, SeadraWaterGunEffect
-	db  $00
-
-ShellderSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ShellderSupersonicEffect
-	db  $00
-
-VaporeonWaterGunEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VaporeonWaterGunEffect
-	dbw EFFECTCMDTYPE_AI, VaporeonWaterGunEffect
-	db  $00
-
 ReduceDamageTakenBy20EffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceDamageTakenBy20Effect
 	db  $00
@@ -415,21 +385,6 @@ AmnesiaEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Amnesia_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Amnesia_DisableEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Amnesia_AISelectEffect
-	db  $00
-
-PoliwhirlDoubleslapEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoliwhirlDoubleslap_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, PoliwhirlDoubleslap_AIEffect
-	db  $00
-
-PoliwrathWaterGunEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoliwrathWaterGunEffect
-	dbw EFFECTCMDTYPE_AI, PoliwrathWaterGunEffect
-	db  $00
-
-PoliwagWaterGunEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoliwagWaterGunEffect
-	dbw EFFECTCMDTYPE_AI, PoliwagWaterGunEffect
 	db  $00
 
 CloysterSpikeCannonEffectCommands:
@@ -483,15 +438,6 @@ SilverWhirlwindEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect
 	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect
-	db  $00
-
-LaprasWaterGunEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LaprasWaterGunEffect
-	dbw EFFECTCMDTYPE_AI, LaprasWaterGunEffect
-	db  $00
-
-LaprasConfuseRayEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect
 	db  $00
 
 ArticunoQuickfreezeEffectCommands:

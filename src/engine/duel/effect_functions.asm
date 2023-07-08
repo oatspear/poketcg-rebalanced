@@ -5,6 +5,8 @@
 Sonicboom_NullEffect:
 	ret
 
+ClairvoyanceEffect:
+RainDanceEffect:
 AdaptiveEvolution_InitialEffect:
 Firegiver_InitialEffect:
 Quickfreeze_InitialEffect:
@@ -2564,98 +2566,6 @@ HelpingHand_RemoveStatusEffect: ; 2ce82 (b:4e82)
 	bank1call DrawDuelHUDs
 	ret
 
-; applies the damage bonus for attacks that get bonus
-; from extra Water energy cards.
-; this bonus is always 10 more damage for each extra Water energy
-; and is always capped at a maximum of 20 damage.
-; input:
-;	b = number of Water energy cards needed for paying Energy Cost
-;	c = number of colorless energy cards needed for paying Energy Cost
-ApplyExtraWaterEnergyDamageBonus: ; 2cec8 (b:4ec8)
-	ld a, [wMetronomeEnergyCost]
-	or a
-	jr z, .not_metronome
-	ld c, a ; amount of colorless needed for Metronome
-	ld b, 0 ; no Water energy needed for Metronome
-
-.not_metronome
-	push bc
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
-	call GetPlayAreaCardAttachedEnergies
-	pop bc
-
-	ld hl, wAttachedEnergies + WATER
-	ld a, c
-	or a
-	jr z, .check_bonus ; is Energy cost all water energy?
-
-	; it's not, so we need to remove the
-	; Water energy cards from calculations
-	; if they pay for colorless instead.
-	ld a, [wTotalAttachedEnergies]
-	cp [hl]
-	jr nz, .check_bonus ; skip if at least 1 non-Water energy attached
-
-	; Water is the only energy color attached
-	ld a, c
-	add b
-	ld b, a
-	; b += c
-
-.check_bonus
-	ld a, [hl]
-	sub b
-	jr c, .skip_bonus ; is water energy <  b?
-	jr z, .skip_bonus ; is water energy == b?
-
-; a holds number of water energy not payed for energy cost
-	cp 3
-	jr c, .less_than_3
-	ld a, 2 ; cap this to 2 for bonus effect
-.less_than_3
-	call ATimes10
-	call AddToDamage ; add 10 * a to damage
-
-.skip_bonus
-	ld a, [wDamage]
-	ld [wAIMinDamage], a
-	ld [wAIMaxDamage], a
-	ret
-
-OmastarWaterGunEffect: ; 2cf05 (b:4f05)
-	lb bc, 2, 0
-	jr ApplyExtraWaterEnergyDamageBonus
-
-OmastarSpikeCannon_AIEffect: ; 2cf0a (b:4f0a)
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-OmastarSpikeCannon_MultiplierEffect: ; 2cf12 (b:4f12)
-	ld hl, 30
-	call LoadTxRam3
-	ld a, 2
-	ldtx de, DamageCheckIfHeadsXDamageText
-	call TossCoinATimes_BankB
-	ld e, a
-	add a
-	add e
-	call ATimes10
-	call SetDefiniteDamage ; 3 * 10 * heads
-	ret
-
-ClairvoyanceEffect: ; 2cf2a (b:4f2a)
-	scf
-	ret
-
-OmanyteWaterGunEffect: ; 2cf2c (b:4f2c)
-	lb bc, 1, 0
-	jp ApplyExtraWaterEnergyDamageBonus
-
-RainDanceEffect: ; 2cf46 (b:4f46)
-	scf
-	ret
 
 HydroPumpEffect:
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -2665,6 +2575,20 @@ HydroPumpEffect:
 	ld a, [wAttachedEnergies + WATER]
 	call ATimes10
 	call AddToDamage ; add 10 * a to damage
+; set attack damage
+	ld a, [wDamage]
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	ret
+
+WaterGunEffect:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+; 10 damage for each Water Energy
+	ld a, [wAttachedEnergies + WATER]
+	call ATimes10
+	call SetDefiniteDamage ; damage = 10 * Water Energy
 ; set attack damage
 	ld a, [wDamage]
 	ld [wAIMinDamage], a
@@ -2702,16 +2626,6 @@ PsyduckFurySwipes_MultiplierEffect: ; 2d01e (b:501e)
 	call SetDefiniteDamage
 	ret
 
-SeadraWaterGunEffect: ; 2d085 (b:5085)
-	lb bc, 1, 1
-	jp ApplyExtraWaterEnergyDamageBonus
-
-
-ShellderSupersonicEffect: ; 2d09d (b:509d)
-	call Confusion50PercentEffect
-	call nc, SetNoEffectFromStatus
-	ret
-
 VaporeonQuickAttack_AIEffect: ; 2d0b8 (b:50b8)
 	ld a, (10 + 30) / 2
 	lb de, 10, 30
@@ -2727,19 +2641,10 @@ VaporeonQuickAttack_DamageBoostEffect: ; 2d0c0 (b:50c0)
 	call AddToDamage
 	ret
 
-VaporeonWaterGunEffect: ; 2d0d3 (b:50d3)
-	lb bc, 2, 0
-	jp ApplyExtraWaterEnergyDamageBonus
-
 
 HorseaSmokescreenEffect: ; 2d134 (b:5134)
 	ld a, SUBSTATUS2_SMOKESCREEN
 	call ApplySubstatus2ToDefendingCard
-	ret
-
-TentacruelSupersonicEffect: ; 2d13a (b:513a)
-	call Confusion50PercentEffect
-	call nc, SetNoEffectFromStatus
 	ret
 
 JellyfishSting_AIEffect: ; 2d141 (b:5141)
@@ -2845,9 +2750,6 @@ PoliwhirlDoubleslap_MultiplierEffect: ; 2d1c8 (b:51c8)
 	call SetDefiniteDamage
 	ret
 
-PoliwrathWaterGunEffect: ; 2d1e0 (b:51e0)
-	lb bc, 1, 1
-	jp ApplyExtraWaterEnergyDamageBonus
 
 Whirlpool_PlayerSelectEffect: ; 2d1e6 (b:51e6)
 	call SwapTurn
@@ -2896,9 +2798,6 @@ Whirlpool_DiscardEffect: ; 2d214 (b:5214)
 	call SwapTurn
 	ret
 
-PoliwagWaterGunEffect: ; 2d227 (b:5227)
-	lb bc, 1, 0
-	jp ApplyExtraWaterEnergyDamageBonus
 
 ClampEffect: ; 2d22d (b:522d)
 	ld a, ATK_ANIM_HIT_EFFECT
@@ -3000,9 +2899,6 @@ Cowardice_RemoveFromPlayAreaEffect: ; 2d2c3 (b:52c3)
 	ld [wDuelDisplayedScreen], a
 	ret
 
-LaprasWaterGunEffect: ; 2d2eb (b:52eb)
-	lb bc, 1, 0
-	jp ApplyExtraWaterEnergyDamageBonus
 
 Quickfreeze_Paralysis50PercentEffect: ; 2d2f3 (b:52f3)
 	ldtx de, ParalysisCheckText
@@ -7522,7 +7418,8 @@ FriendshipSong_AddToBench50PercentEffect: ; 2f119 (b:7119)
 	ret
 
 RockHeadEffect:
-ExpandEffect: ; 2f153 (b:7153)
+ExpandEffect:
+ShellPressEffect:
 	ld a, SUBSTATUS1_REDUCE_BY_10
 	call ApplySubstatus1ToAttackingCard
 	ret
