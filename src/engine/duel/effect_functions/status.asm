@@ -216,3 +216,24 @@ ApplyStatusEffectToPlayAreaPokemon:
 	or c  ; status to apply on top
 	scf
 	ret
+
+
+; assumes:
+;   - SwapTurn if needed to change to the correct play area
+; input:
+;   b: mask of status conditions to preserve on the target
+;   c: status condition to inflict to the target
+ApplyStatusEffectToAllPlayAreaPokemon:
+	call ApplyStatusEffect
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+	jr .next
+.loop_play_area
+	call ApplyStatusEffectToPlayAreaPokemon
+.next
+	inc e
+	dec d
+	ret z
+	jr .loop_play_area
