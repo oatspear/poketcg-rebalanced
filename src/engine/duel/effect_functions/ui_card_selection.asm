@@ -197,6 +197,13 @@ HandlePlayerSelectionPokemonFromDeck_:
 ; Choose Pokémon In Play Area
 ; ------------------------------------------------------------------------------
 
+HandlePlayerSelectionPokemonInPlayArea_AllowCancel:
+	bank1call HasAlivePokemonInPlayArea
+	bank1call OpenPlayAreaScreenForSelection
+	ret c
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ret
+
 HandlePlayerSelectionPokemonInPlayArea:
 	bank1call HasAlivePokemonInPlayArea
 .loop_input
