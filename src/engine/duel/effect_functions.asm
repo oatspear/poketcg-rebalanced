@@ -323,6 +323,31 @@ CheckIfPlayAreaHasAnyDamage:
 	ret
 
 
+; returns carry if Play Area has no damage counters
+; and sets the error message in hl
+; excludes the location in [hTempPlayAreaLocation_ff9d]
+CheckIfPlayAreaHasAnyDamage_ExcludeTempLocation:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+.loop_play_area
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	cp e
+	jr z, .next
+	call GetCardDamageAndMaxHP
+	or a
+	ret nz ; found damage
+.next
+	inc e
+	dec d
+	jr nz, .loop_play_area
+	; no damage found
+	ldtx hl, NoPokemonWithDamageCountersText
+	scf
+	ret
+
+
 ; Loop over turn holder's Pokemon and return whether any have status conditions.
 ; Returns:
 ;    a: first status condition found or zero if none found
@@ -830,6 +855,118 @@ NaturalRemedy_HealEffect:
 	ldh a, [hTemp_ffa0]
 	jp c, ClearStatusFromTarget
 	jp ClearStatusFromTarget_NoAnim
+
+
+SongOfRest_CheckUse:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .already_used
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
+	ret c  ; can't use PKMN due to status or Toxic Gas
+
+; return carry if no Pokémon has damage counters
+	; call CheckIfPlayAreaHasAnyDamage_ExcludeTempLocation
+	; ret nc  ; found damage
+	; call SwapTurn
+	; call CheckIfPlayAreaHasAnyDamage
+	; call SwapTurn
+	ret  ; carry set if no damage
+
+.already_used
+	ldtx hl, OnlyOncePerTurnText
+	scf
+	ret
+
+
+; selects a target Pokémon from either play area (player or opponent)
+; outputs:
+;   [hAIPkmnPowerEffectParam]: 0 if player area, 1 if opponent area
+;   [hPlayAreaEffectTarget]: PLAY_AREA_* of the selected card
+SongOfRest_PlayerSelectEffect:
+; print procedure here, check DevolutionBeam_DevolveEffect
+.start
+	bank1call DrawDuelMainScene
+	ldtx hl, PleaseSelectThePlayAreaText
+	call TwoItemHorizontalMenu
+	ldh a, [hKeysHeld]
+	and B_BUTTON
+	jr nz, .set_carry
+
+; a Play Area was selected
+	ldtx hl, ChoosePkmnToHealText
+	call DrawWideTextBox_WaitForInput
+
+; store Pokémon using the Power
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+
+; which play area?
+	ldh a, [hCurMenuItem]
+	or a
+	jr nz, .opp_chosen
+
+; player chosen
+	call HandlePlayerSelectionPokemonInPlayArea_AllowCancel
+	jr c, .start
+
+	xor a
+.store_selection
+	ldh [hAIPkmnPowerEffectParam], a ; store which Duelist Play Area selected
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hPlayAreaEffectTarget], a ; store which card selected
+	ldh a, [hTemp_ffa0]
+	ldh [hTempPlayAreaLocation_ff9d], a ; restore Pokémon Power user
+	or a  ; ensure no carry
+	ret
+
+.opp_chosen
+	call SwapTurn
+	call HandlePlayerSelectionPokemonInPlayArea_AllowCancel
+	call SwapTurn
+	jr c, .start
+	ld a, $01
+	jr .store_selection
+
+.set_carry
+	scf
+	ret
+
+
+; heal up to 20 damage from selected target and put it to sleep
+; inputs:
+;   [hAIPkmnPowerEffectParam]: 0 if player area, 1 if opponent area
+;   [hPlayAreaEffectTarget]: PLAY_AREA_* of the selected card
+SongOfRest_HealEffect:
+; flag Pkmn Power as being used
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+
+	ldh a, [hAIPkmnPowerEffectParam]
+	or a  ; which play area?
+	jr z, .HealSleepEffect
+
+; opponent play area
+	call SwapTurn
+	call .HealSleepEffect
+	jp SwapTurn
+
+.HealSleepEffect
+; heal the selected Pokémon
+	ldh a, [hPlayAreaEffectTarget]
+	ld e, a   ; location
+	ld d, 20  ; damage
+	push de
+	call HealPlayAreaCardHP
+	pop de
+	call SleepEffect_PlayArea
+	jp ExchangeRNG
 
 
 ; ------------------------------------------------------------------------------
@@ -2510,7 +2647,7 @@ SolarPower_RemoveStatusEffect: ; 2ce82 (b:4e82)
 	bank1call DrawDuelHUDs
 	ret
 
-HelpingHand_CheckUse: ; 2ce53 (b:4e53)
+HelpingHand_CheckUse:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	ldtx hl, CanOnlyBeUsedOnTheBenchText
@@ -2544,7 +2681,7 @@ HelpingHand_CheckUse: ; 2ce53 (b:4e53)
 	scf
 	ret
 
-HelpingHand_RemoveStatusEffect: ; 2ce82 (b:4e82)
+HelpingHand_RemoveStatusEffect:
 	ld a, ATK_ANIM_HEAL
 	ld [wLoadedAttackAnimation], a
 	bank1call Func_7415

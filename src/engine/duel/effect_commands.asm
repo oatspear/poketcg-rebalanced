@@ -336,6 +336,12 @@ HelpingHandEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HelpingHand_RemoveStatusEffect
 	db  $00
 
+SongOfRestEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SongOfRest_CheckUse
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SongOfRest_HealEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SongOfRest_PlayerSelectEffect
+	db  $00
+
 OmanyteClairvoyanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClairvoyanceEffect
 	db  $00
