@@ -1856,7 +1856,7 @@ SwordsDanceEffect: ; 2c7d0 (b:47d0)
 	ret
 
 ; If heads, defending Pokemon becomes confused
-ZubatSupersonicEffect: ; 2c7dc (b:47dc)
+SupersonicEffect:
 	call Confusion50PercentEffect
 	call nc, SetNoEffectFromStatus
 	ret
@@ -2119,11 +2119,6 @@ HornHazard_NoDamage50PercentEffect: ; 2ca96 (b:4a96)
 .heads
 	ld a, ATK_ANIM_HIT
 	ld [wLoadedAttackAnimation], a
-	ret
-
-NidorinaSupersonicEffect: ; 2caac (b:4aac)
-	call Confusion50PercentEffect
-	call nc, SetNoEffectFromStatus
 	ret
 
 DoubleAttackX30_AIEffect: ; 2cad3 (b:4ad3)
@@ -3135,7 +3130,7 @@ CometPunch_AIEffect:
 	lb de, 30, 40
 	jp SetExpectedAIDamage
 
-Heads10Plus10Damage_AIEffect:
+Heads20Plus10Damage_AIEffect:
 	ld a, (20 + 10) / 2
 	lb de, 20, 30
 	jp SetExpectedAIDamage
@@ -7039,11 +7034,6 @@ DoTheWaveEffect: ; 2ed87 (b:6d87)
 PounceEffect: ; 2edac (b:6dac)
 	ld a, SUBSTATUS2_POUNCE
 	call ApplySubstatus2ToDefendingCard
-	ret
-
-LickitungSupersonicEffect: ; 2edb2 (b:6db2)
-	call Confusion50PercentEffect
-	call nc, SetNoEffectFromStatus
 	ret
 
 ConversionBeam_ChangeWeaknessEffect:

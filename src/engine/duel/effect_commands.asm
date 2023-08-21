@@ -108,10 +108,6 @@ ScytherSwordsDanceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SwordsDanceEffect
 	db  $00
 
-ZubatSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ZubatSupersonicEffect
-	db  $00
-
 AscensionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Ascension_EvolveEffect
@@ -209,10 +205,6 @@ ClawEffectCommands:
 HornHazardEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HornHazard_NoDamage50PercentEffect
 	dbw EFFECTCMDTYPE_AI, HornHazard_AIEffect
-	db  $00
-
-NidorinaSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, NidorinaSupersonicEffect
 	db  $00
 
 NidorinaDoubleKickEffectCommands:
@@ -373,8 +365,8 @@ HorseaSmokescreenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HorseaSmokescreenEffect
 	db  $00
 
-TentacruelSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TentacruelSupersonicEffect
+SupersonicEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
 	db  $00
 
 TentacruelJellyfishStingEffectCommands:
@@ -1071,10 +1063,6 @@ DoTheWaveEffectCommands:
 MoonblastEffectCommands:
 PersianPounceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PounceEffect
-	db  $00
-
-LickitungSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LickitungSupersonicEffect
 	db  $00
 
 WhirlwindEffectCommands:
