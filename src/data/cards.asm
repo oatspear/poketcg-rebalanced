@@ -3574,15 +3574,15 @@ PoliwagCard:
 	; attack 2
 	energy WATER, 1 ; energies
 	tx WaterGunName ; name
-	tx WaterGunDescription ; description
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw PoliwagWaterGunEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
+	db 0
 	db ATK_ANIM_WATER_GUN ; animation
 
 	db 0 ; retreat cost
@@ -4135,15 +4135,15 @@ HorseaCard:
 	; attack 2
 	energy WATER, 1 ; energies
 	tx WaterGunName ; name
-	tx WaterGunDescription ; description
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw WaterGun1WEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
+	db 0
 	db ATK_ANIM_WATER_GUN ; animation
 
 	db 0 ; retreat cost
@@ -4648,17 +4648,17 @@ VaporeonLv42Card:
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
-	energy WATER, 2 ; energies
+	energy WATER, 1, COLORLESS, 1 ; energies
 	tx WaterGunName ; name
-	tx WaterGunDescription ; description
+	dw NONE ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
-	db DAMAGE_PLUS ; category
-	dw VaporeonWaterGunEffectCommands ; effect commands
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
+	db 0
 	db ATK_ANIM_WATER_GUN ; animation
 
 	db 1 ; retreat cost
@@ -4714,15 +4714,15 @@ OmanyteCard:
 	; attack 2
 	energy WATER, 1 ; energies
 	tx WaterGunName ; name
-	tx WaterGunDescription ; description
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw OmanyteWaterGunEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
+	db 0
 	db ATK_ANIM_WATER_GUN ; animation
 
 	db 0 ; retreat cost
@@ -4790,17 +4790,17 @@ OmastarCard:
 	; your opponent's next turn.
 
 	; attack 1
-	energy WATER, 2 ; energies
+	energy WATER, 1, COLORLESS, 1 ; energies
 	tx WaterGunName ; name
-	tx WaterGunDescription ; description
+	dw NONE ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
-	db DAMAGE_PLUS ; category
-	dw OmastarWaterGunEffectCommands ; effect commands
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
+	db 0
 	db ATK_ANIM_WATER_GUN ; animation
 
 	; attack 2
@@ -4810,7 +4810,7 @@ OmastarCard:
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_X ; category
-	dw OmastarSpikeCannonEffectCommands ; effect commands
+	dw CloysterSpikeCannonEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7618,15 +7618,15 @@ SlowbroCard:
 	; attack 1
 	energy WATER, 1 ; energies
 	tx WaterGunName ; name
-	tx WaterGunDescription ; description
+	dw NONE ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw WaterGun1WEffectCommands ; effect commands
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
+	db 0
 	db ATK_ANIM_WATER_GUN ; animation
 
 	; attack 2
@@ -9206,7 +9206,7 @@ MeowthLv14Card:
 	energy 0 ; energies
 	tx LuckyTailsName ; name
 	tx LuckyTailsDescription ; description
-	dw PokemonPowerDescriptionCont ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw LuckyTailsEffectCommands ; effect commands

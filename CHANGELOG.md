@@ -282,6 +282,7 @@
 
 #### Poliwag
 - New attack: **Call for Friend** (C): put 1 Basic Pokémon on Bench from deck.
+- **Water Gun**: 20 damage. No effects.
 
 #### Poliwhirl
 - Increased HP from 60 to 70.
@@ -335,7 +336,7 @@
 - **Crabhammer**: +40 damage if the Defending Pokémon is a Basic Pokémon.
 
 #### Horsea
-- New attack: **Water Gun** (W): 10 damage, +10 for each extra Water Energy up to +20.
+- New attack: **Water Gun** (W): 20 damage.
 
 #### Seadra
 - Increased HP from 60 to 70.
@@ -390,10 +391,13 @@
 #### Vaporeon Lv42
 - **Quick Attack**: reworked.
 - New attack: **Quick Attack** (CC): 20 damage, double damage if the Pokémon became Active this turn.
-- **Water Gun**: reduced cost from (WWC) to (WW).
+- **Water Gun**: reduced cost from (WWC) to (Wc). 30 damage, no effects.
+
+#### Omanyte
+- **Water Gun** (W): 20 damage. No effects.
 
 #### Omastar
-- **Water Gun**: increased cost from (WC) to (WW) and base damage from 20 to 30.
+- **Water Gun**: 30 damage, no effects.
 - **Spike Cannon**: reduced cost from (WW) to (CC).
 
 #### Articuno Lv35
@@ -610,7 +614,7 @@
 #### Slowbro
 - Increased HP from 60 to 70.
 - **Strange Behaviour**: removed.
-- New attack: **Water Gun** (W): 20 damage, plus 10 per extra energy up to 20.
+- New attack: **Water Gun** (W): 20 damage.
 - **Psyshock**: reduced cost from (PP) to (PC) and increased damage from 20 to 30.
 
 #### Gastly Lv8
