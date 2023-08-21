@@ -728,6 +728,7 @@ UpdateSubstatusConditions_EndOfTurn:
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
 	res TURN_FLAG_PKMN_POWERS_DISABLED_F, [hl]
+	res TURN_FLAG_TOSSED_TAILS_F, [hl]
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	res SUBSTATUS3_HEADACHE, [hl]

@@ -65,6 +65,7 @@
 #### Nidoran (F)
 - Reduced HP from 60 to 50.
 - **Call for Family**: replaced with **Call for Friend** (C): choose any Basic Pokémon from deck.
+- **Fury Swipes**: changed Energy cost from (D) to (DC); 20 direct damage. Flip a coin. If Heads, +10 damage.
 
 #### Nidorina
 - **Supersonic**: reduced cost from (D) to (C).
@@ -272,6 +273,9 @@
 - **Rain Dance**: removed.
 - **Hydro Pump**: reduced cost from (WWW) to (CCC) and damage from 50 to 40; deals 10 bonus damage for each attached Water Energy (uncapped).
 - New attack: **Aqua Launcher** (W): deal 30 damage to one of the opponent's Pokémon.
+
+#### Psyduck
+- **Fury Swipes**: changed energy cost from (W) to (WC); 20 direct damage; flip a coin; if heads +10 damage.
 
 #### Golduck
 - **Psyshock**: increased damage from 10 to 20.
@@ -698,8 +702,8 @@
 
 #### Meowth Lv14
 - **Cat Punch**: removed.
-- New attack: **Collect** (C): draw 2 cards.
-- New attack: **Scratch** (CC): 20 damage.
+- New Pokémon Power: **Lucky Tails**: if you toss Tails during your turn, draw a card at the end of turn.
+- New attack: **Fury Swipes** (CC): 20 damage. Flip a coin. If Heads, +10 damage.
 
 #### Meowth Lv15
 - **Pay Day**: reduced cost from (CC) to (C), draws a card without coin flip.

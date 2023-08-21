@@ -863,13 +863,13 @@ NidoranFCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1 ; energies
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx FurySwipesName ; name
-	tx TripleAttackX10Description ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_X ; category
-	dw NidoranFFurySwipesEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw FurySwipes20Plus10EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -3470,13 +3470,13 @@ PsyduckCard:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy WATER, 1 ; energies
+	energy WATER, 1, COLORLESS, 1 ; energies
 	tx FurySwipesName ; name
-	tx TripleAttackX10Description ; description
+	tx Heads10BonusDamageDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_X ; category
-	dw PsyduckFurySwipesEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw FurySwipes20Plus10EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9203,32 +9203,32 @@ MeowthLv14Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx CollectName ; name
-	tx Draw2CardsDescription ; description
-	dw NONE ; description (cont)
+	energy 0 ; energies
+	tx LuckyTailsName ; name
+	tx LuckyTailsDescription ; description
+	dw PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw Draw2CardsEffectCommands ; effect commands
-	db DRAW_CARD ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx ScratchName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db POKEMON_POWER ; category
+	dw LuckyTailsEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_SLASH ; animation
+	db ATK_ANIM_NONE ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
+	tx FurySwipesName ; name
+	tx Heads10BonusDamageDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw FurySwipes20Plus10EffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness

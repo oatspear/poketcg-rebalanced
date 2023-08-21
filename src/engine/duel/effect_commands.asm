@@ -35,6 +35,7 @@ EffectCommands: ; 186f7 (6:46f7)
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+LuckyTailsEffectCommands:
 HealingNectarEffectCommands:
 HealingEnergyEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SetCarryNullEffect
@@ -182,11 +183,6 @@ ToxicEffectCommands:
 
 NidoqueenBoyfriendsEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BoyfriendsEffect
-	db  $00
-
-NidoranFFurySwipesEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, NidoranFFurySwipes_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, NidoranFFurySwipes_AIEffect
 	db  $00
 
 PeckEffectCommands:
@@ -488,6 +484,11 @@ QuickAttackEffectCommands:
 KangaskhanCometPunchEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heads10BonusDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, CometPunch_AIEffect
+	db  $00
+
+FurySwipes20Plus10EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heads10BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Heads20Plus10Damage_AIEffect
 	db  $00
 
 ArcanineFlamesOfRageEffectCommands:

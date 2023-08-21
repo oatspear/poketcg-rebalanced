@@ -111,6 +111,7 @@ MainDuelLoop:
 	ld a, [wDuelFinished]
 	or a
 	jr nz, .duel_finished
+	call HandleEndOfTurnEvents
 	call UpdateSubstatusConditions_EndOfTurn
 	call HandleBetweenTurnsEvents
 	call Func_3b31
@@ -7015,6 +7016,41 @@ HandleOnPlayEnergyEffects:
 	ret
 
 
+HandleEndOfTurnEvents:
+; return if Pokémon Powers are disabled
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	ret nz
+	ld a, MUK
+	call CountPokemonIDInBothPlayAreas
+	ccf
+	ret
+
+; check for Meowth's Lucky Tails Power
+	ld a, MEOWTH_LV14
+	call CountPokemonIDInPlayArea
+	jr nc, .done
+	ld c, a
+
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_TOSSED_TAILS_F, a
+	jr z, .done
+
+	push bc
+	ldtx hl, DrawLuckyTailsCardsText
+	call DrawWideTextBox_WaitForInput
+	pop bc
+	ld a, c
+	push af
+	call DisplayDrawNCardsScreen
+	pop af
+	farcall DrawNCards_NoCardDetails
+
+.done
+	ret
+
 
 ; apply and/or refresh status conditions and other events that trigger between turns
 HandleBetweenTurnsEvents:
@@ -8352,6 +8388,16 @@ _TossCoin:
 	call Func_3b31
 	call Func_3b21
 
+; set flag if at least 1 tails
+	ld hl, wCoinTossTotalNum
+	ld a, [wCoinTossNumHeads]
+	cp [hl]
+	jr nc, .got_all_heads
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	set TURN_FLAG_TOSSED_TAILS_F, [hl]
+
+.got_all_heads
 ; return carry if at least 1 heads
 	ld a, [wCoinTossNumHeads]
 	or a

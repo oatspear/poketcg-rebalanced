@@ -3135,6 +3135,11 @@ CometPunch_AIEffect:
 	lb de, 30, 40
 	jp SetExpectedAIDamage
 
+Heads10Plus10Damage_AIEffect:
+	ld a, (20 + 10) / 2
+	lb de, 20, 30
+	jp SetExpectedAIDamage
+
 RagingStorm_AIEffect:
 	call RagingStorm_DamageBoostEffect
 	jp SetDefiniteAIDamage
@@ -8310,15 +8315,7 @@ GamblerEffect: ; 2f3f9 (b:73f9)
 ; correct number of cards to draw is in c
 .draw_cards
 	ld a, c
-	bank1call DisplayDrawNCardsScreen
-.draw_loop
-	call DrawCardFromDeck
-	jr c, .done
-	call AddCardToHand
-	dec c
-	jr nz, .draw_loop
-.done
-	ret
+	jp DrawNCards_NoCardDetails
 
 
 ItemFinder_PlayerSelection:
