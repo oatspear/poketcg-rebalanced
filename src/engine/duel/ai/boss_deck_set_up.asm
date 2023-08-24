@@ -129,7 +129,7 @@ SetUpBossStartingHandAndDeck:
 	ld b, STARTING_HAND_SIZE
 .draw_loop
 	ld a, [hli]
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	dec b
 	jr nz, .draw_loop

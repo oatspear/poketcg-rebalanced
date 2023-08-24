@@ -1070,7 +1070,7 @@ Sprout_AddToHandEffect:
 
 ; add Grass-type card to the hand and show it on screen if
 ; it wasn't the Player who used the attack.
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call IsPlayerTurn
 	jr c, .done
@@ -3469,7 +3469,7 @@ Firegiver_AddToHandEffect: ; 2d6c2 (b:56c2)
 	pop bc
 	pop hl
 	ld a, [hli]
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	dec c
 	jr nz, .loop_energy
@@ -4077,7 +4077,7 @@ Prophecy_ReorderDeckEffect: ; 2da41 (b:5a41)
 	ld a, [hli]
 	cp $ff
 	jr z, .dec_hl
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	inc c
 	jr .loop_add_hand
 
@@ -5313,7 +5313,7 @@ CallForFriend_PutInPlayAreaEffect: ; 2e194 (b:6194)
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	jr z, .shuffle
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call PutHandPokemonCardInPlayArea
 	call IsPlayerTurn
@@ -6440,7 +6440,7 @@ EnergySpike_AttachEnergyEffect:
 	jr z, .done
 
 ; add card to hand and attach it to the selected Pokemon
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
@@ -7538,7 +7538,7 @@ FriendshipSong_AddToBench50PercentEffect: ; 2f119 (b:7119)
 	ret
 
 .put_in_bench
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call PutHandPokemonCardInPlayArea
 	ld a, ATK_ANIM_FRIENDSHIP_SONG
@@ -7878,7 +7878,7 @@ SelectedCards_AddToHandFromDeck:
 	jr z, .done ; skip if no card was chosen
 
 ; add selected card to hand and show on screen if it isn't the Player's turn
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call IsPlayerTurn
 	jr c, .done
@@ -8134,6 +8134,18 @@ EnergyRetrieval_DiscardAndAddToHandEffect:
 	ret
 
 
+Synthesis_PlayerSelection:
+; Pokémon Powers must preserve [hTemp_ffa0]
+	; ldh a, [hTemp_ffa0]
+	; push af
+	call EnergySearch_PlayerSelection
+	ldh a, [hTemp_ffa0]
+	ldh [hAIEnergyTransEnergyCard], a
+	; pop af
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
 
 EnergySearch_PlayerSelection:
 	ld a, $ff
@@ -8183,7 +8195,7 @@ EnergySearch_AddToHandEffect:
 	cp $ff
 	jr z, .done
 ; add to hand
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call IsPlayerTurn
 	jr c, .done ; done if Player played card
@@ -8197,7 +8209,10 @@ EnergySearch_AddToHandEffect:
 
 
 Synthesis_AddToHandEffect:
+; Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
 	call SetUsedPokemonPowerThisTurn
+	ldh a, [hAIEnergyTransEnergyCard]
+	ldh [hTemp_ffa0], a
 	jr EnergySearch_AddToHandEffect
 
 
@@ -8846,7 +8861,7 @@ PokemonTrader_PlayerDeckSelection:
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ldh a, [hTemp_ffa0]
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	or a
 	ret
@@ -8859,7 +8874,7 @@ PokemonTrader_TradeCardsEffect:
 
 ; place deck card in hand
 	ldh a, [hTempPlayAreaLocation_ffa1]
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 
 ; display cards if the Pokemon Trader wasn't played by Player
@@ -9088,7 +9103,7 @@ Pokedex_OrderDeckCardsEffect:
 	ld a, [hli]
 	cp $ff
 	jr z, .place_top_deck
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	inc c
 	jr .loop_place_hand
 

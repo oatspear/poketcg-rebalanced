@@ -190,7 +190,7 @@ EvolutionFromDeck_EvolveEffect:
 	jr z, .done ; skip if no evolution card was chosen
 
 ; add evolution card to the hand and skip showing it on screen
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 
 ; proceed into Breeder-like evolution code

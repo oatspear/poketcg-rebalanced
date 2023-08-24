@@ -299,7 +299,7 @@ Wail_FillBenchEffect: ; 2e335 (b:6335)
 ; place card in Bench
 	push hl
 	ldh a, [hTempCardIndex_ff98]
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call PutHandPokemonCardInPlayArea
 	pop hl
@@ -708,7 +708,7 @@ MixUpEffect: ; 2d647 (b:5647)
 	jr nc, .next_deck
 	dec c
 	ld a, [hl]
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 .next_deck
 	inc hl
@@ -936,7 +936,7 @@ ComputerSearch_DiscardAddToHandEffect: ; 2f545 (b:7545)
 
 ; add card from deck to hand
 	ld a, [hl]
-	call SearchCardInDeckAndAddToHand
+	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call SyncShuffleDeck
 	ret
