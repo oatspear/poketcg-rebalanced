@@ -172,7 +172,7 @@ Hatch_EvolveEffect:
 	; fallthrough
 
 PokemonBreeder_EvolveEffect:
-	call ClearAllStatusConditions
+	call ClearStatusFromTarget_NoAnim
 	; jr EvolutionFromDeck_EvolveEffect
 	; fallthrough
 

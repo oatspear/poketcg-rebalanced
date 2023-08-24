@@ -356,7 +356,7 @@ _PlayStatusClearAnimation:
 ; Affects hl.
 ClearStatusFromTarget:
 	ldh [hTempPlayAreaLocation_ff9d], a
-	call ClearStatusFromTarget_NoAnim
+	call _ClearStatusFromTarget
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
 	jr nz, PlayStatusClearAnimation_PlayAreaPokemon
@@ -370,6 +370,20 @@ ClearStatusFromTarget:
 ;    a: [0, 5] (PLAY_AREA_* offsets)
 ; Affects hl.
 ClearStatusFromTarget_NoAnim:
+	push af
+	call _ClearStatusFromTarget
+	pop af
+	or a
+	ret nz
+	; arena Pokémon additionally clears all substatus effects from attacks
+	; call ClearEffectsFromArenaPokemon
+	jr ClearSubstatus2FromArenaPokemon
+
+; Removes status conditions from turn holder's target.
+; Input:
+;    a: [0, 5] (PLAY_AREA_* offsets)
+; Affects hl.
+_ClearStatusFromTarget:
 	add DUELVARS_ARENA_CARD_STATUS
 	ld l, a
 	ldh a, [hWhoseTurn]
