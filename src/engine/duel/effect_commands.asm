@@ -1213,7 +1213,7 @@ NaturalRemedyEffectCommands:
 SynthesisEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Synthesis_PreconditionCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Synthesis_AddToHandEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySearch_PlayerSelection
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Synthesis_PlayerSelection
 	db  $00
 
 DoubleColorlessEnergyEffectCommands:

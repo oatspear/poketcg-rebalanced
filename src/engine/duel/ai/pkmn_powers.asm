@@ -608,7 +608,7 @@ HandleAISynthesis:
 	ld a, [wDuelTempList]
 
 .use_pkmn_power
-	ldh [hTemp_ffa0], a
+	ldh [hAIEnergyTransEnergyCard], a
 	ld a, [wAITempVars]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_USE_PKMN_POWER
