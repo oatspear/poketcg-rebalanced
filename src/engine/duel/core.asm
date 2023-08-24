@@ -7042,9 +7042,6 @@ HandleEndOfTurnEvents:
 	call DrawWideTextBox_WaitForInput
 	pop bc
 	ld a, c
-	push af
-	call DisplayDrawNCardsScreen
-	pop af
 	farcall DrawNCards_NoCardDetails
 
 .done
