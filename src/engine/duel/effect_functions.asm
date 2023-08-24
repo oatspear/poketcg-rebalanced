@@ -6429,9 +6429,30 @@ EnergySpike_PlayerSelectEffect:
 
 NutritionSupport_AISelectEffect:
 EnergySpike_AISelectEffect:
-; AI doesn't select any card
+; retrieve the presered [hTempPlayAreaLocation_ffa1] from scoring phase
+; just for safety, ensure it is a valid play area index
 	ld a, $ff
 	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	cp [hl]
+	ret nc  ; error, use $ff for [hTemp_ffa0]
+; find the first available energy
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z  ; end of list
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY
+	jr c, .loop_deck  ; not an energy
+	cp TYPE_ENERGY + NUM_COLORED_TYPES
+	jr nc, .loop_deck  ; not a basic energy
+	or a  ; reset carry flag
 	ret
 
 EnergySpike_AttachEnergyEffect:

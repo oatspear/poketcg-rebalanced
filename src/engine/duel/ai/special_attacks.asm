@@ -298,6 +298,9 @@ HandleSpecialAIAttacks:
 	jp nc, .zero_score
 	call AIProcessButDontPlayEnergy_SkipEvolution
 	jp nc, .zero_score
+; preserve selected Pokémon card for the effect logic
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, $83
 	ret
 
