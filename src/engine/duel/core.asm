@@ -7024,8 +7024,7 @@ HandleEndOfTurnEvents:
 	ret nz
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
-	ccf
-	ret
+	ret c
 
 ; check for Meowth's Lucky Tails Power
 	ld a, MEOWTH_LV14
