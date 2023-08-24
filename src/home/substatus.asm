@@ -557,26 +557,17 @@ CountPokemonIDInPlayArea:
 	push de
 	push bc
 	ld [wTempPokemonID_ce7c], a
-	ld c, $0
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld b, a
+	ld c, 0
+	or a
+	jr z, .found
+.loop_play_area
 	ld a, DUELVARS_ARENA_CARD
+	add b
+	dec a  ; b starts at 1, we want a 0-based index
 	call GetTurnDuelistVariable
-	cp -1
-	jr z, .check_bench
-	call GetCardIDFromDeckIndex
-	ld a, [wTempPokemonID_ce7c]
-	cp e
-	jr nz, .check_bench
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	jr nz, .check_bench
-	inc c
-.check_bench
-	ld b, 1
-	ld a, DUELVARS_BENCH
-	call GetTurnDuelistVariable
-.next_bench_slot
-	ld a, [hli]
 	cp $ff
 	jr z, .done
 ; check if it is the right Pokémon
@@ -587,13 +578,14 @@ CountPokemonIDInPlayArea:
 ; check if the Pokémon is affected with a status condition
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	add b
+	dec a  ; b starts at 1, we want a 0-based index
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
 	jr nz, .skip
 	inc c
 .skip
-	inc b
-	jr .next_bench_slot
+	dec b
+	jr nz, .loop_play_area
 .done
 	ld a, c
 	or a
