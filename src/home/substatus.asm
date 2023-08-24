@@ -577,7 +577,7 @@ CountPokemonIDInPlayArea:
 	call GetTurnDuelistVariable
 .next_bench_slot
 	ld a, [hli]
-	cp -1
+	cp $ff
 	jr z, .done
 ; check if it is the right Pokémon
 	call GetCardIDFromDeckIndex
