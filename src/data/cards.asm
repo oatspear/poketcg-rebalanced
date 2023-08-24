@@ -2035,7 +2035,7 @@ ExeggcuteCard:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_X ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
+	dw EggsplosionEffectCommands ; effect commands
 	db NONE ; flags 1
 	db ATTACHED_ENERGY_BOOST | HEAL_USER ; flags 2
 	db NONE ; flags 3
