@@ -1862,11 +1862,6 @@ SwordsDanceEffect: ; 2c7d0 (b:47d0)
 	call ApplySubstatus1ToAttackingCard
 	ret
 
-; If heads, defending Pokemon becomes confused
-SupersonicEffect:
-	call Confusion50PercentEffect
-	call nc, SetNoEffectFromStatus
-	ret
 
 FoulGas_AIEffect: ; 2c822 (b:4822)
 	ld a, 5
@@ -2063,10 +2058,6 @@ Thrash_ModifierEffect: ; 2c973 (b:4973)
 	call AddToDamage
 	ret
 
-; Toxic_AIEffect:
-; 	ld a, 20
-; 	lb de, 20, 20
-; 	jp UpdateExpectedAIDamage
 
 BoyfriendsEffect: ; 2c998 (b:4998)
 	ld a, DUELVARS_ARENA_CARD
@@ -2095,20 +2086,6 @@ BoyfriendsEffect: ; 2c998 (b:4998)
 	call AddToDamage ; adds 2 * 10 * c
 	ret
 
-NidoranFFurySwipes_AIEffect: ; 2c9be (b:49be)
-	ld a, 30 / 2
-	lb de, 0, 30
-	jp SetExpectedAIDamage
-
-NidoranFFurySwipes_MultiplierEffect: ; 2c9c6 (b:49c6)
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 3
-	call TossCoinATimes_BankB
-	call ATimes10
-	call SetDefiniteDamage
-	ret
 
 HornHazard_AIEffect: ; 2ca8e (b:4a8e)
 	ld a, 30 / 2
@@ -2128,23 +2105,6 @@ HornHazard_NoDamage50PercentEffect: ; 2ca96 (b:4a96)
 	ld [wLoadedAttackAnimation], a
 	ret
 
-DoubleAttackX30_AIEffect: ; 2cad3 (b:4ad3)
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-DoubleAttackX30_MultiplierEffect: ; 2cabb (b:4abb)
-	ld hl, 30
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	ld e, a
-	add a
-	add e
-	call ATimes10
-	call SetDefiniteDamage
-	ret
 
 WeedlePoisonSting_AIEffect: ; 2cb27 (b:4b27)
 	ld a, 5

@@ -93,6 +93,16 @@ ApplyStatusEffect: ; 2c035 (b:4035)
 	ret
 
 
+; ------------------------------------------------------------------------------
+; Status Attacks
+; ------------------------------------------------------------------------------
+
+
+; If heads, defending Pokemon becomes confused
+SupersonicEffect:
+	call Confusion50PercentEffect
+	call nc, SetNoEffectFromStatus
+	ret
 
 ; Defending Pokémon and user become confused.
 ; Defending Pokémon also becomes Poisoned.

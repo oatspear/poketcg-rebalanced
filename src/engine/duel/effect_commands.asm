@@ -201,16 +201,11 @@ CrabhammerEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Crabhammer_AIEffect
 	db  $00
 
-ClawEffectCommands:
 HornHazardEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HornHazard_NoDamage50PercentEffect
 	dbw EFFECTCMDTYPE_AI, HornHazard_AIEffect
 	db  $00
 
-NidorinaDoubleKickEffectCommands:
-;	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX30_MultiplierEffect
-;	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
-;	db  $00
 
 AssassinFlightEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, AssassinFlight_CheckBenchAndStatus
@@ -225,6 +220,7 @@ TwineedleEffectCommands:
 	db  $00
 
 MarowakBonemerangEffectCommands:
+NidorinaDoubleKickEffectCommands:
 NidorinoDoubleKickEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX30_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect

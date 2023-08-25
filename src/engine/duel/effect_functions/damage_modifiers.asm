@@ -25,6 +25,26 @@ DoubleDamage_DamageBoostEffect:
 ; ------------------------------------------------------------------------------
 
 
+; flips 2 coins, 30 damage per heads
+DoubleAttackX30_MultiplierEffect:
+	ld hl, 30
+	call LoadTxRam3
+	ldtx de, DamageCheckIfHeadsXDamageText
+	ld a, 2
+	call TossCoinATimes_BankB
+	ld e, a
+	add a
+	add e
+	call ATimes10
+	call SetDefiniteDamage
+	ret
+
+DoubleAttackX30_AIEffect:
+	ld a, 60 / 2
+	lb de, 0, 60
+	jp SetExpectedAIDamage
+
+
 Heads10BonusDamage_DamageBoostEffect:
 	ld hl, 10
 	call LoadTxRam3
