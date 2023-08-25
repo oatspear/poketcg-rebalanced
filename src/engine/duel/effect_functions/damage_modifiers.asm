@@ -1,0 +1,213 @@
+; ------------------------------------------------------------------------------
+; Building Blocks
+; ------------------------------------------------------------------------------
+
+
+; doubles the damage output
+DoubleDamage_DamageBoostEffect:
+  ld a, [wDamage + 1]
+  ld d, a
+  ld a, [wDamage]
+  ld e, a
+  or d
+  ret z  ; zero damage
+  sla e
+  rl d
+  ld a, e
+  ld [wDamage], a
+  ld a, d
+  ld [wDamage + 1], a
+  ret
+
+
+; ------------------------------------------------------------------------------
+; Based on Coin Flips
+; ------------------------------------------------------------------------------
+
+
+Heads10BonusDamage_DamageBoostEffect:
+	ld hl, 10
+	call LoadTxRam3
+	ldtx de, DamageCheckIfHeadsPlusDamageText
+	call TossCoin_BankB
+	ret nc ; return if tails
+	ld a, 10
+	call AddToDamage
+	ret
+
+ArcanineQuickAttack_AIEffect:
+	ld a, (10 + 30) / 2
+	lb de, 20, 30
+	jp SetExpectedAIDamage
+
+CometPunch_AIEffect:
+	ld a, (30 + 40) / 2
+	lb de, 30, 40
+	jp SetExpectedAIDamage
+
+Heads20Plus10Damage_AIEffect:
+	ld a, (20 + 10) / 2
+	lb de, 20, 30
+	jp SetExpectedAIDamage
+
+;
+VaporeonQuickAttack_AIEffect:
+	ld a, (10 + 30) / 2
+	lb de, 10, 30
+	jp SetExpectedAIDamage
+
+VaporeonQuickAttack_DamageBoostEffect:
+	ld hl, 20
+	call LoadTxRam3
+	ldtx de, DamageCheckIfHeadsPlusDamageText
+	call TossCoin_BankB
+	ret nc ; return if tails
+	ld a, 20
+	call AddToDamage
+	ret
+
+
+; ------------------------------------------------------------------------------
+; Based on Energy Cards
+; ------------------------------------------------------------------------------
+
+
+; 10 extra damage for each Water Energy
+HydroPumpEffect:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + WATER]
+	call ATimes10
+	call AddToDamage ; add 10 * a to damage
+; set attack damage
+	ld a, [wDamage]
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	ret
+
+
+; 10 damage for each Water Energy
+WaterGunEffect:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + WATER]
+	call ATimes10
+	call SetDefiniteDamage ; damage = 10 * Water Energy
+; set attack damage
+	ld a, [wDamage]
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	ret
+
+
+; ------------------------------------------------------------------------------
+; Based on Hand Cards
+; ------------------------------------------------------------------------------
+
+
+
+; ------------------------------------------------------------------------------
+; Based on Prize Cards
+; ------------------------------------------------------------------------------
+
+
+; +50 damage if the opponent has less Prize cards than the user
+RagingStorm_DamageBoostEffect:
+	call CheckTurnHolderHasMorePrizeCardsRemaining
+	ret nc  ; opponent Prizes >= user Prizes
+	ld a, 50
+	jp AddToDamage
+
+RagingStorm_AIEffect:
+  call RagingStorm_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; ------------------------------------------------------------------------------
+; Based on Deck Cards
+; ------------------------------------------------------------------------------
+
+
+; ------------------------------------------------------------------------------
+; Based on Defending Pokémon
+; ------------------------------------------------------------------------------
+
+
+; +40 damage versus Basic Pokémon
+Crabhammer_DamageBoostEffect:
+	ld a, DUELVARS_ARENA_CARD_STAGE
+	call GetNonTurnDuelistVariable
+	and a
+	ret nz  ; not a BASIC Pokémon
+	ld a, 40
+	call AddToDamage
+	ret
+
+Crabhammer_AIEffect:
+  call Crabhammer_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; ------------------------------------------------------------------------------
+; Based on Damage Counters
+; ------------------------------------------------------------------------------
+
+
+; add damage taken to damage output
+FlamesOfRage_DamageBoostEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	call AddToDamage
+	ret
+
+FlamesOfRage_AIEffect:
+  call FlamesOfRage_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; set damage output equal to damage taken
+Flail_HPCheck:
+  ld e, PLAY_AREA_ARENA
+  call GetCardDamageAndMaxHP
+  call SetDefiniteDamage
+  ret
+
+Flail_AIEffect:
+	call Flail_HPCheck
+	jp SetDefiniteAIDamage
+
+
+
+; ------------------------------------------------------------------------------
+; Miscellaneous
+; ------------------------------------------------------------------------------
+
+
+; bonus damage if the Pokémon became Active this turn
+IfActiveThisTurn20BonusDamage_DamageBoostEffect:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetTurnDuelistVariable
+	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
+	ret z  ; did not move to active spot this turn
+	ld a, 20
+	call AddToDamage
+	ret
+
+IfActiveThisTurn20BonusDamage_AIEffect:
+  call IfActiveThisTurn20BonusDamage_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; bonus damage if the Pokémon became Active this turn
+IfActiveThisTurnDoubleDamage_DamageBoostEffect:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetTurnDuelistVariable
+	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
+	ret z  ; did not move to active spot this turn
+	jp DoubleDamage_DamageBoostEffect
+
+IfActiveThisTurnDoubleDamage_AIEffect:
+  call IfActiveThisTurnDoubleDamage_DamageBoostEffect
+  jp SetDefiniteAIDamage

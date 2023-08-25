@@ -352,11 +352,6 @@ HeadacheEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HeadacheEffect
 	db  $00
 
-PsyduckFurySwipesEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PsyduckFurySwipes_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, PsyduckFurySwipes_AIEffect
-	db  $00
-
 ReduceDamageTakenBy20EffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceDamageTakenBy20Effect
 	db  $00

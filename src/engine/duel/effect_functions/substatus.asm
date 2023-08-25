@@ -43,6 +43,16 @@ ApplySubstatus2ToDefendingCard: ; 2c149 (b:4149)
 ; ------------------------------------------------------------------------------
 
 
+FocusEnergyEffect:
+; OATS Focus Energy applies to any Pokémon
+	; ld a, [wTempTurnDuelistCardID]
+	; cp VAPOREON_LV29
+	; ret nz ; return if no VaporeonLv29
+	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
+	call ApplySubstatus1ToAttackingCard
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Substatus 2
 ; ------------------------------------------------------------------------------

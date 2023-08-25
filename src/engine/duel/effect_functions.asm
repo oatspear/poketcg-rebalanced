@@ -5,6 +5,7 @@
 Sonicboom_NullEffect:
 	ret
 
+ToxicGasEffect:
 ClairvoyanceEffect:
 RainDanceEffect:
 AdaptiveEvolution_InitialEffect:
@@ -30,13 +31,30 @@ INCLUDE "engine/duel/effect_functions/substatus.asm"
 ; Coin Flip
 ; ------------------------------------------------------------------------------
 
-TossCoin_BankB: ; 2c07e (b:407e)
+
+TossCoin_BankB:
 	call TossCoin
 	ret
 
-TossCoinATimes_BankB: ; 2c082 (b:4082)
+TossCoinATimes_BankB:
 	call TossCoinATimes
 	ret
+
+
+Serial_TossCoin:
+	ld a, $1
+
+Serial_TossCoinATimes:
+	push de
+	push af
+	ld a, OPPACTION_TOSS_COIN_A_TIMES
+	call SetOppAction_SerialSendDuelData
+	pop af
+	pop de
+	call SerialSend8Bytes
+	call TossCoinATimes
+	ret
+
 
 ; ------------------------------------------------------------------------------
 ; Pokémon Evolution
@@ -217,24 +235,6 @@ CreatePlayableStage2PokemonCardListFromHand: ; 2f73e (b:773e)
 
 ; ------------------------------------------------------------------------------
 
-; unreferenced
-;Serial_TossZeroCoins:
-;	xor a
-;	jr Serial_TossCoinATimes
-
-Serial_TossCoin:
-	ld a, $1
-
-Serial_TossCoinATimes:
-	push de
-	push af
-	ld a, OPPACTION_TOSS_COIN_A_TIMES
-	call SetOppAction_SerialSendDuelData
-	pop af
-	pop de
-	call SerialSend8Bytes
-	call TossCoinATimes
-	ret
 
 SetNoEffectFromStatus: ; 2c09c (b:409c)
 	ld a, EFFECT_FAILED_NO_EFFECT
@@ -834,6 +834,13 @@ FullHeal_ClearStatusEffect:
 	call ClearStatusFromTarget
 	bank1call DrawDuelHUDs
 	ret
+
+
+; ------------------------------------------------------------------------------
+; Damage Modifiers
+; ------------------------------------------------------------------------------
+
+INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 
 
 ; ------------------------------------------------------------------------------
@@ -2281,10 +2288,6 @@ EnergyTrans_AIEffect: ; 2cbfb (b:4bfb)
 	ret
 
 
-ToxicGasEffect: ; 2cc36 (b:4c36)
-	scf
-	ret
-
 Sludge_AIEffect: ; 2cc38 (b:4c38)
 	ld a, 5
 	lb de, 0, 10
@@ -2699,78 +2702,11 @@ HelpingHand_RemoveStatusEffect:
 	ret
 
 
-HydroPumpEffect:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
-	call GetPlayAreaCardAttachedEnergies
-; 10 extra damage for each Water Energy
-	ld a, [wAttachedEnergies + WATER]
-	call ATimes10
-	call AddToDamage ; add 10 * a to damage
-; set attack damage
-	ld a, [wDamage]
-	ld [wAIMinDamage], a
-	ld [wAIMaxDamage], a
-	ret
-
-WaterGunEffect:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
-	call GetPlayAreaCardAttachedEnergies
-; 10 damage for each Water Energy
-	ld a, [wAttachedEnergies + WATER]
-	call ATimes10
-	call SetDefiniteDamage ; damage = 10 * Water Energy
-; set attack damage
-	ld a, [wDamage]
-	ld [wAIMinDamage], a
-	ld [wAIMaxDamage], a
-	ret
-
-Flail_AIEffect:
-	call Flail_HPCheck
-	jp SetDefiniteAIDamage
-
-Flail_HPCheck:
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call SetDefiniteDamage
-	ret
 
 HeadacheEffect: ; 2d00e (b:500e)
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetNonTurnDuelistVariable
 	set SUBSTATUS3_HEADACHE, [hl]
-	ret
-
-PsyduckFurySwipes_AIEffect: ; 2d016 (b:5016)
-	ld a, 30 / 2
-	lb de, 0, 30
-	jp SetExpectedAIDamage
-
-PsyduckFurySwipes_MultiplierEffect: ; 2d01e (b:501e)
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 3
-	call TossCoinATimes_BankB
-	call ATimes10
-	call SetDefiniteDamage
-	ret
-
-VaporeonQuickAttack_AIEffect: ; 2d0b8 (b:50b8)
-	ld a, (10 + 30) / 2
-	lb de, 10, 30
-	jp SetExpectedAIDamage
-
-VaporeonQuickAttack_DamageBoostEffect: ; 2d0c0 (b:50c0)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, 20
-	call AddToDamage
 	ret
 
 
@@ -3086,14 +3022,6 @@ IceBreath_BenchDamageEffect:
 	call SwapTurn
 	ret
 
-FocusEnergyEffect: ; 2d33f (b:533f)
-; OATS Focus Energy applies to any Pokémon
-	; ld a, [wTempTurnDuelistCardID]
-	; cp VAPOREON_LV29
-	; ret nz ; return if no VaporeonLv29
-	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
-	call ApplySubstatus1ToAttackingCard
-	ret
 
 PlayerPickFireEnergyCardToDiscard: ; 2d34b (b:534b)
 	call CreateListOfFireEnergyAttachedToArena
@@ -3108,105 +3036,6 @@ AIPickFireEnergyCardToDiscard: ; 2d35a (b:535a)
 	call CreateListOfFireEnergyAttachedToArena
 	ld a, [wDuelTempList]
 	ldh [hTempList], a ; pick first in list
-	ret
-
-ArcanineQuickAttack_AIEffect: ; 2d385 (b:5385)
-	ld a, (10 + 30) / 2
-	lb de, 20, 30
-	jp SetExpectedAIDamage
-
-Heads10BonusDamage_DamageBoostEffect: ; 2d38d (b:538d)
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, 10
-	call AddToDamage
-	ret
-
-CometPunch_AIEffect:
-	ld a, (30 + 40) / 2
-	lb de, 30, 40
-	jp SetExpectedAIDamage
-
-Heads20Plus10Damage_AIEffect:
-	ld a, (20 + 10) / 2
-	lb de, 20, 30
-	jp SetExpectedAIDamage
-
-RagingStorm_AIEffect:
-	call RagingStorm_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-; +50 damage if the opponent has less Prize cards than the user
-RagingStorm_DamageBoostEffect:
-	call CheckTurnHolderHasMorePrizeCardsRemaining
-	ret nc  ; opponent Prizes >= user Prizes
-	ld a, 50
-	jp AddToDamage
-
-Crabhammer_AIEffect:
-	call Crabhammer_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-; +40 damage versus Basic Pokémon
-Crabhammer_DamageBoostEffect:
-	ld a, DUELVARS_ARENA_CARD_STAGE
-	call GetNonTurnDuelistVariable
-	and a
-	ret nz  ; not a BASIC Pokémon
-	ld a, 40
-	call AddToDamage
-	ret
-
-FlamesOfRage_AIEffect:
-	call FlamesOfRage_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-FlamesOfRage_DamageBoostEffect:
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call AddToDamage
-	ret
-
-
-IfActiveThisTurn20BonusDamage_AIEffect:
-	call IfActiveThisTurn20BonusDamage_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-IfActiveThisTurn20BonusDamage_DamageBoostEffect:
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
-	call GetTurnDuelistVariable
-	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
-	ret z  ; did not move to active spot this turn
-	ld a, 20
-	call AddToDamage
-	ret
-
-
-IfActiveThisTurnDoubleDamage_AIEffect:
-	call IfActiveThisTurnDoubleDamage_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-IfActiveThisTurnDoubleDamage_DamageBoostEffect:
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
-	call GetTurnDuelistVariable
-	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
-	ret z  ; did not move to active spot this turn
-; double damage
-	ld a, [wDamage + 1]
-	ld d, a
-	ld a, [wDamage]
-	ld e, a
-	or d
-	ret z  ; zero damage
-	sla e
-	rl d
-	ld a, e
-	ld [wDamage], a
-	ld a, d
-	ld [wDamage + 1], a
 	ret
 
 
