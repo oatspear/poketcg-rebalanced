@@ -79,10 +79,23 @@ HandleSpecialAIAttacks:
 	jr z, .Sprout
 	cp MOLTRES_LV35
 	jp z, .CollectFire
+	cp JYNX
+	jr z, .Mimic
 
 ; return zero score.
 .zero_score
 	xor a
+	ret
+
+.Mimic
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	ld c, a
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	cp c
+	jr nc, .zero_score
+	ld a, $82
 	ret
 
 .Staryu

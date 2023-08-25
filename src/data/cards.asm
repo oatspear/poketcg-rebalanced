@@ -7821,25 +7821,25 @@ HaunterLv22Card:
 
 	; attack 1
 	energy DARKNESS, 1 ; energies
-	tx HypnosisName ; name
+	tx NightmareName ; name
 	tx InflictSleepDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw InflictSleepEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HYPNOSIS ; animation
+	db ATK_ANIM_NIGHTMARE ; animation
 
 	; attack 2
-	energy DARKNESS, 2 ; energies
-	tx DreamEaterName ; name
-	tx DreamEaterDescription ; description
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	tx PesterName ; name
+	tx PesterDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
 	dw HaunterDreamEaterEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
@@ -7936,7 +7936,7 @@ DrowzeeCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	energy PSYCHIC, 1 ; energies
 	tx HypnosisName ; name
 	tx InflictSleepDescription ; description
 	dw NONE ; description (cont)
@@ -7968,23 +7968,23 @@ HypnoCard:
 	db STAR ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db HYPNO
-	db 80 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx DrowzeeName ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	tx DarkMindName ; name
-	tx Damage1BenchedPokemon10Description ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw DarkMindEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	energy 0 ; energies
+	tx DreamEaterName ; name
+	tx DreamEaterDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_DARK_MIND ; animation
+	db 0
+	db ATK_ANIM_NONE ; animation
 
 	; attack 2
 	energy PSYCHIC, 2, COLORLESS, 1 ; energies
@@ -8076,17 +8076,17 @@ JynxCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx DoubleslapName ; name
-	tx DoubleAttackX10Description ; description
+	tx MimicName ; name
+	tx MimicDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_X ; category
-	dw JynxDoubleslapEffectCommands ; effect commands
-	db NONE ; flags 1
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw MimicEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies

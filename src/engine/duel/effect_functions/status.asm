@@ -255,6 +255,7 @@ ApplyStatusEffectToAllPlayAreaPokemon:
 
 ; returns in a the number of Asleep Pokémon
 ; in the turn holder's Play Area
+; sets carry if there is at least one
 ; preserves: de
 ; outputs:
 ;   b: 0
@@ -273,18 +274,22 @@ CountSleepingPokemonInPlayArea:
 	call GetTurnDuelistVariable
 .loop_play_area
 	ld a, [hli]  ; get status and move to next
-	and ASLEEP
+	and CNF_SLP_PRZ
+	cp ASLEEP
 	jr z, .next
 	inc c
 .next
 	dec b
 	jr nz, .loop_play_area
 	ld a, c
+	cp 1
+	ccf
 	ret
 
 
 ; returns in a the number of Poisoned Pokémon
 ; in the turn holder's Play Area
+; sets carry if there is at least one
 ; preserves: de
 ; outputs:
 ;   b: 0
@@ -310,4 +315,6 @@ CountPoisonedPokemonInPlayArea:
 	dec b
 	jr nz, .loop_play_area
 	ld a, c
+	cp 1
+	ccf
 	ret

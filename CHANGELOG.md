@@ -628,6 +628,12 @@
 - **Transparency**: removed.
 - New power: **Curse**: once per turn, move 1 damage counter from one opponent Pokémon to another.
 
+#### Haunter Lv22
+- **Hypnosis**: removed.
+- **Dream Eater**: removed.
+- New attack: **Nightmare** (D): 10 damage, inflicts Sleep.
+- New attack: **Pester** (DC): 20 damage, double damage if opponent has status.
+
 #### Gengar
 - **Curse**: removed.
 - New attack: **Pain Amplifier** (D): deal 10 damage to opponent's damaged Pokémon.
@@ -635,20 +641,22 @@
 
 #### Drowzee
 - **Confuse Ray**: removed.
-- New attack: **Hypnosis** (PC): inflicts Sleep.
+- New attack: **Hypnosis** (P): inflicts Sleep.
 
 #### Hypno
-- Decreased HP from 90 to 80.
+- Decreased HP from 90 to 70.
 - **Prophecy**: removed.
-- **Dark Mind**: reduced cost from (PPP) to (PC) and base damage from 30 to 20.
+- **Dark Mind**: removed.
+- New Pokémon Power: **Dream Eater**: heal 10 damage at the end of turn for each Sleeping Pokémon.
 - New attack: **Hypnoblast** (PPC): 40 damage, inflicts Sleep.
 
 #### Mr. Mime
 - **Meditate**: 20 damage; +20 damage if there are at least 5 cards in hand.
 
 #### Jynx
-- **Doubleslap**: reduced cost from (P) to (C).
+- **Doubleslap**: removed.
 - **Meditate**: reduced cost from (PPC) to (PC); 20 damage; +20 damage if there are at least 5 cards in hand.
+- New attack: **Mimic** (C): shuffle hand into deck; draw as many cards as the opponent has in hand.
 
 #### Pidgey
 - **Whirlwind**: reduced cost from (CC) to (C).

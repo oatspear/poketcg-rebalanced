@@ -1156,13 +1156,14 @@ HaunterDescription: ; 6080c (18:480c)
 	line "be from another dimension."
 	done
 
-DreamEaterName: ; 6086a (18:486a)
+DreamEaterName:
 	text "Dream Eater"
 	done
 
-DreamEaterDescription: ; 60877 (18:4877)
-	text "You can't use this attack unless"
-	line "the Defending Pokémon is Asleep."
+DreamEaterDescription:
+	text "At the end of your turns,"
+	line "heal 10 damage from this Pokémon"
+	line "for each Pokémon that is Asleep."
 	done
 
 GengarName: ; 608ba (18:48ba)
@@ -1266,11 +1267,11 @@ MeditateDescription:
 	line "at least 5 cards in your hand."
 	done
 
-OldMeditateName:
-	text "Meditate"
+PsychicAssaultName:
+	text "Psychic Assault"
 	done
 
-OldMeditateDescription:
+PsychicAssaultDescription:
 	text "Does 10 more damage for each damage"
 	line "counter on the Defending Pokémon."
 	done

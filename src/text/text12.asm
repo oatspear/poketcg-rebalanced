@@ -878,6 +878,32 @@ DrawLuckyTailsCardsText:
 	line "due to Lucky Tails."
 	done
 
+PesterName:
+	text "Pester"
+	done
+
+PesterDescription:
+	text "If the Defending Pokémon is affected"
+	line "by a Special Condition, this attack"
+	line "does double damage."
+	done
+
+MimicName:
+	text "Mimic"
+	done
+
+MimicDescription:
+	text "Shuffle your hand into your deck."
+	line "Then, draw a number of cards"
+	line "equal to the number of cards"
+	line "in your opponent's hand."
+	done
+
+
+; ------------------------------------------------------------------------------
+; Trainer Cards
+; ------------------------------------------------------------------------------
+
 ProfessorOakName:
 	text "Professor Oak"
 	done

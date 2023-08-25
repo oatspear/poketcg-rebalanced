@@ -2742,8 +2742,8 @@ TextOffsets:: ; 34000 (d:4000)
 	; textpointer TransparencyDescription                            ; 0x0aa0
 	textpointer NightmareName                                      ; 0x0aa1
 	textpointer HaunterDescription                                 ; 0x0aa2
-	textpointer DreamEaterName                                     ; 0x0aa3
-	textpointer DreamEaterDescription                              ; 0x0aa4
+	textpointer DreamEaterName
+	textpointer DreamEaterDescription
 	textpointer GengarName                                         ; 0x0aa5
 	textpointer CurseName                                          ; 0x0aa6
 	textpointer CurseDescription                                   ; 0x0aa7
@@ -2764,8 +2764,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer InvisibleWallDescription
 	textpointer MeditateName
 	textpointer MeditateDescription
-	textpointer OldMeditateName
-	textpointer OldMeditateDescription
+	textpointer PsychicAssaultName
+	textpointer PsychicAssaultDescription
 	textpointer BarrierName                                        ; 0x0ab9
 	textpointer MrMimeDescription                                  ; 0x0aba
 	textpointer JynxName                                           ; 0x0abb
@@ -2987,6 +2987,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LuckyTailsName
 	textpointer LuckyTailsDescription
 	textpointer DrawLuckyTailsCardsText
+	textpointer PesterName
+	textpointer PesterDescription
+	textpointer MimicName
+	textpointer MimicDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

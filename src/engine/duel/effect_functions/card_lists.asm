@@ -427,6 +427,75 @@ CreateHandCardListExcludeSelf:
 
 
 ; ------------------------------------------------------------------------------
+; Play Area Lists
+; ------------------------------------------------------------------------------
+
+
+; Return in a the amount of times that the Pokemon card with a given ID
+; is found in the turn holder's play area.
+; If the Pokemon is asleep, confused, or paralyzed (Pkmn Power-incapable),
+; it does not count.
+; Also fills hTempList with the PLAY_AREA_* offsets of each occurrence.
+; Set carry if the Pokemon card is at least found once.
+; This is almost a duplicate of CountPokemonIDInPlayArea.
+; preserves: bc, de, hl
+; input: a: Pokemon card ID to search
+ListPowerCapablePokemonIDInPlayArea:
+	push hl
+	push de
+	push bc
+	ld [wTempPokemonID_ce7c], a
+	call ClearTempList
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld b, a
+	ld c, 0
+	or a
+	jr z, .found
+	ld hl, hTempList
+	push hl
+.loop_play_area
+	ld a, DUELVARS_ARENA_CARD - 1
+	add b  ; b starts at 1, we want a 0-based index
+	call GetTurnDuelistVariable
+	cp $ff
+	jr z, .done
+; check if it is the right Pokémon
+	call GetCardIDFromDeckIndex
+	ld a, [wTempPokemonID_ce7c]
+	cp e
+	jr nz, .skip
+; check if the Pokémon is affected with a status condition
+	ld a, DUELVARS_ARENA_CARD_STATUS - 1
+	add b  ; b starts at 1, we want a 0-based index
+	call GetTurnDuelistVariable
+	and CNF_SLP_PRZ
+	jr nz, .skip
+; increment counter and add to the list
+	inc c
+	ld a, b
+	dec a  ; b starts at 1, we want a 0-based index
+	pop hl
+	ld [hli], a
+	push hl
+.skip
+	dec b
+	jr nz, .loop_play_area
+.done
+	pop hl
+	ld a, $ff
+	ld [hl], a  ; terminator
+	ld a, c
+	cp 1
+	ccf
+.found
+	pop bc
+	pop de
+	pop hl
+	ret
+
+
+; ------------------------------------------------------------------------------
 ; List Filters
 ; ------------------------------------------------------------------------------
 
@@ -519,3 +588,31 @@ RemoveCardTypeFromCardList:
   jr z, .loop
   inc de
   jr .loop
+
+
+; ------------------------------------------------------------------------------
+; hTempList Manipulation
+; ------------------------------------------------------------------------------
+
+ClearTempList:
+	xor a
+	ldh [hCurSelectionItem], a
+	ld a, $ff
+	ldh [hTempList], a
+	ret
+
+
+; outputs in hl the next position
+; in hTempList to place a new card,
+; and increments hCurSelectionItem.
+GetNextPositionInTempList:
+	push de
+	ld hl, hCurSelectionItem
+	ld a, [hl]
+	inc [hl]
+	ld e, a
+	ld d, $00
+	ld hl, hTempList
+	add hl, de
+	pop de
+	ret

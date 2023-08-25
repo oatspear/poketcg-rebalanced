@@ -5,6 +5,7 @@
 Sonicboom_NullEffect:
 	ret
 
+TransparencyEffect:
 ToxicGasEffect:
 ClairvoyanceEffect:
 RainDanceEffect:
@@ -746,21 +747,6 @@ PickRandomPlayAreaCard: ; 2c17e (b:417e)
 	or a
 	ret
 
-; outputs in hl the next position
-; in hTempList to place a new card,
-; and increments hCurSelectionItem.
-GetNextPositionInTempList: ; 2c188 (b:4188)
-	push de
-	ld hl, hCurSelectionItem
-	ld a, [hl]
-	inc [hl]
-	ld e, a
-	ld d, $00
-	ld hl, hTempList
-	add hl, de
-	pop de
-	ret
-
 ; prints the text "<X> devolved to <Y>!" with
 ; the proper card names and levels.
 ; input:
@@ -880,6 +866,49 @@ FullHeal_ClearStatusEffect:
 ; ------------------------------------------------------------------------------
 
 INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
+
+
+; ------------------------------------------------------------------------------
+; Pokémon Powers
+; ------------------------------------------------------------------------------
+
+
+; stores in [wDreamEaterDamageToHeal] the amount of damage to heal
+; from sleeping Pokémon in play area
+DreamEater_SetHealingAmount:
+	call CountSleepingPokemonInPlayArea
+	ld [wDreamEaterDamageToHeal], a
+	call SwapTurn
+	call CountSleepingPokemonInPlayArea
+	call SwapTurn
+	ld a, [wDreamEaterDamageToHeal]
+	add c
+	call ATimes10
+	ld [wDreamEaterDamageToHeal], a
+	ret
+
+; heals the amount of damage in [wDreamEaterDamageToHeal] from every
+; Pokémon Power capable Hypno in the turn holder's play area
+DreamEater_HealEffect:
+	ld a, [wDreamEaterDamageToHeal]
+	or a
+	ret z  ; nothing to do
+
+	ld a, HYPNO
+	call ListPowerCapablePokemonIDInPlayArea
+	ret nc  ; none found
+
+	ld hl, hTempList
+.loop_play_area
+	ld a, [hli]
+	cp $ff
+	ret z  ; done
+
+	ld e, a  ; location
+	ld a, [wDreamEaterDamageToHeal]
+	ld d, a  ; damage
+	call HealPlayAreaCardHP
+	jr .loop_play_area
 
 
 ; ------------------------------------------------------------------------------
@@ -3810,7 +3839,7 @@ EnergyConversion_AddToHandEffect:
 	ret
 
 ; return carry if Defending Pokemon is not asleep
-DreamEaterEffect: ; 2d9d6 (b:59d6)
+OldDreamEaterEffect:
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetNonTurnDuelistVariable
 	and CNF_SLP_PRZ
@@ -3818,10 +3847,6 @@ DreamEaterEffect: ; 2d9d6 (b:59d6)
 	ret z ; return if asleep
 ; not asleep, set carry and load text
 	ldtx hl, OpponentIsNotAsleepText
-	scf
-	ret
-
-TransparencyEffect: ; 2d9e5 (b:59e5)
 	scf
 	ret
 
@@ -6568,6 +6593,15 @@ FetchEffect:
 	; show card on screen if it was Player
 	bank1call OpenCardPage_FromHand
 	ret
+
+
+; shuffle hand back into deck and draw as many cards as the opponent has
+MimicEffect:
+	call ShuffleHandIntoDeck
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	jp DrawNCards_NoCardDetails
+
 
 TaurosStomp_AIEffect: ; 2eb7b (b:6b7b)
 	ld a, (20 + 30) / 2

@@ -183,6 +183,21 @@ Crabhammer_AIEffect:
 
 
 ; ------------------------------------------------------------------------------
+; Based on Status Conditions
+; ------------------------------------------------------------------------------
+
+; double damage if the Defending Pokémon has a status condition
+Pester_DamageBoostEffect:
+  call CheckOpponentHasStatus
+  ret c
+  jp DoubleDamage_DamageBoostEffect
+
+Pester_AIEffect:
+  call Pester_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; ------------------------------------------------------------------------------
 ; Based on Damage Counters
 ; ------------------------------------------------------------------------------
 
@@ -212,7 +227,7 @@ Flail_AIEffect:
 
 
 ; add damage of Defending card to damage output
-OldMeditate_DamageBoostEffect:
+PsychicAssault_DamageBoostEffect:
 	call SwapTurn
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
@@ -220,8 +235,8 @@ OldMeditate_DamageBoostEffect:
 	call AddToDamage
 	ret
 
-OldMeditate_AIEffect:
-  call OldMeditate_DamageBoostEffect
+PsychicAssault_AIEffect:
+  call PsychicAssault_DamageBoostEffect
   jp SetDefiniteAIDamage
 
 

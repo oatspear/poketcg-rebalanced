@@ -1110,7 +1110,16 @@ wFirstAttackAIScore:: ; cdbf
 
 ENDU
 
-	ds $a
+; End of Turn Pokémon Power variables
+wEndOfTurnPowerVariables::
+wLuckyTailsCardsToDraw:: ; cdc0
+	ds $1
+
+wDreamEaterDamageToHeal:: ; cdc1
+	ds $1
+
+; unused free space
+	ds $8
 
 ; information about the defending Pokémon and
 ; the prize card count on both sides for AI:

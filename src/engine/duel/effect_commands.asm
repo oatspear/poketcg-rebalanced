@@ -38,6 +38,7 @@ EffectCommands: ; 186f7 (6:46f7)
 LuckyTailsEffectCommands:
 HealingNectarEffectCommands:
 HealingEnergyEffectCommands:
+PassivePowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SetCarryNullEffect
 	db  $00
 
@@ -576,7 +577,7 @@ InflictSleepEffectCommands:
 	db  $00
 
 HaunterDreamEaterEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DreamEaterEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, OldDreamEaterEffect
 	db  $00
 
 HaunterTransparencyEffectCommands:
@@ -590,10 +591,6 @@ HypnoProphecyEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Prophecy_AISelectEffect
 	db  $00
 
-DrowzeeConfuseRayEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect
-	db  $00
-
 MrMimeInvisibleWallEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, InvisibleWallEffect
 	db  $00
@@ -603,9 +600,19 @@ RendEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Rend_AIEffect
 	db  $00
 
-OldMeditateEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OldMeditate_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, OldMeditate_AIEffect
+PesterEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Pester_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Pester_AIEffect
+	db  $00
+
+PsychicAssaultEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PsychicAssault_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, PsychicAssault_AIEffect
+	db  $00
+
+MimicEffectCommands:
+	; dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MimicEffect
 	db  $00
 
 MeditateEffectCommands:
@@ -698,11 +705,6 @@ RecoverEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recover_HealEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
-	db  $00
-
-JynxDoubleslapEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, JynxDoubleslap_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, JynxDoubleslap_AIEffect
 	db  $00
 
 
