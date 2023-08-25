@@ -899,6 +899,15 @@ MimicDescription:
 	line "in your opponent's hand."
 	done
 
+MindBlastName:
+	text "Mind Blast"
+	done
+
+MindBlastDescription:
+	text "This attack does 10 more damage"
+	line "for each card in your hand."
+	done
+
 
 ; ------------------------------------------------------------------------------
 ; Trainer Cards

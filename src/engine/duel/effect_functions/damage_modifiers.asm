@@ -140,6 +140,18 @@ Meditate_AIEffect:
   jp SetDefiniteAIDamage
 
 
+; +10 damage for each card in turn holder's hand
+MindBlast_DamageBoostEffect:
+  ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	call ATimes10
+	jp AddToDamage
+
+MindBlast_AIEffect:
+  call MindBlast_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Prize Cards
 ; ------------------------------------------------------------------------------

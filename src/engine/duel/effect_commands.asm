@@ -620,13 +620,17 @@ MeditateEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Meditate_AIEffect
 	db  $00
 
-AlakazamDamageSwapEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DamageSwap_CheckDamage
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamageSwap_SelectAndSwapEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageSwap_SwapEffect
+MindBlastEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MindBlast_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, MindBlast_AIEffect
 	db  $00
 
-AlakazamConfuseRayEffectCommands:
+; AlakazamDamageSwapEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DamageSwap_CheckDamage
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamageSwap_SelectAndSwapEffect
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageSwap_SwapEffect
+; 	db  $00
+
 InflictConfusionEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ConfusionEffect
 	db  $00
@@ -647,7 +651,7 @@ MewNeutralizingShieldEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, NeutralizingShieldEffect
 	db  $00
 
-MewtwoPsychicEffectCommands:
+PsychicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Psychic_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Psychic_AIEffect
 	db  $00

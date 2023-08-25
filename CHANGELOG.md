@@ -600,7 +600,11 @@
 - **Super Psi**: reduced cost from (PPC) to (PC) and damage from 50 to 30.
 
 #### Alakazam
-- **Confuse Ray**: reduced cost from (PPP) to (PCC) and inflicts Confusion without a coin flip.
+- Increased HP from 80 to 100.
+- **Damage Swap**: removed.
+- **Confuse Ray**: removed.
+- New attack: **Psychic** (P): 10 damage; +10 for each Energy on Defending Pokémon.
+- New attack: **Mind Blast** (PCC): 10 damage; +10 for each card in player's hand.
 
 #### Slowpoke Lv9
 - Increased HP from 40 to 50.
