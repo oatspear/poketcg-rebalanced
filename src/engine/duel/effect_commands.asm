@@ -627,6 +627,7 @@ AlakazamDamageSwapEffectCommands:
 	db  $00
 
 AlakazamConfuseRayEffectCommands:
+InflictConfusionEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ConfusionEffect
 	db  $00
 

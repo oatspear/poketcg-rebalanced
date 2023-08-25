@@ -625,19 +625,23 @@
 - **Energy Conversion**: reduced cost from (DD) to (C) and removed recoil.
 
 #### Haunter Lv17
+- Increased HP from 50 to 70.
 - **Transparency**: removed.
 - New power: **Curse**: once per turn, move 1 damage counter from one opponent Pokémon to another.
+- New attack: **Pain Amplifier** (D): deal 10 damage to each of the opponent's damaged Pokémon.
 
 #### Haunter Lv22
+- Increased HP from 60 to 70.
 - **Hypnosis**: removed.
 - **Dream Eater**: removed.
 - New attack: **Nightmare** (D): 10 damage, inflicts Sleep.
 - New attack: **Pester** (DC): 20 damage, double damage if opponent has status.
 
 #### Gengar
+- Increased HP from 80 to 90.
 - **Curse**: removed.
-- New attack: **Pain Amplifier** (D): deal 10 damage to opponent's damaged Pokémon.
-- **Dark Mind**: reduced cost from (DDD) to (DDC) and increased base damage from 30 to 60.
+- New attack: **Confuse Ray** (D): 20 damage, inflicts Confusion.
+- **Dark Mind**: reduced cost from (DDD) to (DDC); increased base damage from 30 to 60; damages up to 2 benched Pokémon.
 
 #### Drowzee
 - **Confuse Ray**: removed.
@@ -654,6 +658,7 @@
 - **Meditate**: 20 damage; +20 damage if there are at least 5 cards in hand.
 
 #### Jynx
+- Reduced HP from 70 to 60.
 - **Doubleslap**: removed.
 - **Meditate**: reduced cost from (PPC) to (PC); 20 damage; +20 damage if there are at least 5 cards in hand.
 - New attack: **Mimic** (C): shuffle hand into deck; draw as many cards as the opponent has in hand.

@@ -1170,17 +1170,15 @@ GengarName: ; 608ba (18:48ba)
 	text "Gengar"
 	done
 
-CurseName: ; 608c2 (18:48c2)
+CurseName:
 	text "Curse"
 	done
 
-CurseDescription: ; 608c9 (18:48c9)
+CurseDescription:
 	text "Once during your turn (before your"
 	line "attack), you may move 1 damage"
 	line "counter from 1 of your opponent's"
-	line "Pokémon to another. This power"
-	line "can't be used if this Pokémon is"
-	line "Asleep, Confused, or Paralyzed."
+	line "Pokémon to another."
 	done
 
 PainAmplifierName:

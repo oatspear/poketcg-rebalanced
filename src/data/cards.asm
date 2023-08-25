@@ -7764,7 +7764,7 @@ HaunterLv17Card:
 	db STAR ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db HAUNTER_LV17
-	db 50 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx GastlyName ; pre-evo name
 
@@ -7772,7 +7772,7 @@ HaunterLv17Card:
 	energy 0 ; energies
 	tx CurseName ; name
 	tx CurseDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw CurseEffectCommands ; effect commands
@@ -7783,18 +7783,18 @@ HaunterLv17Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx NightmareName ; name
-	tx InflictSleepDescription ; description
+	energy DARKNESS, 1 ; energies
+	tx PainAmplifierName ; name
+	tx PainAmplifierDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw InflictSleepEffectCommands ; effect commands
-	db INFLICT_SLEEP ; flags 1
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw PainAmplifierEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NIGHTMARE ; animation
+	db 10
+	db ATK_ANIM_DARK_MIND ; animation
 
 	db 0 ; retreat cost
 	db NONE ; weakness
@@ -7815,7 +7815,7 @@ HaunterLv22Card:
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db HAUNTER_LV22
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx GastlyName ; pre-evo name
 
@@ -7866,39 +7866,39 @@ GengarCard:
 	db STAR ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	db GENGAR
-	db 80 ; hp
+	db 90 ; hp
 	db STAGE2 ; stage
 	tx HaunterName ; pre-evo name
 
 	; attack 1
 	energy DARKNESS, 1 ; energies
-	tx PainAmplifierName ; name
-	tx PainAmplifierDescription ; description
+	tx ConfuseRayName ; name
+	tx InflictConfusionDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw PainAmplifierEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw InflictConfusionEffectCommands ; effect commands
+	db INFLICT_CONFUSION ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_DARK_MIND ; animation
+	db 0
+	db ATK_ANIM_CONFUSE_RAY ; animation
 
 	; attack 2
 	energy DARKNESS, 2, COLORLESS, 1 ; energies
 	tx DarkMindName ; name
-	tx Damage1BenchedPokemon10Description ; description
+	tx DamageUpTo2BenchedDescription ; description
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
-	dw DarkMindEffectCommands ; effect commands
+	dw DamageUpTo2Benched10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 10
 	db ATK_ANIM_DARK_MIND ; animation
 
-	db 1 ; retreat cost
+	db 2 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx ShadowName ; category
@@ -8070,7 +8070,7 @@ JynxCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db JYNX
-	db 70 ; hp
+	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
