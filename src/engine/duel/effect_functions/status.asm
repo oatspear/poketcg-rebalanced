@@ -247,3 +247,67 @@ ApplyStatusEffectToAllPlayAreaPokemon:
 	dec d
 	ret z
 	jr .loop_play_area
+
+
+; ------------------------------------------------------------------------------
+; Utility Functions
+; ------------------------------------------------------------------------------
+
+; returns in a the number of Asleep Pokémon
+; in the turn holder's Play Area
+; preserves: de
+; outputs:
+;   b: 0
+;   c: number of sleeping Pokémon in Play Area
+;   a: number of sleeping Pokémon in Play Area
+CountSleepingPokemonInPlayArea:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld b, a
+	ld c, 0
+	or a
+	ret z
+
+; status conditions are all stored consecutively; just use hl to loop
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+.loop_play_area
+	ld a, [hli]  ; get status and move to next
+	and ASLEEP
+	jr z, .next
+	inc c
+.next
+	dec b
+	jr nz, .loop_play_area
+	ld a, c
+	ret
+
+
+; returns in a the number of Poisoned Pokémon
+; in the turn holder's Play Area
+; preserves: de
+; outputs:
+;   b: 0
+;   c: number of poisoned Pokémon in Play Area
+;   a: number of poisoned Pokémon in Play Area
+CountPoisonedPokemonInPlayArea:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld b, a
+	ld c, 0
+	or a
+	ret z
+
+; status conditions are all stored consecutively; just use hl to loop
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+.loop_play_area
+	ld a, [hli]  ; get status and move to next
+	and PSN_DBLPSN
+	jr z, .next
+	inc c
+.next
+	dec b
+	jr nz, .loop_play_area
+	ld a, c
+	ret
