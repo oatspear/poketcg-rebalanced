@@ -127,6 +127,18 @@ WaterGunEffect:
 ; ------------------------------------------------------------------------------
 
 
+; +20 damage if the player has at least 5 cards in hand
+Meditate_DamageBoostEffect:
+  ld c, 5
+	call CheckHandSizeIsLessThanC
+	ret nc  ; hand size < 5
+	ld a, 20
+	jp AddToDamage
+
+Meditate_AIEffect:
+  call Meditate_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
 
 ; ------------------------------------------------------------------------------
 ; Based on Prize Cards
@@ -135,7 +147,7 @@ WaterGunEffect:
 
 ; +50 damage if the opponent has less Prize cards than the user
 RagingStorm_DamageBoostEffect:
-	call CheckTurnHolderHasMorePrizeCardsRemaining
+	call CheckOpponentHasMorePrizeCardsRemaining
 	ret nc  ; opponent Prizes >= user Prizes
 	ld a, 50
 	jp AddToDamage
@@ -198,6 +210,19 @@ Flail_AIEffect:
 	call Flail_HPCheck
 	jp SetDefiniteAIDamage
 
+
+; add damage of Defending card to damage output
+OldMeditate_DamageBoostEffect:
+	call SwapTurn
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	call SwapTurn
+	call AddToDamage
+	ret
+
+OldMeditate_AIEffect:
+  call OldMeditate_DamageBoostEffect
+  jp SetDefiniteAIDamage
 
 
 ; ------------------------------------------------------------------------------

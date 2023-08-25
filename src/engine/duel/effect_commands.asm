@@ -603,9 +603,14 @@ RendEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Rend_AIEffect
 	db  $00
 
-MrMimeMeditateEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MrMimeMeditate_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, MrMimeMeditate_AIEffect
+OldMeditateEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OldMeditate_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, OldMeditate_AIEffect
+	db  $00
+
+MeditateEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Meditate_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Meditate_AIEffect
 	db  $00
 
 AlakazamDamageSwapEffectCommands:
@@ -700,10 +705,6 @@ JynxDoubleslapEffectCommands:
 	dbw EFFECTCMDTYPE_AI, JynxDoubleslap_AIEffect
 	db  $00
 
-JynxMeditateEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, JynxMeditate_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, JynxMeditate_AIEffect
-	db  $00
 
 MewMysteryAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MysteryAttack_RandomEffect

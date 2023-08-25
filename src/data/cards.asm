@@ -8027,7 +8027,7 @@ MrMimeCard:
 	energy 0 ; energies
 	tx InvisibleWallName ; name
 	tx InvisibleWallDescription ; description
-	tx InvisibleWallDescriptionCont ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw MrMimeInvisibleWallEffectCommands ; effect commands
@@ -8042,9 +8042,9 @@ MrMimeCard:
 	tx MeditateName ; name
 	tx MeditateDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw MrMimeMeditateEffectCommands ; effect commands
+	dw MeditateEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -8089,13 +8089,13 @@ JynxCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy PSYCHIC, 1, COLORLESS, 2 ; energies
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
 	tx MeditateName ; name
 	tx MeditateDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw JynxMeditateEffectCommands ; effect commands
+	dw MeditateEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

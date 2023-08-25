@@ -283,14 +283,15 @@ IsPlayerTurn:
 	ret
 
 
-; Returns carry if the opponent has taken more prize cards than the turn holder.
-CheckTurnHolderHasMorePrizeCardsRemaining:
-	call CountPrizes
+; Returns carry if the opponent has less prize cards remaining.
+; Alt: Returns carry if the opponent has taken more prize cards.
+CheckOpponentHasMorePrizeCardsRemaining:
+	call CountPrizes  ; turn holder's remaining Prizes
 	ld c, a
 	call SwapTurn
-	call CountPrizes
+	call CountPrizes  ; opponent's remaining Prizes
 	call SwapTurn
-	cp c
+	cp c  ; carry <- (opponent's Prizes < turn holder's Prizes)
 	ret
 
 
@@ -410,17 +411,17 @@ CheckIfDeckIsEmpty:
 ; returns carry if there are less than 4 cards in hand
 CheckHandSizeGreaterThan3:
 	ld c, 4
-	jr CheckHandSizeGreaterThanC
+	jr CheckHandSizeIsAtLeastC
 
 ; returns carry if there are less than 3 cards in hand
 CheckHandSizeGreaterThan2:
 	ld c, 3
-	jr CheckHandSizeGreaterThanC
+	jr CheckHandSizeIsAtLeastC
 
 ; returns carry if there are less than 2 cards in hand
 CheckHandSizeGreaterThan1:
 	ld c, 2
-	; jr CheckHandSizeGreaterThanC
+	; jr CheckHandSizeIsAtLeastC
 	; fallthrough
 
 ; returns carry if there are less than c cards in hand
@@ -430,12 +431,50 @@ CheckHandSizeGreaterThan1:
 ;   a: number of cards in hand
 ;   carry: set if the number of cards in hand is less than input c
 ;   hl: error text
-CheckHandSizeGreaterThanC:
+CheckHandSizeIsAtLeastC:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetTurnDuelistVariable
 	cp c
 	ldtx hl, NotEnoughCardsInHandText
 	ret
+
+; returns carry if there are at least c cards in hand
+; input:
+;   c: threshold number of cards
+; output:
+;   a: number of cards in hand
+;   carry: set if the number of cards in hand is more than (or equal to) input c
+;   hl: error text
+CheckHandSizeIsLessThanC:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	cp c
+	ldtx hl, TooManyCardsInHandText
+	ccf
+	ret
+
+; returns carry if the player does not have more cards in hand than the opponent
+; output:
+;   a: number of cards in hand
+;   carry: set if the number of cards in hand <= opponent's
+;   hl: error text
+CheckHandSizeGreaterThanOpponents:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	ld c, a
+	inc c
+	jr CheckHandSizeIsAtLeastC
+
+; returns carry if the player does not have less cards in hand than the opponent
+; output:
+;   a: number of cards in hand
+;   carry: set if the number of cards in hand >= opponent's
+;   hl: error text
+CheckHandSizeLesserThanOpponents:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	ld c, a
+	jr CheckHandSizeIsLessThanC
 
 
 Maintenance_CheckHandAndDiscardPile:
@@ -4025,18 +4064,6 @@ Rend_DamageBoostEffect:
 	call AddToDamage
 	ret
 
-MrMimeMeditate_AIEffect: ; 2db79 (b:5b79)
-	call MrMimeMeditate_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-MrMimeMeditate_DamageBoostEffect: ; 2db7f (b:5b7f)
-; add damage counters of Defending card to damage
-	call SwapTurn
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call SwapTurn
-	call AddToDamage
-	ret
 
 ; returns carry if Damage Swap cannot be used.
 DamageSwap_CheckDamage: ; 2db8e (b:5b8e)
@@ -4837,18 +4864,6 @@ JynxDoubleslap_MultiplierEffect: ; 2dfcf (b:5fcf)
 	call SetDefiniteDamage
 	ret
 
-JynxMeditate_AIEffect: ; 2dff2 (b:5ff2)
-	call JynxMeditate_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-JynxMeditate_DamageBoostEffect: ; 2dfec (b:5fec)
-; add damage counters of Defending card to damage
-	call SwapTurn
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call SwapTurn
-	call AddToDamage
-	ret
 
 MysteryAttack_AIEffect: ; 2e001 (b:6001)
 	ld a, 10
@@ -8206,7 +8221,7 @@ ImposterProfessorOakEffect:
 
 .has_cards
 	call ShuffleHandAndReturnToBottomOfDeckExcludeSelf
-	call CheckTurnHolderHasMorePrizeCardsRemaining
+	call CheckOpponentHasMorePrizeCardsRemaining
 	ld a, 3  ; player draws 3 cards
 	jr nc, .draw_cards
 	ld a, 5  ; player is losing, draws 5 cards

@@ -384,6 +384,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NoneCameText                                       ; 0x0176
 	textpointer CameToTheBenchText                                 ; 0x0177
 	textpointer DuelistHasNoCardsInHandText                        ; 0x0178
+	textpointer TooManyCardsInHandText
 	textpointer PokemonHealedDamageText                            ; 0x0179
 	textpointer PokemonDevolvedToText                              ; 0x017a
 	textpointer ThereWasNoFireEnergyText                           ; 0x017b
@@ -2758,12 +2759,13 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ProphecyName                                       ; 0x0ab0
 	textpointer ProphecyDescription                                ; 0x0ab1
 	textpointer HypnoDescription                                   ; 0x0ab2
-	textpointer MrMimeName                                         ; 0x0ab3
-	textpointer InvisibleWallName                                  ; 0x0ab4
-	textpointer InvisibleWallDescription                           ; 0x0ab5
-	textpointer InvisibleWallDescriptionCont                       ; 0x0ab6
-	textpointer MeditateName                                       ; 0x0ab7
-	textpointer MeditateDescription                                ; 0x0ab8
+	textpointer MrMimeName
+	textpointer InvisibleWallName
+	textpointer InvisibleWallDescription
+	textpointer MeditateName
+	textpointer MeditateDescription
+	textpointer OldMeditateName
+	textpointer OldMeditateDescription
 	textpointer BarrierName                                        ; 0x0ab9
 	textpointer MrMimeDescription                                  ; 0x0aba
 	textpointer JynxName                                           ; 0x0abb

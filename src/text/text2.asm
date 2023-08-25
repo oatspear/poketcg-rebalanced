@@ -718,6 +718,11 @@ DuelistHasNoCardsInHandText: ; 39b19 (e:5b19)
 	line "no cards in Hand!"
 	done
 
+TooManyCardsInHandText:
+	text "There are too many"
+	line "cards in Hand!"
+	done
+
 PokemonHealedDamageText: ; 39b32 (e:5b32)
 	text "<RAMTEXT> healed"
 	line "<RAMNUM> damage!"

@@ -643,9 +643,12 @@
 - **Dark Mind**: reduced cost from (PPP) to (PC) and base damage from 30 to 20.
 - New attack: **Hypnoblast** (PPC): 40 damage, inflicts Sleep.
 
+#### Mr. Mime
+- **Meditate**: 20 damage; +20 damage if there are at least 5 cards in hand.
+
 #### Jynx
 - **Doubleslap**: reduced cost from (P) to (C).
-- **Meditate**: reduced cost from (PPC) to (PCC) and base damage from 20 to 10.
+- **Meditate**: reduced cost from (PPC) to (PC); 20 damage; +20 damage if there are at least 5 cards in hand.
 
 #### Pidgey
 - **Whirlwind**: reduced cost from (CC) to (C).

@@ -1240,33 +1240,37 @@ HypnoDescription: ; 60ba4 (18:4ba4)
 	line "as Hypnosis and Confusion."
 	done
 
-MrMimeName: ; 60c06 (18:4c06)
+MrMimeName:
 	text "Mr. Mime"
 	done
 
-InvisibleWallName: ; 60c10 (18:4c10)
+InvisibleWallName:
 	text "Invisible Wall"
 	done
 
-InvisibleWallDescription: ; 60c20 (18:4c20)
-	text "Whenever an attack (including your"
-	line "own) does 30 or more damage to Mr."
-	line "Mime (after applying Weakness and"
-	line "Resistance), prevent that damage."
-	line "(Any other effects of attacks still"
-	line "happen.)"
+InvisibleWallDescription:
+	text "Whenever an attack does 30 or more"
+	line "damage to this Pokémon (after"
+	line "applying Weakness and Resistance),"
+	line "prevent that damage."
+	line "(Any other effects of attacks"
+	line "still happen.)"
 	done
 
-InvisibleWallDescriptionCont: ; 60cd8 (18:4cd8)
-	text "This power can't be used if Mr. Mime"
-	line "is Asleep, Confused, or Paralyzed."
-	done
-
-MeditateName: ; 60d21 (18:4d21)
+MeditateName:
 	text "Meditate"
 	done
 
-MeditateDescription: ; 60e27 (18:4e27)
+MeditateDescription:
+	text "Does 20 more damage if you have"
+	line "at least 5 cards in your hand."
+	done
+
+OldMeditateName:
+	text "Meditate"
+	done
+
+OldMeditateDescription:
 	text "Does 10 more damage for each damage"
 	line "counter on the Defending Pokémon."
 	done
