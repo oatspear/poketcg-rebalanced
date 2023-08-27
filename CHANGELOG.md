@@ -1,6 +1,11 @@
 # Pokémon TCG Rebalanced
 
-## Version 0.2
+## Version 0.2.1
+
+### Fixed
+- Item Finder now selects an Item card from the deck.
+
+## Version 0.2.0
 
 ### Pokémon Cards
 

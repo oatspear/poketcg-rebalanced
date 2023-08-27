@@ -8565,6 +8565,7 @@ ScoopUpNet_PlayerSelection:
 	; call c, CancelSupporterCard
 	ret c ; exit if B was pressed
 
+	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	or a
 	ret nz ; if it wasn't the Active Pokemon, we are done
@@ -8575,6 +8576,7 @@ ScoopUpNet_PlayerSelection:
 	call DrawWideTextBox_WaitForInput
 	bank1call HasAlivePokemonInBench
 	bank1call OpenPlayAreaScreenForSelection
+	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
@@ -8611,9 +8613,8 @@ ScoopUpNet_ReturnToHandEffect:
 	cp DECK_SIZE
 	jr c, .loop
 
-; since the card has been moved to hand,
-; MovePlayAreaCardToDiscardPile will take care
-; of discarding every higher stage cards and other cards attached.
+; The Pokémon has been moved to hand.
+; MovePlayAreaCardToDiscardPile will discard other cards that were attached.
 	ldh a, [hTemp_ffa0]
 	ld e, a
 	call MovePlayAreaCardToDiscardPile
@@ -8647,19 +8648,13 @@ ScoopUpNet_ReturnToHandEffect:
 ; if card was in Bench, simply shift Pokemon slots...
 	ldh a, [hTemp_ffa0]
 	or a
-	jr z, .switch
-	call ShiftAllPokemonToFirstPlayAreaSlots
-	ret
+	jp nz, ShiftAllPokemonToFirstPlayAreaSlots
 
-.switch
 ; ...if Pokemon was in Arena, then switch it with the selected Bench card.
 	ldh a, [hTempPlayAreaLocation_ffa1]
-	ld d, a
-	ld e, PLAY_AREA_ARENA
-	call SwapPlayAreaPokemon
-	call ShiftAllPokemonToFirstPlayAreaSlots
-	ret
-
+	ld e, a
+	call SwapArenaWithBenchPokemon
+	jp ShiftAllPokemonToFirstPlayAreaSlots
 
 
 ; return carry if no other cards in hand,
