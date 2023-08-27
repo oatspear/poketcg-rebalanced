@@ -890,7 +890,7 @@ EvolvePokemonCard:
 ; OATS evolution no longer clears status conditions
 	; ld a, e
 	; or a
-	; call z, ClearAllStatusConditions
+	; call z, ClearAllStatusConditionsAndEffects
 ; set the new evolution stage of the card
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD_STAGE
@@ -984,7 +984,8 @@ CheckIfCanEvolveInto_BasicToStage2:
 	scf
 	ret
 
-; OATS similar to ClearAllStatusConditions but does not remove POISONED, ASLEEP or PARALYZED.
+; OATS similar to ClearAllStatusConditionsAndEffects
+; but does not remove POISONED, ASLEEP or PARALYZED.
 ClearStatusOnSwitch:
 	push hl
 	ldh a, [hWhoseTurn]
@@ -993,16 +994,16 @@ ClearStatusOnSwitch:
 	ld a, [hl]
 	and CNF_SLP_PRZ
 	cp CONFUSED
-	jr nz, ClearAllStatusConditions.done_status  ; only clear confusion
+	jr nz, ClearAllArenaEffectsAndSubstatus  ; only clear confusion
 	ld a, [hl]
 	and PSN_DBLPSN
 	ld [hl], a ; preserve just the poison nybble
-	jr ClearAllStatusConditions.done_status
+	jr ClearAllArenaEffectsAndSubstatus
 
 ; clear the status, all substatuses, and temporary duelvars of the turn holder's
 ; arena Pokemon. called when sending a new Pokemon into the arena.
 ; does not reset Headache, since it targets a player rather than a Pokemon.
-ClearAllStatusConditions:
+ClearAllStatusConditionsAndEffects:
 	push hl
 	ldh a, [hWhoseTurn]
 	ld h, a
@@ -1010,7 +1011,7 @@ ClearAllStatusConditions:
 	ld l, DUELVARS_ARENA_CARD_STATUS
 	ld [hl], a ; NO_STATUS
 
-.done_status
+ClearAllArenaEffectsAndSubstatus:
 	xor a
 	ld l, DUELVARS_ARENA_CARD_SUBSTATUS1
 	ld [hl], a
@@ -1127,8 +1128,8 @@ PutHandPokemonCardInPlayArea:
 ; Change call below to handle just the Active flags and substatuses.
 	ld a, e
 	or a
-	; call z, ClearAllStatusConditions ; only call if Pokemon is being placed in the arena
-	call z, ClearAllStatusConditions.done_status
+	; call z, ClearAllStatusConditionsAndEffects ; only call if Pokemon is being placed in the arena
+	call z, ClearAllArenaEffectsAndSubstatus
 	ld a, e
 	or a
 	ret
@@ -1181,7 +1182,7 @@ MovePlayAreaCardToDiscardPile:
 EmptyPlayAreaSlot:
 	ldh a, [hWhoseTurn]
 	ld h, a
-	ld d, -1
+	ld d, $ff
 	ld a, DUELVARS_ARENA_CARD
 	call .init_duelvar
 	ld d, 0
@@ -1236,7 +1237,7 @@ ShiftTurnPokemonToFirstPlayAreaSlots:
 ; e is the play area location offset of the bench Pokemon (PLAY_AREA_*).
 SwapArenaWithBenchPokemon:
 ; OATS switching no longer clears all status conditions
-	call ClearStatusOnSwitch  ; ClearAllStatusConditions
+	call ClearStatusOnSwitch  ; ClearAllStatusConditionsAndEffects
 	ld d, PLAY_AREA_ARENA
 ;	fallthrough
 

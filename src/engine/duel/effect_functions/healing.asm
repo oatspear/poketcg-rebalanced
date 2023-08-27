@@ -396,7 +396,7 @@ ClearEffectsFromArenaPokemon:
 	push hl
 	ldh a, [hWhoseTurn]
 	ld h, a
-	jp ClearAllStatusConditions.done_status  ; pop hl
+	jp ClearAllArenaEffectsAndSubstatus  ; pop hl
 
 ; clears SUBSTATUS2 effects (harmful) from arena Pokémon
 ClearSubstatus2FromArenaPokemon:

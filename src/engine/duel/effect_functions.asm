@@ -1367,7 +1367,7 @@ ResetDevolvedCardStatus: ; 2c45d (b:445d)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
 	jr nz, .skip_clear_status
-	call ClearAllStatusConditions
+	call ClearAllStatusConditionsAndEffects
 .skip_clear_status
 ; reset changed color status
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -7173,7 +7173,7 @@ MorphEffect: ; 2eff6 (b:6ff6)
 ; clear changed color and status
 	ld l, DUELVARS_ARENA_CARD_CHANGED_TYPE
 	ld [hl], $00
-	call ClearAllStatusConditions
+	call ClearAllStatusConditionsAndEffects
 
 ; load both card's names for printing text
 	ld a, [wTempTurnDuelistCardID]
@@ -8619,13 +8619,15 @@ ScoopUpNet_ReturnToHandEffect:
 	call MovePlayAreaCardToDiscardPile
 
 ; clear status from Pokémon location
-	ldh a, [hTemp_ffa0]
-	call ClearStatusFromTarget_NoAnim
+; handled by EmptyPlayAreaSlot, called by MovePlayAreaCardToDiscardPile
+;	ldh a, [hTemp_ffa0]
+;	call ClearStatusFromTarget_NoAnim
+
 ; arena Pokémon additionally clears all substatus effects
 	ldh a, [hTemp_ffa0]
 	or a
 	jr nz, .skip_clear_status
-	call ClearAllStatusConditions.done_status
+	call ClearAllArenaEffectsAndSubstatus
 .skip_clear_status
 
 ; if card was not played by Player, show detail screen
