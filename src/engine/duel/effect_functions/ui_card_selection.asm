@@ -121,6 +121,7 @@ PlayerSelectAndStoreItemCardFromDiscardPile:
 ;   a: deck index of the selected card
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 HandlePlayerSelectionItemTrainerFromDeck:
+	call CreateDeckCardList
 ; handle input
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseCardToPlaceInHandText
