@@ -1010,6 +1010,7 @@ ClearAllStatusConditionsAndEffects:
 	xor a
 	ld l, DUELVARS_ARENA_CARD_STATUS
 	ld [hl], a ; NO_STATUS
+	; fallthrough
 
 ClearAllArenaEffectsAndSubstatus:
 	xor a
