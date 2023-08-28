@@ -4,6 +4,7 @@
 
 ### Fixed
 - Item Finder now selects an Item card from the deck.
+- Scoop Up Net no longer crashes the game when selecting the Active Pokémon.
 
 ## Version 0.2.0
 
