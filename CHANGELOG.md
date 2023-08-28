@@ -2,6 +2,16 @@
 
 ## Version 0.2.1
 
+### Changed
+
+#### Mr. Mime
+- **Meditate**: removed.
+- New attack: **Hand Press** (PC): 10 damage. +20 damage if player's hand is greater than opponent's.
+
+#### Jynx
+- **Meditate**: removed.
+- New attack: **Hand Press** (PC): 10 damage. +20 damage if player's hand is greater than opponent's.
+
 ### Fixed
 - Item Finder now selects an Item card from the deck.
 - Scoop Up Net no longer crashes the game when selecting the Active Pokémon.

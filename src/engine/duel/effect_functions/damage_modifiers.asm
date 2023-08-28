@@ -152,6 +152,18 @@ MindBlast_AIEffect:
   jp SetDefiniteAIDamage
 
 
+; +damage if player's hand is greater than opponent's
+HandPress_DamageBoostEffect:
+  call CheckHandSizeGreaterThanOpponents
+  ret c
+	ld a, 20
+	jp AddToDamage
+
+HandPress_AIEffect:
+  call HandPress_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Prize Cards
 ; ------------------------------------------------------------------------------

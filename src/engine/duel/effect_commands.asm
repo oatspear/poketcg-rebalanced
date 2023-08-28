@@ -625,6 +625,11 @@ MindBlastEffectCommands:
 	dbw EFFECTCMDTYPE_AI, MindBlast_AIEffect
 	db  $00
 
+HandPressEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HandPress_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, HandPress_AIEffect
+	db  $00
+
 ; AlakazamDamageSwapEffectCommands:
 ; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DamageSwap_CheckDamage
 ; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamageSwap_SelectAndSwapEffect

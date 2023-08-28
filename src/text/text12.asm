@@ -908,6 +908,16 @@ MindBlastDescription:
 	line "for each card in your hand."
 	done
 
+HandPressName:
+	text "Hand Press"
+	done
+
+HandPressDescription:
+	text "If you have more cards in your"
+	line "hand than your opponent, this"
+	line "attack does 20 more damage."
+	done
+
 
 ; ------------------------------------------------------------------------------
 ; Trainer Cards
