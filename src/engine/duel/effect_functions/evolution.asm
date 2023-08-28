@@ -107,7 +107,9 @@ EvolutionFromDeck_PlayerSelectEffect:
 	ld a, l
 ; d: deck index (0-59) of the card selected to be the evolution target
 	ld d, a
+	push hl
 	call CheckIfCanEvolveInto
+	pop hl
 	jr nc, .play_sfx
 	jr nz, .play_sfx
 .next_card
@@ -155,7 +157,9 @@ EvolutionFromDeck_AISelectEffect:
 	ret z ; none found
 ; d: deck index (0-59) of the card selected to be the evolution target
 	ld d, a
+	push hl
 	call CheckIfCanEvolveInto
+	pop hl
 	jr nc, .got_card
 	jr nz, .got_card  ; ignore first turn evolution
 	jr .loop_deck ; not a valid Evolution card
