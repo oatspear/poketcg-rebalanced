@@ -10575,7 +10575,7 @@ GiovanniCard:
 	tx GiovanniName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
-	db BLUE_OAK
+	db GIOVANNI
 	dw GiovanniEffectCommands ; effect commands
 	tx GiovanniDescription ; description
 	dw NONE ; description (cont)

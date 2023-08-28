@@ -16,8 +16,8 @@ AITrainerCardLogic: ; 20000 (8:4000)
 	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_14, PLUSPOWER,              AIDecide_Pluspower2,                     AIPlay_Pluspower
 	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_09, ENERGY_SWITCH,          AIDecide_EnergySwitch_Retreat,           AIPlay_EnergySwitch
 	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_09, SWITCH,                 AIDecide_Switch,                         AIPlay_Switch
-	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_07, BLUE_OAK,           AIDecide_GustOfWind,                     AIPlay_GustOfWind
-	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_10, BLUE_OAK,           AIDecide_GustOfWind,                     AIPlay_GustOfWind
+	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_07, GIOVANNI,               AIDecide_GustOfWind,                     AIPlay_GustOfWind
+	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_10, GIOVANNI,               AIDecide_GustOfWind,                     AIPlay_GustOfWind
 	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_04, BILL,                   AIDecide_Bill,                           AIPlay_Bill
 	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_05, ENERGY_REMOVAL,         AIDecide_EnergyRemoval,                  AIPlay_EnergyRemoval
 	ai_trainer_card_logic AI_TRAINER_CARD_PHASE_12, ENERGY_SWITCH,          AIDecide_EnergySwitch_Attack,            AIPlay_EnergySwitch

@@ -247,7 +247,7 @@ UnnamedDeck:
 	; card_item RATTATA,          4
 	; card_item POKEMON_BREEDER,  4
 	; card_item DEFENDER,         2
-	; card_item BLUE_OAK,     2
+	; card_item GIOVANNI,     2
 	; card_item SCOOP_UP,         2
 	; card_item POTION,           1
 	; card_item SUPER_POTION,     1
@@ -282,7 +282,7 @@ UnnamedDeck:
 	; card_item POKEDEX,          2
 	; card_item PLUSPOWER,        2
 	; card_item DEFENDER,         2
-	; card_item BLUE_OAK,     2
+	; card_item GIOVANNI,     2
 	; card_item SCOOP_UP,         2
 	; card_item POTION,           1
 	; card_item SUPER_POTION,     1
@@ -306,7 +306,7 @@ UnnamedDeck2:
 	; card_item CHANSEY,                  2
 	; card_item ENERGY_RETRIEVAL,         2
 	; card_item PROFESSOR_OAK,            2
-	; card_item BLUE_OAK,             2
+	; card_item GIOVANNI,             2
 	; card_item DOUBLE_COLORLESS_ENERGY,  2
 	; deck_list_end
 	db 0 ; end
@@ -325,7 +325,7 @@ UnnamedDeck2:
 	; card_item POKEMON_TRADER,           3
 	; card_item ENERGY_RETRIEVAL,         2
 	; card_item PROFESSOR_OAK,            2
-	; card_item BLUE_OAK,             2
+	; card_item GIOVANNI,             2
 	; card_item DOUBLE_COLORLESS_ENERGY,  2
 	; deck_list_end
 
@@ -581,7 +581,7 @@ SamsPracticeDeck:
 	card_item MACHOKE,                 1
 	card_item LIGHTNING_ENERGY,        1
 	card_item LIGHTNING_ENERGY,        1
-	card_item BLUE_OAK,            1
+	card_item GIOVANNI,            1
 	card_item JOLTEON_LV29,            1
 	card_item LIGHTNING_ENERGY,        1
 	card_item ELECTABUZZ_LV35,         1
@@ -793,7 +793,7 @@ BulbasaurExtraDeck:
 	card_item HITMONCHAN,        1
 	card_item BILL,              1
 	card_item POTION,            2
-	card_item BLUE_OAK,      1
+	card_item GIOVANNI,      1
 	card_item GRASS_ENERGY,     30 ; irrelevant
 	deck_list_end
 	tx BulbasaurExtraDeckName
@@ -883,7 +883,7 @@ GrassAndPsychicDeck:
 	card_item TAUROS,          1
 	card_item BILL,            2
 	card_item ENERGY_SEARCH,   2
-	card_item BLUE_OAK,    2
+	card_item GIOVANNI,    2
 	card_item POTION,          2
 	card_item FULL_HEAL,       2
 	;deck_list_end
@@ -990,7 +990,7 @@ FirstStrikeDeck:
 	card_item DEFENDER,         2
 	card_item PLUSPOWER,        2
 	card_item SWITCH,           2
-	card_item BLUE_OAK,     3
+	card_item GIOVANNI,     3
 	card_item BILL,             4
 	deck_list_end
 	tx FirstStrikeDeckName
@@ -1054,7 +1054,7 @@ ZappingSelfdestructDeck:
 	card_item BILL,                     2
 	card_item SWITCH,                   2
 	card_item DEFENDER,                 4
-	card_item BLUE_OAK,             1
+	card_item GIOVANNI,             1
 	card_item POTION,                   4
 	deck_list_end
 	tx ZappingSelfdestructDeckName
@@ -1093,7 +1093,7 @@ StrangePsyshockDeck:
 	card_item PROFESSOR_OAK,   2
 	card_item POKEMON_CENTER,  2
 	card_item ENERGY_REMOVAL,  3
-	card_item BLUE_OAK,    3
+	card_item GIOVANNI,    3
 	card_item SCOOP_UP,        4
 	card_item SWITCH,          4
 	card_item GAMBLER,         1
@@ -1171,7 +1171,7 @@ ImRonaldDeck:
 	card_item SWITCH,            1
 	card_item PLUSPOWER,         1
 	card_item DEFENDER,          1
-	card_item BLUE_OAK,      2
+	card_item GIOVANNI,      2
 	deck_list_end
 	tx ImRonaldDeckName
 
@@ -1198,7 +1198,7 @@ PowerfulRonaldDeck:
 	card_item ENERGY_REMOVAL,          2
 	card_item SWITCH,                  1
 	card_item PLUSPOWER,               2
-	card_item BLUE_OAK,            2
+	card_item GIOVANNI,            2
 	card_item FULL_HEAL,               1
 	card_item GAMBLER,                 1
 	deck_list_end
@@ -1223,7 +1223,7 @@ InvincibleRonaldDeck:
 	card_item ENERGY_RETRIEVAL,        2
 	card_item ENERGY_REMOVAL,          2
 	card_item SCOOP_UP,                2
-	card_item BLUE_OAK,            2
+	card_item GIOVANNI,            2
 	card_item PLUSPOWER,               2
 	card_item GAMBLER,                 1
 	deck_list_end
@@ -1273,7 +1273,7 @@ MusclesforBrainsDeck:
 	card_item BILL,                     1
 	card_item ENERGY_REMOVAL,           1
 	card_item PLUSPOWER,                2
-	card_item BLUE_OAK,             2
+	card_item GIOVANNI,             2
 	card_item POTION,                   1
 	card_item SUPER_POTION,             1
 	card_item FULL_HEAL,                1
@@ -1366,7 +1366,7 @@ BlisteringPokemonDeck:
 	card_item MR_FUJI,                 2
 	card_item SWITCH,                  3
 	card_item DEFENDER,                3
-	card_item BLUE_OAK,            2
+	card_item GIOVANNI,            2
 	deck_list_end
 	tx BlisteringPokemonDeckName
 
@@ -1385,7 +1385,7 @@ HardPokemonDeck:
 	card_item BILL,             3
 	card_item POKE_BALL,        2
 	card_item DEFENDER,         4
-	card_item BLUE_OAK,     3
+	card_item GIOVANNI,     3
 	card_item POTION,           2
 	deck_list_end
 	tx HardPokemonDeckName
@@ -1415,7 +1415,7 @@ WaterfrontPokemonDeck:
 	card_item ENERGY_RETRIEVAL,  2
 	card_item SWITCH,            2
 	card_item POKEDEX,           1
-	card_item BLUE_OAK,      1
+	card_item GIOVANNI,      1
 	card_item POTION,            2
 	card_item SUPER_POTION,      1
 	deck_list_end
@@ -1609,7 +1609,7 @@ KaleidoscopeDeck:
 	card_item MR_FUJI,                  2
 	card_item ENERGY_SEARCH,            2
 	card_item SWITCH,                   4
-	card_item BLUE_OAK,             2
+	card_item GIOVANNI,             2
 	deck_list_end
 	tx KaleidoscopeDeckName
 
@@ -1629,7 +1629,7 @@ GhostDeck:
 	card_item PROFESSOR_OAK,            2
 	card_item BILL,                     1
 	card_item POKEMON_BREEDER,          2
-	card_item BLUE_OAK,             1
+	card_item GIOVANNI,             1
 	card_item POTION,                   2
 	card_item FULL_HEAL,                1
 	card_item RECYCLE,                  2
@@ -1650,7 +1650,7 @@ NapTimeDeck:
 	card_item BILL,             2
 	card_item SWITCH,           2
 	card_item PLUSPOWER,        3
-	card_item BLUE_OAK,     2
+	card_item GIOVANNI,     2
 	card_item POTION,           2
 	deck_list_end
 	tx NapTimeDeckName
@@ -1675,7 +1675,7 @@ StrangePowerDeck:
 	card_item ENERGY_SWITCH,            2
 	card_item PLUSPOWER,                2
 	card_item ITEM_FINDER,              1
-	card_item BLUE_OAK,             1
+	card_item GIOVANNI,             1
 	card_item FULL_HEAL,                1
 	deck_list_end
 	tx StrangePowerDeckName
@@ -1792,7 +1792,7 @@ FireDrawDeck:
 	card_item PROFESSOR_OAK,    2
 	card_item POKE_BALL,        2
 	card_item PLUSPOWER,        1
-	card_item BLUE_OAK,     1
+	card_item GIOVANNI,     1
 	deck_list_end
 	tx FireDrawDeckName
 

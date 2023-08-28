@@ -252,7 +252,7 @@ cards = {
 	0xd9: "PLUSPOWER",
 	0xda: "DEFENDER",
 	0xdb: "ITEM_FINDER",
-	0xdc: "BLUE_OAK",
+	0xdc: "GIOVANNI",
 	0xdd: "DEVOLUTION_SPRAY",
 	0xde: "POTION",
 	0xdf: "SUPER_POTION",
