@@ -12,7 +12,7 @@ HandleSpecialAIAttacks:
 	ld a, e
 
 	cp ABRA
-	jp z, .Teleport
+	jp z, .Fetch
 	cp STARYU
 	jp z, .Staryu
 	cp SCYTHER

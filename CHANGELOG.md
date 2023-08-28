@@ -1,16 +1,53 @@
 # Pokémon TCG Rebalanced
 
-## Version 0.2.1
+## Version 0.3.0
 
 ### Changed
 
+- Slight improvement on how AI handles healing attacks.
+
+#### Abra
+- **Teleport Blast**: removed.
+- New attack: **Teleport** (P): shuffle Pokémon and attached cards into deck; draw 5 cards.
+
+#### Alakazam
+- **Mind Blast**: deals 20 damage for each card in opponent's hand.
+
+#### Slowpoke Lv9
+- **Headbutt**: removed.
+- New attack: **Confusion Wave** (CC): 10 damage; inflicts Confusion on both Active Pokémon.
+
+#### Slowpoke Lv18
+- Increased HP from 40 to 50.
+- **Spacing Out**: removed.
+- **Scavenge**: removed.
+- New attack: **Rest** (C): heal 30 damage and status from self; falls asleep.
+- New attack: **Fishing Tail** (C): put a Pokémon or Basic Energy from discard pile into hand.
+
+#### Slowbro
+- Increased HP from 70 to 80.
+- **Water Gun**: removed.
+- **Psyshock**: removed.
+- **Strange Behavior** (Pokémon Power): restored from original.
+- New attack: **Spiral Drain** (CCC): 30 damage; heals 30 damage from self.
+
+#### Gengar
+- **Dark Mind**: reduced cost from (DDC) to (DC) and direct damage from 60 to 40.
+
+#### Drowzee
+- **Pound**: removed.
+- New attack: **Meditate** (CC): 10 damage. +20 damage if player's hand has more than 5 cards.
+
+#### Hypno
+- **Hypnoblast**: reduced cost from (PPC) to (PCC).
+
 #### Mr. Mime
 - **Meditate**: removed.
-- New attack: **Hand Press** (PC): 10 damage. +20 damage if player's hand is greater than opponent's.
+- New attack: **Hand Press** (PC): 10 damage. +20 damage if player's hand has more cards than the opponent's.
 
 #### Jynx
 - **Meditate**: removed.
-- New attack: **Hand Press** (PC): 10 damage. +20 damage if player's hand is greater than opponent's.
+- New attack: **Hand Press** (PC): 10 damage. +20 damage if player's hand has more cards than the opponent's.
 
 ### Fixed
 - Item Finder now selects an Item card from the deck.

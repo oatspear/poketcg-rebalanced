@@ -1038,22 +1038,11 @@ SlowpokeLv9Description: ; 601cf (18:41cf)
 	line "under attack."
 	done
 
-SpacingOutName: ; 60225 (18:4225)
-	text "Spacing Out"
-	done
-
-SpacingOutDescription: ; 60232 (18:4232)
-	text "Flip a coin. If heads, heal 20"
-	line "damage from this Pokémon."
-	line "If tails, heal 10 damage from"
-	line "this Pokémon."
-	done
-
-ScavengeName: ; 602b5 (18:42b5)
+ScavengeName:
 	text "Scavenge"
 	done
 
-ScavengeDescription: ; 602bf (18:42bf)
+ScavengeDescription:
 	text "Put a non-Supporter Trainer card"
 	line "from your discard pile into"
 	line "your hand."
@@ -1526,4 +1515,13 @@ SynthesisDescription:
 	line "search your deck for a Basic Energy"
 	line "card and put it into your hand."
 	line "Shuffle your deck afterward."
+	done
+
+HealingMelodyName:
+	text "Healing Melody"
+	done
+
+Heal10DamageFromAllDescription:
+	text "Heal 10 damage from each of your"
+	line "Pokémon."
 	done

@@ -2719,8 +2719,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SlowpokeName                                       ; 0x0a86
 	textpointer DopeyName                                          ; 0x0a88
 	textpointer SlowpokeLv9Description                            ; 0x0a89
-	textpointer SpacingOutName                                     ; 0x0a8a
-	textpointer SpacingOutDescription                              ; 0x0a8b
 	textpointer ScavengeName                                       ; 0x0a8c
 	textpointer ScavengeDescription                                ; 0x0a8d
 	textpointer SlowbroName                                        ; 0x0a8e
@@ -2814,6 +2812,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Pidgeot2Description                                ; 0x0ae6
 	textpointer SynthesisName
 	textpointer SynthesisDescription
+	textpointer HealingMelodyName
+	textpointer Heal10DamageFromAllDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
@@ -2842,8 +2842,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ClefablesMetronomeDescription                      ; 0x0afe
 	textpointer ClefableDescription                                ; 0x0b00
 	textpointer JigglypuffName                                     ; 0x0b01
-	textpointer HealingMelodyName
-	textpointer Heal10DamageFromAllDescription
 	textpointer DoubleEdgeName                                     ; 0x0b04
 	textpointer BalloonName                                        ; 0x0b06
 	textpointer JigglypuffLv12Description                         ; 0x0b07
@@ -2995,6 +2993,13 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MindBlastDescription
 	textpointer HandPressName
 	textpointer HandPressDescription
+	textpointer SpiralDrainName
+	textpointer StrangeBehaviorName
+	textpointer StrangeBehaviorDescription
+	textpointer FishingTailName
+	textpointer FishingTailDescription
+	textpointer TeleportName
+	textpointer TeleportDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

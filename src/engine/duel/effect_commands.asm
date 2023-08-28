@@ -137,12 +137,18 @@ KoffingFoulGasEffectCommands:
 	db  $00
 
 TeleportEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Teleport_CheckBench
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_ReturnToDeckEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
+	db  $00
+
+OldTeleportEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	; fallthrough
 AgilityEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Teleport_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Agility_AISelectEffect
 	db  $00
 
 RapidSpinEffectCommands:
@@ -229,6 +235,10 @@ NidorinoDoubleKickEffectCommands:
 
 Heal20DamageEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageEffect
+	db  $00
+
+Heal30DamageEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal30DamageEffect
 	db  $00
 
 WeedlePoisonStingEffectCommands:
@@ -321,6 +331,10 @@ HelpingHandEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HelpingHand_RemoveStatusEffect
 	db  $00
 
+RestEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Rest_HealEffect
+	db  $00
+
 SongOfRestEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SongOfRest_CheckUse
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SongOfRest_HealEffect
@@ -381,7 +395,6 @@ CloysterSpikeCannonEffectCommands:
 AbraPsyshockEffectCommands:
 GastlyLickEffectCommands:
 MewPsyshockEffectCommands:
-SlowbroPsyshockEffectCommands:
 ElectabuzzThundershockEffectCommands:
 MagnemiteThunderWaveEffectCommands:
 FlyingPikachuThundershockEffectCommands:
@@ -605,6 +618,19 @@ PesterEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Pester_AIEffect
 	db  $00
 
+FishingTailEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FishingTail_DiscardPileCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FishingTail_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, FishingTail_PlayerSelection
+	dbw EFFECTCMDTYPE_AI_SELECTION, FishingTail_AISelection
+	db  $00
+
+StrangeBehaviorEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StrangeBehavior_CheckDamage
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StrangeBehavior_SelectAndSwapEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StrangeBehavior_SwapEffect
+	db  $00
+
 PsychicAssaultEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PsychicAssault_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, PsychicAssault_AIEffect
@@ -638,6 +664,10 @@ HandPressEffectCommands:
 
 InflictConfusionEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ConfusionEffect
+	db  $00
+
+ConfusionWaveEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ConfusionWaveEffect
 	db  $00
 
 MewPsywaveEffectCommands:
@@ -692,12 +722,6 @@ EnergySporesEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AttachEnergyFromDiscard_AttachToPokemonEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySpores_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySpores_AISelectEffect
-	db  $00
-
-SpacingOutEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SpacingOut_CheckDamage
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpacingOut_Success50PercentEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SpacingOut_HealEffect
 	db  $00
 
 ScavengeEffectCommands:
@@ -1326,7 +1350,7 @@ ClefairyDollEffectCommands:
 	db  $00
 
 MrFujiEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, MrFuji_BenchCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, MrFuji_PlayerSelection
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MrFuji_ReturnToDeckEffect
 	db  $00

@@ -305,6 +305,15 @@ CheckBenchIsNotEmpty:
 	ret
 
 
+; returns carry if has no damage counters.
+CheckArenaPokemonHasAnyDamage:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	ldtx hl, NoDamageCountersText
+	cp 10
+	ret
+
+
 ; returns carry if Play Area has no damage counters
 ; and sets the error message in hl
 CheckIfPlayAreaHasAnyDamage:
@@ -347,6 +356,26 @@ CheckIfPlayAreaHasAnyDamage_ExcludeTempLocation:
 	; no damage found
 	ldtx hl, NoPokemonWithDamageCountersText
 	scf
+	ret
+
+
+; returns carry if Strange Behavior cannot be used
+StrangeBehavior_CheckDamage:
+; can Pkmn Power be used?
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
+	ret c
+; does Play Area have any damage counters?
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	call CheckIfPlayAreaHasAnyDamage
+	ret c
+; can this Pokémon receive any damage counters without KO-ing?
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	ldtx hl, CannotUseBecauseItWillBeKnockedOutText
+	cp 10 + 10
 	ret
 
 
@@ -911,6 +940,93 @@ DreamEater_HealEffect:
 	jr .loop_play_area
 
 
+StrangeBehavior_SelectAndSwapEffect:
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_PLAYER
+	jr z, .player
+
+; not player
+	bank1call Func_61a1
+	bank1call PrintPlayAreaCardList_EnableLCD
+	ret
+
+.player
+	ldtx hl, ProcedureForStrangeBehaviorText
+	bank1call DrawWholeScreenTextBox
+
+	xor a
+	ldh [hCurSelectionItem], a
+	bank1call Func_61a1
+.start
+	bank1call PrintPlayAreaCardList_EnableLCD
+	push af
+	ldh a, [hCurSelectionItem]
+	ld hl, PlayAreaSelectionMenuParameters
+	call InitializeMenuParameters
+	pop af
+
+	ld [wNumMenuItems], a
+.loop_input
+	call DoFrame
+	call HandleMenuInput
+	jr nc, .loop_input
+	cp $ff
+	ret z  ; return when B button is pressed
+
+	ldh [hCurSelectionItem], a
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ld hl, hTemp_ffa0
+	cp [hl]
+	jr z, .play_sfx ; can't select Slowbro itself
+
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .play_sfx ; can't select card without damage
+
+	call TryGiveDamageCounter_StrangeBehavior
+	jr c, .play_sfx
+	ld a, OPPACTION_6B15
+	call SetOppAction_SerialSendDuelData
+	jr .start
+
+.play_sfx
+	call PlaySFX_InvalidChoice
+	jr .loop_input
+
+
+StrangeBehavior_SwapEffect:
+	call TryGiveDamageCounter_StrangeBehavior
+	ret c
+	bank1call PrintPlayAreaCardList_EnableLCD
+	or a
+	ret
+
+; tries to give the damage counter to the target
+; chosen by the Player (hTemp_ffa0).
+; if the damage counter would KO card, then do
+; not give the damage counter and return carry.
+TryGiveDamageCounter_StrangeBehavior:
+	ldh a, [hTemp_ffa0]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	sub 10
+	jr z, .set_carry  ; would bring HP to zero?
+; has enough HP to receive a damage counter
+	ld [hl], a
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD_HP
+	ld l, a
+	ld a, 10
+	add [hl]
+	ld [hl], a
+	or a
+	ret
+.set_carry
+	scf
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
@@ -1042,6 +1158,16 @@ SongOfRest_HealEffect:
 	pop de
 	call SleepEffect_PlayArea
 	jp ExchangeRNG
+
+
+; heal up to 30 damage from user and put it to sleep
+Rest_HealEffect:
+	call ClearAllStatusConditionsAndEffects
+	ld a, 30
+	call HealADamageEffect
+	call SwapTurn
+	call SleepEffect
+	jp SwapTurn
 
 
 ; ------------------------------------------------------------------------------
@@ -1943,15 +2069,9 @@ FoulGas_PoisonOrConfusionEffect: ; 2c82a (b:482a)
 	jp c, PoisonEffect
 	jp ConfusionEffect
 
-; returns carry if no Pokemon on Bench
-Teleport_CheckBench: ; 2c8ec (b:48ec)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, ThereAreNoPokemonOnBenchText
-	cp 2
-	ret
 
-Teleport_PlayerSelectEffect:
+Agility_PlayerSelectEffect:
+OldTeleport_PlayerSelectEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	cp 2
@@ -1974,14 +2094,16 @@ Teleport_PlayerSelectEffect:
 	ldh [hTemp_ffa0], a
 	ret
 
-Teleport_AISelectEffect:
+Agility_AISelectEffect:
+OldTeleport_AISelectEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	call Random
 	ldh [hTemp_ffa0], a
 	ret
 
-Teleport_SwitchEffect:
+Agility_SwitchEffect:
+OldTeleport_SwitchEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	ret z
@@ -1992,6 +2114,23 @@ Teleport_SwitchEffect:
 	xor a
 	ld [wDuelDisplayedScreen], a
 	ret
+
+
+Teleport_PlayerSelectEffect:
+	ldtx hl, SelectPokemonToPlaceInTheArenaText
+	call DrawWideTextBox_WaitForInput
+	bank1call HasAlivePokemonInBench
+	bank1call OpenPlayAreaScreenForSelection
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
+
+Teleport_ReturnToDeckEffect:
+	xor a  ; PLAY_AREA_ARENA
+	call ReturnPlayAreaPokemonToDeckEffect
+	ld a, 5
+	jp DrawNCards_NoCardDetails
 
 
 Eggsplosion_AIEffect:
@@ -4615,42 +4754,6 @@ Helper_AttachCardFromDiscardPile:
 	pop hl
 	ret
 
-; returns carry if has no damage counters.
-SpacingOut_CheckDamage: ; 2ded5 (b:5ed5)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	ldtx hl, NoDamageCountersText
-	cp 10
-	ret
-
-SpacingOut_Success50PercentEffect: ; 2dee0 (b:5ee0)
-	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
-	call TossCoin_BankB
-	ldh [hTemp_ffa0], a
-	ld a, ATK_ANIM_RECOVER
-	ld [wLoadedAttackAnimation], a
-	ret
-
-SpacingOut_HealEffect: ; 2def1 (b:5ef1)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	or a
-	ret z ; no damage counters
-	ld e, 10
-	ldh a, [hTemp_ffa0]
-	or a
-	jr z, .heal ; coin toss was tails
-	ld e, 20
-.heal
-	ld a, DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	add e
-	cp c  ; c contains max HP from GetCardDamageAndMaxHP
-	jr c, .store
-	ld a, c  ; cap HP
-.store
-	ld [hl], a
-	ret
 
 ; sets carry if no Trainer cards in the Discard Pile.
 Scavenge_CheckDiscardPile:
@@ -4662,6 +4765,14 @@ Scavenge_AISelectEffect:
 	ld a, [wDuelTempList]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
+
+; Fishing Tail uses hTemp_ffa0 for storage
+FishingTail_AddToHandEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z
+	ldh [hTempPlayAreaLocation_ffa1], a
+	; fallthrough
 
 Scavenge_AddToHandEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
@@ -6761,13 +6872,13 @@ Whirlwind_SwitchEffect:
 
 
 RapidSpin_PlayerSelectEffect:
-	call Teleport_PlayerSelectEffect
+	call Agility_PlayerSelectEffect
 	ldh a, [hTemp_ffa0]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	jp Whirlwind_SelectEffect
 
 RapidSpin_AISelectEffect:
-	call Teleport_AISelectEffect
+	call Agility_AISelectEffect
 	ldh a, [hTemp_ffa0]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	jp Whirlwind_SelectEffect
@@ -6776,7 +6887,7 @@ RapidSpin_SwitchEffect:
 	call Whirlwind_SwitchEffect
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ldh [hTemp_ffa0], a
-	jp Teleport_SwitchEffect
+	jp Agility_SwitchEffect
 
 
 SingEffect: ; 2ed04 (b:6d04)
@@ -8372,15 +8483,7 @@ ComputerSearch_PlayerSelection:
 	jr .read_input
 
 
-; return carry if no Pokemon in the Bench.
-MrFuji_BenchCheck: ; 2f573 (b:7573)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, EffectNoPokemonOnTheBenchText
-	cp 2
-	ret
-
-MrFuji_PlayerSelection: ; 2f57e (b:757e)
+MrFuji_PlayerSelection:
 	ldtx hl, ChoosePokemonToReturnToTheDeckText
 	call DrawWideTextBox_WaitForInput
 	bank1call HasAlivePokemonInBench
@@ -8390,18 +8493,34 @@ MrFuji_PlayerSelection: ; 2f57e (b:757e)
 	call c, CancelSupporterCard
 	ret
 
-MrFuji_ReturnToDeckEffect: ; 2f58f (b:758f)
+MrFuji_ReturnToDeckEffect:
 ; get Play Area location's card index
 	ldh a, [hTemp_ffa0]
-	add DUELVARS_ARENA_CARD
 	; fallthrough
 
 ; Return the Pokémon in the location given in a
 ; and all cards attached to it to the turn holder's deck.
-ReturnToDeckEffect:
+ReturnPlayAreaPokemonToDeckEffect:
+	ld e, a
+	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff98], a
+	ld a, e
+	or a
+	jr nz, _ReturnBenchedPokemonToDeckEffect
 
+; if Pokemon was in Arena, then switch it with the selected Bench card first
+; this avoids a bug that occurs when arena is empty before
+; calling ShiftAllPokemonToFirstPlayAreaSlots
+	ldh a, [hTemp_ffa0]
+	ld e, a
+; this eventually calls ClearAllArenaEffectsAndSubstatus
+	call SwapArenaWithBenchPokemon
+
+; after switching, return the benched Pokémon as normal
+	; fallthrough
+
+_ReturnBenchedPokemonToDeckEffect:
 ; find all cards that are in the same location
 ; (previous evolutions and energy cards attached)
 ; and return them all to the deck.
@@ -8434,8 +8553,7 @@ ReturnToDeckEffect:
 	dec [hl]
 	call ShiftAllPokemonToFirstPlayAreaSlots
 
-; if Trainer card wasn't played by the Player,
-; print the selected Pokemon's name and show card on screen.
+; if not the Player's turn, print text and show card on screen
 	call IsPlayerTurn
 	jr c, .done
 	ldh a, [hTempCardIndex_ff98]
@@ -8449,8 +8567,8 @@ ReturnToDeckEffect:
 	ldtx hl, PokemonAndAllAttachedCardsWereReturnedToDeckText
 	call DrawWideTextBox_WaitForInput
 .done
-	call SyncShuffleDeck
-	ret
+	jp SyncShuffleDeck
+
 
 PlusPowerEffect: ; 2f5e0 (b:75e0)
 ; attach Trainer card to Arena Pokemon
@@ -8992,6 +9110,7 @@ Pokedex_OrderDeckCardsEffect:
 
 
 BillEffect:
+Draw3CardsEffect:
 	ld a, 3
 	bank1call DisplayDrawNCardsScreen
 	ld c, 3
@@ -9081,6 +9200,7 @@ PokeBall_PlayerSelection:
 
 
 ; return carry if no eligible cards in the Discard Pile
+FishingTail_DiscardPileCheck:
 Recycle_DiscardPileCheck:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_DISCARD_PILE
 	call GetTurnDuelistVariable
@@ -9094,6 +9214,8 @@ Recycle_DiscardPileCheck:
 	ldtx hl, ThereAreNoCardsInTheDiscardPileText
 	ret
 
+
+FishingTail_PlayerSelection:
 Recycle_PlayerSelection:
 ; assume: wDuelTempList is initialized from Recycle_DiscardPileCheck
 	; call CreateDiscardPileCardList
@@ -9110,6 +9232,17 @@ Recycle_PlayerSelection:
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTemp_ffa0], a
 	ret
+
+FishingTail_AISelection:
+; reuse the same logic as for Recycle
+	farcall AIDecide_Recycle
+	jr c, .got_card
+	ld a, $ff
+.got_card
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
 
 Recycle_AddToDeckEffect:
 	ldh a, [hTemp_ffa0]

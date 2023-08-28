@@ -141,11 +141,24 @@ Meditate_AIEffect:
 
 
 ; +10 damage for each card in turn holder's hand
-MindBlast_DamageBoostEffect:
+MegaMind_DamageBoostEffect:
   ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetTurnDuelistVariable
 	call ATimes10
 	jp AddToDamage
+
+MegaMind_AIEffect:
+  call MegaMind_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; 20 damage for each card in opponent's hand
+MindBlast_DamageBoostEffect:
+  ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	call ATimes10
+  add a  ; double
+	jp SetDefiniteDamage
 
 MindBlast_AIEffect:
   call MindBlast_DamageBoostEffect

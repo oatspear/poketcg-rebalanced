@@ -564,7 +564,10 @@ GetAIScoreOfAttack:
 	ld a, ATTACK_FLAG2_ADDRESS | HEAL_USER_F
 	call CheckLoadedAttackFlag
 	jr nc, .check_status_effect
+	ld a, [wAIAttackIsNonDamaging]
+	or a
 	ld a, [wLoadedAttackEffectParam]
+	jr nz, .tally_heal_score
 	cp 1
 	jr z, .tally_heal_score
 	ld a, [wTempAI]

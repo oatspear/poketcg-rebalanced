@@ -7362,11 +7362,11 @@ AbraCard:
 
 	; attack 1
 	energy PSYCHIC, 1 ; energies
-	tx TeleportBlastName ; name
-	tx SwitchThisPokemonDescription ; description
+	tx TeleportName ; name
+	tx TeleportDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
+	db 0 ; damage
+	db RESIDUAL ; category
 	dw TeleportEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
@@ -7481,8 +7481,8 @@ AlakazamCard:
 	tx MindBlastName ; name
 	tx MindBlastDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
+	db 20 ; damage
+	db DAMAGE_X ; category
 	dw MindBlastEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
@@ -7514,20 +7514,6 @@ SlowpokeLv9Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx HeadbuttName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
 	energy PSYCHIC, 1 ; energies
 	tx AmnesiaName ; name
 	tx AmnesiaDescription ; description
@@ -7540,6 +7526,20 @@ SlowpokeLv9Card:
 	db NONE ; flags 3
 	db 2
 	db ATK_ANIM_AMNESIA ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
+	tx ConfusionWaveName ; name
+	tx ConfusionWaveDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ConfusionWaveEffectCommands ; effect commands
+	db INFLICT_CONFUSION ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PSYCHIC_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -7560,32 +7560,32 @@ SlowpokeLv18Card:
 	db CIRCLE ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db SLOWPOKE_LV18
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx SpacingOutName ; name
-	tx SpacingOutDescription ; description
+	tx RestName ; name
+	tx RestDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw SpacingOutEffectCommands ; effect commands
+	dw RestEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 1
-	db ATK_ANIM_NONE ; animation
+	db 3
+	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy PSYCHIC, 1 ; energies
-	tx ScavengeName ; name
-	tx ScavengeDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx FishingTailName ; name
+	tx FishingTailDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw ScavengeEffectCommands ; effect commands
+	dw FishingTailEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7611,37 +7611,37 @@ SlowbroCard:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db SLOWBRO
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx SlowpokeName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
-	tx WaterGunName ; name
-	dw NONE ; description
+	energy 0 ; energies
+	tx StrangeBehaviorName ; name
+	tx StrangeBehaviorDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw StrangeBehaviorEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_WATER_GUN ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	tx PsyshockName ; name
-	tx MayInflictParalysisDescription ; description
+	energy COLORLESS, 3 ; energies
+	tx SpiralDrainName ; name
+	tx Heal30DamageDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SlowbroPsyshockEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
+	dw Heal30DamageEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PSYCHIC_HIT ; animation
+	db 3
+	db ATK_ANIM_DRAIN ; animation
 
 	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -7885,11 +7885,11 @@ GengarCard:
 	db ATK_ANIM_CONFUSE_RAY ; animation
 
 	; attack 2
-	energy DARKNESS, 2, COLORLESS, 1 ; energies
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx DarkMindName ; name
 	tx DamageUpTo2BenchedDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DamageUpTo2Benched10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
@@ -7922,20 +7922,6 @@ DrowzeeCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx PoundName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
 	energy PSYCHIC, 1 ; energies
 	tx HypnosisName ; name
 	tx InflictSleepDescription ; description
@@ -7948,6 +7934,20 @@ DrowzeeCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HYPNOSIS ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
+	tx MeditateName ; name
+	tx MeditateDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw MeditateEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PSYCHIC_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -7987,7 +7987,7 @@ HypnoCard:
 	db ATK_ANIM_NONE ; animation
 
 	; attack 2
-	energy PSYCHIC, 2, COLORLESS, 1 ; energies
+	energy PSYCHIC, 1, COLORLESS, 2 ; energies
 	tx HypnoblastName ; name
 	tx InflictSleepDescription ; description
 	dw NONE ; description (cont)

@@ -138,13 +138,6 @@ ClefablesMetronomeDescription: ; 61d26 (18:5d26)
 	line "still Colorless.)"
 	done
 
-ClefablesMinimizeDescription: ; 61de2 (18:5de2)
-	text "All damage done by attacks to"
-	line "Clefable during your opponent's next"
-	line "turn is reduced by 20 (after"
-	line "applying Weakness and Resistance)."
-	done
-
 ClefableDescription: ; 61e66 (18:5e66)
 	text "A timid Fairy Pokémon that is rarely"
 	line "seen. It will run and hide the"
@@ -153,15 +146,6 @@ ClefableDescription: ; 61e66 (18:5e66)
 
 JigglypuffName: ; 61ec4 (18:5ec4)
 	text "Jigglypuff"
-	done
-
-HealingMelodyName:
-	text "Healing Melody"
-	done
-
-Heal10DamageFromAllDescription:
-	text "Heal 10 damage from each of your"
-	line "Pokémon."
 	done
 
 DoubleEdgeName: ; 61f05 (18:5f05)
@@ -904,8 +888,8 @@ MindBlastName:
 	done
 
 MindBlastDescription:
-	text "This attack does 10 more damage"
-	line "for each card in your hand."
+	text "This attack does 20 damage for"
+	line "each card in your opponent's hand."
 	done
 
 HandPressName:
@@ -916,6 +900,41 @@ HandPressDescription:
 	text "If you have more cards in your"
 	line "hand than your opponent, this"
 	line "attack does 20 more damage."
+	done
+
+SpiralDrainName:
+	text "Spiral Drain"
+	done
+
+StrangeBehaviorName:
+	text "Strange Behavior"
+	done
+
+StrangeBehaviorDescription:
+	text "As often as you like during your"
+	line "turn, you may move 1 damage counter"
+	line "from 1 of your other Pokémon to"
+	line "this Pokémon."
+	done
+
+FishingTailName:
+	text "Fishing Tail"
+	done
+
+FishingTailDescription:
+	text "Put a Pokémon or Basic Energy"
+	line "card from your discard pile into"
+	line "your hand."
+	done
+
+TeleportName:
+	text "Teleport"
+	done
+
+TeleportDescription:
+	text "Shuffle this Pokémon and any cards"
+	line "attached to it into your deck."
+	line "Then, draw 5 cards."
 	done
 
 
@@ -957,11 +976,11 @@ BillDescription: ; 634d3 (18:74d3)
 	text "Draw 3 cards."
 	done
 
-MrFujiName: ; 634e2 (18:74e2)
+MrFujiName:
 	text "Mr.Fuji"
 	done
 
-MrFujiDescription: ; 634eb (18:74eb)
+MrFujiDescription:
 	text "Choose a Pokémon on your Bench."
 	line "Shuffle it and any cards attached"
 	line "to it into your deck."

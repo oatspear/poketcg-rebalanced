@@ -382,12 +382,12 @@ ProcedureForDevolutionBeamText: ; 38fcc (e:4fcc)
 	line "3. Press the B Button to cancel."
 	done
 
-ProcedureForStrangeBehaviorText: ; 390b4 (e:50b4)
+ProcedureForStrangeBehaviorText:
 	text "Procedure for Strange Behavior:"
 	line ""
-	line "1. Choose the Pokémon with the"
-	line "   Damage counters to move to"
-	line "   Slowbro and press the A Button."
+	line "1. Choose the Pokémon to move"
+	line "   damage counters from"
+	line "   and press the A Button."
 	line ""
 	line "2. Repeat step 1 as many times as"
 	line "   you wish to move the counters."
@@ -395,7 +395,7 @@ ProcedureForStrangeBehaviorText: ; 390b4 (e:50b4)
 	line "3. Press the B Button to end."
 	line ""
 	line "4. You cannot move the damage if"
-	line "   Slowbro will be Knocked Out."
+	line "   it Knocks Out the receiver."
 	done
 
 ChooseOppAttackToBeUsedWithMetronomeText: ; 391dc (e:51dc)
