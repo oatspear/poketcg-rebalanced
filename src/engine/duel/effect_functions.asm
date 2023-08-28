@@ -15,6 +15,7 @@ Quickfreeze_InitialEffect:
 PealOfThunder_InitialEffect:
 HealingWind_InitialEffect:
 ThickSkinnedEffect:
+PassivePowerEffect:
 SetCarryNullEffect:
 	scf
 	ret
@@ -4207,10 +4208,6 @@ HandleProphecyScreen: ; 2da76 (b:5a76)
 	ld [hl], $00
 	bank1call Func_5744
 	jr .loop_selection
-
-InvisibleWallEffect: ; 2db77 (b:5b77)
-	scf
-	ret
 
 Rend_AIEffect:
 	call Rend_DamageBoostEffect

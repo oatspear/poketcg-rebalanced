@@ -597,7 +597,7 @@ HaunterTransparencyEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, TransparencyEffect
 	db  $00
 
-HypnoProphecyEffectCommands:
+ProphecyEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Prophecy_CheckDeck
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Prophecy_ReorderDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Prophecy_PlayerSelectEffect
@@ -605,7 +605,7 @@ HypnoProphecyEffectCommands:
 	db  $00
 
 MrMimeInvisibleWallEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, InvisibleWallEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	db  $00
 
 RendEffectCommands:
