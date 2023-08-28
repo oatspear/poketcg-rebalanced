@@ -1212,11 +1212,11 @@ HypnoName: ; 60b37 (18:4b37)
 	text "Hypno"
 	done
 
-ProphecyName: ; 60b3e (18:4b3e)
+ProphecyName:
 	text "Prophecy"
 	done
 
-ProphecyDescription: ; 60b48 (18:4b48)
+ProphecyDescription:
 	text "Look at up to 3 cards from the top"
 	line "of either player's deck and"
 	line "rearrange them as you like."

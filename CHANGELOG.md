@@ -10,6 +10,11 @@
 - **Teleport Blast**: removed.
 - New attack: **Teleport** (P): shuffle Pokémon and attached cards into deck; draw 5 cards.
 
+#### Kadabra
+- Increased HP from 60 to 70.
+- **Recover**: removed.
+- New Pokémon Power: **Prophecy**: reorder either player's top 3 deck cards.
+
 #### Alakazam
 - **Mind Blast**: deals 20 damage for each card in opponent's hand.
 

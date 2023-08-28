@@ -7407,23 +7407,23 @@ KadabraCard:
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db KADABRA
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx AbraName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx RecoverName ; name
-	tx RecoverDescription ; description
-	dw NONE ; description (cont)
+	energy 0 ; energies
+	tx ProphecyName ; name
+	tx ProphecyDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw RecoverEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw ProphecyEffectCommands ; effect commands
 	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_RECOVER ; animation
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies
@@ -7840,7 +7840,7 @@ HaunterLv22Card:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw HaunterDreamEaterEffectCommands ; effect commands
+	dw PesterEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

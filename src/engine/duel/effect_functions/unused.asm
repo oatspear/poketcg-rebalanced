@@ -1,3 +1,16 @@
+; return carry if Defending Pokemon is not asleep
+DreamEaterEffect:
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetNonTurnDuelistVariable
+	and CNF_SLP_PRZ
+	cp ASLEEP
+	ret z ; return if asleep
+; not asleep, set carry and load text
+	ldtx hl, OpponentIsNotAsleepText
+	scf
+	ret
+
+
 Gigashock_PlayerSelectEffect: ; 2e60d (b:660d)
 	call SwapTurn
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA

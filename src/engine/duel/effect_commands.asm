@@ -589,19 +589,11 @@ InflictSleepEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
 	db  $00
 
-HaunterDreamEaterEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, OldDreamEaterEffect
-	db  $00
-
-HaunterTransparencyEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, TransparencyEffect
-	db  $00
-
 ProphecyEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Prophecy_CheckDeck
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Prophecy_ReorderDeckEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Prophecy_ReorderDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Prophecy_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Prophecy_AISelectEffect
+	; dbw EFFECTCMDTYPE_AI_SELECTION, Prophecy_AISelectEffect
 	db  $00
 
 MrMimeInvisibleWallEffectCommands:

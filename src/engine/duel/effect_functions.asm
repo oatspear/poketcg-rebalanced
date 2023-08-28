@@ -3978,21 +3978,10 @@ EnergyConversion_AddToHandEffect:
 	bank1call DisplayCardListDetails
 	ret
 
-; return carry if Defending Pokemon is not asleep
-OldDreamEaterEffect:
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetNonTurnDuelistVariable
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	ret z ; return if asleep
-; not asleep, set carry and load text
-	ldtx hl, OpponentIsNotAsleepText
-	scf
-	ret
 
 ; returns carry if neither the Turn Duelist or
 ; the non-Turn Duelist have any deck cards.
-Prophecy_CheckDeck: ; 2d9e7 (b:59e7)
+Prophecy_CheckDeck:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
 	cp DECK_SIZE
@@ -4008,9 +3997,9 @@ Prophecy_CheckDeck: ; 2d9e7 (b:59e7)
 	or a
 	ret
 
-Prophecy_PlayerSelectEffect: ; 2da00 (b:5a00)
-	ldtx hl, ProcedureForProphecyText
-	bank1call DrawWholeScreenTextBox
+Prophecy_PlayerSelectEffect:
+	; ldtx hl, ProcedureForProphecyText
+	; bank1call DrawWholeScreenTextBox
 .select_deck
 	bank1call DrawDuelMainScene
 	ldtx hl, PleaseSelectTheDeckText
@@ -4020,7 +4009,7 @@ Prophecy_PlayerSelectEffect: ; 2da00 (b:5a00)
 	jr nz, Prophecy_PlayerSelectEffect ; loop back to start
 
 	ldh a, [hCurMenuItem]
-	ldh [hTempList], a ; store selection in first position in list
+	ldh [hAIPkmnPowerEffectParam], a ; store selection
 	or a
 	jr z, .turn_duelist
 
@@ -4042,22 +4031,15 @@ Prophecy_PlayerSelectEffect: ; 2da00 (b:5a00)
 	call HandleProphecyScreen
 	ret
 
-Prophecy_AISelectEffect: ; 2da3c (b:5a3c)
-; AI doesn't ever choose this attack
-; so this it does no sorting.
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ret
-
-Prophecy_ReorderDeckEffect: ; 2da41 (b:5a41)
-	ld hl, hTempList
+Prophecy_ReorderDeckEffect:
+	ld hl, hAIPkmnPowerEffectParam
 	ld a, [hli]
 	or a
 	jr z, .ReorderCards ; turn duelist's deck
 	cp $ff
 	ret z
 
-	; non-turn duelist's deck
+; non-turn duelist's deck
 	call SwapTurn
 	call .ReorderCards
 	call SwapTurn
@@ -4087,8 +4069,8 @@ Prophecy_ReorderDeckEffect: ; 2da41 (b:5a41)
 	jr nz, .loop_return_deck
 	call IsPlayerTurn
 	ret c
-	; print text in case it was the opponent
-	ldtx hl, ExchangedCardsInDuelistsHandText
+; print text in case it was the opponent
+	ldtx hl, SortedCardsInDuelistsDeckText
 	call DrawWideTextBox_WaitForInput
 	ret
 
@@ -4168,7 +4150,8 @@ HandleProphecyScreen: ; 2da76 (b:5a76)
 	push bc
 	ld c, a
 	ld b, $00
-	ld hl, hTempList
+; start at hAIPkmnPowerEffectParam + 1
+	ld hl, hAIPkmnPowerEffectParam
 	add hl, bc
 	ld a, [de]
 	ld [hl], a
@@ -4177,12 +4160,12 @@ HandleProphecyScreen: ; 2da76 (b:5a76)
 	inc de
 	inc c
 	jr .loop_order
-; now hTempList has the list of card deck indices
+; now hTempRetreatCostCards has the list of card deck indices
 ; in the order selected to be place on top of the deck.
 
 .done
 	ld b, $00
-	ld hl, hTempList + 1
+	ld hl, hAIPkmnPowerEffectParam + 1
 	add hl, bc
 	ld [hl], $ff ; terminating byte
 	or a

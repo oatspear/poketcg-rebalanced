@@ -467,8 +467,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_dual_type_fighting
 	cp POLIWRATH
-	jr nz, .check_curse
+	jr nz, .check_prophecy
 	call HandleAIDualTypeFighting
+	jr .next_1
+.check_prophecy
+	cp KADABRA
+	jr nz, .check_curse
+	call HandleAIProphecy
 	jr .next_1
 .check_curse
 	cp HAUNTER_LV17
@@ -482,7 +487,7 @@ HandleAIPkmnPowers:
 	inc c
 	ld a, c
 	cp b
-	jr nz, .loop_play_area
+	jp nz, .loop_play_area
 	ret
 
 .next_3
@@ -1125,6 +1130,155 @@ HandleAICowardice:
 	bank1call AIMakeDecision
 	scf
 	ret
+
+
+;
+HandleAIProphecy:
+; return no carry if number of cards in deck <= 2
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	cp DECK_SIZE - 2
+	ret nc
+
+; use Pokémon Power
+	ld a, [wAITempVars]
+	ldh [hTempCardIndex_ff9f], a
+
+; prioritizes Trainer cards, then energy cards, then Pokémon cards.
+; stores the resulting order in wce1a.
+	xor a
+	ld [wAIPokedexCounter], a ; reset counter
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	add DUELVARS_DECK_CARDS
+	ld l, a
+	ld de, 0
+
+; run through 3 of the remaining cards in deck
+	ld b, 3
+.next_card
+	ld a, [hli]
+	ld c, a
+	call .GetCardType
+
+; load this card's deck index and type in memory
+; wAITempVars = card types
+; wce0f = card deck indices
+	push hl
+	ld hl, wAITempVars
+	add hl, de
+	ld [hl], a
+	ld hl, wce0f
+	add hl, de
+	ld [hl], c
+	pop hl
+	inc e
+	dec b
+	jr nz, .next_card
+
+; terminate the wAITempVars list
+	ld a, $ff
+	ld [wAITempVars + 3], a
+	ld de, wce1a
+
+; find Trainers
+	ld hl, wAITempVars
+	ld c, -1
+	ld b, $00
+
+; run through the stored cards and look for any Trainer cards
+.loop_trainers
+	inc c
+	ld a, [hli]
+	cp $ff
+	jr z, .find_energy
+	cp TYPE_TRAINER
+	jr c, .loop_trainers
+; found a Trainer card, store it in wce1a list
+	push hl
+	ld hl, wce0f
+	add hl, bc
+	ld a, [hl]
+	pop hl
+	ld [de], a
+	inc de
+	jr .loop_trainers
+
+; run through the stored cards and look for any energy cards
+.find_energy
+	ld hl, wAITempVars
+	ld c, -1
+	ld b, $00
+
+.loop_energy
+	inc c
+	ld a, [hli]
+	cp $ff
+	jr z, .find_pokemon
+	and TYPE_ENERGY
+	jr z, .loop_energy
+; found an energy card, store it in wce1a list
+	push hl
+	ld hl, wce0f
+	add hl, bc
+	ld a, [hl]
+	pop hl
+	ld [de], a
+	inc de
+	jr .loop_energy
+
+; run through the stored cards and look for any Pokemon cards
+.find_pokemon
+	ld hl, wAITempVars
+	ld c, -1
+	ld b, $00
+
+.loop_pokemon
+	inc c
+	ld a, [hli]
+	cp $ff
+	jr z, .use_pkmn_power
+	cp TYPE_ENERGY
+	jr nc, .loop_pokemon
+; found a Pokemon card, store it in wce1a list
+	push hl
+	ld hl, wce0f
+	add hl, bc
+	ld a, [hl]
+	pop hl
+	ld [de], a
+	inc de
+	jr .loop_pokemon
+
+.use_pkmn_power
+	ld a, $ff
+	ldh [hTempRetreatCostCards + 3], a
+	ld a, [wce1a]
+	ldh [hTempRetreatCostCards], a
+	ld a, [wce1b]
+	ldh [hTempRetreatCostCards + 1], a
+	ld a, [wce1c]
+	ldh [hTempRetreatCostCards + 2], a
+; setting [hTempCardIndex_ff9f] is done before
+	; ld a, [wAITempVars]
+	; ldh [hTempCardIndex_ff9f], a
+	ld a, OPPACTION_USE_PKMN_POWER
+	bank1call AIMakeDecision
+	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
+	bank1call AIMakeDecision
+	ld a, OPPACTION_DUEL_MAIN_SCENE
+	bank1call AIMakeDecision
+	ret
+
+.GetCardType
+	push bc
+	push de
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	pop de
+	pop bc
+	ret
+
 
 ; AI logic for Damage Swap to transfer damage from Arena card
 ; to a card in Bench with more than 10 HP remaining

@@ -779,9 +779,9 @@ ThereWasNoEffectFromPoisonConfusionText: ; 39c5a (e:5c5a)
 	line "from Poison, Confusion."
 	done
 
-ExchangedCardsInDuelistsHandText: ; 39c86 (e:5c86)
-	text "Exchanged the cards"
-	line "in <RAMNAME>'s Hand."
+SortedCardsInDuelistsDeckText:
+	text "Reordered the cards"
+	line "in <RAMNAME>'s Deck."
 	done
 
 Text0185: ; 39ca8 (e:5ca8)

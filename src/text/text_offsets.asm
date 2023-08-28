@@ -397,7 +397,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThereWasNoEffectFromParalysisText                  ; 0x0181
 	textpointer ThereWasNoEffectFromConfusionText                  ; 0x0182
 	textpointer ThereWasNoEffectFromPoisonConfusionText            ; 0x0183
-	textpointer ExchangedCardsInDuelistsHandText                   ; 0x0184
+	textpointer SortedCardsInDuelistsDeckText
 	textpointer Text0185                                           ; 0x0185
 	textpointer PrizesCardsText                                    ; 0x0186
 	textpointer ChooseTheNumberOfPrizesText                        ; 0x0187
@@ -2754,8 +2754,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PoundName                                          ; 0x0aad
 	textpointer DrowzeeDescription                                 ; 0x0aae
 	textpointer HypnoName                                          ; 0x0aaf
-	textpointer ProphecyName                                       ; 0x0ab0
-	textpointer ProphecyDescription                                ; 0x0ab1
+	textpointer ProphecyName
+	textpointer ProphecyDescription
 	textpointer HypnoDescription                                   ; 0x0ab2
 	textpointer MrMimeName
 	textpointer InvisibleWallName
