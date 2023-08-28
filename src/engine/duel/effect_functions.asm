@@ -2927,7 +2927,7 @@ CloysterSpikeCannon_MultiplierEffect: ; 2d24e (b:524e)
 	ret
 
 ; return carry if can use Cowardice
-Cowardice_Check: ; 2d28b (b:528b)
+Cowardice_Check:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	call CheckCannotUseDueToStatus_Anywhere
@@ -2950,7 +2950,7 @@ Cowardice_Check: ; 2d28b (b:528b)
 	or a
 	ret
 
-Cowardice_PlayerSelectEffect: ; 2d2ae (b:52ae)
+Cowardice_PlayerSelectEffect:
 	ldh a, [hTemp_ffa0]
 	or a
 	ret nz ; return if not Arena card
@@ -2962,7 +2962,7 @@ Cowardice_PlayerSelectEffect: ; 2d2ae (b:52ae)
 	ldh [hAIPkmnPowerEffectParam], a
 	ret
 
-Cowardice_RemoveFromPlayAreaEffect: ; 2d2c3 (b:52c3)
+Cowardice_RemoveFromPlayAreaEffect:
 	ldh a, [hTemp_ffa0]
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
@@ -8565,7 +8565,7 @@ ScoopUpNet_PlayerSelection:
 	; call c, CancelSupporterCard
 	ret c ; exit if B was pressed
 
-	ldh a, [hTempPlayAreaLocation_ff9d]
+	; ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	or a
 	ret nz ; if it wasn't the Active Pokemon, we are done
@@ -8576,12 +8576,56 @@ ScoopUpNet_PlayerSelection:
 	call DrawWideTextBox_WaitForInput
 	bank1call HasAlivePokemonInBench
 	bank1call OpenPlayAreaScreenForSelection
-	ldh a, [hTempPlayAreaLocation_ff9d]
+	; ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
 
 ScoopUpNet_ReturnToHandEffect:
+; if card was in Bench, simply return Pokémon to hand
+	ldh a, [hTemp_ffa0]
+	or a
+	jr nz, ScoopUpFromBench
+	; fallthrough
+
+; if Pokemon was in Arena, then switch it with the selected Bench card first
+; this avoids a bug that occurs when arena is empty before
+; calling ShiftAllPokemonToFirstPlayAreaSlots
+ScoopUpFromArena:
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
+; this eventually calls ClearAllArenaEffectsAndSubstatus
+	call SwapArenaWithBenchPokemon
+
+; after switching, scoop up the benched Pokémon as normal
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ldh [hTemp_ffa0], a
+	call _ReturnBenchedPokemonToHandEffect
+
+; if card was not played by Player, show detail screen
+	call IsPlayerTurn
+	ret c
+
+	ldtx hl, PokemonWasReturnedFromArenaToHandText
+	ldh a, [hTempCardIndex_ff98]
+	bank1call DisplayCardDetailScreen
+	ret
+
+
+ScoopUpFromBench:
+	call _ReturnBenchedPokemonToHandEffect
+
+; if card was not played by Player, show detail screen
+	call IsPlayerTurn
+	ret c
+
+	ldtx hl, PokemonWasReturnedFromBenchToHandText
+	ldh a, [hTempCardIndex_ff98]
+	bank1call DisplayCardDetailScreen
+	ret
+
+
+_ReturnBenchedPokemonToHandEffect:
 ; store chosen card location to Scoop Up
 	ldh a, [hTemp_ffa0]
 	or CARD_LOCATION_PLAY_AREA
@@ -8624,36 +8668,7 @@ ScoopUpNet_ReturnToHandEffect:
 ;	ldh a, [hTemp_ffa0]
 ;	call ClearStatusFromTarget_NoAnim
 
-; arena Pokémon additionally clears all substatus effects
-	ldh a, [hTemp_ffa0]
-	or a
-	jr nz, .skip_clear_status
-	call ClearAllArenaEffectsAndSubstatus
-.skip_clear_status
-
-; if card was not played by Player, show detail screen
-; and print corresponding text.
-	call IsPlayerTurn
-	jr c, .shift_or_switch
-	ldtx hl, PokemonWasReturnedFromArenaToHandText
-	ldh a, [hTemp_ffa0]
-	or a
-	jr z, .display_detail_screen
-	ldtx hl, PokemonWasReturnedFromBenchToHandText
-.display_detail_screen
-	ldh a, [hTempCardIndex_ff98]
-	bank1call DisplayCardDetailScreen
-
-.shift_or_switch
-; if card was in Bench, simply shift Pokemon slots...
-	ldh a, [hTemp_ffa0]
-	or a
-	jp nz, ShiftAllPokemonToFirstPlayAreaSlots
-
-; ...if Pokemon was in Arena, then switch it with the selected Bench card.
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ld e, a
-	call SwapArenaWithBenchPokemon
+; finally, shift Pokemon slots
 	jp ShiftAllPokemonToFirstPlayAreaSlots
 
 
