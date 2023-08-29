@@ -8,6 +8,10 @@
 - **Psyshock**: removed.
 - New attack: **Amnesia** (W): 10 damage; disables 1 of the Defender's attacks.
 
+#### Omanyte
+- **Clairvoyance**: removed.
+- New attack (temporary): **Harden** (C): prevents 30 or less damage.
+
 #### Abra
 - **Teleport**: draws 4 cards, down from 5 cards.
 - **Psyshock**: removed.
@@ -33,10 +37,18 @@
 
 #### Mew Lv8
 - **Psyshock**: removed.
-- New attack: **Teleport** (P): shuffle Pokémon and attached cards into deck; draw 4 cards.
+- New attack: **Teleport Blast** (PC): 20 damage; switch with another Pokémon.
+
+#### Mew Lv15
+- **Mystery Attack**: removed.
+- New Pokémon Power: **Clairvoyance**: the opponent plays with their hand face up.
+- New attack: **Metronome** (CCC): copies one of the Defending Pokémon's attacks.
 
 #### Mew Lv23
 - **Devolution Beam**: reduced cost from (PP) to (PC).
+
+#### Clefable
+- **Metronome**: increased cost from (C) to (CC).
 
 ### Fixed
 

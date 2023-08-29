@@ -2786,8 +2786,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NeutralizingShieldDescription                      ; 0x0acc
 	textpointer NewSpeciesName                                     ; 0x0acd
 	textpointer MewLv8Description                                 ; 0x0ace
-	textpointer MysteryAttackName                                  ; 0x0acf
-	textpointer MysteryAttackDescription                           ; 0x0ad0
 	textpointer MewLv15Description                                ; 0x0ad1
 	textpointer PsywaveName                                        ; 0x0ad2
 	textpointer PsywaveDescription                                 ; 0x0ad3
@@ -2833,14 +2831,12 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BeakName                                           ; 0x0af5
 	textpointer FearowDescription                                  ; 0x0af6
 	textpointer ClefairyName                                       ; 0x0af7
-	textpointer SingName                                           ; 0x0af8
-	textpointer MetronomeName                                      ; 0x0af9
-	textpointer MoonblastName                                      ; 0x0af9
-	textpointer ClefairysMetronomeDescription                      ; 0x0afa
+	textpointer MetronomeName
+	textpointer MoonblastName
+	textpointer MetronomeDescription
 	textpointer FairyName                                          ; 0x0afb
 	textpointer ClefairyDescription                                ; 0x0afc
 	textpointer ClefableName                                       ; 0x0afd
-	textpointer ClefablesMetronomeDescription                      ; 0x0afe
 	textpointer ClefableDescription                                ; 0x0b00
 	textpointer JigglypuffName                                     ; 0x0b01
 	textpointer DoubleEdgeName                                     ; 0x0b04

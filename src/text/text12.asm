@@ -94,25 +94,17 @@ ClefairyName: ; 61be2 (18:5be2)
 	text "Clefairy"
 	done
 
-SingName: ; 61bec (18:5bec)
-	text "Sing"
-	done
-
-MetronomeName: ; 61bf2 (18:5bf2)
+MetronomeName:
 	text "Metronome"
 	done
 
-MoonblastName: ; 61bf2 (18:5bf2)
+MoonblastName:
 	text "Moonblast"
 	done
 
-ClefairysMetronomeDescription: ; 61bfd (18:5bfd)
+MetronomeDescription:
 	text "Choose 1 of the Defending Pokémon's"
-	line "attacks. Metronome copies that"
-	line "attack except for its Energy costs."
-	line "(No matter what type the Defending"
-	line "Pokemon is, Clefairy's type is"
-	line "still Colorless.)"
+	line "attacks and use it as this attack."
 	done
 
 FairyName: ; 61cb9 (18:5cb9)
@@ -127,15 +119,6 @@ ClefairyDescription: ; 61cc0 (18:5cc0)
 
 ClefableName: ; 61d1c (18:5d1c)
 	text "Clefable"
-	done
-
-ClefablesMetronomeDescription: ; 61d26 (18:5d26)
-	text "Choose 1 of the Defending Pokémon's"
-	line "attacks. Metronome copies that"
-	line "attack except for its Energy costs."
-	line "(No matter what type the Defending"
-	line "Pokémon is, Clefable's type is"
-	line "still Colorless.)"
 	done
 
 ClefableDescription: ; 61e66 (18:5e66)

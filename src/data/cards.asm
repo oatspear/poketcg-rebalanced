@@ -2954,7 +2954,7 @@ RapidashCard:
 	db DAMAGE_NORMAL ; category
 	dw AgilityEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK | FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
@@ -4698,18 +4698,18 @@ OmanyteCard:
 	; Kabuto, and Kabutops on your Bench.
 
 	; attack 1
-	energy 0 ; energies
-	tx ClairvoyanceName ; name
-	tx ClairvoyanceDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx HardenName ; name
+	tx HardenDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw OmanyteClairvoyanceEffectCommands ; effect commands
+	db RESIDUAL ; category
+	dw HardenEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db ATK_ANIM_PROTECT ; animation
 
 	; attack 2
 	energy WATER, 1 ; energies
@@ -5308,7 +5308,7 @@ RaichuLv40Card:
 	db DAMAGE_NORMAL ; category
 	dw AgilityEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
@@ -8293,16 +8293,16 @@ MewLv8Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy PSYCHIC, 1 ; energies
-	tx TeleportName ; name
-	tx TeleportDescription ; description
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	tx TeleportBlastName ; name
+	tx SwitchThisPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw TeleportEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw TeleportBlastEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
@@ -8330,27 +8330,27 @@ MewLv15Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	tx MysteryAttackName ; name
-	tx MysteryAttackDescription ; description
-	dw NONE ; description (cont)
+	energy 0 ; energies
+	tx ClairvoyanceName ; name
+	tx ClairvoyanceDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MewMysteryAttackEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT_EFFECT ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
+	energy COLORLESS, 3 ; energies
+	tx MetronomeName ; name
+	tx MetronomeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db RESIDUAL ; category
+	dw MetronomeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -8841,7 +8841,7 @@ ClefairyCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx SingName ; name
+	tx LullabyName ; name
 	tx MayInflictSleepDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
@@ -8856,11 +8856,11 @@ ClefairyCard:
 	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx MetronomeName ; name
-	tx ClefairysMetronomeDescription ; description
+	tx MetronomeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw ClefairyMetronomeEffectCommands ; effect commands
+	dw MetronomeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -8912,17 +8912,17 @@ ClefableCard:
 	; done to each of your Pokémon that has any Energy attached to it.
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx MetronomeName ; name
-	tx ClefablesMetronomeDescription ; description
+	tx MetronomeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw ClefableMetronomeEffectCommands ; effect commands
+	dw MetronomeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 3
 	db ATK_ANIM_NONE ; animation
 
 	; attack 2

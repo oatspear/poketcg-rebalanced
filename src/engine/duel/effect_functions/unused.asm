@@ -1,3 +1,63 @@
+MewMysteryAttackEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MysteryAttack_RandomEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MysteryAttack_RecoverEffect
+	dbw EFFECTCMDTYPE_AI, MysteryAttack_AIEffect
+	db  $00
+
+;
+MysteryAttack_AIEffect: ; 2e001 (b:6001)
+	ld a, 10
+	lb de, 0, 20
+	jp SetExpectedAIDamage
+
+MysteryAttack_RandomEffect: ; 2e009 (b:6009)
+	ld a, 10
+	call SetDefiniteDamage
+
+; chooses a random effect from 8 possible options.
+	call UpdateRNGSources
+	and %111
+	ldh [hTemp_ffa0], a
+	ld hl, .random_effect
+	jp JumpToFunctionInTable
+
+.random_effect
+	dw ParalysisEffect
+	dw PoisonEffect
+	dw SleepEffect
+	dw ConfusionEffect
+	dw .no_effect ; this will actually activate recovery effect afterwards
+	dw .no_effect
+	dw .more_damage
+	dw .no_damage
+
+.more_damage
+	ld a, 20
+	call SetDefiniteDamage
+	ret
+
+.no_damage
+	ld a, ATK_ANIM_GLOW_EFFECT
+	ld [wLoadedAttackAnimation], a
+	xor a
+	call SetDefiniteDamage
+	call SetNoEffectFromStatus
+.no_effect
+	ret
+
+MysteryAttack_RecoverEffect: ; 2e03e (b:603e)
+; in case the 5th option was chosen for random effect,
+; trigger recovery effect for 10 HP.
+	ldh a, [hTemp_ffa0]
+	cp 4
+	ret nz
+	lb de, 0, 10
+	call ApplyAndAnimateHPRecovery
+	ret
+
+
+
+
 ; return carry if Defending Pokemon is not asleep
 DreamEaterEffect:
 	ld a, DUELVARS_ARENA_CARD_STATUS

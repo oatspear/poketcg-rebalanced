@@ -145,6 +145,7 @@ TeleportEffectCommands:
 OldTeleportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	; fallthrough
+TeleportBlastEffectCommands:
 AgilityEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
@@ -339,10 +340,6 @@ SongOfRestEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SongOfRest_CheckUse
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SongOfRest_HealEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SongOfRest_PlayerSelectEffect
-	db  $00
-
-OmanyteClairvoyanceEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClairvoyanceEffect
 	db  $00
 
 RainDanceEffectCommands:
@@ -735,13 +732,6 @@ RecoverEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
-
-MewMysteryAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MysteryAttack_RandomEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MysteryAttack_RecoverEffect
-	dbw EFFECTCMDTYPE_AI, MysteryAttack_AIEffect
-	db  $00
-
 GeodudeStoneBarrageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StoneBarrage_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, StoneBarrage_AIEffect
@@ -1076,7 +1066,6 @@ DoTheWaveEffectCommands:
 	db  $00
 
 MoonblastEffectCommands:
-PersianPounceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PounceEffect
 	db  $00
 

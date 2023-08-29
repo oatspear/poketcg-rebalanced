@@ -7,7 +7,6 @@ Sonicboom_NullEffect:
 
 TransparencyEffect:
 ToxicGasEffect:
-ClairvoyanceEffect:
 RainDanceEffect:
 AdaptiveEvolution_InitialEffect:
 Firegiver_InitialEffect:
@@ -4602,9 +4601,6 @@ FindFirstNonBasicCardInPlayArea: ; 2dd62 (b:5d62)
 	scf
 	ret
 
-NeutralizingShieldEffect: ; 2dd79 (b:5d79)
-	scf
-	ret
 
 Psychic_AIEffect: ; 2dd7b (b:5d7b)
 	call Psychic_DamageBoostEffect
@@ -4964,55 +4960,9 @@ DiscardOpponentEnergyIfHeads_AISelectEffect:
 
 ; ------------------------------------------------------------------------------
 
-
-MysteryAttack_AIEffect: ; 2e001 (b:6001)
-	ld a, 10
-	lb de, 0, 20
-	jp SetExpectedAIDamage
-
-MysteryAttack_RandomEffect: ; 2e009 (b:6009)
-	ld a, 10
-	call SetDefiniteDamage
-
-; chooses a random effect from 8 possible options.
-	call UpdateRNGSources
-	and %111
-	ldh [hTemp_ffa0], a
-	ld hl, .random_effect
-	jp JumpToFunctionInTable
-
-.random_effect
-	dw ParalysisEffect
-	dw PoisonEffect
-	dw SleepEffect
-	dw ConfusionEffect
-	dw .no_effect ; this will actually activate recovery effect afterwards
-	dw .no_effect
-	dw .more_damage
-	dw .no_damage
-
-.more_damage
-	ld a, 20
-	call SetDefiniteDamage
-	ret
-
-.no_damage
-	ld a, ATK_ANIM_GLOW_EFFECT
-	ld [wLoadedAttackAnimation], a
-	xor a
-	call SetDefiniteDamage
-	call SetNoEffectFromStatus
-.no_effect
-	ret
-
-MysteryAttack_RecoverEffect: ; 2e03e (b:603e)
-; in case the 5th option was chosen for random effect,
-; trigger recovery effect for 10 HP.
-	ldh a, [hTemp_ffa0]
-	cp 4
-	ret nz
-	lb de, 0, 10
-	call ApplyAndAnimateHPRecovery
+PounceEffect:
+	ld a, SUBSTATUS2_POUNCE
+	call ApplySubstatus2ToDefendingCard
 	ret
 
 StoneBarrage_AIEffect: ; 2e04a (b:604a)
@@ -6748,21 +6698,6 @@ DragonairSlam_MultiplierEffect: ; 2ec14 (b:6c14)
 	call SetDefiniteDamage
 	ret
 
-; return carry if Defending Pokemon has no attacks
-ClefableMetronome_CheckAttacks: ; 2ec77 (b:6c77)
-	call CheckIfDefendingPokemonHasAnyAttack
-	ldtx hl, NoAttackMayBeChoosenText
-	ret
-
-ClefableMetronome_AISelectEffect: ; 2ec7e (b:6c7e)
-	call HandleAIMetronomeEffect
-	ret
-
-ClefableMetronome_UseAttackEffect: ; 2ec82 (b:6c82)
-	ld a, 1 ; energy cost of this attack
-	call HandlePlayerMetronomeEffect
-	ret
-
 ReduceDamageTakenBy20Effect:
 	ld a, SUBSTATUS1_REDUCE_BY_20
 	call ApplySubstatus1ToAttackingCard
@@ -6860,25 +6795,56 @@ SingEffect: ; 2ed04 (b:6d04)
 	ret
 
 ; return carry if Defending Pokemon has no attacks
-ClefairyMetronome_CheckAttacks: ; 2ed0b (b:6d0b)
+Metronome_CheckAttacks:
 	call CheckIfDefendingPokemonHasAnyAttack
 	ldtx hl, NoAttackMayBeChoosenText
 	ret
 
-ClefairyMetronome_AISelectEffect: ; 2ed12 (b:6d12)
+Metronome_AISelectEffect:
 	call HandleAIMetronomeEffect
 	ret
 
-ClefairyMetronome_UseAttackEffect: ; 2ed16 (b:6d16)
-	ld a, 3 ; energy cost of this attack
-;	fallthrough
+; Metronome1_UseAttackEffect:
+; 	ld a, 1 ; energy cost of this attack
+; 	jr HandlePlayerMetronomeEffect
+
+Metronome_UseAttackEffect:
+	ld hl, wLoadedAttackEnergyCost
+	ld b, 0
+	ld c, (NUM_TYPES / 2) - 1
+.loop
+; check all basic energy cards except colorless
+; each nybble is an energy cost for a type
+	ld a, [hl]
+	swap a
+	and $f
+	add b
+	ld b, a
+	ld a, [hli]
+	and $f
+	add b
+	ld b, a
+	dec c
+	jr nz, .loop
+; last byte, check for darkness energy
+	ld a, [hl]
+	swap a
+	and $f
+	add b
+	ld b, a
+; colorless energy cost
+	ld a, [hl]
+	and $f
+; total energy cost of the attack
+	add b
+	;	fallthrough
 
 ; handles Metronome selection, and validates
 ; whether it can use the selected attack.
 ; if unsuccessful, returns carry.
 ; input:
 ;	a = amount of colorless energy needed for Metronome
-HandlePlayerMetronomeEffect: ; 2ed18 (b:6d18)
+HandlePlayerMetronomeEffect:
 	ld [wMetronomeEnergyCost], a
 	ldtx hl, ChooseOppAttackToBeUsedWithMetronomeText
 	call DrawWideTextBox_WaitForInput
@@ -6954,21 +6920,9 @@ HandlePlayerMetronomeEffect: ; 2ed18 (b:6d18)
 	ret
 
 ; does nothing for AI.
-HandleAIMetronomeEffect: ; 2ed86 (b:6d86)
+HandleAIMetronomeEffect:
 	ret
 
-DoTheWaveEffect: ; 2ed87 (b:6d87)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	dec a ; don't count arena card
-	call ATimes10
-	call AddToDamage
-	ret
-
-PounceEffect: ; 2edac (b:6dac)
-	ld a, SUBSTATUS2_POUNCE
-	call ApplySubstatus2ToDefendingCard
-	ret
 
 ConversionBeam_ChangeWeaknessEffect:
 	call HandleNoDamageOrEffect

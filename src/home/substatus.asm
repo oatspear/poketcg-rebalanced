@@ -476,7 +476,7 @@ NoDamageOrEffectTextIDTable:
 	tx NoDamageOrEffectDueToTransparencyText ; NO_DAMAGE_OR_EFFECT_TRANSPARENCY
 	tx NoDamageOrEffectDueToNShieldText      ; NO_DAMAGE_OR_EFFECT_NSHIELD
 
-; return carry if turn holder has Omanyte and its Clairvoyance Pkmn Power is active
+; return carry if turn holder has Mew and its Clairvoyance Pkmn Power is active
 IsClairvoyanceActive:
 	ld a, MUK
 	call CountPokemonIDInBothPlayAreas
@@ -486,7 +486,7 @@ IsClairvoyanceActive:
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz
-	ld a, OMANYTE
+	ld a, MEW_LV15
 	call CountPokemonIDInPlayArea
 	ret
 

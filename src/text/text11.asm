@@ -1375,17 +1375,6 @@ MewLv8Description: ; 61207 (18:5207)
 	line "people have seen it worldwide."
 	done
 
-MysteryAttackName: ; 61270 (18:5270)
-	text "Mystery Attack"
-	done
-
-MysteryAttackDescription: ; 61280 (18:5280)
-	text "Does a random amount of damage to"
-	line "the Defending Pokémon and may cause"
-	line "a random effect to the Defending"
-	line "Pokémon."
-	done
-
 MewLv15Description: ; 612f1 (18:52f1)
 	text "When viewed through a microscope, "
 	line "this Pokémon's short, fine, delicate"
@@ -1407,11 +1396,10 @@ DevolutionBeamName:
 	done
 
 DevolutionBeamDescription:
-	text "Choose an evolved Pokémon (your"
-	line "own or your opponent's). Return"
-	line "the highest stage evolution card"
-	line "on that Pokémon to Its player's"
-	line "hand."
+	text "Choose an evolved Pokémon in play."
+	line "Return the highest stage evolution"
+	line "card on that Pokémon to the"
+	line "respective owner's hand."
 	done
 
 PidgeyName: ; 61442 (18:5442)

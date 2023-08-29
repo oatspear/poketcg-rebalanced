@@ -246,6 +246,20 @@ RagingStorm_AIEffect:
 
 
 ; ------------------------------------------------------------------------------
+; Based on Play Area
+; ------------------------------------------------------------------------------
+
+
+DoTheWaveEffect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	dec a ; don't count arena card
+	call ATimes10
+	call AddToDamage
+	ret
+
+
+; ------------------------------------------------------------------------------
 ; Based on Defending Pokémon
 ; ------------------------------------------------------------------------------
 

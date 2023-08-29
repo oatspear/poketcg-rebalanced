@@ -1698,15 +1698,13 @@ MysteriousFossilName: ; 5c894 (17:4894)
 	text "Mysterious Fossil"
 	done
 
-ClairvoyanceName: ; 5c8a7 (17:48a7)
+ClairvoyanceName:
 	text "Clairvoyance"
 	done
 
-ClairvoyanceDescription: ; 5c8b5 (17:48b5)
+ClairvoyanceDescription:
 	text "Your opponent plays with his or her"
-	line "hand face up. This power stops"
-	line "working while Omanyte is Asleep,"
-	line "Confused, or Paralyzed."
+	line "hand face up."
 	done
 
 SpiralName: ; 5c9df (17:49df)
