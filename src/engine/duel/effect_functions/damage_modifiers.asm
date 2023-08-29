@@ -192,6 +192,38 @@ HandPress_AIEffect:
   jp SetDefiniteAIDamage
 
 
+; +20 damage for each Trainer card in opponent's hand
+InvadeMind_DamageBoostEffect:
+  call SwapTurn
+  call CreateHandCardList
+  call SwapTurn
+  ret c  ; no cards
+
+  ld c, 0
+  ld hl, wDuelTempList
+.loop
+  ld a, [hli]
+  cp $ff  ; terminating byte
+  jr z, .tally
+  call GetCardIDFromDeckIndex
+  call GetCardType
+; only count Trainer cards
+  cp TYPE_TRAINER
+  jr c, .loop
+  inc c
+  jr .loop
+
+.tally
+	ld a, c
+  add a  ; double
+  call ATimes10
+	jp AddToDamage
+
+InvadeMind_AIEffect:
+  call InvadeMind_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Prize Cards
 ; ------------------------------------------------------------------------------

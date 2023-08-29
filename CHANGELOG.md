@@ -6,6 +6,12 @@
 
 #### Abra
 - **Teleport**: draws 4 cards, down from 5 cards.
+- **Psyshock**: removed.
+- New attack: **Confuse Ray** (PC): 10 damage; inflicts Confusion.
+
+#### Kadabra
+- **Super Psy**: removed.
+- New attack: **Invade Mind** (PC): 10 damage; +10 damage for each Trainer in opponent's hand.
 
 ### Fixed
 

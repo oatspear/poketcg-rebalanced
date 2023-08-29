@@ -990,8 +990,14 @@ InflictConfusionDescription:
 	line "Confused."
 	done
 
-SuperPsiName: ; 5ff50 (17:7f50)
-	text "Super Psy"
+InvadeMindName:
+	text "Invade Mind"
+	done
+
+InvadeMindDescription:
+	text "Your opponent reveals their hand."
+	line "This attack does 20 more damage for"
+	line "each Trainer card you find there."
 	done
 
 KadabraDescription: ; 5ff5b (17:7f5b)

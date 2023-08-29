@@ -452,6 +452,11 @@ CheckHandSizeGreaterThan2:
 ; returns carry if there are less than 2 cards in hand
 CheckHandSizeGreaterThan1:
 	ld c, 2
+	jr CheckHandSizeIsAtLeastC
+
+; returns carry if there are no cards in hand
+CheckHandIsNotEmpty:
+	ld c, 1
 	; jr CheckHandSizeIsAtLeastC
 	; fallthrough
 
@@ -1194,6 +1199,15 @@ Rest_HealEffect:
 	call SwapTurn
 	call SleepEffect
 	jp SwapTurn
+
+
+; look at opponent's hand
+CheckOpponentHandEffect:
+	; call IsPlayerTurn
+	; ret nc
+	farcall OpenYourOrOppPlayAreaScreen_NonTurnHolderHand
+	xor a
+	ret
 
 
 ; ------------------------------------------------------------------------------

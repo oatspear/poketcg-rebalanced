@@ -529,7 +529,7 @@ FireSpinEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Discard2Energies_AISelectEffect
 	db  $00
 
-VulpixConfuseRayEffectCommands:
+Confusion50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect
 	db  $00
 
@@ -646,6 +646,12 @@ MindBlastEffectCommands:
 HandPressEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HandPress_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, HandPress_AIEffect
+	db  $00
+
+InvadeMindEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, InvadeMind_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, InvadeMind_AIEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, CheckOpponentHandEffect
 	db  $00
 
 ; AlakazamDamageSwapEffectCommands:

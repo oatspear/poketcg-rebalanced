@@ -2595,7 +2595,7 @@ VulpixCard:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw VulpixConfuseRayEffectCommands ; effect commands
+	dw Confusion50PercentEffectCommands ; effect commands
 	db INFLICT_CONFUSION ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7376,17 +7376,17 @@ AbraCard:
 
 	; attack 2
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	tx PsyshockName ; name
-	tx MayInflictParalysisDescription ; description
+	tx ConfuseRayName ; name
+	tx InflictConfusionDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw InflictConfusionEffectCommands ; effect commands
+	db INFLICT_CONFUSION ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PSYCHIC_HIT ; animation
+	db ATK_ANIM_CONFUSE_RAY ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -7427,12 +7427,12 @@ KadabraCard:
 
 	; attack 2
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	tx SuperPsiName ; name
-	dw NONE ; description
+	tx InvadeMindName ; name
+	tx InvadeMindDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw InvadeMindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -8906,6 +8906,10 @@ ClefableCard:
 	; Once during your turn, if your Active Pokémon has any Psychic Energy
 	; attached, you may heal 20 damage from it, and it recovers from a
 	; Special Condition.
+
+	; Lunar Sanctuary
+	; Prevents all effects of your opponent's attacks, except damage,
+	; done to each of your Pokémon that has any Energy attached to it.
 
 	; attack 1
 	energy COLORLESS, 1 ; energies

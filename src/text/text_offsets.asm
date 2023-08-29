@@ -2710,7 +2710,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AbraDescription                                    ; 0x0a7d
 	textpointer KadabraName                                        ; 0x0a7e
 	textpointer InflictConfusionDescription                        ; 0x0a7f
-	textpointer SuperPsiName                                       ; 0x0a80
+	textpointer InvadeMindName
+	textpointer InvadeMindDescription
 	textpointer KadabraDescription                                 ; 0x0a81
 	textpointer AlakazamName                                       ; 0x0a82
 	textpointer DamageSwapName                                     ; 0x0a83
