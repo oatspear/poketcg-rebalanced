@@ -7044,13 +7044,11 @@ HandleEndOfTurnEvents:
 	ld a, c
 	ld [wLuckyTailsCardsToDraw], a
 
-.dream_eater
 ; check for Hypno's Dream Eater Power
-
+.dream_eater
 	ld a, HYPNO
 	call CountPokemonIDInPlayArea
 	jr nc, .done
-
 	farcall DreamEater_SetHealingAmount
 
 .done

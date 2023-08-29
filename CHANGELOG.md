@@ -7,6 +7,9 @@
 #### Abra
 - **Teleport**: draws 4 cards, down from 5 cards.
 
+### Fixed
+
+- **Dream Eater** no longer crashes the game.
 
 ## Version 0.3.0
 

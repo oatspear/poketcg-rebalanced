@@ -937,7 +937,9 @@ DreamEater_HealEffect:
 	ld e, a  ; location
 	ld a, [wDreamEaterDamageToHeal]
 	ld d, a  ; damage
+	push hl
 	call HealPlayAreaCardHP
+	pop hl
 	jr .loop_play_area
 
 

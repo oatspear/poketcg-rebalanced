@@ -279,7 +279,7 @@ CountSleepingPokemonInPlayArea:
 	ld a, [hli]  ; get status and move to next
 	and CNF_SLP_PRZ
 	cp ASLEEP
-	jr z, .next
+	jr nz, .next
 	inc c
 .next
 	dec b
