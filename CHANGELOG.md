@@ -1,5 +1,13 @@
 # Pokémon TCG Rebalanced
 
+## Version 0.4.0
+
+### Changed
+
+#### Abra
+- **Teleport**: draws 4 cards, down from 5 cards.
+
+
 ## Version 0.3.0
 
 ### Changed

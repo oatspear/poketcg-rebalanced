@@ -2130,7 +2130,7 @@ Teleport_PlayerSelectEffect:
 Teleport_ReturnToDeckEffect:
 	xor a  ; PLAY_AREA_ARENA
 	call ReturnPlayAreaPokemonToDeckEffect
-	ld a, 5
+	ld a, 4
 	jp DrawNCards_NoCardDetails
 
 

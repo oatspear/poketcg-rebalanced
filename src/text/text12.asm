@@ -934,7 +934,7 @@ TeleportName:
 TeleportDescription:
 	text "Shuffle this Pokémon and any cards"
 	line "attached to it into your deck."
-	line "Then, draw 5 cards."
+	line "Then, draw 4 cards."
 	done
 
 
