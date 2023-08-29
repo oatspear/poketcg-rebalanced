@@ -39,7 +39,7 @@ LuckyTailsEffectCommands:
 HealingNectarEffectCommands:
 HealingEnergyEffectCommands:
 PassivePowerEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SetCarryNullEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	db  $00
 
 EkansSpitPoisonEffectCommands:
@@ -682,10 +682,6 @@ MewDevolutionBeamEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DevolutionBeam_AISelectEffect
 	db  $00
 
-MewNeutralizingShieldEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, NeutralizingShieldEffect
-	db  $00
-
 PsychicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Psychic_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Psychic_AIEffect
@@ -1060,11 +1056,10 @@ CombustionEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Combustion_DiscardDeckEffect
 	db  $00
 
-
-ClefableMetronomeEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClefableMetronome_CheckAttacks
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ClefableMetronome_UseAttackEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, ClefableMetronome_AISelectEffect
+MetronomeEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Metronome_CheckAttacks
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Metronome_UseAttackEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Metronome_AISelectEffect
 	db  $00
 
 PidgeotHurricaneEffectCommands:
@@ -1073,12 +1068,6 @@ PidgeotHurricaneEffectCommands:
 
 SingEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SingEffect
-	db  $00
-
-ClefairyMetronomeEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClefairyMetronome_CheckAttacks
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ClefairyMetronome_UseAttackEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, ClefairyMetronome_AISelectEffect
 	db  $00
 
 DoTheWaveEffectCommands:

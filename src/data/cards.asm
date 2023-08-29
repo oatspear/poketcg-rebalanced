@@ -8282,10 +8282,10 @@ MewLv8Card:
 	energy 0 ; energies
 	tx NeutralizingShieldName ; name
 	tx NeutralizingShieldDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw MewNeutralizingShieldEffectCommands ; effect commands
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

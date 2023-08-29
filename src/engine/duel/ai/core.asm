@@ -2224,9 +2224,12 @@ CheckIfNoSurplusEnergyForAttack:
 	dec c
 	jr nz, .loop
 
-	; colorless
+	; darkness
 	ld a, [de]
 	swap a
+	call CalculateParticularAttachedEnergyNeeded
+	; colorless
+	ld a, [de]
 	and %00001111
 	ld b, a
 	ld hl, wTempLoadedAttackEnergyCost

@@ -1354,17 +1354,15 @@ MewName: ; 61132 (18:5132)
 	text "Mew"
 	done
 
-NeutralizingShieldName: ; 61137 (18:5137)
+NeutralizingShieldName:
 	text "Neutralizing Shield"
 	done
 
-NeutralizingShieldDescription: ; 6114c (18:514c)
+NeutralizingShieldDescription:
 	text "Prevent all effects of attacks,"
-	line "including damage, done to Mew by"
-	line "evolved Pokémon (excluding your"
-	line "own). This power stops working while"
-	line "Mew is Asleep, Confused, or"
-	line "Paralyzed."
+	line "including damage, done to this"
+	line "Pokémon by your opponent's"
+	line "Evolved Pokémon."
 	done
 
 NewSpeciesName: ; 611fa (18:51fa)
@@ -1404,12 +1402,12 @@ PsywaveDescription: ; 61355 (18:5355)
 	line "Defending Pokémon."
 	done
 
-DevolutionBeamName: ; 613a9 (18:53a9)
+DevolutionBeamName:
 	text "Devolution Beam"
 	done
 
-DevolutionBeamDescription: ; 613ba (18:53ba)
-	text "Choose an evolved Pokémon (Your"
+DevolutionBeamDescription:
+	text "Choose an evolved Pokémon (your"
 	line "own or your opponent's). Return"
 	line "the highest stage evolution card"
 	line "on that Pokémon to Its player's"

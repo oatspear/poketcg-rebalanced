@@ -13,6 +13,8 @@ HandleSpecialAIAttacks:
 
 	cp ABRA
 	jp z, .Fetch
+	cp MEW_LV8
+	jp z, .Fetch
 	cp STARYU
 	jp z, .Staryu
 	cp SCYTHER
