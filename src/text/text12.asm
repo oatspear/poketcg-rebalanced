@@ -902,10 +902,6 @@ HandPressDescription:
 	line "attack does 20 more damage."
 	done
 
-SpiralDrainName:
-	text "Spiral Drain"
-	done
-
 StrangeBehaviorName:
 	text "Strange Behavior"
 	done
@@ -935,6 +931,16 @@ TeleportDescription:
 	text "Shuffle this Pokémon and any cards"
 	line "attached to it into your deck."
 	line "Then, draw 4 cards."
+	done
+
+PsyshockName:
+	text "Psyshock"
+	done
+
+PsyshockDescription:
+	text "If your opponent has 5 or more"
+	line "cards in their hand, this attack"
+	line "does 20 more damage."
 	done
 
 

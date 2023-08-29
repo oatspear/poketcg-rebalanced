@@ -392,9 +392,7 @@ CloysterSpikeCannonEffectCommands:
 	dbw EFFECTCMDTYPE_AI, CloysterSpikeCannon_AIEffect
 	db  $00
 
-AbraPsyshockEffectCommands:
 GastlyLickEffectCommands:
-MewPsyshockEffectCommands:
 ElectabuzzThundershockEffectCommands:
 MagnemiteThunderWaveEffectCommands:
 FlyingPikachuThundershockEffectCommands:
@@ -410,7 +408,6 @@ CaterpieStringShotEffectCommands:
 MetapodStunSporeEffectCommands:
 GrimerNastyGooEffectCommands:
 GyaradosBubblebeamEffectCommands:
-GolduckPsyshockEffectCommands:
 DewgongIceBeamEffectCommands:
 ArticunoFreezeDryEffectCommands:
 Paralysis50PercentEffectCommands:
@@ -638,6 +635,11 @@ MeditateEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Meditate_AIEffect
 	db  $00
 
+PsyshockEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Psyshock_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Psyshock_AIEffect
+	db  $00
+
 MindBlastEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MindBlast_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, MindBlast_AIEffect
@@ -689,12 +691,10 @@ PsychicEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Psychic_AIEffect
 	db  $00
 
-MewtwoBarrierEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Barrier_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Barrier_PlayerSelectEffect
+BarrierEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckAnyEnergiesAttached
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Barrier_BarrierEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Barrier_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Barrier_AISelectEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardAllAttachedEnergiesEffect
 	db  $00
 
 CollectFireEffectCommands:
@@ -883,8 +883,8 @@ ZapdosThunderEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ZapdosThunder_RecoilEffect
 	db  $00
 
-ZapdosThunderboltEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ThunderboltEffect
+ThunderboltEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DiscardAllAttachedEnergiesEffect
 	db  $00
 
 ZapdosThunderstormEffectCommands:

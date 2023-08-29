@@ -2396,7 +2396,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DuckName                                           ; 0x0939
 	textpointer PsyduckDescription                                 ; 0x093a
 	textpointer GolduckName                                        ; 0x093b
-	textpointer PsyshockName                                       ; 0x093c
+	textpointer SpiralDrainName                                    ; 0x093c
 	textpointer HyperBeamName                                      ; 0x093d
 	textpointer Discard1EnergyFromTargetDescription
 	textpointer IfHeadsDiscard1EnergyFromTargetDescription
@@ -2994,13 +2994,14 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MindBlastDescription
 	textpointer HandPressName
 	textpointer HandPressDescription
-	textpointer SpiralDrainName
 	textpointer StrangeBehaviorName
 	textpointer StrangeBehaviorDescription
 	textpointer FishingTailName
 	textpointer FishingTailDescription
 	textpointer TeleportName
 	textpointer TeleportDescription
+	textpointer PsyshockName
+	textpointer PsyshockDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

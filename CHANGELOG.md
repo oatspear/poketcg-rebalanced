@@ -4,6 +4,10 @@
 
 ### Changed
 
+#### Golduck
+- **Psyshock**: removed.
+- New attack: **Amnesia** (W): 10 damage; disables 1 of the Defender's attacks.
+
 #### Abra
 - **Teleport**: draws 4 cards, down from 5 cards.
 - **Psyshock**: removed.
@@ -12,6 +16,27 @@
 #### Kadabra
 - **Super Psy**: removed.
 - New attack: **Invade Mind** (PC): 10 damage; +10 damage for each Trainer in opponent's hand.
+
+#### Gengar
+- Reduced Retreat cost from 2 to 1.
+
+#### Mewtwo Lv53
+- **Barrier**: reduced cost from (PP) to (PC); discards all attached energies (at least 1).
+- **Psychic**: increased cost from (PC) to (CCC); increased base damage from 10 to 20.
+
+#### Mewtwo Lv60 (Alt)
+- Decreased HP from 70 to 60.
+- **Energy Absorption**: removed.
+- **Psyburn**: removed.
+- New attack: **Recover** (P): discard 1 Energy; heal all damage from the Pokémon.
+- New attack: **Psyshock** (PC): 20 damage; +20 damage if opponent has at least 5 cards in hand.
+
+#### Mew Lv8
+- **Psyshock**: removed.
+- New attack: **Teleport** (P): shuffle Pokémon and attached cards into deck; draw 4 cards.
+
+#### Mew Lv23
+- **Devolution Beam**: reduced cost from (PP) to (PC).
 
 ### Fixed
 

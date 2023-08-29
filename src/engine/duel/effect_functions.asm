@@ -4621,40 +4621,8 @@ Psychic_DamageBoostEffect: ; 2dd81 (b:5d81)
 	ld [hl], a
 	ret
 
-; return carry if no Psychic Energy attached
-Barrier_CheckEnergy: ; 2dd8e (b:5d8e)
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + PSYCHIC]
-	ldtx hl, NotEnoughPsychicEnergyText
-	cp 1
-	ret
 
-Barrier_PlayerSelectEffect: ; 2dd9c (b:5d9c)
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
-	xor a ; PLAY_AREA_ARENA
-	bank1call DisplayEnergyDiscardScreen
-	bank1call HandleEnergyDiscardMenuInput
-	ret c
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
-	ret
-
-Barrier_AISelectEffect: ; 2ddae (b:5dae)
-; AI picks the first energy in list
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
-	ld a, [wDuelTempList]
-	ldh [hTemp_ffa0], a
-	ret
-
-Barrier_DiscardEffect: ; 2ddb9 (b:5db9)
-	ldh a, [hTemp_ffa0]
-	call PutCardInDiscardPile
-	ret
-
-Barrier_BarrierEffect: ; 2ddbf (b:5dbf)
+Barrier_BarrierEffect:
 	ld a, SUBSTATUS1_BARRIER
 	call ApplySubstatus1ToAttackingCard
 	ret
@@ -4995,29 +4963,6 @@ DiscardOpponentEnergyIfHeads_AISelectEffect:
 	ret
 
 ; ------------------------------------------------------------------------------
-
-Recover_HealEffect: ; 2dfc3 (b:5fc3)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	ld e, a ; all damage for recovery
-	ld d, 0
-	call ApplyAndAnimateHPRecovery
-	ret
-
-JynxDoubleslap_AIEffect: ; 2dfd7 (b:5fd7)
-	ld a, 20 / 2
-	lb de, 0, 20
-	jp SetExpectedAIDamage
-
-JynxDoubleslap_MultiplierEffect: ; 2dfcf (b:5fcf)
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	call ATimes10
-	call SetDefiniteDamage
-	ret
 
 
 MysteryAttack_AIEffect: ; 2e001 (b:6001)
@@ -5586,7 +5531,7 @@ Selfdestruct100Bench20Effect: ; 2e75f (b:675f)
 	call SwapTurn
 	ret
 
-ThunderboltEffect: ; 2e419 (b:6419)
+DiscardAllAttachedEnergiesEffect:
 	xor a
 	call CreateArenaOrBenchEnergyCardList
 	ld hl, wDuelTempList

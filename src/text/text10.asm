@@ -1216,8 +1216,8 @@ GolduckName: ; 5b44f (16:744f)
 	text "Golduck"
 	done
 
-PsyshockName: ; 5b458 (16:7458)
-	text "Psyshock"
+SpiralDrainName:
+	text "Spiral Drain"
 	done
 
 HyperBeamName: ; 5b462 (16:7462)

@@ -1306,17 +1306,17 @@ PsychicName: ; 60ee0 (18:4ee0)
 	text "Psychic"
 	done
 
-PsychicDescription: ; 60ee9 (18:4ee9)
+PsychicDescription:
 	text "Does 10 more damage for each Energy"
 	line "attached to the Defending Pokémon."
 	done
 
-BarrierDescription: ; 60f45 (18:4f45)
-	text "Discard 1 <PSYCHIC> Energy card attached to"
-	line "Mewtwo in order to use this attack."
-	line "During your opponent's next turn,"
-	line "prevent all effects of attacks,"
-	line "including damage, done to Mewtwo."
+BarrierDescription:
+	text "Discard all Energy cards attached to"
+	line "this Pokémon (at least 1). During"
+	line "your opponent's next turn, prevent"
+	line "all effects of attacks, including"
+	line "damage, done to this Pokémon."
 	done
 
 GeneticName: ; 60ff3 (18:4ff3)

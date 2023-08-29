@@ -3507,18 +3507,18 @@ GolduckCard:
 	tx PsyduckName ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 1 ; energies
-	tx PsyshockName ; name
-	tx MayInflictParalysisDescription ; description
+	energy WATER, 1 ; energies
+	tx AmnesiaName ; name
+	tx AmnesiaDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw GolduckPsyshockEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
+	dw AmnesiaEffectCommands ; effect commands
+	db NONE ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PSYCHIC_HIT ; animation
+	db 2
+	db ATK_ANIM_AMNESIA ; animation
 
 	; attack 2
 	energy WATER, 2, COLORLESS, 1 ; energies
@@ -6020,7 +6020,7 @@ ZapdosLv64Card:
 	dw NONE ; description (cont)
 	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ZapdosThunderboltEffectCommands ; effect commands
+	dw ThunderboltEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
@@ -7898,7 +7898,7 @@ GengarCard:
 	db 10
 	db ATK_ANIM_DARK_MIND ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx ShadowName ; category
@@ -8127,10 +8127,24 @@ MewtwoLv53Card:
 
 	; attack 1
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	tx BarrierName ; name
+	tx BarrierDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw BarrierEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK | DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 2
+	db ATK_ANIM_BARRIER ; animation
+
+	; attack 2
+	energy COLORLESS, 3 ; energies
 	tx PsychicName ; name
 	tx PsychicDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
 	dw PsychicEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -8138,20 +8152,6 @@ MewtwoLv53Card:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PSYCHIC_HIT ; animation
-
-	; attack 2
-	energy PSYCHIC, 2 ; energies
-	tx BarrierName ; name
-	tx BarrierDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw MewtwoBarrierEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK | DISCARD_ENERGY ; flags 2
-	db NONE ; flags 3
-	db 2
-	db ATK_ANIM_BARRIER ; animation
 
 	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -8223,32 +8223,32 @@ MewtwoAltLV60Card:
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db MEWTWO_ALT_LV60
-	db 70 ; hp
+	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy PSYCHIC, 1 ; energies
-	tx EnergyAbsorptionName ; name
-	tx EnergyAbsorptionDescription ; description
+	tx RecoverName ; name
+	tx RecoverDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw EnergyAbsorptionEffectCommands ; effect commands
+	dw RecoverEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db HEAL_USER | DISCARD_ENERGY | FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 3
+	db 6
+	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy PSYCHIC, 2, COLORLESS, 1 ; energies
-	tx PsyburnName ; name
-	dw NONE ; description
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	tx PsyshockName ; name
+	tx PsyshockDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw PsyshockEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -8294,17 +8294,17 @@ MewLv8Card:
 
 	; attack 2
 	energy PSYCHIC, 1 ; energies
-	tx PsyshockName ; name
-	tx MayInflictParalysisDescription ; description
+	tx TeleportName ; name
+	tx TeleportDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MewPsyshockEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw TeleportEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_PSYCHIC_HIT ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -8395,7 +8395,7 @@ MewLv23Card:
 	db ATK_ANIM_PSYCHIC_HIT ; animation
 
 	; attack 2
-	energy PSYCHIC, 2 ; energies
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
 	tx DevolutionBeamName ; name
 	tx DevolutionBeamDescription ; description
 	dw NONE ; description (cont)

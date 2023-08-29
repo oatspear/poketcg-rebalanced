@@ -308,6 +308,16 @@ HealingWind_PlayAreaHealEffect:
 	jr nz, .loop_play_area
 	ret
 
+
+Recover_HealEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	ld e, a ; all damage for recovery
+	ld d, 0
+	call ApplyAndAnimateHPRecovery
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Status and Effects
 ; ------------------------------------------------------------------------------
