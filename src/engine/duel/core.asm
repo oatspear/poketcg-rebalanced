@@ -7046,10 +7046,10 @@ HandleEndOfTurnEvents:
 
 ; check for Hypno's Dream Eater Power
 .dream_eater
-	ld a, HYPNO
-	call CountPokemonIDInPlayArea
-	jr nc, .done
-	farcall DreamEater_SetHealingAmount
+	; ld a, HYPNO
+	; call CountPokemonIDInPlayArea
+	; jr nc, .done
+	farcall DreamEater_CountPokemonAndSetHealingAmount
 
 .done
 	ret

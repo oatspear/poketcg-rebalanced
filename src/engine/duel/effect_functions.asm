@@ -903,6 +903,29 @@ INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 ; ------------------------------------------------------------------------------
 
 
+; Stores in [wDreamEaterDamageToHeal] the amount of damage to heal
+; from sleeping Pokémon in play area.
+; Stores 0 if there are no Dream Eater capable Pokémon in play.
+DreamEater_CountPokemonAndSetHealingAmount:
+	xor a
+	ld [wDreamEaterDamageToHeal], a
+
+	ld a, HYPNO
+	call ListPowerCapablePokemonIDInPlayArea
+	ret nc  ; none found
+
+	ld hl, hTempList
+.loop_play_area
+	ld a, [hli]
+	cp $ff
+	ret z  ; done
+
+	ld e, a  ; location
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .loop_play_area  ; not damaged
+	; fallthrough
+
 ; stores in [wDreamEaterDamageToHeal] the amount of damage to heal
 ; from sleeping Pokémon in play area
 DreamEater_SetHealingAmount:
