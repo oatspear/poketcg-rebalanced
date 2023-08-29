@@ -192,12 +192,11 @@ HandPress_AIEffect:
   jp SetDefiniteAIDamage
 
 
-; +20 damage for each Trainer card in opponent's hand
+; +10 damage for each Trainer card in opponent's hand
 InvadeMind_DamageBoostEffect:
   call SwapTurn
   call CreateHandCardList
-  call SwapTurn
-  ret c  ; no cards
+  jp c, SwapTurn  ; no cards, early return
 
   ld c, 0
   ld hl, wDuelTempList
@@ -214,8 +213,8 @@ InvadeMind_DamageBoostEffect:
   jr .loop
 
 .tally
+  call SwapTurn  ; restore turn order
 	ld a, c
-  add a  ; double
   call ATimes10
 	jp AddToDamage
 

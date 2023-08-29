@@ -996,7 +996,7 @@ InvadeMindName:
 
 InvadeMindDescription:
 	text "Your opponent reveals their hand."
-	line "This attack does 20 more damage for"
+	line "This attack does 10 more damage for"
 	line "each Trainer card you find there."
 	done
 
