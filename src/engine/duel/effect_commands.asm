@@ -1066,7 +1066,7 @@ DoTheWaveEffectCommands:
 	db  $00
 
 MoonblastEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PounceEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceAttackBy10Effect
 	db  $00
 
 WhirlwindEffectCommands:

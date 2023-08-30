@@ -8835,37 +8835,37 @@ ClefairyCard:
 	db STAR ; rarity
 	db MYSTERY | NONE ; sets
 	db CLEFAIRY
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx LullabyName ; name
-	tx MayInflictSleepDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SingEffectCommands ; effect commands
-	db INFLICT_SLEEP ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SING ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx MetronomeName ; name
-	tx MetronomeDescription ; description
+	tx MimicName ; name
+	tx MimicDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MetronomeEffectCommands ; effect commands
-	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
-	db NONE ; flags 3
+	dw MimicEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	tx MoonblastName ; name
+	tx ReduceAttackBy10Description ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw MoonblastEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_CONFUSE_RAY ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -8886,6 +8886,78 @@ ClefableCard:
 	db STAR ; rarity
 	db LABORATORY | JUNGLE ; sets
 	db CLEFABLE
+	db 70 ; hp
+	db STAGE1 ; stage
+	tx ClefairyName ; pre-evo name
+
+	; Moon Guidance
+	; Once during your turn (before your attack), you may flip a coin.
+	; If heads, search your deck for a card that evolves from 1 of your Pokémon
+	; and put it on that Pokémon. This counts as evolving your Pokémon.
+	; Shuffle your deck afterward.
+
+	; Moonlight
+	; Once during your turn (before your attack), you may put a card from your
+	; hand back on your deck. If you do, search your deck for a basic Energy card,
+	; show it to your opponent, and put it into your hand. This power can't be
+	; used if Clefable is affected by a Special Condition.
+
+	; Lunar Blessing
+	; Once during your turn, if your Active Pokémon has any Psychic Energy
+	; attached, you may heal 20 damage from it, and it recovers from a
+	; Special Condition.
+
+	; Lunar Sanctuary
+	; Prevents all effects of your opponent's attacks, except damage,
+	; done to each of your Pokémon that has any Energy attached to it.
+
+	; attack 1
+	energy COLORLESS, 2 ; energies
+	tx MetronomeName ; name
+	tx MetronomeDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw MetronomeEffectCommands ; effect commands
+	db NONE ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 3
+	db 3
+	db ATK_ANIM_NONE ; animation
+
+	; attack 2
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	tx MoonblastName ; name
+	tx ReduceAttackBy10Description ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw MoonblastEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_CONFUSE_RAY ; animation
+
+	db 1 ; retreat cost
+	db WR_DARKNESS ; weakness
+	db NONE ; resistance
+	tx FairyName ; category
+	db 36 ; Pokedex number
+	db 0
+	db 34 ; level
+	db 4, 3 ; length
+	dw 88 * 10 ; weight
+	tx ClefableDescription ; description
+	db 0
+
+ClefableLv28Card:
+	db TYPE_PKMN_PSYCHIC ; type
+	gfx ClefableCardGfx ; gfx
+	tx ClefableName ; name
+	db STAR ; rarity
+	db LABORATORY | GB ; sets
+	db CLEFABLE  ; CLEFABLE_LV28
 	db 70 ; hp
 	db STAGE1 ; stage
 	tx ClefairyName ; pre-evo name

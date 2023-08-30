@@ -4960,8 +4960,8 @@ DiscardOpponentEnergyIfHeads_AISelectEffect:
 
 ; ------------------------------------------------------------------------------
 
-PounceEffect:
-	ld a, SUBSTATUS2_POUNCE
+ReduceAttackBy10Effect:
+	ld a, SUBSTATUS2_REDUCE_BY_10
 	call ApplySubstatus2ToDefendingCard
 	ret
 

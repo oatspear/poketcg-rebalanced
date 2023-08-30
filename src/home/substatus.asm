@@ -41,7 +41,7 @@ HandleDamageReduction:
 	jr z, .reduce_damage_by_20
 	cp SUBSTATUS2_GROWL
 	jr z, .reduce_damage_by_20
-	cp SUBSTATUS2_POUNCE
+	cp SUBSTATUS2_REDUCE_BY_10
 	jr z, .reduce_damage_by_10
 	ret
 .reduce_damage_by_20
@@ -687,7 +687,7 @@ ClearDamageReductionSubstatus2:
 	ret z
 	cp SUBSTATUS2_REDUCE_BY_20
 	jr z, .zero
-	cp SUBSTATUS2_POUNCE
+	cp SUBSTATUS2_REDUCE_BY_10
 	jr z, .zero
 	cp SUBSTATUS2_GROWL
 	jr z, .zero

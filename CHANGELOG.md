@@ -47,6 +47,13 @@
 #### Mew Lv23
 - **Devolution Beam**: reduced cost from (PP) to (PC).
 
+#### Clefairy
+- Increased HP from 40 to 50.
+- **Sing**: removed.
+- **Metronome**: removed.
+- New attack: **Mimic** (C): shuffle hand into deck; draw as many cards as the opponent has in hand.
+- New attack: **Moonblast** (PC): 20 damage; reduces Defending Pokémon's damage by 10.
+
 #### Clefable
 - **Metronome**: increased cost from (C) to (CC).
 
