@@ -605,7 +605,7 @@ PunishingSlapName:
 PunishingSlapDescription:
 	text "If any of your opponent's Pokémon"
 	line "have any <DARKNESS> Energy attached to them,"
-	line "this attack does 20 more damage."
+	line "this attack does 10 more damage."
 	done
 
 HelpingHandName:

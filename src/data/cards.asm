@@ -9102,18 +9102,18 @@ JigglypuffLv13Card:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy COLORLESS, 1 ; energies
-	tx CallForFriendName ; name
-	tx CallForFriendDescription ; description
+	energy PSYCHIC, 1 ; energies
+	tx LightStepsName ; name
+	tx EnergySlideDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw CallForFriendEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw EnergySlideEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -9138,19 +9138,6 @@ JigglypuffLv14Card:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
-	; energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	; tx PunishingSlapName ; name
-	; tx PunishingSlapDescription ; description
-	; dw NONE ; description (cont)
-	; db 20 ; damage
-	; db DAMAGE_PLUS ; category
-	; dw NONE ; effect commands
-	; db NONE ; flags 1
-	; db NONE ; flags 2
-	; db NONE ; flags 3
-	; db 3
-	; db ATK_ANIM_HIT ; animation
-
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx LullabyName ; name
@@ -9166,18 +9153,18 @@ JigglypuffLv14Card:
 	db ATK_ANIM_LULLABY ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx DoubleEdgeName ; name
-	tx Recoil20Description ; description
+	energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	tx PunishingSlapName ; name
+	tx PunishingSlapDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Recoil20EffectCommands ; effect commands
-	db HIGH_RECOIL ; flags 1
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw PunishingSlapEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 20
-	db ATK_ANIM_HIT_RECOIL ; animation
+	db 3
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness

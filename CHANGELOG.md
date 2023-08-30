@@ -63,12 +63,13 @@
 - **Punishing Slap**: removed.
 - New attack: **Expand** (CC): 10 damage; reduce damage taken by 10 during the next turn.
 
-#### Jigglypuff Lv14
+#### Jigglypuff Lv13
 - **Expand**: removed.
+- New attack: **Light Steps** (P): 10 damage; may move an energy to another Pokémon.
 
 #### Jigglypuff Lv14
 - **Pound**: removed.
-- New attack: **Double Edge** (CCC): 40 damage; 20 damage recoil.
+- New attack: **Punishing Slap** (PC): 20 damage, +10 if any of the opponent's Pokémon has Darkness Energy.
 
 #### Ditto
 - **Pound**: removed.

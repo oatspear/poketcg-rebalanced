@@ -422,6 +422,7 @@ HandleAttachedBasicEnergySelectionScreen:
 	cp e
 	jr nz, .has_energy
 ; only has colorless energy
+.no_energy
 	ld a, 1
 	or a
 	scf

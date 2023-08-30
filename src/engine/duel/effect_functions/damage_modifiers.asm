@@ -181,7 +181,7 @@ SneakAttack_AIEffect:
 
 
 
-; +20 damage if any Pokémon in opponent's Play Area has any
+; +10 damage if any Pokémon in opponent's Play Area has any
 ; Darkness Energy attached.
 PunishingSlap_DamageBoostEffect:
 	call SwapTurn
@@ -202,7 +202,7 @@ PunishingSlap_DamageBoostEffect:
 
 .bonus
   call SwapTurn
-  ld a, 20
+  ld a, 10
   jp AddToDamage
 
 PunishingSlap_AIEffect:

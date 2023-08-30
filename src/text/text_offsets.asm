@@ -2815,6 +2815,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LunarPowerName
 	textpointer LeadName
 	textpointer LeadDescription
+	textpointer LightStepsName
+	textpointer EnergySlideName
+	textpointer EnergySlideDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
