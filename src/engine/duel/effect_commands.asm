@@ -84,14 +84,14 @@ FlytrapEffectCommands:
 	db  $00
 
 SproutEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Sprout_DeckCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Sprout_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Sprout_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Sprout_AISelectEffect
 	db  $00
 
 UltravisionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Ultravision_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Ultravision_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Ultravision_AISelectEffect
@@ -110,21 +110,21 @@ ScytherSwordsDanceEffectCommands:
 	db  $00
 
 AscensionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Ascension_EvolveEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Ascension_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Ascension_AISelectEffect
 	db  $00
 
 HatchEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Hatch_EvolveEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Hatch_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Hatch_AISelectEffect
 	db  $00
 
 PoisonEvolutionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PoisonEvolution_EvolveEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PoisonEvolution_PlayerSelectEffect
@@ -623,7 +623,7 @@ PsychicAssaultEffectCommands:
 	db  $00
 
 MimicEffectCommands:
-	; dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
+	; dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MimicEffect
 	db  $00
 
@@ -933,14 +933,14 @@ MagnemiteMagneticStormEffectCommands:
 	db  $00
 
 NutritionSupportEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NutritionSupport_AttachEnergyEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, NutritionSupport_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, NutritionSupport_AISelectEffect
 	db  $00
 
 EnergySpikeEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergySpike_AttachEnergyEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySpike_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySpike_AISelectEffect
@@ -949,10 +949,6 @@ EnergySpikeEffectCommands:
 JolteonDoubleKickEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, JolteonDoubleKick_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, JolteonDoubleKick_AIEffect
-	db  $00
-
-EeveeTailWagEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TailWagEffect
 	db  $00
 
 EeveeQuickAttackEffectCommands:
@@ -1149,8 +1145,11 @@ DoubleAttackX40EffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX40_AIEffect
 	db  $00
 
-DittoMorphEffectCommands:
+MorphEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicPokemonCards
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MorphEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Morph_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Morph_AISelectEffect
 	db  $00
 
 Deal10ToAnyPokemonEffectCommands:
@@ -1183,6 +1182,14 @@ PidgeotGaleEffectCommands:
 ;	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
 ;	dbw EFFECTCMDTYPE_AI_SELECTION, Teleport_AISelectEffect
 ;	db  $00
+
+LeadEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCards_AddToHandFromDeck
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Lead_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Lead_AISelectEffect
+	db  $00
+
 
 RockHeadEffectCommands:
 JigglypuffExpandEffectCommands:
@@ -1276,7 +1283,7 @@ EnergyRetrievalEffectCommands:
 	db  $00
 
 EnergySearchEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergySearch_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySearch_PlayerSelection
 	db  $00
@@ -1322,7 +1329,7 @@ ImposterProfessorOakEffectCommands:
 	db  $00
 
 ComputerSearchEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ComputerSearch_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ComputerSearch_PlayerSelection
 	db  $00
@@ -1387,7 +1394,7 @@ PokemonTraderEffectCommands:
 	db  $00
 
 PokedexEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Pokedex_AddToHandAndOrderDeckCardsEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Pokedex_PlayerSelection
 	db  $00
@@ -1408,7 +1415,7 @@ MaintenanceEffectCommands:
 	db  $00
 
 PokeBallEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckIfDeckIsEmpty
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PokeBall_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PokeBall_PlayerSelection
 	db  $00

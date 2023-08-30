@@ -178,7 +178,7 @@ CreateEnergyCardListFromDiscardPile:
 ; if list turns out empty, return carry.
 ; OATS additionally return
 ;   - c the total number of Basic Pokémon
-CreateBasicPokemonCardListFromDiscardPile: ; 2fbd6 (b:7bd6)
+CreateBasicPokemonCardListFromDiscardPile:
 ; gets hl to point at end of Discard Pile cards
 ; and iterates the cards in reverse order.
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_DISCARD_PILE
@@ -201,6 +201,53 @@ CreateBasicPokemonCardListFromDiscardPile: ; 2fbd6 (b:7bd6)
 	or a
 	jr nz, .next_discard_pile_card ; if not Basic stage, skip
 
+; write this card's index to wDuelTempList
+	inc c
+	ld a, [hl]
+	ld [de], a
+	inc de
+.next_discard_pile_card
+	dec l
+	dec b
+	jr nz, .check_card
+
+; done with the loop.
+	ld a, $ff ; terminating byte
+	ld [de], a
+	ld a, [wDuelTempList]
+	cp $ff
+	jr z, .set_carry
+	or a
+	ret
+.set_carry
+	scf
+	ret
+
+
+; makes list in wDuelTempList with all Pokémon cards
+; that are in Turn Duelist's Discard Pile.
+; if list turns out empty, return carry.
+; additionally return
+;   - c the total number of Pokémon
+CreatePokemonCardListFromDiscardPile:
+; gets hl to point at end of Discard Pile cards
+; and iterates the cards in reverse order.
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_DISCARD_PILE
+	call GetTurnDuelistVariable
+	ld b, a
+	add DUELVARS_DECK_CARDS
+	ld l, a
+	ld de, wDuelTempList
+	inc b
+	ld c, 0
+	jr .next_discard_pile_card
+
+.check_card
+	ld a, [hl]
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY
+	jr nc, .next_discard_pile_card ; if not Pokémon card, skip
 ; write this card's index to wDuelTempList
 	inc c
 	ld a, [hl]

@@ -1267,9 +1267,10 @@ wAINumberOfEnergyTransCards:: ; ce06
 ; used for storing weakness of Player's Arena card
 ; in AI routine dealing with Shift Pkmn Power.
 wAIDefendingPokemonWeakness:: ; ce06
-; number of Basic Pokemon cards when
-; setting up AI Boss deck
+; number of Basic Pokemon cards when setting up AI Boss deck
 wAISetupBasicPokemonCount:: ; ce06
+; storage of a byte variable to make code more reusable
+wMultiPurposeByte:: ; ce06
 	ds $1
 
 wce07:: ; ce07

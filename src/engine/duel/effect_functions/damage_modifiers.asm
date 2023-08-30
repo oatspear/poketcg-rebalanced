@@ -122,6 +122,94 @@ WaterGunEffect:
 	ret
 
 
+;
+AquaPunch_DamageBoostEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + WATER]
+	call ATimes10
+	call AddToDamage
+	ld a, [wAttachedEnergies + FIGHTING]
+	call ATimes10
+	jp AddToDamage
+
+AquaPunch_AIEffect:
+	call AquaPunch_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
+;
+DragonRage_DamageBoostEffect:
+	xor a  ; PLAY_AREA_ARENA
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+
+; count how many types of Energy there are (colorless does not count)
+	ld b, 0
+	ld c, NUM_TYPES - 1
+	ld hl, wAttachedEnergies
+.loop
+	ld a, [hli]
+	or a
+	jr z, .next
+	inc b
+.next
+	dec c
+	jr nz, .loop
+	ld a, b
+	call ATimes10
+	jp AddToDamage
+
+DragonRage_AIEffect:
+	call DragonRage_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
+SneakAttack_DamageBoostEffect:
+	xor a  ; PLAY_AREA_ARENA
+	call CheckIfCardHasDarknessEnergyAttached
+	jr c, .done
+	ld a, 10
+	jp AddToDamage
+.done
+	or a
+	ret
+
+SneakAttack_AIEffect:
+	call SneakAttack_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
+
+; +20 damage if any Pokémon in opponent's Play Area has any
+; Darkness Energy attached.
+PunishingSlap_DamageBoostEffect:
+	call SwapTurn
+  ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+  call GetTurnDuelistVariable
+  ld d, a
+  ld e, PLAY_AREA_ARENA
+.loop_play_area
+  ld a, e
+  push de
+  call CheckIfCardHasDarknessEnergyAttached
+  pop de
+  jr nc, .bonus
+  inc e
+  dec d
+  jr nz, .loop_play_area
+	jp SwapTurn
+
+.bonus
+  call SwapTurn
+  ld a, 20
+  jp AddToDamage
+
+PunishingSlap_AIEffect:
+  call PunishingSlap_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Hand Cards
 ; ------------------------------------------------------------------------------

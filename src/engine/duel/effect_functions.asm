@@ -65,7 +65,7 @@ INCLUDE "engine/duel/effect_functions/evolution.asm"
 
 
 PokemonBreeder_PreconditionCheck:
-	call CheckIfDeckIsEmpty
+	call CheckDeckIsNotEmpty
 	ret c
 	bank1call IsPrehistoricPowerActive
 	ret
@@ -436,7 +436,7 @@ CheckIfPlayAreaHasAnyDamageOrStatus:
 
 
 ; returns carry if Deck is empty
-CheckIfDeckIsEmpty:
+CheckDeckIsNotEmpty:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
 	ldtx hl, NoCardsLeftInTheDeckText
@@ -609,6 +609,20 @@ CollectFire_CheckDiscardPile:
 	ret
 
 
+; return carry if no Pokémon cards in Discard Pile
+CheckDiscardPileHasPokemonCards:
+	call CreatePokemonCardListFromDiscardPile
+	ldtx hl, ThereAreNoPokemonInDiscardPileText
+	ret
+
+
+; return carry if no Basic Pokémon cards in Discard Pile
+CheckDiscardPileHasBasicPokemonCards:
+	call CreateBasicPokemonCardListFromDiscardPile
+	ldtx hl, ThereAreNoPokemonInDiscardPileText
+	ret
+
+
 ; returns carry if the Pokémon Power has already been used in this turn.
 ; inputs:
 ;   [hTempPlayAreaLocation_ff9d]: PLAY_AREA_* of the Pokémon using the Power
@@ -639,7 +653,7 @@ AbsorbWater_PreconditionCheck:
 
 
 Synthesis_PreconditionCheck:
-	call CheckIfDeckIsEmpty
+	call CheckDeckIsNotEmpty
 	ret c
 	jr CheckPokemonPowerCanBeUsed
 
@@ -5076,7 +5090,7 @@ DoubleAttackX20X10_MultiplierEffect:
 
 ; returns carry if can't add Pokemon from deck
 CallForFriend_CheckDeckAndPlayArea: ; 2e100 (b:6100)
-	call CheckIfDeckIsEmpty
+	call CheckDeckIsNotEmpty
 	ret c ; no cards in deck
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -6211,11 +6225,6 @@ MagneticStormEffect: ; 2e7d5 (b:67d5)
 	call Func_2c10b
 	ret
 
-; return carry if no cards in Deck
-Sprout_DeckCheck:
-DeckIsNotEmptyCheck:
-	call CheckIfDeckIsEmpty
-	ret
 
 NutritionSupport_PlayerSelectEffect:
 EnergySpike_PlayerSelectEffect:
@@ -6452,16 +6461,6 @@ JolteonDoubleKick_MultiplierEffect: ; 2e938 (b:6938)
 	add a ; a = 2 * heads
 	call ATimes10
 	call SetDefiniteDamage
-	ret
-
-TailWagEffect: ; 2e94e (b:694e)
-	ldtx de, IfHeadsOpponentCannotAttackText
-	call TossCoin_BankB
-	jp nc, SetWasUnsuccessful
-	ld a, ATK_ANIM_LURE
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS2_TAIL_WAG
-	call ApplySubstatus2ToDefendingCard
 	ret
 
 EeveeQuickAttack_AIEffect: ; 2e962 (b:5962)
@@ -7163,23 +7162,84 @@ Func_2efce: ; 2efce (b:6fce)
 	jr nz, .asm_2efd9
 	ret
 
-MorphEffect: ; 2eff6 (b:6ff6)
-	call ExchangeRNG
-	call .PickRandomBasicPokemonFromDeck
-	jr nc, .successful
+
+Morph_PlayerSelectEffect:
+	call HandlePlayerSelectionBasicPokemonFromDiscardPile_AllowCancel
+	ldh [hTemp_ffa0], a
+	ret
+
+Morph_AISelectEffect:
+; prioritize cards for which there are no duplicates on the play area
+; assume card list is already populated from initial check
+	; call CreateBasicPokemonCardListFromDiscardPile
+	ld hl, wDuelTempList
+.loop_cards
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	jr z, .choose_first_card
+
+; which Pokémon are we iterating over?
+	call GetCardIDFromDeckIndex
+	ld a, e
+	ld [wTempPokemonID_ce7c], a
+
+; check play area for duplicates (similar to CountPokemonIDInPlayArea)
+	push hl
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld b, a
+	ld c, 0
+
+.loop_play_area
+	ld a, DUELVARS_ARENA_CARD
+	add b
+	dec a  ; b starts at 1, we want a 0-based index
+	call GetTurnDuelistVariable
+	cp $ff
+	jr z, .found
+; check if it is the same Pokémon
+	call GetCardIDFromDeckIndex
+	ld a, [wTempPokemonID_ce7c]
+	cp e
+	jr z, .found_duplicate
+	dec b
+	jr nz, .loop_play_area
+; no duplicates in play area
+; card is already stored in [hTemp_ffa0]
+	jr .found
+
+.found_duplicate
+	pop hl
+	jr .loop_cards
+
+.found
+	pop hl
+	ret
+
+.choose_first_card
+	ld a, [wDuelTempList]
+	ldh [hTemp_ffa0], a
+	ret
+
+
+MorphEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	jr nz, .successful
 	ldtx hl, AttackUnsuccessfulText
 	call DrawWideTextBox_WaitForInput
 	ret
 
 .successful
+	ldh [hTempCardIndex_ff98], a
 	ld a, DUELVARS_ARENA_CARD_STAGE
 	call GetTurnDuelistVariable
 	or a
 	jr z, .skip_discard_stage_below
 
-; if this is a stage 1 Pokemon (in case it's used
-; by Clefable's Metronome attack) then first discard
-; the lower stage card.
+; if this is an evolved Pokémon (in case it's used with Metronome)
+; then first discard the lower stage card.
 	push hl
 	xor a
 	ldh [hTempPlayAreaLocation_ff9d], a
@@ -7191,11 +7251,14 @@ MorphEffect: ; 2eff6 (b:6ff6)
 
 .skip_discard_stage_below
 ; overwrite card ID
+; store in de the ID of the card we want to Morph to
 	ldh a, [hTempCardIndex_ff98]
 	call GetCardIDFromDeckIndex
+; store in [hTempCardIndex_ff98] the deck index of the current card
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff98], a
+; point hl to the index in deck list, to overwrite ID (preserves de)
 	call _GetCardIDFromDeckIndex
 	ld [hl], e
 
@@ -7239,63 +7302,6 @@ MorphEffect: ; 2eff6 (b:6ff6)
 	ld [wDuelDisplayedScreen], a
 	ret
 
-; picks a random Pokemon in the Deck to morph.
-; needs to be a Basic Pokemon that doesn't have
-; the same ID as the Arena card.
-; returns carry if no Pokemon were found.
-.PickRandomBasicPokemonFromDeck ; 2f06a (b:706a)
-	call CreateDeckCardList
-	ret c ; empty deck
-	ld hl, wDuelTempList
-	call ShuffleCards
-.loop_deck
-	ld a, [hli]
-	ldh [hTempCardIndex_ff98], a
-	cp $ff
-	jr z, .set_carry
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
-	jr nc, .loop_deck ; skip non-Pokemon cards
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .loop_deck ; skip non-Basic cards
-	ld a, [wLoadedCard2ID]
-	cp DUELVARS_ARENA_CARD
-	jr z, .loop_deck ; skip cards with same ID as Arena card
-	ldh a, [hTempCardIndex_ff98]
-	or a
-	ret
-.set_carry
-	scf
-	ret
-
-; returns in a and [hTempCardIndex_ff98] the deck index
-; of random Basic Pokemon card in deck.
-; if none are found, return carry.
-PickRandomBasicCardFromDeck: ; 2f098 (b:7098)
-	call CreateDeckCardList
-	ret c ; return if empty deck
-	ld hl, wDuelTempList
-	call ShuffleCards
-.loop_deck
-	ld a, [hli]
-	ldh [hTempCardIndex_ff98], a
-	cp $ff
-	jr z, .set_carry
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
-	jr nc, .loop_deck ; skip if not Pokemon card
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .loop_deck ; skip if not Basic stage
-	ldh a, [hTempCardIndex_ff98]
-	or a
-	ret
-.set_carry
-	scf
-	ret
 
 DealTargetedDamage_PlayerSelectEffect:
 	xor a  ; PLAY_AREA_ARENA
@@ -7404,45 +7410,6 @@ Gale_SwitchEffect: ; 2f0d6 (b:70d6)
 	ld [wDuelDisplayedScreen], a
 	ret
 
-; return carry if Bench is full
-FriendshipSong_BenchCheck: ; 2f10d (b:710d)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, NoSpaceOnTheBenchText
-	cp MAX_PLAY_AREA_POKEMON
-	ccf
-	ret
-
-FriendshipSong_AddToBench50PercentEffect: ; 2f119 (b:7119)
-	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
-	call TossCoin_BankB
-	jr c, .successful
-
-.none_came_text
-	ldtx hl, NoneCameText
-	call DrawWideTextBox_WaitForInput
-	ret
-
-.successful
-	call PickRandomBasicCardFromDeck
-	jr nc, .put_in_bench
-	ld a, ATK_ANIM_FRIENDSHIP_SONG
-	call Func_2c12e
-	call .none_came_text
-	call SyncShuffleDeck
-	ret
-
-.put_in_bench
-	call SearchCardInDeckAndSetToJustDrawn
-	call AddCardToHand
-	call PutHandPokemonCardInPlayArea
-	ld a, ATK_ANIM_FRIENDSHIP_SONG
-	call Func_2c12e
-	ldh a, [hTempCardIndex_ff98]
-	ldtx hl, CameToTheBenchText
-	bank1call DisplayCardDetailScreen
-	call SyncShuffleDeck
-	ret
 
 RockHeadEffect:
 ExpandEffect:
@@ -7451,72 +7418,6 @@ ShellPressEffect:
 	call ApplySubstatus1ToAttackingCard
 	ret
 
-SneakAttack_AIEffect:
-	call SneakAttack_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-SneakAttack_DamageBoostEffect:
-	xor a  ; PLAY_AREA_ARENA
-	call CheckIfCardHasDarknessEnergyAttached
-	jr c, .done
-	ld a, 10
-	call AddToDamage
-	ret
-.done
-	or a
-	ret
-
-PunishingSlap_AIEffect:
-	call PunishingSlap_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-PunishingSlap_DamageBoostEffect:
-	call SwapTurn
-	call SneakAttack_DamageBoostEffect
-	call SwapTurn
-	ret
-
-
-AquaPunch_AIEffect:
-	call AquaPunch_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-AquaPunch_DamageBoostEffect:
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + WATER]
-	call ATimes10
-	call AddToDamage
-	ld a, [wAttachedEnergies + FIGHTING]
-	call ATimes10
-	jp AddToDamage
-
-
-DragonRage_AIEffect:
-	call DragonRage_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-DragonRage_DamageBoostEffect:
-	xor a  ; PLAY_AREA_ARENA
-	ld e, a
-	call GetPlayAreaCardAttachedEnergies
-
-; count how many types of Energy there are (colorless does not count)
-	ld b, 0
-	ld c, NUM_TYPES - 1
-	ld hl, wAttachedEnergies
-.loop
-	ld a, [hli]
-	or a
-	jr z, .next
-	inc b
-.next
-	dec c
-	jr nz, .loop
-	ld a, b
-	call ATimes10
-	call AddToDamage
-	ret
 
 ; returns carry if either there are no damage counters
 ; or no Energy cards attached in the Play Area.
@@ -7688,6 +7589,26 @@ RocketGrunts_DiscardEffect: ; 2f273 (b:7273)
 ; ------------------------------------------------------------------------------
 
 INCLUDE "engine/duel/effect_functions/ui_card_selection.asm"
+
+Lead_PlayerSelectEffect:
+	call HandlePlayerSelectionSupporterFromDeck
+	ldh [hTemp_ffa0], a
+	ret
+
+; selects the first available card
+Lead_AISelectEffect:
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z  ; none found
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_TRAINER_SUPPORTER
+	ret z  ; found one
+	jr .loop_deck
 
 
 ; select a Pokémon to heal damage and status

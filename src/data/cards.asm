@@ -8890,27 +8890,6 @@ ClefableCard:
 	db STAGE1 ; stage
 	tx ClefairyName ; pre-evo name
 
-	; Moon Guidance
-	; Once during your turn (before your attack), you may flip a coin.
-	; If heads, search your deck for a card that evolves from 1 of your Pokémon
-	; and put it on that Pokémon. This counts as evolving your Pokémon.
-	; Shuffle your deck afterward.
-
-	; Moonlight
-	; Once during your turn (before your attack), you may put a card from your
-	; hand back on your deck. If you do, search your deck for a basic Energy card,
-	; show it to your opponent, and put it into your hand. This power can't be
-	; used if Clefable is affected by a Special Condition.
-
-	; Lunar Blessing
-	; Once during your turn, if your Active Pokémon has any Psychic Energy
-	; attached, you may heal 20 damage from it, and it recovers from a
-	; Special Condition.
-
-	; Lunar Sanctuary
-	; Prevents all effects of your opponent's attacks, except damage,
-	; done to each of your Pokémon that has any Energy attached to it.
-
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx LunarPowerName ; name
@@ -9059,18 +9038,18 @@ JigglypuffLv12Card:
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	tx PunishingSlapName ; name
-	tx PunishingSlapDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx ExpandName ; name
+	tx ReduceDamageTakenBy10Description ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw NONE ; effect commands
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw JigglypuffExpandEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_HIT ; animation
+	db 10
+	db ATK_ANIM_EXPAND ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -9097,6 +9076,20 @@ JigglypuffLv13Card:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
+	tx LeadName ; name
+	tx LeadDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw LeadEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_LURE ; animation
+
+	; attack 2
+	energy COLORLESS, 1 ; energies
 	tx CallForFriendName ; name
 	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
@@ -9108,20 +9101,6 @@ JigglypuffLv13Card:
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx ExpandName ; name
-	tx ReduceDamageTakenBy10Description ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw JigglypuffExpandEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_EXPAND ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -9146,6 +9125,19 @@ JigglypuffLv14Card:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; energy PSYCHIC, 1, COLORLESS, 1 ; energies
+	; tx PunishingSlapName ; name
+	; tx PunishingSlapDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_PLUS ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 3
+	; db ATK_ANIM_HIT ; animation
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx LullabyName ; name
@@ -9161,18 +9153,18 @@ JigglypuffLv14Card:
 	db ATK_ANIM_LULLABY ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx PoundName ; name
-	dw NONE ; description
+	energy COLORLESS, 3 ; energies
+	tx DoubleEdgeName ; name
+	tx Recoil20Description ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	dw Recoil20EffectCommands ; effect commands
+	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db 20
+	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
@@ -9830,30 +9822,30 @@ DittoCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx PoundName ; name
-	dw NONE ; description
+	tx CopyName ; name
+	tx MetronomeDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx MorphName ; name
-	tx MorphDescription ; description
-	tx MorphDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw DittoMorphEffectCommands ; effect commands
+	dw MetronomeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 3
+	db ATK_ANIM_NONE ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
+	tx MorphName ; name
+	tx MorphDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw MorphEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
@@ -10034,20 +10026,6 @@ DratiniCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx PoundName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy COLORLESS, 1 ; energies
 	tx DragonDanceName ; name
 	tx AttachEnergyFromHandDescription ; description
 	dw NONE ; description (cont)
@@ -10059,6 +10037,20 @@ DratiniCard:
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy COLORLESS, 1 ; energies
+	tx WrapName ; name
+	tx MayInflictParalysisDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Paralysis50PercentEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db NONE ; weakness

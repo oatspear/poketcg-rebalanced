@@ -111,16 +111,87 @@ PlayerSelectAndStoreItemCardFromDiscardPile:
 	ret
 
 
+; Handles screen for the Player to choose a Basic Pokémon card
+; from the Discard Pile.
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if Player cancelled selection
+HandlePlayerSelectionBasicPokemonFromDiscardPile_AllowCancel:
+	call CreateBasicPokemonCardListFromDiscardPile
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, PleaseSelectCardText
+	ldtx de, PlayerDiscardPileText
+	bank1call SetCardListHeaderText
+	bank1call DisplayCardList
+	ldh a, [hTempCardIndex_ff98]
+	ret nc
+	ld a, $ff
+	ret
+
+
+; Handles screen for the Player to choose a Pokémon card
+; from the Discard Pile.
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if Player cancelled selection
+HandlePlayerSelectionPokemonFromDiscardPile_AllowCancel:
+	call CreatePokemonCardListFromDiscardPile
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, PleaseSelectCardText
+	ldtx de, PlayerDiscardPileText
+	bank1call SetCardListHeaderText
+	bank1call DisplayCardList
+	ldh a, [hTempCardIndex_ff98]
+	ret nc
+	ld a, $ff
+	ret
+
+; HandlePlayerSelectionPokemonFromDiscardPile_Forced:
+; 	call CreatePokemonCardListFromDiscardPile
+; 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+; 	ldtx hl, PleaseSelectCardText
+; 	ldtx de, PlayerDiscardPileText
+; 	bank1call SetCardListHeaderText
+; .loop_input
+; 	bank1call DisplayCardList
+; 	jr c, .loop_input
+; 	ldh a, [hTempCardIndex_ff98]
+; 	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Choose Cards From Deck
 ; ------------------------------------------------------------------------------
 
-; Handles screen for the Player to choose an Item Trainer card
-; from the Deck.
+; Handles screen for the Player to choose an Item Trainer card from the Deck.
 ; output:
 ;   a: deck index of the selected card
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 HandlePlayerSelectionItemTrainerFromDeck:
+	ld a, TYPE_TRAINER
+	jr HandlePlayerSelectionCardTypeFromDeckToHand
+
+
+; Handles screen for the Player to choose a Supporter card from the Deck.
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+HandlePlayerSelectionSupporterFromDeck:
+	ld a, TYPE_TRAINER_SUPPORTER
+	; jr HandlePlayerSelectionCardTypeFromDeckToHand
+	; fallthrough
+
+
+; Handles screen for the Player to choose a card of given type from the Deck.
+; input:
+;   a: TYPE_* constant of the card to be selected
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+HandlePlayerSelectionCardTypeFromDeckToHand:
+	push af
 	call CreateDeckCardList
 ; handle input
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
@@ -133,21 +204,25 @@ HandlePlayerSelectionItemTrainerFromDeck:
 	jr c, .no_cards
 	ldh a, [hTempCardIndex_ff98]
 	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_TRAINER
-	jr nz, .play_sfx ; can't select non-Item card
+	ld hl, wLoadedCard2Type
+	pop af
+	cp [hl]
+	jr nz, .play_sfx ; can't select card of another type
 	ldh a, [hTempCardIndex_ff98]
 	; ldh [hTemp_ffa0], a
 	or a
 	ret
 
 .no_cards
+	pop af
 	ld a, $ff
+	ldh [hTempCardIndex_ff98], a
 	; ldh [hTemp_ffa0], a
 	or a
 	ret
 
 .play_sfx
+	push af
 	call PlaySFX_InvalidChoice
 	jr .read_input
 

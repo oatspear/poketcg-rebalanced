@@ -59,6 +59,27 @@
 - **Metronome**: increased cost from (C) to (CC).
 - New attack: **Lunar Power** (C): cures a Pokémon from status and evolves it from the deck.
 
+#### Jigglypuff Lv12
+- **Punishing Slap**: removed.
+- New attack: **Expand** (CC): 10 damage; reduce damage taken by 10 during the next turn.
+
+#### Jigglypuff Lv14
+- **Expand**: removed.
+- New attack: **Lead** (C): search the deck for a Supporter card and add it to the hand.
+
+#### Jigglypuff Lv14
+- **Pound**: removed.
+- New attack: **Double Edge** (CCC): 40 damage; 20 damage recoil.
+
+#### Ditto
+- **Pound**: removed.
+- **Morph**: reduced cost from (CCC) to (CC); Basic Pokémon is chosen from Discard Pile, instead of random from deck.
+- New attack: **Copy** (C): copies one of the Defending Pokémon's attacks.
+
+#### Dratini
+- **Pound**: removed.
+- New attack: **Wrap** (C): 10 damage; flip a coin, Paralysis if Heads.
+
 ### Fixed
 
 - **Dream Eater** no longer crashes the game.

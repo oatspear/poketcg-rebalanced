@@ -406,27 +406,23 @@ DittoName: ; 62bda (18:6bda)
 	text "Ditto"
 	done
 
-MorphName: ; 62be1 (18:6be1)
+CopyName:
+	text "Copy"
+	done
+
+MorphName:
 	text "Morph"
 	done
 
-MorphDescription: ; 62be8 (18:6be8)
-	text "Remove all damage counters from"
-	line "Ditto. For the rest of the game,"
-	line "replace Ditto with a copy of a Basic"
-	line "Pokémon card (other than Ditto)"
-	line "chosen at random from your deck."
+MorphDescription:
+	text "Remove all damage counters and"
+	line "effects from this Pokémon."
+	line "For the rest of the game, replace"
+	line "this Pokémon with a copy of a Basic"
+	line "Pokémon from your Discard Pile."
 	done
 
-MorphDescriptionCont: ; 62c90 (18:6c90)
-	text "Ditto is no longer Asleep, Confused,"
-	line "Paralyzed, Poisoned, or anything"
-	line "else that might be the result of an"
-	line "attack (just as if you had evolved"
-	line "it)."
-	done
-
-TransformName: ; 62d23 (18:6d23)
+TransformName:
 	text "Transform"
 	done
 
@@ -602,21 +598,21 @@ DragoniteDescription: ; 633d1 (18:73d1)
 	line "to match that of humans."
 	done
 
-PunishingSlapName: ; 631e4 (18:71e4)
+PunishingSlapName:
 	text "Punishing Slap"
 	done
 
-PunishingSlapDescription: ; 631f2 (18:71f2)
-	text "If the Defending Pokémon has any"
-	line "<DARKNESS> Energy attached to it,"
-	line "this attack does 10 more damage."
+PunishingSlapDescription:
+	text "If any of your opponent's Pokémon"
+	line "have any <DARKNESS> Energy attached to them,"
+	line "this attack does 20 more damage."
 	done
 
-HelpingHandName: ; 631e4 (18:71e4)
+HelpingHandName:
 	text "Helping Hand"
 	done
 
-HelpingHandDescription: ; 631f2 (18:71f2)
+HelpingHandDescription:
 	text "Once during your turn (before your"
 	line "attack), if this Pokémon is on your"
 	line "Bench, you may remove all Special"

@@ -2752,7 +2752,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ShadowName                                         ; 0x0aaa
 	textpointer GengarDescription                                  ; 0x0aab
 	textpointer DrowzeeName                                        ; 0x0aac
-	textpointer PoundName                                          ; 0x0aad
 	textpointer DrowzeeDescription                                 ; 0x0aae
 	textpointer HypnoName                                          ; 0x0aaf
 	textpointer ProphecyName
@@ -2814,6 +2813,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HealingMelodyName
 	textpointer Heal10DamageFromAllDescription
 	textpointer LunarPowerName
+	textpointer LeadName
+	textpointer LeadDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
@@ -2897,9 +2898,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WildBullName                                       ; 0x0b42
 	textpointer TaurosDescription                                  ; 0x0b43
 	textpointer DittoName                                          ; 0x0b44
+	textpointer CopyName
 	textpointer MorphName                                          ; 0x0b45
 	textpointer MorphDescription                                   ; 0x0b46
-	textpointer MorphDescriptionCont                               ; 0x0b47
 	textpointer TransformName                                      ; 0x0b48
 	textpointer DittoDescription                                   ; 0x0b49
 	textpointer TailWagName                                        ; 0x0b4a

@@ -10,7 +10,7 @@ AdaptiveEvolution_AllowEvolutionEffect:
 	ret
 
 ; PoisonEvolution_PreconditionsCheck:
-	; call CheckIfDeckIsEmpty
+	; call CheckDeckIsNotEmpty
 	; ret
 	; ld a, DUELVARS_ARENA_CARD_FLAGS
 	; call GetTurnDuelistVariable

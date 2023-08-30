@@ -1204,10 +1204,6 @@ DrowzeeName: ; 60ac8 (18:4ac8)
 	text "Drowzee"
 	done
 
-PoundName: ; 60ad1 (18:4ad1)
-	text "Pound"
-	done
-
 DrowzeeDescription: ; 60ad8 (18:4ad8)
 	text "Puts enemies to sleep, then eats"
 	line "their dreams. Occasionally gets sick"
@@ -1520,4 +1516,14 @@ Heal10DamageFromAllDescription:
 
 LunarPowerName:
 	text "Lunar Power"
+	done
+
+LeadName:
+	text "Lead"
+	done
+
+LeadDescription:
+	text "Search your deck for a Supporter"
+	line "card, reveal it, and put it into"
+	line "your hand. Then, shuffle your deck."
 	done

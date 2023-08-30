@@ -1,3 +1,15 @@
+TailWagEffect: ; 2e94e (b:694e)
+	ldtx de, IfHeadsOpponentCannotAttackText
+	call TossCoin_BankB
+	jp nc, SetWasUnsuccessful
+	ld a, ATK_ANIM_LURE
+	ld [wLoadedAttackAnimation], a
+	ld a, SUBSTATUS2_TAIL_WAG
+	call ApplySubstatus2ToDefendingCard
+	ret
+
+
+
 MewMysteryAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MysteryAttack_RandomEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MysteryAttack_RecoverEffect
