@@ -1517,3 +1517,7 @@ Heal10DamageFromAllDescription:
 	text "Heal 10 damage from each of your"
 	line "Pokémon."
 	done
+
+LunarPowerName:
+	text "Lunar Power"
+	done

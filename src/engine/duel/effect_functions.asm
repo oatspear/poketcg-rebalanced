@@ -64,6 +64,13 @@ Serial_TossCoinATimes:
 INCLUDE "engine/duel/effect_functions/evolution.asm"
 
 
+PokemonBreeder_PreconditionCheck:
+	call CheckIfDeckIsEmpty
+	ret c
+	bank1call IsPrehistoricPowerActive
+	ret
+
+
 RareCandy_HandPlayAreaCheck:
 	call CreatePlayableStage2PokemonCardListFromHand
 	jr c, .cannot_evolve

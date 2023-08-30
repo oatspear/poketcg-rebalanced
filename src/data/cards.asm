@@ -8912,6 +8912,20 @@ ClefableCard:
 	; done to each of your Pokémon that has any Energy attached to it.
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx LunarPowerName ; name
+	tx PokemonBreederDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw LunarPowerEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx MetronomeName ; name
 	tx MetronomeDescription ; description
@@ -8924,20 +8938,6 @@ ClefableCard:
 	db NONE ; flags 3
 	db 3
 	db ATK_ANIM_NONE ; animation
-
-	; attack 2
-	energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	tx MoonblastName ; name
-	tx ReduceAttackBy10Description ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MoonblastEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_CONFUSE_RAY ; animation
 
 	db 1 ; retreat cost
 	db WR_DARKNESS ; weakness

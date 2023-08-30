@@ -55,7 +55,9 @@
 - New attack: **Moonblast** (PC): 20 damage; reduces Defending Pokémon's damage by 10.
 
 #### Clefable
+- **Moonblast**: removed.
 - **Metronome**: increased cost from (C) to (CC).
+- New attack: **Lunar Power** (C): cures a Pokémon from status and evolves it from the deck.
 
 ### Fixed
 

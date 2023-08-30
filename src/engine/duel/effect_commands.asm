@@ -1052,6 +1052,13 @@ MetronomeEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Metronome_AISelectEffect
 	db  $00
 
+LunarPowerEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PokemonBreeder_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PokemonBreeder_EvolveEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PokemonBreeder_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, EvolutionFromDeck_AISelectEffect
+	db  $00
+
 PidgeotHurricaneEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HurricaneEffect
 	db  $00
@@ -1354,7 +1361,7 @@ PokemonFluteEffectCommands:
 	db  $00
 
 PokemonBreederEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DeckIsNotEmptyCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PokemonBreeder_PreconditionCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PokemonBreeder_EvolveEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PokemonBreeder_PlayerSelectEffect
 	; dbw EFFECTCMDTYPE_AI_SELECTION, PokemonBreeder_AISelectEffect

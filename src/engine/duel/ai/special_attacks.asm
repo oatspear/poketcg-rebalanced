@@ -81,10 +81,20 @@ HandleSpecialAIAttacks:
 	jp z, .CollectFire
 	cp JYNX
 	jr z, .Mimic
+	cp CLEFAIRY
+	jr z, .Mimic
+	cp CLEFABLE
+	jr z, .LunarPower
 
 ; return zero score.
 .zero_score
 	xor a
+	ret
+
+.LunarPower
+	farcall AIDecide_PokemonBreeder
+	jr nc, .zero_score
+	ld a, $83
 	ret
 
 .Mimic
