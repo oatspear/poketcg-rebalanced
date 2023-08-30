@@ -386,6 +386,33 @@ HandlePokemonAndBasicEnergySelectionScreen:
 	bank1call OpenPlayAreaScreenForSelection
 	ret c ; exit if B is pressed
 	ld e, a
+	call HandleAttachedBasicEnergySelectionScreen
+	jr c, .maybe_no_energy
+
+	; ldh a, [hTempCardIndex_ff98]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
+.maybe_no_energy
+	jr nz, .no_energy
+	ret  ; cancelled selection
+
+.no_energy
+	ldtx hl, NoEnergyCardsText
+	call DrawWideTextBox_WaitForInput
+	jr HandlePokemonAndBasicEnergySelectionScreen ; loop back to start
+
+
+; input:
+;   e: PLAY_AREA_* of selected card
+; output:
+;   a: deck index of selected card
+;   [hTempCardIndex_ff98]: deck index of selected card
+;   carry: set if no Basic Energy cards or B pressed
+;   nz: set if no Basic Energy cards
+HandleAttachedBasicEnergySelectionScreen:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wTotalAttachedEnergies]
 	or a
@@ -393,8 +420,14 @@ HandlePokemonAndBasicEnergySelectionScreen:
 	ld e, a
 	ld a, [wAttachedEnergies + COLORLESS]
 	cp e
-	jr z, .no_energy  ; only has colorless energy
+	jr nz, .has_energy
+; only has colorless energy
+	ld a, 1
+	or a
+	scf
+	ret
 
+.has_energy
 	ldh a, [hCurMenuItem]
 	bank1call CreateArenaOrBenchEnergyCardList
 	ld c, DOUBLE_COLORLESS_ENERGY
@@ -407,11 +440,6 @@ HandlePokemonAndBasicEnergySelectionScreen:
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
-
-.no_energy
-	ldtx hl, NoEnergyCardsText
-	call DrawWideTextBox_WaitForInput
-	jr HandlePokemonAndBasicEnergySelectionScreen ; loop back to start
 
 
 ; ------------------------------------------------------------------------------

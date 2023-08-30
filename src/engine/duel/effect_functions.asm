@@ -7682,6 +7682,58 @@ EnergySwitch_PlayerSelection:
 	ret
 
 
+; output:
+;   [hTemp_ffa0]: deck index of energy card to move | $ff
+;   [hTempPlayAreaLocation_ffa1]: PLAY_AREA_* of benched Pokémon
+EnergySlide_PlayerSelection:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	cp 2
+	ccf
+	ret nc  ; nothing to do if there are no Benched Pokémon
+
+	call HandleAttachedBasicEnergySelectionScreen
+	ccf
+	ret nc  ; gave up on choosing energy or there are no Basic energies
+
+; selected energy index is in [hTemp_ffa0]
+	call EmptyScreen
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	call DrawWideTextBox_WaitForInput
+	call HandlePlayerSelectionPokemonInBench
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret
+
+; chooses a benched Pokémon without any attached energies
+EnergySlide_AISelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	dec a
+	ret z  ; nothing to do
+	ld d, a
+	ld e, PLAY_AREA_BENCH_1
+
+.loop_play_area
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	or a
+	jr nz, .skip
+; found Pokémon without any attached energies
+	ld a, e
+	ldh [hTempPlayAreaLocation_ffa1], a
+; choose an energy to move
+	jp DiscardEnergy_AISelectEffect
+.skip
+	inc e
+	dec d
+	ret z  ; nothing to do
+	jr .loop_play_area
+
 ; ------------------------------------------------------------------------------
 ; Move Selected Cards
 ; ------------------------------------------------------------------------------
@@ -7766,6 +7818,23 @@ SelectedCards_Discard1FromHand:
 
 
 ; input:
+;   [hTemp_ffa0]: deck index of card to move
+;   [hTempPlayAreaLocation_ffa1]: target location to move card to
+EnergySlide_TransferEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z  ; nothing to do
+
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ldh [hTempPlayAreaLocation_ff9d], a  ; target location
+	; [hTempList]: card to move
+	ld a, $ff
+	ldh [hTempList + 1], a  ; list terminator
+	; jr SelectedCards_MoveWithinPlayArea
+	; fallthrough
+
+
+; input:
 ;   [hTempPlayAreaLocation_ff9d]: target location to move cards to
 ;   [hTempList]: list of cards to move
 EnergySwitch_TransferEffect:
@@ -7791,8 +7860,7 @@ SelectedCards_MoveWithinPlayArea:
 .done
 	call IsPlayerTurn
 	ret c
-	call Helper_GenericShowAttachedEnergyToPokemon
-	ret
+	jp Helper_GenericShowAttachedEnergyToPokemon
 
 
 ; add a card to the bottom of the turn holder's deck

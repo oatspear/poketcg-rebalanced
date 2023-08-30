@@ -51,7 +51,7 @@
 - Increased HP from 40 to 50.
 - **Sing**: removed.
 - **Metronome**: removed.
-- New attack: **Mimic** (C): shuffle hand into deck; draw as many cards as the opponent has in hand.
+- New attack: **Lead** (C): search the deck for a Supporter card and add it to the hand.
 - New attack: **Moonblast** (PC): 20 damage; reduces Defending Pokémon's damage by 10.
 
 #### Clefable
@@ -65,7 +65,6 @@
 
 #### Jigglypuff Lv14
 - **Expand**: removed.
-- New attack: **Lead** (C): search the deck for a Supporter card and add it to the hand.
 
 #### Jigglypuff Lv14
 - **Pound**: removed.

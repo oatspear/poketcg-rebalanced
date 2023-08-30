@@ -1527,3 +1527,17 @@ LeadDescription:
 	line "card, reveal it, and put it into"
 	line "your hand. Then, shuffle your deck."
 	done
+
+LightStepsName:
+	text "Light Steps"
+	done
+
+EnergySlideName:
+	text "Energy Slide"
+	done
+
+EnergySlideDescription:
+	text "You may move a Basic Energy card"
+	line "from this Pokémon to one of your"
+	line "Benched Pokémon."
+	done

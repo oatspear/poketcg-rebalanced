@@ -8839,19 +8839,32 @@ ClefairyCard:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; energy COLORLESS, 1 ; energies
+	; tx MimicName ; name
+	; tx MimicDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db RESIDUAL ; category
+	; dw MimicEffectCommands ; effect commands
+	; db DRAW_CARD ; flags 1
+	; db NONE ; flags 2
+	; db SPECIAL_AI_HANDLING ; flags 3
+	; db 0
+	; db ATK_ANIM_GLOW_EFFECT ; animation
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx MimicName ; name
-	tx MimicDescription ; description
+	tx LeadName ; name
+	tx LeadDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MimicEffectCommands ; effect commands
-	db DRAW_CARD ; flags 1
+	dw LeadEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_LURE ; animation
 
 	; attack 2
 	energy PSYCHIC, 1, COLORLESS, 1 ; energies
@@ -9076,17 +9089,17 @@ JigglypuffLv13Card:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx LeadName ; name
-	tx LeadDescription ; description
+	tx CallForFriendName ; name
+	tx CallForFriendDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw LeadEffectCommands ; effect commands
+	dw CallForFriendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_LURE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy COLORLESS, 1 ; energies

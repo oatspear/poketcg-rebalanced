@@ -7,6 +7,7 @@ EffectCommands: ; 186f7 (6:46f7)
 ;	...
 ;	db $00
 
+
 ; Commands are associated to a time or a scope (EFFECTCMDTYPE_*) that determines when their function is executed during the turn.
 ; - EFFECTCMDTYPE_INITIAL_EFFECT_1: Executed right after attack or trainer card is used. Bypasses Smokescreen and Sand Attack effects.
 ; - EFFECTCMDTYPE_INITIAL_EFFECT_2: Executed right after attack, Pokemon Power, or trainer card is used.
@@ -18,6 +19,8 @@ EffectCommands: ; 186f7 (6:46f7)
 ; - EFFECTCMDTYPE_PKMN_POWER_TRIGGER: Pokemon Power effects that trigger the moment the Pokemon card is played.
 ; - EFFECTCMDTYPE_AI: Used for AI scoring.
 ; - EFFECTCMDTYPE_AI_SELECTION: When AI is required to select a card
+
+; NOTE: EFFECTCMDTYPE_INITIAL_EFFECT_2 in ATTACKS is not executed by AI.
 
 ; Attacks that have an EFFECTCMDTYPE_REQUIRE_SELECTION also must have either an EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN or an
 ; EFFECTCMDTYPE_AI_SELECTION (for anything not involving switching the defending Pokemon), to handle selections involving the AI.
@@ -1070,6 +1073,15 @@ DoTheWaveEffectCommands:
 
 MoonblastEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceAttackBy10Effect
+	db  $00
+
+EnergySlideEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckAnyEnergiesAttached
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergySlide_TransferEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySlide_PlayerSelection
+	; dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergySlide_PlayerSelection
+	; dbw EFFECTCMDTYPE_DISCARD_ENERGY, EnergySlide_TransferEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySlide_AISelectEffect
 	db  $00
 
 WhirlwindEffectCommands:
