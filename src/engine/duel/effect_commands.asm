@@ -52,6 +52,9 @@ PoisonPaybackEffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoubleDamageIfUserIsDamaged_AIEffect
 	db  $00
 
+StressPheromonesEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
+	db  $00
 
 LureEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Lure_AssertPokemonInBench
@@ -674,7 +677,7 @@ BarrierEffectCommands:
 	db  $00
 
 CollectFireEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CollectFire_CheckDiscardPile
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasFireEnergyCards
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Attach1FireEnergyFromDiscard_SelectEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CollectFire_AttachToPokemonEffect
 	db  $00
@@ -685,14 +688,14 @@ AbsorbWaterEffectCommands:
 	db  $00
 
 EnergyAbsorptionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyAbsorption_CheckDiscardPile
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AttachToPokemonEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyAbsorption_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyAbsorption_AISelectEffect
 	db  $00
 
 EnergySporesEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergySpores_CheckDiscardPile
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AttachEnergyFromDiscard_AttachToPokemonEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySpores_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySpores_AISelectEffect
@@ -1438,7 +1441,7 @@ EnergySwitchEffectCommands:
 	db  $00
 
 EnergyRecyclerEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyRecycler_CheckDiscardPile
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyRecycler_ReturnToDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyRecycler_PlayerDiscardPileSelection
 	db  $00
