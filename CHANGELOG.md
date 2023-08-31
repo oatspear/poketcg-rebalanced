@@ -74,8 +74,8 @@
 
 #### Ditto
 - **Pound**: removed.
-- **Morph**: reduced cost from (CCC) to (CC); Basic Pokémon is chosen from Discard Pile, instead of random from deck.
-- New attack: **Copy** (C): copies one of the Defending Pokémon's attacks.
+- **Morph**: reduced cost from (CCC) to (C); Basic Pokémon is chosen from Discard Pile, instead of random from deck.
+- New attack: **Copy** (CC): copies one of the Defending Pokémon's attacks.
 
 #### Dratini
 - **Pound**: removed.
