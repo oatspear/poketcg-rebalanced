@@ -45,7 +45,6 @@ PassivePowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	db  $00
 
-ArbokPoisonFangEffectCommands:
 PoisonClawsEffectCommands:
 InflictPoisonEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect

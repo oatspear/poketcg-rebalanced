@@ -1,5 +1,13 @@
 # Pokémon TCG Rebalanced
 
+## Version 0.5.0
+
+### Changed
+
+#### Weezing
+- **Smog**: always inflicts Poison.
+
+
 ## Version 0.4.0
 
 ### Changed
