@@ -9113,7 +9113,7 @@ JigglypuffLv13Card:
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_BOYFRIENDS ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness
