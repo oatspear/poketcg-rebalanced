@@ -310,6 +310,18 @@ Synthesis_PreconditionCheck:
 	jp CheckPokemonPowerCanBeUsed
 
 
+Shift_OncePerTurnCheck:
+    ldh a, [hTempPlayAreaLocation_ff9d]
+    ldh [hTemp_ffa0], a
+	jp CheckPokemonPowerCanBeUsed
+
+
+StressPheromones_PreconditionCheck:
+	call CheckTempLocationPokemonHasAnyDamage
+	ret c
+	jp CheckPokemonPowerCanBeUsed
+
+
 ; ------------------------------------------------------------------------------
 ; Discard Cards
 ; ------------------------------------------------------------------------------
@@ -2163,21 +2175,6 @@ EnergyTrans_AIEffect: ; 2cbfb (b:4bfb)
 ; ------------------------------------------------------------------------------
 ; Color Manipulation
 ; ------------------------------------------------------------------------------
-
-DualTypeFighting_OncePerTurnCheck:
-Shift_OncePerTurnCheck:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	and USED_PKMN_POWER_THIS_TURN
-	jr nz, .already_used
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	jp CheckCannotUseDueToStatus_Anywhere
-.already_used
-	ldtx hl, OnlyOncePerTurnText
-	scf
-	ret
 
 
 VaporEssence_OncePerTurnCheck:

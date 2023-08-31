@@ -53,7 +53,7 @@ PoisonPaybackEffectCommands:
 	db  $00
 
 StressPheromonesEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StressPheromones_PreconditionCheck
 	db  $00
 
 LureEffectCommands:
@@ -280,7 +280,7 @@ FlareEssenceEffectCommands:
 	db  $00
 
 DualTypeFightingEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DualTypeFighting_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DualTypeFighting_ChangeColorEffect
 	db  $00
 

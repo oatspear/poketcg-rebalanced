@@ -181,6 +181,18 @@ CheckArenaPokemonHasAnyDamage:
 	ret
 
 
+; Returns carry if the Pokémon at location
+; in [hTempPlayAreaLocation_ff9d] has no damage counters.
+; Useful for Pokémon Powers.
+CheckTempLocationPokemonHasAnyDamage:
+    ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetCardDamageAndMaxHP
+	ldtx hl, NoDamageCountersText
+	cp 10
+	ret
+
+
 ; returns carry if Play Area has no damage counters
 ; and sets the error message in hl
 CheckIfPlayAreaHasAnyDamage:
@@ -262,8 +274,7 @@ CheckPokemonPowerCanBeUsed:
 	jr nz, .already_used
 
 	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_Anywhere
-	ret
+	jp CheckCannotUseDueToStatus_Anywhere
 
 .already_used
 	ldtx hl, OnlyOncePerTurnText
