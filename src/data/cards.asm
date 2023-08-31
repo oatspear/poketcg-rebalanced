@@ -8832,7 +8832,7 @@ ClefairyCard:
 	db TYPE_PKMN_PSYCHIC ; type
 	gfx ClefairyCardGfx ; gfx
 	tx ClefairyName ; name
-	db STAR ; rarity
+	db DIAMOND ; rarity
 	db MYSTERY | NONE ; sets
 	db CLEFAIRY
 	db 50 ; hp

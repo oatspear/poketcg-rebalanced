@@ -49,6 +49,7 @@
 
 #### Clefairy
 - Increased HP from 40 to 50.
+- Reduced rarity from Rare to Uncommon.
 - **Sing**: removed.
 - **Metronome**: removed.
 - New attack: **Lead** (C): search the deck for a Supporter card and add it to the hand.
