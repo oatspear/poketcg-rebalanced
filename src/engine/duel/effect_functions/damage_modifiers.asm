@@ -403,6 +403,19 @@ Pester_AIEffect:
 ; ------------------------------------------------------------------------------
 
 
+; double damage if user is damaged
+DoubleDamageIfUserIsDamaged_DamageBoostEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+  or a
+  ret z  ; not damaged
+	jp DoubleDamage_DamageBoostEffect
+
+DoubleDamageIfUserIsDamaged_AIEffect:
+  call DoubleDamageIfUserIsDamaged_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
 ; add damage taken to damage output
 FlamesOfRage_DamageBoostEffect:
 	ld e, PLAY_AREA_ARENA

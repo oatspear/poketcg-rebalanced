@@ -1788,3 +1788,14 @@ GnawName: ; 5ce9d (17:4e9d)
 SkillDiveName:
 	text "Skill Dive"
 	done
+
+PoisonPaybackName:
+	text "Poison Payback"
+	done
+
+PoisonPaybackDescription:
+	text "If this Pokémon has any damage"
+	line "counters on it, this attack does"
+	line "double damage and the Defending"
+	line "Pokémon is now Poisoned."
+	done

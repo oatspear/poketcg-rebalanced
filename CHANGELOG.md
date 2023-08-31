@@ -8,6 +8,10 @@
 - **Fury Swipes**: removed.
 - New attack: **Poison Sting** (D): 10 damage; flip a coin, Poison if Heads.
 
+#### Nidorina
+- **Supersonic**: removed.
+- New attack: **Poison Payback** (DC): 20 damage; +20 damage and inflicts Poison if user is damaged.
+
 #### Zubat
 - **Leech Life**: removed.
 - **Supersonic**: increased cost from (C) to (D); always inflicts Confusion.

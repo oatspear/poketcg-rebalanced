@@ -1230,6 +1230,15 @@ CheckOpponentHandEffect:
 	ret
 
 
+PoisonPaybackEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	or a
+	ret z  ; not damaged
+	call DoubleDamage_DamageBoostEffect
+	jp PoisonEffect
+
+
 ; ------------------------------------------------------------------------------
 ; Card Search
 ; ------------------------------------------------------------------------------

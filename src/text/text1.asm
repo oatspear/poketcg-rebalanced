@@ -1152,10 +1152,6 @@ IfHeadsNoDamageNextTurnText: ; 37f56 (d:7f56)
 	line "during opponent's next turn!"
 	done
 
-Text00f2: ; 37f9a (d:7f9a)
-	text "Damage check"
-	done
-
 DamageCheckIfHeadsPlusDamageText: ; 37fa8 (d:7fa8)
 	text "Damage check!"
 	line "If Heads, +<RAMNUM> damage!!"

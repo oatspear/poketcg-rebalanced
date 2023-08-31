@@ -245,7 +245,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TrainerCardSuccessCheckText                        ; 0x00ef
 	textpointer CardCheckIfHeads8CardsIfTails1CardText             ; 0x00f0
 	textpointer IfHeadsNoDamageNextTurnText                        ; 0x00f1
-	textpointer Text00f2                                           ; 0x00f2
 	textpointer DamageCheckIfHeadsPlusDamageText                   ; 0x00f3
 	textpointer DamageCheckIfHeadsXDamageText                      ; 0x00f4
 	textpointer IfHeadsDiscard1EnergyFromTargetText
@@ -2515,6 +2514,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PikachuName                                        ; 0x09b5
 	textpointer GnawName                                           ; 0x09b6
 	textpointer SkillDiveName
+	textpointer PoisonPaybackName
+	textpointer PoisonPaybackDescription
 	textpointer VoltTackleName
 	textpointer MouseName                                          ; 0x09b9
 	textpointer PikachuLv12Description                            ; 0x09ba

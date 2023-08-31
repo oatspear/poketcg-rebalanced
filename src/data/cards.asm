@@ -914,18 +914,18 @@ NidorinaCard:
 	tx NidoranFName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx SupersonicName ; name
-	tx MayInflictConfusionDescription ; description
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	tx PoisonPaybackName ; name
+	tx PoisonPaybackDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SupersonicEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw PoisonPaybackEffectCommands ; effect commands
+	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_SUPERSONIC ; animation
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
 	energy DARKNESS, 1, COLORLESS, 2 ; energies

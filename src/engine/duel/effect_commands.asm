@@ -51,6 +51,12 @@ InflictPoisonEffectCommands:
 	; dbw EFFECTCMDTYPE_AI, PoisonFang_AIEffect
 	db  $00
 
+PoisonPaybackEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonPaybackEffect
+	dbw EFFECTCMDTYPE_AI, DoubleDamageIfUserIsDamaged_AIEffect
+	db  $00
+
+
 LureEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Lure_AssertPokemonInBench
 	; dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
