@@ -2,21 +2,17 @@
 ; Dummy Functions
 ; ------------------------------------------------------------------------------
 
-Sonicboom_NullEffect:
-	ret
-
 TransparencyEffect:
-ToxicGasEffect:
 RainDanceEffect:
-AdaptiveEvolution_InitialEffect:
 Firegiver_InitialEffect:
 Quickfreeze_InitialEffect:
 PealOfThunder_InitialEffect:
 HealingWind_InitialEffect:
-ThickSkinnedEffect:
 PassivePowerEffect:
-SetCarryNullEffect:
 	scf
+	; fallthrough
+
+NullEffect:
 	ret
 
 ; ------------------------------------------------------------------------------

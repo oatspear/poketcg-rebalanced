@@ -38,14 +38,10 @@ EffectCommands: ; 186f7 (6:46f7)
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
-LuckyTailsEffectCommands:
-HealingNectarEffectCommands:
-HealingEnergyEffectCommands:
 PassivePowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	db  $00
 
-PoisonClawsEffectCommands:
 InflictPoisonEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
 	; dbw EFFECTCMDTYPE_AI, PoisonFang_AIEffect
@@ -265,10 +261,6 @@ EnergyTransEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyTrans_PrintProcedure
 	db  $00
 
-MukToxicGasEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ToxicGasEffect
-	db  $00
-
 VaporEssenceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, VaporEssence_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VaporEssence_ChangeColorEffect
@@ -417,7 +409,7 @@ CowardiceEffectCommands:
 	db  $00
 
 AdaptiveEvolutionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, AdaptiveEvolution_InitialEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, AdaptiveEvolution_AllowEvolutionEffect
 	db  $00
 
@@ -583,10 +575,6 @@ ProphecyEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Prophecy_ReorderDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Prophecy_PlayerSelectEffect
 	; dbw EFFECTCMDTYPE_AI_SELECTION, Prophecy_AISelectEffect
-	db  $00
-
-MrMimeInvisibleWallEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	db  $00
 
 RendEffectCommands:
@@ -910,7 +898,7 @@ DamageUpTo2Benched10EffectCommands:
 
 SonicboomEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Sonicboom_UnaffectedByColorEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Sonicboom_NullEffect
+	; dbw EFFECTCMDTYPE_AFTER_DAMAGE, NullEffect
 	dbw EFFECTCMDTYPE_AI, Sonicboom_UnaffectedByColorEffect
 	db  $00
 
@@ -968,10 +956,6 @@ UnableToRetreatEffectCommands:
 DragoniteStepInEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StepIn_BenchCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StepIn_SwitchEffect
-	db  $00
-
-SnorlaxThickSkinnedEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ThickSkinnedEffect
 	db  $00
 
 FarfetchdLeekSlapEffectCommands:
