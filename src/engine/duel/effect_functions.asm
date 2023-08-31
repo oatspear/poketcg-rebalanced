@@ -2505,11 +2505,6 @@ EnergyTrans_AIEffect: ; 2cbfb (b:4bfb)
 	ret
 
 
-Sludge_AIEffect: ; 2cc38 (b:4c38)
-	ld a, 5
-	lb de, 0, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
-
 ; ------------------------------------------------------------------------------
 ; Color Manipulation
 ; ------------------------------------------------------------------------------
