@@ -486,23 +486,18 @@ MankeyName: ; 5e7e6 (17:67e6)
 	text "Mankey"
 	done
 
-PeekName: ; 5e7ee (17:67ee)
-	text "Peek"
-	done
-
-PeekDescription: ; 5e7f4 (17:67f4)
-	text "Once during your turn (before your"
-	line "attack), you may look at one of the"
-	line "following: the top card of either"
-	line "player's deck, a random card from"
-	line "your opponent's hand, or one of"
-	line "either player's Prizes."
-	done
-
-PeekDescriptionCont: ; 5e8b8 (17:68b8)
-	text "This power can't be used if Mankey"
-	line "is Asleep, Confused, or Paralyzed."
-	done
+; PeekName: ; 5e7ee (17:67ee)
+; 	text "Peek"
+; 	done
+; 
+; PeekDescription: ; 5e7f4 (17:67f4)
+; 	text "Once during your turn (before your"
+; 	line "attack), you may look at one of the"
+; 	line "following: the top card of either"
+; 	line "player's deck, a random card from"
+; 	line "your opponent's hand, or one of"
+; 	line "either player's Prizes."
+; 	done
 
 PigMonkeyName: ; 5e8ff (17:68ff)
 	text "Pig Monkey"
@@ -1170,10 +1165,9 @@ CurseName:
 	done
 
 CurseDescription:
-	text "Once during your turn (before your"
-	line "attack), you may move 1 damage"
-	line "counter from 1 of your opponent's"
-	line "Pokémon to another."
+	text "Once during your turn, you may move"
+	line "1 damage counter from 1 of your"
+	line "opponent's Pokémon to another."
 	done
 
 PainAmplifierName:
@@ -1549,4 +1543,16 @@ SwarmName:
 SwarmDescription:
 	text "This attack does 20 more damage if"
 	line "you have at least 4 Benched Pokémon."
+	done
+
+StressPheromonesName:
+	text "Stress Pheromones"
+	done
+
+StressPheromonesDescription:
+	text "Once during your turn, if this"
+	line "Pokémon has any damage counters"
+	line "on it, you may search your deck"
+	line "for a Pokémon card and add it to"
+	line "your hand."
 	done

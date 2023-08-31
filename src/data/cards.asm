@@ -914,6 +914,20 @@ NidorinaCard:
 	tx NidoranFName ; pre-evo name
 
 	; attack 1
+	energy 0 ; energies
+	tx StressPheromonesName ; name
+	tx StressPheromonesDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw StressPheromonesEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 1
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx PoisonPaybackName ; name
 	tx PoisonPaybackDescription ; description
@@ -922,20 +936,6 @@ NidorinaCard:
 	db DAMAGE_PLUS ; category
 	dw PoisonPaybackEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy DARKNESS, 1, COLORLESS, 2 ; energies
-	tx DoubleKickName ; name
-	tx DoubleAttackX30Description ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_X ; category
-	dw NidorinaDoubleKickEffectCommands ; effect commands
-	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0

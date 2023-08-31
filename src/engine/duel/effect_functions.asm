@@ -7396,24 +7396,43 @@ EnergySlide_AISelectEffect:
 ; Move Selected Cards
 ; ------------------------------------------------------------------------------
 
-PokeBall_AddToHandEffect:
-ComputerSearch_AddToHandEffect:
+
+; Pokémon Powers do not use [hTemp_ffa0]
+; adds a card in [hAIEnergyTransEnergyCard] from the deck to the hand
+; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
+Synthesis_AddToHandEffect:
+	call SetUsedPokemonPowerThisTurn
+	ldh a, [hAIEnergyTransEnergyCard]
+	ldh [hTemp_ffa0], a
+	jr SelectedCards_AddToHandFromDeck
+	
+	
+; Pokémon Powers do not use [hTemp_ffa0]
+; adds a card in [hAIPkmnPowerEffectParam] from the deck to the hand
+; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
+StressPheromones_AddToHandEffect:
+	ldh a, [hAIPkmnPowerEffectParam]
+	ldh [hTemp_ffa0], a
+	; jr SelectedCards_AddToHandFromDeck
+	; fallthrough
+
+
 SelectedCards_AddToHandFromDeck:
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	jr z, .done ; skip if no card was chosen
 
-; add selected card to hand and show on screen if it isn't the Player's turn
+; add selected card to hand
 	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call IsPlayerTurn
 	jr c, .done
+; show on screen if it isn't the Player's turn
 	ldh a, [hTemp_ffa0]
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 .done
-	call SyncShuffleDeck
-	ret
+	jp SyncShuffleDeck
 
 
 ItemFinder_DiscardAddToHandEffect:
@@ -7731,31 +7750,6 @@ EnergySearch_PlayerSelection:
 	ldh [hTemp_ffa0], a
 	or a
 	ret
-
-EnergySearch_AddToHandEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	jr z, .done
-; add to hand
-	call SearchCardInDeckAndSetToJustDrawn
-	call AddCardToHand
-	call IsPlayerTurn
-	jr c, .done ; done if Player played card
-; display card in screen
-	ldh a, [hTemp_ffa0]
-	ldtx hl, WasPlacedInTheHandText
-	bank1call DisplayCardDetailScreen
-.done
-	call SyncShuffleDeck
-	ret
-
-
-Synthesis_AddToHandEffect:
-; Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
-	call SetUsedPokemonPowerThisTurn
-	ldh a, [hAIEnergyTransEnergyCard]
-	ldh [hTemp_ffa0], a
-	jr EnergySearch_AddToHandEffect
 
 
 ; check if card index in a is a Basic Energy card.

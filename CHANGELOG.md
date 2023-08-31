@@ -10,6 +10,8 @@
 
 #### Nidorina
 - **Supersonic**: removed.
+- **Double Kick**: removed.
+- New Pokémon Power: **Stress Pheromones**: once per turn, if user is damaged, search for a Pokémon in deck.
 - New attack: **Poison Payback** (DC): 20 damage; +20 damage and inflicts Poison if user is damaged.
 
 #### Zubat

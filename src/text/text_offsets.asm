@@ -2607,9 +2607,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EarthquakeDescription                              ; 0x0a16
 	textpointer DugtrioDescription                                 ; 0x0a17
 	textpointer MankeyName                                         ; 0x0a18
-	textpointer PeekName                                           ; 0x0a19
-	textpointer PeekDescription                                    ; 0x0a1a
-	textpointer PeekDescriptionCont                                ; 0x0a1b
+	; textpointer PeekName                                           ; 0x0a19
+	; textpointer PeekDescription                                    ; 0x0a1a
 	textpointer PigMonkeyName                                      ; 0x0a1c
 	textpointer MankeyDescription                                  ; 0x0a1d
 	textpointer PrimeapeName                                       ; 0x0a1e
@@ -2817,6 +2816,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EnergySlideDescription
 	textpointer SwarmName
 	textpointer SwarmDescription
+	textpointer StressPheromonesName
+	textpointer StressPheromonesDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9

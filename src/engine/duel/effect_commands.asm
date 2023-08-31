@@ -54,6 +54,7 @@ PoisonPaybackEffectCommands:
 
 StressPheromonesEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StressPheromones_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StressPheromones_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StressPheromones_PlayerSelectEffect
 	db  $00
 
@@ -1281,7 +1282,7 @@ EnergyRetrievalEffectCommands:
 
 EnergySearchEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergySearch_AddToHandEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCards_AddToHandFromDeck
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySearch_PlayerSelection
 	db  $00
 
@@ -1327,7 +1328,7 @@ ImposterProfessorOakEffectCommands:
 
 ComputerSearchEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ComputerSearch_AddToHandEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCards_AddToHandFromDeck
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ComputerSearch_PlayerSelection
 	db  $00
 
@@ -1413,7 +1414,7 @@ MaintenanceEffectCommands:
 
 PokeBallEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PokeBall_AddToHandEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCards_AddToHandFromDeck
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PokeBall_PlayerSelection
 	db  $00
 
