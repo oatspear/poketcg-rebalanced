@@ -7222,6 +7222,10 @@ RocketGrunts_DiscardEffect: ; 2f273 (b:7273)
 
 INCLUDE "engine/duel/effect_functions/ui_card_selection.asm"
 
+StressPheromones_PlayerSelectEffect:
+	ret
+
+
 Lead_PlayerSelectEffect:
 	call HandlePlayerSelectionSupporterFromDeck
 	ldh [hTemp_ffa0], a
@@ -8483,8 +8487,8 @@ Pokedex_PlayerSelection:
 	call DrawWideTextBox_WaitForInput
 
 ; let the Player choose a Pokémon to add to the hand
-	call HandlePlayerSelectionPokemonFromDeck_
-	ldh a, [hTempList]
+	call _HandlePlayerSelectionPokemonFromDeck
+	ldh [hTempList], a
 	cp $ff
 	jr z, .got_pkmn
 

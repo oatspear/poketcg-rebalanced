@@ -227,18 +227,16 @@ HandlePlayerSelectionCardTypeFromDeckToHand:
 	jr .read_input
 
 
-HandlePlayerSelectionPokemonFromTop5InDeck:
-; create the list of the top 5 cards in deck
-	ld b, 5
-	call CreateDeckCardListTopNCards
-	jr HandlePlayerSelectionPokemonFromDeck_
-
 HandlePlayerSelectionPokemonFromDeck:
 ; create the list of cards in deck
 	call CreateDeckCardList
 	; fallthrough
 
-HandlePlayerSelectionPokemonFromDeck_:
+; output:
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if there are no Pokémon or the Player cancelled the selection
+_HandlePlayerSelectionPokemonFromDeck:
 ; handle input
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChoosePokemonCardText
@@ -254,14 +252,12 @@ HandlePlayerSelectionPokemonFromDeck_:
 	cp TYPE_PKMN + 1
 	jr nc, .play_sfx ; can't select non-Pokémon card
 	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
 	or a
 	ret
 
 .no_cards
 	ld a, $ff
-	ldh [hTemp_ffa0], a
-	or a
+	; scf  ; redundant
 	ret
 
 .play_sfx
