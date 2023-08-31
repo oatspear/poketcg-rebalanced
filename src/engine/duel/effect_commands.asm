@@ -54,6 +54,7 @@ PoisonPaybackEffectCommands:
 
 StressPheromonesEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StressPheromones_PreconditionCheck
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StressPheromones_PlayerSelectEffect
 	db  $00
 
 LureEffectCommands:

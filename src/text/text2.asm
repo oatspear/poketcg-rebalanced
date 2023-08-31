@@ -427,20 +427,13 @@ PleaseSelectThePlayAreaText: ; 3928c (e:528c)
 	line "            Yours   Opponent's"
 	done
 
-NidoranMNidoranFText: ; 392c9 (e:52c9)
-	text "Nidoran♂ Nidoran♀"
+ChooseAnyPokemonFromDeckText:
+	text "Choose any Pokémon"
+	line "from the Deck."
 	done
 
-OddishText: ; 392dc (e:52dc)
-	text "Oddish"
-	done
-
-BellsproutText: ; 392e4 (e:52e4)
-	text "Bellsprout"
-	done
-
-KrabbyText: ; 392f0 (e:52f0)
-	text "Krabby"
+AnyPokemonDeckText:
+	text "Any Pokémon"
 	done
 
 BasicPokemonDeckText: ; 392f8 (e:52f8)

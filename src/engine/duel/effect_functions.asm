@@ -7222,7 +7222,27 @@ RocketGrunts_DiscardEffect: ; 2f273 (b:7273)
 
 INCLUDE "engine/duel/effect_functions/ui_card_selection.asm"
 
+
+; store deck index of selected card or $ff in [hAIPkmnPowerEffectParam]
 StressPheromones_PlayerSelectEffect:
+; search cards in Deck
+	call CreateDeckCardList
+	ldtx hl, ChooseAnyPokemonFromDeckText
+	ldtx bc, AnyPokemonDeckText
+	ld d, SEARCHEFFECT_POKEMON
+	call LookForCardsInDeck
+	jr c, .none_in_deck
+
+	call HandlePlayerSelectionPokemonFromDeck
+	ldh [hAIPkmnPowerEffectParam], a
+	or a  ; the Power has been used, regardless of cancel
+	ret
+
+.none_in_deck
+; proceed, the Power has been used
+	ld a, $ff
+	ldh [hAIPkmnPowerEffectParam], a
+	or a
 	ret
 
 

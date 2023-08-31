@@ -322,10 +322,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThereAreNoEligibleCardsInTheDiscardPileText
 	textpointer PleaseSelectTheDeckText                            ; 0x013d
 	textpointer PleaseSelectThePlayAreaText                        ; 0x013e
-	textpointer NidoranMNidoranFText                               ; 0x013f
-	textpointer OddishText                                         ; 0x0140
-	textpointer BellsproutText                                     ; 0x0141
-	textpointer KrabbyText                                         ; 0x0142
+	textpointer ChooseAnyPokemonFromDeckText
+	textpointer AnyPokemonDeckText
 	textpointer BasicPokemonDeckText                               ; 0x0143
 	textpointer BasicEnergyText                                    ; 0x0144
 	textpointer EvolvedPokemonText
