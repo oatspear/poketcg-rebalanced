@@ -55,10 +55,6 @@ PowerLariatDescription:
 	line "each Evolved Pokémon on your Bench."
 	done
 
-MegaPunchName: ; 58584 (16:4584)
-	text "Mega Punch"
-	done
-
 DrillName: ; 58590 (16:4590)
 	text "Drill"
 	done

@@ -363,6 +363,42 @@ Swarm_AIEffect:
   jp SetDefiniteAIDamage
 
 
+; +20 damage for each Evolved Pokémon in Bench
+PowerLariat_DamageBoostEffect:
+  ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+  call GetTurnDuelistVariable
+  dec a
+  ret z  ; no Benched Pokémon
+  ld d, a
+  ld e, PLAY_AREA_BENCH_1
+  ld c, 0
+
+; go through every Pokemon in the Play Area and boost damage based on Stage
+.loop_play_area
+; check its Stage
+  ld a, DUELVARS_ARENA_CARD_STAGE
+  add e
+  call GetNonTurnDuelistVariable
+  or a
+  jr z, .next_pkmn  ; it's a BASIC Pokémon
+  inc c
+.next_pkmn
+  inc e
+  dec d
+  jr nz, .loop_play_area
+; tally damage boost
+  ld a, c
+  or a
+  ret z  ; done if zero
+  rla            ; a = a * 2
+  call ATimes10  ; a = a * 10
+  jp SetDefiniteDamage  ; a == c * 20
+
+PowerLariat_AIEffect:
+  call PowerLariat_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Defending Pokémon
 ; ------------------------------------------------------------------------------

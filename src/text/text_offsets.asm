@@ -2153,7 +2153,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NidoqueenName                                      ; 0x0856
 	textpointer PowerLariatName
 	textpointer PowerLariatDescription
-	textpointer MegaPunchName                                      ; 0x0859
 	textpointer DrillName                                          ; 0x085a
 	textpointer NidoqueenDescription                               ; 0x085b
 	textpointer NidoranMName                                       ; 0x085c

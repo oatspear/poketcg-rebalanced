@@ -209,6 +209,11 @@ CrabhammerEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Crabhammer_AIEffect
 	db  $00
 
+PowerLariatEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PowerLariat_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, PowerLariat_AIEffect
+	db  $00
+
 HornHazardEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HornHazard_NoDamage50PercentEffect
 	dbw EFFECTCMDTYPE_AI, HornHazard_AIEffect

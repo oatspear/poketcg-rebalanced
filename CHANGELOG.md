@@ -16,7 +16,9 @@
 
 #### Nidoqueen
 - **Boyfriends**: removed.
+- **Mega Punch**: removed.
 - New attack: **Queen Press** (DC): 40 damage; prevents damage from Basic Pokémon for a turn.
+- New attack: **Power Lariat** (CCC): 30 damage; +20 damage for each evolved Pokémon on own Bench.
 
 #### Zubat
 - **Leech Life**: removed.

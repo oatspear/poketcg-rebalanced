@@ -979,18 +979,18 @@ NidoqueenCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy DARKNESS, 1, COLORLESS, 2 ; energies
-	tx MegaPunchName ; name
-	dw NONE ; description
+	energy COLORLESS, 3 ; energies
+	tx PowerLariatName ; name
+	tx PowerLariatDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw PowerLariatEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_BIG_HIT ; animation
 
 	db 2 ; retreat cost
 	db WR_FIGHTING ; weakness
