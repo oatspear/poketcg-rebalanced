@@ -1784,3 +1784,7 @@ PikachuName: ; 5ce94 (17:4e94)
 GnawName: ; 5ce9d (17:4e9d)
 	text "Gnaw"
 	done
+
+SkillDiveName:
+	text "Skill Dive"
+	done

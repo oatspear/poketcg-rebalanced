@@ -4,16 +4,19 @@
 
 ### Changed
 
+#### Nidoran (F)
+- **Fury Swipes**: removed.
+- New attack: **Poison Sting** (D): 10 damage; flip a coin, Poison if Heads.
+
 #### Zubat
 - **Leech Life**: removed.
 - **Supersonic**: increased cost from (C) to (D); always inflicts Confusion.
 - New attack: **Swarm** (CC): 10 damage, +20 damage if the player has 4 or more Benched Pokémon.
 
 #### Golbat
-- Increased HP from 60 to 70.
-- **Leech Life**: removed.
-- **Supersonic**: increased cost from (C) to (D); always inflicts Confusion.
-- New attack: **Swarm** (CC): 10 damage, +20 damage if the player has 4 or more Benched Pokémon.
+- **Wing Attack**: removed.
+- **Leech Life**: reduced cost from (DC) to (D).
+- New attack: **Skill Dive** (CC): 30 damage to any of the opponent's Pokémon.
 
 #### Weezing
 - **Smog**: always inflicts Poison.
@@ -25,7 +28,6 @@
 
 #### Beedrill
 - **Toxic**: reduced cost from (GGC) to (GC); reduced damage from 40 to 30.
-- New attack: **Amnesia** (W): 10 damage; disables 1 of the Defender's attacks.
 
 #### Golduck
 - **Psyshock**: removed.

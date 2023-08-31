@@ -2514,6 +2514,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer OnlyWorksOnEvolvedPokemonText
 	textpointer PikachuName                                        ; 0x09b5
 	textpointer GnawName                                           ; 0x09b6
+	textpointer SkillDiveName
 	textpointer VoltTackleName
 	textpointer MouseName                                          ; 0x09b9
 	textpointer PikachuLv12Description                            ; 0x09ba

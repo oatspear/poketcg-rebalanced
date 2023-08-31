@@ -863,20 +863,6 @@ NidoranFCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx FurySwipesName ; name
-	tx Heads10BonusDamageDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw FurySwipes20Plus10EffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_MULTIPLE_SLASH ; animation
-
-	; attack 2
 	energy COLORLESS, 1 ; energies
 	tx CallForFriendName ; name
 	tx CallForFriendDescription ; description
@@ -889,6 +875,20 @@ NidoranFCard:
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy DARKNESS, 1 ; energies
+	tx PoisonStingName ; name
+	tx MayInflictPoisonDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Poison50PercentEffectCommands ; effect commands
+	db INFLICT_POISON ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_NEEDLES ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -1215,12 +1215,12 @@ GolbatCard:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db GOLBAT
-	db 70 ; hp
+	db 60 ; hp
 	db STAGE1 ; stage
 	tx ZubatName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	energy DARKNESS, 1 ; energies
 	tx LeechLifeName ; name
 	tx LeechLifeDescription ; description
 	dw NONE ; description (cont)
@@ -1234,18 +1234,18 @@ GolbatCard:
 	db ATK_ANIM_DRAIN ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx WingAttackName ; name
-	dw NONE ; description
+	energy COLORLESS, 2 ; energies
+	tx SkillDiveName ; name
+	tx Deal30ToAnyPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db 2
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
