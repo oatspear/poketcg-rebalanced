@@ -236,6 +236,7 @@ HandlePlayerSelectionPokemonFromDeck:
 ;   a: deck index of the selected card | $ff
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 ;   carry: set if there are no Pokémon or the Player cancelled the selection
+;   nz: set if there are no Pokémon in the deck
 _HandlePlayerSelectionPokemonFromDeck:
 ; handle input
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
@@ -245,24 +246,49 @@ _HandlePlayerSelectionPokemonFromDeck:
 .read_input
 	bank1call DisplayCardList
 ; if B was pressed, either there are no Pokémon or Player does not want any
-	jr c, .no_cards
+	jr c, .try_cancel
 	ldh a, [hTempCardIndex_ff98]
 	call LoadCardDataToBuffer2_FromDeckIndex
 	ld a, [wLoadedCard2Type]
 	cp TYPE_PKMN + 1
-	jr nc, .play_sfx ; can't select non-Pokémon card
+	jr nc, .play_sfx  ; can't select non-Pokémon card
+; got Pokémon card
 	ldh a, [hTempCardIndex_ff98]
 	or a
-	ret
-
-.no_cards
-	ld a, $ff
-	; scf  ; redundant
 	ret
 
 .play_sfx
 	call PlaySFX_InvalidChoice
 	jr .read_input
+
+.try_cancel
+; Player tried exiting screen, check if there are any Pokémon to select
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.loop_deck
+	ld a, [hl]
+	cp CARD_LOCATION_DECK
+	jr nz, .next_card
+	ld a, l
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_PKMN + 1
+	jr nc, .next_card  ; not a Pokémon card
+; cancelled selection, but there were valid options
+	xor a  ; ensure z flag
+	ld a, $ff
+	scf
+	ret
+.next_card
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_deck
+; none in deck, can exit
+	ld a, $ff
+	or a  ; ensure nz flag
+	scf
+	ret
 
 
 ; ------------------------------------------------------------------------------
