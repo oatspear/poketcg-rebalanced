@@ -2099,13 +2099,6 @@ KakunaPoisonPowder_AIEffect: ; 2c7b4 (b:47b4)
 	lb de, 0, 10
 	jp UpdateExpectedAIDamage_AccountForPoison
 
-LeechLifeEffect:
-	ld hl, wDealtDamage
-	ld e, [hl]
-	inc hl ; wDamageEffectiveness
-	ld d, [hl]
-	call ApplyAndAnimateHPRecovery
-	ret
 
 ; During your next turn, double damage
 SwordsDanceEffect: ; 2c7d0 (b:47d0)

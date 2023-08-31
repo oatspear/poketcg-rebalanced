@@ -2,6 +2,14 @@
 ; Healing
 ; ------------------------------------------------------------------------------
 
+LeechLifeEffect:
+	ld hl, wDealtDamage
+	ld e, [hl]
+	inc hl ; wDamageEffectiveness
+	ld d, [hl]
+	jr ApplyAndAnimateHPRecovery
+
+
 Heal10DamageEffect:
 	ld hl, wDealtDamage
 	ld a, [hli]
