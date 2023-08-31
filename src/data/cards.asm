@@ -960,23 +960,23 @@ NidoqueenCard:
 	db STAR ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db NIDOQUEEN
-	db 90 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx NidorinaName ; pre-evo name
 
 	; attack 1
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx BoyfriendsName ; name
-	tx BoyfriendsDescription ; description
+	tx QueenPressName ; name
+	tx QueenPressDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw NidoqueenBoyfriendsEffectCommands ; effect commands
+	db 40 ; damage
+	db DAMAGE_NORMAL ; category
+	dw QueenPressEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_BOYFRIENDS ; animation
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
 	energy DARKNESS, 1, COLORLESS, 2 ; energies

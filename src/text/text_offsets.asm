@@ -268,7 +268,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer UnableToEvolveDueToPrehistoricPowerText            ; 0x0106
 	textpointer NoDamageOrEffectDueToFlyText                       ; 0x0107
 	textpointer NoDamageOrEffectDueToBarrierText                   ; 0x0108
-	textpointer NoDamageOrEffectDueToAgilityText                   ; 0x0109
+	; textpointer NoDamageQueenPressText
 	textpointer UnableToUseAttackDueToNShieldText                  ; 0x010a
 	textpointer NoDamageOrEffectDueToNShieldText                   ; 0x010b
 	textpointer NoDamageOrEffectDueToTransparencyText              ; 0x010c
@@ -2151,8 +2151,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DoubleAttackX20X10Description
 	textpointer NidorinaDescription                                ; 0x0855
 	textpointer NidoqueenName                                      ; 0x0856
-	textpointer BoyfriendsName                                     ; 0x0857
-	textpointer BoyfriendsDescription                              ; 0x0858
+	textpointer PowerLariatName
+	textpointer PowerLariatDescription
 	textpointer MegaPunchName                                      ; 0x0859
 	textpointer DrillName                                          ; 0x085a
 	textpointer NidoqueenDescription                               ; 0x085b
@@ -2818,6 +2818,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SwarmDescription
 	textpointer StressPheromonesName
 	textpointer StressPheromonesDescription
+	textpointer QueenPressName
+	textpointer QueenPressDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9

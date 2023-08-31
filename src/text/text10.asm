@@ -46,13 +46,13 @@ NidoqueenName: ; 58525 (16:4525)
 	text "Nidoqueen"
 	done
 
-BoyfriendsName: ; 58530 (16:4530)
-	text "Boyfriends"
+PowerLariatName:
+	text "Power Lariat"
 	done
 
-BoyfriendsDescription: ; 5853c (16:453c)
-	text "Does 20 damage plus 20 more damage"
-	line "for each Nidoking you have in play."
+PowerLariatDescription:
+	text "This attack does 20 more damage for"
+	line "each Evolved Pokémon on your Bench."
 	done
 
 MegaPunchName: ; 58584 (16:4584)

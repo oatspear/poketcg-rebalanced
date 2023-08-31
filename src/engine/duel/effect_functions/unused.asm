@@ -1,3 +1,38 @@
+
+NidoqueenBoyfriendsEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BoyfriendsEffect
+	db  $00
+
+
+BoyfriendsEffect: ; 2c998 (b:4998)
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	ld c, PLAY_AREA_ARENA
+.loop
+	ld a, [hl]
+	cp $ff
+	jr z, .done
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp NIDOKING
+	jr nz, .next
+	ld a, d
+	cp $00 ; why check d? Card IDs are only 1 byte long
+	jr nz, .next
+	inc c
+.next
+	inc hl
+	jr .loop
+.done
+; c holds number of Nidoking found in Play Area
+	ld a, c
+	add a
+	call ATimes10
+	call AddToDamage ; adds 2 * 10 * c
+	ret
+
+
+
 TailWagEffect: ; 2e94e (b:694e)
 	ldtx de, IfHeadsOpponentCannotAttackText
 	call TossCoin_BankB

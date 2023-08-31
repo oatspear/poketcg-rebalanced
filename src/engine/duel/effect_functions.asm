@@ -1993,34 +1993,6 @@ Thrash_ModifierEffect: ; 2c973 (b:4973)
 	ret
 
 
-BoyfriendsEffect: ; 2c998 (b:4998)
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	ld c, PLAY_AREA_ARENA
-.loop
-	ld a, [hl]
-	cp $ff
-	jr z, .done
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp NIDOKING
-	jr nz, .next
-	ld a, d
-	cp $00 ; why check d? Card IDs are only 1 byte long
-	jr nz, .next
-	inc c
-.next
-	inc hl
-	jr .loop
-.done
-; c holds number of Nidoking found in Play Area
-	ld a, c
-	add a
-	call ATimes10
-	call AddToDamage ; adds 2 * 10 * c
-	ret
-
-
 HornHazard_AIEffect: ; 2ca8e (b:4a8e)
 	ld a, 30 / 2
 	lb de, 0, 30
@@ -4275,6 +4247,11 @@ Barrier_BarrierEffect:
 	ld a, SUBSTATUS1_BARRIER
 	call ApplySubstatus1ToAttackingCard
 	ret
+
+
+QueenPressEffect:
+	ld a, SUBSTATUS1_NO_DAMAGE_FROM_BASIC
+	jp ApplySubstatus1ToAttackingCard
 
 
 EnergySpores_PlayerSelectEffect:
@@ -7405,8 +7382,8 @@ Synthesis_AddToHandEffect:
 	ldh a, [hAIEnergyTransEnergyCard]
 	ldh [hTemp_ffa0], a
 	jr SelectedCards_AddToHandFromDeck
-	
-	
+
+
 ; Pokémon Powers do not use [hTemp_ffa0]
 ; adds a card in [hAIPkmnPowerEffectParam] from the deck to the hand
 ; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point

@@ -1690,17 +1690,8 @@ PlayAttackAnimation_DealAttackDamage:
 	pop hl
 .skip_draw_huds
 	call PrintKnockedOutIfHLZero
-	jr Func_17fb
-
-Func_17ed:
-	call DrawWideTextBox_WaitForInput
-	xor a
-	ld hl, wDamage
-	ld [hli], a
-	ld [hl], a
-	ld a, NO_DAMAGE_OR_EFFECT_AGILITY
-	ld [wNoDamageOrEffect], a
-;	fallthrough
+	; jr Func_17fb
+	; fallthrough
 
 Func_17fb:
 	ld a, [wTempNonTurnDuelistCardID]

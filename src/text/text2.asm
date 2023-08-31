@@ -97,10 +97,10 @@ NoDamageOrEffectDueToBarrierText: ; 383d3 (e:43d3)
 	line "due to the effects of Barrier."
 	done
 
-NoDamageOrEffectDueToAgilityText: ; 38416 (e:4416)
-	text "No damage or effect on next Attack"
-	line "due to the effects of Agility."
-	done
+; NoDamageQueenPressText:
+; 	text "No damage on next Attack due to the"
+; 	line "effects of Queen Press."
+; 	done
 
 UnableToUseAttackDueToNShieldText: ; 38459 (e:4459)
 	text "Unable to use this Attack due to"

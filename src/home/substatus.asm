@@ -68,6 +68,8 @@ HandleDamageReductionExceptSubstatus2:
 	call GetTurnDuelistVariable
 	or a
 	jr z, .not_affected_by_substatus1
+	cp SUBSTATUS1_NO_DAMAGE_FROM_BASIC
+	jr z, .no_damage_from_basic
 	cp SUBSTATUS1_NO_DAMAGE_STIFFEN
 	jr z, .no_damage
 	cp SUBSTATUS1_NO_DAMAGE_10
@@ -84,9 +86,11 @@ HandleDamageReductionExceptSubstatus2:
 	jr z, .prevent_less_than_40_damage
 	cp SUBSTATUS1_HALVE_DAMAGE
 	jr z, .halve_damage
+
 .not_affected_by_substatus1
 	call CheckCannotUseDueToStatus
 	ret c
+
 .pkmn_power
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
@@ -101,27 +105,37 @@ HandleDamageReductionExceptSubstatus2:
 	cp KABUTO
 	jr z, .halve_damage2 ; kabuto armor
 	ret
+
+.no_damage_from_basic
+	ld a, DUELVARS_ARENA_CARD_STAGE
+	call GetNonTurnDuelistVariable
+	or a
+	jr nz, .not_affected_by_substatus1  ; not a Basic Pokémon
 .no_damage
 	ld de, 0
 	ret
+
 .reduce_damage_by_10
 	ld hl, -10
 	add hl, de
 	ld e, l
 	ld d, h
 	ret
+
 .reduce_damage_by_20
 	ld hl, -20
 	add hl, de
 	ld e, l
 	ld d, h
 	ret
+
 .prevent_less_than_40_damage
 	ld bc, 40
 	call CompareDEtoBC
 	ret nc
 	ld de, 0
 	ret
+
 .halve_damage
 	sla d
 	rr e
@@ -132,6 +146,7 @@ HandleDamageReductionExceptSubstatus2:
 	ld e, l
 	ld d, h
 	ret
+
 .prevent_less_than_30_damage
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
@@ -141,6 +156,7 @@ HandleDamageReductionExceptSubstatus2:
 	ret c
 	ld de, 0
 	ret
+
 .halve_damage2
 	sla d
 	rr e
@@ -370,6 +386,7 @@ HandleNoDamageOrEffectSubstatus:
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
+
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
 	call GetTurnDuelistVariable
 	ld e, NO_DAMAGE_OR_EFFECT_FLY
@@ -380,29 +397,29 @@ HandleNoDamageOrEffectSubstatus:
 	ldtx hl, NoDamageOrEffectDueToBarrierText
 	cp SUBSTATUS1_BARRIER
 	jr z, .no_damage_or_effect
-	ld e, NO_DAMAGE_OR_EFFECT_AGILITY
-	ldtx hl, NoDamageOrEffectDueToAgilityText
-	cp SUBSTATUS1_AGILITY
-	jr z, .no_damage_or_effect
 	call CheckCannotUseDueToStatus
 	ccf
 	ret nc
+
 .pkmn_power
 	ld a, [wTempNonTurnDuelistCardID]
 	cp MEW_LV8
 	jr z, .neutralizing_shield
 	or a
 	ret
+
 .no_damage_or_effect
 	ld a, e
 	ld [wNoDamageOrEffect], a
 	scf
 	ret
+
 .neutralizing_shield
 	ld a, [wIsDamageToSelf]
 	or a
 	ret nz
-	; prevent damage if attacked by a non-basic Pokemon
+
+; prevent damage if attacked by a non-basic Pokemon
 	ld a, [wTempTurnDuelistCardID]
 	ld e, a
 	ld d, $0
@@ -410,9 +427,11 @@ HandleNoDamageOrEffectSubstatus:
 	ld a, [wLoadedCard2Stage]
 	or a
 	ret z
+
 	ld e, NO_DAMAGE_OR_EFFECT_NSHIELD
 	ldtx hl, NoDamageOrEffectDueToNShieldText
 	jr .no_damage_or_effect
+
 
 ; if the Pokemon being attacked is HAUNTER_LV17, and its Transparency is active,
 ; there is a 50% chance that any damage or effect is prevented
@@ -470,7 +489,7 @@ CheckNoDamageOrEffect:
 	ret
 
 NoDamageOrEffectTextIDTable:
-	tx NoDamageOrEffectDueToAgilityText      ; NO_DAMAGE_OR_EFFECT_AGILITY
+	tx NoDamageText                          ; NO_DAMAGE_OR_EFFECT_UNUSED
 	tx NoDamageOrEffectDueToBarrierText      ; NO_DAMAGE_OR_EFFECT_BARRIER
 	tx NoDamageOrEffectDueToFlyText          ; NO_DAMAGE_OR_EFFECT_FLY
 	tx NoDamageOrEffectDueToTransparencyText ; NO_DAMAGE_OR_EFFECT_TRANSPARENCY

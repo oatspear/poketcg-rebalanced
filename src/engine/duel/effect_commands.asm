@@ -189,10 +189,6 @@ ToxicEffectCommands:
 	; dbw EFFECTCMDTYPE_AI, Toxic_AIEffect
 	db  $00
 
-NidoqueenBoyfriendsEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BoyfriendsEffect
-	db  $00
-
 PeckEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Peck_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Peck_AIEffect
@@ -1231,6 +1227,11 @@ SynthesisEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Synthesis_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Synthesis_PlayerSelection
 	db  $00
+
+QueenPressEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, QueenPressEffect
+	db  $00
+
 
 DoubleColorlessEnergyEffectCommands:
 	db  $00

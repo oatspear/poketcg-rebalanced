@@ -489,7 +489,7 @@ MankeyName: ; 5e7e6 (17:67e6)
 ; PeekName: ; 5e7ee (17:67ee)
 ; 	text "Peek"
 ; 	done
-; 
+;
 ; PeekDescription: ; 5e7f4 (17:67f4)
 ; 	text "Once during your turn (before your"
 ; 	line "attack), you may look at one of the"
@@ -1555,4 +1555,15 @@ StressPheromonesDescription:
 	line "on it, you may search your deck"
 	line "for a Pokémon card and add it to"
 	line "your hand."
+	done
+
+QueenPressName:
+	text "Queen Press"
+	done
+
+QueenPressDescription:
+	text "During your opponent's next turn,"
+	line "prevent all damage done to"
+	line "this Pokémon by attacks from"
+	line "Basic Pokémon."
 	done

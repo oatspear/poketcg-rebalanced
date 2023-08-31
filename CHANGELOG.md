@@ -14,6 +14,10 @@
 - New Pokémon Power: **Stress Pheromones**: once per turn, if user is damaged, search for a Pokémon in deck.
 - New attack: **Poison Payback** (DC): 20 damage; +20 damage and inflicts Poison if user is damaged.
 
+#### Nidoqueen
+- **Boyfriends**: removed.
+- New attack: **Queen Press** (DC): 40 damage; prevents damage from Basic Pokémon for a turn.
+
 #### Zubat
 - **Leech Life**: removed.
 - **Supersonic**: increased cost from (C) to (D); always inflicts Confusion.
