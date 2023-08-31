@@ -4,6 +4,17 @@
 
 ### Changed
 
+#### Zubat
+- **Leech Life**: removed.
+- **Supersonic**: increased cost from (C) to (D); always inflicts Confusion.
+- New attack: **Swarm** (CC): 10 damage, +20 damage if the player has 4 or more Benched Pokémon.
+
+#### Golbat
+- Increased HP from 60 to 70.
+- **Leech Life**: removed.
+- **Supersonic**: increased cost from (C) to (D); always inflicts Confusion.
+- New attack: **Swarm** (CC): 10 damage, +20 damage if the player has 4 or more Benched Pokémon.
+
 #### Weezing
 - **Smog**: always inflicts Poison.
 

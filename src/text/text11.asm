@@ -1541,3 +1541,12 @@ EnergySlideDescription:
 	line "from this Pokémon to one of your"
 	line "Benched Pokémon."
 	done
+
+SwarmName:
+	text "Swarm"
+	done
+
+SwarmDescription:
+	text "This attack does 20 more damage if"
+	line "you have at least 4 Benched Pokémon."
+	done

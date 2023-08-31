@@ -1169,13 +1169,13 @@ ZubatCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
+	energy DARKNESS, 1 ; energies
 	tx SupersonicName ; name
-	tx MayInflictConfusionDescription ; description
+	tx InflictConfusionDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SupersonicEffectCommands ; effect commands
+	dw InflictConfusionEffectCommands ; effect commands
 	db INFLICT_CONFUSION ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -1183,18 +1183,18 @@ ZubatCard:
 	db ATK_ANIM_SUPERSONIC ; animation
 
 	; attack 2
-	energy DARKNESS, 1 ; energies
-	tx LeechLifeName ; name
-	tx LeechLifeDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx SwarmName ; name
+	tx SwarmDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw LeechLifeEffectCommands ; effect commands
+	db DAMAGE_PLUS ; category
+	dw SwarmEffectCommands ; effect commands
 	db NONE ; flags 1
-	db HEAL_USER ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 3
-	db ATK_ANIM_DRAIN ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -1215,7 +1215,7 @@ GolbatCard:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db GOLBAT
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx ZubatName ; pre-evo name
 
@@ -1928,7 +1928,7 @@ GrimerCard:
 
 	; attack 2
 	energy COLORLESS, 1 ; energies
-	tx MinimizeName ; name
+	tx WithdrawName ; name
 	tx ReduceDamageTakenBy20Description ; description
 	dw NONE ; description (cont)
 	db 0 ; damage

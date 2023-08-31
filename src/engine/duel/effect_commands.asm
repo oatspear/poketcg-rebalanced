@@ -1053,8 +1053,13 @@ SingEffectCommands:
 	db  $00
 
 DoTheWaveEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoTheWaveEffect
-	dbw EFFECTCMDTYPE_AI, DoTheWaveEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoTheWave_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, DoTheWave_AIEffect
+	db  $00
+
+SwarmEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Swarm_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Swarm_AIEffect
 	db  $00
 
 MoonblastEffectCommands:

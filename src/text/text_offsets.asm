@@ -2254,7 +2254,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer VictreebelDescription                              ; 0x08a2
 	textpointer GrimerName                                         ; 0x08a3
 	textpointer NastyGooName                                       ; 0x08a4
-	textpointer MinimizeName                                       ; 0x08a5
 	textpointer ReduceDamageTakenBy20Description
 	textpointer SludgeName                                         ; 0x08a7
 	textpointer GrimerDescription                                  ; 0x08a8
@@ -2327,8 +2326,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FireBlastName                                      ; 0x08e9
 	textpointer NinetalesLv32Description                          ; 0x08eb
 	textpointer FireFangName                                       ; 0x08ec
-	textpointer DancingEmbersName                                  ; 0x08ef
-	textpointer DancingEmbersDescription                           ; 0x08f0
 	textpointer NinetalesLv35Description                          ; 0x08f1
 	textpointer GrowlitheName                                      ; 0x08f2
 	textpointer FlareName                                          ; 0x08f3
@@ -2818,6 +2815,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LightStepsName
 	textpointer EnergySlideName
 	textpointer EnergySlideDescription
+	textpointer SwarmName
+	textpointer SwarmDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9

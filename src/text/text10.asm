@@ -537,10 +537,6 @@ NastyGooName: ; 595c7 (16:55c7)
 	text "Nasty Goo"
 	done
 
-MinimizeName: ; 595d2 (16:55d2)
-	text "Minimize"
-	done
-
 ReduceDamageTakenBy20Description:
 	text "Reduce all damage done by attacks"
 	line "to this Pokémon during your"
@@ -883,15 +879,6 @@ NinetalesLv32Description: ; 5a28a (16:628a)
 
 FireFangName: ; 5a2ec (16:62ec)
 	text "Fire Fang"
-	done
-
-DancingEmbersName: ; 5a431 (16:6431)
-	text "Dancing Embers"
-	done
-
-DancingEmbersDescription: ; 5a441 (16:6441)
-	text "Flip 8 coins. This attack does 10"
-	line "damage times the number of heads."
 	done
 
 NinetalesLv35Description: ; 5a486 (16:6486)

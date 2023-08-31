@@ -338,13 +338,29 @@ RagingStorm_AIEffect:
 ; ------------------------------------------------------------------------------
 
 
-DoTheWaveEffect:
+DoTheWave_DamageBoostEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	dec a ; don't count arena card
 	call ATimes10
-	call AddToDamage
-	ret
+	jp AddToDamage
+
+DoTheWave_AIEffect:
+  call DoTheWave_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+Swarm_DamageBoostEffect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+  cp 5
+	ret c  ; nothing to do
+  ld a, 20
+	jp AddToDamage
+
+Swarm_AIEffect:
+  call Swarm_DamageBoostEffect
+  jp SetDefiniteAIDamage
 
 
 ; ------------------------------------------------------------------------------
