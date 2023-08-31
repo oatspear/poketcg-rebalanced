@@ -7694,11 +7694,13 @@ EnergySlide_PlayerSelection:
 	ccf
 	ret nc  ; nothing to do if there are no Benched Pokémon
 
+	ld e, PLAY_AREA_ARENA
 	call HandleAttachedBasicEnergySelectionScreen
 	ccf
 	ret nc  ; gave up on choosing energy or there are no Basic energies
 
-; selected energy index is in [hTemp_ffa0]
+; selected energy index is in a and [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
 	call EmptyScreen
 	ldtx hl, ChoosePokemonToAttachEnergyCardText
 	call DrawWideTextBox_WaitForInput

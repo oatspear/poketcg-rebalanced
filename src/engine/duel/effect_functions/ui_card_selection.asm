@@ -408,8 +408,8 @@ HandlePokemonAndBasicEnergySelectionScreen:
 ; input:
 ;   e: PLAY_AREA_* of selected card
 ; output:
-;   a: deck index of selected card
-;   [hTempCardIndex_ff98]: deck index of selected card
+;   a: deck index of selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of selected card | $ff
 ;   carry: set if no Basic Energy cards or B pressed
 ;   nz: set if no Basic Energy cards
 HandleAttachedBasicEnergySelectionScreen:
@@ -423,7 +423,7 @@ HandleAttachedBasicEnergySelectionScreen:
 	jr nz, .has_energy
 ; only has colorless energy
 .no_energy
-	ld a, 1
+	ld a, $ff
 	or a
 	scf
 	ret
@@ -436,10 +436,7 @@ HandleAttachedBasicEnergySelectionScreen:
 	ldh a, [hCurMenuItem]
 	bank1call DisplayEnergyDiscardScreen
 	bank1call HandleEnergyDiscardMenuInput
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTempPlayAreaLocation_ffa1], a
+	; ldh a, [hTempCardIndex_ff98]
 	ret
 
 
