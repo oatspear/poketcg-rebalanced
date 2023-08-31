@@ -2373,16 +2373,6 @@ HornHazard_NoDamage50PercentEffect: ; 2ca96 (b:4a96)
 	ret
 
 
-WeedlePoisonSting_AIEffect: ; 2cb27 (b:4b27)
-	ld a, 5
-	lb de, 0, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
-
-IvysaurPoisonWhip_AIEffect:
-	ld a, 20
-	lb de, 20, 20
-	jp UpdateExpectedAIDamage_AccountForPoison
-
 ; returns carry if no Grass Energy in Play Area
 EnergyTrans_CheckPlayArea: ; 2cb44 (b:4b44)
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -2516,11 +2506,6 @@ EnergyTrans_AIEffect: ; 2cbfb (b:4bfb)
 
 
 Sludge_AIEffect: ; 2cc38 (b:4c38)
-	ld a, 5
-	lb de, 0, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
-
-WeezingSmog_AIEffect: ; 2cce2 (b:4ce2)
 	ld a, 5
 	lb de, 0, 10
 	jp UpdateExpectedAIDamage_AccountForPoison

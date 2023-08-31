@@ -45,11 +45,6 @@ PassivePowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	db  $00
 
-EkansSpitPoisonEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpitPoison_Poison50PercentEffect
-	; dbw EFFECTCMDTYPE_AI, SpitPoison_AIEffect
-	db  $00
-
 ArbokPoisonFangEffectCommands:
 PoisonClawsEffectCommands:
 InflictPoisonEffectCommands:
@@ -245,14 +240,12 @@ Heal30DamageEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal30DamageEffect
 	db  $00
 
-WeedlePoisonStingEffectCommands:
+Poison50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Poison50PercentEffect
-	dbw EFFECTCMDTYPE_AI, WeedlePoisonSting_AIEffect
 	db  $00
 
 IvysaurPoisonWhipEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	dbw EFFECTCMDTYPE_AI, IvysaurPoisonWhip_AIEffect
 	db  $00
 
 LeechSeedEffectCommands:
@@ -269,11 +262,6 @@ EnergyTransEffectCommands:
 
 MukToxicGasEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ToxicGasEffect
-	db  $00
-
-WeezingSmogEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Poison50PercentEffect
-	dbw EFFECTCMDTYPE_AI, WeezingSmog_AIEffect
 	db  $00
 
 VaporEssenceEffectCommands:
@@ -401,7 +389,6 @@ PikachuAltLv16ThundershockEffectCommands:
 MagnetonThunderWaveEffectCommands:
 JolteonStunNeedleEffectCommands:
 SnorlaxBodySlamEffectCommands:
-EkansWrapEffectCommands:
 PinsirIronGripEffectCommands:
 CloysterClampEffectCommands:
 CaterpieStringShotEffectCommands:

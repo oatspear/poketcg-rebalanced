@@ -4,6 +4,10 @@
 
 ### Changed
 
+#### Beedrill
+- **Toxic**: reduced cost from (GGC) to (GC); reduced damage from 40 to 30.
+- New attack: **Amnesia** (W): 10 damage; disables 1 of the Defender's attacks.
+
 #### Golduck
 - **Psyshock**: removed.
 - New attack: **Amnesia** (W): 10 damage; disables 1 of the Defender's attacks.
