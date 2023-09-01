@@ -178,10 +178,9 @@ TropicalStormEffectCommands:
 	dbw EFFECTCMDTYPE_AI, TropicalStorm_AIEffect
 	db  $00
 
-NidokingThrashEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Thrash_ModifierEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Thrash_RecoilEffect
-	dbw EFFECTCMDTYPE_AI, Thrash_AIEffect
+RoutEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rout_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Rout_AIEffect
 	db  $00
 
 ToxicEffectCommands:
@@ -803,6 +802,10 @@ Earthquake10EffectCommands:
 
 BlizzardEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenched10Effect
+	db  $00
+
+TailSwingEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenchedBasic20Effect
 	db  $00
 
 AerodactylPrehistoricPowerEffectCommands:

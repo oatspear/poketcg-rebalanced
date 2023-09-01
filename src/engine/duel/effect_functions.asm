@@ -409,9 +409,10 @@ Func_2c10b: ; 2c10b (b:410b)
 	bank1call Func_6194
 	ret
 
+
 ; deal damage to all the turn holder's benched Pokemon
 ; input: a = amount of damage to deal to each Pokemon
-DealDamageToAllBenchedPokemon: ; 2c117 (b:4117)
+DealDamageToAllBenchedPokemon:
 	ld e, a
 	ld d, $00
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -428,6 +429,32 @@ DealDamageToAllBenchedPokemon: ; 2c117 (b:4117)
 	dec c
 	jr nz, .loop
 	ret
+
+; deal damage to all the turn holder's benched Basic Pokémon
+; input: a = amount of damage to deal to each Pokémon
+DealDamageToAllBenchedBasicPokemon:
+	ld e, a
+	ld d, $00
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a
+	ld b, PLAY_AREA_ARENA
+	jr .next
+.loop
+	ld a, DUELVARS_ARENA_CARD_STAGE
+	add b
+	call GetTurnDuelistVariable
+	or a
+	jr nz, .next  ; not a BASIC Pokémon
+	push bc
+	call DealDamageToPlayAreaPokemon_RegularAnim
+	pop bc
+.next
+	inc b
+	dec c
+	jr nz, .loop
+	ret
+
 
 Func_2c12e: ; 2c12e (b:412e)
 	ld [wLoadedAttackAnimation], a
@@ -1944,41 +1971,6 @@ BigEggsplosion_MultiplierEffect:
 .got_energies
 	call ATimes10
 	jp SetDefiniteDamage
-
-
-Thrash_AIEffect: ; 2c96b (b:496b)
-	ld a, (30 + 40) / 2
-	lb de, 30, 40
-	jp SetExpectedAIDamage
-
-; If heads 10 more damage; if tails, 10 damage to itself
-Thrash_ModifierEffect: ; 2c973 (b:4973)
-	ldtx de, IfHeadPlus10IfTails10ToYourselfText
-	call TossCoin_BankB
-	ldh [hTemp_ffa0], a
-	ret nc
-	ld a, 10
-	call AddToDamage
-	ret
-
-
-HornHazard_AIEffect: ; 2ca8e (b:4a8e)
-	ld a, 30 / 2
-	lb de, 0, 30
-	jp SetExpectedAIDamage
-
-HornHazard_NoDamage50PercentEffect: ; 2ca96 (b:4a96)
-	ldtx de, DamageCheckIfTailsNoDamageText
-	call TossCoin_BankB
-	jr c, .heads
-	xor a
-	call SetDefiniteDamage
-	call SetWasUnsuccessful
-	ret
-.heads
-	ld a, ATK_ANIM_HIT
-	ld [wLoadedAttackAnimation], a
-	ret
 
 
 ; returns carry if no Grass Energy in Play Area
@@ -5042,8 +5034,17 @@ DamageAllOpponentBenched10Effect:
 	ld [wIsDamageToSelf], a
 	ld a, 10
 	call DealDamageToAllBenchedPokemon
+	jp SwapTurn
+
+; deal 20 damage to each of the opponent's benched Basic Pokémon
+DamageAllOpponentBenchedBasic20Effect:
 	call SwapTurn
-	ret
+	xor a
+	ld [wIsDamageToSelf], a
+	ld a, 20
+	call DealDamageToAllBenchedBasicPokemon
+	jp SwapTurn
+
 
 Selfdestruct80Bench20Effect: ; 2e739 (b:6739)
 	ld a, 80
@@ -5236,7 +5237,6 @@ Fly_Success50PercentEffect: ; 2e4fc (b:64fc)
 	ret
 
 
-Thrash_RecoilEffect: ; 2c982 (b:4982)
 Thunderpunch_RecoilEffect: ; 2e3b0 (b:63b0)
 	ldh a, [hTemp_ffa0]
 	or a

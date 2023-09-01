@@ -1576,8 +1576,11 @@ OverrunName:
 Damage1BenchedPokemon30Description:
 	text "This attack does 30 damage to 1 of"
 	line "your opponent's Benched Pokémon."
-	line "(Don't apply Weakness and Resistance"
-	line "for Benched Pokémon)"
+	done
+
+NoWeaknessResistanceForBenchDescriptionCont:
+	text "Don't apply Weakness and Resistance"
+	line "for Benched Pokémon."
 	done
 
 CombustionName:

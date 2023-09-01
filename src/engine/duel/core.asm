@@ -1448,20 +1448,27 @@ CheckIfActiveCardParalyzed:
 	scf
 	ret
 
+
+; unreferenced
 ; return carry and the corresponding text in hl if the turn holder's
 ; arena Pokemon card is asleep.
-CheckIfActiveCardAsleep:
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	jr z, .asleep
-	or a
-	ret
-.asleep
-	ldtx hl, UnableDueToSleepText
-	scf
-	ret
+; CheckIfActiveCardAsleep:
+; 	ld a, DUELVARS_ARENA_CARD_STATUS
+; 	call GetTurnDuelistVariable
+; 	and CNF_SLP_PRZ
+; 	cp ASLEEP
+; 	jr z, .asleep
+; 	or a
+; 	ret
+; .asleep
+; 	ldtx hl, UnableDueToSleepText
+; 	scf
+; 	ret
+;
+; UnableDueToSleepText:
+; 	text "Unable to due to Sleep."
+; 	done
+
 
 ; handles the sleep check for the Turn Duelist
 ; heals sleep status if coin is heads, else

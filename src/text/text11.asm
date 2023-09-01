@@ -16,11 +16,9 @@ SparkName: ; 5cf47 (17:4f47)
 	text "Spark"
 	done
 
-Damage1BenchedPokemon10Description: ; 5cf4e (17:4f4e)
+Damage1BenchedPokemon10Description:
 	text "This attack does 10 damage to 1 of"
 	line "your opponent's Benched Pokémon."
-	line "(Don't apply Weakness and Resistance"
-	line "for Benched Pokémon)"
 	done
 
 PikachuLv14Description: ; 5cfeb (17:4feb)
@@ -103,11 +101,10 @@ GigashockName: ; 5d43c (17:543c)
 	text "Gigashock"
 	done
 
-DamageUpTo2BenchedDescription: ; 5d447 (17:5447)
+DamageUpTo2BenchedDescription:
 	text "Choose up to 2 of your opponent's"
-	line "Benched Pokémon. Deal 10 damage to"
-	line "each. (Don't apply Weakness and"
-	line "Resistance for Benched Pokémon.)"
+	line "Benched Pokémon. This attack does"
+	line "10 damage to each."
 	done
 
 RaichuLv45Description: ; 5d531 (17:5531)
@@ -124,11 +121,10 @@ ThunderWaveName: ; 5d591 (17:5591)
 	text "Thunder Wave"
 	done
 
-Selfdestruct40Description: ; 5d59f (17:559f)
-	text "Does 10 damage to each Pokémon on"
-	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for Benched"
-	line "Pokémon.) Also does 40 damage"
+Selfdestruct40Description:
+	text "This attack does 10 damage to each"
+	line "Pokémon on each player's Bench."
+	line "This Pokémon does 40 damage"
 	line "to itself."
 	done
 
@@ -162,11 +158,10 @@ MagnetonName: ; 5d76e (17:576e)
 	text "Magneton"
 	done
 
-Selfdestruct80Bench20Description: ; 5d778 (17:5778)
-	text "Does 20 damage to each Pokémon on"
-	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for Benched"
-	line "Pokémon.) Also does 80 damage"
+Selfdestruct80Bench20Description:
+	text "This attack does 20 damage to each"
+	line "Pokémon on each player's Bench."
+	line "This Pokémon does 80 damage"
 	line "to itself."
 	done
 
@@ -185,11 +180,10 @@ SonicboomDescription:
 	line "for this attack."
 	done
 
-Selfdestruct100Bench20Description: ; 5d907 (17:5907)
-	text "Does 20 damage to each Pokémon on"
-	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for Benched"
-	line "Pokémon.) Also does 100 damage"
+Selfdestruct100Bench20Description:
+	text "This attack does 20 damage to each"
+	line "Pokémon on each player's Bench."
+	line "This Pokémon also does 100 damage"
 	line "to itself."
 	done
 
@@ -346,12 +340,11 @@ ThunderstormName: ; 5e0d7 (17:60d7)
 	text "Thunderstorm"
 	done
 
-ThunderstormDescription: ; 5e0e5 (17:60e5)
+ThunderstormDescription:
 	text "For each of your opponent's Benched"
 	line "Pokémon, flip a coin. If heads,"
 	line "this attack does 20 damage to that"
-	line "Pokémon. (Don't apply Weakness and"
-	line "Resistance for Benched Pokémon.)"
+	line "Pokémon."
 	line "Then, Zapdos does 10 damage times"
 	line "the number of tails to itself."
 	done
@@ -469,11 +462,9 @@ EarthquakeName: ; 5e70d (17:670d)
 	text "Earthquake"
 	done
 
-EarthquakeDescription: ; 5e719 (17:6719)
+EarthquakeDescription:
 	text "Does 10 damage to each player's"
 	line "Benched Pokémon."
-	line "(Don't apply Weakness and Resistance"
-	line "for Benched Pokémon.)"
 	done
 
 DugtrioDescription: ; 5e789 (17:6789)
@@ -658,12 +649,11 @@ RockSlideName: ; 5ef53 (17:6f53)
 	text "Rock Slide"
 	done
 
-GolemsSelfdestructDescription: ; 5ef5e (17:6f5e)
-	text "Does 20 damage to each Pokémon on"
-	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for Benched"
-	line "Pokémon.) Golem does 100 damage to"
-	line "itself."
+GolemsSelfdestructDescription:
+	text "This attack does 20 damage to each"
+	line "Pokémon on each player's Bench."
+	line "This Pokémon does 100 damage"
+	line "to itself."
 	done
 
 MegatonName: ; 5eff2 (17:6ff2)
@@ -796,11 +786,9 @@ StretchKickName:
 	text "Stretch Kick"
 	done
 
-Deal20ToBenchDescription: ; 5f633 (17:7633)
+Deal20ToBenchDescription:
 	text "This attack does 20 damage to 1 of"
 	line "your opponent's Benched Pokémon."
-	line "(Don't apply Weakness and Resistance"
-	line "for Benched Pokémon)"
 	done
 
 HighJumpKickName: ; 5f6d0 (17:76d0)
@@ -1442,8 +1430,6 @@ SlicingWindName: ; 615ad (18:55ad)
 Deal30ToAnyPokemonDescription:
 	text "This attack does 30 damage to 1"
 	line "of your opponent's Pokémon."
-	line "(Don't apply Weakness and Resistance"
-	line "for Benched Pokémon)"
 	done
 
 GaleName: ; 6168d (18:568d)

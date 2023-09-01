@@ -1078,7 +1078,7 @@ NidorinoCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
 	; attack 2
 	energy DARKNESS, 1, COLORLESS, 2 ; energies
@@ -1113,37 +1113,37 @@ NidokingCard:
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db NIDOKING
-	db 90 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx NidorinoName ; pre-evo name
 
 	; attack 1
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx ThrashName ; name
-	tx ThrashDescription ; description
+	tx RoutName ; name
+	tx RoutDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw NidokingThrashEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
+	dw RoutEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_MULTIPLE_SLASH ; animation
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy DARKNESS, 2, COLORLESS, 1 ; energies
-	tx ToxicName ; name
-	tx ToxicDescription ; description
-	dw NONE ; description (cont)
-	db 40 ; damage
+	energy DARKNESS, 1, COLORLESS, 2 ; energies
+	tx TailSwingName ; name
+	tx TailSwingDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ToxicEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	dw TailSwingEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 2
-	db ATK_ANIM_TOXIC ; animation
+	db ATK_ANIM_BIG_HIT ; animation
 
 	db 2 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -1237,7 +1237,7 @@ GolbatCard:
 	energy COLORLESS, 2 ; energies
 	tx SkillDiveName ; name
 	tx Deal30ToAnyPokemonDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw Deal30ToAnyPokemonEffectCommands ; effect commands
@@ -2198,7 +2198,7 @@ WeezingCard:
 	energy DARKNESS, 1, COLORLESS, 2 ; energies
 	tx SelfdestructName ; name
 	tx WeezingsSelfdestructDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
 	dw WeezingSelfdestructEffectCommands ; effect commands
@@ -2963,7 +2963,7 @@ RapidashCard:
 	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx OverrunName ; name
 	tx Damage1BenchedPokemon30Description ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw Deal30ToAnyPokemonEffectCommands ; effect commands
@@ -3408,7 +3408,7 @@ BlastoiseCard:
 	energy WATER, 1 ; energies
 	tx AquaLauncherName ; name
 	tx Deal30ToAnyPokemonDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw Deal30ToAnyPokemonEffectCommands ; effect commands
@@ -4173,7 +4173,7 @@ SeadraCard:
 	energy WATER, 1, COLORLESS, 1 ; energies
 	tx AquaLauncherName ; name
 	tx Deal30ToAnyPokemonDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw Deal30ToAnyPokemonEffectCommands ; effect commands
@@ -4858,7 +4858,7 @@ ArticunoLv35Card:
 	energy WATER, 3 ; energies
 	tx BlizzardName ; name
 	tx DamageOpponentBench10Description ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw BlizzardEffectCommands ; effect commands
@@ -5011,7 +5011,7 @@ PikachuLv14Card:
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx SparkName ; name
 	tx Damage1BenchedPokemon10Description ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw SparkEffectCommands ; effect commands
@@ -5368,7 +5368,7 @@ RaichuLv45Card:
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx GigashockName ; name
 	tx DamageUpTo2BenchedDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DamageUpTo2Benched10EffectCommands ; effect commands
@@ -5470,7 +5470,7 @@ MagnemiteLv15Card:
 	energy LIGHTNING, 2 ; energies
 	tx SparkName ; name
 	tx Damage1BenchedPokemon10Description ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw SparkEffectCommands ; effect commands
@@ -5623,7 +5623,7 @@ VoltorbCard:
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx SelfdestructName ; name
 	tx Selfdestruct40Description ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw Selfdestruct40Bench10EffectCommands ; effect commands
@@ -5660,7 +5660,7 @@ ElectrodeLv35Card:
 	energy LIGHTNING, 1 ; energies
 	tx SparkName ; name
 	tx Damage1BenchedPokemon10Description ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw SparkEffectCommands ; effect commands
@@ -5674,7 +5674,7 @@ ElectrodeLv35Card:
 	energy LIGHTNING, 1, COLORLESS, 2 ; energies
 	tx SelfdestructName ; name
 	tx Selfdestruct80Bench20Description ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 80 ; damage
 	db DAMAGE_NORMAL ; category
 	dw Selfdestruct80Bench20EffectCommands ; effect commands
@@ -5725,7 +5725,7 @@ ElectrodeLv42Card:
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx SelfdestructName ; name
 	tx Selfdestruct100Bench20Description ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 100 ; damage
 	db DAMAGE_NORMAL ; category
 	dw Selfdestruct100Bench20EffectCommands ; effect commands
@@ -5966,7 +5966,7 @@ ZapdosLv40Card:
 	energy LIGHTNING, 3 ; energies
 	tx ThunderstormName ; name
 	tx ThunderstormDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw ZapdosThunderstormEffectCommands ; effect commands
@@ -6235,7 +6235,7 @@ DiglettCard:
 	energy FIGHTING, 1 ; energies
 	tx DigName ; name
 	tx Deal20ToBenchDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw DiglettDigEffectCommands ; effect commands
@@ -6286,7 +6286,7 @@ DugtrioCard:
 	energy FIGHTING, 2, COLORLESS, 1 ; energies
 	tx EarthquakeName ; name
 	tx EarthquakeDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 70 ; damage
 	db DAMAGE_NORMAL ; category
 	dw Earthquake10EffectCommands ; effect commands
@@ -6643,7 +6643,7 @@ GravelerCard:
 	energy FIGHTING, 2, COLORLESS, 1 ; energies
 	tx EarthquakeName ; name
 	tx EarthquakeDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
 	dw Earthquake10EffectCommands ; effect commands
@@ -6680,7 +6680,7 @@ GolemCard:
 	energy FIGHTING, 2 ; energies
 	tx RockSlideName ; name
 	tx DamageUpTo2BenchedDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DamageUpTo2Benched10EffectCommands ; effect commands
@@ -6694,7 +6694,7 @@ GolemCard:
 	energy FIGHTING, 1, COLORLESS, 3 ; energies
 	tx SelfdestructName ; name
 	tx GolemsSelfdestructDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 100 ; damage
 	db DAMAGE_NORMAL ; category
 	dw GolemSelfdestructEffectCommands ; effect commands
@@ -6731,7 +6731,7 @@ OnixCard:
 	; energy FIGHTING, 1 ; energies
 	; tx TunnelingName ; name
 	; tx DamageUpTo2BenchedDescription ; description
-	; dw NONE ; description (cont)
+	; tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	; db 0 ; damage
 	; db RESIDUAL ; category
 	; dw DamageUpTo2Benched10EffectCommands ; effect commands
@@ -6920,7 +6920,7 @@ MarowakLv32Card:
 	energy COLORLESS, 1 ; energies
 	tx BoneAttackName ; name
 	tx Deal20ToBenchDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw MarowakBoneAttackEffectCommands ; effect commands
@@ -6971,7 +6971,7 @@ HitmonleeCard:
 	energy FIGHTING, 1 ; energies
 	tx StretchKickName ; name
 	tx Deal20ToBenchDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw Deal20ToBenchEffectCommands ; effect commands
@@ -7888,7 +7888,7 @@ GengarCard:
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx DarkMindName ; name
 	tx DamageUpTo2BenchedDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DamageUpTo2Benched10EffectCommands ; effect commands
@@ -8537,7 +8537,7 @@ Pidgeot1Card:
 	energy COLORLESS, 1 ; energies
 	tx SlicingWindName ; name
 	tx Deal30ToAnyPokemonDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw Deal30ToAnyPokemonEffectCommands ; effect commands
@@ -9634,7 +9634,7 @@ LickitungCard:
 	energy COLORLESS, 2 ; energies
 	tx TongueStretchName ; name
 	tx Deal20ToBenchDescription ; description
-	dw NONE ; description (cont)
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw Deal20ToBenchEffectCommands ; effect commands

@@ -37,9 +37,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TrainerCardText                                    ; 0x001f
 	textpointer EnergyCardText                                     ; 0x0020
 	textpointer DeckPrinterText                                    ; 0x0021
-	textpointer Text0022                                           ; 0x0022
 	textpointer NoPokemonOnTheBenchText                            ; 0x0023
-	textpointer UnableDueToSleepText                               ; 0x0024
 	textpointer UnableDueToParalysisText                           ; 0x0025
 	textpointer Received10DamageDueToPoisonText                    ; 0x0026
 	textpointer Received20DamageDueToPoisonText                    ; 0x0027
@@ -47,19 +45,15 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer IsCuredOfSleepText                                 ; 0x0029
 	textpointer IsCuredOfParalysisText                             ; 0x002a
 	textpointer BetweenTurnsText                                   ; 0x002b
-	textpointer UnableToUseItText                                  ; 0x002c
 	textpointer NoEnergyCardsText                                  ; 0x002d
 	textpointer IsThisOKText                                       ; 0x002e
 	textpointer YesOrNoText                                        ; 0x002f
 	textpointer DiscardName                                        ; 0x0030
 	textpointer IncompleteText                                     ; 0x0031
-	textpointer Text0032                                           ; 0x0032
 	textpointer UsedText                                           ; 0x0033
-	textpointer Text0034                                           ; 0x0034
 	textpointer PokemonsAttackText                                 ; 0x0035
 	textpointer ResistanceLessDamageText                           ; 0x0036
 	textpointer WeaknessMoreDamageText                             ; 0x0037
-	textpointer WeaknessMoreDamage2Text                            ; 0x0038
 	textpointer ResistanceNoDamageText                             ; 0x0039
 	textpointer AttackDamageText                                   ; 0x003a
 	textpointer NoDamageText                                       ; 0x003b
@@ -2138,6 +2132,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BothPlayersSwitchDescription
 	textpointer OverrunName
 	textpointer Damage1BenchedPokemon30Description
+	textpointer NoWeaknessResistanceForBenchDescriptionCont
 	textpointer CombustionName
 	textpointer Discard1CardFromOpponentsDeckDescription
 	textpointer Discard2CardsFromOpponentsDeckDescription
@@ -2164,8 +2159,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HornDrillName                                      ; 0x0861
 	textpointer NidorinoDescription                                ; 0x0862
 	textpointer NidokingName                                       ; 0x0863
-	textpointer ThrashName                                         ; 0x0864
-	textpointer ThrashDescription                                  ; 0x0865
+	textpointer RoutName
+	textpointer RoutDescription
 	textpointer ToxicName                                          ; 0x0866
 	textpointer ToxicDescription                                   ; 0x0867
 	textpointer NidokingDescription                                ; 0x0868
@@ -3009,6 +3004,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PsyshockDescription
 	textpointer FamilyPowerName
 	textpointer FamilyPowerDescription
+	textpointer TailSwingName
+	textpointer TailSwingDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

@@ -1915,7 +1915,7 @@ LoadNonPokemonCardEffectCommands:
 	ld [de], a
 	ret
 
-; Make turn holder deal A damage to self due to recoil (e.g. Thrash, Selfdestruct)
+; Make turn holder deal A damage to self due to recoil (e.g. Take Down, Selfdestruct)
 ; display recoil animation
 DealRecoilDamageToSelf:
 	push af

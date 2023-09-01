@@ -473,6 +473,20 @@ FamilyPower_AIEffect:
   call FamilyPower_DamageBoostEffect
   jp SetDefiniteAIDamage
 
+
+; +10 damage for each of the opponent's Benched Pokémon
+Rout_DamageBoostEffect:
+  ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+  call GetNonTurnDuelistVariable
+  dec a  ; don't count arena card
+  call ATimes10
+  jp AddToDamage
+
+Rout_AIEffect:
+  call Rout_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Defending Pokémon
 ; ------------------------------------------------------------------------------

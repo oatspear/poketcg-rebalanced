@@ -142,16 +142,8 @@ DeckPrinterText: ; 36460 (d:6460)
 	text "Deck"
 	done
 
-Text0022: ; 36466 (d:6466)
-	text "Attack"
-	done
-
 NoPokemonOnTheBenchText: ; 3646e (d:646e)
 	text "No Pokémon on the Bench."
-	done
-
-UnableDueToSleepText: ; 36488 (d:6488)
-	text "Unable to due to Sleep."
 	done
 
 UnableDueToParalysisText: ; 364a1 (d:64a1)
@@ -187,10 +179,6 @@ BetweenTurnsText: ; 36553 (d:6553)
 	text "Between Turns."
 	done
 
-UnableToUseItText: ; 36563 (d:6563)
-	text "Unable to use it."
-	done
-
 NoEnergyCardsText: ; 36576 (d:6576)
 	text "No Energy cards."
 	done
@@ -211,16 +199,8 @@ IncompleteText: ; 365aa (d:65aa)
 	text "Incomplete"
 	done
 
-Text0032: ; 365b6 (d:65b6)
-	text "Damage"
-	done
-
 UsedText: ; 365be (d:65be)
 	text "Used <RAMTEXT>."
-	done
-
-Text0034: ; 365c7 (d:65c7)
-	text "Received damage"
 	done
 
 PokemonsAttackText: ; 365d8 (d:65d8)
@@ -235,11 +215,6 @@ ResistanceLessDamageText: ; 365e1 (d:65e1)
 	done
 
 WeaknessMoreDamageText: ; 36609 (d:6609)
-	text "<RAMTEXT> received"
-	line "<RAMNUM> damage due to Weakness!"
-	done
-
-WeaknessMoreDamage2Text: ; 3662f (d:662f)
 	text "<RAMTEXT> received"
 	line "<RAMNUM> damage due to Weakness!"
 	done

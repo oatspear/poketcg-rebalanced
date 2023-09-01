@@ -108,16 +108,14 @@ NidokingName: ; 5870f (16:470f)
 	text "Nidoking"
 	done
 
-ThrashName: ; 58719 (16:4719)
-	text "Thrash"
+RoutName:
+	text "Rout"
 	done
 
-ThrashDescription: ; 58721 (16:4721)
-	text "Flip a coin. If heads, this attack"
-	line "does 30 damage plus 10 more damage;"
-	line "if tails, this attack does 30 damage"
-	line "and Nidoking does 10 damage to"
-	line "itself."
+RoutDescription:
+	text "This attack does 10 more damage"
+	line "for each of your opponent's"
+	line "Benched Pokémon."
 	done
 
 ToxicName: ; 587b5 (16:47b5)
@@ -679,12 +677,10 @@ SelfdestructName: ; 59abe (16:5abe)
 	text "Selfdestruct"
 	done
 
-WeezingsSelfdestructDescription: ; 59acc (16:5acc)
+WeezingsSelfdestructDescription:
 	text "Does 10 damage to each Pokémon on"
-	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for Benched"
-	line "Pokémon.) Weezing does 60 damage to"
-	line "itself."
+	line "each player's Bench."
+	line "Weezing does 60 damage to itself."
 	done
 
 WeezingDescription: ; 59b61 (16:5b61)
@@ -1728,11 +1724,9 @@ BlizzardName: ; 5cb6d (17:4b6d)
 	text "Blizzard"
 	done
 
-DamageOpponentBench10Description: ; 5cb77 (17:4b77)
+DamageOpponentBench10Description:
 	text "This attack does 10 damage to each"
 	line "of your opponent's Benched Pokémon."
-	line "(Don't apply Weakness and Resistance"
-	line "for Benched Pokémon.)"
 	done
 
 FreezeName: ; 5cc5b (17:4c5b)

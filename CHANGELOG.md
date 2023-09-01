@@ -36,6 +36,13 @@
 - **Double Kick**: removed.
 - New attack: **Den Protector** (CC): 10 damage; +10 damage for each of the player's damaged Pokémon.
 
+#### Nidoking
+- Increased HP from 90 to 100.
+- **Thrash**: removed.
+- **Toxic**: removed.
+- New attack: **Rout** (DC): 10 damage; +10 damage for each of the opponent's benched Pokémon.
+- New attack: **Tail Swing** (DCC): 50 damage; also does 20 damage to each of the opponent's benched Basic Pokémon.
+
 #### Zubat
 - **Leech Life**: removed.
 - **Supersonic**: increased cost from (C) to (D); always inflicts Confusion.
