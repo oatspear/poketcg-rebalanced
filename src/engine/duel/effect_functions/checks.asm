@@ -131,7 +131,7 @@ CheckDiscardPileHasBasicEnergyCards:
     ; call CreateEnergyCardListFromDiscardPile_AllEnergy
     ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
     ret
-    
+
 
 ; return carry if no Fire Energy cards in Discard Pile
 CheckDiscardPileHasFireEnergyCards:
@@ -152,7 +152,7 @@ CheckDiscardPileHasBasicPokemonCards:
     call CreateBasicPokemonCardListFromDiscardPile
     ldtx hl, ThereAreNoPokemonInDiscardPileText
     ret
-    
+
 
 
 ; ------------------------------------------------------------------------------
@@ -339,6 +339,14 @@ FullHeal_CheckPlayAreaStatus:
 ; ------------------------------------------------------------------------------
 ; Energy
 ; ------------------------------------------------------------------------------
+
+CheckArenaPokemonHasAnyEnergiesAttached:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	ldtx hl, NoEnergyCardsText
+	cp 1
+	ret ; return carry if not enough energy
 
 
 ;

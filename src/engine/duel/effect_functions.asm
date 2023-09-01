@@ -4369,25 +4369,14 @@ Scavenge_AddToHandEffect:
 
 ; returns carry if Arena card has no Energies attached
 ; or if it doesn't have any damage counters.
-Recover_CheckEnergyHP: ; 2df89 (b:5f89)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	ldtx hl, NoDamageCountersText
-	cp 10
+Recover_CheckEnergyHP:
+	call CheckArenaPokemonHasAnyDamage
 	ret c ; return carry if no damage
-	; fallthrough
+	jp CheckArenaPokemonHasAnyEnergiesAttached
 
 ; ------------------------------------------------------------------------------
 ; Energy Discard
 ; ------------------------------------------------------------------------------
-
-CheckAnyEnergiesAttached:
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-	ldtx hl, NoEnergyCardsText
-	cp 1
-	ret ; return carry if not enough energy
 
 DiscardEnergy_PlayerSelectEffect:
 	xor a ; PLAY_AREA_ARENA

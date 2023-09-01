@@ -491,7 +491,7 @@ ArcanineFlamesOfRageEffectCommands:
 
 EmberEffectCommands:
 FlamethrowerEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckAnyEnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
@@ -557,7 +557,7 @@ DarkMindEffectCommands:
 	db  $00
 
 GastlyDestinyBondEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckAnyEnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ApplyDestinyBondEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
@@ -679,7 +679,7 @@ PsychicEffectCommands:
 	db  $00
 
 BarrierEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckAnyEnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Barrier_BarrierEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardAllAttachedEnergiesEffect
 	db  $00
@@ -1068,7 +1068,7 @@ MoonblastEffectCommands:
 	db  $00
 
 EnergySlideEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckAnyEnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergySlide_TransferEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySlide_PlayerSelection
 	; dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergySlide_PlayerSelection
