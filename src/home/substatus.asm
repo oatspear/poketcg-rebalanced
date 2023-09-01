@@ -831,7 +831,7 @@ HandleDestinyBondSubstatus:
 ; attacking Pokemon (turn holder's arena Pokemon) takes 20 damage.
 ; used to bounce back an attack of the RESIDUAL category
 ; used to handle direct damage in the Active spot after an attack
-HandleStrikesBack_AgainstResidualAttack:
+HandleStrikesBack_AfterDirectAttack:
 	ld a, [wTempNonTurnDuelistCardID]
 	cp MACHAMP
 	ret nz
@@ -847,11 +847,11 @@ HandleStrikesBack_AgainstResidualAttack:
 	call SwapTurn
 	ret c
 	ld hl, 20 ; damage to be dealt to attacker
-	call ApplyStrikesBack_AgainstResidualAttack
+	call ApplyStrikesBack_AfterDirectAttack
 	call nc, WaitForWideTextBoxInput
 	ret
 
-ApplyStrikesBack_AgainstResidualAttack:
+ApplyStrikesBack_AfterDirectAttack:
 	push hl
 	call LoadTxRam3
 	ld a, [wTempTurnDuelistCardID]

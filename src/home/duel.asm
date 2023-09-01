@@ -1700,7 +1700,7 @@ Func_17fb:
 	call TryExecuteEffectCommandFunction
 	pop af
 	ld [wTempNonTurnDuelistCardID], a
-	call HandleStrikesBack_AgainstResidualAttack
+	call HandleStrikesBack_AfterDirectAttack
 	bank1call Func_6df1
 	call Func_1bb4
 	bank1call Func_7195
