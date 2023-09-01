@@ -1860,6 +1860,8 @@ PlayTrainerCard:
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTempCardIndex_ff9f], a
 	call LoadNonPokemonCardEffectCommands
+	xor a
+	ld [wGarbageEaterDamageToHeal], a
 ; OATS begin support trainer subtypes
 	ld a, [wLoadedCard1Type]
 	cp TYPE_TRAINER_SUPPORTER
@@ -1871,8 +1873,12 @@ PlayTrainerCard:
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	or PLAYED_SUPPORTER_THIS_TURN
 	ld [wAlreadyPlayedEnergyOrSupporter], a
+	jr .try_use_card
 .not_supporter_card
 ; OATS end support trainer subtypes
+	ld a, 10
+	ld [wGarbageEaterDamageToHeal], a
+.try_use_card
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
 	call TryExecuteEffectCommandFunction
 	jr nc, .can_use
@@ -1881,8 +1887,7 @@ PlayTrainerCard:
 	scf
 	ret
 .can_use
-	xor a
-	ld [wGarbageEaterDamageToHeal], a
+
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
 	ld a, 1
