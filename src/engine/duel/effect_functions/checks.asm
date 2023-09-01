@@ -172,7 +172,7 @@ CheckBenchIsNotEmpty:
 ; Damage
 ; ------------------------------------------------------------------------------
 
-; returns carry if has no damage counters.
+; returns carry if the Active Pokémon has no damage counters.
 CheckArenaPokemonHasAnyDamage:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
