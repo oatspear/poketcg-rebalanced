@@ -1115,6 +1115,7 @@ wEndOfTurnPowerVariables::
 wLuckyTailsCardsToDraw:: ; cdc0
 	ds $1
 
+wGarbageEaterDamageToHeal:: ; cdc1
 wDreamEaterDamageToHeal:: ; cdc1
 	ds $1
 
