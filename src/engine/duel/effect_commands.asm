@@ -214,6 +214,11 @@ PowerLariatEffectCommands:
 	dbw EFFECTCMDTYPE_AI, PowerLariat_AIEffect
 	db  $00
 
+FamilyPowerEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FamilyPower_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, FamilyPower_AIEffect
+	db  $00
+
 HornHazardEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HornHazard_NoDamage50PercentEffect
 	dbw EFFECTCMDTYPE_AI, HornHazard_AIEffect

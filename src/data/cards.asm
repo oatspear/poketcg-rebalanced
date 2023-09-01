@@ -980,12 +980,12 @@ NidoqueenCard:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx PowerLariatName ; name
-	tx PowerLariatDescription ; description
+	tx FamilyPowerName ; name
+	tx FamilyPowerDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw PowerLariatEffectCommands ; effect commands
+	dw FamilyPowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

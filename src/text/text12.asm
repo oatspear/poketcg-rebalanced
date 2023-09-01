@@ -922,6 +922,19 @@ PsyshockDescription:
 	line "does 20 more damage."
 	done
 
+FamilyPowerName:
+	text "Family Power"
+	done
+
+FamilyPowerDescription:
+	text "This attack does 10 more damage"
+	line "for each Nidoran♂ or Nidoran♀"
+	line "on your Bench, 20 more damage"
+	line "for each Nidorino or Nidorina,"
+	line "and 30 more damage for each"
+	line "Nidoking or Nidoqueen."
+	done
+
 
 ; ------------------------------------------------------------------------------
 ; Trainer Cards

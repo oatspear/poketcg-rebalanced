@@ -399,6 +399,48 @@ PowerLariat_AIEffect:
   jp SetDefiniteAIDamage
 
 
+; +10 damage for each Nidoran on Bench
+; +20 damage for each Nidorina or Nidorino on Bench
+; +30 damage for each Nidoqueen or Nidoking on Bench
+FamilyPower_DamageBoostEffect:
+	ld a, DUELVARS_BENCH
+	call GetTurnDuelistVariable
+	ld c, 0
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .done
+	call GetCardIDFromDeckIndex
+	ld a, e
+  cp NIDORANF
+	jr z, .plus_10
+  cp NIDORANM
+	jr z, .plus_10
+	cp NIDORINA
+	jr z, .plus_20
+	cp NIDORINO
+	jr z, .plus_20
+	cp NIDOQUEEN
+	jr z, .plus_30
+	cp NIDOKING
+	jr nz, .loop  ; not a Nidoran family card
+.plus_30
+  inc c
+.plus_20
+  inc c
+.plus_10
+	inc c
+	jr .loop
+.done
+; c holds number of Nidoran family bonus found in Play Area
+	ld a, c
+	call ATimes10
+	jp AddToDamage
+
+FamilyPower_AIEffect:
+  call FamilyPower_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
 ; ------------------------------------------------------------------------------
 ; Based on Defending Pokémon
 ; ------------------------------------------------------------------------------
