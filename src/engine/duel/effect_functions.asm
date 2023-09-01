@@ -4604,11 +4604,6 @@ TantrumEffect: ; 2e099 (b:6099)
 	call SwapTurn
 	ret
 
-StrikesBackEffect: ; 2e0af (b:60af)
-BattleArmorEffect:
-KabutoArmorEffect: ; 2e0b1 (b:60b1)
-	scf
-	ret
 
 AbsorbEffect: ; 2e0b3 (b:60b3)
 	ld hl, wDealtDamage

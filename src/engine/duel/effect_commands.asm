@@ -740,18 +740,6 @@ PrimeapeTantrumEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TantrumEffect
 	db  $00
 
-MachampStrikesBackEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StrikesBackEffect
-	db  $00
-
-BattleArmorEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, BattleArmorEffect
-	db  $00
-
-KabutoKabutoArmorEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, KabutoArmorEffect
-	db  $00
-
 KabutopsAbsorbEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AbsorbEffect
 	db  $00

@@ -2624,7 +2624,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MachampName                                        ; 0x0a2c
 	textpointer StrikesBackName                                    ; 0x0a2d
 	textpointer StrikesBackDescription                             ; 0x0a2e
-	textpointer StrikesBackDescriptionCont                         ; 0x0a2f
 	textpointer SeismicTossName                                    ; 0x0a30
 	textpointer MachampDescription                                 ; 0x0a31
 	textpointer GeodudeName                                        ; 0x0a32

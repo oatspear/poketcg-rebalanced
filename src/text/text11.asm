@@ -586,13 +586,6 @@ StrikesBackDescription: ; 5eba7 (17:6ba7)
 	line "Resistance.) "
 	done
 
-StrikesBackDescriptionCont: ; 5ec56 (17:6c56)
-	text "This power can't be used if Machamp"
-	line "is already Asleep, Confused, or"
-	line "Paralyzed when your opponent"
-	line "attacks."
-	done
-
 SeismicTossName: ; 5ecc1 (17:6cc1)
 	text "Seismic Toss"
 	done

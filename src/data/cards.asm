@@ -665,7 +665,7 @@ KakunaCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw BattleArmorEffectCommands ; effect commands
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -6527,10 +6527,10 @@ MachampCard:
 	energy 0 ; energies
 	tx StrikesBackName ; name
 	tx StrikesBackDescription ; description
-	tx StrikesBackDescriptionCont ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw MachampStrikesBackEffectCommands ; effect commands
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -6872,7 +6872,7 @@ MarowakLv26Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw BattleArmorEffectCommands ; effect commands
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7178,7 +7178,7 @@ KabutoCard:
 	tx KabutoArmorDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw KabutoKabutoArmorEffectCommands ; effect commands
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
