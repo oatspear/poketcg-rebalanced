@@ -637,7 +637,9 @@ GarbageEater_HealEffect:
 	ld e, a  ; location
 	ld a, [wGarbageEaterDamageToHeal]
 	ld d, a  ; damage
+	push hl
 	call HealPlayAreaCardHP
+	pop hl
 	jr .loop_play_area
 
 
