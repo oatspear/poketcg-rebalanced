@@ -69,8 +69,14 @@ NidoranMName: ; 585f5 (16:45f5)
 	text "Nidoran♂"
 	done
 
-HornHazardName: ; 585ff (16:45ff)
-	text "Horn Hazard"
+RetaliateName:
+	text "Retaliate"
+	done
+
+RetaliateDescription:
+	text "This attack can only be used if"
+	line "this Pokémon has any damage"
+	line "counters on it."
 	done
 
 MayDoNothingDescription: ; 5860c (16:460c)

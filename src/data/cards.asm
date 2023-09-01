@@ -909,7 +909,7 @@ NidorinaCard:
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db NIDORINA
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx NidoranFName ; pre-evo name
 
@@ -1031,17 +1031,17 @@ NidoranMCard:
 
 	; attack 2
 	energy DARKNESS, 1 ; energies
-	tx HornHazardName ; name
-	tx MayDoNothingDescription ; description
+	tx RetaliateName ; name
+	tx RetaliateDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw HornHazardEffectCommands ; effect commands
+	dw RetaliateEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -1062,18 +1062,18 @@ NidorinoCard:
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db NIDORINO
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx NidoranMName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx DoubleKickName ; name
-	tx DoubleAttackX30Description ; description
+	energy COLORLESS, 2 ; energies
+	tx DenProtectorName ; name
+	tx DenProtectorDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_X ; category
-	dw NidorinoDoubleKickEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw DenProtectorEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -6968,21 +6968,21 @@ HitmonleeCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1, COLORLESS, 1 ; energies
-	tx RollingKickName ; name
-	tx MayInflictParalysisDescription ; description
+	energy FIGHTING, 1 ; energies
+	tx StretchKickName ; name
+	tx Deal20ToBenchDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Deal20ToBenchEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT_EFFECT ; animation
+	db 3
+	db ATK_ANIM_STRETCH_KICK ; animation
 
 	; attack 2
-	energy FIGHTING, 1, COLORLESS, 2 ; energies
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
 	tx HighJumpKickName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)

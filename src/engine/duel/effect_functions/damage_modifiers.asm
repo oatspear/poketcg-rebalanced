@@ -598,6 +598,32 @@ PsychicAssault_AIEffect:
   jp SetDefiniteAIDamage
 
 
+; +10 damage for each damaged Pokémon on turn holder's play area
+DenProtector_DamageBoostEffect:
+  ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+  call GetTurnDuelistVariable
+  ld d, a
+  ld e, PLAY_AREA_ARENA
+  ld c, 0
+.loop_play_area
+  ; input in e
+  call GetCardDamageAndMaxHP
+  or a
+  jr z, .next_pkmn  ; no damage
+  inc c
+.next_pkmn
+  inc e
+  dec d
+  jr nz, .loop_play_area
+; tally damage boost
+  ld a, c
+  call ATimes10
+  jp AddToDamage
+
+DenProtector_AIEffect:
+  call DenProtector_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
 ; ------------------------------------------------------------------------------
 ; Miscellaneous
 ; ------------------------------------------------------------------------------

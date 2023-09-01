@@ -2147,7 +2147,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MayInflictConfusionDescription                     ; 0x0853
 	textpointer AdaptiveEvolutionName
 	textpointer AdaptiveEvolutionDescription
-	textpointer DoubleKickName                                     ; 0x0854
+	textpointer DoubleKickName                                     ; unreferenced
 	textpointer DoubleAttackX20X10Description
 	textpointer NidorinaDescription                                ; 0x0855
 	textpointer NidoqueenName                                      ; 0x0856
@@ -2156,7 +2156,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DrillName                                          ; 0x085a
 	textpointer NidoqueenDescription                               ; 0x085b
 	textpointer NidoranMName                                       ; 0x085c
-	textpointer HornHazardName                                     ; 0x085d
+	textpointer RetaliateName
+	textpointer RetaliateDescription
 	textpointer MayDoNothingDescription                            ; 0x085e
 	textpointer NidoranMDescription                                ; 0x085f
 	textpointer NidorinoName                                       ; 0x0860
@@ -2667,7 +2668,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer VengeanceDescription                               ; 0x0a54
 	textpointer MarowakLv32Description                            ; 0x0a55
 	textpointer HitmonleeName                                      ; 0x0a56
-	textpointer RollingKickName                                    ; 0x0a57
+	textpointer StretchKickName
 	textpointer Deal20ToBenchDescription                           ; 0x0a58
 	textpointer HighJumpKickName                                   ; 0x0a59
 	textpointer KickingName                                        ; 0x0a5a
@@ -2819,6 +2820,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer StressPheromonesDescription
 	textpointer QueenPressName
 	textpointer QueenPressDescription
+	textpointer DenProtectorName
+	textpointer DenProtectorDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9

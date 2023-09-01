@@ -792,8 +792,8 @@ HitmonleeName: ; 5f61a (17:761a)
 	text "Hitmonlee"
 	done
 
-RollingKickName: ; 5f625 (17:7625)
-	text "Rolling Kick"
+StretchKickName:
+	text "Stretch Kick"
 	done
 
 Deal20ToBenchDescription: ; 5f633 (17:7633)
@@ -1566,4 +1566,14 @@ QueenPressDescription:
 	line "prevent all damage done to"
 	line "this Pokémon by attacks from"
 	line "Basic Pokémon."
+	done
+
+DenProtectorName:
+	text "Den Protector"
+	done
+
+DenProtectorDescription:
+	text "This attack does 10 more damage"
+	line "for each of your Pokémon with"
+	line "any damage counters on it."
 	done

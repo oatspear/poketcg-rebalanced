@@ -4,21 +4,37 @@
 
 ### Changed
 
+#### Hitmonlee
+- **Rolling Kick**: removed.
+- **High Jump Kick**: increased cost from (FCC) to (FFC).
+- New attack: **Stretch Kick** (F): 20 damage to a Pokémon on the opponent's Bench.
+
 #### Nidoran (F)
 - **Fury Swipes**: removed.
 - New attack: **Poison Sting** (D): 10 damage; flip a coin, Poison if Heads.
 
 #### Nidorina
+- Increased HP from 70 to 80.
 - **Supersonic**: removed.
 - **Double Kick**: removed.
 - New Pokémon Power: **Stress Pheromones**: once per turn, if user is damaged, search for a Pokémon in deck.
 - New attack: **Poison Payback** (DC): 20 damage; +20 damage and inflicts Poison if user is damaged.
 
 #### Nidoqueen
+- Increased HP from 80 to 100.
 - **Boyfriends**: removed.
 - **Mega Punch**: removed.
 - New attack: **Queen Press** (DC): 40 damage; prevents damage from Basic Pokémon for a turn.
 - New attack: **Family Power** (CCC): 10 damage; +10 damage for each Nidoran on Bench, +20 damage for each Nidorino or Nidorina, +30 for each Nidoking or Nidoqueen.
+
+#### Nidoran (M)
+- **Horn Hazard**: removed.
+- New attack: **Retaliate** (D): 30 damage; unusable, unless the user has taken damage.
+
+#### Nidorino
+- Increased HP from 60 to 70.
+- **Double Kick**: removed.
+- New attack: **Den Protector** (CC): 10 damage; +10 damage for each of the player's damaged Pokémon.
 
 #### Zubat
 - **Leech Life**: removed.

@@ -214,16 +214,19 @@ PowerLariatEffectCommands:
 	dbw EFFECTCMDTYPE_AI, PowerLariat_AIEffect
 	db  $00
 
+DenProtectorEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DenProtector_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, DenProtector_AIEffect
+	db  $00
+
 FamilyPowerEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FamilyPower_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, FamilyPower_AIEffect
 	db  $00
 
-HornHazardEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HornHazard_NoDamage50PercentEffect
-	dbw EFFECTCMDTYPE_AI, HornHazard_AIEffect
+RetaliateEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyDamage
 	db  $00
-
 
 AssassinFlightEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, AssassinFlight_CheckBenchAndStatus
@@ -238,8 +241,6 @@ TwineedleEffectCommands:
 	db  $00
 
 MarowakBonemerangEffectCommands:
-NidorinaDoubleKickEffectCommands:
-NidorinoDoubleKickEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX30_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
 	db  $00
