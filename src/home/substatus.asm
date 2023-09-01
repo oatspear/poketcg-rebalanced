@@ -218,14 +218,11 @@ HandleStrikesBack_AgainstDamagingAttack:
 	cp POKEMON_POWER
 	ret z
 	ld a, [wTempPlayAreaLocation_cceb] ; defending Pokemon's PLAY_AREA_*
-	or a ; cp PLAY_AREA_ARENA
-	jr nz, .in_bench
-	call CheckCannotUseDueToStatus
+	call CheckCannotUseDueToStatus_Anywhere
 	ret c
-.in_bench
 	push hl
 	push de
-	; subtract 10 HP from attacking Pokemon (turn holder's arena Pokemon)
+	; subtract 20 HP from attacking Pokemon (turn holder's arena Pokemon)
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
@@ -833,15 +830,15 @@ HandleDestinyBondSubstatus:
 ; when MACHAMP is damaged, if its Strikes Back is active, the
 ; attacking Pokemon (turn holder's arena Pokemon) takes 20 damage.
 ; used to bounce back an attack of the RESIDUAL category
+; used to handle direct damage in the Active spot after an attack
 HandleStrikesBack_AgainstResidualAttack:
 	ld a, [wTempNonTurnDuelistCardID]
 	cp MACHAMP
-	jr z, .strikes_back
-	ret
-.strikes_back
+	ret nz
 	ld a, [wLoadedAttackCategory]
 	and RESIDUAL
 	ret nz
+; not a RESIDUAL attack
 	ld a, [wDealtDamage]
 	or a
 	ret z

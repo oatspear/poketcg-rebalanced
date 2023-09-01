@@ -60,6 +60,11 @@
 - **Smog**: always inflicts Poison.
 
 
+### Fixed
+
+- **Strikes Back** no longer triggers when the Pokémon is Benched and affected with status.
+
+
 ## Version 0.4.0
 
 ### Changed
