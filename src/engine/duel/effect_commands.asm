@@ -400,9 +400,6 @@ SnorlaxBodySlamEffectCommands:
 PinsirIronGripEffectCommands:
 CloysterClampEffectCommands:
 CaterpieStringShotEffectCommands:
-MetapodStunSporeEffectCommands:
-GrimerNastyGooEffectCommands:
-GyaradosBubblebeamEffectCommands:
 DewgongIceBeamEffectCommands:
 ArticunoFreezeDryEffectCommands:
 Paralysis50PercentEffectCommands:
