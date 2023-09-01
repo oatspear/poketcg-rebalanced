@@ -607,6 +607,10 @@ OpenPlayerHandScreen:
 .trainer_card
 	call PlayTrainerCard
 	jr c, ReloadCardListScreen ; jump if card not played
+	or a
+	jp nz, DuelMainInterface  ; cancelled in EFFECTCMDTYPE_INITIAL_EFFECT_2
+; card was played and moved to discard pile
+	call HandleOnPlayTrainerEffects
 	jp DuelMainInterface
 
 ; play the energy card with deck index at hTempCardIndex_ff98
@@ -6760,6 +6764,8 @@ OppAction_AttemptRetreat:
 
 ; play trainer card from hand
 OppAction_PlayTrainerCard:
+	xor a
+	ld [wGarbageEaterDamageToHeal], a
 	call LoadNonPokemonCardEffectCommands
 	call DisplayUsedTrainerCardDetailScreen
 	call PrintUsedTrainerCardDescription
@@ -6769,12 +6775,17 @@ OppAction_PlayTrainerCard:
 ; OATS begin support trainer subtypes
 	ld a, [wLoadedCard1Type]
 	cp TYPE_TRAINER_SUPPORTER
-	jr nz, .not_supporter_card
+	jr z, .supporter_card
+; OATS end support trainer subtypes
+; item card
+	ld a, 10
+	ld [wGarbageEaterDamageToHeal], a
+	ret
+
+.supporter_card
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	or PLAYED_SUPPORTER_THIS_TURN
 	ld [wAlreadyPlayedEnergyOrSupporter], a
-.not_supporter_card
-; OATS end support trainer subtypes
 	ret
 
 ; execute the effect commands of the trainer card that is being played
@@ -6788,8 +6799,8 @@ OppAction_ExecuteTrainerCardEffectCommands:
 	ldh a, [hTempCardIndex_ff9f]
 	call MoveHandCardToDiscardPile
 	call ExchangeRNG
-	call DrawDuelMainScene
-	ret
+	call HandleOnPlayTrainerEffects
+	jp DrawDuelMainScene
 
 ; begin the execution of an attack and handle the attack being
 ; possibly unsuccessful due to Sand Attack or Smokescreen
@@ -7010,9 +7021,14 @@ Func_6ba2:
 
 
 
+HandleOnPlayTrainerEffects:
+	farcall GarbageEater_HealEffect
+	ret
+
+
 HandleOnPlayEnergyEffects:
 ; OATS introduce Potion Energy effect
-	ld a, CHANSEY  ; Softboiled
+	ld a, CHANSEY  ; Healing Energy
 	call CountPokemonIDInPlayArea
 	jr nc, .full_heal_energy  ; no Pkmn Power-capable Chansey was found
 	ldh a, [hTempPlayAreaLocation_ff9d]
