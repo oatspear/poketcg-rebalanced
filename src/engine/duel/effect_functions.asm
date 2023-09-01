@@ -1946,37 +1946,6 @@ BigEggsplosion_MultiplierEffect:
 	jp SetDefiniteDamage
 
 
-TropicalStorm_AIEffect:
-	call TropicalStorm_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-TropicalStorm_DamageBoostEffect:
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld d, a
-	ld e, PLAY_AREA_ARENA
-	ld c, 0
-
-; go through every Pokemon in the Play Area and boost damage based on energy
-.loop_play_area
-; check its attached energies
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-	or a
-	jr z, .next_pkmn
-	inc c
-.next_pkmn
-	inc e
-	dec d
-	jr nz, .loop_play_area
-	ld a, c
-	or a
-	ret z  ; done if zero
-	rla            ; a = a * 2
-	call ATimes10  ; a = a * 10
-	jp SetDefiniteDamage  ; a == c * 20
-
-
 Thrash_AIEffect: ; 2c96b (b:496b)
 	ld a, (30 + 40) / 2
 	lb de, 30, 40
@@ -6086,37 +6055,6 @@ EeveeQuickAttack_DamageBoostEffect: ; 2e96a (b:596a)
 	ld a, 20
 	call AddToDamage
 	ret
-
-Peck_AIEffect: ; 2e962 (b:5962)
-	call Peck_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-Peck_DamageBoostEffect: ; 2e595 (b:6595)
-	ld a, 10
-	call SetDefiniteDamage
-	call SwapTurn
-	call GetArenaCardColor
-	call SwapTurn
-	cp GRASS
-	ret nz ; no extra damage if not Grass
-	ld a, 10
-	call AddToDamage
-	ret
-
-GrassKnot_AIEffect:
-	call GrassKnot_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-; +20 damage per retreat cost of opponent
-GrassKnot_DamageBoostEffect:
-	call SwapTurn
-	xor a ; PLAY_AREA_ARENA
-	ldh [hTempPlayAreaLocation_ff9d], a
-	call GetPlayAreaCardRetreatCost  ; retreat cost in a
-	call SwapTurn
-	add a  ; x20 per retreat cost
-	call ATimes10
-	jp AddToDamage
 
 
 ; return carry if cannot use Step In
