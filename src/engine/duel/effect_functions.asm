@@ -620,6 +620,27 @@ INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 ; ------------------------------------------------------------------------------
 
 
+GarbageEater_HealEffect:
+	ld a, [wGarbageEaterDamageToHeal]
+	or a
+	ret z  ; nothing to do
+
+	ld a, GRIMER
+	call ListPowerCapablePokemonIDInPlayArea
+	ret nc  ; none found
+
+	ld hl, hTempList
+.loop_play_area
+	ld a, [hli]
+	cp $ff
+	ret z  ; done
+	ld e, a  ; location
+	ld a, [wGarbageEaterDamageToHeal]
+	ld d, a  ; damage
+	call HealPlayAreaCardHP
+	jr .loop_play_area
+
+
 ; Stores in [wDreamEaterDamageToHeal] the amount of damage to heal
 ; from sleeping Pokémon in play area.
 ; Stores 0 if there are no Dream Eater capable Pokémon in play.
