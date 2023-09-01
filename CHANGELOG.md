@@ -58,6 +58,7 @@
 
 #### Grimer
 - **Minimize**: removed.
+- **Nasty Goo**: increased cost from (D) to (DC) and damage from 10 to 20.
 - New Pokémon Power: **Garbage Eater**: heals 10 damage after playing a non-Supporter Trainer.
 
 #### Weezing
