@@ -53,6 +53,9 @@
 - **Leech Life**: reduced cost from (DC) to (D).
 - New attack: **Skill Dive** (CC): 30 damage to any of the opponent's Pokémon.
 
+#### Parasect
+- Increased HP from 60 to 70.
+
 #### Weezing
 - **Smog**: always inflicts Poison.
 
