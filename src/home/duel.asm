@@ -1850,6 +1850,8 @@ CheckSelfConfusionDamage:
 ; play the trainer card with deck index at hTempCardIndex_ff98.
 ; a trainer card is like an attack effect, with its own effect commands.
 ; return nc if the card was played, carry if it wasn't.
+; if the card was played and moved to discard, return 0 in a
+; if the card was cancelled in its initial effect, return 1 in a
 PlayTrainerCard:
 	call CheckCantUseTrainerDueToHeadache
 	jr c, .cant_use
@@ -1879,8 +1881,11 @@ PlayTrainerCard:
 	scf
 	ret
 .can_use
+	xor a
+	ld [wGarbageEaterDamageToHeal], a
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
+	ld a, 1
 	jr c, .done
 	ld a, OPPACTION_PLAY_TRAINER
 	call SetOppAction_SerialSendDuelData
@@ -1897,9 +1902,11 @@ PlayTrainerCard:
 	ldh a, [hTempCardIndex_ff9f]
 	call MoveHandCardToDiscardPile
 	call ExchangeRNG
+	xor a
 .done
 	or a
 	ret
+
 
 ; loads the effect commands of a (trainer or energy) card with deck index (0-59) at hTempCardIndex_ff9f
 ; into wLoadedAttackEffectCommands. in practice, only used for trainer cards
