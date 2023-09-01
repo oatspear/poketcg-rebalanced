@@ -1556,3 +1556,13 @@ DenProtectorDescription:
 	line "for each of your Pokémon with"
 	line "any damage counters on it."
 	done
+
+GarbageEaterName:
+	text "Garbage Eater"
+	done
+
+GarbageEaterDescription:
+	text "After you play a non-Supporter"
+	line "Trainer card from your hand,"
+	line "heal 10 damage from this Pokémon."
+	done

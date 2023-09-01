@@ -1913,6 +1913,20 @@ GrimerCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy 0 ; energies
+	tx GarbageEaterName ; name
+	tx GarbageEaterDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
+	db NONE ; flags 3
+	db 1
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
 	energy DARKNESS, 1 ; energies
 	tx NastyGooName ; name
 	tx MayInflictParalysisDescription ; description
@@ -1925,20 +1939,6 @@ GrimerCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_GOO ; animation
-
-	; attack 2
-	energy COLORLESS, 1 ; energies
-	tx WithdrawName ; name
-	tx ReduceDamageTakenBy20Description ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw ReduceDamageTakenBy20EffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PROTECT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness

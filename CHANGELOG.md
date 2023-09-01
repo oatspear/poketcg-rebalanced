@@ -56,12 +56,15 @@
 #### Parasect
 - Increased HP from 60 to 70.
 
+#### Grimer
+- **Minimize**: removed.
+- New Pokémon Power: **Garbage Eater**: heals 10 damage after playing a non-Supporter Trainer.
+
 #### Weezing
 - **Smog**: always inflicts Poison.
 
 
 ### Fixed
-
 - **Strikes Back** no longer triggers when the Pokémon is Benched and affected with status.
 
 

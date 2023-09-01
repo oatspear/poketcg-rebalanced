@@ -2816,6 +2816,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer QueenPressDescription
 	textpointer DenProtectorName
 	textpointer DenProtectorDescription
+	textpointer GarbageEaterName
+	textpointer GarbageEaterDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
