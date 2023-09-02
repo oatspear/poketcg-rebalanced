@@ -623,6 +623,19 @@ CollectName:
 	text "Collect"
 	done
 
+ProwlName:
+	text "Prowl"
+	done
+
+ProwlDescription:
+	text "Once during your turn, when you play"
+	line "this Pokémon from your hand to"
+	line "evolve 1 of your Pokémon, you may"
+	line "search your deck for any 1 card and"
+	line "put it into your hand."
+	line "Shuffle your deck afterward."
+	done
+
 ShadowClawName:
 	text "Shadow Claw"
 	done

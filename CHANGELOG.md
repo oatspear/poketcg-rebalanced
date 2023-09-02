@@ -65,7 +65,9 @@
 - **Smog**: always inflicts Poison.
 
 #### Persian
+- **Sneak Attack**: removed.
 - **Poison Claws**: removed.
+- New Pokémon Power: **Prowl**: after evolving, search deck for any card and add to hand.
 - New attack: **Shadow Claw** (CC): 30 damage, may discard an energy to discard a random card from opponent's hand.
 
 

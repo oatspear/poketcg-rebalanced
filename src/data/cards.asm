@@ -9413,18 +9413,18 @@ PersianCard:
 	; Flip a coin. If heads, discard a random card from your opponent's hand.
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx SneakAttackName ; name
-	tx SneakAttackDescription ; description
+	energy 0 ; energies
+	tx ProwlName ; name
+	tx ProwlDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw SneakAttackEffectCommands ; effect commands
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw ProwlEffectCommands ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db ENERGY_BOOST_DARKNESS
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db 0
+	db ATK_ANIM_NONE ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
