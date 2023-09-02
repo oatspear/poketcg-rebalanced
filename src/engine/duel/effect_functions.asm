@@ -619,6 +619,40 @@ INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 ; Pokémon Powers
 ; ------------------------------------------------------------------------------
 
+; Search for any card in deck and add it to the hand.
+Prowl_SearchAndAddToHandEffect:
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_LINK_OPP
+	jr z, .link_opp
+	and DUELIST_TYPE_AI_OPP
+	jr nz, .ai_opp
+
+; player
+	; ldtx hl, ChooseCardToPlaceInHandText
+	; call DrawWideTextBox_WaitForInput
+	call HandlePlayerSelectionAnyCardFromDeckToHand
+	; ldh [hAIPkmnPowerEffectParam], a
+	call SerialSend8Bytes
+	jr .done
+
+.link_opp
+	call SerialRecv8Bytes
+	; ldh [hAIPkmnPowerEffectParam], a
+	jr .done
+
+.ai_opp
+; AI just selects the first card in the deck
+	ld b, 1
+	call CreateDeckCardListTopNCards
+	ld a, [wDuelTempList]
+	; fallthrough
+
+.done
+	cp $ff
+	ret z
+	jp SelectedCardFromDeck_AddToHandEffect
+
 
 GarbageEater_HealEffect:
 	ld a, [wGarbageEaterDamageToHeal]
@@ -954,6 +988,14 @@ PoisonPaybackEffect:
 	jp PoisonEffect
 
 
+ShadowClawEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z  ; none selected, do nothing
+	call DiscardEnergy_DiscardEffect
+	jp Discard1RandomCardFromOpponentsHand
+
+
 ; ------------------------------------------------------------------------------
 ; Card Search
 ; ------------------------------------------------------------------------------
@@ -1051,10 +1093,14 @@ Ultravision_AddToHandEffect:
 Sprout_AddToHandEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
-	jr z, .done ; skip if no Grass-type card was chosen
+	jr z, .done ; skip if no card was chosen
+	; fallthrough
 
-; add Grass-type card to the hand and show it on screen if
+; add selected card to the hand and show it on screen if
 ; it wasn't the Player who used the attack.
+; input:
+;   a: deck index of card to add from deck to hand
+SelectedCardFromDeck_AddToHandEffect:
 	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call IsPlayerTurn
@@ -1069,21 +1115,12 @@ Sprout_AddToHandEffect:
 
 ; Looks at the top 4 cards and allows the Player to choose a card.
 Ultravision_PlayerSelectEffect:
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-
 	ld b, 4
 	call CreateDeckCardListTopNCards
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, ChooseCardToPlaceInHandText
-	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
-.loop_input
-	bank1call DisplayCardList
-	jr c, .loop_input ; can't exit with B button
+	call HandlePlayerSelectionAnyCardFromDeckListToHand
 	ldh [hTemp_ffa0], a
-	or a
 	ret
+
 
 ; selects the first Trainer or Energy card that shows up
 ; FIXME improve
@@ -4411,10 +4448,27 @@ DiscardEnergy_AISelectEffect:
 	ldh [hTemp_ffa0], a
 	ret
 
+
+OptionalDiscardEnergy_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	call DiscardEnergy_PlayerSelectEffect
+; ignore carry if set, otherwise the deck index is in [hTemp_ffa0]
+	or a
+	ret
+
+
 DiscardEnergy_DiscardEffect:
 	ldh a, [hTemp_ffa0]
-	call PutCardInDiscardPile
-	ret
+	jp PutCardInDiscardPile
+
+
+OptionalDiscardEnergy_DiscardEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z
+	jp PutCardInDiscardPile
+
 
 ; return carry if has less than 2 Energy cards
 Check2EnergiesAttached:
@@ -4478,6 +4532,17 @@ Discard2Energies_DiscardEffect:
 	ld a, [hli]
 	call PutCardInDiscardPile
 	ret
+
+
+ShadowClaw_AISelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	or a
+	ret z  ; Player has no cards in hand
+	jp DiscardEnergy_AISelectEffect
+
 
 ; ------------------------------------------------------------------------------
 ; Energy Discard (Opponent)

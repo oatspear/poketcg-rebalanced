@@ -540,6 +540,17 @@ MoltresLv37DiveBombEffectCommands:
 	dbw EFFECTCMDTYPE_AI, MoltresLv37DiveBomb_AIEffect
 	db  $00
 
+ProwlEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Prowl_SearchAndAddToHandEffect
+	db  $00
+
+ShadowClawEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, OptionalDiscardEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, ShadowClaw_AISelectEffect
+	db  $00
+
 CurseEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Curse_CheckDamageAndBench
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Curse_TransferDamageEffect

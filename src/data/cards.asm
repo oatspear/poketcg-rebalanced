@@ -9428,14 +9428,14 @@ PersianCard:
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
-	tx PoisonClawsName ; name
-	tx InflictPoisonDescription ; description
+	tx ShadowClawName ; name
+	tx ShadowClawDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw InflictPoisonEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
-	db NONE ; flags 2
+	dw ShadowClawEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_SLASH ; animation

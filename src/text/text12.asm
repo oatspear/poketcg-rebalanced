@@ -623,8 +623,20 @@ CollectName:
 	text "Collect"
 	done
 
-PoisonClawsName:
-	text "Poison Claws"
+ShadowClawName:
+	text "Shadow Claw"
+	done
+
+ShadowClawDescription:
+	text "You may discard an Energy attached"
+	line "to this Pokémon in order to use this"
+	line "attack. If you do, discard a random"
+	line "card from your opponent's hand."
+	done
+
+Discard1CardFromOpponentsHandDescription:
+	text "Discard a random card from your"
+	line "opponent's hand."
 	done
 
 DragonDanceName:

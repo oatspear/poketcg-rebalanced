@@ -2943,7 +2943,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HelpingHandName
 	textpointer HelpingHandDescription
 	textpointer CollectName
-	textpointer PoisonClawsName
+	textpointer ShadowClawName
+	textpointer ShadowClawDescription
+	textpointer Discard1CardFromOpponentsHandDescription
 	textpointer DragonDanceName
 	textpointer DragonRageName
 	textpointer DragonRageDescription

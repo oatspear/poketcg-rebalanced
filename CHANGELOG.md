@@ -64,6 +64,10 @@
 #### Weezing
 - **Smog**: always inflicts Poison.
 
+#### Persian
+- **Poison Claws**: removed.
+- New attack: **Shadow Claw** (CC): 30 damage, may discard an energy to discard a random card from opponent's hand.
+
 
 ### Fixed
 - **Strikes Back** no longer triggers when the Pokémon is Benched and affected with status.

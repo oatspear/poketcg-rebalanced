@@ -227,6 +227,41 @@ HandlePlayerSelectionCardTypeFromDeckToHand:
 	jr .read_input
 
 
+; Handles screen for the Player to choose a card from a list of Deck cards.
+; output:
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card | $ff
+HandlePlayerSelectionAnyCardFromDeckToHand:
+	call CreateDeckCardList
+	; fallthrough
+
+
+; Handles screen for the Player to choose a card from a list of Deck cards.
+; input:
+;   [wDuelTempList]: populated deck list
+; output:
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card | $ff
+HandlePlayerSelectionAnyCardFromDeckListToHand:
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, ChooseCardToPlaceInHandText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+.loop_input
+	bank1call DisplayCardList
+; if B was pressed, either there are no cards or Player does not want any
+	jr c, .no_cards
+	ldh a, [hTempCardIndex_ff98]
+	or a
+	ret
+
+.no_cards
+	ld a, $ff
+	ldh [hTempCardIndex_ff98], a
+	or a
+	ret
+
+
 HandlePlayerSelectionPokemonFromDeck:
 ; create the list of cards in deck
 	call CreateDeckCardList
