@@ -67,6 +67,7 @@
 
 ### Fixed
 - **Strikes Back** no longer triggers when the Pokémon is Benched and affected with status.
+- Certain Pokémon Powers will now display the correct error message when their preconditions are not met.
 
 
 ## Version 0.4.0

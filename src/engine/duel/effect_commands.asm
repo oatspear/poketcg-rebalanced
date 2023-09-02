@@ -21,6 +21,9 @@ EffectCommands: ; 186f7 (6:46f7)
 ; - EFFECTCMDTYPE_AI_SELECTION: When AI is required to select a card
 
 ; NOTE: EFFECTCMDTYPE_INITIAL_EFFECT_2 in ATTACKS is not executed by AI.
+; NOTE: EFFECTCMDTYPE_INITIAL_EFFECT_1 in POWERS is only used to determine if
+;       the ability is passive. The error message is always the same.
+;       Use EFFECTCMDTYPE_INITIAL_EFFECT_2 for precondition checks.
 
 ; Attacks that have an EFFECTCMDTYPE_REQUIRE_SELECTION also must have either an EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN or an
 ; EFFECTCMDTYPE_AI_SELECTION (for anything not involving switching the defending Pokemon), to handle selections involving the AI.
@@ -53,7 +56,7 @@ PoisonPaybackEffectCommands:
 	db  $00
 
 StressPheromonesEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StressPheromones_PreconditionCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StressPheromones_PreconditionCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StressPheromones_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StressPheromones_PlayerSelectEffect
 	db  $00
@@ -579,7 +582,7 @@ InflictSleepEffectCommands:
 	db  $00
 
 ProphecyEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Prophecy_CheckDeck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Prophecy_CheckDeck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Prophecy_ReorderDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Prophecy_PlayerSelectEffect
 	; dbw EFFECTCMDTYPE_AI_SELECTION, Prophecy_AISelectEffect
@@ -1222,7 +1225,7 @@ NaturalRemedyEffectCommands:
 	db  $00
 
 SynthesisEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Synthesis_PreconditionCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Synthesis_PreconditionCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Synthesis_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Synthesis_PlayerSelection
 	db  $00
