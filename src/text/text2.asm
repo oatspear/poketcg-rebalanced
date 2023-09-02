@@ -692,7 +692,7 @@ DiscardedCardsFromDeckText: ; 39ab9 (e:5ab9)
 	line "from <RAMNAME>'s Deck."
 	done
 
-Text0175: ; 39adb (e:5adb)
+DiscardedFromHandText:
 	text "Discarded <RAMTEXT>"
 	line "from the Hand."
 	done
