@@ -311,8 +311,8 @@ Synthesis_PreconditionCheck:
 
 
 Shift_OncePerTurnCheck:
-    ldh a, [hTempPlayAreaLocation_ff9d]
-    ldh [hTemp_ffa0], a
+  ldh a, [hTempPlayAreaLocation_ff9d]
+  ldh [hTemp_ffa0], a
 	jp CheckPokemonPowerCanBeUsed
 
 
