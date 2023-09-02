@@ -185,7 +185,7 @@ CheckArenaPokemonHasAnyDamage:
 ; in [hTempPlayAreaLocation_ff9d] has no damage counters.
 ; Useful for Pokémon Powers.
 CheckTempLocationPokemonHasAnyDamage:
-    ldh a, [hTempPlayAreaLocation_ff9d]
+  ldh a, [hTempPlayAreaLocation_ff9d]
 	ld e, a
 	call GetCardDamageAndMaxHP
 	ldtx hl, NoDamageCountersText
