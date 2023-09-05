@@ -238,6 +238,7 @@ AssassinFlightEffectCommands:
 	db  $00
 
 TwineedleEffectCommands:
+DoubleAttackX20X10EffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX20X10_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX20X10_AIEffect
 	db  $00
@@ -384,11 +385,6 @@ AmnesiaEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Amnesia_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Amnesia_DisableEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Amnesia_AISelectEffect
-	db  $00
-
-CloysterSpikeCannonEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CloysterSpikeCannon_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, CloysterSpikeCannon_AIEffect
 	db  $00
 
 GastlyLickEffectCommands:
@@ -814,6 +810,21 @@ SmogEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SmogEffect
 	db  $00
+
+DeadlyPoisonEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DeadlyPoisonEffect
+	dbw EFFECTCMDTYPE_AI, DeadlyPoison_AIEffect
+	db  $00
+
+StrangleEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ParalysisIf30DamageEffect
+	db  $00
+
+; SpitPoisonEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpitPoisonEffect
+; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Spark_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, Spark_AISelectEffect
+; 	db  $00
 
 AerodactylPrehistoricPowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PrehistoricPowerEffect

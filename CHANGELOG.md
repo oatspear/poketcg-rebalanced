@@ -7,10 +7,24 @@
 #### Moltres Lv37
 - **Dive Bomb**: 40 base damage; no further effects.
 
+#### Cloyster
+- **Spike Cannon**: reduced cost from (WW) to (CC); flip 2 coins, 20 damage per Heads; 10 damage per Tails.
+
 #### Hitmonlee
 - **Rolling Kick**: removed.
 - **High Jump Kick**: increased cost from (FCC) to (FFC).
 - New attack: **Stretch Kick** (F): 20 damage to a Pokémon on the opponent's Bench.
+
+#### Ekans
+- **Wrap**: removed.
+- New attack: **Terror Strike** (CC): 20 damage; opponent switches Pokémon.
+
+#### Arbok
+- Increased HP from 60 to 70.
+- **Terror Strike**: removed.
+- **Poison Fang**: removed.
+- New attack: **Deadly Poison** (D): 10 damage; inflicts Poison; +20 damage if already Poisoned.
+- New attack: **Strangle** (CCC): 30 damage; inflicts Paralysis if Defending Pokémon has taken 30 or more damage.
 
 #### Nidoran (F)
 - **Fury Swipes**: removed.

@@ -24,6 +24,16 @@ INCLUDE "engine/duel/effect_functions/status.asm"
 INCLUDE "engine/duel/effect_functions/substatus.asm"
 
 
+SpitPoisonEffect:
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
+	or a  ; PLAY_AREA_ARENA ?
+	jp nz, PoisonEffect_PlayArea
+	ld a, ATK_ANIM_GOO
+	ld [wLoadedAttackAnimation], a
+	jp PoisonEffect
+
+
 ; ------------------------------------------------------------------------------
 ; Coin Flip
 ; ------------------------------------------------------------------------------
@@ -483,15 +493,6 @@ SetDefiniteAIDamage: ; 2c174 (b:4174)
 	ld a, [wDamage]
 	ld [wAIMinDamage], a
 	ld [wAIMaxDamage], a
-	ret
-
-; returns in a some random occupied Play Area location
-; in Turn Duelist's Play Area.
-PickRandomPlayAreaCard: ; 2c17e (b:417e)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	call Random
-	or a
 	ret
 
 ; prints the text "<X> devolved to <Y>!" with
@@ -1001,6 +1002,11 @@ SmogEffect:
 	ld b, CNF_SLP_PRZ ; mask of status conditions to preserve on the target
 	ld c, POISONED ; status condition to inflict to the target
 	jp ApplyStatusEffectToAllOpponentBenchedPokemon
+
+
+DeadlyPoisonEffect:
+	call DeadlyPoison_DamageBoostEffect
+	jp PoisonEffect
 
 
 ; ------------------------------------------------------------------------------
@@ -1798,16 +1804,6 @@ BenchSelectionMenuParameters: ; 2c6e8 (b:46e8)
 	db SYM_CURSOR_R ; cursor tile number
 	db SYM_SPACE ; tile behind cursor
 	dw NULL ; function pointer if non-0
-
-; If heads, defending Pokemon becomes poisoned
-SpitPoison_Poison50PercentEffect: ; 2c6f8 (b:46f8)
-	ldtx de, PoisonCheckText
-	call TossCoin_BankB
-	jp c, PoisonEffect
-	ld a, ATK_ANIM_SPIT_POISON_SUCCESS
-	ld [wLoadedAttackAnimation], a
-	call SetNoEffectFromStatus
-	ret
 
 ; return carry if there are no Pokemon cards in the non-turn holder's bench
 Lure_AssertPokemonInBench:
@@ -2739,23 +2735,6 @@ ClampEffect: ; 2d22d (b:522d)
 	call SetWasUnsuccessful
 	ret
 
-CloysterSpikeCannon_AIEffect: ; 2d246 (b:5246)
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-CloysterSpikeCannon_MultiplierEffect: ; 2d24e (b:524e)
-	ld hl, 30
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	ld e, a
-	add a
-	add e
-	call ATimes10
-	call SetDefiniteDamage
-	ret
 
 ; return carry if can use Cowardice
 Cowardice_Check:
@@ -2859,15 +2838,6 @@ IceBreath_ZeroDamage: ; 2d329 (b:5329)
 	xor a
 	call SetDefiniteDamage
 	ret
-
-; IceBreath_RandomPokemonDamageEffect: ; 2d32e (b:532e)
-; 	call SwapTurn
-; 	call PickRandomPlayAreaCard
-; 	ld b, a
-; 	ld de, 40
-; 	call DealDamageToPlayAreaPokemon_RegularAnim
-; 	call SwapTurn
-; 	ret
 
 IceBreath_BenchDamageEffect:
 	ldh a, [hTemp_ffa0]

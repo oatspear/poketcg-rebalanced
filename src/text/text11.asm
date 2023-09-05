@@ -1582,3 +1582,24 @@ GatherToxinsDescription:
 	line "The Defending Pokémon is now"
 	line "Poisoned."
 	done
+
+DeadlyPoisonName:
+	text "Deadly Poison"
+	done
+
+DeadlyPoisonDescription:
+	text "The Defending Pokémon is now"
+	line "Poisoned. If the Defending Pokémon"
+	line "was already Poisoned, this attack"
+	line "does 20 more damage."
+	done
+
+StrangleName:
+	text "Strangle"
+	done
+
+StrangleDescription:
+	text "If the Defending Pokémon has at"
+	line "least 3 damage counters on it, it"
+	line "is now Paralyzed."
+	done

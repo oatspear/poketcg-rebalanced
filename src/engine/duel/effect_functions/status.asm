@@ -154,6 +154,16 @@ ParalysisIfBasicEffect:
 	ret
 
 
+; If the Defending Pokémon has taken 30 or more damage, it is Paralyzed
+ParalysisIf30DamageEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	cp 30
+	jp nc, ParalysisEffect  ; 30 or more damage
+	or a
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Play Area Status Effects
 ; ------------------------------------------------------------------------------
