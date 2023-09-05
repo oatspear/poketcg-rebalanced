@@ -1566,3 +1566,19 @@ GarbageEaterDescription:
 	line "Trainer card from your hand,"
 	line "heal 10 damage from this Pokémon."
 	done
+
+ChooseBasicEnergyCardFromDiscardPileToAttachText:
+	text "Choose a Basic Energy card from your"
+	line "Discard Pile to attach."
+	done
+
+GatherToxinsName:
+	text "Gather Toxins"
+	done
+
+GatherToxinsDescription:
+	text "Attach a Basic Energy card from"
+	line "your Discard Pile to this Pokémon."
+	line "The Defending Pokémon is now"
+	line "Poisoned."
+	done

@@ -58,8 +58,9 @@
 
 #### Grimer
 - **Minimize**: removed.
-- **Nasty Goo**: increased cost from (D) to (DC) and damage from 10 to 20.
+- **Nasty Goo**: removed.
 - New Pokémon Power: **Garbage Eater**: heals 10 damage after playing a non-Supporter Trainer.
+- New attack: **Gather Toxins** (C): attach an energy from Discard Pile; then, 10 damage and inflicts Poison.
 
 #### Weezing
 - **Smog**: always inflicts Poison.

@@ -576,10 +576,18 @@ GastlyDestinyBondEffectCommands:
 	db  $00
 
 EnergyConversionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyConversion_CheckEnergy
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyConversion_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyConversion_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyConversion_AISelectEffect
+	db  $00
+
+GatherToxinsEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GatherToxins_AttachToPokemonEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, GatherToxins_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, GatherToxins_AISelectEffect
 	db  $00
 
 EnergySplashEffectCommands:

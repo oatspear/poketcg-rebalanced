@@ -1093,7 +1093,7 @@ Ultravision_AddToHandEffect:
 Sprout_AddToHandEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
-	jr z, .done ; skip if no card was chosen
+	jr z, SelectedCardFromDeck_AddToHandEffect.done ; skip if no card was chosen
 	; fallthrough
 
 ; add selected card to the hand and show it on screen if
@@ -3597,12 +3597,6 @@ ApplyDestinyBondEffect: ; 2d987 (b:5987)
 	call ApplySubstatus1ToAttackingCard
 	ret
 
-; returns carry if no Energy cards in Discard Pile.
-EnergyConversion_CheckEnergy:
-	call CreateEnergyCardListFromDiscardPile_OnlyBasic
-	; call CreateEnergyCardListFromDiscardPile_AllEnergy
-	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
-	ret
 
 EnergySplash_PlayerSelectEffect:
 	ld a, $ff
@@ -4278,8 +4272,23 @@ QueenPressEffect:
 EnergySpores_PlayerSelectEffect:
 EnergyAbsorption_PlayerSelectEffect:
 	ldtx hl, Choose2EnergyCardsFromDiscardPileToAttachText
-	call HandleEnergyCardsInDiscardPileSelection
+	jp HandleEnergyCardsInDiscardPileSelection
+
+
+GatherToxins_PlayerSelectEffect:
+	ldtx hl, ChooseBasicEnergyCardFromDiscardPileToAttachText
+	call HandlePlayerSelectionBasicEnergyFromDiscardPile_AllowCancel
+	ldh [hTemp_ffa0], a
+	or a  ; ignore carry
 	ret
+
+
+GatherToxins_AISelectEffect:
+; AI picks the first energy card
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	ld a, 1
+	jr PickFirstNCardsFromList_SelectEffect
+
 
 EnergySpores_AISelectEffect:
 EnergyAbsorption_AISelectEffect:
@@ -4327,6 +4336,7 @@ PickFirstNCardsFromList_SelectEffect:
 
 CollectFire_AttachToPokemonEffect:
 EnergyAbsorption_AttachToPokemonEffect:
+GatherToxins_AttachToPokemonEffect:
 	ld e, CARD_LOCATION_ARENA
 	jp SetCardLocationsFromDiscardPileToPlayArea
 
