@@ -197,34 +197,34 @@ AIDecide_ComputerSearch_WondersOfScience:
 
 ; Professor Oak not in deck, move on to
 ; look for other cards instead.
-; if Grimer or Muk are not in hand,
+; if Koffing or Weezing are not in hand,
 ; check whether to use Computer Search on them.
 .look_in_hand
-	ld a, GRIMER
+	ld a, KOFFING
 	call LookForCardIDInHandList_Bank8
-	jr nc, .target_grimer
-	ld a, MUK
+	jr nc, .target_koffing
+	ld a, WEEZING
 	call LookForCardIDInHandList_Bank8
-	jr nc, .target_muk
+	jr nc, .target_weezing
 
 .no_carry
 	or a
 	ret
 
-; first check Grimer
+; first check Koffing
 ; if in deck, check cards to discard.
-.target_grimer
-	ld e, GRIMER
+.target_koffing
+	ld e, KOFFING
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation
 	jp nc, .no_carry ; can be a jr
 	ld [wce06], a
 	jr .find_discard_cards
 
-; first check Muk
+; first check Weezing
 ; if in deck, check cards to discard.
-.target_muk
-	ld e, MUK
+.target_weezing
+	ld e, WEEZING
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation
 	jp nc, .no_carry ; can be a jr
@@ -709,13 +709,13 @@ AIDecide_SuperEnergyRetrieval:
 	jp nc, .no_carry
 
 ; handle Rain Dance deck
-; return no carry if there's no Muk card in play and
-; if there's no Blastoise card in Play Area
-; if there's a Muk in play, continue as normal
+; return no carry if there's no Weezing card in play and
+; if there's no Wartortle card in Play Area
+; if there's a Weezing in play, continue as normal
 	; ld a, [wOpponentDeckID]
 	; cp GO_GO_RAIN_DANCE_DECK_ID
 	; jr nz, .start
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	jr c, .start
 	ld a, WARTORTLE

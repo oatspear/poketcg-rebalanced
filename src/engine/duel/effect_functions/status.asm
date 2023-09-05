@@ -58,7 +58,7 @@ ApplyStatusEffect: ; 2c035 (b:4035)
 	cp SNORLAX
 	jr nz, .can_induce_status
 	call SwapTurn
-	; ...unless already so, or if affected by Muk's Toxic Gas
+	; ...unless already so, or if affected by Toxic Gas
 	call CheckCannotUseDueToStatus
 	call SwapTurn
 	jr c, .can_induce_status
@@ -210,7 +210,7 @@ ApplyStatusEffectToPlayAreaPokemon:
 	; Snorlax's Thick Skinned prevents it from being statused...
 	cp SNORLAX
 	jr nz, .can_induce_status
-	; ...unless already so, or if affected by Muk's Toxic Gas
+	; ...unless already so, or if affected by Toxic Gas
 	call CheckCannotUseDueToStatus
 	jr c, .can_induce_status
 

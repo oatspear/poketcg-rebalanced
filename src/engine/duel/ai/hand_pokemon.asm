@@ -475,7 +475,7 @@ AIDecideSpecialEvolutions:
 ; if Dragonair is benched, check all Pokémon in Play Area
 ; and sum all the damage in HP of all cards
 ; if this result is >= 70, check if there's
-; a Muk in any duelist's Play Area
+; a Weezing in any duelist's Play Area
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld b, a
@@ -493,15 +493,15 @@ AIDecideSpecialEvolutions:
 	jr nz, .loop
 	ld a, 70
 	cp c
-	jr c, .check_muk
+	jr c, .check_weezing
 .lower_score
 	ld a, 10
 	call SubFromAIScore
 	ret
 
-; if there's no Muk, raise score
-.check_muk
-	ld a, MUK
+; if there's no Weezing, raise score
+.check_weezing
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	jr c, .lower_score
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -515,7 +515,7 @@ AIDecideSpecialEvolutions:
 ; if Dragonair is active, check its damage in HP
 ; if this result is >= 50,
 ; and if at least 3 energy cards attached,
-; check if there's a Muk in any duelist's Play Area
+; check if there's a Weezing in any duelist's Play Area
 .is_active
 	ld e, 0
 	call GetCardDamageAndMaxHP
@@ -526,7 +526,7 @@ AIDecideSpecialEvolutions:
 	ld a, [wTotalAttachedEnergies]
 	cp 3
 	jr c, .lower_score
-	jr .check_muk
+	jr .check_weezing
 
 ; determine AI score for the legendary cards
 ; Moltres, Zapdos and Articuno
@@ -583,18 +583,18 @@ AIDecidePlayLegendaryBirds:
 	call SwapTurn
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
-	jr z, .check_muk_and_snorlax
+	jr z, .check_weezing_and_snorlax
 
 	; return if no space on the bench
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	cp MAX_BENCH_POKEMON
-	jr c, .check_muk_and_snorlax
+	jr c, .check_weezing_and_snorlax
 	ret
 
-.check_muk_and_snorlax
-	; checks for Muk in both Play Areas
-	ld a, MUK
+.check_weezing_and_snorlax
+	; checks for Weezing in both Play Areas
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	jr c, .subtract
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -629,8 +629,8 @@ AIDecidePlayLegendaryBirds:
 	ret
 
 .zapdos
-	; checks for Muk in both Play Areas
-	ld a, MUK
+	; checks for Weezing in both Play Areas
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	jr c, .subtract
 	ld a, DUELVARS_MISC_TURN_FLAGS

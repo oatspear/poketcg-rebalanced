@@ -1442,7 +1442,7 @@ GetNonTurnDuelistVariable:
 ; the player, and possibly to use it if it triggers when the card is played.
 OnPokemonPlayedInitVariablesAndPowers:
 	ldh a, [hTempCardIndex_ff98]
-	call ClearChangedTypesIfMuk
+	call ClearChangedTypesIfWeezing
 	ldh a, [hTempCardIndex_ff98]
 	ld d, a
 	ld e, $00
@@ -1468,9 +1468,9 @@ OnPokemonPlayedInitVariablesAndPowers:
 	call DrawWideTextBox_WaitForInput
 	call ExchangeRNG
 	ld a, [wLoadedCard1ID]
-	cp MUK
+	cp WEEZING
 	jr z, .use_pokemon_power
-	ld a, $01 ; check only Muk
+	ld a, $01 ; check only Weezing
 	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
 	jr c, .unable_to_use
 	ld a, DUELVARS_MISC_TURN_FLAGS

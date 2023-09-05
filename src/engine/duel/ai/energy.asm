@@ -163,11 +163,11 @@ AIProcessEnergyCards: ; 164fc (5:64fc)
 	ld a, 1
 	call AddToAIScore
 
-; if there's no Muk in any Play Area
+; if there's no Weezing in any Play Area
 ; and there's Ivysaur in own Play Area,
 ; add to AI score
 .check_ivysaur
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	jr c, .check_if_active
 	ld a, DUELVARS_MISC_TURN_FLAGS

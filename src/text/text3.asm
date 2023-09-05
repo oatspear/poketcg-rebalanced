@@ -541,7 +541,7 @@ PoisonDescriptionText: ; 3cf5d (f:4f5d)
 
 WondersOfScienceDescriptionText: ; 3cf99 (f:4f99)
 	text "Block Pokémon Powers with "
-	line "Muk and attack with Mewtwo!"
+	line "Weezing and attack with Mewtwo!"
 	done
 
 ReplaceEmAllDescriptionText: ; 3cfd1 (f:4fd1)

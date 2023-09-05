@@ -111,9 +111,9 @@ AIDoTurn_LegendaryRonald:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_1 ; skip if cards in deck <= 9
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
-	jr c, .skip_moltres_1 ; skip if Muk in play
+	jr c, .skip_moltres_1 ; skip if Weezing in play
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
@@ -170,9 +170,9 @@ AIDoTurn_LegendaryRonald:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_2 ; skip if cards in deck <= 9
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
-	jr c, .skip_moltres_2 ; skip if Muk in play
+	jr c, .skip_moltres_2 ; skip if Weezing in play
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a

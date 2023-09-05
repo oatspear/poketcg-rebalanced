@@ -174,7 +174,7 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	ret c
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -207,7 +207,7 @@ HandleStrikesBack_AgainstDamagingAttack:
 	ld a, [wTempNonTurnDuelistCardID] ; ID of defending Pokemon
 	cp MACHAMP
 	ret nz
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	ret c
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -494,7 +494,7 @@ NoDamageOrEffectTextIDTable:
 
 ; return carry if turn holder has Mew and its Clairvoyance Pkmn Power is active
 IsClairvoyanceActive:
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	ccf
 	ret nc
@@ -529,7 +529,7 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0:
 	scf
 	jr nz, .done ; return carry
 .check_toxic_gas
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	jr c, .disabled
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -639,7 +639,7 @@ GetLoadedCard1RetreatCost:
 	ld a, [wLoadedCard1RetreatCost] ; return regular retreat cost
 	ret
 .dodrio_found
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	jr c, .powers_disabled
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -687,7 +687,7 @@ IsPrehistoricPowerActive:
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
 	ccf
@@ -766,7 +766,7 @@ IsRainDanceActive:
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	ccf
 	ret
@@ -882,12 +882,12 @@ ApplyStrikesBack_AfterDirectAttack:
 	scf
 	ret
 
-; if the id of the card provided in register a as a deck index is MUK,
+; if the id of the card provided in register a as a deck index is WEEZING,
 ; clear the changed type of all arena and bench Pokemon
-ClearChangedTypesIfMuk:
+ClearChangedTypesIfWeezing:
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp MUK
+	cp WEEZING
 	ret nz
 	call SwapTurn
 	call .zero_changed_types

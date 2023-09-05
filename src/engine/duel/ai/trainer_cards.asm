@@ -2113,7 +2113,7 @@ AIDecide_ProfessorOak:
 	ld [wce06], a
 
 .handle_wartortle
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	jr c, .check_hand
 
@@ -2122,7 +2122,7 @@ AIDecide_ProfessorOak:
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	jr nz, .check_hand
 
-; no Muk in Play Area
+; no Toxic Gas in Play Area
 	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
 	jr nc, .check_hand
@@ -2351,21 +2351,21 @@ AIDecide_ProfessorOak:
 	jp .check_cards_hand
 
 ; handles Wonders of Science AI logic.
-; if there's either Grimer or Muk in hand,
+; if there's either Koffing or Weezing in hand,
 ; do not play Professor Oak.
 .HandleWondersOfScienceDeck
-	ld a, GRIMER
+	ld a, KOFFING
 	call LookForCardIDInHandList_Bank8
-	jr c, .found_grimer_or_muk
-	ld a, MUK
+	jr c, .found_koffing_or_weezing
+	ld a, WEEZING
 	call LookForCardIDInHandList_Bank8
-	jr c, .found_grimer_or_muk
+	jr c, .found_koffing_or_weezing
 
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
 	jp .check_cards_deck
 
-.found_grimer_or_muk
+.found_koffing_or_weezing
 	or a
 	ret
 
@@ -2399,14 +2399,14 @@ AIDecide_EnergyRetrieval:
 	jp nc, .no_carry
 
 ; handle Rain Dance deck
-; return no carry if there's no Muk card in play and
+; return no carry if there's no Weezing card in play and
 ; if there's no Wartortle card in Play Area
-; if there's a Muk in play, continue as normal
+; if there's a Weezing in play, continue as normal
 	; ld a, [wOpponentDeckID]
 	; cp GO_GO_RAIN_DANCE_DECK_ID
 	; jr nz, .start
 
-	; ld a, MUK
+	; ld a, WEEZING
 	; call CountPokemonIDInBothPlayAreas
 	; jr c, .start
 	; ld a, WARTORTLE
@@ -3607,7 +3607,7 @@ AIDecide_ScoopUp:
 
 ; this deck will use Scoop Up on a benched ArticunoLv37.
 ; it checks if the defending Pokemon is a Snorlax,
-; but interestingly does not check for Muk in both Play Areas.
+; but interestingly does not check for Weezing in both Play Areas.
 ; will also use Scoop Up on
 .HandleLegendaryArticuno
 ; if less than 3 Play Area Pokemon cards, skip.
@@ -3690,7 +3690,7 @@ AIDecide_ScoopUp:
 	ret
 
 ; this deck will use Scoop Up on a benched ArticunoLv37, ZapdosLv68 or MoltresLv37.
-; interestingly, does not check for Muk in both Play Areas.
+; interestingly, does not check for Weezing in both Play Areas.
 .HandleLegendaryRonald
 ; if less than 3 Play Area Pokemon cards, skip.
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA

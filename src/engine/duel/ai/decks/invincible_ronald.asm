@@ -37,11 +37,11 @@ AIActionTable_InvincibleRonald:
 	db CHANSEY
 	db GEODUDE
 	db SCYTHER
-	db GRIMER
+	db KOFFING
 	db $00
 
 .list_bench
-	db GRIMER
+	db KOFFING
 	db SCYTHER
 	db GEODUDE
 	db CHANSEY
@@ -50,12 +50,12 @@ AIActionTable_InvincibleRonald:
 	db $00
 
 .list_retreat
-	ai_retreat GRIMER, -1
+	ai_retreat KOFFING, -1
 	db $00
 
 .list_energy
-	ai_energy GRIMER,         1, -1
-	ai_energy MUK,            3, -1
+	ai_energy KOFFING,        1, -1
+	ai_energy WEEZING,        3, -1
 	ai_energy SCYTHER,        4, +1
 	ai_energy MAGMAR_LV31,    2, +0
 	ai_energy GEODUDE,        2, +0

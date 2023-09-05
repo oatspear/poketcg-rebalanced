@@ -64,7 +64,7 @@ AIActionTable_WondersOfScience:
 	db $00
 
 .list_prize
-	db MUK
+	db WEEZING
 	db $00
 
 .store_list_pointers

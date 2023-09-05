@@ -677,10 +677,11 @@ SelfdestructName: ; 59abe (16:5abe)
 	text "Selfdestruct"
 	done
 
-WeezingsSelfdestructDescription:
-	text "Does 10 damage to each Pokémon on"
-	line "each player's Bench."
-	line "Weezing does 60 damage to itself."
+KoffingsSelfdestructDescription:
+	text "This attack does 10 damage to each"
+	line "Pokémon on each player's Bench."
+	line "This Pokémon does 50 damage to"
+	line "itself."
 	done
 
 WeezingDescription: ; 59b61 (16:5b61)

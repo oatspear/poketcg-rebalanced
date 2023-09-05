@@ -1210,8 +1210,8 @@ InvincibleRonaldDeck:
 	card_item FIRE_ENERGY,             6
 	card_item FIGHTING_ENERGY,         7
 	card_item DOUBLE_COLORLESS_ENERGY, 4
-	card_item GRIMER,                  3
-	card_item MUK,                     2
+	card_item KOFFING,                 3
+	card_item WEEZING,                 2
 	card_item SCYTHER,                 4
 	card_item MAGMAR_LV31,             3
 	card_item GEODUDE,                 3

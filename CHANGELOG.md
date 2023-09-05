@@ -62,8 +62,17 @@
 - New Pokémon Power: **Garbage Eater**: heals 10 damage after playing a non-Supporter Trainer.
 - New attack: **Gather Toxins** (C): attach an energy from Discard Pile; then, 10 damage and inflicts Poison.
 
+#### Muk
+- **Toxic Gas**: removed.
+
+#### Koffing
+- New attack: **Selfdestruct** (CC): 50 damage; 50 recoil; 10 damage to all Benched.
+
 #### Weezing
+- Increased HP from 60 to 80.
 - **Smog**: always inflicts Poison.
+- **Selfdestruct**: removed:
+- New Pokémon Power: **Toxic Gas**: disables other Pokémon Powers.
 
 #### Persian
 - **Sneak Attack**: removed.

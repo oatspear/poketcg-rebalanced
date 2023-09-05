@@ -224,7 +224,7 @@ Text04b1: ; 44c4d (11:4c4d)
 	done
 
 Text04b2: ; 44c58 (11:4c58)
-	text "Muk's Toxic Gas is very powerful!"
+	text "Toxic Gas is very powerful!"
 	line "It can block all Pokémon Powers!"
 	line "But be careful because it also"
 	line "blocks your own Pokémon's Powers!"

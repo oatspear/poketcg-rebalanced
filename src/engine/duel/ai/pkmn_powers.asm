@@ -22,9 +22,9 @@ HandleAIEnergyTrans:
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Ivysaur found in own Play Area
 
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
-	ret c ; return if Muk found in any Play Area
+	ret c ; return if Weezing found in any Play Area
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -377,10 +377,10 @@ AIEnergyTransTransferEnergyToBench:
 ;	- Curse.
 ; returns carry if turn ended.
 HandleAIPkmnPowers:
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	ccf
-	ret nc ; return no carry if Muk is in play
+	ret nc ; return no carry if Weezing is in play
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -1037,9 +1037,9 @@ HandleAIDualTypeFighting:
 
 ; handles AI logic for Cowardice
 HandleAICowardice:
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
-	ret c ; return if there's Muk in play
+	ret c ; return if there's Weezing in play
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -1295,9 +1295,9 @@ HandleAIDamageSwap:
 	ld a, ALAKAZAM
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Alakazam
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
-	ret c ; return if there's Muk in play
+	ret c ; return if there's Weezing in play
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
@@ -1464,9 +1464,9 @@ HandleAIRainDanceEnergy:
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Wartortle
 
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
-	ret c ; return if there's Muk in play
+	ret c ; return if there's Weezing in play
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -1491,9 +1491,9 @@ HandleAIFirestarterEnergy:
 	call CountPokemonIDInPlayArea
 	ret nc  ; no Charmeleon
 
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
-	ret c  ; Muk is in play
+	ret c  ; Weezing is in play
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable

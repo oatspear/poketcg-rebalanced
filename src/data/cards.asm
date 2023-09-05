@@ -1964,18 +1964,18 @@ MukCard:
 	tx GrimerName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx ToxicGasName ; name
-	tx ToxicGasDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw PassivePowerEffectCommands ; effect commands
-	db NONE ; flags 1
+	energy DARKNESS, 2, COLORLESS, 1 ; energies
+	tx SludgeName ; name
+	tx InflictPoisonDescription ; description
+	dw NONE ; description (cont)
+	db 40 ; damage
+	db DAMAGE_NORMAL ; category
+	dw InflictPoisonEffectCommands ; effect commands
+	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db ATK_ANIM_GOO ; animation
 
 	; attack 2
 	energy DARKNESS, 2, COLORLESS, 1 ; energies
@@ -2130,6 +2130,20 @@ KoffingCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 2 ; energies
+	tx SelfdestructName ; name
+	tx KoffingsSelfdestructDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 50 ; damage
+	db DAMAGE_NORMAL ; category
+	dw WeezingSelfdestructEffectCommands ; effect commands
+	db HIGH_RECOIL ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 50
+	db ATK_ANIM_SELFDESTRUCT ; animation
+
+	; attack 2
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx FoulGasName ; name
 	tx FoulGasDescription ; description
@@ -2142,20 +2156,6 @@ KoffingCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_FOUL_GAS ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -2176,11 +2176,25 @@ WeezingCard:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db WEEZING
-	db 60 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx KoffingName ; pre-evo name
 
 	; attack 1
+	energy 0 ; energies
+	tx ToxicGasName ; name
+	tx ToxicGasDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx SmogName ; name
 	tx InflictPoisonDescription ; description
@@ -2193,20 +2207,6 @@ WeezingCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_SMOG ; animation
-
-	; attack 2
-	energy DARKNESS, 1, COLORLESS, 2 ; energies
-	tx SelfdestructName ; name
-	tx WeezingsSelfdestructDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 60 ; damage
-	db DAMAGE_NORMAL ; category
-	dw WeezingSelfdestructEffectCommands ; effect commands
-	db HIGH_RECOIL ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 60
-	db ATK_ANIM_SELFDESTRUCT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

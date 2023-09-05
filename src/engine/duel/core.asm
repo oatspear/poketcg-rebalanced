@@ -7050,7 +7050,7 @@ HandleEndOfTurnEvents:
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz
-	ld a, MUK
+	ld a, WEEZING
 	call CountPokemonIDInBothPlayAreas
 	ret c
 

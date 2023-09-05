@@ -2275,7 +2275,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WeezingName                                        ; 0x08be
 	textpointer SmogName                                           ; 0x08bf
 	textpointer SelfdestructName                                   ; 0x08c0
-	textpointer WeezingsSelfdestructDescription                    ; 0x08c1
+	textpointer KoffingsSelfdestructDescription                    ; 0x08c1
 	textpointer WeezingDescription                                 ; 0x08c2
 	textpointer TangelaName                                        ; 0x08c3
 	textpointer BindName                                           ; 0x08c4
