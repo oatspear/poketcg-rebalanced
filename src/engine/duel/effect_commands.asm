@@ -853,16 +853,16 @@ Selfdestruct40Bench10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct40Bench10Effect
 	db  $00
 
+Selfdestruct50Bench10EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct50Bench10Effect
+	db  $00
+
 Selfdestruct80Bench20EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct80Bench20Effect
 	db  $00
 
 Selfdestruct100Bench20EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct100Bench20Effect
-	db  $00
-
-WeezingSelfdestructEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct60Bench10Effect
 	db  $00
 
 GolemSelfdestructEffectCommands:

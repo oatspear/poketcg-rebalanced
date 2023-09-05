@@ -5102,12 +5102,12 @@ ElectabuzzQuickAttack_DamageBoostEffect: ; 2e3c8 (b:63c8)
 	call AddToDamage
 	ret
 
-Selfdestruct40Bench10Effect: ; 2e3db (b:63db)
+Selfdestruct40Bench10Effect:
 	ld a, 40
-	jr Selfdestruct60Bench10Effect.recoil
+	jr Selfdestruct50Bench10Effect.recoil
 
-Selfdestruct60Bench10Effect: ; 2ccea (b:4cea)
-	ld a, 60
+Selfdestruct50Bench10Effect:
+	ld a, 50
 .recoil
 	call DealRecoilDamageToSelf
 	; fallthrough
