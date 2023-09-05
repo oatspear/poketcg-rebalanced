@@ -64,6 +64,9 @@
 
 #### Muk
 - **Toxic Gas**: removed.
+- **Sludge**: removed.
+- New attack: **Toxic** (DC): 10 damage; inflicts Double Poison.
+- New attack: **Pester** (CCC): 30 damage; double damage if the Defending Pokémon has a Status Condition.
 
 #### Koffing
 - New attack: **Selfdestruct** (CC): 50 damage; 50 recoil; 10 damage to all Benched.

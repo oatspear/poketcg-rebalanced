@@ -1964,32 +1964,32 @@ MukCard:
 	tx GrimerName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 2, COLORLESS, 1 ; energies
-	tx SludgeName ; name
-	tx InflictPoisonDescription ; description
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	tx ToxicName ; name
+	tx ToxicDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw InflictPoisonEffectCommands ; effect commands
+	dw ToxicEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 2
 	db ATK_ANIM_GOO ; animation
 
 	; attack 2
-	energy DARKNESS, 2, COLORLESS, 1 ; energies
-	tx SludgeName ; name
-	tx InflictPoisonDescription ; description
+	energy COLORLESS, 3 ; energies
+	tx PesterName ; name
+	tx PesterDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw InflictPoisonEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw PesterEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GOO ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
