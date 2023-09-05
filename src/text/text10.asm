@@ -79,11 +79,6 @@ RetaliateDescription:
 	line "counters on it."
 	done
 
-MayDoNothingDescription: ; 5860c (16:460c)
-	text "Flip a coin. If tails, this attack"
-	line "does nothing."
-	done
-
 NidoranMDescription: ; 5863e (16:463e)
 	text "Stiffens its ears to sense danger."
 	line "The larger, more powerful of its"
@@ -669,8 +664,15 @@ WeezingName: ; 59aaf (16:5aaf)
 	text "Weezing"
 	done
 
-SmogName: ; 59ab8 (16:5ab8)
+SmogName:
 	text "Smog"
+	done
+
+SmogDescription:
+	text "This attack does 10 damage to each"
+	line "of your opponent's Benched Pokémon."
+	line "All of your opponent's Pokémon are"
+	line "now Poisoned."
 	done
 
 SelfdestructName: ; 59abe (16:5abe)
@@ -726,10 +728,10 @@ SwordsDanceName: ; 59cb4 (16:5cb4)
 	text "Swords Dance"
 	done
 
-SwordsDanceDescription: ; 59cc2 (16:5cc2)
-	text "During your next turn, Scyther's"
-	line "Slash attack's base damage is"
-	line "doubled."
+NextTurnDoubleDamageDescription:
+	text "During your next turn, this"
+	line "Pokémon's attack's base damage"
+	line "is doubled."
 	done
 
 MantisName: ; 59d0b (16:5d0b)
@@ -1652,12 +1654,6 @@ VaporeonName: ; 5c6aa (17:46aa)
 
 FocusEnergyName: ; 5c6b4 (17:46b4)
 	text "Focus Energy"
-	done
-
-FocusEnergyDescription: ; 5c6c2 (17:46c2)
-	text "During your next turn, this"
-	line "Pokémon's attack's base damage"
-	line "is doubled."
 	done
 
 BubbleJetName: ; 5c70b (17:470b)

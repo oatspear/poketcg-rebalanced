@@ -535,11 +535,6 @@ MoltresFiregiverEffectCommands:
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Firegiver_AddToHandEffect
 	db  $00
 
-MoltresLv37DiveBombEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MoltresLv37DiveBomb_Success50PercentEffect
-	dbw EFFECTCMDTYPE_AI, MoltresLv37DiveBomb_AIEffect
-	db  $00
-
 ProwlEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Prowl_SearchAndAddToHandEffect
@@ -813,6 +808,11 @@ BlizzardEffectCommands:
 
 TailSwingEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenchedBasic20Effect
+	db  $00
+
+SmogEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SmogEffect
 	db  $00
 
 AerodactylPrehistoricPowerEffectCommands:

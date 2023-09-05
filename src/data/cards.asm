@@ -2197,12 +2197,12 @@ WeezingCard:
 	; attack 2
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx SmogName ; name
-	tx InflictPoisonDescription ; description
+	tx SmogDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw InflictPoisonEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
+	dw SmogEffectCommands ; effect commands
+	db INFLICT_POISON | DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
@@ -2336,7 +2336,7 @@ ScytherCard:
 	; attack 1
 	energy GRASS, 1 ; energies
 	tx SwordsDanceName ; name
-	tx SwordsDanceDescription ; description
+	tx NextTurnDoubleDamageDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -3268,16 +3268,16 @@ MoltresLv37Card:
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
 	tx DiveBombName ; name
-	tx MayDoNothingDescription ; description
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 70 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MoltresLv37DiveBombEffectCommands ; effect commands
+	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_DIVE_BOMB ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness

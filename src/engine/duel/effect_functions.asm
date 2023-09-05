@@ -996,6 +996,13 @@ ShadowClawEffect:
 	jp Discard1RandomCardFromOpponentsHand
 
 
+SmogEffect:
+	call DamageAllOpponentBenched10Effect
+	ld b, CNF_SLP_PRZ ; mask of status conditions to preserve on the target
+	ld c, POISONED ; status condition to inflict to the target
+	jp ApplyStatusEffectToAllOpponentBenchedPokemon
+
+
 ; ------------------------------------------------------------------------------
 ; Card Search
 ; ------------------------------------------------------------------------------
@@ -2964,25 +2971,6 @@ Wildfire_DiscardEnergyEffect: ; 2d4e1 (b:54e1)
 	ret
 
 
-MoltresLv35DiveBomb_AIEffect: ; 2d523 (b:5523)
-	ld a, 80 / 2
-	lb de, 0, 80
-	jp SetExpectedAIDamage
-
-MoltresLv35DiveBomb_Success50PercentEffect: ; 2d52b (b:552b)
-	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
-	call TossCoin_BankB
-	jr c, .heads
-; tails
-	xor a
-	call SetDefiniteDamage
-	call SetWasUnsuccessful
-	ret
-.heads
-	ld a, ATK_ANIM_DIVE_BOMB
-	ld [wLoadedAttackAnimation], a
-	ret
-
 FlareonQuickAttack_AIEffect: ; 2d541 (b:5541)
 	ld a, (10 + 30) / 2
 	lb de, 10, 30
@@ -3002,11 +2990,6 @@ MagmarSmokescreenEffect: ; 2d594 (b:5594)
 	ld a, SUBSTATUS2_SMOKESCREEN
 	call ApplySubstatus2ToDefendingCard
 	ret
-
-MagmarSmog_AIEffect: ; 2d59a (b:559a)
-	ld a, 5
-	lb de, 0, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
 
 EnergyBurnEffect: ; 2d5be (b:55be)
 	scf

@@ -4,6 +4,9 @@
 
 ### Changed
 
+#### Moltres Lv37
+- **Dive Bomb**: 40 base damage; no further effects.
+
 #### Hitmonlee
 - **Rolling Kick**: removed.
 - **High Jump Kick**: increased cost from (FCC) to (FFC).
@@ -73,9 +76,10 @@
 
 #### Weezing
 - Increased HP from 60 to 80.
-- **Smog**: always inflicts Poison.
+- **Smog**: reworked.
 - **Selfdestruct**: removed:
 - New Pokémon Power: **Toxic Gas**: disables other Pokémon Powers.
+- New attack: **Smog** (DC): 10 damage and Poison to all of the opponent's Pokémon.
 
 #### Persian
 - **Sneak Attack**: removed.

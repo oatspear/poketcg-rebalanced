@@ -252,6 +252,37 @@ ApplyStatusEffectToAllPlayAreaPokemon:
 	jr .loop_play_area
 
 
+; assumes:
+;   - SwapTurn if needed to change to the correct play area
+; input:
+;   b: mask of status conditions to preserve on the target
+;   c: status condition to inflict to the target
+ApplyStatusEffectToAllBenchedPokemon:
+	call ApplyStatusEffect
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	dec a
+	ld d, a
+	ld e, PLAY_AREA_BENCH_1
+	jr .next
+.loop_play_area
+	call ApplyStatusEffectToPlayAreaPokemon
+.next
+	inc e
+	dec d
+	ret z
+	jr .loop_play_area
+
+
+; input:
+;   b: mask of status conditions to preserve on the target
+;   c: status condition to inflict to the target
+ApplyStatusEffectToAllOpponentBenchedPokemon:
+	call SwapTurn
+	call ApplyStatusEffectToAllBenchedPokemon
+	jp SwapTurn
+
+
 ; ------------------------------------------------------------------------------
 ; Utility Functions
 ; ------------------------------------------------------------------------------

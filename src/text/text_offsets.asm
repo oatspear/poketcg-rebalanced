@@ -2153,7 +2153,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NidoranMName                                       ; 0x085c
 	textpointer RetaliateName
 	textpointer RetaliateDescription
-	textpointer MayDoNothingDescription                            ; 0x085e
 	textpointer NidoranMDescription                                ; 0x085f
 	textpointer NidorinoName                                       ; 0x0860
 	textpointer HornDrillName                                      ; 0x0861
@@ -2273,7 +2272,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PoisonGasName                                      ; 0x08bc
 	textpointer KoffingDescription                                 ; 0x08bd
 	textpointer WeezingName                                        ; 0x08be
-	textpointer SmogName                                           ; 0x08bf
+	textpointer SmogName
+	textpointer SmogDescription
 	textpointer SelfdestructName                                   ; 0x08c0
 	textpointer KoffingsSelfdestructDescription                    ; 0x08c1
 	textpointer WeezingDescription                                 ; 0x08c2
@@ -2285,7 +2285,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TangelaLv12Description                            ; 0x08c8
 	textpointer ScytherName                                        ; 0x08c9
 	textpointer SwordsDanceName                                    ; 0x08ca
-	textpointer SwordsDanceDescription                             ; 0x08cb
+	textpointer NextTurnDoubleDamageDescription
 	textpointer MantisName                                         ; 0x08cc
 	textpointer ScytherDescription                                 ; 0x08cd
 	textpointer PinsirName                                         ; 0x08ce
@@ -2480,7 +2480,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LaprasDescription                                  ; 0x0998
 	textpointer VaporeonName                                       ; 0x0999
 	textpointer FocusEnergyName                                    ; 0x099a
-	textpointer FocusEnergyDescription                             ; 0x099b
 	textpointer BubbleJetName                                      ; 0x099c
 	textpointer VaporeonLv29Description                           ; 0x099d
 	textpointer VaporeonLv42Description                           ; 0x099f
