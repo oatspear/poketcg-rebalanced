@@ -4224,7 +4224,9 @@ EnergyAbsorption_PlayerSelectEffect:
 GatherToxins_PlayerSelectEffect:
 	ldtx hl, ChooseBasicEnergyCardFromDiscardPileToAttachText
 	call HandlePlayerSelectionBasicEnergyFromDiscardPile_AllowCancel
-	ldh [hTemp_ffa0], a
+	ldh [hTempList], a
+	ld a, $ff
+	ldh [hTempList + 1], a  ; terminating byte
 	or a  ; ignore carry
 	ret
 
