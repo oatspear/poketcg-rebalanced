@@ -93,7 +93,7 @@
 - **Smog**: reworked.
 - **Selfdestruct**: removed:
 - New Pokémon Power: **Toxic Gas**: disables other Pokémon Powers.
-- New attack: **Smog** (DC): 10 damage and Poison to all of the opponent's Pokémon.
+- New attack: **Smog** (DC): 20 damage; inflicts Poison; 10 damage to all Benched Pokémon.
 
 #### Persian
 - **Sneak Attack**: removed.

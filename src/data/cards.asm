@@ -2199,7 +2199,7 @@ WeezingCard:
 	tx SmogName ; name
 	tx SmogDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw SmogEffectCommands ; effect commands
 	db INFLICT_POISON | DAMAGE_TO_OPPONENT_BENCH ; flags 1

@@ -463,8 +463,8 @@ EarthquakeName: ; 5e70d (17:670d)
 	done
 
 EarthquakeDescription:
-	text "Does 10 damage to each player's"
-	line "Benched Pokémon."
+	text "This attack does 10 damage to each"
+	line "player's Benched Pokémon."
 	done
 
 DugtrioDescription: ; 5e789 (17:6789)

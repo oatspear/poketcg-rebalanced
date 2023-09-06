@@ -1,4 +1,12 @@
 
+SmogEffect:
+	call DamageAllOpponentBenched10Effect
+	ld b, CNF_SLP_PRZ ; mask of status conditions to preserve on the target
+	ld c, POISONED ; status condition to inflict to the target
+	jp ApplyStatusEffectToAllOpponentBenchedPokemon
+
+
+
 NidoqueenBoyfriendsEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BoyfriendsEffect
 	db  $00

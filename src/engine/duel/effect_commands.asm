@@ -808,7 +808,8 @@ TailSwingEffectCommands:
 
 SmogEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SmogEffect
+	; dbw EFFECTCMDTYPE_AFTER_DAMAGE, SmogEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Earthquake10Effect
 	db  $00
 
 DeadlyPoisonEffectCommands:
