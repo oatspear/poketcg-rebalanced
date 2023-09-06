@@ -4,26 +4,13 @@ HandleDoubleDamageSubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
-	call nz, .double_damage_at_de
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
-	call GetTurnDuelistVariable
-	or a
-	call nz, .ret1
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
-	call GetTurnDuelistVariable
-	or a
-	call nz, .ret2
-	ret
-.ret1
-	ret
-.double_damage_at_de
+	ret z
+; double damage at de
 	ld a, e
 	or d
 	ret z
 	sla e
 	rl d
-	ret
-.ret2
 	ret
 
 ; check if the attacking card (non-turn holder's arena card) has any substatus that

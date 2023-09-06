@@ -1,4 +1,33 @@
 
+; doubles the damage at de if swords dance or focus energy was used
+; in the last turn by the turn holder's arena Pokemon
+HandleDoubleDamageSubstatus:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetTurnDuelistVariable
+	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
+	call nz, .double_damage_at_de
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
+	call GetTurnDuelistVariable
+	or a
+	call nz, .ret1
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
+	call GetTurnDuelistVariable
+	or a
+	call nz, .ret2
+	ret
+.ret1
+	ret
+.double_damage_at_de
+	ld a, e
+	or d
+	ret z
+	sla e
+	rl d
+	ret
+.ret2
+	ret
+
+
 
 SongOfRest_CheckUse:
 	ldh a, [hTempPlayAreaLocation_ff9d]
