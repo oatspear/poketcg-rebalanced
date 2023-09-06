@@ -681,7 +681,7 @@ SelfdestructName: ; 59abe (16:5abe)
 
 KoffingsSelfdestructDescription:
 	text "This attack does 10 damage to each"
-	line "Pokémon on each player's Bench."
+	line "player's Benched Pokémon."
 	line "This Pokémon does 50 damage to"
 	line "itself."
 	done

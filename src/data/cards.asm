@@ -2130,7 +2130,21 @@ KoffingCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
+	energy DARKNESS, 1 ; energies
+	tx FoulGasName ; name
+	tx FoulGasDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw KoffingFoulGasEffectCommands ; effect commands
+	db INFLICT_POISON | INFLICT_CONFUSION ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_FOUL_GAS ; animation
+
+	; attack 2
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx SelfdestructName ; name
 	tx KoffingsSelfdestructDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
@@ -2142,20 +2156,6 @@ KoffingCard:
 	db NONE ; flags 3
 	db 50
 	db ATK_ANIM_SELFDESTRUCT ; animation
-
-	; attack 2
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx FoulGasName ; name
-	tx FoulGasDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw KoffingFoulGasEffectCommands ; effect commands
-	db INFLICT_POISON | INFLICT_CONFUSION ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_FOUL_GAS ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness

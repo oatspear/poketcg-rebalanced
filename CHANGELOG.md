@@ -86,7 +86,8 @@
 - New attack: **Pester** (CCC): 30 damage; double damage if the Defending Pokémon has a Status Condition.
 
 #### Koffing
-- New attack: **Selfdestruct** (CC): 50 damage; 50 recoil; 10 damage to all Benched.
+- **Foul Gas**: reduced cost from (DC) to (D); base damage reduced from 10 to zero.
+- New attack: **Selfdestruct** (DC): 40 damage; 50 recoil; 10 damage to all Benched.
 
 #### Weezing
 - Increased HP from 60 to 80.
