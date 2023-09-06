@@ -339,11 +339,11 @@ RestEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Rest_HealEffect
 	db  $00
 
-SongOfRestEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SongOfRest_CheckUse
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SongOfRest_HealEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SongOfRest_PlayerSelectEffect
-	db  $00
+; SongOfRestEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SongOfRest_CheckUse
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SongOfRest_HealEffect
+; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SongOfRest_PlayerSelectEffect
+; 	db  $00
 
 RainDanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RainDanceEffect
