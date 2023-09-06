@@ -7050,8 +7050,7 @@ HandleEndOfTurnEvents:
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ret c
 
 ; check for Meowth's Lucky Tails Power

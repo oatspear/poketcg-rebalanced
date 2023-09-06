@@ -22,8 +22,7 @@ HandleAIEnergyTrans:
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Ivysaur found in own Play Area
 
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ret c ; return if Weezing found in any Play Area
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -377,8 +376,7 @@ AIEnergyTransTransferEnergyToBench:
 ;	- Curse.
 ; returns carry if turn ended.
 HandleAIPkmnPowers:
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ccf
 	ret nc ; return no carry if Weezing is in play
 
@@ -1037,8 +1035,7 @@ HandleAIDualTypeFighting:
 
 ; handles AI logic for Cowardice
 HandleAICowardice:
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ret c ; return if there's Weezing in play
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -1295,8 +1292,7 @@ HandleAIDamageSwap:
 	ld a, ALAKAZAM
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Alakazam
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ret c ; return if there's Weezing in play
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -1464,8 +1460,7 @@ HandleAIRainDanceEnergy:
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Wartortle
 
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ret c ; return if there's Weezing in play
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -1491,8 +1486,7 @@ HandleAIFirestarterEnergy:
 	call CountPokemonIDInPlayArea
 	ret nc  ; no Charmeleon
 
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ret c  ; Weezing is in play
 
 	ld a, DUELVARS_MISC_TURN_FLAGS

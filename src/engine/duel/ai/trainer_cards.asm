@@ -2113,8 +2113,7 @@ AIDecide_ProfessorOak:
 	ld [wce06], a
 
 .handle_wartortle
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	jr c, .check_hand
 
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -2406,8 +2405,7 @@ AIDecide_EnergyRetrieval:
 	; cp GO_GO_RAIN_DANCE_DECK_ID
 	; jr nz, .start
 
-	; ld a, WEEZING
-	; call CountPokemonIDInBothPlayAreas
+	; call IsToxicGasActive
 	; jr c, .start
 	; ld a, WARTORTLE
 	; call CountPokemonIDInPlayArea

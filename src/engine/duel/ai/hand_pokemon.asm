@@ -501,8 +501,7 @@ AIDecideSpecialEvolutions:
 
 ; if there's no Weezing, raise score
 .check_weezing
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	jr c, .lower_score
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -594,8 +593,7 @@ AIDecidePlayLegendaryBirds:
 
 .check_weezing_and_snorlax
 	; checks for Weezing in both Play Areas
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	jr c, .subtract
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -630,8 +628,7 @@ AIDecidePlayLegendaryBirds:
 
 .zapdos
 	; checks for Weezing in both Play Areas
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	jr c, .subtract
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable

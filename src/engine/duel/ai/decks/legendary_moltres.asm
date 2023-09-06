@@ -109,8 +109,7 @@ AIDoTurn_LegendaryMoltres:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres ; skip if cards in deck <= 9
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	jr c, .skip_moltres ; skip if Weezing in play
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable

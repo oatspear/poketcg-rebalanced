@@ -161,8 +161,7 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ret c
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -194,8 +193,7 @@ HandleStrikesBack_AgainstDamagingAttack:
 	ld a, [wTempNonTurnDuelistCardID] ; ID of defending Pokemon
 	cp MACHAMP
 	ret nz
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ret c
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -481,8 +479,7 @@ NoDamageOrEffectTextIDTable:
 
 ; return carry if turn holder has Mew and its Clairvoyance Pkmn Power is active
 IsClairvoyanceActive:
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ccf
 	ret nc
 	ld a, DUELVARS_MISC_TURN_FLAGS
@@ -516,8 +513,7 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0:
 	scf
 	jr nz, .done ; return carry
 .check_toxic_gas
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	jr c, .disabled
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -527,6 +523,49 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0:
 .disabled
 	ldtx hl, UnableToUsePkmnPowerText
 .done
+	ret
+
+; Check whether Toxic Gas (Weezing) is found in either player's Active Spot,
+; and whether it is Pokémon Power capable.
+; Returns carry if the Pokémon card is at least found once.
+; outputs:
+;   a: 0 if not found; 1 if found
+;   carry: set iff found
+IsToxicGasActive:
+	push hl
+	push de
+	; push bc
+	; ld a, WEEZING
+	; ld [wTempPokemonID_ce7c], a
+	call .check_active_spot
+	jr c, .found
+	call SwapTurn
+	call .check_active_spot
+	call SwapTurn
+	jr c, .found
+; not found
+	xor a
+.found
+	; pop bc
+	pop de
+	pop hl
+	ret
+
+.check_active_spot
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+; check if it is the right Pokémon
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp WEEZING
+	ret nz
+; check if the Pokémon is affected with a status condition
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	and CNF_SLP_PRZ
+	ret nz
+	ld a, 1
+	scf
 	ret
 
 ; return, in a, the amount of times that the Pokemon card with a given ID is found in the
@@ -626,8 +665,7 @@ GetLoadedCard1RetreatCost:
 	ld a, [wLoadedCard1RetreatCost] ; return regular retreat cost
 	ret
 .dodrio_found
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	jr c, .powers_disabled
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
@@ -674,8 +712,7 @@ IsPrehistoricPowerActive:
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
 	ccf
 	ret
@@ -753,8 +790,7 @@ IsRainDanceActive:
 	call GetTurnDuelistVariable
 	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
 	ret nz
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	ccf
 	ret
 

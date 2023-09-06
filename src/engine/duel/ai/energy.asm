@@ -167,8 +167,7 @@ AIProcessEnergyCards: ; 164fc (5:64fc)
 ; and there's Ivysaur in own Play Area,
 ; add to AI score
 .check_ivysaur
-	ld a, WEEZING
-	call CountPokemonIDInBothPlayAreas
+	call IsToxicGasActive
 	jr c, .check_if_active
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
