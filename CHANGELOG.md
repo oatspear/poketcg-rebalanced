@@ -24,7 +24,7 @@
 - **Terror Strike**: removed.
 - **Poison Fang**: removed.
 - New attack: **Deadly Poison** (D): 10 damage; inflicts Poison; +20 damage if already Poisoned.
-- New attack: **Strangle** (CCC): 30 damage; inflicts Paralysis if Defending Pokémon has taken 30 or more damage.
+- New attack: **Strangle** (CCC): 30 damage; inflicts Paralysis and discards a card from opponent's hand if they have at least 7 cards in hand.
 
 #### Nidoran (F)
 - **Fury Swipes**: removed.

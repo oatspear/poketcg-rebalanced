@@ -1599,7 +1599,8 @@ StrangleName:
 	done
 
 StrangleDescription:
-	text "If the Defending Pokémon has at"
-	line "least 3 damage counters on it, it"
-	line "is now Paralyzed."
+	text "If the opponent has 7 or more cards"
+	line "in their hand, they discard a random"
+	line "card from their hand and the"
+	line "Defending Pokémon is now Paralyzed."
 	done

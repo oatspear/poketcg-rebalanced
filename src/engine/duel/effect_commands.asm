@@ -818,7 +818,7 @@ DeadlyPoisonEffectCommands:
 	db  $00
 
 StrangleEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ParalysisIf30DamageEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StrangleEffect
 	db  $00
 
 ; SpitPoisonEffectCommands:

@@ -890,6 +890,15 @@ DeadlyPoisonEffect:
 	jp PoisonEffect
 
 
+StrangleEffect:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	cp 7
+	ret c  ; less than 7 cards
+	call Discard1RandomCardFromOpponentsHand
+	jp ParalysisEffect
+
+
 ; ------------------------------------------------------------------------------
 ; Card Search
 ; ------------------------------------------------------------------------------
