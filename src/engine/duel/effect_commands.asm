@@ -538,7 +538,7 @@ ProwlEffectCommands:
 
 ShadowClawEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, OptionalDiscardEnergy_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, ShadowClawEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, ShadowClaw_AISelectEffect
 	db  $00
 
