@@ -7768,6 +7768,19 @@ HaunterLv17Card:
 	db STAGE1 ; stage
 	tx GastlyName ; pre-evo name
 
+	; energy COLORLESS, 2 ; energies
+	; tx ShadowClawName ; name
+	; tx ShadowClawDescription ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw ShadowClawEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db DISCARD_ENERGY ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_SLASH ; animation
+
 	; attack 1
 	energy 0 ; energies
 	tx CurseName ; name
