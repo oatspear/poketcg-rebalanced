@@ -1,4 +1,36 @@
 
+
+; if the id of the card provided in register a as a deck index is WEEZING,
+; clear the changed type of all arena and bench Pokemon
+ClearChangedTypesIfWeezing:
+	ld d, a
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+	; or a
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	cp d
+	ret nz  ; not Active spot
+	ld a, d
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp WEEZING
+	ret nz
+	call SwapTurn
+	call .zero_changed_types
+	call SwapTurn
+.zero_changed_types
+	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
+	call GetTurnDuelistVariable
+	ld c, MAX_PLAY_AREA_POKEMON
+.zero_changed_types_loop
+	xor a
+	ld [hli], a
+	dec c
+	jr nz, .zero_changed_types_loop
+	ret
+
+
+
 ; doubles the damage at de if swords dance or focus energy was used
 ; in the last turn by the turn holder's arena Pokemon
 HandleDoubleDamageSubstatus:
