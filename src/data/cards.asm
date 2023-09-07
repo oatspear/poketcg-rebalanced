@@ -1979,12 +1979,12 @@ MukCard:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx StenchName ; name
-	tx StenchDescription ; description
+	tx OverwhelmName ; name
+	tx OverwhelmDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw StenchEffectCommands ; effect commands
+	dw OverwhelmEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

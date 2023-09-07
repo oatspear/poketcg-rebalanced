@@ -86,7 +86,7 @@
 - **Toxic Gas**: removed.
 - **Sludge**: removed.
 - New attack: **Toxic** (D): 10 damage; inflicts Double Poison.
-- New attack: **Stench** (CCC): 30 damage; inflicts Paralysis and discards a card from opponent's hand if they have at least 7 cards in hand.
+- New attack: **Overwhelm** (CCC): 30 damage; inflicts Paralysis and discards a card from opponent's hand if they have at least 6 cards in hand.
 
 #### Koffing
 - **Foul Gas**: reduced cost from (DC) to (D); base damage reduced from 10 to zero.

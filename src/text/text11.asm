@@ -1594,12 +1594,12 @@ DeadlyPoisonDescription:
 	line "does 20 more damage."
 	done
 
-StenchName:
-	text "Stench"
+OverwhelmName:
+	text "Overwhelm"
 	done
 
-StenchDescription:
-	text "If the opponent has 7 or more cards"
+OverwhelmDescription:
+	text "If the opponent has 6 or more cards"
 	line "in their hand, they discard a random"
 	line "card from their hand and the"
 	line "Defending Pokémon is now Paralyzed."

@@ -890,10 +890,10 @@ DeadlyPoisonEffect:
 	jp PoisonEffect
 
 
-StenchEffect:
+OverwhelmEffect:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetNonTurnDuelistVariable
-	cp 7
+	cp 6
 	ret c  ; less than 7 cards
 	call Discard1RandomCardFromOpponentsHand
 	jp ParalysisEffect
