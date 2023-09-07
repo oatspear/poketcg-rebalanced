@@ -1604,13 +1604,3 @@ StrangleDescription:
 	line "card from their hand and the"
 	line "Defending Pokémon is now Paralyzed."
 	done
-
-FinishingBiteName:
-	text "Finishing Bite"
-	done
-
-FinishingBiteDescription:
-	text "This attack can only be used if"
-	line "your opponent's Active Pokémon"
-	line "has any damage counters on it."
-	done

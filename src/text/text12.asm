@@ -16,15 +16,24 @@ RaticateName: ; 6192f (18:592f)
 	text "Raticate"
 	done
 
+FinishingBiteName:
+	text "Finishing Bite"
+	done
+
+FinishingBiteDescription:
+	text "This attack can only be used if"
+	line "your opponent's Active Pokémon"
+	line "has any damage counters on it."
+	done
+
 SuperFangName: ; 61939 (18:5939)
 	text "Super Fang"
 	done
 
 SuperFangDescription: ; 61945 (18:5945)
-	text "Does damage to the Defending Pokémon"
-	line "equal to half the Defending"
-	line "Pokémon's remaining HP (rounded up"
-	line "to the nearest 10)."
+	text "This attack does damage to the"
+	line "Defending Pokémon equal to half"
+	line "of its remaining HP (rounded up)."
 	done
 
 RaticateDescription: ; 619be (18:59be)
