@@ -890,7 +890,7 @@ DeadlyPoisonEffect:
 	jp PoisonEffect
 
 
-StrangleEffect:
+StenchEffect:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetNonTurnDuelistVariable
 	cp 7

@@ -82,10 +82,11 @@
 - New attack: **Gather Toxins** (C): attach an energy from Discard Pile; then, 10 damage and inflicts Poison.
 
 #### Muk
+- Increased HP from 70 to 80.
 - **Toxic Gas**: removed.
 - **Sludge**: removed.
-- New attack: **Toxic** (DC): 10 damage; inflicts Double Poison.
-- New attack: **Pester** (CCC): 30 damage; double damage if the Defending Pokémon has a Status Condition.
+- New attack: **Toxic** (D): 10 damage; inflicts Double Poison.
+- New attack: **Stench** (CCC): 30 damage; inflicts Paralysis and discards a card from opponent's hand if they have at least 7 cards in hand.
 
 #### Koffing
 - **Foul Gas**: reduced cost from (DC) to (D); base damage reduced from 10 to zero.

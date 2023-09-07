@@ -1594,11 +1594,11 @@ DeadlyPoisonDescription:
 	line "does 20 more damage."
 	done
 
-StrangleName:
-	text "Strangle"
+StenchName:
+	text "Stench"
 	done
 
-StrangleDescription:
+StenchDescription:
 	text "If the opponent has 7 or more cards"
 	line "in their hand, they discard a random"
 	line "card from their hand and the"

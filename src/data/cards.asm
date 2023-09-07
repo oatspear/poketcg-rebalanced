@@ -827,17 +827,17 @@ ArbokCard:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx StrangleName ; name
-	tx StrangleDescription ; description
+	tx BiteName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw StrangleEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw NONE ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT_EFFECT ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -1959,12 +1959,12 @@ MukCard:
 	db STAR ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db MUK
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx GrimerName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	energy DARKNESS, 1 ; energies
 	tx ToxicName ; name
 	tx ToxicDescription ; description
 	dw NONE ; description (cont)
@@ -1979,17 +1979,17 @@ MukCard:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx PesterName ; name
-	tx PesterDescription ; description
+	tx StenchName ; name
+	tx StenchDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
-	db DAMAGE_PLUS ; category
-	dw PesterEffectCommands ; effect commands
-	db NONE ; flags 1
+	db DAMAGE_NORMAL ; category
+	dw StenchEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_HIT_EFFECT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

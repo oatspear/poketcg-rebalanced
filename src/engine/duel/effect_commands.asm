@@ -821,8 +821,8 @@ DeadlyPoisonEffectCommands:
 	dbw EFFECTCMDTYPE_AI, DeadlyPoison_AIEffect
 	db  $00
 
-StrangleEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StrangleEffect
+StenchEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StenchEffect
 	db  $00
 
 ; SpitPoisonEffectCommands:
