@@ -16,8 +16,10 @@
 - New attack: **Stretch Kick** (F): 20 damage to a Pokémon on the opponent's Bench.
 
 #### Ekans
+- **Spit Poison**: removed.
 - **Wrap**: removed.
-- New attack: **Terror Strike** (CC): 20 damage; opponent switches Pokémon.
+- New attack: **Finishing Bite** (D): 30 damage; can only be used if the opponent has taken damage.
+- New attack: **Poison Fang** (DC): 10 damage; inflicts Poison.
 
 #### Arbok
 - Increased HP from 60 to 70.

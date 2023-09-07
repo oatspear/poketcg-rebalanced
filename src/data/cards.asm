@@ -762,31 +762,31 @@ EkansCard:
 
 	; attack 1
 	energy DARKNESS, 1 ; energies
-	tx SpitPoisonName ; name
-	tx MayInflictPoisonDescription ; description
+	tx FinishingBiteName ; name
+	tx FinishingBiteDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw FinishingBiteEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
+
+	; attack 2
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	tx PoisonFangName ; name
+	tx InflictPoisonDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Poison50PercentEffectCommands ; effect commands
+	dw InflictPoisonEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GOO ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx TerrorStrikeName ; name
-	tx OpponentSwitchesPokemonDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw TerrorStrikeEffectCommands ; effect commands
-	db NONE ; flags 1
-	db SWITCH_OPPONENT_POKEMON ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_POISON_FANG ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness

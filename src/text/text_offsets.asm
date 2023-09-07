@@ -2824,6 +2824,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DeadlyPoisonDescription
 	textpointer StrangleName
 	textpointer StrangleDescription
+	textpointer FinishingBiteName
+	textpointer FinishingBiteDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9

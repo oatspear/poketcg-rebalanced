@@ -181,6 +181,13 @@ CheckArenaPokemonHasAnyDamage:
 	ret
 
 
+; returns carry if the opponent's Active Pokémon has no damage counters.
+CheckOpponentArenaPokemonHasAnyDamage:
+	call SwapTurn
+	call CheckArenaPokemonHasAnyDamage
+	jp SwapTurn
+
+
 ; Returns carry if the Pokémon at location
 ; in [hTempPlayAreaLocation_ff9d] has no damage counters.
 ; Useful for Pokémon Powers.

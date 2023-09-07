@@ -230,6 +230,10 @@ RetaliateEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyDamage
 	db  $00
 
+FinishingBiteEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckOpponentArenaPokemonHasAnyDamage
+	db  $00
+
 AssassinFlightEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, AssassinFlight_CheckBenchAndStatus
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AssassinFlight_BenchDamageEffect
