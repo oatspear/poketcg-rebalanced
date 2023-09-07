@@ -487,6 +487,34 @@ Rout_AIEffect:
   jp SetDefiniteAIDamage
 
 
+; +20 damage for each of the opponent's Pokémon with a Pokémon Power
+TerrorStrike_DamageBoostEffect:
+  call SwapTurn
+  ld a, DUELVARS_ARENA_CARD
+  call GetTurnDuelistVariable
+  ld c, 0
+.loop_play_area
+  ld a, [hli]
+  cp $ff
+  jr z, .done
+  call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Atk1Category]
+	cp POKEMON_POWER
+  jr nz, .loop_play_area
+  inc c
+  jr .loop_play_area
+.done
+  call SwapTurn
+  ld a, c
+  add a  ; x20
+  call ATimes10
+  jp AddToDamage
+
+TerrorStrike_AIEffect:
+  call TerrorStrike_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Defending Pokémon
 ; ------------------------------------------------------------------------------

@@ -186,6 +186,11 @@ RoutEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Rout_AIEffect
 	db  $00
 
+TerrorStrikeEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TerrorStrike_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, TerrorStrike_AIEffect
+	db  $00
+
 ToxicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoublePoisonEffect
 	; dbw EFFECTCMDTYPE_AI, Toxic_AIEffect
@@ -1105,7 +1110,6 @@ EnergySlideEffectCommands:
 
 WhirlwindEffectCommands:
 WaterfallEffectCommands:
-TerrorStrikeEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect
 	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect

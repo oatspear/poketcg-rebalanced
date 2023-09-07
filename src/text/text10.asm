@@ -1793,3 +1793,9 @@ PoisonPaybackDescription:
 	line "double damage and the Defending"
 	line "Pokémon is now Poisoned."
 	done
+
+DamagePerPokemonPowerDescription:
+	text "This attack does 20 more damage"
+	line "for each of your opponent's Pokémon"
+	line "that has a Pokémon Power."
+	done

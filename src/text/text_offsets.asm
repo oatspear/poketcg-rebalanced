@@ -2508,6 +2508,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SkillDiveName
 	textpointer PoisonPaybackName
 	textpointer PoisonPaybackDescription
+	textpointer DamagePerPokemonPowerDescription
 	textpointer VoltTackleName
 	textpointer MouseName                                          ; 0x09b9
 	textpointer PikachuLv12Description                            ; 0x09ba
