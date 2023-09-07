@@ -905,9 +905,11 @@ ApplyStrikesBack_AfterDirectAttack:
 	scf
 	ret
 
-; if the id of the card provided in register a as a deck index is WEEZING,
-; clear the changed type of all arena and bench Pokemon
+; if the id of the arena card is WEEZING,
+; clear the changed type of all arena and bench Pokémon
 ClearChangedTypesIfWeezing:
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
 	cp WEEZING

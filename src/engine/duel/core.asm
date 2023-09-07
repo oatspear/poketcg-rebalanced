@@ -7184,8 +7184,8 @@ HandleBetweenTurnsEvents:
 .asm_6c3a
 	call DiscardAttachedDefenders
 	call SwapTurn
-	call Func_6e4c
-	ret
+	jp Func_6e4c
+
 
 ; unreferenced
 ;PreprocessHealingNectar:
@@ -7780,6 +7780,8 @@ ReplaceKnockedOutPokemon:
 	ld d, a
 	ld e, PLAY_AREA_ARENA
 	call SwapPlayAreaPokemon
+; OATS trigger "on Active" Pokémon Powers
+	call ClearChangedTypesIfWeezing
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ldtx hl, DuelistPlacedACardText

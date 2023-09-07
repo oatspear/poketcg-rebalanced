@@ -1240,7 +1240,9 @@ SwapArenaWithBenchPokemon:
 ; OATS switching no longer clears all status conditions
 	call ClearStatusOnSwitch  ; ClearAllStatusConditionsAndEffects
 	ld d, PLAY_AREA_ARENA
-;	fallthrough
+	call SwapPlayAreaPokemon
+; OATS trigger "on Active" Pokémon Powers
+	jp ClearChangedTypesIfWeezing
 
 ; swap the data of the turn holder's Pokemon card in play area d with the
 ; data of the turn holder's Pokemon card in play area e.
@@ -1279,8 +1281,8 @@ SwapPlayAreaPokemon:
 	set CARD_LOCATION_PLAY_AREA_F, d
 	set CARD_LOCATION_PLAY_AREA_F, e
 	ld l, DUELVARS_CARD_LOCATIONS
+; update card locations of the two swapped cards
 .update_card_locations_loop
-	; update card locations of the two swapped cards
 	ld a, [hl]
 	cp e
 	jr nz, .next1
@@ -1441,7 +1443,7 @@ GetNonTurnDuelistVariable:
 ; card played, and checks if the played card has Pokemon Power to show it to
 ; the player, and possibly to use it if it triggers when the card is played.
 OnPokemonPlayedInitVariablesAndPowers:
-	ldh a, [hTempCardIndex_ff98]
+	; ldh a, [hTempCardIndex_ff98]
 	call ClearChangedTypesIfWeezing
 	ldh a, [hTempCardIndex_ff98]
 	ld d, a
@@ -1467,9 +1469,9 @@ OnPokemonPlayedInitVariablesAndPowers:
 	ldtx hl, HavePokemonPowerText
 	call DrawWideTextBox_WaitForInput
 	call ExchangeRNG
-	ld a, [wLoadedCard1ID]
-	cp WEEZING
-	jr z, .use_pokemon_power
+	; ld a, [wLoadedCard1ID]
+	; cp WEEZING
+	; jr z, .use_pokemon_power
 	ld a, $01 ; check only Weezing
 	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
 	jr c, .unable_to_use
