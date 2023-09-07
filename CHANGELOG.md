@@ -93,7 +93,7 @@
 - Increased HP from 60 to 80.
 - **Smog**: reworked.
 - **Selfdestruct**: removed:
-- New Pokémon Power: **Toxic Gas**: disables other Pokémon Powers.
+- New Pokémon Power: **Toxic Gas**: disables other Pokémon Powers while in the Active spot.
 - New attack: **Smog** (DC): 20 damage; inflicts Poison; 10 damage to all Benched Pokémon.
 
 #### Persian

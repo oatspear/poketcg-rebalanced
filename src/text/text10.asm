@@ -553,13 +553,14 @@ MukName: ; 596c7 (16:56c7)
 	text "Muk"
 	done
 
-ToxicGasName: ; 596cc (16:56cc)
+ToxicGasName:
 	text "Toxic Gas"
 	done
 
-ToxicGasDescription: ; 596d7 (16:56d7)
-	text "Ignore all Pokémon Powers other"
-	line "than Toxic Gases."
+ToxicGasDescription:
+	text "While this Pokémon is in the Active"
+	line "Spot, ignore all Pokémon Powers"
+	line "other than Toxic Gases."
 	done
 
 MukDescription: ; 59750 (16:5750)
