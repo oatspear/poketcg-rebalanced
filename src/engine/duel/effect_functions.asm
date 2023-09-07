@@ -6502,8 +6502,8 @@ TrainerCardAsPokemon_DiscardEffect:
 	ld e, a
 	call SwapArenaWithBenchPokemon
 .shift_cards
-	call ShiftAllPokemonToFirstPlayAreaSlots
-	ret
+	jp ShiftAllPokemonToFirstPlayAreaSlots
+
 
 ; return carry if no energy cards in hand,
 AttachEnergyFromHand_HandCheck:
