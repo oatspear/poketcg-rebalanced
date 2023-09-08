@@ -100,6 +100,11 @@
 - New Pokémon Power: **Toxic Gas**: disables other Pokémon Powers while in the Active spot.
 - New attack: **Smog** (DC): 20 damage; inflicts Poison; 10 damage to all Benched Pokémon.
 
+#### Raticate
+- Increased HP from 60 to 70.
+- **Sneak Attack**: removed.
+- New attack: **Finishing Bite** (C): 40 damage; can only be used if the opponent has taken damage.
+
 #### Persian
 - **Sneak Attack**: removed.
 - **Poison Claws**: removed.

@@ -8695,23 +8695,23 @@ RaticateCard:
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db RATICATE
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx RattataName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx SneakAttackName ; name
-	tx SneakAttackDescription ; description
+	tx FinishingBiteName ; name
+	tx FinishingBiteDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw SneakAttackEffectCommands ; effect commands
+	db 40 ; damage
+	db DAMAGE_NORMAL ; category
+	dw FinishingBiteEffectCommands ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db ENERGY_BOOST_DARKNESS
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db 0
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
