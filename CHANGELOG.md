@@ -68,6 +68,7 @@
 - New attack: **Swarm** (CC): 10 damage, +20 damage if the player has 4 or more Benched Pokémon.
 
 #### Golbat
+- Increased HP from 60 to 70.
 - **Wing Attack**: removed.
 - **Leech Life**: reduced cost from (DC) to (D).
 - New attack: **Skill Dive** (CC): 30 damage to any of the opponent's Pokémon.

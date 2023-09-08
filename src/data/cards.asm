@@ -1215,7 +1215,7 @@ GolbatCard:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db GOLBAT
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx ZubatName ; pre-evo name
 
@@ -1239,13 +1239,13 @@ GolbatCard:
 	tx Deal30ToAnyPokemonDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
+	db DAMAGE_NORMAL ; category
 	dw Deal30ToAnyPokemonEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 2
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_AGILITY_NO_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
