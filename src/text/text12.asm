@@ -979,6 +979,18 @@ TailSwingDescription:
 	line "Basic Pokémon."
 	done
 
+DarkDrainName:
+	text "Dark Drain"
+	done
+
+DarkDrainDescription:
+	text "This attack does 10 damage to"
+	line "each of your opponent's Pokémon."
+	line "Remove a damage counter from this"
+	line "Pokémon for each Pokémon your"
+	line "opponent has in play."
+	done
+
 
 ; ------------------------------------------------------------------------------
 ; Trainer Cards

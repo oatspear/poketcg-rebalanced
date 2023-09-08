@@ -2752,8 +2752,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer InvisibleWallDescription
 	textpointer MeditateName
 	textpointer MeditateDescription
-	textpointer PsychicAssaultName
-	textpointer PsychicAssaultDescription
+	textpointer PainBurstName
+	textpointer PainBurstDescription
 	textpointer BarrierName                                        ; 0x0ab9
 	textpointer MrMimeDescription                                  ; 0x0aba
 	textpointer JynxName                                           ; 0x0abb
@@ -3020,6 +3020,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FamilyPowerDescription
 	textpointer TailSwingName
 	textpointer TailSwingDescription
+	textpointer DarkDrainName
+	textpointer DarkDrainDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

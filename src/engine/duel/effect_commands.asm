@@ -631,6 +631,7 @@ StrangeBehaviorEffectCommands:
 	db  $00
 
 PsychicAssaultEffectCommands:
+PainBurstEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PsychicAssault_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, PsychicAssault_AIEffect
 	db  $00
@@ -809,6 +810,10 @@ Earthquake10EffectCommands:
 
 BlizzardEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenched10Effect
+	db  $00
+
+DarkDrainEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DarkDrainEffect
 	db  $00
 
 TailSwingEffectCommands:

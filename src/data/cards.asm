@@ -7781,6 +7781,19 @@ HaunterLv17Card:
 	; db 0
 	; db ATK_ANIM_SLASH ; animation
 
+	; energy DARKNESS, 1 ; energies
+	; tx PainAmplifierName ; name
+	; tx PainAmplifierDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db RESIDUAL ; category
+	; dw PainAmplifierEffectCommands ; effect commands
+	; db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 10
+	; db ATK_ANIM_DARK_MIND ; animation
+
 	; attack 1
 	energy 0 ; energies
 	tx CurseName ; name
@@ -7796,13 +7809,13 @@ HaunterLv17Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy DARKNESS, 1 ; energies
-	tx PainAmplifierName ; name
-	tx PainAmplifierDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw PainAmplifierEffectCommands ; effect commands
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	tx DarkMindName ; name
+	tx DamageUpTo2BenchedDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw DamageUpTo2Benched10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7884,31 +7897,31 @@ GengarCard:
 	tx HaunterName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1 ; energies
-	tx ConfuseRayName ; name
-	tx InflictConfusionDescription ; description
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	tx DarkDrainName ; name
+	tx DarkDrainDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw InflictConfusionEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
+	dw DarkDrainEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_DRAIN ; animation
+
+	; attack 2
+	energy COLORLESS, 3 ; energies
+	tx PainBurstName ; name
+	tx PainBurstDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw PainBurstEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_CONFUSE_RAY ; animation
-
-	; attack 2
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx DarkMindName ; name
-	tx DamageUpTo2BenchedDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw DamageUpTo2Benched10EffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 10
 	db ATK_ANIM_DARK_MIND ; animation
 
 	db 1 ; retreat cost

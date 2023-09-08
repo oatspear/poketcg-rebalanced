@@ -100,6 +100,16 @@
 - New Pokémon Power: **Toxic Gas**: disables other Pokémon Powers while in the Active spot.
 - New attack: **Smog** (DC): 20 damage; inflicts Poison; 10 damage to all Benched Pokémon.
 
+#### Haunter Lv17
+- **Pain Amplifier**: removed.
+- New attack: **Dark Mind** (DC): 30 damage; 10 damage to 2 Benched Pokémon.
+
+#### Gengar
+- **Confuse Ray**: removed.
+- **Dark Mind**: removed.
+- New attack: **Dark Drain** (DC): 10 damage to all opponent's Pokémon; heal 10 damage for each.
+- New attack: **Pain Burst** (CCC): 30 damage; +10 damage for each damage counter on Defending Pokémon.
+
 #### Raticate
 - Increased HP from 60 to 70.
 - **Sneak Attack**: removed.

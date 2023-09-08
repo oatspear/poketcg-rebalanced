@@ -995,9 +995,7 @@ DamageSwapDescription: ; 60000 (18:4000)
 	line "turn (before your attack), you may"
 	line "move 1 damage counter from 1 of your"
 	line "Pokémon to another as long as you"
-	line "don't Knock Out that Pokémon. This"
-	line "power can't be used if this Pokémon"
-	line "is Asleep, Confused, or Paralyzed."
+	line "don't Knock Out that Pokémon."
 	done
 
 AlakazamDescription: ; 600f2 (18:40f2)
@@ -1231,13 +1229,14 @@ MeditateDescription:
 	line "at least 5 cards in your hand."
 	done
 
-PsychicAssaultName:
-	text "Psychic Assault"
+PainBurstName:
+	text "Pain Burst"
 	done
 
-PsychicAssaultDescription:
-	text "Does 10 more damage for each damage"
-	line "counter on the Defending Pokémon."
+PainBurstDescription:
+	text "This attack does 10 more damage"
+	line "for each damage counter on the"
+	line "Defending Pokémon."
 	done
 
 BarrierName: ; 60d81 (18:4d81)
