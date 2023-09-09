@@ -109,10 +109,12 @@
 - **Pester**: increased cost from (DC) to (CCC) and base damage from 20 to 30.
 
 #### Gengar
+- HP increased from 90 to 100.
+- Retreat cost increased from 1 to 2.
 - **Confuse Ray**: removed.
 - **Dark Mind**: removed.
 - New attack: **Dark Drain** (DC): 10 damage to all opponent's Pokémon; heal 10 damage for each.
-- New attack: **Pain Burst** (CCC): 30 damage; +10 damage for each damage counter on Defending Pokémon.
+- New attack: **Pain Burst** (CCC): 40 damage; +10 damage for each damage counter on Defending Pokémon.
 
 #### Raticate
 - Increased HP from 60 to 70.

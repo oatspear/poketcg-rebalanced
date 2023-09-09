@@ -7892,7 +7892,7 @@ GengarCard:
 	db STAR ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	db GENGAR
-	db 90 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx HaunterName ; pre-evo name
 
@@ -7915,7 +7915,7 @@ GengarCard:
 	tx PainBurstName ; name
 	tx PainBurstDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_PLUS ; category
 	dw PainBurstEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -7924,7 +7924,7 @@ GengarCard:
 	db 0
 	db ATK_ANIM_DARK_MIND ; animation
 
-	db 1 ; retreat cost
+	db 2 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx ShadowName ; category
