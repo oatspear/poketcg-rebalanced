@@ -131,6 +131,20 @@
 
 ### Colorless Changes
 
+#### Pidgeotto
+- Increased HP from 60 to 70.
+- **Wing Attack**: removed.
+- **Whirlwind**: increased damage from 20 to 30.
+- New Pokémon Power: **Courier**: once per turn, you may draw 1 card.
+
+#### Pidgeot Lv38
+- Increased HP from 80 to 100.
+
+#### Pidgeot Lv40
+- Increased HP from 80 to 100.
+- **Whirlwind**: increased cost from (C) to (CC) and base damage from 20 to 40.
+- **Hurricane**: reduced base damage from 30 to zero.
+
 #### Raticate
 - Increased HP from 60 to 70.
 - **Sneak Attack**: removed.

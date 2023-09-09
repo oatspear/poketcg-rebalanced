@@ -2834,6 +2834,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SuperFangName                                      ; 0x0aeb
 	textpointer SuperFangDescription                               ; 0x0aec
 	textpointer RaticateDescription                                ; 0x0aed
+	textpointer CourierName
+	textpointer CourierDescription
 	textpointer SpearowName                                        ; 0x0aee
 	textpointer PeckName                                           ; 0x0aef
 	textpointer PeckDescription                                    ; 0x0aef

@@ -1444,16 +1444,14 @@ Pidgeot1Description: ; 6176a (18:576a)
 	line "feared as wicked weapons."
 	done
 
-HurricaneName: ; 617cc (18:57cc)
+HurricaneName:
 	text "Hurricane"
 	done
 
-HurricaneDescription: ; 617d7 (18:57d7)
-	text "Unless this attack Knocks Out the"
-	line "Defending Pokémon, return the"
-	line "Defending Pokémon and all cards"
-	line "attached to it to your opponent's"
-	line "hand."
+HurricaneDescription:
+	text "Return the Defending Pokémon and"
+	line "all cards attached to it to your"
+	line "opponent's hand."
 	done
 
 TwisterName:

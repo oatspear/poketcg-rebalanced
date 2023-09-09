@@ -315,6 +315,7 @@ AbsorbWater_PreconditionCheck:
 
 
 Synthesis_PreconditionCheck:
+Courier_PreconditionCheck:
 	call CheckDeckIsNotEmpty
 	ret c
 	jp CheckPokemonPowerCanBeUsed
@@ -619,6 +620,12 @@ INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 ; ------------------------------------------------------------------------------
 ; Pokémon Powers
 ; ------------------------------------------------------------------------------
+
+; Draw 1 card per turn.
+CourierEffect:
+	call SetUsedPokemonPowerThisTurn
+	jp FetchEffect
+
 
 ; Search for any card in deck and add it to the hand.
 Prowl_SearchAndAddToHandEffect:
@@ -5670,8 +5677,7 @@ Firestarter_OncePerTurnCheck:
 	ret c ; return if no bench
 
 	ldh a, [hTemp_ffa0]
-	call CheckCannotUseDueToStatus_Anywhere
-	ret
+	jp CheckCannotUseDueToStatus_Anywhere
 
 .already_used
 	ldtx hl, OnlyOncePerTurnText

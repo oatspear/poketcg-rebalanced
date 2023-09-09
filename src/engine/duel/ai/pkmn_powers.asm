@@ -371,7 +371,7 @@ AIEnergyTransTransferEnergyToBench:
 ; Pkmn Powers handled here are:
 ;	- Heal;
 ;	- Shift;
-;	- Peek;
+;	- Courier;
 ;	- Strange Behavior;
 ;	- Curse.
 ; returns carry if turn ended.
@@ -470,8 +470,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_prophecy
 	cp KADABRA
-	jr nz, .check_curse
+	jr nz, .check_courier
 	call HandleAIProphecy
+	jr .next_1
+.check_courier
+	cp PIDGEOTTO
+	jr nz, .check_curse
+	call HandleAICourier
 	jr .next_1
 .check_curse
 	cp HAUNTER_LV17
@@ -888,6 +893,9 @@ HandleAICurse:
 	ret
 
 
+; EFFECTCMDTYPE_INITIAL_EFFECT_2 has already been executed, so the AI knows
+; that there are cards in the deck.
+HandleAICourier:
 ; EFFECTCMDTYPE_INITIAL_EFFECT_2 has already been executed, so the AI knows
 ; that there are Water Energies to retrieve.
 HandleAIAbsorbWater:

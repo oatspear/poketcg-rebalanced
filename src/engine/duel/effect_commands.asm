@@ -334,6 +334,11 @@ PollenFrenzyEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PollenFrenzy_Status50PercentEffect
 	db  $00
 
+CourierEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Courier_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CourierEffect
+	db  $00
+
 FirestarterEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Firestarter_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Firestarter_AttachEnergyEffect

@@ -42,6 +42,15 @@ RaticateDescription: ; 619be (18:59be)
 	line "they are cut off."
 	done
 
+CourierName:
+	text "Courier"
+	done
+
+CourierDescription:
+	text "Once during your turn, you may"
+	line "draw a card."
+	done
+
 SpearowName: ; 61a18 (18:5a18)
 	text "Spearow"
 	done

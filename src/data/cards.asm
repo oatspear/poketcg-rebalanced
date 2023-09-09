@@ -8504,30 +8504,30 @@ PidgeottoCard:
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db PIDGEOTTO
-	db 60 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx PidgeyName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx WingAttackName ; name
-	dw NONE ; description
+	energy 0 ; energies
+	tx CourierName ; name
+	tx CourierDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw CourierEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx WhirlwindName ; name
 	tx OpponentSwitchesPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw WhirlwindEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -8555,7 +8555,7 @@ Pidgeot1Card:
 	db STAR ; rarity
 	db LABORATORY | GB ; sets
 	db PIDGEOT_LV38
-	db 80 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx PidgeottoName ; pre-evo name
 
@@ -8606,16 +8606,16 @@ Pidgeot2Card:
 	db STAR ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db PIDGEOT_LV40
-	db 80 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx PidgeottoName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx WhirlwindName ; name
 	tx OpponentSwitchesPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw WhirlwindEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -8629,8 +8629,8 @@ Pidgeot2Card:
 	tx HurricaneName ; name
 	tx HurricaneDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
+	db 0 ; damage
+	db RESIDUAL ; category
 	dw PidgeotHurricaneEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_7 ; flags 2
@@ -8663,20 +8663,6 @@ RattataCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx BiteName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy COLORLESS, 1 ; energies
 	tx ScavengeName ; name
 	tx ScavengeDescription ; description
 	dw NONE ; description (cont)
@@ -8688,6 +8674,20 @@ RattataCard:
 	db NONE ; flags 3
 	db 2
 	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy COLORLESS, 1 ; energies
+	tx BiteName ; name
+	dw NONE ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
