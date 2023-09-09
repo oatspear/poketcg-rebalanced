@@ -2130,7 +2130,7 @@ KoffingCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
+	energy DARKNESS, 1 ; energies
 	tx FoulGasName ; name
 	tx FoulGasDescription ; description
 	dw NONE ; description (cont)
@@ -7713,7 +7713,7 @@ GastlyLv17Card:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db GASTLY_LV17
-	db 50 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 

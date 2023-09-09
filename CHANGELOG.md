@@ -90,7 +90,7 @@
 - New attack: **Overwhelm** (CCC): 30 damage; inflicts Paralysis and discards a card from opponent's hand if they have at least 6 cards in hand.
 
 #### Koffing
-- **Foul Gas**: reduced cost from (DC) to (C); reduced base damage from 10 to 0.
+- **Foul Gas**: reduced cost from (DC) to (D); reduced base damage from 10 to 0.
 - New attack: **Selfdestruct** (DC): 40 damage; 50 recoil; 10 damage to all Benched.
 
 #### Weezing
@@ -98,6 +98,9 @@
 - **Smog**: always inflicts Poison; also inflicts Smokescreen effect.
 - **Selfdestruct**: removed:
 - New Pokémon Power: **Toxic Gas**: disables other Pokémon Powers while in the Active spot.
+
+#### Gastly Lv17
+- Reduced HP from 50 to 40.
 
 #### Haunter Lv17
 - **Curse**: deal 10 damage to 1 Pokémon, instead of moving 1 damage counter.
