@@ -1592,7 +1592,7 @@ VenonatCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy GRASS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx UltravisionName ; name
 	tx UltravisionDescription ; description
 	dw NONE ; description (cont)

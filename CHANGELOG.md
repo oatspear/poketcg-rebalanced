@@ -2,18 +2,32 @@
 
 ## Version 0.5.0
 
-### Changed
+### Grass Changes
+
+#### Venonat
+- **Ultravision**: reduced cost from (G) to (C).
+
+#### Parasect
+- Increased HP from 60 to 70.
+
+### Fire Changes
 
 #### Moltres Lv37
 - **Dive Bomb**: 40 base damage; no further effects.
 
+### Water Changes
+
 #### Cloyster
 - **Spike Cannon**: reduced cost from (WW) to (CC); flip 2 coins, 20 damage per Heads; 10 damage per Tails.
+
+### Fighting Changes
 
 #### Hitmonlee
 - **Rolling Kick**: removed.
 - **High Jump Kick**: increased cost from (FCC) to (FFC).
 - New attack: **Stretch Kick** (F): 20 damage to a Pokémon on the opponent's Bench.
+
+### Darkness Changes
 
 #### Ekans
 - **Spit Poison**: removed.
@@ -73,9 +87,6 @@
 - **Leech Life**: reduced cost from (DC) to (D).
 - New attack: **Skill Dive** (CC): 30 damage to any of the opponent's Pokémon.
 
-#### Parasect
-- Increased HP from 60 to 70.
-
 #### Grimer
 - **Minimize**: removed.
 - **Nasty Goo**: removed.
@@ -118,6 +129,8 @@
 - New attack: **Dark Drain** (DC): 10 damage to all opponent's Pokémon; heal 10 damage for each.
 - New attack: **Pain Burst** (CCC): 40 damage; +10 damage for each damage counter on Defending Pokémon.
 
+### Colorless Changes
+
 #### Raticate
 - Increased HP from 60 to 70.
 - **Sneak Attack**: removed.
@@ -130,7 +143,7 @@
 - New attack: **Shadow Claw** (CC): 30 damage, may discard an energy to discard a random card from opponent's hand.
 
 
-### Fixed
+### Bug Fixes
 - **Strikes Back** no longer triggers when the Pokémon is Benched and affected with status.
 - Certain Pokémon Powers will now display the correct error message when their preconditions are not met.
 
