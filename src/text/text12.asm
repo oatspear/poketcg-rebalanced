@@ -76,15 +76,6 @@ FearowName: ; 61aee (18:5aee)
 	text "Fearow"
 	done
 
-ClutchName:
-	text "Clutch"
-	done
-
-ClutchDescription:
-	text "The Defending Pokémon can't retreat"
-	line "during your opponent's next turn."
-	done
-
 DrillPeckName: ; 61b72 (18:5b72)
 	text "Drill Peck"
 	done

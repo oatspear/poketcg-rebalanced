@@ -8810,23 +8810,23 @@ FearowCard:
 	db DIAMOND ; rarity
 	db LABORATORY | JUNGLE ; sets
 	db FEAROW
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx SpearowName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
-	tx ClutchName ; name
-	tx ClutchDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
+	tx SkillDiveName ; name
+	tx Deal30ToAnyPokemonDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw UnableToRetreatEffectCommands ; effect commands
-	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 1
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db 3
+	db ATK_ANIM_AGILITY_NO_HIT ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies

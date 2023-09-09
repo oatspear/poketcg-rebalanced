@@ -2839,8 +2839,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PeckDescription                                    ; 0x0aef
 	textpointer SpearowDescription                                 ; 0x0af1
 	textpointer FearowName                                         ; 0x0af2
-	textpointer ClutchName                                         ; 0x0af4
-	textpointer ClutchDescription                                  ; 0x0af4
 	textpointer DrillPeckName                                      ; 0x0af4
 	textpointer BeakName                                           ; 0x0af5
 	textpointer FearowDescription                                  ; 0x0af6

@@ -136,6 +136,11 @@
 - **Sneak Attack**: removed.
 - New attack: **Finishing Bite** (C): 40 damage; can only be used if the opponent has taken damage.
 
+#### Fearow
+- Increased HP from 70 to 80.
+- **Clutch**: removed.
+- New attack: **Skill Dive** (CC): 30 damage to any of the opponent's Pokémon.
+
 #### Persian
 - **Sneak Attack**: removed.
 - **Poison Claws**: removed.
