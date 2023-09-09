@@ -869,97 +869,14 @@ HandleAIPeek:
 
 ; checks whether AI uses Curse.
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Gengar.
+;	c = Play Area location (PLAY_AREA_*) of Haunter.
 HandleAICurse:
 	ld a, c
 	ldh [hTemp_ffa0], a
 
-; loop Player's Play Area and checks their damage.
-; finds the card with lowest remaining HP and
-; stores its HP and its Play Area location
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	ld d, a
-	ld e, PLAY_AREA_ARENA
-	lb bc, 0, $ff
-	ld h, PLAY_AREA_ARENA
-	call SwapTurn
-.loop_play_area_1
-	push bc
-	call GetCardDamageAndMaxHP
-	pop bc
-	or a
-	jr z, .next_1
-
-	inc b
-	ld a, e
-	add DUELVARS_ARENA_CARD_HP
-	push hl
-	call GetTurnDuelistVariable
-	pop hl
-	cp c
-	jr nc, .next_1
-	; lower HP than one stored
-	ld c, a ; store this HP
-	ld h, e ; store this Play Area location
-
-.next_1
-	inc e
-	ld a, e
-	cp d
-	jr nz, .loop_play_area_1 ; reached end of Play Area
-
-	ld a, 1
-	cp b
-	jr nc, .failed ; return if less than 2 cards with damage
+	farcall DealTargetedDamage_AISelectEffect
 
 ; card in Play Area with lowest HP remaining was found.
-; look for another card to take damage counter from.
-	ld a, h
-	ldh [hTempRetreatCostCards], a
-	ld b, a
-	ld a, 10
-	cp c
-	jr z, .hp_10_remaining
-	; if has more than 10 HP remaining,
-	; skip Arena card in choosing which
-	; card to take damage counter from.
-	ld e, PLAY_AREA_BENCH_1
-	jr .second_card
-
-.hp_10_remaining
-	; if Curse can KO, then include
-	; Player's Arena card to take
-	; damage counter from.
-	ld e, PLAY_AREA_ARENA
-
-.second_card
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld d, a
-.loop_play_area_2
-	ld a, e
-	cp b
-	jr z, .next_2 ; skip same Pokemon card
-	push bc
-	call GetCardDamageAndMaxHP
-	pop bc
-	jr nz, .use_curse ; has damage counters, choose this card
-.next_2
-	inc e
-	ld a, e
-	cp d
-	jr nz, .loop_play_area_2
-
-.failed
-	call SwapTurn
-	or a
-	ret
-
-.use_curse
-	ld a, e
-	ldh [hAIPkmnPowerEffectParam], a
-	call SwapTurn
 	ld a, [wAITempVars]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_USE_PKMN_POWER

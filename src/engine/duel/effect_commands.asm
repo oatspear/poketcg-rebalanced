@@ -552,20 +552,21 @@ ShadowClawEffectCommands:
 	db  $00
 
 CurseEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Curse_CheckDamageAndBench
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Curse_TransferDamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Curse_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Deal10Damage_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
+	; dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
 	db  $00
 
 PainAmplifierEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PainAmplifier_DamageEffect
 	db  $00
 
-DarkMindEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DarkMind_DamageBenchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DarkMind_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DarkMind_AISelectEffect
-	db  $00
+; DarkMindEffectCommands:
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DarkMind_DamageBenchEffect
+; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DarkMind_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, DarkMind_AISelectEffect
+; 	db  $00
 
 GastlyDestinyBondEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
@@ -1210,10 +1211,10 @@ Deal30ToAnyPokemonEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
 	db  $00
 
-PidgeotGaleEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Gale_LoadAnimation
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Gale_SwitchEffect
-	db  $00
+; PidgeotGaleEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Gale_LoadAnimation
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Gale_SwitchEffect
+; 	db  $00
 ;	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Whirlwind_SwitchEffect
 ;	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Whirlwind_SelectEffect
 ;	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect

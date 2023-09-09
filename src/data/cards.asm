@@ -7813,7 +7813,7 @@ HaunterLv17Card:
 	tx DarkMindName ; name
 	tx DamageUpTo2BenchedDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DamageUpTo2Benched10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
@@ -7860,11 +7860,11 @@ HaunterLv22Card:
 	db ATK_ANIM_NIGHTMARE ; animation
 
 	; attack 2
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	energy COLORLESS, 3 ; energies
 	tx PesterName ; name
 	tx PesterDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_PLUS ; category
 	dw PesterEffectCommands ; effect commands
 	db NONE ; flags 1

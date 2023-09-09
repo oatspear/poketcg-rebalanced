@@ -1144,9 +1144,9 @@ CurseName:
 	done
 
 CurseDescription:
-	text "Once during your turn, you may move"
-	line "1 damage counter from 1 of your"
-	line "opponent's Pokémon to another."
+	text "Once during your turn, you may"
+	line "put 1 damage counter on 1 of"
+	line "your opponent's Pokémon."
 	done
 
 PainAmplifierName:

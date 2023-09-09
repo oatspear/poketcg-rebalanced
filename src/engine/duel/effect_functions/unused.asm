@@ -1,5 +1,296 @@
 
 
+DarkMind_PlayerSelectEffect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	cp 2
+	jr nc, .has_bench
+; no bench Pokemon to damage.
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+
+.has_bench
+; opens Play Area screen to select Bench Pokemon
+; to damage, and store it before returning.
+	ldtx hl, ChoosePkmnInTheBenchToGiveDamageText
+	call DrawWideTextBox_WaitForInput
+	call SwapTurn
+	bank1call HasAlivePokemonInBench
+.loop_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	call SwapTurn
+	ret
+
+DarkMind_AISelectEffect: ; 2d92a (b:592a)
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	cp 2
+	ret c ; return if no Bench Pokemon
+; just pick Pokemon with lowest remaining HP.
+	call GetOpponentBenchPokemonWithLowestHP
+	ldh [hTemp_ffa0], a
+	ret
+
+DarkMind_DamageBenchEffect: ; 2d93c (b:593c)
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z ; no target chosen
+	call SwapTurn
+	ld b, a
+	ld de, 10
+	call DealDamageToPlayAreaPokemon_RegularAnim
+	call SwapTurn
+	ret
+
+
+
+
+; unused
+Gale_LoadAnimation: ; 2f0d0 (b:70d0)
+	ld a, ATK_ANIM_GALE
+	ld [wLoadedAttackAnimation], a
+	ret
+
+; unused
+Gale_SwitchEffect: ; 2f0d6 (b:70d6)
+; if Defending card is unaffected by attack
+; jump directly to switching this card only.
+	call HandleNoDamageOrEffect
+	jr c, .SwitchWithRandomBenchPokemon
+
+; handle switching Defending card
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	or a
+	jr nz, .skip_destiny_bond
+	bank1call HandleDestinyBondSubstatus
+.skip_destiny_bond
+	call SwapTurn
+	call .SwitchWithRandomBenchPokemon
+	jr c, .skip_clear_damage
+; clear dealt damage because Pokemon was switched
+	xor a
+	ld hl, wDealtDamage
+	ld [hli], a
+	ld [hl], a
+.skip_clear_damage
+	call SwapTurn
+;	fallthrough for attacking card switch
+
+.SwitchWithRandomBenchPokemon
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	cp 2
+	ret c ; return if no Bench Pokemon
+
+; get random Bench location and swap
+	dec a
+	call Random
+	inc a
+	ld e, a
+	call SwapArenaWithBenchPokemon
+
+	xor a
+	ld [wDuelDisplayedScreen], a
+	ret
+
+
+
+
+CurseEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Curse_CheckDamageAndBench
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Curse_TransferDamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Curse_PlayerSelectEffect
+	db  $00
+
+; returns carry if Pkmn Power cannot be used, and
+; sets the correct text in hl for failure.
+Curse_CheckDamageAndBench: ; 2d7fc (b:57fc)
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+
+; fail if Pkmn Power has already been used
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	ldtx hl, OnlyOncePerTurnText
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .set_carry
+
+; fail if Opponent only has 1 Pokemon in Play Area
+	call SwapTurn
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	call SwapTurn
+	ldtx hl, CannotUseSinceTheresOnly1PkmnText
+	cp 2
+	jr c, .set_carry
+
+; fail if Opponent has no damage counters
+	call SwapTurn
+	call CheckIfPlayAreaHasAnyDamage
+	call SwapTurn
+	ret c
+
+; return carry if Pkmn Power cannot be used due
+; to Toxic Gas or status.
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
+	ret
+
+.set_carry
+	scf
+	ret
+
+;
+
+Curse_PlayerSelectEffect: ; 2d834 (b:5834)
+	ldtx hl, ProcedureForCurseText
+	bank1call DrawWholeScreenTextBox
+	call SwapTurn
+	xor a
+	ldh [hCurSelectionItem], a
+	bank1call Func_61a1
+.start
+	bank1call PrintPlayAreaCardList_EnableLCD
+	push af
+	ldh a, [hCurSelectionItem]
+	ld hl, PlayAreaSelectionMenuParameters
+	call InitializeMenuParameters
+	pop af
+	ld [wNumMenuItems], a
+
+; first pick a target to take 1 damage counter from.
+.loop_input_first
+	call DoFrame
+	call HandleMenuInput
+	jr nc, .loop_input_first
+	cp $ff
+	jr z, .cancel
+	ldh [hCurSelectionItem], a
+	ldh [hTempPlayAreaLocation_ffa1], a
+	call GetCardDamageAndMaxHP
+	or a
+	jr nz, .picked_first ; test if has damage
+	; play sfx
+	call PlaySFX_InvalidChoice
+	jr .loop_input_first
+
+.picked_first
+; give 10 HP to card selected, draw the scene,
+; then immediately revert this.
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	push af
+	push hl
+	add 10
+	ld [hl], a
+	bank1call PrintPlayAreaCardList_EnableLCD
+	pop hl
+	pop af
+	ld [hl], a
+
+; draw damage counter on cursor
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld b, SYM_HP_NOK
+	call DrawSymbolOnPlayAreaCursor
+
+; handle input to pick the target to receive the damage counter.
+.loop_input_second
+	call DoFrame
+	call HandleMenuInput
+	jr nc, .loop_input_second
+	ldh [hPlayAreaEffectTarget], a
+	cp $ff
+	jr nz, .a_press ; was a pressed?
+
+; b press
+; erase the damage counter symbol
+; and loop back up again.
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld b, SYM_SPACE
+	call DrawSymbolOnPlayAreaCursor
+	call EraseCursor
+	jr .start
+
+.a_press
+	ld hl, hTempPlayAreaLocation_ffa1
+	cp [hl]
+	jr z, .loop_input_second ; same as first?
+; a different Pokemon was picked,
+; so store this Play Area location
+; and erase the damage counter in the cursor.
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld b, SYM_SPACE
+	call DrawSymbolOnPlayAreaCursor
+	call EraseCursor
+	call SwapTurn
+	or a
+	ret
+
+.cancel
+; return carry if operation was cancelled.
+	call SwapTurn
+	scf
+	ret
+
+Curse_TransferDamageEffect: ; 2d8bb (b:58bb)
+; set Pkmn Power as used
+	ldh a, [hTempList]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+
+; figure out the type of duelist that used Curse.
+; if it was the player, no need to draw the Play Area screen.
+	call SwapTurn
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetNonTurnDuelistVariable
+	cp DUELIST_TYPE_PLAYER
+	jr z, .vs_player
+
+; vs. opponent
+	bank1call Func_61a1
+.vs_player
+; transfer the damage counter to the targets that were selected.
+	ldh a, [hPlayAreaEffectTarget]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	sub 10
+	ld [hl], a
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD_HP
+	ld l, a
+	ld a, 10
+	add [hl]
+	ld [hl], a
+
+	bank1call PrintPlayAreaCardList_EnableLCD
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetNonTurnDuelistVariable
+	cp DUELIST_TYPE_PLAYER
+	jr z, .done
+; vs. opponent
+	ldh a, [hPlayAreaEffectTarget]
+	ldh [hTempPlayAreaLocation_ff9d], a
+	bank1call Func_6194
+
+.done
+	call SwapTurn
+	call ExchangeRNG
+	bank1call Func_6e49
+	ret
+
+
+
+
+
 ; if the id of the card provided in register a as a deck index is WEEZING,
 ; clear the changed type of all arena and bench Pokemon
 ClearChangedTypesIfWeezing:

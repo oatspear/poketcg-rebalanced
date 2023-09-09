@@ -101,8 +101,12 @@
 - New attack: **Smog** (DC): 20 damage; inflicts Poison; 10 damage to all Benched Pokémon.
 
 #### Haunter Lv17
+- **Curse**: deal 10 damage to 1 Pokémon, instead of moving 1 damage counter.
 - **Pain Amplifier**: removed.
-- New attack: **Dark Mind** (DC): 30 damage; 10 damage to 2 Benched Pokémon.
+- New attack: **Dark Mind** (DC): 20 damage; 10 damage to 2 Benched Pokémon.
+
+#### Haunter Lv22
+- **Pester**: increased cost from (DC) to (CCC) and base damage from 20 to 30.
 
 #### Gengar
 - **Confuse Ray**: removed.
