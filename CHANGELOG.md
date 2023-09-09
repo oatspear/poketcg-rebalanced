@@ -139,11 +139,12 @@
 
 #### Pidgeot Lv38
 - Increased HP from 80 to 100.
+- **Twister**: increased damage from 30 to 40.
 
 #### Pidgeot Lv40
 - Increased HP from 80 to 100.
 - **Whirlwind**: increased cost from (C) to (CC) and base damage from 20 to 40.
-- **Hurricane**: reduced base damage from 30 to zero.
+- **Hurricane**: renamed to **Gale**; reduced base damage from 30 to zero.
 
 #### Raticate
 - Increased HP from 60 to 70.

@@ -2795,7 +2795,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GaleDescription                                    ; 0x0ae2
 	textpointer Pidgeot1Description                                ; 0x0ae3
 	textpointer HurricaneName                                      ; 0x0ae4
-	textpointer HurricaneDescription                               ; 0x0ae5
 	textpointer TwisterName                                        ; 0x0ae4
 	textpointer Pidgeot2Description                                ; 0x0ae6
 	textpointer SynthesisName

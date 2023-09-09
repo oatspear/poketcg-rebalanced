@@ -8578,7 +8578,7 @@ Pidgeot1Card:
 	tx TwisterName ; name
 	tx Discard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw TwisterEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -8626,12 +8626,12 @@ Pidgeot2Card:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx HurricaneName ; name
-	tx HurricaneDescription ; description
+	tx GaleName ; name
+	tx GaleDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw PidgeotHurricaneEffectCommands ; effect commands
+	dw GaleEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_7 ; flags 2
 	db NONE ; flags 3

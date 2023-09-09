@@ -5975,7 +5975,7 @@ ReduceDamageTakenBy20Effect:
 	call ApplySubstatus1ToAttackingCard
 	ret
 
-HurricaneEffect:
+GaleEffect:
 	call HandleNoDamageOrEffect
 	ret c ; is unaffected
 

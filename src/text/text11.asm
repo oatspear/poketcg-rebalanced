@@ -1424,18 +1424,14 @@ Deal30ToAnyPokemonDescription:
 	line "of your opponent's Pokémon."
 	done
 
-GaleName: ; 6168d (18:568d)
+GaleName:
 	text "Gale"
 	done
 
-GaleDescription: ; 61693 (18:5693)
-	text "Switch Pidgeot with 1 of your"
-	line "Benched Pokémon chosen at random."
-	line "If your opponent has any Benched"
-	line "Pokémon, switch the Defending"
-	line "Pokémon with 1 of them chosen at"
-	line "random. (Do the damage before"
-	line "switching the Pokémon.)"
+GaleDescription:
+	text "Return the Defending Pokémon and"
+	line "all cards attached to it to your"
+	line "opponent's hand."
 	done
 
 Pidgeot1Description: ; 6176a (18:576a)
@@ -1446,12 +1442,6 @@ Pidgeot1Description: ; 6176a (18:576a)
 
 HurricaneName:
 	text "Hurricane"
-	done
-
-HurricaneDescription:
-	text "Return the Defending Pokémon and"
-	line "all cards attached to it to your"
-	line "opponent's hand."
 	done
 
 TwisterName:

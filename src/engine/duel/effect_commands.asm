@@ -1082,8 +1082,8 @@ LunarPowerEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, EvolutionFromDeck_AISelectEffect
 	db  $00
 
-PidgeotHurricaneEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HurricaneEffect
+GaleEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GaleEffect
 	db  $00
 
 SingEffectCommands:
