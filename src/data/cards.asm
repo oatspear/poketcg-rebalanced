@@ -2148,7 +2148,7 @@ KoffingCard:
 	tx SelfdestructName ; name
 	tx KoffingsSelfdestructDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 50 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw Selfdestruct50Bench10EffectCommands ; effect commands
 	db HIGH_RECOIL ; flags 1
