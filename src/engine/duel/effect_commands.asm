@@ -376,8 +376,8 @@ ReduceDamageTakenBy20EffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceDamageTakenBy20Effect
 	db  $00
 
-HorseaSmokescreenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HorseaSmokescreenEffect
+SmokescreenEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SmokescreenEffect
 	db  $00
 
 SupersonicEffectCommands:
@@ -508,10 +508,6 @@ WildfireEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Wildfire_DiscardDeckEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Wildfire_DiscardEnergyEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Wildfire_AISelectEffect
-	db  $00
-
-MagmarSmokescreenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MagmarSmokescreenEffect
 	db  $00
 
 CharizardEnergyBurnEffectCommands:
@@ -822,9 +818,7 @@ TailSwingEffectCommands:
 	db  $00
 
 SmogEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	; dbw EFFECTCMDTYPE_AFTER_DAMAGE, SmogEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Earthquake10Effect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SmogEffect
 	db  $00
 
 DeadlyPoisonEffectCommands:

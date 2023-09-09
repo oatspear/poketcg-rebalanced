@@ -2466,10 +2466,10 @@ HeadacheEffect: ; 2d00e (b:500e)
 	ret
 
 
-HorseaSmokescreenEffect: ; 2d134 (b:5134)
+SmokescreenEffect:
 	ld a, SUBSTATUS2_SMOKESCREEN
-	call ApplySubstatus2ToDefendingCard
-	ret
+	jp ApplySubstatus2ToDefendingCard
+
 
 JellyfishSting_AIEffect: ; 2d141 (b:5141)
 	ld a, 10
@@ -2857,10 +2857,6 @@ FlareonQuickAttack_DamageBoostEffect: ; 2d549 (b:5549)
 	call AddToDamage
 	ret
 
-MagmarSmokescreenEffect: ; 2d594 (b:5594)
-	ld a, SUBSTATUS2_SMOKESCREEN
-	call ApplySubstatus2ToDefendingCard
-	ret
 
 EnergyBurnEffect: ; 2d5be (b:55be)
 	scf

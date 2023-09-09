@@ -97,6 +97,11 @@ ApplyStatusEffect: ; 2c035 (b:4035)
 ; Status Attacks
 ; ------------------------------------------------------------------------------
 
+; Poison + Smokescreen
+SmogEffect:
+	call SmokescreenEffect
+	jp PoisonEffect
+
 
 ; If heads, defending Pokemon becomes confused
 SupersonicEffect:

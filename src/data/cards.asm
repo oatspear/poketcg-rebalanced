@@ -2130,7 +2130,7 @@ KoffingCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx FoulGasName ; name
 	tx FoulGasDescription ; description
 	dw NONE ; description (cont)
@@ -2198,12 +2198,12 @@ WeezingCard:
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx SmogName ; name
 	tx SmogDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw SmogEffectCommands ; effect commands
-	db INFLICT_POISON | DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db NONE ; flags 2
+	db INFLICT_POISON ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_SMOG ; animation
@@ -3054,7 +3054,7 @@ MagmarLv31Card:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MagmarSmokescreenEffectCommands ; effect commands
+	dw SmokescreenEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -4125,7 +4125,7 @@ HorseaCard:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw HorseaSmokescreenEffectCommands ; effect commands
+	dw SmokescreenEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
