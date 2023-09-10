@@ -127,7 +127,7 @@
 - Retreat cost increased from 1 to 2.
 - **Confuse Ray**: removed.
 - **Dark Mind**: removed.
-- New attack: **Dark Drain** (DC): 10 damage to all opponent's Pokémon; heal 10 damage for each.
+- New attack: **Sinister Fog** (DC): 10 damage to all opponent's Pokémon; inflicts Poison.
 - New attack: **Pain Burst** (CCC): 40 damage; +10 damage for each damage counter on Defending Pokémon.
 
 ### Colorless Changes

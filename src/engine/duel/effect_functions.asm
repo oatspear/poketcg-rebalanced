@@ -911,13 +911,6 @@ OverwhelmEffect:
 	jp ParalysisEffect
 
 
-DarkDrainEffect:
-	call DamageAllOpponentBenched10Effect
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	jp HealADamageEffect
-
-
 ; ------------------------------------------------------------------------------
 ; Card Search
 ; ------------------------------------------------------------------------------

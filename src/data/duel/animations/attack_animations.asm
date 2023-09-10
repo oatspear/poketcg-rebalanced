@@ -125,7 +125,7 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_BigThunder          ; ATK_ANIM_BIG_THUNDER
 	dw AttackAnimation_SolarPower          ; ATK_ANIM_SOLAR_POWER
 	dw AttackAnimation_PoisonFang          ; ATK_ANIM_POISON_FANG
-	dw AttackAnimation_PoisonFang          ; ATK_ANIM_103
+	dw AttackAnimation_SinisterFog         ; ATK_ANIM_SINISTER_FOG
 	dw AttackAnimation_PoisonFang          ; ATK_ANIM_104
 	dw AttackAnimation_558c                ; ATK_ANIM_105
 	dw AttackAnimation_FriendshipSong      ; ATK_ANIM_FRIENDSHIP_SONG
@@ -710,6 +710,15 @@ AttackAnimation_SolarPower:
 
 AttackAnimation_PoisonFang:
 	anim_player         DUEL_ANIM_GLOW
+	anim_opponent       DUEL_ANIM_HIT
+	anim_normal         DUEL_ANIM_SHAKE1
+	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
+	anim_end
+
+AttackAnimation_SinisterFog:
+	anim_player         DUEL_ANIM_GLOW
+	anim_player         DUEL_ANIM_GLARE
+	anim_opponent       DUEL_ANIM_DARK_GAS
 	anim_opponent       DUEL_ANIM_HIT
 	anim_normal         DUEL_ANIM_SHAKE1
 	anim_opponent       DUEL_ANIM_SHOW_DAMAGE

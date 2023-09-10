@@ -7898,17 +7898,17 @@ GengarCard:
 
 	; attack 1
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx DarkDrainName ; name
-	tx DarkDrainDescription ; description
+	tx SinisterFogName ; name
+	tx SinisterFogDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw DarkDrainEffectCommands ; effect commands
-	db NONE ; flags 1
-	db HEAL_USER ; flags 2
+	dw SinisterFogEffectCommands ; effect commands
+	db INFLICT_POISON | DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_DRAIN ; animation
+	db ATK_ANIM_SINISTER_FOG ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies

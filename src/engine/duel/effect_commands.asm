@@ -814,8 +814,9 @@ BlizzardEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenched10Effect
 	db  $00
 
-DarkDrainEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DarkDrainEffect
+SinisterFogEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenched10Effect
 	db  $00
 
 TailSwingEffectCommands:

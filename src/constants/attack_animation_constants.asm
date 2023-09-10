@@ -105,7 +105,7 @@
 	const ATK_ANIM_BIG_THUNDER            ; $64
 	const ATK_ANIM_SOLAR_POWER            ; $65
 	const ATK_ANIM_POISON_FANG            ; $66
-	const ATK_ANIM_103                    ; $67
+	const ATK_ANIM_SINISTER_FOG           ; $67
 	const ATK_ANIM_104                    ; $68
 	const ATK_ANIM_105                    ; $69
 	const ATK_ANIM_FRIENDSHIP_SONG        ; $6a

@@ -979,16 +979,15 @@ TailSwingDescription:
 	line "Basic Pokémon."
 	done
 
-DarkDrainName:
-	text "Dark Drain"
+SinisterFogName:
+	text "Sinister Fog"
 	done
 
-DarkDrainDescription:
-	text "This attack does 10 damage to"
-	line "each of your opponent's Pokémon."
-	line "Remove a damage counter from this"
-	line "Pokémon for each Pokémon your"
-	line "opponent has in play."
+SinisterFogDescription:
+	text "The Defending Pokémon is now"
+	line "Poisoned. This attack does"
+	line "10 damage to each of your"
+	line "opponent's Benched Pokémon."
 	done
 
 
