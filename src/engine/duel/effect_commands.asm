@@ -554,7 +554,7 @@ ShadowClawEffectCommands:
 
 CurseEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Deal10Damage_DamageEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Curse_DamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
 	; dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
 	db  $00

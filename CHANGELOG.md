@@ -114,6 +114,7 @@
 - Reduced HP from 50 to 40.
 
 #### Haunter Lv17
+- Increased retreat cost from 0 to 1.
 - **Curse**: deal 10 damage to 1 Pokémon, instead of moving 1 damage counter.
 - **Pain Amplifier**: removed.
 - New attack: **Dark Mind** (DC): 20 damage; 10 damage to 2 Benched Pokémon.

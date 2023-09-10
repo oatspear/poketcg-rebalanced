@@ -7822,7 +7822,7 @@ HaunterLv17Card:
 	db 10
 	db ATK_ANIM_DARK_MIND ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx GasName ; category

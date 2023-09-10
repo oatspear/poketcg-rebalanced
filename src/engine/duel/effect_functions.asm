@@ -835,6 +835,11 @@ TryGiveDamageCounter_StrangeBehavior:
 	ret
 
 
+Curse_DamageEffect:
+	call SetUsedPokemonPowerThisTurn
+	jp Deal10Damage_DamageEffect
+
+
 ; ------------------------------------------------------------------------------
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
