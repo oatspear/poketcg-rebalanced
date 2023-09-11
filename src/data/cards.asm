@@ -6912,7 +6912,7 @@ MarowakLv32Card:
 	db DIAMOND ; rarity
 	db EVOLUTION | GB ; sets
 	db MAROWAK_LV32
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx CuboneName ; pre-evo name
 
@@ -6935,7 +6935,7 @@ MarowakLv32Card:
 	tx VengeanceName ; name
 	tx VengeanceDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
 	dw VengeanceEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -7768,32 +7768,6 @@ HaunterLv17Card:
 	db STAGE1 ; stage
 	tx GastlyName ; pre-evo name
 
-	; energy COLORLESS, 2 ; energies
-	; tx ShadowClawName ; name
-	; tx ShadowClawDescription ; description
-	; dw NONE ; description (cont)
-	; db 30 ; damage
-	; db DAMAGE_NORMAL ; category
-	; dw ShadowClawEffectCommands ; effect commands
-	; db NONE ; flags 1
-	; db DISCARD_ENERGY ; flags 2
-	; db NONE ; flags 3
-	; db 0
-	; db ATK_ANIM_SLASH ; animation
-
-	; energy DARKNESS, 1 ; energies
-	; tx PainAmplifierName ; name
-	; tx PainAmplifierDescription ; description
-	; dw NONE ; description (cont)
-	; db 0 ; damage
-	; db RESIDUAL ; category
-	; dw PainAmplifierEffectCommands ; effect commands
-	; db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	; db NONE ; flags 2
-	; db NONE ; flags 3
-	; db 10
-	; db ATK_ANIM_DARK_MIND ; animation
-
 	; attack 1
 	energy 0 ; energies
 	tx CurseName ; name
@@ -7809,13 +7783,13 @@ HaunterLv17Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx DarkMindName ; name
-	tx DamageUpTo2BenchedDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw DamageUpTo2Benched10EffectCommands ; effect commands
+	energy DARKNESS, 1 ; energies
+	tx PainAmplifierName ; name
+	tx PainAmplifierDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw PainAmplifierEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7898,26 +7872,26 @@ GengarCard:
 
 	; attack 1
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
-	tx SinisterFogName ; name
-	tx SinisterFogDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SinisterFogEffectCommands ; effect commands
-	db INFLICT_POISON | DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SINISTER_FOG ; animation
-
-	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx PainBurstName ; name
-	tx PainBurstDescription ; description
+	tx ShadowClawName ; name
+	tx ShadowClawDescription ; description
 	dw NONE ; description (cont)
 	db 40 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ShadowClawEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_SLASH ; animation
+
+	; attack 2
+	energy DARKNESS, 2, COLORLESS, 1 ; energies
+	tx VengeanceName ; name
+	tx VengeanceDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
 	db DAMAGE_PLUS ; category
-	dw PainBurstEffectCommands ; effect commands
+	dw VengeanceEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9440,12 +9414,12 @@ PersianCard:
 
 	; attack 1
 	energy 0 ; energies
-	tx ProwlName ; name
-	tx ProwlDescription ; description
+	tx TradeName ; name
+	tx TradeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw ProwlEffectCommands ; effect commands
+	dw TradeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

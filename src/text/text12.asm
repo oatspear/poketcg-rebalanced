@@ -47,8 +47,11 @@ CourierName:
 	done
 
 CourierDescription:
-	text "Once during your turn, you may"
-	line "draw a card."
+	text "When you play this Pokémon from your"
+	line "hand to evolve 1 of your Pokémon,"
+	line "you may search your deck for any"
+	line "1 card and put it into your hand."
+	line "Shuffle your deck afterward."
 	done
 
 SpearowName: ; 61a18 (18:5a18)
@@ -632,17 +635,15 @@ CollectName:
 	text "Collect"
 	done
 
-ProwlName:
-	text "Prowl"
+TradeName:
+	text "Trade"
 	done
 
-ProwlDescription:
-	text "Once during your turn, when you play"
-	line "this Pokémon from your hand to"
-	line "evolve 1 of your Pokémon, you may"
-	line "search your deck for any 1 card and"
-	line "put it into your hand."
-	line "Shuffle your deck afterward."
+TradeDescription:
+	text "You must discard a card from your"
+	line "hand in order to use this Power."
+	line "Once during your turn,"
+	line "you may draw 2 cards."
 	done
 
 ShadowClawName:
@@ -650,9 +651,9 @@ ShadowClawName:
 	done
 
 ShadowClawDescription:
-	text "You may discard an Energy attached"
-	line "to this Pokémon in order to use this"
-	line "attack. If you do, discard a random"
+	text "You may discard a card from your"
+	line "hand in order to use this attack."
+	line "If you do, discard a random"
 	line "card from your opponent's hand."
 	done
 
@@ -979,16 +980,16 @@ TailSwingDescription:
 	line "Basic Pokémon."
 	done
 
-SinisterFogName:
-	text "Sinister Fog"
-	done
-
-SinisterFogDescription:
-	text "The Defending Pokémon is now"
-	line "Poisoned. This attack does"
-	line "10 damage to each of your"
-	line "opponent's Benched Pokémon."
-	done
+; SinisterFogName:
+; 	text "Sinister Fog"
+; 	done
+;
+; SinisterFogDescription:
+; 	text "The Defending Pokémon is now"
+; 	line "Poisoned. This attack does"
+; 	line "10 damage to each of your"
+; 	line "opponent's Benched Pokémon."
+; 	done
 
 
 ; ------------------------------------------------------------------------------

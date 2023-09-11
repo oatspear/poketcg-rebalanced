@@ -371,7 +371,7 @@ AIEnergyTransTransferEnergyToBench:
 ; Pkmn Powers handled here are:
 ;	- Heal;
 ;	- Shift;
-;	- Courier;
+;	- Trade;
 ;	- Strange Behavior;
 ;	- Curse.
 ; returns carry if turn ended.
@@ -470,13 +470,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_prophecy
 	cp KADABRA
-	jr nz, .check_courier
+	jr nz, .check_trade
 	call HandleAIProphecy
 	jr .next_1
-.check_courier
-	cp PIDGEOTTO
+.check_trade
+	cp PERSIAN
 	jr nz, .check_curse
-	call HandleAICourier
+	call HandleAITrade
 	jr .next_1
 .check_curse
 	cp HAUNTER_LV17
@@ -895,7 +895,29 @@ HandleAICurse:
 
 ; EFFECTCMDTYPE_INITIAL_EFFECT_2 has already been executed, so the AI knows
 ; that there are cards in the deck.
-HandleAICourier:
+HandleAITrade:
+; do not use if there are only a few cards in deck
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetNonTurnDuelistVariable
+	cp DECK_SIZE - 5
+	ret nc
+
+	call CreateHandCardList
+	ld hl, wDuelTempList
+.loop_hand
+	ld a, [hli]
+	ldh [hAIPkmnPowerEffectParam], a
+	cp $ff
+	ret z
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_ENERGY
+	jr c, .loop_hand  ; skip Pokémon cards
+	cp TYPE_ENERGY_DOUBLE_COLORLESS
+	jr nc, .loop_hand  ; skip Special Energy and Trainer cards
+	; use power
+	; fallthrough
+
 ; EFFECTCMDTYPE_INITIAL_EFFECT_2 has already been executed, so the AI knows
 ; that there are Water Energies to retrieve.
 HandleAIAbsorbWater:

@@ -22,6 +22,10 @@
 
 ### Fighting Changes
 
+#### Marowak Lv32
+- Increased HP from 70 to 80.
+- **Vengeance**: reduced base damage from 30 to 10; +10 bonus damage for each Pokémon (up to 5) in discard pile.
+
 #### Hitmonlee
 - **Rolling Kick**: removed.
 - **High Jump Kick**: increased cost from (FCC) to (FFC).
@@ -116,8 +120,6 @@
 #### Haunter Lv17
 - Increased retreat cost from 0 to 1.
 - **Curse**: deal 10 damage to 1 Pokémon, instead of moving 1 damage counter.
-- **Pain Amplifier**: removed.
-- New attack: **Dark Mind** (DC): 20 damage; 10 damage to 2 Benched Pokémon.
 
 #### Haunter Lv22
 - **Pester**: increased cost from (DC) to (CCC) and base damage from 20 to 30.
@@ -127,8 +129,8 @@
 - Retreat cost increased from 1 to 2.
 - **Confuse Ray**: removed.
 - **Dark Mind**: removed.
-- New attack: **Sinister Fog** (DC): 10 damage to all opponent's Pokémon; inflicts Poison.
-- New attack: **Pain Burst** (CCC): 40 damage; +10 damage for each damage counter on Defending Pokémon.
+- New attack: **Shadow Claw** (DC): 40 damage; may discard a card from hand to discard a random card from opponent's hand.
+- New attack: **Vengeance** (DDC): 30 damage; +10 bonus damage for each Pokémon (up to 5) in discard pile.
 
 ### Colorless Changes
 
@@ -136,7 +138,7 @@
 - Increased HP from 60 to 70.
 - **Wing Attack**: removed.
 - **Whirlwind**: increased damage from 20 to 30.
-- New Pokémon Power: **Courier**: once per turn, you may draw 1 card.
+- New Pokémon Power: **Courier**: after evolving, search deck for any card and add to hand.
 
 #### Pidgeot Lv38
 - Increased HP from 80 to 100.
@@ -160,8 +162,8 @@
 #### Persian
 - **Sneak Attack**: removed.
 - **Poison Claws**: removed.
-- New Pokémon Power: **Prowl**: after evolving, search deck for any card and add to hand.
-- New attack: **Shadow Claw** (CC): 30 damage, may discard an energy to discard a random card from opponent's hand.
+- New Pokémon Power: **Trade**: once per turn, discard 1 card from hand to draw 2 cards.
+- New attack: **Shadow Claw** (CC): 30 damage; may discard a card from hand to discard a random card from opponent's hand.
 
 
 ### Bug Fixes

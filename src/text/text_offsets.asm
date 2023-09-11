@@ -2951,8 +2951,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HelpingHandName
 	textpointer HelpingHandDescription
 	textpointer CollectName
-	textpointer ProwlName
-	textpointer ProwlDescription
+	textpointer TradeName
+	textpointer TradeDescription
 	textpointer ShadowClawName
 	textpointer ShadowClawDescription
 	textpointer Discard1CardFromOpponentsHandDescription
@@ -3019,8 +3019,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FamilyPowerDescription
 	textpointer TailSwingName
 	textpointer TailSwingDescription
-	textpointer SinisterFogName
-	textpointer SinisterFogDescription
+	; textpointer SinisterFogName
+	; textpointer SinisterFogDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

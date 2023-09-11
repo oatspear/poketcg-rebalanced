@@ -314,8 +314,12 @@ AbsorbWater_PreconditionCheck:
 	ret
 
 
+Trade_PreconditionCheck:
+	call CheckHandSizeGreaterThan1
+	ret c
+	; fallthrough
+
 Synthesis_PreconditionCheck:
-Courier_PreconditionCheck:
 	call CheckDeckIsNotEmpty
 	ret c
 	jp CheckPokemonPowerCanBeUsed
@@ -622,13 +626,16 @@ INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 ; ------------------------------------------------------------------------------
 
 ; Draw 1 card per turn.
-CourierEffect:
+TradeEffect:
 	call SetUsedPokemonPowerThisTurn
-	jp FetchEffect
+	ldh a, [hAIPkmnPowerEffectParam]
+	ldh [hTempList], a
+	call SelectedCards_Discard1FromHand
+	jp Draw2CardsEffect
 
 
 ; Search for any card in deck and add it to the hand.
-Prowl_SearchAndAddToHandEffect:
+Courier_SearchAndAddToHandEffect:
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
 	cp DUELIST_TYPE_LINK_OPP
@@ -890,11 +897,15 @@ PoisonPaybackEffect:
 
 
 ShadowClawEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret z  ; none selected, do nothing
-	call DiscardEnergy_DiscardEffect
-	jp Discard1RandomCardFromOpponentsHand
+	call SelectedCards_Discard1FromHand
+	jp nc, Discard1RandomCardFromOpponentsHand
+	ret
+
+; OptionalDiscardEnergy:
+; 	ldh a, [hTemp_ffa0]
+; 	cp $ff
+; 	ret z  ; none selected, do nothing
+; 	call DiscardEnergy_DiscardEffect
 
 
 DeadlyPoisonEffect:
@@ -4179,16 +4190,6 @@ Discard2Energies_DiscardEffect:
 	ret
 
 
-ShadowClaw_AISelectEffect:
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetNonTurnDuelistVariable
-	or a
-	ret z  ; Player has no cards in hand
-	jp DiscardEnergy_AISelectEffect
-
-
 ; ------------------------------------------------------------------------------
 ; Energy Discard (Opponent)
 ; ------------------------------------------------------------------------------
@@ -4680,28 +4681,6 @@ Peek_SelectEffect: ; 2e2b4 (b:62b4)
 	call DrawWideTextBox_WaitForInput
 	ret
 
-
-Vengeance_AIEffect:
-	call Vengeance_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-Vengeance_DamageBoostEffect:
-; add 20 damage
-	call CreateBasicPokemonCardListFromDiscardPile
-	ret c  ; return if there are no Basic Pokémon in discard pile
-	xor a
-	ld b, 3  ; cap at 3 bonuses
-	; c has the total number of Basic Pokémon in discard pile
-.loop
-	add 20
-	dec c
-	jr z, .done  ; no more Pokémon
-	dec b
-	jr z, .done  ; reached cap
-	jr .loop
-.done
-	call AddToDamage
-	ret
 
 Thunderpunch_AIEffect: ; 2e399 (b:6399)
 	ld a, (30 + 40) / 2
@@ -6878,17 +6857,35 @@ NaturalRemedy_PlayerSelection:
 	ret
 
 
-Maintenance_PlayerHandCardSelection:
-PlayerSelectAndStoreHandCardToDiscard:
-	call HandlePlayerSelection1HandCardToDiscardExcludeSelf
-	ldh [hTempList], a
+OptionalDiscard_PlayerHandCardSelection:
+	call CheckHandSizeGreaterThan1
+	ld a, $ff
+	call nc, HandlePlayerSelection1HandCardToDiscard
+	ldh [hTemp_ffa0], a
+	or a
 	ret
 
-EnergyRetrieval_PlayerHandSelection:
-PlayerSelectAndStoreHandCardToDiscard_SupporterTrainer:
+ShadowClaw_AISelectEffect:
+; the AI never discards hand cards
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+	; ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	; call GetNonTurnDuelistVariable
+	; or a
+	; ret z  ; Player has no cards in hand
+	; jp DiscardEnergy_AISelectEffect
+
+
+Trade_PlayerHandCardSelection:
+	call HandlePlayerSelection1HandCardToDiscard
+	ldh [hAIPkmnPowerEffectParam], a
+	ret
+
+
+Discard_PlayerHandCardSelection:
 	call HandlePlayerSelection1HandCardToDiscardExcludeSelf
 	ldh [hTempList], a
-	call c, CancelSupporterCard
 	ret
 
 
@@ -7081,9 +7078,12 @@ SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
 SelectedCards_Discard1FromHand:
 	ldh a, [hTempList]
 	cp $ff
+	scf
 	ret z
 	call RemoveCardFromHand
-	jp PutCardInDiscardPile
+	call PutCardInDiscardPile
+	or a
+	ret
 
 
 ; input:
@@ -8266,6 +8266,12 @@ Pokedex_OrderDeckCardsEffect:
 	jr nz, .loop_place_deck
 	ret
 
+
+Draw2CardsEffect:
+	ld a, 2
+	bank1call DisplayDrawNCardsScreen
+	ld c, 2
+	jr Draw3CardsEffect.loop_draw
 
 BillEffect:
 Draw3CardsEffect:

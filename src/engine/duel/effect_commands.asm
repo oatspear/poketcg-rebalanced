@@ -334,11 +334,6 @@ PollenFrenzyEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PollenFrenzy_Status50PercentEffect
 	db  $00
 
-CourierEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Courier_PreconditionCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CourierEffect
-	db  $00
-
 FirestarterEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Firestarter_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Firestarter_AttachEnergyEffect
@@ -541,13 +536,19 @@ MoltresFiregiverEffectCommands:
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Firegiver_AddToHandEffect
 	db  $00
 
-ProwlEffectCommands:
+CourierEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
-	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Prowl_SearchAndAddToHandEffect
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Courier_SearchAndAddToHandEffect
+	db  $00
+
+TradeEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Trade_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TradeEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Trade_PlayerHandCardSelection
 	db  $00
 
 ShadowClawEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, OptionalDiscardEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, OptionalDiscard_PlayerHandCardSelection
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, ShadowClawEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, ShadowClaw_AISelectEffect
 	db  $00
@@ -1323,7 +1324,7 @@ RocketGruntsEffectCommands:
 
 EnergyRetrievalEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyRetrieval_HandEnergyCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergyRetrieval_PlayerHandSelection
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discard_PlayerHandCardSelection
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyRetrieval_DiscardAndAddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyRetrieval_PlayerDiscardPileSelection
 	db  $00
@@ -1455,7 +1456,7 @@ LassEffectCommands:
 
 MaintenanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Maintenance_CheckHandAndDiscardPile
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Maintenance_PlayerHandCardSelection
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discard_PlayerHandCardSelection
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Maintenance_DiscardAndAddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Maintenance_PlayerDiscardPileSelection
 	db  $00

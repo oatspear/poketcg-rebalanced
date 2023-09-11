@@ -361,8 +361,24 @@ RagingStorm_AIEffect:
 
 
 ; ------------------------------------------------------------------------------
-; Based on Deck Cards
+; Based on Discard Pile
 ; ------------------------------------------------------------------------------
+
+; +10 damage per Pokémon in discard pile (up to 5)
+Vengeance_DamageBoostEffect:
+	call CreatePokemonCardListFromDiscardPile
+	ret c  ; return if there are no Pokémon in discard pile
+  ld a, c
+  cp 5
+  jr c, .cap
+  ld a, 5
+.cap
+	call ATimes10
+	jp AddToDamage
+
+Vengeance_AIEffect:
+	call Vengeance_DamageBoostEffect
+	jp SetDefiniteAIDamage
 
 
 ; ------------------------------------------------------------------------------

@@ -755,14 +755,14 @@ BoneAttackName: ; 5f45b (17:745b)
 ; 	line "opponent's next turn."
 ; 	done
 
-VengeanceName: ; 5f4c5 (17:74c5)
+VengeanceName:
 	text "Vengeance"
 	done
 
-VengeanceDescription: ; 5f4cb (17:74cb)
-	text "Does 20 additional damage for each"
-	line "Basic Pokémon in your discard pile,"
-	line "up to 60 additional damage."
+VengeanceDescription:
+	text "This attack does 10 more damage"
+	line "for each Pokémon card (up to 5)"
+	line "in your discard pile."
 	done
 
 MarowakLv32Description: ; 5f5b6 (17:75b6)
@@ -1154,9 +1154,9 @@ PainAmplifierName:
 	done
 
 PainAmplifierDescription:
-	text "Put a damage counter on each of"
-	line "your opponent's Pokémon that already"
-	line "has any damage counters on it."
+	text "This attack does 10 damage to each"
+	line "of your opponent's Pokémon that"
+	line "already has damage counters on it."
 	done
 
 DarkMindName: ; 609b7 (18:49b7)
