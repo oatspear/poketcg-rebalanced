@@ -1,5 +1,76 @@
 
+; Stores in [wAfflictionAffectedPlayArea] the number of which Pokémon to damage
+; from status in the opponent's play area.
+; Stores 0 if there are no Affliction capable Pokémon in play.
+Affliction_CountPokemonAndSetBitVector:
+	xor a
+	ld [wAfflictionAffectedPlayArea], a
 
+	ld a, HAUNTER_LV22
+	call CountPokemonIDInPlayArea
+	ret nc  ; none found
+
+	call SwapTurn
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	; or a
+	; ret z
+
+	ld b, a  ; loop counter
+	ld c, 0  ; status counter
+	ld l, DUELVARS_ARENA_CARD_STATUS
+.loop_play_area
+	ld a, [hli]
+	or a
+	jr z, .next  ; no status
+	inc c
+.next
+	dec b
+	jr nz, .loop_play_area
+; end loop, store counter
+	ld a, c
+	ld [wAfflictionAffectedPlayArea], a
+	jp SwapTurn
+
+
+; Stores in [wAfflictionAffectedPlayArea] a bit vector with which Pokémon to damage
+; from status in the opponent's play area.
+; Stores 0 if there are no Affliction capable Pokémon in play.
+Affliction_CountPokemonAndSetBitVector:
+	xor a
+	ld [wAfflictionAffectedPlayArea], a
+
+	ld a, HAUNTER_LV22
+	call CountPokemonIDInPlayArea
+	ret nc  ; none found
+
+	call SwapTurn
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	; or a
+	; ret z
+; loop from last to first and shift the bit vector to the left
+	ld b, 0  ; bit vector
+	ld c, a  ; loop counter
+	dec a  ; zero-based index
+	add DUELVARS_ARENA_CARD_STATUS
+	ld l, a
+.loop_play_area
+	ld a, [hld]
+	or a
+	jr z, .previous  ; no status
+	set 0, b
+.previous
+	sla b
+	dec c
+	jr nz, .loop_play_area
+; end loop, store bit vector
+	ld a, b
+	ld [wAfflictionAffectedPlayArea], a
+	jp SwapTurn
+
+
+;
 Affliction_DamageEffect:
 	ld a, [wAfflictionAffectedPlayArea]
 	or a
