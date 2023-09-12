@@ -1119,8 +1119,11 @@ wGarbageEaterDamageToHeal:: ; cdc1
 wDreamEaterDamageToHeal:: ; cdc1
 	ds $1
 
+wAfflictionAffectedPlayArea:: ; cdc2
+	ds $1
+
 ; unused free space
-	ds $8
+	ds $7
 
 ; information about the defending Pokémon and
 ; the prize card count on both sides for AI:
