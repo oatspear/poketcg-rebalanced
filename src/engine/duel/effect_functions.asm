@@ -660,10 +660,10 @@ ApplyDirectDamage:
 	call GetTurnDuelistVariable
 	push af
 	bank1call PlayAttackAnimation_DealAttackDamageSimple
-	push hl
-	ldtx hl, Received10DamageDueToAfflictionText
-	bank1call PrintNonTurnDuelistCardIDText
-	pop hl
+	; push hl
+	; ldtx hl, Received10DamageDueToAfflictionText
+	; bank1call PrintNonTurnDuelistCardIDText
+	; pop hl
 	pop af
 	or a
 	call nz, PrintKnockedOutIfHLZero
@@ -678,12 +678,12 @@ Affliction_DamageEffect:
 	or a
 	ret z
 
+	call SwapTurn
 	call DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld c, a  ; loop counter
 	ld d, 10  ; damage
 	ld e, PLAY_AREA_ARENA  ; target
-	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 .loop_play_area
