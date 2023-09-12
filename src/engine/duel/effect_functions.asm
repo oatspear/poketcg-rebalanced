@@ -944,7 +944,10 @@ TryGiveDamageCounter_StrangeBehavior:
 
 Curse_DamageEffect:
 	call SetUsedPokemonPowerThisTurn
-	jp Deal10Damage_DamageEffect
+	; input e: PLAY_AREA_* of the target
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
+	jp Put1DamageCounterOnTarget
 
 
 ; ------------------------------------------------------------------------------
