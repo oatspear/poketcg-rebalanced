@@ -7820,11 +7820,25 @@ HaunterLv22Card:
 	tx GastlyName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1 ; energies
+	energy 0 ; energies
+	tx AfflictionName ; name
+	tx AfflictionDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx NightmareName ; name
 	tx InflictSleepDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw InflictSleepEffectCommands ; effect commands
 	db INFLICT_SLEEP ; flags 1
@@ -7832,20 +7846,6 @@ HaunterLv22Card:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_NIGHTMARE ; animation
-
-	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx PesterName ; name
-	tx PesterDescription ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_PLUS ; category
-	dw PesterEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PSYCHIC_HIT ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness

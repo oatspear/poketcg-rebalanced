@@ -122,7 +122,9 @@
 - **Curse**: deal 10 damage to 1 Pokémon, instead of moving 1 damage counter.
 
 #### Haunter Lv22
-- **Pester**: increased cost from (DC) to (CCC) and base damage from 20 to 30.
+- **Nightmare**: increased cost from (D) to (DC) and base damage from 10 to 20.
+- **Pester**: removed.
+- New Pokémon Power: **Affliction**: at the end of turn, 10 damage to all of the opponent's Pokémon with Status.
 
 #### Gengar
 - HP increased from 90 to 100.
