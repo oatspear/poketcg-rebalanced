@@ -615,6 +615,97 @@ FullHeal_ClearStatusEffect:
 
 
 ; ------------------------------------------------------------------------------
+; Damage
+; ------------------------------------------------------------------------------
+
+; puts 1 damage counter on the target at location in e,
+; without counting as attack damage (does not trigger damage reduction, etc.)
+; inputs:
+;   e: PLAY_AREA_* of the target
+Put1DamageCounterOnTarget:
+	ld d, 10
+	; jr ApplyDirectDamage
+	; fallthrough
+
+
+; Puts damage counters on the target at location in e,
+;   without counting as attack damage (does not trigger damage reduction, etc.)
+; This is a mix between DealDamageToPlayAreaPokemon_RegularAnim (bank 0)
+;   and HandlePoisonDamage (bank 1).
+; inputs:
+;   d: amount of damage to deal
+;   e: PLAY_AREA_* of the target
+; preserves:
+;   hl, de, bc
+ApplyDirectDamage:
+	ld a, ATK_ANIM_BENCH_HIT
+	ld [wLoadedAttackAnimation], a
+	ld a, e
+	ld [wTempPlayAreaLocation_cceb], a
+	or a ; cp PLAY_AREA_ARENA
+	jr nz, .skip_no_damage_or_effect_check
+	ld a, [wNoDamageOrEffect]
+	or a
+	ret nz
+.skip_no_damage_or_effect_check
+	push hl
+	push de
+	push bc
+	xor a
+	ld [wNoDamageOrEffect], a
+	ld e, d
+	ld d, 0
+	push de
+	ld a, [wTempPlayAreaLocation_cceb]
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	ld [wTempNonTurnDuelistCardID], a
+	pop de
+	ld a, [wTempPlayAreaLocation_cceb]
+	ld b, a
+	ld c, 0
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	push af
+	bank1call PlayAttackAnimation_DealAttackDamageSimple
+	push hl
+	ldtx hl, Received10DamageDueToAfflictionText
+	bank1call PrintNonTurnDuelistCardIDText
+	pop hl
+	pop af
+	or a
+	call nz, PrintKnockedOutIfHLZero
+	pop bc
+	pop de
+	pop hl
+	ret
+
+
+Affliction_DamageEffect:
+	ld a, [wAfflictionAffectedPlayArea]
+	or a
+	ret z
+
+	call DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a  ; loop counter
+	ld d, 10  ; damage
+	ld e, PLAY_AREA_ARENA  ; target
+	call SwapTurn
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+.loop_play_area
+	ld a, [hli]
+	or a
+	call nz, ApplyDirectDamage
+	inc e
+	dec c
+	jr nz, .loop_play_area
+	jp SwapTurn
+
+; ------------------------------------------------------------------------------
 ; Damage Modifiers
 ; ------------------------------------------------------------------------------
 
@@ -753,6 +844,25 @@ DreamEater_HealEffect:
 	call HealPlayAreaCardHP
 	pop hl
 	jr .loop_play_area
+
+
+
+; Stores in [wAfflictionAffectedPlayArea] whether there are Pokémon to damage
+; from status in the opponent's play area.
+; Stores 0 if there are no Affliction capable Pokémon in play.
+Affliction_CountPokemonAndSetVariable:
+	xor a
+	ld [wAfflictionAffectedPlayArea], a
+
+	ld a, HAUNTER_LV22
+	call CountPokemonIDInPlayArea
+	ret nc  ; none found
+
+	call SwapTurn
+	call CheckIfPlayAreaHasAnyStatus
+	or a
+	ld [wAfflictionAffectedPlayArea], a
+	jp SwapTurn
 
 
 StrangeBehavior_SelectAndSwapEffect:
