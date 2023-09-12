@@ -308,27 +308,18 @@ CheckOpponentHasStatus:
 CheckIfPlayAreaHasAnyStatus:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
-	ld b, a
 	or a
 	jr z, .set_carry  ; no Pokémon in play area
 
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
+	ld b, a  ; loop counter
+	ld l, DUELVARS_ARENA_CARD_STATUS
+.loop_play_area
+	ld a, [hl]
 	or a
-	ret nz  ; arena Pokémon has status
-
-	ld c, 0
-	jr .next
-.loop
-	ld a, [hl]  ; get status
-	or a
-	ret nz  ; this Pokémon has status
-.next
-	inc c
-	ld a, c
-	ld l, a
-	cp b
-	jr nz, .loop
+	ret nz  ; found status
+	inc hl
+	dec b
+	jr nz, .loop_play_area
 .set_carry
 	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
 	scf
