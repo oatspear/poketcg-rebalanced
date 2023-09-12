@@ -1953,7 +1953,7 @@ DealConfusionDamageToSelf:
 	push af
 	ld a, [wTempTurnDuelistCardID]
 	ld [wTempNonTurnDuelistCardID], a
-	bank1call ApplyDamageModifiers_DamageToSelf ; this is at bank 0
+	call ApplyDamageModifiers_DamageToSelf
 	ld a, [wDamageEffectiveness]
 	ld c, a
 	ld b, $0
