@@ -149,6 +149,13 @@ TeleportEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
 	db  $00
 
+StealthPoisonEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Agility_AISelectEffect
+	db  $00
+
 OldTeleportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	; fallthrough
@@ -1199,6 +1206,10 @@ Deal10ToAnyPokemonEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
 	db  $00
+
+NightAmbushEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TargetedPoisonEffect
+	; fallthrough
 
 Deal20ToAnyPokemonEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20Damage_DamageEffect
