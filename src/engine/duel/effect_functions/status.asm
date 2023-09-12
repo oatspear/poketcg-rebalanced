@@ -163,6 +163,13 @@ ParalysisIfBasicEffect:
 ; Play Area Status Effects
 ; ------------------------------------------------------------------------------
 
+TargetedPoisonEffect:
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
+	call SwapTurn
+	call PoisonEffect_PlayArea
+	jp SwapTurn
+
 ; input e: PLAY_AREA_* of the target Pokémon
 PoisonEffect_PlayArea:
 	lb bc, CNF_SLP_PRZ, POISONED
