@@ -642,8 +642,8 @@ TradeName:
 TradeDescription:
 	text "You must discard a card from your"
 	line "hand in order to use this Power."
-	line "Once during your turn,"
-	line "you may draw 2 cards."
+	line "Once during your turn, you may"
+	line "draw 2 cards."
 	done
 
 ShadowClawName:
@@ -991,10 +991,21 @@ TailSwingDescription:
 ; 	line "opponent's Benched Pokémon."
 ; 	done
 
-
 Received10DamageDueToAfflictionText:
 	text "<RAMTEXT> received"
 	line "10 damage due to Affliction."
+	done
+
+NightAmbushName:
+	text "Night Ambush"
+	done
+
+NightAmbushDescription:
+	text "This attack does 20 damage to 1"
+	line "of your opponent's Pokémon."
+	line "That Pokémon is now Poisoned."
+	; line "You may switch this Pokémon with"
+	; line "one of your Benched Pokémon."
 	done
 
 ; ------------------------------------------------------------------------------
