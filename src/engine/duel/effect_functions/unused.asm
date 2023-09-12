@@ -1,5 +1,57 @@
 
 
+Affliction_DamageEffect:
+	ld a, [wAfflictionAffectedPlayArea]
+	or a
+	ret z
+
+	ld b, a  ; bit vector
+	ld d, 10  ; damage
+	ld e, PLAY_AREA_ARENA  ; target
+	call SwapTurn
+	bit PLAY_AREA_ARENA, b
+	call nz, ApplyDirectDamage
+	inc e
+	bit PLAY_AREA_BENCH_1, b
+	call nz, ApplyDirectDamage
+	inc e
+	bit PLAY_AREA_BENCH_2, b
+	call nz, ApplyDirectDamage
+	inc e
+	bit PLAY_AREA_BENCH_3, b
+	call nz, ApplyDirectDamage
+	inc e
+	bit PLAY_AREA_BENCH_4, b
+	call nz, ApplyDirectDamage
+	inc e
+	bit PLAY_AREA_BENCH_5, b
+	call nz, ApplyDirectDamage
+	jp SwapTurn
+
+
+;
+Affliction_DamageEffect:
+	ld a, [wAfflictionAffectedPlayArea]
+	or a
+	ret z
+
+	ld b, a  ; bit vector
+	ld d, 10  ; damage
+	ld e, PLAY_AREA_ARENA  ; target
+	call SwapTurn
+	call DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a  ; loop counter
+	sla b
+.loop_play_area
+	srl b  ; old bit 0 goes to carry
+	call c, ApplyDirectDamage
+	inc e
+	dec c
+	jr nz, .loop_play_area
+	jp SwapTurn
+
+
 
 DarkDrainEffect:
 	call DamageAllOpponentBenched10Effect
