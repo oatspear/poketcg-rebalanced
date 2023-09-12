@@ -24,16 +24,6 @@ INCLUDE "engine/duel/effect_functions/status.asm"
 INCLUDE "engine/duel/effect_functions/substatus.asm"
 
 
-SpitPoisonEffect:
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ld e, a
-	or a  ; PLAY_AREA_ARENA ?
-	jp nz, PoisonEffect_PlayArea
-	ld a, ATK_ANIM_GOO
-	ld [wLoadedAttackAnimation], a
-	jp PoisonEffect
-
-
 ; ------------------------------------------------------------------------------
 ; Coin Flip
 ; ------------------------------------------------------------------------------
@@ -1916,26 +1906,24 @@ FoulGas_PoisonOrConfusionEffect: ; 2c82a (b:482a)
 
 Agility_PlayerSelectEffect:
 OldTeleport_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	cp 2
-	jr nc, .select_pokemon
-.none
-	ld a, $ff
-	or a
-	jr .done
-.select_pokemon
+	jr c, .done
+
 	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
 	call DrawWideTextBox_WaitForInput
 	bank1call HasAlivePokemonInBench
 	ld a, $01
 	ld [wcbd4], a
-.loop
 	bank1call OpenPlayAreaScreenForSelection
-	jr c, .none
+	jr c, .done
 	ldh a, [hTempPlayAreaLocation_ff9d]
-.done
 	ldh [hTemp_ffa0], a
+.done
+	or a
 	ret
 
 Agility_AISelectEffect:
