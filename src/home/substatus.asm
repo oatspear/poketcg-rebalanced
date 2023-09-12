@@ -542,9 +542,9 @@ IsToxicGasActive:
 	call SwapTurn
 	call .check_active_spot
 	call SwapTurn
-	jr c, .found
+	; jr c, .found
 ; not found
-	xor a
+	; xor a
 .found
 	; pop bc
 	pop de
@@ -558,12 +558,16 @@ IsToxicGasActive:
 	call GetCardIDFromDeckIndex
 	ld a, e
 	cp WEEZING
-	ret nz
+	jr z, .is_weezing
+.nope
+	xor a  ; reset carry
+	ret
+.is_weezing
 ; check if the Pokémon is affected with a status condition
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
-	ret nz
+	jr nz, .nope
 	ld a, 1
 	scf
 	ret
