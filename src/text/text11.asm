@@ -1390,17 +1390,6 @@ PidgeottoName: ; 614b8 (18:54b8)
 	text "Pidgeotto"
 	done
 
-MirrorMoveName: ; 614c3 (18:54c3)
-	text "Mirror Move"
-	done
-
-PidgeottosMirrorMoveDescription: ; 614d0 (18:54d0)
-	text "If Pidgeotto was attacked last turn,"
-	line "do the final result of that attack"
-	line "on Pidgeotto to the Defending"
-	line "Pokémon."
-	done
-
 BirdName: ; 61540 (18:5540)
 	text "Bird"
 	done
@@ -1590,4 +1579,15 @@ OverwhelmDescription:
 	line "in their hand, they discard a random"
 	line "card from their hand and the"
 	line "Defending Pokémon is now Paralyzed."
+	done
+
+AfflictionName:
+	text "Affliction"
+	done
+
+AfflictionDescription:
+	text "At the end of your turns, put 1"
+	line "damage counter on each of your"
+	line "opponent's Pokémon that is affected"
+	line "with a Special Condition."
 	done

@@ -2784,8 +2784,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TinyBirdName                                       ; 0x0ad7
 	textpointer PidgeyDescription                                  ; 0x0ad8
 	textpointer PidgeottoName                                      ; 0x0ad9
-	textpointer MirrorMoveName                                     ; 0x0ada
-	textpointer PidgeottosMirrorMoveDescription                    ; 0x0adb
 	textpointer BirdName                                           ; 0x0adc
 	textpointer PidgeottoDescription                               ; 0x0add
 	textpointer PidgeotName                                        ; 0x0ade
@@ -2824,6 +2822,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DeadlyPoisonDescription
 	textpointer OverwhelmName
 	textpointer OverwhelmDescription
+	textpointer AfflictionName
+	textpointer AfflictionDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
@@ -3021,6 +3021,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TailSwingDescription
 	; textpointer SinisterFogName
 	; textpointer SinisterFogDescription
+	textpointer Received10DamageDueToAfflictionText
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

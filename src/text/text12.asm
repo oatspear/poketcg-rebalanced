@@ -992,6 +992,11 @@ TailSwingDescription:
 ; 	done
 
 
+Received10DamageDueToAfflictionText:
+	text "<RAMTEXT> received"
+	line "10 damage due to Affliction."
+	done
+
 ; ------------------------------------------------------------------------------
 ; Trainer Cards
 ; ------------------------------------------------------------------------------
