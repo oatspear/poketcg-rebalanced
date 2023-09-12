@@ -819,6 +819,7 @@ Earthquake10EffectCommands:
 	db  $00
 
 BlizzardEffectCommands:
+DamageAllOpponentBenched10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenched10Effect
 	db  $00
 

@@ -144,6 +144,7 @@
 
 #### Pidgeot Lv38
 - Increased HP from 80 to 100.
+- **Slicing Wind**: increased cost from (C) to (CC); 20 base damage; 10 damage to all opponent's Bench.
 - **Twister**: increased damage from 30 to 40.
 
 #### Pidgeot Lv40

@@ -1225,7 +1225,7 @@ GolbatCard:
 	tx NightAmbushDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
+	db RESIDUAL ; category
 	dw NightAmbushEffectCommands ; effect commands
 	db INFLICT_POISON | DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
@@ -8534,13 +8534,13 @@ Pidgeot1Card:
 	tx PidgeottoName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx SlicingWindName ; name
-	tx Deal30ToAnyPokemonDescription ; description
+	tx DamageOpponentBench10Description ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw DamageAllOpponentBenched10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -8794,7 +8794,7 @@ FearowCard:
 	tx Deal30ToAnyPokemonDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
+	db RESIDUAL ; category
 	dw Deal30ToAnyPokemonEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
