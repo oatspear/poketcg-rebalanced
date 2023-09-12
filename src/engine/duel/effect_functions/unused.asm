@@ -1,4 +1,14 @@
 
+SpitPoisonEffect:
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
+	or a  ; PLAY_AREA_ARENA ?
+	jp nz, PoisonEffect_PlayArea
+	ld a, ATK_ANIM_GOO
+	ld [wLoadedAttackAnimation], a
+	jp PoisonEffect
+
+
 ; Stores in [wAfflictionAffectedPlayArea] the number of which Pokémon to damage
 ; from status in the opponent's play area.
 ; Stores 0 if there are no Affliction capable Pokémon in play.
