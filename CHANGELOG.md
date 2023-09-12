@@ -82,14 +82,14 @@
 
 #### Zubat
 - **Leech Life**: removed.
-- **Supersonic**: increased cost from (C) to (D); always inflicts Confusion.
-- New attack: **Swarm** (CC): 10 damage, +20 damage if the player has 4 or more Benched Pokémon.
+- **Supersonic**: increased cost from (C) to (D); added 10 base damage.
+- New attack: **Bite** (CC): 20 damage.
 
 #### Golbat
 - Increased HP from 60 to 70.
 - **Wing Attack**: removed.
-- **Leech Life**: reduced cost from (DC) to (D).
-- New attack: **Skill Dive** (CC): 30 damage to any of the opponent's Pokémon.
+- **Leech Life**: increased cost from (DC) to (DCC) and base damage from 20 to 30.
+- New attack: **Night Ambush** (CC): 20 damage and inflict Poison to any of the opponent's Pokémon.
 
 #### Grimer
 - **Minimize**: removed.

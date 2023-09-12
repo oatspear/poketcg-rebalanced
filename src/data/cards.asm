@@ -1171,11 +1171,11 @@ ZubatCard:
 	; attack 1
 	energy DARKNESS, 1 ; energies
 	tx SupersonicName ; name
-	tx InflictConfusionDescription ; description
+	tx MayInflictConfusionDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw InflictConfusionEffectCommands ; effect commands
+	dw Confusion50PercentEffectCommands ; effect commands
 	db INFLICT_CONFUSION ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -1184,12 +1184,12 @@ ZubatCard:
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
-	tx SwarmName ; name
-	tx SwarmDescription ; description
+	tx BiteName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw SwarmEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -1220,11 +1220,25 @@ GolbatCard:
 	tx ZubatName ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1 ; energies
+	energy COLORLESS, 2 ; energies
+	tx NightAmbushName ; name
+	tx NightAmbushDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 0 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NightAmbushEffectCommands ; effect commands
+	db INFLICT_POISON | DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 2
+	db ATK_ANIM_AGILITY_NO_HIT ; animation
+
+	; attack 2
+	energy DARKNESS, 1, COLORLESS, 2 ; energies
 	tx LeechLifeName ; name
 	tx LeechLifeDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw LeechLifeEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -1232,20 +1246,6 @@ GolbatCard:
 	db NONE ; flags 3
 	db 3
 	db ATK_ANIM_DRAIN ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx SkillDiveName ; name
-	tx Deal30ToAnyPokemonDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Deal30ToAnyPokemonEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
-	db NONE ; flags 3
-	db 2
-	db ATK_ANIM_AGILITY_NO_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
