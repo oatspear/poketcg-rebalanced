@@ -1515,7 +1515,7 @@ HandleSleepCheck:
 	ld a, DUELVARS_ARENA_CARD
 	call LoadCardNameAndLevelFromVarToRam2
 	pop hl
-	; call Func_6ce4
+	; call PrintNonTurnDuelistCardIDText
 	call DrawWideTextBox_PrintText
 	pop af
 	call Func_6cab
@@ -7073,6 +7073,10 @@ HandleEndOfTurnEvents:
 	; jr nc, .done
 	farcall DreamEater_CountPokemonAndSetHealingAmount
 
+	; ld a, HAUNTER_LV22
+	; call CountPokemonIDInPlayArea
+	; jr nc, .done
+	farcall Affliction_CountPokemonAndSetVariable
 .done
 	ret
 
@@ -7087,6 +7091,9 @@ HandleBetweenTurnsEvents:
 	or a
 	jr nz, .something_to_handle
 	ld a, [wDreamEaterDamageToHeal]
+	or a
+	jr nz, .something_to_handle
+	ld a, [wAfflictionAffectedPlayArea]
 	or a
 	jr nz, .something_to_handle
 ;	call PreprocessHealingNectar
@@ -7128,6 +7135,7 @@ HandleBetweenTurnsEvents:
 ; handle Hypno's Dream Eater
 .dream_eater
 	farcall DreamEater_HealEffect
+	farcall Affliction_DamageEffect
 
 ; handle status conditions
 .status_conditions
@@ -7158,7 +7166,7 @@ HandleBetweenTurnsEvents:
 	ld [hl], a
 	call Func_6c7e
 	ldtx hl, IsCuredOfParalysisText
-	call Func_6ce4
+	call PrintNonTurnDuelistCardIDText
 	ld a, DUEL_ANIM_HEAL
 	call Func_6cab
 	call WaitForWideTextBoxInput
@@ -7363,8 +7371,7 @@ Func_6c7e:
 	jp z, DrawDuelMainScene
 	call SwapTurn
 	call DrawDuelMainScene
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 .asm_6c98
 	ld hl, wWhoseTurn
@@ -7373,8 +7380,7 @@ Func_6c7e:
 	jp z, DrawDuelHUDs
 	call SwapTurn
 	call DrawDuelHUDs
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 ; input:
 ;	a = animation ID
@@ -7409,11 +7415,11 @@ Func_6cab:
 	call DoFrame
 	call CheckAnyAnimationPlaying
 	jr c, .loop_anim
-	call Func_6c7e.asm_6c98
-	ret
+	jr Func_6c7e.asm_6c98
+
 
 ; prints the name of the card at wTempNonTurnDuelistCardID in a text box
-Func_6ce4:
+PrintNonTurnDuelistCardIDText:
 	push hl
 	ld a, [wTempNonTurnDuelistCardID]
 	ld e, a
@@ -7424,8 +7430,8 @@ Func_6ce4:
 	ld l, a
 	call LoadTxRam2
 	pop hl
-	call DrawWideTextBox_PrintText
-	ret
+	jp DrawWideTextBox_PrintText
+
 
 HandlePoisonDamage:
 	or a
@@ -7450,7 +7456,7 @@ HandlePoisonDamage:
 	push hl
 	call Func_6c7e
 	pop hl
-	call Func_6ce4
+	call PrintNonTurnDuelistCardIDText
 
 ; play animation
 	ld a, DUEL_ANIM_POISON
@@ -8747,12 +8753,12 @@ PlayAttackAnimation:
 	inc hl
 	ld [hl], d
 
-; if damage >= 70, ATK_ANIM_HIT becomes ATK_ANIM_BIG_HIT
+; if damage >= 60, ATK_ANIM_HIT becomes ATK_ANIM_BIG_HIT
 	ld a, [wLoadedAttackAnimation]
 	cp ATK_ANIM_HIT
 	jr nz, .got_anim
 	ld a, e
-	cp 70
+	cp 60
 	jr c, .got_anim
 	ld a, ATK_ANIM_BIG_HIT
 	ld [wLoadedAttackAnimation], a
