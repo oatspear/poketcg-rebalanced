@@ -610,6 +610,7 @@ FullHeal_ClearStatusEffect:
 
 ; puts 1 damage counter on the target at location in e,
 ; without counting as attack damage (does not trigger damage reduction, etc.)
+; assumes: call to SwapTurn if needed
 ; inputs:
 ;   e: PLAY_AREA_* of the target
 Put1DamageCounterOnTarget:
@@ -953,7 +954,9 @@ Curse_DamageEffect:
 	; input e: PLAY_AREA_* of the target
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
-	jp Put1DamageCounterOnTarget
+	call SwapTurn
+	call Put1DamageCounterOnTarget
+	jp SwapTurn
 
 
 ; ------------------------------------------------------------------------------
