@@ -1180,7 +1180,7 @@ ZubatCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_SUPERSONIC ; animation
+	db ATK_ANIM_SUPERSONIC_HIT ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
@@ -2141,7 +2141,7 @@ KoffingCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_FOUL_GAS ; animation
+	db ATK_ANIM_SLEEPING_GAS ; animation
 
 	; attack 2
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
@@ -3416,7 +3416,7 @@ BlastoiseCard:
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 2
-	db ATK_ANIM_WATER_GUN ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
@@ -4181,7 +4181,7 @@ SeadraCard:
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 2
-	db ATK_ANIM_WATER_GUN ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy WATER, 2, COLORLESS, 1 ; energies
@@ -7794,7 +7794,7 @@ HaunterLv17Card:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 10
-	db ATK_ANIM_DARK_MIND ; animation
+	db ATK_ANIM_DARK_MIND_NO_HIT ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness
@@ -8610,7 +8610,7 @@ Pidgeot2Card:
 	db FLAG_2_BIT_7 ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_WHIRLWIND ; animation
+	db ATK_ANIM_GALE ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness

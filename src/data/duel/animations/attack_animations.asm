@@ -99,7 +99,7 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_Sing                ; ATK_ANIM_SING
 	dw AttackAnimation_Sing                ; ATK_ANIM_LULLABY
 	dw AttackAnimation_Supersonic          ; ATK_ANIM_SUPERSONIC
-	dw AttackAnimation_Supersonic          ; ATK_ANIM_77
+	dw AttackAnimation_SupersonicHit       ; ATK_ANIM_SUPERSONIC_HIT
 	dw AttackAnimation_PetalDance          ; ATK_ANIM_PETAL_DANCE
 	dw AttackAnimation_Protect             ; ATK_ANIM_PROTECT
 	dw AttackAnimation_Barrier             ; ATK_ANIM_BARRIER
@@ -125,7 +125,7 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_BigThunder          ; ATK_ANIM_BIG_THUNDER
 	dw AttackAnimation_SolarPower          ; ATK_ANIM_SOLAR_POWER
 	dw AttackAnimation_PoisonFang          ; ATK_ANIM_POISON_FANG
-	dw AttackAnimation_SinisterFog         ; ATK_ANIM_SINISTER_FOG
+	dw AttackAnimation_DarkMindNoHit       ; ATK_ANIM_DARK_MIND_NO_HIT
 	dw AttackAnimation_PoisonFang          ; ATK_ANIM_104
 	dw AttackAnimation_558c                ; ATK_ANIM_105
 	dw AttackAnimation_FriendshipSong      ; ATK_ANIM_FRIENDSHIP_SONG
@@ -538,6 +538,14 @@ AttackAnimation_Supersonic:
 	anim_opponent       DUEL_ANIM_SUPERSONIC
 	anim_end
 
+AttackAnimation_SupersonicHit:
+	anim_player         DUEL_ANIM_GLOW
+	anim_opponent       DUEL_ANIM_SUPERSONIC
+	anim_opponent       DUEL_ANIM_HIT
+	anim_normal         DUEL_ANIM_SHAKE1
+	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
+	anim_end
+
 AttackAnimation_PetalDance:
 	anim_player         DUEL_ANIM_GLOW
 	anim_normal         DUEL_ANIM_PETAL_DANCE
@@ -715,13 +723,9 @@ AttackAnimation_PoisonFang:
 	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
 	anim_end
 
-AttackAnimation_SinisterFog:
+AttackAnimation_DarkMindNoHit:
 	anim_player         DUEL_ANIM_GLOW
-	anim_player         DUEL_ANIM_GLARE
-	anim_opponent       DUEL_ANIM_DARK_GAS
-	anim_opponent       DUEL_ANIM_HIT
-	anim_normal         DUEL_ANIM_SHAKE1
-	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
+	anim_opponent       DUEL_ANIM_GLARE
 	anim_end
 
 AttackAnimation_558c:
@@ -885,9 +889,9 @@ AttackAnimation_HealingWindPlayArea:
 AttackAnimation_Gale:
 	anim_player         DUEL_ANIM_GLOW
 	anim_opponent       DUEL_ANIM_WHIRLWIND
-	anim_opponent       DUEL_ANIM_HIT
-	anim_normal         DUEL_ANIM_SHAKE1
-	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
+	; anim_opponent       DUEL_ANIM_HIT
+	; anim_normal         DUEL_ANIM_SHAKE1
+	; anim_opponent       DUEL_ANIM_SHOW_DAMAGE
 	anim_normal         DUEL_ANIM_FLASH
 	anim_end
 
