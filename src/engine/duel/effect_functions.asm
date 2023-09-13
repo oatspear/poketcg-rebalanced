@@ -7107,6 +7107,7 @@ Synthesis_AddToHandEffect:
 ; adds a card in [hAIPkmnPowerEffectParam] from the deck to the hand
 ; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
 StressPheromones_AddToHandEffect:
+	call SetUsedPokemonPowerThisTurn
 	ldh a, [hAIPkmnPowerEffectParam]
 	ldh [hTemp_ffa0], a
 	; jr SelectedCards_AddToHandFromDeck
