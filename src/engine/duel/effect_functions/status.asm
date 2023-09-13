@@ -165,6 +165,8 @@ ParalysisIfBasicEffect:
 
 TargetedPoisonEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
+	cp $ff
+	ret z
 	ld e, a
 	call SwapTurn
 	call PoisonEffect_PlayArea
@@ -239,6 +241,7 @@ ApplyStatusEffectToPlayAreaPokemon:
 	call GetTurnDuelistVariable  ; current status
 	and b  ; status condition to preserve
 	or c  ; status to apply on top
+	ld [hl], a
 	scf
 	ret
 
