@@ -679,7 +679,9 @@ DenProtector_DamageBoostEffect:
   ld c, 0
 .loop_play_area
   ; input in e
+  push bc
   call GetCardDamageAndMaxHP
+  pop bc
   or a
   jr z, .next_pkmn  ; no damage
   inc c
