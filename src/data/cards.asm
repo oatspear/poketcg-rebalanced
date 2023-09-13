@@ -7667,7 +7667,7 @@ GastlyLv8Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx SleepingGasName ; name
 	tx InflictSleepDescription ; description
 	dw NONE ; description (cont)

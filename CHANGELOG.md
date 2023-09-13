@@ -114,6 +114,9 @@
 - **Selfdestruct**: removed:
 - New Pokémon Power: **Toxic Gas**: disables other Pokémon Powers while in the Active spot.
 
+#### Gastly Lv8
+- **Sleeping Gas**: reduced cost from (D) to (C).
+
 #### Gastly Lv17
 - Reduced HP from 50 to 40.
 
