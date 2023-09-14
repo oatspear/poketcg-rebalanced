@@ -1,4 +1,65 @@
 
+DragoniteHealingWindEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, HealingWind_InitialEffect
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, HealingWind_PlayAreaHealEffect
+	db  $00
+
+;
+HealingWind_PlayAreaHealEffect:
+; play initial animation
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+	ld a, ATK_ANIM_HEALING_WIND_PLAY_AREA
+	ld [wLoadedAttackAnimation], a
+
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+.loop_play_area
+	push de
+	ld a, e
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .next_pkmn ; skip if no damage
+
+; if less than 20 damage, cap recovery at 10 damage
+	ld de, 20
+	cp e
+	jr nc, .heal
+	ld e, a
+
+.heal
+; add HP to this card
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	add e
+	ld [hl], a
+
+; play heal animation
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $01
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+.next_pkmn
+	pop de
+	inc e
+	dec d
+	jr nz, .loop_play_area
+	ret
+	
+
+
 
 ; returns carry if Pkmn Power can't be used.
 Peek_OncePerTurnCheck: ; 2e29c (b:629c)
