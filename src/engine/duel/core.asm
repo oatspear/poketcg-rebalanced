@@ -7044,6 +7044,7 @@ HandleOnEvolvePokemonEffects:
 	jr nc, .done  ; no Pkmn Power-capable Dragonair was found
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTempPlayAreaLocation_ffa1], a
+	call DrawDuelMainScene
 	farcall DraconicEvolutionEffect
 .done
 	ret

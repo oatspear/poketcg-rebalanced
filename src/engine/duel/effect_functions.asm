@@ -962,6 +962,8 @@ Curse_DamageEffect:
 ; input:
 ;   [hTempPlayAreaLocation_ffa1]: PLAY_AREA_* of target card
 DraconicEvolutionEffect:
+	; ldtx hl, DraconicEvolutionActivatesText
+	; call DrawWideTextBox_WaitForInput
 ; check status
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	add DUELVARS_ARENA_CARD_STATUS
@@ -973,15 +975,15 @@ DraconicEvolutionEffect:
 	bank1call DrawDuelHUDs
 ; check energy cards in hand
 	call AttachEnergyFromHand_HandCheck
-	jr c, .no_energy
 ; choose energy card to attach
-	call DraconicEvolution_AttachEnergyFromHandEffect
-.no_energy
+	call nc, DraconicEvolution_AttachEnergyFromHandEffect
 	or a
 	ret
 
 
 ; Choose a Basic Energy from hand and attach it to a Pokémon.
+; inputs:
+;   [wDuelTempList]: list of Basic Energy cards in hand
 DraconicEvolution_AttachEnergyFromHandEffect:
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
@@ -991,8 +993,8 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 	jr nz, .ai_opp
 
 ; player
-	call OptionalAttachEnergyFromHand_PlayerSelectEffect
-	ldh a, [hTemp_ffa0]
+	call Helper_SelectEnergyFromHand
+	ldh [hTemp_ffa0], a
 	ld d, a
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
@@ -1008,7 +1010,9 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 	jp AttachEnergyFromHand_AttachEnergyEffect
 
 .ai_opp
-	call AttachEnergyFromHand_AISelectEffect
+; AI selects the first card
+	ld a, [wDuelTempList]
+	ldh [hTemp_ffa0], a
 	jp AttachEnergyFromHand_AttachEnergyEffect
 
 
