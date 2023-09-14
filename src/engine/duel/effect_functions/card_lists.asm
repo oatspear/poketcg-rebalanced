@@ -578,23 +578,23 @@ RemoveCardIDFromCardList:
 
 
 RemovePokemonCardsFromCardList:
-  ld hl, wDuelTempList
-  ld de, wDuelTempList
+	ld hl, wDuelTempList
+	ld de, wDuelTempList
 .loop
-  ld a, [hli]
-  ld [de], a
-  cp $ff  ; terminating byte
-  ret z
-  push de
-  call GetCardIDFromDeckIndex
-  call GetCardType
-  pop de
+	ld a, [hli]
+	ld [de], a
+	cp $ff  ; terminating byte
+	ret z
+	push de
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	pop de
 ; only advance de if the current card is not a Pokémon
-  cp TYPE_ENERGY
-  jr c, .loop
-  inc de
-  jr .loop
-  ; 413 555 01 93
+	cp TYPE_ENERGY
+	jr c, .loop
+	inc de
+	jr .loop
+
 
 RemoveTrainerCardsFromCardList:
   ld hl, wDuelTempList
