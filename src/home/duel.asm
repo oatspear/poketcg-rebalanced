@@ -1483,8 +1483,7 @@ OnPokemonPlayedInitVariablesAndPowers:
 	call DisplayUsePokemonPowerScreen
 	ldtx hl, UnableToUsePkmnPowerDueToDisableEffectText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
-	ret
+	jp ExchangeRNG
 
 .use_pokemon_power
 	ld hl, wLoadedAttackEffectCommands
@@ -1515,8 +1514,7 @@ OnPokemonPlayedInitVariablesAndPowers:
 	call ExchangeRNG
 	call Func_7415
 	ld a, EFFECTCMDTYPE_PKMN_POWER_TRIGGER
-	call TryExecuteEffectCommandFunction
-	ret
+	jp TryExecuteEffectCommandFunction
 
 ; copies, given a card identified by register a (card ID):
 ; - e into wSelectedAttack and d into hTempCardIndex_ff9f
