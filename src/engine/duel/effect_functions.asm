@@ -1869,11 +1869,6 @@ DrawSymbolOnPlayAreaCursor: ; 2c6cc (b:46cc)
 	call WriteByteToBGMap0
 	ret
 
-; possibly unreferenced
-Func_2c6d9: ; 2c6d9 (b:46d9)
-	ldtx hl, IncompleteText
-	call DrawWideTextBox_WaitForInput
-	ret
 
 PlayAreaSelectionMenuParameters: ; 2c6e0 (b:46e0)
 	db 0, 0 ; cursor x, cursor y
@@ -3040,30 +3035,6 @@ FlareonQuickAttack_DamageBoostEffect: ; 2d549 (b:5549)
 	call AddToDamage
 	ret
 
-
-EnergyBurnEffect: ; 2d5be (b:55be)
-	scf
-	ret
-
-; returns carry if Pkmn Power cannot be used
-; or if Arena card is not Charizard.
-; this is unused.
-EnergyBurnCheck_Unreferenced: ; 2d620 (b:5620)
-	call CheckCannotUseDueToStatus
-	ret c
-	ld a, DUELVARS_ARENA_CARD
-	push de
-	call GetTurnDuelistVariable
-	call GetCardIDFromDeckIndex
-	ld a, e
-	pop de
-	cp CHARIZARD
-	jr nz, .not_charizard
-	or a
-	ret
-.not_charizard
-	scf
-	ret
 
 Rage_AIEffect:
 	call Rage_DamageBoostEffect
@@ -6420,54 +6391,6 @@ AttachEnergyFromHand_AttachEnergyEffect:
 ; not Player, so show detail screen
 ; and which Pokemon was chosen to attach Energy.
 	jp Helper_ShowAttachedEnergyToPokemon
-
-DragoniteLv41Slam_AIEffect: ; 2ef9c (b:6f9c)
-	ld a, (30 * 2) / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-DragoniteLv41Slam_MultiplierEffect: ; 2efa4 (b:6fa4)
-	ld hl, 30
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	ld c, a
-	add a
-	add c
-	call ATimes10
-	call SetDefiniteDamage
-	ret
-
-; possibly unreferenced
-Func_2efbc: ; 2efbc (b:6fbc)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld c, a
-	ld l, DUELVARS_ARENA_CARD_HP
-	ld de, wce76
-.asm_2efc7
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .asm_2efc7
-	ret
-
-; possibly unreferenced
-Func_2efce: ; 2efce (b:6fce)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld c, a
-	ld l, DUELVARS_ARENA_CARD_HP
-	ld de, wce76
-.asm_2efd9
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec c
-	jr nz, .asm_2efd9
-	ret
 
 
 Morph_PlayerSelectEffect:

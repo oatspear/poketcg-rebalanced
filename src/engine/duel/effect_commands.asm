@@ -517,10 +517,6 @@ WildfireEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Wildfire_AISelectEffect
 	db  $00
 
-CharizardEnergyBurnEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyBurnEffect
-	db  $00
-
 FireBlastEffectCommands:
 FireSpinEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Check2EnergiesAttached

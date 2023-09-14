@@ -1,4 +1,58 @@
 
+; returns carry if Pkmn Power cannot be used
+; or if Arena card is not Charizard.
+; this is unused.
+EnergyBurnCheck_Unreferenced: ; 2d620 (b:5620)
+	call CheckCannotUseDueToStatus
+	ret c
+	ld a, DUELVARS_ARENA_CARD
+	push de
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	pop de
+	cp CHARIZARD
+	jr nz, .not_charizard
+	or a
+	ret
+.not_charizard
+	scf
+	ret
+
+
+; possibly unreferenced
+Func_2efce: ; 2efce (b:6fce)
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a
+	ld l, DUELVARS_ARENA_CARD_HP
+	ld de, wce76
+.asm_2efd9
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	jr nz, .asm_2efd9
+	ret
+
+
+; possibly unreferenced
+Func_2efbc: ; 2efbc (b:6fbc)
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a
+	ld l, DUELVARS_ARENA_CARD_HP
+	ld de, wce76
+.asm_2efc7
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_2efc7
+	ret
+
+
+
 DragoniteStepInEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StepIn_BenchCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StepIn_SwitchEffect
