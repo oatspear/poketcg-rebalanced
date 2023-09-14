@@ -5953,23 +5953,6 @@ FuryAttack_MultiplierEffect: ; 2ebc2 (b:6bc2)
 	call SetDefiniteDamage
 	ret
 
-DragonairSlam_AIEffect: ; 2ec0c (b:6c0c)
-	ld a, (30 * 2) / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-DragonairSlam_MultiplierEffect: ; 2ec14 (b:6c14)
-	ld hl, 30
-	call LoadTxRam3
-	ld a, 2
-	ldtx de, DamageCheckIfHeadsXDamageText
-	call TossCoinATimes_BankB
-	ld e, a
-	add a
-	add e
-	call ATimes10
-	call SetDefiniteDamage
-	ret
 
 ReduceDamageTakenBy20Effect:
 	ld a, SUBSTATUS1_REDUCE_BY_20
