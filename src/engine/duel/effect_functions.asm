@@ -6126,11 +6126,6 @@ RapidSpin_SwitchEffect:
 	jp Agility_SwitchEffect
 
 
-SingEffect: ; 2ed04 (b:6d04)
-	call Sleep50PercentEffect
-	call nc, SetNoEffectFromStatus
-	ret
-
 ; return carry if Defending Pokemon has no attacks
 Metronome_CheckAttacks:
 	call CheckIfDefendingPokemonHasAnyAttack

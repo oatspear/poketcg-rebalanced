@@ -1076,10 +1076,6 @@ GaleEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GaleEffect
 	db  $00
 
-SingEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SingEffect
-	db  $00
-
 DoTheWaveEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoTheWave_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, DoTheWave_AIEffect
