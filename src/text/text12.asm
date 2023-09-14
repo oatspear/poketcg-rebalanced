@@ -1008,6 +1008,21 @@ NightAmbushDescription:
 	; line "one of your Benched Pokémon."
 	done
 
+DraconicEvolutionName:
+	text "Draconic Evolution"
+	done
+
+DraconicEvolutionDescription:
+	text "When you play a card from your hand"
+	line "to evolve 1 of your Pokémon, remove"
+	line "all Special Conditions and effects"
+	line "of attacks from that Pokémon."
+	line "You may attach a Basic Energy card"
+	line "in your hand to that Pokémon."
+	done
+
+
+
 ; ------------------------------------------------------------------------------
 ; Trainer Cards
 ; ------------------------------------------------------------------------------
