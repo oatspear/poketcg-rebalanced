@@ -2841,7 +2841,7 @@ Quickfreeze_Paralysis50PercentEffect: ; 2d2f3 (b:52f3)
 ; tails
 	call SetWasUnsuccessful
 	bank1call DrawDuelMainScene
-	bank1call Func_1bca
+	call PrintNoEffectTextOrUnsuccessfulText
 	call WaitForWideTextBoxInput
 	ret
 
@@ -2857,7 +2857,7 @@ Quickfreeze_Paralysis50PercentEffect: ; 2d2f3 (b:52f3)
 	bank1call WaitAttackAnimation
 	bank1call Func_6df1
 	bank1call DrawDuelHUDs
-	bank1call Func_1bca
+	call PrintNoEffectTextOrUnsuccessfulText
 	call c, WaitForWideTextBoxInput
 	ret
 
