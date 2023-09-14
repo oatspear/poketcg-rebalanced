@@ -991,11 +991,6 @@ UnableToRetreatEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
 	db  $00
 
-DragoniteStepInEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StepIn_BenchCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StepIn_SwitchEffect
-	db  $00
-
 FarfetchdLeekSlapEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, LeekSlap_OncePerDuelCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeekSlap_NoDamage50PercentEffect

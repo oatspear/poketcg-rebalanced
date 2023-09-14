@@ -588,17 +588,6 @@ DragoniteLv41Description: ; 632a2 (18:72a2)
 	line "flies. However, it is only a rumor."
 	done
 
-StepInName: ; 6330b (18:730b)
-	text "Step In"
-	done
-
-StepInDescription: ; 63314 (18:7314)
-	text "Once during your turn (before your"
-	line "attack), if Dragonite is on your"
-	line "Bench, you may switch it with your"
-	line "Active Pokémon."
-	done
-
 DoubleAttackX40Description: ; 6338c (18:738c)
 	text "Flip 2 coins. This attack does 40"
 	line "damage times the number of heads."

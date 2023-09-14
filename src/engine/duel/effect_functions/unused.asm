@@ -1,4 +1,44 @@
 
+DragoniteStepInEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StepIn_BenchCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StepIn_SwitchEffect
+	db  $00
+
+
+; return carry if cannot use Step In
+StepIn_BenchCheck: ; 2eaca (b:6aca)
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ldtx hl, CanOnlyBeUsedOnTheBenchText
+	or a
+	jr z, .set_carry
+
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	ldtx hl, OnlyOncePerTurnText
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .set_carry
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
+	ret
+
+.set_carry
+	scf
+	ret
+
+StepIn_SwitchEffect: ; 2eae8 (b:6ae8)
+	ldh a, [hTemp_ffa0]
+	ld e, a
+	call SwapArenaWithBenchPokemon
+	ld a, DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+	ret
+
+
+
+
 DragoniteHealingWindEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, HealingWind_InitialEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, HealingWind_PlayAreaHealEffect
@@ -57,7 +97,7 @@ HealingWind_PlayAreaHealEffect:
 	dec d
 	jr nz, .loop_play_area
 	ret
-	
+
 
 
 

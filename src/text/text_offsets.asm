@@ -2942,8 +2942,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HealingWindName                                    ; 0x0b61
 	textpointer HealingWindDescription                             ; 0x0b62
 	textpointer DragoniteLv41Description                          ; 0x0b63
-	textpointer StepInName                                         ; 0x0b64
-	textpointer StepInDescription                                  ; 0x0b65
 	textpointer DoubleAttackX40Description                         ; 0x0b66
 	textpointer DragoniteDescription                               ; 0x0b67
 	textpointer PunishingSlapName
