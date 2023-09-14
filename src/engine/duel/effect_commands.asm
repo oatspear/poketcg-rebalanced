@@ -1017,10 +1017,6 @@ DoduoFuryAttackEffectCommands:
 	dbw EFFECTCMDTYPE_AI, FuryAttack_AIEffect
 	db  $00
 
-DodrioRetreatAidEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RetreatAidEffect
-	db  $00
-
 DragonairSlamEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DragonairSlam_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, DragonairSlam_AIEffect

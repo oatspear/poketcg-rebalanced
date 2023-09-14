@@ -5953,10 +5953,6 @@ FuryAttack_MultiplierEffect: ; 2ebc2 (b:6bc2)
 	call SetDefiniteDamage
 	ret
 
-RetreatAidEffect: ; 2ebd7 (b:6bd7)
-	scf
-	ret
-
 DragonairSlam_AIEffect: ; 2ec0c (b:6c0c)
 	ld a, (30 * 2) / 2
 	lb de, 0, 60
