@@ -845,26 +845,6 @@ OverwhelmEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, OverwhelmEffect
 	db  $00
 
-; SpitPoisonEffectCommands:
-; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpitPoisonEffect
-; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Spark_PlayerSelectEffect
-; 	dbw EFFECTCMDTYPE_AI_SELECTION, Spark_AISelectEffect
-; 	db  $00
-
-AerodactylPrehistoricPowerEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PrehistoricPowerEffect
-	db  $00
-
-; MankeyPeekEffectCommands:
-; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Peek_OncePerTurnCheck
-; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Peek_SelectEffect
-; 	db  $00
-
-; WailEffectCommands:
-; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Wail_BenchCheck
-; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Wail_FillBenchEffect
-; 	db  $00
-
 VengeanceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Vengeance_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Vengeance_AIEffect
