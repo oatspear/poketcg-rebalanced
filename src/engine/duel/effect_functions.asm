@@ -29,12 +29,10 @@ INCLUDE "engine/duel/effect_functions/substatus.asm"
 
 
 TossCoin_BankB:
-	call TossCoin
-	ret
+	jp TossCoin
 
 TossCoinATimes_BankB:
-	call TossCoinATimes
-	ret
+	jp TossCoinATimes
 
 
 Serial_TossCoin:
@@ -48,8 +46,7 @@ Serial_TossCoinATimes:
 	pop af
 	pop de
 	call SerialSend8Bytes
-	call TossCoinATimes
-	ret
+	jp TossCoinATimes
 
 
 ; ------------------------------------------------------------------------------
@@ -5950,8 +5947,7 @@ FuryAttack_MultiplierEffect: ; 2ebc2 (b:6bc2)
 	ldtx de, DamageCheckIfHeadsXDamageText
 	call TossCoinATimes_BankB
 	call ATimes10
-	call SetDefiniteDamage
-	ret
+	jp SetDefiniteDamage
 
 
 ReduceDamageTakenBy20Effect:
