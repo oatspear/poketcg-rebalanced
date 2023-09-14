@@ -1,4 +1,83 @@
 
+
+; returns carry if Pkmn Power can't be used.
+Peek_OncePerTurnCheck: ; 2e29c (b:629c)
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .already_used
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	jp CheckCannotUseDueToStatus_Anywhere
+.already_used
+	ldtx hl, OnlyOncePerTurnText
+	scf
+	ret
+
+Peek_SelectEffect: ; 2e2b4 (b:62b4)
+; set Pkmn Power used flag
+	ldh a, [hTemp_ffa0]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_LINK_OPP
+	jr z, .link_opp
+	and DUELIST_TYPE_AI_OPP
+	jr nz, .ai_opp
+
+; player
+	call Func_3b31
+	call HandlePeekSelection
+	ldh [hAIPkmnPowerEffectParam], a
+	call SerialSend8Bytes
+	ret
+
+.link_opp
+	call SerialRecv8Bytes
+	ldh [hAIPkmnPowerEffectParam], a
+
+.ai_opp
+	ldh a, [hAIPkmnPowerEffectParam]
+	bit AI_PEEK_TARGET_HAND_F, a
+	jr z, .prize_or_deck
+	and (~AI_PEEK_TARGET_HAND & $ff) ; unset bit to get deck index
+; if masked value is higher than $40, then it means
+; that AI chose to look at Player's deck.
+; all deck indices will be smaller than $40.
+	cp $40
+	jr c, .hand
+	ldh a, [hAIPkmnPowerEffectParam]
+	jr .prize_or_deck
+
+.hand
+; AI chose to look at random card in hand,
+; so display it to the Player on screen.
+	call SwapTurn
+	ldtx hl, PeekWasUsedToLookInYourHandText
+	bank1call DisplayCardDetailScreen
+	call SwapTurn
+	ret
+
+.prize_or_deck
+; AI chose either a prize card or Player's top deck card,
+; so show Play Area and draw cursor appropriately.
+	call Func_3b31
+	call SwapTurn
+	ldh a, [hAIPkmnPowerEffectParam]
+	xor $80
+	call DrawAIPeekScreen
+	call SwapTurn
+	ldtx hl, CardPeekWasUsedOnText
+	call DrawWideTextBox_WaitForInput
+	ret
+
+
+
+
 SpitPoisonEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
