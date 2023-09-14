@@ -1,5 +1,25 @@
 # Pokémon TCG Rebalanced
 
+## Version 0.6.0
+
+### Colorless Changes
+
+#### Dragonair
+- Increased Retreat cost from 1 to 2.
+- **Dragon Rage**: removed.
+- **Hyper Beam**: increased damage from 20 to 30.
+- New Pokémon Power: **Draconic Evolution**: when evolving other Pokémon, remove status and effects from that Pokémon; may attach 1 Basic Energy from hand to that Pokémon.
+
+#### Dragonite Lv41
+- Increased HP from 100 to 120.
+- **Healing Wind**: removed.
+- New attack: **Dragon Rage** (CC): 30 damage, +10 for each type of Basic Energy attached.
+
+#### Dragonite Lv45
+- Increased HP from 100 to 120.
+- Increased Retreat cost from 1 to 2.
+
+
 ## Version 0.5.0
 
 ### Grass Changes

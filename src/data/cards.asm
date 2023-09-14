@@ -10107,25 +10107,25 @@ DragonairCard:
 	; Discard the top card from your deck.
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx DragonRageName ; name
-	tx DragonRageDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw DragonRageEffectCommands ; effect commands
+	energy 0 ; energies
+	tx DraconicEvolutionName ; name
+	tx DraconicEvolutionDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_DRAGON_RAGE ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx HyperBeamName ; name
 	tx Discard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw HyperBeamEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -10153,7 +10153,7 @@ DragoniteLv41Card:
 	db STAR ; rarity
 	db PROMOTIONAL | GB ; sets
 	db DRAGONITE_LV41
-	db 100 ; hp
+	db 120 ; hp
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
 
@@ -10195,18 +10195,18 @@ DragoniteLv41Card:
 	; Does 100 damage minus 20 damage for each Energy attached to the Defending Pokémon.
 
 	; attack 1
-	energy 0 ; energies
-	tx HealingWindName ; name
-	tx HealingWindDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx DragonRageName ; name
+	tx DragonRageDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw DragonRageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HEALING_WIND ; animation
+	db ATK_ANIM_DRAGON_RAGE ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
@@ -10241,7 +10241,7 @@ DragoniteLv45Card:
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db DRAGONITE_LV45
-	db 100 ; hp
+	db 120 ; hp
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
 
@@ -10273,7 +10273,7 @@ DragoniteLv45Card:
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
-	db 1 ; retreat cost
+	db 2 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx DragonName ; category

@@ -774,6 +774,7 @@ PlayPokemonCard:
 	call PrintPlayAreaCardList_EnableLCD
 	call PrintPokemonEvolvedIntoPokemon
 	call OnPokemonPlayedInitVariablesAndPowers
+	call HandleOnEvolvePokemonEffects
 .done
 	or a
 	ret
@@ -6678,7 +6679,7 @@ OppActionTable:
 
 OppAction_DrawCard:
 	call DrawCardFromDeck
-	call nc, AddCardToHand
+	jp nc, AddCardToHand
 	ret
 
 OppAction_FinishTurnWithoutAttacking:
@@ -6719,8 +6720,8 @@ OppAction_EvolvePokemonCard:
 	call EvolvePokemonCardIfPossible
 	call PrintPokemonEvolvedIntoPokemon
 	call OnPokemonPlayedInitVariablesAndPowers
-	call DrawDuelMainScene
-	ret
+	call HandleOnEvolvePokemonEffects
+	jp DrawDuelMainScene
 
 ; place a basic Pokemon card from hand in the bench
 OppAction_PlayBasicPokemonCard:
@@ -6735,8 +6736,7 @@ OppAction_PlayBasicPokemonCard:
 	ldtx hl, PlacedOnTheBenchText
 	call DisplayCardDetailScreen
 	call OnPokemonPlayedInitVariablesAndPowers
-	call DrawDuelMainScene
-	ret
+	jp DrawDuelMainScene
 
 ; attempt the retreat of the active Pokemon card
 ; if successful, discard the required energy cards for retreat and
@@ -6759,8 +6759,7 @@ OppAction_AttemptRetreat:
 	push hl
 	call LoadCardNameToTxRam2
 	pop hl
-	call DrawWideTextBox_WaitForInput_Bank1
-	ret
+	jp DrawWideTextBox_WaitForInput_Bank1
 
 ; play trainer card from hand
 OppAction_PlayTrainerCard:
@@ -7036,6 +7035,17 @@ HandleOnPlayEnergyEffects:
 	ld d, 10  ; damage
 	farcall HealPlayAreaCardHP
 .full_heal_energy
+	ret
+
+
+HandleOnEvolvePokemonEffects:
+	ld a, DRAGONAIR  ; Draconic Evolution
+	call CountPokemonIDInPlayArea
+	jr nc, .done  ; no Pkmn Power-capable Dragonair was found
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	farcall DraconicEvolutionEffect
+.done
 	ret
 
 

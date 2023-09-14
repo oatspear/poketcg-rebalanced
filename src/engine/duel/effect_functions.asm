@@ -7,7 +7,6 @@ RainDanceEffect:
 Firegiver_InitialEffect:
 Quickfreeze_InitialEffect:
 PealOfThunder_InitialEffect:
-HealingWind_InitialEffect:
 PassivePowerEffect:
 	scf
 	; fallthrough
@@ -957,6 +956,60 @@ Curse_DamageEffect:
 	call SwapTurn
 	call Put1DamageCounterOnTarget
 	jp SwapTurn
+
+
+; Remove status conditions from target PLAY_AREA_* and attach an Energy from Hand.
+; input:
+;   [hTempPlayAreaLocation_ffa1]: PLAY_AREA_* of target card
+DraconicEvolutionEffect:
+; check status
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	or a
+	ldh a, [hTempPlayAreaLocation_ffa1]
+; remove status
+	call nz, ClearStatusFromTarget
+	bank1call DrawDuelHUDs
+; check energy cards in hand
+	call AttachEnergyFromHand_HandCheck
+	jr c, .no_energy
+; choose energy card to attach
+	call DraconicEvolution_AttachEnergyFromHandEffect
+.no_energy
+	or a
+	ret
+
+
+; Choose a Basic Energy from hand and attach it to a Pokémon.
+DraconicEvolution_AttachEnergyFromHandEffect:
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_LINK_OPP
+	jr z, .link_opp
+	and DUELIST_TYPE_AI_OPP
+	jr nz, .ai_opp
+
+; player
+	call OptionalAttachEnergyFromHand_PlayerSelectEffect
+	ldh a, [hTemp_ffa0]
+	ld d, a
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
+	call SerialSend8Bytes
+	jp AttachEnergyFromHand_AttachEnergyEffect
+
+.link_opp
+	call SerialRecv8Bytes
+	ld a, d
+	ldh [hTemp_ffa0], a
+	ld a, e
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jp AttachEnergyFromHand_AttachEnergyEffect
+
+.ai_opp
+	call AttachEnergyFromHand_AISelectEffect
+	jp AttachEnergyFromHand_AttachEnergyEffect
 
 
 ; ------------------------------------------------------------------------------
@@ -4712,85 +4765,6 @@ SandAttackEffect: ; 2e26b (b:626b)
 	call ApplySubstatus2ToDefendingCard
 	ret
 
-PrehistoricPowerEffect: ; 2e29a (b:629a)
-	scf
-	ret
-
-; returns carry if Pkmn Power can't be used.
-Peek_OncePerTurnCheck: ; 2e29c (b:629c)
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	and USED_PKMN_POWER_THIS_TURN
-	jr nz, .already_used
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	jp CheckCannotUseDueToStatus_Anywhere
-.already_used
-	ldtx hl, OnlyOncePerTurnText
-	scf
-	ret
-
-Peek_SelectEffect: ; 2e2b4 (b:62b4)
-; set Pkmn Power used flag
-	ldh a, [hTemp_ffa0]
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	set USED_PKMN_POWER_THIS_TURN_F, [hl]
-
-	ld a, DUELVARS_DUELIST_TYPE
-	call GetTurnDuelistVariable
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .link_opp
-	and DUELIST_TYPE_AI_OPP
-	jr nz, .ai_opp
-
-; player
-	call Func_3b31
-	call HandlePeekSelection
-	ldh [hAIPkmnPowerEffectParam], a
-	call SerialSend8Bytes
-	ret
-
-.link_opp
-	call SerialRecv8Bytes
-	ldh [hAIPkmnPowerEffectParam], a
-
-.ai_opp
-	ldh a, [hAIPkmnPowerEffectParam]
-	bit AI_PEEK_TARGET_HAND_F, a
-	jr z, .prize_or_deck
-	and (~AI_PEEK_TARGET_HAND & $ff) ; unset bit to get deck index
-; if masked value is higher than $40, then it means
-; that AI chose to look at Player's deck.
-; all deck indices will be smaller than $40.
-	cp $40
-	jr c, .hand
-	ldh a, [hAIPkmnPowerEffectParam]
-	jr .prize_or_deck
-
-.hand
-; AI chose to look at random card in hand,
-; so display it to the Player on screen.
-	call SwapTurn
-	ldtx hl, PeekWasUsedToLookInYourHandText
-	bank1call DisplayCardDetailScreen
-	call SwapTurn
-	ret
-
-.prize_or_deck
-; AI chose either a prize card or Player's top deck card,
-; so show Play Area and draw cursor appropriately.
-	call Func_3b31
-	call SwapTurn
-	ldh a, [hAIPkmnPowerEffectParam]
-	xor $80
-	call DrawAIPeekScreen
-	call SwapTurn
-	ldtx hl, CardPeekWasUsedOnText
-	call DrawWideTextBox_WaitForInput
-	ret
-
 
 Thunderpunch_AIEffect: ; 2e399 (b:6399)
 	ld a, (30 + 40) / 2
@@ -6417,12 +6391,24 @@ Helper_SelectEnergyFromHand:
 	bank1call SetCardListHeaderText
 .loop_hand_input
 	bank1call DisplayCardList
-	jr c, .loop_hand_input
-	ldh [hTemp_ffa0], a
+; if B pressed, return carry and $ff in a
+; otherwise, return deck index in a
+	ret nc
+	ld a, $ff
 	ret
+
+OptionalAttachEnergyFromHand_PlayerSelectEffect:
+	call Helper_SelectEnergyFromHand
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z
+	jr AttachEnergyFromHand_PlayerSelectEffect.select_play_area
 
 AttachEnergyFromHand_PlayerSelectEffect:
 	call Helper_SelectEnergyFromHand
+	jr c, Helper_SelectEnergyFromHand.loop_hand_input
+	ldh [hTemp_ffa0], a
+.select_play_area
 ; handle Player selection (play area)
 	call Helper_ChooseAPokemonInPlayArea_EmptyScreen
 	ldh [hTempPlayAreaLocation_ffa1], a

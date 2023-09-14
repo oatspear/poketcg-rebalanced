@@ -1165,11 +1165,6 @@ DragonDanceEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, AttachEnergyFromHand_AISelectEffect
 	db  $00
 
-DragoniteHealingWindEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, HealingWind_InitialEffect
-	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, HealingWind_PlayAreaHealEffect
-	db  $00
-
 DoubleAttackX40EffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX40_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX40_AIEffect
