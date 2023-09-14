@@ -52,8 +52,7 @@ Heads10BonusDamage_DamageBoostEffect:
 	call TossCoin_BankB
 	ret nc ; return if tails
 	ld a, 10
-	call AddToDamage
-	ret
+	jp AddToDamage
 
 ArcanineQuickAttack_AIEffect:
 	ld a, (10 + 30) / 2
@@ -83,8 +82,29 @@ VaporeonQuickAttack_DamageBoostEffect:
 	call TossCoin_BankB
 	ret nc ; return if tails
 	ld a, 20
-	call AddToDamage
-	ret
+	jp AddToDamage
+
+
+; input:
+;   a: number of coins to flip
+;   d: amount of damage to add for each heads
+; outputs:
+;   a: number of flipped heads
+IfHeadsPlusDamage_DamageBoostEffect:
+  ld e, a  ; store number of coins
+	ld l, d  ; store damage in hl
+	ld h, 0
+	call LoadTxRam3  ; preserves hl, de
+  ld a, e
+  ldtx de, DamageCheckIfHeadsPlusDamageText
+	call TossCoinATimes_BankB  ; preserves hl
+; number of heads is in a
+	ret nc ; all tails
+  ld h, a  ; store number of heads
+	ld a, l  ; get damage from hl again
+	call AddToDamage  ; preserves hl, de
+  ld a, h  ; get number of heads from hl again
+  ret
 
 
 ; ------------------------------------------------------------------------------
