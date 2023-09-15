@@ -29,6 +29,14 @@ TossCoin:
 	pop hl
 	ret
 
+GetCoinTossNumTails:
+	push hl
+	ld hl, wCoinTossNumHeads
+	ld a, [wCoinTossTotalNum]
+	sub [hl]
+	pop hl
+	ret
+
 ; cp de, bc
 CompareDEtoBC:
 	ld a, d
