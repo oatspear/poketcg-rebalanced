@@ -100,10 +100,7 @@ HydroPumpEffect:
 	call ATimes10
 	call AddToDamage ; add 10 * a to damage
 ; set attack damage
-	ld a, [wDamage]
-	ld [wAIMinDamage], a
-	ld [wAIMaxDamage], a
-	ret
+	jp SetDefiniteAIDamage
 
 
 ; 10 damage for each Water Energy
@@ -115,10 +112,7 @@ WaterGunEffect:
 	call ATimes10
 	call SetDefiniteDamage ; damage = 10 * Water Energy
 ; set attack damage
-	ld a, [wDamage]
-	ld [wAIMinDamage], a
-	ld [wAIMaxDamage], a
-	ret
+	jp SetDefiniteAIDamage
 
 
 ;
