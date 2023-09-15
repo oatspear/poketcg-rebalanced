@@ -995,6 +995,7 @@ wCoinTossDuelistType:: ; cd9e
 wCoinTossNumTossed:: ; cd9f
 	ds $1
 
+; unused free space
 	ds $5
 
 wAIDuelVars::
