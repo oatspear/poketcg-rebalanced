@@ -6748,7 +6748,7 @@ OnixCard:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw RockHeadEffectCommands ; effect commands
+	dw ReduceDamageTakenBy10EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
@@ -9057,7 +9057,7 @@ JigglypuffLv12Card:
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw JigglypuffExpandEffectCommands ; effect commands
+	dw ReduceDamageTakenBy10EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3

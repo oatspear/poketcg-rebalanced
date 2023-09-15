@@ -1622,8 +1622,8 @@ GyaradosName: ; 5c500 (17:4500)
 	text "Gyarados"
 	done
 
-BubblebeamName: ; 5c517 (17:4517)
-	text "Bubblebeam"
+ShellPressName:
+	text "Shell Press"
 	done
 
 AtrociousName: ; 5c523 (17:4523)

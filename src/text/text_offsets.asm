@@ -2472,7 +2472,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FishName                                           ; 0x098e
 	textpointer MagikarpDescription                                ; 0x098f
 	textpointer GyaradosName                                       ; 0x0990
-	textpointer BubblebeamName                                     ; 0x0992
+	textpointer ShellPressName
 	textpointer AtrociousName                                      ; 0x0993
 	textpointer GyaradosDescription                                ; 0x0994
 	textpointer LaprasName                                         ; 0x0995

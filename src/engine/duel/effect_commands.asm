@@ -1198,8 +1198,7 @@ LeadEffectCommands:
 	db  $00
 
 
-RockHeadEffectCommands:
-JigglypuffExpandEffectCommands:
+ReduceDamageTakenBy10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ExpandEffect
 	db  $00
 
