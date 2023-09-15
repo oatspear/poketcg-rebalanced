@@ -1,4 +1,51 @@
 
+
+; input:
+;   a: number of coins to flip
+;   d: amount of damage to add for each heads
+; outputs:
+;   a: amount of damage added
+;   h: number of flipped heads
+;   l: number of flipped tails
+IfHeadsPlusDamage_DamageBoostEffect:
+  ld e, a  ; store number of coins
+  ld h, 0
+	ld l, d  ; store damage in hl
+	call LoadTxRam3  ; preserves hl, de
+  ld a, e
+  ldtx de, DamageCheckIfHeadsPlusDamageText
+  cp 2
+  jr nc, .multiple
+  call TossCoin_BankB  ; preserves hl
+  jr .post
+
+.multiple
+	call TossCoinATimes_BankB  ; preserves hl
+
+.post
+; number of heads is in a
+  ld d, l  ; restore damage per heads
+  ld h, a  ; store number of heads
+  ld a, [wCoinTossTotalNum]
+  sub h
+  ld l, a  ; store number of tails
+  ld a, h
+  or a
+	ret z ; all tails
+  ld e, a  ; store number of heads (a > 0)
+  xor a  ; set damage bonus to zero
+.loop
+  add d  ; add damage per heads
+  dec e
+  jr nz, .loop
+  ld e, a  ; store total bonus damage
+  call AddToDamage  ; preserves hl, de
+  ld a, e  ; get total bonus damage
+  ret
+
+
+
+
 ; returns carry if Pkmn Power cannot be used
 ; or if Arena card is not Charizard.
 ; this is unused.
