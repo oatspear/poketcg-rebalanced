@@ -93,10 +93,11 @@ VaporeonQuickAttack_DamageBoostEffect:
 ;   h: number of flipped heads
 ;   l: number of flipped tails
 IfHeadsPlusDamage_DamageBoostEffect:
-  ld h, a  ; store number of coins
+  ld e, a  ; store number of coins
+  ld h, 0
 	ld l, d  ; store damage in hl
 	call LoadTxRam3  ; preserves hl, de
-  ld a, h
+  ld a, e
   ldtx de, DamageCheckIfHeadsPlusDamageText
   cp 2
   jr nc, .multiple
