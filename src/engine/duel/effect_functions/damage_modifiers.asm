@@ -93,10 +93,7 @@ VaporeonQuickAttack_DamageBoostEffect:
 
 ; 10 extra damage for each Water Energy
 HydroPumpEffect:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + WATER]
+  call GetNumAttachedWaterEnergy
 	call ATimes10
 	call AddToDamage ; add 10 * a to damage
 ; set attack damage
@@ -105,10 +102,7 @@ HydroPumpEffect:
 
 ; 10 damage for each Water Energy
 WaterGunEffect:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + WATER]
+  call GetNumAttachedWaterEnergy
 	call ATimes10
 	call SetDefiniteDamage ; damage = 10 * Water Energy
 ; set attack damage

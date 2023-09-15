@@ -1088,6 +1088,11 @@ OverwhelmEffect:
 	jp ParalysisEffect
 
 
+AquaTailEffect:
+	call GetNumAttachedWaterEnergy
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Card Search
 ; ------------------------------------------------------------------------------
@@ -1243,6 +1248,14 @@ Ultravision_AISelectEffect:
 INCLUDE "engine/duel/effect_functions/card_lists.asm"
 
 ; ------------------------------------------------------------------------------
+
+
+GetNumAttachedWaterEnergy:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + WATER]
+	ret
 
 
 ; handles the Player selection of attack
