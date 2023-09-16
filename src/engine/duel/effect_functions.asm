@@ -35,6 +35,12 @@ TossCoinATimes_BankB:
 	jp TossCoinATimes
 
 
+TossACoins:
+	cp 2
+	jp nc, TossCoinATimes
+	jp TossCoin
+
+
 Serial_TossCoin:
 	ld a, $1
 
@@ -2962,7 +2968,7 @@ Wildfire_CheckEnergy: ; 2d49b (b:549b)
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
 	ldtx hl, NotEnoughFireEnergyText
-	ld a, [wAttachedEnergies]
+	ld a, [wAttachedEnergies + FIRE]
 	cp 1
 	ret
 
@@ -4273,15 +4279,6 @@ OptionalDiscardEnergy_DiscardEffect:
 	ret z
 	jp PutCardInDiscardPile
 
-
-; return carry if has less than 2 Energy cards
-Check2EnergiesAttached:
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-	ldtx hl, NotEnoughEnergyCardsText
-	cp 2
-	ret
 
 Discard2Energies_PlayerSelectEffect:
 	ldtx hl, ChooseAndDiscard2EnergyCardsText

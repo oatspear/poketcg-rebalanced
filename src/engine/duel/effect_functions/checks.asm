@@ -354,6 +354,34 @@ CheckIfPlayAreaHasAnyEnergies:
 	ret
 
 
+; return carry if has less than 2 Energy cards
+Check2EnergiesAttached:
+	ld a, 2
+	ldtx hl, NotEnoughEnergyCardsText
+	jr GetNumAttachedEnergiesAtMostA_Arena
+
+
+; return carry if less than a Energy cards
+GetNumAttachedEnergiesAtMostA_Arena:
+	ld e, PLAY_AREA_ARENA
+
+; input:
+;   a: max number of energy cards to test against
+;   e: PLAY_AREA_* of target
+; output:
+;   a: total number of attached energy cards, capped at input a
+;   carry: set if attached Energy cards < cap
+GetNumAttachedEnergiesAtMostA:
+	ld d, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	cp d
+	ret c
+	ld a, d
+	ret
+
+
+
 CheckIfCardHasGrassEnergyAttached:
 	ld c, TYPE_ENERGY_GRASS
 	jr CheckIfCardHasSpecificEnergyAttached
