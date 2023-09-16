@@ -8455,10 +8455,16 @@ _TossCoin:
 	call Func_3b21
 
 ; set flag if at least 1 tails
-	ld hl, wCoinTossTotalNum
-	ld a, [wCoinTossNumHeads]
-	cp [hl]
-	jr nc, .got_all_heads
+	ld hl, wCoinTossNumHeads
+	ld a, [wCoinTossTotalNum]
+	sub [hl]  ; got number of tails in a
+	ld [wCoinTossNumTails], a
+	; or a
+	jr z, .got_all_heads
+	; ld hl, wCoinTossTotalNum
+	; ld a, [wCoinTossNumHeads]
+	; cp [hl]
+	; jr nc, .got_all_heads
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
 	set TURN_FLAG_TOSSED_TAILS_F, [hl]

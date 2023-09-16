@@ -991,6 +991,8 @@ wCoinTossNumHeads:: ; cd9d
 wCoinTossDuelistType:: ; cd9e
 	ds $1
 
+; this stores the result from a coin toss (number of tails)
+wCoinTossNumTails:: ; cd9f
 ; holds the number of coins that have already been tossed
 wCoinTossNumTossed:: ; cd9f
 	ds $1
