@@ -2067,30 +2067,11 @@ Eggsplosion_AIEffect:
 ; deal 10 damage per heads and heal 10 damage per tails
 ; cap at 30 damage
 Eggsplosion_MultiplierEffect:
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld hl, 10
-	call LoadTxRam3
-	ld a, [wTotalAttachedEnergies]
-; cap if number of coins/energies >= 3
-	cp 3
-	jr c, .got_number
 	ld a, 3
-
-.got_number
-	ld c, a
-	push bc
-	ldtx de, DamageCheckIfHeadsXDamageText
-	call TossCoinATimes_BankB
-
-; deal 10 damage per heads
-	pop bc
-	ld b, a  ; store number of heads
-	call ATimes10
-	call SetDefiniteDamage
+	call GetNumAttachedEnergiesAtMostA_Arena
+	call X10DamagePerHeads_MultiplierEffect
 ; heal 10 damage per tails (store for later)
-	ld a, c
-	sub b
+	ld a, [wCoinTossNumTails]
 	ldh [hTemp_ffa0], a
 	ret
 
