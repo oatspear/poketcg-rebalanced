@@ -1,5 +1,38 @@
 
 
+
+; input:
+;   a: number of coins to flip
+;   hl: amount of damage per heads
+;   de: text to display
+; outputs:
+;   a: amount of bonus damage
+;   [wCoinTossTotalNum]: number of flipped coins
+;   [wCoinTossNumHeads]: number of flipped heads
+;   [wCoinTossNumTails]: number of flipped tails
+GetDamageBonusPerHeads:
+  cp 2
+  jr nc, .multiple
+  call TossCoin_BankB  ; preserves hl
+  jr .post
+
+.multiple
+	call TossCoinATimes_BankB  ; preserves hl
+
+.post
+; number of heads is in a
+  or a
+  ret z  ; all tails
+  ld h, a  ; store number of heads
+  xor a  ; set damage bonus to zero
+.loop
+  add l  ; add damage per heads
+  dec h
+  jr nz, .loop
+  ret  ; got total bonus damage
+
+
+
 ; input:
 ;   a: number of coins to flip
 ;   d: amount of damage to add for each heads
