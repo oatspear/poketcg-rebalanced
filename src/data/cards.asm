@@ -3423,7 +3423,7 @@ BlastoiseCard:
 	tx HydroPumpName ; name
 	tx HydroPumpDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 50 ; damage
 	db DAMAGE_PLUS ; category
 	dw HydroPumpEffectCommands ; effect commands
 	db NONE ; flags 1

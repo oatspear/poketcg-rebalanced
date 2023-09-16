@@ -2,6 +2,11 @@
 
 ## Version 0.6.0
 
+### Water Changes
+
+#### Blastoise
+- **Hydro Pump**: base damage increased from 40 to 50.
+
 ### Fighting Changes
 
 #### Marowak Lv26
