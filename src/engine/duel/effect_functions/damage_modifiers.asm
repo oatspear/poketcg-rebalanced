@@ -104,16 +104,15 @@ DoubleAttackX20X10_AIEffect:
 	jp SetExpectedAIDamage
 
 DoubleAttackX20X10_MultiplierEffect:
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	; tails = 10, heads = 20
-	; result = (tails + 2 * heads) = coins + heads
-	add 2
-	call ATimes10
-	jp SetDefiniteDamage
+  ld a, 2
+  ld hl, 20
+  call X10DamagePerHeads_TossCoins
+; tails = 10, heads = 20
+; result = (10 * tails) + (20 * heads)
+; result = (10 * coins) + (10 * heads)
+; a = 10 * heads
+  add 20
+  jp SetDefiniteDamage
 
 
 Heads10BonusDamage_DamageBoostEffect:
