@@ -55,7 +55,7 @@ Plus10DamagePerHeads_DamageBoostEffect:
 ;   [wCoinTossTotalNum]: number of flipped coins
 ;   [wCoinTossNumHeads]: number of flipped heads
 ;   [wCoinTossNumTails]: number of flipped tails
-; preserves: hl, bc
+; preserves: hl
 Plus10DamagePerHeads_TossCoins:
   ld e, a  ; store number of coins
   call LoadTxRam3  ; preserves hl, de
@@ -86,7 +86,7 @@ X10DamagePerHeads_MultiplierEffect:
 ;   [wCoinTossTotalNum]: number of flipped coins
 ;   [wCoinTossNumHeads]: number of flipped heads
 ;   [wCoinTossNumTails]: number of flipped tails
-; preserves: hl, bc
+; preserves: hl
 X10DamagePerHeads_TossCoins:
   ld e, a  ; store number of coins
   call LoadTxRam3  ; preserves hl, de
