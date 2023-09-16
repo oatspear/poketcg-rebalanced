@@ -213,12 +213,9 @@ WaterGunEffect:
 
 ;
 AquaPunch_DamageBoostEffect:
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + WATER]
-	call ATimes10
-	call AddToDamage
-	ld a, [wAttachedEnergies + FIGHTING]
+  call GetNumAttachedWaterEnergy
+  ld hl, wAttachedEnergies + FIGHTING
+  add [hl]
 	call ATimes10
 	jp AddToDamage
 

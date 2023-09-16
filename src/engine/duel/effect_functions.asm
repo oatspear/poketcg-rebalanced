@@ -1257,8 +1257,9 @@ INCLUDE "engine/duel/effect_functions/card_lists.asm"
 
 
 GetNumAttachedWaterEnergy:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+	; ld e, a
+	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	ret
