@@ -708,6 +708,27 @@ DeadlyPoison_AIEffect:
 ; Based on Damage Counters
 ; ------------------------------------------------------------------------------
 
+KarateChop_DamageSubtractionEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	ld e, a
+	ld hl, wDamage
+	ld a, [hl]
+	sub e
+	ld [hli], a
+	ld a, [hl]
+	sbc 0
+	ld [hl], a
+	rla
+	ret nc
+; cap it to 0 damage
+	xor a
+	jp SetDefiniteDamage
+
+KarateChop_AIEffect:
+	call KarateChop_DamageSubtractionEffect
+	jp SetDefiniteAIDamage
+
 
 ; double damage if user is damaged
 DoubleDamageIfUserIsDamaged_DamageBoostEffect:

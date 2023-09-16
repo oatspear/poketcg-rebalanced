@@ -4421,8 +4421,7 @@ DiscardOpponentEnergyIfHeads_AISelectEffect:
 
 ReduceAttackBy10Effect:
 	ld a, SUBSTATUS2_REDUCE_BY_10
-	call ApplySubstatus2ToDefendingCard
-	ret
+	jp ApplySubstatus2ToDefendingCard
 
 
 TantrumEffect: ; 2e099 (b:6099)
@@ -4554,43 +4553,19 @@ CallForFriend_AISelectEffect: ; 2e177 (b:6177)
 CallForFriend_PutInPlayAreaEffect: ; 2e194 (b:6194)
 	ldh a, [hTemp_ffa0]
 	cp $ff
-	jr z, .shuffle
+	jp z, SyncShuffleDeck
 	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call PutHandPokemonCardInPlayArea
 	call IsPlayerTurn
-	jr c, .shuffle
+	jp c, SyncShuffleDeck
 	; display card on screen
 	ldh a, [hTemp_ffa0]
 	ldtx hl, PlacedOnTheBenchText
 	bank1call DisplayCardDetailScreen
-.shuffle
-	call SyncShuffleDeck
-	ret
+	jp SyncShuffleDeck
 
 ; ------------------------------------------------------------------------------
-
-KarateChop_AIEffect: ; 2e1b4 (b:61b4)
-	call KarateChop_DamageSubtractionEffect
-	jp SetDefiniteAIDamage
-
-KarateChop_DamageSubtractionEffect: ; 2e1ba (b:61ba)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	ld e, a
-	ld hl, wDamage
-	ld a, [hl]
-	sub e
-	ld [hli], a
-	ld a, [hl]
-	sbc 0
-	ld [hl], a
-	rla
-	ret nc
-; cap it to 0 damage
-	xor a
-	call SetDefiniteDamage
-	ret
 
 HardenEffect: ; 2e1f6 (b:61f6)
 	ld a, SUBSTATUS1_HARDEN
