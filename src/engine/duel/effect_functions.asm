@@ -2046,14 +2046,8 @@ Teleport_ReturnToDeckEffect:
 
 
 Eggsplosion_AIEffect:
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-; cap if number of coins/energies >= 3
-	cp 3
-	jr c, .got_number
 	ld a, 3
-.got_number
+	call GetNumAttachedEnergiesAtMostA_Arena
 ; tails = heal 10, heads = deal 10
 	call ATimes10
 	ld d, 0
