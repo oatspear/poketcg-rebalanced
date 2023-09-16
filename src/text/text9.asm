@@ -1479,11 +1479,6 @@ TwineedleName: ; 58070 (16:4070)
 	text "Twineedle"
 	done
 
-DoubleAttackX30Description: ; 5807b (16:407b)
-	text "Flip 2 coins. This attack does 30"
-	line "damage times the number of heads."
-	done
-
 PoisonBeeName: ; 580c0 (16:40c0)
 	text "Poison Bee"
 	done

@@ -4806,7 +4806,7 @@ OmastarCard:
 	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx SpikeCannonName ; name
-	tx DoubleAttackX30Description ; description
+	tx DoubleAttackX20X10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_X ; category
@@ -6882,11 +6882,11 @@ MarowakLv26Card:
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 1 ; energies
 	tx BonemerangName ; name
-	tx DoubleAttackX30Description ; description
+	tx DoubleAttackX20X10Description ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_X ; category
-	dw MarowakBonemerangEffectCommands ; effect commands
+	dw DoubleAttackX20X10EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10211,11 +10211,11 @@ DragoniteLv41Card:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx SlamName ; name
-	tx DoubleAttackX40Description ; description
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_X ; category
-	dw DoubleAttackX40EffectCommands ; effect commands
+	db 70 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

@@ -259,11 +259,6 @@ DoubleAttackX20X10EffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX20X10_AIEffect
 	db  $00
 
-MarowakBonemerangEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX30_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, DoubleAttackX30_AIEffect
-	db  $00
-
 Heal20DamageEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageEffect
 	db  $00
@@ -757,11 +752,6 @@ GeodudeStoneBarrageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, StoneBarrage_AIEffect
 	db  $00
 
-PrimeapeFurySwipesEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PrimeapeFurySwipes_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, PrimeapeFurySwipes_AIEffect
-	db  $00
-
 PrimeapeTantrumEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TantrumEffect
 	db  $00
@@ -1141,11 +1131,6 @@ DragonDanceEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AttachEnergyFromHand_AttachEnergyEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, AttachEnergyFromHand_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, AttachEnergyFromHand_AISelectEffect
-	db  $00
-
-DoubleAttackX40EffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleAttackX40_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, DoubleAttackX40_AIEffect
 	db  $00
 
 MorphEffectCommands:

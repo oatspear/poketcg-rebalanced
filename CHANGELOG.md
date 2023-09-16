@@ -2,6 +2,11 @@
 
 ## Version 0.6.0
 
+### Fighting Changes
+
+#### Marowak Lv26
+- **Bonemerang**: damage changed from x30 per heads to x20 per heads and x10 per tails.
+
 ### Colorless Changes
 
 #### Dragonair

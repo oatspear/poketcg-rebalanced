@@ -24,25 +24,96 @@ DoubleDamage_DamageBoostEffect:
 ; Based on Coin Flips
 ; ------------------------------------------------------------------------------
 
+; outputs:
+;   a: amount of damage added
+;   [wCoinTossTotalNum]: number of flipped coins
+;   [wCoinTossNumHeads]: number of flipped heads
+;   [wCoinTossNumTails]: number of flipped tails
+Plus10DamageIfHeads_DamageBoostEffect:
+  ld a, 1  ; coin flips
+  ; fallthrough
 
-; flips 2 coins, 30 damage per heads
-DoubleAttackX30_MultiplierEffect:
-	ld hl, 30
+
+; input:
+;   a: number of coins to flip
+; outputs:
+;   a: amount of damage added
+;   [wCoinTossTotalNum]: number of flipped coins
+;   [wCoinTossNumHeads]: number of flipped heads
+;   [wCoinTossNumTails]: number of flipped tails
+Plus10DamagePerHeads_DamageBoostEffect:
+  ld hl, 10
+  call Plus10DamagePerHeads_TossCoins
+  jp AddToDamage
+
+
+; input:
+;   a: number of coins to flip
+;   hl: amount of damage to add per heads (display)
+; outputs:
+;   a: amount of bonus damage to add (heads x 10)
+;   [wCoinTossTotalNum]: number of flipped coins
+;   [wCoinTossNumHeads]: number of flipped heads
+;   [wCoinTossNumTails]: number of flipped tails
+; preserves: hl, bc
+Plus10DamagePerHeads_TossCoins:
+  ld e, a  ; store number of coins
+  call LoadTxRam3  ; preserves hl, de
+  ld a, e
+  ldtx de, DamageCheckIfHeadsPlusDamageText
+  call TossACoins
+  jp ATimes10
+
+
+; input:
+;   a: number of coins to flip
+; outputs:
+;   a: amount of damage added
+;   [wCoinTossTotalNum]: number of flipped coins
+;   [wCoinTossNumHeads]: number of flipped heads
+;   [wCoinTossNumTails]: number of flipped tails
+X10DamagePerHeads_MultiplierEffect:
+  ld hl, 10
+  call X10DamagePerHeads_TossCoins
+  jp SetDefiniteDamage
+
+
+; input:
+;   a: number of coins to flip
+;   hl: amount of damage per heads
+; outputs:
+;   a: amount of damage to set (heads x 10)
+;   [wCoinTossTotalNum]: number of flipped coins
+;   [wCoinTossNumHeads]: number of flipped heads
+;   [wCoinTossNumTails]: number of flipped tails
+; preserves: hl, bc
+X10DamagePerHeads_TossCoins:
+  ld e, a  ; store number of coins
+  call LoadTxRam3  ; preserves hl, de
+  ld a, e
+  ldtx de, DamageCheckIfHeadsXDamageText
+  call TossACoins
+  jp ATimes10
+
+
+
+;
+DoubleAttackX20X10_AIEffect:
+	ld a, (15 * 2)
+	lb de, 20, 40
+	jp SetExpectedAIDamage
+
+DoubleAttackX20X10_MultiplierEffect:
+	ld hl, 20
 	call LoadTxRam3
 	ldtx de, DamageCheckIfHeadsXDamageText
 	ld a, 2
 	call TossCoinATimes_BankB
-	ld e, a
-	add a
-	add e
+	; tails = 10, heads = 20
+	; result = (tails + 2 * heads) = coins + heads
+	add 2
 	call ATimes10
-	call SetDefiniteDamage
-	ret
-
-DoubleAttackX30_AIEffect:
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
+	jp SetDefiniteDamage
 
 
 Heads10BonusDamage_DamageBoostEffect:
@@ -84,6 +155,38 @@ VaporeonQuickAttack_DamageBoostEffect:
 	ld a, 20
 	jp AddToDamage
 
+
+;
+StoneBarrage_AIEffect: ; 2e04a (b:604a)
+	ld a, 10
+	lb de, 0, 100
+	jp SetExpectedAIDamage
+
+StoneBarrage_MultiplierEffect: ; 2e052 (b:6052)
+	xor a
+	ldh [hTemp_ffa0], a
+.loop_coin_toss
+	ldtx de, FlipUntilFailAppears10DamageForEachHeadsText
+	xor a
+	call TossCoinATimes_BankB
+	jr nc, .tails
+	ld hl, hTemp_ffa0
+	inc [hl] ; increase heads count
+	jr .loop_coin_toss
+
+.tails
+; store resulting damage
+	ldh a, [hTemp_ffa0]
+	ld l, a
+	ld h, 10
+	call HtimesL
+	ld de, wDamage
+	ld a, l
+	ld [de], a
+	inc de
+	ld a, h
+	ld [de], a
+	ret
 
 
 ; ------------------------------------------------------------------------------

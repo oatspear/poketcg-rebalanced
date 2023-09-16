@@ -2110,7 +2110,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer KakunaDescription                                  ; 0x0839
 	textpointer BeedrillName                                       ; 0x083a
 	textpointer TwineedleName                                      ; 0x083b
-	textpointer DoubleAttackX30Description                         ; 0x083c
 	textpointer PoisonBeeName                                      ; 0x083d
 	textpointer BeedrillDescription                                ; 0x083e
 	textpointer EkansName                                          ; 0x083f
@@ -2567,7 +2566,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThunderpunchDescription                            ; 0x09f2
 	textpointer ElectabuzzLv35Description                         ; 0x09f3
 	textpointer JolteonName                                        ; 0x09f4
-	textpointer DoubleAttackX20Description                         ; 0x09f5
 	textpointer StunNeedleName                                     ; 0x09f6
 	textpointer LightningName                                      ; 0x09f7
 	textpointer JolteonLv24Description                            ; 0x09f8
@@ -2942,7 +2940,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HealingWindName                                    ; 0x0b61
 	textpointer HealingWindDescription                             ; 0x0b62
 	textpointer DragoniteLv41Description                          ; 0x0b63
-	textpointer DoubleAttackX40Description                         ; 0x0b66
 	textpointer DragoniteDescription                               ; 0x0b67
 	textpointer PunishingSlapName
 	textpointer PunishingSlapDescription

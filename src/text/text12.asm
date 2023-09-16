@@ -588,11 +588,6 @@ DragoniteLv41Description: ; 632a2 (18:72a2)
 	line "flies. However, it is only a rumor."
 	done
 
-DoubleAttackX40Description: ; 6338c (18:738c)
-	text "Flip 2 coins. This attack does 40"
-	line "damage times the number of heads."
-	done
-
 DragoniteDescription: ; 633d1 (18:73d1)
 	text "An extremely rarely seen marine"
 	line "Pokémon. Its intelligence is said"

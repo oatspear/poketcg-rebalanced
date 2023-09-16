@@ -4424,52 +4424,6 @@ ReduceAttackBy10Effect:
 	call ApplySubstatus2ToDefendingCard
 	ret
 
-StoneBarrage_AIEffect: ; 2e04a (b:604a)
-	ld a, 10
-	lb de, 0, 100
-	jp SetExpectedAIDamage
-
-StoneBarrage_MultiplierEffect: ; 2e052 (b:6052)
-	xor a
-	ldh [hTemp_ffa0], a
-.loop_coin_toss
-	ldtx de, FlipUntilFailAppears10DamageForEachHeadsText
-	xor a
-	call TossCoinATimes_BankB
-	jr nc, .tails
-	ld hl, hTemp_ffa0
-	inc [hl] ; increase heads count
-	jr .loop_coin_toss
-
-.tails
-; store resulting damage
-	ldh a, [hTemp_ffa0]
-	ld l, a
-	ld h, 10
-	call HtimesL
-	ld de, wDamage
-	ld a, l
-	ld [de], a
-	inc de
-	ld a, h
-	ld [de], a
-	ret
-
-PrimeapeFurySwipes_AIEffect: ; 2e07b (b:607b)
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-PrimeapeFurySwipes_MultiplierEffect: ; 2e083 (b:6083)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 3
-	call TossCoinATimes_BankB
-	add a
-	call ATimes10
-	call SetDefiniteDamage
-	ret
 
 TantrumEffect: ; 2e099 (b:6099)
 	ldtx de, IfTailsYourPokemonBecomesConfusedText
@@ -4480,8 +4434,7 @@ TantrumEffect: ; 2e099 (b:6099)
 	ld [wLoadedAttackAnimation], a
 	call SwapTurn
 	call ConfusionEffect
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 
 AbsorbEffect: ; 2e0b3 (b:60b3)
@@ -4499,27 +4452,8 @@ AbsorbEffect: ; 2e0b3 (b:60b3)
 .rounded
 	ld e, l
 	ld d, h
-	call ApplyAndAnimateHPRecovery
-	ret
+	jp ApplyAndAnimateHPRecovery
 
-
-DoubleAttackX20X10_AIEffect: ; 2e4d6 (b:64d6)
-	ld a, (15 * 2)
-	lb de, 20, 40
-	jp SetExpectedAIDamage
-
-DoubleAttackX20X10_MultiplierEffect:
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	; tails = 10, heads = 20
-	; result = (tails + 2 * heads) = coins + heads
-	add 2
-	call ATimes10
-	call SetDefiniteDamage
-	ret
 
 ; returns carry if can't add Pokemon from deck
 CallForFriend_CheckDeckAndPlayArea: ; 2e100 (b:6100)
@@ -5818,23 +5752,6 @@ EeveeQuickAttack_DamageBoostEffect: ; 2e96a (b:596a)
 	call AddToDamage
 	ret
 
-
-DoubleAttackX40_AIEffect: ; 2eaf6 (b:6af6)
-	ld a, (40 * 2) / 2
-	lb de, 0, 80
-	jp SetExpectedAIDamage
-
-DoubleAttackX40_MultiplierEffect: ; 2eafe (b:6afe)
-	ld hl, 40
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	add a
-	add a
-	call ATimes10
-	call SetDefiniteDamage
-	ret
 
 LeekSlap_AIEffect: ; 2eb17 (b:6b17)
 	ld a, 30 / 2

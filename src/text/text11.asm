@@ -298,11 +298,6 @@ JolteonName: ; 5df54 (17:5f54)
 	text "Jolteon"
 	done
 
-DoubleAttackX20Description: ; 5df5d (17:5f5d)
-	text "Flip 2 coins. This attack does 20"
-	line "damage times the number of heads."
-	done
-
 StunNeedleName: ; 5dfa2 (17:5fa2)
 	text "Stun Needle"
 	done
