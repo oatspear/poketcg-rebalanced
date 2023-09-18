@@ -1069,9 +1069,10 @@ PoisonPaybackEffect:
 
 
 ShadowClawEffect:
-	call SelectedCards_Discard1FromHand
-	jp nc, Discard1RandomCardFromOpponentsHand
-	ret
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z  ; no card was chosen to discard
+	jp Discard1RandomCardFromOpponentsHand
 
 ; OptionalDiscardEnergy:
 ; 	ldh a, [hTemp_ffa0]

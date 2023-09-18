@@ -547,7 +547,8 @@ TradeEffectCommands:
 
 ShadowClawEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, OptionalDiscard_PlayerHandCardSelection
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, ShadowClawEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, SelectedCards_Discard1FromHand
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ShadowClawEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, ShadowClaw_AISelectEffect
 	db  $00
 
