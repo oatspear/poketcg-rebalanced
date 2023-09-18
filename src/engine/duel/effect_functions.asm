@@ -1196,7 +1196,7 @@ Ultravision_AddToHandEffect:
 Sprout_AddToHandEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
-	jr z, SelectedCardFromDeck_AddToHandEffect.done ; skip if no card was chosen
+	jp z, SyncShuffleDeck ; skip if no card was chosen
 	; fallthrough
 
 ; add selected card to the hand and show it on screen if
@@ -1207,13 +1207,11 @@ SelectedCardFromDeck_AddToHandEffect:
 	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	call IsPlayerTurn
-	jr c, .done
+	jp c, SyncShuffleDeck
 	ldh a, [hTemp_ffa0]
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
-.done
-	call SyncShuffleDeck
-	ret
+	jp SyncShuffleDeck
 
 
 ; Looks at the top 4 cards and allows the Player to choose a card.
