@@ -477,19 +477,6 @@ NoDamageOrEffectTextIDTable:
 	tx NoDamageOrEffectDueToTransparencyText ; NO_DAMAGE_OR_EFFECT_TRANSPARENCY
 	tx NoDamageOrEffectDueToNShieldText      ; NO_DAMAGE_OR_EFFECT_NSHIELD
 
-; return carry if turn holder has Mew and its Clairvoyance Pkmn Power is active
-IsClairvoyanceActive:
-	call IsToxicGasActive
-	ccf
-	ret nc
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz
-	ld a, MEW_LV15
-	call CountPokemonIDInPlayArea
-	ret
-
 ; returns carry if turn holder's card in location a is paralyzed, asleep, confused,
 ; and/or toxic gas in play, meaning that attack and/or pkmn power cannot be used
 CheckCannotUseDueToStatus_Anywhere:
@@ -571,6 +558,35 @@ IsToxicGasActive:
 	ld a, 1
 	scf
 	ret
+
+
+; return carry if turn holder has Mew and its Clairvoyance Pkmn Power is active
+IsClairvoyanceActive:
+	call IsToxicGasActive
+	ccf
+	ret nc
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	ret nz
+	ld a, MEW_LV15
+	jp CountPokemonIDInPlayArea
+
+
+; return carry if any duelist has Aerodactyl and its Prehistoric Power Pkmn Power is active
+IsPrehistoricPowerActive:
+	ld a, AERODACTYL
+	call CountPokemonIDInBothPlayAreas
+	ret nc
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	ret nz
+	call IsToxicGasActive
+	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
+	ccf
+	ret
+
 
 ; return, in a, the amount of times that the Pokemon card with a given ID is found in the
 ; play area of both duelists. Also return carry if the Pokemon card is at least found once.
@@ -707,19 +723,6 @@ CheckCantUseTrainerDueToHeadache:
 	scf
 	ret
 
-; return carry if any duelist has Aerodactyl and its Prehistoric Power Pkmn Power is active
-IsPrehistoricPowerActive:
-	ld a, AERODACTYL
-	call CountPokemonIDInBothPlayAreas
-	ret nc
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz
-	call IsToxicGasActive
-	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
-	ccf
-	ret
 
 ; clears some SUBSTATUS2 conditions from the turn holder's active Pokemon.
 ; more specifically, those conditions that reduce the damage from an attack
