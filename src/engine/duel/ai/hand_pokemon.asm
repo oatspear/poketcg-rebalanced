@@ -501,15 +501,10 @@ AIDecideSpecialEvolutions:
 
 ; if there's no Weezing, raise score
 .check_weezing
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	jr c, .lower_score
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	jr nz, .lower_score ; Poké Flute in play
 	ld a, 10
-	call AddToAIScore
-	ret
+	jp AddToAIScore
 
 ; if Dragonair is active, check its damage in HP
 ; if this result is >= 50,
@@ -593,12 +588,8 @@ AIDecidePlayLegendaryBirds:
 
 .check_weezing_and_snorlax
 	; checks for Weezing in both Play Areas
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	jr c, .subtract
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	jr nz, .subtract ; Poké Flute in play
 	; checks if player's active card is Snorlax
 	ld a, DUELVARS_ARENA_CARD
 	call GetNonTurnDuelistVariable
@@ -611,12 +602,11 @@ AIDecidePlayLegendaryBirds:
 
 ; add
 	ld a, 70
-	call AddToAIScore
-	ret
+	jp AddToAIScore
+
 .subtract
 	ld a, 100
-	call SubFromAIScore
-	ret
+	jp SubFromAIScore
 
 .moltres
 	; checks if there's enough cards in deck
@@ -628,10 +618,6 @@ AIDecidePlayLegendaryBirds:
 
 .zapdos
 	; checks for Weezing in both Play Areas
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	jr c, .subtract
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	jr nz, .subtract ; Poké Flute in play
 	ret

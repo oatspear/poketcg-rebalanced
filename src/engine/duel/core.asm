@@ -7057,11 +7057,7 @@ HandleEndOfTurnEvents:
 	ld [wDreamEaterDamageToHeal], a
 
 ; return if Pokémon Powers are disabled
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ret c
 
 ; check for Meowth's Lucky Tails Power

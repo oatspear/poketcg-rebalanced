@@ -167,12 +167,8 @@ AIProcessEnergyCards: ; 164fc (5:64fc)
 ; and there's Ivysaur in own Play Area,
 ; add to AI score
 .check_ivysaur
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	jr c, .check_if_active
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	jr nz, .check_if_active ; skip if Poké Flute in play
 	ld a, IVYSAUR
 	call CountPokemonIDInPlayArea
 	jr nc, .check_if_active

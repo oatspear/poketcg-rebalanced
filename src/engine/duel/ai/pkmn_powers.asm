@@ -22,13 +22,8 @@ HandleAIEnergyTrans:
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Ivysaur found in own Play Area
 
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ret c ; return if Weezing found in any Play Area
-
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz ; return if Poké Flute in play
 
 	ld a, [wAIEnergyTransRoutine]
 	cp AI_ENERGY_TRANS_RETREAT
@@ -376,14 +371,9 @@ AIEnergyTransTransferEnergyToBench:
 ;	- Curse.
 ; returns carry if turn ended.
 HandleAIPkmnPowers:
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ccf
 	ret nc ; return no carry if Weezing is in play
-
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz ; return no carry if Poké Flute in play
 
 	farcall AIChooseRandomlyNotToDoAction
 	ccf
@@ -982,13 +972,8 @@ HandleAIDualTypeFighting:
 
 ; handles AI logic for Cowardice
 HandleAICowardice:
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ret c ; return if there's Weezing in play
-
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz ; return if Poké Flute in play
 
 	farcall AIChooseRandomlyNotToDoAction
 	ret c ; randomly return
@@ -1239,12 +1224,8 @@ HandleAIDamageSwap:
 	ld a, ALAKAZAM
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Alakazam
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ret c ; return if there's Weezing in play
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz ; return if Poké Flute in play
 
 ; only take damage off certain cards in Arena
 	ld a, DUELVARS_ARENA_CARD
@@ -1407,13 +1388,8 @@ HandleAIRainDanceEnergy:
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Wartortle
 
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ret c ; return if there's Weezing in play
-
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz ; return if Poké Flute in play
 
 ; play all the energy cards that is needed.
 .loop
@@ -1433,13 +1409,8 @@ HandleAIFirestarterEnergy:
 	call CountPokemonIDInPlayArea
 	ret nc  ; no Charmeleon
 
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ret c  ; Weezing is in play
-
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz ; return if Poké Flute in play
 
 	farcall CreateEnergyCardListFromDiscardPile_OnlyFire
 	ret c  ; no Fire energy

@@ -109,12 +109,8 @@ AIDoTurn_LegendaryMoltres:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres ; skip if cards in deck <= 9
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	jr c, .skip_moltres ; skip if Weezing in play
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	jr nz, .skip_moltres ; skip if Poké Flute in play
 	ld a, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres ; skip if no MoltresLv37 in hand

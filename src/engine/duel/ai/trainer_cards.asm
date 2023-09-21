@@ -2113,13 +2113,8 @@ AIDecide_ProfessorOak:
 	ld [wce06], a
 
 .handle_wartortle
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	jr c, .check_hand
-
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	jr nz, .check_hand
 
 ; no Toxic Gas in Play Area
 	ld a, WARTORTLE
@@ -2405,7 +2400,7 @@ AIDecide_EnergyRetrieval:
 	; cp GO_GO_RAIN_DANCE_DECK_ID
 	; jr nz, .start
 
-	; call IsToxicGasActive
+	; call ArePokemonPowersDisabled
 	; jr c, .start
 	; ld a, WARTORTLE
 	; call CountPokemonIDInPlayArea

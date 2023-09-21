@@ -824,7 +824,7 @@ AIDecide_SuperEnergyRetrieval:
 	; ld a, [wOpponentDeckID]
 	; cp GO_GO_RAIN_DANCE_DECK_ID
 	; jr nz, .start
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	jr c, .start
 	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
