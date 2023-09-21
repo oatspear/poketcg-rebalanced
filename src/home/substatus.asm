@@ -801,22 +801,6 @@ IsRainDanceActive:
 	ccf
 	ret
 
-; return carry if card at [hTempCardIndex_ff98] is a water energy card.
-CheckRainDanceScenario:  ; unreferenced
-	ldh a, [hTempCardIndex_ff98]
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	cp TYPE_ENERGY_WATER
-	jr nz, .done
-	; ldh a, [hTempPlayAreaLocation_ff9d]
-	; call GetPlayAreaCardColor
-	; cp TYPE_PKMN_WATER
-	; jr nz, .done
-	scf
-	ret
-.done
-	or a
-	ret
 
 ; if the defending (non-turn) card's HP is 0 and the attacking (turn) card's HP
 ;  is not, the attacking card faints if it was affected by destiny bond
@@ -824,22 +808,23 @@ HandleDestinyBondSubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
 	call GetNonTurnDuelistVariable
 	cp SUBSTATUS1_DESTINY_BOND
-	jr z, .check_hp
-	ret
+	ret nz
 
-.check_hp
 	ld a, DUELVARS_ARENA_CARD
 	call GetNonTurnDuelistVariable
-	cp -1
+	cp $ff
 	ret z
+
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetNonTurnDuelistVariable
 	or a
 	ret nz
+
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
 	or a
 	ret z
+
 	ld [hl], 0
 	push hl
 	call DrawDuelMainScene
@@ -854,8 +839,8 @@ HandleDestinyBondSubstatus:
 	ld l, a
 	call LoadTxRam2
 	ldtx hl, KnockedOutDueToDestinyBondText
-	call DrawWideTextBox_WaitForInput
-	ret
+	jp DrawWideTextBox_WaitForInput
+
 
 ; when MACHAMP is damaged, if its Strikes Back is active, the
 ; attacking Pokemon (turn holder's arena Pokemon) takes 20 damage.
@@ -865,21 +850,26 @@ HandleStrikesBack_AfterDirectAttack:
 	ld a, [wTempNonTurnDuelistCardID]
 	cp MACHAMP
 	ret nz
+
 	ld a, [wLoadedAttackCategory]
 	and RESIDUAL
 	ret nz
+
 ; not a RESIDUAL attack
 	ld a, [wDealtDamage]
 	or a
 	ret z
+
 	call SwapTurn
 	call CheckCannotUseDueToStatus
 	call SwapTurn
 	ret c
+
 	ld hl, 20 ; damage to be dealt to attacker
 	call ApplyStrikesBack_AfterDirectAttack
 	call nc, WaitForWideTextBoxInput
 	ret
+
 
 ApplyStrikesBack_AfterDirectAttack:
 	push hl
@@ -912,6 +902,7 @@ ApplyStrikesBack_AfterDirectAttack:
 	scf
 	ret
 
+
 ; if the id of the arena card is WEEZING,
 ; clear the changed type of all arena and bench Pokémon
 ClearChangedTypesIfWeezing:
@@ -921,6 +912,7 @@ ClearChangedTypesIfWeezing:
 	ld a, e
 	cp WEEZING
 	ret nz
+
 	call SwapTurn
 	call .zero_changed_types
 	call SwapTurn

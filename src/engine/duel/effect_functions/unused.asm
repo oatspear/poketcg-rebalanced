@@ -1,4 +1,21 @@
+;
 
+; return carry if card at [hTempCardIndex_ff98] is a water energy card.
+CheckRainDanceScenario:  ; unreferenced
+	ldh a, [hTempCardIndex_ff98]
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_ENERGY_WATER
+	jr nz, .done
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+	; call GetPlayAreaCardColor
+	; cp TYPE_PKMN_WATER
+	; jr nz, .done
+	scf
+	ret
+.done
+	or a
+	ret
 
 
 ; input:
