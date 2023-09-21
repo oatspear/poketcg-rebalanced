@@ -76,7 +76,7 @@
 	const ATK_ANIM_TOXIC                  ; $47
 	const ATK_ANIM_CONFUSE_RAY            ; $48
 	const ATK_ANIM_73                     ; $49
-	const ATK_ANIM_SING                   ; $4a
+	const ATK_ANIM_HIT_PROTECT            ; $4a
 	const ATK_ANIM_LULLABY                ; $4b
 	const ATK_ANIM_SUPERSONIC             ; $4c
 	const ATK_ANIM_SUPERSONIC_HIT         ; $4d

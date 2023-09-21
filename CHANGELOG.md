@@ -4,6 +4,13 @@
 
 ### Water Changes
 
+#### Squirtle
+- Increased HP from 40 to 50.
+- **Withdraw**: removed.
+- **Bubble**: removed.
+- New attack: **Water Reserve** (C): add up to 2 Water Energy from deck to hand.
+- New attack: **Shell Press** (WC): 20 damage; reduce incoming damage by 10.
+
 #### Blastoise
 - **Hydro Pump**: base damage increased from 40 to 50.
 

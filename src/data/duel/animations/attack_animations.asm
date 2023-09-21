@@ -96,7 +96,7 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_Toxic               ; ATK_ANIM_TOXIC
 	dw AttackAnimation_ConfuseRay          ; ATK_ANIM_CONFUSE_RAY
 	dw AttackAnimation_ConfuseRay          ; ATK_ANIM_73
-	dw AttackAnimation_Sing                ; ATK_ANIM_SING
+	dw AttackAnimation_HitProtect          ; ATK_ANIM_HIT_PROTECT
 	dw AttackAnimation_Sing                ; ATK_ANIM_LULLABY
 	dw AttackAnimation_Supersonic          ; ATK_ANIM_SUPERSONIC
 	dw AttackAnimation_SupersonicHit       ; ATK_ANIM_SUPERSONIC_HIT
@@ -570,6 +570,14 @@ AttackAnimation_QuickAttack:
 	anim_opponent       DUEL_ANIM_HIT
 	anim_normal         DUEL_ANIM_SHAKE1
 	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
+	anim_end
+
+AttackAnimation_HitProtect:
+	anim_player         DUEL_ANIM_GLOW
+	anim_opponent       DUEL_ANIM_HIT
+	anim_normal         DUEL_ANIM_SHAKE1
+	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
+	anim_player         DUEL_ANIM_PROTECT
 	anim_end
 
 AttackAnimation_AgilityProtect:

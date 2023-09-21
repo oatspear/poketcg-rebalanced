@@ -207,12 +207,22 @@ HandlePlayerSelectionSupporterFromDeck:
 ; input:
 ;   a: TYPE_* constant of the card to be selected
 ; output:
-;   a: deck index of the selected card
-;   [hTempCardIndex_ff98]: deck index of the selected card
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card | $ff
 HandlePlayerSelectionCardTypeFromDeckToHand:
 	push af
 	call CreateDeckCardList
-; handle input
+	jr HandlePlayerSelectionCardTypeFromDeckListToHand.show_ui
+
+; Handles screen for the Player to choose a card of given type from a Deck list
+; input:
+;   a: TYPE_* constant of the card to be selected
+; output:
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card | $ff
+HandlePlayerSelectionCardTypeFromDeckListToHand:
+	push af
+.show_ui
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseCardToPlaceInHandText
 	ldtx de, DuelistDeckText

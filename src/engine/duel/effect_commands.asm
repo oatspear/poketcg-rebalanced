@@ -92,14 +92,14 @@ FlytrapEffectCommands:
 
 SproutEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Sprout_AddToHandEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCard_AddToHandFromDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Sprout_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Sprout_AISelectEffect
 	db  $00
 
 UltravisionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Ultravision_AddToHandEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCard_AddToHandFromDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Ultravision_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Ultravision_AISelectEffect
 	db  $00
@@ -582,6 +582,13 @@ EnergyConversionEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyConversion_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyConversion_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyConversion_AISelectEffect
+	db  $00
+
+WaterReserveEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCardList_AddToHandFromDeckEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, WaterReserve_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, WaterReserve_AISelectEffect
 	db  $00
 
 GatherToxinsEffectCommands:
@@ -1178,7 +1185,7 @@ Deal30ToAnyPokemonEffectCommands:
 
 LeadEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCards_AddToHandFromDeck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCard_AddToHandFromDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Lead_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Lead_AISelectEffect
 	db  $00
@@ -1281,7 +1288,7 @@ EnergyRetrievalEffectCommands:
 
 EnergySearchEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCards_AddToHandFromDeck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCard_AddToHandFromDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySearch_PlayerSelection
 	db  $00
 
@@ -1327,7 +1334,7 @@ ImposterProfessorOakEffectCommands:
 
 ComputerSearchEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCards_AddToHandFromDeck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCard_AddToHandFromDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ComputerSearch_PlayerSelection
 	db  $00
 
@@ -1413,7 +1420,7 @@ MaintenanceEffectCommands:
 
 PokeBallEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCards_AddToHandFromDeck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCard_AddToHandFromDeckEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PokeBall_PlayerSelection
 	db  $00
 

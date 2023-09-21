@@ -1586,3 +1586,14 @@ AfflictionDescription:
 	line "opponent's Pokémon that is affected"
 	line "with a Special Condition."
 	done
+
+WaterReserveName:
+	text "Water Reserve"
+	done
+
+WaterReserveDescription:
+	text "Search your deck for up to 2"
+	line "<WATER> Energy, reveal them, and put"
+	line "them in your hand."
+	line "Then, shuffle your deck."
+	done

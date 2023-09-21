@@ -3298,37 +3298,37 @@ SquirtleCard:
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db SQUIRTLE
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx WithdrawName ; name
-	tx ReduceDamageTakenBy20Description ; description
+	tx WaterReserveName ; name
+	tx WaterReserveDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw ReduceDamageTakenBy20EffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PROTECT ; animation
-
-	; attack 2
-	energy WATER, 1 ; energies
-	tx BubbleName ; name
-	tx MayInflictParalysisDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw WaterReserveEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_BUBBLES ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy WATER, 1, COLORLESS, 1 ; energies
+	tx ShellPressName ; name
+	tx ReduceDamageTakenBy10Description ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ReduceDamageTakenBy10EffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_HIT_PROTECT ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness

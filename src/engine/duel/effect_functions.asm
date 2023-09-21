@@ -756,7 +756,7 @@ Courier_SearchAndAddToHandEffect:
 .done
 	cp $ff
 	ret z
-	jp SelectedCardFromDeck_AddToHandEffect
+	jp AddDeckCardToHandAndShuffleEffect
 
 
 GarbageEater_HealEffect:
@@ -1177,42 +1177,15 @@ Sprout_PlayerSelectEffect:
 
 Sprout_AISelectEffect:
 	call CreateDeckCardList
-	ld hl, wDuelTempList
-.loop_deck
-	ld a, [hli]
+	ld b, TYPE_ENERGY_GRASS
+	call ChooseCardOfGivenType_AISelectEffect
 	ldh [hTemp_ffa0], a
 	cp $ff
-	ret z ; none found
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY_GRASS
-	jr z, .found
-	cp TYPE_PKMN_GRASS
-	jr nz, .loop_deck
-.found
+	ret nz  ; found
+	ld b, TYPE_PKMN_GRASS
+	call ChooseCardOfGivenType_AISelectEffect
+	ldh [hTemp_ffa0], a
 	ret
-
-; Adds the selected card to the turn holder's Hand.
-Ultravision_AddToHandEffect:
-Sprout_AddToHandEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	jp z, SyncShuffleDeck ; skip if no card was chosen
-	; fallthrough
-
-; add selected card to the hand and show it on screen if
-; it wasn't the Player who used the attack.
-; input:
-;   a: deck index of card to add from deck to hand
-SelectedCardFromDeck_AddToHandEffect:
-	call SearchCardInDeckAndSetToJustDrawn
-	call AddCardToHand
-	call IsPlayerTurn
-	jp c, SyncShuffleDeck
-	ldh a, [hTemp_ffa0]
-	ldtx hl, WasPlacedInTheHandText
-	bank1call DisplayCardDetailScreen
-	jp SyncShuffleDeck
 
 
 ; Looks at the top 4 cards and allows the Player to choose a card.
@@ -1244,6 +1217,60 @@ Ultravision_AISelectEffect:
 	ld a, [wDuelTempList]
 	ldh [hTemp_ffa0], a
 	ret
+
+
+WaterReserve_PlayerSelectEffect:
+	; ld b, 5
+	; call CreateDeckCardListTopNCards
+	call CreateDeckCardList
+; select the first card
+	ld a, TYPE_ENERGY_WATER
+	call HandlePlayerSelectionCardTypeFromDeckListToHand
+	ldh [hTempList], a
+	cp $ff
+	ret z  ; no cards or cancelled selection
+; remove the first card from the list
+	call RemoveCardFromDuelTempList
+; choose a second card
+	ld a, TYPE_ENERGY_WATER
+	call HandlePlayerSelectionCardTypeFromDeckListToHand
+	ldh [hTempList + 1], a
+	ret
+
+WaterReserve_AISelectEffect:
+	; ld b, 5
+	; call CreateDeckCardListTopNCards
+	call CreateDeckCardList
+	ld b, TYPE_ENERGY_WATER
+	call ChooseCardOfGivenType_AISelectEffect
+	ldh [hTempList], a
+	cp $ff
+	ret z
+	call RemoveCardFromDuelTempList  ; preserves bc
+	; ld b, TYPE_ENERGY_WATER
+	call ChooseCardOfGivenType_AISelectEffect
+	ldh [hTempList + 1], a
+	ret
+
+
+; input:
+;   [wDuelTempList]: list of cards to choose from
+;   b: TYPE_* constant of card to choose
+; output:
+;   a: deck index of the selected card
+ChooseCardOfGivenType_AISelectEffect:
+	ld hl, wDuelTempList
+.loop_cards
+	ld a, [hli]
+	cp $ff
+	ret z  ; no more cards
+	ld c, a
+	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
+	call GetCardType  ; preserves hl, bc
+	cp b
+	ld a, c
+	ret z  ; found
+	jr .loop_cards
 
 
 ; ------------------------------------------------------------------------------
@@ -6825,45 +6852,7 @@ EnergySlide_AISelectEffect:
 ; ------------------------------------------------------------------------------
 
 
-; Pokémon Powers do not use [hTemp_ffa0]
-; adds a card in [hAIEnergyTransEnergyCard] from the deck to the hand
-; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
-Synthesis_AddToHandEffect:
-	call SetUsedPokemonPowerThisTurn
-	ldh a, [hAIEnergyTransEnergyCard]
-	ldh [hTemp_ffa0], a
-	jr SelectedCards_AddToHandFromDeck
-
-
-; Pokémon Powers do not use [hTemp_ffa0]
-; adds a card in [hAIPkmnPowerEffectParam] from the deck to the hand
-; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
-StressPheromones_AddToHandEffect:
-	call SetUsedPokemonPowerThisTurn
-	ldh a, [hAIPkmnPowerEffectParam]
-	ldh [hTemp_ffa0], a
-	; jr SelectedCards_AddToHandFromDeck
-	; fallthrough
-
-
-SelectedCards_AddToHandFromDeck:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	jr z, .done ; skip if no card was chosen
-
-; add selected card to hand
-	call SearchCardInDeckAndSetToJustDrawn
-	call AddCardToHand
-	call IsPlayerTurn
-	jr c, .done
-; show on screen if it isn't the Player's turn
-	ldh a, [hTemp_ffa0]
-	ldtx hl, WasPlacedInTheHandText
-	bank1call DisplayCardDetailScreen
-.done
-	jp SyncShuffleDeck
-
-
+;
 ItemFinder_DiscardAddToHandEffect:
 SelectedCards_Discard1AndAdd1ToHandFromDeck:
 ; discard the first card in hTempList
@@ -6873,9 +6862,75 @@ SelectedCards_Discard1AndAdd1ToHandFromDeck:
 	ldh [hTempList], a
 	; ld a, $ff
 	; ldh [hTempList + 1], a
-	jr SelectedCards_AddToHandFromDeck
+	jr SelectedCard_AddToHandFromDeckEffect
 
 
+; Pokémon Powers do not use [hTemp_ffa0]
+; adds a card in [hAIEnergyTransEnergyCard] from the deck to the hand
+; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
+Synthesis_AddToHandEffect:
+	call SetUsedPokemonPowerThisTurn
+	ldh a, [hAIEnergyTransEnergyCard]
+	ldh [hTemp_ffa0], a
+	jr SelectedCard_AddToHandFromDeckEffect
+
+
+; Pokémon Powers do not use [hTemp_ffa0]
+; adds a card in [hAIPkmnPowerEffectParam] from the deck to the hand
+; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
+StressPheromones_AddToHandEffect:
+	call SetUsedPokemonPowerThisTurn
+	ldh a, [hAIPkmnPowerEffectParam]
+	ldh [hTemp_ffa0], a
+	; jr SelectedCard_AddToHandFromDeckEffect
+	; fallthrough
+
+
+; Adds the selected card to the turn holder's Hand.
+SelectedCard_AddToHandFromDeckEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	jp z, SyncShuffleDeck ; skip if no card was chosen
+	; fallthrough
+
+; add selected card to the hand and show it on screen if
+; it wasn't the Player who used the attack.
+; input:
+;   a: deck index of card to add from deck to hand
+AddDeckCardToHandAndShuffleEffect:
+	call AddDeckCardToHandEffect
+	jp SyncShuffleDeck
+
+; add selected card to the hand and show it on screen if
+; it wasn't the Player who used the attack.
+; input:
+;   a: deck index of card to add from deck to hand
+AddDeckCardToHandEffect:
+	call SearchCardInDeckAndSetToJustDrawn  ; preserves af, hl, bc, de
+	call AddCardToHand  ; preserves af, hl bc, de
+	push de
+	ld d, a
+	call IsPlayerTurn  ; preserves bc, de
+	ld a, d
+	pop de
+	ret c
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
+	ret
+
+
+; adds all the cards in hTempList to the turn holder's hand
+SelectedCardList_AddToHandFromDeckEffect:
+	ld hl, hTempList
+.loop_cards
+	ld a, [hli]
+	cp $ff
+	jp z, SyncShuffleDeck  ; done
+	call AddDeckCardToHandEffect
+	jr .loop_cards
+
+
+; FIXME card (singular), refactor the same as deck version above
 SelectedCards_AddToHandFromDiscardPile:
 ; add the first card in hTempList to the hand
 	ldh a, [hTempList]
