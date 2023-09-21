@@ -90,7 +90,7 @@ HandleDamageReductionExceptSubstatus2:
 	cp KAKUNA
 	jr z, .reduce_damage_by_20 ; Exoskeleton
 	cp KABUTO
-	jr z, .halve_damage2 ; kabuto armor
+	jr z, .halve_damage ; kabuto armor
 	ret
 
 .no_damage_from_basic
@@ -144,16 +144,6 @@ HandleDamageReductionExceptSubstatus2:
 	ld de, 0
 	ret
 
-.halve_damage2
-	sla d
-	rr e
-	bit 0, e
-	ret z
-	ld hl, -5
-	add hl, de
-	ld e, l
-	ld d, h
-	ret
 
 ; check for Invisible Wall, Kabuto Armor, NShield, or Transparency, in order to
 ; possibly reduce or make zero the damage at de.
@@ -161,12 +151,8 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ret c
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret z
 	ld a, [wTempPlayAreaLocation_cceb]
 	or a
 	call nz, HandleDamageReductionExceptSubstatus2.pkmn_power
@@ -193,12 +179,8 @@ HandleStrikesBack_AgainstDamagingAttack:
 	ld a, [wTempNonTurnDuelistCardID] ; ID of defending Pokemon
 	cp MACHAMP
 	ret nz
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ret c
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret z
 	ld a, [wLoadedAttackCategory] ; category of attack used
 	cp POKEMON_POWER
 	ret z
@@ -498,19 +480,31 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0:
 	and CNF_SLP_PRZ
 	ldtx hl, CannotUseDueToStatusText
 	scf
-	jr nz, .done ; return carry
+	ret nz  ; return carry
 .check_toxic_gas
+	call ArePokemonPowersDisabled
+	ret nc
+	ldtx hl, UnableToUsePkmnPowerText
+	ret
+
+
+; Check whether Toxic Gas (Weezing) or other Pokémon Power cancelling
+; effects are currently active.
+; outputs:
+;   a: 1 if Pokémon Powers cannot be used | 0
+;   carry: set if Pokémon Powers cannot be used
+ArePokemonPowersDisabled:
 	call IsToxicGasActive
-	jr c, .disabled
+	ld a, 1
+	ret c
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
+	and 1 << TURN_FLAG_PKMN_POWERS_DISABLED_F
 	ret z
+	ld a, 1
 	scf
-.disabled
-	ldtx hl, UnableToUsePkmnPowerText
-.done
 	ret
+
 
 ; Check whether Toxic Gas (Weezing) is found in either player's Active Spot,
 ; and whether it is Pokémon Power capable.
@@ -562,13 +556,9 @@ IsToxicGasActive:
 
 ; return carry if turn holder has Mew and its Clairvoyance Pkmn Power is active
 IsClairvoyanceActive:
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ccf
 	ret nc
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz
 	ld a, MEW_LV15
 	jp CountPokemonIDInPlayArea
 
@@ -578,11 +568,7 @@ IsPrehistoricPowerActive:
 	ld a, AERODACTYL
 	call CountPokemonIDInBothPlayAreas
 	ret nc
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
 	ccf
 	ret
@@ -685,12 +671,8 @@ GetLoadedCard1RetreatCost:
 	ld a, [wLoadedCard1RetreatCost] ; return regular retreat cost
 	ret
 .dodrio_found
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	jr c, .powers_disabled
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	jr nz, .powers_disabled
 	ld a, [wLoadedCard1RetreatCost]
 	sub c ; apply Retreat Aid for each Pkmn Power-capable Dodrio
 	ret nc
@@ -793,11 +775,7 @@ IsRainDanceActive:
 	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Pkmn Power-capable Wartortle found in turn holder's play area
-	ld a, DUELVARS_MISC_TURN_FLAGS
-	call GetTurnDuelistVariable
-	bit TURN_FLAG_PKMN_POWERS_DISABLED_F, a
-	ret nz
-	call IsToxicGasActive
+	call ArePokemonPowersDisabled
 	ccf
 	ret
 
