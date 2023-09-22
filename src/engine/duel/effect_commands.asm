@@ -944,10 +944,6 @@ ZapdosBigThunderEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, BigThunderEffect
 	db  $00
 
-MagnemiteMagneticStormEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MagneticStormEffect
-	db  $00
-
 NutritionSupportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NutritionSupport_AttachEnergyEffect
