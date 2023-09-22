@@ -5616,8 +5616,8 @@ Firestarter_OncePerTurnCheck:
 	call CreateEnergyCardListFromDiscardPile_OnlyFire
 	ret c  ; no energy
 
-;	ldh a, [hTempPlayAreaLocation_ff9d]
-;	ldh [hTemp_ffa0], a
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
 
 ;	ld a, [wAlreadyPlayedEnergyOrSupporter]
 ;	and USED_FIRESTARTER_THIS_TURN
@@ -5643,14 +5643,12 @@ Firestarter_AttachEnergyEffect:
 	ldtx hl, ChoosePokemonToAttachEnergyCardText
 	call DrawWideTextBox_WaitForInput
 ; choose a Pokemon in Play Area to attach card
-	bank1call HasAlivePokemonInBench
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
+	call HandlePlayerSelectionPokemonInBench
 	; ldh [hPlayAreaEffectTarget], a
 	ld e, a
 	call SerialSend8Bytes
+	ldh a, [hTemp_ffa0]
+	ldh [hTempPlayAreaLocation_ff9d], a
 	jr .attach
 
 .link_opp
@@ -5660,10 +5658,7 @@ Firestarter_AttachEnergyEffect:
 
 .attach
 ; flag Firestarter as being used
-	ldh a, [hTemp_ffa0]
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+	call SetUsedPokemonPowerThisTurn
 	; ld a, [wAlreadyPlayedEnergyOrSupporter]
 	; or USED_FIRESTARTER_THIS_TURN
 	; ld [wAlreadyPlayedEnergyOrSupporter], a
