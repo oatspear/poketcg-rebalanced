@@ -341,6 +341,11 @@ FirestarterEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Firestarter_AttachEnergyEffect
 	db  $00
 
+RainDanceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, RainDance_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Firestarter_AttachEnergyEffect
+	db  $00
+
 HelpingHandEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, HelpingHand_CheckUse
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HelpingHand_RemoveStatusEffect
@@ -355,10 +360,6 @@ RestEffectCommands:
 ; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SongOfRest_HealEffect
 ; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SongOfRest_PlayerSelectEffect
 ; 	db  $00
-
-RainDanceEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
-	db  $00
 
 HydroPumpEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HydroPumpEffect
@@ -959,16 +960,6 @@ EnergySpikeEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergySpike_AttachEnergyEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySpike_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySpike_AISelectEffect
-	db  $00
-
-JolteonDoubleKickEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, JolteonDoubleKick_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, JolteonDoubleKick_AIEffect
-	db  $00
-
-EeveeQuickAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EeveeQuickAttack_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, EeveeQuickAttack_AIEffect
 	db  $00
 
 ; SpearowMirrorMoveEffectCommands:

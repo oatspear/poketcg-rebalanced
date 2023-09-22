@@ -2490,7 +2490,7 @@ CharmeleonCard:
 	energy 0 ; energies
 	tx FirestarterName ; name
 	tx FirestarterDescription ; description
-	tx UniquePokemonPowerDescriptionCont ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw FirestarterEffectCommands ; effect commands

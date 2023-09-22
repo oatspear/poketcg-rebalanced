@@ -2,6 +2,11 @@
 
 ## Version 0.6.0
 
+### Fire Changes
+
+#### Charmeleon
+- **Firestarter**: can be used once per Pokémon per turn, rather than once per turn.
+
 ### Water Changes
 
 #### Squirtle

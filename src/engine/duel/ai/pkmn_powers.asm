@@ -1401,9 +1401,9 @@ HandleAIRainDanceEnergy:
 ; handles AI logic for attaching energy cards
 ; with the Firestarter Pokémon Power.
 HandleAIFirestarterEnergy:
-	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	and USED_FIRESTARTER_THIS_TURN
-	ret nz  ; Firestarter was used this turn
+	; ld a, [wAlreadyPlayedEnergyOrSupporter]
+	; and USED_FIRESTARTER_THIS_TURN
+	; ret nz  ; Firestarter was used this turn
 
 	ld a, CHARMELEON
 	call CountPokemonIDInPlayArea

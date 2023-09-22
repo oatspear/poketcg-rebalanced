@@ -127,31 +127,27 @@ CheckHandSizeLesserThanOpponents:
 
 ; return carry if no Basic Energy cards in Discard Pile
 CheckDiscardPileHasBasicEnergyCards:
-    call CreateEnergyCardListFromDiscardPile_OnlyBasic
-    ; call CreateEnergyCardListFromDiscardPile_AllEnergy
-    ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
-    ret
+	; call CreateEnergyCardListFromDiscardPile_AllEnergy
+  jp CreateEnergyCardListFromDiscardPile_OnlyBasic
 
 
 ; return carry if no Fire Energy cards in Discard Pile
 CheckDiscardPileHasFireEnergyCards:
-    call CreateEnergyCardListFromDiscardPile_OnlyFire
-    ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
-    ret
+  jp CreateEnergyCardListFromDiscardPile_OnlyFire
 
 
 ; return carry if no Pokémon cards in Discard Pile
 CheckDiscardPileHasPokemonCards:
-    call CreatePokemonCardListFromDiscardPile
-    ldtx hl, ThereAreNoPokemonInDiscardPileText
-    ret
+  call CreatePokemonCardListFromDiscardPile
+  ldtx hl, ThereAreNoPokemonInDiscardPileText
+  ret
 
 
 ; return carry if no Basic Pokémon cards in Discard Pile
 CheckDiscardPileHasBasicPokemonCards:
-    call CreateBasicPokemonCardListFromDiscardPile
-    ldtx hl, ThereAreNoPokemonInDiscardPileText
-    ret
+  call CreateBasicPokemonCardListFromDiscardPile
+  ldtx hl, ThereAreNoPokemonInDiscardPileText
+  ret
 
 
 

@@ -5607,34 +5607,25 @@ NutritionSupport_AttachEnergyEffect:
 	jp HealPlayAreaCardHP
 
 
+RainDance_OncePerTurnCheck:
 Firestarter_OncePerTurnCheck:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	and USED_PKMN_POWER_THIS_TURN
-	jr nz, .already_used
-
-	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	and USED_FIRESTARTER_THIS_TURN
-	jr nz, .already_used
-
+	call CheckPokemonPowerCanBeUsed
+	ret c  ; cannot be used
+	call CheckBenchIsNotEmpty
+	ret c  ; no bench
 	call CreateEnergyCardListFromDiscardPile_OnlyFire
-	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
-	ret c
+	ret c  ; no energy
 
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, EffectNoPokemonOnTheBenchText
-	cp 2
-	ret c ; return if no bench
+;	ldh a, [hTempPlayAreaLocation_ff9d]
+;	ldh [hTemp_ffa0], a
 
-	ldh a, [hTemp_ffa0]
-	jp CheckCannotUseDueToStatus_Anywhere
+;	ld a, [wAlreadyPlayedEnergyOrSupporter]
+;	and USED_FIRESTARTER_THIS_TURN
+;	jr nz, .already_used
 
-.already_used
-	ldtx hl, OnlyOncePerTurnText
-	scf
+;.already_used
+;	ldtx hl, OnlyOncePerTurnText
+;	scf
 	ret
 
 Firestarter_AttachEnergyEffect:
@@ -5673,9 +5664,9 @@ Firestarter_AttachEnergyEffect:
 	add DUELVARS_ARENA_CARD_FLAGS
 	call GetTurnDuelistVariable
 	set USED_PKMN_POWER_THIS_TURN_F, [hl]
-	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	or USED_FIRESTARTER_THIS_TURN
-	ld [wAlreadyPlayedEnergyOrSupporter], a
+	; ld a, [wAlreadyPlayedEnergyOrSupporter]
+	; or USED_FIRESTARTER_THIS_TURN
+	; ld [wAlreadyPlayedEnergyOrSupporter], a
 
 ; pick Fire Energy from Discard Pile
 	call CreateEnergyCardListFromDiscardPile_OnlyFire
@@ -5694,39 +5685,7 @@ Firestarter_AttachEnergyEffect:
 .done
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	call Func_2c10b
-	call ExchangeRNG
-	ret
-
-JolteonDoubleKick_AIEffect: ; 2e930 (b:6930)
-	ld a, 40 / 2
-	lb de, 0, 40
-	jp SetExpectedAIDamage
-
-JolteonDoubleKick_MultiplierEffect: ; 2e938 (b:6938)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	add a ; a = 2 * heads
-	call ATimes10
-	call SetDefiniteDamage
-	ret
-
-EeveeQuickAttack_AIEffect: ; 2e962 (b:5962)
-	ld a, (10 + 30) / 2
-	lb de, 10, 30
-	jp SetExpectedAIDamage
-
-EeveeQuickAttack_DamageBoostEffect: ; 2e96a (b:596a)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, 20
-	call AddToDamage
-	ret
+	jp ExchangeRNG
 
 
 LeekSlap_AIEffect: ; 2eb17 (b:6b17)

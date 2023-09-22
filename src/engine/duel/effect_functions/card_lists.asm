@@ -105,6 +105,7 @@ CreateEnergyCardListFromDiscardPile_AllEnergy:
 ; if (c == 0), double colorless energy cards are not included;
 ; otherwise, only energies of type c are allowed.
 ; returns carry if no energy cards were found.
+; also sets error message in hl if carry is set.
 CreateEnergyCardListFromDiscardPile:
 ; get number of cards in Discard Pile
 ; and have hl point to the end of the
@@ -161,7 +162,7 @@ CreateEnergyCardListFromDiscardPile:
 ; check if any energy card was found
 ; by checking whether the first byte
 ; in wDuelTempList is $ff.
-; if none were found, return carry.
+; if none were found, return carry and set error message.
 	ld a, [wDuelTempList]
 	cp $ff
 	jr z, .set_carry
@@ -169,6 +170,7 @@ CreateEnergyCardListFromDiscardPile:
 	ret
 
 .set_carry
+	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
 	scf
 	ret
 

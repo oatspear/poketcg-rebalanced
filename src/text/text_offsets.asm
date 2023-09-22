@@ -2324,7 +2324,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GrowlitheDescription                               ; 0x08f5
 	textpointer ArcanineName                                       ; 0x08f6
 	textpointer QuickAttackName                                    ; 0x08f7
-	textpointer QuickAttackDescription                             ; 0x08f8
 	textpointer Heads10BonusDamageDescription
 	textpointer DoubleDamageIfActiveThisTurnDescription
 	textpointer FlamesOfRageName                                   ; 0x08f9

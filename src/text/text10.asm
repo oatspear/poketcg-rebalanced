@@ -805,9 +805,9 @@ FirestarterName:
 	done
 
 FirestarterDescription:
-	text "You may attach a <FIRE> Energy from"
-	line "your Discard Pile to 1 of your"
-	line "Benched Pokémon."
+	text "Once during your turn, you may"
+	line "attach a <FIRE> Energy from your Discard"
+	line "Pile to 1 of your Benched Pokémon."
 	done
 
 FlameName: ; 59f42 (16:5f42)
@@ -914,11 +914,6 @@ ArcanineName: ; 5a552 (16:6552)
 
 QuickAttackName: ; 5a55c (16:655c)
 	text "Quick Attack"
-	done
-
-QuickAttackDescription: ; 5a56a (16:656a)
-	text "Flip a coin. If heads, this attack"
-	line "does 20 additional damage."
 	done
 
 Heads10BonusDamageDescription: ; 5a56a (16:656a)
