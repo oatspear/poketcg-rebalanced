@@ -1140,16 +1140,21 @@ BlastoiseName: ; 5b14e (16:714e)
 	text "Blastoise"
 	done
 
-RainDanceName: ; 5b159 (16:7159)
+RainDanceName:
 	text "Rain Dance"
 	done
 
-RainDanceDescription: ; 5b165 (16:7165)
-	text "You may attach 1 extra <WATER> Energy"
-	line "to 1 of your Pokémon each turn."
-	line "(This doesn't use up your 1 Energy"
-	line "card attachment for the turn.)"
+RainDanceDescription:
+	text "As often as you like during your"
+	line "turn, your may attach a <WATER> Energy"
+	line "card from your hand to 1 of"
+	line "your Pokémon."
 	done
+;	text "You may attach 1 extra <WATER> Energy"
+;	line "to 1 of your Pokémon each turn."
+;	line "(This doesn't use up your 1 Energy"
+;	line "card attachment for the turn.)"
+;	done
 
 AquaLauncherName:
 	text "Aqua Launcher"

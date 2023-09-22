@@ -16,6 +16,11 @@
 - New attack: **Water Reserve** (C): add up to 2 Water Energy from deck to hand.
 - New attack: **Shell Press** (WC): 20 damage; reduce incoming damage by 10.
 
+#### Wartortle
+- **Rain Dance**: can attach unlimited Water Energy per turn.
+- **Bite**: removed.
+- New attack: **Shell Press** (WC): 30 damage; reduce incoming damage by 10.
+
 #### Blastoise
 - **Hydro Pump**: base damage increased from 40 to 50.
 

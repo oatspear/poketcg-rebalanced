@@ -3357,10 +3357,10 @@ WartortleCard:
 	energy 0 ; energies
 	tx RainDanceName ; name
 	tx RainDanceDescription ; description
-	tx UniquePokemonPowerDescriptionCont ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw RainDanceEffectCommands ; effect commands
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -3368,18 +3368,18 @@ WartortleCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 2 ; energies
-	tx BiteName ; name
-	dw NONE ; description
+	energy WATER, 1, COLORLESS, 1 ; energies
+	tx ShellPressName ; name
+	tx ReduceDamageTakenBy10Description ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw ReduceDamageTakenBy10EffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db 10
+	db ATK_ANIM_HIT_PROTECT ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness

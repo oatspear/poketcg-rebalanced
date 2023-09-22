@@ -475,6 +475,18 @@ CreateHandCardListExcludeSelf:
 	ret
 
 
+; Just like CreateHandCardList, returns carry if there are no cards in hand,
+; and returns in a the number of cards in wDuelTempList.
+CreateHandCardList_OnlyWaterEnergy:
+	call CreateHandCardList
+	ret c  ; no cards
+	ld c, TYPE_ENERGY_WATER
+	call KeepOnlyCardTypeInCardList
+	call CountCardsInDuelTempList
+	cp 1
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Play Area Lists
 ; ------------------------------------------------------------------------------
@@ -635,6 +647,29 @@ RemoveCardTypeFromCardList:
 ; only advance de if the current card is not the given type
   cp c
   jr z, .loop
+  inc de
+  jr .loop
+
+
+; removes cards from wDuelTempList with types other than the type given in c
+; input:
+;   wDuelTempList: must be built
+;   c: TYPE_* constant
+KeepOnlyCardTypeInCardList:
+  ld hl, wDuelTempList
+  ld de, wDuelTempList
+.loop
+  ld a, [hli]
+  ld [de], a
+  cp $ff  ; terminating byte
+  ret z
+  push de
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	pop de
+; only advance de if the current card is of the given type
+  cp c
+  jr nz, .loop
   inc de
   jr .loop
 

@@ -714,6 +714,62 @@ INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 ; Pokémon Powers
 ; ------------------------------------------------------------------------------
 
+;
+RainDance_OncePerTurnCheck:
+	call CheckPokemonPowerCanBeUsed
+	ret c  ; cannot be used
+	call CreateHandCardList_OnlyWaterEnergy
+	ret c  ; no energy
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
+;
+RainDance_AttachEnergyEffect:
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_LINK_OPP
+	jr z, .link_opp
+	and DUELIST_TYPE_AI_OPP
+	jr z, .player
+
+; AI Pokémon selection logic is in HandleAIRainDanceEnergy
+	jr .attach
+
+.player
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	call DrawWideTextBox_WaitForInput
+; choose a Pokemon in Play Area to attach card
+	call HandlePlayerSelectionPokemonInPlayArea
+	ld e, a  ; set selected Pokémon
+	ldh [hTempPlayAreaLocation_ffa1], a
+	call SerialSend8Bytes
+	jr .attach
+
+.link_opp
+	call SerialRecv8Bytes
+	ld a, e  ; get selected Pokémon
+	ldh [hTempPlayAreaLocation_ffa1], a
+	; fallthrough
+
+.attach
+; restore [hTempPlayAreaLocation_ff9d] from [hTemp_ffa0]
+	ldh a, [hTemp_ffa0]
+	ldh [hTempPlayAreaLocation_ff9d], a
+; flag Rain Dance as being used (requires [hTempPlayAreaLocation_ff9d])
+	call SetUsedPokemonPowerThisTurn
+
+; pick Water Energy from Hand
+	call CreateHandCardList_OnlyWaterEnergy
+	ld a, [wDuelTempList]
+	ldh [hTemp_ffa0], a
+	call AttachEnergyFromHand_AttachEnergyEffect
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call Func_2c10b
+	jp ExchangeRNG
+
+
 ; Draw 1 card per turn.
 TradeEffect:
 	call SetUsedPokemonPowerThisTurn
@@ -4570,8 +4626,7 @@ CallForFriend_PutInPlayAreaEffect: ; 2e194 (b:6194)
 
 HardenEffect: ; 2e1f6 (b:61f6)
 	ld a, SUBSTATUS1_HARDEN
-	call ApplySubstatus1ToAttackingCard
-	ret
+	jp ApplySubstatus1ToAttackingCard
 
 Ram_SelectSwitchEffect: ; 2e1fc (b:61fc)
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -4623,8 +4678,7 @@ StretchKick_PlayerSelectEffect:
 	jr c, .loop_input
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 AssassinFlight_AISelectEffect:
 StretchKick_AISelectEffect:
@@ -4639,8 +4693,7 @@ StretchKick_BenchDamageEffect:
 	ld b, a
 	ld de, 20
 	call DealDamageToPlayAreaPokemon_RegularAnim
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 AssassinFlight_BenchDamageEffect:
 	call SwapTurn
@@ -4648,14 +4701,12 @@ AssassinFlight_BenchDamageEffect:
 	ld b, a
 	ld de, 40
 	call DealDamageToPlayAreaPokemon_RegularAnim
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 
-SandAttackEffect: ; 2e26b (b:626b)
+SandAttackEffect:
 	ld a, SUBSTATUS2_SAND_ATTACK
-	call ApplySubstatus2ToDefendingCard
-	ret
+	jp ApplySubstatus2ToDefendingCard
 
 
 Thunderpunch_AIEffect: ; 2e399 (b:6399)
@@ -4672,10 +4723,10 @@ Thunderpunch_ModifierEffect: ; 2e3a1 (b:63a1)
 	call AddToDamage
 	ret
 
-LightScreenEffect: ; 2e3ba (b:63ba)
+LightScreenEffect:
 	ld a, SUBSTATUS1_HALVE_DAMAGE
-	call ApplySubstatus1ToAttackingCard
-	ret
+	jp ApplySubstatus1ToAttackingCard
+
 
 ElectabuzzQuickAttack_AIEffect: ; 2e3c0 (b:63c0)
 	ld a, (10 + 30) / 2
@@ -4920,7 +4971,7 @@ Fly_Success50PercentEffect: ; 2e4fc (b:64fc)
 	ret
 
 
-Thunderpunch_RecoilEffect: ; 2e3b0 (b:63b0)
+Thunderpunch_RecoilEffect:
 	ldh a, [hTemp_ffa0]
 	or a
 	ret nz ; return if got heads
@@ -4928,13 +4979,12 @@ Thunderpunch_RecoilEffect: ; 2e3b0 (b:63b0)
 
 Recoil10Effect:
 	ld a, 10
-	call DealRecoilDamageToSelf
-	ret
+	jp DealRecoilDamageToSelf
 
 Recoil20Effect:
 	ld a, 20
-	call DealRecoilDamageToSelf
-	ret
+	jp DealRecoilDamageToSelf
+
 
 IceBreath_PlayerSelectEffect:
 Spark_PlayerSelectEffect: ; 2e539 (b:6539)
@@ -5478,7 +5528,6 @@ NutritionSupport_AttachEnergyEffect:
 	jp HealPlayAreaCardHP
 
 
-RainDance_OncePerTurnCheck:
 Firestarter_OncePerTurnCheck:
 	call CheckPokemonPowerCanBeUsed
 	ret c  ; cannot be used
@@ -5515,20 +5564,22 @@ Firestarter_AttachEnergyEffect:
 	call DrawWideTextBox_WaitForInput
 ; choose a Pokemon in Play Area to attach card
 	call HandlePlayerSelectionPokemonInBench
-	; ldh [hPlayAreaEffectTarget], a
-	ld e, a
+	ld e, a  ; set selected Pokémon
+	ldh [hTempPlayAreaLocation_ffa1], a
 	call SerialSend8Bytes
-	ldh a, [hTemp_ffa0]
-	ldh [hTempPlayAreaLocation_ff9d], a
 	jr .attach
 
 .link_opp
 	call SerialRecv8Bytes
-	ldh [hTempPlayAreaLocation_ff9d], a
+	ld a, e  ; get selected Pokémon
+	ldh [hTempPlayAreaLocation_ffa1], a
 	; fallthrough
 
 .attach
-; flag Firestarter as being used
+; restore [hTempPlayAreaLocation_ff9d] from [hTemp_ffa0]
+	ldh a, [hTemp_ffa0]
+	ldh [hTempPlayAreaLocation_ff9d], a
+; flag Firestarter as being used (requires [hTempPlayAreaLocation_ff9d])
 	call SetUsedPokemonPowerThisTurn
 	; ld a, [wAlreadyPlayedEnergyOrSupporter]
 	; or USED_FIRESTARTER_THIS_TURN
@@ -5538,7 +5589,7 @@ Firestarter_AttachEnergyEffect:
 	call CreateEnergyCardListFromDiscardPile_OnlyFire
 ;   a: deck index of discarded card to attach
 ;   e: CARD_LOCATION_* constant
-	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	or CARD_LOCATION_PLAY_AREA
 	ld e, a
 	ld a, [wDuelTempList]

@@ -769,9 +769,9 @@ UpdateSubstatusConditions_EndOfTurn:
 
 ; return carry if turn holder has Wartortle and its Rain Dance Pkmn Power is active
 IsRainDanceActive:
-	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	and USED_RAIN_DANCE_THIS_TURN
-	ret nz ; return if Rain Dance was already used this turn
+	; ld a, [wAlreadyPlayedEnergyOrSupporter]
+	; and USED_RAIN_DANCE_THIS_TURN
+	; ret nz ; return if Rain Dance was already used this turn
 	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Pkmn Power-capable Wartortle found in turn holder's play area

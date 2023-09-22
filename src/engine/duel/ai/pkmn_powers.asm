@@ -1374,15 +1374,10 @@ HandleAIDamageSwap:
 	ret
 
 ; handles AI logic for attaching energy cards
-; in Go Go Rain Dance deck.
 HandleAIRainDanceEnergy:
-	; ld a, [wOpponentDeckID]
-	; cp GO_GO_RAIN_DANCE_DECK_ID
-	; ret nz ; return if not Go Go Rain Dance deck
-
-	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	and USED_RAIN_DANCE_THIS_TURN
-	ret nz ; return if Rain Dance was used this turn
+	; ld a, [wAlreadyPlayedEnergyOrSupporter]
+	; and USED_RAIN_DANCE_THIS_TURN
+	; ret nz ; return if Rain Dance was used this turn
 
 	ld a, WARTORTLE
 	call CountPokemonIDInPlayArea
