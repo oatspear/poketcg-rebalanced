@@ -357,7 +357,7 @@ RestEffectCommands:
 ; 	db  $00
 
 RainDanceEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RainDanceEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	db  $00
 
 HydroPumpEffectCommands:

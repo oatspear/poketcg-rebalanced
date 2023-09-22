@@ -3,7 +3,6 @@
 ; ------------------------------------------------------------------------------
 
 TransparencyEffect:
-RainDanceEffect:
 Firegiver_InitialEffect:
 Quickfreeze_InitialEffect:
 PealOfThunder_InitialEffect:
