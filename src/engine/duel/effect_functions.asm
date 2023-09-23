@@ -1150,11 +1150,6 @@ OverwhelmEffect:
 	jp ParalysisEffect
 
 
-AquaTailEffect:
-	call GetNumAttachedWaterEnergy
-	ret
-
-
 ; ------------------------------------------------------------------------------
 ; Card Search
 ; ------------------------------------------------------------------------------
