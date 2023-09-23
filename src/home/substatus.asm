@@ -646,6 +646,71 @@ CountPokemonIDInPlayArea:
 	pop hl
 	ret
 
+
+; Similar to CountPokemonIDInPlayArea, but returns the PLAY_AREA_* location of
+; the first Pokémon Power capable Pokémon with the given ID in play.
+; If a Pokémon is Asleep, Confused, or Paralyzed (Power-incapable), it does not count.
+; If a Pokémon's Power has been used this turn, it does not count.
+; Returns $ff if no Pokémon is found.
+; input:
+;   a: Pokémon card ID to search
+; output:
+;   a: PLAY_AREA_* of the first Pokémon with given ID | $ff
+;   carry: set if a Pokémon is found
+GetFirstPokemonWithAvailablePower:
+	push hl
+	push de
+	push bc
+	ld [wTempPokemonID_ce7c], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a  ; loop counter
+	ld b, 0  ; use b as a 0-based index
+; optimize: assume that hl is already in DUELVARS
+.loop_play_area
+	ld a, DUELVARS_ARENA_CARD
+	add b
+	ld l, a
+	ld a, [hl]
+	cp $ff
+	jr z, .done
+; check if it is the right Pokémon
+	call GetCardIDFromDeckIndex
+	ld a, [wTempPokemonID_ce7c]
+	cp e
+	jr nz, .skip
+; check if the Pokémon is affected with a status condition
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	add b
+	ld l, a
+	ld a, [hl]
+	and CNF_SLP_PRZ
+	jr nz, .skip
+; check if this Pokémon's Power has been used
+	ld a, DUELVARS_ARENA_CARD_FLAGS
+	add b
+	ld l, a
+	ld a, [hl]
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .skip
+; found a valid Pokémon
+	ld a, b  ; get the PLAY_AREA_* offset
+	scf
+	jr .found
+.skip
+	inc b
+	dec c
+	jr nz, .loop_play_area
+	ld a, $ff
+.done
+	or a
+.found
+	pop bc
+	pop de
+	pop hl
+	ret
+
+
 ; return, in a, the retreat cost of the card in wLoadedCard1,
 ; adjusting for any Dodrio's Retreat Aid Pkmn Power that is active.
 GetLoadedCard1RetreatCost:
