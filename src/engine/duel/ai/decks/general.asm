@@ -72,7 +72,7 @@ IF DEBUG_MODE
 	call DrawWideTextBox_WaitForInput
 ENDC
 
-	farcall HandleAIDamageSwap
+	; farcall HandleAIDamageSwap
 IF DEBUG_MODE
 	ldtx hl, PinsirName
 	call DrawWideTextBox_WaitForInput
@@ -203,7 +203,7 @@ IF DEBUG_MODE
 ENDC
 
 ; handle Pkmn Powers again
-	farcall HandleAIDamageSwap
+	; farcall HandleAIDamageSwap
 IF DEBUG_MODE
 	ldtx hl, JolteonName
 	call DrawWideTextBox_WaitForInput
@@ -376,7 +376,7 @@ IF DEBUG_MODE
 	call DrawWideTextBox_WaitForInput
 ENDC
 
-	farcall HandleAIDamageSwap
+	; farcall HandleAIDamageSwap
 IF DEBUG_MODE
 	ldtx hl, OddishName
 	call DrawWideTextBox_WaitForInput

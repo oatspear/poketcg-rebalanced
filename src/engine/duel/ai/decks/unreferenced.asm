@@ -84,7 +84,7 @@ AIDoTurn_GeneralNoRetreat:
 	jp nc, .try_attack
 ; handle Pkmn Powers
 	farcall HandleAIRainDanceEnergy
-	farcall HandleAIDamageSwap
+	; farcall HandleAIDamageSwap
 	farcall HandleAIPkmnPowers
 	ret c ; return if turn ended
 	farcall HandleAICowardice
@@ -124,7 +124,7 @@ AIDoTurn_GeneralNoRetreat:
 ; play Pokemon from hand again
 	call AIDecidePlayPokemonCard
 ; handle Pkmn Powers again
-	farcall HandleAIDamageSwap
+	; farcall HandleAIDamageSwap
 	farcall HandleAIPkmnPowers
 	ret c ; return if turn ended
 	farcall HandleAIRainDanceEnergy
@@ -170,7 +170,7 @@ AIDoTurn_GeneralNoRetreat:
 	call AIProcessAndTryToPlayEnergy
 .skip_energy_attach_2
 	call AIDecidePlayPokemonCard
-	farcall HandleAIDamageSwap
+	; farcall HandleAIDamageSwap
 	farcall HandleAIPkmnPowers
 	ret c ; return if turn ended
 	farcall HandleAIRainDanceEnergy
