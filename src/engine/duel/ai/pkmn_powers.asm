@@ -267,7 +267,7 @@ AIEnergyTransTransferEnergyToBench:
 	add b
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff9f], a
-	ld [wAIIvysaurDeckIndex], a
+	ld [wAIPokemonPowerDeckIndex], a
 	call GetCardIDFromDeckIndex
 	ld a, e
 	cp IVYSAUR
@@ -284,7 +284,7 @@ AIEnergyTransTransferEnergyToBench:
 .use_pkmn_power
 	ld a, b
 	ldh [hTemp_ffa0], a
-	ld [wAIIvysaurPlayAreaLocation], a
+	ld [wAIPokemonPowerPlayAreaLocation], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
 	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
@@ -294,7 +294,7 @@ AIEnergyTransTransferEnergyToBench:
 .loop_energy
 	xor a
 	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, [wAIIvysaurPlayAreaLocation]
+	ld a, [wAIPokemonPowerPlayAreaLocation]
 	ldh [hTemp_ffa0], a
 
 	; returns when Arena card has no Grass energy cards attached.
@@ -344,7 +344,7 @@ AIEnergyTransTransferEnergyToBench:
 	ld d, 30
 	call AIDelayFrames_D
 
-	ld a, [wAIIvysaurDeckIndex]
+	ld a, [wAIPokemonPowerDeckIndex]
 	ldh [hTempCardIndex_ff9f], a
 	ld d, a
 	ld e, FIRST_ATTACK_OR_PKMN_POWER
@@ -407,6 +407,7 @@ HandleAIPkmnPowers:
 	ld d, a
 	ld a, c
 	ldh [hTempPlayAreaLocation_ff9d], a
+	ld [wAIPokemonPowerPlayAreaLocation], a
 	ld e, FIRST_ATTACK_OR_PKMN_POWER
 	call CopyAttackDataAndDamage_FromDeckIndex
 	ld a, [wLoadedAttackCategory]
@@ -424,6 +425,7 @@ HandleAIPkmnPowers:
 ; TryExecuteEffectCommandFunction was successful,
 ; so check what Pkmn Power this is through card's ID.
 	pop af
+	ld [wAIPokemonPowerDeckIndex], a
 	call GetCardIDFromDeckIndex
 	ld a, e
 	push bc
@@ -673,22 +675,13 @@ HandleAISynthesis:
 
 ; if any of the energy cards in deck is useful store it and use power
 	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
-	jr nc, .use_pkmn_power
-
-; otherwise pick the first energy in the list
-	ld a, [wDuelTempList]
-
-.use_pkmn_power
 	ldh [hAIEnergyTransEnergyCard], a
-	ld a, [wAITempVars]
-	ldh [hTempCardIndex_ff9f], a
-	ld a, OPPACTION_USE_PKMN_POWER
-	bank1call AIMakeDecision
-	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
-	bank1call AIMakeDecision
-	ld a, OPPACTION_DUEL_MAIN_SCENE
-	bank1call AIMakeDecision
-	ret
+	jp nc, HandleAIDecideToUsePokemonPower
+	
+	; otherwise pick the first energy in the list
+	ld a, [wDuelTempList]
+	ldh [hAIEnergyTransEnergyCard], a
+	jp HandleAIDecideToUsePokemonPower
 
 
 ; checks whether AI uses Shift.
@@ -779,108 +772,12 @@ HandleAIShift:
 	or a
 	ret
 
-; checks whether AI uses Peek.
-; input:
-;	c = Play Area location (PLAY_AREA_*) of Mankey.
-HandleAIPeek:
-	ld a, c
-	ldh [hTemp_ffa0], a
-	ld a, 50
-	call Random
-	cp 3
-	ret nc ; return 47 out of 50 times
-
-; choose what to use Peek on at random
-	ld a, 3
-	call Random
-	or a
-	jr z, .check_ai_prizes
-	cp 2
-	jr c, .check_player_hand
-
-; check Player's Deck
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetNonTurnDuelistVariable
-	cp DECK_SIZE - 1
-	ret nc ; return if Player has one or no cards in Deck
-	ld a, AI_PEEK_TARGET_DECK
-	jr .use_peek
-
-.check_ai_prizes
-	ld a, DUELVARS_PRIZES
-	call GetTurnDuelistVariable
-	ld hl, wAIPeekedPrizes
-	and [hl]
-	ld [hl], a
-	or a
-	ret z ; return if no prizes
-
-	ld c, a
-	ld b, $1
-	ld d, 0
-.loop_prizes
-	ld a, c
-	and b
-	jr nz, .found_prize
-	sla b
-	inc d
-	jr .loop_prizes
-.found_prize
-; remove this prize's flag from the prize list
-; and use Peek on first one in list (lowest bit set)
-	ld a, c
-	sub b
-	ld [hl], a
-	ld a, AI_PEEK_TARGET_PRIZE
-	add d
-	jr .use_peek
-
-.check_player_hand
-	call SwapTurn
-	call CreateHandCardList
-	call SwapTurn
-	or a
-	ret z ; return if no cards in Hand
-; shuffle list and pick the first entry to Peek
-	ld hl, wDuelTempList
-	call CountCardsInDuelTempList
-	call ShuffleCards
-	ld a, [wDuelTempList]
-	or AI_PEEK_TARGET_HAND
-
-.use_peek
-	push af
-	ld a, [wAITempVars]
-	ldh [hTempCardIndex_ff9f], a
-	ld a, OPPACTION_USE_PKMN_POWER
-	bank1call AIMakeDecision
-	pop af
-	ldh [hAIPkmnPowerEffectParam], a
-	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
-	bank1call AIMakeDecision
-	ld a, OPPACTION_DUEL_MAIN_SCENE
-	bank1call AIMakeDecision
-	ret
 
 ; checks whether AI uses Curse.
-; input:
-;	c = Play Area location (PLAY_AREA_*) of Haunter.
 HandleAICurse:
-	ld a, c
-	ldh [hTemp_ffa0], a
-
 	farcall DealTargetedDamage_AISelectEffect
-
 ; card in Play Area with lowest HP remaining was found.
-	ld a, [wAITempVars]
-	ldh [hTempCardIndex_ff9f], a
-	ld a, OPPACTION_USE_PKMN_POWER
-	bank1call AIMakeDecision
-	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
-	bank1call AIMakeDecision
-	ld a, OPPACTION_DUEL_MAIN_SCENE
-	bank1call AIMakeDecision
-	ret
+	jp HandleAIDecideToUsePokemonPower
 
 
 ; EFFECTCMDTYPE_INITIAL_EFFECT_2 has already been executed, so the AI knows
@@ -905,21 +802,14 @@ HandleAITrade:
 	jr c, .loop_hand  ; skip Pokémon cards
 	cp TYPE_ENERGY_DOUBLE_COLORLESS
 	jr nc, .loop_hand  ; skip Special Energy and Trainer cards
-	; use power
-	; fallthrough
+; use power
+	jp HandleAIDecideToUsePokemonPower
+
 
 ; EFFECTCMDTYPE_INITIAL_EFFECT_2 has already been executed, so the AI knows
 ; that there are Water Energies to retrieve.
 HandleAIAbsorbWater:
-	ld a, [wAITempVars]
-	ldh [hTempCardIndex_ff9f], a
-	ld a, OPPACTION_USE_PKMN_POWER
-	bank1call AIMakeDecision
-	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
-	bank1call AIMakeDecision
-	ld a, OPPACTION_DUEL_MAIN_SCENE
-	bank1call AIMakeDecision
-	ret
+	jp HandleAIDecideToUsePokemonPower
 
 
 HandleAIDualTypeFighting:
@@ -949,39 +839,29 @@ HandleAIDualTypeFighting:
 	call GetArenaCardResistance
 	call SwapTurn
 	cp WR_FIGHTING
-	jr z, .use_pkmn_power  ; change type if resistant to Fighting
-	ret
+	ret nz
+	jp HandleAIDecideToUsePokemonPower  ; change type if resistant to Fighting
 
 .other_color
 	ld a, [wAIDefendingPokemonWeakness]
 	cp WR_FIGHTING
-	jr z, .use_pkmn_power  ; change type if weak to Fighting
-	ret
-
-.use_pkmn_power
-	ld a, [wAITempVars]
-	ldh [hTempCardIndex_ff9f], a
-	ld a, OPPACTION_USE_PKMN_POWER
-	bank1call AIMakeDecision
-	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
-	bank1call AIMakeDecision
-	ld a, OPPACTION_DUEL_MAIN_SCENE
-	bank1call AIMakeDecision
-	ret
+	ret nz
+; change type if weak to Fighting
+	jp HandleAIDecideToUsePokemonPower
 
 
 ; handles AI logic for Cowardice
 HandleAICowardice:
 	call ArePokemonPowersDisabled
-	ret c ; return if there's Weezing in play
+	ret c  ; return if there's Weezing in play
 
 	farcall AIChooseRandomlyNotToDoAction
-	ret c ; randomly return
+	ret c  ; randomly return
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	cp 1
-	ret z ; return if only one Pokemon in Play Area
+	ret z  ; return if only one Pokemon in Play Area
 
 	ld b, a
 	ld c, PLAY_AREA_ARENA
@@ -1028,7 +908,7 @@ HandleAICowardice:
 ; return carry if Pkmn Power was used.
 ; input:
 ;	c = Play Area location (PLAY_AREA_*) of Farfetch'd.
-.CheckWhetherToUseCowardice ; 22671 (8:6671)
+.CheckWhetherToUseCowardice
 	ld a, c
 	ldh [hTemp_ffa0], a
 	ld e, a
@@ -1211,37 +1091,58 @@ HandleAIProphecy:
 
 ; handles AI logic for attaching energy cards
 HandleAIRainDanceEnergy:
+	call ArePokemonPowersDisabled
+	ret c  ; Pokémon Powers are disabled
+
 	; ld a, [wAlreadyPlayedEnergyOrSupporter]
 	; and USED_RAIN_DANCE_THIS_TURN
-	; ret nz ; return if Rain Dance was used this turn
+	; ret nz  ; Rain Dance was used this turn
 
 	ld a, WARTORTLE
-	call CountPokemonIDInPlayArea
-	ret nc ; return if no Wartortle
+	call GetFirstPokemonWithAvailablePower
+	ret nc  ; no Power-capable Pokémon
 
-	call ArePokemonPowersDisabled
-	ret c ; return if there's Weezing in play
+; store the Pokémon's Play Area location and deck index
+	ld [wAIPokemonPowerPlayAreaLocation], a
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	ld [wAIPokemonPowerDeckIndex], a
 
-; play all the energy cards that is needed.
-	ret
+	farcall CreateHandCardList_OnlyWaterEnergy
+	ret c  ; no Energy
+
+	farcall AIProcessButDontPlayEnergy_SkipEvolution
+	ret nc  ; no energy card attachment is needed
+
+; use Pokémon Power
+; got the target card location in [hTempPlayAreaLocation_ff9d]
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jr HandleAIDecideToUsePokemonPower
 
 
 ; handles AI logic for attaching energy cards
 ; with the Firestarter Pokémon Power.
 HandleAIFirestarterEnergy:
+	call ArePokemonPowersDisabled
+	ret c  ; Pokémon Powers are disabled
+
 	; ld a, [wAlreadyPlayedEnergyOrSupporter]
 	; and USED_FIRESTARTER_THIS_TURN
 	; ret nz  ; Firestarter was used this turn
 
 	ld a, CHARMELEON
-	call CountPokemonIDInPlayArea
-	ret nc  ; no Charmeleon
+	call GetFirstPokemonWithAvailablePower
+	ret nc  ; no Power-capable Pokémon
 
-	call ArePokemonPowersDisabled
-	ret c  ; Weezing is in play
+; store the Pokémon's Play Area location and deck index
+	ld [wAIPokemonPowerPlayAreaLocation], a
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	ld [wAIPokemonPowerDeckIndex], a
 
 	farcall CreateEnergyCardListFromDiscardPile_OnlyFire
-	ret c  ; no Fire energy
+	ret c  ; no Energy
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -1250,35 +1151,27 @@ HandleAIFirestarterEnergy:
 
 	farcall AIProcessButDontPlayEnergy_SkipEvolutionAndArena
 	ret nc  ; no energy card attachment is needed
+
+; use Pokémon Power
 ; got the Bench card location in [hTempPlayAreaLocation_ff9d]
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
 
-; look for Charmeleon in Play Area to use its PKMN Power.
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	dec a
-	ld b, a
-.loop_play_area
-	ld a, DUELVARS_ARENA_CARD
-	add b
-	call GetTurnDuelistVariable
+	; jr HandleAIDecideToUsePokemonPower
+	; fallthrough
+
+
+; this should only be called after all necessary parameters are set
+; this sets [hTempCardIndex_ff9f] and [hTemp_ffa0]
+; other parameters should be initialized elsewhere
+; input:
+;   [wAIPokemonPowerDeckIndex]: deck index of the Pokémon using the Power
+;   [wAIPokemonPowerPlayAreaLocation]: PLAY_AREA_* of the Pokémon using the Power
+HandleAIDecideToUsePokemonPower:
+	ld a, [wAIPokemonPowerDeckIndex]
 	ldh [hTempCardIndex_ff9f], a
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp CHARMELEON
-	jr z, .use_pkmn_power
-
-	ld a, b
-	or a
-	ret z ; return when Play Area loop is ended
-
-	dec b
-	jr .loop_play_area
-
-.use_pkmn_power
-	ld a, b
+	ld a, [wAIPokemonPowerPlayAreaLocation]
 	ldh [hTemp_ffa0], a
-; got deck index of Charmeleon in [hTempCardIndex_ff9f]
-; got play area location of Charmeleon in [hTemp_ffa0]
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
 ; execute the EFFECTCMDTYPE_BEFORE_DAMAGE command of the used Pokemon Power

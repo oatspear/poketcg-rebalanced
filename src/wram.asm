@@ -1259,11 +1259,11 @@ wAIAttackIsNonDamaging:: ; ce02
 wAlreadyRetreatedThisTurn:: ; ce03
 	ds $1
 
-; used by AI to store information of Ivysaur
-; while handling Energy Trans logic.
-wAIIvysaurDeckIndex:: ; ce04
+; used by AI to store information of Ivysaur, Charmeleon, Wartortle
+; while handling Energy Trans, Firestarter, Rain Dance logic.
+wAIPokemonPowerDeckIndex:: ; ce04
 	ds $1
-wAIIvysaurPlayAreaLocation:: ; ce05
+wAIPokemonPowerPlayAreaLocation:: ; ce05
 	ds $1
 
 wce06:: ; ce06
