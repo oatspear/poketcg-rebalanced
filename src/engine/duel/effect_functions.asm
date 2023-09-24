@@ -5582,11 +5582,11 @@ Firestarter_AttachEnergyEffect:
 
 ; pick Fire Energy from Discard Pile
 	call CreateEnergyCardListFromDiscardPile_OnlyFire
-;   a: deck index of discarded card to attach
-;   e: CARD_LOCATION_* constant
+; input e: CARD_LOCATION_* constant
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	or CARD_LOCATION_PLAY_AREA
 	ld e, a
+; input a: deck index of discarded card to attach
 	ld a, [wDuelTempList]
 	call Helper_AttachCardFromDiscardPile
 
