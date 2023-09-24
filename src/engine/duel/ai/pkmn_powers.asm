@@ -1068,16 +1068,7 @@ HandleAIProphecy:
 	ldh [hTempRetreatCostCards + 1], a
 	ld a, [wce1c]
 	ldh [hTempRetreatCostCards + 2], a
-; setting [hTempCardIndex_ff9f] is done before
-	; ld a, [wAITempVars]
-	; ldh [hTempCardIndex_ff9f], a
-	ld a, OPPACTION_USE_PKMN_POWER
-	bank1call AIMakeDecision
-	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
-	bank1call AIMakeDecision
-	ld a, OPPACTION_DUEL_MAIN_SCENE
-	bank1call AIMakeDecision
-	ret
+	jp HandleAIDecideToUsePokemonPower
 
 .GetCardType
 	push bc
