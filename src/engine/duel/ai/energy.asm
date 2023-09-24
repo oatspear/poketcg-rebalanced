@@ -1,10 +1,13 @@
 ; processes AI energy card playing logic
 ; with AI_ENERGY_FLAG_DONT_PLAY flag on
+; with only this flag, this always uses the list of energy cards in hand
+; unreferenced
 AIProcessButDontPlayEnergy:
 	ld a, AI_ENERGY_FLAG_DONT_PLAY
 	ld [wAIEnergyAttachLogicFlags], a
 	call BackupPlayAreaAIScore
-	jr AIProcessAndTryToPlayEnergy.has_logic_flags
+	; jr AIProcessAndTryToPlayEnergy.has_logic_flags
+	jr AIProcessEnergyCards
 
 ; have AI choose an energy card to play, but do not play it.
 ; does not consider whether the cards have evolutions to be played.
