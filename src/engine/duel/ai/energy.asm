@@ -1,55 +1,34 @@
 ; processes AI energy card playing logic
 ; with AI_ENERGY_FLAG_DONT_PLAY flag on
-; unreferenced
-Func_16488:
+AIProcessButDontPlayEnergy:
 	ld a, AI_ENERGY_FLAG_DONT_PLAY
 	ld [wAIEnergyAttachLogicFlags], a
-	ld de, wTempPlayAreaAIScore
-	ld hl, wPlayAreaAIScore
-	ld b, MAX_PLAY_AREA_POKEMON
-.loop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .loop
-	ld a, [wAIScore]
-	ld [de], a
+	call BackupPlayAreaAIScore
 	jr AIProcessAndTryToPlayEnergy.has_logic_flags
 
 ; have AI choose an energy card to play, but do not play it.
 ; does not consider whether the cards have evolutions to be played.
 ; return carry if an energy card is chosen to use in any Play Area card,
 ; and if so, return its Play Area location in hTempPlayAreaLocation_ff9d.
-AIProcessButDontPlayEnergy_SkipEvolution: ; 164a1 (5:64a1)
+AIProcessButDontPlayEnergy_SkipEvolution:
 	ld a, AI_ENERGY_FLAG_DONT_PLAY | AI_ENERGY_FLAG_SKIP_EVOLUTION
 	ld [wAIEnergyAttachLogicFlags], a
-
-; backup wPlayAreaAIScore in wTempPlayAreaAIScore.
-	ld de, wTempPlayAreaAIScore
-	ld hl, wPlayAreaAIScore
-	ld b, MAX_PLAY_AREA_POKEMON
-.loop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .loop
-
-	ld a, [wAIScore]
-	ld [de], a
-
+	call BackupPlayAreaAIScore
 	jr AIProcessEnergyCards
 
 ; have AI choose an energy card to play, but do not play it.
 ; does not consider whether the cards have evolutions to be played.
 ; return carry if an energy card is chosen to use in any Bench card,
 ; and if so, return its Play Area location in hTempPlayAreaLocation_ff9d.
-AIProcessButDontPlayEnergy_SkipEvolutionAndArena: ; 164ba (5:64ba)
+AIProcessButDontPlayEnergy_SkipEvolutionAndArena:
 	ld a, AI_ENERGY_FLAG_DONT_PLAY | AI_ENERGY_FLAG_SKIP_EVOLUTION | AI_ENERGY_FLAG_SKIP_ARENA_CARD
 	ld [wAIEnergyAttachLogicFlags], a
+	call BackupPlayAreaAIScore
+	jr AIProcessEnergyCards
+
 
 ; backup wPlayAreaAIScore in wTempPlayAreaAIScore.
+BackupPlayAreaAIScore:
 	ld de, wTempPlayAreaAIScore
 	ld hl, wPlayAreaAIScore
 	ld b, MAX_PLAY_AREA_POKEMON
@@ -62,13 +41,12 @@ AIProcessButDontPlayEnergy_SkipEvolutionAndArena: ; 164ba (5:64ba)
 
 	ld a, [wAIScore]
 	ld [de], a
+	ret
 
-	jr AIProcessEnergyCards
 
 ; copies wTempPlayAreaAIScore to wPlayAreaAIScore
 ; and loads wAIScore with value in wTempAIScore.
-; identical to RetrievePlayAreaAIScoreFromBackup2.
-RetrievePlayAreaAIScoreFromBackup1: ; 164d3 (5:64d3)
+RetrievePlayAreaAIScoreFromBackup:
 	push af
 	ld de, wPlayAreaAIScore
 	ld hl, wTempPlayAreaAIScore
@@ -98,7 +76,7 @@ AIProcessAndTryToPlayEnergy: ; 164e8 (5:64e8)
 	ld a, [wAIEnergyAttachLogicFlags]
 	or a
 	jr z, .exit
-	jp RetrievePlayAreaAIScoreFromBackup1
+	jp RetrievePlayAreaAIScoreFromBackup
 .exit
 	or a
 	ret
@@ -373,7 +351,7 @@ AIProcessEnergyCards: ; 164fc (5:64fc)
 	or a
 	jr z, .play_card
 	scf
-	jp RetrievePlayAreaAIScoreFromBackup1
+	jp RetrievePlayAreaAIScoreFromBackup
 
 .play_card
 	call CreateEnergyCardListFromHand
@@ -383,7 +361,7 @@ AIProcessEnergyCards: ; 164fc (5:64fc)
 	ld a, [wAIEnergyAttachLogicFlags]
 	or a
 	jr z, .no_carry
-	jp RetrievePlayAreaAIScoreFromBackup1
+	jp RetrievePlayAreaAIScoreFromBackup
 .no_carry
 	or a
 	ret
