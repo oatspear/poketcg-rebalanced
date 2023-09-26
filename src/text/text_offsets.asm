@@ -2444,7 +2444,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SneakAttackDescription                             ; 0x0974
 	textpointer HorseaDescription                                  ; 0x0975
 	textpointer SeadraName                                         ; 0x0976
-	textpointer WaterGunDescription                                ; 0x0977
+	; textpointer WaterGunDescription                                ; 0x0977
 	textpointer SeadraDescription                                  ; 0x0979
 	textpointer GoldeenName                                        ; 0x097a
 	textpointer HornAttackName                                     ; 0x097b
@@ -2456,13 +2456,14 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WaterfallName                                      ; 0x097f
 	textpointer SeakingDescription                                 ; 0x0980
 	textpointer StaryuName                                         ; 0x0981
-	textpointer BigSplashName
+	textpointer CoreRegenerationName
+	textpointer CoreRegenerationDescription
 	textpointer StarshapeName                                      ; 0x0983
 	textpointer StaryuDescription                                  ; 0x0984
 	textpointer StarmieName                                        ; 0x0985
 	textpointer RecoverName                                        ; 0x0986
 	textpointer RecoverDescription                                 ; 0x0987
-	textpointer EnergySplashName
+	textpointer CosmicPowerName
 	textpointer MysteriousName                                     ; 0x0989
 	textpointer StarmieDescription                                 ; 0x098a
 	textpointer MagikarpName                                       ; 0x098b

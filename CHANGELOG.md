@@ -24,6 +24,13 @@
 #### Blastoise
 - **Hydro Pump**: base damage increased from 40 to 50.
 
+#### Staryu
+- **Big Splash**: removed.
+- New attack: **Core Regeneration** (C): heal 10 damage; draw a card.
+
+#### Starmie
+- **Energy Splash**: renamed to **Cosmic Power**.
+
 ### Fighting Changes
 
 #### Marowak Lv26

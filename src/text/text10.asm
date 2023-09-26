@@ -1499,13 +1499,13 @@ SeadraName: ; 5c05d (17:405d)
 	text "Seadra"
 	done
 
-WaterGunDescription: ; 5ca47 (17:4a47)
-	text "Does 10 additional damage for each"
-	line "<WATER> Energy attached to this"
-	line "Pokémon but not used to pay for"
-	line "this attack's Energy cost, up to"
-	line "20 additional damage."
-	done
+; WaterGunDescription: ; 5ca47 (17:4a47)
+; 	text "Does 10 additional damage for each"
+; 	line "<WATER> Energy attached to this"
+; 	line "Pokémon but not used to pay for"
+; 	line "this attack's Energy cost, up to"
+; 	line "20 additional damage."
+; 	done
 
 SeadraDescription: ; 5c18e (17:418e)
 	text "Capable of swimming backward by"
@@ -1559,8 +1559,13 @@ StaryuName: ; 5c2d7 (17:42d7)
 	text "Staryu"
 	done
 
-BigSplashName:
-	text "Big Splash"
+CoreRegenerationName:
+	text "Core Regeneration"
+	done
+
+CoreRegenerationDescription:
+	text "Heal 10 damage from this Pokémon."
+	line "Draw a card."
 	done
 
 StarshapeName: ; 5c2e5 (17:42e5)
@@ -1586,8 +1591,8 @@ RecoverDescription:
 	line "Then, heal all damage from it."
 	done
 
-EnergySplashName:
-	text "Energy Splash"
+CosmicPowerName:
+	text "Cosmic Power"
 	done
 
 MysteriousName: ; 5c3dc (17:43dc)

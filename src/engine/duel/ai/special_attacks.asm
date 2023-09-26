@@ -111,8 +111,8 @@ HandleSpecialAIAttacks:
 .Staryu
 	ld a, [wSelectedAttack]
 	or a
-	jr z, .Teleport
-	jp .Fetch
+	jp z, .Fetch
+	jr .Teleport
 
 ; if any basic cards are found in deck,
 ; return a score of $80 + slots available in bench.

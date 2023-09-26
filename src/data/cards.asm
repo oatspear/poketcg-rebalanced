@@ -354,7 +354,7 @@ VenusaurLv64Card:
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Heal20DamageEffectCommands ; effect commands
+	dw Leech20DamageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
@@ -4324,6 +4324,20 @@ StaryuCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
+	tx CoreRegenerationName ; name
+	tx CoreRegenerationDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw CoreRegenerationEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db HEAL_USER ; flags 2
+	db NONE ; flags 3
+	db 1
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy COLORLESS, 1 ; energies
 	tx RapidSpinName ; name
 	tx BothPlayersSwitchDescription ; description
 	dw NONE ; description (cont)
@@ -4333,20 +4347,6 @@ StaryuCard:
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy WATER, 1, COLORLESS, 1 ; energies
-	tx BigSplashName ; name
-	tx Draw1CardDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Draw1CardEffectCommands ; effect commands
-	db DRAW_CARD ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
 
@@ -4389,7 +4389,7 @@ StarmieCard:
 
 	; attack 2
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx EnergySplashName ; name
+	tx CosmicPowerName ; name
 	tx EnergyConversionDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
@@ -7636,7 +7636,7 @@ SlowbroCard:
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Heal30DamageEffectCommands ; effect commands
+	dw Leech30DamageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3

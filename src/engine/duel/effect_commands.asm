@@ -87,7 +87,7 @@ PanicVineEffectCommands:
 
 FlytrapEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Leech20DamageEffect
 	db  $00
 
 SproutEffectCommands:
@@ -259,12 +259,12 @@ DoubleAttackX20X10EffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoubleAttackX20X10_AIEffect
 	db  $00
 
-Heal20DamageEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageEffect
+Leech20DamageEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Leech20DamageEffect
 	db  $00
 
-Heal30DamageEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal30DamageEffect
+Leech30DamageEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Leech30DamageEffect
 	db  $00
 
 Poison50PercentEffectCommands:
@@ -276,8 +276,8 @@ IvysaurPoisonWhipEffectCommands:
 	db  $00
 
 LeechSeedEffectCommands:
-Heal10DamageEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal10DamageEffect
+Leech10DamageEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Leech10DamageEffect
 	db  $00
 
 EnergyTransEffectCommands:
@@ -598,6 +598,11 @@ GatherToxinsEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GatherToxins_AttachToPokemonEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, GatherToxins_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, GatherToxins_AISelectEffect
+	db  $00
+
+CoreRegenerationEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal10DamageEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FetchEffect
 	db  $00
 
 EnergySplashEffectCommands:

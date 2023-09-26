@@ -10,34 +10,47 @@ LeechLifeEffect:
 	jr ApplyAndAnimateHPRecovery
 
 
-Heal10DamageEffect:
+Leech10DamageEffect:
 	ld hl, wDealtDamage
 	ld a, [hli]
 	or a
 	ret z ; return if no damage dealt
+	; fallthrough
+
+Heal10DamageEffect:
 	ld de, 10
 	jr ApplyAndAnimateHPRecovery
 
-Heal20DamageEffect:
+
+Leech20DamageEffect:
 	ld hl, wDealtDamage
 	ld a, [hli]
 	or a
 	ret z ; return if no damage dealt
+	; fallthrough
+
+Heal20DamageEffect:
 	ld de, 20
 	jr ApplyAndAnimateHPRecovery
 
-Heal30DamageEffect:
+
+Leech30DamageEffect:
 	ld hl, wDealtDamage
 	ld a, [hli]
 	or a
 	ret z ; return if no damage dealt
+	; fallthrough
+
+Heal30DamageEffect:
 	ld de, 30
 	jr ApplyAndAnimateHPRecovery
+
 
 HealADamageEffect:
 	ld d, 0
 	ld e, a
 	jr ApplyAndAnimateHPRecovery
+
 
 ; applies HP recovery on Pokemon after an attack
 ; with HP recovery effect, and handles its animation.
