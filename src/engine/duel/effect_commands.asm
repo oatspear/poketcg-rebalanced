@@ -178,9 +178,9 @@ EggsplosionEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Eggsplosion_AIEffect
 	db  $00
 
-BigEggsplosionEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BigEggsplosion_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, BigEggsplosion_AIEffect
+DamagePerEnergyAttachedToBothActiveEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamagePerEnergyAttachedToBothActive_MultiplierEffect
+	dbw EFFECTCMDTYPE_AI, DamagePerEnergyAttachedToBothActive_AIEffect
 	db  $00
 
 TropicalStormEffectCommands:
@@ -603,12 +603,6 @@ GatherToxinsEffectCommands:
 CoreRegenerationEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal10DamageEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FetchEffect
-	db  $00
-
-EnergySplashEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergySplash_AddToHandEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySplash_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySplash_AISelectEffect
 	db  $00
 
 InflictSleepEffectCommands:

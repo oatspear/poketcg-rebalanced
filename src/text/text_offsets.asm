@@ -2262,7 +2262,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EggsplosionName
 	textpointer EggsplosionDescription
 	textpointer BigEggsplosionName
-	textpointer BigEggsplosionDescription
+	textpointer DamagePerEnergyAttachedToBothActiveDescription
 	textpointer CoconutName                                        ; 0x08b7
 	textpointer ExeggutorDescription                               ; 0x08b8
 	textpointer KoffingName                                        ; 0x08b9
@@ -2463,7 +2463,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer StarmieName                                        ; 0x0985
 	textpointer RecoverName                                        ; 0x0986
 	textpointer RecoverDescription                                 ; 0x0987
-	textpointer CosmicPowerName
+	textpointer EnergySpiralName
 	textpointer MysteriousName                                     ; 0x0989
 	textpointer StarmieDescription                                 ; 0x098a
 	textpointer MagikarpName                                       ; 0x098b

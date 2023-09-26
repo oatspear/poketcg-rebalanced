@@ -328,6 +328,37 @@ TropicalStorm_AIEffect:
 	jp SetDefiniteAIDamage
 
 
+
+; Deal 10 damage for each energy attached to both Active Pokémon.
+; cap at 200 damage
+DamagePerEnergyAttachedToBothActive_MultiplierEffect:
+; get energies attached to self
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	ld d, a
+; get energies attached to opponent
+	call SwapTurn
+	call GetPlayAreaCardAttachedEnergies
+	call SwapTurn
+	ld a, [wTotalAttachedEnergies]
+; add both
+	add d
+	jr c, .cap  ; overflow
+; cap if number of energies >= 20
+	cp 21
+	jr c, .got_energies
+.cap
+	ld a, 20
+.got_energies
+	call ATimes10
+	jp SetDefiniteDamage
+
+DamagePerEnergyAttachedToBothActive_AIEffect:
+	call DamagePerEnergyAttachedToBothActive_MultiplierEffect
+	jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Hand Cards
 ; ------------------------------------------------------------------------------

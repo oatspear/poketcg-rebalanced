@@ -1,5 +1,30 @@
 ;
 
+EnergySplashEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergySplash_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySplash_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySplash_AISelectEffect
+	db  $00
+
+
+EnergySplash_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTempList], a
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	jr nc, EnergyConversion_PlayerSelectEffect
+	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
+	ccf  ; reset carry
+	ret
+
+EnergySplash_AISelectEffect:
+EnergyConversion_AISelectEffect:
+
+EnergySplash_AddToHandEffect:
+EnergyConversion_AddToHandEffect:
+
+
+;
+
 MagneticStormEffect: ; 2e7d5 (b:67d5)
 	ld a, DUELVARS_CARD_LOCATIONS
 	call GetTurnDuelistVariable

@@ -2082,11 +2082,11 @@ ExeggutorCard:
 	; attack 2
 	energy COLORLESS, 1 ; energies
 	tx BigEggsplosionName ; name
-	tx BigEggsplosionDescription ; description
+	tx DamagePerEnergyAttachedToBothActiveDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_X ; category
-	dw BigEggsplosionEffectCommands ; effect commands
+	dw DamagePerEnergyAttachedToBothActiveEffectCommands ; effect commands
 	db NONE ; flags 1
 	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3
@@ -4388,17 +4388,17 @@ StarmieCard:
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 1 ; energies
-	tx CosmicPowerName ; name
-	tx EnergyConversionDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx EnergySpiralName ; name
+	tx DamagePerEnergyAttachedToBothActiveDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw EnergySplashEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw DamagePerEnergyAttachedToBothActiveEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3
-	db 10
+	db MAX_ENERGY_BOOST_IS_NOT_LIMITED
 	db ATK_ANIM_BEAM ; animation
 
 	db 1 ; retreat cost

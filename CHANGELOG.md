@@ -29,7 +29,8 @@
 - New attack: **Core Regeneration** (C): heal 10 damage; draw a card.
 
 #### Starmie
-- **Energy Splash**: renamed to **Cosmic Power**.
+- **Energy Splash**: removed.
+- New attack: **Energy Spiral** (C): 10 damage for each energy attached to both Active Pokémon.
 
 ### Fighting Changes
 

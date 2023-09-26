@@ -620,7 +620,7 @@ BigEggsplosionName:
 	text "Big Eggsplosion"
 	done
 
-BigEggsplosionDescription:
+DamagePerEnergyAttachedToBothActiveDescription:
 	text "This attack does 10 damage for each"
 	line "Energy attached to this Pokémon and"
 	line "to the Defending Pokémon."
@@ -1591,8 +1591,8 @@ RecoverDescription:
 	line "Then, heal all damage from it."
 	done
 
-CosmicPowerName:
-	text "Cosmic Power"
+EnergySpiralName:
+	text "Energy Spiral"
 	done
 
 MysteriousName: ; 5c3dc (17:43dc)

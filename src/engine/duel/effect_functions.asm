@@ -2153,36 +2153,6 @@ Eggsplosion_HealEffect:
 	jp HealADamageEffect
 
 
-BigEggsplosion_AIEffect:
-	call BigEggsplosion_MultiplierEffect
-	jp SetDefiniteAIDamage
-
-; Deal 10 damage for each energy attached to both Active Pokémon.
-; cap at 200 damage
-BigEggsplosion_MultiplierEffect:
-; get energies attached to self
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-	ld d, a
-; get energies attached to opponent
-	call SwapTurn
-	call GetPlayAreaCardAttachedEnergies
-	call SwapTurn
-	ld a, [wTotalAttachedEnergies]
-; add both
-	add d
-	jr c, .cap  ; overflow
-; cap if number of energies >= 20
-	cp 21
-	jr c, .got_energies
-.cap
-	ld a, 20
-.got_energies
-	call ATimes10
-	jp SetDefiniteDamage
-
-
 ; returns carry if no Grass Energy in Play Area
 EnergyTrans_CheckPlayArea: ; 2cb44 (b:4b44)
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -3448,21 +3418,11 @@ ApplyDestinyBondEffect: ; 2d987 (b:5987)
 	ret
 
 
-EnergySplash_PlayerSelectEffect:
-	ld a, $ff
-	ldh [hTempList], a
-	call CreateEnergyCardListFromDiscardPile_OnlyBasic
-	jr nc, EnergyConversion_PlayerSelectEffect
-	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
-	ccf  ; reset carry
-	ret
-
 EnergyConversion_PlayerSelectEffect:
 	ldtx hl, Choose2EnergyCardsFromDiscardPileForHandText
 	call HandleEnergyCardsInDiscardPileSelection
 	ret
 
-EnergySplash_AISelectEffect:
 EnergyConversion_AISelectEffect:
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
 	; call CreateEnergyCardListFromDiscardPile_AllEnergy
@@ -3483,7 +3443,6 @@ EnergyConversion_AISelectEffect:
 	ld [de], a
 	ret
 
-EnergySplash_AddToHandEffect:
 EnergyConversion_AddToHandEffect:
 ; loop cards that were chosen
 ; until $ff is reached,
