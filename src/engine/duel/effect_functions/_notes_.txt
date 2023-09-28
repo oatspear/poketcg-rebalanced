@@ -1,3 +1,18 @@
+; ------------------------------------------------------------------------------
+; General Notes
+; ------------------------------------------------------------------------------
+
+It seems that, in many Pokémon sets, at least for Evolved Pokémon, there is a
+10 point bonus for 3-energy attacks and a 20-point bonus for 4-energy attacks.
+
+Spread damage to full Bench seems to be valued at 25 or 30 points.
+
+
+; ------------------------------------------------------------------------------
+; Attacks
+; ------------------------------------------------------------------------------
+
+
 StarmieCard:
 	db TYPE_PKMN_WATER ; type
 	gfx StarmieCardGfx ; gfx
