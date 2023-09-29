@@ -3516,6 +3516,39 @@ DisplayCardList:
 	scf
 	ret
 
+
+; given the deck index (0-59) of a card in [wDuelTempList + a], return:
+;  - the id of the card with that deck index in register de
+;  - [wDuelTempList + a] in hTempCardIndex_ff98 and in register a
+GetCardInDuelTempList:
+	push hl
+	ld e, a
+	ld d, $0
+	ld hl, wDuelTempList
+	add hl, de
+	ld a, [hl]
+	ldh [hTempCardIndex_ff98], a
+	call GetCardIDFromDeckIndex
+	pop hl
+	ldh a, [hTempCardIndex_ff98]
+	ret
+
+
+; return [wDuelTempList + a] in a and in hTempCardIndex_ff98
+GetCardInDuelTempList_OnlyDeckIndex:
+	push hl
+	push de
+	ld e, a
+	ld d, $0
+	ld hl, wDuelTempList
+	add hl, de
+	ld a, [hl]
+	ldh [hTempCardIndex_ff98], a
+	pop de
+	pop hl
+	ret
+
+
 Func_5690:
 	ldh a, [hDPadHeld]
 	and D_PAD

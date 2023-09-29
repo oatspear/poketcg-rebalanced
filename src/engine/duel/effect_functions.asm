@@ -5879,7 +5879,7 @@ HandlePlayerMetronomeEffect:
 	; successful
 
 ; send data to link opponent
-	bank1call SendAttackDataToLinkOpponent
+	call SendAttackDataToLinkOpponent
 	ld a, OPPACTION_USE_METRONOME_ATTACK
 	call SetOppAction_SerialSendDuelData
 	ld hl, wMetronomeSelectedAttack

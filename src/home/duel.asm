@@ -310,6 +310,7 @@ PutCardInDiscardPile:
 	pop af
 	ret
 
+
 ; search a card in the turn holder's discard pile, extract it, and set its location to
 ; CARD_LOCATION_JUST_DRAWN. AddCardToHand is meant to be called next.
 ; the card is identified by register a, which contains the deck index (0-59) of the card
@@ -344,6 +345,7 @@ MoveDiscardPileCardToHand:
 	pop de
 	pop hl
 	ret
+
 
 ; return in the z flag whether turn holder's prize a (0-7) has been drawn or not
 ; z: drawn, nz: not drawn
@@ -698,35 +700,6 @@ GetCardIDFromDeckIndex_bc:
 	pop hl
 	ret
 
-; return [wDuelTempList + a] in a and in hTempCardIndex_ff98
-GetCardInDuelTempList_OnlyDeckIndex:
-	push hl
-	push de
-	ld e, a
-	ld d, $0
-	ld hl, wDuelTempList
-	add hl, de
-	ld a, [hl]
-	ldh [hTempCardIndex_ff98], a
-	pop de
-	pop hl
-	ret
-
-; given the deck index (0-59) of a card in [wDuelTempList + a], return:
-;  - the id of the card with that deck index in register de
-;  - [wDuelTempList + a] in hTempCardIndex_ff98 and in register a
-GetCardInDuelTempList:
-	push hl
-	ld e, a
-	ld d, $0
-	ld hl, wDuelTempList
-	add hl, de
-	ld a, [hl]
-	ldh [hTempCardIndex_ff98], a
-	call GetCardIDFromDeckIndex
-	pop hl
-	ldh a, [hTempCardIndex_ff98]
-	ret
 
 ; returns, in register de, the id of the card with the deck index (0-59) specified by register a
 ; preserves bc, af and hl
@@ -1624,7 +1597,7 @@ UseAttackOrPokemonPower:
 	jr c, .sand_attack_smokescreen
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
-	jp c, ReturnCarry
+	ret c
 	call SendAttackDataToLinkOpponent
 	jr .next
 .sand_attack_smokescreen
@@ -1633,7 +1606,7 @@ UseAttackOrPokemonPower:
 	jp c, ClearNonTurnTemporaryDuelvars_ResetCarry
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
-	jp c, ReturnCarry
+	ret c
 .next
 	ld a, OPPACTION_USE_ATTACK
 	call SetOppAction_SerialSendDuelData
@@ -1690,10 +1663,6 @@ PlayAttackAnimation_DealAttackDamage:
 	pop hl
 .skip_draw_huds
 	call PrintKnockedOutIfHLZero
-	; jr Func_17fb
-	; fallthrough
-
-Func_17fb:
 	ld a, [wTempNonTurnDuelistCardID]
 	push af
 	ld a, EFFECTCMDTYPE_AFTER_DAMAGE
@@ -1716,9 +1685,6 @@ DisplayUsePokemonPowerScreen_WaitForInput:
 
 DrawWideTextBox_WaitForInput_ReturnCarry:
 	call DrawWideTextBox_WaitForInput
-;	fallthrough
-
-ReturnCarry:
 	scf
 	ret
 
@@ -1753,7 +1719,7 @@ UsePokemonPower:
 	jr c, DisplayUsePokemonPowerScreen_WaitForInput
 	ld a, EFFECTCMDTYPE_REQUIRE_SELECTION
 	call TryExecuteEffectCommandFunction
-	jr c, ReturnCarry
+	ret c
 	ld a, OPPACTION_USE_PKMN_POWER
 	call SetOppAction_SerialSendDuelData
 	call ExchangeRNG
@@ -1887,7 +1853,6 @@ PlayTrainerCard:
 	scf
 	ret
 .can_use
-
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
 	ld a, 1
@@ -2364,6 +2329,7 @@ LoadAttackNameToRam2b:
 	ld [wTxRam2_b + 1], a
 	ret
 
+
 Func_1bb4:
 	call Func_3b31
 	bank1call DrawDuelMainScene
@@ -2372,8 +2338,8 @@ Func_1bb4:
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call PrintNoEffectTextOrUnsuccessfulText
 	call WaitForWideTextBoxInput
-	call ExchangeRNG
-	ret
+	jp ExchangeRNG
+
 
 ; prints one of the ThereWasNoEffectFrom*Text if wEffectFailed contains EFFECT_FAILED_NO_EFFECT,
 ; and prints WasUnsuccessfulText if wEffectFailed contains EFFECT_FAILED_UNSUCCESSFUL
@@ -2397,6 +2363,7 @@ PrintNoEffectTextOrUnsuccessfulText:
 	scf
 	ret
 
+
 ; return in a the retreat cost of the turn holder's arena or bench Pokemon
 ; given the PLAY_AREA_* value in hTempPlayAreaLocation_ff9d
 GetPlayAreaCardRetreatCost:
@@ -2404,8 +2371,8 @@ GetPlayAreaCardRetreatCost:
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
-	call GetLoadedCard1RetreatCost
-	ret
+	jp GetLoadedCard1RetreatCost
+
 
 ; move the turn holder's card with ID at de to the discard pile
 ; if it's currently in the arena.
