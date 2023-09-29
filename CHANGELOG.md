@@ -43,6 +43,9 @@
 - **Twister**: removed.
 - New attack: **Riptide** (WCC): 10 damage; retrieve up to 2 energies from discard; +20 damage for each.
 
+#### Seaking
+- **Waterfall**: reduced cost from (WCC) to (CCC).
+
 ### Fighting Changes
 
 #### Marowak Lv26
