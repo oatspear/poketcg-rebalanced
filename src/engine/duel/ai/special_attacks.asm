@@ -85,6 +85,8 @@ HandleSpecialAIAttacks:
 	jr z, .Mimic
 	cp CLEFABLE
 	jr z, .LunarPower
+	cp GASTLY_LV17
+	jr z, .EnergyConversion
 
 ; return zero score.
 .zero_score
@@ -253,6 +255,13 @@ HandleSpecialAIAttacks:
 	cp 3
 	jp nc, .zero_score
 	ld a, $83
+	ret
+
+.EnergyConversion:
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call CheckIfAnyBasicEnergyInLocation
+	jp nc, .zero_score
+	ld a, $82
 	ret
 
 ; if the Pokémon has less than 2 Energies attached to it,
