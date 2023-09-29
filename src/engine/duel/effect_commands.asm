@@ -499,6 +499,7 @@ ArcanineFlamesOfRageEffectCommands:
 
 EmberEffectCommands:
 FlamethrowerEffectCommands:
+Discard1EnergyEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect

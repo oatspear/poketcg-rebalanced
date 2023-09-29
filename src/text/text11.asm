@@ -1587,6 +1587,10 @@ AfflictionDescription:
 	line "with a Special Condition."
 	done
 
+AquaBurstName:
+	text "Aqua Burst"
+	done
+
 WaterReserveName:
 	text "Water Reserve"
 	done

@@ -2822,6 +2822,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer OverwhelmDescription
 	textpointer AfflictionName
 	textpointer AfflictionDescription
+	textpointer AquaBurstName
 	textpointer WaterReserveName
 	textpointer WaterReserveDescription
 	textpointer RattataName                                        ; 0x0ae7

@@ -32,6 +32,12 @@
 - **Energy Splash**: removed.
 - New attack: **Energy Spiral** (C): 10 damage for each energy attached to both Active Pokémon.
 
+#### Horsea
+- **Smokescreen**: removed.
+- **Water Gun**: removed.
+- New attack: **Water Reserve** (C): add up to 2 Water Energy from deck to hand.
+- New attack: **Aqua Burst** (WC): 30 damage, discard 1 energy.
+
 ### Fighting Changes
 
 #### Marowak Lv26
