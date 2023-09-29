@@ -39,6 +39,7 @@
 - New attack: **Aqua Burst** (WC): 30 damage, discard 1 energy.
 
 #### Seadra
+- **Aqua Launcher**: renamed to **Water Arrow**.
 - **Twister**: removed.
 - New attack: **Riptide** (WCC): 10 damage; retrieve up to 2 energies from discard; +20 damage for each.
 

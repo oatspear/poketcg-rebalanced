@@ -4171,7 +4171,7 @@ SeadraCard:
 
 	; attack 1
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx AquaLauncherName ; name
+	tx WaterArrowName ; name
 	tx Deal30ToAnyPokemonDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage

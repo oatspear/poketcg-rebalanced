@@ -2823,6 +2823,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AfflictionName
 	textpointer AfflictionDescription
 	textpointer AquaBurstName
+	textpointer WaterArrowName
 	textpointer WaterReserveName
 	textpointer WaterReserveDescription
 	textpointer RiptideName

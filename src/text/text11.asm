@@ -1591,6 +1591,10 @@ AquaBurstName:
 	text "Aqua Burst"
 	done
 
+WaterArrowName:
+	text "Water Arrow"
+	done
+
 WaterReserveName:
 	text "Water Reserve"
 	done
