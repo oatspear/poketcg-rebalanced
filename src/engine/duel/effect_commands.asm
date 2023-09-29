@@ -586,6 +586,14 @@ EnergyConversionEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyConversion_AISelectEffect
 	db  $00
 
+RiptideEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Riptide_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyConversion_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyConversion_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyConversion_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, Riptide_AIEffect
+	db  $00
+
 WaterReserveEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCardList_AddToHandFromDeckEffect

@@ -4184,18 +4184,18 @@ SeadraCard:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy WATER, 2, COLORLESS, 1 ; energies
-	tx TwisterName ; name
-	tx Discard1EnergyFromTargetDescription ; description
+	energy WATER, 1, COLORLESS, 2 ; energies
+	tx RiptideName ; name
+	tx RiptideDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw TwisterEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw RiptideEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_WHIRLWIND ; animation
+	db ATK_ANIM_WHIRLPOOL ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness

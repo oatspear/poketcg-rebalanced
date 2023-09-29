@@ -1601,3 +1601,14 @@ WaterReserveDescription:
 	line "them in your hand."
 	line "Then, shuffle your deck."
 	done
+
+RiptideName:
+	text "Riptide"
+	done
+
+RiptideDescription:
+	text "Put up to 2 Basic Energy cards from"
+	line "your discard pile into your hand."
+	line "This attack does 20 more damage for"
+	line "each Energy card."
+	done
