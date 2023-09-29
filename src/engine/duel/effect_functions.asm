@@ -3420,8 +3420,8 @@ ApplyDestinyBondEffect: ; 2d987 (b:5987)
 
 EnergyConversion_PlayerSelectEffect:
 	ldtx hl, Choose2EnergyCardsFromDiscardPileForHandText
-	call HandleEnergyCardsInDiscardPileSelection
-	ret
+	jp HandleEnergyCardsInDiscardPileSelection
+
 
 EnergyConversion_AISelectEffect:
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
