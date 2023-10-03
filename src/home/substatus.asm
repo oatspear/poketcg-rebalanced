@@ -87,6 +87,8 @@ HandleDamageReductionExceptSubstatus2:
 	jr z, .reduce_damage_by_20 ; Battle Armor
 	cp KAKUNA
 	jr z, .reduce_damage_by_20 ; Exoskeleton
+	cp CLOYSTER
+	jr z, .reduce_damage_by_20 ; Exoskeleton
 	cp KABUTO
 	jr z, .halve_damage ; kabuto armor
 	ret

@@ -44,6 +44,16 @@
 - New attack: **Deep Dive** (W): heal 30 damage; switch with a Benched Pokémon.
 - New attack: **Blizzard** (WWCC): 40 damage; 10 damage to all opponent Benched Pokémon.
 
+#### Shellder
+- **Supersonic**: removed.
+- New attack: **Clamp** (WC): 20 damage; flip a coin, if Heads inflicts Paralysis.
+
+#### Cloyster
+- **Clamp**: removed.
+- **Spike Cannon**: removed.
+- New Pokémon Power: **Exoskeleton**: reduces damage taken by 20.
+- New attack: **Cold Crush** (WC): 30 damage; discard an Energy from both Active Pokémon.
+
 #### Horsea
 - **Smokescreen**: removed.
 - **Water Gun**: removed.

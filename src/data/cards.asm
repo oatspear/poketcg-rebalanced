@@ -3916,20 +3916,6 @@ ShellderCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx SupersonicName ; name
-	tx MayInflictConfusionDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SupersonicEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SUPERSONIC ; animation
-
-	; attack 2
-	energy COLORLESS, 1 ; energies
 	tx WithdrawName ; name
 	tx ReduceDamageTakenBy20Description ; description
 	dw NONE ; description (cont)
@@ -3941,6 +3927,20 @@ ShellderCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PROTECT ; animation
+
+	; attack 2
+	energy WATER, 1, COLORLESS, 1 ; energies
+	tx ClampName ; name
+	tx MayInflictParalysisDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Paralysis50PercentEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -3966,32 +3966,33 @@ CloysterCard:
 	tx ShellderName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx SpikeCannonName ; name
-	tx DoubleAttackX20X10Description ; description
+	; depends: HandleDamageReductionExceptSubstatus2
+	energy 0 ; energies
+	tx ExoskeletonName ; name
+	tx BattleArmorDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_X ; category
-	dw DoubleAttackX20X10EffectCommands ; effect commands
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NEEDLES ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx ClampName ; name
-	tx MayInflictParalysisDescription ; description
+	tx ColdCrushName ; name
+	tx Discard1EnergyFromBothActiveDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw CloysterClampEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
+	dw Discard1EnergyFromBothActiveEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_BLIZZARD ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -4805,7 +4806,7 @@ OmastarCard:
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
-	tx SpikeCannonName ; name
+	tx HydroPumpName ; name
 	tx DoubleAttackX20X10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
