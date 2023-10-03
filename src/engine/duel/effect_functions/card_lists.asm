@@ -396,62 +396,6 @@ CreateTrainerCardListFromDeck_:
 	ret
 
 
-; FIXME not done
-CreatePokemonCardListFromDeck:
-; get number of cards in Deck
-; and have hl point to the top of the
-; Deck list in wOpponentDeckCards.
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ld a, DECK_SIZE
-	sub [hl]
-	ld b, a  ; number of cards in deck
-	ld a, [hl]
-	add DUELVARS_DECK_CARDS
-	ld l, a  ; top of deck
-	dec hl
-
-	ld de, wDuelTempList
-	inc b
-	jr .next_card
-
-.check_trainer
-	ld a, [hl]
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
-	jr nc, .next_card
-
-	; ld a, c
-	; cp $ff  ; anything goes
-	; jr z, .store
-	; ld a, [wLoadedCard2Type]
-	; cp c  ; apply filter
-	; jr nz, .next_card
-
-.store
-	ld a, [hl]
-	ld [de], a
-	inc de
-
-.next_card
-	inc hl
-	dec b
-	jr nz, .check_trainer
-
-	ld a, $ff ; terminating byte
-	ld [de], a
-	ld a, [wDuelTempList]
-	cp $ff
-	jr z, .no_pokemon
-	or a
-	ret
-.no_pokemon
-	ldtx hl, ThereAreNoTrainerCardsInDeckText
-	scf
-	ret
-
-
 ; ------------------------------------------------------------------------------
 ; Hand Lists
 ; ------------------------------------------------------------------------------
