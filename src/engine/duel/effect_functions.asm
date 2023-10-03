@@ -2834,20 +2834,6 @@ Whirlpool_DiscardEffect: ; 2d214 (b:5214)
 	ret
 
 
-ClampEffect: ; 2d22d (b:522d)
-	ld a, ATK_ANIM_HIT_EFFECT
-	ld [wLoadedAttackAnimation], a
-	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
-	call TossCoin_BankB
-	jp c, ParalysisEffect
-; unsuccessful
-	xor a ; ATK_ANIM_NONE
-	ld [wLoadedAttackAnimation], a
-	call SetDefiniteDamage
-	call SetWasUnsuccessful
-	ret
-
-
 ; return carry if can use Cowardice
 Cowardice_Check:
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -4337,8 +4323,7 @@ Discard2Energies_DiscardEffect:
 	ld a, [hli]
 	call PutCardInDiscardPile
 	ld a, [hli]
-	call PutCardInDiscardPile
-	ret
+	jp PutCardInDiscardPile
 
 
 ; ------------------------------------------------------------------------------
