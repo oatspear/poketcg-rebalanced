@@ -6759,6 +6759,26 @@ SelectedCardList_AddToHandFromDeckEffect:
 	jr .loop_cards
 
 
+
+; Move the selected deck card to the top of the deck.
+SelectedCard_DredgeEffect:
+SelectedCard_MoveToTopOfDeckEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z ; skip if no card was chosen
+	; fallthrough
+
+; move selected card to the top of the deck.
+; input:
+;   a: deck index of card to move
+DredgeEffect:
+MoveDeckCardToTopOfDeckEffect:
+	call SearchCardInDeckAndSetToJustDrawn  ; preserves af, hl, bc, de
+	call AddCardToHand  ; preserves af, hl bc, de
+	call RemoveCardFromHand  ; preserves af, hl bc, de
+	jp ReturnCardToDeck  ; preserves a, hl, de, bc
+
+
 ; FIXME card (singular), refactor the same as deck version above
 SelectedCards_AddToHandFromDiscardPile:
 ; add the first card in hTempList to the hand
