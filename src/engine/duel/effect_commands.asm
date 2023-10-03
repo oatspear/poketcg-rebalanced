@@ -143,6 +143,14 @@ KoffingFoulGasEffectCommands:
 	dbw EFFECTCMDTYPE_AI, FoulGas_AIEffect
 	db  $00
 
+DeepDiveEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal30DamageEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Agility_AISelectEffect
+	db  $00
+
 TeleportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_ReturnToDeckEffect
@@ -411,7 +419,6 @@ SnorlaxBodySlamEffectCommands:
 PinsirIronGripEffectCommands:
 CloysterClampEffectCommands:
 CaterpieStringShotEffectCommands:
-DewgongIceBeamEffectCommands:
 ArticunoFreezeDryEffectCommands:
 Paralysis50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
@@ -913,6 +920,7 @@ FlyingPikachuFlyEffectCommands:
 	db  $00
 
 SparkEffectCommands:
+Damage1BenchedPokemon10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Spark_BenchDamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Spark_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Spark_AISelectEffect

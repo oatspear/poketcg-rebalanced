@@ -87,6 +87,8 @@ HandleSpecialAIAttacks:
 	jr z, .LunarPower
 	cp GASTLY_LV17
 	jr z, .EnergyConversion
+	cp DEWGONG
+	jr z, .Teleport
 
 ; return zero score.
 .zero_score

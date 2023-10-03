@@ -1587,12 +1587,20 @@ AfflictionDescription:
 	line "with a Special Condition."
 	done
 
+IcyWindName:
+	text "Icy Wind"
+	done
+
 AquaBurstName:
 	text "Aqua Burst"
 	done
 
 WaterArrowName:
 	text "Water Arrow"
+	done
+
+FindIceName:
+	text "Find Ice"
 	done
 
 WaterReserveName:
@@ -1615,4 +1623,14 @@ RiptideDescription:
 	line "your discard pile into your hand."
 	line "This attack does 20 more damage for"
 	line "each Energy card."
+	done
+
+DeepDiveName:
+	text "Deep Dive"
+	done
+
+DeepDiveDescription:
+	text "Heal 30 damage from this Pokémon"
+	line "and Switch it with 1 of your"
+	line "Benched Pokémon."
 	done

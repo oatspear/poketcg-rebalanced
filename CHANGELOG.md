@@ -32,6 +32,18 @@
 - **Energy Splash**: removed.
 - New attack: **Energy Spiral** (C): 10 damage for each energy attached to both Active Pokémon.
 
+#### Seel
+- **Headbutt**: removed.
+- New attack: **Find Ice** (C): add up to 2 Water Energy from deck to hand.
+- New attack: **Energy Slide** (W): 10 damage; move an attached Basic Energy to a Benched Pokémon.
+
+#### Dewgong
+- Added a Resistance to Fire.
+- **Ice Beam**: removed.
+- **Aurora Beam**: removed.
+- New attack: **Deep Dive** (W): heal 30 damage; switch with a Benched Pokémon.
+- New attack: **Blizzard** (WWCC): 40 damage; 10 damage to all opponent Benched Pokémon.
+
 #### Horsea
 - **Smokescreen**: removed.
 - **Water Gun**: removed.
@@ -45,6 +57,13 @@
 
 #### Seaking
 - **Waterfall**: reduced cost from (WCC) to (CCC).
+
+#### Lapras
+- Reduced HP from 80 to 70.
+- **Healing Melody**: removed.
+- **Surf**: removed.
+- New attack: **Transport** (C): add a Supporter card from the deck to the hand.
+- New attack: **Icy Wind** (WCC): 20 damage; 10 damage to 1 Benched Pokémon.
 
 ### Fighting Changes
 

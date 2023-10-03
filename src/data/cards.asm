@@ -3814,31 +3814,31 @@ SeelCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx HeadbuttName ; name
-	dw NONE ; description
+	tx FindIceName ; name
+	tx WaterReserveDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw WaterReserveEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy WATER, 1 ; energies
+	dw EnergySlideName ; name
+	dw EnergySlideDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw EnergySlideEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
+	db 3
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -3865,35 +3865,35 @@ DewgongCard:
 
 	; attack 1
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx IceBeamName ; name
-	tx MayInflictParalysisDescription ; description
+	tx DeepDiveName ; name
+	tx DeepDiveDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw DewgongIceBeamEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_BEAM ; animation
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw DeepDiveEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 3
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy WATER, 2, COLORLESS, 1 ; energies
-	tx AuroraBeamName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 50 ; damage
+	energy WATER, 2, COLORLESS, 2 ; energies
+	tx BlizzardName ; name
+	tx DamageOpponentBench10Description ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	dw BlizzardEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_BEAM ; animation
+	db 10
+	db ATK_ANIM_BLIZZARD ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
-	db NONE ; resistance
+	db WR_FIRE ; resistance
 	tx SeaLionName ; category
 	db 87 ; Pokedex number
 	db 0
@@ -4382,9 +4382,9 @@ StarmieCard:
 	db RESIDUAL ; category
 	dw RecoverEffectCommands ; effect commands
 	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
+	db DISCARD_ENERGY | HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 7
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
@@ -4527,37 +4527,37 @@ LaprasCard:
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db LAPRAS
-	db 80 ; hp
+	db 70 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx HealingMelodyName ; name
-	tx Heal10DamageFromAllDescription ; description
+	tx TransportName ; name
+	tx LeadDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw HealingMelodyEffectCommands ; effect commands
-	db NONE ; flags 1
-	db HEAL_USER ; flags 2
-	db NONE ; flags 3
-	db 1
-	db ATK_ANIM_RECOVER ; animation
-
-	; attack 2
-	energy WATER, 2, COLORLESS, 1 ; energies
-	tx SurfName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw LeadEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_WATER_JETS ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy WATER, 1, COLORLESS, 2 ; energies
+	tx IcyWindName ; name
+	tx Damage1BenchedPokemon10Description ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Damage1BenchedPokemon10EffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_BLIZZARD ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
