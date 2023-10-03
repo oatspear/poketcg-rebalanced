@@ -2,6 +2,11 @@
 
 ## Version 0.6.0
 
+### Grass Changes
+
+#### Vileplume
+- **Allergic Pollen**: only prevents the use of non-Supporter Trainer cards.
+
 ### Fire Changes
 
 #### Charmeleon
@@ -30,6 +35,9 @@
 #### Blastoise
 - **Aqua Launcher**: increased cost from (W) to (WC); reduces damage taken by 10.
 - **Hydro Pump**: base damage increased from 40 to 50.
+
+#### Psyduck
+- **Headache**: only prevents the use of non-Supporter Trainer cards.
 
 #### Staryu
 - **Big Splash**: removed.

@@ -61,11 +61,6 @@ _AIProcessHandTrainerCards:
 	call AICheckCanPlayTrainerInBuffer1
 	jp c, .next_in_data
 
-; if Headache effects prevent playing card
-; move on to the next item in list.
-	bank1call CheckCantUseTrainerDueToHeadache
-	jp c, .next_in_data
-
 	call LoadNonPokemonCardEffectCommands
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
 	call TryExecuteEffectCommandFunction
@@ -160,12 +155,16 @@ _AIProcessHandTrainerCards:
 AICheckCanPlayTrainerInBuffer1:
 	ld a, [wLoadedCard1Type]
 	cp TYPE_TRAINER_SUPPORTER
-	jr nz, .can_play_card
+	jr nz, .not_supporter
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	and PLAYED_SUPPORTER_THIS_TURN
 	jr z, .can_play_card
 	scf
 	ret
+.not_supporter
+; Headache effects prevent playing card
+	bank1call CheckCantUseTrainerDueToHeadache
+	ret c
 .can_play_card
 	or a
 	ret

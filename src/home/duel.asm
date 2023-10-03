@@ -1819,8 +1819,6 @@ CheckSelfConfusionDamage:
 ; if the card was played and moved to discard, return 0 in a
 ; if the card was cancelled in its initial effect, return 1 in a
 PlayTrainerCard:
-	call CheckCantUseTrainerDueToHeadache
-	jr c, .cant_use
 	ldh a, [hWhoseTurn]
 	ld h, a
 	ldh a, [hTempCardIndex_ff98]
@@ -1842,6 +1840,8 @@ PlayTrainerCard:
 	jr .try_use_card
 .not_supporter_card
 ; OATS end support trainer subtypes
+	call CheckCantUseTrainerDueToHeadache
+	jr c, .cant_use
 	ld a, 10
 	ld [wGarbageEaterDamageToHeal], a
 .try_use_card

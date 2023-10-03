@@ -656,7 +656,7 @@ CheckIfCardCanBePlayed:
 	jr nz, .not_supporter_card
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	and PLAYED_SUPPORTER_THIS_TURN
-	jr z, .not_supporter_card
+	jr z, .can_play
 ; supporter already played
 	scf
 	ret
@@ -664,10 +664,10 @@ CheckIfCardCanBePlayed:
 ; OATS end SUPPORTER check
 	bank1call CheckCantUseTrainerDueToHeadache
 	ret c
+.can_play
 	call LoadNonPokemonCardEffectCommands
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
-	call TryExecuteEffectCommandFunction
-	ret
+	jp TryExecuteEffectCommandFunction
 
 ; loads all the energy cards
 ; in hand in wDuelTempList

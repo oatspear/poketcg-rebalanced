@@ -1183,13 +1183,14 @@ PsyduckName: ; 5b38f (16:738f)
 	text "Psyduck"
 	done
 
-HeadacheName: ; 5b398 (16:7398)
+HeadacheName:
 	text "Headache"
 	done
 
-HeadacheDescription: ; 5b3a2 (16:73a2)
-	text "Your opponent can't play Trainer"
-	line "cards during his or her next turn."
+HeadacheDescription:
+	text "Your opponent cannot play"
+	line "non-Supporter Trainer cards"
+	line "during their next turn."
 	done
 
 DuckName: ; 5b3e7 (16:73e7)
