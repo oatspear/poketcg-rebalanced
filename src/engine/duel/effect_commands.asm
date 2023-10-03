@@ -31,15 +31,6 @@ EffectCommands: ; 186f7 (6:46f7)
 ; Similar attack effects of different Pokemon cards all point to a different command list,
 ; even though in some cases their commands and function pointers match.
 
-; Function name examples
-;	PoisonEffect                     ; generic effect shared by multiple attacks.
-;	Paralysis50PercentEffect         ;
-;	KakunaStiffenEffect              ; unique effect from an attack known by multiple cards.
-;	MetapodStiffenEffect             ;
-;	AcidEffect                       ; unique effect from an attack known by a single card
-;	FoulOdorEffect                   ;
-;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
-;	SpitPoison_AIEffect              ;
 
 PassivePowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
@@ -421,7 +412,6 @@ MagnetonThunderWaveEffectCommands:
 JolteonStunNeedleEffectCommands:
 SnorlaxBodySlamEffectCommands:
 PinsirIronGripEffectCommands:
-CloysterClampEffectCommands:
 CaterpieStringShotEffectCommands:
 ArticunoFreezeDryEffectCommands:
 Paralysis50PercentEffectCommands:
@@ -531,6 +521,34 @@ FireSpinEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discard2Energies_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Discard2Energies_DiscardEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Discard2Energies_AISelectEffect
+	db  $00
+
+WhirlpoolEffectCommands:
+TwisterEffectCommands:
+HyperBeamEffectCommands:
+FireFangEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergy_AISelectEffect
+	db  $00
+
+; EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN runs after EFFECTCMDTYPE_DISCARD_ENERGY,
+; but before EFFECTCMDTYPE_BEFORE_DAMAGE
+Discard1EnergyFromBothActiveEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, DiscardOpponentEnergy_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect
+	db  $00
+
+CorrosiveAcidEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardOpponentEnergyIfHeads_50PercentEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergyIfHeads_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergyIfHeads_AISelectEffect
 	db  $00
 
 Confusion50PercentEffectCommands:
@@ -1017,22 +1035,6 @@ DoduoFuryAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FuryAttack_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, FuryAttack_AIEffect
 	db  $00
-
-WhirlpoolEffectCommands:
-TwisterEffectCommands:
-HyperBeamEffectCommands:
-FireFangEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergy_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergy_AISelectEffect
-	db  $00
-
-CorrosiveAcidEffectCommands:
- 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardOpponentEnergyIfHeads_50PercentEffect
- 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect
- 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergyIfHeads_PlayerSelectEffect
- 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergyIfHeads_AISelectEffect
- 	db  $00
 
 SmallCombustionEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SmallCombustion_DiscardDeckEffect
