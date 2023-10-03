@@ -59,7 +59,7 @@ HealADamageEffect:
 ;	e = HP amount to recover
 ApplyAndAnimateHPRecovery:
 	push de
-	ld hl, wccbd
+	ld hl, wHPRecoveryInputBackup
 	ld [hl], e
 	inc hl
 	ld [hl], d

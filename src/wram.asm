@@ -739,7 +739,8 @@ wAIMinDamage:: ; ccbb
 wAIMaxDamage:: ; ccbc
 	ds $1
 
-wccbd:: ; ccbd
+wCardListNumberOfCardsToChoose:: ; ccbd
+wHPRecoveryInputBackup:: ; ccbd
 	ds $2
 
 ; damage dealt by an attack to a target
