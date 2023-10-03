@@ -6735,29 +6735,29 @@ DoLinkOpponentTurn:
 ; on a link duel, this is referenced by DoLinkOpponentTurn in a loop (on each opponent's HandleTurn)
 ; on a non-link duel (vs AI opponent), this is referenced by AIMakeDecision
 OppActionTable:
-	dw DuelTransmissionError
-	dw OppAction_PlayBasicPokemonCard
-	dw OppAction_EvolvePokemonCard
-	dw OppAction_PlayEnergyCard
-	dw OppAction_AttemptRetreat
-	dw OppAction_FinishTurnWithoutAttacking
-	dw OppAction_PlayTrainerCard
-	dw OppAction_ExecuteTrainerCardEffectCommands
-	dw OppAction_BeginUseAttack
-	dw OppAction_UseAttack
-	dw OppAction_PlayAttackAnimationDealAttackDamage
-	dw OppAction_DrawCard
-	dw OppAction_UsePokemonPower
-	dw OppAction_ExecutePokemonPowerEffect
-	dw OppAction_ForceSwitchActive
-	dw OppAction_NoAction
-	dw OppAction_NoAction
-	dw OppAction_TossCoinATimes
-	dw OppAction_6b30
-	dw OppAction_NoAction
-	dw OppAction_UseMetronomeAttack
-	dw OppAction_6b15
-	dw OppAction_DrawDuelMainScene
+	dw DuelTransmissionError                          ; OPPACTION_ERROR
+	dw OppAction_PlayBasicPokemonCard                 ; OPPACTION_PLAY_BASIC_PKMN
+	dw OppAction_EvolvePokemonCard                    ; OPPACTION_EVOLVE_PKMN
+	dw OppAction_PlayEnergyCard                       ; OPPACTION_PLAY_ENERGY
+	dw OppAction_AttemptRetreat                       ; OPPACTION_ATTEMPT_RETREAT
+	dw OppAction_FinishTurnWithoutAttacking           ; OPPACTION_FINISH_NO_ATTACK
+	dw OppAction_PlayTrainerCard                      ; OPPACTION_PLAY_TRAINER
+	dw OppAction_ExecuteTrainerCardEffectCommands     ; OPPACTION_EXECUTE_TRAINER_EFFECTS
+	dw OppAction_BeginUseAttack                       ; OPPACTION_BEGIN_ATTACK
+	dw OppAction_UseAttack                            ; OPPACTION_USE_ATTACK
+	dw OppAction_PlayAttackAnimationDealAttackDamage  ; OPPACTION_ATTACK_ANIM_AND_DAMAGE
+	dw OppAction_DrawCard                             ; OPPACTION_DRAW_CARD
+	dw OppAction_UsePokemonPower                      ; OPPACTION_USE_PKMN_POWER
+	dw OppAction_ExecutePokemonPowerEffect            ; OPPACTION_EXECUTE_PKMN_POWER_EFFECT
+	dw OppAction_ForceSwitchActive                    ; OPPACTION_FORCE_SWITCH_ACTIVE
+	dw OppAction_NoAction                             ; OPPACTION_NO_ACTION_0F
+	dw OppAction_NoAction                             ; OPPACTION_NO_ACTION_10
+	dw OppAction_TossCoinATimes                       ; OPPACTION_TOSS_COIN_A_TIMES
+	dw OppAction_6b30                                 ; OPPACTION_6B30
+	dw OppAction_NoAction                             ; OPPACTION_NO_ACTION_13
+	dw OppAction_UseMetronomeAttack                   ; OPPACTION_USE_METRONOME_ATTACK
+	dw OppAction_6b15                                 ; OPPACTION_6B15
+	dw OppAction_DrawDuelMainScene                    ; OPPACTION_DUEL_MAIN_SCENE
 
 OppAction_DrawCard:
 	call DrawCardFromDeck
