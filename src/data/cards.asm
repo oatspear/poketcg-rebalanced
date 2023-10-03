@@ -4121,15 +4121,15 @@ HorseaCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx WaterReserveName ; name
-	tx WaterReserveDescription ; description
+	tx DragonDanceName ; name
+	tx AttachEnergyFromHandDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw WaterReserveEffectCommands ; effect commands
-	db DRAW_CARD ; flags 1
+	dw DragonDanceEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
@@ -4185,7 +4185,7 @@ SeadraCard:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 2 ; energies
+	energy WATER, 1, COLORLESS, 1 ; energies
 	tx RiptideName ; name
 	tx RiptideDescription ; description
 	dw NONE ; description (cont)

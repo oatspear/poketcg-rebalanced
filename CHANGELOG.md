@@ -62,13 +62,13 @@
 #### Horsea
 - **Smokescreen**: removed.
 - **Water Gun**: removed.
-- New attack: **Water Reserve** (C): add up to 2 Water Energy from deck to hand.
+- New attack: **Dragon Dance** (C): attach an energy from hand to one Pokémon.
 - New attack: **Aqua Burst** (WC): 30 damage, discard 1 energy.
 
 #### Seadra
 - **Aqua Launcher**: renamed to **Water Arrow**.
 - **Twister**: removed.
-- New attack: **Riptide** (WCC): 10 damage; retrieve up to 2 energies from discard; +20 damage for each.
+- New attack: **Riptide** (WC): 10 damage; retrieve up to 2 energies from discard; +20 damage for each.
 
 #### Seaking
 - **Waterfall**: reduced cost from (WCC) to (CCC).
