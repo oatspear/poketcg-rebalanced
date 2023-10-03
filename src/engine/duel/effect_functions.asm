@@ -1664,7 +1664,7 @@ AIPickAttackForAmnesia: ; 2c532 (b:4532)
 	call SwapTurn
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
-	call HandleEnergyBurn
+	; call HandleEnergyBurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ld d, a
