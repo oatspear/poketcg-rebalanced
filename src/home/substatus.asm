@@ -719,7 +719,7 @@ GetLoadedCard1RetreatCost:
 	call GetTurnDuelistVariable
 .check_bench_loop
 	ld a, [hli]
-	cp -1
+	cp $ff
 	jr z, .no_more_bench
 	call GetCardIDFromDeckIndex
 	ld a, e
