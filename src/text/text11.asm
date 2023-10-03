@@ -1591,10 +1591,6 @@ IcyWindName:
 	text "Icy Wind"
 	done
 
-AquaBurstName:
-	text "Aqua Burst"
-	done
-
 WaterArrowName:
 	text "Water Arrow"
 	done
@@ -1633,4 +1629,14 @@ DeepDiveDescription:
 	text "Heal 30 damage from this Pokémon"
 	line "and Switch it with 1 of your"
 	line "Benched Pokémon."
+	done
+
+ColdCrushName:
+	text "Cold Crush"
+	done
+
+Discard1EnergyFromBothActiveDescription:
+	text "Discard an Energy card attached to"
+	line "this Pokémon and another attached"
+	line "to the Defending Pokémon."
 	done

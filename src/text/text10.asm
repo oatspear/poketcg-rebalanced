@@ -1388,8 +1388,8 @@ ClampName: ; 5bc7e (16:7c7e)
 	text "Clamp"
 	done
 
-SpikeCannonName: ; 5bcfb (16:7cfb)
-	text "Spike Cannon"
+AquaBurstName:
+	text "Aqua Burst"
 	done
 
 CloysterDescription: ; 5bd09 (16:7d09)

@@ -2420,7 +2420,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ShellderDescription                                ; 0x0962
 	textpointer CloysterName                                       ; 0x0963
 	textpointer ClampName                                          ; 0x0964
-	textpointer SpikeCannonName                                    ; 0x0966
+	textpointer AquaBurstName
 	textpointer CloysterDescription                                ; 0x0967
 	textpointer KrabbyName                                         ; 0x0968
 	textpointer RiverCrabName                                      ; 0x096a
@@ -2822,7 +2822,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AfflictionName
 	textpointer AfflictionDescription
 	textpointer IcyWindName
-	textpointer AquaBurstName
 	textpointer WaterArrowName
 	textpointer FindIceName
 	textpointer WaterReserveName
@@ -2831,6 +2830,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RiptideDescription
 	textpointer DeepDiveName
 	textpointer DeepDiveDescription
+	textpointer ColdCrushName
+	textpointer Discard1EnergyFromBothActiveDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
