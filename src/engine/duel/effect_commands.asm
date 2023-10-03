@@ -391,6 +391,10 @@ SmokescreenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceAccuracyEffect
 	db  $00
 
+IncreaseRetreatCostEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IncreaseRetreatCostEffect
+	db  $00
+
 SupersonicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
 	db  $00
