@@ -155,12 +155,15 @@ AITryUseAttack:
 	call GetTurnDuelistVariable
 	ld d, a
 	call CopyAttackDataAndDamage_FromDeckIndex
+; display the attack used by the opponent, and handle
+; EFFECTCMDTYPE_DISCARD_ENERGY and confusion damage to self
 	ld a, OPPACTION_USE_ATTACK
 	bank1call AIMakeDecision
 	ret c
 
 	ld a, EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN
 	call TryExecuteEffectCommandFunction
+; handle EFFECTCMDTYPE_BEFORE_DAMAGE, damage and EFFECTCMDTYPE_AFTER_DAMAGE
 	ld a, OPPACTION_ATTACK_ANIM_AND_DAMAGE
 	bank1call AIMakeDecision
 	ret
@@ -191,6 +194,10 @@ CheckIfEnergyIsUseful:
 	jr z, .set_carry
 	ld a, [wTempCardID]
 
+	ld d, FIGHTING_ENERGY
+	cp POLIWRATH
+	jr z, .check_energy
+
 	ld d, PSYCHIC_ENERGY
 	cp PSYDUCK
 	jr z, .check_energy
@@ -202,6 +209,14 @@ CheckIfEnergyIsUseful:
 	jr z, .check_energy
 	cp SURFING_PIKACHU_ALT_LV13
 	jr z, .check_energy
+
+; Dragon Rage users benefit from all kinds of energy
+	cp GYARADOS
+	jr z, .set_carry
+	cp DRAGONITE_LV41
+	jr z, .set_carry
+	cp DRAGONITE_LV45
+	jr z, .set_carry
 
 	cp EEVEE
 	jr nz, .check_type
