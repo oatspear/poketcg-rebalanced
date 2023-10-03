@@ -22,9 +22,10 @@
 - New attack: **Shell Press** (WC): 20 damage; reduce incoming damage by 10.
 
 #### Wartortle
+- Increased HP from 70 to 80.
 - **Rain Dance**: can attach unlimited Water Energy per turn.
 - **Bite**: removed.
-- New attack: **Shell Press** (WC): 30 damage; reduce incoming damage by 10.
+- New attack: **Rocket Shell** (WCC): 30 damage; reduce incoming damage by 10; add 1 Water Energy from deck to hand if attached energy on the same turn.
 
 #### Blastoise
 - **Aqua Launcher**: increased cost from (W) to (WC); reduces damage taken by 10.

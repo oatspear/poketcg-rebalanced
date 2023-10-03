@@ -630,6 +630,13 @@ WaterReserveEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, WaterReserve_AISelectEffect
 	db  $00
 
+RocketShellEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCard_AddToHandFromDeckEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ReduceDamageTakenBy10Effect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, RocketShell_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, RocketShell_AISelectEffect
+	db  $00
+
 GatherToxinsEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
@@ -1203,7 +1210,7 @@ LeadEffectCommands:
 
 
 ReduceDamageTakenBy10EffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ExpandEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ReduceDamageTakenBy10Effect
 	db  $00
 
 SneakAttackEffectCommands:

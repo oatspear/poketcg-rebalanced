@@ -1081,7 +1081,7 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 ; Deal damage to selected Pokémon and apply defense boost to self.
 AquaLauncherEffect:
 	call Deal30Damage_DamageEffect
-	jp ShellPressEffect
+	jp ReduceDamageTakenBy10Effect
 
 
 PanicVine_ConfusionTrapEffect:
@@ -1272,6 +1272,43 @@ Ultravision_AISelectEffect:
 .anything
 	ld a, [wDuelTempList]
 	ldh [hTemp_ffa0], a
+	ret
+
+
+
+RocketShell_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTempList], a
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_ENERGY_THIS_TURN
+	ret z  ; did not play energy
+	; fallthrough
+
+TutorWaterEnergy_PlayerSelectEffect:
+	; ld b, 5
+	; call CreateDeckCardListTopNCards
+	call CreateDeckCardList
+	ld a, TYPE_ENERGY_WATER
+	call HandlePlayerSelectionCardTypeFromDeckListToHand
+	ldh [hTempList], a
+	ret
+
+
+RocketShell_AISelectEffect:
+	ld a, $ff
+	ldh [hTempList], a
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_ENERGY_THIS_TURN
+	ret z  ; did not play energy
+	; fallthrough
+
+TutorWaterEnergy_AISelectEffect:
+	; ld b, 5
+	; call CreateDeckCardListTopNCards
+	call CreateDeckCardList
+	ld b, TYPE_ENERGY_WATER
+	call ChooseCardOfGivenType_AISelectEffect
+	ldh [hTempList], a
 	ret
 
 
@@ -6272,13 +6309,6 @@ DealDEDamage_DamageEffect:
 	; ld de, 30
 	call DealDamageToPlayAreaPokemon_RegularAnim
 	jp SwapTurn
-
-
-RockHeadEffect:
-ExpandEffect:
-ShellPressEffect:
-	ld a, SUBSTATUS1_REDUCE_BY_10
-	jp ApplySubstatus1ToAttackingCard
 
 
 ; returns carry if either there are no damage counters

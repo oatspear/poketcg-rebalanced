@@ -3349,7 +3349,7 @@ WartortleCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db WARTORTLE
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx SquirtleName ; pre-evo name
 
@@ -3368,13 +3368,13 @@ WartortleCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 1 ; energies
-	tx ShellPressName ; name
-	tx ReduceDamageTakenBy10Description ; description
-	dw NONE ; description (cont)
+	energy WATER, 1, COLORLESS, 2 ; energies
+	tx RocketShellName ; name
+	tx RocketShellDescription ; description
+	tx ReduceDamageTakenBy10Description ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ReduceDamageTakenBy10EffectCommands ; effect commands
+	dw RocketShellEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3

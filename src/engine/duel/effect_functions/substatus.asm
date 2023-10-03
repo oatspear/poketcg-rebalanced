@@ -1,18 +1,4 @@
 ; ------------------------------------------------------------------------------
-; Application
-; ------------------------------------------------------------------------------
-
-; apply a status condition of type 1 identified by register a to the target
-ApplySubstatus1ToAttackingCard: ; 2c140 (b:4140)
-	push af
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
-	call GetTurnDuelistVariable
-	pop af
-	ld [hli], a
-	ret
-
-
-; ------------------------------------------------------------------------------
 ; Substatus 1
 ; ------------------------------------------------------------------------------
 
@@ -23,7 +9,21 @@ FocusEnergyEffect:
 	; cp VAPOREON_LV29
 	; ret nz ; return if no VaporeonLv29
 	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
-	call ApplySubstatus1ToAttackingCard
+	jr ApplySubstatus1ToAttackingCard
+
+
+ReduceDamageTakenBy10Effect:
+	ld a, SUBSTATUS1_REDUCE_BY_10
+	jr ApplySubstatus1ToAttackingCard
+
+
+; apply a status condition of type 1 identified by register a to the target
+ApplySubstatus1ToAttackingCard:
+	push af
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
+	call GetTurnDuelistVariable
+	pop af
+	ld [hli], a
 	ret
 
 

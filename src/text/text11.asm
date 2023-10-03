@@ -1649,3 +1649,15 @@ AquaLauncherDescription:
 	line "is reduced by 10 (after applying"
 	line "Weakness and Resistance)."
 	done
+
+RocketShellName:
+	text "Rocket Shell"
+	done
+
+RocketShellDescription:
+	text "If you attached an Energy card from"
+	line "your Hand this turn, you may search"
+	line "your Deck for a Basic Energy card"
+	line "and add it to your hand."
+	line "Shuffle your Deck afterward."
+	done

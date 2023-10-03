@@ -44,8 +44,7 @@ LookForCardsInDeck:
 	ldtx hl, ThereIsNoInTheDeckText
 	call DrawWideTextBox_WaitForInput
 	ldtx hl, WouldYouLikeToCheckTheDeckText
-	call YesOrNoMenuWithText_SetCursorToYes
-	ret
+	jp YesOrNoMenuWithText_SetCursorToYes
 
 ; searches through the Discard Pile in wDuelTempList looking for
 ; a certain card or cards, and prints text depending
