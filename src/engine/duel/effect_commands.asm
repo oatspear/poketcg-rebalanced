@@ -678,6 +678,13 @@ FishingTailEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, FishingTail_AISelection
 	db  $00
 
+AquaticRescueEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FishingTail_DiscardPileCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCardList_AddToHandFromDiscardPileEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ChooseUpTo3Cards_PlayerDiscardPileSelection
+	dbw EFFECTCMDTYPE_AI_SELECTION, AquaticRescue_AISelectEffect
+	db  $00
+
 StrangeBehaviorEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StrangeBehavior_CheckDamage
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StrangeBehavior_SelectAndSwapEffect
@@ -1469,7 +1476,7 @@ EnergySwitchEffectCommands:
 EnergyRecyclerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyRecycler_ReturnToDeckEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyRecycler_PlayerDiscardPileSelection
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ChooseUpTo4Cards_PlayerDiscardPileSelection
 	db  $00
 
 GiovanniEffectCommands:

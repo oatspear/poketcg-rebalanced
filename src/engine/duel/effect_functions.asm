@@ -1275,6 +1275,49 @@ Ultravision_AISelectEffect:
 	ret
 
 
+; assume card list is already initialized from precondition check
+; FIXME improve
+AquaticRescue_AISelectEffect:
+	ld a, $ff
+	ldh [hTempList], a
+	ldh [hTempList + 1], a
+	ldh [hTempList + 2], a
+	ldh [hTempList + 3], a
+; try to get energy
+	call LoopCardList_GetFirstEnergy
+	jr c, .done
+	ldh [hTempList], a
+; try to get energy
+	call LoopCardList_GetFirstEnergy
+	jr c, .done
+	ldh [hTempList + 1], a
+; try to get energy
+	call LoopCardList_GetFirstEnergy
+	jr c, .done
+	ldh [hTempList + 2], a
+.done
+	or a
+	ret
+
+
+; return in a deck index of card or $ff
+LoopCardList_GetFirstEnergy:
+	ld hl, wDuelTempList
+.loop_cards
+	ld a, [hl]
+	cp $ff
+	jr z, .none_found
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY
+	ld a, [hl]
+	ret z  ; found
+	inc hl
+	jr .loop_cards
+.none_found
+	scf
+	ret
+
 
 RocketShell_PlayerSelectEffect:
 	ld a, $ff
@@ -6773,12 +6816,15 @@ MoveDeckCardToTopOfDeckEffect:
 	jp ReturnCardToDeck  ; preserves a, hl, de, bc
 
 
-; FIXME card (singular), refactor the same as deck version above
-SelectedCards_AddToHandFromDiscardPile:
+SelectedCard_AddToHandFromDiscardPile:
 ; add the first card in hTempList to the hand
 	ldh a, [hTempList]
 	cp $ff
 	ret z
+	; fallthrough
+
+; move the card with deck index given in a from the discard pile to the hand
+AddDiscardPileCardToHandEffect:
 	call MoveDiscardPileCardToHand
 	call AddCardToHand
 	call IsPlayerTurn
@@ -6790,6 +6836,17 @@ SelectedCards_AddToHandFromDiscardPile:
 	ret
 
 
+; moves all the cards in hTempList from the discard pile to the turn holder's hand
+SelectedCardList_AddToHandFromDiscardPileEffect:
+	ld hl, hTempList
+.loop_cards
+	ld a, [hli]
+	cp $ff
+	ret z  ; done
+	call AddDiscardPileCardToHandEffect
+	jr .loop_cards
+
+
 AbsorbWater_AddToHandEffect:
 	call CreateEnergyCardListFromDiscardPile_OnlyWater
 ; choose the first energy in the list
@@ -6797,7 +6854,7 @@ AbsorbWater_AddToHandEffect:
 	ldh [hTempList], a
 	ld a, $ff
 	ldh [hTempList + 1], a
-	jr SelectedCards_AddToHandFromDiscardPile
+	jr SelectedCard_AddToHandFromDiscardPile
 
 
 Maintenance_DiscardAndAddToHandEffect:
@@ -6809,7 +6866,7 @@ SelectedCards_Discard1AndAdd1ToHandFromDiscardPile:
 	ldh [hTempList], a
 	ld a, $ff
 	ldh [hTempList + 1], a
-	jr SelectedCards_AddToHandFromDiscardPile
+	jr SelectedCard_AddToHandFromDiscardPile
 
 
 ; discard the first card in hTempList
@@ -8368,7 +8425,19 @@ DevolutionSpray_DevolutionEffect: ; 2fc99 (b:7c99)
 	ret
 
 
-EnergyRecycler_PlayerDiscardPileSelection:
+ChooseUpTo3Cards_PlayerDiscardPileSelection:
+	ld a, 3
+	ld [wCardListNumberOfCardsToChoose], a
+	jr ChooseUpToNCards_PlayerDiscardPileSelection
+
+ChooseUpTo4Cards_PlayerDiscardPileSelection:
+	ld a, 4
+	ld [wCardListNumberOfCardsToChoose], a
+	; jr ChooseUpToNCards_PlayerDiscardPileSelection
+	; fallthrough
+
+; number of cards is given in [wCardListNumberOfCardsToChoose]
+ChooseUpToNCards_PlayerDiscardPileSelection:
 	xor a
 	ldh [hCurSelectionItem], a
 	ldtx hl, ChooseUpTo4FromDiscardPileText
@@ -8383,7 +8452,7 @@ EnergyRecycler_PlayerDiscardPileSelection:
 	bank1call DisplayCardList
 	jr nc, .store_selected_card
 	; B pressed
-	ld a, 6
+	ld a, [wCardListNumberOfCardsToChoose]
 	call AskWhetherToQuitSelectingCards
 	jr c, .loop_discard_pile_selection ; player selected to continue
 	jr .done
@@ -8396,9 +8465,10 @@ EnergyRecycler_PlayerDiscardPileSelection:
 	ld [hl], a ; store selected energy card
 	call RemoveCardFromDuelTempList
 	jr c, .done
-	; this shouldn't happen
+	ld a, [wCardListNumberOfCardsToChoose]
+	ld b, a
 	ldh a, [hCurSelectionItem]
-	cp 6
+	cp b
 	jr c, .loop_discard_pile_selection
 
 .done
