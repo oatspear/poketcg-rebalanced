@@ -4603,15 +4603,6 @@ Ram_RecoilSwitchEffect: ; 2e212 (b:6212)
 	call HandleSwitchDefendingPokemonEffect
 	ret
 
-LeerEffect: ; 2e21d (b:621d)
-	ldtx de, IfHeadsOpponentCannotAttackText
-	call TossCoin_BankB
-	jp nc, SetWasUnsuccessful
-	ld a, ATK_ANIM_LEER
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS2_LEER
-	call ApplySubstatus2ToDefendingCard
-	ret
 
 ; return carry if opponent has no Bench Pokemon.
 StretchKick_CheckBench:

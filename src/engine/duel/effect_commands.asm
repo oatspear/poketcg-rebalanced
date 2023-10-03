@@ -806,10 +806,6 @@ RhydonRamEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Ram_SelectSwitchEffect
 	db  $00
 
-RhyhornLeerEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeerEffect
-	db  $00
-
 MarowakBoneAttackEffectCommands:
 DiglettDigEffectCommands:
 HitmonleeStretchKickEffectCommands:

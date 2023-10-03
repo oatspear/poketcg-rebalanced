@@ -272,10 +272,7 @@ HandleCantAttackSubstatus:
 	or a
 	ret z
 	ldtx hl, UnableToAttackDueToEffectText
-	cp SUBSTATUS2_TAIL_WAG
-	jr z, .return_with_cant_attack
-	; ldtx hl, UnableToAttackDueToEffectText
-	cp SUBSTATUS2_LEER
+	cp SUBSTATUS2_UNABLE_ATTACK
 	jr z, .return_with_cant_attack
 	or a
 	ret
@@ -785,9 +782,7 @@ ClearDamageReductionSubstatus2:
 	jr z, .zero
 	cp SUBSTATUS2_GROWL
 	jr z, .zero
-	cp SUBSTATUS2_TAIL_WAG
-	jr z, .zero
-	cp SUBSTATUS2_LEER
+	cp SUBSTATUS2_UNABLE_ATTACK
 	jr z, .zero
 	ret
 .zero

@@ -2370,7 +2370,17 @@ GetPlayAreaCardRetreatCost:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
+	call LoadCardDataToBuffer1_FromDeckIndex  ; preserves hl
+	; apply Retreat Cost penalties before discounts
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	or a
+	jp nz, GetLoadedCard1RetreatCost  ; exit, not arena, penalties are not applicable
+	ld l, DUELVARS_ARENA_CARD_SUBSTATUS2
+	ld a, [hl]
+	cp SUBSTATUS2_RETREAT_PLUS_1
+	jp nz, GetLoadedCard1RetreatCost  ; exit, no substatus
+	ld hl, wLoadedCard1RetreatCost
+	inc [hl]
 	jp GetLoadedCard1RetreatCost
 
 

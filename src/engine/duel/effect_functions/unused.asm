@@ -1144,7 +1144,7 @@ TailWagEffect: ; 2e94e (b:694e)
 	jp nc, SetWasUnsuccessful
 	ld a, ATK_ANIM_LURE
 	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS2_TAIL_WAG
+	ld a, SUBSTATUS2_UNABLE_ATTACK
 	call ApplySubstatus2ToDefendingCard
 	ret
 
@@ -2695,11 +2695,22 @@ ThunderJolt_RecoilEffect: ; 2e529 (b:6529)
 
 ;
 
+
+LeerEffect: ; 2e21d (b:621d)
+	ldtx de, IfHeadsOpponentCannotAttackText
+	call TossCoin_BankB
+	jp nc, SetWasUnsuccessful
+	ld a, ATK_ANIM_LEER
+	ld [wLoadedAttackAnimation], a
+	ld a, SUBSTATUS2_LEER
+	call ApplySubstatus2ToDefendingCard
+	ret
+
 BoneAttackEffect: ; 2e30f (b:630f)
 	ldtx de, IfHeadsOpponentCannotAttackText
 	call TossCoin_BankB
 	ret nc
-	ld a, SUBSTATUS2_LEER
+	ld a, SUBSTATUS2_UNABLE_ATTACK
 	call ApplySubstatus2ToDefendingCard
 	ret
 

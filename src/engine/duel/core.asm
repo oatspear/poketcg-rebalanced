@@ -7777,7 +7777,7 @@ Data_6ed2:
 	db TURN_PLAYER_TIED, TURN_PLAYER_LOST, TURN_PLAYER_WON, TURN_PLAYER_TIED
 
 ; clears SUBSTATUS2_REDUCE_BY_20, SUBSTATUS2_REDUCE_BY_10, SUBSTATUS2_GROWL,
-; SUBSTATUS2_TAIL_WAG, and SUBSTATUS2_LEER for each arena Pokemon with 0 HP
+; SUBSTATUS2_UNABLE_ATTACK for each arena Pokemon with 0 HP
 ClearDamageReductionSubstatus2OfKnockedOutPokemon:
 	call SwapTurn
 	call .clear
@@ -7786,8 +7786,7 @@ ClearDamageReductionSubstatus2OfKnockedOutPokemon:
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetNonTurnDuelistVariable
 	or a
-	ret nz
-	call ClearDamageReductionSubstatus2
+	call z, ClearDamageReductionSubstatus2
 	ret
 
 Func_6ef6:
