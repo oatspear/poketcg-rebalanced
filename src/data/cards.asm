@@ -2538,27 +2538,27 @@ CharizardCard:
 	tx CharmeleonName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx EnergyBurnName ; name
-	tx EnergyBurnDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw PassivePowerEffectCommands ; effect commands
+	energy COLORLESS, 2 ; energies
+	tx DragonRageName ; name
+	tx DragonRageDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw DragonRageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db ATK_ANIM_DRAGON_RAGE ; animation
 
 	; attack 2
-	energy FIRE, 4 ; energies
+	energy COLORLESS, 4 ; energies
 	tx FireSpinName ; name
 	tx Discard2EnergiesDescription ; description
 	dw NONE ; description (cont)
 	db 100 ; damage
 	db DAMAGE_NORMAL ; category
-	dw FireSpinEffectCommands ; effect commands
+	dw Discard2EnergiesEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3

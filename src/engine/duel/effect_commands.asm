@@ -516,7 +516,7 @@ WildfireEffectCommands:
 	db  $00
 
 FireBlastEffectCommands:
-FireSpinEffectCommands:
+Discard2EnergiesEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Check2EnergiesAttached
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discard2Energies_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Discard2Energies_DiscardEffect

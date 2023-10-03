@@ -7,6 +7,11 @@
 #### Charmeleon
 - **Firestarter**: can be used once per Pokémon per turn, rather than once per turn.
 
+#### Charizard
+- **Energy Burn**: removed.
+- **Fire Spin**: reduced cost from (FFFF) to (CCCC).
+- New attack: **Dragon Rage** (CC): 30 damage, +10 for each type of Basic Energy attached.
+
 ### Water Changes
 
 #### Squirtle
