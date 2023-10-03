@@ -27,6 +27,7 @@
 - New attack: **Shell Press** (WC): 30 damage; reduce incoming damage by 10.
 
 #### Blastoise
+- **Aqua Launcher**: increased cost from (W) to (WC); reduces damage taken by 10.
 - **Hydro Pump**: base damage increased from 40 to 50.
 
 #### Staryu

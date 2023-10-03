@@ -1175,6 +1175,12 @@ Deal30ToAnyPokemonEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
 	db  $00
 
+AquaLauncherEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AquaLauncherEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
+	db  $00
+
 ; PidgeotGaleEffectCommands:
 ; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Gale_LoadAnimation
 ; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Gale_SwitchEffect

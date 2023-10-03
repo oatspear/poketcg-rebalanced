@@ -1078,6 +1078,12 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
 
+; Deal damage to selected Pokémon and apply defense boost to self.
+AquaLauncherEffect:
+	call Deal30Damage_DamageEffect
+	jp ShellPressEffect
+
+
 PanicVine_ConfusionTrapEffect:
 	call UnableToRetreatEffect
 	jp ConfusionEffect
@@ -6265,16 +6271,14 @@ DealDEDamage_DamageEffect:
 	ld b, a
 	; ld de, 30
 	call DealDamageToPlayAreaPokemon_RegularAnim
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 
 RockHeadEffect:
 ExpandEffect:
 ShellPressEffect:
 	ld a, SUBSTATUS1_REDUCE_BY_10
-	call ApplySubstatus1ToAttackingCard
-	ret
+	jp ApplySubstatus1ToAttackingCard
 
 
 ; returns carry if either there are no damage counters

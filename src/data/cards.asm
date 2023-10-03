@@ -3405,18 +3405,18 @@ BlastoiseCard:
 	tx WartortleName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
+	energy WATER, 1, COLORLESS, 1 ; energies
 	tx AquaLauncherName ; name
-	tx Deal30ToAnyPokemonDescription ; description
+	tx AquaLauncherDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	dw AquaLauncherEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 2
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db 3
+	db ATK_ANIM_PROTECT ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies

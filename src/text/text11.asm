@@ -1587,10 +1587,6 @@ AfflictionDescription:
 	line "with a Special Condition."
 	done
 
-IcyWindName:
-	text "Icy Wind"
-	done
-
 WaterArrowName:
 	text "Water Arrow"
 	done
@@ -1639,4 +1635,17 @@ Discard1EnergyFromBothActiveDescription:
 	text "Discard an Energy card attached to"
 	line "this Pokémon and another attached"
 	line "to the Defending Pokémon."
+	done
+
+AquaLauncherName:
+	text "Aqua Launcher"
+	done
+
+AquaLauncherDescription:
+	text "This attack does 30 damage to 1"
+	line "of your opponent's Pokémon."
+	line "All damage done to this Pokémon"
+	line "during your opponent's next turn"
+	line "is reduced by 10 (after applying"
+	line "Weakness and Resistance)."
 	done

@@ -2371,7 +2371,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BlastoiseName                                      ; 0x092e
 	textpointer RainDanceName                                      ; 0x092f
 	textpointer RainDanceDescription                               ; 0x0930
-	textpointer AquaLauncherName
+	textpointer IcyWindName
 	textpointer HydroPumpName                                      ; 0x0932
 	textpointer HydroPumpDescription                               ; 0x0933
 	textpointer ShellfishName                                      ; 0x0934
@@ -2821,7 +2821,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer OverwhelmDescription
 	textpointer AfflictionName
 	textpointer AfflictionDescription
-	textpointer IcyWindName
 	textpointer WaterArrowName
 	textpointer FindIceName
 	textpointer WaterReserveName
@@ -2832,6 +2831,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DeepDiveDescription
 	textpointer ColdCrushName
 	textpointer Discard1EnergyFromBothActiveDescription
+	textpointer AquaLauncherName
+	textpointer AquaLauncherDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9

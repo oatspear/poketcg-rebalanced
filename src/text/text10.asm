@@ -1156,8 +1156,8 @@ RainDanceDescription:
 ;	line "card attachment for the turn.)"
 ;	done
 
-AquaLauncherName:
-	text "Aqua Launcher"
+IcyWindName:
+	text "Icy Wind"
 	done
 
 HydroPumpName:
