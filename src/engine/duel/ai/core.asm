@@ -198,12 +198,6 @@ CheckIfEnergyIsUseful:
 	cp POLIWRATH
 	jr z, .check_energy
 
-	ld d, PSYCHIC_ENERGY
-	cp PSYDUCK
-	jr z, .check_energy
-	cp GOLDUCK
-	jr z, .check_energy
-
 	ld d, WATER_ENERGY
 	cp SURFING_PIKACHU_LV13
 	jr z, .check_energy
