@@ -3456,7 +3456,7 @@ PsyduckCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx HeadacheName ; name
 	tx HeadacheDescription ; description
 	dw NONE ; description (cont)
@@ -3464,24 +3464,24 @@ PsyduckCard:
 	db RESIDUAL ; category
 	dw HeadacheEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 2
+	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx FurySwipesName ; name
-	tx Heads10BonusDamageDescription ; description
+	tx AmnesiaName ; name
+	tx AmnesiaDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw FurySwipes20Plus10EffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw AmnesiaEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_MULTIPLE_SLASH ; animation
+	db 2
+	db ATK_ANIM_AMNESIA ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -3502,7 +3502,7 @@ GolduckCard:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db GOLDUCK
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx PsyduckName ; pre-evo name
 

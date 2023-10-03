@@ -37,7 +37,14 @@
 - **Hydro Pump**: base damage increased from 40 to 50.
 
 #### Psyduck
-- **Headache**: only prevents the use of non-Supporter Trainer cards.
+- **Fury Swipes**: removed.
+- **Headache**: reduced cost from (P) to (C); only prevents the use of non-Supporter Trainer cards.
+- New attack: **Amnesia** (WC): 10 damage; disable 1 of the opponent's attacks.
+
+#### Golduck
+- Increased HP from 70 to 80.
+- **Amnesia**: removed.
+- **Hyper Beam**: removed.
 
 #### Staryu
 - **Big Splash**: removed.
