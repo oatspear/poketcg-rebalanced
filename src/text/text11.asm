@@ -1661,3 +1661,13 @@ RocketShellDescription:
 	line "and add it to your hand."
 	line "Shuffle your Deck afterward."
 	done
+
+AquaticRescueName:
+	text "Aquatic Rescue"
+	done
+
+AquaticRescueDescription:
+	text "Put up to 4 Pokémon or Energy"
+	line "cards from your discard pile"
+	line "into your hand."
+	done
