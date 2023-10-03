@@ -2490,7 +2490,7 @@ SuperEnergyRemoval_PlayerSelection: ; 2fce4 (b:7ce4)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hPlayAreaEffectTarget], a
 ; store which energy card to discard from it
-	bank1call CreateArenaOrBenchEnergyCardList
+	call CreateArenaOrBenchEnergyCardList
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	bank1call DisplayEnergyDiscardScreen
 	ld a, 2

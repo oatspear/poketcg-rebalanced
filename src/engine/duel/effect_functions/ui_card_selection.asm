@@ -451,7 +451,7 @@ HandlePokemonAndEnergySelectionScreen:
 
 .has_energy
 	ldh a, [hCurMenuItem]
-	bank1call CreateArenaOrBenchEnergyCardList
+	call CreateArenaOrBenchEnergyCardList
 	ldh a, [hCurMenuItem]
 	bank1call DisplayEnergyDiscardScreen
 	bank1call HandleEnergyDiscardMenuInput
@@ -516,7 +516,7 @@ HandleAttachedBasicEnergySelectionScreen:
 
 .has_energy
 	ldh a, [hCurMenuItem]
-	bank1call CreateArenaOrBenchEnergyCardList
+	call CreateArenaOrBenchEnergyCardList
 	ld c, DOUBLE_COLORLESS_ENERGY
 	call RemoveCardIDFromCardList
 	ldh a, [hCurMenuItem]

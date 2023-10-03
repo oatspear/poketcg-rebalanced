@@ -4234,7 +4234,8 @@ Recover_CheckEnergyHP:
 
 DiscardEnergy_PlayerSelectEffect:
 	xor a ; PLAY_AREA_ARENA
-	bank1call CreateArenaOrBenchEnergyCardList
+	call CreateArenaOrBenchEnergyCardList
+.got_energy_list
 	xor a ; PLAY_AREA_ARENA
 	bank1call DisplayEnergyDiscardScreen
 	bank1call HandleEnergyDiscardMenuInput
@@ -4245,7 +4246,7 @@ DiscardEnergy_PlayerSelectEffect:
 
 DiscardEnergy_AISelectEffect:
 	xor a ; PLAY_AREA_ARENA
-	bank1call CreateArenaOrBenchEnergyCardList
+	call CreateArenaOrBenchEnergyCardList
 	ld a, [wDuelTempList] ; pick first card
 	ldh [hTemp_ffa0], a
 	ret
@@ -4254,18 +4255,15 @@ DiscardEnergy_AISelectEffect:
 OptionalDiscardEnergy_PlayerSelectEffect:
 	ld a, $ff
 	ldh [hTemp_ffa0], a
-	call DiscardEnergy_PlayerSelectEffect
+	xor a ; PLAY_AREA_ARENA
+	call CreateArenaOrBenchEnergyCardList
+	call nc, DiscardEnergy_PlayerSelectEffect.got_energy_list
 ; ignore carry if set, otherwise the deck index is in [hTemp_ffa0]
 	or a
 	ret
 
 
 DiscardEnergy_DiscardEffect:
-	ldh a, [hTemp_ffa0]
-	jp PutCardInDiscardPile
-
-
-OptionalDiscardEnergy_DiscardEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	ret z
@@ -6315,7 +6313,7 @@ SuperPotion_PlayerSelectEffect: ; 2f167 (b:7167)
 ; Pokemon has damage and Energy cards attached,
 ; prompt the Player for Energy selection to discard.
 	ldh a, [hCurMenuItem]
-	bank1call CreateArenaOrBenchEnergyCardList
+	call CreateArenaOrBenchEnergyCardList
 	ldh a, [hCurMenuItem]
 	bank1call DisplayEnergyDiscardScreen
 	bank1call HandleEnergyDiscardMenuInput
