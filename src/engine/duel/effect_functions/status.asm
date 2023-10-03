@@ -99,7 +99,7 @@ ApplyStatusEffect: ; 2c035 (b:4035)
 
 ; Poison + Smokescreen
 SmogEffect:
-	call SmokescreenEffect
+	call ReduceAccuracyEffect
 	jp PoisonEffect
 
 

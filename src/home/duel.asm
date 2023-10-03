@@ -1593,7 +1593,7 @@ UseAttackOrPokemonPower:
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
 	call TryExecuteEffectCommandFunction
 	jp c, DrawWideTextBox_WaitForInput_ReturnCarry
-	call CheckSandAttackOrSmokescreenSubstatus
+	call CheckReducedAccuracySubstatus
 	jr c, .sand_attack_smokescreen
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
@@ -1602,7 +1602,7 @@ UseAttackOrPokemonPower:
 	jr .next
 .sand_attack_smokescreen
 	call SendAttackDataToLinkOpponent
-	call HandleSandAttackOrSmokescreenSubstatus
+	call HandleReducedAccuracySubstatus
 	jp c, ClearNonTurnTemporaryDuelvars_ResetCarry
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction

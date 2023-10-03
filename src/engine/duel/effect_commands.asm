@@ -9,7 +9,7 @@ EffectCommands: ; 186f7 (6:46f7)
 
 
 ; Commands are associated to a time or a scope (EFFECTCMDTYPE_*) that determines when their function is executed during the turn.
-; - EFFECTCMDTYPE_INITIAL_EFFECT_1: Executed right after attack or trainer card is used. Bypasses Smokescreen and Sand Attack effects.
+; - EFFECTCMDTYPE_INITIAL_EFFECT_1: Executed right after attack or trainer card is used. Bypasses Accuracy effects.
 ; - EFFECTCMDTYPE_INITIAL_EFFECT_2: Executed right after attack, Pokemon Power, or trainer card is used.
 ; - EFFECTCMDTYPE_DISCARD_ENERGY: For attacks or trainer cards that require putting one or more attached energy cards into the discard pile.
 ; - EFFECTCMDTYPE_REQUIRE_SELECTION: For attacks, Pokemon Powers, or trainer cards requiring the user to select a card (from e.g. play area screen or card list).
@@ -388,7 +388,7 @@ ReduceDamageTakenBy20EffectCommands:
 	db  $00
 
 SmokescreenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SmokescreenEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceAccuracyEffect
 	db  $00
 
 SupersonicEffectCommands:
@@ -817,7 +817,7 @@ Deal20ToBenchEffectCommands:
 	db  $00
 
 SandshrewSandAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SandAttackEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceAccuracyEffect
 	db  $00
 
 Earthquake10EffectCommands:

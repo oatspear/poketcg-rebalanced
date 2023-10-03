@@ -638,8 +638,8 @@ wDuelInitialPrizes:: ; cc08
 wDuelType:: ; cc09
 	ds $1
 
-; set to 1 if the coin toss during the CheckSandAttackOrSmokescreenSubstatus check is heads
-wGotHeadsFromSandAttackOrSmokescreenCheck:: ; cc0a
+; set to 1 if the coin toss during the CheckReducedAccuracySubstatus check is heads
+wGotHeadsFromAccuracyCheck:: ; cc0a
 	ds $1
 
 ; OATS WRAM0 is full, so we must reuse this byte to implement SUPPORTER checks

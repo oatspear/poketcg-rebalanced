@@ -6905,7 +6905,7 @@ OppAction_BeginUseAttack:
 	jr nz, .failed
 
 .not_first_turn
-	call CheckSandAttackOrSmokescreenSubstatus
+	call CheckReducedAccuracySubstatus
 	jr c, .has_status
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
@@ -6928,7 +6928,7 @@ OppAction_BeginUseAttack:
 	call ExchangeRNG
 	call HandleSleepCheck
 	jr c, .failed
-	call HandleSandAttackOrSmokescreenSubstatus
+	call HandleReducedAccuracySubstatus
 	ret nc ; return if attack is successful (won the coin toss)
 .failed
 	call ClearNonTurnTemporaryDuelvars
@@ -7776,7 +7776,7 @@ Data_6ed2:
 	db TURN_PLAYER_WON, TURN_PLAYER_TIED, TURN_PLAYER_WON, TURN_PLAYER_WON
 	db TURN_PLAYER_TIED, TURN_PLAYER_LOST, TURN_PLAYER_WON, TURN_PLAYER_TIED
 
-; clears SUBSTATUS2_REDUCE_BY_20, SUBSTATUS2_REDUCE_BY_10, SUBSTATUS2_GROWL,
+; clears SUBSTATUS2_REDUCE_BY_20, SUBSTATUS2_REDUCE_BY_10,
 ; SUBSTATUS2_UNABLE_ATTACK for each arena Pokemon with 0 HP
 ClearDamageReductionSubstatus2OfKnockedOutPokemon:
 	call SwapTurn
@@ -8133,7 +8133,7 @@ InitVariablesToBeginTurn:
 	ld [wAlreadyPlayedEnergyOrSupporter], a
 	; ld [wGotTailsFromConfusionCheckDuringRetreat], a
 	ld [wMiscTurnFlags], a
-	ld [wGotHeadsFromSandAttackOrSmokescreenCheck], a
+	ld [wGotHeadsFromAccuracyCheck], a
 	ldh a, [hWhoseTurn]
 	ld [wWhoseTurn], a
 	ret

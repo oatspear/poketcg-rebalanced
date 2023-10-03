@@ -26,8 +26,6 @@ HandleDamageReduction:
 	ret z
 	cp SUBSTATUS2_REDUCE_BY_20
 	jr z, .reduce_damage_by_20
-	cp SUBSTATUS2_GROWL
-	jr z, .reduce_damage_by_20
 	cp SUBSTATUS2_REDUCE_BY_10
 	jr z, .reduce_damage_by_10
 	ret
@@ -304,12 +302,12 @@ HandleAmnesiaSubstatus:
 	scf
 	ret
 
-; return carry if the turn holder's attack was unsuccessful due to sand attack or smokescreen effect
-HandleSandAttackOrSmokescreenSubstatus:
-	call CheckSandAttackOrSmokescreenSubstatus
+; return carry if the turn holder's attack was unsuccessful due to reduced accuracy effect
+HandleReducedAccuracySubstatus:
+	call CheckReducedAccuracySubstatus
 	ret nc
 	call TossCoin
-	ld [wGotHeadsFromSandAttackOrSmokescreenCheck], a
+	ld [wGotHeadsFromAccuracyCheck], a
 	ccf
 	ret nc
 	ldtx hl, AttackUnsuccessfulText
@@ -317,22 +315,19 @@ HandleSandAttackOrSmokescreenSubstatus:
 	scf
 	ret
 
-; return carry if the turn holder's arena card is under the effects of sand attack or smokescreen
-CheckSandAttackOrSmokescreenSubstatus:
+; return carry if the turn holder's arena card is under the effects of reduced accuracy
+CheckReducedAccuracySubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
 	call GetTurnDuelistVariable
 	or a
 	ret z
-	ldtx de, SandAttackCheckText
-	cp SUBSTATUS2_SAND_ATTACK
-	jr z, .card_is_affected
-	ldtx de, SmokescreenCheckText
-	cp SUBSTATUS2_SMOKESCREEN
+	ldtx de, AccuracyCheckText
+	cp SUBSTATUS2_ACCURACY
 	jr z, .card_is_affected
 	or a
 	ret
 .card_is_affected
-	ld a, [wGotHeadsFromSandAttackOrSmokescreenCheck]
+	ld a, [wGotHeadsFromAccuracyCheck]
 	or a
 	ret nz
 	scf
@@ -779,8 +774,6 @@ ClearDamageReductionSubstatus2:
 	cp SUBSTATUS2_REDUCE_BY_20
 	jr z, .zero
 	cp SUBSTATUS2_REDUCE_BY_10
-	jr z, .zero
-	cp SUBSTATUS2_GROWL
 	jr z, .zero
 	cp SUBSTATUS2_UNABLE_ATTACK
 	jr z, .zero

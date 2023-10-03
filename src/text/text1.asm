@@ -1036,8 +1036,7 @@ CardPopCannotBePlayedWithTheGameBoyText: ; 37b5d (d:7b5d)
 	line "with a Game Boy Color."
 	done
 
-SandAttackCheckText: ; 37ba9 (d:7ba9)
-SmokescreenCheckText: ; 37bdf (d:7bdf)
+AccuracyCheckText:
 	text "Accuracy check!"
 	line "If Tails, Attack is unsuccessful."
 	done

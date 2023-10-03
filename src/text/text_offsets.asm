@@ -221,8 +221,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PrinterPacketErrorText                             ; 0x00db
 	textpointer PrintingWasInterruptedText                         ; 0x00dc
 	textpointer CardPopCannotBePlayedWithTheGameBoyText            ; 0x00dd
-	textpointer SandAttackCheckText                                ; 0x00de
-	textpointer SmokescreenCheckText                               ; 0x00df
+	textpointer AccuracyCheckText
 	textpointer ParalysisCheckText                                 ; 0x00e0
 	textpointer SleepCheckText                                     ; 0x00e1
 	textpointer PoisonCheckText                                    ; 0x00e2

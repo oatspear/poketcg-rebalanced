@@ -11,9 +11,54 @@ ApplySubstatus1ToAttackingCard: ; 2c140 (b:4140)
 	ld [hli], a
 	ret
 
+
+; ------------------------------------------------------------------------------
+; Substatus 1
+; ------------------------------------------------------------------------------
+
+
+FocusEnergyEffect:
+; OATS Focus Energy applies to any Pokémon
+	; ld a, [wTempTurnDuelistCardID]
+	; cp VAPOREON_LV29
+	; ret nz ; return if no VaporeonLv29
+	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
+	call ApplySubstatus1ToAttackingCard
+	ret
+
+
+; ------------------------------------------------------------------------------
+; Substatus 2
+; ------------------------------------------------------------------------------
+
+ReduceAccuracyEffect:
+	ld a, SUBSTATUS2_ACCURACY
+	jr ApplySubstatus2ToDefendingCard
+
+
+GrowlEffect:
+	ld a, SUBSTATUS2_REDUCE_BY_20
+	jr ApplySubstatus2ToDefendingCard
+
+
+UnableToRetreatEffect:
+	ld a, SUBSTATUS2_UNABLE_RETREAT
+	jr ApplySubstatus2ToDefendingCard
+
+
+IncreaseRetreatCostEffect:
+	ld a, SUBSTATUS2_RETREAT_PLUS_1
+	jr ApplySubstatus2ToDefendingCard
+
+
+ReduceAttackBy10Effect:
+	ld a, SUBSTATUS2_REDUCE_BY_10
+	jr ApplySubstatus2ToDefendingCard
+
+
 ; apply a status condition of type 2 identified by register a to the target,
 ; unless prevented by wNoDamageOrEffect
-ApplySubstatus2ToDefendingCard: ; 2c149 (b:4149)
+ApplySubstatus2ToDefendingCard:
 	push af
 	call CheckNoDamageOrEffect
 	jr c, .no_damage_orEffect
@@ -35,37 +80,6 @@ ApplySubstatus2ToDefendingCard: ; 2c149 (b:4149)
 	ld a, l
 	or h
 	call nz, DrawWideTextBox_PrintText
-	ret
-
-
-; ------------------------------------------------------------------------------
-; Substatus 1
-; ------------------------------------------------------------------------------
-
-
-FocusEnergyEffect:
-; OATS Focus Energy applies to any Pokémon
-	; ld a, [wTempTurnDuelistCardID]
-	; cp VAPOREON_LV29
-	; ret nz ; return if no VaporeonLv29
-	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
-	call ApplySubstatus1ToAttackingCard
-	ret
-
-
-; ------------------------------------------------------------------------------
-; Substatus 2
-; ------------------------------------------------------------------------------
-
-GrowlEffect:
-	ld a, SUBSTATUS2_GROWL
-	call ApplySubstatus2ToDefendingCard
-	ret
-
-
-UnableToRetreatEffect:
-	ld a, SUBSTATUS2_UNABLE_RETREAT
-	call ApplySubstatus2ToDefendingCard
 	ret
 
 

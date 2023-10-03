@@ -2682,11 +2682,6 @@ HeadacheEffect: ; 2d00e (b:500e)
 	ret
 
 
-SmokescreenEffect:
-	ld a, SUBSTATUS2_SMOKESCREEN
-	jp ApplySubstatus2ToDefendingCard
-
-
 JellyfishSting_AIEffect: ; 2d141 (b:5141)
 	ld a, 10
 	lb de, 10, 10
@@ -4430,10 +4425,6 @@ DiscardOpponentEnergyIfHeads_AISelectEffect:
 
 ; ------------------------------------------------------------------------------
 
-ReduceAttackBy10Effect:
-	ld a, SUBSTATUS2_REDUCE_BY_10
-	jp ApplySubstatus2ToDefendingCard
-
 
 TantrumEffect: ; 2e099 (b:6099)
 	ldtx de, IfTailsYourPokemonBecomesConfusedText
@@ -4647,11 +4638,6 @@ AssassinFlight_BenchDamageEffect:
 	ld de, 40
 	call DealDamageToPlayAreaPokemon_RegularAnim
 	jp SwapTurn
-
-
-SandAttackEffect:
-	ld a, SUBSTATUS2_SAND_ATTACK
-	jp ApplySubstatus2ToDefendingCard
 
 
 Thunderpunch_AIEffect: ; 2e399 (b:6399)
