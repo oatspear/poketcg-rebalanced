@@ -4349,6 +4349,22 @@ OptionalDiscardEnergy_PlayerSelectEffect:
 	ret
 
 
+BounceEnergy_BounceEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z
+	call PutCardInDiscardPile
+	call MoveDiscardPileCardToHand
+	call AddCardToHand
+	ld d, a
+	call IsPlayerTurn  ; preserves bc, de
+	ld a, d
+	ret c
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
+	ret
+
+
 DiscardEnergy_DiscardEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff

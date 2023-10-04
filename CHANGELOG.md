@@ -45,6 +45,8 @@
 - Increased HP from 70 to 80.
 - **Amnesia**: removed.
 - **Hyper Beam**: removed.
+- New attack: **Aquatic Rescue** (C): put up to 3 Pokémon or Energy from discard pile into hand.
+- New attack: **Energy Loop** (WCC): 60 damage; put an Energy attached to the Pokémon back into the hand.
 
 #### Staryu
 - **Big Splash**: removed.

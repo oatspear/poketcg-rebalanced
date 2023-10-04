@@ -1667,7 +1667,16 @@ AquaticRescueName:
 	done
 
 AquaticRescueDescription:
-	text "Put up to 4 Pokémon or Energy"
+	text "Put up to 3 Pokémon or Energy"
 	line "cards from your discard pile"
 	line "into your hand."
+	done
+
+EnergyLoopName:
+	text "Energy Loop"
+	done
+
+Bounce1EnergyDescription:
+	text "Put an Energy attached to"
+	line "this Pokémon into your hand."
 	done
