@@ -4152,20 +4152,27 @@ EnergyAbsorption_PlayerSelectEffect:
 
 
 GatherToxins_PlayerSelectEffect:
-	ldtx hl, ChooseBasicEnergyCardFromDiscardPileToAttachText
-	call HandlePlayerSelectionBasicEnergyFromDiscardPile_AllowCancel
-	ldh [hTempList], a
+	call RetrieveBasicEnergyFromDiscardPile_PlayerSelectEffect
 	ld a, $ff
 	ldh [hTempList + 1], a  ; terminating byte
-	or a  ; ignore carry
 	ret
 
 
-GatherToxins_AISelectEffect:
+RetrieveBasicEnergyFromDiscardPile_PlayerSelectEffect:
+	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
+	call DrawWideTextBox_WaitForInput
+	call HandlePlayerSelectionBasicEnergyFromDiscardPile_AllowCancel
+	ldh [hTemp_ffa0], a
+	or a  ; ignore carry
+	ret
+
+RetrieveBasicEnergyFromDiscardPile_AISelectEffect:
 ; AI picks the first energy card
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
-	ld a, 1
-	jr PickFirstNCardsFromList_SelectEffect
+	ld a, [wDuelTempList]
+	ldh [hTemp_ffa0], a
+	or a  ; ignore carry
+	ret
 
 
 EnergySpores_AISelectEffect:

@@ -212,14 +212,9 @@ ChoosePokemonToAttachEnergyCardText: ; 387fe (e:47fe)
 	line "Energy to."
 	done
 
-Text011e: ; 3882e (e:482e)
-	text "Choose and Discard"
-	line "1 Fire Energy card."
-	done
-
-ChooseAndDiscard2FireEnergyCardsText: ; 38856 (e:4856)
-	text "Choose and Discard"
-	line "2 Fire Energy cards."
+Choose1BasicEnergyCardFromDiscardPileText:
+	text "Choose 1 Basic Energy card"
+	line "from the Discard Pile."
 	done
 
 DiscardOppDeckAsManyFireEnergyCardsText: ; 3887f (e:487f)

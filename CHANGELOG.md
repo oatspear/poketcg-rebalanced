@@ -48,6 +48,12 @@
 - New attack: **Aquatic Rescue** (C): put up to 3 Pokémon or Energy from discard pile into hand.
 - New attack: **Energy Loop** (WCC): 60 damage; put an Energy attached to the Pokémon back into the hand.
 
+#### Poliwag
+- **Call for Friend**: removed.
+- **Water Gun**: removed.
+- New attack: **Mud Splash** (C): 10 damage; put 1 Basic Energy from discard pile into hand.
+- New attack: **Rain Splash** (W): 10 damage; double damage if attached energy on the same turn.
+
 #### Staryu
 - **Big Splash**: removed.
 - New attack: **Core Regeneration** (C): heal 10 damage; draw a card.

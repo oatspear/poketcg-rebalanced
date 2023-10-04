@@ -644,12 +644,23 @@ RocketShellEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, RocketShell_AISelectEffect
 	db  $00
 
+DoubleDamageIfAttachedEnergyEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleDamageIfAttachedEnergy_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, DoubleDamageIfAttachedEnergy_AIEffect
+	db  $00
+
 GatherToxinsEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GatherToxins_AttachToPokemonEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, GatherToxins_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, GatherToxins_AISelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, RetrieveBasicEnergyFromDiscardPile_AISelectEffect
+	db  $00
+
+Retrieve1BasicEnergyEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCard_AddToHandFromDiscardPile
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, RetrieveBasicEnergyFromDiscardPile_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, RetrieveBasicEnergyFromDiscardPile_AISelectEffect
 	db  $00
 
 CoreRegenerationEffectCommands:

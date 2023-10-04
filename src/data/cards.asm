@@ -3559,26 +3559,26 @@ PoliwagCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx CallForFriendName ; name
-	tx CallForFriendDescription ; description
+	tx MudSplashName ; name
+	tx Retrieve1BasicEnergyDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw CallForFriendEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Retrieve1BasicEnergyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
 	energy WATER, 1 ; energies
-	tx WaterGunName ; name
-	dw NONE ; description
+	tx RainSplashName ; name
+	tx DoubleDamageIfAttachedEnergyDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw DoubleDamageIfAttachedEnergyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

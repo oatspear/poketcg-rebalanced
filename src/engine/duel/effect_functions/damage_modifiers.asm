@@ -389,6 +389,17 @@ Riptide_AIEffect:
 	jp SetDefiniteAIDamage
 
 
+DoubleDamageIfAttachedEnergy_DamageBoostEffect:
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_ENERGY_THIS_TURN
+	ret z  ; did not play energy
+	jp DoubleDamage_DamageBoostEffect
+
+DoubleDamageIfAttachedEnergy_AIEffect:
+	call DoubleDamageIfAttachedEnergy_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Hand Cards
 ; ------------------------------------------------------------------------------

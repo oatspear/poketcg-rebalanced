@@ -284,8 +284,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseUpTo2PkmnOnBenchToGiveDamageText             ; 0x011b
 	textpointer Choose1BasicEnergyCardFromDeckText                 ; 0x011c
 	textpointer ChoosePokemonToAttachEnergyCardText                ; 0x011d
-	textpointer Text011e                                           ; 0x011e
-	textpointer ChooseAndDiscard2FireEnergyCardsText               ; 0x011f
+	textpointer Choose1BasicEnergyCardFromDiscardPileText
 	textpointer DiscardOppDeckAsManyFireEnergyCardsText            ; 0x0120
 	textpointer ChooseAndDiscard2EnergyCardsText                   ; 0x0121
 	textpointer ChooseDiscardEnergyCardFromOpponentText            ; 0x0123
@@ -2812,7 +2811,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DenProtectorDescription
 	textpointer GarbageEaterName
 	textpointer GarbageEaterDescription
-	textpointer ChooseBasicEnergyCardFromDiscardPileToAttachText
 	textpointer GatherToxinsName
 	textpointer GatherToxinsDescription
 	textpointer DeadlyPoisonName
@@ -2839,6 +2837,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AquaticRescueDescription
 	textpointer EnergyLoopName
 	textpointer Bounce1EnergyDescription
+	textpointer MudSplashName
+	textpointer Retrieve1BasicEnergyDescription
+	textpointer RainSplashName
+	textpointer DoubleDamageIfAttachedEnergyDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9

@@ -1538,11 +1538,6 @@ GarbageEaterDescription:
 	line "heal 10 damage from this Pokémon."
 	done
 
-ChooseBasicEnergyCardFromDiscardPileToAttachText:
-	text "Choose a Basic Energy card from your"
-	line "Discard Pile to attach."
-	done
-
 GatherToxinsName:
 	text "Gather Toxins"
 	done
@@ -1679,4 +1674,23 @@ EnergyLoopName:
 Bounce1EnergyDescription:
 	text "Put an Energy attached to"
 	line "this Pokémon into your hand."
+	done
+
+MudSplashName:
+	text "Mud Splash"
+	done
+
+Retrieve1BasicEnergyDescription:
+	text "You may put a Basic Energy card from"
+	line "your discard pile into your hand."
+	done
+
+RainSplashName:
+	text "Rain Splash"
+	done
+
+DoubleDamageIfAttachedEnergyDescription:
+	text "If you attached an Energy card from"
+	line "your Hand this turn, double this"
+	line "attack's damage."
 	done
