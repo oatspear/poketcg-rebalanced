@@ -4856,11 +4856,11 @@ ArticunoLv35Card:
 	db ATK_ANIM_BEAM ; animation
 
 	; attack 2
-	energy WATER, 3 ; energies
+	energy WATER, 2, COLORLESS, 2 ; energies
 	tx BlizzardName ; name
 	tx DamageOpponentBench10Description ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 40 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw BlizzardEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1

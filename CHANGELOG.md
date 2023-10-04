@@ -99,6 +99,9 @@
 - New attack: **Transport** (C): add a Supporter card from the deck to the hand.
 - New attack: **Icy Wind** (WCC): 20 damage; 10 damage to 1 Benched Pokémon.
 
+#### Articuno Lv35
+- **Blizzard**: increased cost from (WWW) to (WWCC); reduced base damage from 40 to 20.
+
 ### Fighting Changes
 
 #### Marowak Lv26
