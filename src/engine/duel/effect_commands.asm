@@ -794,6 +794,12 @@ AbsorbWaterEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AbsorbWater_AddToHandEffect
 	db  $00
 
+MudSportEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, MudSport_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MudSport_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MudSport_PlayerSelection
+	db  $00
+
 EnergyAbsorptionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AttachToPokemonEffect

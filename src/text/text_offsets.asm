@@ -3006,6 +3006,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Attach1FireEnergyFromDiscardDescription
 	textpointer AbsorbWaterName
 	textpointer Retrieve1WaterEnergyFromDiscardDescription
+	textpointer MudSportName
+	textpointer Retrieve1WaterOrFightingEnergyFromDiscardDescription
 	textpointer DualTypeFightingName
 	textpointer DualTypeFightingDescription
 	textpointer AquaPunchName

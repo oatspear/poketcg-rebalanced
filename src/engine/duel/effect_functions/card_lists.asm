@@ -72,6 +72,27 @@ CreateTrainerCardListFromDiscardPile_:
 	scf
 	ret
 
+
+; makes a list in wDuelTempList with the deck indices
+; of all Water and Fighting energy cards found in Turn Duelist's Discard Pile.
+CreateEnergyCardListFromDiscardPile_WaterFighting:
+; start with list of Water Energy
+	call CreateEnergyCardListFromDiscardPile_OnlyWater
+; go to the end of the list
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	cp $ff
+	jr nz, .loop
+; store position in de
+	dec hl
+	ld e, l
+	ld d, h
+; append list of Fighting Energy
+	ld c, TYPE_ENERGY_FIGHTING
+	jr CreateEnergyCardListFromDiscardPile_DE
+
+
 DEF ALL_ENERGY_ALLOWED EQU $ff
 
 ; makes a list in wDuelTempList with the deck indices
@@ -107,6 +128,11 @@ CreateEnergyCardListFromDiscardPile_AllEnergy:
 ; returns carry if no energy cards were found.
 ; also sets error message in hl if carry is set.
 CreateEnergyCardListFromDiscardPile:
+	ld de, wDuelTempList
+	; fallthrough
+
+; input: pointer to the start of the list at de
+CreateEnergyCardListFromDiscardPile_DE:
 ; get number of cards in Discard Pile
 ; and have hl point to the end of the
 ; Discard Pile list in wOpponentDeckCards.
@@ -115,8 +141,6 @@ CreateEnergyCardListFromDiscardPile:
 	ld b, a
 	add DUELVARS_DECK_CARDS
 	ld l, a
-
-	ld de, wDuelTempList
 	inc b
 	jr .next_card
 

@@ -824,6 +824,16 @@ Retrieve1WaterEnergyFromDiscardDescription:
 	line "into your hand."
 	done
 
+MudSportName:
+	text "Mud Sport"
+	done
+
+Retrieve1WaterOrFightingEnergyFromDiscardDescription:
+	text "Once during your turn, you may put"
+	line "a <WATER> or <FIGHTING> Energy from your"
+	line "discard pile into your hand."
+	done
+
 DualTypeFightingName:
 	text "Fighting Type"
 	done

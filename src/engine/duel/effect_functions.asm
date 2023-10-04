@@ -301,7 +301,15 @@ AbsorbWater_PreconditionCheck:
 	ret c
 
 	call CreateEnergyCardListFromDiscardPile_OnlyWater
-	ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
+	; ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
+	ret
+
+
+MudSport_PreconditionCheck:
+	call CheckPokemonPowerCanBeUsed
+	ret c
+	call CreateEnergyCardListFromDiscardPile_WaterFighting
+	; ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
 	ret
 
 
@@ -6765,6 +6773,16 @@ Synthesis_AddToHandEffect:
 
 
 ; Pokémon Powers do not use [hTemp_ffa0]
+; adds a card in [hAIEnergyTransEnergyCard] from the discard pile to the hand
+; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
+MudSport_AddToHandEffect:
+	call SetUsedPokemonPowerThisTurn
+	ldh a, [hAIEnergyTransEnergyCard]
+	ldh [hTemp_ffa0], a
+	jp SelectedCard_AddToHandFromDiscardPile
+
+
+; Pokémon Powers do not use [hTemp_ffa0]
 ; adds a card in [hAIPkmnPowerEffectParam] from the deck to the hand
 ; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
 StressPheromones_AddToHandEffect:
@@ -7113,6 +7131,21 @@ Synthesis_PlayerSelection:
 	; push af
 	call EnergySearch_PlayerSelection
 	ldh a, [hTemp_ffa0]
+	ldh [hAIEnergyTransEnergyCard], a
+	; pop af
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
+
+MudSport_PlayerSelection:
+; Pokémon Powers must preserve [hTemp_ffa0]
+	; ldh a, [hTemp_ffa0]
+	; push af
+	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
+	call DrawWideTextBox_WaitForInput
+	call HandlePlayerSelectionBasicEnergyFromDiscardPile_AllowCancel
+	ret c
 	ldh [hAIEnergyTransEnergyCard], a
 	; pop af
 	ldh a, [hTempPlayAreaLocation_ff9d]

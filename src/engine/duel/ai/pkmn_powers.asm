@@ -447,13 +447,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_shift
 	cp PORYGON
-	jr nz, .check_absorb_water
+	jr nz, .check_mud_sport
 	call HandleAIShift
 	jr .next_1
-.check_absorb_water
+.check_mud_sport
 	cp POLIWHIRL
 	jr nz, .check_dual_type_fighting
-	call HandleAIAbsorbWater
+	call HandleAIMudSport
 	jr .next_1
 .check_dual_type_fighting
 	cp POLIWRATH
@@ -678,7 +678,22 @@ HandleAISynthesis:
 	ldh [hAIEnergyTransEnergyCard], a
 	jp nc, HandleAIDecideToUsePokemonPower
 	
-	; otherwise pick the first energy in the list
+; otherwise pick the first energy in the list
+	ld a, [wDuelTempList]
+	ldh [hAIEnergyTransEnergyCard], a
+	jp HandleAIDecideToUsePokemonPower
+
+
+HandleAIMudSport:
+	farcall CreateEnergyCardListFromDiscardPile_WaterFighting
+	ret c  ; no energy cards
+
+; if any of the energy cards in deck is useful store it and use power
+	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
+	ldh [hAIEnergyTransEnergyCard], a
+	jp nc, HandleAIDecideToUsePokemonPower
+	
+; otherwise pick the first energy in the list
 	ld a, [wDuelTempList]
 	ldh [hAIEnergyTransEnergyCard], a
 	jp HandleAIDecideToUsePokemonPower

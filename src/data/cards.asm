@@ -3610,12 +3610,12 @@ PoliwhirlCard:
 
 	; attack 1
 	energy 0 ; energies
-	tx AbsorbWaterName ; name
-	tx Retrieve1WaterEnergyFromDiscardDescription ; description
+	tx MudSportName ; name
+	tx Retrieve1WaterOrFightingEnergyFromDiscardDescription ; description
 	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw AbsorbWaterEffectCommands ; effect commands
+	dw MudSportEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -3623,18 +3623,18 @@ PoliwhirlCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx DoTheWaveName ; name
-	tx DoTheWaveDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx RainSplashName ; name
+	tx DoubleDamageIfAttachedEnergyDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw DoTheWaveEffectCommands ; effect commands
+	dw DoubleDamageIfAttachedEnergyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_WATER_GUN ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
