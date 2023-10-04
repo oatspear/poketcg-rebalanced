@@ -6843,7 +6843,9 @@ SelectedCardList_AddToHandFromDiscardPileEffect:
 	ld a, [hli]
 	cp $ff
 	ret z  ; done
+	push hl
 	call AddDiscardPileCardToHandEffect
+	pop hl
 	jr .loop_cards
 
 
