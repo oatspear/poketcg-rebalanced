@@ -68,8 +68,13 @@ PoisonLureEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Lure_GetOpponentBenchPokemonWithLowestHP
 	db  $00
 
-AcidEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
+; AcidEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
+; 	db  $00
+
+ConstrictEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Constrict_TrapDamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Constrict_AIEffect
 	db  $00
 
 PanicVineEffectCommands:
@@ -1125,6 +1130,14 @@ EnergySlideEffectCommands:
 	; dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergySlide_PlayerSelection
 	; dbw EFFECTCMDTYPE_DISCARD_ENERGY, EnergySlide_TransferEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergySlide_AISelectEffect
+	db  $00
+
+WickedTentacleEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, WickedTentacle_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WickedTentacle_TransferEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, TargetedPoisonEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, WickedTentacle_PlayerSelection
+	dbw EFFECTCMDTYPE_AI_SELECTION, WickedTentacle_AISelectEffect
 	db  $00
 
 WhirlwindEffectCommands:

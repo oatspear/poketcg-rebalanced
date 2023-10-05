@@ -727,6 +727,29 @@ Peck_AIEffect:
 	jp SetDefiniteAIDamage
 
 
+; return in a 10x damage per Energy in the Opponent's Retreat Cost.
+_DamagePerOpponentRetreatCost:
+	call SwapTurn
+	xor a ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call GetPlayAreaCardRetreatCost  ; retreat cost in a
+	call SwapTurn
+	jp ATimes10
+
+
+; +10 damage per retreat cost of opponent
+Constrict_DamageBoostEffect:
+	call _DamagePerOpponentRetreatCost
+	jp AddToDamage
+
+; this runs before applying the retreat cost increase, so add 10
+Constrict_AIEffect:
+	call _DamagePerOpponentRetreatCost
+	add 10
+	call AddToDamage
+	jp SetDefiniteAIDamage
+
+
 ; +20 damage per retreat cost of opponent
 GrassKnot_DamageBoostEffect:
 	call SwapTurn

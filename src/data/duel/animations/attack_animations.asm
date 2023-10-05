@@ -127,7 +127,7 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_PoisonFang          ; ATK_ANIM_POISON_FANG
 	dw AttackAnimation_DarkMindNoHit       ; ATK_ANIM_DARK_MIND_NO_HIT
 	dw AttackAnimation_PoisonFang          ; ATK_ANIM_104
-	dw AttackAnimation_558c                ; ATK_ANIM_105
+	dw AttackAnimation_WhipNoDamage        ; ATK_ANIM_WHIP_NO_HIT
 	dw AttackAnimation_FriendshipSong      ; ATK_ANIM_FRIENDSHIP_SONG
 	dw AttackAnimation_Scrunch             ; ATK_ANIM_SCRUNCH
 	dw AttackAnimation_CatPunch            ; ATK_ANIM_CAT_PUNCH
@@ -736,12 +736,10 @@ AttackAnimation_DarkMindNoHit:
 	anim_opponent       DUEL_ANIM_GLARE
 	anim_end
 
-AttackAnimation_558c:
+AttackAnimation_WhipNoDamage:
 	anim_player         DUEL_ANIM_GLOW
-	anim_opponent       DUEL_ANIM_NEEDLES
-	anim_opponent       DUEL_ANIM_HIT
+	anim_opponent       DUEL_ANIM_WHIP
 	anim_normal         DUEL_ANIM_SHAKE1
-	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
 	anim_end
 
 AttackAnimation_FriendshipSong:

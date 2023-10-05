@@ -422,3 +422,14 @@ CheckIfCardHasSpecificEnergyAttached:
 	ld a, l
 	or a
 	ret
+
+
+; ------------------------------------------------------------------------------
+; Compound Checks
+; ------------------------------------------------------------------------------
+
+WickedTentacle_PreconditionCheck:
+	call SwapTurn
+	call CheckBenchIsNotEmpty
+	call nc, CheckArenaPokemonHasAnyEnergiesAttached
+	jp SwapTurn

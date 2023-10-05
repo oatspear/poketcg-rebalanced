@@ -3045,6 +3045,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AquaLauncherDescription
 	textpointer SteamrollerName
 	textpointer SteamrollerDescription
+	textpointer ConstrictName
+	textpointer ConstrictDescription
+	textpointer WickedTentacleName
+	textpointer WickedTentacleDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

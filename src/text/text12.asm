@@ -1093,6 +1093,30 @@ SteamrollerDescription:
 	line "your opponent's Benched Pokémon."
 	done
 
+ConstrictName:
+	text "Constrict"
+	done
+
+ConstrictDescription:
+	text "Until your next turn, increase the"
+	line "Defending Pokémon's Retreat Cost"
+	line "by 1 <COLORLESS>. Then, this attack does"
+	line "10 more damage for each <COLORLESS> in"
+	line "that Pokémon's Retreat Cost."
+	done
+
+WickedTentacleName:
+	text "Wicked Tentacle"
+	done
+
+WickedTentacleDescription:
+	text "Move a Basic Energy card from the"
+	line "Defending Pokémon to one of your"
+	line "opponent's Benched Pokémon."
+	line "That Pokémon is now Poisoned."
+	done
+
+
 
 
 ; ------------------------------------------------------------------------------

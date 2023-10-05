@@ -3553,7 +3553,7 @@ PoliwagCard:
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
 	db POLIWAG
-	db 50 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -3725,18 +3725,18 @@ TentacoolCard:
 	db ATK_ANIM_NEEDLES ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 1 ; energies
-	tx AcidName ; name
-	tx AcidDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx ConstrictName ; name
+	tx ConstrictDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw AcidEffectCommands ; effect commands
+	db DAMAGE_PLUS ; category
+	dw ConstrictEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
 	db 1
-	db ATK_ANIM_GOO ; animation
+	db ATK_ANIM_WHIP ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -3757,23 +3757,23 @@ TentacruelCard:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db TENTACRUEL
-	db 60 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx TentacoolName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx SupersonicName ; name
-	tx MayInflictConfusionDescription ; description
+	tx WickedTentacleName ; name
+	tx WickedTentacleDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SupersonicEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
+	db RESIDUAL ; category
+	dw WickedTentacleEffectCommands ; effect commands
+	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_SUPERSONIC ; animation
+	db ATK_ANIM_WHIP_NO_HIT ; animation
 
 	; attack 2
 	energy WATER, 2 ; energies

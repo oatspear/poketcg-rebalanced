@@ -66,6 +66,15 @@
 - New attack: **Steamroller** (CC): 20 damage; 20 damage to 1 Benched Pokémon; deals Fighting damage.
 - New attack: **Drain Punch** (CCCC): 70 damage; heal 20 damage.
 
+#### Tentacool
+- **Acid**: removed.
+- New attack: **Constrict** (CC): 10 damage; increase opponent's retreat cost by 1 and deal +10 damage for each (C) in retreat cost.
+
+#### Tentacruel
+- Increased HP from 60 to 80.
+- **Supersonic**: removed.
+- New attack: **Wicked Tentacle** (C): move an Energy from the Defending Pokémon to another Pokémon; Poison the second Pokémon.
+
 #### Staryu
 - **Big Splash**: removed.
 - New attack: **Core Regeneration** (C): heal 10 damage; draw a card.

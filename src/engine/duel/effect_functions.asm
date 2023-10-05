@@ -1090,6 +1090,11 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
 
+Constrict_TrapDamageBoostEffect:
+	call IncreaseRetreatCostEffect
+	jp Constrict_DamageBoostEffect
+
+
 ; damage to bench target and reset color to whatever it was
 Steamroller_DamageAndColorEffect:
 	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
@@ -6648,6 +6653,23 @@ EnergySlide_AISelectEffect:
 	ret z  ; nothing to do
 	jr .loop_play_area
 
+
+WickedTentacle_PlayerSelection:
+	call SwapTurn
+	call EnergySlide_PlayerSelection
+	jp SwapTurn
+
+; Precondition ensures there are Bench Pokémon and energy on the Active Pokémon.
+WickedTentacle_AISelectEffect:
+	call SwapTurn
+; store energy to discard in [hTemp_ffa0]
+	call DiscardEnergy_AISelectEffect
+; pick the first Benched Pokémon
+	ld a, PLAY_AREA_BENCH_1
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jp SwapTurn
+
+
 ; ------------------------------------------------------------------------------
 ; Move Selected Cards
 ; ------------------------------------------------------------------------------
@@ -6826,6 +6848,15 @@ SelectedCards_Discard1FromHand:
 	call PutCardInDiscardPile
 	or a
 	ret
+
+
+WickedTentacle_TransferEffect:
+	call SwapTurn
+	call EnergySlide_TransferEffect
+; restore target location to [hTempPlayAreaLocation_ffa1]
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jp SwapTurn
 
 
 ; input:
