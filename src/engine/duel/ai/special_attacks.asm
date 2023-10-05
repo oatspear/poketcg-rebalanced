@@ -86,7 +86,7 @@ HandleSpecialAIAttacks:
 	cp CLEFABLE
 	jr z, .LunarPower
 	cp GASTLY_LV17
-	jr z, .EnergyConversion
+	jp z, .EnergyConversion
 	cp DEWGONG
 	jr z, .Teleport
 

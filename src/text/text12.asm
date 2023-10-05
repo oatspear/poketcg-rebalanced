@@ -1015,6 +1015,69 @@ DraconicEvolutionDescription:
 	line "in your hand to that Pokémon."
 	done
 
+RainSplashName:
+	text "Rain Splash"
+	done
+
+DoubleDamageIfAttachedEnergyDescription:
+	text "If you attached an Energy card from"
+	line "your Hand this turn, double this"
+	line "attack's damage."
+	done
+
+MudSplashName:
+	text "Mud Splash"
+	done
+
+Retrieve1BasicEnergyDescription:
+	text "You may put a Basic Energy card from"
+	line "your discard pile into your hand."
+	done
+
+EnergyLoopName:
+	text "Energy Loop"
+	done
+
+Bounce1EnergyDescription:
+	text "Put an Energy attached to"
+	line "this Pokémon into your hand."
+	done
+
+AquaticRescueName:
+	text "Aquatic Rescue"
+	done
+
+AquaticRescueDescription:
+	text "Put up to 3 Pokémon or Energy"
+	line "cards from your discard pile"
+	line "into your hand."
+	done
+
+RocketShellName:
+	text "Rocket Shell"
+	done
+
+RocketShellDescription:
+	text "If you attached an Energy card from"
+	line "your Hand this turn, you may search"
+	line "your Deck for a Basic Energy card"
+	line "and add it to your hand."
+	line "Shuffle your Deck afterward."
+	done
+
+AquaLauncherName:
+	text "Aqua Launcher"
+	done
+
+AquaLauncherDescription:
+	text "This attack does 30 damage to 1"
+	line "of your opponent's Pokémon."
+	line "All damage done to this Pokémon"
+	line "during your opponent's next turn"
+	line "is reduced by 10 (after applying"
+	line "Weakness and Resistance)."
+	done
+
 
 
 ; ------------------------------------------------------------------------------

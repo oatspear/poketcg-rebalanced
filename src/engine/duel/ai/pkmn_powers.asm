@@ -395,7 +395,7 @@ HandleAIPkmnPowers:
 	add c
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
-	jr nz, .next_2
+	jp nz, .next_2
 
 	ld a, DUELVARS_ARENA_CARD
 	add c
@@ -677,7 +677,7 @@ HandleAISynthesis:
 	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
 	ldh [hAIEnergyTransEnergyCard], a
 	jp nc, HandleAIDecideToUsePokemonPower
-	
+
 ; otherwise pick the first energy in the list
 	ld a, [wDuelTempList]
 	ldh [hAIEnergyTransEnergyCard], a
@@ -692,7 +692,7 @@ HandleAIMudSport:
 	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
 	ldh [hAIEnergyTransEnergyCard], a
 	jp nc, HandleAIDecideToUsePokemonPower
-	
+
 ; otherwise pick the first energy in the list
 	ld a, [wDuelTempList]
 	ldh [hAIEnergyTransEnergyCard], a

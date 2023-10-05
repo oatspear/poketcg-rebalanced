@@ -3828,8 +3828,8 @@ SeelCard:
 
 	; attack 2
 	energy WATER, 1 ; energies
-	dw EnergySlideName ; name
-	dw EnergySlideDescription ; description
+	tx EnergySlideName ; name
+	tx EnergySlideDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
@@ -4136,7 +4136,7 @@ HorseaCard:
 	; attack 2
 	energy WATER, 1, COLORLESS, 1 ; energies
 	tx AquaBurstName ; name
-	dw Discard1EnergyDescription ; description
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category

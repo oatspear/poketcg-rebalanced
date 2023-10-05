@@ -2829,18 +2829,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DeepDiveDescription
 	textpointer ColdCrushName
 	textpointer Discard1EnergyFromBothActiveDescription
-	textpointer AquaLauncherName
-	textpointer AquaLauncherDescription
-	textpointer RocketShellName
-	textpointer RocketShellDescription
-	textpointer AquaticRescueName
-	textpointer AquaticRescueDescription
-	textpointer EnergyLoopName
-	textpointer Bounce1EnergyDescription
-	textpointer MudSplashName
-	textpointer Retrieve1BasicEnergyDescription
-	textpointer RainSplashName
-	textpointer DoubleDamageIfAttachedEnergyDescription
 	textpointer RattataName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
@@ -3042,6 +3030,18 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NightAmbushDescription
 	textpointer DraconicEvolutionName
 	textpointer DraconicEvolutionDescription
+	textpointer RainSplashName
+	textpointer DoubleDamageIfAttachedEnergyDescription
+	textpointer MudSplashName
+	textpointer Retrieve1BasicEnergyDescription
+	textpointer EnergyLoopName
+	textpointer Bounce1EnergyDescription
+	textpointer AquaticRescueName
+	textpointer AquaticRescueDescription
+	textpointer RocketShellName
+	textpointer RocketShellDescription
+	textpointer AquaLauncherName
+	textpointer AquaLauncherDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a
