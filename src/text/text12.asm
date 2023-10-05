@@ -834,26 +834,30 @@ Retrieve1WaterOrFightingEnergyFromDiscardDescription:
 	line "discard pile into your hand."
 	done
 
-DualTypeFightingName:
-	text "Fighting Type"
+; DualTypeFightingName:
+; 	text "Fighting Type"
+; 	done
+; 
+; DualTypeFightingDescription:
+; 	text "Once during your turn, you may"
+; 	line "change this Pokémon's type to <FIGHTING>."
+; 	line "If it is <FIGHTING> type already, you may"
+; 	line "revert it to its original type."
+; 	done
+
+DrainPunchName:
+	text "Drain Punch"
 	done
 
-DualTypeFightingDescription:
-	text "Once during your turn, you may"
-	line "change this Pokémon's type to <FIGHTING>."
-	line "If it is <FIGHTING> type already, you may"
-	line "revert it to its original type."
-	done
-
-AquaPunchName:
-	text "Aqua Punch"
-	done
-
-AquaPunchDescription:
-	text "This attack does 10 more damage for"
-	line "each <WATER> or <FIGHTING> energy attached"
-	line "to this Pokémon."
-	done
+; AquaPunchName:
+; 	text "Aqua Punch"
+; 	done
+; 
+; AquaPunchDescription:
+; 	text "This attack does 10 more damage for"
+; 	line "each <WATER> or <FIGHTING> energy attached"
+; 	line "to this Pokémon."
+; 	done
 
 LuckyTailsName:
 	text "Lucky Tails"
@@ -1076,6 +1080,17 @@ AquaLauncherDescription:
 	line "during your opponent's next turn"
 	line "is reduced by 10 (after applying"
 	line "Weakness and Resistance)."
+	done
+
+SteamrollerName:
+	text "Steamroller"
+	done
+
+SteamrollerDescription:
+	text "This attack does <FIGHTING> damage to the"
+	line "Defending Pokémon. In addition,"
+	line "this attack does 20 damage to 1 of"
+	line "your opponent's Benched Pokémon."
 	done
 
 

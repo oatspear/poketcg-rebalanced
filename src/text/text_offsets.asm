@@ -2996,10 +2996,11 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Retrieve1WaterEnergyFromDiscardDescription
 	textpointer MudSportName
 	textpointer Retrieve1WaterOrFightingEnergyFromDiscardDescription
-	textpointer DualTypeFightingName
-	textpointer DualTypeFightingDescription
-	textpointer AquaPunchName
-	textpointer AquaPunchDescription
+	; textpointer DualTypeFightingName
+	; textpointer DualTypeFightingDescription
+	; textpointer AquaPunchName
+	; textpointer AquaPunchDescription
+	textpointer DrainPunchName
 	textpointer LuckyTailsName
 	textpointer LuckyTailsDescription
 	textpointer DrawLuckyTailsCardsText
@@ -3042,6 +3043,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RocketShellDescription
 	textpointer AquaLauncherName
 	textpointer AquaLauncherDescription
+	textpointer SteamrollerName
+	textpointer SteamrollerDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

@@ -31,8 +31,12 @@ GetPlayAreaCardColor:
 	pop hl
 	ret
 .has_changed_color
-	call CheckCannotUseDueToStatus
+	bit IS_PERMANENT_COLOR_F, a
+	jr nz, .permanent_color
+	ld a, e
+	call CheckCannotUseDueToStatus_Anywhere
 	jr c, .regular_color ; jump if can't use Shift
+.permanent_color
 	ld a, e
 	add DUELVARS_ARENA_CARD_CHANGED_TYPE
 	call GetTurnDuelistVariable

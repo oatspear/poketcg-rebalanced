@@ -3660,32 +3660,32 @@ PoliwrathCard:
 	tx PoliwhirlName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx DualTypeFightingName ; name
-	tx DualTypeFightingDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw DualTypeFightingEffectCommands ; effect commands
-	db NONE ; flags 1
+	energy COLORLESS, 2 ; energies
+	tx SteamrollerName ; name
+	tx SteamrollerDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw SteamrollerEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db 20
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx AquaPunchName ; name
-	tx AquaPunchDescription ; description
+	energy COLORLESS, 4 ; energies
+	tx DrainPunchName ; name
+	tx Heal20DamageDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_PLUS ; category
-	dw AquaPunchEffectCommands ; effect commands
+	db 70 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Leech20DamageEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_WHIRLPOOL ; animation
+	db 2
+	db ATK_ANIM_PUNCH ; animation
 
 	db 2 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -5015,7 +5015,7 @@ PikachuLv14Card:
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SparkEffectCommands ; effect commands
+	dw Damage1BenchedPokemon10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -5664,7 +5664,7 @@ ElectrodeLv35Card:
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SparkEffectCommands ; effect commands
+	dw Damage1BenchedPokemon10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

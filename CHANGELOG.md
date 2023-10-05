@@ -60,6 +60,12 @@
 - New Pokémon Power: **Mud Sport**: retrieve 1 Water or Fighting Energy from discard pile to hand.
 - New attack: **Rain Splash** (CC): 20 damage; double damage if attached energy on the same turn.
 
+#### Poliwrath
+- **Dual Type Fighting**: removed.
+- **Aqua Punch**: removed.
+- New attack: **Steamroller** (CC): 20 damage; 20 damage to 1 Benched Pokémon; deals Fighting damage.
+- New attack: **Drain Punch** (CCCC): 70 damage; heal 20 damage.
+
 #### Staryu
 - **Big Splash**: removed.
 - New attack: **Core Regeneration** (C): heal 10 damage; draw a card.

@@ -1,5 +1,26 @@
 ;
 
+
+DualTypeFightingEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DualTypeFighting_ChangeColorEffect
+	db  $00
+
+
+DualTypeFighting_ChangeColorEffect:
+	call SetUsedPokemonPowerThisTurn
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetPlayAreaCardColor
+	cp FIGHTING
+	jr z, ResetCardColorEffect
+
+; change color to Fighting
+	ld d, FIGHTING
+	jr ColorShift_ChangeColorEffect
+
+
+
 EnergySplashEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergySplash_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySplash_PlayerSelectEffect

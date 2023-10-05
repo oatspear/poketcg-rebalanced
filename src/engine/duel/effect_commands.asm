@@ -301,11 +301,6 @@ FlareEssenceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FlareEssence_ChangeColorEffect
 	db  $00
 
-DualTypeFightingEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DualTypeFighting_ChangeColorEffect
-	db  $00
-
 ShiftEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Shift_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Shift_ChangeColorEffect
@@ -443,14 +438,6 @@ SilverWhirlwindEffectCommands:
 ArticunoQuickfreezeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Quickfreeze_InitialEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Quickfreeze_Paralysis50PercentEffect
-	db  $00
-
-ArticunoIceBreathEffectCommands:
-	; dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IceBreath_ZeroDamage
-	; dbw EFFECTCMDTYPE_AFTER_DAMAGE, IceBreath_RandomPokemonDamageEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IceBreath_BenchDamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, IceBreath_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, IceBreath_AISelectEffect
 	db  $00
 
 FocusEnergyEffectCommands:
@@ -593,8 +580,8 @@ ShadowClawEffectCommands:
 CurseEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Curse_DamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
-	; dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
+	; dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
 	db  $00
 
 PainAmplifierEffectCommands:
@@ -975,11 +962,29 @@ FlyingPikachuFlyEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Fly_AIEffect
 	db  $00
 
-SparkEffectCommands:
 Damage1BenchedPokemon10EffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Spark_BenchDamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Spark_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Spark_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal10DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
+	db  $00
+
+Damage1BenchedPokemon20EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
+	db  $00
+
+SteamrollerEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Steamroller_ChangeColorEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Steamroller_DamageAndColorEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
+	db  $00
+
+ArticunoIceBreathEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IceBreath_BenchDamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
 	db  $00
 
 GrowlEffectCommands:
@@ -1192,9 +1197,9 @@ MorphEffectCommands:
 	db  $00
 
 Deal10ToAnyPokemonEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal10Damage_DamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal10DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
 	db  $00
 
 NightAmbushEffectCommands:
@@ -1202,21 +1207,21 @@ NightAmbushEffectCommands:
 	; fallthrough
 
 Deal20ToAnyPokemonEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20Damage_DamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
 	db  $00
 
 Deal30ToAnyPokemonEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal30Damage_DamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal30DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
 	db  $00
 
 AquaLauncherEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AquaLauncherEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DealTargetedDamage_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DealTargetedDamage_AISelectEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
 	db  $00
 
 ; PidgeotGaleEffectCommands:
@@ -1254,10 +1259,10 @@ PunishingSlapEffectCommands:
 	dbw EFFECTCMDTYPE_AI, PunishingSlap_AIEffect
 	db  $00
 
-AquaPunchEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AquaPunch_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, AquaPunch_AIEffect
-	db  $00
+; AquaPunchEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AquaPunch_DamageBoostEffect
+; 	dbw EFFECTCMDTYPE_AI, AquaPunch_AIEffect
+; 	db  $00
 
 DragonRageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DragonRage_DamageBoostEffect

@@ -617,6 +617,9 @@ FullHeal_ClearStatusEffect:
 ; Damage
 ; ------------------------------------------------------------------------------
 
+INCLUDE "engine/duel/effect_functions/damage.asm"
+
+
 ; puts 1 damage counter on the target at location in e,
 ; without counting as attack damage (does not trigger damage reduction, etc.)
 ; assumes: call to SwapTurn if needed
@@ -710,6 +713,7 @@ Affliction_DamageEffect:
 	dec c
 	jr nz, .loop_play_area
 	jp SwapTurn
+
 
 ; ------------------------------------------------------------------------------
 ; Damage Modifiers
@@ -1086,9 +1090,18 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
 
+; damage to bench target and reset color to whatever it was
+Steamroller_DamageAndColorEffect:
+	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
+	call GetTurnDuelistVariable
+	ldh a, [hTemp_ffa0]
+	ld [hl], a
+	jp Deal20DamageToTarget_DamageEffect
+
+
 ; Deal damage to selected Pokémon and apply defense boost to self.
 AquaLauncherEffect:
-	call Deal30Damage_DamageEffect
+	call Deal30DamageToTarget_DamageEffect
 	jp ReduceDamageTakenBy10Effect
 
 
@@ -2458,6 +2471,18 @@ SetUsedPokemonPowerThisTurn:
 	ret
 
 
+Steamroller_ChangeColorEffect:
+; store current card color
+	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
+	call GetTurnDuelistVariable
+	ldh [hTemp_ffa0], a
+; temporarily change color to Fighting
+	ld a, FIGHTING
+	or HAS_CHANGED_COLOR | IS_PERMANENT_COLOR
+	ld [hl], a
+	ret
+
+
 Shift_ChangeColorEffect:
 	ldh a, [hTemp_ffa0]
 	add DUELVARS_ARENA_CARD_FLAGS
@@ -2488,24 +2513,23 @@ FlareEssence_ChangeColorEffect:
 	ld d, FIRE
 	jr ColorShift_ChangeColorEffect
 
-DualTypeFighting_ChangeColorEffect:
-	call SetUsedPokemonPowerThisTurn
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
-	call GetPlayAreaCardColor
-	cp FIGHTING
-	jr z, ResetCardColorEffect
-
-; change color to Fighting
-	ld d, FIGHTING
-	jr ColorShift_ChangeColorEffect
-
 
 ; changes the effective color of a Pokémon in play
 ; input:
 ;   e: offset of play area Pokémon
 ;   d: selected color (type) constant
 ColorShift_ChangeColorEffect:
+	call _ChangeCardColor
+	call LoadCardNameAndInputColor
+	ldtx hl, ChangedTheColorOfText
+	jp DrawWideTextBox_WaitForInput
+
+
+; changes the effective color of a Pokémon in play
+; input:
+;   e: offset of play area Pokémon
+;   d: selected color (type) constant
+_ChangeCardColor:
 	ld a, e
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
@@ -2517,9 +2541,12 @@ ColorShift_ChangeColorEffect:
 	ld a, d
 	or HAS_CHANGED_COLOR
 	ld [hl], a
-	call LoadCardNameAndInputColor
-	ldtx hl, ChangedTheColorOfText
-	call DrawWideTextBox_WaitForInput
+	ret
+
+_ChangeCardColorPermanent:
+	call _ChangeCardColor
+	or IS_PERMANENT_COLOR
+	ld [hl], a
 	ret
 
 
@@ -2533,6 +2560,19 @@ ResetArenaCardColorEffect:
 ; input:
 ;   e: offset of play area Pokémon
 ResetCardColorEffect:
+	call _ResetCardColor
+	ld a, e
+	call GetPlayAreaCardColor
+	ld [hl], a
+	call LoadCardNameAndInputColor
+	ldtx hl, ChangedTheColorOfText
+	jp DrawWideTextBox_WaitForInput
+
+
+; resets the effective color of a Pokémon in play
+; input:
+;   e: offset of play area Pokémon
+_ResetCardColor:
 	ld a, e
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
@@ -2542,13 +2582,7 @@ ResetCardColorEffect:
 	add DUELVARS_ARENA_CARD_CHANGED_TYPE
 	ld l, a
 	res HAS_CHANGED_COLOR_F, [hl]
-
-	ld a, e
-	call GetPlayAreaCardColor
-	ld [hl], a
-	call LoadCardNameAndInputColor
-	ldtx hl, ChangedTheColorOfText
-	call DrawWideTextBox_WaitForInput
+	res IS_PERMANENT_COLOR_F, [hl]
 	ret
 
 
@@ -5002,68 +5036,6 @@ Fly_Success50PercentEffect: ; 2e4fc (b:64fc)
 	ret
 
 
-Thunderpunch_RecoilEffect:
-	ldh a, [hTemp_ffa0]
-	or a
-	ret nz ; return if got heads
-	; fallthrough
-
-Recoil10Effect:
-	ld a, 10
-	jp DealRecoilDamageToSelf
-
-Recoil20Effect:
-	ld a, 20
-	jp DealRecoilDamageToSelf
-
-
-IceBreath_PlayerSelectEffect:
-Spark_PlayerSelectEffect: ; 2e539 (b:6539)
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	ret c ; has no Bench Pokemon
-
-	ldtx hl, ChoosePkmnInTheBenchToGiveDamageText
-	call DrawWideTextBox_WaitForInput
-	call SwapTurn
-	bank1call HasAlivePokemonInBench
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	call SwapTurn
-	ret
-
-IceBreath_AISelectEffect:
-Spark_AISelectEffect: ; 2e562 (b:6562)
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	ret c ; has no Bench Pokemon
-; AI always picks Pokemon with lowest HP remaining
-	call GetOpponentBenchPokemonWithLowestHP
-	ldh [hTemp_ffa0], a
-	ret
-
-Spark_BenchDamageEffect: ; 2e574 (b:6574)
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret z
-	call SwapTurn
-	ldh a, [hTemp_ffa0]
-	ld b, a
-	ld de, 10
-	call DealDamageToPlayAreaPokemon_RegularAnim
-	call SwapTurn
-	ret
-
-
 ChainLightningEffect: ; 2e595 (b:6595)
 	ld a, 10
 	call SetDefiniteDamage
@@ -5082,10 +5054,9 @@ ChainLightningEffect: ; 2e595 (b:6595)
 ; own Bench
 	ld a, $01
 	ld [wIsDamageToSelf], a
-	call .DamageSameColorBench
-	ret
+	; fallthrough
 
-.DamageSameColorBench ; 2e5ba (b:65ba)
+.DamageSameColorBench
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld e, a
@@ -6316,73 +6287,6 @@ MorphEffect:
 	xor a
 	ld [wDuelDisplayedScreen], a
 	ret
-
-
-DealTargetedDamage_PlayerSelectEffect:
-	xor a  ; PLAY_AREA_ARENA
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	jr c, .done ; has no Bench Pokemon
-
-	ldtx hl, ChoosePkmnToGiveDamageText
-	call DrawWideTextBox_WaitForInput
-	call SwapTurn
-	bank1call HasAlivePokemonInPlayArea
-
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	call SwapTurn
-.done
-	or a
-	ret
-
-DealTargetedDamage_AISelectEffect:
-	xor a  ; PLAY_AREA_ARENA
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	jr c, .done ; has no Bench Pokemon
-; AI always picks Pokemon with lowest HP remaining
-	call GetOpponentBenchPokemonWithLowestHP
-; amount of HP remaining is in e
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, DUELVARS_ARENA_CARD_HP
-	call GetNonTurnDuelistVariable
-	ld a, e
-	cp [hl]
-	jr c, .done  ; got minimum
-; arena is lower
-	xor a
-	ldh [hTempPlayAreaLocation_ffa1], a
-.done
-	or a
-	ret
-
-Deal10Damage_DamageEffect:
-	ld de, 10
-	jr DealDEDamage_DamageEffect
-
-Deal20Damage_DamageEffect:
-	ld de, 20
-	jr DealDEDamage_DamageEffect
-
-Deal30Damage_DamageEffect:
-	ld de, 30
-	; fallthrough
-
-DealDEDamage_DamageEffect:
-	call SwapTurn
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ld b, a
-	; ld de, 30
-	call DealDamageToPlayAreaPokemon_RegularAnim
-	jp SwapTurn
 
 
 ; returns carry if either there are no damage counters

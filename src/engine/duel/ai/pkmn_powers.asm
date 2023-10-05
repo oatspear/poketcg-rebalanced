@@ -790,7 +790,7 @@ HandleAIShift:
 
 ; checks whether AI uses Curse.
 HandleAICurse:
-	farcall DealTargetedDamage_AISelectEffect
+	farcall DamageTargetPokemon_AISelectEffect
 ; card in Play Area with lowest HP remaining was found.
 	jp HandleAIDecideToUsePokemonPower
 
