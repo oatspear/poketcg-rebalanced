@@ -3553,7 +3553,7 @@ PoliwagCard:
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
 	db POLIWAG
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -3864,7 +3864,7 @@ DewgongCard:
 	tx SeelName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1, COLORLESS, 1 ; energies
+	energy WATER, 1 ; energies
 	tx DeepDiveName ; name
 	tx DeepDiveDescription ; description
 	dw NONE ; description (cont)
