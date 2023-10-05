@@ -3782,7 +3782,7 @@ TentacruelCard:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw TentacruelJellyfishStingEffectCommands ; effect commands
+	dw InflictPoisonEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
