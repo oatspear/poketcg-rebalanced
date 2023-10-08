@@ -1116,7 +1116,11 @@ WickedTentacleDescription:
 	line "That Pokémon is now Poisoned."
 	done
 
-
+PoisonOrConfusionIfPoisonedDescription:
+	text "The Defending Pokémon is now"
+	line "Poisoned. If it was already"
+	line "Poisoned, it is now Confused."
+	done
 
 
 ; ------------------------------------------------------------------------------

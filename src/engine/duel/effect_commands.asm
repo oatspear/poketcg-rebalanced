@@ -317,6 +317,10 @@ VenomothVenomPowderEffectCommands:
 	; dbw EFFECTCMDTYPE_AI, VenomPowder_AIEffect
 	db  $00
 
+JellyfishStingEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, JellyfishSting_PoisonConfusionEffect
+	db  $00
+
 PokemonPowerHealEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Heal_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal_RemoveDamageEffect

@@ -2815,11 +2815,6 @@ HeadacheEffect: ; 2d00e (b:500e)
 	ret
 
 
-JellyfishSting_AIEffect: ; 2d141 (b:5141)
-	ld a, 10
-	lb de, 10, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
-
 ; returns carry if Defending Pokemon has no attacks
 Amnesia_CheckAttacks: ; 2d149 (b:5149)
 	call SwapTurn

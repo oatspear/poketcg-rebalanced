@@ -3776,18 +3776,18 @@ TentacruelCard:
 	db ATK_ANIM_WHIP_NO_HIT ; animation
 
 	; attack 2
-	energy WATER, 2 ; energies
+	energy WATER, 1, COLORLESS, 1 ; energies
 	tx JellyfishStingName ; name
-	tx InflictPoisonDescription ; description
+	tx PoisonOrConfusionIfPoisonedDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw InflictPoisonEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
+	dw JellyfishStingEffectCommands ; effect commands
+	db INFLICT_POISON | INFLICT_CONFUSION ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_MULTIPLE_SLASH ; animation
+	db ATK_ANIM_NEEDLES ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness

@@ -73,6 +73,7 @@
 #### Tentacruel
 - Increased HP from 60 to 80.
 - **Supersonic**: removed.
+- **Jellyfish Sting**: reduced cost from (WW) to (WC); inflicts Poison, or Confusion if already Poisoned.
 - New attack: **Wicked Tentacle** (C): move an Energy from the Defending Pokémon to another Pokémon; Poison the second Pokémon.
 
 #### Staryu

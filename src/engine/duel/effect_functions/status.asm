@@ -97,6 +97,15 @@ ApplyStatusEffect: ; 2c035 (b:4035)
 ; Status Attacks
 ; ------------------------------------------------------------------------------
 
+; Poison; Confusion if Poisoned.
+JellyfishSting_PoisonConfusionEffect:
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetNonTurnDuelistVariable
+	and PSN_DBLPSN
+	jp z, PoisonEffect  ; not yet Poisoned
+	jp ConfusionEffect
+
+
 ; Poison + Smokescreen
 SmogEffect:
 	call ReduceAccuracyEffect
