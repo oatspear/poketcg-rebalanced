@@ -4579,7 +4579,7 @@ VaporeonLv29Card:
 	db DIAMOND ; rarity
 	db MYSTERY | GB ; sets
 	db VAPOREON_LV29
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
 
@@ -4598,7 +4598,7 @@ VaporeonLv29Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
+	energy COLORLESS, 2 ; energies
 	tx BiteName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)

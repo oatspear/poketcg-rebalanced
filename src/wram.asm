@@ -1621,9 +1621,8 @@ wce9b:: ; ce9b
 wPrintOnlyStarRarity:: ; ce9c
 	ds $1
 
-; only used in unreferenced function Func_1a14b
-; otherwise unused
-wce9d:: ; ce9d
+; which Color to temporarily convert energies into
+wEnergyColorOverride:: ; ce9d
 	ds $1
 
 wPrinterInitAttempts:: ; ce9e

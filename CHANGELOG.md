@@ -127,6 +127,10 @@
 - New attack: **Transport** (C): add a Supporter card from the deck to the hand.
 - New attack: **Icy Wind** (WCC): 20 damage; 10 damage to 1 Benched Pokémon.
 
+#### Vaporeon Lv29
+- Increased HP from 70 to 80.
+- **Bite**: reduced cost from (CCC) to (CC).
+
 #### Articuno Lv35
 - **Blizzard**: increased cost from (WWW) to (WWCC); reduced base damage from 40 to 20.
 

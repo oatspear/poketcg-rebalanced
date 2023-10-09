@@ -488,21 +488,6 @@ GetPrinterContrastSerialData:
 .contrast_level_data
 	db $00, $20, $40, $60, $7f
 
-Func_1a14b: ; unreferenced
-	ld a, $01
-	jr .asm_1a15d
-	ld a, $02
-	jr .asm_1a15d
-	ld a, $03
-	jr .asm_1a15d
-	ld a, $04
-	jr .asm_1a15d
-	ld a, $05
-.asm_1a15d
-	ld [wce9d], a
-	scf
-	ret
-
 ; a = saved deck index to print
 _PrintDeckConfiguration:
 ; copies selected deck from SRAM to wDuelTempList
