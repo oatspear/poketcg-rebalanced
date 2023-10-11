@@ -95,17 +95,24 @@ GetCardResistance:
 	ld a, [wLoadedCard2Resistance]
 	ret
 
-; this function checks if turn holder's CHARIZARD energy burn is active, and if so, turns
-; all energies at wAttachedEnergies except double colorless energies into fire energies
+; this function checks if turn holder's energy color override is active and,
+; if so, turns all energies at wAttachedEnergies (except double colorless energies)
+; into energies of the override color
 HandleEnergyBurn:
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp CHARIZARD
-	ret nz
-	call CheckCannotUseDueToStatus
-	ret c
+	; ld a, DUELVARS_ARENA_CARD
+	; call GetTurnDuelistVariable
+	; call GetCardIDFromDeckIndex
+	; ld a, e
+	; cp CHARIZARD
+	; ret nz
+	; call CheckCannotUseDueToStatus
+	; ret c
+
+	ld a, [wEnergyColorOverride]
+	cp $ff
+	ret z
+	ld b, a
+
 	ld hl, wAttachedEnergies
 	ld c, NUM_COLORED_TYPES
 	xor a
@@ -113,6 +120,10 @@ HandleEnergyBurn:
 	ld [hli], a
 	dec c
 	jr nz, .zero_next_energy
+	ld c, b
+	ld b, 0
+	ld hl, wAttachedEnergies
+	add hl, bc
 	ld a, [wTotalAttachedEnergies]
-	ld [wAttachedEnergies + FIRE], a
+	ld [hl], a
 	ret

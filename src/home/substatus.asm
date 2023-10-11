@@ -796,6 +796,8 @@ UpdateSubstatusConditions_StartOfTurn:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	set SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
+	ld a, $ff
+	ld [wEnergyColorOverride], a
 	ret
 
 ; clears the SUBSTATUS2, Headache, and updates the double damage condition

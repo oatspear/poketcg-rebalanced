@@ -1621,7 +1621,7 @@ wce9b:: ; ce9b
 wPrintOnlyStarRarity:: ; ce9c
 	ds $1
 
-; which Color to temporarily convert energies into
+; which Color to temporarily convert energies into ($ff if none)
 wEnergyColorOverride:: ; ce9d
 	ds $1
 
