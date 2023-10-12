@@ -1038,13 +1038,34 @@ Retrieve1BasicEnergyDescription:
 	line "your discard pile into your hand."
 	done
 
-EnergyLoopName:
-	text "Energy Loop"
+EnergySoakName:
+	text "Energy Soak"
 	done
 
-Bounce1EnergyDescription:
-	text "Put an Energy attached to"
-	line "this Pokémon into your hand."
+EnergySoakDescription:
+	text "Once during your turn, you may use"
+	line "this Power. All Energies attached to"
+	line "your Pokémon count as <WATER> Energy."
+	done
+
+EnergyJoltName:
+	text "Energy Jolt"
+	done
+
+EnergyJoltDescription:
+	text "Once during your turn, you may use"
+	line "this Power. All Energies attached to"
+	line "your Pokémon count as <LIGHTNING> Energy."
+	done
+
+EnergyBurnName:
+	text "Energy Burn"
+	done
+
+EnergyBurnDescription:
+	text "Once during your turn, you may use"
+	line "this Power. All Energies attached to"
+	line "your Pokémon count as <FIRE> Energy."
 	done
 
 AquaticRescueName:

@@ -17,6 +17,15 @@
 - **Fire Spin**: reduced cost from (FFFF) to (CCCC).
 - New attack: **Dragon Rage** (CC): 30 damage, +10 for each type of Basic Energy attached.
 
+#### Flareon Lv22
+- Increased HP from 70 to 80.
+
+#### Flareon Lv28
+- Increased HP from 70 to 80.
+- **Quick Attack**: removed.
+- **Flamethrower**: reduced cost from (FFC) to (FF) and damage from 60 to 50.
+- New Pokémon Power: **Energy Burn**: until end of turn, changes all energies to Fire energy.
+
 ### Water Changes
 
 #### Squirtle
@@ -131,8 +140,28 @@
 - Increased HP from 70 to 80.
 - **Bite**: reduced cost from (CCC) to (CC).
 
+#### Vaporeon Lv42
+- **Quick Attack**: removed.
+- **Water Gun**: removed.
+- New Pokémon Power: **Energy Soak**: until end of turn, changes all energies to Water energy.
+- New attack: **Hydro Pump** (CC): 20 damage; +10 damage for each attached Water energy.
+
 #### Articuno Lv35
 - **Blizzard**: increased cost from (WWW) to (WWCC); reduced base damage from 40 to 20.
+
+### Lightning Changes
+
+#### Jolteon Lv24
+- Increased HP from 70 to 80.
+- **Stun Needle**: increased base damage from 30 to 40.
+
+#### Jolteon Lv29
+- Increased HP from 70 to 80.
+- **Quick Attack**: removed.
+- **Pin Missile**: removed.
+- New Pokémon Power: **Energy Soak**: until end of turn, changes all energies to Water energy.
+- New attack: **Thunderbolt** (LL): 60 damage; discards all attached energy.
+
 
 ### Fighting Changes
 

@@ -2302,8 +2302,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FlameName                                          ; 0x08db
 	textpointer CharmeleonDescription                              ; 0x08dc
 	textpointer CharizardName                                      ; 0x08dd
-	textpointer EnergyBurnName                                     ; 0x08de
-	textpointer EnergyBurnDescription                              ; 0x08df
+	textpointer EnergyLoopName
+	textpointer Bounce1EnergyDescription
 	textpointer FireSpinName                                       ; 0x08e0
 	textpointer Discard2EnergiesDescription
 	textpointer CharizardDescription                               ; 0x08e2
@@ -3035,8 +3035,12 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DoubleDamageIfAttachedEnergyDescription
 	textpointer MudSplashName
 	textpointer Retrieve1BasicEnergyDescription
-	textpointer EnergyLoopName
-	textpointer Bounce1EnergyDescription
+	textpointer EnergySoakName
+	textpointer EnergySoakDescription
+	textpointer EnergyJoltName
+	textpointer EnergyJoltDescription
+	textpointer EnergyBurnName
+	textpointer EnergyBurnDescription
 	textpointer AquaticRescueName
 	textpointer AquaticRescueDescription
 	textpointer RocketShellName

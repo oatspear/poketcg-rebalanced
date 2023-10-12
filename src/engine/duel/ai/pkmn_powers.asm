@@ -247,6 +247,7 @@ AIEnergyTransTransferEnergyToBench:
 ; return if Arena card has no Grass energy cards attached.
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
 	ld a, [wAttachedEnergies + GRASS]
 	or a
 	ret z
@@ -300,6 +301,7 @@ AIEnergyTransTransferEnergyToBench:
 	; returns when Arena card has no Grass energy cards attached.
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
 	ld a, [wAttachedEnergies + GRASS]
 	or a
 	jr z, .done_transfer

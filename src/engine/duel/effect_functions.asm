@@ -1449,6 +1449,7 @@ GetNumAttachedWaterEnergy:
 	; ld e, a
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
 	ld a, [wAttachedEnergies + WATER]
 	ret
 
@@ -2402,6 +2403,22 @@ EnergyTrans_AIEffect: ; 2cbfb (b:4bfb)
 ; ------------------------------------------------------------------------------
 
 
+EnergySoak_ChangeColorEffect:
+	ld a, WATER
+	ld [wEnergyColorOverride], a
+	jp SetUsedPokemonPowerThisTurn
+
+EnergyJolt_ChangeColorEffect:
+	ld a, LIGHTNING
+	ld [wEnergyColorOverride], a
+	jp SetUsedPokemonPowerThisTurn
+
+EnergyBurn_ChangeColorEffect:
+	ld a, FIRE
+	ld [wEnergyColorOverride], a
+	jp SetUsedPokemonPowerThisTurn
+
+
 VaporEssence_OncePerTurnCheck:
 JoltEssence_OncePerTurnCheck:
 FlareEssence_OncePerTurnCheck:
@@ -3098,6 +3115,7 @@ AIPickFireEnergyCardToDiscard: ; 2d35a (b:535a)
 Wildfire_CheckEnergy: ; 2d49b (b:549b)
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
 	ldtx hl, NotEnoughFireEnergyText
 	ld a, [wAttachedEnergies + FIRE]
 	cp 1

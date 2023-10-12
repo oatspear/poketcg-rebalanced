@@ -824,13 +824,13 @@ CharizardName: ; 59fa0 (16:5fa0)
 	text "Charizard"
 	done
 
-EnergyBurnName: ; 59fab (16:5fab)
-	text "Energy Burn"
+EnergyLoopName:
+	text "Energy Loop"
 	done
 
-EnergyBurnDescription: ; 59fb8 (16:5fb8)
-	text "All Energies attached to this"
-	line "Pokémon count as <FIRE> Energy."
+Bounce1EnergyDescription:
+	text "Put an Energy attached to"
+	line "this Pokémon into your hand."
 	done
 
 FireSpinName: ; 5a095 (16:6095)

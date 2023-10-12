@@ -5823,6 +5823,7 @@ CheckPrintCnfSlpPrz:
 PrintPlayAreaCardAttachedEnergies:
 	push bc
 	call GetPlayAreaCardAttachedEnergies
+	; call HandleEnergyBurn
 	ld hl, wDefaultText
 	push hl
 	ld c, NUM_TYPES
@@ -7330,6 +7331,7 @@ HandleBetweenTurnsEvents:
 ;.loop_play_area
 ;; check its attached energies
 ;	call GetPlayAreaCardAttachedEnergies
+; call HandleEnergyBurn
 ;	ld a, [wAttachedEnergies + GRASS]
 ;	or a
 ;	jr z, .next_pkmn ; no Grass energy, skip Pokemon

@@ -3094,7 +3094,7 @@ FlareonLv22Card:
 	db DIAMOND ; rarity
 	db MYSTERY | GB ; sets
 	db FLAREON_LV22
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
 
@@ -3145,30 +3145,30 @@ FlareonLv28Card:
 	db STAR ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db FLAREON_LV28
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx QuickAttackName ; name
-	tx DoubleDamageIfActiveThisTurnDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw QuickAttackEffectCommands ; effect commands
+	energy 0 ; energies
+	tx EnergyBurnName ; name
+	tx EnergyBurnDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw EnergyBurnEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy FIRE, 2, COLORLESS, 1 ; energies
+	energy FIRE, 2 ; energies
 	tx FlamethrowerName ; name
 	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
 	dw FlamethrowerEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -4635,32 +4635,32 @@ VaporeonLv42Card:
 	tx EeveeName ; pre-evo name
 
 	; attack 1
+	energy 0 ; energies
+	tx EnergySoakName ; name
+	tx EnergySoakDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw EnergySoakEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
 	energy COLORLESS, 2 ; energies
-	tx QuickAttackName ; name
-	tx DoubleDamageIfActiveThisTurnDescription ; description
+	tx HydroPumpName ; name
+	tx HydroPumpDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw QuickAttackEffectCommands ; effect commands
+	dw HydroPumpEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
-
-	; attack 2
-	energy WATER, 1, COLORLESS, 1 ; energies
-	tx WaterGunName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_WATER_GUN ; animation
+	db MAX_ENERGY_BOOST_IS_NOT_LIMITED
+	db ATK_ANIM_HYDRO_PUMP ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -5857,7 +5857,7 @@ JolteonLv24Card:
 	db DIAMOND ; rarity
 	db MYSTERY | GB ; sets
 	db JOLTEON_LV24
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
 
@@ -5880,7 +5880,7 @@ JolteonLv24Card:
 	tx StunNeedleName ; name
 	tx MayInflictParalysisDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw JolteonStunNeedleEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
@@ -5908,37 +5908,37 @@ JolteonLv29Card:
 	db STAR ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db JOLTEON_LV29
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx QuickAttackName ; name
-	tx DoubleDamageIfActiveThisTurnDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw QuickAttackEffectCommands ; effect commands
+	energy 0 ; energies
+	tx EnergyJoltName ; name
+	tx EnergyJoltDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw EnergyJoltEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy LIGHTNING, 2, COLORLESS, 1 ; energies
-	tx PinMissileName ; name
-	tx TripleAttackX20X10Description ; description
+	energy LIGHTNING, 2 ; energies
+	tx ThunderboltName ; name
+	tx ThunderboltDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_X ; category
-	dw JolteonPinMissileEffectCommands ; effect commands
+	db 60 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ThunderboltEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NEEDLES ; animation
+	db 9
+	db ATK_ANIM_THUNDERBOLT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

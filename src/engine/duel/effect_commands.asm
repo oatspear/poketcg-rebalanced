@@ -291,6 +291,21 @@ EnergyTransEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyTrans_PrintProcedure
 	db  $00
 
+EnergySoakEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergySoak_ChangeColorEffect
+	db  $00
+
+EnergyJoltEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyJolt_ChangeColorEffect
+	db  $00
+
+EnergyBurnEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyBurn_ChangeColorEffect
+	db  $00
+
 VaporEssenceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, VaporEssence_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VaporEssence_ChangeColorEffect
@@ -454,15 +469,6 @@ Recoil10EffectCommands:
 
 Recoil20EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil20Effect
-	db  $00
-
-JolteonQuickAttackEffectCommands:
-VaporeonQuickAttackEffectCommands:
-FlareonQuickAttackEffectCommands:
-NinetalesQuickAttackEffectCommands:
-ArcanineQuickAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heads10BonusDamage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, ArcanineQuickAttack_AIEffect
 	db  $00
 
 QuickAttackEffectCommands:
@@ -955,7 +961,6 @@ ZapdosThunderstormEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderstormEffect
 	db  $00
 
-JolteonPinMissileEffectCommands:
 SandslashFurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TripleAttackX20X10_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, TripleAttackX20X10_AIEffect
@@ -1270,11 +1275,6 @@ PunishingSlapEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PunishingSlap_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, PunishingSlap_AIEffect
 	db  $00
-
-; AquaPunchEffectCommands:
-; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AquaPunch_DamageBoostEffect
-; 	dbw EFFECTCMDTYPE_AI, AquaPunch_AIEffect
-; 	db  $00
 
 DragonRageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DragonRage_DamageBoostEffect

@@ -1,5 +1,23 @@
 ;
 
+; AquaPunchEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AquaPunch_DamageBoostEffect
+; 	dbw EFFECTCMDTYPE_AI, AquaPunch_AIEffect
+; 	db  $00
+
+;
+AquaPunch_DamageBoostEffect:
+  call GetNumAttachedWaterEnergy
+  ld hl, wAttachedEnergies + FIGHTING
+  add [hl]
+	call ATimes10
+	jp AddToDamage
+
+AquaPunch_AIEffect:
+	call AquaPunch_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
 
 DualTypeFightingEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
@@ -1886,7 +1904,8 @@ FlamesOfRage_PlayerSelectEffect:
 FlamesOfRage_CheckEnergy:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies]
+	call HandleEnergyBurn
+	ld a, [wAttachedEnergies + FIRE]
 	ldtx hl, NotEnoughFireEnergyText
 	cp 2
 	ret
@@ -2798,6 +2817,7 @@ ApplyExtraWaterEnergyDamageBonus: ; 2cec8 (b:4ec8)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld e, a
 	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
 	pop bc
 
 	ld hl, wAttachedEnergies + WATER

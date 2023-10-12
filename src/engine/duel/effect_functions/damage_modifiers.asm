@@ -212,23 +212,11 @@ WaterGunEffect:
 
 
 ;
-AquaPunch_DamageBoostEffect:
-  call GetNumAttachedWaterEnergy
-  ld hl, wAttachedEnergies + FIGHTING
-  add [hl]
-	call ATimes10
-	jp AddToDamage
-
-AquaPunch_AIEffect:
-	call AquaPunch_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-
-;
 DragonRage_DamageBoostEffect:
 	xor a  ; PLAY_AREA_ARENA
 	ld e, a
 	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
 
 ; count how many types of Energy there are (colorless does not count)
 	ld b, 0
