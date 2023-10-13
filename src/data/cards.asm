@@ -5474,7 +5474,7 @@ MagnemiteLv15Card:
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SparkEffectCommands ; effect commands
+	dw Damage1BenchedPokemon10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

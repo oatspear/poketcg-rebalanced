@@ -281,7 +281,7 @@ INCLUDE "engine/duel/effect_functions/checks.asm"
 CheckIfPlayAreaHasAnyDamageOrStatus:
 	call CheckIfPlayAreaHasAnyDamage
 	ret nc  ; there is damage to heal
-	jr CheckIfPlayAreaHasAnyStatus
+	jp CheckIfPlayAreaHasAnyStatus
 
 
 Maintenance_CheckHandAndDiscardPile:
