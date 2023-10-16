@@ -6776,7 +6776,9 @@ SelectedCardList_AddToHandFromDeckEffect:
 	ld a, [hli]
 	cp $ff
 	jp z, SyncShuffleDeck  ; done
+	push hl
 	call AddDeckCardToHandEffect
+	pop hl
 	jr .loop_cards
 
 
