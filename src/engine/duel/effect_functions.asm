@@ -1397,6 +1397,8 @@ WaterReserve_PlayerSelectEffect:
 	ld a, TYPE_ENERGY_WATER
 	call HandlePlayerSelectionCardTypeFromDeckListToHand
 	ldh [hTempList + 1], a
+	ld a, $ff
+	ldh [hTempList + 2], a  ; terminator
 	ret
 
 WaterReserve_AISelectEffect:
