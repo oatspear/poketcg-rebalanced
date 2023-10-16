@@ -1414,6 +1414,8 @@ WaterReserve_AISelectEffect:
 	; ld b, TYPE_ENERGY_WATER
 	call ChooseCardOfGivenType_AISelectEffect
 	ldh [hTempList + 1], a
+	ld a, $ff
+	ldh [hTempList + 2], a  ; terminator
 	ret
 
 
