@@ -1143,6 +1143,19 @@ PoisonOrConfusionIfPoisonedDescription:
 	line "Poisoned, it is now Confused."
 	done
 
+PrimordialDreamName:
+	text "Primordial Dream"
+	done
+
+PrimordialDreamDescription:
+	text "Once during your turn, you may"
+	line "choose a non-Supporter Trainer card"
+	line "from your Discard Pile. Transform"
+	line "that card into a Mysterious Fossil"
+	line "and add it to your hand."
+	done
+
+
 
 ; ------------------------------------------------------------------------------
 ; Trainer Cards

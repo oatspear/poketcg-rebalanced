@@ -9,6 +9,40 @@ Spread damage to full Bench seems to be valued at 25 or 30 points.
 
 
 ; ------------------------------------------------------------------------------
+; Concepts
+; ------------------------------------------------------------------------------
+
+Omanyte:
+- choose Item card from discard pile, transform into Mysterious Fossil and add to hand
+- either search for evolution card or spiral drain
+
+Omastar:
+- devolution
+- spiral drain or hydro pump
+
+Kabuto:
+- exoskeleton or shell press
+- search for evolution cards
+
+Kabutops:
+- discard fossil from hand to deal bonus damage
+- drain or defense crush (Defending Pokémon takes extra damage from attacks next turn)
+
+Aerodactyl:
+- prehistoric power (only in active spot)
+- bonus damage against evolutions
+
+
+Fossil synergy:
+- Omastar with devolution and Aerodactyl blocking evolutions
+- Omanyte generating fossils and Kabutops discarding them to deal massive damage
+
+Monotype Fossils:
+- Omastar with hydro pump
+- Kabutops with discard plus discard recovery with Sandshrew or Diglett
+
+
+; ------------------------------------------------------------------------------
 ; Attacks
 ; ------------------------------------------------------------------------------
 

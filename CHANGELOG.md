@@ -146,6 +146,13 @@
 - New Pokémon Power: **Energy Soak**: until end of turn, changes all energies to Water energy.
 - New attack: **Hydro Pump** (CC): 20 damage; +10 damage for each attached Water energy.
 
+#### Omanyte
+- Increased HP from 40 to 70.
+- **Harden**: removed.
+- **Water Gun**: removed.
+- New Pokémon Power: **Primordial Dream**: once per turn, put an Item card from discard pile into hand and morph it into Mysterious Fossil.
+- New attack: **Spiral Drain** (WC): 20 damage, heal 20 damage from self.
+
 #### Articuno Lv35
 - **Blizzard**: increased cost from (WWW) to (WWCC); reduced base damage from 40 to 20.
 

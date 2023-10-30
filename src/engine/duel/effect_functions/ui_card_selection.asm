@@ -91,18 +91,24 @@ HandlePlayerSelection2HandCardsExcludeSelf:
 ; Handles screen for the Player to choose an Item Trainer card
 ; from the Discard Pile.
 ; output:
-;   a: deck index of the selected card
-;   [hTempCardIndex_ff98]: deck index of the selected card
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card | $ff
+;   carry: set iff cancelled
 HandlePlayerSelectionItemTrainerFromDiscardPile:
 	call CreateItemCardListFromDiscardPile
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, PleaseSelectCardText
 	ldtx de, PlayerDiscardPileText
 	bank1call SetCardListHeaderText
-.loop_input
+; .loop_input
 	bank1call DisplayCardList
-	jr c, .loop_input
+	jr c, .cancel
 	ldh a, [hTempCardIndex_ff98]
+	ret
+
+.cancel
+	ld a, $ff
+	ldh [hTempCardIndex_ff98], a
 	ret
 
 PlayerSelectAndStoreItemCardFromDiscardPile:

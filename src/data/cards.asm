@@ -4681,7 +4681,7 @@ OmanyteCard:
 	db CIRCLE ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db OMANYTE
-	db 40 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx MysteriousFossilName ; pre-evo name
 
@@ -4699,32 +4699,32 @@ OmanyteCard:
 	; Kabuto, and Kabutops on your Bench.
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx HardenName ; name
-	tx HardenDescription ; description
-	dw NONE ; description (cont)
+	energy 0 ; energies
+	tx PrimordialDreamName ; name
+	tx PrimordialDreamDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw HardenEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PROTECT ; animation
-
-	; attack 2
-	energy WATER, 1 ; energies
-	tx WaterGunName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db POKEMON_POWER ; category
+	dw PrimordialDreamEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_WATER_GUN ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
+	energy WATER, 1, COLORLESS, 1 ; energies
+	tx SpiralDrainName ; name
+	tx Heal20DamageDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Leech20DamageEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
+	db NONE ; flags 3
+	db 2
+	db ATK_ANIM_DRAIN ; animation
 
 	db 0 ; retreat cost
 	db WR_GRASS ; weakness

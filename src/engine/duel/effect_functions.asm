@@ -299,18 +299,25 @@ AssassinFlight_CheckBenchAndStatus:
 AbsorbWater_PreconditionCheck:
 	call CheckPokemonPowerCanBeUsed
 	ret c
-
-	call CreateEnergyCardListFromDiscardPile_OnlyWater
+	jp CreateEnergyCardListFromDiscardPile_OnlyWater
 	; ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
-	ret
+	; ret
 
 
 MudSport_PreconditionCheck:
 	call CheckPokemonPowerCanBeUsed
 	ret c
-	call CreateEnergyCardListFromDiscardPile_WaterFighting
+	jp CreateEnergyCardListFromDiscardPile_WaterFighting
 	; ldtx hl, ThereAreNoEnergyCardsInDiscardPileText
-	ret
+	; ret
+
+
+PrimordialDream_PreconditionCheck:
+	call CheckPokemonPowerCanBeUsed
+	ret c
+	jp CreateItemCardListFromDiscardPile
+	; ldtx hl, ThereAreNoTrainerCardsInDiscardPileText
+	; ret
 
 
 Trade_PreconditionCheck:
@@ -1084,6 +1091,37 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 	ld a, [wDuelTempList]
 	ldh [hTemp_ffa0], a
 	jp AttachEnergyFromHand_AttachEnergyEffect
+
+
+PrimordialDream_PlayerSelectEffect:
+; Pokémon Powers must preserve [hTemp_ffa0]
+	; ldh a, [hTemp_ffa0]
+	; push af
+	ldtx hl, ChooseCardToPlaceInHandText
+	call DrawWideTextBox_WaitForInput
+	call HandlePlayerSelectionItemTrainerFromDiscardPile
+	ret c
+	ldh [hAIPkmnPowerEffectParam], a
+	; pop af
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
+
+; Pokémon Powers do not use [hTemp_ffa0]
+; adds a card in [hAIEnergyTransEnergyCard] from the discard pile to the hand
+; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
+PrimordialDream_MorphAndAddToHandEffect:
+	call SetUsedPokemonPowerThisTurn
+; get deck index and morph the selected card
+	ldh a, [hAIPkmnPowerEffectParam]
+	call FossilizeCard
+; get deck index again and add to the hand
+	ldh a, [hAIPkmnPowerEffectParam]
+	ldh [hTempList], a
+	ld a, $ff
+	ldh [hTempList + 1], a
+	jr SelectedCard_AddToHandFromDiscardPile
 
 
 ; ------------------------------------------------------------------------------
@@ -6311,6 +6349,23 @@ MorphEffect:
 	ret
 
 
+; Converts the selected card into a Mysterious Fossil
+; input:
+;   a - deck index of the selected card
+FossilizeCard:
+	ld e, MYSTERIOUS_FOSSIL
+	; fallthrough
+
+; input:
+;   a - deck index of the card to transform
+;   e - ID of the card to transform into
+OverwriteCardID:
+; point hl to the index in deck list, to overwrite ID (preserves de)
+	call _GetCardIDFromDeckIndex
+	ld [hl], e
+	ret
+
+
 ; returns carry if either there are no damage counters
 ; or no Energy cards attached in the Play Area.
 SuperPotion_DamageEnergyCheck: ; 2f159 (b:7159)
@@ -6580,6 +6635,7 @@ Discard_PlayerHandCardSelection:
 
 Maintenance_PlayerDiscardPileSelection:
 	call HandlePlayerSelectionItemTrainerFromDiscardPile
+	ret c
 	ldh [hTempList + 1], a
 	ld a, $ff  ; terminating byte
 	ldh [hTempList + 2], a
