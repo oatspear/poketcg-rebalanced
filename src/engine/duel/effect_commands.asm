@@ -769,6 +769,10 @@ MewDevolutionBeamEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DevolutionBeam_AISelectEffect
 	db  $00
 
+PrimalSwirlEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DevolveDefendingPokemonEffect
+	db  $00
+
 PsychicEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Psychic_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Psychic_AIEffect

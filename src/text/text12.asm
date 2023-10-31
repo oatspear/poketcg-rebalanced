@@ -1155,6 +1155,16 @@ PrimordialDreamDescription:
 	line "and add it to your hand."
 	done
 
+PrimalSwirlName:
+	text "Primal Swirl"
+	done
+
+PrimalSwirlDescription:
+	text "If the Defending Pokémon is an"
+	line "Evolution Pokémon, return the"
+	line "highest stage evolution card on that"
+	line "Pokémon to your opponent's hand."
+	done
 
 
 ; ------------------------------------------------------------------------------

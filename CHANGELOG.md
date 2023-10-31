@@ -151,7 +151,14 @@
 - **Harden**: removed.
 - **Water Gun**: removed.
 - New Pokémon Power: **Primordial Dream**: once per turn, put an Item card from discard pile into hand and morph it into Mysterious Fossil.
+- New attack: **Constrict** (WC): 20 damage; increase opponent's retreat cost by 1 and deal +10 damage for each (C) in retreat cost.
+
+#### Omastar
+- Increased HP from 70 to 100.
+- **Water Gun**: removed.
+- **Spike Cannon**: removed.
 - New attack: **Spiral Drain** (WC): 20 damage, heal 20 damage from self.
+- New attack: **Primal Swirl** (WCC): 40 damage, devolve the Defending Pokémon.
 
 #### Articuno Lv35
 - **Blizzard**: increased cost from (WWW) to (WWCC); reduced base damage from 40 to 20.

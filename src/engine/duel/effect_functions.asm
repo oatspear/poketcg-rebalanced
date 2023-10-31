@@ -4081,6 +4081,24 @@ DevolutionBeam_LoadAnimation: ; 2dcb6 (b:5cb6)
 	ld [wLoadedAttackAnimation], a
 	ret
 
+DevolveDefendingPokemonEffect:
+	ld a, 1  ; opponent's Play Area
+	ldh [hTemp_ffa0], a
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ffa1], a
+
+	call SwapTurn
+	call HandleNoDamageOrEffect
+	jp c, SwapTurn  ; exit
+
+	ld b, PLAY_AREA_ARENA
+	ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	call DevolutionBeam_DevolveEffect.DevolvePokemonSkipAnimation
+	jp SwapTurn
+
+
 DevolutionBeam_DevolveEffect: ; 2dcbb (b:5cbb)
 	ldh a, [hTemp_ffa0]
 	or a
@@ -4091,14 +4109,14 @@ DevolutionBeam_DevolveEffect: ; 2dcbb (b:5cbb)
 ; opponent's Play Area
 	call SwapTurn
 	ldh a, [hTempPlayAreaLocation_ffa1]
+	or a
 	jr nz, .skip_handle_no_damage_effect
 	call HandleNoDamageOrEffect
 	jr c, .unaffected
 .skip_handle_no_damage_effect
 	call .DevolvePokemon
 .unaffected
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 .DevolvePokemon
 	ld a, ATK_ANIM_DEVOLUTION_BEAM
@@ -4111,6 +4129,7 @@ DevolutionBeam_DevolveEffect: ; 2dcbb (b:5cbb)
 	bank1call PlayAttackAnimation
 	bank1call WaitAttackAnimation
 
+.DevolvePokemonSkipAnimation
 ; load selected card's data
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ldh [hTempPlayAreaLocation_ff9d], a
@@ -4119,7 +4138,7 @@ DevolutionBeam_DevolveEffect: ; 2dcbb (b:5cbb)
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
 
-; check if car is affected
+; check if card is affected
 	ld a, [wLoadedCard1ID]
 	ld [wTempNonTurnDuelistCardID], a
 	ld de, $0
@@ -4133,8 +4152,7 @@ DevolutionBeam_DevolveEffect: ; 2dcbb (b:5cbb)
 .check_no_damage_effect
 	call CheckNoDamageOrEffect
 	jr nc, .devolve
-	call DrawWideTextBox_WaitForInput
-	ret
+	jp DrawWideTextBox_WaitForInput
 
 .devolve
 	ldh a, [hTempPlayAreaLocation_ffa1]

@@ -4714,17 +4714,17 @@ OmanyteCard:
 
 	; attack 2
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx SpiralDrainName ; name
-	tx Heal20DamageDescription ; description
+	tx ConstrictName ; name
+	tx ConstrictDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Leech20DamageEffectCommands ; effect commands
+	db DAMAGE_PLUS ; category
+	dw ConstrictEffectCommands ; effect commands
 	db NONE ; flags 1
-	db HEAL_USER ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 2
-	db ATK_ANIM_DRAIN ; animation
+	db 1
+	db ATK_ANIM_WHIP ; animation
 
 	db 0 ; retreat cost
 	db WR_GRASS ; weakness
@@ -4792,31 +4792,31 @@ OmastarCard:
 
 	; attack 1
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx WaterGunName ; name
-	dw NONE ; description
+	tx SpiralDrainName ; name
+	tx Heal20DamageDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw Leech20DamageEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_WATER_GUN ; animation
+	db 2
+	db ATK_ANIM_DRAIN ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx HydroPumpName ; name
-	tx DoubleAttackX20X10Description ; description
+	energy WATER, 1, COLORLESS, 2 ; energies
+	tx PrimalSwirlName ; name
+	tx PrimalSwirlDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_X ; category
-	dw DoubleAttackX20X10EffectCommands ; effect commands
+	db 40 ; damage
+	db DAMAGE_NORMAL ; category
+	dw PrimalSwirlEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NEEDLES ; animation
+	db ATK_ANIM_WHIRLPOOL ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
