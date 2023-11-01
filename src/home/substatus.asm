@@ -507,6 +507,19 @@ ArePokemonPowersDisabled:
 ;   a: 0 if not found; 1 if found
 ;   carry: set iff found
 IsToxicGasActive:
+	push bc
+	ld c, WEEZING
+	call IsActiveSpotPokemonPowerActive
+	pop bc
+	ret
+
+; Check whether a given Pokémon is found in either player's Active Spot,
+; and whether it is Pokémon Power capable.
+; Returns carry if the Pokémon card is at least found once.
+; outputs:
+;   a: 0 if not found; 1 if found
+;   carry: set iff found
+IsActiveSpotPokemonPowerActive:
 	push hl
 	push de
 	; push bc
@@ -530,14 +543,14 @@ IsToxicGasActive:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 ; check if it is the right Pokémon
-	call GetCardIDFromDeckIndex
+	call GetCardIDFromDeckIndex  ; preserves bc
 	ld a, e
-	cp WEEZING
-	jr z, .is_weezing
+	cp c
+	jr z, .is_this_pokemon
 .nope
 	xor a  ; reset carry
 	ret
-.is_weezing
+.is_this_pokemon
 ; check if the Pokémon is affected with a status condition
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
@@ -558,13 +571,22 @@ IsClairvoyanceActive:
 
 
 ; return carry if any duelist has Aerodactyl and its Prehistoric Power Pkmn Power is active
+; IsPrehistoricPowerActive:
+; 	ld a, AERODACTYL
+; 	call CountPokemonIDInBothPlayAreas
+; 	ret nc
+; 	call ArePokemonPowersDisabled
+; 	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
+; 	ccf
+; 	ret
+
+; return carry if a Pokémon Power capable Aerodactyl is found in either player's
+; Active Spot.
 IsPrehistoricPowerActive:
-	ld a, AERODACTYL
-	call CountPokemonIDInBothPlayAreas
-	ret nc
-	call ArePokemonPowersDisabled
-	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
-	ccf
+	push bc
+	ld c, AERODACTYL
+	call IsActiveSpotPokemonPowerActive
+	pop bc
 	ret
 
 

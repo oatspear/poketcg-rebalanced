@@ -7315,7 +7315,7 @@ AerodactylCard:
 	energy 0 ; energies
 	tx PrehistoricPowerName ; name
 	tx PrehistoricPowerDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw PassivePowerEffectCommands ; effect commands
@@ -7327,16 +7327,16 @@ AerodactylCard:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx WingAttackName ; name
-	dw NONE ; description
+	tx FossilFangsName ; name
+	tx ReduceAttackBy10Description ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw ReduceAttackBy10EffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 10
 	db ATK_ANIM_HIT ; animation
 
 	db 1 ; retreat cost

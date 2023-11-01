@@ -918,15 +918,21 @@ AerodactylName: ; 5fd6c (17:7d6c)
 	text "Aerodactyl"
 	done
 
-PrehistoricPowerName: ; 5fd78 (17:7d78)
+PrehistoricPowerName:
 	text "Prehistoric Power"
 	done
 
-PrehistoricPowerDescription: ; 5fd8b (17:7d8b)
+; PrehistoricPowerDescription:
+; 	text "No more Evolution cards can be"
+; 	line "played. This power stops working"
+; 	line "while Aerodactyl is Asleep,"
+; 	line "Confused, or Paralyzed."
+; 	done
+
+PrehistoricPowerDescription:
 	text "No more Evolution cards can be"
-	line "played. This power stops working"
-	line "while Aerodactyl is Asleep,"
-	line "Confused, or Paralyzed."
+	line "played while this Pokémon is in"
+	line "the Active Spot."
 	done
 
 FossilName: ; 5fe00 (17:7e00)

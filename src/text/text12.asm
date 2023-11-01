@@ -1186,6 +1186,10 @@ SharpSickleDescription:
 	line "30 more damage."
 	done
 
+FossilFangsName:
+	text "Fossil Fangs"
+	done
+
 ; ------------------------------------------------------------------------------
 ; Trainer Cards
 ; ------------------------------------------------------------------------------

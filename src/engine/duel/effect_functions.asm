@@ -64,15 +64,13 @@ INCLUDE "engine/duel/effect_functions/evolution.asm"
 PokemonBreeder_PreconditionCheck:
 	call CheckDeckIsNotEmpty
 	ret c
-	bank1call IsPrehistoricPowerActive
-	ret
+	jp IsPrehistoricPowerActive
 
 
 RareCandy_HandPlayAreaCheck:
 	call CreatePlayableStage2PokemonCardListFromHand
 	jr c, .cannot_evolve
-	bank1call IsPrehistoricPowerActive
-	ret
+	jp IsPrehistoricPowerActive
 .cannot_evolve
 	ldtx hl, ConditionsForEvolvingToStage2NotFulfilledText
 	scf

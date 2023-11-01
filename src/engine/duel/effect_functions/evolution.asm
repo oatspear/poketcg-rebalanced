@@ -50,7 +50,7 @@ EvolutionFromDeck_PlayerSelectEffect:
 ; temporary storage for card location
 	ldh [hTempPlayAreaLocation_ffa1], a
 
-	bank1call IsPrehistoricPowerActive
+	call IsPrehistoricPowerActive
 	; ldtx hl, UnableToEvolveDueToPrehistoricPowerText
 	jr c, .none_in_deck
 
@@ -139,7 +139,7 @@ EvolutionFromDeck_AISelectEffect:
 ; temporary storage of card location
 	ldh [hTempPlayAreaLocation_ffa1], a
 
-	bank1call IsPrehistoricPowerActive
+	call IsPrehistoricPowerActive
 	jr nc, .search
 	ld a, $ff
 	ldh [hTemp_ffa0], a

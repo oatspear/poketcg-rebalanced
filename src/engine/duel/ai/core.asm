@@ -629,7 +629,7 @@ CheckIfCardCanBePlayed:
 	ret
 
 .evolution_card
-	bank1call IsPrehistoricPowerActive
+	call IsPrehistoricPowerActive
 	ret c
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable

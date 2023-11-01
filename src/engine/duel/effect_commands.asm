@@ -1151,6 +1151,7 @@ SwarmEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Swarm_AIEffect
 	db  $00
 
+ReduceAttackBy10EffectCommands:
 MoonblastEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceAttackBy10Effect
 	db  $00

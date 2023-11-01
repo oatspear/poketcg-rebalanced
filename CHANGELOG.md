@@ -200,6 +200,10 @@
 
 #### Aerodactyl
 - Increased HP from 60 to 80.
+- **Prehistoric Power**: only works while in the Active Spot.
+- **Wing Attack**: removed.
+- New attack: **Fossil Fangs** (CCC): 40 damage; reduce Defending Pokémon's attack by 10.
+
 
 ### Colorless Changes
 
