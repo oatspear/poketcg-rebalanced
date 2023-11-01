@@ -877,20 +877,21 @@ KabutoArmorName: ; 5fa55 (17:7a55)
 	text "Kabuto Armor"
 	done
 
-KabutoArmorDescription: ; 5fa63 (17:7a63)
-	text "Whenever an attack (even your own)"
-	line "does damage to Kabuto (after"
-	line "applying Weakness and Resistance),"
-	line "that attack only does half the"
-	line "damage to Kabuto (rounded down to"
-	line "the nearest 10)."
+KabutoArmorDescription:
+	text "This Pokémon takes only half"
+	line "damage from attacks (rounded down"
+	line "to the nearest 10, after applying"
+	line "Weakness and Resistance)."
 	done
 
-KabutoArmorDescriptionCont: ; 5fb19 (17:7b19)
-	text "(Any other effects of attacks still"
-	line "happen.) This power stops working"
-	line "while Kabuto is Asleep, Confused,"
-	line "or Paralyzed."
+PrimalHuntName:
+	text "Primal Hunt"
+	done
+
+PrimalHuntDescription:
+	text "You may search your Deck for"
+	line "a Pokémon card and add it to"
+	line "your hand."
 	done
 
 KabutoDescription: ; 5fb90 (17:7b90)

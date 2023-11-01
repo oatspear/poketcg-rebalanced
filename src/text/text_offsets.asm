@@ -2681,7 +2681,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer KabutoName                                         ; 0x0a6b
 	textpointer KabutoArmorName                                    ; 0x0a6c
 	textpointer KabutoArmorDescription                             ; 0x0a6d
-	textpointer KabutoArmorDescriptionCont                         ; 0x0a6e
+	textpointer PrimalHuntName
+	textpointer PrimalHuntDescription
 	textpointer KabutoDescription                                  ; 0x0a6f
 	textpointer KabutopsName                                       ; 0x0a70
 	textpointer SharpSickleName                                    ; 0x0a71

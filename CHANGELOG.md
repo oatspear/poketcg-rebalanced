@@ -182,6 +182,11 @@
 #### Marowak Lv26
 - **Bonemerang**: damage changed from x30 per heads to x20 per heads and x10 per tails.
 
+#### Kabuto
+- Increased HP from 40 to 60.
+- **Scratch**: removed.
+- New attack: **Primal Hunt** (FC): 20 damage, search deck for a Pokémon card and add to the hand.
+
 ### Colorless Changes
 
 #### Dragonair

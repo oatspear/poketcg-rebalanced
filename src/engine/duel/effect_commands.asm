@@ -52,6 +52,12 @@ StressPheromonesEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StressPheromones_PlayerSelectEffect
 	db  $00
 
+PrimalHuntEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCard_AddToHandFromDeckEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ChoosePokemonFromDeck_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, ChoosePokemonFromDeck_AISelectEffect
+	db  $00
+
 LureEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Lure_AssertPokemonInBench
 	; dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect

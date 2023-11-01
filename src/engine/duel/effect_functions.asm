@@ -6558,26 +6558,36 @@ RocketGrunts_DiscardEffect: ; 2f273 (b:7273)
 INCLUDE "engine/duel/effect_functions/ui_card_selection.asm"
 
 
-; store deck index of selected card or $ff in [hAIPkmnPowerEffectParam]
-StressPheromones_PlayerSelectEffect:
-; search cards in Deck
+; search Pokémon cards in Deck
+; return carry if there are none and the player refused to look into the deck
+_LookForPokemonInDeck:
 	call CreateDeckCardList
 	ldtx hl, ChooseAnyPokemonFromDeckText
 	ldtx bc, AnyPokemonDeckText
 	ld d, SEARCHEFFECT_POKEMON
-	call LookForCardsInDeck
-	jr c, .none_in_deck
+	jp LookForCardsInDeck
 
-	call HandlePlayerSelectionPokemonFromDeck
-	ldh [hAIPkmnPowerEffectParam], a
-	or a  ; the Power has been used, regardless of cancel
+
+; store deck index of selected card or $ff in [hTemp_ffa0]
+ChoosePokemonFromDeck_PlayerSelectEffect:
+	call _LookForPokemonInDeck
+	; jr c, .none_in_deck
+	ld a, $ff
+	call nc, _HandlePlayerSelectionPokemonFromDeck
+	ldh [hTemp_ffa0], a
+	or a  ; the effect has been handled, regardless of cancel
 	ret
 
-.none_in_deck
-; proceed, the Power has been used
+
+
+; store deck index of selected card or $ff in [hAIPkmnPowerEffectParam]
+StressPheromones_PlayerSelectEffect:
+	call _LookForPokemonInDeck
+	; jr c, .none_in_deck
 	ld a, $ff
+	call nc, _HandlePlayerSelectionPokemonFromDeck
 	ldh [hAIPkmnPowerEffectParam], a
-	or a
+	or a  ; the Power has been used, regardless of cancel
 	ret
 
 
@@ -7081,6 +7091,14 @@ NaturalRemedy_AISelectEffect:
 	jr nz, .loop
 ; return selected location (or $ff) in a and [hTemp_ffa0]
 	ld a, b
+	ldh [hTemp_ffa0], a
+	ret
+
+
+; store deck index of selected card or $ff in [hTemp_ffa0]
+ChoosePokemonFromDeck_AISelectEffect:
+; TODO FIXME
+	ld a, $ff
 	ldh [hTemp_ffa0], a
 	ret
 

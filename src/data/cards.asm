@@ -662,7 +662,7 @@ KakunaCard:
 	energy 0 ; energies
 	tx ExoskeletonName ; name
 	tx BattleArmorDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw PassivePowerEffectCommands ; effect commands
@@ -3970,7 +3970,7 @@ CloysterCard:
 	energy 0 ; energies
 	tx ExoskeletonName ; name
 	tx BattleArmorDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw PassivePowerEffectCommands ; effect commands
@@ -6844,33 +6844,12 @@ MarowakLv26Card:
 	db STAGE1 ; stage
 	tx CuboneName ; pre-evo name
 
-	; Pokémon Power: Ancient Guidance
-	; Once during your turn (before your attack), you may flip a coin.
-	; If heads, search your deck for Mysterious Fossil and put it onto your Bench.
-	; Shuffle your deck afterward. This power can't be used if Kabuto is affected by a Special Condition.
-
-	; Pokémon Power: Fossilization
-	; Once during your turn (before your attack), you may flip a coin.
-	; If heads, take all Evolution cards attached to 1 of your Pokémon in play
-	; that evolves from Mysterious Fossil and put them into your hand.
-	; (This doesn't count as devolving that Pokémon.)
-	; This power can't be used if Kabuto is Asleep, Confused, or Paralyzed.
-
-	; Poké-Body: Thick Shell
-	; All damage done by attacks to Kabuto from Evolved Pokémon is reduced by 10
-	; (after applying Weakness and Resistance).
-
-	; Team Assembly (C)
-	; Search your deck for Omanyte, Kabuto, or any Basic Pokémon and put as many
-	; of them as you like onto your Bench. Shuffle your deck afterward.
-	; Treat the new Benched Pokémon as Basic Pokémon.
-
 	; attack 1
 	; depends: HandleDamageReductionExceptSubstatus2
 	energy 0 ; energies
 	tx BattleArmorName ; name
 	tx BattleArmorDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw PassivePowerEffectCommands ; effect commands
@@ -7168,15 +7147,37 @@ KabutoCard:
 	db CIRCLE ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db KABUTO
-	db 40 ; hp
+	db 60 ; hp
 	db STAGE1 ; stage
 	tx MysteriousFossilName ; pre-evo name
 
+	; Pokémon Power: Ancient Guidance
+	; Once during your turn (before your attack), you may flip a coin.
+	; If heads, search your deck for Mysterious Fossil and put it onto your Bench.
+	; Shuffle your deck afterward. This power can't be used if Kabuto is affected by a Special Condition.
+
+	; Pokémon Power: Fossilization
+	; Once during your turn (before your attack), you may flip a coin.
+	; If heads, take all Evolution cards attached to 1 of your Pokémon in play
+	; that evolves from Mysterious Fossil and put them into your hand.
+	; (This doesn't count as devolving that Pokémon.)
+	; This power can't be used if Kabuto is Asleep, Confused, or Paralyzed.
+
+	; Poké-Body: Thick Shell
+	; All damage done by attacks to Kabuto from Evolved Pokémon is reduced by 10
+	; (after applying Weakness and Resistance).
+
+	; Team Assembly (C)
+	; Search your deck for Omanyte, Kabuto, or any Basic Pokémon and put as many
+	; of them as you like onto your Bench. Shuffle your deck afterward.
+	; Treat the new Benched Pokémon as Basic Pokémon.
+
 	; attack 1
+	; depends: HandleDamageReductionExceptSubstatus2
 	energy 0 ; energies
 	tx KabutoArmorName ; name
 	tx KabutoArmorDescription ; description
-	tx KabutoArmorDescriptionCont ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw PassivePowerEffectCommands ; effect commands
@@ -7187,13 +7188,13 @@ KabutoCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 1 ; energies
-	tx ScratchName ; name
-	dw NONE ; description
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	tx PrimalHuntName ; name
+	tx PrimalHuntDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw PrimalHuntEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
