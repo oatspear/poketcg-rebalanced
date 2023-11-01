@@ -20,6 +20,13 @@ DoubleDamage_DamageBoostEffect:
   ret
 
 
+; just add 40 damage, precondition checks have already been made
+PrimalScythe_DamageBoostEffect:
+	ld a, 40
+	call AddToDamage
+	jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Coin Flips
 ; ------------------------------------------------------------------------------
@@ -124,10 +131,6 @@ Heads10BonusDamage_DamageBoostEffect:
 	ld a, 10
 	jp AddToDamage
 
-ArcanineQuickAttack_AIEffect:
-	ld a, (10 + 30) / 2
-	lb de, 20, 30
-	jp SetExpectedAIDamage
 
 CometPunch_AIEffect:
 	ld a, (30 + 40) / 2
@@ -138,21 +141,6 @@ Heads20Plus10Damage_AIEffect:
 	ld a, (20 + 10) / 2
 	lb de, 20, 30
 	jp SetExpectedAIDamage
-
-;
-VaporeonQuickAttack_AIEffect:
-	ld a, (10 + 30) / 2
-	lb de, 10, 30
-	jp SetExpectedAIDamage
-
-VaporeonQuickAttack_DamageBoostEffect:
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, 20
-	jp AddToDamage
 
 
 ;
@@ -689,11 +677,24 @@ Crabhammer_DamageBoostEffect:
 	and a
 	ret nz  ; not a BASIC Pokémon
 	ld a, 40
-	call AddToDamage
-	ret
+	jp AddToDamage
 
 Crabhammer_AIEffect:
   call Crabhammer_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; +30 damage versus Evolved Pokémon
+SharpSickle_DamageBoostEffect:
+	ld a, DUELVARS_ARENA_CARD_STAGE
+	call GetNonTurnDuelistVariable
+	and a
+	ret z  ; BASIC Pokémon
+	ld a, 30
+	jp AddToDamage
+
+SharpSickle_AIEffect:
+  call SharpSickle_DamageBoostEffect
   jp SetDefiniteAIDamage
 
 

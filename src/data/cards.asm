@@ -4726,7 +4726,7 @@ OmanyteCard:
 	db 1
 	db ATK_ANIM_WHIP ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_GRASS ; weakness
 	db NONE ; resistance
 	tx SpiralName ; category
@@ -4818,7 +4818,7 @@ OmastarCard:
 	db 0
 	db ATK_ANIM_WHIRLPOOL ; animation
 
-	db 1 ; retreat cost
+	db 2 ; retreat cost
 	db WR_GRASS ; weakness
 	db NONE ; resistance
 	tx SpiralName ; category
@@ -7201,7 +7201,7 @@ KabutoCard:
 	db 0
 	db ATK_ANIM_SLASH ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_GRASS ; weakness
 	db NONE ; resistance
 	tx ShellfishName ; category
@@ -7220,7 +7220,7 @@ KabutopsCard:
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db KABUTOPS
-	db 70 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx KabutoName ; pre-evo name
 
@@ -7237,12 +7237,12 @@ KabutopsCard:
 
 	; attack 1
 	energy FIGHTING, 1 ; energies
-	tx SharpSickleName ; name
-	dw NONE ; description
+	tx PrimalScytheName ; name
+	tx PrimalScytheDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw PrimalScytheEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7250,20 +7250,20 @@ KabutopsCard:
 	db ATK_ANIM_TEAR ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 2 ; energies
-	tx MegaDrainName ; name
-	tx HealHalfDamageDealtDescription ; description
+	energy FIGHTING, 1, COLORLESS, 2 ; energies
+	tx SharpSickleName ; name
+	tx SharpSickleDescription ; description
 	dw NONE ; description (cont)
 	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw KabutopsAbsorbEffectCommands ; effect commands
+	db DAMAGE_PLUS ; category
+	dw SharpSickleEffectCommands ; effect commands
 	db NONE ; flags 1
-	db HEAL_USER ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 2
-	db ATK_ANIM_DRAIN ; animation
+	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
-	db 1 ; retreat cost
+	db 2 ; retreat cost
 	db WR_GRASS ; weakness
 	db NONE ; resistance
 	tx ShellfishName ; category
@@ -7282,7 +7282,7 @@ AerodactylCard:
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db AERODACTYL
-	db 60 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx MysteriousFossilName ; pre-evo name
 

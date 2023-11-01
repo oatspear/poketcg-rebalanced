@@ -148,6 +148,7 @@
 
 #### Omanyte
 - Increased HP from 40 to 70.
+- Increased Retreat Cost from 0 to 1.
 - **Harden**: removed.
 - **Water Gun**: removed.
 - New Pokémon Power: **Primordial Dream**: once per turn, put an Item card from discard pile into hand and morph it into Mysterious Fossil.
@@ -155,6 +156,7 @@
 
 #### Omastar
 - Increased HP from 70 to 100.
+- Increased Retreat Cost from 1 to 2.
 - **Water Gun**: removed.
 - **Spike Cannon**: removed.
 - New attack: **Spiral Drain** (WC): 20 damage, heal 20 damage from self.
@@ -184,8 +186,20 @@
 
 #### Kabuto
 - Increased HP from 40 to 60.
+- Increased Retreat Cost from 0 to 1.
 - **Scratch**: removed.
 - New attack: **Primal Hunt** (FC): 20 damage, search deck for a Pokémon card and add to the hand.
+
+#### Kabutops
+- Increased HP from 70 to 100.
+- Increased Retreat Cost from 1 to 2.
+- **Sharp Sickle**: reworked.
+- **Mega Drain**: removed.
+- New attack: **Primal Scythe** (F): 20 damage; can discard Mysterious Fossil from hand for +40 damage.
+- New attack: **Sharp Sickle** (FCC): 50 damage; +30 damage versus Evolved Pokémon.
+
+#### Aerodactyl
+- Increased HP from 60 to 80.
 
 ### Colorless Changes
 

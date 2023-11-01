@@ -365,6 +365,12 @@ SmallCombustion_DiscardDeckEffect:
 	jp DiscardFromOpponentsDeckEffect
 
 
+PrimalScythe_DiscardDamageBoostEffect:
+	call SelectedCards_Discard1FromHand
+	ret c  ; no Mysterious Fossil
+	jp PrimalScythe_DamageBoostEffect
+
+
 ; ------------------------------------------------------------------------------
 
 ; Stores information about the attack damage for AI purposes
@@ -6631,6 +6637,24 @@ NaturalRemedy_PlayerSelection:
 	ret
 
 
+PrimalScythe_PlayerHandCardSelection:
+	call CheckMysteriousFossilInHand
+	jr c, .none_in_hand
+; found a Mysterious Fossil in hand
+	ldh [hTemp_ffa0], a
+	ldtx hl, DiscardMysteriousFossilText
+	call YesOrNoMenuWithText_SetCursorToYes
+	ret nc  ; selected Yes
+
+; selected No
+	ld a, $ff
+.none_in_hand
+	or a  ; reset carry
+.done
+	ldh [hTemp_ffa0], a
+	ret
+
+
 OptionalDiscard_PlayerHandCardSelection:
 	call CheckHandSizeGreaterThan1
 	ld a, $ff
@@ -7099,6 +7123,26 @@ NaturalRemedy_AISelectEffect:
 ChoosePokemonFromDeck_AISelectEffect:
 ; TODO FIXME
 	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+
+
+PrimalScythe_AIEffect:
+	call CheckMysteriousFossilInHand
+	call nc, PrimalScythe_DamageBoostEffect
+	or a
+	ret
+
+
+PrimalScythe_AISelectEffect:
+	call CheckMysteriousFossilInHand
+	ldh [hTemp_ffa0], a
+	jr nc, .found
+	or a  ; reset carry
+	ret
+
+.found
+; always discard
 	ldh [hTemp_ffa0], a
 	ret
 

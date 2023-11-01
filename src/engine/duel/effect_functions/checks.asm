@@ -120,6 +120,32 @@ CheckHandSizeLesserThanOpponents:
 	jr CheckHandSizeIsLessThanC
 
 
+; returns carry if the player does not have Mysterious Fossil in hand
+; output:
+;   a: deck index of Mysterious Fossil | $ff
+;   carry: set if there is no Mysterious Fossil in hand
+CheckMysteriousFossilInHand:
+	call CreateHandCardList
+	ld hl, wDuelTempList
+.loop_hand
+	ld a, [hli]
+	cp $ff
+	jr z, .none
+	call GetCardIDFromDeckIndex  ; preserves hl
+	ld a, e
+	cp MYSTERIOUS_FOSSIL
+	jr nz, .loop_hand
+
+; found a Mysterious Fossil in hand
+	dec hl
+	ld a, [hl]
+	ret
+
+.none
+	scf
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Discard Pile
 ; ------------------------------------------------------------------------------

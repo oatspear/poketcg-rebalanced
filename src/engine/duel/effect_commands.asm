@@ -233,6 +233,11 @@ CrabhammerEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Crabhammer_AIEffect
 	db  $00
 
+SharpSickleEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SharpSickle_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, SharpSickle_AIEffect
+	db  $00
+
 PowerLariatEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PowerLariat_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, PowerLariat_AIEffect
@@ -851,6 +856,13 @@ GeodudeStoneBarrageEffectCommands:
 
 PrimeapeTantrumEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TantrumEffect
+	db  $00
+
+PrimalScytheEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PrimalScythe_DiscardDamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, PrimalScythe_AIEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PrimalScythe_PlayerHandCardSelection
+	dbw EFFECTCMDTYPE_AI_SELECTION, PrimalScythe_AISelectEffect
 	db  $00
 
 KabutopsAbsorbEffectCommands:
