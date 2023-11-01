@@ -1127,7 +1127,7 @@ PrimordialDream_MorphAndAddToHandEffect:
 	ldh [hTempList], a
 	ld a, $ff
 	ldh [hTempList + 1], a
-	jr SelectedCard_AddToHandFromDiscardPile
+	jp SelectedCard_AddToHandFromDiscardPile
 
 
 ; ------------------------------------------------------------------------------

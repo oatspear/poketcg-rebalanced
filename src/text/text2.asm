@@ -1,3 +1,18 @@
+DamageCheckIfHeadsPlusDamageText: ; 37fa8 (d:7fa8)
+	text "Damage check!"
+	line "If Heads, +<RAMNUM> damage!!"
+	done
+
+DamageCheckIfHeadsXDamageText: ; 37fcd (d:7fcd)
+	text "Damage check!"
+	line "If Heads, x <RAMNUM> damage!!"
+	done
+
+IfHeadsDiscard1EnergyFromTargetText:
+	text "If Heads, discard an Energy"
+	line "from the Defending Pokémon!"
+	done
+
 AlreadyRetreatedThisTurnText:
 	text "Already retreated this turn."
 	done
@@ -1911,9 +1926,4 @@ DismantledDeckText: ; 3bf63 (e:7f63)
 Text026b: ; 3bf73 (e:7f73)
 	text "Please choose the Deck"
 	line "you wish to Build."
-	done
-
-ThisDeckCanOnlyBeBuiltIfYouDismantleText: ; 3bf9e (e:7f9e)
-	text "This Deck can only be built if"
-	line "you dismantle another Deck."
 	done

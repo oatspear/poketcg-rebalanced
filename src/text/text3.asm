@@ -1,3 +1,8 @@
+ThisDeckCanOnlyBeBuiltIfYouDismantleText: ; 3bf9e (e:7f9e)
+	text "This Deck can only be built if"
+	line "you dismantle another Deck."
+	done
+
 YouDoNotOwnAllCardsNeededToBuildThisDeckText: ; 3c000 (f:4000)
 	text "You do not own all cards needed"
 	line "to build this Deck."

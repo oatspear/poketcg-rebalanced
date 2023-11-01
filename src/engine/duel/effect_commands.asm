@@ -809,7 +809,7 @@ AbsorbWaterEffectCommands:
 PrimordialDreamEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, PrimordialDream_PreconditionCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PrimordialDream_MorphAndAddToHandEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PrimordialDream_PlayerSelection
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PrimordialDream_PlayerSelectEffect
 	db  $00
 
 MudSportEffectCommands:
