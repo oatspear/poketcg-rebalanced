@@ -1115,6 +1115,8 @@ PrimordialDream_MorphAndAddToHandEffect:
 	call SetUsedPokemonPowerThisTurn
 ; get deck index and morph the selected card
 	ldh a, [hAIPkmnPowerEffectParam]
+	cp $ff
+	ret z
 	call FossilizeCard
 ; get deck index again and add to the hand
 	ldh a, [hAIPkmnPowerEffectParam]

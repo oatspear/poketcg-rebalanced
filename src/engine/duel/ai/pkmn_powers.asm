@@ -469,8 +469,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_trade
 	cp PERSIAN
-	jr nz, .check_curse
+	jr nz, .check_primordial_dream
 	call HandleAITrade
+	jr .next_1
+.check_primordial_dream
+	cp OMANYTE
+	jr nz, .check_curse
+	call HandleAIPrimordialDream
 	jr .next_1
 .check_curse
 	cp HAUNTER_LV17
@@ -686,6 +691,7 @@ HandleAISynthesis:
 	jp HandleAIDecideToUsePokemonPower
 
 
+
 HandleAIMudSport:
 	farcall CreateEnergyCardListFromDiscardPile_WaterFighting
 	ret c  ; no energy cards
@@ -699,6 +705,49 @@ HandleAIMudSport:
 	ld a, [wDuelTempList]
 	ldh [hAIEnergyTransEnergyCard], a
 	jp HandleAIDecideToUsePokemonPower
+
+
+
+HandleAIPrimordialDream:
+	farcall CreateItemCardListFromDiscardPile
+	ret c  ; no Item cards
+
+; use this Power to recover Mysterious Fossil already in discard pile
+	ld hl, wDuelTempList
+.loop_fossil
+	ld a, [hli]
+	ldh [hAIPkmnPowerEffectParam], a
+	cp $ff
+	jr z, .scenario2
+	call GetCardIDFromDeckIndex  ; preserves hl
+	ld a, e
+	cp MYSTERIOUS_FOSSIL
+	jp z, HandleAIDecideToUsePokemonPower  ; got a fossil, use Power
+	jr .loop_fossil
+
+.scenario2
+; store the first item card in the list to potentially transform into Fossil
+	ld a, [wDuelTempList]
+	ldh [hAIPkmnPowerEffectParam], a
+; use the Power if there is a Kabuto, Omanyte or Aerodactyl in hand
+	call CreateHandCardList
+	ld hl, wDuelTempList
+.loop_hand
+	ld a, [hli]
+	cp $ff
+	ret z
+	call GetCardIDFromDeckIndex  ; preserves hl
+	ld a, e
+	cp OMANYTE
+	jp z, HandleAIDecideToUsePokemonPower  ; got a Fossil Pokémon, use Power
+	cp KABUTO
+	jp z, HandleAIDecideToUsePokemonPower  ; got a Fossil Pokémon, use Power
+	cp AERODACTYL
+	jp z, HandleAIDecideToUsePokemonPower  ; got a Fossil Pokémon, use Power
+	jr .loop_hand
+
+; scenario 3: TODO
+; use the Power if there is a Kabutops in the Active Spot
 
 
 ; checks whether AI uses Shift.
