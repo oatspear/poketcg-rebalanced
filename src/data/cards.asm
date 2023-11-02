@@ -4745,7 +4745,7 @@ OmastarCard:
 	db DIAMOND ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db OMASTAR
-	db 70 ; hp
+	db 100 ; hp
 	db STAGE2 ; stage
 	tx OmanyteName ; pre-evo name
 
