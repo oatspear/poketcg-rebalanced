@@ -3401,45 +3401,6 @@ MoltresLv37DiveBomb_Success50PercentEffect: ; 2d776 (b:5776)
 	ld [wLoadedAttackAnimation], a
 	ret
 
-; output in de the number of energy cards
-; attached to the Defending Pokemon times 10.
-; used for attacks that deal 10x number of energy
-; cards attached to the Defending card.
-GetEnergyAttachedMultiplierDamage: ; 2d78c (b:578c)
-	call SwapTurn
-	ld a, DUELVARS_CARD_LOCATIONS
-	call GetTurnDuelistVariable
-
-	ld c, 0
-.loop
-	ld a, [hl]
-	cp CARD_LOCATION_ARENA
-	jr nz, .next
-	; is in Arena
-	ld a, l
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	and TYPE_ENERGY
-	jr z, .next
-	; is Energy attached to Arena card
-	inc c
-.next
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop
-
-	call SwapTurn
-	ld l, c
-	ld h, $00
-	ld b, $00
-	add hl, hl ; hl =  2 * c
-	add hl, hl ; hl =  4 * c
-	add hl, bc ; hl =  5 * c
-	add hl, hl ; hl = 10 * c
-	ld e, l
-	ld d, h
-	ret
 
 ; draws list of Energy Cards in Discard Pile
 ; for Player to select from.
@@ -4241,22 +4202,6 @@ FindFirstNonBasicCardInPlayArea: ; 2dd62 (b:5d62)
 .not_basic
 	ld a, b
 	scf
-	ret
-
-
-Psychic_AIEffect: ; 2dd7b (b:5d7b)
-	call Psychic_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-Psychic_DamageBoostEffect: ; 2dd81 (b:5d81)
-	call GetEnergyAttachedMultiplierDamage
-	ld hl, wDamage
-	ld a, e
-	add [hl]
-	ld [hli], a
-	ld a, d
-	adc [hl]
-	ld [hl], a
 	ret
 
 

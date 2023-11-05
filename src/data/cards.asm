@@ -10170,9 +10170,6 @@ DragoniteLv41Card:
 	; you may switch 1 of your opponent's Benched Pokémon with the Defending Pokémon.
 	; This power can't be used if Dragonite is affected by a Special Condition.
 
-	; Slam (GLC) 60x
-	; Flip 2 coins. This attack does 60 damage times the number of heads.
-
 	; Energy Hurricane (WLCC) 180
 	; Search your deck for up to 3 basic Energy cards and attach them to your
 	; Pokémon in any way you like. Then, shuffle your deck.
