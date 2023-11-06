@@ -2964,7 +2964,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DragonRageDescription
 	textpointer AttachEnergyFromHandDescription
 	textpointer EnergyHurricaneName
-	textpointer DragonClawName
+	textpointer OutrageName
+	textpointer OutrageDescription
 	textpointer AscensionName
 	textpointer AscensionDescription
 	textpointer RagingStormName

@@ -10245,20 +10245,6 @@ DragoniteLv45Card:
 	tx DragonairName ; pre-evo name
 
 	; attack 1
-	energy FIRE, 1, COLORLESS, 1 ; energies
-	tx DragonClawName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SLASH ; animation
-
-	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx EnergyHurricaneName ; name
 	tx EnergySpikeDescription ; description
@@ -10271,6 +10257,20 @@ DragoniteLv45Card:
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_WHIRLWIND ; animation
+
+	; attack 2
+	energy COLORLESS, 3 ; energies
+	tx OutrageName ; name
+	tx OutrageDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw OutrageEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 3
+	db ATK_ANIM_BIG_HIT ; animation
 
 	db 2 ; retreat cost
 	db NONE ; weakness

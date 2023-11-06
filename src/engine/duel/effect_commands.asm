@@ -506,6 +506,15 @@ ArcanineFlamesOfRageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
 	db  $00
 
+OutrageEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
+	db  $00
+
 EmberEffectCommands:
 FlamethrowerEffectCommands:
 Discard1EnergyEffectCommands:

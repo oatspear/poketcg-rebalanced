@@ -669,8 +669,15 @@ EnergyHurricaneName:
 	text "Energy Hurricane"
 	done
 
-DragonClawName:
-	text "Dragon Claw"
+OutrageName:
+	text "Outrage"
+	done
+
+OutrageDescription:
+	text "Discard an Energy card attached to"
+	line "this Pokémon. This attack does 10"
+	line "more damage for each damage counter"
+	line "on this Pokémon."
 	done
 
 AscensionName:
