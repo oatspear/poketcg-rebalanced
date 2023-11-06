@@ -4088,6 +4088,19 @@ DevolutionBeam_LoadAnimation: ; 2dcb6 (b:5cb6)
 	ret
 
 DevolveDefendingPokemonEffect:
+; did this attack KO the Defending Pokémon?
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	or a
+	ret z  ; nothing to do
+
+; is the Defending Pokémon a Basic Pokémon?
+	ld a, DUELVARS_ARENA_CARD_STAGE
+	call GetNonTurnDuelistVariable
+	or a  ; BASIC
+	ret z  ; nothing to do
+
+; devolve the Defending Pokémon
 	ld a, 1  ; opponent's Play Area
 	ldh [hTemp_ffa0], a
 	xor a  ; PLAY_AREA_ARENA
