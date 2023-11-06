@@ -10209,12 +10209,12 @@ DragoniteLv41Card:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx SlamName ; name
-	dw NONE ; description
+	tx SpeedImpactName ; name
+	tx SpeedImpactDescription ; description
 	dw NONE ; description (cont)
-	db 70 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 100 ; damage
+	db DAMAGE_MINUS ; category
+	dw SpeedImpactEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

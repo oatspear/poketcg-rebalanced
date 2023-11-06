@@ -3,6 +3,34 @@
 ; ------------------------------------------------------------------------------
 
 
+; overwrites in wDamage, wAIMinDamage and wAIMaxDamage with the value in a
+SetDefiniteDamage:
+	ld [wDamage], a
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	xor a
+	ld [wDamage + 1], a
+	ret
+
+
+; overwrites wAIMinDamage and wAIMaxDamage with value in wDamage
+SetDefiniteAIDamage:
+	ld a, [wDamage]
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	ret
+
+
+; subtract the value in a from wDamage
+SubtractFromDamageCapZero:
+	call SubtractFromDamage
+	rla
+	ret nc
+; cap it to 0 damage
+	xor a
+	jp SetDefiniteDamage
+
+
 ; doubles the damage output
 DoubleDamage_DamageBoostEffect:
   ld a, [wDamage + 1]
@@ -224,6 +252,23 @@ DragonRage_DamageBoostEffect:
 
 DragonRage_AIEffect:
 	call DragonRage_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
+SpeedImpact_DamageSubtractionEffect:
+	xor a  ; PLAY_AREA_ARENA
+	ld e, a
+	call SwapTurn
+	call GetPlayAreaCardAttachedEnergies
+	call SwapTurn
+	ld a, [wTotalAttachedEnergies]
+	or a
+	ret z
+	call ATimes10
+	jp SubtractFromDamageCapZero
+
+SpeedImpact_AIEffect:
+	call SpeedImpact_DamageSubtractionEffect
 	jp SetDefiniteAIDamage
 
 
@@ -848,19 +893,7 @@ DeadlyPoison_AIEffect:
 KarateChop_DamageSubtractionEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
-	ld e, a
-	ld hl, wDamage
-	ld a, [hl]
-	sub e
-	ld [hli], a
-	ld a, [hl]
-	sbc 0
-	ld [hl], a
-	rla
-	ret nc
-; cap it to 0 damage
-	xor a
-	jp SetDefiniteDamage
+	jp SubtractFromDamageCapZero
 
 KarateChop_AIEffect:
 	call KarateChop_DamageSubtractionEffect

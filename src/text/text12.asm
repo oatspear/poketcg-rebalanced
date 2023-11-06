@@ -1190,6 +1190,17 @@ FossilFangsName:
 	text "Fossil Fangs"
 	done
 
+SpeedImpactName:
+	text "Speed Impact"
+	done
+
+SpeedImpactDescription:
+	text "This attack does 20 less damage"
+	line "for each Energy attached to the"
+	line "Defending Pokémon."
+	done
+
+
 ; ------------------------------------------------------------------------------
 ; Trainer Cards
 ; ------------------------------------------------------------------------------

@@ -1310,6 +1310,11 @@ DragonRageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, DragonRage_AIEffect
 	db  $00
 
+SpeedImpactEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpeedImpact_DamageSubtractionEffect
+	dbw EFFECTCMDTYPE_AI, SpeedImpact_AIEffect
+	db  $00
+
 FungalGrowthEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, LeechLifeEffect

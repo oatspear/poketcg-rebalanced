@@ -492,23 +492,6 @@ Func_2c12e: ; 2c12e (b:412e)
 	bank1call WaitAttackAnimation
 	ret
 
-; overwrites in wDamage, wAIMinDamage and wAIMaxDamage
-; with the value in a.
-SetDefiniteDamage: ; 2c166 (b:4166)
-	ld [wDamage], a
-	ld [wAIMinDamage], a
-	ld [wAIMaxDamage], a
-	xor a
-	ld [wDamage + 1], a
-	ret
-
-; overwrites wAIMinDamage and wAIMaxDamage
-; with value in wDamage.
-SetDefiniteAIDamage: ; 2c174 (b:4174)
-	ld a, [wDamage]
-	ld [wAIMinDamage], a
-	ld [wAIMaxDamage], a
-	ret
 
 ; prints the text "<X> devolved to <Y>!" with
 ; the proper card names and levels.
