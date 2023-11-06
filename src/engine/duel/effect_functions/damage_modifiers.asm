@@ -3,6 +3,34 @@
 ; ------------------------------------------------------------------------------
 
 
+; overwrites in wDamage, wAIMinDamage and wAIMaxDamage with the value in a
+SetDefiniteDamage:
+	ld [wDamage], a
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	xor a
+	ld [wDamage + 1], a
+	ret
+
+
+; overwrites wAIMinDamage and wAIMaxDamage with value in wDamage
+SetDefiniteAIDamage:
+	ld a, [wDamage]
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	ret
+
+
+; subtract the value in a from wDamage
+SubtractFromDamageCapZero:
+	call SubtractFromDamage
+	rla
+	ret nc
+; cap it to 0 damage
+	xor a
+	jp SetDefiniteDamage
+
+
 ; doubles the damage output
 DoubleDamage_DamageBoostEffect:
   ld a, [wDamage + 1]
@@ -227,6 +255,23 @@ DragonRage_AIEffect:
 	jp SetDefiniteAIDamage
 
 
+SpeedImpact_DamageSubtractionEffect:
+	xor a  ; PLAY_AREA_ARENA
+	ld e, a
+	call SwapTurn
+	call GetPlayAreaCardAttachedEnergies
+	call SwapTurn
+	ld a, [wTotalAttachedEnergies]
+	or a
+	ret z
+	call ATimes10
+	jp SubtractFromDamageCapZero
+
+SpeedImpact_AIEffect:
+	call SpeedImpact_DamageSubtractionEffect
+	jp SetDefiniteAIDamage
+
+
 SneakAttack_DamageBoostEffect:
 	xor a  ; PLAY_AREA_ARENA
 	call CheckIfCardHasDarknessEnergyAttached
@@ -270,6 +315,63 @@ PunishingSlap_DamageBoostEffect:
 PunishingSlap_AIEffect:
   call PunishingSlap_DamageBoostEffect
   jp SetDefiniteAIDamage
+
+
+Psychic_DamageBoostEffect:
+	call GetEnergyAttachedMultiplierDamage
+	ld hl, wDamage
+	ld a, e
+	add [hl]
+	ld [hli], a
+	ld a, d
+	adc [hl]
+	ld [hl], a
+	ret
+	
+Psychic_AIEffect:
+	call Psychic_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
+; output in de the number of energy cards
+; attached to the Defending Pokemon times 10.
+; used for attacks that deal 10x number of energy
+; cards attached to the Defending card.
+GetEnergyAttachedMultiplierDamage:
+	call SwapTurn
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+
+	ld c, 0
+.loop
+	ld a, [hl]
+	cp CARD_LOCATION_ARENA
+	jr nz, .next
+	; is in Arena
+	ld a, l
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	and TYPE_ENERGY
+	jr z, .next
+	; is Energy attached to Arena card
+	inc c
+.next
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop
+
+	call SwapTurn
+	ld l, c
+	ld h, $00
+	ld b, $00
+	add hl, hl ; hl =  2 * c
+	add hl, hl ; hl =  4 * c
+	add hl, bc ; hl =  5 * c
+	add hl, hl ; hl = 10 * c
+	ld e, l
+	ld d, h
+	ret
 
 
 ;
@@ -791,19 +893,7 @@ DeadlyPoison_AIEffect:
 KarateChop_DamageSubtractionEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
-	ld e, a
-	ld hl, wDamage
-	ld a, [hl]
-	sub e
-	ld [hli], a
-	ld a, [hl]
-	sbc 0
-	ld [hl], a
-	rla
-	ret nc
-; cap it to 0 damage
-	xor a
-	jp SetDefiniteDamage
+	jp SubtractFromDamageCapZero
 
 KarateChop_AIEffect:
 	call KarateChop_DamageSubtractionEffect

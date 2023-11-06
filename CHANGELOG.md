@@ -216,11 +216,16 @@
 #### Dragonite Lv41
 - Increased HP from 100 to 120.
 - **Healing Wind**: removed.
+- **Slam**: removed.
 - New attack: **Dragon Rage** (CC): 30 damage, +10 for each type of Basic Energy attached.
+- New attack: **Speed Impact** (CCC): 100 damage, -20 for each Energy attached to the Defending Pokémon.
 
 #### Dragonite Lv45
 - Increased HP from 100 to 120.
 - Increased Retreat cost from 1 to 2.
+- **Dragon Claw**: removed.
+- **Energy Hurricane**: decreased cost from (WCC) to (CCC) and base damage from 60 to 50.
+- New attack: **Outrage** (CCC): 30 damage; discard 1 energy; +10 damage for each damage counter.
 
 
 ## Version 0.5.0

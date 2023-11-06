@@ -10170,9 +10170,6 @@ DragoniteLv41Card:
 	; you may switch 1 of your opponent's Benched Pokémon with the Defending Pokémon.
 	; This power can't be used if Dragonite is affected by a Special Condition.
 
-	; Slam (GLC) 60x
-	; Flip 2 coins. This attack does 60 damage times the number of heads.
-
 	; Energy Hurricane (WLCC) 180
 	; Search your deck for up to 3 basic Energy cards and attach them to your
 	; Pokémon in any way you like. Then, shuffle your deck.
@@ -10212,12 +10209,12 @@ DragoniteLv41Card:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx SlamName ; name
-	dw NONE ; description
+	tx SpeedImpactName ; name
+	tx SpeedImpactDescription ; description
 	dw NONE ; description (cont)
-	db 70 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 100 ; damage
+	db DAMAGE_MINUS ; category
+	dw SpeedImpactEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10248,32 +10245,32 @@ DragoniteLv45Card:
 	tx DragonairName ; pre-evo name
 
 	; attack 1
-	energy FIRE, 1, COLORLESS, 1 ; energies
-	tx DragonClawName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SLASH ; animation
-
-	; attack 2
-	energy WATER, 1, COLORLESS, 2 ; energies
+	energy COLORLESS, 3 ; energies
 	tx EnergyHurricaneName ; name
 	tx EnergySpikeDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
 	dw EnergySpikeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_WHIRLWIND ; animation
+
+	; attack 2
+	energy COLORLESS, 3 ; energies
+	tx OutrageName ; name
+	tx OutrageDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw OutrageEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 3
+	db ATK_ANIM_BIG_HIT ; animation
 
 	db 2 ; retreat cost
 	db NONE ; weakness

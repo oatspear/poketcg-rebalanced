@@ -669,8 +669,15 @@ EnergyHurricaneName:
 	text "Energy Hurricane"
 	done
 
-DragonClawName:
-	text "Dragon Claw"
+OutrageName:
+	text "Outrage"
+	done
+
+OutrageDescription:
+	text "Discard an Energy card attached to"
+	line "this Pokémon. This attack does 10"
+	line "more damage for each damage counter"
+	line "on this Pokémon."
 	done
 
 AscensionName:
@@ -1189,6 +1196,17 @@ SharpSickleDescription:
 FossilFangsName:
 	text "Fossil Fangs"
 	done
+
+SpeedImpactName:
+	text "Speed Impact"
+	done
+
+SpeedImpactDescription:
+	text "This attack does 20 less damage"
+	line "for each Energy attached to the"
+	line "Defending Pokémon."
+	done
+
 
 ; ------------------------------------------------------------------------------
 ; Trainer Cards
