@@ -10259,18 +10259,18 @@ DragoniteLv45Card:
 	db ATK_ANIM_SLASH ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 2 ; energies
+	energy COLORLESS, 3 ; energies
 	tx EnergyHurricaneName ; name
 	tx EnergySpikeDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
 	dw EnergySpikeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_WHIRLWIND ; animation
 
 	db 2 ; retreat cost
 	db NONE ; weakness

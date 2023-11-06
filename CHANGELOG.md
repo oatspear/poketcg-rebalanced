@@ -223,6 +223,7 @@
 #### Dragonite Lv45
 - Increased HP from 100 to 120.
 - Increased Retreat cost from 1 to 2.
+- **Energy Hurricane**: decreased cost from (WCC) to (CCC) and base damage from 60 to 50.
 
 
 ## Version 0.5.0
