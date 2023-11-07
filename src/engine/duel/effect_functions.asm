@@ -776,7 +776,7 @@ RainDance_AttachEnergyEffect:
 	jp ExchangeRNG
 
 
-; Draw 1 card per turn.
+; Discard 1 card and draw 2 cards per turn.
 TradeEffect:
 	call SetUsedPokemonPowerThisTurn
 	ldh a, [hAIPkmnPowerEffectParam]
