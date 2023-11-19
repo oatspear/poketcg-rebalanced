@@ -1789,7 +1789,7 @@ FireBlastDeck:
 	card_item KANGASKHAN,       2
 	card_item POKE_BALL,        4
 	card_item COMPUTER_SEARCH,  3
-	card_item ITEMFINDER,       3
+	card_item ITEM_FINDER,      3
 	card_item MAINTENANCE,      3
 	card_item POKEMON_TRADER,   3
 	card_item BILL,             2
