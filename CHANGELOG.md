@@ -1,5 +1,13 @@
 # Pokémon TCG Rebalanced
 
+## Version 0.7.0
+
+### Colorless Changes
+
+#### Chansey
+- Reduced HP from 80 to 70.
+
+
 ## Version 0.6.0
 
 ### Grass Changes
