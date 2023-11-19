@@ -265,6 +265,7 @@ SpeedImpact_DamageSubtractionEffect:
 	or a
 	ret z
 	call ATimes10
+	add a  ; x20
 	jp SubtractFromDamageCapZero
 
 SpeedImpact_AIEffect:
