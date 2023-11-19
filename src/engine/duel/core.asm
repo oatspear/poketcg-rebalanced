@@ -7622,7 +7622,7 @@ ConvertSpecialTrainerCardToPokemon:
 	ret
 
 .trainer_to_pkmn_data
-	db 30                 ; CARD_DATA_HP
+	db 20                 ; CARD_DATA_HP
 	ds $07                ; CARD_DATA_ATTACK1_NAME - (CARD_DATA_HP + 1)
 	tx DiscardName        ; CARD_DATA_ATTACK1_NAME
 	tx DiscardDescription ; CARD_DATA_ATTACK1_DESCRIPTION

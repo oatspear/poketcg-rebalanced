@@ -1327,7 +1327,7 @@ ClefairyDollName:
 	done
 
 TrainerCardAsPokemonDescription:
-	text "Play this card as if it were a 30 HP"
+	text "Play this card as if it were a 20 HP"
 	line "<COLORLESS> Basic Pokémon. At any"
 	line "time during your turn (before your"
 	line "attack), you may discard this card."

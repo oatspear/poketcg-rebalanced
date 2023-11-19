@@ -7,6 +7,10 @@
 #### Chansey
 - Reduced HP from 80 to 70.
 
+### Trainer Changes
+- **Mysterious Fossil**: reduced HP from 30 to 20.
+- **Clefairy Doll**: reduced HP from 30 to 20.
+
 ### Bug Fixes
 - **Dragonite Lv41's** *Speed Impact*: now reduces 20 damage per energy as stated in the description.
 
