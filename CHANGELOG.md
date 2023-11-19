@@ -13,6 +13,7 @@
 
 ### Bug Fixes
 - **Dragonite Lv41's** *Speed Impact*: now reduces 20 damage per energy as stated in the description.
+- **Dragonair's** *Draconic Evolution*: now triggers when evolving a Pokémon using **Rare Candy**.
 
 
 ## Version 0.6.0
