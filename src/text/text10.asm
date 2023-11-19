@@ -867,7 +867,7 @@ VulpixDescription: ; 5a163 (16:6163)
 	done
 
 NinetalesName: ; 5a1c0 (16:61c0)
-	text "Ninetails"
+	text "Ninetales"
 	done
 
 FireBlastName: ; 5a231 (16:6231)

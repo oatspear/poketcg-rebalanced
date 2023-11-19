@@ -1410,8 +1410,8 @@ FlamethrowerDeckName: ; 3b614 (e:7614)
 	text "Flamethrower"
 	done
 
-FireDrawDeckName: ; 3b622 (e:7622)
-	text "Fire Draw"
+FireBlastDeckName: ; 3b622 (e:7622)
+	text "Fire Blast"
 	done
 
 ExcavationDeckName: ; 3b62d (e:762d)

@@ -221,7 +221,7 @@ OpponentTitlesAndDeckNames:
 	tx FlamethrowerDeckName
 
 	tx FireClubMemberText
-	tx FireDrawDeckName
+	tx FireBlastDeckName
 
 	tx StrangeLifeformText
 	tx ImakuniDeckName

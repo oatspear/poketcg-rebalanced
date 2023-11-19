@@ -53,7 +53,7 @@ DeckPointers:
 	dw PoisonDeck
 	dw EasyToCatchDeck
 	dw FlamethrowerDeck
-	dw FireDrawDeck
+	dw FireBlastDeck
 	dw ImakuniDeck
 	dw NULL
 	assert_table_length NUM_VALID_DECKS + 1
@@ -1777,24 +1777,31 @@ FlamethrowerDeck:
 	deck_list_end
 	tx FlamethrowerDeckName
 
-FireDrawDeck:
+FireBlastDeck:
 	deck_list_start
-	card_item FIRE_ENERGY,     24
+	card_item FIRE_ENERGY,     10
 	card_item CHARMANDER,       4
-	card_item CHARMELEON,       4
-	card_item VULPIX,           4
-	card_item NINETALES_LV32,   4
-	card_item MEOWTH_LV14,      2
+	card_item CHARMELEON,       3
+	card_item VULPIX,           3
+	card_item NINETALES_LV32,   3
 	card_item MEOWTH_LV15,      2
-	card_item PIDGEY,           4
+	card_item PERSIAN,          2
 	card_item KANGASKHAN,       2
-	card_item BILL,             4
+	card_item POKE_BALL,        4
+	card_item COMPUTER_SEARCH,  3
+	card_item ITEMFINDER,       3
+	card_item MAINTENANCE,      3
+	card_item POKEMON_TRADER,   3
+	card_item BILL,             2
+	card_item GIOVANNI,         2
+	card_item LASS,             2
+	card_item POKEMON_BREEDER,  2
 	card_item PROFESSOR_OAK,    2
-	card_item POKE_BALL,        2
+	card_item RECYCLE,          2
+	card_item ENERGY_SEARCH,    2
 	card_item PLUSPOWER,        1
-	card_item GIOVANNI,     1
 	deck_list_end
-	tx FireDrawDeckName
+	tx FireBlastDeckName
 
 ImakuniDeck:
 	deck_list_start

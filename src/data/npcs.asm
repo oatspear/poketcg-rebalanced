@@ -819,7 +819,7 @@ JonathanNPCHeader:
 	dw Script_Jonathan
 	tx JonathanNPCName
 	db JONATHAN_PIC
-	db FIRE_DRAW_DECK_ID
+	db FIRE_BLAST_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
 
