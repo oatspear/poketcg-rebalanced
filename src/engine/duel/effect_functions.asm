@@ -8515,11 +8515,15 @@ DevolutionSpray_DevolutionEffect: ; 2fc99 (b:7c99)
 	ret
 
 
+; input:
+;  [wDuelTempList]: list of cards to choose from
 ChooseUpTo3Cards_PlayerDiscardPileSelection:
 	ld a, 3
 	ld [wCardListNumberOfCardsToChoose], a
 	jr ChooseUpToNCards_PlayerDiscardPileSelection
 
+; input:
+;  [wDuelTempList]: list of cards to choose from
 ChooseUpTo4Cards_PlayerDiscardPileSelection:
 	ld a, 4
 	ld [wCardListNumberOfCardsToChoose], a
@@ -8527,12 +8531,14 @@ ChooseUpTo4Cards_PlayerDiscardPileSelection:
 	; fallthrough
 
 ; number of cards is given in [wCardListNumberOfCardsToChoose]
+; input:
+;  [wDuelTempList]: list of cards to choose from
 ChooseUpToNCards_PlayerDiscardPileSelection:
 	xor a
 	ldh [hCurSelectionItem], a
 	ldtx hl, ChooseUpTo4FromDiscardPileText
 	call DrawWideTextBox_WaitForInput
-	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	; call CreateEnergyCardListFromDiscardPile_OnlyBasic
 
 .loop_discard_pile_selection
 	bank1call InitAndDrawCardListScreenLayout
