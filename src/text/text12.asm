@@ -198,8 +198,10 @@ DoTheWaveName: ; 621b8 (18:61b8)
 	done
 
 DoTheWaveDescription: ; 621c5 (18:61c5)
-	text "Does 10 damage plus 10 more damage"
-	line "for each of your Benched Pokémon."
+	;text "Does 10 damage plus 10 more damage"
+	;line "for each of your Benched Pokémon."
+	text "Does 10 damage for each of your"
+	line "Benched Pokémon."
 	done
 
 WigglytuffDescription: ; 6220b (18:620b)

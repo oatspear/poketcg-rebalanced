@@ -2,6 +2,11 @@
 
 ## Version 0.7.0
 
+### Psychic Changes
+
+#### Wigglytuff
+- **Do The Wave**: does 10 damage per Benched Pokémon (does not count Active Pokémon).
+
 ### Colorless Changes
 
 #### Chansey
