@@ -655,7 +655,7 @@ WaterReserveEffectCommands:
 	db  $00
 
 RocketShellEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCard_AddToHandFromDeckEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RocketShell_AddToHandEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ReduceDamageTakenBy10Effect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, RocketShell_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, RocketShell_AISelectEffect

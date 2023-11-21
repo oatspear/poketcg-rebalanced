@@ -1378,6 +1378,9 @@ RocketShell_PlayerSelectEffect:
 	ldh [hTempList], a
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	and PLAYED_ENERGY_THIS_TURN
+	jr nz, TutorWaterEnergy_PlayerSelectEffect  ; played energy
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and USED_RAIN_DANCE_THIS_TURN
 	ret z  ; did not play energy
 	; fallthrough
 
@@ -1396,6 +1399,9 @@ RocketShell_AISelectEffect:
 	ldh [hTempList], a
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	and PLAYED_ENERGY_THIS_TURN
+	jr nz, TutorWaterEnergy_AISelectEffect  ; played energy
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and USED_RAIN_DANCE_THIS_TURN
 	ret z  ; did not play energy
 	; fallthrough
 
@@ -6784,6 +6790,13 @@ StressPheromones_AddToHandEffect:
 	ldh [hTemp_ffa0], a
 	; jr SelectedCard_AddToHandFromDeckEffect
 	; fallthrough
+
+
+RocketShell_AddToHandEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z
+	jr AddDeckCardToHandAndShuffleEffect
 
 
 ; Adds the selected card to the turn holder's Hand.

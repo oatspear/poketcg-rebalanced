@@ -471,6 +471,9 @@ Riptide_AIEffect:
 DoubleDamageIfAttachedEnergy_DamageBoostEffect:
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	and PLAYED_ENERGY_THIS_TURN
+	jp nz, DoubleDamage_DamageBoostEffect  ; played energy
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and USED_RAIN_DANCE_THIS_TURN
 	ret z  ; did not play energy
 	jp DoubleDamage_DamageBoostEffect
 

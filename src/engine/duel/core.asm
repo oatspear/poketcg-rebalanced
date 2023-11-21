@@ -701,9 +701,9 @@ PlayEnergyCard:
 	call OpenPlayAreaScreenForSelection ; choose card to play energy card on
 	jp c, DuelMainInterface ; exit if no card was chosen
 ; set rain dance played this turn
-	; ld a, [wAlreadyPlayedEnergyOrSupporter]
-	; or USED_RAIN_DANCE_THIS_TURN
-	; ld [wAlreadyPlayedEnergyOrSupporter], a
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	or USED_RAIN_DANCE_THIS_TURN
+	ld [wAlreadyPlayedEnergyOrSupporter], a
 	jr .play_energy
 ; redundant: Water Energy check already done
 	; call CheckRainDanceScenario

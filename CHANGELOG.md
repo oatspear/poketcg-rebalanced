@@ -23,6 +23,10 @@
 - **Dragonite Lv41** - *Speed Impact*: now reduces 20 damage per energy as stated in the description.
 - **Dragonair** - *Draconic Evolution*: now triggers when evolving a Pokémon using **Rare Candy**.
 - **Golduck** - *Aquatic Rescue*: now allows the selection of both Pokémon and Energies.
+- **Wartortle** - *Rocket Shell*: no longer shuffles the deck if the effect does not trigger.
+- **Wartortle** - *Rocket Shell*: now counts energies attached with Rain Dance to trigger the effect.
+- **Poliwag** - *Rain Splash*: now counts energies attached with Rain Dance to trigger the effect.
+- **Poliwhirl** - *Rain Splash*: now counts energies attached with Rain Dance to trigger the effect.
 
 
 ## Version 0.6.0
