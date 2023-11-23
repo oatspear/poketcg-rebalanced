@@ -10,7 +10,9 @@
 ### Colorless Changes
 
 #### Chansey
-- Reduced HP from 80 to 70.
+- Reduced HP from 80 to 60.
+- Reduced Retreat Cost from 1 to 0.
+- **Natural Remedy**: reduced cost from (CCC) to (CC) and healing from 30 to 20.
 
 ### Trainer Card Changes
 - **Mysterious Fossil**: reduced HP from 30 to 20.

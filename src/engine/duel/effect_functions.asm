@@ -1148,7 +1148,7 @@ NaturalRemedy_HealEffect:
 	cp $ff
 	ret z
 	ld e, a   ; location
-	ld d, 30  ; damage
+	ld d, 20  ; damage
 	call HealPlayAreaCardHP
 	ldh a, [hTemp_ffa0]
 	jp c, ClearStatusFromTarget

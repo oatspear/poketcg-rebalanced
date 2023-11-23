@@ -809,7 +809,7 @@ NaturalRemedyName:
 	done
 
 NaturalRemedyDescription:
-	text "Heal 30 damage and remove all"
+	text "Heal 20 damage and remove all"
 	line "Special Conditions from 1 of"
 	line "your Pokémon."
 	done
