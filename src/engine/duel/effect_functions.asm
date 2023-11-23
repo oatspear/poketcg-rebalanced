@@ -8545,11 +8545,15 @@ ChooseUpTo4Cards_PlayerDiscardPileSelection:
 
 ; number of cards is given in [wCardListNumberOfCardsToChoose]
 ; input:
+;  a: number of cards to choose
 ;  [wDuelTempList]: list of cards to choose from
 ChooseUpToNCards_PlayerDiscardPileSelection:
+	ld l, a
 	xor a
 	ldh [hCurSelectionItem], a
-	ldtx hl, ChooseUpTo4FromDiscardPileText
+	ld h, a
+	call LoadTxRam3
+	ldtx hl, ChooseUpToNFromDiscardPileText
 	call DrawWideTextBox_WaitForInput
 	; call CreateEnergyCardListFromDiscardPile_OnlyBasic
 
