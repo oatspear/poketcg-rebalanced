@@ -2,6 +2,11 @@
 
 ## Version 0.7.0
 
+### Water Changes
+
+#### Blastoise
+- **Hydro Pump**: reduced base damage from 50 to 40.
+
 ### Psychic Changes
 
 #### Wigglytuff
