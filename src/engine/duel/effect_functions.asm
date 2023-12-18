@@ -5562,6 +5562,30 @@ NutritionSupport_AttachEnergyEffect:
 	jp HealPlayAreaCardHP
 
 
+RainbowTeam_OncePerTurnCheck:
+	call CheckPokemonPowerCanBeUsed
+	ret c  ; cannot be used
+	call CheckBenchIsNotEmpty
+	ret c  ; no bench
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	ret c  ; no energy
+	call CheckNoDuplicateColorsInPlayArea
+	ld hl, UnableToUsePkmnPowerText
+	ret c  ; duplicate colors
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+
+;	ld a, [wAlreadyPlayedEnergyOrSupporter]
+;	and USED_FIRESTARTER_THIS_TURN
+;	jr nz, .already_used
+
+;.already_used
+;	ldtx hl, OnlyOncePerTurnText
+;	scf
+	ret
+
+
 Firestarter_OncePerTurnCheck:
 	call CheckPokemonPowerCanBeUsed
 	ret c  ; cannot be used
@@ -5582,6 +5606,7 @@ Firestarter_OncePerTurnCheck:
 ;	scf
 	ret
 
+RainbowTeam_AttachEnergyEffect:
 Firestarter_AttachEnergyEffect:
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable

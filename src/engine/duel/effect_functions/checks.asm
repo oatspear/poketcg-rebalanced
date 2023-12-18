@@ -190,6 +190,33 @@ CheckBenchIsNotEmpty:
 	ret
 
 
+; return carry if there are two Pokémon of the same color in the Play Area
+CheckNoDuplicateColorsInPlayArea:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld b, a
+	xor a
+	ld c, a  ; color bit mask
+	ld e, a  ; PLAY_AREA_ARENA
+.loop
+	ld a, e
+	call GetPlayAreaCardColor
+	call TranslateColorToWR
+	ld d, a
+	and c
+	jr nz, .duplicate
+	ld a, c
+	or d
+	ld c, a
+	inc e
+	dec b
+	jr nz, .loop
+	ret
+.duplicate
+	scf
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Damage
 ; ------------------------------------------------------------------------------

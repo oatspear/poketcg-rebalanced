@@ -365,6 +365,11 @@ PollenFrenzyEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PollenFrenzy_Status50PercentEffect
 	db  $00
 
+RainbowTeamEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, RainbowTeam_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RainbowTeam_AttachEnergyEffect
+	db  $00
+
 FirestarterEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Firestarter_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Firestarter_AttachEnergyEffect
