@@ -3,6 +3,16 @@
 AIDecideWhetherToRetreat:
 	xor a
 	ld [wAIPlayEnergyCardForRetreat], a
+
+; affected by unable to retreat substatus?
+	call CheckCantRetreatDueToAcid
+	jr nc, .able_to_retreat
+	xor a
+	ld [wAIScore], a
+	ld [wAIRetreatScore], a
+	jp .no_carry
+
+.able_to_retreat
 	call LoadDefendingPokemonColorWRAndPrizeCards
 	ld a, $80 ; initial retreat score
 	ld [wAIScore], a
