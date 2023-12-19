@@ -80,7 +80,7 @@ Func_3bb5:
 	ld a, [wDuelAnimReturnBank]
 	call BankswitchROM
 	call HandleAllSpriteAnimations
-	call CallHL2
+	call CallHL
 	pop af
 	call BankswitchROM
 	ld a, $80

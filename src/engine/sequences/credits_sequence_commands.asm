@@ -37,7 +37,7 @@ ExecuteCreditsSequenceCmd: ; 1d80b (7:580b)
 	ld a, [hli]
 	ld d, a
 	pop hl
-	call CallHL2
+	call CallHL
 	jr ExecuteCreditsSequenceCmd
 
 	ret ; stray ret

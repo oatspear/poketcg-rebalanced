@@ -79,7 +79,7 @@ DoScreenAnimationUpdate:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call CallHL2
+	call CallHL
 	jr DefaultScreenAnimationUpdate
 
 ShakeScreenX_Small:

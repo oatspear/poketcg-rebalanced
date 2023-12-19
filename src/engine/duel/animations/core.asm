@@ -422,7 +422,7 @@ Func_1cac5:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call CallHL2
+	call CallHL
 	ld a, [wd42a]
 	jr .asm_1cafb
 

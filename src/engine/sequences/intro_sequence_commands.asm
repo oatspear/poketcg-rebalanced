@@ -24,7 +24,7 @@ ExecuteIntroSequenceCmd: ; 1d408 (7:5408)
 	ld b, a
 	ld l, e
 	ld h, d
-	call CallHL2
+	call CallHL
 	jr c, ExecuteIntroSequenceCmd
 	ret
 
