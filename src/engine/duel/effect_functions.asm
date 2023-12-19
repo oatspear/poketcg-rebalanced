@@ -3464,8 +3464,10 @@ HandleSelectBasicEnergyFromDiscardPile_NoCancel:
 	ret
 
 ; Draws list of Energy Cards in Discard Pile for Player to select from.
-; input: hHowManyCardsToSelectOneByOne - how many cards still left to choose
-; Output deck index or $ff in hTemp_ffa0 and a.
+; input:
+;   hl: text to display before choosing a card
+;   hHowManyCardsToSelectOneByOne - how many cards still left to choose
+; Output deck index or $ff in a.
 ; Return carry if cancelled or if there are no cards to choose.
 HandleSelectBasicEnergyFromDiscardPile_AllowCancel:
 	push hl
@@ -3475,7 +3477,6 @@ HandleSelectBasicEnergyFromDiscardPile_AllowCancel:
 .not_chosen
 ; return terminating byte
 	ld a, $ff
-	ldh [hTemp_ffa0], a
 	scf
 	ret
 
@@ -3493,7 +3494,6 @@ HandleSelectBasicEnergyFromDiscardPile_AllowCancel:
 
 .selected
 	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
 	or a
 	ret
 
@@ -5570,7 +5570,7 @@ RainbowTeam_OncePerTurnCheck:
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
 	ret c  ; no energy
 	call CheckNoDuplicateColorsInPlayArea
-	ld hl, UnableToUsePkmnPowerText
+	ldtx hl, MultiplePokemonOfTheSameColorText
 	ret c  ; duplicate colors
 
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -5583,6 +5583,24 @@ RainbowTeam_OncePerTurnCheck:
 ;.already_used
 ;	ldtx hl, OnlyOncePerTurnText
 ;	scf
+	ret
+
+
+RainbowTeam_AttachEnergyEffect:
+	; input: hHowManyCardsToSelectOneByOne - how many cards still left to choose
+	; Output deck index or $ff in a.
+	; Return carry if cancelled or if there are no cards to choose.
+	ld a, 1
+	ldh [hHowManyCardsToSelectOneByOne], a
+	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
+	call HandleSelectBasicEnergyFromDiscardPile_AllowCancel
+	ldh [hAIEnergyTransEnergyCard], a
+	ld hl, .retrieve
+	jr _AttachEnergyFromDiscardPileToBenchEffect
+
+.retrieve
+	ldh a, [hAIEnergyTransEnergyCard]
+	ld [wDuelTempList], a
 	ret
 
 
@@ -5606,8 +5624,15 @@ Firestarter_OncePerTurnCheck:
 ;	scf
 	ret
 
-RainbowTeam_AttachEnergyEffect:
 Firestarter_AttachEnergyEffect:
+	ld hl, CreateEnergyCardListFromDiscardPile_OnlyFire
+	; jr _AttachEnergyFromDiscardPileToBenchEffect
+	; fallthrough
+
+; input:
+;  hl: function to place an energy card in [wDuelTempList]
+_AttachEnergyFromDiscardPileToBenchEffect:
+	push hl
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
 	cp DUELIST_TYPE_LINK_OPP
@@ -5644,8 +5669,10 @@ Firestarter_AttachEnergyEffect:
 	; or USED_FIRESTARTER_THIS_TURN
 	; ld [wAlreadyPlayedEnergyOrSupporter], a
 
-; pick Fire Energy from Discard Pile
-	call CreateEnergyCardListFromDiscardPile_OnlyFire
+; pick Energy from card list
+	; call CreateEnergyCardListFromDiscardPile_OnlyFire
+	pop hl
+	call CallHL
 ; input e: CARD_LOCATION_* constant
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	or CARD_LOCATION_PLAY_AREA

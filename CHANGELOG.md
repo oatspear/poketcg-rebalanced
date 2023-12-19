@@ -19,6 +19,10 @@
 - Reduced Retreat Cost from 1 to 0.
 - **Natural Remedy**: reduced cost from (CCC) to (CC) and healing from 30 to 20.
 
+#### Eevee
+- **Take Down**: removed.
+- New Pokémon Power: **Rainbow Team**: attaches an Energy from discard pile to a benched Pokémon if all Pokémon are of a different color.
+
 ### Trainer Card Changes
 - **Mysterious Fossil**: reduced HP from 30 to 20.
 - **Clefairy Doll**: reduced HP from 30 to 20.

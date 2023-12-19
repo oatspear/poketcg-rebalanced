@@ -1591,3 +1591,8 @@ Discard2CardsFromOpponentsDeckDescription:
 	text "Discard 2 cards from the top"
 	line "of your opponent's deck."
 	done
+
+MultiplePokemonOfTheSameColorText:
+	text "There are multiple Pokémon"
+	line "of the same Color."
+	done

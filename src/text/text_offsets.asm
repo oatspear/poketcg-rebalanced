@@ -2133,6 +2133,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer CombustionName
 	textpointer Discard1CardFromOpponentsDeckDescription
 	textpointer Discard2CardsFromOpponentsDeckDescription
+	textpointer MultiplePokemonOfTheSameColorText
 	textpointer NidoranFDescription                                ; 0x0850
 	textpointer NidorinaName                                       ; 0x0851
 	textpointer SupersonicName                                     ; 0x0852
@@ -3067,6 +3068,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FossilFangsName
 	textpointer SpeedImpactName
 	textpointer SpeedImpactDescription
+	textpointer RainbowTeamName
+	textpointer RainbowTeamDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

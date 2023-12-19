@@ -9874,6 +9874,20 @@ EeveeCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy 0 ; energies
+	tx RainbowTeamName ; name
+	tx RainbowTeamDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw RainbowTeamEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3    ; SPECIAL_AI_HANDLING
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
 	energy COLORLESS, 1 ; energies
 	tx QuickAttackName ; name
 	tx DoubleDamageIfActiveThisTurnDescription ; description
@@ -9886,20 +9900,6 @@ EeveeCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx TakeDownName ; name
-	tx Recoil10Description ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Recoil10EffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
