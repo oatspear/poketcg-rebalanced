@@ -1377,6 +1377,7 @@ wTxRam3_b:: ; ce45
 	ds $2
 
 ; when printing text, number of frames to wait between each text tile
+; stores TextDelaySettings constants
 wTextSpeed:: ; ce47
 	ds $1
 

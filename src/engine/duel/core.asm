@@ -87,7 +87,7 @@ StartDuel_VSAIOpp:
 
 ; OATS DEBUG player override AI
 	ld a, [wTextSpeed]
-	cp 1
+	cp TEXT_SPEED_4
 	jr nz, .normal_loading_sequence
 ; debug sequence
 ; AI (player) gets second player deck
