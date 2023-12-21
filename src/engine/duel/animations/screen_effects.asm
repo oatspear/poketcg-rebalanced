@@ -3,7 +3,7 @@
 ; and initializes the duration of the animation.
 InitScreenAnimation:
 	ld a, [wAnimationsDisabled]
-	or a
+	and ANIMATIONS_DISABLED_F
 	jr nz, .skip
 	ld a, [wTempAnimation]
 	ld [wd42a], a

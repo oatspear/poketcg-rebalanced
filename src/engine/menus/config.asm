@@ -8,11 +8,14 @@ _PauseMenu_Config:
 	ld a, 1
 	ld [wLineSeparation], a
 	call InitMenuScreen
-	lb de,  0,  3
-	lb bc, 20,  5
-	call DrawRegularTextBox
-	lb de,  0,  9
-	lb bc, 20,  5
+	; lb de,  0,  3
+	; lb bc, 20,  5
+	; call DrawRegularTextBox
+	; lb de,  0,  9
+	; lb bc, 20,  5
+	; call DrawRegularTextBox
+	lb de,  0,  1
+	lb bc, 20, 15
 	call DrawRegularTextBox
 	ld hl, ConfigScreenLabels
 	call PrintLabels
@@ -20,6 +23,8 @@ _PauseMenu_Config:
 	ld a, 0
 	call ShowConfigMenuCursor
 	ld a, 1
+	call ShowConfigMenuCursor
+	ld a, 2
 	call ShowConfigMenuCursor
 	xor a
 	ld [wCursorBlinkTimer], a
@@ -35,7 +40,7 @@ _PauseMenu_Config:
 	and B_BUTTON | START
 	jr nz, .asm_105ab
 	ld a, [wConfigCursorYPos]
-	cp $02
+	cp $03
 	jr nz, .asm_10588
 	ldh a, [hKeysPressed]
 	and A_BUTTON
@@ -51,14 +56,16 @@ _PauseMenu_Config:
 	ret
 
 ConfigScreenLabels:
-	db 1, 1
-	tx ConfigMenuTitleText
-
-	db 1, 4
+	; db 1, 4
+	db 1, 2
 	tx ConfigMenuMessageSpeedText
 
-	db 1, 10
+	; db 1, 10
+	db 1, 7
 	tx ConfigMenuDuelAnimationText
+
+	db 1, 12
+	tx ConfigMenuDuelControllersText
 
 	db 1, 16
 	tx ConfigMenuExitText
@@ -70,6 +77,7 @@ ConfigScreenLabels:
 ; to the right positions for those values
 GetConfigCursorPositions:
 	call EnableSRAM
+; text speed
 	ld c, 0
 	ld hl, TextDelaySettings
 .loop
@@ -84,12 +92,23 @@ GetConfigCursorPositions:
 .match
 	ld a, c
 	ld [wConfigMessageSpeedCursorPos], a
+; duel controllers
+	ld a, [sAnimationsDisabled]
+	and DEBUG_DUEL_CONTROLLER_MASK
+	rrca
+	ld c, a
+	ld b, $00
+	ld hl, DuelControllerSettingsIndices
+	add hl, bc
+	ld a, [hl]
+	ld [wConfigDebugDuelControllersCursorPos], a
+; animations enabled
 	ld a, [sSkipDelayAllowed]
 	and $1
 	rlca
 	ld c, a
 	ld a, [wAnimationsDisabled]
-	and $1
+	and ANIMATIONS_DISABLED_F
 	or c
 	ld c, a
 	ld b, $00
@@ -97,8 +116,7 @@ GetConfigCursorPositions:
 	add hl, bc
 	ld a, [hl]
 	ld [wConfigDuelAnimationCursorPos], a
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; indexes into DuelAnimationSettings
 ; 0: show all
@@ -110,7 +128,18 @@ DuelAnimationSettingsIndices:
 	db 1 ; skip delay allowed = true, animations disabled = false
 	db 2 ; skip delay allowed = true, animations disabled = true
 
+; indexes into DuelControllerSettings
+; 0: Human vs Human
+; 1: AI vs AI
+; 2: Human vs AI
+DuelControllerSettingsIndices:
+	db 2 ; Human vs AI
+	db 0 ; Human vs Human
+	db 1 ; AI vs AI
+	db 2 ; Human vs AI
+
 SaveConfigSettings:
+; animations
 	call EnableSRAM
 	ld a, [wConfigDuelAnimationCursorPos]
 	and %11
@@ -125,6 +154,21 @@ SaveConfigSettings:
 	ld a, [hl]
 	ld [sSkipDelayAllowed], a
 	call DisableSRAM
+; duel controllers
+	ld a, [wConfigDebugDuelControllersCursorPos]
+	ld c, a
+	ld b, $00
+	ld hl, DuelControllerSettings
+	add hl, bc
+	ld a, [wAnimationsDisabled]
+	ld c, a
+	call EnableSRAM
+	ld a, [hl]
+	or c
+	ld [wAnimationsDisabled], a
+	ld [sAnimationsDisabled], a
+	call DisableSRAM
+; text speed
 	ld a, [wConfigMessageSpeedCursorPos]
 	ld c, a
 	ld b, $00
@@ -134,8 +178,7 @@ SaveConfigSettings:
 	ld a, [hl]
 	ld [sTextSpeed], a
 	ld [wTextSpeed], a
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 DuelAnimationSettings:
 ; animation disabled, skip delay allowed
@@ -149,6 +192,10 @@ TextDelaySettings:
 	; slow to fast
 	db TEXT_SPEED_1, TEXT_SPEED_2, TEXT_SPEED_3, TEXT_SPEED_4, TEXT_SPEED_5
 
+; special duel controller modes
+DuelControllerSettings:
+	db DEBUG_HUMAN_VS_HUMAN_F, DEBUG_AI_VS_AI_F, 0
+
 UpdateConfigMenuCursor:
 	push af
 	ld a, [wCursorBlinkTimer]
@@ -158,7 +205,8 @@ UpdateConfigMenuCursor:
 	jr HideConfigMenuCursor
 .show
 	pop af
-	jr ShowConfigMenuCursor ; can be fallthrough
+	; jr ShowConfigMenuCursor
+	; fallthrough
 
 ShowConfigMenuCursor:
 	push bc
@@ -200,27 +248,33 @@ DrawConfigMenuCursor:
 	ld a, [hl]
 	ld c, a
 	pop af
-	call WriteByteToBGMap0
-	ret
+	jp WriteByteToBGMap0
 
 ConfigScreenCursorPositions:
 	dw MessageSpeedCursorPositions
 	dw DuelAnimationsCursorPositions
+	dw DuelControllersCursorPositions
 	dw ExitSettingsCursorPosition
 
 MessageSpeedCursorPositions:
 	dw wConfigMessageSpeedCursorPos
-	db  5, 6
-	db  7, 6
-	db  9, 6
-	db 11, 6
-	db 13, 6
+	db  5, 4
+	db  7, 4
+	db  9, 4
+	db 11, 4
+	db 13, 4
 
 DuelAnimationsCursorPositions:
 	dw wConfigDuelAnimationCursorPos
-	db  1, 12
-	db  7, 12
-	db 15, 12
+	db  1, 9
+	db  7, 9
+	db 15, 9
+
+DuelControllersCursorPositions:
+	dw wConfigDebugDuelControllersCursorPos
+	db  1, 14
+	db  9, 14
+	db 14, 14
 
 ExitSettingsCursorPosition:
 	dw wConfigExitSettingsCursorPos
@@ -251,7 +305,7 @@ ConfigScreenDPadDown:
 .up_or_down
 	push af
 	ld a, [wConfigCursorYPos]
-	cp 2
+	cp 3
 	jr z, .hide_cursor
 	call ShowConfigMenuCursor
 	jr .skip
@@ -263,7 +317,7 @@ ConfigScreenDPadDown:
 	ld b, a
 	pop af
 	add b
-	cp 3
+	cp 4
 	jr c, .valid
 	jr z, .wrap_min
 ; wrap max
@@ -288,6 +342,7 @@ ConfigScreenDPadDown:
 Unknown_106ff:
 	db $18 ; message speed, start hidden
 	db $18 ; duel animation, start hidden
+	db $18 ; duel controllers, start hidden
 	db $8 ; exit settings, start visible
 
 ConfigScreenDPadRight:
@@ -353,4 +408,5 @@ ConfigScreenDPadLeft:
 ; x pos variable, max x value
 	dwb wConfigMessageSpeedCursorPos,  4
 	dwb wConfigDuelAnimationCursorPos, 2
+	dwb wConfigDebugDuelControllersCursorPos, 2
 	dwb wConfigExitSettingsCursorPos,  0

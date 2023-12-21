@@ -49,7 +49,7 @@ PlayLoadedDuelAnimation:
 ; hl: pointer
 
 	ld a, [wAnimationsDisabled]
-	or a
+	and ANIMATIONS_DISABLED_F
 	jr z, .check_to_play_sfx
 	; animations are disabled
 	push hl

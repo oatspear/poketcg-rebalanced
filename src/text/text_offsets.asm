@@ -838,7 +838,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PlayerDiarySaveConfirmText                         ; 0x0345
 	textpointer PlayerDiarySaveCancelText                          ; 0x0346
 	textpointer PlayerStatusMedalsTitleText                        ; 0x0347
-	textpointer ConfigMenuTitleText                                ; 0x0348
+	textpointer ConfigMenuDuelControllersText
 	textpointer ConfigMenuMessageSpeedText                         ; 0x0349
 	textpointer ConfigMenuDuelAnimationText                        ; 0x034a
 	textpointer ConfigMenuExitText                                 ; 0x034b

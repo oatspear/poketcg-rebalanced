@@ -2115,6 +2115,7 @@ wMedalDisplayTimer:: ; d116
 ; if TRUE, additional booster being given
 ; used to control the text that is displayed when booster is opened
 wAnotherBoosterPack:: ; d117
+wConfigDebugDuelControllersCursorPos:: ; d117
 	ds $1
 
 wConfigMessageSpeedCursorPos:: ; d118
@@ -2542,6 +2543,7 @@ wd420:: ; d420
 
 ; store settings for animation enabled/disabled
 ; 0 means enabled, 1 means disabled
+; OATS: use this byte to store extra configs
 wAnimationsDisabled:: ; d421
 	ds $1
 

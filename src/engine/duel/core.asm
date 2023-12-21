@@ -85,11 +85,35 @@ StartDuel_VSAIOpp:
 	ld a, [wNPCDuelDeckID]
 	ld [wOpponentDeckID], a
 
-; OATS DEBUG player override AI
-	ld a, [wTextSpeed]
-	cp TEXT_SPEED_4
-	jr nz, .normal_loading_sequence
-; debug sequence
+; OATS DEBUG override player or AI controllers
+	ld a, [wAnimationsDisabled]
+	and DEBUG_HUMAN_VS_HUMAN_F
+	jr nz, .human_vs_human_sequence
+	ld a, [wAnimationsDisabled]
+	and DEBUG_AI_VS_AI_F
+	jr z, .normal_loading_sequence
+
+; Auto-duel, AI vs AI
+	call LoadPlayerDeck
+	call SwapTurn
+	call LoadOpponentDeck
+	call SwapTurn
+; hand control over to the AI
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	ld a, [wOpponentDeckID]
+	or DUELIST_TYPE_AI_OPP
+	ld [hl], a
+	jr StartDuel
+
+.normal_loading_sequence
+	call LoadPlayerDeck
+	call SwapTurn
+	call LoadOpponentDeck
+	call SwapTurn
+	jr StartDuel
+
+.human_vs_human_sequence
 ; AI (player) gets second player deck
 	ld a, 1
 	call LoadSpecificPlayerDeck
@@ -112,12 +136,6 @@ StartDuel_VSAIOpp:
 	call LoadPlayerDeck
 	jr StartDuel
 
-.normal_loading_sequence
-	call LoadPlayerDeck
-	call SwapTurn
-	call LoadOpponentDeck
-	call SwapTurn
-	jr StartDuel
 
 StartDuel_VSLinkOpp:
 	ld a, MUSIC_DUEL_THEME_1
@@ -6474,8 +6492,7 @@ LoadPlayerDeck:
 	inc de
 	dec c
 	jr nz, .copy_cards_loop
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; returns carry if wSkipDelayAllowed is non-0 and B is being held in order to branch
 ; out of the caller's wait frames loop. probably only used for debugging.

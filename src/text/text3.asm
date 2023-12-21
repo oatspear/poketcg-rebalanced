@@ -1113,8 +1113,10 @@ PlayerStatusMedalsTitleText: ; 3e90e (f:690e)
 	text "Master Medals"
 	done
 
-ConfigMenuTitleText: ; 3e91d (f:691d)
-	text "           Change Settings"
+ConfigMenuDuelControllersText: ; 3e91d (f:691d)
+	text "Duel Controllers"
+	line ""
+	line "  Human-Human     AI-AI     Normal"
 	done
 
 ConfigMenuMessageSpeedText: ; 3e939 (f:6939)
@@ -1343,11 +1345,11 @@ DataExistsWhenPowerWasTurnedOFFDuringDuelText: ; 3ee0b (f:6e0b)
 	line "was turned OFF during a duel."
 	line "Choose CONTINUE DUEL on the"
 	line "Main Menu to continue the duel."
-	line "If you continue now, the heading,"
-	line "CONTINUE DUEL, will be"
-	line "deleted, and the game will start"
-	line "from the point when you last "
-	line "wrote in the Diary."
+	; line "If you continue now, the heading,"
+	; line "CONTINUE DUEL, will be"
+	; line "deleted, and the game will start"
+	; line "from the point when you last "
+	; line "wrote in the Diary."
 	line ""
 	line "Would you like to continue the Game"
 	line "from the point saved in"
