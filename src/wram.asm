@@ -664,6 +664,7 @@ wDuelistType:: ; cc0d
 wOpponentDeckID:: ; cc0e
 	ds $1
 
+wIsInDuel::
 wcc0f:: ; cc0f
 	ds $1
 

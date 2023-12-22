@@ -278,6 +278,10 @@ MainDuelLoop:
 	call WaitForWideTextBoxInput
 	call Func_3b31
 	call ResetSerial
+; OATS: helper to detect end of duel
+	xor a
+	ld [wIsInDuel], a
+; ----------------------------------
 	ld a, PLAYER_TURN
 	ldh [hWhoseTurn], a
 	ret

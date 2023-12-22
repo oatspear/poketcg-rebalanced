@@ -714,13 +714,27 @@ SetCursorParametersForTextBox_Default:
 ; wait until A or B is pressed.
 ; return carry if A is pressed, nc if B is pressed. erase the cursor either way
 WaitForButtonAorB:
+	call IsCinematicDuel
+	jr nc, _WaitForButtonAorB
+; cinematic duel (delayed text)
+	ld d, 48
+.wait_A_or_B_loop
+	call DoFrame
+	push de
+	call RefreshMenuCursor
+	pop de
+	dec d
+	jr nz, .wait_A_or_B_loop
+	jr _WaitForButtonAorB.a_pressed
+
+_WaitForButtonAorB:
 	call DoFrame
 	call RefreshMenuCursor
 	ldh a, [hKeysPressed]
 	bit A_BUTTON_F, a
 	jr nz, .a_pressed
 	bit B_BUTTON_F, a
-	jr z, WaitForButtonAorB
+	jr z, _WaitForButtonAorB
 	call EraseCursor
 	scf
 	ret
@@ -828,13 +842,30 @@ NarrowTextBoxMenuParameters:
 	db SYM_BOX_BOTTOM ; tile behind cursor
 	dw NULL ; function pointer if non-0
 
+
+IsCinematicDuel:
+	ld a, [wIsInDuel]
+	or a
+	ret z
+; currently in a duel
+	ld a, [wAnimationsDisabled]
+	and DEBUG_AI_VS_AI_F
+	ret z
+; it is an AI vs AI duel
+	ld a, [wTextSpeed]
+	cp TEXT_SPEED_5
+	ret z
+; cinematic duel (delayed text)
+	scf
+	ret
+
+
 ; draw a 20x6 text box aligned to the bottom of the screen
 DrawWideTextBox:
 	lb de, 0, 12
 	lb bc, 20, 6
 	call AdjustCoordinatesForBGScroll
-	call DrawRegularTextBox
-	ret
+	jp DrawRegularTextBox
 
 ; draw a 20x6 text box aligned to the bottom of the screen,
 ; print the text at hl with letter delay, and wait for A or B pressed
@@ -844,6 +875,24 @@ DrawWideTextBox_WaitForInput:
 
 ; wait for A or B to be pressed on a wide (20x6) text box
 WaitForWideTextBoxInput:
+	call IsCinematicDuel
+	jr nc, _WaitForWideTextBoxInput
+; cinematic duel (delayed text)
+	xor a
+	ld hl, WideTextBoxMenuParameters
+	call InitializeMenuParameters
+	call EnableLCD
+	ld d, 48
+.wait_A_or_B_loop
+	call DoFrame
+	push de
+	call RefreshMenuCursor
+	pop de
+	dec d
+	jr nz, .wait_A_or_B_loop
+	jp EraseCursor
+
+_WaitForWideTextBoxInput:
 	xor a
 	ld hl, WideTextBoxMenuParameters
 	call InitializeMenuParameters
@@ -854,8 +903,7 @@ WaitForWideTextBoxInput:
 	ldh a, [hKeysPressed]
 	and A_BUTTON | B_BUTTON
 	jr z, .wait_A_or_B_loop
-	call EraseCursor
-	ret
+	jp EraseCursor
 
 WideTextBoxMenuParameters:
 	db 18, 17 ; cursor x, cursor y
