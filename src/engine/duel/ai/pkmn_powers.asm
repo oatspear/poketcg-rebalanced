@@ -457,11 +457,11 @@ HandleAIPkmnPowers:
 	jr nz, .check_dual_type_fighting
 	call HandleAIMudSport
 	jr .next_1
-.check_dual_type_fighting
-	cp POLIWRATH
-	jr nz, .check_prophecy
-	call HandleAIDualTypeFighting
-	jr .next_1
+; .check_dual_type_fighting
+; 	cp POLIWRATH
+; 	jr nz, .check_prophecy
+; 	call HandleAIDualTypeFighting
+; 	jr .next_1
 .check_prophecy
 	cp KADABRA
 	jr nz, .check_trade
@@ -474,8 +474,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_primordial_dream
 	cp OMANYTE
-	jr nz, .check_curse
+	jr nz, .check_rainbow_team
 	call HandleAIPrimordialDream
+	jr .next_1
+.check_rainbow_team
+	cp EEVEE
+	jr nz, .check_curse
+	call HandleAIRainbowTeam
 	jr .next_1
 .check_curse
 	cp HAUNTER_LV17
@@ -706,6 +711,27 @@ HandleAIMudSport:
 	ldh [hAIEnergyTransEnergyCard], a
 	jp HandleAIDecideToUsePokemonPower
 
+
+
+HandleAIRainbowTeam:
+	farcall CreateEnergyCardListFromDiscardPile_OnlyBasic
+	ret c  ; no energy cards
+
+; if any of the energy cards in deck is useful store it and use power
+	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
+	ldh [hAIEnergyTransEnergyCard], a
+	jr nc, .choose_bench
+
+; otherwise pick the first energy in the list
+	ld a, [wDuelTempList]
+	ldh [hAIEnergyTransEnergyCard], a
+
+.choose_bench
+; TODO: improve
+; choose the first bench slot
+	ld a, PLAY_AREA_BENCH_1
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jp HandleAIDecideToUsePokemonPower
 
 
 HandleAIPrimordialDream:
@@ -1199,6 +1225,8 @@ HandleAIFirestarterEnergy:
 	ld [wAIPokemonPowerDeckIndex], a
 
 	farcall CreateEnergyCardListFromDiscardPile_OnlyFire
+	ld a, [wDuelTempList]
+	ldh [hAIEnergyTransEnergyCard], a
 	ret c  ; no Energy
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA

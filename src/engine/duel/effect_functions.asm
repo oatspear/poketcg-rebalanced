@@ -5641,6 +5641,9 @@ _AttachEnergyFromDiscardPileToBenchEffect:
 	jr z, .player
 
 ; AI Pokémon selection logic is in HandleAIFirestarterEnergy
+	pop hl
+	ld hl, RainbowTeam_AttachEnergyEffect.retrieve
+	push hl
 	jr .attach
 
 .player
