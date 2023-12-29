@@ -39,6 +39,7 @@
 - **Wartortle** - *Rocket Shell*: now counts energies attached with Rain Dance to trigger the effect.
 - **Poliwag** - *Rain Splash*: now counts energies attached with Rain Dance to trigger the effect.
 - **Poliwhirl** - *Rain Splash*: now counts energies attached with Rain Dance to trigger the effect.
+- **Seaking** - *Rend*: now properly applies the bonus damage versus damaged Pokémon.
 
 
 ## Version 0.6.0
