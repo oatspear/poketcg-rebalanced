@@ -2235,11 +2235,11 @@ DealDamageToPlayAreaPokemon:
 	pop de
 	call HandleDamageReduction
 .in_bench
+	call HandleDamageReductionOrNoDamageFromPkmnPowerEffects
 	bit 7, d
 	jr z, .no_underflow
 	ld de, 0
 .no_underflow
-	call HandleDamageReductionOrNoDamageFromPkmnPowerEffects
 	ld a, [wTempPlayAreaLocation_cceb]
 	ld b, a
 	or a ; cp PLAY_AREA_ARENA

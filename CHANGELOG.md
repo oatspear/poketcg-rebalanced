@@ -40,6 +40,7 @@
 - **Poliwag** - *Rain Splash*: now counts energies attached with Rain Dance to trigger the effect.
 - **Poliwhirl** - *Rain Splash*: now counts energies attached with Rain Dance to trigger the effect.
 - **Seaking** - *Rend*: now properly applies the bonus damage versus damaged Pokémon.
+- Fixed an underflow error when dealing 10 damage to a Benched Pokémon with Exoskeleton or Battle Armor.
 
 
 ## Version 0.6.0
