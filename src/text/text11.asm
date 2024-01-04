@@ -504,8 +504,8 @@ TantrumName: ; 5e96d (17:696d)
 	done
 
 TantrumDescription: ; 5e976 (17:6976)
-	text "Flip a coin. If tails, Primeape is"
-	line "now Confused (after doing damage)."
+	text "This Pokémon is now Confused"
+	line "(after doing damage)."
 	done
 
 PrimeapeDescription: ; 5e9bd (17:69bd)

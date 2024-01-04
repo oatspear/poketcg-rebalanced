@@ -4593,12 +4593,12 @@ DiscardOpponentEnergyIfHeads_AISelectEffect:
 
 
 TantrumEffect: ; 2e099 (b:6099)
-	ldtx de, IfTailsYourPokemonBecomesConfusedText
-	call TossCoin_BankB
-	ret c ; return if heads
+	; ldtx de, IfTailsYourPokemonBecomesConfusedText
+	; call TossCoin_BankB
+	; ret c ; return if heads
 ; confuse Pokemon
-	ld a, ATK_ANIM_MULTIPLE_SLASH
-	ld [wLoadedAttackAnimation], a
+	; ld a, ATK_ANIM_MULTIPLE_SLASH
+	; ld [wLoadedAttackAnimation], a
 	call SwapTurn
 	call ConfusionEffect
 	jp SwapTurn

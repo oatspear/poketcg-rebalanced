@@ -6335,18 +6335,18 @@ MankeyCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx RageName ; name
-	tx RageDescription ; description
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	tx TantrumName ; name
+	tx TantrumDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw RageEffectCommands ; effect commands
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw TantrumEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	db FLAG_2_BIT_7 ; flags 2
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_RAMPAGE ; animation
 
 	db 0 ; retreat cost
 	db WR_PSYCHIC ; weakness
@@ -6378,7 +6378,7 @@ PrimeapeCard:
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw PrimeapeTantrumEffectCommands ; effect commands
+	dw TantrumEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_7 ; flags 2
 	db NONE ; flags 3

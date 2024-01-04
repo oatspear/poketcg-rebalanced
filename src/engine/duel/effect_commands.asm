@@ -868,7 +868,7 @@ GeodudeStoneBarrageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, StoneBarrage_AIEffect
 	db  $00
 
-PrimeapeTantrumEffectCommands:
+TantrumEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TantrumEffect
 	db  $00
 
