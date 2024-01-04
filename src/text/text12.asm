@@ -1220,3 +1220,15 @@ RainbowTeamDescription:
 	line "Bench and attach a Basic Energy"
 	line "card from your Discard Pile to it."
 	done
+
+GetMadName:
+	text "Get Mad"
+	done
+
+GetMadDescription:
+	text "Move any number of damage counters"
+	line "from your Pokémon to this Pokémon."
+	line "If you moved at least 5, prevent all"
+	line "damage done to this Pokémon during"
+	line "your opponent's next turn."
+	done

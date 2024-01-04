@@ -113,7 +113,7 @@ HandleAIEnergyTrans:
 	ld d, 30
 	call AIDelayFrames_D
 
-	ld a, OPPACTION_6B15
+	ld a, OPPACTION_EXECUTE_EFFECT_STEP
 	bank1call AIMakeDecision
 	pop de
 	dec d
@@ -351,7 +351,7 @@ AIEnergyTransTransferEnergyToBench:
 	ld d, a
 	ld e, FIRST_ATTACK_OR_PKMN_POWER
 	call CopyAttackDataAndDamage_FromDeckIndex
-	ld a, OPPACTION_6B15
+	ld a, OPPACTION_EXECUTE_EFFECT_STEP
 	bank1call AIMakeDecision
 	jr .loop_energy
 
@@ -457,7 +457,7 @@ HandleAIPkmnPowers:
 	jr nz, .check_dual_type_fighting
 	call HandleAIMudSport
 	jr .next_1
-; .check_dual_type_fighting
+.check_dual_type_fighting
 ; 	cp POLIWRATH
 ; 	jr nz, .check_prophecy
 ; 	call HandleAIDualTypeFighting
@@ -661,7 +661,7 @@ HandleAIStrangeBehavior:
 	dec d
 	jr nz, .small_delay_loop
 	push de
-	ld a, OPPACTION_6B15
+	ld a, OPPACTION_EXECUTE_EFFECT_STEP
 	bank1call AIMakeDecision
 	pop de
 	dec e

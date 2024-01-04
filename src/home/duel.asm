@@ -1728,8 +1728,7 @@ UsePokemonPower:
 	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
 	call TryExecuteEffectCommandFunction
 	ld a, OPPACTION_DUEL_MAIN_SCENE
-	call SetOppAction_SerialSendDuelData
-	ret
+	jp SetOppAction_SerialSendDuelData
 
 ; called by UseAttackOrPokemonPower (on an attack only)
 ; in a link duel, it's used to send the other game data about the

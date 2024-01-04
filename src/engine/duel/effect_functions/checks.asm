@@ -297,21 +297,28 @@ CheckIfPlayAreaHasAnyDamage_ExcludeTempLocation:
 ; returns carry if Strange Behavior cannot be used
 StrangeBehavior_CheckDamage:
 ; can Pkmn Power be used?
-    ldh a, [hTempPlayAreaLocation_ff9d]
-    call CheckCannotUseDueToStatus_Anywhere
-    ret c
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
+	ret c
 ; does Play Area have any damage counters?
-    ldh a, [hTempPlayAreaLocation_ff9d]
-    ldh [hTemp_ffa0], a
-    call CheckIfPlayAreaHasAnyDamage
-    ret c
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+.check_damage
+	call CheckIfPlayAreaHasAnyDamage_ExcludeTempLocation
+	ret c
 ; can this Pokémon receive any damage counters without KO-ing?
-    ldh a, [hTempPlayAreaLocation_ff9d]
-    add DUELVARS_ARENA_CARD_HP
-    call GetTurnDuelistVariable
-    ldtx hl, CannotUseBecauseItWillBeKnockedOutText
-    cp 10 + 10
-    ret
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	ldtx hl, CannotUseBecauseItWillBeKnockedOutText
+	cp 10 + 10
+	ret
+
+
+GetMad_CheckDamage:
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ff9d], a
+	jr StrangeBehavior_CheckDamage.check_damage
 
 
 ; ------------------------------------------------------------------------------

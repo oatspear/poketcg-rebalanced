@@ -15,6 +15,7 @@ EffectCommands: ; 186f7 (6:46f7)
 ; - EFFECTCMDTYPE_REQUIRE_SELECTION: For attacks, Pokemon Powers, or trainer cards requiring the user to select a card (from e.g. play area screen or card list).
 ; - EFFECTCMDTYPE_BEFORE_DAMAGE: Effect command of an attack executed prior to the damage step. For trainer card or Pokemon Power, usually the main effect.
 ; - EFFECTCMDTYPE_AFTER_DAMAGE: Effect command executed after the damage step.
+; - EFFECTCMDTYPE_INTERACTIVE_STEP: Effect command executed interactively during link battles or in multi-step menus.
 ; - EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN: For attacks that may result in the defending Pokemon being switched out. Called only for AI-executed attacks.
 ; - EFFECTCMDTYPE_PKMN_POWER_TRIGGER: Pokemon Power effects that trigger the moment the Pokemon card is played.
 ; - EFFECTCMDTYPE_AI: Used for AI scoring.
@@ -298,7 +299,7 @@ Leech10DamageEffectCommands:
 EnergyTransEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergyTrans_CheckPlayArea
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyTrans_TransferEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyTrans_AIEffect
+	dbw EFFECTCMDTYPE_INTERACTIVE_STEP, EnergyTrans_AIEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyTrans_PrintProcedure
 	db  $00
 
@@ -728,7 +729,12 @@ AquaticRescueEffectCommands:
 StrangeBehaviorEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StrangeBehavior_CheckDamage
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StrangeBehavior_SelectAndSwapEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StrangeBehavior_SwapEffect
+	dbw EFFECTCMDTYPE_INTERACTIVE_STEP, StrangeBehavior_SwapEffect
+	db  $00
+
+GetMadEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, GetMad_CheckDamage
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StrangeBehavior_SelectAndSwapEffect
 	db  $00
 
 PsychicAssaultEffectCommands:
@@ -771,7 +777,7 @@ InvadeMindEffectCommands:
 ; AlakazamDamageSwapEffectCommands:
 ; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DamageSwap_CheckDamage
 ; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamageSwap_SelectAndSwapEffect
-; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageSwap_SwapEffect
+; 	dbw EFFECTCMDTYPE_INTERACTIVE_STEP, DamageSwap_SwapEffect
 ; 	db  $00
 
 InflictConfusionEffectCommands:

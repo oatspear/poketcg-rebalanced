@@ -944,7 +944,21 @@ StrangeBehavior_SelectAndSwapEffect:
 	xor a
 	ldh [hCurSelectionItem], a
 	bank1call Func_61a1
-.start
+.loop
+	call Move1DamageCounterToRecipient_PlayerSelectEffect
+	ret z  ; B was pressed
+	ld a, OPPACTION_EXECUTE_EFFECT_STEP
+	call SetOppAction_SerialSendDuelData
+	jr .loop
+
+
+; Single iteration of the Strange Behaviour effect
+; return nz if the damage counter was moved (more iterations to come)
+; return z if the player pressed B (end selection)
+; the goal of refactoring this into its own function was to take
+; OPPACTION_EXECUTE_EFFECT_STEP apart, so that its effect can be used for
+; other things besides Strange Behaviour.
+Move1DamageCounterToRecipient_PlayerSelectEffect:
 	bank1call PrintPlayAreaCardList_EnableLCD
 	push af
 	ldh a, [hCurSelectionItem]
@@ -972,9 +986,9 @@ StrangeBehavior_SelectAndSwapEffect:
 
 	call TryGiveDamageCounter_StrangeBehavior
 	jr c, .play_sfx
-	ld a, OPPACTION_6B15
-	call SetOppAction_SerialSendDuelData
-	jr .start
+	ld a, 1
+	or a
+	ret
 
 .play_sfx
 	call PlaySFX_InvalidChoice
@@ -1208,6 +1222,69 @@ OverwhelmEffect:
 	ret c  ; less than 7 cards
 	call Discard1RandomCardFromOpponentsHand
 	jp ParalysisEffect
+
+
+GetMad_MoveDamageCountersEffect:
+; store initial HP count
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	ldh [hMultiPurposeByte1], a
+
+; handle duelist type
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_LINK_OPP
+	jr z, .link_opp
+	and DUELIST_TYPE_AI_OPP
+	jr nz, .ai_opp
+
+; player
+	ldtx hl, ProcedureForStrangeBehaviorText
+	bank1call DrawWholeScreenTextBox
+	xor a
+	ldh [hTemp_ffa0], a
+	ldh [hCurSelectionItem], a
+	bank1call Func_61a1
+.loop_player
+	call Move1DamageCounterToRecipient_PlayerSelectEffect
+	jr z, .send_terminator  ; B was pressed
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a
+	call SerialSend8Bytes
+	jr .loop_player
+
+.send_terminator
+	ld a, $ff  ; terminator
+	ld e, a
+	call SerialSend8Bytes
+	jr .end
+
+.link_opp
+	call SerialRecv8Bytes
+	ld a, e
+	cp $ff
+	jr z, .end
+	ldh [hTempPlayAreaLocation_ffa1], a
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTemp_ffa0], a
+	call StrangeBehavior_SwapEffect
+	jr .link_opp
+
+.ai_opp
+	; TODO
+	ret
+
+.end
+; compare current HP to initial value
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	ldh a, [hMultiPurposeByte1]
+	sub [hl]
+	cp 50
+	ret c
+; moved 5 damage counters or more; immune to damage
+	ld a, SUBSTATUS1_NO_DAMAGE
+	jp ApplySubstatus1ToAttackingCard
 
 
 ; ------------------------------------------------------------------------------
@@ -2406,7 +2483,7 @@ EnergyTrans_TransferEffect: ; 2cb77 (b:4b77)
 ; a press
 	ldh [hCurSelectionItem], a
 	ldh [hAIEnergyTransPlayAreaLocation], a
-	ld a, OPPACTION_6B15
+	ld a, OPPACTION_EXECUTE_EFFECT_STEP
 	call SetOppAction_SerialSendDuelData
 	ldh a, [hAIEnergyTransPlayAreaLocation]
 	ld e, a
@@ -3908,7 +3985,7 @@ DamageSwap_SelectAndSwapEffect: ; 2dba2 (b:5ba2)
 	call TryGiveDamageCounter_DamageSwap
 	jr c, .loop_input_second
 
-	ld a, OPPACTION_6B15
+	ld a, OPPACTION_EXECUTE_EFFECT_STEP
 	call SetOppAction_SerialSendDuelData
 
 .update_ui

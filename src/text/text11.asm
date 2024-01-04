@@ -263,7 +263,7 @@ LightScreenDescription: ; 5dc80 (17:5c80)
 	line "down to the nearest 10)."
 	done
 
-LightScreenDescriptionCont: ; 5dd4f (17:5d4f)
+OtherEffectsStillHappenDescriptionCont:
 	text "(Any other effects of attacks still"
 	line "happen.)"
 	done

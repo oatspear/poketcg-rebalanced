@@ -5457,8 +5457,7 @@ Func_61a1:
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
 	call LoadDuelCardSymbolTiles
-	call LoadDuelCheckPokemonScreenTiles
-	ret
+	jp LoadDuelCheckPokemonScreenTiles
 
 ; for each turn holder's play area Pokemon card, print the name, level,
 ; face down stage card, color symbol, status symbol (if any), pluspower/defender
@@ -6778,7 +6777,7 @@ OppActionTable:
 	dw OppAction_6b30                                 ; OPPACTION_6B30
 	dw OppAction_NoAction                             ; OPPACTION_NO_ACTION_13
 	dw OppAction_UseMetronomeAttack                   ; OPPACTION_USE_METRONOME_ATTACK
-	dw OppAction_6b15                                 ; OPPACTION_6B15
+	dw OppAction_ExecuteEffectStep                    ; OPPACTION_EXECUTE_EFFECT_STEP
 	dw OppAction_DrawDuelMainScene                    ; OPPACTION_DUEL_MAIN_SCENE
 
 OppAction_DrawCard:
@@ -7029,9 +7028,9 @@ OppAction_ExecutePokemonPowerEffect:
 	ld [wSkipDuelistIsThinkingDelay], a
 	ret
 
-; execute the EFFECTCMDTYPE_AFTER_DAMAGE command of the used Pokemon Power
-OppAction_6b15:
-	ld a, EFFECTCMDTYPE_AFTER_DAMAGE
+; execute the EFFECTCMDTYPE_INTERACTIVE_STEP command of the used Pokemon Power
+OppAction_ExecuteEffectStep:
+	ld a, EFFECTCMDTYPE_INTERACTIVE_STEP
 	call TryExecuteEffectCommandFunction
 	ld a, $01
 	ld [wSkipDuelistIsThinkingDelay], a

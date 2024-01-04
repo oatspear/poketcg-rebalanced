@@ -5763,7 +5763,7 @@ ElectabuzzLv20Card:
 	energy LIGHTNING, 1 ; energies
 	tx LightScreenName ; name
 	tx LightScreenDescription ; description
-	tx LightScreenDescriptionCont ; description (cont)
+	tx OtherEffectsStillHappenDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw ElectabuzzLightScreenEffectCommands ; effect commands
@@ -6372,21 +6372,21 @@ PrimeapeCard:
 	tx MankeyName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2 ; energies
-	tx TantrumName ; name
-	tx TantrumDescription ; description
-	dw NONE ; description (cont)
-	db 40 ; damage
+	energy FIGHTING, 1 ; energies
+	tx GetMadName ; name
+	tx GetMadDescription ; description
+	tx OtherEffectsStillHappenDescriptionCont ; description (cont)
+	db 0 ; damage
 	db DAMAGE_NORMAL ; category
-	dw TantrumEffectCommands ; effect commands
+	dw GetMadEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_7 ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_RAMPAGE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
+	energy COLORLESS, 2 ; energies
 	tx RageName ; name
 	tx RageDescription ; description
 	dw NONE ; description (cont)

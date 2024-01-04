@@ -2558,7 +2558,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ElectabuzzName                                     ; 0x09ea
 	textpointer LightScreenName                                    ; 0x09eb
 	textpointer LightScreenDescription                             ; 0x09ec
-	textpointer LightScreenDescriptionCont                         ; 0x09ed
+	textpointer OtherEffectsStillHappenDescriptionCont
 	textpointer ElectricName                                       ; 0x09ef
 	textpointer ElectabuzzLv20Description                         ; 0x09f0
 	textpointer ThunderpunchName                                   ; 0x09f1
@@ -3070,6 +3070,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SpeedImpactDescription
 	textpointer RainbowTeamName
 	textpointer RainbowTeamDescription
+	textpointer GetMadName
+	textpointer GetMadDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

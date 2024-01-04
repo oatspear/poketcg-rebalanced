@@ -186,7 +186,7 @@ HandleAIDamageSwap:
 	ldh [hTempRetreatCostCards], a
 	xor a ; PLAY_AREA_ARENA
 	ldh [hAIPkmnPowerEffectParam], a
-	ld a, OPPACTION_6B15
+	ld a, OPPACTION_EXECUTE_EFFECT_STEP
 	bank1call AIMakeDecision
 	pop de
 	dec e

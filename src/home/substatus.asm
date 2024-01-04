@@ -55,7 +55,7 @@ HandleDamageReductionExceptSubstatus2:
 	jr z, .not_affected_by_substatus1
 	cp SUBSTATUS1_NO_DAMAGE_FROM_BASIC
 	jr z, .no_damage_from_basic
-	cp SUBSTATUS1_NO_DAMAGE_STIFFEN
+	cp SUBSTATUS1_NO_DAMAGE
 	jr z, .no_damage
 	cp SUBSTATUS1_NO_DAMAGE_10
 	jr z, .no_damage
