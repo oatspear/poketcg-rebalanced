@@ -1242,10 +1242,11 @@ GetMad_MoveDamageCountersEffect:
 	ldtx hl, ProcedureForStrangeBehaviorText
 	bank1call DrawWholeScreenTextBox
 	xor a
-	ldh [hTemp_ffa0], a
 	ldh [hCurSelectionItem], a
 	bank1call Func_61a1
 .loop_player
+	xor a
+	ldh [hTemp_ffa0], a
 	call Move1DamageCounterToRecipient_PlayerSelectEffect
 	jr z, .send_terminator  ; B was pressed
 	ldh a, [hTempPlayAreaLocation_ffa1]
