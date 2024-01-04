@@ -380,8 +380,7 @@ ProcedureForDamageSwapText: ; 38e90 (e:4e90)
 	done
 
 ProcedureForDevolutionBeamText: ; 38fcc (e:4fcc)
-	text "Procedure for Devolution Beam."
-	line ""
+	text ""
 	line "1. Choose either a Pokémon in your"
 	line "   Play Area or your opponent's"
 	line "   Play Area and press the A Button."
@@ -393,8 +392,7 @@ ProcedureForDevolutionBeamText: ; 38fcc (e:4fcc)
 	done
 
 ProcedureForStrangeBehaviorText:
-	text "Procedure for Strange Behavior:"
-	line ""
+	text ""
 	line "1. Choose the Pokémon to move"
 	line "   damage counters from"
 	line "   and press the A Button."
