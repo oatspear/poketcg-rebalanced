@@ -6168,27 +6168,27 @@ SandslashCard:
 	tx SandshrewName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx SlashName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	energy 0 ; energies
+	tx SpikesName ; name
+	tx SpikesDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_SLASH ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
-	tx FurySwipesName ; name
+	energy COLORLESS, 3 ; energies
+	tx TripleStrikeName ; name
 	tx TripleAttackX20X10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_X ; category
-	dw SandslashFurySwipesEffectCommands ; effect commands
+	dw TripleStrikeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

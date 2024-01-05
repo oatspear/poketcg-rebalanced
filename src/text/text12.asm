@@ -1232,3 +1232,18 @@ GetMadDescription:
 	line "damage done to this Pokémon during"
 	line "your opponent's next turn."
 	done
+
+SpikesName:
+	text "Spikes"
+	done
+
+SpikesDescription:
+	text "During your opponent's turn,"
+	line "whenever 1 of your opponent's"
+	line "Benched Pokémon becomes their Active"
+	line "Pokémon, put 1 damage counter on it."
+	done
+
+TripleStrikeName:
+	text "Triple Strike"
+	done

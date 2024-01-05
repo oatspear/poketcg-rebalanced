@@ -1010,7 +1010,7 @@ ZapdosThunderstormEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderstormEffect
 	db  $00
 
-SandslashFurySwipesEffectCommands:
+TripleStrikeEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TripleAttackX20X10_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, TripleAttackX20X10_AIEffect
 	db  $00

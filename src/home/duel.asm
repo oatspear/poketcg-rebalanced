@@ -1215,7 +1215,9 @@ SwapArenaWithBenchPokemon:
 	ld d, PLAY_AREA_ARENA
 	call SwapPlayAreaPokemon
 ; OATS trigger "on Active" Pokémon Powers
-	jp ClearChangedTypesIfWeezing
+	call ClearChangedTypesIfWeezing
+	farcall SpikesDamageEffect
+	ret
 
 ; swap the data of the turn holder's Pokemon card in play area d with the
 ; data of the turn holder's Pokemon card in play area e.

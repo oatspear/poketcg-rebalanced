@@ -142,3 +142,20 @@ DamageTargetBenchedPokemon_AISelectEffect:
 	call GetOpponentBenchPokemonWithLowestHP
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
+
+
+; ------------------------------------------------------------------------------
+; Passive Damage - Pokémon Powers
+; ------------------------------------------------------------------------------
+
+SpikesDamageEffect:
+	call ArePokemonPowersDisabled
+	ret c  ; Powers are disabled
+	call SwapTurn
+	ld a, SANDSLASH
+	call CountPokemonIDInPlayArea
+	call SwapTurn
+	or a
+	ret z  ; no Sandslash in the opponent's Play Area
+	ld e, PLAY_AREA_ARENA
+	jp Put1DamageCounterOnTarget

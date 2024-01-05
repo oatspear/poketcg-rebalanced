@@ -319,15 +319,11 @@ AIDecideWhetherToRetreat:
 	call SwapTurn
 	ld a, e
 	cp MR_MIME
-	jr z, .mr_mime_or_hitmonlee
-	cp HITMONLEE ; ??
 	jr nz, .check_retreat_cost
 
 ; check bench if there's any Pokémon
 ; that can damage defending Pokémon
 ; this is done because of Mr. Mime's PKMN PWR
-; but why Hitmonlee ($87) as well?
-.mr_mime_or_hitmonlee
 	xor a
 	call CheckIfCanDamageDefendingPokemon
 	jr c, .check_retreat_cost
@@ -366,18 +362,25 @@ AIDecideWhetherToRetreat:
 	call GetPlayAreaCardRetreatCost
 	cp 2
 	jr c, .one_or_none
-	cp 3
-	jr nc, .three_or_more
-	; exactly two
-	ld a, 1
-	call SubFromAIScore
-	jr .one_or_none
-
-.three_or_more
+; two or more
 	ld a, 2
 	call SubFromAIScore
 
 .one_or_none
+; check for SANDSLASH with Spikes
+; discourage switching if there is one
+	call ArePokemonPowersDisabled
+	jr c, .check_evolve  ; Powers are disabled
+	call SwapTurn
+	ld a, SANDSLASH
+	call CountPokemonIDInPlayArea
+	call SwapTurn
+	or a
+	jr z, .check_evolve  ; no Sandslash in the opponent's Play Area
+	ld a, 2
+	call SubFromAIScore
+
+.check_evolve
 	call CheckIfArenaCardIsAtHalfHPCanEvolveAndUseSecondAttack
 	jr c, .check_defending_can_ko
 	call CountNumberOfSetUpBenchPokemon

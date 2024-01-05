@@ -7903,6 +7903,7 @@ ReplaceKnockedOutPokemon:
 	ldtx hl, DuelistPlacedACardText
 	bank1call DisplayCardDetailScreen
 	call ExchangeRNG
+	farcall SpikesDamageEffect
 	or a
 	ret
 

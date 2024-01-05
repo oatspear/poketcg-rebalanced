@@ -17,6 +17,11 @@
 - **Tantrum**: removed.
 - New attack: **Get Mad** (F): move damage counters from Benched Pokémon to this Pokémon; immune to damage in the next turn if moved at least 4.
 
+#### Sandslash
+- **Slash**: removed.
+- **Fury Swipes**: renamed to **Triple Strike**.
+- New Pokémon Power: **Spikes**: whenever the opponent switches Active Pokémon, the new Pokémon takes 10 damage.
+
 ### Psychic Changes
 
 #### Wigglytuff
