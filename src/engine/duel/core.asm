@@ -7859,7 +7859,7 @@ ReplaceKnockedOutPokemon:
 	jr nc, .can_replace_pokemon
 
 ; if we made it here, the duelist can't replace the knocked out Pokemon
-	bank1call DrawDuelMainScene
+	call DrawDuelMainScene
 	ldtx hl, ThereAreNoPokemonInPlayAreaText
 	call DrawWideTextBox_WaitForInput
 	call ExchangeRNG
@@ -7873,7 +7873,7 @@ ReplaceKnockedOutPokemon:
 	jr nz, .opponent
 
 ; prompt the player to replace the knocked out Pokemon with one from bench
-	bank1call DrawDuelMainScene
+	call DrawDuelMainScene
 	ldtx hl, SelectPokemonToPlaceInTheArenaText
 	call DrawWideTextBox_WaitForInput
 	ld a, $01
@@ -7901,7 +7901,7 @@ ReplaceKnockedOutPokemon:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ldtx hl, DuelistPlacedACardText
-	bank1call DisplayCardDetailScreen
+	call DisplayCardDetailScreen
 	call ExchangeRNG
 	farcall SpikesDamageEffect
 	or a
@@ -7918,7 +7918,7 @@ ReplaceKnockedOutPokemon:
 
 ; wait for link opponent to replace the knocked out Pokemon with one from bench
 .link_opponent
-	bank1call DrawDuelMainScene
+	call DrawDuelMainScene
 	ldtx hl, DuelistIsSelectingPokemonToPlaceInArenaText
 	call DrawWideTextBox_PrintText
 	call SerialRecv8Bytes
@@ -7930,11 +7930,11 @@ Func_6fa5:
 	ret nc
 	; at least one Pokemon knocked out
 	call SwapTurn
-	bank1call Func_5805
+	call Func_5805
 	call SwapTurn
 	ret nc
 	call SwapTurn
-	bank1call DrawDuelMainScene
+	call DrawDuelMainScene
 	ldtx hl, TookAllThePrizesText
 	call DrawWideTextBox_WaitForInput
 	call ExchangeRNG

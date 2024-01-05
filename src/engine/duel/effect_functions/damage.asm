@@ -157,5 +157,9 @@ SpikesDamageEffect:
 	call SwapTurn
 	or a
 	ret z  ; no Sandslash in the opponent's Play Area
+
+	ld a, [wDuelDisplayedScreen]
+	cp DUEL_MAIN_SCENE
+	call nz, DrawDuelMainScene
 	ld e, PLAY_AREA_ARENA
 	jp Put1DamageCounterOnTarget
