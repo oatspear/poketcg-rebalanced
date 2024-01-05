@@ -2625,7 +2625,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MachampDescription                                 ; 0x0a31
 	textpointer GeodudeName                                        ; 0x0a32
 	textpointer StoneBarrageName                                   ; 0x0a33
-	textpointer StoneBarrageDescription                            ; 0x0a34
+	textpointer FlipUntilTails10xDescription
 	textpointer RockName                                           ; 0x0a35
 	textpointer GeodudeDescription                                 ; 0x0a36
 	textpointer GravelerName                                       ; 0x0a37

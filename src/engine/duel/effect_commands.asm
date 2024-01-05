@@ -869,7 +869,8 @@ RecoverEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
-GeodudeStoneBarrageEffectCommands:
+FurySwipesEffectCommands:
+StoneBarrageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StoneBarrage_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, StoneBarrage_AIEffect
 	db  $00

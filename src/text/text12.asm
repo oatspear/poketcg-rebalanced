@@ -875,7 +875,7 @@ LuckyTailsName:
 LuckyTailsDescription:
 	text "If, during your turn, you tossed a"
 	line "Tails, draw a card at the end of"
-	line "your turn."
+	line "your turn for each Lucky Tails."
 	done
 
 DrawLuckyTailsCardsText:

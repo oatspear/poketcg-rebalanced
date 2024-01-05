@@ -599,7 +599,7 @@ StoneBarrageName: ; 5ed41 (17:6d41)
 	text "Stone Barrage"
 	done
 
-StoneBarrageDescription: ; 5ed50 (17:6d50)
+FlipUntilTails10xDescription:
 	text "Flip a coin until you get tails."
 	line "This attack does 10 damage times"
 	line "the number of heads."

@@ -6578,11 +6578,11 @@ GeodudeCard:
 	; attack 1
 	energy FIGHTING, 1 ; energies
 	tx StoneBarrageName ; name
-	tx StoneBarrageDescription ; description
+	tx FlipUntilTails10xDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_X ; category
-	dw GeodudeStoneBarrageEffectCommands ; effect commands
+	dw StoneBarrageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9289,11 +9289,11 @@ MeowthLv14Card:
 	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx FurySwipesName ; name
-	tx Heads10BonusDamageDescription ; description
+	tx FlipUntilTails10xDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw FurySwipes20Plus10EffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw FurySwipesEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9442,7 +9442,7 @@ PersianCard:
 	db 0
 	db ATK_ANIM_SLASH ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx ClassyCatName ; category

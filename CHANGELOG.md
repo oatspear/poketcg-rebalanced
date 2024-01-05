@@ -24,6 +24,12 @@
 
 ### Colorless Changes
 
+#### Meowth Lv14
+- **Fury Swipes**: reworked. Flip a coin until tails; 10 damage per heads.
+
+#### Persian
+- Increased Retreat Cost from 0 to 1.
+
 #### Chansey
 - Reduced HP from 80 to 60.
 - Reduced Retreat Cost from 1 to 0.
