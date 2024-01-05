@@ -1287,7 +1287,13 @@ GetMad_MoveDamageCountersEffect:
 .loop_ai
 	call GetCardDamageAndMaxHP
 	cp 40
-	jr c, .next_ai
+	jr nc, .ai_damage_swap
+	inc e
+	dec d
+	ret z  ; no Benched Pokémon with at least 40 damage
+	jr .loop_ai
+
+.ai_damage_swap
 	ld a, e  ; play area location
 	ldh [hTempPlayAreaLocation_ffa1], a
 	xor a  ; PLAY_AREA_ARENA
@@ -1297,12 +1303,8 @@ GetMad_MoveDamageCountersEffect:
 	call StrangeBehavior_SwapEffect
 	call StrangeBehavior_SwapEffect
 	call StrangeBehavior_SwapEffect
-	jr .end
-.next_ai
-	inc e
-	dec d
-	ret z  ; no Benched Pokémon with at least 40 damage
-	jr .loop_ai
+	; jr .end
+	; fallthrough
 
 .end
 ; compare current HP to initial value
