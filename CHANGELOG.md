@@ -14,6 +14,8 @@
 - New attack: **Tantrum** (FC): 30 damage; confuses the user.
 
 #### Primeape
+- **Tantrum**: removed.
+- New attack: **Get Mad** (F): move damage counters from Benched Pokémon to this Pokémon; immune to damage in the next turn if moved at least 4.
 
 ### Psychic Changes
 

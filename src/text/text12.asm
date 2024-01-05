@@ -1228,7 +1228,7 @@ GetMadName:
 GetMadDescription:
 	text "Move any number of damage counters"
 	line "from your Pokémon to this Pokémon."
-	line "If you moved at least 5, prevent all"
+	line "If you moved at least 4, prevent all"
 	line "damage done to this Pokémon during"
 	line "your opponent's next turn."
 	done

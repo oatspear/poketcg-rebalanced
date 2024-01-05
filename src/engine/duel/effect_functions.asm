@@ -1281,9 +1281,11 @@ GetMad_MoveDamageCountersEffect:
 	call GetTurnDuelistVariable
 	ldh a, [hMultiPurposeByte1]
 	sub [hl]
-	cp 50
+	cp 40
 	ret c
-; moved 5 damage counters or more; immune to damage
+; moved 4 damage counters or more; immune to damage
+	ld a, ATK_ANIM_PROTECT
+	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS1_NO_DAMAGE
 	jp ApplySubstatus1ToAttackingCard
 
