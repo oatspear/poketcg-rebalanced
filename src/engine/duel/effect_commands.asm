@@ -734,7 +734,7 @@ StrangeBehaviorEffectCommands:
 
 GetMadEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, GetMad_CheckDamage
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StrangeBehavior_SelectAndSwapEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, GetMad_MoveDamageCountersEffect
 	db  $00
 
 PsychicAssaultEffectCommands:
