@@ -89,6 +89,8 @@ HandleSpecialAIAttacks:
 	jp z, .EnergyConversion
 	cp DEWGONG
 	jr z, .Teleport
+	cp PRIMEAPE
+	jp z, .GetMad
 
 ; return zero score.
 .zero_score
@@ -373,6 +375,29 @@ HandleSpecialAIAttacks:
 .hyper_beam_neutral
 	ld a, $80
 	ret
+
+.GetMad:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	or a
+	jp nz, .zero_score  ; return if Arena card has damage counters
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	cp 2
+	jp c, .zero_score  ; return if no Benched Pokémon
+	dec a
+	ld d, a
+	ld e, PLAY_AREA_BENCH_1
+.get_mad_loop
+	call GetCardDamageAndMaxHP
+	cp 40
+	ld a, $83
+	ret nc  ; at least 40 damage
+	inc e
+	dec d
+	jr nz, .get_mad_loop
+	jp .zero_score  ; no Benched Pokémon with at least 40 damage
+
 
 ; called when second attack is determined by AI to have
 ; more AI score than the first attack, so that it checks

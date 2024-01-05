@@ -1272,8 +1272,37 @@ GetMad_MoveDamageCountersEffect:
 	jr .link_opp
 
 .ai_opp
-	; TODO
-	ret
+; if we got here, there should be a Benched Pokémon with at least 40 damage
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	or a
+	ret nz  ; return if Arena card has damage counters
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	cp 2
+	ret c  ; return if no Benched Pokémon
+	dec a
+	ld d, a
+	ld e, PLAY_AREA_BENCH_1
+.loop_ai
+	call GetCardDamageAndMaxHP
+	cp 40
+	jr c, .next_ai
+	ld a, e  ; play area location
+	ldh [hTempPlayAreaLocation_ffa1], a
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTemp_ffa0], a
+	; move four damage counters
+	call StrangeBehavior_SwapEffect
+	call StrangeBehavior_SwapEffect
+	call StrangeBehavior_SwapEffect
+	call StrangeBehavior_SwapEffect
+	jr .end
+.next_ai
+	inc e
+	dec d
+	ret z  ; no Benched Pokémon with at least 40 damage
+	jr .loop_ai
 
 .end
 ; compare current HP to initial value
@@ -2261,12 +2290,6 @@ PoisonLure_SwitchEffect:
 Lure_SwitchAndTrapDefendingPokemon:
 	call Lure_SwitchDefendingPokemon
 	jp UnableToRetreatEffect
-
-
-KakunaPoisonPowder_AIEffect: ; 2c7b4 (b:47b4)
-	ld a, 5
-	lb de, 0, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
 
 
 ; During your next turn, double damage
