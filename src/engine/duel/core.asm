@@ -4993,8 +4993,7 @@ _DisplayCardDetailScreen:
 	ld hl, 0
 	call LoadTxRam2
 	pop hl
-	call DrawWideTextBox_WaitForInput
-	ret
+	jp DrawWideTextBox_WaitForInput
 
 ; draw a large picture of the card loaded in wLoadedCard1, including its image
 ; and a header indicating the type of card (TRAINER, ENERGY, PoKéMoN)
@@ -5026,8 +5025,7 @@ DrawLargePictureOfCard:
 	ld hl, LargeCardTileData
 	call WriteDataBlocksToBGMap0
 	lb de, 6, 3
-	call ApplyBGP6OrSGB3ToCardImage
-	ret
+	jp ApplyBGP6OrSGB3ToCardImage
 
 LargeCardTileData:
 	db  5,  0, $d0, $d4, $d4, $d4, $d4, $d4, $d4, $d4, $d4, $d1, 0 ; top border
@@ -8808,6 +8806,9 @@ Func_741a:
 ; this is a simple version of PlayAttackAnimation_DealAttackDamage that doesn't
 ; take into account status conditions, damage modifiers, etc, for damage calculation.
 ; used for confusion damage to self and for damage to benched Pokemon, for example
+; inputs:
+;   hl: address to subtract HP from
+;   de: how much HP to subtract (damage to deal)
 PlayAttackAnimation_DealAttackDamageSimple:
 	push hl
 	push de
