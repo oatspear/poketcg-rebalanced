@@ -158,8 +158,15 @@ SpikesDamageEffect:
 	or a
 	ret z  ; no Sandslash in the opponent's Play Area
 
-	ld a, [wDuelDisplayedScreen]
-	cp DUEL_MAIN_SCENE
-	call nz, DrawDuelMainScene
+	; ld a, [wDuelDisplayedScreen]
+	; cp DUEL_MAIN_SCENE
+	; jr z, .main_scene
+	; bank1call DrawDuelMainScene
+; .main_scene
 	ld e, PLAY_AREA_ARENA
 	jp Put1DamageCounterOnTarget
+
+	; ld a, DUELVARS_ARENA_CARD
+	; call LoadCardNameAndLevelFromVarToRam2
+	; ldtx hl, Received10DamageDueToSpikesText
+	; jp DrawWideTextBox_WaitForInput
