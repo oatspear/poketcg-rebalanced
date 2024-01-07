@@ -667,10 +667,11 @@ ApplyDirectDamage:
 	add DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
 	push af
+	bank1call Func_7415
 	bank1call PlayAttackAnimation_DealAttackDamageSimple
-	push hl
-	call WaitForWideTextBoxInput
-	pop hl
+	; push hl
+	; call WaitForWideTextBoxInput
+	; pop hl
 	; push hl
 	; ldtx hl, Received10DamageDueToAfflictionText
 	; bank1call PrintNonTurnDuelistCardIDText
