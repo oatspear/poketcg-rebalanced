@@ -369,13 +369,8 @@ AIDecideWhetherToRetreat:
 .one_or_none
 ; check for SANDSLASH with Spikes
 ; discourage switching if there is one
-	call ArePokemonPowersDisabled
+	call AICheckPlayerSandslash
 	jr c, .check_evolve  ; Powers are disabled
-	call SwapTurn
-	ld a, SANDSLASH
-	call CountPokemonIDInPlayArea
-	call SwapTurn
-	or a
 	jr z, .check_evolve  ; no Sandslash in the opponent's Play Area
 	ld a, 2
 	call SubFromAIScore
@@ -496,6 +491,21 @@ Func_15b54:
 	ld [wcdda], a
 	ret
 
+
+; return carry if Pokémon Powers are disabled
+; return nz if there are Pokémon Power-capable Sandslash
+; preserves: bc, de
+AICheckPlayerSandslash:
+	call ArePokemonPowersDisabled  ; preserves bc, de
+	ret c
+	call SwapTurn
+	ld a, SANDSLASH
+	call CountPokemonIDInPlayArea  ; preserves hl, bc, de
+	call SwapTurn
+	or a
+	ret
+
+
 ; calculates AI score for bench Pokémon
 ; returns in a and [hTempPlayAreaLocation_ff9d] the
 ; Play Area location of best card to switch to.
@@ -567,8 +577,7 @@ AIDecideBenchPokemonToSwitchTo:
 	ld a, [wDamage]
 	call CalculateByteTensDigit
 	inc a
-	call AddToAIScore
-	ret
+	jp AddToAIScore
 
 ; if an energy card that is needed is found in hand
 ; calculate damage of the move and raise AI score
@@ -698,13 +707,25 @@ AIDecideBenchPokemonToSwitchTo:
 	add DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
 	or a
-	jr nz, .add_hp_score
+	jr nz, .check_spikes
+	ld [wAIScore], a
+	jp .store_score
+
+.check_spikes
+	ld b, a
+	cp 20
+	jr nc, .add_hp_score  ; has at least 20 HP
+	call AICheckPlayerSandslash
+	jr c, .add_hp_score  ; Powers are disabled
+	jr z, .add_hp_score  ; no Sandslash in the opponent's Play Area
+	; zero score if the Pokémon is going to be KO'd by Spikes
+	xor a
 	ld [wAIScore], a
 	jr .store_score
 
 ; AI score += floor(HP/40)
 .add_hp_score
-	ld b, a
+	; ld b, a  ; moved up
 	ld a, 4
 	call CalculateBDividedByA_Bank5
 	call CalculateByteTensDigit
