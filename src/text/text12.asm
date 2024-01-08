@@ -998,15 +998,15 @@ TailSwingDescription:
 ; 	line "opponent's Benched Pokémon."
 ; 	done
 
-Received10DamageDueToAfflictionText:
-	text "<RAMTEXT> received"
-	line "10 damage due to Affliction."
-	done
+; Received10DamageDueToAfflictionText:
+; 	text "<RAMTEXT> received"
+; 	line "10 damage due to Affliction."
+; 	done
 
-Received10DamageDueToSpikesText:
-	text "<RAMTEXT> received"
-	line "10 damage due to Spikes."
-	done
+; Received10DamageDueToSpikesText:
+; 	text "<RAMTEXT> received"
+; 	line "10 damage due to Spikes."
+; 	done
 
 NightAmbushName:
 	text "Night Ambush"

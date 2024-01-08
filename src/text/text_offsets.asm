@@ -3029,8 +3029,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TailSwingDescription
 	; textpointer SinisterFogName
 	; textpointer SinisterFogDescription
-	textpointer Received10DamageDueToAfflictionText
-	textpointer Received10DamageDueToSpikesText
+	; textpointer Received10DamageDueToAfflictionText
+	; textpointer Received10DamageDueToSpikesText
 	textpointer NightAmbushName
 	textpointer NightAmbushDescription
 	textpointer DraconicEvolutionName
