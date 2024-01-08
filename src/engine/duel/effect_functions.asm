@@ -4316,8 +4316,7 @@ FindFirstNonBasicCardInPlayArea: ; 2dd62 (b:5d62)
 
 Barrier_BarrierEffect:
 	ld a, SUBSTATUS1_BARRIER
-	call ApplySubstatus1ToAttackingCard
-	ret
+	jp ApplySubstatus1ToAttackingCard
 
 
 QueenPressEffect:
@@ -4988,21 +4987,6 @@ LightScreenEffect:
 	jp ApplySubstatus1ToAttackingCard
 
 
-ElectabuzzQuickAttack_AIEffect: ; 2e3c0 (b:63c0)
-	ld a, (10 + 30) / 2
-	lb de, 10, 30
-	jp SetExpectedAIDamage
-
-ElectabuzzQuickAttack_DamageBoostEffect: ; 2e3c8 (b:63c8)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, 20
-	call AddToDamage
-	ret
-
 Selfdestruct40Bench10Effect:
 	ld a, 40
 	jr Selfdestruct50Bench10Effect.recoil
@@ -5176,20 +5160,6 @@ ThunderstormEffect: ; 2e429 (b:6429)
 	ld [wDuelDisplayedScreen], a
 	ret
 
-JolteonQuickAttack_AIEffect: ; 2e4bb (b:64bb)
-	ld a, (10 + 30) / 2
-	lb de, 10, 30
-	jp SetExpectedAIDamage
-
-JolteonQuickAttack_DamageBoostEffect: ; 2e4c3 (b:64c3)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, 20
-	call AddToDamage
-	ret
 
 TripleAttackX20X10_AIEffect: ; 2e4d6 (b:64d6)
 	ld a, (15 * 3)

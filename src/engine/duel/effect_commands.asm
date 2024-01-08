@@ -980,11 +980,6 @@ ElectabuzzLightScreenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LightScreenEffect
 	db  $00
 
-ElectabuzzQuickAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ElectabuzzQuickAttack_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, ElectabuzzQuickAttack_AIEffect
-	db  $00
-
 Selfdestruct40Bench10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct40Bench10Effect
 	db  $00
