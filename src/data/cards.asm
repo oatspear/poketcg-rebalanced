@@ -6182,18 +6182,18 @@ SandslashCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx TripleStrikeName ; name
-	tx TripleAttackX20X10Description ; description
+	energy COLORLESS, 2 ; energies
+	tx RapidSpinName ; name
+	tx BothPlayersSwitchDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_X ; category
-	dw TripleStrikeEffectCommands ; effect commands
+	db DAMAGE_NORMAL ; category
+	dw RapidSpinEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_MULTIPLE_SLASH ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness

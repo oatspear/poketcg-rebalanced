@@ -89,6 +89,8 @@ HandleSpecialAIAttacks:
 	jp z, .EnergyConversion
 	cp DEWGONG
 	jr z, .Teleport
+	cp SANDSLASH
+	jr z, .Teleport
 	cp PRIMEAPE
 	jp z, .GetMad
 

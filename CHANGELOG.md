@@ -19,8 +19,9 @@
 
 #### Sandslash
 - **Slash**: removed.
-- **Fury Swipes**: renamed to **Triple Strike**.
+- **Fury Swipes**: removed.
 - New Pokémon Power: **Spikes**: whenever the opponent switches Active Pokémon, the new Pokémon takes 10 damage.
+- New attack: **Rapid Spin** (CC): 20 damage, both players switch Pokémon.
 
 ### Psychic Changes
 
