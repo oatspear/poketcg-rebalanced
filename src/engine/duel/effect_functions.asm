@@ -4338,6 +4338,63 @@ GatherToxins_PlayerSelectEffect:
 	ret
 
 
+RetrieveBasicEnergyOrItemFromDiscardPile_PlayerSelectEffect:
+	ldtx hl, ChooseCardToPlaceInHandText
+	call DrawWideTextBox_WaitForInput
+	call CreateDiscardPileCardList
+	call RemovePokemonCardsFromCardList
+	ld c, TYPE_TRAINER_SUPPORTER
+	call RemoveCardTypeFromCardList
+	ld c, TYPE_ENERGY_DOUBLE_COLORLESS
+	call RemoveCardTypeFromCardList
+	call HandlePlayerSelectionAnyFromDiscardPileList_AllowCancel
+	ldh [hTemp_ffa0], a
+	or a  ; ignore carry
+	ret
+
+
+Excavate_AIEffect:
+	ld a, (10 + 10) / 2
+	lb de, 10, 20
+	jp SetExpectedAIDamage
+
+Excavate_AISelectEffect:
+	ld a, [wAIMaxDamage]
+	or a
+; select a card if unable to deal damage
+	jr z, RetrieveBasicEnergyOrItemFromDiscardPile_AISelectEffect
+; do not select a card if boosted damage is enough to KO
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	ld a, [wAIMinDamage]
+	cp [hl]
+	jr nc, RetrieveBasicEnergyOrItemFromDiscardPile_AISelectEffect
+	ld a, [wAIMaxDamage]
+	cp [hl]
+	jr nc, RetrieveBasicEnergyOrItemFromDiscardPile_AISelectEffect
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	or a  ; ignore carry
+	ret
+
+
+RetrieveBasicEnergyOrItemFromDiscardPile_AISelectEffect:
+; AI picks Mysterious Fossil if available
+	call CreateItemCardListFromDiscardPile
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, RetrieveBasicEnergyFromDiscardPile_AISelectEffect
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp MYSTERIOUS_FOSSIL
+	jr nz, .loop
+	ldh [hTemp_ffa0], a
+	or a  ; ignore carry
+	ret
+
+
 RetrieveBasicEnergyFromDiscardPile_PlayerSelectEffect:
 	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
 	call DrawWideTextBox_WaitForInput

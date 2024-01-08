@@ -17,6 +17,10 @@
 - **Tantrum**: removed.
 - New attack: **Get Mad** (F): move damage counters from Benched Pokémon to this Pokémon; immune to damage in the next turn if moved at least 4.
 
+#### Sandshrew
+- Increased HP from 40 to 50.
+- New attack: **Excavate** (FC): 10 damage; may retrieve a Basic Energy or Item from discard pile to hand; 10 bonus damage if no card is retrieved.
+
 #### Sandslash
 - **Slash**: removed.
 - **Fury Swipes**: removed.

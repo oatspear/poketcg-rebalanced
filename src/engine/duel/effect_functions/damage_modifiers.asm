@@ -995,8 +995,7 @@ IfActiveThisTurn20BonusDamage_DamageBoostEffect:
 	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
 	ret z  ; did not move to active spot this turn
 	ld a, 20
-	call AddToDamage
-	ret
+	jp AddToDamage
 
 IfActiveThisTurn20BonusDamage_AIEffect:
   call IfActiveThisTurn20BonusDamage_DamageBoostEffect
@@ -1014,3 +1013,11 @@ IfActiveThisTurnDoubleDamage_DamageBoostEffect:
 IfActiveThisTurnDoubleDamage_AIEffect:
   call IfActiveThisTurnDoubleDamage_DamageBoostEffect
   jp SetDefiniteAIDamage
+
+
+BonusDamageIfNoCardSelected_DamageBoostEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret nz
+	ld a, 10
+	jp AddToDamage

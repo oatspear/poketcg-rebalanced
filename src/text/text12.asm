@@ -1249,6 +1249,26 @@ SpikesDescription:
 	line "Pokémon, put 1 damage counter on it."
 	done
 
-TripleStrikeName:
-	text "Triple Strike"
+RototillerName:
+	text "Rototiller"
+	done
+
+RototillerDescription:
+	text "Shuffle up to 2 cards from your"
+	line "Discard Pile into your Deck. This"
+	line "attack does 10 damage for each "
+	line "Pokémon and Energy card you shuffled"
+	line "back in this way."
+	done
+
+ExcavateName:
+	text "Excavate"
+	done
+
+ExcavateDescription:
+	text "You may put a non-Supporter Trainer"
+	line "card or a Basic Energy card from"
+	line "your Discard Pile into your hand."
+	line "If you do not, this attack does 10"
+	line "additional damage."
 	done

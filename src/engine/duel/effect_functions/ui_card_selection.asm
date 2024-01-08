@@ -186,6 +186,24 @@ HandlePlayerSelectionBasicEnergyFromDiscardPile_AllowCancel:
 	ret
 
 
+; Handles screen for the Player to choose any card from a pre-built Discard Pile list.
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if Player cancelled selection
+HandlePlayerSelectionAnyFromDiscardPileList_AllowCancel:
+	; call CreateDiscardPileCardList
+	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	ldtx hl, PleaseSelectCardText
+	ldtx de, PlayerDiscardPileText
+	bank1call SetCardListHeaderText
+	bank1call DisplayCardList
+	ldh a, [hTempCardIndex_ff98]
+	ret nc
+	ld a, $ff
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Choose Cards From Deck
 ; ------------------------------------------------------------------------------

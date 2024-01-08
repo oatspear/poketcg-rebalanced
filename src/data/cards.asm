@@ -6112,7 +6112,7 @@ SandshrewCard:
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db SANDSHREW
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -6131,18 +6131,18 @@ SandshrewCard:
 	db ATK_ANIM_DARK_GAS ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	tx ExcavateName ; name
+	tx ExcavateDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw ExcavateEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
 	db WR_GRASS ; weakness
