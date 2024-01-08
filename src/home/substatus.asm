@@ -484,6 +484,7 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0:
 
 ; Check whether Toxic Gas (Weezing) or other Pokémon Power cancelling
 ; effects are currently active.
+; preserves: bc, de
 ; outputs:
 ;   a: 1 if Pokémon Powers cannot be used | 0
 ;   carry: set if Pokémon Powers cannot be used
