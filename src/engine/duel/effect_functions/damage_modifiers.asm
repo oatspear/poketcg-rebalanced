@@ -1013,3 +1013,41 @@ IfActiveThisTurnDoubleDamage_DamageBoostEffect:
 IfActiveThisTurnDoubleDamage_AIEffect:
   call IfActiveThisTurnDoubleDamage_DamageBoostEffect
   jp SetDefiniteAIDamage
+
+
+Rototiller_DamageBoostEffect:
+	xor a
+	call SetDefiniteDamage
+	ldh a, [hTempList]
+	call .BoostIfPokemonOrEnergy
+	ldh a, [hTempList + 1]
+	; jr .BoostIfPokemonOrEnergy
+	; fallthrough
+
+; input:
+;   a: deck index of selected card
+.BoostIfPokemonOrEnergy:
+	cp $ff
+	ret z
+	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
+	call GetCardType  ; preserves hl, bc
+	cp TYPE_TRAINER
+	ret nc
+; Pokémon or Energy card
+	ld a, 10
+	jp AddToDamage
+
+
+Rototiller_AIEffect:
+	call CreateEnergyCardListFromDiscardPile_AllEnergy
+	jr nc, .damage
+	call CreatePokemonCardListFromDiscardPile
+	jr nc, .damage
+; no damage
+	xor a
+	lb de, 0, 0
+	jp SetExpectedAIDamage
+.damage
+	ld a, (10 + 10) / 2
+	lb de, 10, 20
+	jp SetExpectedAIDamage

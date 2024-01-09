@@ -414,6 +414,7 @@ ReduceDamageTakenBy20EffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceDamageTakenBy20Effect
 	db  $00
 
+SandAttackEffectCommands:
 SmokescreenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceAccuracyEffect
 	db  $00
@@ -726,6 +727,14 @@ AquaticRescueEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, AquaticRescue_AISelectEffect
 	db  $00
 
+RototillerEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedDiscardPileCards_ShuffleIntoDeckEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rototiller_DamageBoostEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Rototiller_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Rototiller_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, Rototiller_AIEffect
+	db  $00
+
 StrangeBehaviorEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StrangeBehavior_CheckDamage
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StrangeBehavior_SelectAndSwapEffect
@@ -920,10 +929,6 @@ Deal20ToBenchEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StretchKick_BenchDamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StretchKick_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, StretchKick_AISelectEffect
-	db  $00
-
-SandshrewSandAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ReduceAccuracyEffect
 	db  $00
 
 Earthquake10EffectCommands:

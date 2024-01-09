@@ -1859,6 +1859,8 @@ INCLUDE "engine/duel/ai/attacks.asm"
 
 INCLUDE "engine/duel/ai/special_attacks.asm"
 
+INCLUDE "engine/duel/ai/effect_functions.asm"
+
 ; checks in other Play Area for non-basic cards.
 ; afterwards, that card is checked for damage,
 ; and if the damage counters it has is greater than or equal

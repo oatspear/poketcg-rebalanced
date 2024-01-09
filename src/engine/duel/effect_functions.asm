@@ -1441,47 +1441,13 @@ Ultravision_AISelectEffect:
 	ret
 
 
-; assume card list is already initialized from precondition check
-; FIXME improve
-AquaticRescue_AISelectEffect:
-	ld a, $ff
-	ldh [hTempList], a
-	ldh [hTempList + 1], a
-	ldh [hTempList + 2], a
-	ldh [hTempList + 3], a
-; try to get energy
-	call LoopCardList_GetFirstEnergy
-	jr c, .done
-	ldh [hTempList], a
-; try to get energy
-	call LoopCardList_GetFirstEnergy
-	jr c, .done
-	ldh [hTempList + 1], a
-; try to get energy
-	call LoopCardList_GetFirstEnergy
-	jr c, .done
-	ldh [hTempList + 2], a
-.done
-	or a
+Rototiller_AISelectEffect:
+	farcall AISelect_Rototiller
 	ret
 
 
-; return in a deck index of card or $ff
-LoopCardList_GetFirstEnergy:
-	ld hl, wDuelTempList
-.loop_cards
-	ld a, [hl]
-	cp $ff
-	jr z, .none_found
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_ENERGY
-	ld a, [hl]
-	ret z  ; found
-	inc hl
-	jr .loop_cards
-.none_found
-	scf
+AquaticRescue_AISelectEffect:
+	farcall AISelect_AquaticRescue
 	ret
 
 
@@ -8659,6 +8625,18 @@ DevolutionSpray_DevolutionEffect: ; 2fc99 (b:7c99)
 	ret
 
 
+Rototiller_PlayerSelectEffect:
+	call CreateDiscardPileCardList
+	; jr ChooseUpTo2Cards_PlayerDiscardPileSelection
+	; fallthrough
+
+; input:
+;  [wDuelTempList]: list of cards to choose from
+ChooseUpTo2Cards_PlayerDiscardPileSelection:
+	ld a, 2
+	ld [wCardListNumberOfCardsToChoose], a
+	jr ChooseUpToNCards_PlayerDiscardPileSelection
+
 ; input:
 ;  [wDuelTempList]: list of cards to choose from
 ChooseUpTo3Cards_PlayerDiscardPileSelection:
@@ -8722,6 +8700,7 @@ ChooseUpToNCards_PlayerDiscardPileSelection:
 	or a
 	ret
 
+SelectedDiscardPileCards_ShuffleIntoDeckEffect:
 EnergyRecycler_ReturnToDeckEffect:
 ; return selected cards to the deck
 	ld hl, hTempList
