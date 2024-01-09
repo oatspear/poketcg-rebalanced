@@ -3079,6 +3079,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RototillerDescription
 	; textpointer ExcavateName
 	; textpointer ExcavateDescription
+	textpointer LandslideName
+	textpointer LandslideDescription
+	textpointer MountainBreakName
+	textpointer MountainBreakDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

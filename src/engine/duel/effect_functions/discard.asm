@@ -5,6 +5,8 @@
 ; Discards N cards from the top of the turn holder's deck.
 ; input:
 ;   a: number of cards to discard
+; output:
+;   a: number of discarded cards
 ; preserves: nothing
 ;   - push/pop de around DrawWideTextBox_PrintText to preserve it
 DiscardFromDeckEffect:
@@ -33,9 +35,13 @@ DiscardFromDeckEffect:
   jr nz, .loop
 
   pop hl
+  ld a, l
+  or a
+  push af
   call LoadTxRam3
   ldtx hl, DiscardedCardsFromDeckText
   call DrawWideTextBox_PrintText
+  pop af
   ret
 
 

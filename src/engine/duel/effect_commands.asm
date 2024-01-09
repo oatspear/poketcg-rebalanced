@@ -1144,6 +1144,15 @@ CombustionEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Combustion_DiscardDeckEffect
 	db  $00
 
+LandslideEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Landslide_DiscardDeckEffect
+	db  $00
+
+MountainBreakEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MountainBreak_DiscardDeckEffect
+	dbw EFFECTCMDTYPE_AI, MountainBreak_AIEffect
+	db  $00
+
 MetronomeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Metronome_CheckAttacks
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Metronome_UseAttackEffect

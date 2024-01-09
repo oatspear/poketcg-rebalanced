@@ -31,6 +31,11 @@
 - **Scratch**: removed.
 - New attack: **Rototiller** (CC): shuffle up to 2 cards from Discard Pile into Deck; 10 damage for each Pokémon or Energy card.
 
+#### Dugtrio
+- **Slash**: removed.
+- **Earthquake**: reduced base damage from 70 to 50.
+- New attack: **Landslide** (FC): 30 damage; discards the top 3 cards from both decks.
+
 ### Psychic Changes
 
 #### Wigglytuff

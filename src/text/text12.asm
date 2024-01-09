@@ -1272,3 +1272,23 @@ RototillerDescription:
 ; 	line "If you do not, this attack does 10"
 ; 	line "additional damage."
 ; 	done
+
+LandslideName:
+	text "Landslide"
+	done
+
+LandslideDescription:
+	text "Discard the top 3 cards from"
+	line "both players' decks."
+	done
+
+MountainBreakName:
+	text "Mountain Break"
+	done
+
+MountainBreakDescription:
+	text "Discard the top 5 cards from your"
+	line "deck. This attack does 20 more"
+	line "damage for each Energy discarded"
+	line "this way."
+	done
