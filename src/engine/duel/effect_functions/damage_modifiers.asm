@@ -1021,8 +1021,14 @@ Rototiller_DamageBoostEffect:
 	ldh a, [hTempList]
 	call .BoostIfPokemonOrEnergy
 	ldh a, [hTempList + 1]
-	; jr .BoostIfPokemonOrEnergy
-	; fallthrough
+	call .BoostIfPokemonOrEnergy
+; switch animation if this attack deals damage
+	ld a, [wDamage]
+	or a
+	ret z
+	ld a, ATK_ANIM_HIT
+	ld [wLoadedAttackAnimation], a
+	ret
 
 ; input:
 ;   a: deck index of selected card

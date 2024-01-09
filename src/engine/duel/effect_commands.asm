@@ -922,7 +922,6 @@ RhydonRamEffectCommands:
 	db  $00
 
 MarowakBoneAttackEffectCommands:
-DiglettDigEffectCommands:
 HitmonleeStretchKickEffectCommands:
 Deal20ToBenchEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StretchKick_CheckBench

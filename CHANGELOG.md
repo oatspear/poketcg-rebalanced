@@ -27,6 +27,10 @@
 - New Pokémon Power: **Spikes**: whenever the opponent switches Active Pokémon, the new Pokémon takes 10 damage.
 - New attack: **Rapid Spin** (CC): 20 damage, both players switch Pokémon.
 
+#### Diglett
+- **Scratch**: removed.
+- New attack: **Rototiller** (CC): shuffle up to 2 cards from Discard Pile into Deck; 10 damage for each Pokémon or Energy card.
+
 ### Psychic Changes
 
 #### Wigglytuff
