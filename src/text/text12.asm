@@ -1256,19 +1256,19 @@ RototillerName:
 RototillerDescription:
 	text "Shuffle up to 2 cards from your"
 	line "Discard Pile into your Deck. This"
-	line "attack does 10 damage for each "
+	line "attack does 10 damage for each"
 	line "Pokémon and Energy card you shuffled"
 	line "back in this way."
 	done
 
-ExcavateName:
-	text "Excavate"
-	done
-
-ExcavateDescription:
-	text "You may put a non-Supporter Trainer"
-	line "card or a Basic Energy card from"
-	line "your Discard Pile into your hand."
-	line "If you do not, this attack does 10"
-	line "additional damage."
-	done
+; ExcavateName:
+; 	text "Excavate"
+; 	done
+; 
+; ExcavateDescription:
+; 	text "You may put a non-Supporter Trainer"
+; 	line "card or a Basic Energy card from"
+; 	line "your Discard Pile into your hand."
+; 	line "If you do not, this attack does 10"
+; 	line "additional damage."
+; 	done

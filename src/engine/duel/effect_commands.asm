@@ -686,14 +686,6 @@ Retrieve1BasicEnergyEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, RetrieveBasicEnergyFromDiscardPile_AISelectEffect
 	db  $00
 
-ExcavateEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCard_AddToHandFromDiscardPile
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BonusDamageIfNoCardSelected_DamageBoostEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, RetrieveBasicEnergyOrItemFromDiscardPile_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Excavate_AISelectEffect
-	dbw EFFECTCMDTYPE_AI, Excavate_AIEffect
-	db  $00
-
 CoreRegenerationEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal10DamageEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FetchEffect

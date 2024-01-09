@@ -1013,11 +1013,3 @@ IfActiveThisTurnDoubleDamage_DamageBoostEffect:
 IfActiveThisTurnDoubleDamage_AIEffect:
   call IfActiveThisTurnDoubleDamage_DamageBoostEffect
   jp SetDefiniteAIDamage
-
-
-BonusDamageIfNoCardSelected_DamageBoostEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret nz
-	ld a, 10
-	jp AddToDamage

@@ -6132,12 +6132,12 @@ SandshrewCard:
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 1 ; energies
-	tx ExcavateName ; name
-	tx ExcavateDescription ; description
+	dw NONE ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw ExcavateEffectCommands ; effect commands
+	db DAMAGE_X ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
