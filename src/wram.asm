@@ -726,10 +726,12 @@ wLoadedAttack:: ; cca6
 
 ; the damage field of a used attack is loaded here
 ; doubles as "wAIAverageDamage" when complementing wAIMinDamage and wAIMaxDamage
-; little-endian
+; ~~little-endian~~  capped at 250
 ; second byte may have UNAFFECTED_BY_WEAKNESS_RESISTANCE_F set/unset
 wDamage:: ; ccb9
-	ds $2
+	ds $1
+wDamageFlags:: ; ccba
+	ds $1
 
 ; wAIMinDamage and wAIMaxDamage appear to be used for AI scoring
 ; they are updated with the minimum (or floor) damage of the current attack

@@ -1543,7 +1543,7 @@ CopyAttackDataAndDamage:
 	ld hl, wDamage
 	ld [hli], a
 	xor a
-	ld [hl], a
+	ld [hl], a  ; wDamageFlags
 	ld [wNoDamageOrEffect], a
 	ld hl, wDealtDamage
 	ld [hli], a
@@ -1907,7 +1907,7 @@ DealRecoilDamageToSelf:
 DealConfusionDamageToSelf:
 	ld hl, wDamage
 	ld [hli], a
-	ld [hl], 0
+	ld [hl], 0  ; wDamageFlags
 	ld a, [wNoDamageOrEffect]
 	push af
 	xor a
@@ -1942,19 +1942,19 @@ ApplyDamageModifiers_DamageToTarget:
 	ld [wDamageEffectiveness], a
 	ld hl, wDamage
 	ld a, [hli]
-	or [hl]
+	or a
 	jr nz, .non_zero_damage
 	ld de, 0
 	ret
 .non_zero_damage
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
-	ld d, [hl]
+	ld d, [hl]  ; wDamageFlags
 	dec hl
 	ld e, [hl]
-	bit 7, d
+	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, d
 	jr z, .safe
-	res 7, d ; cap at 2^15
+	res UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, d
 	xor a
 	ld [wDamageEffectiveness], a
 	call HandleDoubleDamageSubstatus
@@ -2027,10 +2027,9 @@ ApplyDamageModifiers_DamageToSelf:
 	ld [wDamageEffectiveness], a
 	ld hl, wDamage
 	ld a, [hli]
-	or [hl]
 	or a
 	jr z, .no_damage
-	ld d, [hl]
+	ld d, [hl]  ; wDamageFlags
 	dec hl
 	ld e, [hl]
 	call GetArenaCardColor

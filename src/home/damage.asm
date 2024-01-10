@@ -1,29 +1,27 @@
 ; [wDamage] += a
 AddToDamage:
 	push hl
-	ld hl, wDamage
-	add [hl]
-	ld [hli], a
-	ld a, 0
-	adc [hl]
-	ld [hl], a
+	ld l, a
+	ld a, [wDamage]
+	add l
+	ld [wDamage], a
 	pop hl
+	ret nc  ; no overflow
+	ld a, MAX_DAMAGE
+	ld [wDamage], a
 	ret
 
 ; [wDamage] -= a
 SubtractFromDamage:
-	push de
 	push hl
-	ld e, a
-	ld hl, wDamage
-	ld a, [hl]
-	sub e
-	ld [hli], a
-	ld a, [hl]
-	sbc 0
-	ld [hl], a
+	ld l, a
+	ld a, [wDamage]
+	sub l
+	ld [wDamage], a
 	pop hl
-	pop de
+	ret nc  ; no underflow
+	xor a
+	ld [wDamage], a
 	ret
 
 ; Weakness doubles damage if [wDamage] <= 30.
@@ -45,6 +43,7 @@ SubtractFromDamage:
 
 ; Weakness doubles damage if de <= 30.
 ; Otherwise, it adds +30 damage.
+; (damage capped at 250, just ignore d)
 ApplyWeaknessToDamage_DE:
 	ld a, d
 	or a
@@ -54,19 +53,20 @@ ApplyWeaknessToDamage_DE:
 	jr nc, .add_30
 
 ; double de if <= 30
-	sla e
-	rl d
+	add e
+	ld d, 0
+	ld e, a
+	ret nc  ; no overflow
+	ld e, MAX_DAMAGE
 	ret
 
 .add_30
 	ld hl, 30
 	add hl, de
 	ld e, l
-	ld d, h
-	; ld a, 30
-	; add e
-	; ld e, a
-	; ld a, 0
-	; adc d
-	; ld d, a
+	ld d, 0
+	ld a, h
+	or a
+	ret z  ; no overflow
+	ld e, MAX_DAMAGE
 	ret

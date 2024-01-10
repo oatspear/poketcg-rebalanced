@@ -465,7 +465,7 @@ UpdateExpectedAIDamage: ; 2c0e9 (b:40e9)
 SetExpectedAIDamage: ; 2c0fb (b:40fb)
 	ld [wDamage], a
 	xor a
-	ld [wDamage + 1], a
+	; ld [wDamageFlags], a
 	ld a, d
 	ld [wAIMinDamage], a
 	ld a, e
@@ -4075,8 +4075,8 @@ PsywaveEffect: ; 2dc49 (b:5c49)
 	call GetEnergyAttachedMultiplierDamage
 	ld hl, wDamage
 	ld [hl], e
-	inc hl
-	ld [hl], d
+	; inc hl
+	; ld [hl], d
 	ret
 
 ; returns carry if neither Duelist has evolved Pokemon.
@@ -5456,7 +5456,7 @@ SelectUpTo2Benched_BenchDamageEffect: ; 2e71f (b:671f)
 	ret
 
 Sonicboom_UnaffectedByColorEffect: ; 2e758 (b:6758)
-	ld hl, wDamage + 1
+	ld hl, wDamageFlags
 	set UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, [hl]
 	ret
 

@@ -216,7 +216,10 @@ DEF HAS_CHANGED_COLOR    EQU 1 << HAS_CHANGED_COLOR_F
 DEF IS_PERMANENT_COLOR_F EQU 6
 DEF IS_PERMANENT_COLOR   EQU 1 << IS_PERMANENT_COLOR_F
 
-; flag in wDamage + 1 that indicates
+; wDamage constants
+DEF MAX_DAMAGE EQU 250
+
+; flag in wDamageFlags that indicates
 ; whether damage is unaffected by Weakness/Resistance
 DEF UNAFFECTED_BY_WEAKNESS_RESISTANCE_F EQU 7
 

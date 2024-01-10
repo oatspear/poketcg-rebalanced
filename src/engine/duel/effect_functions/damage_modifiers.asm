@@ -4,12 +4,13 @@
 
 
 ; overwrites in wDamage, wAIMinDamage and wAIMaxDamage with the value in a
+; resets wDamageFlags
 SetDefiniteDamage:
 	ld [wDamage], a
 	ld [wAIMinDamage], a
 	ld [wAIMaxDamage], a
 	xor a
-	ld [wDamage + 1], a
+	ld [wDamageFlags], a
 	ret
 
 
@@ -28,23 +29,18 @@ SubtractFromDamageCapZero:
 	ret nc
 ; cap it to 0 damage
 	xor a
-	jp SetDefiniteDamage
+	jr SetDefiniteDamage
 
 
 ; doubles the damage output
 DoubleDamage_DamageBoostEffect:
-  ld a, [wDamage + 1]
-  ld d, a
   ld a, [wDamage]
-  ld e, a
-  or d
-  ret z  ; zero damage
-  sla e
-  rl d
-  ld a, e
+  add a
+  jr nc, .got_damage
+; cap damage at 250
+	ld a, MAX_DAMAGE
+.got_damage
   ld [wDamage], a
-  ld a, d
-  ld [wDamage + 1], a
   ret
 
 
@@ -195,12 +191,20 @@ StoneBarrage_MultiplierEffect: ; 2e052 (b:6052)
 	ld l, a
 	ld h, 10
 	call HtimesL
-	ld de, wDamage
+; cap damage at 250
+	; ld de, wDamage
+	; ld a, l
+	; ld [de], a
+	; inc de
+	; ld a, h
+	; ld [de], a
 	ld a, l
-	ld [de], a
-	inc de
+	ld [wDamage], a
 	ld a, h
-	ld [de], a
+	or a
+	ret z  ; no overflow
+	ld a, MAX_DAMAGE
+	ld [wDamage], a
 	ret
 
 
@@ -323,9 +327,13 @@ Psychic_DamageBoostEffect:
 	ld hl, wDamage
 	ld a, e
 	add [hl]
-	ld [hli], a
-	ld a, d
-	adc [hl]
+; cap damage at 250
+	; ld [hli], a
+	; ld a, d
+	; adc [hl]
+	ld [hl], a
+	ret nc  ; no overflow
+	ld a, MAX_DAMAGE
 	ld [hl], a
 	ret
 	
@@ -370,8 +378,14 @@ GetEnergyAttachedMultiplierDamage:
 	add hl, hl ; hl =  4 * c
 	add hl, bc ; hl =  5 * c
 	add hl, hl ; hl = 10 * c
+; cap damage at 250
+	; ld d, h
+	ld d, 0
 	ld e, l
-	ld d, h
+	ld a, h
+	or a
+	ret z
+	ld e, MAX_DAMAGE
 	ret
 
 

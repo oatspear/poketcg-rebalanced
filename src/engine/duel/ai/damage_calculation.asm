@@ -16,11 +16,11 @@ EstimateDamage_VersusDefendingCard:
 	jr nz, .is_attack
 
 ; is a Pokémon Power
-; set wDamage, wAIMinDamage and wAIMaxDamage to zero
+; set wDamage, wDamageFlags, wAIMinDamage and wAIMaxDamage to zero
 	ld hl, wDamage
 	xor a
 	ld [hli], a
-	ld [hl], a
+	ld [hl], a  ; wDamageFlags
 	ld [wAIMinDamage], a
 	ld [wAIMaxDamage], a
 	ld e, a
@@ -228,11 +228,11 @@ EstimateDamage_FromDefendingPokemon: ; 1450b (5:450b)
 	jr nz, .is_attack
 
 ; is a Pokémon Power
-; set wDamage, wAIMinDamage and wAIMaxDamage to zero
+; set wDamage, wDamageFlags, wAIMinDamage and wAIMaxDamage to zero
 	ld hl, wDamage
 	xor a
 	ld [hli], a
-	ld [hl], a
+	ld [hl], a  ; wDamageFlags
 	ld [wAIMinDamage], a
 	ld [wAIMaxDamage], a
 	ld e, a
