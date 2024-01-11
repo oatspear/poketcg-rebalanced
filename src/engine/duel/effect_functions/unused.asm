@@ -1,6 +1,22 @@
 ;
 
 
+; doubles the damage at de if swords dance or focus energy was used
+; in the last turn by the turn holder's arena Pokemon
+HandleDoubleDamageSubstatus:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetTurnDuelistVariable
+	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
+	ret z
+; double damage at de
+	ld a, e
+	or d
+	ret z
+	sla e
+	rl d
+	ret
+
+
 ; [wDamage] += a
 AddToDamage:
 	push hl
@@ -31,6 +47,23 @@ SubtractFromDamage:
 
 ;
 
+; Weakness doubles damage if [wDamage] <= 30.
+; Otherwise, it adds +30 damage.
+ApplyWeaknessToDamage:
+	ld a, [wDamage + 1]
+	or a
+	jr nz, .add_30
+	ld a, [wDamage]
+	or a
+	ret z  ; zero damage
+; double damage if <= 30
+	cp 30 + 1
+	jr c, AddToDamage  ; use damage already in a
+.add_30
+	ld a, 30
+	jr AddToDamage
+
+
 ; Weakness doubles damage if de <= 30.
 ; Otherwise, it adds +30 damage.
 ApplyWeaknessToDamage_DE:
@@ -58,6 +91,26 @@ ApplyWeaknessToDamage_DE:
 	; adc d
 	; ld d, a
 	ret
+
+;
+
+SubtractFromDamage_DE:
+	cp e
+	jr c, .subtract
+	ld e, 0
+	ret
+; e (damage) > a (value to subtract)
+; this will produce a negative number; use two's complement
+.subtract
+	sub e
+	cpl    ; invert the bits of a
+	inc a  ; add one
+	; ld d, 0
+	ld e, a
+	ret
+
+
+
 
 
 ; doubles the damage output
