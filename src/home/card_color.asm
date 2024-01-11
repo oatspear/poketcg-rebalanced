@@ -5,6 +5,7 @@ GetArenaCardColor:
 
 ; input: a = play area location offset (PLAY_AREA_*) of the desired card
 ; return the turn holder's card's color in a, accounting for Pokemon Powers
+; preserves: hl, de, bc?
 GetPlayAreaCardColor:
 	push hl
 	push de
@@ -56,6 +57,7 @@ GetPlayAreaCardWeakness:
 
 ; return in a the weakness of the turn holder's arena Pokemon
 ; if [DUELVARS_ARENA_CARD_CHANGED_WEAKNESS] != 0, return it instead
+; preserves: bc, de
 GetArenaCardWeakness:
 	ld a, DUELVARS_ARENA_CARD_CHANGED_WEAKNESS
 	call GetTurnDuelistVariable
