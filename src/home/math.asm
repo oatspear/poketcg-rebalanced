@@ -46,3 +46,13 @@ DoubleDE:
 	sla e
 	rl d
 	ret
+
+
+; cp de, bc
+CompareDEtoBC:
+	ld a, d
+	cp b
+	ret nz
+	ld a, e
+	cp c
+	ret

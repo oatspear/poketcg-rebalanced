@@ -28,13 +28,3 @@ TossCoin:
 	ld [hl], 0
 	pop hl
 	ret
-
-
-; cp de, bc
-CompareDEtoBC:
-	ld a, d
-	cp b
-	ret nz
-	ld a, e
-	cp c
-	ret
