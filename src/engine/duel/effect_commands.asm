@@ -1069,6 +1069,11 @@ SonicboomEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Sonicboom_UnaffectedByColorEffect
 	db  $00
 
+UnaffectedByResistanceEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnaffectedByResistanceEffect
+	dbw EFFECTCMDTYPE_AI, UnaffectedByResistanceEffect
+	db  $00
+
 ZapdosPealOfThunderEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PealOfThunder_InitialEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, PealOfThunder_RandomlyDamageEffect

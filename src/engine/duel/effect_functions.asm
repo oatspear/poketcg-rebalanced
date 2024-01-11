@@ -5455,9 +5455,14 @@ SelectUpTo2Benched_BenchDamageEffect: ; 2e71f (b:671f)
 	call SwapTurn
 	ret
 
-Sonicboom_UnaffectedByColorEffect: ; 2e758 (b:6758)
+Sonicboom_UnaffectedByColorEffect:
 	ld hl, wDamageFlags
 	set UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, [hl]
+	ret
+
+UnaffectedByResistanceEffect:
+	ld hl, wDamageFlags
+	set UNAFFECTED_BY_RESISTANCE_F, [hl]
 	ret
 
 PealOfThunder_RandomlyDamageEffect: ; 2e780 (b:6780)
