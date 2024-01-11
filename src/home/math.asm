@@ -36,3 +36,13 @@ ADividedBy10:
 	ld a, e
 	pop de
 	ret
+
+
+; Doubles the current value at de
+DoubleDE:
+	ld a, e
+	or d
+	ret z
+	sla e
+	rl d
+	ret
