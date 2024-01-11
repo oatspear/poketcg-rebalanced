@@ -746,6 +746,7 @@ wCardListNumberOfCardsToChoose:: ; ccbd
 wHPRecoveryInputBackup:: ; ccbd
 	ds $2
 
+; unused second byte
 ; damage dealt by an attack to a target
 wDealtDamage:: ; ccbf
 	ds $2
@@ -805,7 +806,7 @@ wEffectFunctionsFeedback:: ; ccce
 wIsDamageToSelf:: ; cce6
 	ds $1
 
-wcce7:: ; cce7
+wAttackerColorAsWR:: ; cce7
 	ds $1
 
 wcce8:: ; cce8

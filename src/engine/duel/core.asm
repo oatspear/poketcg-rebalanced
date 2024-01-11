@@ -8123,7 +8123,7 @@ InitVariablesToBeginDuel:
 	xor a
 	ld [wDuelFinished], a
 	ld [wDuelTurns], a
-	ld [wcce7], a
+	ld [wAttackerColorAsWR], a
 	ld a, $ff
 	ld [wcc0f], a
 	ld [wPlayerAttackingCardIndex], a
