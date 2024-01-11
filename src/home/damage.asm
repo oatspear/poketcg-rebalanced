@@ -24,26 +24,26 @@ SubtractFromDamage:
 	ld [wDamage], a
 	ret
 
-; Weakness doubles damage if [wDamage] <= 30.
-; Otherwise, it adds +30 damage.
-; ApplyWeaknessToDamage:
-; 	ld a, [wDamage + 1]
-; 	or a
-; 	jr nz, .add_30
-; 	ld a, [wDamage]
-; 	or a
-; 	ret z  ; zero damage
-; ; double damage if <= 30
-; 	cp 30 + 1
-; 	jr c, AddToDamage  ; use damage already in a
-; .add_30
-; 	ld a, 30
-; 	jr AddToDamage
+
+CapMaximumDamage_DE:
+	ld a, d
+	or a
+	ret z  ; no overflow
+	ld de, MAX_DAMAGE
+	ret
+
+
+CapMinimumDamage_DE:
+	ld a, d
+	or a
+	ret z  ; no underflow
+	ld de, 0
+	ret
 
 
 ; Weakness doubles damage if de <= 30.
 ; Otherwise, it adds +30 damage.
-; (damage capped at 250, just ignore d)
+; preserves: bc
 ApplyWeaknessToDamage_DE:
 	ld a, d
 	or a
@@ -52,21 +52,38 @@ ApplyWeaknessToDamage_DE:
 	cp 30 + 1
 	jr nc, .add_30
 
-; double de if <= 30
+; double damage if de <= 30
 	add e
-	ld d, 0
 	ld e, a
-	ret nc  ; no overflow
-	ld e, MAX_DAMAGE
-	ret
+	ret  ; no overflow, a <= 60
 
 .add_30
 	ld hl, 30
+	; fallthrough
+
+; Adds the value in hl to damage at de.
+; preserves: bc
+AddToDamage_DE:
 	add hl, de
 	ld e, l
-	ld d, 0
-	ld a, h
-	or a
-	ret z  ; no overflow
-	ld e, MAX_DAMAGE
+	ld d, h
 	ret
+
+
+; Subtract 10 from damage at de.
+; preserves: bc
+ReduceDamageBy10_DE:
+	ld hl, -10
+	jr AddToDamage_DE
+
+; Subtract 20 from damage at de.
+; preserves: bc
+ReduceDamageBy20_DE:
+	ld hl, -20
+	jr AddToDamage_DE
+
+; Subtract 30 from damage at de.
+; preserves: bc
+ReduceDamageBy30_DE:
+	ld hl, -30
+	jr AddToDamage_DE
