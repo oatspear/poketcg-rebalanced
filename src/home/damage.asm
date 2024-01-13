@@ -70,6 +70,18 @@ AddToDamage_DE:
 	ret
 
 
+; Subtracts the (positive) value in hl from damage at de.
+; preserves: bc
+SubtractFromDamage_DE:
+	ld a, e
+	sub l
+	ld e, a
+	ld a, d
+	sbc h
+	ld d, a
+	ret
+
+
 ; Subtract 10 from damage at de.
 ; preserves: bc
 ReduceDamageBy10_DE:
