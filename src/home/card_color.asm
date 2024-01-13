@@ -97,6 +97,24 @@ GetCardResistance:
 	ld a, [wLoadedCard2Resistance]
 	ret
 
+
+; convert a color to its equivalent WR_* (weakness/resistance) value
+; preserves: hl, bc, de
+TranslateColorToWR:
+	push hl
+	add LOW(InvertedPowersOf2)
+	ld l, a
+	ld a, HIGH(InvertedPowersOf2)
+	adc $0
+	ld h, a
+	ld a, [hl]
+	pop hl
+	ret
+
+InvertedPowersOf2:
+	db $80, $40, $20, $10, $08, $04, $02, $01
+
+
 ; this function checks if turn holder's energy color override is active and,
 ; if so, turns all energies at wAttachedEnergies (except double colorless energies)
 ; into energies of the override color
