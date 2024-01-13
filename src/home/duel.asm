@@ -2250,6 +2250,7 @@ DealDamageToPlayAreaPokemon:
 	call ApplyAttachedPluspower
 	call SwapTurn
 .next
+	call CapMaximumDamage_DE
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	jr z, .skip_defender
@@ -2264,25 +2265,25 @@ DealDamageToPlayAreaPokemon:
 	push de
 	call HandleNoDamageOrEffectSubstatus
 	pop de
-	call HandleDamageReduction
+	call HandleDefenderDamageReductionEffects
+	call HandleAttackerDamageReductionEffects
 .in_bench
 	call HandleDamageReductionOrNoDamageFromPkmnPowerEffects
-	bit 7, d
-	jr z, .no_underflow
-	ld de, 0
-.no_underflow
+	call CapMinimumDamage_DE
 	ld a, [wTempPlayAreaLocation_cceb]
 	ld b, a
 	or a ; cp PLAY_AREA_ARENA
 	jr nz, .benched
-	; if arena Pokemon, add damage at de to [wDealtDamage]
+; if arena Pokemon, add damage at de to [wDealtDamage]
+; assume: damage is capped to one byte
 	ld hl, wDealtDamage
 	ld a, e
-	add [hl]
-	ld [hli], a
-	ld a, d
-	adc [hl]
+	; add [hl]
+	; ld [hli], a
+	; ld a, d
+	; adc [hl]
 	ld [hl], a
+	xor a  ; PLAY_AREA_ARENA
 .benched
 	ld c, $00
 	add DUELVARS_ARENA_CARD_HP
