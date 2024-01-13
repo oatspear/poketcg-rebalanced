@@ -1487,7 +1487,7 @@ OnPokemonPlayedInitVariablesAndPowers:
 	ldtx hl, WillUseThePokemonPowerText
 	call DrawWideTextBox_WaitForInput
 	call ExchangeRNG
-	call Func_7415
+	bank1call Func_7415
 	ld a, EFFECTCMDTYPE_PKMN_POWER_TRIGGER
 	jp TryExecuteEffectCommandFunction
 
@@ -1626,7 +1626,7 @@ UseAttackOrPokemonPower:
 ;	fallthrough
 
 PlayAttackAnimation_DealAttackDamage:
-	call Func_7415
+	bank1call Func_7415
 	ld a, [wLoadedAttackCategory]
 	and RESIDUAL
 	jr nz, .deal_damage
@@ -1715,7 +1715,7 @@ HandleConfusionDamageToSelf:
 
 ; use Pokemon Power
 UsePokemonPower:
-	call Func_7415
+	bank1call Func_7415
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
 	jr c, DisplayUsePokemonPowerScreen_WaitForInput
