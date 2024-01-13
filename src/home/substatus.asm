@@ -1,51 +1,33 @@
 ; doubles the damage at de if swords dance or focus energy was used
 ; in the last turn by the turn holder's arena Pokemon
+; preserves: bc
 HandleDoubleDamageSubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
 	ret z
 ; double damage at de
-	ld a, e
-	or d
-	ret z
-	sla e
-	rl d
-	ret
+	jp DoubleDE
 
 ; check if the attacking card (non-turn holder's arena card) has any substatus that
 ; reduces the damage dealt this turn (SUBSTATUS2).
-; check if the defending card (turn holder's arena card) has any substatus that
-; reduces the damage dealt to it this turn (SUBSTATUS1 or Pkmn Powers).
 ; damage is given in de as input and the possibly updated damage is also returned in de.
-HandleDamageReduction:
-	call HandleDamageReductionExceptSubstatus2
+; preserves: bc
+HandleAttackerDamageReductionEffects:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
 	call GetNonTurnDuelistVariable
 	or a
 	ret z
 	cp SUBSTATUS2_REDUCE_BY_20
-	jr z, .reduce_damage_by_20
+	jp z, ReduceDamageBy20_DE
 	cp SUBSTATUS2_REDUCE_BY_10
-	jr z, .reduce_damage_by_10
-	ret
-.reduce_damage_by_20
-	ld hl, -20
-	add hl, de
-	ld e, l
-	ld d, h
-	ret
-.reduce_damage_by_10
-	ld hl, -10
-	add hl, de
-	ld e, l
-	ld d, h
+	jp z, ReduceDamageBy10_DE
 	ret
 
 ; check if the defending card (turn holder's arena card) has any substatus that
 ; reduces the damage dealt to it this turn. (SUBSTATUS1 or Pkmn Powers)
 ; damage is given in de as input and the possibly updated damage is also returned in de.
-HandleDamageReductionExceptSubstatus2:
+HandleDefenderDamageReductionEffects:
 	ld a, [wNoDamageOrEffect]
 	or a
 	jr nz, .no_damage
@@ -64,9 +46,9 @@ HandleDamageReductionExceptSubstatus2:
 	cp SUBSTATUS1_NO_DAMAGE_17
 	jr z, .no_damage
 	cp SUBSTATUS1_REDUCE_BY_10
-	jr z, .reduce_damage_by_10
+	jr z, ReduceDamageBy10_DE
 	cp SUBSTATUS1_REDUCE_BY_20
-	jr z, .reduce_damage_by_20
+	jr z, ReduceDamageBy20_DE
 	cp SUBSTATUS1_HARDEN
 	jr z, .prevent_less_than_40_damage
 	cp SUBSTATUS1_HALVE_DAMAGE
@@ -82,13 +64,13 @@ HandleDamageReductionExceptSubstatus2:
 	ret z
 	ld a, [wTempNonTurnDuelistCardID]
 	cp MR_MIME
-	jr z, .prevent_less_than_30_damage ; invisible wall
+	jr z, .prevent_30_or_more_damage ; invisible wall
 	cp MAROWAK_LV26
-	jr z, .reduce_damage_by_20 ; Battle Armor
+	jp z, ReduceDamageBy20_DE ; Battle Armor
 	cp KAKUNA
-	jr z, .reduce_damage_by_20 ; Exoskeleton
+	jp z, ReduceDamageBy20_DE ; Exoskeleton
 	cp CLOYSTER
-	jr z, .reduce_damage_by_20 ; Exoskeleton
+	jp z, ReduceDamageBy20_DE ; Exoskeleton
 	cp KABUTO
 	jr z, .halve_damage ; kabuto armor
 	ret
@@ -102,24 +84,18 @@ HandleDamageReductionExceptSubstatus2:
 	ld de, 0
 	ret
 
-.reduce_damage_by_10
-	ld hl, -10
-	add hl, de
-	ld e, l
-	ld d, h
-	ret
-
-.reduce_damage_by_20
-	ld hl, -20
-	add hl, de
-	ld e, l
-	ld d, h
-	ret
-
 .prevent_less_than_40_damage
 	ld bc, 40
 	call CompareDEtoBC
-	ret nc
+	jr nc, .not_affected_by_substatus1  ; de >= 40
+	ld de, 0
+	ret
+
+.prevent_30_or_more_damage
+	ld bc, 30
+	call CompareDEtoBC
+; no jump, this is a Pokémon Power
+	ret c  ; de < 30
 	ld de, 0
 	ret
 
@@ -129,20 +105,7 @@ HandleDamageReductionExceptSubstatus2:
 	bit 0, e
 	ret z
 	ld hl, -5
-	add hl, de
-	ld e, l
-	ld d, h
-	ret
-
-.prevent_less_than_30_damage
-	ld a, [wLoadedAttackCategory]
-	cp POKEMON_POWER
-	ret z
-	ld bc, 30
-	call CompareDEtoBC
-	ret c
-	ld de, 0
-	ret
+	jp AddToDamage_DE
 
 
 ; check for Invisible Wall, Kabuto Armor, NShield, or Transparency, in order to
@@ -155,7 +118,7 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	ret c
 	ld a, [wTempPlayAreaLocation_cceb]
 	or a
-	call nz, HandleDamageReductionExceptSubstatus2.pkmn_power
+	call nz, HandleDefenderDamageReductionEffects.pkmn_power
 	push de ; push damage from call above, which handles Invisible Wall and Kabuto Armor
 	call HandleNoDamageOrEffectSubstatus.pkmn_power
 	; call nc, HandleTransparency
