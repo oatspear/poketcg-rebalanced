@@ -1639,7 +1639,7 @@ PlayAttackAnimation_DealAttackDamage:
 	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
 	call TryExecuteEffectCommandFunction
 	call ApplyDamageModifiers_DamageToTarget
-	call Func_189d
+	call LastChanceToNegateFinalDamage
 	ld hl, wDealtDamage
 	ld [hl], e
 	inc hl
@@ -1758,7 +1758,7 @@ SendAttackDataToLinkOpponent:
 	ldh [hTemp_ffa0], a
 	ret
 
-Func_189d:
+LastChanceToNegateFinalDamage:
 	ld a, [wLoadedAttackCategory]
 	bit RESIDUAL_F, a
 	ret nz
@@ -1767,15 +1767,15 @@ Func_189d:
 	ret nz
 	ld a, e
 	or d
-	jr nz, .asm_18b9
+	jr nz, .attack_opponent
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
 	call GetNonTurnDuelistVariable
 	or a
-	jr nz, .asm_18b9
+	jr nz, .attack_opponent
 	ld a, [wEffectFunctionsFeedbackIndex]
 	or a
 	ret z
-.asm_18b9
+.attack_opponent
 	push de
 	call SwapTurn
 	xor a
@@ -1783,7 +1783,7 @@ Func_189d:
 	; call HandleTransparency
 	call SwapTurn
 	pop de
-	ret nc
+	ret nc  ; always returns here without Transparency
 	bank1call DrawDuelMainScene
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
 	call GetNonTurnDuelistVariable
@@ -1937,163 +1937,194 @@ DealConfusionDamageToSelf:
 ; - also apply Pluspower, Defender, and other kinds of damage reduction accordingly
 ; return resulting damage in de
 ; OATS we have to tinker with this to implement BURN
+; OATS new logic for damage calculation:
+;  1. apply damage bonus effects
+;  2. apply weakness bonus
+;  3. apply Plus Power bonuses
+;  4. cap damage at 250
+;  5. apply resistance
+;  6. apply Defender reduction
+;  7. apply damage reduction effects
+;  8. cap damage at zero if negative
 ApplyDamageModifiers_DamageToTarget:
-	xor a
-	ld [wDamageEffectiveness], a
-	ld hl, wDamage
-	ld a, [hli]
-	or a
-	jr nz, .non_zero_damage
-	ld de, 0
-	ret
-.non_zero_damage
+	call _DamageModifiers_Preamble
+	ret z  ; no damage
+; non-zero damage
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
-	ld d, [hl]  ; wDamageFlags
-	dec hl
-	ld e, [hl]
-	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, d
-	jr z, .safe
-	res UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, d
-	xor a
-	ld [wDamageEffectiveness], a
+; 1. apply damage bonus effects
 	call HandleDoubleDamageSubstatus
-	jr .check_pluspower_and_defender
-.safe
-	call HandleDoubleDamageSubstatus
-	ld a, e
-	or d
-	ret z
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call GetPlayAreaCardColor
-	call TranslateColorToWR
+; 2. apply weakness bonus
+	ld a, [wDamageFlags]
+	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
+	jr nz, .apply_pluspower
+	call SwapTurn
+	call GetArenaCardWeakness  ; preserves de
+	call SwapTurn
 	ld b, a
-	call SwapTurn
-	call GetArenaCardWeakness
-	call SwapTurn
-	and b
-	jr z, .not_weak
-	call ApplyWeaknessToDamage_DE
-	ld hl, wDamageEffectiveness
-	set WEAKNESS, [hl]
-.not_weak
+	; ldh a, [hTempPlayAreaLocation_ff9d]  ; this is always PLAY_AREA_ARENA
+	xor a  ; PLAY_AREA_ARENA
+	call _DamageModifiers_HandleWeakness
+; 3. apply pluspower bonuses
+.apply_pluspower
+	ld b, CARD_LOCATION_ARENA
+	call ApplyAttachedPluspower
+; 4. cap damage at 250
+	call CapMaximumDamage_DE
+; 5. apply resistance
+	ld a, [wDamageFlags]
+	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
+	jr nz, .apply_defender
+	bit UNAFFECTED_BY_RESISTANCE_F, a
+	jr nz, .apply_defender
+; affected by Resistance
 	call SwapTurn
 	call GetArenaCardResistance
 	call SwapTurn
-	and b
-	jr z, .check_pluspower_and_defender ; jump if not resistant
-	ld hl, -30
-	add hl, de
-	ld e, l
-	ld d, h
-	ld hl, wDamageEffectiveness
-	set RESISTANCE, [hl]
-.check_pluspower_and_defender
-	ld b, CARD_LOCATION_ARENA
-	call ApplyAttachedPluspower
+	ld b, a
+	call _DamageModifiers_HandleResistance
+.apply_defender
+; 6. apply Defender reduction
 	call SwapTurn
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedDefender
-	call HandleDamageReduction
-	bit 7, d
-	jr z, .no_underflow
-	ld de, 0
-.no_underflow
-	call SwapTurn
-	ret
+; 7. apply damage reduction effects
+	call HandleDefenderDamageReductionEffects
+	call HandleAttackerDamageReductionEffects
+; 8. cap damage at zero if negative
+	call CapMinimumDamage_DE
+	jp SwapTurn
 
-; convert a color to its equivalent WR_* (weakness/resistance) value
-TranslateColorToWR:
-	push hl
-	add LOW(InvertedPowersOf2)
-	ld l, a
-	ld a, HIGH(InvertedPowersOf2)
-	adc $0
-	ld h, a
-	ld a, [hl]
-	pop hl
-	ret
-
-InvertedPowersOf2:
-	db $80, $40, $20, $10, $08, $04, $02, $01
 
 ; given a damage value at wDamage:
 ; - if the turn holder's arena card is weak to its own color: double damage
 ; - if the turn holder's arena card resists its own color: reduce damage by 30
 ; return resulting damage in de
 ; OATS we have to tinker with this to implement BURN
+; OATS new logic for damage calculation:
+;  1. apply damage bonus effects
+;  2. apply weakness bonus
+;  3. apply Plus Power bonuses
+;  4. cap damage at 250
+;  5. apply resistance
+;  6. apply Defender reduction
+;  7. apply damage reduction effects
+;  8. cap damage at zero if negative
 ApplyDamageModifiers_DamageToSelf:
-	xor a
-	ld [wDamageEffectiveness], a
-	ld hl, wDamage
-	ld a, [hli]
-	or a
-	jr z, .no_damage
-	ld d, [hl]  ; wDamageFlags
-	dec hl
-	ld e, [hl]
-	call GetArenaCardColor
-	call TranslateColorToWR
+	call _DamageModifiers_Preamble
+	ret z  ; no damage
+; non-zero damage
+; 1. apply damage bonus effects
+  ; skip
+; 2. apply weakness bonus
+	call GetArenaCardWeakness  ; preserves de
 	ld b, a
-	call GetArenaCardWeakness
-	and b
-	jr z, .not_weak
-	call ApplyWeaknessToDamage_DE
-	ld hl, wDamageEffectiveness
-	set WEAKNESS, [hl]
-.not_weak
-	call GetArenaCardResistance
-	and b
-	jr z, .not_resistant
-	ld hl, -30
-	add hl, de
-	ld e, l
-	ld d, h
-	ld hl, wDamageEffectiveness
-	set RESISTANCE, [hl]
-.not_resistant
+	xor a  ; PLAY_AREA_ARENA
+	call _DamageModifiers_HandleWeakness
+; 3. apply pluspower bonuses
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedPluspower
+; 4. cap damage at 250
+	call CapMaximumDamage_DE  ; preserves bc
+; 5. apply resistance
+	call GetArenaCardResistance
+	ld b, a
+	call _DamageModifiers_HandleResistance
+; 6. apply Defender reduction
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedDefender
-	bit 7, d ; test for underflow
-	ret z
-.no_damage
-	ld de, 0
+; 7. apply damage reduction effects
+	; skip
+; 8. cap damage at zero if negative
+	jp CapMinimumDamage_DE
+
+
+; sets up necessary variables for
+;  - ApplyDamageModifiers_DamageToTarget
+;  - ApplyDamageModifiers_DamageToSelf
+; output:
+;    z: set iff [wDamage] is zero
+;   de: value in [wDamage]
+;    a: value in [wDamage]
+_DamageModifiers_Preamble:
+	xor a
+	ld [wDamageEffectiveness], a
+	ld a, [wDamage]
+	or a
+	ld d, 0
+	ld e, a
 	ret
 
-; increases de by 10 points for each Pluspower found in location b
+
+; applies weakness bonus
+; if the attacker's color matches the target's weakness
+; input:
+;    a: PLAY_AREA_* of the attacker
+;    b: target's Weakness (WR constant)
+;   de: current damage
+; preserves:
+;   bc
+_DamageModifiers_HandleWeakness:
+	call GetPlayAreaCardColor  ; preserves de
+	call TranslateColorToWR  ; preserves de
+	ld [wAttackerColorAsWR], a
+	and b
+	ret z  ; not weak
+	ld hl, wDamageEffectiveness
+	set WEAKNESS, [hl]
+	jp ApplyWeaknessToDamage_DE  ; preserves bc
+
+
+; applies resistance reduction
+; if the attacker's color matches the target's resistance
+; assume:
+;   - if an attack is affected by Resistance,
+;     it must have been affected by Weakness;
+;     there are no effects that bypass Weakness but preserve Resistance
+; input:
+;    b: target's Weakness (WR constant)
+;   de: current damage
+; preserves:
+;   bc
+_DamageModifiers_HandleResistance:
+	; xor a  ; PLAY_AREA_ARENA
+	; call GetPlayAreaCardColor  ; preserves de
+	; call TranslateColorToWR  ; preserves de
+	ld a, [wAttackerColorAsWR]
+	and b
+	ret z  ; not resistant
+	ld hl, wDamageEffectiveness
+	set RESISTANCE, [hl]
+	jp ReduceDamageBy30_DE  ; preserves bc
+
+
+
+; if de > 0, increases de by 10 for each Pluspower found in location b
 ApplyAttachedPluspower:
+	ld a, e
+	or a
+	ret z
 	push de
 	call GetTurnDuelistVariable
 	ld de, PLUSPOWER
 	call CountCardIDInLocation
-	ld l, a
-	ld h, 10
-	call HtimesL
+	call ATimes10
 	pop de
-	add hl, de
-	ld e, l
-	ld d, h
-	ret
+	jp AddToDamage_DE
 
-; reduces de by 20 points for each Defender found in location b
+; reduces e by 20 for each Defender found in location b
 ApplyAttachedDefender:
+	ld a, e
+	or a
+	ret z
 	push de
 	call GetTurnDuelistVariable
 	ld de, DEFENDER
 	call CountCardIDInLocation
-	ld l, a
-	ld h, 20
-	call HtimesL
+	add a  ; x2
+	call ATimes10
 	pop de
-	ld a, e
-	sub l
-	ld e, a
-	ld a, d
-	sbc h
-	ld d, a
-	ret
+	jp SubtractFromDamage_DE
 
 ; hl: address to subtract HP from
 ; de: how much HP to subtract (damage to deal)
