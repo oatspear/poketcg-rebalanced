@@ -658,7 +658,7 @@ KakunaCard:
 	tx WeedleName ; pre-evo name
 
 	; attack 1
-	; depends: HandleDamageReductionExceptSubstatus2
+	; depends: HandleDefenderDamageReductionEffects
 	energy 0 ; energies
 	tx ExoskeletonName ; name
 	tx BattleArmorDescription ; description
@@ -3966,7 +3966,7 @@ CloysterCard:
 	tx ShellderName ; pre-evo name
 
 	; attack 1
-	; depends: HandleDamageReductionExceptSubstatus2
+	; depends: HandleDefenderDamageReductionEffects
 	energy 0 ; energies
 	tx ExoskeletonName ; name
 	tx BattleArmorDescription ; description
@@ -6845,7 +6845,7 @@ MarowakLv26Card:
 	tx CuboneName ; pre-evo name
 
 	; attack 1
-	; depends: HandleDamageReductionExceptSubstatus2
+	; depends: HandleDefenderDamageReductionEffects
 	energy 0 ; energies
 	tx BattleArmorName ; name
 	tx BattleArmorDescription ; description
@@ -7173,7 +7173,7 @@ KabutoCard:
 	; Treat the new Benched Pokémon as Basic Pokémon.
 
 	; attack 1
-	; depends: HandleDamageReductionExceptSubstatus2
+	; depends: HandleDefenderDamageReductionEffects
 	energy 0 ; energies
 	tx KabutoArmorName ; name
 	tx KabutoArmorDescription ; description
