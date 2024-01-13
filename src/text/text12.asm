@@ -1292,3 +1292,8 @@ MountainBreakDescription:
 	line "damage for each Energy discarded"
 	line "this way."
 	done
+
+UnaffectedByResistanceDescription:
+	text "This attack's damage is not affected"
+	line "by Resistance."
+	done

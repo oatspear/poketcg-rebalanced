@@ -6590,18 +6590,18 @@ GeodudeCard:
 	db ATK_ANIM_STONE_BARRAGE ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	tx RockThrowName ; name
+	tx UnaffectedByResistanceDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw UnaffectedByResistanceEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_ROCK_THROW ; animation
 
 	db 0 ; retreat cost
 	db WR_GRASS ; weakness
