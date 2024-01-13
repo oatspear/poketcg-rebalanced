@@ -132,79 +132,83 @@ _CalculateDamage_VersusDefendingPokemon: ; 14462 (5:4462)
 .vulnerable
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
+; 1. apply damage bonus effects
 	call z, HandleDoubleDamageSubstatus
-	; skips the weak/res checks if unaffected.
-	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, d
-	res UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, d
-	jr nz, .not_resistant
-
+; 2. apply weakness bonus
+	ld a, [wDamageFlags]
+	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
+	jr nz, .apply_pluspower
 ; handle weakness
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call GetPlayAreaCardColor
-	call TranslateColorToWR
-	ld b, a
 	call SwapTurn
 	call GetArenaCardWeakness
 	call SwapTurn
+	ld b, a
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call GetPlayAreaCardColor
+	call TranslateColorToWR
+	ld [wAttackerColorAsWR], a
 	and b
-	jr z, .not_weak
+	jr z, .apply_pluspower
 	call ApplyWeaknessToDamage_DE
 
-.not_weak
-; handle resistance
-	call SwapTurn
-	call GetArenaCardResistance
-	call SwapTurn
-	and b
-	jr z, .not_resistant
-	ld hl, -30
-	add hl, de
-	ld e, l
-	ld d, h
-
-.not_resistant
-	; apply pluspower and defender boosts
+; 3. apply pluspower bonuses
+.apply_pluspower
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add CARD_LOCATION_ARENA
 	ld b, a
 	call ApplyAttachedPluspower
+; 4. cap damage at 250
+	call CapMaximumDamage_DE
+; 5. apply resistance
+	ld a, [wDamageFlags]
+	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
+	jr nz, .apply_defender
+	bit UNAFFECTED_BY_RESISTANCE_F, a
+	jr nz, .apply_defender
+; affected by resistance
+	call SwapTurn
+	call GetArenaCardResistance
+	call SwapTurn
+	ld b, a
+	ld a, [wAttackerColorAsWR]
+	and b
+	jr z, .apply_defender
+	call ReduceDamageBy30_DE  ; preserves bc
+
+; 6. apply Defender reduction
+.apply_defender
+	; apply pluspower and defender boosts
 	call SwapTurn
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedDefender
-	call HandleDamageReduction
-	; test if de underflowed
-	bit 7, d
-	jr z, .no_underflow
-	ld de, $0
+; 7. apply damage reduction effects
+	call HandleDefenderDamageReductionEffects
+	call HandleAttackerDamageReductionEffects
+; 8. cap damage at zero if negative
+	call CapMinimumDamage_DE
 
-.no_underflow
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and DOUBLE_POISONED
-	jr z, .not_poisoned
-	ld c, 20
-	and DOUBLE_POISONED & (POISONED ^ $ff)
-	jr nz, .add_poison
-	ld c, 10
-.add_poison
-	ld a, c
-	add e
-	ld e, a
-	ld a, $00
-	adc d
-	ld d, a
-.not_poisoned
+; OATS poison only does damage on the target's turn
+;	ld a, DUELVARS_ARENA_CARD_STATUS
+;	call GetTurnDuelistVariable
+;	and DOUBLE_POISONED
+;	jr z, .not_poisoned
+;	ld c, 20
+;	and DOUBLE_POISONED & (POISONED ^ $ff)
+;	jr nz, .add_poison
+;	ld c, 10
+;.add_poison
+;	ld a, c
+;	add e
+;	ld e, a
+;	ld a, $00
+;	adc d
+;	ld d, a
+;.not_poisoned
 	call SwapTurn
 
 .done
 	pop hl
 	ld [hl], e
-	ld a, d
-	or a
-	ret z
-	; cap damage
-	ld a, $ff
-	ld [hl], a
 	ret
 
 ; stores in wDamage, wAIMinDamage and wAIMaxDamage the calculated damage
@@ -345,102 +349,84 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 	ld [wTempNonTurnDuelistCardID], a
 
 	call SwapTurn
+; 1. apply damage bonus effects
 	call HandleDoubleDamageSubstatus
-	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, d
-	res UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, d
-	jr nz, .not_resistant
-
+; 2. apply weakness bonus
+	ld a, [wDamageFlags]
+	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
+	jr nz, .apply_pluspower
 ; handle weakness
+	call SwapTurn
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call GetPlayAreaCardWeakness
+	call SwapTurn
+	ld b, a
 	call GetArenaCardColor
 	call TranslateColorToWR
-	ld b, a
-	call SwapTurn
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	or a
-	jr nz, .bench_weak
-	ld a, DUELVARS_ARENA_CARD_CHANGED_WEAKNESS
-	call GetTurnDuelistVariable
-	or a
-	jr nz, .unchanged_weak
-
-.bench_weak
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Weakness]
-.unchanged_weak
+	ld [wAttackerColorAsWR], a
 	and b
-	jr z, .not_weak
+	jr z, .apply_pluspower
 	call ApplyWeaknessToDamage_DE
 
-.not_weak
-; handle resistance
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	or a
-	jr nz, .bench_res
-	ld a, DUELVARS_ARENA_CARD_CHANGED_RESISTANCE
-	call GetTurnDuelistVariable
-	or a
-	jr nz, .unchanged_res
-
-.bench_res
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Resistance]
-.unchanged_res
-	and b
-	jr z, .not_resistant
-	ld hl, -30
-	add hl, de
-	ld e, l
-	ld d, h
-
-.not_resistant
-	; apply pluspower and defender boosts
-	call SwapTurn
+; 3. apply pluspower bonuses
+.apply_pluspower
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedPluspower
+; 4. cap damage at 250
+	call CapMaximumDamage_DE
+; 5. apply resistance
+	ld a, [wDamageFlags]
+	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
+	jr nz, .apply_defender
+	bit UNAFFECTED_BY_RESISTANCE_F, a
+	jr nz, .apply_defender
+; affected by Resistance
+	call SwapTurn
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call GetPlayAreaCardResistance
+	call SwapTurn
+	ld b, a
+	ld a, [wAttackerColorAsWR]
+	and b
+	call nz, ReduceDamageBy30_DE
+
+; 6. apply Defender reduction
+.apply_defender
 	call SwapTurn
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add CARD_LOCATION_ARENA
 	ld b, a
 	call ApplyAttachedDefender
+; 7. apply damage reduction effects
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
-	call z, HandleDamageReduction
-	bit 7, d
-	jr z, .no_underflow
-	ld de, $0
+	jr nz, .no_damage_reduction
+	call HandleDefenderDamageReductionEffects
+	call HandleAttackerDamageReductionEffects
+; 8. cap damage at zero if negative
+.no_damage_reduction
+	call CapMinimumDamage_DE
 
-.no_underflow
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
 	jr nz, .done
+
+; OATS Poison only deals damage on the target's turn
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and DOUBLE_POISONED
 	jr z, .done
-	ld c, 40
+	; ld c, 40
+	ld hl, 20
 	and DOUBLE_POISONED & (POISONED ^ $ff)
 	jr nz, .add_poison
-	ld c, 20
+	; ld c, 20
+	ld hl, 10
 .add_poison
-	ld a, c
-	add e
-	ld e, a
-	ld a, $00
-	adc d
-	ld d, a
+	call AddToDamage_DE
+	call CapMaximumDamage_DE
 
 .done
 	pop hl
 	ld [hl], e
-	ld a, d
-	or a
-	ret z
-	ld a, $ff
-	ld [hl], a
 	ret
