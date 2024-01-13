@@ -46,9 +46,9 @@ HandleDefenderDamageReductionEffects:
 	cp SUBSTATUS1_NO_DAMAGE_17
 	jr z, .no_damage
 	cp SUBSTATUS1_REDUCE_BY_10
-	jr z, ReduceDamageBy10_DE
+	jp z, ReduceDamageBy10_DE
 	cp SUBSTATUS1_REDUCE_BY_20
-	jr z, ReduceDamageBy20_DE
+	jp z, ReduceDamageBy20_DE
 	cp SUBSTATUS1_HARDEN
 	jr z, .prevent_less_than_40_damage
 	cp SUBSTATUS1_HALVE_DAMAGE
