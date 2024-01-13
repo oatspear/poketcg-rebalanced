@@ -23,6 +23,28 @@ HLTimes10:
 	pop de
 	ret
 
+; returns h * l in hl
+HtimesL:
+	push de
+	ld a, h
+	ld e, l
+	ld d, $0
+	ld l, d
+	ld h, d
+	jr .asm_887
+.asm_882
+	add hl, de
+.asm_883
+	sla e
+	rl d
+.asm_887
+	srl a
+	jr c, .asm_882
+	jr nz, .asm_883
+	pop de
+	ret
+
+
 ; returns a /= 10
 ; returns carry if a % 10 >= 5
 ADividedBy10:
