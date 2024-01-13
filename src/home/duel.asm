@@ -1367,10 +1367,10 @@ GetPlayAreaCardAttachedEnergies:
 ; returns in a how many times card e can be found in location b
 ; e = card id to search
 ; b = location to consider (CARD_LOCATION_*)
-; h = PLAYER_TURN or OPPONENT_TURN
 CountCardIDInLocation:
 	push bc
-	ld l, DUELVARS_CARD_LOCATIONS
+	xor a  ; DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
 	ld c, $0
 .next_card
 	ld a, [hl]
@@ -1950,11 +1950,13 @@ ApplyDamageModifiers_DamageToTarget:
 	call _DamageModifiers_Preamble
 	ret z  ; no damage
 ; non-zero damage
+	; call Debug_Print_DE
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 ; 1. apply damage bonus effects
 	call HandleDoubleDamageSubstatus
 ; 2. apply weakness bonus
+	; call Debug_Print_DE
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
 	jr nz, .apply_pluspower
@@ -1967,11 +1969,14 @@ ApplyDamageModifiers_DamageToTarget:
 	call _DamageModifiers_HandleWeakness
 ; 3. apply pluspower bonuses
 .apply_pluspower
+	; call Debug_Print_DE
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedPluspower
 ; 4. cap damage at 250
+	; call Debug_Print_DE
 	call CapMaximumDamage_DE
 ; 5. apply resistance
+	;; call Debug_Print_DE
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
 	jr nz, .apply_defender
@@ -1983,17 +1988,31 @@ ApplyDamageModifiers_DamageToTarget:
 	call SwapTurn
 	ld b, a
 	call _DamageModifiers_HandleResistance
-.apply_defender
 ; 6. apply Defender reduction
+.apply_defender
+	; call Debug_Print_DE
 	call SwapTurn
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedDefender
 ; 7. apply damage reduction effects
+	; call Debug_Print_DE
 	call HandleDefenderDamageReductionEffects
 	call HandleAttackerDamageReductionEffects
 ; 8. cap damage at zero if negative
+	; call Debug_Print_DE
 	call CapMinimumDamage_DE
 	jp SwapTurn
+
+
+; Debug_Print_DE:
+; 	push de
+; 	ld l, e
+; 	ld h, d
+; 	call LoadTxRam3
+; 	ldtx hl, YouCanSelectMoreCardsQuitText
+; 	call DrawWideTextBox_WaitForInput
+; 	pop de
+; 	ret
 
 
 ; given a damage value at wDamage:
@@ -2102,28 +2121,30 @@ _DamageModifiers_HandleResistance:
 ; if de > 0, increases de by 10 for each Pluspower found in location b
 ApplyAttachedPluspower:
 	ld a, e
-	or a
+	or d
 	ret z
 	push de
-	call GetTurnDuelistVariable
 	ld de, PLUSPOWER
 	call CountCardIDInLocation
-	call ATimes10
 	pop de
+	call ATimes10
+	ld l, a
+	ld h, 0
 	jp AddToDamage_DE
 
-; reduces e by 20 for each Defender found in location b
+; reduces de by 20 for each Defender found in location b
 ApplyAttachedDefender:
 	ld a, e
-	or a
+	or d
 	ret z
 	push de
-	call GetTurnDuelistVariable
 	ld de, DEFENDER
 	call CountCardIDInLocation
+	pop de
 	add a  ; x2
 	call ATimes10
-	pop de
+	ld l, a
+	ld h, 0
 	jp SubtractFromDamage_DE
 
 ; hl: address to subtract HP from
