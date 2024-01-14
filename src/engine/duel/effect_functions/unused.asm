@@ -3213,3 +3213,73 @@ ItemFinder_DiscardAddToHandEffect:
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 	ret
+
+
+
+;
+
+ZapdosPealOfThunderEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PealOfThunder_InitialEffect
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, PealOfThunder_RandomlyDamageEffect
+	db  $00
+
+ZapdosBigThunderEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, BigThunderEffect
+	db  $00
+
+PealOfThunder_RandomlyDamageEffect: ; 2e780 (b:6780)
+	call ExchangeRNG
+	ld de, 30 ; damage to inflict
+	call RandomlyDamagePlayAreaPokemon
+	bank1call Func_6e49
+	ret
+
+; randomly damages a Pokemon in play, except
+; card that is in [hTempPlayAreaLocation_ff9d].
+; plays thunder animation when Play Area is shown.
+; input:
+;	de = amount of damage to deal
+RandomlyDamagePlayAreaPokemon: ; 2e78d (b:678d)
+	xor a
+	ld [wNoDamageOrEffect], a
+
+; choose randomly which Play Area to attack
+	call UpdateRNGSources
+	and 1
+	jr nz, .opp_play_area
+
+; own Play Area
+	ld a, $01
+	ld [wIsDamageToSelf], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	call Random
+	ld b, a
+	; can't select Zapdos
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	cp b
+	jr z, RandomlyDamagePlayAreaPokemon ; re-roll Pokemon to attack
+
+.damage
+	ld a, ATK_ANIM_THUNDER_PLAY_AREA
+	ld [wLoadedAttackAnimation], a
+	call DealDamageToPlayAreaPokemon
+	ret
+
+.opp_play_area
+	xor a
+	ld [wIsDamageToSelf], a
+	call SwapTurn
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	call Random
+	ld b, a
+	call .damage
+	call SwapTurn
+	ret
+
+BigThunderEffect: ; 2e7cb (b:67cb)
+	call ExchangeRNG
+	ld de, 70 ; damage to inflict
+	call RandomlyDamagePlayAreaPokemon
+	ret

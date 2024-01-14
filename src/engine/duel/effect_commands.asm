@@ -1074,15 +1074,6 @@ UnaffectedByResistanceEffectCommands:
 	dbw EFFECTCMDTYPE_AI, UnaffectedByResistanceEffect
 	db  $00
 
-ZapdosPealOfThunderEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PealOfThunder_InitialEffect
-	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, PealOfThunder_RandomlyDamageEffect
-	db  $00
-
-ZapdosBigThunderEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, BigThunderEffect
-	db  $00
-
 NutritionSupportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NutritionSupport_AttachEnergyEffect

@@ -6072,8 +6072,8 @@ ZapdosLv68Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw ZapdosPealOfThunderEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	dw NONE ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
@@ -6084,12 +6084,12 @@ ZapdosLv68Card:
 	tx BigThunderName ; name
 	tx BigThunderDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw ZapdosBigThunderEffectCommands ; effect commands
+	db 50 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_BIG_THUNDER ; animation
 
