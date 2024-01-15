@@ -3,7 +3,7 @@
 
 ; doubles the damage at de if swords dance or focus energy was used
 ; in the last turn by the turn holder's arena Pokemon
-HandleDoubleDamageSubstatus:
+HandleDamageBonusSubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
@@ -1202,7 +1202,7 @@ ClearChangedTypesIfWeezing:
 
 ; doubles the damage at de if swords dance or focus energy was used
 ; in the last turn by the turn holder's arena Pokemon
-HandleDoubleDamageSubstatus:
+HandleDamageBonusSubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]

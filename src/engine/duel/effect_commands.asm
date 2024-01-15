@@ -915,6 +915,10 @@ HardenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HardenEffect
 	db  $00
 
+CloseCombatEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IncreaseDamageTakenBy20Effect
+	db  $00
+
 RhydonRamEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Ram_RecoilSwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Ram_SelectSwitchEffect

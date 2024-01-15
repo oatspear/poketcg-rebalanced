@@ -1297,3 +1297,9 @@ UnaffectedByResistanceDescription:
 	text "This attack's damage is not affected"
 	line "by Resistance."
 	done
+
+IncreaseDamageTakenBy20Description:
+	text "During your opponent's next turn,"
+	line "attacks against this Pokémon do"
+	line "20 more damage."
+	done

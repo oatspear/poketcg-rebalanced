@@ -2666,7 +2666,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HitmonleeDescription                               ; 0x0a5b
 	textpointer HitmonchanName                                     ; 0x0a5c
 	textpointer JabName                                            ; 0x0a5d
-	textpointer SpecialPunch                                       ; 0x0a5e
+	textpointer CloseCombatName
 	textpointer PunchingName                                       ; 0x0a5f
 	textpointer HitmonchanDescription                              ; 0x0a60
 	textpointer RhyhornName                                        ; 0x0a61
@@ -3084,6 +3084,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MountainBreakName
 	textpointer MountainBreakDescription
 	textpointer UnaffectedByResistanceDescription
+	textpointer IncreaseDamageTakenBy20Description
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

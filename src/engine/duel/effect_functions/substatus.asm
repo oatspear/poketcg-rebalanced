@@ -17,6 +17,11 @@ ReduceDamageTakenBy10Effect:
 	jr ApplySubstatus1ToAttackingCard
 
 
+IncreaseDamageTakenBy20Effect:
+	ld a, SUBSTATUS1_VULNERABLE_20
+	jr ApplySubstatus1ToAttackingCard
+
+
 ; apply a status condition of type 1 identified by register a to the target
 ApplySubstatus1ToAttackingCard:
 	push af

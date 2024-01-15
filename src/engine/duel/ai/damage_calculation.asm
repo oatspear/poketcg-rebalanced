@@ -133,7 +133,7 @@ _CalculateDamage_VersusDefendingPokemon: ; 14462 (5:4462)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
 ; 1. apply damage bonus effects
-	call z, HandleDoubleDamageSubstatus
+	call z, HandleDamageBonusSubstatus
 ; 2. apply weakness bonus
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
@@ -350,7 +350,7 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 
 	call SwapTurn
 ; 1. apply damage bonus effects
-	call HandleDoubleDamageSubstatus
+	call HandleDamageBonusSubstatus
 ; 2. apply weakness bonus
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a

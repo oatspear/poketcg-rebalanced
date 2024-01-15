@@ -801,8 +801,8 @@ JabName: ; 5f75a (17:775a)
 	text "Jab"
 	done
 
-SpecialPunch: ; 5f75f (17:775f)
-	text "Special Punch"
+CloseCombatName:
+	text "Close Combat"
 	done
 
 PunchingName: ; 5f76e (17:776e)

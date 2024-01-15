@@ -39,6 +39,10 @@
 #### Geodude
 - New attack: **Rock Throw** (FC): 20 damage; damage is not affected by Resistance.
 
+#### Hitmonchan
+- **Special Punch**: removed.
+- New attack: **Close Combat** (FC): 40 damage; takes 20 more damage from attacks next turn.
+
 ### Psychic Changes
 
 #### Wigglytuff

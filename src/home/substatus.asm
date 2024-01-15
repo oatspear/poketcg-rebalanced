@@ -1,13 +1,20 @@
 ; doubles the damage at de if swords dance or focus energy was used
 ; in the last turn by the turn holder's arena Pokemon
+; also applies other damage bonus effects based on the Defender's substatus 1
+; or the attacker's substatus 2.
 ; preserves: bc
-HandleDoubleDamageSubstatus:
+HandleDamageBonusSubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
-	ret z
-; double damage at de
-	jp DoubleDE
+	call nz, DoubleDE
+
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
+	call GetNonTurnDuelistVariable
+	cp SUBSTATUS1_VULNERABLE_20
+	ret nz
+	ld hl, 20
+	jp AddToDamage_DE
 
 ; check if the attacking card (non-turn holder's arena card) has any substatus that
 ; reduces the damage dealt this turn (SUBSTATUS2).
@@ -38,8 +45,6 @@ HandleDefenderDamageReductionEffects:
 	cp SUBSTATUS1_NO_DAMAGE_FROM_BASIC
 	jr z, .no_damage_from_basic
 	cp SUBSTATUS1_NO_DAMAGE
-	jr z, .no_damage
-	cp SUBSTATUS1_NO_DAMAGE_10
 	jr z, .no_damage
 	cp SUBSTATUS1_NO_DAMAGE_11
 	jr z, .no_damage

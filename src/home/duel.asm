@@ -1954,7 +1954,7 @@ ApplyDamageModifiers_DamageToTarget:
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 ; 1. apply damage bonus effects
-	call HandleDoubleDamageSubstatus
+	call HandleDamageBonusSubstatus
 ; 2. apply weakness bonus
 	; call Debug_Print_DE
 	ld a, [wDamageFlags]
