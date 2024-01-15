@@ -3009,20 +3009,13 @@ Amnesia_CheckAttacks: ; 2d149 (b:5149)
 	or a
 	ret
 
-Amnesia_PlayerSelectEffect: ; 2d16f (b:516f)
-	call PlayerPickAttackForAmnesia
-	ret
-
 Amnesia_AISelectEffect: ; 2d173 (b:5173)
 	call AIPickAttackForAmnesia
 	ldh [hTemp_ffa0], a
 	ret
 
-Amnesia_DisableEffect: ; 2d179 (b:5179)
-	call ApplyAmnesiaToAttack
-	ret
-
-PlayerPickAttackForAmnesia: ; 2d17d (b:517d)
+Amnesia_PlayerSelectEffect:
+PlayerPickAttackForAmnesia:
 	ldtx hl, ChooseAttackOpponentWillNotBeAbleToUseText
 	call DrawWideTextBox_WaitForInput
 	call HandleDefendingPokemonAttackSelection
@@ -3032,7 +3025,8 @@ PlayerPickAttackForAmnesia: ; 2d17d (b:517d)
 
 ; applies the Amnesia effect on the defending Pokemon,
 ; for the attack index in hTemp_ffa0.
-ApplyAmnesiaToAttack: ; 2d18a (b:518a)
+Amnesia_DisableEffect:
+ApplyAmnesiaToAttack:
 	ld a, SUBSTATUS2_AMNESIA
 	call ApplySubstatus2ToDefendingCard
 	ld a, [wNoDamageOrEffect]
@@ -3063,26 +3057,7 @@ ApplyAmnesiaToAttack: ; 2d18a (b:518a)
 	call LoadTxRam2
 	ldtx hl, WasChosenForTheEffectOfAmnesiaText
 	call DrawWideTextBox_WaitForInput
-	call SwapTurn
-	ret
-
-PoliwhirlDoubleslap_AIEffect: ; 2d1c0 (b:51c0)
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
-
-PoliwhirlDoubleslap_MultiplierEffect: ; 2d1c8 (b:51c8)
-	ld hl, 30
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes_BankB
-	ld e, a
-	add a
-	add e
-	call ATimes10
-	call SetDefiniteDamage
-	ret
+	jp SwapTurn
 
 
 Whirlpool_PlayerSelectEffect: ; 2d1e6 (b:51e6)
