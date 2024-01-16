@@ -1318,9 +1318,18 @@ RockAndRollName:
 	done
 
 RockAndRollDescription:
-	text "Each of your Pokémon's attacks"
-	line "do 10 more damage and their"
-	line "Retreat Cost is <COLORLESS> more."
+	text "Your Pokémon's attacks do 10 more"
+	line "damage, but their Retreat Cost"
+	line "is <COLORLESS> more."
 	line "Only one Pokémon Power with this"
 	line "name can be active at any time."
+	done
+
+BodyguardName:
+	text "Bodyguard"
+	done
+
+BodyguardDescription:
+	text "Prevent all damage done to your"
+	line "Benched Pokémon by attacks."
 	done

@@ -123,13 +123,18 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	ret c
 	ld a, [wTempPlayAreaLocation_cceb]
 	or a
-	call nz, HandleDefenderDamageReductionEffects.pkmn_power
+	jr z, .not_bench
+	call IsBodyguardActive
+	jr c, .no_damage
+	call HandleDefenderDamageReductionEffects.pkmn_power
+.not_bench
 	push de ; push damage from call above, which handles Invisible Wall and Kabuto Armor
 	call HandleNoDamageOrEffectSubstatus.pkmn_power
 	; call nc, HandleTransparency
 	pop de ; restore damage
 	ret nc
-	; if carry was set due to NShield or Transparency, damage is 0
+; if carry was set due to NShield or Transparency, damage is 0
+.no_damage
 	ld de, 0
 	ret
 
@@ -475,6 +480,7 @@ ArePokemonPowersDisabled:
 ; outputs:
 ;   a: 0 if not found; 1 if found
 ;   carry: set iff found
+; preserves: hl, bc, de
 IsToxicGasActive:
 	push bc
 	ld c, WEEZING
@@ -485,9 +491,12 @@ IsToxicGasActive:
 ; Check whether a given Pokémon is found in either player's Active Spot,
 ; and whether it is Pokémon Power capable.
 ; Returns carry if the Pokémon card is at least found once.
+; input:
+;   c: ID of the Pokémon to check
 ; outputs:
 ;   a: 0 if not found; 1 if found
 ;   carry: set iff found
+; preserves: hl, bc, de
 IsActiveSpotPokemonPowerActive:
 	push hl
 	push de
@@ -531,12 +540,23 @@ IsActiveSpotPokemonPowerActive:
 
 
 ; return carry if turn holder has Mew and its Clairvoyance Pkmn Power is active
+; preserves: bc, de
 IsClairvoyanceActive:
 	call ArePokemonPowersDisabled
 	ccf
 	ret nc
 	ld a, MEW_LV15
-	jp CountPokemonIDInPlayArea
+	jp GetFirstPokemonWithAvailablePower
+
+
+; return carry if turn holder has Marowak and its Bodyguard Pkmn Power is active
+; preserves: bc, de
+IsBodyguardActive:
+	call ArePokemonPowersDisabled  ; preserves: bc, de
+	ccf
+	ret nc
+	ld a, 0  ; TODO insert Pokémon ID
+	jp GetFirstPokemonWithAvailablePower  ; preserves: hl, bc, de
 
 
 ; return carry if any duelist has Aerodactyl and its Prehistoric Power Pkmn Power is active
@@ -549,8 +569,9 @@ IsClairvoyanceActive:
 ; 	ccf
 ; 	ret
 
-; return carry if a Pokémon Power capable Aerodactyl is found in either player's
-; Active Spot.
+; return carry if a Pokémon Power capable Aerodactyl
+; is found in either player's Active Spot.
+; preserves: hl, bc, de
 IsPrehistoricPowerActive:
 	push bc
 	ld c, AERODACTYL
@@ -585,6 +606,7 @@ CountPokemonIDInBothPlayAreas:
 ; turn holder's play area. Also return carry if the Pokemon card is at least found once.
 ; if the Pokemon is asleep, confused, or paralyzed (Pkmn Power-incapable), it doesn't count.
 ; input: a = Pokemon card ID to search
+; preserves: hl, bc, de
 CountPokemonIDInPlayArea:
 	push hl
 	push de
@@ -642,6 +664,7 @@ CountPokemonIDInPlayArea:
 ; output:
 ;   a: PLAY_AREA_* of the first Pokémon with given ID | $ff
 ;   carry: set if a Pokémon is found
+; preserves: hl, bc, de
 GetFirstPokemonWithAvailablePower:
 	push hl
 	push de

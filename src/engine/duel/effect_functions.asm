@@ -680,19 +680,26 @@ Put1DamageCounterOnTarget:
 ; preserves:
 ;   hl, de, bc
 ApplyDirectDamage:
+	push hl
+	push de
+	push bc
 	ld a, ATK_ANIM_BENCH_HIT
 	ld [wLoadedAttackAnimation], a
 	ld a, e
 	ld [wTempPlayAreaLocation_cceb], a
 	or a ; cp PLAY_AREA_ARENA
-	jr nz, .skip_no_damage_or_effect_check
+	jr nz, .bench
+; arena
 	ld a, [wNoDamageOrEffect]
 	or a
-	ret nz
+	jr nz, .no_damage
+	jr .skip_no_damage_or_effect_check
+.bench
+	call IsBodyguardActive
+	jr nc, .skip_no_damage_or_effect_check
+.no_damage
+	ld d, 0
 .skip_no_damage_or_effect_check
-	push hl
-	push de
-	push bc
 	xor a
 	ld [wNoDamageOrEffect], a
 	ld e, d
