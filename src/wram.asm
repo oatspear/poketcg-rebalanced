@@ -1556,6 +1556,7 @@ wce76:: ; ce76
 wTempPokemonID_ce7c:: ; ce7c
 	ds $1
 
+; unused, unless we extend IDs to two bytes
 	ds $1
 
 wce7e:: ; ce7e
