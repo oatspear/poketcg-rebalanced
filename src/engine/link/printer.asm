@@ -1,3 +1,72 @@
+; serial transfer-related
+SendPrinterPacket:
+	push hl
+	ld hl, wce64
+	; Preamble
+	ld a, $88
+	ld [hli], a          ; [wce64] ← $88
+	ld a, $33
+	ld [hli], a          ; [wce65] ← $33
+
+	; Header
+	ld [hl], d           ; [wce66] ← d
+	inc hl
+	ld [hl], e           ; [wce67] ← e
+	inc hl
+	ld [hl], c           ; [wce68] ← c
+	inc hl
+	ld [hl], b           ; [wce69] ← b
+	inc hl
+
+	pop de
+	ld [hl], e           ; [wPrinterPacketDataPtr] ← l
+	inc hl
+	ld [hl], d           ; [wce6b] ← h
+	inc hl
+	ld de, $ff45
+	ld [hl], e           ; [wce6c] ← $45
+	inc hl
+	ld [hl], d           ; [wce6d] ← $ff
+	ld hl, wSerialDataPtr
+	ld [hl], LOW(wce64)  ; [wSerialDataPtr] ← $64
+	inc hl
+	ld [hl], HIGH(wce64) ; [wSerialDataPtr] ← $ce
+	call Func_0e8e
+	ld a, $1
+	ld [wce63], a        ; [wce63] ← 1
+	call Func_31fc
+.asm_315d
+	call DoFrame
+	ld a, [wce63]
+	or a
+	jr nz, .asm_315d
+	call ResetSerial
+
+	ld bc, 1500
+.asm_316c
+	dec bc
+	ld a, b
+	or c
+	jr nz, .asm_316c
+
+	ld a, [wce6e]
+	cp $81
+	jr nz, .asm_3182
+	ld a, [wPrinterStatus]
+	ld l, a
+	and $f1
+	ld a, l
+	ret z
+	scf
+	ret
+
+.asm_3182
+	ld a, $ff
+	ld [wPrinterStatus], a
+	scf
+	ret
+
+
 ; sends serial data to printer
 ; if there's an error in connection,
 ; show Printer Not Connected scene with error message
