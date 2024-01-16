@@ -134,6 +134,7 @@ _CalculateDamage_VersusDefendingPokemon: ; 14462 (5:4462)
 	or a
 ; 1. apply damage bonus effects
 	call z, HandleDamageBonusSubstatus
+	call HandleDamageRelatedPowers
 ; 2. apply weakness bonus
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
@@ -351,6 +352,7 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 	call SwapTurn
 ; 1. apply damage bonus effects
 	call HandleDamageBonusSubstatus
+	call HandleDamageRelatedPowers
 ; 2. apply weakness bonus
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a

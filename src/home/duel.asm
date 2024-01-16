@@ -1955,6 +1955,7 @@ ApplyDamageModifiers_DamageToTarget:
 	ldh [hTempPlayAreaLocation_ff9d], a
 ; 1. apply damage bonus effects
 	call HandleDamageBonusSubstatus
+	call HandleDamageRelatedPowers
 ; 2. apply weakness bonus
 	; call Debug_Print_DE
 	ld a, [wDamageFlags]
@@ -2146,6 +2147,22 @@ ApplyAttachedDefender:
 	ld l, a
 	ld h, 0
 	jp SubtractFromDamage_DE
+
+
+HandleDamageRelatedPowers:
+	call ArePokemonPowersDisabled  ; preserves de
+	ret c  ; Powers are disabled
+; Badge of Discipline
+	ld a, MACHOKE
+	call CountPokemonIDInPlayArea  ; preserves de
+	ret nc
+	; call GetArenaCardColor  ; preserves de
+	; cp FIGHTING
+	; ret nz
+	ld hl, wDamageFlags
+	set UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, [hl]
+	ret
+
 
 ; hl: address to subtract HP from
 ; de: how much HP to subtract (damage to deal)

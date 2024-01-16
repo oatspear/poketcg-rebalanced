@@ -1303,3 +1303,12 @@ IncreaseDamageTakenBy40Description:
 	line "this Pokémon takes 40 more damage"
 	line "from attacks."
 	done
+
+BadgeOfDisciplineName:
+	text "Badge of Discipline"
+	done
+
+BadgeOfDisciplineDescription:
+	text "The damage of your Pokémon's attacks"
+	line "is not affected by Resistance."
+	done

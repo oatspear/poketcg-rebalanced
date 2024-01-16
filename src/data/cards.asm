@@ -6474,18 +6474,18 @@ MachokeCard:
 	tx MachopName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
-	tx KarateChopName ; name
-	tx KarateChopDescription ; description
-	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_MINUS ; category
-	dw KarateChopEffectCommands ; effect commands
+	energy 0 ; energies
+	tx BadgeOfDisciplineName ; name
+	tx BadgeOfDisciplineDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_7 ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 2 ; energies

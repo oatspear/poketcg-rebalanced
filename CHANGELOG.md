@@ -36,6 +36,10 @@
 - **Earthquake**: reduced base damage from 70 to 50.
 - New attack: **Landslide** (FC): 30 damage; discards the top 3 cards from both decks.
 
+#### Machoke
+- **Karate Chop**: removed.
+- New Pokémon Power: **Badge of Discipline**: your Pokémon's attacks ignore Resistance.
+
 #### Geodude
 - New attack: **Rock Throw** (FC): 20 damage; damage is not affected by Resistance.
 
