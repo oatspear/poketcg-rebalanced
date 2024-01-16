@@ -6622,23 +6622,23 @@ GravelerCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	db GRAVELER
-	db 60 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx GeodudeName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1, COLORLESS, 1 ; energies
-	tx RockThrowName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	energy 0 ; energies
+	tx RockAndRollName ; name
+	tx RockAndRollDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_ROCK_THROW ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy FIGHTING, 2, COLORLESS, 1 ; energies

@@ -3087,6 +3087,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer IncreaseDamageTakenBy40Description
 	textpointer BadgeOfDisciplineName
 	textpointer BadgeOfDisciplineDescription
+	textpointer RockAndRollName
+	textpointer RockAndRollDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

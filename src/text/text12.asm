@@ -1312,3 +1312,15 @@ BadgeOfDisciplineDescription:
 	text "The damage of your Pokémon's attacks"
 	line "is not affected by Resistance."
 	done
+
+RockAndRollName:
+	text "Rock And Roll"
+	done
+
+RockAndRollDescription:
+	text "Each of your Pokémon's attacks"
+	line "do 10 more damage and their"
+	line "Retreat Cost is <COLORLESS> more."
+	line "Only one Pokémon Power with this"
+	line "name can be active at any time."
+	done

@@ -43,6 +43,10 @@
 #### Geodude
 - New attack: **Rock Throw** (FC): 20 damage; damage is not affected by Resistance.
 
+#### Graveler
+- Increased HP from 60 to 80.
+- New Pokémon Power: **Rock And Roll**: the Active Pokémon's attacks do 10 more damage; its Retreat Cost increases by 1.
+
 #### Hitmonlee
 - Increased HP from 60 to 70.
 - **High Jump Kick**: reduced cost from (FFC) to (FCC); increased damage from 40 to 50; does 20 recoil damage.
