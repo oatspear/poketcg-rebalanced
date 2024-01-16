@@ -39,6 +39,10 @@
 #### Geodude
 - New attack: **Rock Throw** (FC): 20 damage; damage is not affected by Resistance.
 
+#### Hitmonlee
+- Increased HP from 60 to 70.
+- **High Jump Kick**: reduced cost from (FFC) to (FCC); increased damage from 40 to 50; does 20 recoil damage.
+
 #### Hitmonchan
 - **Jab**: removed.
 - **Special Punch**: removed.
