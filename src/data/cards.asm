@@ -7000,12 +7000,12 @@ HitmonchanCard:
 
 	; attack 1
 	energy FIGHTING, 1 ; energies
-	tx JabName ; name
-	dw NONE ; description
+	tx CloseCombatName ; name
+	tx IncreaseDamageTakenBy40Description ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw CloseCombatEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7013,13 +7013,13 @@ HitmonchanCard:
 	db ATK_ANIM_PUNCH ; animation
 
 	; attack 2
-	energy FIGHTING, 1, COLORLESS, 1 ; energies
-	tx CloseCombatName ; name
-	tx IncreaseDamageTakenBy20Description ; description
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	tx SkyUppercutName ; name
+	tx UnaffectedByResistanceDescription ; description
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw CloseCombatEffectCommands ; effect commands
+	dw UnaffectedByResistanceEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

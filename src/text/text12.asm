@@ -1298,8 +1298,8 @@ UnaffectedByResistanceDescription:
 	line "by Resistance."
 	done
 
-IncreaseDamageTakenBy20Description:
+IncreaseDamageTakenBy40Description:
 	text "During your opponent's next turn,"
-	line "attacks against this Pokémon do"
-	line "20 more damage."
+	line "this Pokémon takes 40 more damage"
+	line "from attacks."
 	done

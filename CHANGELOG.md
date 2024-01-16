@@ -40,8 +40,10 @@
 - New attack: **Rock Throw** (FC): 20 damage; damage is not affected by Resistance.
 
 #### Hitmonchan
+- **Jab**: removed.
 - **Special Punch**: removed.
-- New attack: **Close Combat** (FC): 40 damage; takes 20 more damage from attacks next turn.
+- New attack: **Close Combat** (F): 40 damage; takes 40 more damage from attacks next turn.
+- New attack: **Sky Uppercut** (FFC): 40 damage; damage is not affected by Resistance.
 
 ### Psychic Changes
 

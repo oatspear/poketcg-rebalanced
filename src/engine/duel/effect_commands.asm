@@ -916,7 +916,7 @@ HardenEffectCommands:
 	db  $00
 
 CloseCombatEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IncreaseDamageTakenBy20Effect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IncreaseDamageTakenBy40Effect
 	db  $00
 
 RhydonRamEffectCommands:

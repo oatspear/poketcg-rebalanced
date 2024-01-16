@@ -11,9 +11,9 @@ HandleDamageBonusSubstatus:
 
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
 	call GetNonTurnDuelistVariable
-	cp SUBSTATUS1_VULNERABLE_20
+	cp SUBSTATUS1_VULNERABLE_40
 	ret nz
-	ld hl, 20
+	ld hl, 40
 	jp AddToDamage_DE
 
 ; check if the attacking card (non-turn holder's arena card) has any substatus that

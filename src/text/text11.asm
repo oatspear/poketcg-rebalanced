@@ -797,8 +797,8 @@ HitmonchanName: ; 5f74e (17:774e)
 	text "Hitmonchan"
 	done
 
-JabName: ; 5f75a (17:775a)
-	text "Jab"
+SkyUppercutName:
+	text "Sky Uppercut"
 	done
 
 CloseCombatName:
