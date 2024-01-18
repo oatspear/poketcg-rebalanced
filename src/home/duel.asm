@@ -2155,7 +2155,8 @@ HandleDamageRelatedPowers:
 ; Badge of Discipline
 	ld a, MACHOKE
 	call GetFirstPokemonWithAvailablePower  ; preserves de
-	jr nc, .rock_and_roll
+	; jr nc, .rock_and_roll
+	ret nc
 	; call GetArenaCardColor  ; preserves de
 	; cp FIGHTING
 	; ret nz
@@ -2163,12 +2164,12 @@ HandleDamageRelatedPowers:
 	set UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, [hl]
 	ret
 
-.rock_and_roll
-	ld a, GRAVELER
-	call GetFirstPokemonWithAvailablePower  ; preserves de
-	ret nc
-	ld hl, 10
-	jp AddToDamage_DE
+; .rock_and_roll
+; 	ld a, GRAVELER
+; 	call GetFirstPokemonWithAvailablePower  ; preserves de
+; 	ret nc
+; 	ld hl, 10
+; 	jp AddToDamage_DE
 
 
 ; hl: address to subtract HP from
