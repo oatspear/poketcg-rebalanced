@@ -847,6 +847,13 @@ MudSportEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MudSport_PlayerSelection
 	db  $00
 
+MendEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MendEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, AttachBasicEnergyFromDiscardPile_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, RetrieveBasicEnergyFromDiscardPile_AISelectEffect
+	db  $00
+
 EnergyAbsorptionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AttachToPokemonEffect

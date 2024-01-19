@@ -164,6 +164,16 @@ HandlePlayerSelectionFromDiscardPileList_AllowCancel:
 ; 	jr HandlePlayerSelectionFromDiscardPileList_Forced
 
 
+; Handles screen for the Player to choose a Basic Energy card from the Discard Pile.
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if Player cancelled selection
+HandlePlayerSelectionFromDiscardPile_BasicEnergy_Forced:
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	jr HandlePlayerSelectionFromDiscardPileList_Forced
+
+
 ; Handles screen for the Player to choose any card from a pre-built Discard Pile list.
 ; The selection is forced. The Player cannot cancel by pressing B.
 ; input:

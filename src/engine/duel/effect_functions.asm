@@ -1184,6 +1184,14 @@ PrimordialDream_MorphAndAddToHandEffect:
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
 
+; Attaches the selected energy from the discard pile to the user and heals 10 damage.
+MendEffect:
+	ld a, $ff
+	ldh [hTempList + 1], a
+	call EnergyAbsorption_AttachToPokemonEffect
+	jp Heal10DamageEffect
+
+
 Constrict_TrapDamageBoostEffect:
 	call IncreaseRetreatCostEffect
 	jp Constrict_DamageBoostEffect
@@ -4329,6 +4337,14 @@ GatherToxins_PlayerSelectEffect:
 	ret
 
 
+AttachBasicEnergyFromDiscardPile_PlayerSelectEffect:
+	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
+	call DrawWideTextBox_WaitForInput
+	call HandlePlayerSelectionFromDiscardPile_BasicEnergy_Forced
+	ldh [hTemp_ffa0], a
+	ret
+
+
 RetrieveBasicEnergyFromDiscardPile_PlayerSelectEffect:
 	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
 	call DrawWideTextBox_WaitForInput
@@ -4390,12 +4406,6 @@ PickFirstNCardsFromList_SelectEffect:
 	ret
 
 
-CollectFire_AttachToPokemonEffect:
-EnergyAbsorption_AttachToPokemonEffect:
-GatherToxins_AttachToPokemonEffect:
-	ld e, CARD_LOCATION_ARENA
-	jp SetCardLocationsFromDiscardPileToPlayArea
-
 AttachEnergyFromDiscard_AttachToPokemonEffect:
 	call IsPlayerTurn
 	jr c, .player_turn
@@ -4430,6 +4440,15 @@ AttachEnergyFromDiscard_AttachToPokemonEffect:
 	jr .loop
 	or a
 	ret
+
+
+CollectFire_AttachToPokemonEffect:
+GatherToxins_AttachToPokemonEffect:
+EnergyAbsorption_AttachToPokemonEffect:
+	ld e, CARD_LOCATION_ARENA
+	; jr SetCardLocationsFromDiscardPileToPlayArea
+	; fallthrough
+
 
 ; input:
 ;   e: CARD_LOCATION_* constant
