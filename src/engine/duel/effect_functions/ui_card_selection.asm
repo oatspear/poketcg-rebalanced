@@ -88,119 +88,93 @@ HandlePlayerSelection2HandCardsExcludeSelf:
 ; Choose Cards From Discard Pile
 ; ------------------------------------------------------------------------------
 
-; Handles screen for the Player to choose an Item Trainer card
-; from the Discard Pile.
-; output:
-;   a: deck index of the selected card | $ff
-;   [hTempCardIndex_ff98]: deck index of the selected card | $ff
-;   carry: set iff cancelled
-HandlePlayerSelectionItemTrainerFromDiscardPile:
-	call CreateItemCardListFromDiscardPile
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, PleaseSelectCardText
-	ldtx de, PlayerDiscardPileText
-	bank1call SetCardListHeaderText
-; .loop_input
-	bank1call DisplayCardList
-	jr c, .cancel
-	ldh a, [hTempCardIndex_ff98]
-	ret
-
-.cancel
-	ld a, $ff
-	ldh [hTempCardIndex_ff98], a
-	ret
 
 PlayerSelectAndStoreItemCardFromDiscardPile:
-	call HandlePlayerSelectionItemTrainerFromDiscardPile
+	call HandlePlayerSelectionFromDiscardPile_ItemTrainer
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
+; Handles screen for the Player to choose an Item Trainer card from the Discard Pile.
+; output:
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card | $ff
+;   carry: set if Player cancelled selection
+HandlePlayerSelectionFromDiscardPile_ItemTrainer:
+	call CreateItemCardListFromDiscardPile
+	jr HandlePlayerSelectionFromDiscardPileList_AllowCancel
 
-; Handles screen for the Player to choose a Basic Pokémon card
-; from the Discard Pile.
+
+; Handles screen for the Player to choose a Basic Pokémon card from the Discard Pile.
 ; output:
 ;   a: deck index of the selected card
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 ;   carry: set if Player cancelled selection
-HandlePlayerSelectionBasicPokemonFromDiscardPile_AllowCancel:
+HandlePlayerSelectionFromDiscardPile_BasicPokemon:
 	call CreateBasicPokemonCardListFromDiscardPile
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, PleaseSelectCardText
-	ldtx de, PlayerDiscardPileText
-	bank1call SetCardListHeaderText
-	bank1call DisplayCardList
-	ldh a, [hTempCardIndex_ff98]
-	ret nc
-	ld a, $ff
-	ret
+	jr HandlePlayerSelectionFromDiscardPileList_AllowCancel
 
 
-; Handles screen for the Player to choose a Pokémon card
-; from the Discard Pile.
+; Handles screen for the Player to choose a Pokémon card from the Discard Pile.
 ; output:
 ;   a: deck index of the selected card
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 ;   carry: set if Player cancelled selection
-HandlePlayerSelectionPokemonFromDiscardPile_AllowCancel:
+HandlePlayerSelectionFromDiscardPile_AnyPokemon:
 	call CreatePokemonCardListFromDiscardPile
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, PleaseSelectCardText
-	ldtx de, PlayerDiscardPileText
-	bank1call SetCardListHeaderText
-	bank1call DisplayCardList
-	ldh a, [hTempCardIndex_ff98]
-	ret nc
-	ld a, $ff
-	ret
-
-; HandlePlayerSelectionPokemonFromDiscardPile_Forced:
-; 	call CreatePokemonCardListFromDiscardPile
-; 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-; 	ldtx hl, PleaseSelectCardText
-; 	ldtx de, PlayerDiscardPileText
-; 	bank1call SetCardListHeaderText
-; .loop_input
-; 	bank1call DisplayCardList
-; 	jr c, .loop_input
-; 	ldh a, [hTempCardIndex_ff98]
-; 	ret
+	jr HandlePlayerSelectionFromDiscardPileList_AllowCancel
 
 
-; Handles screen for the Player to choose a Basic Energy card
-; from the Discard Pile.
+; Handles screen for the Player to choose a Basic Energy card from the Discard Pile.
 ; output:
 ;   a: deck index of the selected card
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 ;   carry: set if Player cancelled selection
-HandlePlayerSelectionBasicEnergyFromDiscardPile_AllowCancel:
+HandlePlayerSelectionFromDiscardPile_BasicEnergy:
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, PleaseSelectCardText
-	ldtx de, PlayerDiscardPileText
-	bank1call SetCardListHeaderText
-	bank1call DisplayCardList
-	ldh a, [hTempCardIndex_ff98]
-	ret nc
-	ld a, $ff
-	ret
+	jr HandlePlayerSelectionFromDiscardPileList_AllowCancel
+
+
+; Handles screen for the Player to choose any card from the Discard Pile.
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if Player cancelled selection
+HandlePlayerSelectionFromDiscardPile_AnyCard:
+	call CreateDiscardPileCardList
+	; jr HandlePlayerSelectionFromDiscardPileList_AllowCancel
+	; fallthrough
 
 
 ; Handles screen for the Player to choose any card from a pre-built Discard Pile list.
+; input:
+;   [wDuelTempList]: $ff terminated list of cards to choose from
 ; output:
 ;   a: deck index of the selected card
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 ;   carry: set if Player cancelled selection
-HandlePlayerSelectionAnyFromDiscardPileList_AllowCancel:
+HandlePlayerSelectionFromDiscardPileList_AllowCancel:
 	; call CreateDiscardPileCardList
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, PleaseSelectCardText
 	ldtx de, PlayerDiscardPileText
-	bank1call SetCardListHeaderText
-	bank1call DisplayCardList
-	ldh a, [hTempCardIndex_ff98]
-	ret nc
-	ld a, $ff
+	bank1call HandlePlayerSelectionFromCardList_AllowCancel
+	ret
+
+
+; HandlePlayerSelectionPokemonFromDiscardPile_Forced:
+; 	call CreatePokemonCardListFromDiscardPile
+; 	jr HandlePlayerSelectionFromDiscardPileList_Forced
+
+
+; Handles screen for the Player to choose any card from a pre-built Discard Pile list.
+; The selection is forced. The Player cannot cancel by pressing B.
+; input:
+;   [wDuelTempList]: $ff terminated list of cards to choose from
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+HandlePlayerSelectionFromDiscardPileList_Forced:
+	; call CreateDiscardPileCardList
+	ldtx de, PlayerDiscardPileText
+	bank1call HandlePlayerSelectionFromCardList_Forced
 	ret
 
 

@@ -1153,7 +1153,7 @@ PrimordialDream_PlayerSelectEffect:
 	; push af
 	ldtx hl, ChooseCardToPlaceInHandText
 	call DrawWideTextBox_WaitForInput
-	call HandlePlayerSelectionItemTrainerFromDiscardPile
+	call HandlePlayerSelectionFromDiscardPile_ItemTrainer
 	ret c
 	ldh [hAIPkmnPowerEffectParam], a
 	; pop af
@@ -4332,7 +4332,7 @@ GatherToxins_PlayerSelectEffect:
 RetrieveBasicEnergyFromDiscardPile_PlayerSelectEffect:
 	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
 	call DrawWideTextBox_WaitForInput
-	call HandlePlayerSelectionBasicEnergyFromDiscardPile_AllowCancel
+	call HandlePlayerSelectionFromDiscardPile_BasicEnergy
 	ldh [hTemp_ffa0], a
 	or a  ; ignore carry
 	ret
@@ -6253,7 +6253,7 @@ AttachEnergyFromHand_AttachEnergyEffect:
 
 
 Morph_PlayerSelectEffect:
-	call HandlePlayerSelectionBasicPokemonFromDiscardPile_AllowCancel
+	call HandlePlayerSelectionFromDiscardPile_BasicPokemon
 	ldh [hTemp_ffa0], a
 	ret
 
@@ -6705,7 +6705,7 @@ Discard_PlayerHandCardSelection:
 
 
 Maintenance_PlayerDiscardPileSelection:
-	call HandlePlayerSelectionItemTrainerFromDiscardPile
+	call HandlePlayerSelectionFromDiscardPile_ItemTrainer
 	ret c
 	ldh [hTempList + 1], a
 	ld a, $ff  ; terminating byte
@@ -7260,7 +7260,7 @@ MudSport_PlayerSelection:
 	; push af
 	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
 	call DrawWideTextBox_WaitForInput
-	call HandlePlayerSelectionBasicEnergyFromDiscardPile_AllowCancel
+	call HandlePlayerSelectionFromDiscardPile_BasicEnergy
 	ret c
 	ldh [hAIEnergyTransEnergyCard], a
 	; pop af

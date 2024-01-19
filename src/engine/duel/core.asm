@@ -1920,8 +1920,7 @@ DisplayCardListDetails:
 	call InitTextPrinting
 	call PrintTextNoDelay
 	ldtx hl, YouReceivedTheseCardsText
-	call DrawWideTextBox_WaitForInput
-	ret
+	jp DrawWideTextBox_WaitForInput
 
 ; handles the initial duel actions:
 ; - drawing starting hand and placing the Basic Pokemon cards
@@ -3314,13 +3313,47 @@ DisplayPlaceInitialPokemonCardsScreen:
 	pop af
 	ret
 
-Func_5542:
-	call CreateDiscardPileCardList
-	ret c
-	call InitAndDrawCardListScreenLayout
-	call SetDiscardPileScreenTexts
+; Handles screen for the Player to choose any card from a pre-built list.
+; input:
+;   de: pointer to location text (e.g., PlayerDiscardPileText)
+;   [wDuelTempList]: $ff terminated list of cards to choose from
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if Player cancelled selection
+HandlePlayerSelectionFromCardList_AllowCancel:
+	; call CreateDiscardPileCardList
+	push de
+	call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	pop de
+	ldtx hl, PleaseSelectCardText
+	call SetCardListHeaderText
 	call DisplayCardList
+	ldh a, [hTempCardIndex_ff98]
+	ret nc
+	ld a, $ff
 	ret
+
+; Handles screen for the Player to choose any card from a pre-built list.
+; input:
+;   de: pointer to location text (e.g., PlayerDiscardPileText)
+;   [wDuelTempList]: $ff terminated list of cards to choose from
+; output:
+;   a: deck index of the selected card
+;   [hTempCardIndex_ff98]: deck index of the selected card
+HandlePlayerSelectionFromCardList_Forced:
+	; call CreateDiscardPileCardList
+	push de
+	call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	pop de
+	ldtx hl, PleaseSelectCardText
+	call SetCardListHeaderText
+.loop_input
+	call DisplayCardList
+	jr c, .loop_input
+	ldh a, [hTempCardIndex_ff98]
+	ret
+
 
 ; draw the turn holder's discard pile screen
 OpenDiscardPileScreen:
@@ -3349,8 +3382,8 @@ SetDiscardPileScreenTexts:
 	ldtx de, OpponentsDiscardPileText
 .got_header_text
 	ldtx hl, ChooseTheCardYouWishToExamineText
-	call SetCardListHeaderText
-	ret
+	; jr SetCardListHeaderText
+	; fallthrough
 
 SetCardListHeaderText:
 	ld a, e
