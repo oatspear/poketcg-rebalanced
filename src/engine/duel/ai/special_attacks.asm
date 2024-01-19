@@ -17,16 +17,14 @@ HandleSpecialAIAttacks:
 	jp z, .Staryu
 	cp SCYTHER
 	jp z, .SwordsDanceAndFocusEnergy
-	cp VAPOREON_LV29
-	jp z, .SwordsDanceAndFocusEnergy
 	cp MAGNETON_LV28
 	jp z, .ChainLightning
 	cp MEW_LV23
 	jp z, .DevolutionBeam
 	; cp PORYGON
 	; jp z, .Conversion
-	cp MEWTWO_ALT_LV60
-	jp z, .EnergyAbsorption
+	cp GEODUDE
+	jp z, .Mend
 	cp MEWTWO_LV60
 	jp z, .EnergyAbsorption
 	cp BELLSPROUT
@@ -248,6 +246,18 @@ HandleSpecialAIAttacks:
 	ld a, CARD_LOCATION_DISCARD_PILE
 	call CheckIfAnyCardIDinLocation
 	jp nc, .zero_score
+	ld a, $82
+	ret
+
+.Mend:
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	cp 3
+	jp nc, .zero_score
+	ld e, FIGHTING_ENERGY
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call CheckIfAnyCardIDinLocation
+	ret nc
 	ld a, $82
 	ret
 

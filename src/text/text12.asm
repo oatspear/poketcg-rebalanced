@@ -1333,3 +1333,13 @@ BodyguardDescription:
 	text "Prevent all damage done to your"
 	line "Benched Pokémon by attacks."
 	done
+
+MendName:
+	text "Mend"
+	done
+
+MendDescription:
+	text "Attach a Basic Energy from your"
+	line "Discard Pile to this Pokémon."
+	line "Then, heal 10 damage."
+	done

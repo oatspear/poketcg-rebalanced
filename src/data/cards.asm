@@ -6576,18 +6576,18 @@ GeodudeCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
-	tx StoneBarrageName ; name
-	tx FlipUntilTails10xDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx MendName ; name
+	tx MendDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_X ; category
-	dw StoneBarrageEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw MendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_STONE_BARRAGE ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 1 ; energies

@@ -41,6 +41,8 @@
 - New Pokémon Power: **Badge of Discipline**: your Pokémon's attacks ignore Resistance.
 
 #### Geodude
+- **Stone Barrage**: removed.
+- New attack: **Mend** (C): attach an energy from the discard pile; heal 10 damage.
 - New attack: **Rock Throw** (FC): 20 damage; damage is not affected by Resistance.
 
 #### Graveler
