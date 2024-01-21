@@ -2154,7 +2154,9 @@ ApplyAttachedDefender:
 HandleDamageBoostingPowers:
 	; call ArePokemonPowersDisabled  ; preserves de
 	; ret c  ; Powers are disabled
+	push de
 	call IsFightingFuryActive
+	pop de
 	ret nc
 	ld hl, 10
 	jp AddToDamage_DE
@@ -2165,7 +2167,9 @@ HandleDamageBoostingPowers:
 HandleDamageReducingPowers:
 	; call ArePokemonPowersDisabled  ; preserves de
 	; ret c  ; Powers are disabled
+	push de
 	call IsStoneSkinActive
+	pop de
 	ret nc
 	jp ReduceDamageBy10_DE
 
