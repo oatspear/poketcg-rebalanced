@@ -1040,6 +1040,24 @@ DenProtector_AIEffect:
 ; ------------------------------------------------------------------------------
 
 
+; double damage if some stored value is true
+DoubleDamageIfCondition_DamageBoostEffect:
+	ldh a, [hTemp_ffa0]
+	or a
+	ret z
+	jp DoubleDamage_DamageBoostEffect
+
+DoubleDamageIfCondition_AIEffect:
+	ld a, [wDamage]
+	ld d, a  ; min damage
+	add a
+	ld e, a  ; max damage
+	ld a, d
+	; srl a
+	; add d    ; avg damage
+	jp SetExpectedAIDamage
+
+
 ; bonus damage if the Pokémon became Active this turn
 IfActiveThisTurn20BonusDamage_DamageBoostEffect:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3

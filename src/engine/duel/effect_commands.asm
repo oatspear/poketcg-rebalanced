@@ -487,6 +487,13 @@ SwordsDanceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FocusEnergyEffect
 	db  $00
 
+OptionalDoubleDamageEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleDamageIfCondition_DamageBoostEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, OptionalDoubleDamage_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, OptionalDoubleDamage_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, DoubleDamageIfCondition_AIEffect
+	; fallthrough
+
 NextTurnUnableToAttackEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NextTurnUnableToAttackEffect
 	db  $00

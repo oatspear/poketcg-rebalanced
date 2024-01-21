@@ -3737,8 +3737,7 @@ Prophecy_PlayerSelectEffect:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE
 	jr nc, .select_deck ; no cards, go back to deck selection
-	call HandleProphecyScreen
-	ret
+	jp HandleProphecyScreen
 
 Prophecy_ReorderDeckEffect:
 	ld hl, hAIPkmnPowerEffectParam
@@ -3751,8 +3750,7 @@ Prophecy_ReorderDeckEffect:
 ; non-turn duelist's deck
 	call SwapTurn
 	call .ReorderCards
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 .ReorderCards
 	ld c, 0
@@ -3780,8 +3778,7 @@ Prophecy_ReorderDeckEffect:
 	ret c
 ; print text in case it was the opponent
 	ldtx hl, SortedCardsInDuelistsDeckText
-	call DrawWideTextBox_WaitForInput
-	ret
+	jp DrawWideTextBox_WaitForInput
 
 ; draw and handle Player selection for reordering
 ; the top 3 cards of Deck.
@@ -6810,6 +6807,20 @@ WickedTentacle_AISelectEffect:
 	jp SwapTurn
 
 
+; Asks the Player whether they want to deal double damage
+; output:
+;   [hTemp_ffa0]: 0 if selected No; 1 if selected Yes
+OptionalDoubleDamage_PlayerSelectEffect:
+	ldtx hl, DoAdditionalDamageText
+	call YesOrNoMenuWithText
+	ld a, 1
+	jr nc, .store
+	xor a  ; no, reset carry
+.store
+	ldh [hTemp_ffa0], a
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Move Selected Cards
 ; ------------------------------------------------------------------------------
@@ -7163,6 +7174,24 @@ PrimalScythe_AISelectEffect:
 
 .found
 ; always discard
+	ldh [hTemp_ffa0], a
+	ret
+
+
+OptionalDoubleDamage_AISelectEffect:
+	call ApplyDamageModifiers_DamageToTarget  ; damage in e
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	cp e
+	jr c, .no  ; current HP is less than minimum damage
+	ld a, e
+	add a
+	cp [hl]
+	ld a, 1
+	jr nc, .store  ; double damage is enough
+.no
+	xor a
+.store
 	ldh [hTemp_ffa0], a
 	ret
 

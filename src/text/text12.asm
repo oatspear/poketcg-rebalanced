@@ -1380,6 +1380,10 @@ AvalancheDescription:
 	line "<COLORLESS> in your Pokémon's Retreat Costs."
 	done
 
+DoAdditionalDamageText:
+	text "Do additional damage?"
+	done
+
 StrongArmLariatName:
 	text "Strong-Arm Lariat"
 	done

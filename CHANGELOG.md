@@ -30,7 +30,13 @@
 
 #### Machoke
 - **Karate Chop**: removed.
+- **Seismic Toss**: removed.
 - New Pokémon Power: **Fighting Fury**: the user's Pokémon with attached (F) Energy deal 10 more damage when attacking.
+- New attack: **Submission** (FC): 50 damage, 20 recoil.
+
+#### Machamp
+- **Submission**: removed.
+- New attack: **Strong-Arm Lariat** (FFC): 60 damage; may do double damage, but is unable to attack next turn.
 
 #### Sandshrew
 - Increased HP from 40 to 50.
