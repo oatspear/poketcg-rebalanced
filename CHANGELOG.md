@@ -33,8 +33,8 @@
 
 #### Dugtrio
 - **Slash**: removed.
-- **Earthquake**: reduced base damage from 70 to 50.
-- New attack: **Landslide** (FC): 30 damage; discards the top 3 cards from both decks.
+- **Earthquake**: reduced cost from (FFC) to (FCC); reduced base damage from 70 to 50.
+- New attack: **Landslide** (FC): 30 damage; discards the top 2 cards from both decks.
 
 #### Machoke
 - **Karate Chop**: removed.
