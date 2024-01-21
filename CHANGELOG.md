@@ -47,6 +47,7 @@
 
 #### Graveler
 - Increased HP from 60 to 70.
+- Increased Retreat Cost from 1 to 2.
 - **Earthquake**: removed.
 - New Pokémon Power: **Stone Skin**: the user's Pokémon with attached (F) Energy take 10 less damage from attacks.
 - New attack: **Rock Slide** (FFC): 40 damage; 10 damage to 2 of the opponent's benched Pokémon.

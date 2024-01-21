@@ -6654,7 +6654,7 @@ GravelerCard:
 	db 10
 	db ATK_ANIM_STONE_BARRAGE ; animation
 
-	db 1 ; retreat cost
+	db 2 ; retreat cost
 	db WR_GRASS ; weakness
 	db WR_LIGHTNING ; resistance
 	tx RockName ; category
