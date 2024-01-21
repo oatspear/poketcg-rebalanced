@@ -37,33 +37,19 @@ HandleAttackerDamageReductionEffects:
 HandleDefenderDamageReductionEffects:
 	ld a, [wNoDamageOrEffect]
 	or a
-	jr nz, .no_damage
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
-	call GetTurnDuelistVariable
-	or a
-	jr z, .not_affected_by_substatus1
-	cp SUBSTATUS1_NO_DAMAGE_FROM_BASIC
-	jr z, .no_damage_from_basic
-	cp SUBSTATUS1_NO_DAMAGE
-	jr z, .no_damage
-	cp SUBSTATUS1_NO_DAMAGE_11
-	jr z, .no_damage
-	cp SUBSTATUS1_NO_DAMAGE_17
-	jr z, .no_damage
-	cp SUBSTATUS1_REDUCE_BY_10
-	jp z, ReduceDamageBy10_DE
-	cp SUBSTATUS1_REDUCE_BY_20
-	jp z, ReduceDamageBy20_DE
-	cp SUBSTATUS1_HARDEN
-	jr z, .prevent_less_than_40_damage
-	cp SUBSTATUS1_HALVE_DAMAGE
-	jr z, .halve_damage
-
-.not_affected_by_substatus1
+	jr z, .substatus1
+; no damage
+	ld de, 0
+	ret
+.substatus1
+	call HandleDefenderDamageReduction_Substatus
+.pkmn_power
 	call CheckCannotUseDueToStatus
 	ret c
+	; jr HandleDefenderDamageReduction_PokemonPowers
+	; fallthrough
 
-.pkmn_power
+HandleDefenderDamageReduction_PokemonPowers:
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
@@ -77,14 +63,40 @@ HandleDefenderDamageReductionEffects:
 	cp CLOYSTER
 	jp z, ReduceDamageBy20_DE ; Exoskeleton
 	cp KABUTO
-	jr z, .halve_damage ; kabuto armor
+	jp z, HalveDamage_DE ; kabuto armor
 	ret
+
+.prevent_30_or_more_damage
+	ld bc, 30
+	call CompareDEtoBC
+	ret c  ; de < 30
+	ld de, 0
+	ret
+
+
+HandleDefenderDamageReduction_Substatus:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
+	call GetTurnDuelistVariable
+	or a
+	ret z
+	cp SUBSTATUS1_NO_DAMAGE_FROM_BASIC
+	jr z, .no_damage_from_basic
+	cp SUBSTATUS1_NO_DAMAGE
+	jr z, .no_damage
+	cp SUBSTATUS1_REDUCE_BY_10
+	jp z, ReduceDamageBy10_DE
+	cp SUBSTATUS1_REDUCE_BY_20
+	jp z, ReduceDamageBy20_DE
+	cp SUBSTATUS1_HARDEN
+	jr z, .prevent_less_than_40_damage
+	cp SUBSTATUS1_HALVE_DAMAGE
+	call z, HalveDamage_DE
 
 .no_damage_from_basic
 	ld a, DUELVARS_ARENA_CARD_STAGE
 	call GetNonTurnDuelistVariable
 	or a
-	jr nz, .not_affected_by_substatus1  ; not a Basic Pokémon
+	ret nz  ; not a Basic Pokémon
 .no_damage
 	ld de, 0
 	ret
@@ -92,25 +104,9 @@ HandleDefenderDamageReductionEffects:
 .prevent_less_than_40_damage
 	ld bc, 40
 	call CompareDEtoBC
-	jr nc, .not_affected_by_substatus1  ; de >= 40
+	ret nc  ; de >= 40
 	ld de, 0
 	ret
-
-.prevent_30_or_more_damage
-	ld bc, 30
-	call CompareDEtoBC
-; no jump, this is a Pokémon Power
-	ret c  ; de < 30
-	ld de, 0
-	ret
-
-.halve_damage
-	sla d
-	rr e
-	bit 0, e
-	ret z
-	ld hl, -5
-	jp AddToDamage_DE
 
 
 ; check for Invisible Wall, Kabuto Armor, NShield, or Transparency, in order to
@@ -559,16 +555,6 @@ IsBodyguardActive:
 	jp GetFirstPokemonWithAvailablePower  ; preserves: hl, bc, de
 
 
-; return carry if any duelist has Aerodactyl and its Prehistoric Power Pkmn Power is active
-; IsPrehistoricPowerActive:
-; 	ld a, AERODACTYL
-; 	call CountPokemonIDInBothPlayAreas
-; 	ret nc
-; 	call ArePokemonPowersDisabled
-; 	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
-; 	ccf
-; 	ret
-
 ; return carry if a Pokémon Power capable Aerodactyl
 ; is found in either player's Active Spot.
 ; preserves: hl, bc, de
@@ -577,6 +563,58 @@ IsPrehistoricPowerActive:
 	ld c, AERODACTYL
 	call IsActiveSpotPokemonPowerActive
 	pop bc
+	ret
+
+
+; returns carry if the turn holder's Pokémon in the given location
+; benefits from Stone Skin
+; input:
+;   a: PLAY_AREA_* of the Pokémon benefiting from the Power
+; output:
+;   carry: set if Stone Skin is active
+IsStoneSkinActive:
+	ld b, a
+	ld c, FIGHTING
+	ld e, GRAVELER
+	jr IsSpecialEnergyPowerActive
+
+
+; returns carry if the turn holder's Active Pokémon benefits
+; from Fighting Fury
+; output:
+;   carry: set if Fighting Fury is active
+IsFightingFuryActive:
+	ld b, PLAY_AREA_ARENA
+	ld c, FIGHTING
+	ld e, MACHOKE
+	; jr IsSpecialEnergyPowerActive
+	; fallthrough
+
+
+; returns carry if the turn holder's Pokémon Power
+; that enhances Energies is active
+; input:
+;   b: PLAY_AREA_* of the Pokémon benefiting from the Power
+;   c: color of the energy to look for
+;   e: ID of the Pokémon granting the Power
+; output:
+;   carry: set if the Power is active
+IsSpecialEnergyPowerActive:
+	call ArePokemonPowersDisabled  ; preserves bc, de
+	ccf
+	ret nc
+	ld a, e
+	call GetFirstPokemonWithAvailablePower  ; preserves hl, bc, de
+	ret nc  ; not found
+; Feedback is returned in wAttachedEnergies and wTotalAttachedEnergies.
+	ld e, b
+	call GetPlayAreaCardAttachedEnergies  ; preserves hl, bc, de
+	ld hl, wAttachedEnergies
+	ld b, 0  ; bc is color offset
+	add hl, bc
+	ld a, [hl]
+	cp 1
+	ccf
 	ret
 
 
