@@ -122,7 +122,7 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	jr z, .not_bench
 	call IsBodyguardActive
 	jr c, .no_damage
-	call HandleDefenderDamageReductionEffects.pkmn_power
+	call HandleDefenderDamageReduction_PokemonPowers
 .not_bench
 	push de ; push damage from call above, which handles Invisible Wall and Kabuto Armor
 	call HandleNoDamageOrEffectSubstatus.pkmn_power

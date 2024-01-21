@@ -134,7 +134,7 @@ _CalculateDamage_VersusDefendingPokemon: ; 14462 (5:4462)
 	or a
 ; 1. apply damage bonus effects
 	call z, HandleDamageBonusSubstatus
-	call HandleDamageRelatedPowers
+	call HandleDamageBoostingPowers
 ; 2. apply weakness bonus
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
@@ -183,6 +183,8 @@ _CalculateDamage_VersusDefendingPokemon: ; 14462 (5:4462)
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedDefender
 ; 7. apply damage reduction effects
+	xor a  ; PLAY_AREA_ARENA
+	call HandleDamageReducingPowers
 	call HandleDefenderDamageReductionEffects
 	call HandleAttackerDamageReductionEffects
 ; 8. cap damage at zero if negative
@@ -352,7 +354,7 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 	call SwapTurn
 ; 1. apply damage bonus effects
 	call HandleDamageBonusSubstatus
-	call HandleDamageRelatedPowers
+	call HandleDamageBoostingPowers
 ; 2. apply weakness bonus
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
@@ -405,8 +407,10 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 	jr nz, .no_damage_reduction
 	call HandleDefenderDamageReductionEffects
 	call HandleAttackerDamageReductionEffects
+	xor a  ; PLAY_AREA_ARENA
 ; 8. cap damage at zero if negative
 .no_damage_reduction
+	call HandleDamageReducingPowers
 	call CapMinimumDamage_DE
 
 	ldh a, [hTempPlayAreaLocation_ff9d]
