@@ -2320,16 +2320,6 @@ Lure_SwitchAndTrapDefendingPokemon:
 	jp UnableToRetreatEffect
 
 
-; During your next turn, double damage
-SwordsDanceEffect: ; 2c7d0 (b:47d0)
-	ld a, [wTempTurnDuelistCardID]
-	cp SCYTHER
-	ret nz
-	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
-	call ApplySubstatus1ToAttackingCard
-	ret
-
-
 FoulGas_AIEffect: ; 2c822 (b:4822)
 	ld a, 5
 	lb de, 0, 10

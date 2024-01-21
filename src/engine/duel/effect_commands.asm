@@ -115,10 +115,6 @@ LeechLifeEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, LeechLifeEffect
 	db  $00
 
-ScytherSwordsDanceEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SwordsDanceEffect
-	db  $00
-
 AscensionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Ascension_EvolveEffect
@@ -487,6 +483,7 @@ ArticunoQuickfreezeEffectCommands:
 	db  $00
 
 FocusEnergyEffectCommands:
+SwordsDanceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FocusEnergyEffect
 	db  $00
 
