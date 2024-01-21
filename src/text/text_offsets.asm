@@ -2543,7 +2543,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MagnetonLv28Description                           ; 0x09db
 	textpointer SonicboomName                                      ; 0x09dc
 	textpointer SonicboomDescription                               ; 0x09dd
-	textpointer Selfdestruct100Bench20Description                  ; 0x09de
 	textpointer MagnetonLv35Description                           ; 0x09df
 	textpointer VoltorbName                                        ; 0x09e0
 	textpointer BallName                                           ; 0x09e1
@@ -2633,7 +2632,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer GravelerDescription                                ; 0x0a3b
 	textpointer GolemName                                          ; 0x0a3c
 	textpointer RockSlideName                                      ; 0x0a3d
-	textpointer GolemsSelfdestructDescription                      ; 0x0a3e
+	textpointer ExplosionName
+	textpointer ExplosionDescription
 	textpointer MegatonName                                        ; 0x0a3f
 	textpointer GolemDescription                                   ; 0x0a40
 	textpointer OnixName                                           ; 0x0a41

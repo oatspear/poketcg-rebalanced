@@ -180,13 +180,6 @@ SonicboomDescription:
 	line "for this attack."
 	done
 
-Selfdestruct100Bench20Description:
-	text "This attack does 20 damage to each"
-	line "Pokémon on each player's Bench."
-	line "This Pokémon also does 100 damage"
-	line "to itself."
-	done
-
 MagnetonLv35Description: ; 5d99e (17:599e)
 	text "Formed by several Magnemites linked"
 	line "together. They frequently appear"
@@ -637,11 +630,17 @@ RockSlideName: ; 5ef53 (17:6f53)
 	text "Rock Slide"
 	done
 
-GolemsSelfdestructDescription:
+ExplosionName:
+	text "Explosion"
+	done
+
+ExplosionDescription:
 	text "This attack does 20 damage to each"
 	line "Pokémon on each player's Bench."
 	line "This Pokémon does 100 damage"
 	line "to itself."
+	; line "This Pokémon does damage to itself"
+	; line "equal to its maximum HP."
 	done
 
 MegatonName: ; 5eff2 (17:6ff2)

@@ -7,6 +7,12 @@
 #### Blastoise
 - **Hydro Pump**: reduced base damage from 50 to 40.
 
+### Lightning Changes
+
+#### Electrode Lv42
+- Reduced HP from 90 to 80.
+- **Self-destruct**: renamed to **Explosion**; reduced base damage from 100 to 80.
+
 ### Fighting Changes
 
 #### Mankey
@@ -55,7 +61,9 @@
 #### Golem
 - Increased HP from 90 to 110.
 - **Rock Slide**: removed.
+- **Self-destruct**: removed.
 - New attack: **Avalanche** (FFC): 10 damage for each (C) in the retreat cost of all the user's Pokémon.
+- New attack: **Explosion** (FFCC): 120 damage; 100 recoil; 20 damage to *all* benched Pokémon.
 
 #### Hitmonlee
 - Increased HP from 60 to 70.

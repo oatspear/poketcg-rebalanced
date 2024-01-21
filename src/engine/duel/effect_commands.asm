@@ -999,11 +999,7 @@ Selfdestruct80Bench20EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct80Bench20Effect
 	db  $00
 
-Selfdestruct100Bench20EffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct100Bench20Effect
-	db  $00
-
-GolemSelfdestructEffectCommands:
+ExplosionEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct100Bench20Effect
 	db  $00
 

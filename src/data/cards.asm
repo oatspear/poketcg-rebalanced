@@ -5704,7 +5704,7 @@ ElectrodeLv42Card:
 	db STAR ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db ELECTRODE_LV42
-	db 90 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx VoltorbName ; pre-evo name
 
@@ -5724,12 +5724,12 @@ ElectrodeLv42Card:
 
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
-	tx SelfdestructName ; name
-	tx Selfdestruct100Bench20Description ; description
+	tx ExplosionName ; name
+	tx ExplosionDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 100 ; damage
+	db 80 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Selfdestruct100Bench20EffectCommands ; effect commands
+	dw ExplosionEffectCommands ; effect commands
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -6673,7 +6673,7 @@ GolemCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	db GOLEM
-	db 110 ; hp
+	db 120 ; hp
 	db STAGE2 ; stage
 	tx GravelerName ; pre-evo name
 
@@ -6692,13 +6692,13 @@ GolemCard:
 	db ATK_ANIM_STONE_BARRAGE ; animation
 
 	; attack 2
-	energy FIGHTING, 1, COLORLESS, 3 ; energies
-	tx SelfdestructName ; name
-	tx GolemsSelfdestructDescription ; description
+	energy FIGHTING, 2, COLORLESS, 2 ; energies
+	tx ExplosionName ; name
+	tx ExplosionDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 100 ; damage
+	db 120 ; damage
 	db DAMAGE_NORMAL ; category
-	dw GolemSelfdestructEffectCommands ; effect commands
+	dw ExplosionEffectCommands ; effect commands
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
