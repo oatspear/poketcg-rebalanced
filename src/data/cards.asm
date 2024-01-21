@@ -6475,8 +6475,8 @@ MachokeCard:
 
 	; attack 1
 	energy 0 ; energies
-	tx BadgeOfDisciplineName ; name
-	tx BadgeOfDisciplineDescription ; description
+	tx FightingFuryName ; name
+	tx FightingFuryDescription ; description
 	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
@@ -6628,8 +6628,8 @@ GravelerCard:
 
 	; attack 1
 	energy 0 ; energies
-	tx RockAndRollName ; name
-	tx RockAndRollDescription ; description
+	tx StoneSkinName ; name
+	tx StoneSkinDescription ; description
 	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category

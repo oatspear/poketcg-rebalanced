@@ -38,7 +38,7 @@
 
 #### Machoke
 - **Karate Chop**: removed.
-- New Pokémon Power: **Badge of Discipline**: your Pokémon's attacks ignore Resistance.
+- New Pokémon Power: **Fighting Fury**: the user's Pokémon with attached (F) Energy deal 10 more damage when attacking.
 
 #### Geodude
 - **Stone Barrage**: removed.
@@ -47,7 +47,7 @@
 
 #### Graveler
 - Increased HP from 60 to 80.
-- New Pokémon Power: **Rock And Roll**: the Active Pokémon's attacks do 10 more damage; its Retreat Cost increases by 1.
+- New Pokémon Power: **Stone Skin**: the user's Pokémon with attached (F) Energy take 10 less damage from attacks.
 
 #### Hitmonlee
 - Increased HP from 60 to 70.

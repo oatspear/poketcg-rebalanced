@@ -1304,35 +1304,35 @@ IncreaseDamageTakenBy40Description:
 	line "from attacks."
 	done
 
-BadgeOfDisciplineName:
-	text "Badge of Discipline"
-	done
+; BadgeOfDisciplineName:
+; 	text "Badge of Discipline"
+; 	done
 
-BadgeOfDisciplineDescription:
-	text "The damage of your Pokémon's attacks"
-	line "is not affected by Resistance."
-	done
+; BadgeOfDisciplineDescription:
+; 	text "The damage of your Pokémon's attacks"
+; 	line "is not affected by Resistance."
+; 	done
 
-RockAndRollName:
-	text "Rock And Roll"
-	done
+; RockAndRollName:
+; 	text "Rock And Roll"
+; 	done
 
-RockAndRollDescription:
-	text "Your Pokémon's attacks do 10 more"
-	line "damage, but their Retreat Cost"
-	line "is <COLORLESS> more."
-	line "Only one Pokémon Power with this"
-	line "name can be active at any time."
-	done
+; RockAndRollDescription:
+; 	text "Your Pokémon's attacks do 10 more"
+; 	line "damage, but their Retreat Cost"
+; 	line "is <COLORLESS> more."
+; 	line "Only one Pokémon Power with this"
+; 	line "name can be active at any time."
+; 	done
 
-BodyguardName:
-	text "Bodyguard"
-	done
+; BodyguardName:
+; 	text "Bodyguard"
+; 	done
 
-BodyguardDescription:
-	text "Prevent all damage done to your"
-	line "Benched Pokémon by attacks."
-	done
+; BodyguardDescription:
+; 	text "Prevent all damage done to your"
+; 	line "Benched Pokémon by attacks."
+; 	done
 
 MendName:
 	text "Mend"
@@ -1342,4 +1342,26 @@ MendDescription:
 	text "Attach a Basic Energy from your"
 	line "Discard Pile to this Pokémon."
 	line "Then, heal 10 damage."
+	done
+
+FightingFuryName:
+	text "Fighting Fury"
+	done
+
+FightingFuryDescription:
+	text "Each of your <FIGHTING> Pokémon's attacks"
+	line "do 10 more damage to your opponent's"
+	line "Active Pokémon (before applying"
+	line "Weakness and Resistance)."
+	done
+
+StoneSkinName:
+	text "Stone Skin"
+	done
+
+StoneSkinDescription:
+	text "Your Pokémon with any attached"
+	line "<FIGHTING> Energy take 10 less damage from"
+	line "attacks (after applying Weakness"
+	line "and Resistance)."
 	done
