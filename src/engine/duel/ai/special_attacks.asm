@@ -43,7 +43,7 @@ HandleSpecialAIAttacks:
 	jp z, .Fetch
 	cp DUGTRIO
 	jp z, .Earthquake
-	cp GRAVELER
+	cp RHYDON
 	jp z, .Earthquake
 	cp MAGNETON_LV35
 	jp z, .EnergySpike

@@ -47,7 +47,9 @@
 
 #### Graveler
 - Increased HP from 60 to 70.
+- **Earthquake**: removed.
 - New Pokémon Power: **Stone Skin**: the user's Pokémon with attached (F) Energy take 10 less damage from attacks.
+- New attack: **Rock Slide** (FFC): 40 damage; 10 damage to 2 of the opponent's benched Pokémon.
 
 #### Hitmonlee
 - Increased HP from 60 to 70.
@@ -58,6 +60,10 @@
 - **Special Punch**: removed.
 - New attack: **Close Combat** (F): 40 damage; takes 40 more damage from attacks next turn.
 - New attack: **Sky Uppercut** (FFC): 40 damage; damage is not affected by Resistance.
+
+#### Rhydon
+- **Horn Attack**: removed.
+- New attack: **Earthquake** (FFC): 50 damage; 10 damage to *all* benched Pokémon.
 
 ### Psychic Changes
 

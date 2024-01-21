@@ -6642,17 +6642,17 @@ GravelerCard:
 
 	; attack 2
 	energy FIGHTING, 2, COLORLESS, 1 ; energies
-	tx EarthquakeName ; name
-	tx EarthquakeDescription ; description
+	tx RockSlideName ; name
+	tx DamageUpTo2BenchedDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 60 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Earthquake10EffectCommands ; effect commands
-	db NONE ; flags 1
+	dw DamageUpTo2Benched10EffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_STONE_BARRAGE ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
@@ -7101,16 +7101,16 @@ RhydonCard:
 	tx RhyhornName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx HornAttackName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	tx EarthquakeName ; name
+	tx EarthquakeDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw Earthquake10EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
 
