@@ -846,7 +846,17 @@ UpdateSubstatusConditions_StartOfTurn:
 	or a
 	ret z
 	cp SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
+	jr z, .double_damage
+	cp SUBSTATUS1_NEXT_TURN_UNABLE_ATTACK
 	ret nz
+
+; .unable_to_attack
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
+	call GetTurnDuelistVariable
+	ld [hl], SUBSTATUS2_UNABLE_ATTACK
+	ret
+
+.double_damage
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	set SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]

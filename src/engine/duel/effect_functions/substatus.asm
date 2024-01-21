@@ -12,6 +12,11 @@ FocusEnergyEffect:
 	jr ApplySubstatus1ToAttackingCard
 
 
+NextTurnUnableToAttackEffect:
+	ld a, SUBSTATUS1_NEXT_TURN_UNABLE_ATTACK
+	jr ApplySubstatus1ToAttackingCard
+
+
 ReduceDamageTakenBy10Effect:
 	ld a, SUBSTATUS1_REDUCE_BY_10
 	jr ApplySubstatus1ToAttackingCard

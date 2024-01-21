@@ -487,6 +487,10 @@ SwordsDanceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FocusEnergyEffect
 	db  $00
 
+NextTurnUnableToAttackEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NextTurnUnableToAttackEffect
+	db  $00
+
 Recoil10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil10Effect
 	db  $00

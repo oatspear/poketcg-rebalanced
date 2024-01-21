@@ -1379,3 +1379,13 @@ AvalancheDescription:
 	text "This attack does 10 damage for each"
 	line "<COLORLESS> in your Pokémon's Retreat Costs."
 	done
+
+StrongArmLariatName:
+	text "Strong-Arm Lariat"
+	done
+
+StrongArmLariatDescription:
+	text "You may do double damage."
+	line "If you do, during your next turn,"
+	line "this Pokémon can't attack."
+	done
