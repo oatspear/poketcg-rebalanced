@@ -602,12 +602,11 @@ InvadeMind_AIEffect:
 ; ------------------------------------------------------------------------------
 
 
-; +50 damage if the opponent has less Prize cards than the user
+; double damage if the opponent has less Prize cards than the user
 RagingStorm_DamageBoostEffect:
 	call CheckOpponentHasMorePrizeCardsRemaining
 	ret nc  ; opponent Prizes >= user Prizes
-	ld a, 50
-	jp AddToDamage
+	jp DoubleDamage_DamageBoostEffect
 
 RagingStorm_AIEffect:
   call RagingStorm_DamageBoostEffect

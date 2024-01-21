@@ -232,6 +232,7 @@ GrassKnotEffectCommands:
 	dbw EFFECTCMDTYPE_AI, GrassKnot_AIEffect
 	db  $00
 
+RevengeEffectCommands:
 RagingStormEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RagingStorm_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, RagingStorm_AIEffect

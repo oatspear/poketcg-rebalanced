@@ -697,9 +697,9 @@ RagingStormName:
 	done
 
 RagingStormDescription:
-	text "This attack does 50 more damage if"
-	line "the opponent has taken more Prize"
-	line "cards than you."
+	text "This attack does double damage if"
+	line "you have more Prize cards remaining"
+	line "than your opponent."
 	done
 
 VaporEssenceName:
@@ -1302,6 +1302,10 @@ IncreaseDamageTakenBy40Description:
 	text "During your opponent's next turn,"
 	line "this Pokémon takes 40 more damage"
 	line "from attacks."
+	done
+
+RevengeName:
+	text "Revenge"
 	done
 
 ; BadgeOfDisciplineName:

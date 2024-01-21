@@ -3087,6 +3087,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MountainBreakDescription
 	textpointer UnaffectedByResistanceDescription
 	textpointer IncreaseDamageTakenBy40Description
+	textpointer RevengeName
 	; textpointer BadgeOfDisciplineName
 	; textpointer BadgeOfDisciplineDescription
 	; textpointer RockAndRollName
