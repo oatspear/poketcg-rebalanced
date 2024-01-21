@@ -6284,7 +6284,7 @@ DugtrioCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	energy FIGHTING, 1, COLORLESS, 2 ; energies
 	tx EarthquakeName ; name
 	tx EarthquakeDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
