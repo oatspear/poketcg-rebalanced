@@ -6093,8 +6093,7 @@ ConversionBeam_ChangeWeaknessEffect:
 	call SwapTurn
 	ldtx hl, ChangedTheWeaknessOfPokemonToColorText
 	call PrintArenaCardNameAndColorText
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 ; prints text that requires card name and color,
 ; with the card name of the Turn Duelist's Arena Pokemon
@@ -6109,18 +6108,7 @@ PrintArenaCardNameAndColorText:
 	ldh a, [hTemp_ffa0]
 	call LoadCardNameAndInputColor
 	pop hl
-	call DrawWideTextBox_PrintText
-	ret
-
-ScrunchEffect: ; 2eee7 (b:6ee7)
-	ldtx de, IfHeadsNoDamageNextTurnText
-	call TossCoin_BankB
-	jp nc, SetWasUnsuccessful
-	ld a, ATK_ANIM_SCRUNCH
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_NO_DAMAGE_17
-	call ApplySubstatus1ToAttackingCard
-	ret
+	jp DrawWideTextBox_PrintText
 
 SuperFang_AIEffect: ; 2ef01 (b:6f01)
 	call SuperFang_HalfHPEffect
@@ -6135,8 +6123,7 @@ SuperFang_HalfHPEffect: ; 2ef07 (b:6f07)
 	; round up
 	add 5
 .rounded
-	call SetDefiniteDamage
-	ret
+	jp SetDefiniteDamage
 
 ; return carry if no Pokemon in Bench
 TrainerCardAsPokemon_BenchCheck: ; 2ef18 (b:6f18)

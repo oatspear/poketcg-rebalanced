@@ -1234,10 +1234,6 @@ ConversionBeamEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ConversionBeam_ChangeWeaknessEffect
 	db  $00
 
-ChanseyScrunchEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ScrunchEffect
-	db  $00
-
 RaticateSuperFangEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperFang_HalfHPEffect
 	dbw EFFECTCMDTYPE_AI, SuperFang_AIEffect
