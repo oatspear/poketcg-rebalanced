@@ -6622,7 +6622,7 @@ GravelerCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	db GRAVELER
-	db 80 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx GeodudeName ; pre-evo name
 

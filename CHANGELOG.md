@@ -46,7 +46,7 @@
 - New attack: **Rock Throw** (FC): 20 damage; damage is not affected by Resistance.
 
 #### Graveler
-- Increased HP from 60 to 80.
+- Increased HP from 60 to 70.
 - New Pokémon Power: **Stone Skin**: the user's Pokémon with attached (F) Energy take 10 less damage from attacks.
 
 #### Hitmonlee
