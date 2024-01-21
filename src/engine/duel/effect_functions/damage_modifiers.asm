@@ -977,8 +977,7 @@ DoubleDamageIfUserIsDamaged_AIEffect:
 FlamesOfRage_DamageBoostEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
-	call AddToDamage
-	ret
+	jp AddToDamage
 
 FlamesOfRage_AIEffect:
   call FlamesOfRage_DamageBoostEffect
@@ -989,8 +988,7 @@ FlamesOfRage_AIEffect:
 Flail_HPCheck:
   ld e, PLAY_AREA_ARENA
   call GetCardDamageAndMaxHP
-  call SetDefiniteDamage
-  ret
+  jp SetDefiniteDamage
 
 Flail_AIEffect:
 	call Flail_HPCheck
@@ -1003,8 +1001,7 @@ PsychicAssault_DamageBoostEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
 	call SwapTurn
-	call AddToDamage
-	ret
+	jp AddToDamage
 
 PsychicAssault_AIEffect:
   call PsychicAssault_DamageBoostEffect
