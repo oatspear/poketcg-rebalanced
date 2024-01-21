@@ -89,6 +89,8 @@ HandleSpecialAIAttacks:
 	jr z, .Teleport
 	cp SANDSLASH
 	jr z, .Teleport
+	cp MACHOP
+	jr z, .Teleport
 	cp PRIMEAPE
 	jp z, .GetMad
 

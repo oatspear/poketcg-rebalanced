@@ -1628,6 +1628,16 @@ DeepDiveDescription:
 	line "Benched Pokémon."
 	done
 
+DefensiveStanceName:
+	text "Defensive Stance"
+	done
+
+DefensiveStanceDescription:
+	text "Heal 20 damage from this Pokémon"
+	line "and Switch it with 1 of your"
+	line "Benched Pokémon."
+	done
+
 ColdCrushName:
 	text "Cold Crush"
 	done

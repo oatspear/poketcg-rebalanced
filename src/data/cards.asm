@@ -6423,18 +6423,18 @@ MachopCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
-	tx LowKickName ; name
-	dw NONE ; description
+	energy COLORLESS, 1 ; energies
+	tx DefensiveStanceName ; name
+	tx DefensiveStanceDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw DefensiveStanceEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db HEAL_USER ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 2
+	db ATK_ANIM_PROTECT ; animation
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 1 ; energies

@@ -24,6 +24,8 @@
 - New attack: **Get Mad** (F): move damage counters from Benched Pokémon to this Pokémon; immune to damage in the next turn if moved at least 4.
 
 #### Machop
+- **Low Kick**: removed.
+- New attack: **Defensive Stance** (C): heal 20 damage; switch with a Benched Pokémon.
 - New attack: **Karate Chop** (FC): 40 damage; 10 less damage for each damage counter on itself.
 
 #### Machoke

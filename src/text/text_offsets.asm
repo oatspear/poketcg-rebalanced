@@ -2829,6 +2829,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RiptideDescription
 	textpointer DeepDiveName
 	textpointer DeepDiveDescription
+	textpointer DefensiveStanceName
+	textpointer DefensiveStanceDescription
 	textpointer ColdCrushName
 	textpointer Discard1EnergyFromBothActiveDescription
 	textpointer RattataName                                        ; 0x0ae7
