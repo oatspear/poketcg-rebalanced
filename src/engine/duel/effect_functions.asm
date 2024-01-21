@@ -365,9 +365,9 @@ SmallCombustion_DiscardDeckEffect:
 
 
 Landslide_DiscardDeckEffect:
-	ld a, 3
+	ld a, 2
 	call DiscardFromDeckEffect
-	ld a, 3
+	ld a, 2
 	jp DiscardFromOpponentsDeckEffect
 
 

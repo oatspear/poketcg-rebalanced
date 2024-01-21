@@ -1278,7 +1278,7 @@ LandslideName:
 	done
 
 LandslideDescription:
-	text "Discard the top 3 cards from"
+	text "Discard the top 2 cards from"
 	line "both players' decks."
 	done
 
