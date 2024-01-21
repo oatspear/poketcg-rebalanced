@@ -1955,7 +1955,7 @@ ApplyDamageModifiers_DamageToTarget:
 	ldh [hTempPlayAreaLocation_ff9d], a
 ; 1. apply damage bonus effects
 	call HandleDamageBonusSubstatus
-	call HandleDamageRelatedPowers
+	call HandleDamageBoostingPowers
 ; 2. apply weakness bonus
 	; call Debug_Print_DE
 	ld a, [wDamageFlags]
@@ -1997,6 +1997,8 @@ ApplyDamageModifiers_DamageToTarget:
 	call ApplyAttachedDefender
 ; 7. apply damage reduction effects
 	; call Debug_Print_DE
+	xor a  ; PLAY_AREA_ARENA
+	call HandleDamageReducingPowers
 	call HandleDefenderDamageReductionEffects
 	call HandleAttackerDamageReductionEffects
 ; 8. cap damage at zero if negative
@@ -2149,27 +2151,23 @@ ApplyAttachedDefender:
 	jp SubtractFromDamage_DE
 
 
-HandleDamageRelatedPowers:
-	call ArePokemonPowersDisabled  ; preserves de
-	ret c  ; Powers are disabled
-; Badge of Discipline
-	ld a, MACHOKE
-	call GetFirstPokemonWithAvailablePower  ; preserves de
-	; jr nc, .rock_and_roll
+HandleDamageBoostingPowers:
+	; call ArePokemonPowersDisabled  ; preserves de
+	; ret c  ; Powers are disabled
+	call IsFightingFuryActive
 	ret nc
-	; call GetArenaCardColor  ; preserves de
-	; cp FIGHTING
-	; ret nz
-	ld hl, wDamageFlags
-	set UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, [hl]
-	ret
+	ld hl, 10
+	jp AddToDamage_DE
 
-; .rock_and_roll
-; 	ld a, GRAVELER
-; 	call GetFirstPokemonWithAvailablePower  ; preserves de
-; 	ret nc
-; 	ld hl, 10
-; 	jp AddToDamage_DE
+
+; input:
+;   a: PLAY_AREA_* of the target Pokémon
+HandleDamageReducingPowers:
+	; call ArePokemonPowersDisabled  ; preserves de
+	; ret c  ; Powers are disabled
+	call IsStoneSkinActive
+	ret nc
+	jp ReduceDamageBy10_DE
 
 
 ; hl: address to subtract HP from
@@ -2313,7 +2311,9 @@ DealDamageToPlayAreaPokemon:
 	pop de
 	call HandleDefenderDamageReductionEffects
 	call HandleAttackerDamageReductionEffects
+	xor a  ; PLAY_AREA_ARENA
 .in_bench
+	call HandleDamageReducingPowers
 	call HandleDamageReductionOrNoDamageFromPkmnPowerEffects
 	call CapMinimumDamage_DE
 	ld a, [wTempPlayAreaLocation_cceb]
