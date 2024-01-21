@@ -1349,8 +1349,9 @@ FightingFuryName:
 	done
 
 FightingFuryDescription:
-	text "Each of your <FIGHTING> Pokémon's attacks"
-	line "do 10 more damage to your opponent's"
+	text "The attacks of each of your Pokémon"
+	line "with any attached <FIGHTING> Energy do"
+	line "10 more damage to your opponent's"
 	line "Active Pokémon (before applying"
 	line "Weakness and Resistance)."
 	done
