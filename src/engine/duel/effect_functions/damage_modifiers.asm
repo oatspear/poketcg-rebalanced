@@ -665,6 +665,48 @@ Swarm_AIEffect:
   jp SetDefiniteAIDamage
 
 
+; 10 damage for each (C) in the retreat costs of the turn holder's Pokémon
+Avalanche_DamageBoostEffect:
+  ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+  call GetTurnDuelistVariable
+  ld d, a
+  ld e, PLAY_AREA_ARENA
+  ld c, 0
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+
+; go through every Pokémon in the Play Area and boost damage based on retreat cost
+.loop_play_area
+; check its retreat cost
+	ld a, e
+	ldh [hTempPlayAreaLocation_ff9d], a
+	push bc
+	push de
+	call GetPlayAreaCardRetreatCost
+	pop de
+	pop bc
+; add to total and store
+	add c
+	ld c, a
+; next Pokémon
+  inc e
+  dec d
+  jr nz, .loop_play_area
+; restore backed up variables
+	ld a, b
+	ldh [hTempPlayAreaLocation_ff9d], a
+; tally damage boost
+  ld a, c
+  or a
+  ret z  ; done if zero
+  call ATimes10
+  jp SetDefiniteDamage
+
+Avalanche_AIEffect:
+  call Avalanche_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
 ; +20 damage for each Evolved Pokémon in Bench
 PowerLariat_DamageBoostEffect:
   ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -680,7 +722,7 @@ PowerLariat_DamageBoostEffect:
 ; check its Stage
   ld a, DUELVARS_ARENA_CARD_STAGE
   add e
-  call GetNonTurnDuelistVariable
+  call GetTurnDuelistVariable
   or a
   jr z, .next_pkmn  ; it's a BASIC Pokémon
   inc c

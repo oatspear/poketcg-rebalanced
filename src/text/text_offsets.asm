@@ -3097,6 +3097,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FightingFuryDescription
 	textpointer StoneSkinName
 	textpointer StoneSkinDescription
+	textpointer AvalancheName
+	textpointer AvalancheDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

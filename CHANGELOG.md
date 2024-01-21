@@ -52,6 +52,11 @@
 - New Pokémon Power: **Stone Skin**: the user's Pokémon with attached (F) Energy take 10 less damage from attacks.
 - New attack: **Rock Slide** (FFC): 40 damage; 10 damage to 2 of the opponent's benched Pokémon.
 
+#### Golem
+- Increased HP from 90 to 110.
+- **Rock Slide**: removed.
+- New attack: **Avalanche** (FFC): 10 damage for each (C) in the retreat cost of all the user's Pokémon.
+
 #### Hitmonlee
 - Increased HP from 60 to 70.
 - **High Jump Kick**: reduced cost from (FFC) to (FCC); increased damage from 40 to 50; does 20 recoil damage.

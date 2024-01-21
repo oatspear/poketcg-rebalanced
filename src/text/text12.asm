@@ -1366,3 +1366,12 @@ StoneSkinDescription:
 	line "attacks (after applying Weakness"
 	line "and Resistance)."
 	done
+
+AvalancheName:
+	text "Avalanche"
+	done
+
+AvalancheDescription:
+	text "This attack does 10 damage for each"
+	line "<COLORLESS> in your Pokémon's Retreat Costs."
+	done

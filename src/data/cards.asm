@@ -6673,22 +6673,22 @@ GolemCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	db GOLEM
-	db 90 ; hp
+	db 110 ; hp
 	db STAGE2 ; stage
 	tx GravelerName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2 ; energies
-	tx RockSlideName ; name
-	tx DamageUpTo2BenchedDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw DamageUpTo2Benched10EffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	energy FIGHTING, 2, COLORLESS, 1 ; energies
+	tx AvalancheName ; name
+	tx AvalancheDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw AvalancheEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 0
 	db ATK_ANIM_STONE_BARRAGE ; animation
 
 	; attack 2
