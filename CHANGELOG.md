@@ -23,6 +23,13 @@
 - **Tantrum**: removed.
 - New attack: **Get Mad** (F): move damage counters from Benched Pokémon to this Pokémon; immune to damage in the next turn if moved at least 4.
 
+#### Machop
+- New attack: **Karate Chop** (FC): 40 damage; 10 less damage for each damage counter on itself.
+
+#### Machoke
+- **Karate Chop**: removed.
+- New Pokémon Power: **Fighting Fury**: the user's Pokémon with attached (F) Energy deal 10 more damage when attacking.
+
 #### Sandshrew
 - Increased HP from 40 to 50.
 - New attack: **Rototiller** (FC): shuffle up to 2 cards from Discard Pile into Deck; 10 damage for each Pokémon or Energy card.
@@ -41,10 +48,6 @@
 - **Slash**: removed.
 - **Earthquake**: reduced cost from (FFC) to (FCC); reduced base damage from 70 to 50.
 - New attack: **Landslide** (FC): 30 damage; discards the top 2 cards from both decks.
-
-#### Machoke
-- **Karate Chop**: removed.
-- New Pokémon Power: **Fighting Fury**: the user's Pokémon with attached (F) Energy deal 10 more damage when attacking.
 
 #### Geodude
 - **Stone Barrage**: removed.
