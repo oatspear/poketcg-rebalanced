@@ -32,11 +32,12 @@
 - **Karate Chop**: removed.
 - **Seismic Toss**: removed.
 - New Pokémon Power: **Fighting Fury**: the user's Pokémon with attached (F) Energy deal 10 more damage when attacking.
-- New attack: **Submission** (FC): 50 damage, 20 recoil.
+- New attack: **Strong-Arm Lariat** (FC): 30 damage; may do double damage, but is unable to attack next turn.
 
 #### Machamp
+- Increased HP from 100 to 110.
 - **Submission**: removed.
-- New attack: **Strong-Arm Lariat** (FFC): 60 damage; may do double damage, but is unable to attack next turn.
+- New attack: **Chop Down** (FFC): 50 damage; double damage if the user has less HP than the Defending Pokémon.
 
 #### Sandshrew
 - Increased HP from 40 to 50.

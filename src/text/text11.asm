@@ -539,11 +539,17 @@ KarateChopDescription: ; 5eab9 (17:6ab9)
 	line "damage counter on this Pokémon."
 	done
 
-SubmissionName: ; 5eafd (17:6afd)
-	text "Submission"
+ChopDownName:
+	text "Chop Down"
 	done
 
-Recoil10Description: ; 5eb09 (17:6b09)
+ChopDownDescription:
+	text "If the Defending Pokémon has more"
+	line "HP remaining than this Pokémon,"
+	line "double this attack's damage."
+	done
+
+Recoil10Description:
 	text "Also does 10 damage to itself."
 	done
 

@@ -949,6 +949,21 @@ DeadlyPoison_AIEffect:
 ; Based on Damage Counters
 ; ------------------------------------------------------------------------------
 
+ChopDown_DamageBoostEffect:
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	ld e, a
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	cp e
+	jp c, DoubleDamage_DamageBoostEffect
+	ret
+
+ChopDown_AIEffect:
+	call ChopDown_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
 KarateChop_DamageSubtractionEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP

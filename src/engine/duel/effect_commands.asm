@@ -234,6 +234,11 @@ RagingStormEffectCommands:
 	dbw EFFECTCMDTYPE_AI, RagingStorm_AIEffect
 	db  $00
 
+ChopDownEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ChopDown_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, ChopDown_AIEffect
+	db  $00
+
 CrabhammerEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Crabhammer_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Crabhammer_AIEffect

@@ -2613,7 +2613,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MachokeName                                        ; 0x0a26
 	textpointer KarateChopName                                     ; 0x0a27
 	textpointer KarateChopDescription                              ; 0x0a28
-	textpointer SubmissionName                                     ; 0x0a29
+	textpointer ChopDownName
+	textpointer ChopDownDescription
 	textpointer Recoil10Description                                ; 0x0a2a
 	textpointer Recoil20Description                                ; 0x0a2a
 	textpointer MachokeDescription                                 ; 0x0a2b
