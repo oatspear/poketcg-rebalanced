@@ -45,6 +45,7 @@
 - New attack: **Excavate** (C): choose a card from the top 4 deck cards and add it to the hand.
 
 #### Sandslash
+- Increased HP from 70 to 80.
 - **Slash**: removed.
 - **Fury Swipes**: removed.
 - New Pokémon Power: **Spikes**: whenever the opponent switches Active Pokémon, the new Pokémon takes 10 damage.

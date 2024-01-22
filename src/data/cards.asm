@@ -6163,7 +6163,7 @@ SandslashCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	db SANDSLASH
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx SandshrewName ; pre-evo name
 
