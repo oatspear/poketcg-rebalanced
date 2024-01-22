@@ -1261,10 +1261,10 @@ RototillerDescription:
 	line "back in this way."
 	done
 
-; ExcavateName:
-; 	text "Excavate"
-; 	done
-; 
+ExcavateName:
+	text "Excavate"
+	done
+
 ; ExcavateDescription:
 ; 	text "You may put a non-Supporter Trainer"
 ; 	line "card or a Basic Energy card from"

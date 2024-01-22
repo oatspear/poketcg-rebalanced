@@ -6117,11 +6117,25 @@ SandshrewCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
+	energy COLORLESS, 1 ; energies
+	tx ExcavateName ; name
+	tx UltravisionDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw UltravisionEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
 	tx SandAttackName ; name
 	tx OpponentAttackMayDoNothingDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw SandAttackEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -6129,20 +6143,6 @@ SandshrewCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_DARK_GAS ; animation
-
-	; attack 2
-	energy FIGHTING, 1, COLORLESS, 1 ; energies
-	tx RototillerName ; name
-	tx RototillerDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_X ; category
-	dw RototillerEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_GRASS ; weakness

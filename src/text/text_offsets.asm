@@ -3080,7 +3080,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SpikesDescription
 	textpointer RototillerName
 	textpointer RototillerDescription
-	; textpointer ExcavateName
+	textpointer ExcavateName
 	; textpointer ExcavateDescription
 	textpointer LandslideName
 	textpointer LandslideDescription

@@ -41,7 +41,8 @@
 
 #### Sandshrew
 - Increased HP from 40 to 50.
-- New attack: **Rototiller** (FC): shuffle up to 2 cards from Discard Pile into Deck; 10 damage for each Pokémon or Energy card.
+- **Sand Attack**: increased cost from (F) to (FC) and base damage from 10 to 20.
+- New attack: **Excavate** (C): choose a card from the top 4 deck cards and add it to the hand.
 
 #### Sandslash
 - **Slash**: removed.
