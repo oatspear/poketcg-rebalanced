@@ -91,6 +91,10 @@
 - New attack: **Growl** (C): reduce damage dealt by the Defending Pokémon by 20.
 - New attack: **Retaliate** (F): 30 damage; can only be used when damaged.
 
+#### Marowak Lv26
+- **Bonemerang**: reworked.
+- New attack: **Bonemerang** (FC): 20 damage; deal 20 damage to 1 Pokémon in opponent's Bench.
+
 #### Hitmonlee
 - Increased HP from 60 to 70.
 - **High Jump Kick**: reduced cost from (FFC) to (FCC); increased damage from 40 to 50; does 20 recoil damage.

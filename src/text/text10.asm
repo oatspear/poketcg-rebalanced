@@ -1806,3 +1806,8 @@ DamagePerPokemonPowerDescription:
 	line "for each of your opponent's Pokémon"
 	line "that has a Pokémon Power."
 	done
+
+Damage1BenchedPokemon20Description:
+	text "This attack does 20 damage to 1 of"
+	line "your opponent's Benched Pokémon."
+	done

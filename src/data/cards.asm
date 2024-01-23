@@ -6876,15 +6876,15 @@ MarowakLv26Card:
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 1 ; energies
 	tx BonemerangName ; name
-	tx DoubleAttackX20X10Description ; description
-	dw NONE ; description (cont)
+	tx Damage1BenchedPokemon20Description ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 20 ; damage
-	db DAMAGE_X ; category
-	dw DoubleAttackX20X10EffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
+	db DAMAGE_NORMAL ; category
+	dw Damage1BenchedPokemon20EffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 2
 	db ATK_ANIM_BONEMERANG ; animation
 
 	db 1 ; retreat cost
@@ -6917,7 +6917,7 @@ MarowakLv32Card:
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MarowakBoneAttackEffectCommands ; effect commands
+	dw Deal20ToBenchEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
