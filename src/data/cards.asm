@@ -6809,29 +6809,29 @@ CuboneCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx CallForFriendName ; name
-	tx CallForFriendDescription ; description
+	tx GrowlName ; name
+	tx ReduceDamageBy20Description ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw CallForFriendEffectCommands ; effect commands
+	db DAMAGE_NORMAL ; category
+	dw GrowlEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_SUPERSONIC ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx RageName ; name
-	tx RageDescription ; description
+	energy FIGHTING, 1 ; energies
+	tx RetaliateName ; name
+	tx RetaliateDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw RageEffectCommands ; effect commands
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw RetaliateEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
 

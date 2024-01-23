@@ -85,6 +85,12 @@
 #### Onix
 - Reduced HP from 80 to 70.
 
+#### Cubone
+- **Call For Friend**: removed.
+- **Rage**: removed.
+- New attack: **Growl** (C): reduce damage taken by 20.
+- New attack: **Retaliate** (F): 30 damage; can only be used when damaged.
+
 #### Hitmonlee
 - Increased HP from 60 to 70.
 - **High Jump Kick**: reduced cost from (FFC) to (FCC); increased damage from 40 to 50; does 20 recoil damage.
