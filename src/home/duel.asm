@@ -139,6 +139,7 @@ ShuffleDeck:
 ; draw a card from the turn holder's deck, saving its location as CARD_LOCATION_JUST_DRAWN.
 ; returns carry if deck is empty, nc if a card was successfully drawn.
 ; AddCardToHand is meant to be called next (unless this function returned carry).
+; preserves: hl, bc, de
 DrawCardFromDeck:
 	push hl
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
@@ -292,6 +293,7 @@ MoveHandCardToDiscardPile:
 ;	fallthrough
 
 ; puts the turn holder's card with the deck index (0-59) given in a into the discard pile
+; preserves: af, hl, bc, de
 PutCardInDiscardPile:
 	push af
 	push hl
