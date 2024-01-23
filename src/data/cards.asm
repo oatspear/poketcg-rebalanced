@@ -6962,7 +6962,7 @@ HitmonleeCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx StretchKickName ; name
 	tx Deal20ToBenchDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)

@@ -102,6 +102,7 @@
 
 #### Hitmonlee
 - Increased HP from 60 to 70.
+- **Stretch Kick**: increased cost from (F) to (CC).
 - **High Jump Kick**: reduced cost from (FFC) to (FCC); increased damage from 40 to 50; does 20 recoil damage.
 
 #### Hitmonchan
