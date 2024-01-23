@@ -6545,7 +6545,7 @@ MachampCard:
 	dw NONE ; description (cont)
 	db 50 ; damage
 	db DAMAGE_PLUS ; category
-	dw OptionalDoubleDamageEffectCommands ; effect commands
+	dw ChopDownEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
