@@ -6552,6 +6552,20 @@ MachampCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
+	; strong-arm lariat
+	; energy FIGHTING, 2, COLORLESS, 1 ; energies
+	; tx StrongArmLariatName ; name
+	; tx StrongArmLariatDescription ; description
+	; dw NONE ; description (cont)
+	; db 50 ; damage
+	; db DAMAGE_PLUS ; category
+	; dw OptionalDoubleDamageEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_HIT ; animation
+
 	db 2 ; retreat cost
 	db WR_PSYCHIC ; weakness
 	db NONE ; resistance
