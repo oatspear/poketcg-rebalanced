@@ -82,6 +82,9 @@
 - New attack: **Avalanche** (FFC): 10 damage for each (C) in the retreat cost of all the user's Pokémon.
 - New attack: **Explosion** (FFCC): 120 damage; 100 recoil; 20 damage to *all* benched Pokémon.
 
+#### Onix
+- Reduced HP from 80 to 70.
+
 #### Hitmonlee
 - Increased HP from 60 to 70.
 - **High Jump Kick**: reduced cost from (FFC) to (FCC); increased damage from 40 to 50; does 20 recoil damage.

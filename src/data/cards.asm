@@ -6738,7 +6738,7 @@ OnixCard:
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
 	db ONIX
-	db 80 ; hp
+	db 70 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -6768,7 +6768,7 @@ OnixCard:
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 10
-	db ATK_ANIM_ROCK_THROW ; animation
+	db ATK_ANIM_HIT_PROTECT ; animation
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 2 ; energies
