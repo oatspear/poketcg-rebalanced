@@ -7238,16 +7238,9 @@ KabutopsCard:
 	db STAGE2 ; stage
 	tx KabutoName ; pre-evo name
 
-	; Extra Claws (FCC) 50+
-	; If the Defending Pokémon is an Evolved Pokémon, this attack does 30 additional damage.
-
 	; Chop Up (FFC) 60
 	; Does 10 damage to each of your opponent's Benched Pokémon that has any damage
 	; counters on it. (Don't apply Weakness and Resistance for Benched Pokémon.)
-
-	; Primal Scythe (F) 20+
-	; You may discard Mysterious Fossil from your hand.
-	; If you do, this attack does 40 additional damage.
 
 	; attack 1
 	energy FIGHTING, 1 ; energies
