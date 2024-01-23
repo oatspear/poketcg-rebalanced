@@ -4172,7 +4172,7 @@ SeadraCard:
 
 	; attack 1
 	energy WATER, 1, COLORLESS, 1 ; energies
-	tx WaterArrowName ; name
+	tx SharpshooterName ; name
 	tx Deal30ToAnyPokemonDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage

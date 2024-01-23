@@ -2821,7 +2821,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer OverwhelmDescription
 	textpointer AfflictionName
 	textpointer AfflictionDescription
-	textpointer WaterArrowName
+	textpointer SharpshooterName
 	textpointer FindIceName
 	textpointer WaterReserveName
 	textpointer WaterReserveDescription

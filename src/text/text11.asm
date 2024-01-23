@@ -1590,8 +1590,8 @@ AfflictionDescription:
 	line "with a Special Condition."
 	done
 
-WaterArrowName:
-	text "Water Arrow"
+SharpshooterName:
+	text "Sharpshooter"
 	done
 
 FindIceName:
