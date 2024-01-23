@@ -1409,7 +1409,8 @@ CrushingChargeName:
 	done
 
 CrushingChargeDescription:
-	text "Discard the top card from your deck."
-	line "If it is a Basic Energy, attach it"
-	line "to one of your Pokémon."
+	text "Once during your turn, you may"
+	line "discard the top card of your deck."
+	line "If it is a Basic Energy card,"
+	line "attach it to 1 of your Pokémon."
 	done
