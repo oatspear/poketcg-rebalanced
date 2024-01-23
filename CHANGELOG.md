@@ -88,7 +88,7 @@
 #### Cubone
 - **Call For Friend**: removed.
 - **Rage**: removed.
-- New attack: **Growl** (C): reduce damage taken by 20.
+- New attack: **Growl** (C): reduce damage dealt by the Defending Pokémon by 20.
 - New attack: **Retaliate** (F): 30 damage; can only be used when damaged.
 
 #### Hitmonlee
