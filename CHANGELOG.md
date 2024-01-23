@@ -26,15 +26,14 @@
 - New attack: **Get Mad** (F): move damage counters from Benched Pokémon to this Pokémon; immune to damage in the next turn if moved at least 4.
 
 #### Machop
-- **Low Kick**: removed.
+- **Low Kick**: reworked.
 - New attack: **Defensive Stance** (C): heal 20 damage; switch with a Benched Pokémon.
-- New attack: **Karate Chop** (FC): 40 damage; 10 less damage for each damage counter on itself.
+- New attack: **Low Kick** (FC): 10 damage; increase retreat cost of Defending Pokémon by (C); +10 damage for each (C) on Defending Pokémon's retreat cost.
 
 #### Machoke
-- **Karate Chop**: removed.
+- **Karate Chop**: increased cost from (F) to (FC) and base damage from 40 to 50.
 - **Seismic Toss**: removed.
 - New Pokémon Power: **Fighting Fury**: the user's Pokémon with attached (F) Energy deal 10 more damage when attacking.
-- New attack: **Strong-Arm Lariat** (FC): 30 damage; may do double damage, but is unable to attack next turn.
 
 #### Machamp
 - Increased HP from 100 to 110.

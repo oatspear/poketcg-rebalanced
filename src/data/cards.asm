@@ -6438,16 +6438,16 @@ MachopCard:
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 1 ; energies
-	tx KarateChopName ; name
-	tx KarateChopDescription ; description
+	tx LowKickName ; name
+	tx ConstrictDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_MINUS ; category
-	dw KarateChopEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw ConstrictEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_7 ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 1
 	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
@@ -6489,14 +6489,14 @@ MachokeCard:
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 1 ; energies
-	tx StrongArmLariatName ; name
-	tx StrongArmLariatDescription ; description
+	tx KarateChopName ; name
+	tx KarateChopDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_PLUS ; category
-	dw OptionalDoubleDamageEffectCommands ; effect commands
+	db 50 ; damage
+	db DAMAGE_MINUS ; category
+	dw KarateChopEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db FLAG_2_BIT_7 ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation

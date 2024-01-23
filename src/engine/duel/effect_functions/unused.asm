@@ -1,4 +1,18 @@
-;
+
+
+
+energy FIGHTING, 1, COLORLESS, 1 ; energies
+	tx StrongArmLariatName ; name
+	tx StrongArmLariatDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_PLUS ; category
+	dw OptionalDoubleDamageEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation;
 
 
 ; doubles the damage at de if swords dance or focus energy was used
