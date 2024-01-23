@@ -71,12 +71,24 @@ DiscardFromOpponentsDeckEffect:
 Discard1RandomCardFromOpponentsHand:
   call Discard1RandomCardFromOpponentsHandEffect
   ret c  ; unable to discard
+  ; fallthrough
+
+ShowOpponentDiscardedCardDetails:
 ; deck index is already in a
 ; show respective card from the opposing player's deck
   call SwapTurn
 	ldtx hl, DiscardedFromHandText
 	bank1call DisplayCardDetailScreen
   call SwapTurn
+  or a
+  ret
+
+
+; input:
+;    a: deck index
+ShowDiscardedCardDetails:
+  ldtx hl, DiscardedFromHandText
+  bank1call DisplayCardDetailScreen
   or a
   ret
 

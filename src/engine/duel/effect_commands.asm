@@ -381,6 +381,11 @@ RainbowTeamEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RainbowTeam_AttachEnergyEffect
 	db  $00
 
+CrushingChargeEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CrushingCharge_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CrushingCharge_DiscardAndAttachEnergyEffect
+	db  $00
+
 FirestarterEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Firestarter_OncePerTurnCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Firestarter_AttachEnergyEffect

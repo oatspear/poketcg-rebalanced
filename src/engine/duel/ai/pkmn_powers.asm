@@ -479,8 +479,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_rainbow_team
 	cp EEVEE
-	jr nz, .check_curse
+	jr nz, .check_crushing_charge
 	call HandleAIRainbowTeam
+	jr .next_1
+.check_crushing_charge
+	cp MAROWAK_LV32
+	jr nz, .check_curse
+	call HandleAICrushingCharge
 	jr .next_1
 .check_curse
 	cp HAUNTER_LV17
@@ -711,6 +716,32 @@ HandleAIMudSport:
 	ldh [hAIEnergyTransEnergyCard], a
 	jp HandleAIDecideToUsePokemonPower
 
+
+HandleAICrushingCharge:
+	ld b, 1
+	call CreateDeckCardListTopNCards
+	ret c  ; no cards
+
+; if any of the energy cards in deck is useful store it and use power
+	; call AIDecide_EnergySearch.CheckForUsefulEnergyCards
+	; ldh [hAIEnergyTransEnergyCard], a
+	; jr nc, .choose_pokemon
+
+; otherwise pick the first energy in the list
+	; ld a, [wDuelTempList]
+	; ldh [hAIEnergyTransEnergyCard], a
+
+; .choose_pokemon
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ffa1], a
+	farcall AIProcessButDontPlayEnergy_SkipEvolution
+	ret nc  ; no energy card attachment is needed
+
+; use Pokémon Power
+; got the target card location in [hTempPlayAreaLocation_ff9d]
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jp HandleAIDecideToUsePokemonPower
 
 
 HandleAIRainbowTeam:

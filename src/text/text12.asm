@@ -1403,3 +1403,13 @@ PrankDescription:
 	line "Discard Pile and put it on the top"
 	line "of their deck."
 	done
+
+CrushingChargeName:
+	text "Crushing Charge"
+	done
+
+CrushingChargeDescription:
+	text "Discard the top card from your deck."
+	line "If it is a Basic Energy, attach it"
+	line "to one of your Pokémon."
+	done

@@ -6911,18 +6911,18 @@ MarowakLv32Card:
 	tx CuboneName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx BoneAttackName ; name
-	tx Deal20ToBenchDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	energy 0 ; energies
+	tx CrushingChargeName ; name
+	tx CrushingChargeDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw Deal20ToBenchEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
-	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_BONEMERANG ; animation
+	db POKEMON_POWER ; category
+	dw CrushingChargeEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3    ; SPECIAL_AI_HANDLING
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 2 ; energies

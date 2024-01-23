@@ -324,6 +324,7 @@ Trade_PreconditionCheck:
 	ret c
 	; fallthrough
 
+CrushingCharge_PreconditionCheck:
 Synthesis_PreconditionCheck:
 	call CheckDeckIsNotEmpty
 	ret c
@@ -371,6 +372,7 @@ Landslide_DiscardDeckEffect:
 	; jp DiscardFromOpponentsDeckEffect
 
 
+; FIXME: DiscardFromDeckEffect now stores cards in wDuelTempList
 MountainBreak_DiscardDeckEffect:
 	ld a, 5
 	call DiscardFromDeckEffect
@@ -5572,6 +5574,7 @@ RainbowTeam_AttachEnergyEffect:
 	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
 	call HandleSelectBasicEnergyFromDiscardPile_AllowCancel
 	ldh [hAIEnergyTransEnergyCard], a
+	xor a  ; cannot select active spot
 	ld hl, .retrieve
 	jr _AttachEnergyFromDiscardPileToBenchEffect
 
@@ -5579,6 +5582,27 @@ RainbowTeam_AttachEnergyEffect:
 	ldh a, [hAIEnergyTransEnergyCard]
 	ld [wDuelTempList], a
 	ret
+
+
+CrushingCharge_DiscardAndAttachEnergyEffect:
+	ld a, 1
+	call DiscardFromDeckEffect
+	ld a, [wDuelTempList]
+	call ShowDiscardedCardDetails
+; check whether the discarded card is a basic energy
+	ld a, [wDuelTempList]
+	ldh [hAIEnergyTransEnergyCard], a
+	cp $ff
+	ret z
+	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
+	call GetCardType  ; preserves hl, bc
+	cp TYPE_ENERGY
+	ret c  ; not a basic energy
+	cp TYPE_ENERGY_DOUBLE_COLORLESS
+	ret nc  ; not a basic energy
+	ld a, 1  ; can select active spot
+	ld hl, RainbowTeam_AttachEnergyEffect.retrieve
+	jr _AttachEnergyFromDiscardPileToBenchEffect
 
 
 Firestarter_OncePerTurnCheck:
@@ -5602,13 +5626,16 @@ Firestarter_OncePerTurnCheck:
 	ret
 
 Firestarter_AttachEnergyEffect:
+	xor a  ; cannot select active spot
 	ld hl, CreateEnergyCardListFromDiscardPile_OnlyFire
 	; jr _AttachEnergyFromDiscardPileToBenchEffect
 	; fallthrough
 
 ; input:
+;   a: (boolean) whether active Pokémon can be selected
 ;  hl: function to place an energy card in [wDuelTempList]
 _AttachEnergyFromDiscardPileToBenchEffect:
+	ld [wMultiPurposeByte], a
 	push hl
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
@@ -5627,7 +5654,14 @@ _AttachEnergyFromDiscardPileToBenchEffect:
 	ldtx hl, ChoosePokemonToAttachEnergyCardText
 	call DrawWideTextBox_WaitForInput
 ; choose a Pokemon in Play Area to attach card
+	ld a, [wMultiPurposeByte]
+	or a
+	jr z, .bench_only
+	call HandlePlayerSelectionPokemonInPlayArea
+	jr .got_pokemon
+.bench_only
 	call HandlePlayerSelectionPokemonInBench
+.got_pokemon
 	ld e, a  ; set selected Pokémon
 	ldh [hTempPlayAreaLocation_ffa1], a
 	call SerialSend8Bytes

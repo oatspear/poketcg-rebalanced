@@ -1120,8 +1120,3 @@ CardCheckIfHeads8CardsIfTails1CardText: ; 37f24 (d:7f24)
 	text "Card check!"
 	line "If Heads, 8 cards! If Tails, 1 card!"
 	done
-
-IfHeadsNoDamageNextTurnText: ; 37f56 (d:7f56)
-	text "If Heads, prevent damage"
-	line "during opponent's next turn!"
-	done
