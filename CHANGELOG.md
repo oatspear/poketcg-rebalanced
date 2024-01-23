@@ -97,6 +97,7 @@
 
 #### Marowak Lv26
 - **Bone Attack**: removed.
+- **Vengeance**: increased base damage from 10 to 20.
 - New Pokémon Power: **Crushing Charge**: discard the top card of your deck; attach it if it is a basic energy.
 
 #### Hitmonlee

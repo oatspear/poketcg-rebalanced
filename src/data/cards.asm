@@ -6929,7 +6929,7 @@ MarowakLv32Card:
 	tx VengeanceName ; name
 	tx VengeanceDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
 	dw VengeanceEffectCommands ; effect commands
 	db NONE ; flags 1
