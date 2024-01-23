@@ -1,5 +1,48 @@
 ;
 
+MountainBreakEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MountainBreak_DiscardDeckEffect
+	dbw EFFECTCMDTYPE_AI, MountainBreak_AIEffect
+	db  $00
+
+
+; FIXME: DiscardFromDeckEffect now stores cards in wDuelTempList
+MountainBreak_DiscardDeckEffect:
+	ld a, 5
+	call DiscardFromDeckEffect
+	or a
+	ret z  ; nothing to discard
+	ld c, a
+	push bc
+	; this creates a list from most recent to oldest
+	call CreateDiscardPileCardList
+	pop bc
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	cp $ff  ; maybe redundant
+	ret z
+; check if it is an energy
+	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
+	call GetCardType  ; preserves hl, bc
+	cp TYPE_ENERGY
+	jr c, .next
+	cp TYPE_TRAINER
+	jr nc, .next
+; bonus damage if it is an energy
+	ld a, 20
+	call AddToDamage
+.next
+	dec c
+	jr nz, .loop
+	ret
+
+
+MountainBreak_AIEffect:
+	ld a, (50 + 150) / 2
+	lb de, 50, 150
+	jp UpdateExpectedAIDamage
+
 
 
 ; doubles the damage at de if swords dance or focus energy was used

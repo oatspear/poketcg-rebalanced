@@ -1184,9 +1184,9 @@ LandslideEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Landslide_DiscardDeckEffect
 	db  $00
 
-MountainBreakEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MountainBreak_DiscardDeckEffect
-	dbw EFFECTCMDTYPE_AI, MountainBreak_AIEffect
+MountainSwingEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MountainSwing_DiscardDeckEffect
 	db  $00
 
 MetronomeEffectCommands:

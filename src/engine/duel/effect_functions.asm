@@ -368,46 +368,13 @@ SmallCombustion_DiscardDeckEffect:
 Landslide_DiscardDeckEffect:
 	ld a, 2
 	jp DiscardFromDeckEffect
-	; ld a, 2
-	; jp DiscardFromOpponentsDeckEffect
 
 
-; FIXME: DiscardFromDeckEffect now stores cards in wDuelTempList
-MountainBreak_DiscardDeckEffect:
-	ld a, 5
+MountainSwing_DiscardDeckEffect:
+	ld a, 2
 	call DiscardFromDeckEffect
-	or a
-	ret z  ; nothing to discard
-	ld c, a
-	push bc
-	; this creates a list from most recent to oldest
-	call CreateDiscardPileCardList
-	pop bc
-	ld hl, wDuelTempList
-.loop
-	ld a, [hli]
-	cp $ff  ; maybe redundant
-	ret z
-; check if it is an energy
-	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
-	call GetCardType  ; preserves hl, bc
-	cp TYPE_ENERGY
-	jr c, .next
-	cp TYPE_TRAINER
-	jr nc, .next
-; bonus damage if it is an energy
-	ld a, 20
-	call AddToDamage
-.next
-	dec c
-	jr nz, .loop
-	ret
-
-
-MountainBreak_AIEffect:
-	ld a, (50 + 150) / 2
-	lb de, 50, 150
-	jp UpdateExpectedAIDamage
+	ld a, 2
+	jp DiscardFromOpponentsDeckEffect
 
 
 PrimalScythe_DiscardDamageBoostEffect:

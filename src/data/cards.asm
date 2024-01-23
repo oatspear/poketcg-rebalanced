@@ -7079,16 +7079,16 @@ RhyhornCard:
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 2 ; energies
-	tx TakeDownName ; name
-	tx Recoil10Description ; description
-	dw NONE ; description (cont)
-	db 40 ; damage
+	tx RamName ; name
+	tx RamDescription ; description
+	tx RamDescriptionCont ; description (cont)
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Recoil10EffectCommands ; effect commands
+	dw RhydonRamEffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
-	db NONE ; flags 2
+	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 20
 	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 1 ; retreat cost
@@ -7115,32 +7115,32 @@ RhydonCard:
 	tx RhyhornName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
-	tx EarthquakeName ; name
-	tx EarthquakeDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 50 ; damage
+	energy COLORLESS, 2 ; energies
+	tx HornDrillName ; name
+	dw NONE ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Earthquake10EffectCommands ; effect commands
+	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_DRILL ; animation
 
 	; attack 2
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
-	tx RamName ; name
-	tx RamDescription ; description
-	tx RamDescriptionCont ; description (cont)
-	db 50 ; damage
+	energy FIGHTING, 2, COLORLESS, 2 ; energies
+	tx MountainSwingName ; name
+	tx MountainSwingDescription ; description
+	dw NONE ; description (cont)
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw RhydonRamEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db SWITCH_OPPONENT_POKEMON ; flags 2
+	dw MountainSwingEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 20
-	db ATK_ANIM_HIT_RECOIL ; animation
+	db 0
+	db ATK_ANIM_HIT ; animation
 
 	db 2 ; retreat cost
 	db WR_GRASS ; weakness

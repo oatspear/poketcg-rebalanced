@@ -1282,15 +1282,24 @@ Discard2CardsFromYourDeckDescription:
 	line "your deck."
 	done
 
-MountainBreakName:
-	text "Mountain Break"
+; MountainBreakName:
+; 	text "Mountain Break"
+; 	done
+
+; MountainBreakDescription:
+; 	text "Discard the top 4 cards from your"
+; 	line "deck. This attack does 20 more"
+; 	line "damage for each Energy discarded"
+; 	line "this way."
+; 	done
+
+MountainSwingName:
+	text "Mountain Swing"
 	done
 
-MountainBreakDescription:
-	text "Discard the top 5 cards from your"
-	line "deck. This attack does 20 more"
-	line "damage for each Energy discarded"
-	line "this way."
+MountainSwingDescription:
+	text "Discard the top 2 cards from"
+	line "each player's deck."
 	done
 
 UnaffectedByResistanceDescription:

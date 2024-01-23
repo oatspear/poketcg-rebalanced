@@ -3084,8 +3084,10 @@ TextOffsets:: ; 34000 (d:4000)
 	; textpointer ExcavateDescription
 	textpointer LandslideName
 	textpointer Discard2CardsFromYourDeckDescription
-	textpointer MountainBreakName
-	textpointer MountainBreakDescription
+	; textpointer MountainBreakName
+	; textpointer MountainBreakDescription
+	textpointer MountainSwingName
+	textpointer MountainSwingDescription
 	textpointer UnaffectedByResistanceDescription
 	textpointer IncreaseDamageTakenBy40Description
 	textpointer RevengeName

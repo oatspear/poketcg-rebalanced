@@ -112,7 +112,7 @@
 - New attack: **Sky Uppercut** (FFC): 40 damage; damage is not affected by Resistance.
 
 #### Rhydon
-- **Horn Attack**: removed.
+- **Horn Attack**: renamed to **Horn Drill**.
 - New attack: **Earthquake** (FFC): 50 damage; 10 damage to *all* benched Pokémon.
 
 ### Psychic Changes
