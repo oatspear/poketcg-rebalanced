@@ -1254,7 +1254,7 @@ RototillerName:
 	done
 
 RototillerDescription:
-	text "Shuffle up to 2 cards from your"
+	text "Shuffle up to 3 cards from your"
 	line "Discard Pile into your Deck. This"
 	line "attack does 10 damage for each"
 	line "Pokémon and Energy card you shuffled"
@@ -1277,9 +1277,9 @@ LandslideName:
 	text "Landslide"
 	done
 
-LandslideDescription:
+Discard2CardsFromYourDeckDescription:
 	text "Discard the top 2 cards from"
-	line "both players' decks."
+	line "your deck."
 	done
 
 MountainBreakName:

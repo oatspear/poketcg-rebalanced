@@ -366,9 +366,9 @@ SmallCombustion_DiscardDeckEffect:
 
 Landslide_DiscardDeckEffect:
 	ld a, 2
-	call DiscardFromDeckEffect
-	ld a, 2
-	jp DiscardFromOpponentsDeckEffect
+	jp DiscardFromDeckEffect
+	; ld a, 2
+	; jp DiscardFromOpponentsDeckEffect
 
 
 MountainBreak_DiscardDeckEffect:
@@ -8624,17 +8624,18 @@ DevolutionSpray_DevolutionEffect: ; 2fc99 (b:7c99)
 	ret
 
 
-Rototiller_PlayerSelectEffect:
-	call CreateDiscardPileCardList
-	; jr ChooseUpTo2Cards_PlayerDiscardPileSelection
-	; fallthrough
-
 ; input:
 ;  [wDuelTempList]: list of cards to choose from
 ChooseUpTo2Cards_PlayerDiscardPileSelection:
 	ld a, 2
 	ld [wCardListNumberOfCardsToChoose], a
 	jr ChooseUpToNCards_PlayerDiscardPileSelection
+
+
+Rototiller_PlayerSelectEffect:
+	call CreateDiscardPileCardList
+	; jr ChooseUpTo3Cards_PlayerDiscardPileSelection
+	; fallthrough
 
 ; input:
 ;  [wDuelTempList]: list of cards to choose from

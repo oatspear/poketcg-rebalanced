@@ -424,12 +424,8 @@ DiglettName: ; 5e67f (17:667f)
 	text "Diglett"
 	done
 
-DigName: ; 5e688 (17:6688)
-	text "Dig"
-	done
-
-MudSlapName: ; 5e68d (17:668d)
-	text "Mud Slap"
+DigUnderName:
+	text "Dig Under"
 	done
 
 MoleName: ; 5e697 (17:6697)

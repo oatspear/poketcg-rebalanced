@@ -1170,6 +1170,7 @@ CombustionEffectCommands:
 	db  $00
 
 LandslideEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Landslide_DiscardDeckEffect
 	db  $00
 

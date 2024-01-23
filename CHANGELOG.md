@@ -52,13 +52,15 @@
 - New attack: **Rapid Spin** (CC): 20 damage, both players switch Pokémon.
 
 #### Diglett
+- Increased HP from 30 to 40.
 - **Scratch**: removed.
-- New attack: **Rototiller** (CC): shuffle up to 2 cards from Discard Pile into Deck; 10 damage for each Pokémon or Energy card.
+- **Dig**: renamed to **Dig Under**; increased cost from (F) to (CC).
+- New attack: **Landslide** (F): 30 damage; discards the top 2 cards from the user's deck.
 
 #### Dugtrio
 - **Slash**: removed.
 - **Earthquake**: reduced cost from (FFC) to (FCC); reduced base damage from 70 to 50.
-- New attack: **Landslide** (FC): 30 damage; discards the top 2 cards from both decks.
+- New attack: **Rototiller** (CC): shuffle up to 3 cards from Discard Pile into Deck; 10 damage for each Pokémon or Energy card.
 
 #### Geodude
 - **Stone Barrage**: removed.

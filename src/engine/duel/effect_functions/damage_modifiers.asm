@@ -1103,11 +1103,15 @@ IfActiveThisTurnDoubleDamage_AIEffect:
 Rototiller_DamageBoostEffect:
 	xor a
 	call SetDefiniteDamage
-	ldh a, [hTempList]
+	ld hl, hTempList
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .check_damage
 	call .BoostIfPokemonOrEnergy
-	ldh a, [hTempList + 1]
-	call .BoostIfPokemonOrEnergy
+	jr .loop
 ; switch animation if this attack deals damage
+.check_damage
 	ld a, [wDamage]
 	or a
 	ret z
@@ -1118,15 +1122,13 @@ Rototiller_DamageBoostEffect:
 ; input:
 ;   a: deck index of selected card
 .BoostIfPokemonOrEnergy:
-	cp $ff
-	ret z
 	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
 	call GetCardType  ; preserves hl, bc
 	cp TYPE_TRAINER
 	ret nc
 ; Pokémon or Energy card
 	ld a, 10
-	jp AddToDamage
+	jp AddToDamage  ; preserves hl
 
 
 Rototiller_AIEffect:
@@ -1139,6 +1141,6 @@ Rototiller_AIEffect:
 	lb de, 0, 0
 	jp SetExpectedAIDamage
 .damage
-	ld a, (10 + 10) / 2
-	lb de, 10, 20
+	ld a, 20
+	lb de, 10, 30
 	jp SetExpectedAIDamage

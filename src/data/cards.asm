@@ -6214,13 +6214,27 @@ DiglettCard:
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db DIGLETT
-	db 30 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy FIGHTING, 1 ; energies
-	tx DigName ; name
+	tx LandslideName ; name
+	tx Discard2CardsFromYourDeckDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw LandslideEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
+	tx DigUnderName ; name
 	tx Deal20ToBenchDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 0 ; damage
@@ -6231,20 +6245,6 @@ DiglettCard:
 	db NONE ; flags 3
 	db 3
 	db ATK_ANIM_NONE ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx RototillerName ; name
-	tx RototillerDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_X ; category
-	dw RototillerEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
 	db WR_GRASS ; weakness
@@ -6270,18 +6270,18 @@ DugtrioCard:
 	tx DiglettName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1, COLORLESS, 1 ; energies
-	tx LandslideName ; name
-	tx LandslideDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx RototillerName ; name
+	tx RototillerDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw LandslideEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw RototillerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy FIGHTING, 1, COLORLESS, 2 ; energies

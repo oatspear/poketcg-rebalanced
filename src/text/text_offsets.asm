@@ -2589,8 +2589,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer TripleAttackX20Description                         ; 0x0a0d
 	textpointer SandslashDescription                               ; 0x0a0e
 	textpointer DiglettName                                        ; 0x0a0f
-	textpointer DigName                                            ; 0x0a10
-	textpointer MudSlapName                                        ; 0x0a11
+	textpointer DigUnderName
 	textpointer MoleName                                           ; 0x0a12
 	textpointer DiglettDescription                                 ; 0x0a13
 	textpointer DugtrioName                                        ; 0x0a14
@@ -3083,7 +3082,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ExcavateName
 	; textpointer ExcavateDescription
 	textpointer LandslideName
-	textpointer LandslideDescription
+	textpointer Discard2CardsFromYourDeckDescription
 	textpointer MountainBreakName
 	textpointer MountainBreakDescription
 	textpointer UnaffectedByResistanceDescription
