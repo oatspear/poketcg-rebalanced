@@ -7,6 +7,7 @@
 ;   a: number of cards to discard
 ; output:
 ;   a: number of discarded cards
+;   wDuelTempList: $ff-terminated list of discarded cards (by deck index)
 ; preserves: nothing
 ;   - push/pop de around DrawWideTextBox_PrintText to preserve it
 DiscardFromDeckEffect:
@@ -24,16 +25,24 @@ DiscardFromDeckEffect:
 .start_discard
   push bc
   inc c
+  ld hl, wDuelTempList
   jr .check_remaining
 
 .loop
 ; discard top card from deck
-  call DrawCardFromDeck
-  call nc, PutCardInDiscardPile
+; assume: deck size is already handled, this never returns carry
+  call DrawCardFromDeck  ; preserves hl
+  ; <- jr c would be done here
+  ld [hli], a  ; deck index
+  call nc, PutCardInDiscardPile  ; preserves hl, de
 .check_remaining
   dec c
   jr nz, .loop
 
+; terminate wDuelTempList before using hl
+  ld a, $ff
+  ld [hl], a
+; retrieve number of discarded cards and print text
   pop hl
   ld a, l
   or a

@@ -158,6 +158,7 @@ DrawCardFromDeck:
 	ret
 .empty_deck
 	pop hl
+	ld a, $ff
 	scf
 	ret
 
