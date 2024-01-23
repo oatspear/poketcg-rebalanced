@@ -95,7 +95,7 @@
 - **Bonemerang**: reworked.
 - New attack: **Bonemerang** (FC): 20 damage; deal 20 damage to 1 Pokémon in opponent's Bench.
 
-#### Marowak Lv26
+#### Marowak Lv32
 - **Bone Attack**: removed.
 - **Vengeance**: increased base damage from 10 to 20.
 - New Pokémon Power: **Crushing Charge**: discard the top card of your deck; attach it if it is a basic energy.
