@@ -6321,21 +6321,21 @@ MankeyCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
-	tx KarateChopName ; name
-	tx KarateChopDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx PrankName ; name
+	tx PrankDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_MINUS ; category
-	dw KarateChopEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw PrankEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_7 ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 1
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	energy FIGHTING, 1 ; energies
 	tx TantrumName ; name
 	tx TantrumDescription ; description
 	dw NONE ; description (cont)

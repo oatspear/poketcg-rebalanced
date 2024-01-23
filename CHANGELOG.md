@@ -16,8 +16,10 @@
 ### Fighting Changes
 
 #### Mankey
+- **Karate Chop**: removed.
 - **Rage**: removed.
-- New attack: **Tantrum** (FC): 30 damage; confuses the user.
+- New attack: **Prank** (C): put a card from the opponent's discard pile on the top of their deck.
+- New attack: **Tantrum** (F): 30 damage; confuses the user.
 
 #### Primeape
 - **Tantrum**: removed.

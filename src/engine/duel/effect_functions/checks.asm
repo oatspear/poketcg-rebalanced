@@ -151,6 +151,20 @@ CheckMysteriousFossilInHand:
 ; ------------------------------------------------------------------------------
 
 
+; return carry if the Discard Pile is empty
+CheckDiscardPileNotEmpty:
+	call CreateDiscardPileCardList
+	ldtx hl, ThereAreNoCardsInTheDiscardPileText
+	ret
+
+
+; return carry if the opponent's Discard Pile is empty
+CheckOpponentDiscardPileNotEmpty:
+	call SwapTurn
+	call CheckDiscardPileNotEmpty
+	jp SwapTurn
+
+
 ; return carry if no Basic Energy cards in Discard Pile
 CheckDiscardPileHasBasicEnergyCards:
 	; call CreateEnergyCardListFromDiscardPile_AllEnergy

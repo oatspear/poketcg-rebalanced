@@ -6821,6 +6821,17 @@ OptionalDoubleDamage_PlayerSelectEffect:
 	ret
 
 
+; choose a card from the opponent's Discard Pile
+; assume:
+;   - card list already created in precondition check
+Prank_PlayerSelectEffect:
+	; call CreateDiscardPileCardList
+	ldtx de, OpponentsDiscardPileText
+	bank1call HandlePlayerSelectionFromCardList_Forced
+	ldh [hTemp_ffa0], a
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Move Selected Cards
 ; ------------------------------------------------------------------------------
@@ -6941,6 +6952,31 @@ MoveDeckCardToTopOfDeckEffect:
 	call AddCardToHand  ; preserves af, hl bc, de
 	call RemoveCardFromHand  ; preserves af, hl bc, de
 	jp ReturnCardToDeck  ; preserves a, hl, de, bc
+
+
+SelectedCard_AddToDeckFromDiscardPileEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z ; return if no card was selected
+	; fallthrough
+
+MoveDiscardPileCardToTopOfDeckEffect:
+	call MoveDiscardPileCardToHand
+	jp ReturnCardToDeck
+
+
+; put card on top of the deck and show it on screen if
+; it wasn't the Player who played the Trainer card.
+Recycle_AddToDeckEffect:
+	call SelectedCard_AddToDeckFromDiscardPileEffect
+	jp SelectedCard_ShowDetailsIfOpponentsTurn
+
+
+Prank_AddToDeckEffect:
+	call SwapTurn
+	call SelectedCard_AddToDeckFromDiscardPileEffect
+	call SwapTurn
+	jp SelectedCard_ShowDetailsIfOpponentsTurn
 
 
 SelectedCard_AddToHandFromDiscardPile:
@@ -7193,6 +7229,11 @@ OptionalDoubleDamage_AISelectEffect:
 	xor a
 .store
 	ldh [hTemp_ffa0], a
+	ret
+
+
+Prank_AISelectEffect:
+	farcall AISelect_Prank
 	ret
 
 
@@ -8402,15 +8443,7 @@ FishingTail_AISelection:
 	ret
 
 
-Recycle_AddToDeckEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret z ; return if no card was selected
-
-; put card on top of the deck and show it on screen if
-; it wasn't the Player who played the Trainer card.
-	call MoveDiscardPileCardToHand
-	call ReturnCardToDeck
+SelectedCard_ShowDetailsIfOpponentsTurn:
 	call IsPlayerTurn
 	ret c
 	ldh a, [hTemp_ffa0]

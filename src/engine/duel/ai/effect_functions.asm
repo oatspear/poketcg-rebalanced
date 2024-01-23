@@ -70,13 +70,30 @@ LoopCardList_GetFirstOfCardType:
 ; ------------------------------------------------------------------------------
 
 
-AISelect_Rototiller:
-	call CreateDiscardPileCardList
+; assume:
+;   - the opponent has basic energy cards in discard pile (from Special Attack AI)
+AISelect_Prank:
+	ld a, $ff
+	ldh [hTempList], a
+	ldh [hTempList + 1], a
+	call SwapTurn
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
 	jr c, .done
+; get the first energy
+	ld a, [wDuelTempList]
+	ldh [hTempList], a
+.done
+	or a
+	jp SwapTurn
+
+
+AISelect_Rototiller:
 	ld a, $ff
 	ldh [hTempList], a
 	ldh [hTempList + 1], a
 	ldh [hTempList + 2], a
+	call CreateDiscardPileCardList
+	jr c, .done
 ; try to get energy
 	call LoopCardList_GetFirstEnergy
 	jr c, .pokemon1

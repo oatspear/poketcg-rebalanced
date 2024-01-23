@@ -917,6 +917,13 @@ TantrumEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TantrumEffect
 	db  $00
 
+PrankEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckOpponentDiscardPileNotEmpty
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Prank_AddToDeckEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Prank_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Prank_AISelectEffect
+	db  $00
+
 PrimalScytheEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PrimalScythe_DiscardDamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, PrimalScythe_AIEffect

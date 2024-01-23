@@ -1393,3 +1393,13 @@ StrongArmLariatDescription:
 	line "If you do, during your next turn,"
 	line "this Pokémon can't attack."
 	done
+
+PrankName:
+	text "Prank"
+	done
+
+PrankDescription:
+	text "Choose a card from the opponent's"
+	line "Discard Pile and put it on the top"
+	line "of their deck."
+	done

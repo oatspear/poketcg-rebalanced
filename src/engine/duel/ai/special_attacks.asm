@@ -91,6 +91,8 @@ HandleSpecialAIAttacks:
 	jr z, .Teleport
 	cp MACHOP
 	jr z, .Teleport
+	cp MANKEY
+	jp z, .Prank
 	cp PRIMEAPE
 	jp z, .GetMad
 
@@ -388,6 +390,14 @@ HandleSpecialAIAttacks:
 	ret
 .hyper_beam_neutral
 	ld a, $80
+	ret
+
+.Prank:
+	call SwapTurn
+	call CreateEnergyCardListFromDiscardPile_OnlyBasic
+	call SwapTurn
+	jp c, .zero_score
+	ld a, $82
 	ret
 
 .GetMad:
