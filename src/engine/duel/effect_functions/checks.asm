@@ -204,6 +204,15 @@ CheckBenchIsNotEmpty:
 	ret
 
 
+; return carry if opponent has no Bench Pokemon.
+CheckOpponentBenchIsNotEmpty:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	ldtx hl, EffectNoPokemonOnTheBenchText
+	cp 2
+	ret
+
+
 ; return carry if there are two Pokémon of the same color in the Play Area
 CheckNoDuplicateColorsInPlayArea:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA

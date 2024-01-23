@@ -31,6 +31,10 @@ Deal20DamageToTarget_DamageEffect:
 	ld de, 20
 	jr DealDamageToTarget_DE_DamageEffect
 
+Deal40DamageToTarget_DamageEffect:
+	ld de, 40
+	jr DealDamageToTarget_DE_DamageEffect
+
 Deal30DamageToTarget_DamageEffect:
 	ld de, 30
 	; jr DealDamageToTarget_DE_DamageEffect
@@ -80,14 +84,16 @@ DamageTargetPokemon_PlayerSelectEffect:
 	ret
 
 
-DamageTargetBenchedPokemon_PlayerSelectEffect:
+DamageTargetBenchedPokemonIfAny_PlayerSelectEffect:
 	ld a, $ff
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	cp 2
 	ret c ; has no Bench Pokemon
+	; fallthrough
 
+DamageTargetBenchedPokemon_PlayerSelectEffect:
 	ldtx hl, ChoosePkmnInTheBenchToGiveDamageText
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
@@ -131,13 +137,16 @@ DamageTargetPokemon_AISelectEffect:
 	ret
 
 
-DamageTargetBenchedPokemon_AISelectEffect:
+DamageTargetBenchedPokemonIfAny_AISelectEffect:
 	ld a, $ff
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	cp 2
 	ret c ; has no Bench Pokemon
+	; fallthrough
+
+DamageTargetBenchedPokemon_AISelectEffect:
 ; AI always picks Pokemon with lowest HP remaining
 	call GetOpponentBenchPokemonWithLowestHP
 	ldh [hTempPlayAreaLocation_ffa1], a

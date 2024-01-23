@@ -292,7 +292,7 @@ Maintenance_CheckHandAndDiscardPile:
 AssassinFlight_CheckBenchAndStatus:
 	call CheckOpponentHasStatus
 	ret c
-	jp StretchKick_CheckBench
+	jp CheckOpponentBenchIsNotEmpty
 
 
 AbsorbWater_PreconditionCheck:
@@ -4862,51 +4862,6 @@ Ram_RecoilSwitchEffect: ; 2e212 (b:6212)
 	ldh a, [hTemp_ffa0]
 	call HandleSwitchDefendingPokemonEffect
 	ret
-
-
-; return carry if opponent has no Bench Pokemon.
-StretchKick_CheckBench:
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	ldtx hl, EffectNoPokemonOnTheBenchText
-	cp 2
-	ret
-
-AssassinFlight_PlayerSelectEffect:
-StretchKick_PlayerSelectEffect:
-	ldtx hl, ChoosePkmnInTheBenchToGiveDamageText
-	call DrawWideTextBox_WaitForInput
-	call SwapTurn
-	bank1call HasAlivePokemonInBench
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	jp SwapTurn
-
-AssassinFlight_AISelectEffect:
-StretchKick_AISelectEffect:
-; chooses Bench Pokemon with least amount of remaining HP
-	call GetOpponentBenchPokemonWithLowestHP
-	ldh [hTemp_ffa0], a
-	ret
-
-StretchKick_BenchDamageEffect:
-	call SwapTurn
-	ldh a, [hTemp_ffa0]
-	ld b, a
-	ld de, 20
-	call DealDamageToPlayAreaPokemon_RegularAnim
-	jp SwapTurn
-
-AssassinFlight_BenchDamageEffect:
-	call SwapTurn
-	ldh a, [hTemp_ffa0]
-	ld b, a
-	ld de, 40
-	call DealDamageToPlayAreaPokemon_RegularAnim
-	jp SwapTurn
 
 
 Thunderpunch_AIEffect: ; 2e399 (b:6399)

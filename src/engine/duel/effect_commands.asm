@@ -274,9 +274,9 @@ FinishingBiteEffectCommands:
 
 AssassinFlightEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, AssassinFlight_CheckBenchAndStatus
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AssassinFlight_BenchDamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, AssassinFlight_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, AssassinFlight_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal40DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
 	db  $00
 
 TwineedleEffectCommands:
@@ -961,13 +961,11 @@ RhydonRamEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Ram_SelectSwitchEffect
 	db  $00
 
-MarowakBoneAttackEffectCommands:
-HitmonleeStretchKickEffectCommands:
 Deal20ToBenchEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StretchKick_CheckBench
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StretchKick_BenchDamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StretchKick_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, StretchKick_AISelectEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckOpponentBenchIsNotEmpty
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
 	db  $00
 
 Earthquake10EffectCommands:
@@ -1057,27 +1055,27 @@ FlyingPikachuFlyEffectCommands:
 
 Damage1BenchedPokemon10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal10DamageToTarget_DamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemonIfAny_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
 	db  $00
 
 Damage1BenchedPokemon20EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20DamageToTarget_DamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemonIfAny_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
 	db  $00
 
 SteamrollerEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Steamroller_ChangeColorEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Steamroller_DamageAndColorEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemonIfAny_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
 	db  $00
 
 ArticunoIceBreathEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IceBreath_BenchDamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemon_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemon_AISelectEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemonIfAny_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
 	db  $00
 
 GrowlEffectCommands:
