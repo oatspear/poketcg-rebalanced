@@ -2689,8 +2689,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SharpSickleName                                    ; 0x0a71
 	textpointer KabutopsDescription                                ; 0x0a75
 	textpointer AerodactylName                                     ; 0x0a76
-	textpointer PrehistoricPowerName                               ; 0x0a77
-	textpointer PrehistoricPowerDescription                        ; 0x0a78
+	textpointer PrehistoricPowerName
+	textpointer PrehistoricPowerDescription
+	; textpointer PrimalClawName
+	; textpointer PrimalClawDescription
 	textpointer FossilName                                         ; 0x0a79
 	textpointer AerodactylDescription                              ; 0x0a7a
 	textpointer AbraName                                           ; 0x0a7b

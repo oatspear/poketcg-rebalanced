@@ -916,18 +916,21 @@ PrehistoricPowerName:
 	text "Prehistoric Power"
 	done
 
-; PrehistoricPowerDescription:
-; 	text "No more Evolution cards can be"
-; 	line "played. This power stops working"
-; 	line "while Aerodactyl is Asleep,"
-; 	line "Confused, or Paralyzed."
-; 	done
-
 PrehistoricPowerDescription:
 	text "No more Evolution cards can be"
 	line "played while this Pokémon is in"
 	line "the Active Spot."
 	done
+
+; PrimalClawName:
+; 	text "Primal Claw"
+; 	done
+
+; PrimalClawDescription:
+; 	text "After your opponent's Pokémon uses"
+; 	line "a Pokémon Power, put 1 damage"
+; 	line "counter on that Pokémon."
+; 	done
 
 FossilName: ; 5fe00 (17:7e00)
 	text "Fossil"
