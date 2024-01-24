@@ -6893,7 +6893,7 @@ OppAction_AttemptRetreat:
 	push hl
 	call LoadCardNameToTxRam2
 	pop hl
-	jp DrawWideTextBox_WaitForInput_Bank1
+	jp DrawWideTextBox_WaitForInput
 
 ; play trainer card from hand
 OppAction_PlayTrainerCard:
@@ -7044,7 +7044,7 @@ OppAction_UsePokemonPower:
 	call LoadCardNameToTxRam2
 	call LoadAttackNameToRam2b
 	ldtx hl, WillUseThePokemonPowerText
-	call DrawWideTextBox_WaitForInput_Bank1
+	call DrawWideTextBox_WaitForInput
 	call ExchangeRNG
 	ld a, $01
 	ld [wSkipDuelistIsThinkingDelay], a
@@ -7068,8 +7068,7 @@ OppAction_ExecuteEffectStep:
 	ret
 
 OppAction_DrawDuelMainScene:
-	call DrawDuelMainScene
-	ret
+	jp DrawDuelMainScene
 
 OppAction_TossCoinATimes:
 	call SerialRecv8Bytes
@@ -7097,8 +7096,7 @@ OppAction_UseMetronomeAttack:
 	jr z, .asm_6b56
 	call PrintPokemonsAttackText
 	call .asm_6b56
-	call WaitForWideTextBoxInput
-	ret
+	jp WaitForWideTextBoxInput
 .asm_6b56
 	call SerialRecv8Bytes
 	push bc
@@ -7140,17 +7138,12 @@ LoadCardNameToTxRam2_b:
 	ld [wTxRam2_b + 1], a
 	ret
 
-DrawWideTextBox_WaitForInput_Bank1:
-	call DrawWideTextBox_WaitForInput
-	ret
-
 Func_6ba2:
 	call DrawWideTextBox_PrintText
 	ld a, [wDuelistType]
 	cp DUELIST_TYPE_LINK_OPP
 	ret z
-	call WaitForWideTextBoxInput
-	ret
+	jp WaitForWideTextBoxInput
 
 
 
