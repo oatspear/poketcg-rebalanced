@@ -7150,6 +7150,18 @@ Func_6ba2:
 
 HandleOnUsePokemonPowerEffects:
 	ret
+;	call SwapTurn
+;	ld a, AERODACTYL  ; Primal Claw
+;	call GetFirstPokemonWithAvailablePower
+;	jp nc, SwapTurn  ; no Pkmn Power-capable Aerodactyl was found
+;	; hl is text to display
+;	; a is the card's deck index
+;	; ldtx hl, AerodactylPrimalClawText
+;	; call DisplayCardDetailScreen
+;	ldh a, [hTempPlayAreaLocation_ff9d]
+;	ld e, a  ; location
+;	farcall Put1DamageCounterOnTarget
+;	jp SwapTurn
 
 
 HandleOnPlayTrainerEffects:
