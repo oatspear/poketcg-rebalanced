@@ -1732,6 +1732,7 @@ UsePokemonPower:
 	call SetOppAction_SerialSendDuelData
 	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
 	call TryExecuteEffectCommandFunction
+	bank1call HandleOnUsePokemonPowerEffects
 	ld a, OPPACTION_DUEL_MAIN_SCENE
 	jp SetOppAction_SerialSendDuelData
 

@@ -7055,6 +7055,7 @@ OppAction_ExecutePokemonPowerEffect:
 	call Func_7415
 	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
 	call TryExecuteEffectCommandFunction
+	call HandleOnUsePokemonPowerEffects
 	ld a, $01
 	ld [wSkipDuelistIsThinkingDelay], a
 	ret
@@ -7145,6 +7146,10 @@ Func_6ba2:
 	ret z
 	jp WaitForWideTextBoxInput
 
+
+
+HandleOnUsePokemonPowerEffects:
+	ret
 
 
 HandleOnPlayTrainerEffects:
