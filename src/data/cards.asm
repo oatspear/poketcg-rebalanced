@@ -7323,6 +7323,20 @@ AerodactylCard:
 	; As long as this Pokémon is your Active Pokémon, your opponent's Basic Pokémon's
 	; attacks cost Colorless more.
 
+	; Primal Claw
+	; energy 0 ; energies
+	; tx PrimalClawName ; name
+	; tx PrimalClawDescription ; description
+	; tx PokemonPowerDescriptionCont ; description (cont)
+	; db 0 ; damage
+	; db POKEMON_POWER ; category
+	; dw PassivePowerEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_PKMN_POWER_1 ; animation
+
 	; attack 1
 	energy 0 ; energies
 	tx PrehistoricPowerName ; name
