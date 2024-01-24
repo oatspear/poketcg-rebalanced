@@ -540,37 +540,6 @@ PrintDevolvedCardNameAndLevelText: ; 2c1c4 (b:41c4)
 	pop de
 	ret
 
-HandleSwitchDefendingPokemonEffect: ; 2c1ec (b:41ec)
-	ld e, a
-	cp $ff
-	ret z
-
-; check Defending Pokemon's HP
-	ld a, DUELVARS_ARENA_CARD_HP
-	call GetNonTurnDuelistVariable
-	or a
-	jr nz, .switch
-
-; if 0, handle Destiny Bond first
-	push de
-	bank1call HandleDestinyBondSubstatus
-	pop de
-
-.switch
-	call HandleNoDamageOrEffect
-	ret c
-
-; attack was successful, switch Defending Pokemon
-	call SwapTurn
-	call SwapArenaWithBenchPokemon
-	call SwapTurn
-
-	xor a
-	ld [wccc5], a
-	ld [wDuelDisplayedScreen], a
-	inc a
-	ld [wccef], a
-	ret
 
 ; returns carry if Defending has No Damage or Effect
 ; if so, print its appropriate text.
@@ -4811,27 +4780,6 @@ HardenEffect: ; 2e1f6 (b:61f6)
 	ld a, SUBSTATUS1_HARDEN
 	jp ApplySubstatus1ToAttackingCard
 
-Ram_SelectSwitchEffect: ; 2e1fc (b:61fc)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	jr c, .no_bench
-	call DuelistSelectForcedSwitch
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	ret
-.no_bench
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ret
-
-Ram_RecoilSwitchEffect: ; 2e212 (b:6212)
-	ld a, 20
-	call DealRecoilDamageToSelf
-	ldh a, [hTemp_ffa0]
-	call HandleSwitchDefendingPokemonEffect
-	ret
-
 
 Thunderpunch_AIEffect: ; 2e399 (b:6399)
 	ld a, (30 + 40) / 2
@@ -5844,15 +5792,15 @@ GaleEffect:
 	call DrawWideTextBox_WaitForInput
 	xor a
 	ld [wDuelDisplayedScreen], a
-	call SwapTurn
-	ret
+	jp SwapTurn
+
 
 Whirlwind_SelectEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	cp 2
 	jr nc, .switch
-	; no Bench Pokemon
+; no Bench Pokemon
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 	ret
@@ -5862,9 +5810,48 @@ Whirlwind_SelectEffect:
 	ldh [hTemp_ffa0], a
 	ret
 
+
+Ram_RecoilSwitchEffect:
+	call Recoil20Effect
+	; jr Whirlwind_SwitchEffect
+	; fallthrough
+
+
 Whirlwind_SwitchEffect:
 	ldh a, [hTemp_ffa0]
-	call HandleSwitchDefendingPokemonEffect
+	; jr HandleSwitchDefendingPokemonEffect
+	; fallthrough
+
+HandleSwitchDefendingPokemonEffect:
+	ld e, a
+	cp $ff
+	ret z
+
+; check Defending Pokemon's HP
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	or a
+	jr nz, .switch
+
+; if 0, handle Destiny Bond first
+	push de
+	bank1call HandleDestinyBondSubstatus
+	pop de
+
+.switch
+	call HandleNoDamageOrEffect
+	ret c
+
+; attack was successful, switch Defending Pokemon
+	call SwapTurn
+	call SwapArenaWithBenchPokemon
+	call SwapTurn
+
+	xor a
+	ld [wccc5], a
+	ld [wDuelDisplayedScreen], a
+	inc a
+	ld [wccef], a
 	ret
 
 
