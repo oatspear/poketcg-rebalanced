@@ -1064,6 +1064,12 @@ Damage1BenchedPokemon20EffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
 	db  $00
 
+Damage1BenchedPokemon30EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal30DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemonIfAny_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
+	db  $00
+
 SteamrollerEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Steamroller_ChangeColorEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Steamroller_DamageAndColorEffect

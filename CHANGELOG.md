@@ -111,9 +111,16 @@
 - New attack: **Close Combat** (F): 40 damage; takes 40 more damage from attacks next turn.
 - New attack: **Sky Uppercut** (FFC): 40 damage; damage is not affected by Resistance.
 
+#### Rhyhorn
+- Decreased HP from 70 to 60.
+- **Horn Attack**: removed.
+- **Take Down**: removed.
+- New attack: **Ram** (F): 20 damage; 10 recoil; opponent switches active Pokémon.
+- New attack: **Overrun** (FCC): 20 damage; 20 damage to 1 benched Pokémon.
+
 #### Rhydon
 - **Horn Attack**: renamed to **Horn Drill**.
-- New attack: **Earthquake** (FFC): 50 damage; 10 damage to *all* benched Pokémon.
+- New attack: **Mountain Swing** (FFCC): 50 damage; discard the top 2 cards of both decks.
 
 ### Psychic Changes
 

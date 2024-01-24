@@ -850,18 +850,11 @@ RamName: ; 5f8fa (17:78fa)
 	text "Ram"
 	done
 
-RamDescription: ; 5f8ff (17:78ff)
-	text "Rhydon does 20 damage to itself."
-	line "If your opponent has any Benched"
-	line "Pokémon, he or she chooses 1 of them"
-	line "and switches it with the Defending"
-	line "Pokémon.(Do the damage before"
-	line "switching the Pokémon."
-	done
-
-RamDescriptionCont: ; 5f9bf (17:79bf)
-	text "Switch the Pokémon even if Rhydon"
-	line "is Knocked Out.)"
+RamDescription:
+	text "Also does 10 damage to itself."
+	line "Your opponent switches their"
+	line "Active Pokémon with one of their"
+	line "Benched Pokémon."
 	done
 
 RhydonDescription: ; 5f9f3 (17:79f3)

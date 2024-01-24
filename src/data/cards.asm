@@ -2966,7 +2966,7 @@ RapidashCard:
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	dw Damage1BenchedPokemon30EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -7059,37 +7059,39 @@ RhyhornCard:
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db RHYHORN
-	db 70 ; hp
+	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
-	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx HornAttackName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	; Land Crush: damage; damage to own bench
 
-	; attack 2
-	energy FIGHTING, 1, COLORLESS, 2 ; energies
+	; attack 1
+	energy FIGHTING, 1 ; energies
 	tx RamName ; name
 	tx RamDescription ; description
-	tx RamDescriptionCont ; description (cont)
-	db 50 ; damage
+	dw NONE ; description (cont)
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw RhydonRamEffectCommands ; effect commands
+	dw RamEffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
 	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
-	db 20
+	db 10
 	db ATK_ANIM_HIT_RECOIL ; animation
+
+	; attack 2
+	energy FIGHTING, 1, COLORLESS, 2 ; energies
+	tx OverrunName ; name
+	tx Damage1BenchedPokemon20Description ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Damage1BenchedPokemon20EffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 3
+	db 2
+	db ATK_ANIM_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
@@ -7114,6 +7116,9 @@ RhydonCard:
 	db STAGE1 ; stage
 	tx RhyhornName ; pre-evo name
 
+	; Earthquake / Break Ground: high base damage; damage to own benched
+	; Raging Crash: bonus damage per damaged Pokémon
+
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx HornDrillName ; name
@@ -7133,7 +7138,7 @@ RhydonCard:
 	tx MountainSwingName ; name
 	tx MountainSwingDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
 	dw MountainSwingEffectCommands ; effect commands
 	db NONE ; flags 1

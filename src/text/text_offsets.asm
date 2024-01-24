@@ -2677,8 +2677,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RhyhornDescription                                 ; 0x0a65
 	textpointer RhydonName                                         ; 0x0a66
 	textpointer RamName                                            ; 0x0a67
-	textpointer RamDescription                                     ; 0x0a68
-	textpointer RamDescriptionCont                                 ; 0x0a69
+	textpointer RamDescription
 	textpointer RhydonDescription                                  ; 0x0a6a
 	textpointer KabutoName                                         ; 0x0a6b
 	textpointer KabutoArmorName                                    ; 0x0a6c

@@ -5812,7 +5812,7 @@ Whirlwind_SelectEffect:
 
 
 Ram_RecoilSwitchEffect:
-	call Recoil20Effect
+	call Recoil10Effect
 	; jr Whirlwind_SwitchEffect
 	; fallthrough
 
