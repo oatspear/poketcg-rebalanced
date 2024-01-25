@@ -134,65 +134,6 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	ld de, 0
 	ret
 
-; when MACHAMP is damaged, if its Strikes Back is active, the
-; attacking Pokemon (turn holder's arena Pokemon) takes 20 damage.
-; ignore if damage taken at de is 0.
-; used to bounce back a damaging attack.
-HandleStrikesBack_AgainstDamagingAttack:
-	ld a, e
-	or d
-	ret z
-	ld a, [wIsDamageToSelf]
-	or a
-	ret nz
-	ld a, [wTempNonTurnDuelistCardID] ; ID of defending Pokemon
-	cp MACHAMP
-	ret nz
-	call ArePokemonPowersDisabled
-	ret c
-	ld a, [wLoadedAttackCategory] ; category of attack used
-	cp POKEMON_POWER
-	ret z
-	ld a, [wTempPlayAreaLocation_cceb] ; defending Pokemon's PLAY_AREA_*
-	call CheckCannotUseDueToStatus_Anywhere
-	ret c
-	; OATS if we want to limit the power to "while active",
-	; this is where a location check would go
-	push hl
-	push de
-	; subtract 20 HP from attacking Pokemon (turn holder's arena Pokemon)
-	call SwapTurn
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	push af
-	push hl
-	ld de, 20
-	call SubtractHP
-	ld a, [wLoadedCard2ID]
-	ld [wTempNonTurnDuelistCardID], a
-	ld hl, 20
-	call LoadTxRam3
-	ld hl, wLoadedCard2Name
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call LoadTxRam2
-	ldtx hl, ReceivesDamageDueToStrikesBackText
-	call DrawWideTextBox_WaitForInput
-	pop hl
-	pop af
-	or a
-	jr z, .not_knocked_out
-	xor a
-	call PrintPlayAreaCardKnockedOutIfNoHP
-.not_knocked_out
-	call SwapTurn
-	pop de
-	pop hl
-	ret
 
 ; return carry if NShield or Transparency activate (if MEW_LV8 or HAUNTER_LV17 is
 ; the turn holder's arena Pokemon), and print their corresponding text if so
@@ -941,10 +882,10 @@ HandleDestinyBondSubstatus:
 	jp DrawWideTextBox_WaitForInput
 
 
-; when MACHAMP is damaged, if its Strikes Back is active, the
-; attacking Pokemon (turn holder's arena Pokemon) takes 20 damage.
-; used to bounce back an attack of the RESIDUAL category
-; used to handle direct damage in the Active spot after an attack
+; If a Strikes Back ability is active, the attacking Pokémon
+; (turn holder's arena Pokémon) takes damage back.
+; Used to bounce back an attack of the RESIDUAL category.
+; Used to handle direct damage in the Active spot after an attack.
 HandleStrikesBack_AfterDirectAttack:
 	ld a, [wTempNonTurnDuelistCardID]
 	cp MACHAMP
@@ -965,8 +906,74 @@ HandleStrikesBack_AfterDirectAttack:
 	ret c
 
 	ld hl, 20 ; damage to be dealt to attacker
-	call ApplyStrikesBack_AfterDirectAttack
-	call nc, WaitForWideTextBoxInput
+	jp ApplyStrikesBack_AfterDirectAttack
+
+
+; If a Strikes Back ability is active, the attacking Pokémon
+; (turn holder's arena Pokémon) takes damage back.
+; Ignore if damage taken at de is 0.
+; Used to bounce back a damaging attack.
+HandleStrikesBack_AgainstDamagingAttack:
+	ld a, e
+	or d
+	ret z
+
+; do not counter recoil or confusion damage
+	ld a, [wIsDamageToSelf]
+	or a
+	ret nz
+
+; do not counter damage from Pokémon Powers
+	ld a, [wLoadedAttackCategory]
+	cp POKEMON_POWER
+	ret z
+
+	ld a, [wTempNonTurnDuelistCardID] ; ID of defending Pokemon
+	cp MACHAMP
+	ret nz
+
+; do not counter if the Pokémon Power is disabled
+	ld a, [wTempPlayAreaLocation_cceb]  ; defending Pokemon's PLAY_AREA_*
+	call CheckCannotUseDueToStatus_Anywhere  ; calls ArePokemonPowersDisabled
+	ret c
+
+	; OATS if we want to limit the power to "while active",
+	; this is where a location check would go
+
+	push hl
+	push de
+	; subtract 20 HP from attacking Pokemon (turn holder's arena Pokemon)
+	call SwapTurn
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	push af
+	push hl
+	ld de, 20
+	call SubtractHP
+	ld a, [wLoadedCard2ID]
+	ld [wTempNonTurnDuelistCardID], a
+	ld hl, 20
+	call LoadTxRam3
+	ld hl, wLoadedCard2Name
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call LoadTxRam2
+	ldtx hl, ReceivesDamageDueToStrikesBackText
+	call DrawWideTextBox_WaitForInput
+	pop hl
+	pop af
+	or a
+	jr z, .not_knocked_out
+	xor a
+	call PrintPlayAreaCardKnockedOutIfNoHP
+.not_knocked_out
+	call SwapTurn
+	pop de
+	pop hl
 	ret
 
 
@@ -989,13 +996,12 @@ ApplyStrikesBack_AfterDirectAttack:
 	push hl
 	call SubtractHP
 	ldtx hl, ReceivesDamageDueToStrikesBackText
-	call DrawWideTextBox_PrintText
+	call DrawWideTextBox_WaitForInput
 	pop hl
 	pop af
 	or a
 	ret z
-	call WaitForWideTextBoxInput
-	xor a
+	xor a  ; PLAY_AREA_ARENA
 	call PrintPlayAreaCardKnockedOutIfNoHP
 	call DrawDuelHUDs
 	scf
