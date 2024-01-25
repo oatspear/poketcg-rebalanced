@@ -567,18 +567,18 @@ StrikesBackName: ; 5eb99 (17:6b99)
 	text "Strikes Back"
 	done
 
-StrikesBackDescription: ; 5eba7 (17:6ba7)
-	text "Whenever your opponent's attack"
-	line "damages Machamp (even if Machamp is"
+StrikesBackDescription:
+	text "Whenever your opponent's attacks"
+	line "damage this Pokémon (even if it is"
 	line "Knocked Out), this power does 20"
 	line "damage to the attacking Pokémon."
 	line "(Don't apply Weakness and"
 	line "Resistance.) "
 	done
 
-SeismicTossName: ; 5ecc1 (17:6cc1)
-	text "Seismic Toss"
-	done
+; SeismicTossName:
+; 	text "Seismic Toss"
+; 	done
 
 MachampDescription: ; 5eccf (17:6ccf)
 	text "Using its amazing muscles, it throws"
