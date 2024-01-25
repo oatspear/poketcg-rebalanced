@@ -1412,6 +1412,11 @@ Deal30ToAnyPokemonDescription:
 	line "of your opponent's Pokémon."
 	done
 
+Deal40ToAnyPokemonDescription:
+	text "This attack does 40 damage to 1"
+	line "of your opponent's Pokémon."
+	done
+
 GaleName:
 	text "Gale"
 	done

@@ -7353,17 +7353,17 @@ AerodactylCard:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx FossilFangsName ; name
-	tx ReduceAttackBy10Description ; description
-	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ReduceAttackBy10EffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	tx SkillDiveName ; name
+	tx Deal40ToAnyPokemonDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Deal40ToAnyPokemonEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_HIT ; animation
+	db 3
+	db ATK_ANIM_AGILITY_NO_HIT ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness

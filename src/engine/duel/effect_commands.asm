@@ -1336,6 +1336,12 @@ Deal30ToAnyPokemonEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
 	db  $00
 
+Deal40ToAnyPokemonEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal40DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
+	db  $00
+
 AquaLauncherEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AquaLauncherEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect

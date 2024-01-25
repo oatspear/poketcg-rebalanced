@@ -2789,6 +2789,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PidgeotName                                        ; 0x0ade
 	textpointer SlicingWindName                                    ; 0x0adf
 	textpointer Deal30ToAnyPokemonDescription
+	textpointer Deal40ToAnyPokemonDescription
 	textpointer GaleName                                           ; 0x0ae1
 	textpointer GaleDescription                                    ; 0x0ae2
 	textpointer Pidgeot1Description                                ; 0x0ae3
@@ -3070,7 +3071,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PrimalScytheName
 	textpointer PrimalScytheDescription
 	textpointer SharpSickleDescription
-	textpointer FossilFangsName
+	; textpointer FossilFangsName
 	textpointer SpeedImpactName
 	textpointer SpeedImpactDescription
 	textpointer RainbowTeamName

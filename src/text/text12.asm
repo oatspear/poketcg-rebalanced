@@ -1200,9 +1200,9 @@ SharpSickleDescription:
 	line "30 more damage."
 	done
 
-FossilFangsName:
-	text "Fossil Fangs"
-	done
+; FossilFangsName:
+; 	text "Fossil Fangs"
+; 	done
 
 SpeedImpactName:
 	text "Speed Impact"

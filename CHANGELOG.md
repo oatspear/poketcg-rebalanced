@@ -122,6 +122,10 @@
 - **Horn Attack**: renamed to **Horn Drill**.
 - New attack: **Mountain Swing** (FFCC): 50 damage; discard the top 2 cards of both decks.
 
+#### Aerodactyl
+- **Fossil Fangs**: removed.
+- New attack: **Skill Dive** (CCC): 40 damage to any Pokémon.
+
 ### Psychic Changes
 
 #### Wigglytuff
