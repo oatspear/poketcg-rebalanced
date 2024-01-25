@@ -912,9 +912,10 @@ HandleStrikesBack_AfterDirectAttack:
 
 
 ; If a Strikes Back ability is active, the attacking Pokémon
-; (turn holder's arena Pokémon) takes damage back.
+; (non-turn holder's arena Pokémon) takes damage back.
 ; Ignore if damage taken at de is 0.
 ; Used to bounce back a damaging attack.
+; This is called with turns swapped (turn holder is the defender).
 HandleStrikesBack_AgainstDamagingAttack:
 	ld a, e
 	or d
@@ -942,42 +943,36 @@ HandleStrikesBack_AgainstDamagingAttack:
 	; OATS if we want to limit the power to "while active",
 	; this is where a location check would go
 
-	; subtract 20 HP from attacking Pokemon (turn holder's arena Pokemon)
+; assume: no carry is set at this point
+; subtract HP from attacking Pokémon (non-turn holder's arena Pokémon)
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	push af
-	push hl
+	call GetCardIDFromDeckIndex
+	; back up and overwrite wTempTurnDuelistCardID
+	; not sure if back up is needed
+	ld a, [wTempTurnDuelistCardID]
+	push af  ; ld [wMultiPurposeByte], a
+	ld a, e
+	ld [wTempTurnDuelistCardID], a
+
 	ld de, 20
-	call SubtractHP
+	call ApplyStrikesBack_AfterDirectAttack
+	; not sure if these assignments are needed
 	ld a, [wLoadedCard2ID]
 	ld [wTempNonTurnDuelistCardID], a
-	ld hl, 20
-	call LoadTxRam3
-	ld hl, wLoadedCard2Name
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call LoadTxRam2
-	ldtx hl, ReceivesDamageDueToStrikesBackText
-	call DrawWideTextBox_WaitForInput
-	pop hl
-	pop af
-	or a
-	jr z, .not_knocked_out
-	xor a  ; PLAY_AREA_ARENA
-	call PrintPlayAreaCardKnockedOutIfNoHP
-.not_knocked_out
-	call SwapTurn
-	ret
+; restore backed up variables
+	pop af  ; ld a, [wMultiPurposeByte]
+	ld [wTempTurnDuelistCardID], a
+	jp SwapTurn
 
 
 ; subtract HP from the attacking Pokémon due to a counter attack
 ; input:
 ;   e: damage to be dealt
+; output:
+;   z: set if no Knock Out due to damage
+;   carry: set if Knock Out occurred
 ApplyStrikesBack_AfterDirectAttack:
 	push de
 	ld l, e
@@ -985,7 +980,7 @@ ApplyStrikesBack_AfterDirectAttack:
 	call LoadTxRam3
 	ld a, [wTempTurnDuelistCardID]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	call LoadCardDataToBuffer2_FromCardID
 	ld hl, wLoadedCard2Name
 	ld a, [hli]
