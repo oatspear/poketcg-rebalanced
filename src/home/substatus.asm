@@ -156,6 +156,8 @@ HandleStrikesBack_AgainstDamagingAttack:
 	ld a, [wTempPlayAreaLocation_cceb] ; defending Pokemon's PLAY_AREA_*
 	call CheckCannotUseDueToStatus_Anywhere
 	ret c
+	; OATS if we want to limit the power to "while active",
+	; this is where a location check would go
 	push hl
 	push de
 	; subtract 20 HP from attacking Pokemon (turn holder's arena Pokemon)
