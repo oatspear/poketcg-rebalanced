@@ -905,8 +905,10 @@ HandleStrikesBack_AfterDirectAttack:
 	call SwapTurn
 	ret c
 
-	ld hl, 20 ; damage to be dealt to attacker
-	jp ApplyStrikesBack_AfterDirectAttack
+	ld de, 20  ; damage to be dealt to attacker
+	call ApplyStrikesBack_AfterDirectAttack
+	jp c, DrawDuelHUDs
+	ret
 
 
 ; If a Strikes Back ability is active, the attacking Pokémon
@@ -973,8 +975,13 @@ HandleStrikesBack_AgainstDamagingAttack:
 	ret
 
 
+; subtract HP from the attacking Pokémon due to a counter attack
+; input:
+;   e: damage to be dealt
 ApplyStrikesBack_AfterDirectAttack:
-	push hl
+	push de
+	ld l, e
+	ld h, 0
 	call LoadTxRam3
 	ld a, [wTempTurnDuelistCardID]
 	ld e, a
@@ -999,7 +1006,6 @@ ApplyStrikesBack_AfterDirectAttack:
 	ret z
 	xor a  ; PLAY_AREA_ARENA
 	call PrintPlayAreaCardKnockedOutIfNoHP
-	call DrawDuelHUDs
 	scf
 	ret
 
