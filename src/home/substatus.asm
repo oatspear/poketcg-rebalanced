@@ -940,8 +940,6 @@ HandleStrikesBack_AgainstDamagingAttack:
 	; OATS if we want to limit the power to "while active",
 	; this is where a location check would go
 
-	push hl
-	push de
 	; subtract 20 HP from attacking Pokemon (turn holder's arena Pokemon)
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
@@ -968,12 +966,10 @@ HandleStrikesBack_AgainstDamagingAttack:
 	pop af
 	or a
 	jr z, .not_knocked_out
-	xor a
+	xor a  ; PLAY_AREA_ARENA
 	call PrintPlayAreaCardKnockedOutIfNoHP
 .not_knocked_out
 	call SwapTurn
-	pop de
-	pop hl
 	ret
 
 
