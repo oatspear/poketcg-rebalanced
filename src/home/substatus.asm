@@ -367,16 +367,19 @@ NoDamageOrEffectTextIDTable:
 
 ; returns carry if turn holder's card in location a is paralyzed, asleep, confused,
 ; and/or toxic gas in play, meaning that attack and/or pkmn power cannot be used
+; preserves: bc, de
 CheckCannotUseDueToStatus_Anywhere:
 	add DUELVARS_ARENA_CARD_STATUS
 	jr CheckCannotUseDueToStatus_OnlyToxicGasIfANon0.status_check
 
 ; returns carry if turn holder's arena card is paralyzed, asleep, confused,
 ; and/or toxic gas in play, meaning that attack and/or pkmn power cannot be used
+; preserves: bc, de
 CheckCannotUseDueToStatus:
-	xor a
+	xor a  ; PLAY_AREA_ARENA
 
 ; same as above, but if a is non-0, only toxic gas is checked
+; preserves: bc, de
 CheckCannotUseDueToStatus_OnlyToxicGasIfANon0:
 	or a
 	jr nz, .check_toxic_gas
@@ -507,6 +510,19 @@ IsPrehistoricPowerActive:
 	call IsActiveSpotPokemonPowerActive
 	pop bc
 	ret
+
+
+; returns carry if the turn holder's Pokémon in the given location
+; benefits from Dark Retribution
+; input:
+;   a: PLAY_AREA_* of the Pokémon benefiting from the Power
+; output:
+;   carry: set if Dark Retribution is active
+IsDarkRetributionActive:
+	ld b, a
+	ld c, DARKNESS
+	ld e, NIDORINO
+	jr IsSpecialEnergyPowerActive
 
 
 ; returns carry if the turn holder's Pokémon in the given location
@@ -897,16 +913,12 @@ HandleStrikesBack_AfterDirectAttack:
 	ret z
 
 ; damaging attack
-	ld a, [wTempNonTurnDuelistCardID]
-	cp MACHAMP
-	ret nz
-
 	call SwapTurn
-	call CheckCannotUseDueToStatus
+	call IsCounterattackActive
 	call SwapTurn
-	ret c
+	ret nc  ; not active or no capable Pokémon
 
-	ld de, 20  ; damage to be dealt to attacker
+	; de: amount of counter damage to deal
 	call ApplyCounterattackDamage
 	jp c, DrawDuelHUDs
 	ret
@@ -932,17 +944,15 @@ HandleStrikesBack_AgainstDamagingAttack:
 	cp POKEMON_POWER
 	ret z
 
-	ld a, [wTempNonTurnDuelistCardID] ; ID of defending Pokemon
-	cp MACHAMP
-	ret nz
-
-; do not counter if the Pokémon Power is disabled
+; do not counter damage while on the bench
 	ld a, [wTempPlayAreaLocation_cceb]  ; defending Pokemon's PLAY_AREA_*
-	call CheckCannotUseDueToStatus_Anywhere  ; calls ArePokemonPowersDisabled
-	ret c
+	or a
+	ret nz  ; bench
 
-	; OATS if we want to limit the power to "while active",
-	; this is where a location check would go
+; do not counter if the Pokémon Power is disabled or not available	
+	call IsCounterattackActive
+	ret nc  ; not active or no capable Pokémon
+	ccf
 
 ; assume: no carry is set at this point
 ; back up wTempTurnDuelistCardID (not sure if needed)
@@ -953,15 +963,17 @@ HandleStrikesBack_AgainstDamagingAttack:
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
+	push de  ; amount of counter damage to deal
 	call GetCardIDFromDeckIndex
 	ld a, e
 	ld [wTempTurnDuelistCardID], a
+	pop de  ; amount of counter damage to deal
 
-	ld de, 20
 	call ApplyCounterattackDamage
 	; not sure if these assignments are needed
 	ld a, [wLoadedCard2ID]
 	ld [wTempNonTurnDuelistCardID], a
+
 ; restore backed up variables
 	pop af  ; ld a, [wMultiPurposeByte]
 	ld [wTempTurnDuelistCardID], a
@@ -1006,25 +1018,47 @@ ApplyCounterattackDamage:
 	ret
 
 
-; Checks whether the target Pokémon is capable of
-; dealing counterattack damage.
+; Checks whether the target Pokémon in the turn holder's play area
+; is capable of dealing counterattack damage.
 ; input:
 ;   wTempNonTurnDuelistCardID: ID of the target Pokémon receiving damage
 ; output:
 ;   carry: set if counterattack damage is active
-;   a: amount of counter damage to deal
+;   de: amount of counter damage to deal
 IsCounterattackActive:
-; OATS: check for Rocky Helmet here (ROCKY_HELMET)
+	ld de, 0
 
-	ld a, [wTempNonTurnDuelistCardID] ; ID of defending Pokemon
+; do not counter if the defender's Pokémon Power is disabled
+; ArePokemonPowersDisabled is called here
+	; ld a, [wTempPlayAreaLocation_cceb]  ; defending Pokemon's PLAY_AREA_*
+	; call CheckCannotUseDueToStatus_Anywhere  ; preserves de
+	call CheckCannotUseDueToStatus  ; preserves de
+	jr c, .dark_retribution
+
+; check the ID of the defending Pokémon
+	ld a, [wTempNonTurnDuelistCardID]
 	cp MACHAMP
-	jr z, .strikes_back
+	; ld hl, 20  ; damage to return
+	; call z, AddToDamage_DE
+	jr nz, .dark_retribution
+	ld de, 20  ; damage to return
 
-	ret nz
+.dark_retribution
+	push de
+	call IsDarkRetributionActive
+	pop de
+	jr nc, .rocky_helmet  ; not active
+	ld hl, 10
+	call AddToDamage_DE
 
-.strikes_back
-	ld a, 20
-	scf
+.rocky_helmet
+	; TODO
+
+; carry set if non-zero damage
+	call CapMaximumDamage_DE
+	ld a, e
+	cp 1
+	ccf
 	ret
 
 
