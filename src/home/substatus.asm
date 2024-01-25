@@ -945,15 +945,15 @@ HandleStrikesBack_AgainstDamagingAttack:
 	; this is where a location check would go
 
 ; assume: no carry is set at this point
+; back up wTempTurnDuelistCardID (not sure if needed)
+	ld a, [wTempTurnDuelistCardID]
+	push af  ; ld [wMultiPurposeByte], a
+
 ; subtract HP from attacking Pokémon (non-turn holder's arena Pokémon)
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	; back up and overwrite wTempTurnDuelistCardID
-	; not sure if back up is needed
-	ld a, [wTempTurnDuelistCardID]
-	push af  ; ld [wMultiPurposeByte], a
 	ld a, e
 	ld [wTempTurnDuelistCardID], a
 
