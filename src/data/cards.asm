@@ -1067,32 +1067,32 @@ NidorinoCard:
 	tx NidoranMName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx DenProtectorName ; name
-	tx DenProtectorDescription ; description
+	energy 0 ; energies
+	tx DarkRetributionName ; name
+	tx DarkRetributionDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
+	energy DARKNESS, 1, COLORLESS, 1 ; energies
+	tx VengefulHornName ; name
+	tx VengefulHornDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw DenProtectorEffectCommands ; effect commands
+	dw VengefulHornEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_MULTIPLE_SLASH ; animation
-
-	; attack 2
-	energy DARKNESS, 1, COLORLESS, 2 ; energies
-	tx HornDrillName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_DRILL ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -6526,8 +6526,8 @@ MachampCard:
 
 	; attack 1
 	energy 0 ; energies
-	tx StrikesBackName ; name
-	tx StrikesBackDescription ; description
+	tx StrikeBackName ; name
+	tx StrikeBackDescription ; description
 	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category

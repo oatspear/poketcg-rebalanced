@@ -257,7 +257,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer UnableToAttackDueToEffectText
 	textpointer UnableToUseAttackDueToAmnesiaText                  ; 0x0103
 	textpointer KnockedOutDueToDestinyBondText                     ; 0x0104
-	textpointer ReceivesDamageDueToStrikesBackText                 ; 0x0105
+	textpointer ReceivesDamageDueToStrikeBackText                 ; 0x0105
 	textpointer UnableToEvolveDueToPrehistoricPowerText            ; 0x0106
 	textpointer NoDamageOrEffectDueToFlyText                       ; 0x0107
 	textpointer NoDamageOrEffectDueToBarrierText                   ; 0x0108
@@ -2619,8 +2619,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Recoil20Description                                ; 0x0a2a
 	textpointer MachokeDescription                                 ; 0x0a2b
 	textpointer MachampName                                        ; 0x0a2c
-	textpointer StrikesBackName                                    ; 0x0a2d
-	textpointer StrikesBackDescription                             ; 0x0a2e
+	textpointer StrikeBackName
+	textpointer StrikeBackDescription
 	; textpointer SeismicTossName
 	textpointer MachampDescription                                 ; 0x0a31
 	textpointer GeodudeName                                        ; 0x0a32
@@ -2812,8 +2812,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer StressPheromonesDescription
 	textpointer QueenPressName
 	textpointer QueenPressDescription
-	textpointer DenProtectorName
-	textpointer DenProtectorDescription
+	textpointer VengefulHornName
+	textpointer VengefulHornDescription
 	textpointer GarbageEaterName
 	textpointer GarbageEaterDescription
 	textpointer GatherToxinsName
@@ -3114,6 +3114,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PrankDescription
 	textpointer CrushingChargeName
 	textpointer CrushingChargeDescription
+	textpointer DarkRetributionName
+	textpointer DarkRetributionDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

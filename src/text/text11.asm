@@ -563,17 +563,16 @@ MachampName: ; 5eb90 (17:6b90)
 	text "Machamp"
 	done
 
-StrikesBackName: ; 5eb99 (17:6b99)
-	text "Strikes Back"
+StrikeBackName:
+	text "Strike Back"
 	done
 
-StrikesBackDescription:
-	text "Whenever your opponent's attacks"
-	line "damage this Pokémon (even if it is"
-	line "Knocked Out), this power does 20"
-	line "damage to the attacking Pokémon."
-	line "(Don't apply Weakness and"
-	line "Resistance.) "
+StrikeBackDescription:
+	text "If this is your Active Pokémon and"
+	line "it is damaged by an opponent's"
+	line "attack (even if this Pokémon is"
+	line "Knocked Out), put 2 damage counters"
+	line "on the Attacking Pokémon."
 	done
 
 ; SeismicTossName:
@@ -1527,11 +1526,11 @@ QueenPressDescription:
 	line "Basic Pokémon."
 	done
 
-DenProtectorName:
-	text "Den Protector"
+VengefulHornName:
+	text "Vengeful Horn"
 	done
 
-DenProtectorDescription:
+VengefulHornDescription:
 	text "This attack does 10 more damage"
 	line "for each of your Pokémon with"
 	line "any damage counters on it."

@@ -38,6 +38,7 @@
 #### Machamp
 - Increased HP from 100 to 110.
 - **Submission**: removed.
+- **Strikes Back**: only returns damage to the attacker when this Pokémon is Active.
 - New attack: **Chop Down** (FFC): 50 damage; double damage if the user has less HP than the Defending Pokémon.
 
 #### Sandshrew
@@ -130,6 +131,13 @@
 
 #### Wigglytuff
 - **Do The Wave**: does 10 damage per Benched Pokémon (does not count Active Pokémon).
+
+### Darkness Changes
+
+#### Nidorino
+- **Horn Drill**: removed.
+- **Den Protector**: renamed to **Vengeful Horn**; increased cost from (CC) to (DC).
+- New Pokémon Power: **Dark Retribution**: Active Pokémon with (D) Energy attached return 10 damage back to attackers.
 
 ### Colorless Changes
 

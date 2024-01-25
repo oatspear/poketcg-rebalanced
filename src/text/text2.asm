@@ -97,9 +97,9 @@ KnockedOutDueToDestinyBondText: ; 382e9 (e:42e9)
 	line "due to the effects of Destiny Bond."
 	done
 
-ReceivesDamageDueToStrikesBackText: ; 38320 (e:4320)
+ReceivesDamageDueToStrikeBackText:
 	text "<RAMTEXT> receives <RAMNUM> damage"
-	line "due to the effects of Strikes Back."
+	line "due to a counterattack."
 	done
 
 UnableToEvolveDueToPrehistoricPowerText: ; 38359 (e:4359)

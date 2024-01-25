@@ -1423,3 +1423,15 @@ CrushingChargeDescription:
 	line "If it is a Basic Energy card,"
 	line "attach it to 1 of your Pokémon."
 	done
+
+DarkRetributionName:
+	text "Dark Retribution"
+	done
+
+DarkRetributionDescription:
+	text "When your Active Pokémon is damaged"
+	line "by an opponent's attack (even if it"
+	line "is Knocked Out), if it has any"
+	line "attached <DARKNESS> Energy, put 1 damage"
+	line "counter on the Attacking Pokémon."
+	done

@@ -1674,7 +1674,7 @@ PlayAttackAnimation_DealAttackDamage:
 	call TryExecuteEffectCommandFunction
 	pop af
 	ld [wTempNonTurnDuelistCardID], a
-	call HandleStrikesBack_AfterDirectAttack
+	call HandleStrikeBack_AfterDirectAttack
 	bank1call Func_6df1
 	call Func_1bb4
 	bank1call Func_7195
@@ -2351,7 +2351,7 @@ DealDamageToPlayAreaPokemon:
 	call PrintKnockedOutIfHLZero
 	pop de
 .skip_knocked_out
-	call HandleStrikesBack_AgainstDamagingAttack
+	call HandleStrikeBack_AgainstDamagingAttack
 	pop bc
 	pop de
 	pop hl

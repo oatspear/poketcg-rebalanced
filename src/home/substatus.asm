@@ -902,7 +902,7 @@ HandleDestinyBondSubstatus:
 ; (turn holder's arena Pokémon) takes damage back.
 ; Used to bounce back an attack of the RESIDUAL category.
 ; Used to handle direct damage in the Active spot after an attack.
-HandleStrikesBack_AfterDirectAttack:
+HandleStrikeBack_AfterDirectAttack:
 	ld a, [wLoadedAttackCategory]
 	and RESIDUAL
 	ret nz
@@ -929,7 +929,7 @@ HandleStrikesBack_AfterDirectAttack:
 ; Ignore if damage taken at de is 0.
 ; Used to bounce back a damaging attack.
 ; This is called with turns swapped (turn holder is the defender).
-HandleStrikesBack_AgainstDamagingAttack:
+HandleStrikeBack_AgainstDamagingAttack:
 	ld a, e
 	or d
 	ret z
@@ -1006,7 +1006,7 @@ ApplyCounterattackDamage:
 	push af
 	push hl
 	call SubtractHP
-	ldtx hl, ReceivesDamageDueToStrikesBackText
+	ldtx hl, ReceivesDamageDueToStrikeBackText
 	call DrawWideTextBox_WaitForInput
 	pop hl
 	pop af

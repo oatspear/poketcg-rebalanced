@@ -1023,7 +1023,7 @@ PsychicAssault_AIEffect:
 
 
 ; +10 damage for each damaged Pokémon on turn holder's play area
-DenProtector_DamageBoostEffect:
+VengefulHorn_DamageBoostEffect:
   ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
   call GetTurnDuelistVariable
   ld d, a
@@ -1046,8 +1046,8 @@ DenProtector_DamageBoostEffect:
   call ATimes10
   jp AddToDamage
 
-DenProtector_AIEffect:
-  call DenProtector_DamageBoostEffect
+VengefulHorn_AIEffect:
+  call VengefulHorn_DamageBoostEffect
   jp SetDefiniteAIDamage
 
 ; ------------------------------------------------------------------------------

@@ -254,9 +254,9 @@ PowerLariatEffectCommands:
 	dbw EFFECTCMDTYPE_AI, PowerLariat_AIEffect
 	db  $00
 
-DenProtectorEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DenProtector_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, DenProtector_AIEffect
+VengefulHornEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VengefulHorn_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, VengefulHorn_AIEffect
 	db  $00
 
 FamilyPowerEffectCommands:
