@@ -887,10 +887,6 @@ HandleDestinyBondSubstatus:
 ; Used to bounce back an attack of the RESIDUAL category.
 ; Used to handle direct damage in the Active spot after an attack.
 HandleStrikesBack_AfterDirectAttack:
-	ld a, [wTempNonTurnDuelistCardID]
-	cp MACHAMP
-	ret nz
-
 	ld a, [wLoadedAttackCategory]
 	and RESIDUAL
 	ret nz
@@ -900,13 +896,18 @@ HandleStrikesBack_AfterDirectAttack:
 	or a
 	ret z
 
+; damaging attack
+	ld a, [wTempNonTurnDuelistCardID]
+	cp MACHAMP
+	ret nz
+
 	call SwapTurn
 	call CheckCannotUseDueToStatus
 	call SwapTurn
 	ret c
 
 	ld de, 20  ; damage to be dealt to attacker
-	call ApplyStrikesBack_AfterDirectAttack
+	call ApplyCounterattackDamage
 	jp c, DrawDuelHUDs
 	ret
 
@@ -957,7 +958,7 @@ HandleStrikesBack_AgainstDamagingAttack:
 	ld [wTempTurnDuelistCardID], a
 
 	ld de, 20
-	call ApplyStrikesBack_AfterDirectAttack
+	call ApplyCounterattackDamage
 	; not sure if these assignments are needed
 	ld a, [wLoadedCard2ID]
 	ld [wTempNonTurnDuelistCardID], a
@@ -973,7 +974,7 @@ HandleStrikesBack_AgainstDamagingAttack:
 ; output:
 ;   z: set if no Knock Out due to damage
 ;   carry: set if Knock Out occurred
-ApplyStrikesBack_AfterDirectAttack:
+ApplyCounterattackDamage:
 	push de
 	ld l, e
 	ld h, 0
@@ -1001,6 +1002,28 @@ ApplyStrikesBack_AfterDirectAttack:
 	ret z
 	xor a  ; PLAY_AREA_ARENA
 	call PrintPlayAreaCardKnockedOutIfNoHP
+	scf
+	ret
+
+
+; Checks whether the target Pokémon is capable of
+; dealing counterattack damage.
+; input:
+;   wTempNonTurnDuelistCardID: ID of the target Pokémon receiving damage
+; output:
+;   carry: set if counterattack damage is active
+;   a: amount of counter damage to deal
+IsCounterattackActive:
+; OATS: check for Rocky Helmet here (ROCKY_HELMET)
+
+	ld a, [wTempNonTurnDuelistCardID] ; ID of defending Pokemon
+	cp MACHAMP
+	jr z, .strikes_back
+
+	ret nz
+
+.strikes_back
+	ld a, 20
 	scf
 	ret
 
