@@ -4,22 +4,26 @@
 
 ; prompts the player to select a card from the hand to discard
 ; output:
-;   a: deck index of the selected card
+;   a: deck index of the selected card | $ff
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 ;   carry: set if the selection was cancelled
 HandlePlayerSelection1HandCardToDiscard:
+	; consider refactoring this to use HandlePlayerSelectionFromCardList_AllowCancel
+	; the difference is that the function above sets card location headers
 	ldtx hl, ChooseCardToDiscardFromHandText
 	call DrawWideTextBox_WaitForInput
 	call CreateHandCardList
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	bank1call DisplayCardList
 	ldh a, [hTempCardIndex_ff98]
+	ret nc
+	ld a, $ff
 	ret
 
 ; prompts the player to select a card from the hand to discard,
 ; excluding the card that is currently being used.
 ; output:
-;   a: deck index of the selected card
+;   a: deck index of the selected card | $ff
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 ;   carry: set if the selection was cancelled
 HandlePlayerSelection1HandCardToDiscardExcludeSelf:
@@ -29,6 +33,8 @@ HandlePlayerSelection1HandCardToDiscardExcludeSelf:
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	bank1call DisplayCardList
 	ldh a, [hTempCardIndex_ff98]
+	ret nc
+	ld a, $ff
 	ret
 
 

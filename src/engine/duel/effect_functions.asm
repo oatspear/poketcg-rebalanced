@@ -6609,7 +6609,7 @@ PrimalScythe_PlayerHandCardSelection:
 
 
 OptionalDiscard_PlayerHandCardSelection:
-	call CheckHandSizeGreaterThan1
+	call CheckHandIsNotEmpty
 	ld a, $ff
 	call nc, HandlePlayerSelection1HandCardToDiscard
 	ldh [hTemp_ffa0], a
