@@ -34,6 +34,16 @@ Heal20DamageEffect:
 	jr ApplyAndAnimateHPRecovery
 
 
+; to be used in effects that happen BEFORE_DAMAGE
+Heal20DamageEffect_PreserveAttackAnimation:
+	ld a, [wLoadedAttackAnimation]
+	push af
+	call Heal20DamageEffect
+	pop af
+	ld [wLoadedAttackAnimation], a
+	ret
+
+
 Leech30DamageEffect:
 	ld hl, wDealtDamage
 	ld a, [hli]
@@ -44,6 +54,16 @@ Leech30DamageEffect:
 Heal30DamageEffect:
 	ld de, 30
 	jr ApplyAndAnimateHPRecovery
+
+
+; to be used in effects that happen BEFORE_DAMAGE
+Heal30DamageEffect_PreserveAttackAnimation:
+	ld a, [wLoadedAttackAnimation]
+	push af
+	call Heal30DamageEffect
+	pop af
+	ld [wLoadedAttackAnimation], a
+	ret
 
 
 HealADamageEffect:

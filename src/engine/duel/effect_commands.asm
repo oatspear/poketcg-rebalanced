@@ -144,7 +144,7 @@ KoffingFoulGasEffectCommands:
 
 DefensiveStanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal20DamageEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal20DamageEffect_PreserveAttackAnimation
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Agility_AISelectEffect
@@ -152,7 +152,7 @@ DefensiveStanceEffectCommands:
 
 DeepDiveEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal30DamageEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal30DamageEffect_PreserveAttackAnimation
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Agility_AISelectEffect
