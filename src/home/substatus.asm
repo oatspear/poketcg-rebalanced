@@ -1045,6 +1045,7 @@ IsCounterattackActive:
 
 .dark_retribution
 	push de
+	xor a  ; PLAY_AREA_ARENA
 	call IsDarkRetributionActive
 	pop de
 	jr nc, .rocky_helmet  ; not active
