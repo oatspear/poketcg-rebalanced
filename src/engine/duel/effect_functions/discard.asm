@@ -9,7 +9,7 @@
 ;   a: number of discarded cards
 ;   wDuelTempList: $ff-terminated list of discarded cards (by deck index)
 ; preserves: nothing
-;   - push/pop de around DrawWideTextBox_PrintText to preserve it
+;   - push/pop de around DrawWideTextBox_WaitForInput to preserve it
 DiscardFromDeckEffect:
   ld c, a
   ld b, $00
@@ -49,7 +49,7 @@ DiscardFromDeckEffect:
   push af
   call LoadTxRam3
   ldtx hl, DiscardedCardsFromDeckText
-  call DrawWideTextBox_PrintText
+  call DrawWideTextBox_WaitForInput
   pop af
   ret
 
