@@ -34,7 +34,7 @@ DiscardFromDeckEffect:
   call DrawCardFromDeck  ; preserves hl
   ; <- jr c would be done here
   ld [hli], a  ; deck index
-  call nc, PutCardInDiscardPile  ; preserves hl, de
+  call nc, PutCardInDiscardPile  ; preserves af, hl, bc, de
 .check_remaining
   dec c
   jr nz, .loop
