@@ -6435,6 +6435,7 @@ DuelDataToSave:
 	dw hWhoseTurn,             $1
 	dw wRNG1,                  wRNGCounter + $1 - wRNG1
 	dw wAIDuelVars,            wAIDuelVarsEnd - wAIDuelVars
+	dw wEnergyColorOverride,   $1
 	dw NULL
 
 ; return carry if there is no data saved at sCurrentDuel or if the checksum isn't correct,
