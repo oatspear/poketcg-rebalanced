@@ -1648,6 +1648,8 @@ wCardPopCardObtainSong:: ; cea0
 wCardListVisibleOffset:: ; cea1
 	ds $1
 
+; needed to enable AI vs AI mode
+wOpponentDeckIDBackup:: ; cea2
 	ds $1
 
 ; it's used when the player enters check menu, and its sub-menus.

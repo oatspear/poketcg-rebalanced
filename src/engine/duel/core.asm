@@ -174,6 +174,9 @@ MainDuelLoop:
 	call HandleTurn
 
 .between_turns
+; restore variables from backup
+	ld a, [wOpponentDeckIDBackup]
+	ld [wOpponentDeckID], a
 	call ExchangeRNG
 	ld a, [wDuelFinished]
 	or a
@@ -327,8 +330,7 @@ SetupDuel:
 	call SetDefaultConsolePalettes
 	lb de, $38, $9f
 	call SetupText
-	call EnableLCD
-	ret
+	jp EnableLCD
 
 ; handle the turn of the duelist identified by hWhoseTurn.
 ; if player's turn, display the animation of the player drawing the card at
@@ -1989,7 +1991,15 @@ HandleDuelSetup:
 	push af
 	ld a, PLAYER_TURN
 	ldh [hWhoseTurn], a
+; additional variables to enable AI vs AI mode
+	ld a, [wOpponentDeckID]
+	ld [wOpponentDeckIDBackup], a
+	ld a, SAMS_NORMAL_DECK
+	ld [wOpponentDeckID], a
 	call ChooseInitialArenaAndBenchPokemon
+	ld a, [wOpponentDeckIDBackup]
+	ld [wOpponentDeckID], a
+; back to regular setup logic
 	call SetAdaptiveEvolutionPokemonCanEvolve
 	call SwapTurn
 	call ChooseInitialArenaAndBenchPokemon
@@ -6436,6 +6446,7 @@ DuelDataToSave:
 	dw wRNG1,                  wRNGCounter + $1 - wRNG1
 	dw wAIDuelVars,            wAIDuelVarsEnd - wAIDuelVars
 	dw wEnergyColorOverride,   $1
+	dw wOpponentDeckIDBackup,  $1
 	dw NULL
 
 ; return carry if there is no data saved at sCurrentDuel or if the checksum isn't correct,
@@ -8193,6 +8204,10 @@ InitVariablesToBeginDuel:
 
 ; init variables that last a single player's turn
 InitVariablesToBeginTurn:
+; backup variables to enable AI vs AI mode
+	ld a, [wOpponentDeckID]
+	ld [wOpponentDeckIDBackup], a
+; setup normal variables
 	xor a
 	ld [wAlreadyRetreatedThisTurn], a
 	ld [wAlreadyPlayedEnergyOrSupporter], a
@@ -8201,6 +8216,11 @@ InitVariablesToBeginTurn:
 	ld [wGotHeadsFromAccuracyCheck], a
 	ldh a, [hWhoseTurn]
 	ld [wWhoseTurn], a
+	or a
+	ret nz
+; player's turn - use a general purpose AI in AI vs AI mode
+	ld a, SAMS_NORMAL_DECK
+	ld [wOpponentDeckID], a
 	ret
 
 ; make all Pokemon in the turn holder's play area able to evolve. called from the
