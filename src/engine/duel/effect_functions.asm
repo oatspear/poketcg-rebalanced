@@ -324,7 +324,12 @@ Trade_PreconditionCheck:
 	ret c
 	; fallthrough
 
+; this Power needs to back up hTempPlayAreaLocation_ff9d
 CrushingCharge_PreconditionCheck:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	; fallthrough
+
 Synthesis_PreconditionCheck:
 	call CheckDeckIsNotEmpty
 	ret c
@@ -5512,9 +5517,9 @@ CrushingCharge_DiscardAndAttachEnergyEffect:
 	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
 	call GetCardType  ; preserves hl, bc
 	cp TYPE_ENERGY
-	ret c  ; not a basic energy
+	jp c, SetUsedPokemonPowerThisTurn  ; not a basic energy
 	cp TYPE_ENERGY_DOUBLE_COLORLESS
-	ret nc  ; not a basic energy
+	jp nc, SetUsedPokemonPowerThisTurn  ; not a basic energy
 	ld a, 1  ; can select active spot
 	ld hl, RainbowTeam_AttachEnergyEffect.retrieve
 	jr _AttachEnergyFromDiscardPileToBenchEffect
