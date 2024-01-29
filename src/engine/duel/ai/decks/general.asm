@@ -8,25 +8,20 @@ AIActionTable_GeneralDecks:
 	dw .take_prize
 
 .do_turn
-	call AIMainTurnLogic
-	ret
+	jp AIMainTurnLogic
 
 .start_duel
 	call InitAIDuelVars
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize:
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 ; handle AI routines for a whole turn
 AIMainTurnLogic:
