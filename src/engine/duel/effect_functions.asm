@@ -1756,15 +1756,15 @@ ResetDevolvedCardStatus: ; 2c45d (b:445d)
 ;	- a = total number of cards that can be selected
 ; output:
 ;	- carry set if "No" was selected
-AskWhetherToQuitSelectingCards: ; 2c476 (b:4476)
+AskWhetherToQuitSelectingCards:
 	ld hl, hCurSelectionItem
 	sub [hl]
 	ld l, a
 	ld h, $00
 	call LoadTxRam3
 	ldtx hl, YouCanSelectMoreCardsQuitText
-	call YesOrNoMenuWithText
-	ret
+	jp YesOrNoMenuWithText
+
 
 ; handles the selection of a forced switch by link/AI opponent or by the player.
 ; outputs the Play Area location of the chosen bench card in hTempPlayAreaLocation_ff9d.
