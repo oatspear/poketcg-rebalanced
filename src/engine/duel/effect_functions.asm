@@ -1788,8 +1788,7 @@ DuelistSelectForcedSwitch: ; 2c487 (b:4487)
 	ld d, a
 	ld a, [wPlayerAttackingCardID]
 	call CopyAttackDataAndDamage_FromCardID
-	call Func_16f6
-	ret
+	jp Func_16f6
 
 .player
 	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
@@ -1801,8 +1800,7 @@ DuelistSelectForcedSwitch: ; 2c487 (b:4487)
 .asm_2c4c0
 	bank1call OpenPlayAreaScreenForSelection
 	jr c, .asm_2c4c0
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 .link_opp
 ; get selection from link opponent
