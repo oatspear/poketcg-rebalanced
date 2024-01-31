@@ -1127,6 +1127,11 @@ PrimordialDream_MorphAndAddToHandEffect:
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
 
+RampageEffect:
+	call Rage_DamageBoostEffect
+	jp SelfConfusionEffect
+
+
 ; Attaches the selected energy from the discard pile to the user and heals 10 damage.
 MendEffect:
 	ld a, $ff
@@ -2794,15 +2799,13 @@ Heal_RemoveDamageEffect:
 	ld e, a   ; location
 	ld d, 10  ; damage
 	call HealPlayAreaCardHP
-	call ExchangeRNG
-	ret
+	jp ExchangeRNG
+
 
 PetalDance_BonusEffect:
 	call Heal20DamageFromAll_HealEffect
-	call SwapTurn
-	call ConfusionEffect
-	call SwapTurn
-	ret
+	jp SelfConfusionEffect
+
 
 PoisonWhip_AIEffect: ; 2ce4b (b:4e4b)
 	ld a, 10
@@ -3259,32 +3262,6 @@ Wildfire_DiscardEnergyEffect: ; 2d4e1 (b:54e1)
 	jr nz, .loop_discard
 	ret
 
-
-FlareonQuickAttack_AIEffect: ; 2d541 (b:5541)
-	ld a, (10 + 30) / 2
-	lb de, 10, 30
-	jp SetExpectedAIDamage
-
-FlareonQuickAttack_DamageBoostEffect: ; 2d549 (b:5549)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, 20
-	call AddToDamage
-	ret
-
-
-Rage_AIEffect:
-	call Rage_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-Rage_DamageBoostEffect:
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call AddToDamage
-	ret
 
 Firegiver_AddToHandEffect: ; 2d6c2 (b:56c2)
 ; fill wDuelTempList with all Fire Energy card
@@ -4636,18 +4613,6 @@ DiscardOpponentEnergyIfHeads_AISelectEffect:
 ; ------------------------------------------------------------------------------
 
 
-TantrumEffect: ; 2e099 (b:6099)
-	; ldtx de, IfTailsYourPokemonBecomesConfusedText
-	; call TossCoin_BankB
-	; ret c ; return if heads
-; confuse Pokemon
-	; ld a, ATK_ANIM_MULTIPLE_SLASH
-	; ld [wLoadedAttackAnimation], a
-	call SwapTurn
-	call ConfusionEffect
-	jp SwapTurn
-
-
 AbsorbEffect: ; 2e0b3 (b:60b3)
 	ld hl, wDealtDamage
 	ld a, [hli]
@@ -5696,39 +5661,6 @@ MimicEffect:
 	call GetNonTurnDuelistVariable
 	jp DrawNCards_NoCardDetails
 
-
-TaurosStomp_AIEffect: ; 2eb7b (b:6b7b)
-	ld a, (20 + 30) / 2
-	lb de, 20, 30
-	jp SetExpectedAIDamage
-
-TaurosStomp_DamageBoostEffect: ; 2eb83 (b:6b83)
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; tails
-	ld a, 10
-	call AddToDamage
-	ret
-
-Rampage_AIEffect: ; 2eb96 (b:6b96)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call AddToDamage
-	jp SetDefiniteAIDamage
-
-Rampage_Confusion50PercentEffect: ; 2eba1 (b:6ba1)
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call AddToDamage
-	ldtx de, IfTailsYourPokemonBecomesConfusedText
-	call TossCoin_BankB
-	ret c ; heads
-	call SwapTurn
-	call ConfusionEffect
-	call SwapTurn
-	ret
 
 FuryAttack_AIEffect: ; 2ebba (b:6bba)
 	ld a, (10 * 2) / 2

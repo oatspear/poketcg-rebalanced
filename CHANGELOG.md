@@ -152,6 +152,12 @@
 - Reduced Retreat Cost from 1 to 0.
 - **Natural Remedy**: reduced cost from (CCC) to (CC) and healing from 30 to 20.
 
+#### Tauros
+- Increased HP from 60 to 70.
+- **Stomp**: removed.
+- **Rampage**: always inflicts Confusion on itself.
+- New attack: **Take Down** (C): 20 damage; 10 damage recoil.
+
 #### Eevee
 - **Take Down**: removed.
 - New Pokémon Power: **Rainbow Team**: attaches an Energy from discard pile to a benched Pokémon if all Pokémon are of a different color.

@@ -399,11 +399,11 @@ RampageName: ; 62ade (18:6ade)
 	text "Rampage"
 	done
 
-RampageDescription: ; 62ae7 (18:6ae7)
-	text "Does 20 damage plus 10 more damage"
-	line "for each damage counter on Tauros."
-	line "Flip a coin. If tails, Tauros is"
-	line "now Confused (after doing damage)."
+RampageDescription:
+	text "This attack does 10 more damage for"
+	line "each damage counter on this Pokémon."
+	line "This Pokémon is now Confused"
+	line "(after doing damage)."
 	done
 
 WildBullName: ; 62b72 (18:6b72)

@@ -126,10 +126,12 @@ FoulOdorEffect:
 
 ConfusionWaveEffect:
 	call ConfusionEffect
+	; fallthrough
+
+SelfConfusionEffect:
 	call SwapTurn
 	call ConfusionEffect
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 ; If heads, Poison + Paralysis.
 ; If tails, Poison + Sleep.

@@ -988,14 +988,15 @@ DoubleDamageIfUserIsDamaged_AIEffect:
 
 
 ; add damage taken to damage output
-FlamesOfRage_DamageBoostEffect:
+Rage_DamageBoostEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
 	jp AddToDamage
 
-FlamesOfRage_AIEffect:
-  call FlamesOfRage_DamageBoostEffect
-  jp SetDefiniteAIDamage
+Rage_AIEffect:
+	call Rage_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
 
 
 ; set damage output equal to damage taken

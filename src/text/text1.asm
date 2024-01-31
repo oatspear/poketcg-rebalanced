@@ -1071,11 +1071,6 @@ VenomPowderCheckText: ; 37cdf (d:7cdf)
 ; 	line "is Paralyzed. If tails, Asleep."
 ; 	done
 
-IfTailsYourPokemonBecomesConfusedText: ; 37d1f (d:7d1f)
-	text "If Tails,  your Pokémon"
-	line "becomes Confused."
-	done
-
 DamageCheckIfTailsNoDamageText: ; 37d4a (d:7d4a)
 	text "Damage check!"
 	line "If Tails, no damage!!!"

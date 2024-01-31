@@ -227,7 +227,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PoisonCheckText                                    ; 0x00e2
 	textpointer ConfusionCheckText                                 ; 0x00e3
 	textpointer VenomPowderCheckText                               ; 0x00e4
-	textpointer IfTailsYourPokemonBecomesConfusedText              ; 0x00e5
 	textpointer DamageCheckIfTailsNoDamageText                     ; 0x00e6
 	textpointer IfHeadsDraw1CardFromDeckText                       ; 0x00e7
 	textpointer FlipUntilFailAppears10DamageForEachHeadsText       ; 0x00e8
@@ -2337,7 +2336,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FireHorseName                                      ; 0x0904
 	textpointer PonytaDescription                                  ; 0x0905
 	textpointer RapidashName                                       ; 0x0906
-	textpointer StompName                                          ; 0x0907
+	; textpointer StompName
 	textpointer AgilityName                                        ; 0x0909
 	textpointer RapidashDescription                                ; 0x090b
 	textpointer MagmarName                                         ; 0x090c

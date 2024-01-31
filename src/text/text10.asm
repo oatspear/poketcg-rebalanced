@@ -984,9 +984,9 @@ RapidashName: ; 5a846 (16:6846)
 	text "Rapidash"
 	done
 
-StompName: ; 5a850 (16:6850)
-	text "Stomp"
-	done
+; StompName:
+; 	text "Stomp"
+; 	done
 
 AgilityName:
 	text "Agility"

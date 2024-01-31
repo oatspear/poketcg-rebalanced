@@ -531,15 +531,6 @@ FurySwipes20Plus10EffectCommands:
 	dbw EFFECTCMDTYPE_AI, Heads20Plus10Damage_AIEffect
 	db  $00
 
-ArcanineFlamesOfRageEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Check2EnergiesAttached
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discard2Energies_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Discard2Energies_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Discard2Energies_AISelectEffect
-	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
-	db  $00
-
 OutrageEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect
@@ -612,6 +603,13 @@ CorrosiveAcidEffectCommands:
 Confusion50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect
 	db  $00
+
+ArcanineFlamesOfRageEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Check2EnergiesAttached
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discard2Energies_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Discard2Energies_DiscardEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Discard2Energies_AISelectEffect
+	; fallthrough
 
 RageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
@@ -919,7 +917,12 @@ StoneBarrageEffectCommands:
 	db  $00
 
 TantrumEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TantrumEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelfConfusionEffect
+	db  $00
+
+RampageEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RampageEffect
+	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
 	db  $00
 
 PrankEffectCommands:
@@ -1154,16 +1157,6 @@ Draw1CardEffectCommands:
 
 Draw2CardsEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CollectEffect
-	db  $00
-
-TaurosStompEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TaurosStomp_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, TaurosStomp_AIEffect
-	db  $00
-
-TaurosRampageEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rampage_Confusion50PercentEffect
-	dbw EFFECTCMDTYPE_AI, Rampage_AIEffect
 	db  $00
 
 DoduoFuryAttackEffectCommands:

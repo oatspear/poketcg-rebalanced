@@ -9793,23 +9793,23 @@ TaurosCard:
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db TAUROS
-	db 60 ; hp
+	db 70 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx StompName ; name
-	tx Heads10BonusDamageDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx TakeDownName ; name
+	tx Recoil10Description ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw TaurosStompEffectCommands ; effect commands
-	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db DAMAGE_NORMAL ; category
+	dw Recoil10EffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 1
-	db ATK_ANIM_HIT ; animation
+	db 10
+	db ATK_ANIM_HIT_RECOIL ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
@@ -9818,7 +9818,7 @@ TaurosCard:
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw TaurosRampageEffectCommands ; effect commands
+	dw RampageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db BOOST_IF_TAKEN_DAMAGE ; flags 3
