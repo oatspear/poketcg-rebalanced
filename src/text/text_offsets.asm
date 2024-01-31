@@ -370,8 +370,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseTheCardToDiscardText                         ; 0x0173
 	textpointer DiscardedCardsFromDeckText                         ; 0x0174
 	textpointer DiscardedFromHandText
-	textpointer NoneCameText                                       ; 0x0176
-	textpointer CameToTheBenchText                                 ; 0x0177
+	textpointer DiscardedFromDeckText
 	textpointer DuelistHasNoCardsInHandText                        ; 0x0178
 	textpointer TooManyCardsInHandText
 	textpointer PokemonHealedDamageText                            ; 0x0179

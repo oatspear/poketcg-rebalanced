@@ -710,13 +710,9 @@ DiscardedFromHandText:
 	line "from the Hand."
 	done
 
-NoneCameText: ; 39af7 (e:5af7)
-	text "None came!"
-	done
-
-CameToTheBenchText: ; 39b03 (e:5b03)
-	text "<RAMTEXT>"
-	line "came to the Bench!"
+DiscardedFromDeckText:
+	text "Discarded <RAMTEXT>"
+	line "from the deck."
 	done
 
 DuelistHasNoCardsInHandText: ; 39b19 (e:5b19)
