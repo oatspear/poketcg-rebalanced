@@ -3,6 +3,7 @@
 ; ------------------------------------------------------------------------------
 
 ; Discards N cards from the top of the turn holder's deck.
+; Shows the details of each discarded card.
 ; input:
 ;   a: number of cards to discard
 ; output:
@@ -11,6 +12,38 @@
 ; preserves: nothing
 ;   - push/pop de around DrawWideTextBox_WaitForInput to preserve it
 DiscardFromDeckEffect:
+  call DiscardCardsFromDeck
+  ; push af
+  ; call LoadTxRam3
+  ; ldtx hl, DiscardedCardsFromDeckText
+  ; call DrawWideTextBox_WaitForInput
+  ; pop af
+  ld hl, wDuelTempList
+.loop
+  ld a, [hli]
+  cp $ff
+  ret z
+  call ShowDiscardedDeckCardDetails
+  jr .loop
+
+
+;
+DiscardFromOpponentsDeckEffect:
+  call SwapTurn
+  call DiscardFromDeckEffect
+  jp SwapTurn
+
+
+; Discards N cards from the top of the turn holder's deck.
+; input:
+;   a: number of cards to discard
+; output:
+;   a: number of discarded cards
+;   hl: number of discarded cards
+;   wDuelTempList: $ff-terminated list of discarded cards (by deck index)
+; preserves: nothing
+;   - push/pop de around DrawWideTextBox_WaitForInput to preserve it
+DiscardCardsFromDeck:
   ld c, a
   ld b, $00
   ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
@@ -42,22 +75,22 @@ DiscardFromDeckEffect:
 ; terminate wDuelTempList before using hl
   ld a, $ff
   ld [hl], a
-; retrieve number of discarded cards and print text
+; retrieve number of discarded cards
   pop hl
   ld a, l
   or a
-  push af
-  call LoadTxRam3
-  ldtx hl, DiscardedCardsFromDeckText
-  call DrawWideTextBox_WaitForInput
-  pop af
   ret
 
 
-DiscardFromOpponentsDeckEffect:
-  call SwapTurn
-  call DiscardFromDeckEffect
-  jp SwapTurn
+; input:
+;    a: deck index
+ShowDiscardedDeckCardDetails:
+  push hl
+  ldtx hl, DiscardedFromDeckText
+  bank1call DisplayCardDetailScreen
+  or a
+  pop hl
+  ret
 
 
 ; ------------------------------------------------------------------------------
@@ -80,15 +113,6 @@ ShowOpponentDiscardedCardDetails:
 	ldtx hl, DiscardedFromHandText
 	bank1call DisplayCardDetailScreen
   call SwapTurn
-  or a
-  ret
-
-
-; input:
-;    a: deck index
-ShowDiscardedCardDetails:
-  ldtx hl, DiscardedFromHandText
-  bank1call DisplayCardDetailScreen
   or a
   ret
 

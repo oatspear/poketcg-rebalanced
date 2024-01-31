@@ -5505,8 +5505,6 @@ RainbowTeam_AttachEnergyEffect:
 CrushingCharge_DiscardAndAttachEnergyEffect:
 	ld a, 1
 	call DiscardFromDeckEffect
-	ld a, [wDuelTempList]
-	call ShowDiscardedCardDetails
 ; check whether the discarded card is a basic energy
 	ld a, [wDuelTempList]
 	ldh [hAIEnergyTransEnergyCard], a
