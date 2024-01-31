@@ -1894,19 +1894,6 @@ PrintDuelistResultStats:
 	call InitTextPrinting_ProcessTextFromID
 	ret
 
-; display the animation of the player drawing the card at hTempCardIndex_ff98
-DisplayPlayerDrawCardScreen:
-	ldtx hl, YouDrewText
-	ldh a, [hTempCardIndex_ff98]
-;	fallthrough
-
-; display card detail when a card is drawn or played
-; hl is text to display
-; a is the card's deck index
-DisplayCardDetailScreen:
-	call LoadCardDataToBuffer1_FromDeckIndex
-	call _DisplayCardDetailScreen
-	ret
 
 DisplayCardListDetails:
 	ld a, [wDuelTempList]
@@ -5023,6 +5010,21 @@ CardPageSupporterTextData:
 	textitem 1, 5, SupporterText
 	db $ff
 
+
+; display the animation of the player drawing the card at hTempCardIndex_ff98
+DisplayPlayerDrawCardScreen:
+	ldtx hl, YouDrewText
+	ldh a, [hTempCardIndex_ff98]
+;	fallthrough
+
+; display card detail when a card is drawn or played
+; hl is text to display
+; a is the card's deck index
+DisplayCardDetailScreen:
+	call LoadCardDataToBuffer1_FromDeckIndex
+	; jr _DisplayCardDetailScreen
+	; fallthrough
+
 ; display the card details of the card in wLoadedCard1
 ; print the text at hl
 _DisplayCardDetailScreen:
@@ -6289,8 +6291,7 @@ DisplayOpponentUsedAttackScreen:
 DisplayUsedTrainerCardDetailScreen:
 	ldh a, [hTempCardIndex_ff9f]
 	ldtx hl, UsedText
-	call DisplayCardDetailScreen
-	ret
+	jp DisplayCardDetailScreen
 
 ; prints the name and description of a trainer card, along with the
 ; "Used xxx" text in a text box. this function is used to show the player
