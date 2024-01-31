@@ -700,19 +700,24 @@ ChooseTheCardToDiscardText: ; 39a9c (e:5a9c)
 	line "to Discard."
 	done
 
-DiscardedCardsFromDeckText: ; 39ab9 (e:5ab9)
+DiscardedCardsFromDeckText:
 	text "Discarded <RAMNUM> cards"
 	line "from <RAMNAME>'s Deck."
+	done
+
+DiscardedFromDeckText:
+	text "Discarded <RAMTEXT>"
+	line "from <RAMNAME>'s Deck."
+	done
+
+DiscardedFromOpponentsDeckText:
+	text "Discarded <RAMTEXT>"
+	line "from the opponent's deck."
 	done
 
 DiscardedFromHandText:
 	text "Discarded <RAMTEXT>"
 	line "from the Hand."
-	done
-
-DiscardedFromDeckText:
-	text "Discarded <RAMTEXT>"
-	line "from the deck."
 	done
 
 DuelistHasNoCardsInHandText: ; 39b19 (e:5b19)
