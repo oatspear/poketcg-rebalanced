@@ -317,7 +317,7 @@ HandlePlayerSelectionPokemonFromDeck:
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 ;   carry: set if there are no Pokémon or the Player cancelled the selection
 ;   nz: set if there are no Pokémon in the deck
-_HandlePlayerSelectionPokemonFromDeck:
+HandlePlayerSelectionPokemonFromDeckList:
 	ld a, CARDTEST_POKEMON
 	; jr HandlePlayerSelectionFromDeck
 	; fallthrough

@@ -6454,7 +6454,7 @@ ChoosePokemonFromDeck_PlayerSelectEffect:
 	call _LookForPokemonInDeck
 	; jr c, .none_in_deck
 	ld a, $ff
-	call nc, _HandlePlayerSelectionPokemonFromDeck
+	call nc, HandlePlayerSelectionPokemonFromDeckList
 	ldh [hTemp_ffa0], a
 	or a  ; the effect has been handled, regardless of cancel
 	ret
@@ -6466,7 +6466,7 @@ StressPheromones_PlayerSelectEffect:
 	call _LookForPokemonInDeck
 	; jr c, .none_in_deck
 	ld a, $ff
-	call nc, _HandlePlayerSelectionPokemonFromDeck
+	call nc, HandlePlayerSelectionPokemonFromDeckList
 	ldh [hAIPkmnPowerEffectParam], a
 	or a  ; the Power has been used, regardless of cancel
 	ret
@@ -7993,7 +7993,7 @@ Pokedex_PlayerSelection:
 	call DrawWideTextBox_WaitForInput
 
 ; let the Player choose a Pokémon to add to the hand
-	call _HandlePlayerSelectionPokemonFromDeck
+	call HandlePlayerSelectionPokemonFromDeckList
 	ldh [hTempList], a
 	cp $ff
 	jr z, .got_pkmn
