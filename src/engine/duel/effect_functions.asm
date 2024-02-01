@@ -4632,7 +4632,7 @@ AbsorbEffect: ; 2e0b3 (b:60b3)
 
 
 ; returns carry if can't add Pokemon from deck
-CallForFriend_CheckDeckAndPlayArea: ; 2e100 (b:6100)
+CallForFriend_CheckDeckAndPlayArea:
 	call CheckDeckIsNotEmpty
 	ret c ; no cards in deck
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -4642,7 +4642,8 @@ CallForFriend_CheckDeckAndPlayArea: ; 2e100 (b:6100)
 	ccf
 	ret
 
-CallForFriend_PlayerSelectEffect: ; 2e110 (b:6110)
+
+CallForFriend_PlayerSelectEffect:
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 
@@ -4651,7 +4652,7 @@ CallForFriend_PlayerSelectEffect: ; 2e110 (b:6110)
 	ldtx bc, BasicPokemonDeckText
 	lb de, SEARCHEFFECT_BASIC_POKEMON, $00
 	call LookForCardsInDeck
-	ret c
+	ret c  ; none in deck, refused to look
 
 ; draw Deck list interface and print text
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
@@ -4663,13 +4664,8 @@ CallForFriend_PlayerSelectEffect: ; 2e110 (b:6110)
 	bank1call DisplayCardList
 	jr c, .pressed_b
 
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
-	jr nc, .play_sfx  ; is it a Pokemon?
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .play_sfx ; is it Basic?
+	call IsBasicPokemonCard
+	jr nc, .play_sfx  ; not a Basic Pokémon
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTemp_ffa0], a
 	or a
@@ -4690,13 +4686,8 @@ CallForFriend_PlayerSelectEffect: ; 2e110 (b:6110)
 	cp CARD_LOCATION_DECK
 	jr nz, .next
 	ld a, l
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
-	jr nc, .next ; go to the next card
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr z, .play_sfx ; found, go back to top loop
+	call IsBasicPokemonCard
+	jr c, .play_sfx ; found, go back to top loop
 .next
 	inc l
 	ld a, l
@@ -4709,7 +4700,8 @@ CallForFriend_PlayerSelectEffect: ; 2e110 (b:6110)
 	or a
 	ret
 
-CallForFriend_AISelectEffect: ; 2e177 (b:6177)
+
+CallForFriend_AISelectEffect:
 	call CreateDeckCardList
 	ld hl, wDuelTempList
 .loop_deck
@@ -4717,15 +4709,12 @@ CallForFriend_AISelectEffect: ; 2e177 (b:6177)
 	ldh [hTemp_ffa0], a
 	cp $ff
 	ret z ; none found
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
-	jr nc, .loop_deck
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .loop_deck
+	call IsBasicPokemonCard
+	ccf
+	jr c, .loop_deck
 ; found
 	ret
+
 
 CallForFriend_PutInPlayAreaEffect: ; 2e194 (b:6194)
 	ldh a, [hTemp_ffa0]
