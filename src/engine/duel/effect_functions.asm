@@ -4645,7 +4645,9 @@ CallForFriend_CheckDeckAndPlayArea:
 
 CallForFriend_PlayerSelectEffect:
 	ld a, $ff
-	ldh [hTemp_ffa0], a
+	ldh [hTempList], a
+	ldh [hTempList + 1], a
+	ldh [hTempList + 2], a  ; terminator
 
 	call CreateDeckCardList
 	ldtx hl, ChooseBasicPokemonFromDeckText
@@ -4654,69 +4656,59 @@ CallForFriend_PlayerSelectEffect:
 	call LookForCardsInDeck
 	ret c  ; none in deck, refused to look
 
-; draw Deck list interface and print text
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, ChooseBasicPokemonText
-	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
+; handle selection of the first card
+	call HandlePlayerSelectionBasicPokemonFromDeckList
+	ldh [hTempList], a
+	ret c  ; cancelled selection
+; remove the first card from the list
+	call RemoveCardFromDuelTempList
+	ld a, [wDuelTempList]
+	cp $ff
+	ret z  ; no more cards in the deck
 
-.loop
-	bank1call DisplayCardList
-	jr c, .pressed_b
-
-	call IsBasicPokemonCard
-	jr nc, .play_sfx  ; not a Basic Pokémon
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
-	or a
-	ret
-
-.play_sfx
-	; play SFX and loop back
-	call PlaySFX_InvalidChoice
-	jr .loop
-
-.pressed_b
-; figure if Player can exit the screen without selecting,
-; that is, if the Deck has no Basic Pokemon.
-	ld a, DUELVARS_CARD_LOCATIONS
+; check whether there is a second free slot in the bench
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
-.loop_b_press
-	ld a, [hl]
-	cp CARD_LOCATION_DECK
-	jr nz, .next
-	ld a, l
-	call IsBasicPokemonCard
-	jr c, .play_sfx ; found, go back to top loop
-.next
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop_b_press
+	cp MAX_PLAY_AREA_POKEMON - 1
+	ret nc  ; only has space for one
 
-; no valid card in Deck, can safely exit screen
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	or a
+; handle selection of the second card
+	call HandlePlayerSelectionBasicPokemonFromDeckList
+	ldh [hTempList + 1], a
 	ret
 
 
 CallForFriend_AISelectEffect:
+	ld a, $ff
+	ldh [hTempList], a
+	ldh [hTempList + 1], a
+	ldh [hTempList + 2], a  ; terminator
+
+; handle selection of the first card
 	call CreateDeckCardList
-	ld hl, wDuelTempList
-.loop_deck
-	ld a, [hli]
-	ldh [hTemp_ffa0], a
+	call CardSearch_FunctionTable.SearchDuelTempListForBasicPokemon
+	ret c  ; none in deck
+	ldh [hTempList], a
+
+; remove the first card from the list
+	call RemoveCardFromDuelTempList
+	ld a, [wDuelTempList]
 	cp $ff
-	ret z ; none found
-	call IsBasicPokemonCard
-	ccf
-	jr c, .loop_deck
-; found
+	ret z  ; no more cards in the deck
+
+; check whether there is a second free slot in the bench
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	cp MAX_PLAY_AREA_POKEMON - 1
+	ret nc  ; only has space for one
+
+; handle selection of the second card
+	call CardSearch_FunctionTable.SearchDuelTempListForBasicPokemon
+	ldh [hTempList + 1], a
 	ret
 
 
-CallForFriend_PutInPlayAreaEffect: ; 2e194 (b:6194)
+CallForFriend_PutInPlayAreaEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	jp z, SyncShuffleDeck
