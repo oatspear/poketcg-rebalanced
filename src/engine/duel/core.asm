@@ -3456,6 +3456,22 @@ DrawCardListScreenLayout:
 	or a
 	ret
 
+
+; draw Deck list interface and print text
+; input:
+;   hl: "Choose a <CARD>" text
+;   de: header text (e.g., DuelistDeckText)
+DisplayCardList_PrintText:
+	push hl
+	push de
+	call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
+	pop de
+	pop hl
+	call SetCardListHeaderText
+	; jr DisplayCardList
+	; fallthrough
+
+
 ; displays a list of cards and handles input in order to navigate through the list,
 ; select a card, open a card page, etc.
 ; input:
