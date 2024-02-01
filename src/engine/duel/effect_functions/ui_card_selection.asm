@@ -317,18 +317,14 @@ HandlePlayerSelectionPokemonFromDeck:
 ;   nz: set if there are no Pokémon in the deck
 _HandlePlayerSelectionPokemonFromDeck:
 ; handle input
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChoosePokemonCardText
 	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
 .read_input
-	bank1call DisplayCardList
+	bank1call DisplayCardList_PrintText
 ; if B was pressed, either there are no Pokémon or Player does not want any
 	jr c, .try_cancel
 	ldh a, [hTempCardIndex_ff98]
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
+	call IsPokemonCard
 	jr nc, .play_sfx  ; can't select non-Pokémon card
 ; got Pokémon card
 	ldh a, [hTempCardIndex_ff98]
@@ -348,9 +344,7 @@ _HandlePlayerSelectionPokemonFromDeck:
 	cp CARD_LOCATION_DECK
 	jr nz, .next_card
 	ld a, l
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
+	call IsPokemonCard
 	jr nc, .next_card  ; not a Pokémon card
 ; cancelled selection, but there were valid options
 	xor a  ; ensure z flag
