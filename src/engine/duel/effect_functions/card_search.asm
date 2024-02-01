@@ -20,6 +20,7 @@
 ;	  hl = text to print if Deck has card(s)
 ;	  bc = variable text to fill <RAMTEXT> in hl
 ; output:
+;   a: TRUE if cards were found; FALSE otherwise
 ;	  carry set if refused to look at deck
 LookForCardsInDeck:
 	push hl
@@ -34,6 +35,7 @@ LookForCardsInDeck:
 	pop bc
 	pop hl
 	call DrawWideTextBox_WaitForInput
+	ld a, TRUE
 	or a
 	ret
 
@@ -44,7 +46,10 @@ LookForCardsInDeck:
 	ldtx hl, ThereIsNoInTheDeckText
 	call DrawWideTextBox_WaitForInput
 	ldtx hl, WouldYouLikeToCheckTheDeckText
-	jp YesOrNoMenuWithText_SetCursorToYes
+	call YesOrNoMenuWithText_SetCursorToYes
+	ld a, FALSE
+	ret
+
 
 ; searches through the Discard Pile in wDuelTempList looking for
 ; a certain card or cards, and prints text depending
