@@ -943,11 +943,11 @@ KabutopsAbsorbEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AbsorbEffect
 	db  $00
 
-CallForFriendEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CallForFriend_CheckDeckAndPlayArea
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CallForFriend_PutInPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, CallForFriend_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, CallForFriend_AISelectEffect
+CallForFamilyEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CallForFamily_CheckDeckAndPlayArea
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CallForFamily_PutInPlayAreaEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, CallForFamily_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, CallForFamily_AISelectEffect
 	db  $00
 
 KarateChopEffectCommands:

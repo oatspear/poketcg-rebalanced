@@ -33,8 +33,6 @@ HandleSpecialAIAttacks:
 	jp z, .BigThunder
 	cp GROWLITHE
 	jp z, .Fetch
-	cp KANGASKHAN
-	jp z, .Fetch
 	cp PIKACHU_LV14
 	jp z, .Fetch
 	cp MEOWTH_LV14
@@ -66,13 +64,11 @@ HandleSpecialAIAttacks:
 	cp NINETALES_LV35
 	jp z, .HyperBeam
 	cp NIDORANF
-	jr z, .CallForFriend
-	cp CUBONE
-	jr z, .CallForFriend
-	cp POLIWAG
-	jr z, .CallForFriend
+	jr z, .CallForFamily
+	cp KANGASKHAN
+	jr z, .CallForFamily
 	cp JIGGLYPUFF_LV13
-	jr z, .CallForFriend
+	jr z, .CallForFamily
 	cp ODDISH
 	jr z, .Sprout
 	cp MOLTRES_LV35
@@ -126,7 +122,7 @@ HandleSpecialAIAttacks:
 
 ; if any basic cards are found in deck,
 ; return a score of $80 + slots available in bench.
-.CallForFriend:
+.CallForFamily:
 	call CheckIfAnyBasicPokemonInDeck
 	jr nc, .zero_score
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA

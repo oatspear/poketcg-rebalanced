@@ -129,10 +129,18 @@
 
 ### Psychic Changes
 
+#### Jigglypuff Lv13
+- **Call For Friend**: removed.
+- New attack: **Call For Family** (C): put up to 2 Basic Pokémon from deck onto Bench.
+
 #### Wigglytuff
 - **Do The Wave**: does 10 damage per Benched Pokémon (does not count Active Pokémon).
 
 ### Darkness Changes
+
+#### Nidoran (F)
+- **Call For Friend**: removed.
+- New attack: **Call For Family** (C): put up to 2 Basic Pokémon from deck onto Bench.
 
 #### Nidorino
 - **Horn Drill**: removed.
@@ -151,6 +159,10 @@
 - Reduced HP from 80 to 60.
 - Reduced Retreat Cost from 1 to 0.
 - **Natural Remedy**: reduced cost from (CCC) to (CC) and healing from 30 to 20.
+
+#### Kangaskhan
+- **Call For Friend**: removed.
+- New attack: **Call For Family** (C): put up to 2 Basic Pokémon from deck onto Bench.
 
 #### Tauros
 - Increased HP from 60 to 70.

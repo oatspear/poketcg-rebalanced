@@ -864,12 +864,12 @@ NidoranFCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx CallForFriendName ; name
-	tx CallForFriendDescription ; description
+	tx CallForFamilyName ; name
+	tx CallForFamilyDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw CallForFriendEffectCommands ; effect commands
+	dw CallForFamilyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -9117,12 +9117,12 @@ JigglypuffLv13Card:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx CallForFriendName ; name
-	tx CallForFriendDescription ; description
+	tx CallForFamilyName ; name
+	tx CallForFamilyDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw CallForFriendEffectCommands ; effect commands
+	dw CallForFamilyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -9774,13 +9774,13 @@ KangaskhanCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx FetchName ; name
-	tx Draw1CardDescription ; description
+	tx CallForFamilyName ; name
+	tx CallForFamilyDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw Draw1CardEffectCommands ; effect commands
-	db DRAW_CARD ; flags 1
+	dw CallForFamilyEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0

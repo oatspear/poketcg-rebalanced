@@ -2649,8 +2649,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BattleArmorName                                    ; 0x0a6c
 	textpointer BattleArmorDescription                             ; 0x0a4c
 	textpointer BonemerangName                                     ; 0x0a4c
-	textpointer CallForFriendName                                  ; 0x0a4d
-	textpointer CallForFriendDescription                           ; 0x0a4e
+	textpointer CallForFamilyName
+	textpointer CallForFamilyDescription
 	textpointer BonekeeperName                                     ; 0x0a4f
 	textpointer MarowakLv26Description                            ; 0x0a50
 	textpointer BoneAttackName                                     ; 0x0a51

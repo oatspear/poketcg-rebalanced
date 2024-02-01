@@ -4632,7 +4632,7 @@ AbsorbEffect: ; 2e0b3 (b:60b3)
 
 
 ; returns carry if can't add Pokemon from deck
-CallForFriend_CheckDeckAndPlayArea:
+CallForFamily_CheckDeckAndPlayArea:
 	call CheckDeckIsNotEmpty
 	ret c ; no cards in deck
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -4643,7 +4643,7 @@ CallForFriend_CheckDeckAndPlayArea:
 	ret
 
 
-CallForFriend_PlayerSelectEffect:
+CallForFamily_PlayerSelectEffect:
 	ld a, $ff
 	ldh [hTempList], a
 	ldh [hTempList + 1], a
@@ -4678,7 +4678,7 @@ CallForFriend_PlayerSelectEffect:
 	ret
 
 
-CallForFriend_AISelectEffect:
+CallForFamily_AISelectEffect:
 	ld a, $ff
 	ldh [hTempList], a
 	ldh [hTempList + 1], a
@@ -4708,7 +4708,7 @@ CallForFriend_AISelectEffect:
 	ret
 
 
-CallForFriend_PutInPlayAreaEffect:
+CallForFamily_PutInPlayAreaEffect:
 	ld hl, hTempList
 .loop
 	ld a, [hl]

@@ -718,16 +718,14 @@ BonemerangName: ; 5f332 (17:7332)
 	text "Bonemerang"
 	done
 
-CallForFriendName: ; 5f33e (17:733e)
-	text "Call for Friend"
+CallForFamilyName:
+	text "Call for Family"
 	done
 
-CallForFriendDescription: ; 5f34f (17:734f)
-	text "Search your deck for a Basic"
-	line "Pokémon card and put it onto your"
-	line "Bench. Shuffle your deck afterward."
-	line "(You can't use this attack if your"
-	line "Bench is full.)"
+CallForFamilyDescription:
+	text "Search your deck for up to 2 Basic"
+	line "Pokémon and put them onto your"
+	line "Bench. Then, shuffle your deck."
 	done
 
 BonekeeperName: ; 5f3e9 (17:73e9)
