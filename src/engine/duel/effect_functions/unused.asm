@@ -68,6 +68,21 @@ CallForFriend_PlayerSelectEffect:
 	ret
 
 
+;
+CallForFriend_AISelectEffect:
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z ; none found
+	call IsBasicPokemonCard
+	ccf
+	jr c, .loop_deck
+; found
+	ret
+
 
 
 
