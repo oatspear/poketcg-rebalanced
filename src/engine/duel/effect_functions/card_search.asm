@@ -135,16 +135,18 @@ CardSearch_FunctionTable:
 	or a
 	ret
 
-; returns carry if no Basic Pokemon is found
+; returns carry if no Basic Pokémon is found
+; otherwise, returns deck index of the first matching card
 .SearchDuelTempListForBasicPokemon
 	ld hl, wDuelTempList
 .loop_list_basic_pkmn
-	ld a, [hli]
+	ld a, [hl]
 	cp $ff
 	jr z, .set_carry
 	call IsBasicPokemonCard
+	ld a, [hli]
 	jr nc, .loop_list_basic_pkmn
-	xor a
+	or a
 	ret
 
 ; returns carry if no Basic Energy cards are found
