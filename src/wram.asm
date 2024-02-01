@@ -2525,14 +2525,11 @@ wDebugSGBBorder:: ; d419
 wDebugBoosterSelection:: ; d41a
 	ds $1
 
-; used in unreferenced function Func_1c890
-; otherwise unused
-wd41b:: ; d41b
+; used to store an index within a table or list
+wDataTableIndex:: ; d41b
 	ds $1
 
-; used in unreferenced function Func_1c890
-; otherwise unused
-; is read like a sprite index
+; unused
 wd41c:: ; d41c
 	ds $1
 
