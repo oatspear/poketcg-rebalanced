@@ -301,6 +301,24 @@ HandlePlayerSelectionAnyCardFromDeckListToHand:
 	ret
 
 
+HandlePlayerSelectionBasicPokemonFromDeck:
+; create the list of cards in deck
+	call CreateDeckCardList
+	; fallthrough
+
+; input:
+;   wDuelTempList: list of deck cards to search
+; output:
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if there are no Pokémon or the Player cancelled the selection
+;   nz: set if there are no Pokémon in the deck
+HandlePlayerSelectionBasicPokemonFromDeckList:
+	ld a, CARDTEST_BASIC_POKEMON
+	ldtx hl, ChoosePokemonCardText
+	jr HandlePlayerSelectionFromDeckList
+
+
 HandlePlayerSelectionPokemonFromDeck:
 ; create the list of cards in deck
 	call CreateDeckCardList
