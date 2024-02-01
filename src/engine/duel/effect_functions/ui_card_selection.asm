@@ -237,12 +237,10 @@ HandlePlayerSelectionCardTypeFromDeckToHand:
 HandlePlayerSelectionCardTypeFromDeckListToHand:
 	push af
 .show_ui
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseCardToPlaceInHandText
 	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
 .read_input
-	bank1call DisplayCardList
+	bank1call DisplayCardList_PrintText
 ; if B was pressed, either there are no cards or Player does not want any
 	jr c, .no_cards
 	ldh a, [hTempCardIndex_ff98]
@@ -286,12 +284,10 @@ HandlePlayerSelectionAnyCardFromDeckToHand:
 ;   a: deck index of the selected card | $ff
 ;   [hTempCardIndex_ff98]: deck index of the selected card | $ff
 HandlePlayerSelectionAnyCardFromDeckListToHand:
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
 	ldtx hl, ChooseCardToPlaceInHandText
 	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
 .loop_input
-	bank1call DisplayCardList
+	bank1call DisplayCardList_PrintText
 ; if B was pressed, either there are no cards or Player does not want any
 	jr c, .no_cards
 	ldh a, [hTempCardIndex_ff98]
@@ -319,22 +315,23 @@ HandlePlayerSelectionPokemonFromDeck:
 ;   nz: set if there are no Pokémon in the deck
 HandlePlayerSelectionPokemonFromDeckList:
 	ld a, CARDTEST_POKEMON
-	; jr HandlePlayerSelectionFromDeck
+	ldtx hl, ChoosePokemonCardText
+	; jr HandlePlayerSelectionFromDeckList
 	; fallthrough
 
 
 ; input:
 ;   wDuelTempList: list of deck cards to search
 ;   a: table index of a function to use as a test for the desired card type
+;   hl: text pointer with the card type to choose
 ; output:
 ;   a: deck index of the selected card | $ff
 ;   [hTempCardIndex_ff98]: deck index of the selected card
 ;   carry: set if there are no valid cards or the Player cancelled the selection
 ;   nz: set if there are no valid cards in the deck
-HandlePlayerSelectionFromDeck:
+HandlePlayerSelectionFromDeckList:
 	ld [wDataTableIndex], a
 ; handle input
-	ldtx hl, ChoosePokemonCardText
 	ldtx de, DuelistDeckText
 .read_input
 	bank1call DisplayCardList_PrintText
@@ -354,26 +351,14 @@ HandlePlayerSelectionFromDeck:
 
 .try_cancel
 ; Player tried exiting screen, check if there are any cards to select
-	ld a, DUELVARS_CARD_LOCATIONS
-	call GetTurnDuelistVariable
-.loop_deck
-	ld a, [hl]
-	cp CARD_LOCATION_DECK
-	jr nz, .next_card
-	ld a, l
-	call DynamicCardTypeTest
-	jr nc, .next_card  ; not a card of the desired type
+	call CheckThereIsCardTypeInDeck
+	jr c, .none_in_deck
 ; cancelled selection, but there were valid options
 	xor a  ; ensure z flag
 	ld a, $ff
 	scf
 	ret
-.next_card
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop_deck
-; none in deck, can exit
+.none_in_deck
 	ld a, $ff
 	or a  ; ensure nz flag
 	scf
