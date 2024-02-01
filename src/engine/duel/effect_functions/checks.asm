@@ -529,6 +529,18 @@ IsBasicPokemonCard:
 	ret
 
 
+; input:
+;   a: deck index of the card
+; output:
+;   carry: set if the given card is a Pokémon
+; preserves: hl, bc, de
+IsPokemonCard:
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, bc, de
+	ld a, [wLoadedCard2Type]
+	cp TYPE_PKMN + 1
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Compound Checks
 ; ------------------------------------------------------------------------------
