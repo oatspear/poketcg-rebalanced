@@ -4734,7 +4734,7 @@ CallForFamily_PutInPlayAreaEffect:
 	ccf
 	ret nc
 	; display card on screen
-	ldh a, [hl]
+	ld a, [hl]
 	push hl
 	ldtx hl, PlacedOnTheBenchText
 	bank1call DisplayCardDetailScreen
