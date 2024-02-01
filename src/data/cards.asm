@@ -9746,6 +9746,32 @@ KangaskhanCard:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; [Ability] Bench Guard
+	; (While this is your Active Pokémon)
+	; Your Benched Pokémon cannot take any damage from attacks.
+
+	; [Ability] Parental Bonds
+	; Whenever you play a Basic Pokémon from your hand during your turn,
+	; you may attach a Basic Energy from your hand to that Pokémon.
+
+	; Den Protector / Parental Rush (CC)  20+
+	; If you have any damaged Pokémon in your Bench,
+	; this attack does +20 damage.
+
+	; Call for Family (C)
+	; Put up to 2 Basic Pokémon from your deck into your Bench.
+
+	; Cross-Cut (C)  10+
+	; If your opponent's Active Pokémon is an Evolution Pokémon,
+	; this attack does 20 more damage.
+
+	; Fast Evolution (C)
+	; Search your deck for up to 2 Evolution Pokémon, reveal them,
+	; and put them into your hand. Then, shuffle your deck.
+
+	; Spike Draw (CC)  20
+	; Draw a card.
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx FetchName ; name
