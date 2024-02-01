@@ -508,6 +508,28 @@ CheckIfCardHasSpecificEnergyAttached:
 
 
 ; ------------------------------------------------------------------------------
+; Card Types
+; ------------------------------------------------------------------------------
+
+
+; input:
+;   a: deck index of the card
+; output:
+;   carry: set if the given card is a Basic Pokémon
+; preserves: hl, bc, de
+IsBasicPokemonCard:
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, bc, de
+	ld a, [wLoadedCard2Type]
+	cp TYPE_PKMN + 1
+	ret nc  ; not a Pokémon card
+	ld a, [wLoadedCard2Stage]
+	or a  ; BASIC
+	ret nz  ; not a Basic Pokémon
+	scf
+	ret
+
+
+; ------------------------------------------------------------------------------
 ; Compound Checks
 ; ------------------------------------------------------------------------------
 
