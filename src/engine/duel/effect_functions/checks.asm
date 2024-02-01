@@ -512,6 +512,11 @@ CheckIfCardHasSpecificEnergyAttached:
 ; ------------------------------------------------------------------------------
 
 
+CardTypeTest_FunctionTable:
+	dw IsPokemonCard
+	dw IsBasicPokemonCard
+
+
 ; input:
 ;   a: deck index of the card
 ; output:
