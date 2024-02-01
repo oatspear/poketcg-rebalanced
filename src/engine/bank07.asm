@@ -981,33 +981,3 @@ Func_1c866: ; unreferenced
 	ld a, c
 	ldh [hSCY], a
 	ret
-
-; sets some flags on a given sprite
-Func_1c890: ; unreferenced
-	ld a, [wVBlankCounter]
-	and %111111
-	ret nz
-
-	ld a, [wd41b]
-	cp $11
-	jr z, .asm_1c8a3
-	cp $0e
-	ret c
-	cp $10
-	ret nc
-
-; wd41b == $11 || (wd41b >= $0e && wd41b < $10)
-.asm_1c8a3
-	ld a, [wd41c]
-	ld [wWhichSprite], a
-	ld c, SPRITE_ANIM_FLAGS
-	call GetSpriteAnimBufferProperty
-	call UpdateRNGSources
-	and (1 << SPRITE_ANIM_FLAG_X_SUBTRACT)
-	jr nz, .asm_1c8b9
-	res SPRITE_ANIM_FLAG_SPEED, [hl]
-	jr .asm_1c8bb
-.asm_1c8b9
-	set SPRITE_ANIM_FLAG_SPEED, [hl]
-.asm_1c8bb
-	ret
