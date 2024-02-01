@@ -161,8 +161,11 @@
 - **Natural Remedy**: reduced cost from (CCC) to (CC) and healing from 30 to 20.
 
 #### Kangaskhan
+- Reduced Retreat Cost from 2 to 1.
 - **Call For Friend**: removed.
+- **Comet Punch**: removed.
 - New attack: **Call For Family** (C): put up to 2 Basic Pokémon from deck onto Bench.
+- New attack: **Parental Rush** (CCC): 10 damage; +10 damage for each of the player's damaged Pokémon.
 
 #### Tauros
 - Increased HP from 60 to 70.

@@ -2811,6 +2811,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer StressPheromonesDescription
 	textpointer QueenPressName
 	textpointer QueenPressDescription
+	textpointer ParentalRushName
 	textpointer VengefulHornName
 	textpointer VengefulHornDescription
 	textpointer GarbageEaterName

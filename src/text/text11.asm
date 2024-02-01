@@ -1524,6 +1524,10 @@ QueenPressDescription:
 	line "Basic Pokémon."
 	done
 
+ParentalRushName:
+	text "Parental Rush"
+	done
+
 VengefulHornName:
 	text "Vengeful Horn"
 	done

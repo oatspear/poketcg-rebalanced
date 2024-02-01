@@ -9788,19 +9788,19 @@ KangaskhanCard:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx CometPunchName ; name
-	tx Heads10BonusDamageDescription ; description
+	tx ParentalRushName ; name
+	tx VengefulHornDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw KangaskhanCometPunchEffectCommands ; effect commands
+	dw VengefulHornEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PUNCH ; animation
 
-	db 2 ; retreat cost
+	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx ParentName ; category
