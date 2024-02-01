@@ -3,6 +3,7 @@
 ; ------------------------------------------------------------------------------
 
 ; return carry if Player is the Turn Duelist
+; preserves: bc, de
 IsPlayerTurn:
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
@@ -20,6 +21,7 @@ IsPlayerTurn:
 ; ------------------------------------------------------------------------------
 
 ; returns carry if Deck is empty
+; preserves: bc, de
 CheckDeckIsNotEmpty:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
