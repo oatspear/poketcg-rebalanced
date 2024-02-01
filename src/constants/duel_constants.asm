@@ -312,3 +312,8 @@ DEF PRIZES_6    EQU $06
 	const SEARCHEFFECT_CARD_TYPE                ; $05
  	const SEARCHEFFECT_GRASS_CARD               ; $07
  	const SEARCHEFFECT_EVOLUTION_OF_PLAY_AREA   ; $08
+
+; constant offsets for CardTypeTest_FunctionTable
+	const_def
+ 	const CARDTEST_POKEMON                      ; $00
+ 	const CARDTEST_BASIC_POKEMON                ; $01
