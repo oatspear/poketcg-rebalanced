@@ -15,6 +15,10 @@ IsPlayerTurn:
 	ret
 
 
+; ------------------------------------------------------------------------------
+; Deck
+; ------------------------------------------------------------------------------
+
 ; returns carry if Deck is empty
 CheckDeckIsNotEmpty:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
@@ -22,6 +26,36 @@ CheckDeckIsNotEmpty:
 	ldtx hl, NoCardsLeftInTheDeckText
 	cp DECK_SIZE
 	ccf
+	ret
+
+
+; input:
+;   wDataTableIndex: function index in CardTypeTest_FunctionTable
+; output:
+;   carry: set if there are no valid cards in deck
+;   a: deck index of the first valid card | $ff
+CheckThereIsCardTypeInDeck:
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.loop_deck
+	ld a, [hl]
+	cp CARD_LOCATION_DECK
+	jr nz, .next_card
+	ld a, l
+	call DynamicCardTypeTest
+	jr nc, .next_card  ; not a card of the desired type
+; there are valid cards
+	ld a, l
+	ccf
+	ret
+.next_card
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_deck
+; none in deck
+	ld a, $ff
+	scf
 	ret
 
 
