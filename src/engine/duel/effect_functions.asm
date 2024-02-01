@@ -4709,19 +4709,37 @@ CallForFriend_AISelectEffect:
 
 
 CallForFriend_PutInPlayAreaEffect:
-	ldh a, [hTemp_ffa0]
+	ld hl, hTempList
+.loop
+	ld a, [hl]
 	cp $ff
 	jp z, SyncShuffleDeck
-	call SearchCardInDeckAndSetToJustDrawn
-	call AddCardToHand
-	call PutHandPokemonCardInPlayArea
-	call IsPlayerTurn
+	call .PutInPlayArea
 	jp c, SyncShuffleDeck
+	inc hl
+	jr .loop
+
+; input:
+;   hl: pointer to deck index
+.PutInPlayArea:
+	call SearchCardInDeckAndSetToJustDrawn  ; preserves everything
+	call AddCardToHand  ; preserves everything
+	push hl
+	call PutHandPokemonCardInPlayArea
+	pop hl
+	ret c
+	push hl
+	call IsPlayerTurn
+	pop hl
+	ccf
+	ret nc
 	; display card on screen
-	ldh a, [hTemp_ffa0]
+	ldh a, [hl]
+	push hl
 	ldtx hl, PlacedOnTheBenchText
 	bank1call DisplayCardDetailScreen
-	jp SyncShuffleDeck
+	pop hl
+	ret
 
 ; ------------------------------------------------------------------------------
 
