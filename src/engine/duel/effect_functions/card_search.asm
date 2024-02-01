@@ -142,13 +142,9 @@ CardSearch_FunctionTable:
 	ld a, [hli]
 	cp $ff
 	jr z, .set_carry
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
-	jr nc, .loop_list_basic_pkmn  ; not a Pokemon
-	ld a, [wLoadedCard2Stage]
-	or a  ; BASIC
-	jr nz, .loop_list_basic_pkmn
+	call IsBasicPokemonCard
+	jr nc, .loop_list_basic_pkmn
+	xor a
 	ret
 
 ; returns carry if no Basic Energy cards are found
