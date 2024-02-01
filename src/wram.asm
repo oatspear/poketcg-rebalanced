@@ -2529,8 +2529,8 @@ wDebugBoosterSelection:: ; d41a
 wDataTableIndex:: ; d41b
 	ds $1
 
-; unused
-wd41c:: ; d41c
+; used to store a single byte argument for a dynamic function call
+wDynamicFunctionArgument:: ; d41c
 	ds $1
 
 wd41d:: ; d41d

@@ -513,9 +513,29 @@ CheckIfCardHasSpecificEnergyAttached:
 
 
 CardTypeTest_FunctionTable:
-	dw IsPokemonCard
-	dw IsBasicPokemonCard
+	dw CardTypeTest_Pokemon
+	dw CardTypeTest_BasicPokemon
 
+
+CardTypeTest_Pokemon:
+	ld a, [wDynamicFunctionArgument]
+	; fallthrough
+
+; input:
+;   a: deck index of the card
+; output:
+;   carry: set if the given card is a Pokémon
+; preserves: hl, bc, de
+IsPokemonCard:
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, bc, de
+	ld a, [wLoadedCard2Type]
+	cp TYPE_PKMN + 1
+	ret
+
+
+CardTypeTest_BasicPokemon:
+	ld a, [wDynamicFunctionArgument]
+	; fallthrough
 
 ; input:
 ;   a: deck index of the card
@@ -531,18 +551,6 @@ IsBasicPokemonCard:
 	or a  ; BASIC
 	ret nz  ; not a Basic Pokémon
 	scf
-	ret
-
-
-; input:
-;   a: deck index of the card
-; output:
-;   carry: set if the given card is a Pokémon
-; preserves: hl, bc, de
-IsPokemonCard:
-	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, bc, de
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN + 1
 	ret
 
 
