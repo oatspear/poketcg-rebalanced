@@ -363,6 +363,77 @@ _HandlePlayerSelectionPokemonFromDeck:
 	ret
 
 
+
+; input:
+;   wDuelTempList: list of deck cards to search
+;   a: table index of a function to use as a test for the desired card type
+; output:
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if there are no Pokémon or the Player cancelled the selection
+;   nz: set if there are no Pokémon in the deck
+HandlePlayerSelectionFromDeck:
+	ld [wDataTableIndex], a
+; handle input
+	ldtx hl, ChoosePokemonCardText
+	ldtx de, DuelistDeckText
+.read_input
+	bank1call DisplayCardList_PrintText
+; if B was pressed, either there are no cards or Player does not want any
+	jr c, .try_cancel
+	ldh a, [hTempCardIndex_ff98]
+	call DynamicCardTypeTest
+	jr nc, .play_sfx  ; invalid card choice
+; got a valid card
+	ldh a, [hTempCardIndex_ff98]
+	or a
+	ret
+
+.play_sfx
+	call PlaySFX_InvalidChoice
+	jr .read_input
+
+.try_cancel
+; Player tried exiting screen, check if there are any cards to select
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.loop_deck
+	ld a, [hl]
+	cp CARD_LOCATION_DECK
+	jr nz, .next_card
+	ld a, l
+	call DynamicCardTypeTest
+	jr nc, .next_card  ; not a card of the desired type
+; cancelled selection, but there were valid options
+	xor a  ; ensure z flag
+	ld a, $ff
+	scf
+	ret
+.next_card
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_deck
+; none in deck, can exit
+	ld a, $ff
+	or a  ; ensure nz flag
+	scf
+	ret
+
+
+; input:
+;   a: argument (e.g., deck index) to pass to a function in CardTypeTest_FunctionTable
+; preserves: hl
+DynamicCardTypeTest:
+	ld [wDynamicFunctionArgument], a
+	ld a, [wDataTableIndex]
+	push hl
+	ld hl, CardTypeTest_FunctionTable
+	call JumpToFunctionInTable
+	pop hl
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Choose Pokémon In Play Area
 ; ------------------------------------------------------------------------------
