@@ -304,6 +304,11 @@ HandleSpecialAIAttacks:
 	call GetTurnDuelistVariable
 	cp 46
 	jp nc, .zero_score
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	cp 4
+	ld a, $82
+	ret c
 	ld a, $80
 	ret
 
