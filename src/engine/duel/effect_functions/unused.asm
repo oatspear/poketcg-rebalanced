@@ -1,5 +1,17 @@
 ;
 
+Selfdestruct40Bench10Effect:
+	ld a, 40
+	jr Selfdestruct50Bench10Effect.recoil
+
+Selfdestruct50Bench10Effect:
+	ld a, 50
+.recoil
+	call DealRecoilDamageToSelf
+	jr Earthquake10Effect
+
+
+
 
 CallForFriendEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CallForFriend_CheckDeckAndPlayArea

@@ -681,10 +681,13 @@ SelfdestructName: ; 59abe (16:5abe)
 	text "Selfdestruct"
 	done
 
-KoffingsSelfdestructDescription:
-	text "This attack does 10 damage to each"
-	line "player's Benched Pokémon."
-	line "This Pokémon does 50 damage to"
+Selfdestruct40Description:
+	text "This Pokémon does 40 damage to"
+	line "itself."
+	done
+
+Selfdestruct50Description:
+	text "This Pokémon does 50 damage to"
 	line "itself."
 	done
 

@@ -2272,7 +2272,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SmogName
 	textpointer SmogDescription
 	textpointer SelfdestructName                                   ; 0x08c0
-	textpointer KoffingsSelfdestructDescription                    ; 0x08c1
+	textpointer Selfdestruct40Description
+	textpointer Selfdestruct50Description
 	textpointer WeezingDescription                                 ; 0x08c2
 	textpointer TangelaName                                        ; 0x08c3
 	textpointer BindName                                           ; 0x08c4
@@ -2532,14 +2533,12 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RaichuLv45Description                             ; 0x09d0
 	textpointer MagnemiteName                                      ; 0x09d1
 	textpointer ThunderWaveName                                    ; 0x09d2
-	textpointer Selfdestruct40Description                          ; 0x09d3
 	textpointer MagnetName                                         ; 0x09d4
 	textpointer MagnemiteLv13Description                          ; 0x09d5
 	; textpointer MagneticStormName                                  ; 0x09d6
 	; textpointer MagneticStormDescription                           ; 0x09d7
 	textpointer MagnemiteLv15Description                          ; 0x09d8
 	textpointer MagnetonName                                       ; 0x09d9
-	textpointer Selfdestruct80Bench20Description                   ; 0x09da
 	textpointer MagnetonLv28Description                           ; 0x09db
 	textpointer SonicboomName                                      ; 0x09dc
 	textpointer SonicboomDescription                               ; 0x09dd

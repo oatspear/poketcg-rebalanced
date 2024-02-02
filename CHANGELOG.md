@@ -9,6 +9,12 @@
 
 ### Lightning Changes
 
+#### Voltorb
+- **Self-destruction**: removed damage to Benched Pokémon.
+
+#### Electrode Lv35
+- **Self-destruct**: renamed to **Explosion**; reduced base damage from 100 to 80.
+
 #### Electrode Lv42
 - Reduced HP from 90 to 80.
 - **Self-destruct**: renamed to **Explosion**; reduced base damage from 100 to 80.
@@ -146,6 +152,9 @@
 - **Horn Drill**: removed.
 - **Den Protector**: renamed to **Vengeful Horn**; increased cost from (CC) to (DC).
 - New Pokémon Power: **Dark Retribution**: Active Pokémon with (D) Energy attached return 10 damage back to attackers.
+
+#### Koffing
+- **Self-destruction**: removed damage to benched Pokémon.
 
 ### Colorless Changes
 

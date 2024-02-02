@@ -17,6 +17,14 @@ Recoil20Effect:
 	ld a, 20
 	jp DealRecoilDamageToSelf
 
+Recoil40Effect:
+	ld a, 40
+	jp DealRecoilDamageToSelf
+
+Recoil50Effect:
+	ld a, 50
+	jp DealRecoilDamageToSelf
+
 
 ; ------------------------------------------------------------------------------
 ; Targeted Damage

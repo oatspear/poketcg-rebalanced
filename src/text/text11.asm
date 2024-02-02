@@ -121,13 +121,6 @@ ThunderWaveName: ; 5d591 (17:5591)
 	text "Thunder Wave"
 	done
 
-Selfdestruct40Description:
-	text "This attack does 10 damage to each"
-	line "Pokémon on each player's Bench."
-	line "This Pokémon does 40 damage"
-	line "to itself."
-	done
-
 MagnetName: ; 5d636 (17:5636)
 	text "Magnet"
 	done
@@ -156,13 +149,6 @@ MagnemiteLv15Description: ; 5d70f (17:570f)
 
 MagnetonName: ; 5d76e (17:576e)
 	text "Magneton"
-	done
-
-Selfdestruct80Bench20Description:
-	text "This attack does 20 damage to each"
-	line "Pokémon on each player's Bench."
-	line "This Pokémon does 80 damage"
-	line "to itself."
 	done
 
 MagnetonLv28Description: ; 5d80e (17:580e)

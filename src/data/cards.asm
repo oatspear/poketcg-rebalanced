@@ -2146,11 +2146,11 @@ KoffingCard:
 	; attack 2
 	energy DARKNESS, 1, COLORLESS, 1 ; energies
 	tx SelfdestructName ; name
-	tx KoffingsSelfdestructDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	tx Selfdestruct50Description ; description
+	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Selfdestruct50Bench10EffectCommands ; effect commands
+	dw Recoil50EffectCommands ; effect commands
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -5624,10 +5624,10 @@ VoltorbCard:
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx SelfdestructName ; name
 	tx Selfdestruct40Description ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Selfdestruct40Bench10EffectCommands ; effect commands
+	dw Recoil40EffectCommands ; effect commands
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -5673,16 +5673,16 @@ ElectrodeLv35Card:
 
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 2 ; energies
-	tx SelfdestructName ; name
-	tx Selfdestruct80Bench20Description ; description
+	tx ExplosionName ; name
+	tx ExplosionDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 80 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Selfdestruct80Bench20EffectCommands ; effect commands
+	dw ExplosionEffectCommands ; effect commands
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 80
+	db 100
 	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
 
 	db 1 ; retreat cost

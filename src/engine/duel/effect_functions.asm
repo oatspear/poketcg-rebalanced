@@ -4767,16 +4767,6 @@ LightScreenEffect:
 	jp ApplySubstatus1ToAttackingCard
 
 
-Selfdestruct40Bench10Effect:
-	ld a, 40
-	jr Selfdestruct50Bench10Effect.recoil
-
-Selfdestruct50Bench10Effect:
-	ld a, 50
-.recoil
-	call DealRecoilDamageToSelf
-	; fallthrough
-
 ; deal 10 damage to all benched Pokémon
 Earthquake10Effect:
 	ld a, $01

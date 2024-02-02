@@ -516,6 +516,14 @@ Recoil20EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil20Effect
 	db  $00
 
+Recoil40EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil40Effect
+	db  $00
+
+Recoil50EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil50Effect
+	db  $00
+
 QuickAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurnDoubleDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, IfActiveThisTurnDoubleDamage_AIEffect
@@ -1014,18 +1022,6 @@ ElectabuzzThunderpunchEffectCommands:
 
 ElectabuzzLightScreenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LightScreenEffect
-	db  $00
-
-Selfdestruct40Bench10EffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct40Bench10Effect
-	db  $00
-
-Selfdestruct50Bench10EffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct50Bench10Effect
-	db  $00
-
-Selfdestruct80Bench20EffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct80Bench20Effect
 	db  $00
 
 ExplosionEffectCommands:
