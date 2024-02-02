@@ -111,10 +111,12 @@ HandleDefenderDamageReduction_Substatus:
 
 ; check for Invisible Wall, Kabuto Armor, NShield, or Transparency, in order to
 ; possibly reduce or make zero the damage at de.
+; TODO FIXME this function can be refactored and eliminated
 HandleDamageReductionOrNoDamageFromPkmnPowerEffects:
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
+.attack
 	call ArePokemonPowersDisabled
 	ret c
 	ld a, [wTempPlayAreaLocation_cceb]
@@ -256,7 +258,7 @@ HandleNoDamageOrEffectSubstatus:
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
-
+.attack
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
 	call GetTurnDuelistVariable
 	ld e, NO_DAMAGE_OR_EFFECT_FLY
