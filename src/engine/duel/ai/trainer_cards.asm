@@ -810,7 +810,7 @@ AIDecide_Pluspower1:
 	call GetCardIDFromDeckIndex
 	ld a, e
 	ld [wTempNonTurnDuelistCardID], a
-	bank1call HandleNoDamageOrEffectSubstatus
+	call HandleNoDamageOrEffectSubstatus
 	call SwapTurn
 	jr c, .no_carry
 
