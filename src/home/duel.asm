@@ -1685,31 +1685,6 @@ PlayAttackAnimation_DealAttackDamage:
 	ret
 
 
-; this is a simple version of PlayAttackAnimation_DealAttackDamage that doesn't
-; take into account status conditions, damage modifiers, etc, for damage calculation.
-; used for confusion damage to self and for damage to benched Pokemon, for example
-; inputs:
-;   hl: address to subtract HP from
-;   de: how much HP to subtract (damage to deal)
-PlayAttackAnimation_DealAttackDamageSimple:
-	push hl
-	push de
-	call PlayAttackAnimation
-	call WaitAttackAnimation
-	pop de
-	pop hl
-	call SubtractHP
-	ld a, [wDuelDisplayedScreen]
-	cp DUEL_MAIN_SCENE
-	ret nz
-	push hl
-	push de
-	call DrawDuelHUDs
-	pop de
-	pop hl
-	ret
-
-
 DisplayUsePokemonPowerScreen_WaitForInput:
 	push hl
 	call DisplayUsePokemonPowerScreen
@@ -1955,7 +1930,7 @@ DealConfusionDamageToSelf:
 	ld b, $0
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
-	call PlayAttackAnimation_DealAttackDamageSimple
+	bank1call PlayAttackAnimation_DealAttackDamageSimple
 	call PrintKnockedOutIfHLZero
 	pop af
 	ld [wTempNonTurnDuelistCardID], a
@@ -2387,7 +2362,7 @@ DealDamageToPlayAreaPokemon:
 	add DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
 	push af
-	call PlayAttackAnimation_DealAttackDamageSimple
+	bank1call PlayAttackAnimation_DealAttackDamageSimple
 	pop af
 	or a
 	jr z, .skip_knocked_out
