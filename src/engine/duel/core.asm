@@ -8884,29 +8884,6 @@ Func_741a:
 .done
 	ret
 
-; this is a simple version of PlayAttackAnimation_DealAttackDamage that doesn't
-; take into account status conditions, damage modifiers, etc, for damage calculation.
-; used for confusion damage to self and for damage to benched Pokemon, for example
-; inputs:
-;   hl: address to subtract HP from
-;   de: how much HP to subtract (damage to deal)
-PlayAttackAnimation_DealAttackDamageSimple:
-	push hl
-	push de
-	call PlayAttackAnimation
-	call WaitAttackAnimation
-	pop de
-	pop hl
-	call SubtractHP
-	ld a, [wDuelDisplayedScreen]
-	cp DUEL_MAIN_SCENE
-	ret nz
-	push hl
-	push de
-	call DrawDuelHUDs
-	pop de
-	pop hl
-	ret
 
 ; if [wLoadedAttackAnimation] != 0, wait until the animation is over
 WaitAttackAnimation:

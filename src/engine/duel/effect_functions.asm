@@ -662,7 +662,7 @@ ApplyDirectDamage:
 	call GetTurnDuelistVariable
 	push af
 	bank1call Func_7415
-	bank1call PlayAttackAnimation_DealAttackDamageSimple
+	call PlayAttackAnimation_DealAttackDamageSimple
 	; push hl
 	; call WaitForWideTextBoxInput
 	; pop hl

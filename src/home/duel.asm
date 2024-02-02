@@ -1684,6 +1684,32 @@ PlayAttackAnimation_DealAttackDamage:
 	or a
 	ret
 
+
+; this is a simple version of PlayAttackAnimation_DealAttackDamage that doesn't
+; take into account status conditions, damage modifiers, etc, for damage calculation.
+; used for confusion damage to self and for damage to benched Pokemon, for example
+; inputs:
+;   hl: address to subtract HP from
+;   de: how much HP to subtract (damage to deal)
+PlayAttackAnimation_DealAttackDamageSimple:
+	push hl
+	push de
+	call PlayAttackAnimation
+	call WaitAttackAnimation
+	pop de
+	pop hl
+	call SubtractHP
+	ld a, [wDuelDisplayedScreen]
+	cp DUEL_MAIN_SCENE
+	ret nz
+	push hl
+	push de
+	call DrawDuelHUDs
+	pop de
+	pop hl
+	ret
+
+
 DisplayUsePokemonPowerScreen_WaitForInput:
 	push hl
 	call DisplayUsePokemonPowerScreen
@@ -1929,7 +1955,7 @@ DealConfusionDamageToSelf:
 	ld b, $0
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
-	bank1call PlayAttackAnimation_DealAttackDamageSimple
+	call PlayAttackAnimation_DealAttackDamageSimple
 	call PrintKnockedOutIfHLZero
 	pop af
 	ld [wTempNonTurnDuelistCardID], a
@@ -1959,6 +1985,7 @@ ApplyDamageModifiers_DamageToTarget:
 	; call Debug_Print_DE
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
+.step1
 ; 1. apply damage bonus effects
 	call HandleDamageBonusSubstatus
 	call HandleDamageBoostingPowers
@@ -2042,6 +2069,7 @@ ApplyDamageModifiers_DamageToSelf:
 	call _DamageModifiers_Preamble
 	ret z  ; no damage
 ; non-zero damage
+.step1
 ; 1. apply damage bonus effects
   ; skip
 ; 2. apply weakness bonus
@@ -2253,10 +2281,12 @@ PrintKnockedOut:
 	scf
 	ret
 
+
 ; deal damage to turn holder's Pokemon card at play area location at b (PLAY_AREA_*).
 ; damage to deal is given in de.
 ; shows the defending player's play area screen when dealing the damage
 ; instead of the main duel interface with regular attack animation.
+; preserves: hl, bc, de
 DealDamageToPlayAreaPokemon_RegularAnim:
 	ld a, ATK_ANIM_BENCH_HIT
 	ld [wLoadedAttackAnimation], a
@@ -2267,6 +2297,7 @@ DealDamageToPlayAreaPokemon_RegularAnim:
 ; shows the defending player's play area screen when dealing the damage
 ; instead of the main duel interface.
 ; plays animation that is loaded in wLoadedAttackAnimation.
+; preserves: hl, bc, de
 DealDamageToPlayAreaPokemon:
 	ld a, b
 	ld [wTempPlayAreaLocation_cceb], a
@@ -2289,63 +2320,74 @@ DealDamageToPlayAreaPokemon:
 	ld a, e
 	ld [wTempNonTurnDuelistCardID], a
 	pop de
-	ld a, [wTempPlayAreaLocation_cceb]
-	or a ; cp PLAY_AREA_ARENA
-	jr nz, .next
-	ld a, [wIsDamageToSelf]
-	or a
-	jr z, .turn_swapped
-	ld b, CARD_LOCATION_ARENA
-	call ApplyAttachedPluspower
-	jr .next
-.turn_swapped
-	call SwapTurn
-	ld b, CARD_LOCATION_ARENA
-	call ApplyAttachedPluspower
-	call SwapTurn
-.next
-	call CapMaximumDamage_DE
+
+; Pokémon Powers do not have damage modifiers
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
-	jr z, .skip_defender
+	jr z, .got_damage
+
+; handle damage modifiers depending on play area location
+	ld a, [wTempPlayAreaLocation_cceb]
+	or a ; cp PLAY_AREA_ARENA
+	jr z, .arena_target
+
+.bench_target
+; 1. apply Defender reduction
 	ld a, [wTempPlayAreaLocation_cceb]
 	or CARD_LOCATION_PLAY_AREA
 	ld b, a
 	call ApplyAttachedDefender
-.skip_defender
+; 2. apply damage reduction effects
 	ld a, [wTempPlayAreaLocation_cceb]
-	or a ; cp PLAY_AREA_ARENA
-	jr nz, .in_bench
-	push de
-	call HandleNoDamageOrEffectSubstatus
-	pop de
-	call HandleDefenderDamageReductionEffects
-	call HandleAttackerDamageReductionEffects
-	xor a  ; PLAY_AREA_ARENA
-.in_bench
 	call HandleDamageReducingPowers
-	call HandleDamageReductionOrNoDamageFromPkmnPowerEffects
+	call HandleDamageReductionOrNoDamageFromPkmnPowerEffects.attack
+; 3. cap damage at zero if negative
 	call CapMinimumDamage_DE
 	ld a, [wTempPlayAreaLocation_cceb]
-	ld b, a
-	or a ; cp PLAY_AREA_ARENA
-	jr nz, .benched
+	jr .got_damage
+
+.arena_target
+; handle effects that prevent all damage
+	push de
+	call HandleNoDamageOrEffectSubstatus.attack
+	pop de
+	ld a, [wNoDamageOrEffect]
+	or a
+	jr z, .non_zero_active_damage
+; nullify all damage
+	ld de, 0
+	jr .got_arena_damage
+
+.non_zero_active_damage
+	ld a, [wIsDamageToSelf]
+	or a
+	jr z, .damage_to_opponent
+; damage to self
+	call ApplyDamageModifiers_DamageToSelf.step1
+	jr .update_damage_dealt
+
+.damage_to_opponent
+	call SwapTurn
+	call ApplyDamageModifiers_DamageToTarget.step1
+	call SwapTurn
+
+.update_damage_dealt
 ; if arena Pokemon, add damage at de to [wDealtDamage]
 ; assume: damage is capped to one byte
-	ld hl, wDealtDamage
-	ld a, e
-	; add [hl]
-	; ld [hli], a
-	; ld a, d
-	; adc [hl]
-	ld [hl], a
+	ld a, [wDealtDamage]
+	add e
+	jr nc, .capped
+	ld a, MAX_DAMAGE
+.capped
+	ld [wDealtDamage], a
+.got_arena_damage
 	xor a  ; PLAY_AREA_ARENA
-.benched
+.got_damage
 	ld c, $00
 	add DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
 	push af
-	bank1call PlayAttackAnimation_DealAttackDamageSimple
+	call PlayAttackAnimation_DealAttackDamageSimple
 	pop af
 	or a
 	jr z, .skip_knocked_out
@@ -2358,6 +2400,7 @@ DealDamageToPlayAreaPokemon:
 	pop de
 	pop hl
 	ret
+
 
 ; draw duel main scene, then print the "<Pokemon Lvxx>'s <attack>" text
 ; The Pokemon's name is the turn holder's arena Pokemon, and the
