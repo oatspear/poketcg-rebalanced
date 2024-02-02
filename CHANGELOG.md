@@ -149,6 +149,9 @@
 
 ### Colorless Changes
 
+#### Pidgey
+- **Collect**: draws 2 cards instead of 1.
+
 #### Meowth Lv14
 - **Fury Swipes**: reworked. Flip a coin until tails; 10 damage per heads.
 
