@@ -555,15 +555,6 @@ CheckPlayedEnergyThisTurn:
 	scf
 	ret
 
-; return carry if the opponent did not play any energy cards
-; during their last turn
-; this actually checks "this turn", but variables are only reset
-; at the start of a new turn
-CheckOpponentPlayedEnergyLastTurn:
-	call SwapTurn
-	call CheckPlayedEnergyThisTurn
-	jp SwapTurn
-
 
 ; ------------------------------------------------------------------------------
 ; Card Types
