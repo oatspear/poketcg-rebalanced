@@ -197,7 +197,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NotEnoughWaterEnergyText                           ; 0x00c3
 	textpointer ThereAreNoTrainerCardsInDiscardPileText            ; 0x00c4
 	textpointer NoAttackMayBeChoosenText                           ; 0x00c5
-	textpointer YouDidNotReceiveAnAttackToMirrorMoveText           ; 0x00c6
+	; textpointer YouDidNotReceiveAnAttackToMirrorMoveText           ; 0x00c6
 	textpointer ThisAttackCannotBeUsedTwiceText                    ; 0x00c7
 	textpointer NoWeaknessText                                     ; 0x00c8
 	textpointer NoResistanceText                                   ; 0x00c9

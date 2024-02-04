@@ -928,10 +928,10 @@ NoAttackMayBeChoosenText: ; 3781b (d:781b)
 	text "No Attacks may be choosen."
 	done
 
-YouDidNotReceiveAnAttackToMirrorMoveText: ; 37837 (d:7837)
-	text "You did not receive an Attack"
-	line "to Mirror Move."
-	done
+; YouDidNotReceiveAnAttackToMirrorMoveText: ; 37837 (d:7837)
+; 	text "You did not receive an Attack"
+; 	line "to Mirror Move."
+; 	done
 
 ThisAttackCannotBeUsedTwiceText: ; 37866 (d:7866)
 	text "This attack cannot"
