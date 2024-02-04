@@ -543,6 +543,28 @@ CheckIfCardHasSpecificEnergyAttached:
 	ret
 
 
+; returns carry if the turn holder did not play any energy cards
+; during their turn
+CheckPlayedEnergyThisTurn:
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_ENERGY_THIS_TURN
+	ret nz  ; played energy
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and USED_RAIN_DANCE_THIS_TURN
+	ret nz  ; played energy with Rain Dance
+	scf
+	ret
+
+; return carry if the opponent did not play any energy cards
+; during their last turn
+; this actually checks "this turn", but variables are only reset
+; at the start of a new turn
+CheckOpponentPlayedEnergyLastTurn:
+	call SwapTurn
+	call CheckPlayedEnergyThisTurn
+	jp SwapTurn
+
+
 ; ------------------------------------------------------------------------------
 ; Card Types
 ; ------------------------------------------------------------------------------
