@@ -295,8 +295,14 @@ DoduoName: ; 62712 (18:6712)
 	text "Doduo"
 	done
 
-FuryAttackName: ; 62719 (18:6719)
+FuryAttackName:
 	text "Fury Attack"
+	done
+
+DoubleDamageIfOppPlayedSupporterDescription:
+	text "This attack does double damage if"
+	line "your opponent played a Supporter"
+	line "card during their last turn."
 	done
 
 TwinBirdName: ; 62726 (18:6726)

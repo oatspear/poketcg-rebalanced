@@ -5651,21 +5651,6 @@ MimicEffect:
 	jp DrawNCards_NoCardDetails
 
 
-FuryAttack_AIEffect: ; 2ebba (b:6bba)
-	ld a, (10 * 2) / 2
-	lb de, 0, 20
-	jp SetExpectedAIDamage
-
-FuryAttack_MultiplierEffect: ; 2ebc2 (b:6bc2)
-	ld hl, 10
-	call LoadTxRam3
-	ld a, 2
-	ldtx de, DamageCheckIfHeadsXDamageText
-	call TossCoinATimes_BankB
-	call ATimes10
-	jp SetDefiniteDamage
-
-
 ReduceDamageTakenBy20Effect:
 	ld a, SUBSTATUS1_REDUCE_BY_20
 	call ApplySubstatus1ToAttackingCard

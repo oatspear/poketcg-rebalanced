@@ -1917,6 +1917,8 @@ DisplayCardListDetails:
 ; - tossing coin to determine first player to go
 HandleDuelSetup:
 ; init variables and shuffle cards
+	xor a
+	ld [wOpponentPlayedEnergyOrSupporter], a
 	call InitializeDuelVariables
 	call SwapTurn
 	call InitializeDuelVariables
@@ -6463,6 +6465,7 @@ DuelDataToSave:
 	dw wRNG1,                  wRNGCounter + $1 - wRNG1
 	dw wAIDuelVars,            wAIDuelVarsEnd - wAIDuelVars
 	dw wEnergyColorOverride,   $1
+	dw wOpponentPlayedEnergyOrSupporter,   $1
 	dw wOpponentDeckIDBackup,  $1
 	dw NULL
 
@@ -8225,11 +8228,12 @@ InitVariablesToBeginTurn:
 	ld a, [wOpponentDeckID]
 	ld [wOpponentDeckIDBackup], a
 ; setup normal variables
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	ld [wOpponentPlayedEnergyOrSupporter], a
 	xor a
 	ld [wAlreadyRetreatedThisTurn], a
 	ld [wAlreadyPlayedEnergyOrSupporter], a
 	; ld [wGotTailsFromConfusionCheckDuringRetreat], a
-	ld [wMiscTurnFlags], a
 	ld [wGotHeadsFromAccuracyCheck], a
 	ldh a, [hWhoseTurn]
 	ld [wWhoseTurn], a

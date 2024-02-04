@@ -1235,11 +1235,6 @@ JynxName: ; 60ddc (18:4ddc)
 	text "Jynx"
 	done
 
-DoubleAttackX10Description: ; 60de2 (18:4de2)
-	text "Flip 2 coins. This attack does 10"
-	line "damage times the number of heads."
-	done
-
 HumanShapeName: ; 60e7d (18:4e7d)
 	text "Human Shape"
 	done

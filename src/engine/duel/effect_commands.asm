@@ -1155,9 +1155,9 @@ Draw2CardsEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CollectEffect
 	db  $00
 
-DoduoFuryAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FuryAttack_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, FuryAttack_AIEffect
+FuryAttackEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleDamageIfOppPlayedSupporter_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, DoubleDamageIfOppPlayedSupporter_AIEffect
 	db  $00
 
 SmallCombustionEffectCommands:

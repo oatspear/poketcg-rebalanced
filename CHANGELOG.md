@@ -167,6 +167,11 @@
 #### Persian
 - Increased Retreat Cost from 0 to 1.
 
+#### Doduo
+- **Fury Attack**: reworked.
+- New attack: **Fury Attack** (C): 10 damage; double damage if the opponent played a Supporter last turn.
+
+
 #### Chansey
 - Reduced HP from 80 to 60.
 - Reduced Retreat Cost from 1 to 0.

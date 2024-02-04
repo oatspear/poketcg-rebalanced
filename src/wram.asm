@@ -651,8 +651,8 @@ wAlreadyPlayedEnergyOrSupporter:: ; cc0b
 ; wGotTailsFromConfusionCheckDuringRetreat:: ; cc0c
 ;	ds $1
 
-; miscellaneous turn flags
-wMiscTurnFlags:: ; cc0c
+; turn flags for what the opponent did on their previous turn
+wOpponentPlayedEnergyOrSupporter:: ; cc0c
 	ds $1
 
 ; DUELIST_TYPE_* of the turn holder

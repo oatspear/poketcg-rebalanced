@@ -9545,11 +9545,11 @@ DoduoCard:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx FuryAttackName ; name
-	tx DoubleAttackX10Description ; description
+	tx DoubleDamageIfOppPlayedSupporterDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_X ; category
-	dw DoduoFuryAttackEffectCommands ; effect commands
+	db DAMAGE_PLUS ; category
+	dw FuryAttackEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

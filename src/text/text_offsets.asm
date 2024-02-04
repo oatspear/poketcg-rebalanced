@@ -2755,7 +2755,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BarrierName                                        ; 0x0ab9
 	textpointer MrMimeDescription                                  ; 0x0aba
 	textpointer JynxName                                           ; 0x0abb
-	textpointer DoubleAttackX10Description                         ; 0x0abc
 	textpointer HumanShapeName                                     ; 0x0abe
 	textpointer JynxDescription                                    ; 0x0abf
 	textpointer MewtwoName                                         ; 0x0ac0
@@ -2893,7 +2892,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer WildDuckName                                       ; 0x0b24
 	textpointer FarfetchdDescription                               ; 0x0b25
 	textpointer DoduoName                                          ; 0x0b26
-	textpointer FuryAttackName                                     ; 0x0b27
+	textpointer FuryAttackName
+	textpointer DoubleDamageIfOppPlayedSupporterDescription
 	textpointer TwinBirdName                                       ; 0x0b28
 	textpointer DoduoDescription                                   ; 0x0b29
 	textpointer DodrioName                                         ; 0x0b2a

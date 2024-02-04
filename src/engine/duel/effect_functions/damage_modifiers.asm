@@ -493,6 +493,23 @@ DoubleDamageIfAttachedEnergy_AIEffect:
 
 
 ; ------------------------------------------------------------------------------
+; Based on Trainer Cards
+; ------------------------------------------------------------------------------
+
+
+DoubleDamageIfOppPlayedSupporter_DamageBoostEffect:
+	ld a, [wOpponentPlayedEnergyOrSupporter]
+	and PLAYED_SUPPORTER_THIS_TURN
+	ret z  ; did not play Supporter
+	jp DoubleDamage_DamageBoostEffect
+
+
+DoubleDamageIfOppPlayedSupporter_AIEffect:
+	call DoubleDamageIfOppPlayedSupporter_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
+; ------------------------------------------------------------------------------
 ; Based on Hand Cards
 ; ------------------------------------------------------------------------------
 
