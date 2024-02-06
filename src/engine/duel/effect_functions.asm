@@ -7426,6 +7426,9 @@ JudgeEffect:
 	call ShuffleHandIntoDeckExcludeSelf
 	ld a, 4  ; player draws 4 cards
 	call DrawNCards_NoCardDetails
+	; fallthrough
+
+DevastatingWindEffect:
 	call SwapTurn
 	call ShuffleHandIntoDeck
 	ld a, 4  ; opponent draws 4 cards
