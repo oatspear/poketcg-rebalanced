@@ -86,6 +86,7 @@ DamageTargetPokemon_PlayerSelectEffect:
 	jr c, .loop_input
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTempPlayAreaLocation_ffa1], a
+.got_target
 	call SwapTurn
 .done
 	or a
