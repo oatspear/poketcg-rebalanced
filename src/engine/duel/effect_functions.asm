@@ -716,61 +716,6 @@ INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 ; Pokémon Powers
 ; ------------------------------------------------------------------------------
 
-;
-RainDance_OncePerTurnCheck:
-	call CheckPokemonPowerCanBeUsed
-	ret c  ; cannot be used
-	call CreateHandCardList_OnlyWaterEnergy
-	ret c  ; no energy
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	ret
-
-;
-RainDance_AttachEnergyEffect:
-	ld a, DUELVARS_DUELIST_TYPE
-	call GetTurnDuelistVariable
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .link_opp
-	and DUELIST_TYPE_AI_OPP
-	jr z, .player
-
-; AI Pokémon selection logic is in HandleAIRainDanceEnergy
-	jr .attach
-
-.player
-	ldtx hl, ChoosePokemonToAttachEnergyCardText
-	call DrawWideTextBox_WaitForInput
-; choose a Pokemon in Play Area to attach card
-	call HandlePlayerSelectionPokemonInPlayArea
-	ld e, a  ; set selected Pokémon
-	ldh [hTempPlayAreaLocation_ffa1], a
-	call SerialSend8Bytes
-	jr .attach
-
-.link_opp
-	call SerialRecv8Bytes
-	ld a, e  ; get selected Pokémon
-	ldh [hTempPlayAreaLocation_ffa1], a
-	; fallthrough
-
-.attach
-; restore [hTempPlayAreaLocation_ff9d] from [hTemp_ffa0]
-	ldh a, [hTemp_ffa0]
-	ldh [hTempPlayAreaLocation_ff9d], a
-; flag Rain Dance as being used (requires [hTempPlayAreaLocation_ff9d])
-	call SetUsedPokemonPowerThisTurn
-
-; pick Water Energy from Hand
-	call CreateHandCardList_OnlyWaterEnergy
-	ld a, [wDuelTempList]
-	ldh [hTemp_ffa0], a
-	call AttachEnergyFromHand_AttachEnergyEffect
-
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call Func_2c10b
-	jp ExchangeRNG
-
 
 ; Discard 1 card and draw 2 cards per turn.
 TradeEffect:
