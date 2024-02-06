@@ -1632,3 +1632,12 @@ Discard1EnergyFromBothActiveDescription:
 	line "this Pokémon and another attached"
 	line "to the Defending Pokémon."
 	done
+
+DevastatingWindName:
+	text "Devastating Wind"
+	done
+
+DevastatingWindDescription:
+	text "Your opponent shuffles their hand"
+	line "into their deck and draws 4 cards."
+	done

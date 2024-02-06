@@ -58,15 +58,15 @@ SpearowName: ; 61a18 (18:5a18)
 	text "Spearow"
 	done
 
-PeckName: ; 61a21 (18:5a21)
-	text "Peck"
-	done
+; PeckName:
+; 	text "Peck"
+; 	done
 
-PeckDescription: ; 61a21 (18:5a21)
-	text "If your opponent's Active Pokémon"
-	line "is a <GRASS> Pokémon, this attack"
-	line "does 10 more damage."
-	done
+; PeckDescription:
+; 	text "If your opponent's Active Pokémon"
+; 	line "is a <GRASS> Pokémon, this attack"
+; 	line "does 10 more damage."
+; 	done
 
 FlapName:
 	text "Flap"

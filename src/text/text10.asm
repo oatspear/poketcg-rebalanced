@@ -157,9 +157,9 @@ GolbatName: ; 589e9 (16:49e9)
 	text "Golbat"
 	done
 
-WingAttackName: ; 589f1 (16:49f1)
-	text "Wing Attack"
-	done
+; WingAttackName:
+; 	text "Wing Attack"
+; 	done
 
 GolbatDescription: ; 58acd (16:4acd)
 	text "Once it strikes, it will not stop"
@@ -1813,4 +1813,9 @@ DamagePerPokemonPowerDescription:
 Damage1BenchedPokemon20Description:
 	text "This attack does 20 damage to 1 of"
 	line "your opponent's Benched Pokémon."
+	done
+
+NoPokemonWithoutDamageCountersText:
+	text "There are no Pokémon in play without"
+	line "any damage counters."
 	done

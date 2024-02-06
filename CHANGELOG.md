@@ -161,6 +161,15 @@
 #### Pidgey
 - **Collect**: draws 2 cards instead of 1.
 
+#### Spearow
+- **Peck**: removed.
+- **Wing Attack**: removed.
+- New attack: **Devastating Wind** (C): opponent shuffles hand into deck and draws 4 cards.
+- New attack: **Fury Attack** (C): 10 damage; double damage if the opponent played a Supporter last turn.
+
+#### Fearow
+- **Drill Peck**: increased base damage from 40 to 50.
+
 #### Meowth Lv14
 - **Fury Swipes**: reworked. Flip a coin until tails; 10 damage per heads.
 

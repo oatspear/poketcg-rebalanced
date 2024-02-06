@@ -8767,31 +8767,31 @@ SpearowCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx PeckName ; name
-	tx PeckDescription ; description
+	tx DevastatingWindName ; name
+	tx DevastatingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw DevastatingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GALE ; animation
+
+	; attack 2
+	energy COLORLESS, 1 ; energies
+	tx FuryAttackName ; name
+	tx DoubleDamageIfOppPlayedSupporterDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw PeckEffectCommands ; effect commands
+	dw FuryAttackEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx WingAttackName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
 	db 0 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -8835,7 +8835,7 @@ FearowCard:
 	tx DrillPeckName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1

@@ -872,24 +872,6 @@ SharpSickle_AIEffect:
   jp SetDefiniteAIDamage
 
 
-;
-Peck_DamageBoostEffect:
-	ld a, 10
-	call SetDefiniteDamage
-	call SwapTurn
-	call GetArenaCardColor
-	call SwapTurn
-	cp GRASS
-	ret nz ; no extra damage if not Grass
-	ld a, 10
-	call AddToDamage
-	ret
-
-Peck_AIEffect:
-	call Peck_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-
 ; return in a 10x damage per Energy in the Opponent's Retreat Cost.
 _DamagePerOpponentRetreatCost:
 	call SwapTurn

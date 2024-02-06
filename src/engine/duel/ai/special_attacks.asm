@@ -12,7 +12,7 @@ HandleSpecialAIAttacks:
 	ld a, e
 
 	cp ABRA
-	jp z, .Fetch
+	jp z, .Collect
 	cp STARYU
 	jp z, .Staryu
 	cp SCYTHER
@@ -32,13 +32,13 @@ HandleSpecialAIAttacks:
 	cp ZAPDOS_LV68
 	jp z, .BigThunder
 	cp GROWLITHE
-	jp z, .Fetch
+	jp z, .Collect
 	cp PIKACHU_LV14
-	jp z, .Fetch
+	jp z, .Collect
 	cp MEOWTH_LV14
-	jp z, .Fetch
+	jp z, .Collect
 	cp PIDGEY
-	jp z, .Fetch
+	jp z, .Collect
 	cp DUGTRIO
 	jp z, .Earthquake
 	cp RHYDON
@@ -79,6 +79,8 @@ HandleSpecialAIAttacks:
 	jr z, .Mimic
 	cp CLEFABLE
 	jr z, .LunarPower
+	cp SPEAROW
+	jr z, .DevastatingWind
 	cp GASTLY_LV17
 	jp z, .EnergyConversion
 	cp DEWGONG
@@ -114,10 +116,19 @@ HandleSpecialAIAttacks:
 	ld a, $82
 	ret
 
+.DevastatingWind
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	sub 5
+	jr c, .zero_score
+	; +1 score for each card above 5
+	add $80
+	ret
+
 .Staryu
 	ld a, [wSelectedAttack]
 	or a
-	jp z, .Fetch
+	jp z, .Collect
 	jr .Teleport
 
 ; if any basic cards are found in deck,
@@ -298,8 +309,8 @@ HandleSpecialAIAttacks:
 	ret
 
 ; dismiss attack if cards in deck <= 15.
-; otherwise return a score of $80 + 0.
-.Fetch:
+; otherwise return a score of $80 + 2 if number of cards in hand is less than 4.
+.Collect:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
 	cp 46

@@ -2166,7 +2166,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BatName                                            ; 0x086c
 	textpointer ZubatDescription                                   ; 0x086d
 	textpointer GolbatName                                         ; 0x086e
-	textpointer WingAttackName                                     ; 0x086f
+	; textpointer WingAttackName
 	textpointer GolbatDescription                                  ; 0x0871
 	textpointer OddishName                                         ; 0x0872
 	textpointer GrowthName
@@ -2508,6 +2508,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer PoisonPaybackDescription
 	textpointer DamagePerPokemonPowerDescription
 	textpointer Damage1BenchedPokemon20Description
+	textpointer NoPokemonWithoutDamageCountersText
 	textpointer VoltTackleName
 	textpointer MouseName                                          ; 0x09b9
 	textpointer PikachuLv12Description                            ; 0x09ba
@@ -2834,7 +2835,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DefensiveStanceDescription
 	textpointer ColdCrushName
 	textpointer Discard1EnergyFromBothActiveDescription
-	textpointer RattataName                                        ; 0x0ae7
+	textpointer DevastatingWindName
+	textpointer DevastatingWindDescription
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
 	textpointer RaticateName                                       ; 0x0aea
@@ -2846,8 +2848,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer CourierName
 	textpointer CourierDescription
 	textpointer SpearowName                                        ; 0x0aee
-	textpointer PeckName                                           ; 0x0aef
-	textpointer PeckDescription                                    ; 0x0aef
+	; textpointer PeckName
+	; textpointer PeckDescription
 	textpointer SpearowDescription                                 ; 0x0af1
 	textpointer FearowName                                         ; 0x0af2
 	textpointer DrillPeckName                                      ; 0x0af4
