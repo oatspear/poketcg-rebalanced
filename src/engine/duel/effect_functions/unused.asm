@@ -21,7 +21,11 @@ DamageTargetUndamagedPokemon_PlayerSelectEffect:
 	jr .loop
 
 
-
+;
+RainDanceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, RainDance_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RainDance_AttachEnergyEffect
+	db  $00
 
 
 PeckEffectCommands:

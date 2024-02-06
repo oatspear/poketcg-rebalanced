@@ -386,11 +386,6 @@ FirestarterEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Firestarter_AttachEnergyEffect
 	db  $00
 
-RainDanceEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, RainDance_OncePerTurnCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RainDance_AttachEnergyEffect
-	db  $00
-
 HelpingHandEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, HelpingHand_CheckUse
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HelpingHand_RemoveStatusEffect
