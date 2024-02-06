@@ -8580,7 +8580,7 @@ Pidgeot1Card:
 	tx TwisterName ; name
 	tx Discard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
 	dw TwisterEffectCommands ; effect commands
 	db NONE ; flags 1
@@ -8608,7 +8608,7 @@ Pidgeot2Card:
 	db STAR ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db PIDGEOT_LV40
-	db 100 ; hp
+	db 110 ; hp
 	db STAGE2 ; stage
 	tx PidgeottoName ; pre-evo name
 

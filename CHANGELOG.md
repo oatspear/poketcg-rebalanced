@@ -162,6 +162,12 @@
 #### Pidgey
 - **Collect**: draws 2 cards instead of 1.
 
+#### Pidgeot Lv38
+- **Twister**: increased base damage from 40 to 50.
+
+#### Pidgeot Lv40
+- Increased HP from 100 to 110.
+
 #### Spearow
 - **Peck**: removed.
 - **Wing Attack**: removed.
