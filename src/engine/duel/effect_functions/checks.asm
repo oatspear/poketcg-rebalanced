@@ -280,6 +280,32 @@ CheckNoDuplicateColorsInPlayArea:
 ; Damage
 ; ------------------------------------------------------------------------------
 
+; returns carry if every Pokémon in the Play Area has damage counters.
+CheckSomePokemonWithoutDamage:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+.loop_play_area
+	call GetCardDamageAndMaxHP
+	or a
+	ret z ; found undamaged
+	inc e
+	dec d
+	jr nz, .loop_play_area
+	; damage found
+	ldtx hl, NoPokemonWithoutDamageCountersText
+	scf
+	ret
+
+
+CheckSomeOpponentPokemonWithoutDamage:
+	call SwapTurn
+	call CheckSomePokemonWithoutDamage
+	jp SwapTurn
+
+
+
 ; returns carry if the Active Pokémon has no damage counters.
 CheckArenaPokemonHasAnyDamage:
 	ld e, PLAY_AREA_ARENA
