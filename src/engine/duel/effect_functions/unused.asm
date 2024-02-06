@@ -1,5 +1,48 @@
 ;
 
+
+
+
+; can choose any undamaged Pokémon in Play Area
+DamageTargetUndamagedPokemon_PlayerSelectEffect:
+	call DamageTargetPokemon_PlayerSelectEffect
+.loop
+	call SwapTurn
+	call CheckTempLocationPokemonHasAnyDamage
+	jr c, DamageTargetPokemon_PlayerSelectEffect.got_target
+; the selected target has some damage counters on it
+	call DamageTargetPokemon_PlayerSelectEffect.loop_input
+	jr .loop
+
+
+
+
+
+PeckEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Peck_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Peck_AIEffect
+	db  $00
+
+;
+Peck_DamageBoostEffect:
+	ld a, 10
+	call SetDefiniteDamage
+	call SwapTurn
+	call GetArenaCardColor
+	call SwapTurn
+	cp GRASS
+	ret nz ; no extra damage if not Grass
+	ld a, 10
+	call AddToDamage
+	ret
+
+Peck_AIEffect:
+	call Peck_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
+
+
 Selfdestruct40Bench10Effect:
 	ld a, 40
 	jr Selfdestruct50Bench10Effect.recoil
