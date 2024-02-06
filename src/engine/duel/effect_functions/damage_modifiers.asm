@@ -911,6 +911,15 @@ GrassKnot_AIEffect:
 	jp SetDefiniteAIDamage
 
 
+SuperFang_AIEffect:
+	call SwapTurn
+	call GetDamageUntil10HPRemaining
+	ld [wDamage], a
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	jp SwapTurn
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Status Conditions
 ; ------------------------------------------------------------------------------

@@ -8716,12 +8716,12 @@ RaticateCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx FinishingBiteName ; name
-	tx FinishingBiteDescription ; description
+	tx GnawOffName ; name
+	tx PainBurstDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw FinishingBiteEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw PainBurstEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -8734,13 +8734,13 @@ RaticateCard:
 	tx SuperFangDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw RaticateSuperFangEffectCommands ; effect commands
+	db RESIDUAL ; category
+	dw SuperFangEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_NONE ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

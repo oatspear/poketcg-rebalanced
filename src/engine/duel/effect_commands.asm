@@ -1262,8 +1262,8 @@ ConversionBeamEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ConversionBeam_ChangeWeaknessEffect
 	db  $00
 
-RaticateSuperFangEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperFang_HalfHPEffect
+SuperFangEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperFang_DamageEffect
 	dbw EFFECTCMDTYPE_AI, SuperFang_AIEffect
 	db  $00
 

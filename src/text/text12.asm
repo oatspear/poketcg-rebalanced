@@ -26,14 +26,13 @@ FinishingBiteDescription:
 	line "has any damage counters on it."
 	done
 
-SuperFangName: ; 61939 (18:5939)
+SuperFangName:
 	text "Super Fang"
 	done
 
-SuperFangDescription: ; 61945 (18:5945)
-	text "This attack does damage to the"
-	line "Defending Pokémon equal to half"
-	line "of its remaining HP (rounded up)."
+SuperFangDescription:
+	text "Put damage counters on the Defending"
+	line "Pokémon until its remaing HP is 10."
 	done
 
 RaticateDescription: ; 619be (18:59be)

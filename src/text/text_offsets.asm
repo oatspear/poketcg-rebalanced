@@ -2751,6 +2751,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer InvisibleWallDescription
 	textpointer MeditateName
 	textpointer MeditateDescription
+	textpointer GnawOffName
 	textpointer PainBurstName
 	textpointer PainBurstDescription
 	textpointer BarrierName                                        ; 0x0ab9

@@ -618,7 +618,7 @@ INCLUDE "engine/duel/effect_functions/damage.asm"
 ;   e: PLAY_AREA_* of the target
 Put1DamageCounterOnTarget:
 	ld d, 10
-	; jr ApplyDirectDamage
+	; jr ApplyDirectDamage_RegularAnim
 	; fallthrough
 
 
@@ -631,12 +631,15 @@ Put1DamageCounterOnTarget:
 ;   e: PLAY_AREA_* of the target
 ; preserves:
 ;   hl, de, bc
+ApplyDirectDamage_RegularAnim:
+	ld a, ATK_ANIM_BENCH_HIT
+	ld [wLoadedAttackAnimation], a
+	; fallthrough
+
 ApplyDirectDamage:
 	push hl
 	push de
 	push bc
-	ld a, ATK_ANIM_BENCH_HIT
-	ld [wLoadedAttackAnimation], a
 	ld a, e
 	ld [wTempPlayAreaLocation_cceb], a
 	or a ; cp PLAY_AREA_ARENA
@@ -707,11 +710,35 @@ Affliction_DamageEffect:
 .loop_play_area
 	ld a, [hli]
 	or a
-	call nz, ApplyDirectDamage
+	call nz, ApplyDirectDamage_RegularAnim
 	inc e
 	dec c
 	jr nz, .loop_play_area
 	jp SwapTurn
+
+
+; returns how much HP the Active Pokémon can lose
+; until it has only 10 HP remaining
+GetDamageUntil10HPRemaining:
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	sub 10
+	ret nc
+	xor a
+	ret  ; already at 10 HP
+
+
+; applies damage counters directly
+SuperFang_DamageEffect:
+	call GetDamageUntil10HPRemaining
+	ret z  ; no damage to deal
+	ld d, a  ; amount of damage to deal
+	ld e, PLAY_AREA_ARENA
+	ld a, ATK_ANIM_HIT
+	ld [wLoadedAttackAnimation], a
+	xor a
+	ld [wDamage], a
+	jp ApplyDirectDamage
 
 
 ; ------------------------------------------------------------------------------
@@ -5864,20 +5891,6 @@ PrintArenaCardNameAndColorText:
 	pop hl
 	jp DrawWideTextBox_PrintText
 
-SuperFang_AIEffect: ; 2ef01 (b:6f01)
-	call SuperFang_HalfHPEffect
-	jp SetDefiniteAIDamage
-
-SuperFang_HalfHPEffect: ; 2ef07 (b:6f07)
-	ld a, DUELVARS_ARENA_CARD_HP
-	call GetNonTurnDuelistVariable
-	srl a
-	bit 0, a
-	jr z, .rounded
-	; round up
-	add 5
-.rounded
-	jp SetDefiniteDamage
 
 ; return carry if no Pokemon in Bench
 TrainerCardAsPokemon_BenchCheck: ; 2ef18 (b:6f18)
