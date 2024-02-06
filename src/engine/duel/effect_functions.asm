@@ -730,6 +730,7 @@ GetDamageUntil10HPRemaining:
 
 ; applies damage counters directly
 SuperFang_DamageEffect:
+	call SwapTurn
 	call GetDamageUntil10HPRemaining
 	ret z  ; no damage to deal
 	ld d, a  ; amount of damage to deal
@@ -738,7 +739,10 @@ SuperFang_DamageEffect:
 	ld [wLoadedAttackAnimation], a
 	xor a
 	ld [wDamage], a
-	jp ApplyDirectDamage
+	call ApplyDirectDamage
+	ld a, ATK_ANIM_NONE
+	ld [wLoadedAttackAnimation], a
+	jp SwapTurn
 
 
 ; ------------------------------------------------------------------------------
