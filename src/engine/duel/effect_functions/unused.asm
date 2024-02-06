@@ -1,6 +1,22 @@
 ;
 
 
+SuperFang_AIEffect: ; 2ef01 (b:6f01)
+	call SuperFang_HalfHPEffect
+	jp SetDefiniteAIDamage
+
+SuperFang_HalfHPEffect: ; 2ef07 (b:6f07)
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	srl a
+	bit 0, a
+	jr z, .rounded
+	; round up
+	add 5
+.rounded
+	jp SetDefiniteDamage
+
+
 
 FrustrationEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckSomeOpponentPokemonWithoutDamage
