@@ -29,6 +29,7 @@
 
 #### Primeape
 - **Tantrum**: removed.
+- **Rage**: reduced cost fro (CCC) to (CC) and base damage from 20 to 10.
 - New attack: **Get Mad** (F): move damage counters from Benched Pokémon to this Pokémon; immune to damage in the next turn if moved at least 4.
 
 #### Machop
@@ -177,9 +178,13 @@
 - Increased Retreat Cost from 0 to 1.
 
 #### Doduo
-- **Fury Attack**: reworked.
-- New attack: **Fury Attack** (C): 10 damage; double damage if the opponent played a Supporter last turn.
+- **Fury Attack**: removed.
+- New Pokémon Power: **Fleet Footed**: may draw 1 card per turn if in the Active Spot.
+- New attack: **Double-Edge** (C): 20 damage; 10 damage recoil.
 
+#### Dodrio
+- Increased Retreat Cost from 0 to 1.
+- **Rage**: reduced cost from (CCC) to (CC).
 
 #### Chansey
 - Reduced HP from 80 to 60.

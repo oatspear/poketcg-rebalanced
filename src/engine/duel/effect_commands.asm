@@ -624,6 +624,11 @@ CourierEffectCommands:
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Courier_SearchAndAddToHandEffect
 	db  $00
 
+FleetFootedEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FleetFooted_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FleetFootedEffect
+	db  $00
+
 TradeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Trade_PreconditionCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TradeEffect
@@ -712,7 +717,7 @@ Retrieve1BasicEnergyEffectCommands:
 
 CoreRegenerationEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal10DamageEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FetchEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Draw1CardEffect
 	db  $00
 
 InflictSleepEffectCommands:
@@ -1138,11 +1143,11 @@ FarfetchdLeekSlapEffectCommands:
 	db  $00
 
 Draw1CardEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FetchEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Draw1CardEffect
 	db  $00
 
 Draw2CardsEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CollectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Draw2CardsEffect
 	db  $00
 
 FuryAttackEffectCommands:

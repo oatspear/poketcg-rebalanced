@@ -277,10 +277,6 @@ LeekSlapDescription: ; 625d8 (18:65d8)
 	line "won't let you use it again)."
 	done
 
-PotSmashName: ; 6269d (18:669d)
-	text "Pot Smash"
-	done
-
 WildDuckName: ; 626a8 (18:66a8)
 	text "Wild Duck"
 	done
@@ -319,14 +315,14 @@ DodrioName: ; 6278e (18:678e)
 	text "Dodrio"
 	done
 
-RetreatAidName: ; 62796 (18:6796)
+RetreatAidName:
 	text "Retreat Aid"
 	done
 
-RetreatAidDescription: ; 627a3 (18:67a3)
-	text "As long as Dodrio is Benched, pay"
-	line "<COLORLESS> less to retreat your Active"
-	line "Pokémon."
+RetreatAidDescription:
+	text "As long as this Pokémon is Benched,"
+	line "pay <COLORLESS> less to retreat your"
+	line "Active Pokémon."
 	done
 
 TriplebirdName: ; 62835 (18:6835)

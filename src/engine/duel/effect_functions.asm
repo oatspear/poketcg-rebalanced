@@ -336,6 +336,15 @@ Synthesis_PreconditionCheck:
 	jp CheckPokemonPowerCanBeUsed
 
 
+FleetFooted_PreconditionCheck:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	or a  ; cp PLAY_AREA_ARENA
+	jr z, Synthesis_PreconditionCheck
+	ldtx hl, NotInTheActiveSpotText
+	scf
+	ret
+
+
 Shift_OncePerTurnCheck:
   ldh a, [hTempPlayAreaLocation_ff9d]
   ldh [hTemp_ffa0], a
@@ -718,12 +727,18 @@ INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 
 
 ; Discard 1 card and draw 2 cards per turn.
+FleetFootedEffect:
+	call SetUsedPokemonPowerThisTurn
+	jp Draw1Card
+
+
+; Discard 1 card and draw 2 cards per turn.
 TradeEffect:
 	call SetUsedPokemonPowerThisTurn
 	ldh a, [hAIPkmnPowerEffectParam]
 	ldh [hTempList], a
 	call SelectedCards_Discard1FromHand
-	jp Draw2CardsEffect
+	jp Draw2Cards
 
 
 ; Search for any card in deck and add it to the hand.
@@ -5547,45 +5562,7 @@ LeekSlap_NoDamage50PercentEffect: ; 2eb34 (b:6b34)
 	call TossCoin_BankB
 	ret c
 	xor a ; 0 damage
-	call SetDefiniteDamage
-	ret
-
-CollectEffect:
-	ldtx hl, Draw2CardsFromTheDeckText
-	call DrawWideTextBox_WaitForInput
-	ld a, 2
-	bank1call DisplayDrawNCardsScreen
-	ld c, 2
-.loop_draw
-	call DrawCardFromDeck
-	jr c, .done
-	ldh [hTempCardIndex_ff98], a
-	call AddCardToHand
-	call IsPlayerTurn
-	jr nc, .skip_display_screen
-	push bc
-	bank1call DisplayPlayerDrawCardScreen
-	pop bc
-.skip_display_screen
-	dec c
-	jr nz, .loop_draw
-.done
-	ret
-
-FetchEffect:
-	ldtx hl, Draw1CardFromTheDeckText
-	call DrawWideTextBox_WaitForInput
-	bank1call DisplayDrawOneCardScreen
-	call DrawCardFromDeck
-	ret c ; return if deck is empty
-	call AddCardToHand
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, [wDuelistType]
-	cp DUELIST_TYPE_PLAYER
-	ret nz
-	; show card on screen if it was Player
-	bank1call OpenCardPage_FromHand
-	ret
+	jp SetDefiniteDamage
 
 
 ; shuffle hand back into deck and draw as many cards as the opponent has
@@ -5595,11 +5572,6 @@ MimicEffect:
 	call GetNonTurnDuelistVariable
 	jp DrawNCards_NoCardDetails
 
-
-ReduceDamageTakenBy20Effect:
-	ld a, SUBSTATUS1_REDUCE_BY_20
-	call ApplySubstatus1ToAttackingCard
-	ret
 
 GaleEffect:
 	call HandleNoDamageOrEffect
@@ -6645,7 +6617,7 @@ SelectedCards_Discard1AndAdd1ToHandFromDeck:
 	jr SelectedCard_AddToHandFromDeckEffect
 
 
-; Pokémon Powers do not use [hTemp_ffa0]
+; Pokémon Powers should not use [hTemp_ffa0]
 ; adds a card in [hAIEnergyTransEnergyCard] from the deck to the hand
 ; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
 Synthesis_AddToHandEffect:
@@ -6655,7 +6627,7 @@ Synthesis_AddToHandEffect:
 	jr SelectedCard_AddToHandFromDeckEffect
 
 
-; Pokémon Powers do not use [hTemp_ffa0]
+; Pokémon Powers should not use [hTemp_ffa0]
 ; adds a card in [hAIEnergyTransEnergyCard] from the discard pile to the hand
 ; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
 MudSport_AddToHandEffect:
@@ -6665,7 +6637,7 @@ MudSport_AddToHandEffect:
 	jp SelectedCard_AddToHandFromDiscardPile
 
 
-; Pokémon Powers do not use [hTemp_ffa0]
+; Pokémon Powers should not use [hTemp_ffa0]
 ; adds a card in [hAIPkmnPowerEffectParam] from the deck to the hand
 ; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
 StressPheromones_AddToHandEffect:
@@ -8100,14 +8072,39 @@ Pokedex_OrderDeckCardsEffect:
 	ret
 
 
+;
+Draw1CardEffect:
+	ldtx hl, Draw1CardFromTheDeckText
+	call DrawWideTextBox_WaitForInput
+	; fallthrough
+
+Draw1Card:
+	bank1call DisplayDrawOneCardScreen
+	call DrawCardFromDeck
+	ret c ; return if deck is empty
+	call AddCardToHand
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld a, [wDuelistType]
+	cp DUELIST_TYPE_PLAYER
+	ret nz
+; show card on screen if it was Player
+	bank1call OpenCardPage_FromHand
+	ret
+
+;
 Draw2CardsEffect:
+	ldtx hl, Draw2CardsFromTheDeckText
+	call DrawWideTextBox_WaitForInput
+	; fallthrough
+
+Draw2Cards:
 	ld a, 2
 	bank1call DisplayDrawNCardsScreen
 	ld c, 2
-	jr Draw3CardsEffect.loop_draw
+	jr Draw3Cards.loop_draw
 
 BillEffect:
-Draw3CardsEffect:
+Draw3Cards:
 	ld a, 3
 	bank1call DisplayDrawNCardsScreen
 	ld c, 3

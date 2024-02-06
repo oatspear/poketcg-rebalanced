@@ -2837,6 +2837,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Discard1EnergyFromBothActiveDescription
 	textpointer DevastatingWindName
 	textpointer DevastatingWindDescription
+	textpointer FleetFootedName
+	textpointer FleetFootedDescription
+	textpointer NotInTheActiveSpotText
+	textpointer RattataName
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
 	textpointer RaticateName                                       ; 0x0aea
@@ -2890,7 +2894,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FarfetchdName                                      ; 0x0b20
 	textpointer LeekSlapName                                       ; 0x0b21
 	textpointer LeekSlapDescription                                ; 0x0b22
-	textpointer PotSmashName                                       ; 0x0b23
 	textpointer WildDuckName                                       ; 0x0b24
 	textpointer FarfetchdDescription                               ; 0x0b25
 	textpointer DoduoName                                          ; 0x0b26

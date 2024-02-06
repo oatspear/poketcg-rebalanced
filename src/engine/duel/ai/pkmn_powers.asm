@@ -416,7 +416,7 @@ HandleAIPkmnPowers:
 	cp POKEMON_POWER
 	jr z, .execute_effect
 	pop bc
-	jr .next_3
+	jp .next_3
 
 .execute_effect
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
@@ -479,8 +479,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_rainbow_team
 	cp EEVEE
-	jr nz, .check_crushing_charge
+	jr nz, .check_fleet_footed
 	call HandleAIRainbowTeam
+	jr .next_1
+.check_fleet_footed
+	cp DODUO
+	jr nz, .check_crushing_charge
+	call HandleAIFleetFooted
 	jr .next_1
 .check_crushing_charge
 	cp MAROWAK_LV32
@@ -900,6 +905,18 @@ HandleAIShift:
 HandleAICurse:
 	farcall DamageTargetPokemon_AISelectEffect
 ; card in Play Area with lowest HP remaining was found.
+	jp HandleAIDecideToUsePokemonPower
+
+
+; EFFECTCMDTYPE_INITIAL_EFFECT_2 has already been executed, so the AI knows
+; that there are cards in the deck.
+HandleAIFleetFooted:
+; do not use if there are only a few cards in deck
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetNonTurnDuelistVariable
+	cp DECK_SIZE - 5
+	ret nc
+; use power
 	jp HandleAIDecideToUsePokemonPower
 
 

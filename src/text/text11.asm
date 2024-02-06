@@ -1641,3 +1641,18 @@ DevastatingWindDescription:
 	text "Your opponent shuffles their hand"
 	line "into their deck and draws 4 cards."
 	done
+
+FleetFootedName:
+	text "Fleet Footed"
+	done
+
+FleetFootedDescription:
+	text "Once during your turn, if this"
+	line "Pokémon is in the Active Spot,"
+	line "you may draw a card."
+	done
+
+NotInTheActiveSpotText:
+	text "This Pokémon is not in the"
+	line "Active Spot."
+	done

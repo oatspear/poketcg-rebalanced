@@ -22,6 +22,11 @@ ReduceDamageTakenBy10Effect:
 	jr ApplySubstatus1ToAttackingCard
 
 
+ReduceDamageTakenBy20Effect:
+	ld a, SUBSTATUS1_REDUCE_BY_20
+	jr ApplySubstatus1ToAttackingCard
+
+
 IncreaseDamageTakenBy40Effect:
 	ld a, SUBSTATUS1_VULNERABLE_40
 	jr ApplySubstatus1ToAttackingCard
