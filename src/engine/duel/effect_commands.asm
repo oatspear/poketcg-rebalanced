@@ -1336,13 +1336,6 @@ AquaLauncherEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
 	db  $00
 
-FrustrationEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckSomeOpponentPokemonWithoutDamage
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20DamageToTarget_DamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
-	db  $00
-
 
 ; PidgeotGaleEffectCommands:
 ; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Gale_LoadAnimation

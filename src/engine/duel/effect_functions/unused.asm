@@ -2,6 +2,12 @@
 
 
 
+FrustrationEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckSomeOpponentPokemonWithoutDamage
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20DamageToTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetUndamagedPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
+	db  $00
 
 ; can choose any undamaged Pokémon in Play Area
 DamageTargetUndamagedPokemon_PlayerSelectEffect:
