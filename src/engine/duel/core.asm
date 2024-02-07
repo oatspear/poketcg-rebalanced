@@ -7292,8 +7292,7 @@ HandleBetweenTurnsEvents:
 	call DiscardAttachedPluspowers
 	call SwapTurn
 	call DiscardAttachedDefenders
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 .something_to_handle
 ; turn holder's arena Pokemon is paralyzed, poisoned or double poisoned
