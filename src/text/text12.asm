@@ -597,15 +597,15 @@ DragoniteDescription: ; 633d1 (18:73d1)
 	line "to match that of humans."
 	done
 
-PunishingSlapName:
-	text "Punishing Slap"
-	done
+; PunishingSlapName:
+; 	text "Punishing Slap"
+; 	done
 
-PunishingSlapDescription:
-	text "If any of your opponent's Pokémon"
-	line "have <DARKNESS> Energy attached to them,"
-	line "this attack does 10 more damage."
-	done
+; PunishingSlapDescription:
+; 	text "If any of your opponent's Pokémon"
+; 	line "have <DARKNESS> Energy attached to them,"
+; 	line "this attack does 10 more damage."
+; 	done
 
 HelpingHandName:
 	text "Helping Hand"

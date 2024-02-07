@@ -2958,10 +2958,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DragoniteName                                      ; 0x0b60
 	textpointer HealingWindName                                    ; 0x0b61
 	textpointer HealingWindDescription                             ; 0x0b62
-	textpointer DragoniteLv41Description                          ; 0x0b63
+	textpointer DragoniteLv41Description                           ; 0x0b63
 	textpointer DragoniteDescription                               ; 0x0b67
-	textpointer PunishingSlapName
-	textpointer PunishingSlapDescription
+	; textpointer PunishingSlapName
+	; textpointer PunishingSlapDescription
 	textpointer HelpingHandName
 	textpointer HelpingHandDescription
 	textpointer CollectName

@@ -1275,11 +1275,6 @@ SneakAttackEffectCommands:
 	dbw EFFECTCMDTYPE_AI, SneakAttack_AIEffect
 	db  $00
 
-PunishingSlapEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PunishingSlap_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, PunishingSlap_AIEffect
-	db  $00
-
 DragonRageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DragonRage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, DragonRage_AIEffect

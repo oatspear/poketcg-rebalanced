@@ -1,5 +1,40 @@
 ;
 
+PunishingSlapEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PunishingSlap_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, PunishingSlap_AIEffect
+	db  $00
+
+; +10 damage if any Pokémon in opponent's Play Area has any
+; Darkness Energy attached.
+PunishingSlap_DamageBoostEffect:
+	call SwapTurn
+  ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+  call GetTurnDuelistVariable
+  ld d, a
+  ld e, PLAY_AREA_ARENA
+.loop_play_area
+  ld a, e
+  push de
+  call CheckIfCardHasDarknessEnergyAttached
+  pop de
+  jr nc, .bonus
+  inc e
+  dec d
+  jr nz, .loop_play_area
+	jp SwapTurn
+
+.bonus
+  call SwapTurn
+  ld a, 10
+  jp AddToDamage
+
+PunishingSlap_AIEffect:
+  call PunishingSlap_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+
 TripleStrikeEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TripleAttackX20X10_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, TripleAttackX20X10_AIEffect
