@@ -8716,12 +8716,12 @@ RaticateCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx GnawOffName ; name
-	tx PainBurstDescription ; description
+	tx RendName ; name
+	tx Bonus20IfOpponentIsDamagedDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw PainBurstEffectCommands ; effect commands
+	dw RendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

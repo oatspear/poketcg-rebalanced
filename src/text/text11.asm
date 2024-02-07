@@ -1211,9 +1211,9 @@ MeditateDescription:
 	line "at least 5 cards in your hand."
 	done
 
-GnawOffName:
-	text "Gnaw Off"
-	done
+; GnawOffName:
+; 	text "Gnaw Off"
+; 	done
 
 PainBurstName:
 	text "Pain Burst"

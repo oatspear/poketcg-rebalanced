@@ -180,7 +180,7 @@
 #### Raticate
 - **Finishing Bite**: removed.
 - **Super Fang**: reworked; puts damage counters on the Defending Pokémon until its remaining HP is 10.
-- New attack: **Gnaw Off** (C): 10 damage; +10 damage for each damage counter on the Defending Pokémon.
+- New attack: **Rend** (C): 10 damage; +20 damage if the Defending Pokémon is damaged.
 
 #### Spearow
 - **Peck**: removed.
