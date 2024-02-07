@@ -732,7 +732,7 @@ GetDamageUntil10HPRemaining:
 SuperFang_DamageEffect:
 	call SwapTurn
 	call GetDamageUntil10HPRemaining
-	ret z  ; no damage to deal
+	jp z, SwapTurn  ; no damage to deal
 	ld d, a  ; amount of damage to deal
 	ld e, PLAY_AREA_ARENA
 	ld a, ATK_ANIM_HIT
