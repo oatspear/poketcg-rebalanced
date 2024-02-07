@@ -294,8 +294,8 @@ FuryAttackName:
 	text "Fury Attack"
 	done
 
-DoubleDamageIfOppPlayedSupporterDescription:
-	text "This attack does double damage if"
+Bonus20IfOpponentPlayedSupporterDescription:
+	text "This attack does 20 more damage if"
 	line "your opponent played a Supporter"
 	line "card during their last turn."
 	done

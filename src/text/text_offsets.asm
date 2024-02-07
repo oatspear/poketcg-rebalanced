@@ -2901,7 +2901,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FarfetchdDescription                               ; 0x0b25
 	textpointer DoduoName                                          ; 0x0b26
 	textpointer FuryAttackName
-	textpointer DoubleDamageIfOppPlayedSupporterDescription
+	textpointer Bonus20IfOpponentPlayedSupporterDescription
 	textpointer TwinBirdName                                       ; 0x0b28
 	textpointer DoduoDescription                                   ; 0x0b29
 	textpointer DodrioName                                         ; 0x0b2a

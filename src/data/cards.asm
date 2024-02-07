@@ -8780,9 +8780,9 @@ SpearowCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy COLORLESS, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx FuryAttackName ; name
-	tx DoubleDamageIfOppPlayedSupporterDescription ; description
+	tx Bonus20IfOpponentPlayedSupporterDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category

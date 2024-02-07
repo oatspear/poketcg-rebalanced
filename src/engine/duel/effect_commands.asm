@@ -1093,8 +1093,8 @@ Draw2CardsEffectCommands:
 	db  $00
 
 FuryAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleDamageIfOppPlayedSupporter_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, DoubleDamageIfOppPlayedSupporter_AIEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfOpponentPlayedSupporter20BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, IfOpponentPlayedSupporter20BonusDamage_AIEffect
 	db  $00
 
 SmallCombustionEffectCommands:

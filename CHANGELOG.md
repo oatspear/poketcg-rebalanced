@@ -186,7 +186,7 @@
 - **Peck**: removed.
 - **Wing Attack**: removed.
 - New attack: **Pluck** (C): 10 damage; discards any Tools attached to the Defending Pokémon.
-- New attack: **Fury Attack** (C): 10 damage; double damage if the opponent played a Supporter last turn.
+- New attack: **Fury Attack** (CC): 10 damage; +20 damage if the opponent played a Supporter last turn.
 
 #### Fearow
 - **Drill Peck**: increased base damage from 40 to 50.
