@@ -8729,7 +8729,7 @@ RaticateCard:
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 3 ; energies
 	tx SuperFangName ; name
 	tx SuperFangDescription ; description
 	dw NONE ; description (cont)
