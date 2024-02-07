@@ -8767,17 +8767,17 @@ SpearowCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx DevastatingWindName ; name
-	tx DevastatingWindDescription ; description
+	tx PluckName ; name
+	tx PluckDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw DevastatingWindEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw DiscardToolsFromOpponentEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GALE ; animation
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
 	energy COLORLESS, 1 ; energies

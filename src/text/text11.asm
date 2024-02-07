@@ -1646,6 +1646,16 @@ DevastatingWindDescription:
 	line "into their deck and draws 4 cards."
 	done
 
+PluckName:
+	text "Fleet Footed"
+	done
+
+PluckDescription:
+	text "Before doing damage, discard any"
+	line "Trainer cards attached to your"
+	line "opponent's Active Pokémon."
+	done
+
 FleetFootedName:
 	text "Fleet Footed"
 	done

@@ -185,7 +185,7 @@
 #### Spearow
 - **Peck**: removed.
 - **Wing Attack**: removed.
-- New attack: **Devastating Wind** (C): opponent shuffles hand into deck and draws 4 cards.
+- New attack: **Pluck** (C): 10 damage; discards any Tools attached to the Defending Pokémon.
 - New attack: **Fury Attack** (C): 10 damage; double damage if the opponent played a Supporter last turn.
 
 #### Fearow

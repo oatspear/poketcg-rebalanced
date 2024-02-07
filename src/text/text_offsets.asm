@@ -2838,6 +2838,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Discard1EnergyFromBothActiveDescription
 	textpointer DevastatingWindName
 	textpointer DevastatingWindDescription
+	textpointer PluckName
+	textpointer PluckDescription
 	textpointer FleetFootedName
 	textpointer FleetFootedDescription
 	textpointer NotInTheActiveSpotText

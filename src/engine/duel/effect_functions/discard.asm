@@ -149,3 +149,22 @@ Discard1RandomCardFromOpponentsHandEffect:
   call SwapTurn
   or a
   ret
+
+
+; ------------------------------------------------------------------------------
+; Discard Energies
+; ------------------------------------------------------------------------------
+
+
+
+; ------------------------------------------------------------------------------
+; Discard Other Cards
+; ------------------------------------------------------------------------------
+
+DiscardOpponentTools_DiscardEffect:
+  ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	call GetTurnDuelistVariable
+	xor a
+	ld [hl], a
+	ld de, DEFENDER
+	jp MoveCardToDiscardPileIfInArena

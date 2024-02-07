@@ -550,6 +550,10 @@ Bounce1EnergyEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
+DiscardToolsFromOpponentEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DiscardOpponentTools_DiscardEffect
+	db  $00
+
 CorrosiveAcidEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardOpponentEnergyIfHeads_50PercentEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect

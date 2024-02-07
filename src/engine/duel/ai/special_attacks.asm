@@ -79,8 +79,8 @@ HandleSpecialAIAttacks:
 	jr z, .Mimic
 	cp CLEFABLE
 	jr z, .LunarPower
-	cp SPEAROW
-	jr z, .DevastatingWind
+	; cp SPEAROW
+	; jr z, .DevastatingWind
 	cp GASTLY_LV17
 	jp z, .EnergyConversion
 	cp DEWGONG
@@ -116,14 +116,14 @@ HandleSpecialAIAttacks:
 	ld a, $82
 	ret
 
-.DevastatingWind
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetNonTurnDuelistVariable
-	sub 5
-	jr c, .zero_score
-	; +1 score for each card above 5
-	add $80
-	ret
+; .DevastatingWind
+; 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+; 	call GetNonTurnDuelistVariable
+; 	sub 5
+; 	jr c, .zero_score
+; 	; +1 score for each card above 5
+; 	add $80
+; 	ret
 
 .Staryu
 	ld a, [wSelectedAttack]
