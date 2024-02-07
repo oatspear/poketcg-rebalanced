@@ -146,34 +146,13 @@ DoubleAttackX20X10_MultiplierEffect:
   jp SetDefiniteDamage
 
 
-Heads10BonusDamage_DamageBoostEffect:
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsPlusDamageText
-	call TossCoin_BankB
-	ret nc ; return if tails
-	ld a, 10
-	jp AddToDamage
-
-
-CometPunch_AIEffect:
-	ld a, (30 + 40) / 2
-	lb de, 30, 40
-	jp SetExpectedAIDamage
-
-Heads20Plus10Damage_AIEffect:
-	ld a, (20 + 10) / 2
-	lb de, 20, 30
-	jp SetExpectedAIDamage
-
-
 ;
-StoneBarrage_AIEffect: ; 2e04a (b:604a)
+FurySwipes_AIEffect:
 	ld a, 10
 	lb de, 0, 100
 	jp SetExpectedAIDamage
 
-StoneBarrage_MultiplierEffect: ; 2e052 (b:6052)
+FurySwipes_MultiplierEffect:
 	xor a
 	ldh [hTemp_ffa0], a
 .loop_coin_toss

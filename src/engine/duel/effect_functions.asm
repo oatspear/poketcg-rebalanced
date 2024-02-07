@@ -2798,69 +2798,6 @@ PetalDance_BonusEffect:
 	jp SelfConfusionEffect
 
 
-PoisonWhip_AIEffect: ; 2ce4b (b:4e4b)
-	ld a, 10
-	lb de, 10, 10
-	jp UpdateExpectedAIDamage_AccountForPoison
-
-SolarPower_CheckUse: ; 2ce53 (b:4e53)
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	and USED_PKMN_POWER_THIS_TURN
-	jr nz, .already_used
-
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_Anywhere
-	ret c ; can't use PKMN due to status or Toxic Gas
-
-; return carry if none of the Arena cards have status conditions
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	or a
-	jr nz, .has_status
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetNonTurnDuelistVariable
-	or a
-	jr z, .no_status
-.has_status
-	or a
-	ret
-.already_used
-	ldtx hl, OnlyOncePerTurnText
-	scf
-	ret
-.no_status
-	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
-	scf
-	ret
-
-SolarPower_RemoveStatusEffect: ; 2ce82 (b:4e82)
-	ld a, ATK_ANIM_HEAL_BOTH_SIDES
-	ld [wLoadedAttackAnimation], a
-	bank1call Func_7415
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld b, a
-	ld c, $00
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-
-	ldh a, [hTemp_ffa0]
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	set USED_PKMN_POWER_THIS_TURN_F, [hl]
-	ld l, DUELVARS_ARENA_CARD_STATUS
-	ld [hl], NO_STATUS
-
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetNonTurnDuelistVariable
-	ld [hl], NO_STATUS
-	bank1call DrawDuelHUDs
-	ret
-
 HelpingHand_CheckUse:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
@@ -4604,24 +4541,6 @@ DiscardOpponentEnergyIfHeads_AISelectEffect:
 ; ------------------------------------------------------------------------------
 
 
-AbsorbEffect: ; 2e0b3 (b:60b3)
-	ld hl, wDealtDamage
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	srl h
-	rr l
-	bit 0, l
-	jr z, .rounded
-	; round up to nearest 10
-	ld de, 5
-	add hl, de
-.rounded
-	ld e, l
-	ld d, h
-	jp ApplyAndAnimateHPRecovery
-
-
 ; returns carry if can't add Pokemon from deck
 CallForFamily_CheckDeckAndPlayArea:
 	call CheckDeckIsNotEmpty
@@ -4921,24 +4840,6 @@ ThunderstormEffect: ; 2e429 (b:6429)
 	ld [wDuelDisplayedScreen], a
 	ret
 
-
-TripleAttackX20X10_AIEffect: ; 2e4d6 (b:64d6)
-	ld a, (15 * 3)
-	lb de, 30, 60
-	jp SetExpectedAIDamage
-
-TripleAttackX20X10_MultiplierEffect: ; 2e4de (b:64de)
-	ld hl, 20
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 3
-	call TossCoinATimes_BankB
-	; tails = 10, heads = 20
-	; result = (tails + 2 * heads) = coins + heads
-	add 3
-	call ATimes10
-	call SetDefiniteDamage
-	ret
 
 Fly_AIEffect: ; 2e4f4 (b:64f4)
 	ld a, 30 / 2

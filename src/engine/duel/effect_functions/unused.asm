@@ -1,5 +1,118 @@
 ;
 
+TripleStrikeEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TripleAttackX20X10_MultiplierEffect
+	dbw EFFECTCMDTYPE_AI, TripleAttackX20X10_AIEffect
+	db  $00
+
+
+TripleAttackX20X10_AIEffect: ; 2e4d6 (b:64d6)
+	ld a, (15 * 3)
+	lb de, 30, 60
+	jp SetExpectedAIDamage
+
+TripleAttackX20X10_MultiplierEffect: ; 2e4de (b:64de)
+	ld hl, 20
+	call LoadTxRam3
+	ldtx de, DamageCheckIfHeadsXDamageText
+	ld a, 3
+	call TossCoinATimes_BankB
+	; tails = 10, heads = 20
+	; result = (tails + 2 * heads) = coins + heads
+	add 3
+	call ATimes10
+	call SetDefiniteDamage
+	ret
+
+
+
+VenusaurSolarPowerEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SolarPower_CheckUse
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SolarPower_RemoveStatusEffect
+	db  $00
+
+
+SolarPower_CheckUse: ; 2ce53 (b:4e53)
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .already_used
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CheckCannotUseDueToStatus_Anywhere
+	ret c ; can't use PKMN due to status or Toxic Gas
+
+; return carry if none of the Arena cards have status conditions
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	or a
+	jr nz, .has_status
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetNonTurnDuelistVariable
+	or a
+	jr z, .no_status
+.has_status
+	or a
+	ret
+.already_used
+	ldtx hl, OnlyOncePerTurnText
+	scf
+	ret
+.no_status
+	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
+	scf
+	ret
+
+SolarPower_RemoveStatusEffect: ; 2ce82 (b:4e82)
+	ld a, ATK_ANIM_HEAL_BOTH_SIDES
+	ld [wLoadedAttackAnimation], a
+	bank1call Func_7415
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+
+	ldh a, [hTemp_ffa0]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+	ld l, DUELVARS_ARENA_CARD_STATUS
+	ld [hl], NO_STATUS
+
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetNonTurnDuelistVariable
+	ld [hl], NO_STATUS
+	bank1call DrawDuelHUDs
+	ret
+
+
+
+
+FurySwipes20Plus10EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heads10BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Heads20Plus10Damage_AIEffect
+	db  $00
+
+Heads20Plus10Damage_AIEffect:
+	ld a, (20 + 10) / 2
+	lb de, 20, 30
+	jp SetExpectedAIDamage
+
+Heads10BonusDamage_DamageBoostEffect:
+	ld hl, 10
+	call LoadTxRam3
+	ldtx de, DamageCheckIfHeadsPlusDamageText
+	call TossCoin_BankB
+	ret nc ; return if tails
+	ld a, 10
+	jp AddToDamage
+
+
 
 SuperFang_AIEffect: ; 2ef01 (b:6f01)
 	call SuperFang_HalfHPEffect
@@ -2095,6 +2208,18 @@ MegaDrainEffect: ; 2cb0f (b:4b0f)
 
 
 ;
+
+SpearowMirrorMoveEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SpearowMirrorMove_InitialEffect1
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SpearowMirrorMove_InitialEffect2
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpearowMirrorMove_BeforeDamage
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SpearowMirrorMove_AfterDamage
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SpearowMirrorMove_PlayerSelection
+	dbw EFFECTCMDTYPE_AI_SELECTION, SpearowMirrorMove_AISelection
+	dbw EFFECTCMDTYPE_AI, SpearowMirrorMove_AIEffect
+	db  $00
+
+
 SpearowMirrorMove_AIEffect: ; 2e97d (b:697d)
 	jr MirrorMoveEffects.AIEffect
 
@@ -2687,6 +2812,20 @@ ComputerSearch_DiscardAddToHandEffect: ; 2f545 (b:7545)
 	ret
 
 
+
+PorygonConversion1EffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Conversion1_WeaknessCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Conversion1_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Conversion1_ChangeWeaknessEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Conversion1_AISelectEffect
+	db  $00
+
+PorygonConversion2EffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Conversion2_ResistanceCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Conversion2_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Conversion2_ChangeResistanceEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Conversion2_AISelectEffect
+	db  $00
 
 ;
 ; return carry if Defending card has no weakness
