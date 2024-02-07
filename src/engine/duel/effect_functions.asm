@@ -5636,8 +5636,8 @@ Metronome_CheckAttacks:
 	ldtx hl, NoAttackMayBeChoosenText
 	ret
 
+; does nothing for AI
 Metronome_AISelectEffect:
-	call HandleAIMetronomeEffect
 	ret
 
 ; Metronome1_UseAttackEffect:
@@ -5753,10 +5753,6 @@ HandlePlayerMetronomeEffect:
 	ld a, [wTempCardID_ccc2]
 	ld [wPlayerAttackingCardID], a
 	or a
-	ret
-
-; does nothing for AI.
-HandleAIMetronomeEffect:
 	ret
 
 
