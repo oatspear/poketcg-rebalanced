@@ -1647,7 +1647,7 @@ DevastatingWindDescription:
 	done
 
 PluckName:
-	text "Fleet Footed"
+	text "Pluck"
 	done
 
 PluckDescription:
