@@ -256,21 +256,6 @@ SpeedImpact_AIEffect:
 	jp SetDefiniteAIDamage
 
 
-SneakAttack_DamageBoostEffect:
-	xor a  ; PLAY_AREA_ARENA
-	call CheckIfCardHasDarknessEnergyAttached
-	jr c, .done
-	ld a, 10
-	jp AddToDamage
-.done
-	or a
-	ret
-
-SneakAttack_AIEffect:
-	call SneakAttack_DamageBoostEffect
-	jp SetDefiniteAIDamage
-
-
 Psychic_DamageBoostEffect:
 	call GetEnergyAttachedMultiplierDamage
 	ld hl, wDamage

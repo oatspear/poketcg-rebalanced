@@ -1270,11 +1270,6 @@ ReduceDamageTakenBy10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ReduceDamageTakenBy10Effect
 	db  $00
 
-SneakAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SneakAttack_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, SneakAttack_AIEffect
-	db  $00
-
 DragonRageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DragonRage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, DragonRage_AIEffect

@@ -1,5 +1,31 @@
 ;
 
+
+SneakAttackEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SneakAttack_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, SneakAttack_AIEffect
+	db  $00
+
+
+SneakAttack_DamageBoostEffect:
+	xor a  ; PLAY_AREA_ARENA
+	call CheckIfCardHasDarknessEnergyAttached
+	jr c, .done
+	ld a, 10
+	jp AddToDamage
+.done
+	or a
+	ret
+
+SneakAttack_AIEffect:
+	call SneakAttack_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
+
+
+
+
 PunishingSlapEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PunishingSlap_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, PunishingSlap_AIEffect
