@@ -7,6 +7,10 @@
 #### Blastoise
 - **Hydro Pump**: reduced base damage from 50 to 40.
 
+#### Kingler
+- Increased HP from 70 to 80.
+- **Crabhammer**: reduced cost from (WWC) to (WCC).
+
 ### Lightning Changes
 
 #### Voltorb
