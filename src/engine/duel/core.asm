@@ -2800,10 +2800,10 @@ DrawDuelHUD:
 	ret z
 	inc c
 	ld a, SYM_DEFENDER
-	call WriteByteToBGMap0
+	; call WriteByteToBGMap0
 	inc b
-	ld a, [hl] ; number of attached Defender
-	add SYM_0
+	; ld a, [hl] ; number of attached Defender
+	; add SYM_0
 	jp WriteByteToBGMap0
 
 ; draws an horizontal line that separates the arena side of each duelist
@@ -5840,19 +5840,17 @@ PrintPlayAreaCardHeader:
 	add DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	or a
-	jr z, .not_defender
+	ret z
 	ld a, [wCurPlayAreaY]
 	inc a
 	ld c, a
 	ld b, 17
 	ld a, SYM_DEFENDER
-	call WriteByteToBGMap0
-	inc b
-	ld a, [hl]
-	add SYM_0
-	call WriteByteToBGMap0
-.not_defender
-	ret
+	; call WriteByteToBGMap0
+	; inc b
+	; ld a, [hl]
+	; add SYM_0
+	jp WriteByteToBGMap0
 
 FaceDownCardTileNumbers:
 ; starting tile number, cgb palette (grey, yellow/red, green/blue, pink/orange)
@@ -7508,26 +7506,36 @@ ClearParalysisFromBenchedPokemon:
 	ret
 
 ; discard any PLUSPOWER attached to the turn holder's arena and/or bench Pokemon
+; FIXME refactor into single function
 DiscardAttachedPluspowers:
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	ld e, MAX_PLAY_AREA_POKEMON
-	xor a
 .unattach_pluspower_loop
-	ld [hli], a
+	ld a, [hl]
+	cp POKEMON_TOOL_PLUSPOWER
+	jr nz, .next
+	ld [hl], 0
+.next
+	inc hl
 	dec e
 	jr nz, .unattach_pluspower_loop
 	ld de, PLUSPOWER
 	jp MoveCardToDiscardPileIfInPlayArea
 
 ; discard any DEFENDER attached to the turn holder's arena and/or bench Pokemon
+; FIXME refactor into single function
 DiscardAttachedDefenders:
 	ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	ld e, MAX_PLAY_AREA_POKEMON
-	xor a
 .unattach_defender_loop
-	ld [hli], a
+	ld a, [hl]
+	cp POKEMON_TOOL_DEFENDER
+	jr nz, .next
+	ld [hl], 0
+.next
+	inc hl
 	dec e
 	jr nz, .unattach_defender_loop
 	ld de, DEFENDER

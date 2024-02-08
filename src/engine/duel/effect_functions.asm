@@ -7084,18 +7084,18 @@ Defender_PlayerSelection: ; 2f488 (b:7488)
 	call DrawWideTextBox_WaitForInput
 	jr .loop
 
-Defender_AttachDefenderEffect: ; 2f499 (b:7499)
+Defender_AttachDefenderEffect:
 ; attach Trainer card to Play Area Pokemon
 	ldh a, [hTemp_ffa0]
 	ld e, a
 	ldh a, [hTempCardIndex_ff9f]
 	call PutHandCardInPlayArea
 
-; increase number of Defender cards of this location by 1
+; store Defender as the attached tool
 	ldh a, [hTemp_ffa0]
 	add DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
-	inc [hl]
+	ld [hl], POKEMON_TOOL_DEFENDER
 	call IsPlayerTurn
 	ret c
 
@@ -7351,10 +7351,10 @@ PlusPowerEffect:
 	ldh a, [hTempCardIndex_ff9f]
 	call PutHandCardInPlayArea
 
-; increase number of Defender cards of this location by 1
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
+; store PlusPower as the attached tool
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
-	inc [hl]
+	ld [hl], POKEMON_TOOL_PLUSPOWER
 	ret
 
 ; return carry if no Pokemon in the Bench.
