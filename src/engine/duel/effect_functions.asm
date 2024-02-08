@@ -7083,11 +7083,14 @@ ItemFinder_PlayerSelection:
 Defender_PlayerSelection: ; 2f488 (b:7488)
 	ldtx hl, ChoosePokemonToAttachDefenderToText
 	call DrawWideTextBox_WaitForInput
-	bank1call HasAlivePokemonInPlayArea
-	bank1call OpenPlayAreaScreenForSelection
-	ldh a, [hTempPlayAreaLocation_ff9d]
+.loop
+	call HandlePlayerSelectionPokemonInPlayArea_AllowCancel
+	ret c  ; cancelled
 	ldh [hTemp_ffa0], a
-	ret
+	call CheckPokemonHasNoToolsAttached
+	ret nc
+	call DrawWideTextBox_WaitForInput
+	jr .loop
 
 Defender_AttachDefenderEffect: ; 2f499 (b:7499)
 ; attach Trainer card to Play Area Pokemon
@@ -7345,7 +7348,11 @@ _ReturnBenchedPokemonToDeckEffect:
 	jp SyncShuffleDeck
 
 
-PlusPowerEffect: ; 2f5e0 (b:75e0)
+PlusPower_PreconditionCheck:
+	xor a  ; PLAY_AREA_ARENA
+	jp CheckPokemonHasNoToolsAttached
+
+PlusPowerEffect:
 ; attach Trainer card to Arena Pokemon
 	ld e, PLAY_AREA_ARENA
 	ldh a, [hTempCardIndex_ff9f]

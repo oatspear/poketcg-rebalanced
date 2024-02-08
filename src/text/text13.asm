@@ -236,32 +236,29 @@ PokedexDescription:
 	line "the top of your deck in any order."
 	done
 
-PlusPowerName: ; 64177 (19:4177)
+PlusPowerName:
 	text "PlusPower"
 	done
 
-PlusPowerDescription: ; 64182 (19:4182)
-	text "Attach PlusPower to your Active"
+PlusPowerDescription:
+	text "Attach this card to your Active"
 	line "Pokémon. At the end of your turn,"
-	line "discard PlusPower. If this Pokémon's"
+	line "discard this card. If this Pokémon's"
 	line "attack does damage to any Active"
-	line "Pokémon (after applying Weakness and"
-	line "Resistance), the attack does 10 more"
+	line "Pokémon, the attack does 10 more"
 	line "damage to that Active Pokémon."
 	done
 
-DefenderName: ; 64274 (19:4274)
+DefenderName:
 	text "Defender"
 	done
 
-DefenderDescription: ; 6427e (19:427e)
-	text "Attach Defender to 1 of your"
+DefenderDescription:
+	text "Attach this card to 1 of your"
 	line "Pokémon. At the end of your"
 	line "opponent's next turn, discard"
-	line "Defender. Damage done to that"
-	line "Pokémon by attacks is reduced by 20"
-	line "(after applying Weakness and"
-	line "Resistance)."
+	line "this card. Damage done to that"
+	line "Pokémon by attacks is reduced by 20."
 	done
 
 ItemFinderName:
@@ -381,4 +378,17 @@ RecycleDescription:
 	text "Put a Pokémon or Basic Energy card"
 	line "in your discard pile on the top of"
 	line "your deck."
+	done
+
+AlreadyHasAToolAttachedText:
+	text "That Pokémon already has a Tool"
+	line "attached to it."
+	done
+
+YouMayAttachOnly1ToolPerPokemonText:
+	text "You may attach any number of Pokémon"
+	line "Tools to your Pokémon during your"
+	line "turn. You may attach only 1 Pokémon"
+	line "Tool to each Pokémon, and it stays"
+	line "attached."
 	done

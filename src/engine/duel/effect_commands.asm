@@ -1424,6 +1424,7 @@ MrFujiEffectCommands:
 	db  $00
 
 PlusPowerEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PlusPower_PreconditionCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PlusPowerEffect
 	db  $00
 

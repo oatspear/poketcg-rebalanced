@@ -3203,3 +3203,5 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RecycleDescription                                 ; 0x0bad
 	textpointer DarknessEnergyName                                 ; 0x0bae
 	textpointer DarknessEnergyDescription                          ; 0x0baf
+	textpointer AlreadyHasAToolAttachedText
+	textpointer YouMayAttachOnly1ToolPerPokemonText

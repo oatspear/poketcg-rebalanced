@@ -259,6 +259,8 @@
 ### Trainer Card Changes
 - **Mysterious Fossil**: reduced HP from 30 to 20.
 - **Clefairy Doll**: reduced HP from 30 to 20.
+- **PlusPower**: can only attach 1 per Pokémon; does not work if there is already another tool attached.
+- **Defender**: can only attach 1 per Pokémon; does not work if there is already another tool attached.
 
 ### NPC Changes
 - **Fire Club**: updated the deck list of Jonathan.
