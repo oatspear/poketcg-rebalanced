@@ -9313,7 +9313,7 @@ MeowthLv14Card:
 	db ATK_ANIM_NONE ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx FurySwipesName ; name
 	tx FlipUntilTails10xDescription ; description
 	dw NONE ; description (cont)

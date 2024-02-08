@@ -195,7 +195,8 @@
 - **Drill Peck**: increased base damage from 40 to 50.
 
 #### Meowth Lv14
-- **Fury Swipes**: reworked. Flip a coin until tails; 10 damage per heads.
+- **Fury Swipes**: reworked.
+- New attack: **Fury Swipes** (C): flip a coin until tails; 10 damage per heads.
 
 #### Persian
 - Increased Retreat Cost from 0 to 1.
