@@ -960,7 +960,7 @@ NidoqueenCard:
 	db STAR ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db NIDOQUEEN
-	db 100 ; hp
+	db 110 ; hp
 	db STAGE2 ; stage
 	tx NidorinaName ; pre-evo name
 

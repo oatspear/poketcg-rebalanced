@@ -157,6 +157,9 @@
 - **Call For Friend**: removed.
 - New attack: **Call For Family** (C): put up to 2 Basic Pokémon from deck onto Bench.
 
+#### Nidoqueen
+- Increased HP from 100 to 110.
+
 #### Nidorino
 - **Horn Drill**: removed.
 - **Den Protector**: renamed to **Vengeful Horn**; increased cost from (CC) to (DC).
