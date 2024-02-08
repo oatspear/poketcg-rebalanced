@@ -615,7 +615,13 @@ CurseEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Curse_DamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
-	; dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
+	db  $00
+
+Put1DamageCounterOnTargetEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Put1DamageCounterOnTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, Put1DamageCounterOnTarget_AIEffect
 	db  $00
 
 PainAmplifierEffectCommands:

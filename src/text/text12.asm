@@ -1447,3 +1447,12 @@ Bonus20IfPlayedSupporterDescription:
 	line "your hand during this turn, this"
 	line "attack does 20 more damage."
 	done
+
+OminousEyesName:
+	text "Ominous Eyes"
+	done
+
+Put1DamageCounterOnAnyPokemonDescription:
+	text "Put 1 damage counter on 1 of your"
+	line "opponent's Pokémon."
+	done

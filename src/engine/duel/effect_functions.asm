@@ -987,12 +987,21 @@ TryGiveDamageCounter_StrangeBehavior:
 
 Curse_DamageEffect:
 	call SetUsedPokemonPowerThisTurn
+	; fallthrough
+
+Put1DamageCounterOnTarget_DamageEffect:
 	; input e: PLAY_AREA_* of the target
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 	call SwapTurn
 	call Put1DamageCounterOnTarget
 	jp SwapTurn
+
+
+Put1DamageCounterOnTarget_AIEffect:
+	ld a, 10
+	lb de, 10, 10
+	jp UpdateExpectedAIDamage
 
 
 ; Remove status conditions from target PLAY_AREA_* and attach an Energy from Hand.

@@ -182,6 +182,10 @@
 #### Koffing
 - **Self-destruction**: removed damage to benched Pokémon.
 
+#### Gastly Lv17
+- **Lick**: removed.
+- New attack: **Ominous Eyes**: put 1 damage counter on any of the opponent's Pokémon.
+
 ### Colorless Changes
 
 #### Pidgey

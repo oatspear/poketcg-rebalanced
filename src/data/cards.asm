@@ -7761,17 +7761,17 @@ GastlyLv17Card:
 
 	; attack 2
 	energy DARKNESS, 1 ; energies
-	tx LickName ; name
-	tx MayInflictParalysisDescription ; description
+	tx OminousEyesName ; name
+	tx Put1DamageCounterOnAnyPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Put1DamageCounterOnTargetEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GOO ; animation
+	db ATK_ANIM_DARK_MIND_NO_HIT ; animation
 
 	db 0 ; retreat cost
 	db NONE ; weakness
