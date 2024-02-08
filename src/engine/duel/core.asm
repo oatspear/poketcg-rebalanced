@@ -5496,16 +5496,23 @@ Func_6186:
 	add a
 	add c
 	ld [hl], a
-	call PrintPlayAreaCardInformationAndLocation
-	ret
+	jp PrintPlayAreaCardInformationAndLocation
+
+
+;
+Func_2c10b:
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call Func_61a1
+	call PrintPlayAreaCardList_EnableLCD
+	; jr Func_6194
+	; fallthrough
 
 Func_6194:
 	call Func_6186
 	ld a, [wCurPlayAreaY]
 	ld e, a
 	ld d, 0
-	call SetCursorParametersForTextBox_Default
-	ret
+	jp SetCursorParametersForTextBox_Default
 
 Func_61a1:
 	xor a

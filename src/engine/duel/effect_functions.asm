@@ -455,13 +455,6 @@ SetExpectedAIDamage: ; 2c0fb (b:40fb)
 	ld [wAIMaxDamage], a
 	ret
 
-Func_2c10b: ; 2c10b (b:410b)
-	ldh [hTempPlayAreaLocation_ff9d], a
-	bank1call Func_61a1
-	bank1call PrintPlayAreaCardList_EnableLCD
-	bank1call Func_6194
-	ret
-
 
 ; deal damage to all the turn holder's benched Pokemon
 ; input: a = amount of damage to deal to each Pokemon
@@ -5021,7 +5014,7 @@ SelectUpTo2Benched_PlayerSelectEffect:
 .chosen
 	ldh a, [hCurMenuItem]
 	inc a
-	call Func_2c10b
+	bank1call Func_2c10b
 	ldh a, [hKeysPressed]
 	and B_BUTTON
 	jr nz, .try_cancel
@@ -5478,7 +5471,7 @@ _AttachEnergyFromDiscardPileToBenchEffect:
 
 .done
 	ldh a, [hTempPlayAreaLocation_ff9d]
-	call Func_2c10b
+	bank1call Func_2c10b
 	jp ExchangeRNG
 
 
@@ -6229,9 +6222,8 @@ RocketGrunts_DiscardEffect: ; 2f273 (b:7273)
 ; show Player which Pokemon was affected
 	call SwapTurn
 	ldh a, [hTemp_ffa0]
-	call Func_2c10b
-	call SwapTurn
-	ret
+	bank1call Func_2c10b
+	jp SwapTurn
 
 ; ------------------------------------------------------------------------------
 ; UI, Menus and Prompts
@@ -7108,7 +7100,8 @@ Defender_AttachDefenderEffect: ; 2f499 (b:7499)
 	ret c
 
 	ldh a, [hTemp_ffa0]
-	jp Func_2c10b
+	bank1call Func_2c10b
+	ret
 
 
 ; return carry if Bench is full.
