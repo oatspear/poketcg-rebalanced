@@ -1,5 +1,53 @@
 ;
 
+; modern version
+SuperFangEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperFang_DamageEffect
+	dbw EFFECTCMDTYPE_AI, SuperFang_AIEffect
+	db  $00
+
+
+; returns how much HP the Active Pokémon can lose
+; until it has only 10 HP remaining
+GetDamageUntil10HPRemaining:
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	sub 10
+	ret nc
+	xor a
+	ret  ; already at 10 HP
+
+
+; modern version
+; applies damage counters directly
+SuperFang_DamageEffect:
+	call SwapTurn
+	call GetDamageUntil10HPRemaining
+	jp z, SwapTurn  ; no damage to deal
+	ld d, a  ; amount of damage to deal
+	ld e, PLAY_AREA_ARENA
+	ld a, ATK_ANIM_HIT
+	ld [wLoadedAttackAnimation], a
+	xor a
+	ld [wDamage], a
+	call ApplyDirectDamage
+	ld a, ATK_ANIM_NONE
+	ld [wLoadedAttackAnimation], a
+	jp SwapTurn
+
+
+; modern version
+SuperFang_AIEffect:
+	call SwapTurn
+	call GetDamageUntil10HPRemaining
+	ld [wDamage], a
+	ld [wAIMinDamage], a
+	ld [wAIMaxDamage], a
+	jp SwapTurn
+
+
+
+
 
 SneakAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SneakAttack_DamageBoostEffect

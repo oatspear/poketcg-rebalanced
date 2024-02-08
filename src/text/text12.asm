@@ -26,14 +26,14 @@ FinishingBiteDescription:
 	line "has any damage counters on it."
 	done
 
-SuperFangName:
-	text "Super Fang"
-	done
+; SuperFangName:
+; 	text "Super Fang"
+; 	done
 
-SuperFangDescription:
-	text "Put damage counters on the Defending"
-	line "Pokémon until its remaing HP is 10."
-	done
+; SuperFangDescription:
+; 	text "Put damage counters on the Defending"
+; 	line "Pokémon until its remaing HP is 10."
+; 	done
 
 RaticateDescription: ; 619be (18:59be)
 	text "It uses its whiskers to maintain its"

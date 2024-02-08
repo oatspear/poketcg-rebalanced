@@ -118,14 +118,13 @@ ShowOpponentDiscardedCardDetails:
 
 
 ; chooses a card at random from the opponents hand
-; and moves it to the discard pile
-; return carry if there are no cards to discard
-; returns deck index of discarded card in a
-Discard1RandomCardFromOpponentsHandEffect:
+; return carry if there are no cards
+; returns deck index of selected card or $ff in a
+Get1RandomCardFromOpponentsHand:
   call ExchangeRNG
   call SwapTurn
   call CreateHandCardList
-  jp c, SwapTurn  ; no cards in hand
+  jr c, .get_deck_index  ; no cards in hand
 
 ; got number of cards in a
   ld hl, wDuelTempList
@@ -141,14 +140,22 @@ Discard1RandomCardFromOpponentsHandEffect:
 
 .get_deck_index
   ld a, [hl]
+  jp SwapTurn
+
+; chooses a card at random from the opponents hand
+; and moves it to the discard pile
+; return carry if there are no cards to discard
+; returns deck index of discarded card in a
+Discard1RandomCardFromOpponentsHandEffect:
+  call Get1RandomCardFromOpponentsHand
 ; could use MoveHandCardToDiscardPile here, but the check to avoid
 ; anything other than CARD_LOCATION_HAND is redundant;
 ; it is already done in CreateHandCardList
+  call SwapTurn
   call RemoveCardFromHand
   call PutCardInDiscardPile
-  call SwapTurn
   or a
-  ret
+  jp SwapTurn
 
 
 ; ------------------------------------------------------------------------------

@@ -8716,6 +8716,20 @@ RaticateCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
+	tx ThiefName ; name
+	tx ThiefDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ThiefEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
+
+	; attack 2
+	energy COLORLESS, 1 ; energies
 	tx RendName ; name
 	tx Bonus20IfOpponentIsDamagedDescription ; description
 	dw NONE ; description (cont)
@@ -8727,20 +8741,6 @@ RaticateCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx SuperFangName ; name
-	tx SuperFangDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw SuperFangEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

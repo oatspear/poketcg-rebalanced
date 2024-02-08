@@ -717,34 +717,6 @@ Affliction_DamageEffect:
 	jp SwapTurn
 
 
-; returns how much HP the Active Pokémon can lose
-; until it has only 10 HP remaining
-GetDamageUntil10HPRemaining:
-	ld a, DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	sub 10
-	ret nc
-	xor a
-	ret  ; already at 10 HP
-
-
-; applies damage counters directly
-SuperFang_DamageEffect:
-	call SwapTurn
-	call GetDamageUntil10HPRemaining
-	jp z, SwapTurn  ; no damage to deal
-	ld d, a  ; amount of damage to deal
-	ld e, PLAY_AREA_ARENA
-	ld a, ATK_ANIM_HIT
-	ld [wLoadedAttackAnimation], a
-	xor a
-	ld [wDamage], a
-	call ApplyDirectDamage
-	ld a, ATK_ANIM_NONE
-	ld [wLoadedAttackAnimation], a
-	jp SwapTurn
-
-
 ; ------------------------------------------------------------------------------
 ; Damage Modifiers
 ; ------------------------------------------------------------------------------
@@ -1196,6 +1168,30 @@ PoisonPaybackEffect:
 	jp PoisonEffect
 
 
+Thief_PlayerHandCardSelection:
+	call SwapTurn
+	ldtx hl, ChooseCardToPutOnTheBottomOfTheDeckText
+	call HandlePlayerSelection1HandCardToDiscard.got_text
+	ldh [hTemp_ffa0], a
+	jp SwapTurn
+
+Thief_AIHandCardSelection:
+	call Get1RandomCardFromOpponentsHand
+	ldh [hTemp_ffa0], a
+	ret
+
+ThiefEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z  ; no card was chosen to put on the bottom of the deck
+	call SwapTurn
+	call RemoveCardFromHand
+	call ReturnCardToBottomOfDeck
+	ldtx hl, PutOnTheBottomOfTheDeckText
+	bank1call DisplayCardDetailScreen
+	jp SwapTurn
+
+
 ShadowClawEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
@@ -1412,6 +1408,11 @@ Sprout_AISelectEffect:
 Ultravision_PlayerSelectEffect:
 	ld b, 4
 	call CreateDeckCardListTopNCards
+	; fallthrough
+
+; input:
+;   wDuelTempList: list of deck cards to choose from
+ChooseAnyCardFromDeckList_PlayerSelectEffect:
 	call HandlePlayerSelectionAnyCardFromDeckListToHand
 	ldh [hTemp_ffa0], a
 	ret
@@ -1422,6 +1423,11 @@ Ultravision_PlayerSelectEffect:
 Ultravision_AISelectEffect:
 	ld b, 4
 	call CreateDeckCardListTopNCards
+	; fallthrough
+
+; input:
+;   wDuelTempList: list of deck cards to choose from
+ChooseAnyCardFromDeckList_AISelectEffect:
 	ld hl, wDuelTempList
 .loop_deck
 	ld a, [hli]
@@ -6784,6 +6790,8 @@ SelectedCards_MoveWithinPlayArea:
 
 ; add a card to the bottom of the turn holder's deck
 ; input:
+;   a: the deck index (0-59) of the card
+; output:
 ;   a: the deck index (0-59) of the card
 ReturnCardToBottomOfDeck:
 	push hl

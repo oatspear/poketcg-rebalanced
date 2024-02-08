@@ -605,6 +605,12 @@ ShadowClawEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, ShadowClaw_AISelectEffect
 	db  $00
 
+ThiefEffectCommands:
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Thief_PlayerHandCardSelection
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThiefEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Thief_AIHandCardSelection
+	db  $00
+
 CurseEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CheckPokemonPowerCanBeUsed
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Curse_DamageEffect
@@ -1187,11 +1193,6 @@ RamEffectCommands:
 
 ConversionBeamEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ConversionBeam_ChangeWeaknessEffect
-	db  $00
-
-SuperFangEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperFang_DamageEffect
-	dbw EFFECTCMDTYPE_AI, SuperFang_AIEffect
 	db  $00
 
 TrainerCardAsPokemonEffectCommands:

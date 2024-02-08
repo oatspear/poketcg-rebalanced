@@ -2795,6 +2795,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HurricaneName                                      ; 0x0ae4
 	textpointer TwisterName                                        ; 0x0ae4
 	textpointer Pidgeot2Description                                ; 0x0ae6
+	textpointer CrunchName
 	textpointer SynthesisName
 	textpointer SynthesisDescription
 	textpointer HealingMelodyName
@@ -2843,14 +2844,18 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FleetFootedName
 	textpointer FleetFootedDescription
 	textpointer NotInTheActiveSpotText
+	textpointer ThiefName
+	textpointer ThiefDescription
+	textpointer ChooseCardToPutOnTheBottomOfTheDeckText
+	textpointer PutOnTheBottomOfTheDeckText
 	textpointer RattataName
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
 	textpointer RaticateName                                       ; 0x0aea
 	textpointer FinishingBiteName
 	textpointer FinishingBiteDescription
-	textpointer SuperFangName                                      ; 0x0aeb
-	textpointer SuperFangDescription                               ; 0x0aec
+	; textpointer SuperFangName
+	; textpointer SuperFangDescription
 	textpointer RaticateDescription                                ; 0x0aed
 	textpointer CourierName
 	textpointer CourierDescription

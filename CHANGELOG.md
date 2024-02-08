@@ -181,7 +181,8 @@
 
 #### Raticate
 - **Finishing Bite**: removed.
-- **Super Fang**: reworked; puts damage counters on the Defending Pokémon until its remaining HP is 10.
+- **Super Fang**: removed.
+- New attack: **Thief** (C): 10 damage; choose a card from opponent's hand to put on the bottom of the deck.
 - New attack: **Rend** (C): 10 damage; +20 damage if the Defending Pokémon is damaged.
 
 #### Spearow

@@ -11,6 +11,7 @@ HandlePlayerSelection1HandCardToDiscard:
 	; consider refactoring this to use HandlePlayerSelectionFromCardList_AllowCancel
 	; the difference is that the function above sets card location headers
 	ldtx hl, ChooseCardToDiscardFromHandText
+.got_text
 	call DrawWideTextBox_WaitForInput
 	call CreateHandCardList
 	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck

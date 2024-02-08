@@ -1429,6 +1429,10 @@ Pidgeot2Description: ; 61860 (18:5860)
 	line "unwary prey such as Magikarp."
 	done
 
+CrunchName:
+	text "Crunch"
+	done
+
 SynthesisName:
 	text "Synthesis"
 	done
@@ -1669,4 +1673,24 @@ FleetFootedDescription:
 NotInTheActiveSpotText:
 	text "This Pokémon is not in the"
 	line "Active Spot."
+	done
+
+ThiefName:
+	text "Thief"
+	done
+
+ThiefDescription:
+	text "Your opponent reveals their hand."
+	line "Choose a card you find there and"
+	line "put it on the bottom of their deck."
+	done
+
+ChooseCardToPutOnTheBottomOfTheDeckText:
+	text "Choose the card to put on"
+	line "the bottom of the Deck."
+	done
+
+PutOnTheBottomOfTheDeckText:
+	text "Put <RAMTEXT> on"
+	line "the bottom of the Deck."
 	done
