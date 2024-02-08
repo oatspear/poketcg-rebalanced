@@ -174,4 +174,31 @@ DiscardOpponentTools_DiscardEffect:
 	xor a
 	ld [hl], a
 	ld de, DEFENDER
-	jp MoveCardToDiscardPileIfInPlayArea  ; FIXME this discards all tools, not just active
+  ; FIXME this discards all tools, not just active
+	; jp MoveCardToDiscardPileIfInPlayArea
+
+  ld c, e
+	ld b, d
+	ld l, DUELVARS_CARD_LOCATIONS
+.next_card
+	ld a, [hl]
+	cp CARD_LOCATION_ARENA
+	jr z, .skip ; jump if card not in arena
+	ld a, l
+	call GetCardIDFromDeckIndex
+	ld a, c
+	cp e
+	jr nz, .skip ; jump if not the card id provided in c
+	ld a, b
+	cp d ; card IDs are 8-bit so d is always 0
+	jr nz, .skip
+	ld a, l
+	push bc
+	call PutCardInDiscardPile
+	pop bc
+.skip
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .next_card
+	ret
