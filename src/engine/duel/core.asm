@@ -2794,7 +2794,7 @@ DrawDuelHUD:
 	call WriteByteToBGMap0
 	dec b
 .check_defender
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	or a
 	jr z, .done
@@ -5832,7 +5832,7 @@ PrintPlayAreaCardHeader:
 	call WriteByteToBGMap0
 .not_pluspower
 	ld a, [wCurPlayAreaSlot]
-	add DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	add DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	or a
 	jr z, .not_defender
@@ -7517,7 +7517,7 @@ DiscardAttachedPluspowers:
 
 ; discard any DEFENDER attached to the turn holder's arena and/or bench Pokemon
 DiscardAttachedDefenders:
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	ld e, MAX_PLAY_AREA_POKEMON
 	xor a

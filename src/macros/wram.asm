@@ -161,12 +161,12 @@ MACRO duel_vars
 \1Bench4CardChangedType::        ds $1
 \1Bench5CardChangedType::        ds $1
 
-\1ArenaCardAttachedDefender::    ds $1
-\1Bench1CardAttachedDefender::   ds $1
-\1Bench2CardAttachedDefender::   ds $1
-\1Bench3CardAttachedDefender::   ds $1
-\1Bench4CardAttachedDefender::   ds $1
-\1Bench5CardAttachedDefender::   ds $1
+\1ArenaCardAttachedTool::        ds $1
+\1Bench1CardAttachedTool::       ds $1
+\1Bench2CardAttachedTool::       ds $1
+\1Bench3CardAttachedTool::       ds $1
+\1Bench4CardAttachedTool::       ds $1
+\1Bench5CardAttachedTool::       ds $1
 
 \1ArenaCardAttachedPluspower::   ds $1
 \1Bench1CardAttachedPluspower::  ds $1

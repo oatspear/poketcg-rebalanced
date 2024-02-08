@@ -7101,7 +7101,7 @@ Defender_AttachDefenderEffect: ; 2f499 (b:7499)
 
 ; increase number of Defender cards of this location by 1
 	ldh a, [hTemp_ffa0]
-	add DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	add DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	inc [hl]
 	call IsPlayerTurn

@@ -1173,7 +1173,7 @@ EmptyPlayAreaSlot:
 .zero_vars
 	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
 	call .init_duelvar
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call .init_duelvar
 	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
 ; OATS must also reset status conditions
@@ -1250,7 +1250,7 @@ SwapPlayAreaPokemon:
 	call .swap_duelvar
 	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
 	call .swap_duelvar
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call .swap_duelvar
 ; OATS also swap status conditions
 	ld a, DUELVARS_ARENA_CARD_STATUS

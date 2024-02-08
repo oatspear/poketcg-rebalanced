@@ -169,7 +169,7 @@ Discard1RandomCardFromOpponentsHandEffect:
 ; ------------------------------------------------------------------------------
 
 DiscardOpponentTools_DiscardEffect:
-  ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+  ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	xor a
 	ld [hl], a
