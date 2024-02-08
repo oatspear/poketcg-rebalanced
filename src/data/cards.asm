@@ -9162,7 +9162,7 @@ JigglypuffLv14Card:
 	db CIRCLE ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	db JIGGLYPUFF_LV14
-	db 50 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -9181,7 +9181,7 @@ JigglypuffLv14Card:
 	db ATK_ANIM_LULLABY ; animation
 
 	; attack 2
-	energy PSYCHIC, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx PesterName ; name
 	tx PesterDescription ; description
 	dw NONE ; description (cont)

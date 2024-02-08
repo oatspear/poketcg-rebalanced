@@ -152,9 +152,9 @@
 - New attack: **Call For Family** (C): put up to 2 Basic Pokémon from deck onto Bench.
 
 #### Jigglypuff Lv14
-- Reduced HP from 60 to 50.
+- Reduced HP from 60 to 40.
 - **Punishing Slap**: removed.
-- New attack: **Pester** (P): 10 damage; double damage if opponent if affected with Status.
+- New attack: **Pester** (C): 10 damage; double damage if opponent if affected with Status.
 
 #### Wigglytuff
 - **Do The Wave**: does 10 damage per Benched Pokémon (does not count Active Pokémon).
