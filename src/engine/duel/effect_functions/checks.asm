@@ -280,19 +280,13 @@ CheckNoDuplicateColorsInPlayArea:
 ; input:
 ;   a: PLAY_AREA_* of the card to check
 CheckPokemonHasNoToolsAttached:
-	ld e, a
 	add DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
-	cp 1
-	ccf
+	or a
+	ret z
+; there is an attached tool
 	ldtx hl, AlreadyHasAToolAttachedText
-	ret c
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
-	add e
-	call GetTurnDuelistVariable
-	cp 1
-	ccf
-	ldtx hl, AlreadyHasAToolAttachedText
+	scf
 	ret
 
 
