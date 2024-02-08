@@ -1437,3 +1437,13 @@ DarkRetributionDescription:
 	line "attached <DARKNESS> Energy, put 1 damage"
 	line "counter on the Attacking Pokémon."
 	done
+
+FriendTackleName:
+	text "Friend Tackle"
+	done
+
+Bonus20IfPlayedSupporterDescription:
+	text "If you played a Supporter card from"
+	line "your hand during this turn, this"
+	line "attack does 20 more damage."
+	done

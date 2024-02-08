@@ -8895,18 +8895,18 @@ ClefairyCard:
 	db ATK_ANIM_LURE ; animation
 
 	; attack 2
-	energy PSYCHIC, 1, COLORLESS, 1 ; energies
-	tx MoonblastName ; name
-	tx ReduceAttackBy10Description ; description
+	energy COLORLESS, 2 ; energies
+	tx FriendTackleName ; name
+	tx Bonus20IfPlayedSupporterDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ReduceAttackBy10EffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw FriendTackleEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 10
-	db ATK_ANIM_CONFUSE_RAY ; animation
+	db ATK_ANIM_BOYFRIENDS ; animation
 
 	db 0 ; retreat cost
 	db WR_DARKNESS ; weakness

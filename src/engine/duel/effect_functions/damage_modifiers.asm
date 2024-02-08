@@ -437,6 +437,19 @@ DoubleDamageIfAttachedEnergy_AIEffect:
 ; ------------------------------------------------------------------------------
 
 
+IfPlayedSupporter20BonusDamage_DamageBoostEffect:
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and PLAYED_SUPPORTER_THIS_TURN
+	ret z  ; did not play Supporter
+	ld a, 20
+	jp AddToDamage
+
+
+IfPlayedSupporter20BonusDamage_AIEffect:
+	call IfPlayedSupporter20BonusDamage_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
+
 IfOpponentPlayedSupporter20BonusDamage_DamageBoostEffect:
 	ld a, [wOpponentPlayedEnergyOrSupporter]
 	and PLAYED_SUPPORTER_THIS_TURN

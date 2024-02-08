@@ -1091,6 +1091,11 @@ Draw2CardsEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Draw2CardsEffect
 	db  $00
 
+FriendTackleEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfPlayedSupporter20BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, IfPlayedSupporter20BonusDamage_AIEffect
+	db  $00
+
 FuryAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfOpponentPlayedSupporter20BonusDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, IfOpponentPlayedSupporter20BonusDamage_AIEffect

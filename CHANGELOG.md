@@ -139,6 +139,10 @@
 
 ### Psychic Changes
 
+#### Clefairy
+- **Moonblast**: removed.
+- New attack: **Friend Tackle** (CC): 10 damage; +20 damage if a Supporter was played on the same turn.
+
 #### Jigglypuff Lv13
 - **Call For Friend**: removed.
 - New attack: **Call For Family** (C): put up to 2 Basic Pokémon from deck onto Bench.
