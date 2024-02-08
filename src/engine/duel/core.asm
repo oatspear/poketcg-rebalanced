@@ -7513,7 +7513,7 @@ DiscardAttachedPluspowers:
 	dec e
 	jr nz, .unattach_pluspower_loop
 	ld de, PLUSPOWER
-	jp MoveCardToDiscardPileIfInArena
+	jp MoveCardToDiscardPileIfInPlayArea
 
 ; discard any DEFENDER attached to the turn holder's arena and/or bench Pokemon
 DiscardAttachedDefenders:
@@ -7526,7 +7526,7 @@ DiscardAttachedDefenders:
 	dec e
 	jr nz, .unattach_defender_loop
 	ld de, DEFENDER
-	jp MoveCardToDiscardPileIfInArena
+	jp MoveCardToDiscardPileIfInPlayArea
 
 ; return carry if the turn holder's arena Pokemon card is poisoned or double poisoned.
 ; also return the status condition in a.

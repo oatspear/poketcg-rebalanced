@@ -174,4 +174,4 @@ DiscardOpponentTools_DiscardEffect:
 	xor a
 	ld [hl], a
 	ld de, DEFENDER
-	jp MoveCardToDiscardPileIfInArena
+	jp MoveCardToDiscardPileIfInPlayArea  ; FIXME this discards all tools, not just active
