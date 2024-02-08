@@ -9508,18 +9508,18 @@ FarfetchdCard:
 	; attack 2
 	energy COLORLESS, 1 ; energies
 	tx LeekSlapName ; name
-	tx LeekSlapDescription ; description
+	tx NextTurnUnableToAttackDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw FarfetchdLeekSlapEffectCommands ; effect commands
+	dw NextTurnUnableToAttackEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_WHIP ; animation
+	db ATK_ANIM_HIT ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx WildDuckName ; category

@@ -2837,8 +2837,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DefensiveStanceDescription
 	textpointer ColdCrushName
 	textpointer Discard1EnergyFromBothActiveDescription
-	textpointer DevastatingWindName
-	textpointer DevastatingWindDescription
 	textpointer PluckName
 	textpointer PluckDescription
 	textpointer FleetFootedName
@@ -2862,6 +2860,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SpearowName                                        ; 0x0aee
 	; textpointer PeckName
 	; textpointer PeckDescription
+	textpointer DevastatingWindName
+	textpointer DevastatingWindDescription
 	textpointer SpearowDescription                                 ; 0x0af1
 	textpointer FearowName                                         ; 0x0af2
 	textpointer DrillPeckName                                      ; 0x0af4
@@ -2900,8 +2900,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ClassyCatName                                      ; 0x0b1e
 	textpointer PersianDescription                                 ; 0x0b1f
 	textpointer FarfetchdName                                      ; 0x0b20
-	textpointer LeekSlapName                                       ; 0x0b21
-	textpointer LeekSlapDescription                                ; 0x0b22
+	textpointer LeekSlapName
+	textpointer NextTurnUnableToAttackDescription
 	textpointer WildDuckName                                       ; 0x0b24
 	textpointer FarfetchdDescription                               ; 0x0b25
 	textpointer DoduoName                                          ; 0x0b26

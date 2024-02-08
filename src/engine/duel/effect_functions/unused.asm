@@ -499,7 +499,7 @@ MountainBreak_AIEffect:
 HandleDamageBonusSubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
-	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
+	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, a
 	ret z
 ; double damage at de
 	ld a, e
@@ -1698,7 +1698,7 @@ ClearChangedTypesIfWeezing:
 HandleDamageBonusSubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
-	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
+	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, a
 	call nz, .double_damage_at_de
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
 	call GetTurnDuelistVariable
@@ -3462,6 +3462,44 @@ ThunderJolt_RecoilEffect: ; 2e529 (b:6529)
 
 
 ;
+
+LeekSlapEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, LeekSlap_OncePerDuelCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeekSlap_NoDamage50PercentEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, LeekSlap_SetUsedThisDuelFlag
+	dbw EFFECTCMDTYPE_AI, LeekSlap_AIEffect
+	db  $00
+
+
+LeekSlap_AIEffect: ; 2eb17 (b:6b17)
+	ld a, 30 / 2
+	lb de, 0, 30
+	jp SetExpectedAIDamage
+
+; return carry if already used attack in this duel
+LeekSlap_OncePerDuelCheck: ; 2eb1f (b:6b1f)
+; can only use attack if it was never used before this duel
+	ld a, DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	and USED_LEEK_SLAP_THIS_DUEL
+	ret z
+	ldtx hl, ThisAttackCannotBeUsedTwiceText
+	scf
+	ret
+
+LeekSlap_SetUsedThisDuelFlag: ; 2eb2c (b:6b2c)
+	ld a, DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_LEEK_SLAP_THIS_DUEL_F, [hl]
+	ret
+
+LeekSlap_NoDamage50PercentEffect: ; 2eb34 (b:6b34)
+	ldtx de, DamageCheckIfTailsNoDamageText
+	call TossCoin_BankB
+	ret c
+	xor a ; 0 damage
+	jp SetDefiniteDamage
+
 
 
 LeerEffect: ; 2e21d (b:621d)

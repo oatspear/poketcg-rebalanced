@@ -67,8 +67,13 @@ SpearowName: ; 61a18 (18:5a18)
 ; 	line "does 10 more damage."
 ; 	done
 
-FlapName:
-	text "Flap"
+DevastatingWindName:
+	text "Devastating Wind"
+	done
+
+DevastatingWindDescription:
+	text "Your opponent shuffles their hand"
+	line "into their deck and draws 4 cards."
 	done
 
 ; SpearowsMirrorMoveDescription: ; 61a27 (18:5a27)
@@ -263,17 +268,13 @@ FarfetchdName: ; 625c1 (18:65c1)
 	text "Farfetch'd"
 	done
 
-LeekSlapName: ; 625cd (18:65cd)
+LeekSlapName:
 	text "Leek Slap"
 	done
 
-LeekSlapDescription: ; 625d8 (18:65d8)
-	text "Flip a coin. If tails, this attack"
-	line "does nothing. Either way, you can't"
-	line "use this attack again as long as"
-	line "Farfetch'd stays in play (even"
-	line "putting Farfetch'd on the Bench"
-	line "won't let you use it again)."
+NextTurnUnableToAttackDescription:
+	text "This Pokémon is unable to attack"
+	line "during your next turn."
 	done
 
 WildDuckName: ; 626a8 (18:66a8)

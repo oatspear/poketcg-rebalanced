@@ -1083,13 +1083,6 @@ UnableToRetreatEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnableToRetreatEffect
 	db  $00
 
-FarfetchdLeekSlapEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, LeekSlap_OncePerDuelCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeekSlap_NoDamage50PercentEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, LeekSlap_SetUsedThisDuelFlag
-	dbw EFFECTCMDTYPE_AI, LeekSlap_AIEffect
-	db  $00
-
 Draw1CardEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Draw1CardEffect
 	db  $00

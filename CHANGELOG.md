@@ -201,6 +201,10 @@
 #### Persian
 - Increased Retreat Cost from 0 to 1.
 
+#### Farfetch'd
+- Increased Retreat Cost from 0 to 1.
+- **Leek Slap**: reworked. The user is unable to attack next turn.
+
 #### Doduo
 - **Fury Attack**: removed.
 - New Pokémon Power: **Fleet Footed**: may draw 1 card per turn if in the Active Spot.

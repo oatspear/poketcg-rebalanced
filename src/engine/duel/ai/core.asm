@@ -349,10 +349,10 @@ CheckIfSelectedAttackIsUnusable:
 	or a
 	jr nz, .bench
 
-	bank1call HandleCantAttackSubstatus
+	call HandleCantAttackSubstatus
 	ret c
 ; OATS only paralysis guarantees a no-attack turn
-	bank1call CheckIfActiveCardParalyzed  ; CheckIfActiveCardParalyzedOrAsleep
+	call CheckIfActiveCardParalyzed  ; CheckIfActiveCardParalyzedOrAsleep
 	ret c
 
 	ld a, DUELVARS_ARENA_CARD

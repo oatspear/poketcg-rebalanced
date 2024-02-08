@@ -5473,36 +5473,6 @@ _AttachEnergyFromDiscardPileToBenchEffect:
 	jp ExchangeRNG
 
 
-LeekSlap_AIEffect: ; 2eb17 (b:6b17)
-	ld a, 30 / 2
-	lb de, 0, 30
-	jp SetExpectedAIDamage
-
-; return carry if already used attack in this duel
-LeekSlap_OncePerDuelCheck: ; 2eb1f (b:6b1f)
-; can only use attack if it was never used before this duel
-	ld a, DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	and USED_LEEK_SLAP_THIS_DUEL
-	ret z
-	ldtx hl, ThisAttackCannotBeUsedTwiceText
-	scf
-	ret
-
-LeekSlap_SetUsedThisDuelFlag: ; 2eb2c (b:6b2c)
-	ld a, DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	set USED_LEEK_SLAP_THIS_DUEL_F, [hl]
-	ret
-
-LeekSlap_NoDamage50PercentEffect: ; 2eb34 (b:6b34)
-	ldtx de, DamageCheckIfTailsNoDamageText
-	call TossCoin_BankB
-	ret c
-	xor a ; 0 damage
-	jp SetDefiniteDamage
-
-
 ; shuffle hand back into deck and draw as many cards as the opponent has
 MimicEffect:
 	call ShuffleHandIntoDeck

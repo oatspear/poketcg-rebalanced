@@ -6,7 +6,7 @@
 HandleDamageBonusSubstatus:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
-	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
+	bit SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, a
 	call nz, DoubleDE
 
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
@@ -181,16 +181,11 @@ HandleNShieldAndTransparency:
 ; return carry if the turn holder's arena Pokemon is under a condition that makes
 ; it unable to attack. also return in hl the text id to be displayed
 HandleCantAttackSubstatus:
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
-	or a
+	bit SUBSTATUS3_THIS_TURN_CANNOT_ATTACK, a
 	ret z
 	ldtx hl, UnableToAttackDueToEffectText
-	cp SUBSTATUS2_UNABLE_ATTACK
-	jr z, .return_with_cant_attack
-	or a
-	ret
-.return_with_cant_attack
 	scf
 	ret
 
@@ -812,14 +807,12 @@ UpdateSubstatusConditions_StartOfTurn:
 	ret nz
 
 ; .unable_to_attack
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
-	call GetTurnDuelistVariable
-	ld [hl], SUBSTATUS2_UNABLE_ATTACK
+	ld l, DUELVARS_ARENA_CARD_SUBSTATUS3
+	set SUBSTATUS3_THIS_TURN_CANNOT_ATTACK, [hl]
 	ret
 
 .double_damage
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
-	call GetTurnDuelistVariable
+	ld l, DUELVARS_ARENA_CARD_SUBSTATUS3
 	set SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
 	ret
 
@@ -832,19 +825,14 @@ UpdateSubstatusConditions_EndOfTurn:
 	res TURN_FLAG_TOSSED_TAILS_F, [hl]
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
-	res SUBSTATUS3_HEADACHE, [hl]
-	res SUBSTATUS3_THIS_TURN_ACTIVE, [hl]
-	push hl
+	ld [hl], $0
+	; res SUBSTATUS3_HEADACHE, [hl]
+	; res SUBSTATUS3_THIS_TURN_ACTIVE, [hl]
+	; res SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
+	; res SUBSTATUS3_THIS_TURN_CANNOT_ATTACK, [hl]
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
 	call GetTurnDuelistVariable
-	xor a
-	ld [hl], a
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
-	call GetTurnDuelistVariable
-	pop hl
-	cp SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
-	ret z
-	res SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE, [hl]
+	ld [hl], $0
 	ret
 
 ; return carry if turn holder has Wartortle and its Rain Dance Pkmn Power is active

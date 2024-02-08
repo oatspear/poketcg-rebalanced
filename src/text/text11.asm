@@ -1641,15 +1641,6 @@ Discard1EnergyFromBothActiveDescription:
 	line "to the Defending Pokémon."
 	done
 
-DevastatingWindName:
-	text "Devastating Wind"
-	done
-
-DevastatingWindDescription:
-	text "Your opponent shuffles their hand"
-	line "into their deck and draws 4 cards."
-	done
-
 PluckName:
 	text "Pluck"
 	done
