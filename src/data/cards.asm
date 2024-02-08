@@ -8557,7 +8557,7 @@ Pidgeot1Card:
 	db STAR ; rarity
 	db LABORATORY | GB ; sets
 	db PIDGEOT_LV38
-	db 100 ; hp
+	db 110 ; hp
 	db STAGE2 ; stage
 	tx PidgeottoName ; pre-evo name
 
@@ -8589,7 +8589,7 @@ Pidgeot1Card:
 	db 0
 	db ATK_ANIM_WHIRLWIND ; animation
 
-	db 1 ; retreat cost
+	db 2 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx BirdName ; category

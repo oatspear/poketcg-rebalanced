@@ -172,6 +172,8 @@
 - **Collect**: draws 2 cards instead of 1.
 
 #### Pidgeot Lv38
+- Increased HP from 100 to 110.
+- Increased Retreat Cost from 1 to 2.
 - **Twister**: increased base damage from 40 to 50.
 
 #### Pidgeot Lv40
