@@ -404,6 +404,7 @@ DynamicCardTypeTest:
 HandlePlayerSelectionPokemonInPlayArea_AllowCancel:
 	bank1call HasAlivePokemonInPlayArea
 	bank1call OpenPlayAreaScreenForSelection
+	ld a, $ff
 	ret c
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ret
