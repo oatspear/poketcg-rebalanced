@@ -95,6 +95,7 @@
 
 #### Onix
 - Reduced HP from 80 to 70.
+- **Rock Head**: reduced cost from (FC) to (F) and base damage from 20 to 10.
 
 #### Cubone
 - **Call For Friend**: removed.

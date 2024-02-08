@@ -6757,11 +6757,11 @@ OnixCard:
 	; db ATK_ANIM_NONE ; animation
 
 	; attack 1
-	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	energy FIGHTING, 1 ; energies
 	tx RockHeadName ; name
 	tx ReduceDamageTakenBy10Description ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw ReduceDamageTakenBy10EffectCommands ; effect commands
 	db NONE ; flags 1
