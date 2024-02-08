@@ -50,6 +50,12 @@ PrimalScythe_DamageBoostEffect:
 	call AddToDamage
 	jp SetDefiniteAIDamage
 
+PrimalScythe_AIEffect:
+	call CheckMysteriousFossilInHand
+	call nc, PrimalScythe_DamageBoostEffect
+	or a
+	ret
+
 
 ; ------------------------------------------------------------------------------
 ; Based on Coin Flips
