@@ -2797,16 +2797,14 @@ DrawDuelHUD:
 	ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	or a
-	jr z, .done
+	ret z
 	inc c
 	ld a, SYM_DEFENDER
 	call WriteByteToBGMap0
 	inc b
 	ld a, [hl] ; number of attached Defender
 	add SYM_0
-	call WriteByteToBGMap0
-.done
-	ret
+	jp WriteByteToBGMap0
 
 ; draws an horizontal line that separates the arena side of each duelist
 ; also colorizes the line on CGB
