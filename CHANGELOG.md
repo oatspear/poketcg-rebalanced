@@ -174,6 +174,11 @@
 - **Den Protector**: renamed to **Vengeful Horn**; increased cost from (CC) to (DC).
 - New Pokémon Power: **Dark Retribution**: Active Pokémon with (D) Energy attached return 10 damage back to attackers.
 
+#### Zubat
+- **Supersonic**: reduced cost from (D) to (C); reduced base damage from 10 to zero; always inflicts Confusion.
+- **Bite**: removed.
+- New attack: **Pester** (D): 10 damage; double damage if the opponent is afflicted with Status.
+
 #### Koffing
 - **Self-destruction**: removed damage to benched Pokémon.
 

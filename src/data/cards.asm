@@ -1169,27 +1169,27 @@ ZubatCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy DARKNESS, 1 ; energies
+	energy COLORLESS, 1 ; energies
 	tx SupersonicName ; name
-	tx MayInflictConfusionDescription ; description
+	tx InflictConfusionDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Confusion50PercentEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw InflictConfusionEffectCommands ; effect commands
 	db INFLICT_CONFUSION ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_SUPERSONIC_HIT ; animation
+	db ATK_ANIM_SUPERSONIC ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx BiteName ; name
-	dw NONE ; description
+	energy DARKNESS, 1 ; energies
+	tx PesterName ; name
+	tx PesterDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw PesterEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
