@@ -9050,7 +9050,7 @@ JigglypuffLv12Card:
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db JIGGLYPUFF_LV12
-	db 50 ; hp
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -9079,7 +9079,7 @@ JigglypuffLv12Card:
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
-	energy COLORLESS, 2 ; energies
+	energy COLORLESS, 1 ; energies
 	tx ExpandName ; name
 	tx ReduceDamageTakenBy10Description ; description
 	dw NONE ; description (cont)

@@ -143,6 +143,10 @@
 - **Moonblast**: removed.
 - New attack: **Friend Tackle** (CC): 10 damage; +20 damage if a Supporter was played on the same turn.
 
+#### Jigglypuff Lv12
+- Reduced HP from 50 to 40.
+- **Expand**: reduced cost from (CC) to (C).
+
 #### Jigglypuff Lv13
 - **Call For Friend**: removed.
 - New attack: **Call For Family** (C): put up to 2 Basic Pokémon from deck onto Bench.
