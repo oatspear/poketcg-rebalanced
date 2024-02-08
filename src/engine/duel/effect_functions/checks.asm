@@ -276,6 +276,26 @@ CheckNoDuplicateColorsInPlayArea:
 	ret
 
 
+; returns carry if the given Pokémon has a Tool attached to it
+; input:
+;   a: PLAY_AREA_* of the card to check
+CheckPokemonHasNoToolsAttached:
+	ld e, a
+	add DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	call GetTurnDuelistVariable
+	cp 1
+	ccf
+	ldtx hl, AlreadyHasAToolAttachedText
+	ret c
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
+	add e
+	call GetTurnDuelistVariable
+	cp 1
+	ccf
+	ldtx hl, AlreadyHasAToolAttachedText
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Damage
 ; ------------------------------------------------------------------------------
