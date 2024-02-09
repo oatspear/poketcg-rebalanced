@@ -775,9 +775,6 @@ AIPlay_Pluspower:
 ; if active card cannot KO without the boost.
 ; outputs in a the attack to use.
 AIDecide_Pluspower1:
-; this is mistakenly duplicated
-	xor a
-	ldh [hTempPlayAreaLocation_ff9d], a
 	xor a
 	ldh [hTempPlayAreaLocation_ff9d], a
 
