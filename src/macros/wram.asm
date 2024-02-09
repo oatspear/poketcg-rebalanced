@@ -168,12 +168,12 @@ MACRO duel_vars
 \1Bench4CardAttachedTool::       ds $1
 \1Bench5CardAttachedTool::       ds $1
 
-\1ArenaCardAttachedPluspower::   ds $1
-\1Bench1CardAttachedPluspower::  ds $1
-\1Bench2CardAttachedPluspower::  ds $1
-\1Bench3CardAttachedPluspower::  ds $1
-\1Bench4CardAttachedPluspower::  ds $1
-\1Bench5CardAttachedPluspower::  ds $1
+\1ArenaCardUnused::   ds $1
+\1Bench1CardUnused::  ds $1
+\1Bench2CardUnused::  ds $1
+\1Bench3CardUnused::  ds $1
+\1Bench4CardUnused::  ds $1
+\1Bench5CardUnused::  ds $1
 
 	ds $1
 
