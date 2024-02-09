@@ -7515,7 +7515,8 @@ DiscardAttachedPluspowers:
 	ld a, [hl]
 	cp POKEMON_TOOL_PLUSPOWER
 	jr nz, .next
-	ld [hl], 0
+	xor a
+	ld [hl], a
 .next
 	inc hl
 	dec e
@@ -7533,7 +7534,8 @@ DiscardAttachedDefenders:
 	ld a, [hl]
 	cp POKEMON_TOOL_DEFENDER
 	jr nz, .next
-	ld [hl], 0
+	xor a
+	ld [hl], a
 .next
 	inc hl
 	dec e
