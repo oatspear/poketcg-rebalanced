@@ -5046,7 +5046,7 @@ SelectUpTo2Benched_PlayerSelectEffect:
 
 	dec a
 	ld [wce72], a
-	jr .start
+	jp .start
 
 ; returns carry if Bench Pokemon
 ; in register a was already chosen.
