@@ -551,7 +551,7 @@ Bounce1EnergyEffectCommands:
 	db  $00
 
 DiscardToolsFromOpponentEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DiscardOpponentTools_DiscardEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DiscardOpponentTool_DiscardEffect
 	db  $00
 
 CorrosiveAcidEffectCommands:

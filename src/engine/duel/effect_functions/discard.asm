@@ -168,37 +168,50 @@ Discard1RandomCardFromOpponentsHandEffect:
 ; Discard Other Cards
 ; ------------------------------------------------------------------------------
 
-DiscardOpponentTools_DiscardEffect:
-  ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
-	call GetTurnDuelistVariable
-	xor a
-	ld [hl], a
-	ld de, DEFENDER
-  ; FIXME this discards all tools, not just active
-	; jp MoveCardToDiscardPileIfInPlayArea
+DiscardArenaTool_DiscardEffect:
+  xor a  ; PLAY_AREA_ARENA
+  ; fallthrough
 
-  ld c, e
-	ld b, d
-	ld l, DUELVARS_CARD_LOCATIONS
+; input:
+;   a: PLAY_AREA_* of the target
+; preserves: nothing
+DiscardPlayAreaTool_DiscardEffect:
+  ld c, a
+  add DUELVARS_ARENA_CARD_ATTACHED_TOOL
+	call GetTurnDuelistVariable
+  or a
+  ret z  ; no attached tools
+; reset duel variable
+  xor a
+	ld [hl], a
+; store target card location to search for
+  ld a, CARD_LOCATION_PLAY_AREA
+  or c
+  ld c, a
+; loop card locations and move tool to discard pile
+  ld l, DUELVARS_CARD_LOCATIONS
 .next_card
 	ld a, [hl]
-	cp CARD_LOCATION_ARENA
-	jr z, .skip ; jump if card not in arena
+	cp c
+	jr nz, .skip  ; not in target play area location
 	ld a, l
-	call GetCardIDFromDeckIndex
-	ld a, c
-	cp e
-	jr nz, .skip ; jump if not the card id provided in c
-	ld a, b
-	cp d ; card IDs are 8-bit so d is always 0
-	jr nz, .skip
+	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
+	call GetCardType  ; preserves hl, bc
+	cp TYPE_TRAINER
+	jr nz, .skip  ; not a trainer card
 	ld a, l
-	push bc
-	call PutCardInDiscardPile
-	pop bc
+; assume: there is only one attached tool at a time
+; no need to search for more cards
+	jp PutCardInDiscardPile
 .skip
 	inc l
 	ld a, l
 	cp DECK_SIZE
 	jr c, .next_card
 	ret
+
+
+DiscardOpponentTool_DiscardEffect:
+  call SwapTurn
+  call DiscardArenaTool_DiscardEffect
+  jp SwapTurn
