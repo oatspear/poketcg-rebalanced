@@ -5490,7 +5490,6 @@ Func_6186:
 
 ;
 Func_2c10b:
-	ldh [hTempPlayAreaLocation_ff9d], a
 	call Func_61a1
 	call PrintPlayAreaCardList_EnableLCD
 	; jr Func_6194

@@ -5014,6 +5014,7 @@ SelectUpTo2Benched_PlayerSelectEffect:
 .chosen
 	ldh a, [hCurMenuItem]
 	inc a
+	ldh [hTempPlayAreaLocation_ff9d], a
 	bank1call Func_2c10b
 	ldh a, [hKeysPressed]
 	and B_BUTTON
@@ -5470,7 +5471,6 @@ _AttachEnergyFromDiscardPileToBenchEffect:
 	call Helper_GenericShowAttachedEnergyToPokemon
 
 .done
-	ldh a, [hTempPlayAreaLocation_ff9d]
 	bank1call Func_2c10b
 	jp ExchangeRNG
 
@@ -6222,6 +6222,7 @@ RocketGrunts_DiscardEffect: ; 2f273 (b:7273)
 ; show Player which Pokemon was affected
 	call SwapTurn
 	ldh a, [hTemp_ffa0]
+	ldh [hTempPlayAreaLocation_ff9d], a
 	bank1call Func_2c10b
 	jp SwapTurn
 
@@ -7100,6 +7101,7 @@ Defender_AttachDefenderEffect:
 	ret c
 
 	ldh a, [hTemp_ffa0]
+	ldh [hTempPlayAreaLocation_ff9d], a
 	bank1call Func_2c10b
 	ret
 
