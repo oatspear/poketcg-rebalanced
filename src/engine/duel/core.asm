@@ -2778,32 +2778,21 @@ DrawDuelHUD:
 	; print number of attached Pluspower and Defender with respective icon, if any
 	ld hl, wHUDEnergyAndHPBarsX
 	ld a, [hli]
-	add 6
+	add 8  ; previously 6, use old position that displayed the number
 	ld b, a
 	ld c, [hl] ; wHUDEnergyAndHPBarsY
 	inc c
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
-	call GetTurnDuelistVariable
-	or a
-	jr z, .check_defender
-	ld a, SYM_PLUSPOWER
-	call WriteByteToBGMap0
-	inc b
-	ld a, [hl] ; number of attached Pluspower
-	add SYM_0
-	call WriteByteToBGMap0
-	dec b
-.check_defender
 	ld a, DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	or a
-	ret z
+	ret z  ; no tools
+	cp POKEMON_TOOL_PLUSPOWER
+	jr nz, .not_pluspower
+	ld a, SYM_PLUSPOWER
+	jp WriteByteToBGMap0
+.not_pluspower
 	inc c
 	ld a, SYM_DEFENDER
-	; call WriteByteToBGMap0
-	inc b
-	; ld a, [hl] ; number of attached Defender
-	; add SYM_0
 	jp WriteByteToBGMap0
 
 ; draws an horizontal line that separates the arena side of each duelist
@@ -5821,22 +5810,6 @@ PrintPlayAreaCardHeader:
 .skip_status
 	; finally check whether to print the Pluspower and/or Defender symbols
 	ld a, [wCurPlayAreaSlot]
-	add DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
-	call GetTurnDuelistVariable
-	or a
-	jr z, .not_pluspower
-	ld a, [wCurPlayAreaY]
-	inc a
-	ld c, a
-	ld b, 15
-	ld a, SYM_PLUSPOWER
-	call WriteByteToBGMap0
-	inc b
-	ld a, [hl]
-	add SYM_0
-	call WriteByteToBGMap0
-.not_pluspower
-	ld a, [wCurPlayAreaSlot]
 	add DUELVARS_ARENA_CARD_ATTACHED_TOOL
 	call GetTurnDuelistVariable
 	or a
@@ -5844,12 +5817,15 @@ PrintPlayAreaCardHeader:
 	ld a, [wCurPlayAreaY]
 	inc a
 	ld c, a
-	ld b, 17
+	ld b, 17  ; previously 15
+	ld a, [hl]
+	cp POKEMON_TOOL_PLUSPOWER
+	jr nz, .not_pluspower
+	ld a, SYM_PLUSPOWER
+	jp WriteByteToBGMap0
+.not_pluspower
+	ld b, 18  ; previously 17
 	ld a, SYM_DEFENDER
-	; call WriteByteToBGMap0
-	; inc b
-	; ld a, [hl]
-	; add SYM_0
 	jp WriteByteToBGMap0
 
 FaceDownCardTileNumbers:
