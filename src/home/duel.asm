@@ -2035,6 +2035,9 @@ ENDC
 	xor a  ; PLAY_AREA_ARENA
 	call HandleDamageReducingPowers
 	call HandleDefenderDamageReductionEffects
+IF DEBUG_MODE
+	call Debug_Print_DE
+ENDC
 	call HandleAttackerDamageReductionEffects
 ; 8. cap damage at zero if negative
 IF DEBUG_MODE
