@@ -1839,33 +1839,45 @@ PlayTrainerCard:
 	ld a, [wLoadedCard1Type]
 	cp TYPE_TRAINER_SUPPORTER
 	jr nz, .not_supporter_card
+
+; Supporter Trainer
 	ldtx hl, MayOnlyUseOneSupporterCardText
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	and PLAYED_SUPPORTER_THIS_TURN
 	jr nz, .cant_use
+; try to execute effects that can prevent the card from being played
+; we can only set Supporter played after that
+	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
+	call TryExecuteEffectCommandFunction
+	jr c, .cant_use
+	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
+	call TryExecuteEffectCommandFunction
+	ld a, 1
+	jr c, .done
 	ld a, [wAlreadyPlayedEnergyOrSupporter]
 	or PLAYED_SUPPORTER_THIS_TURN
 	ld [wAlreadyPlayedEnergyOrSupporter], a
-	jr .try_use_card
+	jr .play_card
+
+.cant_use
+	call DrawWideTextBox_WaitForInput
+	scf
+	ret
+
 .not_supporter_card
 ; OATS end support trainer subtypes
 	call CheckCantUseTrainerDueToHeadache
 	jr c, .cant_use
 	ld a, 10
 	ld [wGarbageEaterDamageToHeal], a
-.try_use_card
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
 	call TryExecuteEffectCommandFunction
-	jr nc, .can_use
-.cant_use
-	call DrawWideTextBox_WaitForInput
-	scf
-	ret
-.can_use
+	jr c, .cant_use
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
 	ld a, 1
 	jr c, .done
+.play_card
 	ld a, OPPACTION_PLAY_TRAINER
 	call SetOppAction_SerialSendDuelData
 	call DisplayUsedTrainerCardDetailScreen
