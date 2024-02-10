@@ -90,7 +90,8 @@ HandleDefenderDamageReduction_Substatus:
 	cp SUBSTATUS1_HARDEN
 	jr z, .prevent_less_than_40_damage
 	cp SUBSTATUS1_HALVE_DAMAGE
-	call z, HalveDamage_DE
+	jp z, HalveDamage_DE
+	ret
 
 .no_damage_from_basic
 	ld a, DUELVARS_ARENA_CARD_STAGE
