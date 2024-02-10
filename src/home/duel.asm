@@ -1958,7 +1958,9 @@ ApplyDamageModifiers_DamageToTarget:
 	call _DamageModifiers_Preamble
 	ret z  ; no damage
 ; non-zero damage
-	; call Debug_Print_DE
+IF DEBUG_MODE
+	call Debug_Print_DE
+ENDC
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 .step1
@@ -1966,7 +1968,9 @@ ApplyDamageModifiers_DamageToTarget:
 	call HandleDamageBonusSubstatus
 	call HandleDamageBoostingPowers
 ; 2. apply weakness bonus
-	; call Debug_Print_DE
+IF DEBUG_MODE
+	call Debug_Print_DE
+ENDC
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
 	jr nz, .apply_pluspower
@@ -1979,14 +1983,20 @@ ApplyDamageModifiers_DamageToTarget:
 	call _DamageModifiers_HandleWeakness
 ; 3. apply pluspower bonuses
 .apply_pluspower
-	; call Debug_Print_DE
+IF DEBUG_MODE
+	call Debug_Print_DE
+ENDC
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedPluspower
 ; 4. cap damage at 250
-	; call Debug_Print_DE
+IF DEBUG_MODE
+	call Debug_Print_DE
+ENDC
 	call CapMaximumDamage_DE
 ; 5. apply resistance
-	;; call Debug_Print_DE
+IF DEBUG_MODE
+	call Debug_Print_DE
+ENDC
 	ld a, [wDamageFlags]
 	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
 	jr nz, .apply_defender
@@ -2000,31 +2010,39 @@ ApplyDamageModifiers_DamageToTarget:
 	call _DamageModifiers_HandleResistance
 ; 6. apply Defender reduction
 .apply_defender
-	; call Debug_Print_DE
+IF DEBUG_MODE
+	call Debug_Print_DE
+ENDC
 	call SwapTurn
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedDefender
 ; 7. apply damage reduction effects
-	; call Debug_Print_DE
+IF DEBUG_MODE
+	call Debug_Print_DE
+ENDC
 	xor a  ; PLAY_AREA_ARENA
 	call HandleDamageReducingPowers
 	call HandleDefenderDamageReductionEffects
 	call HandleAttackerDamageReductionEffects
 ; 8. cap damage at zero if negative
-	; call Debug_Print_DE
+IF DEBUG_MODE
+	call Debug_Print_DE
+ENDC
 	call CapMinimumDamage_DE
 	jp SwapTurn
 
 
-; Debug_Print_DE:
-; 	push de
-; 	ld l, e
-; 	ld h, d
-; 	call LoadTxRam3
-; 	ldtx hl, YouCanSelectMoreCardsQuitText
-; 	call DrawWideTextBox_WaitForInput
-; 	pop de
-; 	ret
+IF DEBUG_MODE
+Debug_Print_DE:
+	push de
+	ld l, e
+	ld h, d
+	call LoadTxRam3
+	ldtx hl, YouCanSelectMoreCardsQuitText
+	call DrawWideTextBox_WaitForInput
+	pop de
+	ret
+ENDC
 
 
 ; given a damage value at wDamage:
