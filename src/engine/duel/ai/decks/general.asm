@@ -45,8 +45,10 @@ ENDC
 
 	farcall HandleAIAntiMewtwoDeckStrategy
 IF DEBUG_MODE
+	push af
 	ldtx hl, WeedleName
 	call DrawWideTextBox_WaitForInput
+	pop af
 ENDC
 	jp nc, .try_attack
 IF DEBUG_MODE
