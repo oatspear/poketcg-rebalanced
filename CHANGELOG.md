@@ -1,5 +1,13 @@
 # Pokémon TCG Rebalanced
 
+## Version 0.8.0
+
+### Lightning Changes
+
+#### Electrode Lv42
+- **Tackle**: removed.
+- New attack: **Energy Spike** (L): 10 damage; attach an Energy from the deck to 1 Pokémon.
+
 ## Version 0.7.0
 
 ### Water Changes
