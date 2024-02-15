@@ -602,9 +602,9 @@ CheckPlayedEnergyThisTurn:
 
 
 CardTypeTest_FunctionTable:
-	dw CardTypeTest_Pokemon
-	dw CardTypeTest_BasicPokemon
-	dw CardTypeTest_BasicEnergy
+	dw CardTypeTest_Pokemon       ; CARDTEST_POKEMON
+	dw CardTypeTest_BasicPokemon  ; CARDTEST_BASIC_POKEMON
+	dw CardTypeTest_BasicEnergy   ; CARDTEST_BASIC_ENERGY
 
 
 CardTypeTest_Pokemon:
