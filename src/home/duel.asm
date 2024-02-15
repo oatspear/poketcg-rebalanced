@@ -1670,7 +1670,7 @@ PlayAttackAnimation_DealAttackDamage:
 	bank1call DrawDuelHUDs
 	pop hl
 .skip_draw_huds
-	call PrintKnockedOutIfHLZero
+	call PrintKnockedOutAndSetFlagIfHLZero
 	ld a, [wTempNonTurnDuelistCardID]
 	push af
 	ld a, EFFECTCMDTYPE_AFTER_DAMAGE
@@ -1944,7 +1944,7 @@ DealConfusionDamageToSelf:
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
 	bank1call PlayAttackAnimation_DealAttackDamageSimple
-	call PrintKnockedOutIfHLZero
+	call PrintKnockedOutAndSetFlagIfHLZero
 	pop af
 	ld [wTempNonTurnDuelistCardID], a
 	pop af
@@ -2263,7 +2263,7 @@ PrintPlayAreaCardKnockedOutIfNoHP:
 	scf
 	ret
 
-PrintKnockedOutIfHLZero:
+PrintKnockedOutAndSetFlagIfHLZero:
 	ld a, [hl] ; this is supposed to point to a remaining HP value after some form of damage calculation
 	or a
 	ret nz
@@ -2401,7 +2401,7 @@ DealDamageToPlayAreaPokemon:
 	or a
 	jr z, .skip_knocked_out
 	push de
-	call PrintKnockedOutIfHLZero
+	call PrintKnockedOutAndSetFlagIfHLZero
 	pop de
 .skip_knocked_out
 	call HandleStrikeBack_AgainstDamagingAttack

@@ -7647,7 +7647,7 @@ HandlePoisonDamage:
 	call Func_6cab
 	pop hl
 
-	call PrintKnockedOutIfHLZero
+	call PrintKnockedOutAndSetFlagIfHLZero
 	push af
 	call WaitForWideTextBoxInput
 	pop af
