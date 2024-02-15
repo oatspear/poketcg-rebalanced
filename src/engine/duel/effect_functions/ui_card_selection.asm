@@ -302,6 +302,24 @@ HandlePlayerSelectionAnyCardFromDeckListToHand:
 	ret
 
 
+HandlePlayerSelectionBasicEnergyFromDeck:
+; create the list of cards in deck
+	call CreateDeckCardList
+	; fallthrough
+
+; input:
+;   wDuelTempList: list of deck cards to search
+; output:
+;   a: deck index of the selected card | $ff
+;   [hTempCardIndex_ff98]: deck index of the selected card
+;   carry: set if there are no Energy or the Player cancelled the selection
+;   nz: set if there are no Energy in the deck
+HandlePlayerSelectionBasicEnergyFromDeckList:
+	ld a, CARDTEST_BASIC_ENERGY
+	ldtx hl, ChooseBasicEnergyCardText
+	jr HandlePlayerSelectionFromDeckList
+
+
 HandlePlayerSelectionBasicPokemonFromDeck:
 ; create the list of cards in deck
 	call CreateDeckCardList
