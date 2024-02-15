@@ -5672,18 +5672,18 @@ ElectrodeLv35Card:
 	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
 
 	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 2 ; energies
-	tx ExplosionName ; name
-	tx ExplosionDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 80 ; damage
+	energy LIGHTNING, 1 ; energies
+	tx EnergySpikeName ; name
+	tx EnergySpikeDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ExplosionEffectCommands ; effect commands
-	db HIGH_RECOIL ; flags 1
+	dw EnergySpikeEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
-	db 100
-	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

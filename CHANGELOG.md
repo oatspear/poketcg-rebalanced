@@ -4,6 +4,10 @@
 
 ### Lightning Changes
 
+#### Electrode Lv35
+- **Explosion**: removed.
+- New attack: **Energy Spike** (L): 10 damage; attach an Energy from the deck to 1 Pokémon.
+
 #### Electrode Lv42
 - **Tackle**: removed.
 - New attack: **Energy Spike** (L): 10 damage; attach an Energy from the deck to 1 Pokémon.
