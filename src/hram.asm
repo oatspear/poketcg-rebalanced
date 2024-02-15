@@ -101,7 +101,7 @@ NEXTU
 ; parameters chosen by AI in Energy Trans routine.
 ; the deck index (0-59) of the energy card to transfer
 ; and the Play Area location (PLAY_AREA_*) of card to receive that energy card.
-hAIEnergyTransEnergyCard:: ; ffa2
+hEnergyTransEnergyCard:: ; ffa2
 
 ; PLAY_AREA_*  of target selected for some Pkmn Powers,
 ; (e.g. Curse, Damage Swap) and for trainer card effect.

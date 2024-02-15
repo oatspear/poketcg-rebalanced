@@ -1071,7 +1071,7 @@ PrimordialDream_PlayerSelectEffect:
 
 
 ; Pokémon Powers do not use [hTemp_ffa0]
-; adds a card in [hAIEnergyTransEnergyCard] from the discard pile to the hand
+; adds a card in [hEnergyTransEnergyCard] from the discard pile to the hand
 ; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
 PrimordialDream_MorphAndAddToHandEffect:
 	call SetUsedPokemonPowerThisTurn
@@ -2446,13 +2446,13 @@ EnergyTrans_TransferEffect: ; 2cb77 (b:4b77)
 	call CheckIfCardHasGrassEnergyAttached
 	jr c, .play_sfx ; no Grass attached
 
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	; temporarily take card away to draw Play Area
 	call AddCardToHand
 	bank1call PrintPlayAreaCardList_EnableLCD
 	ldh a, [hAIPkmnPowerEffectParam]
 	ld e, a
-	ldh a, [hAIEnergyTransEnergyCard]
+	ldh a, [hEnergyTransEnergyCard]
 	; give card back
 	call PutHandCardInPlayArea
 
@@ -2476,7 +2476,7 @@ EnergyTrans_TransferEffect: ; 2cb77 (b:4b77)
 	call SetOppAction_SerialSendDuelData
 	ldh a, [hAIEnergyTransPlayAreaLocation]
 	ld e, a
-	ldh a, [hAIEnergyTransEnergyCard]
+	ldh a, [hEnergyTransEnergyCard]
 	; give card being held to this Pokemon
 	call AddCardToHand
 	call PutHandCardInPlayArea
@@ -2495,7 +2495,7 @@ EnergyTrans_TransferEffect: ; 2cb77 (b:4b77)
 EnergyTrans_AIEffect: ; 2cbfb (b:4bfb)
 	ldh a, [hAIEnergyTransPlayAreaLocation]
 	ld e, a
-	ldh a, [hAIEnergyTransEnergyCard]
+	ldh a, [hEnergyTransEnergyCard]
 	call AddCardToHand
 	call PutHandCardInPlayArea
 	bank1call PrintPlayAreaCardList_EnableLCD
@@ -5346,13 +5346,13 @@ RainbowTeam_AttachEnergyEffect:
 	ldh [hHowManyCardsToSelectOneByOne], a
 	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
 	call HandleSelectBasicEnergyFromDiscardPile_AllowCancel
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	xor a  ; cannot select active spot
 	ld hl, .retrieve
 	jr _AttachEnergyFromDiscardPileToBenchEffect
 
 .retrieve
-	ldh a, [hAIEnergyTransEnergyCard]
+	ldh a, [hEnergyTransEnergyCard]
 	ld [wDuelTempList], a
 	ret
 
@@ -5362,7 +5362,7 @@ CrushingCharge_DiscardAndAttachEnergyEffect:
 	call DiscardFromDeckEffect
 ; check whether the discarded card is a basic energy
 	ld a, [wDuelTempList]
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	cp $ff
 	ret z
 	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
@@ -6510,21 +6510,21 @@ SelectedCards_Discard1AndAdd1ToHandFromDeck:
 
 
 ; Pokémon Powers should not use [hTemp_ffa0]
-; adds a card in [hAIEnergyTransEnergyCard] from the deck to the hand
+; adds a card in [hEnergyTransEnergyCard] from the deck to the hand
 ; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
 Synthesis_AddToHandEffect:
 	call SetUsedPokemonPowerThisTurn
-	ldh a, [hAIEnergyTransEnergyCard]
+	ldh a, [hEnergyTransEnergyCard]
 	ldh [hTemp_ffa0], a
 	jr SelectedCard_AddToHandFromDeckEffect
 
 
 ; Pokémon Powers should not use [hTemp_ffa0]
-; adds a card in [hAIEnergyTransEnergyCard] from the discard pile to the hand
+; adds a card in [hEnergyTransEnergyCard] from the discard pile to the hand
 ; Note: Pokémon Power no longer needs to preserve [hTemp_ffa0] at this point
 MudSport_AddToHandEffect:
 	call SetUsedPokemonPowerThisTurn
-	ldh a, [hAIEnergyTransEnergyCard]
+	ldh a, [hEnergyTransEnergyCard]
 	ldh [hTemp_ffa0], a
 	jp SelectedCard_AddToHandFromDiscardPile
 
@@ -6885,7 +6885,7 @@ Synthesis_PlayerSelection:
 	; push af
 	call EnergySearch_PlayerSelection
 	ldh a, [hTemp_ffa0]
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	; pop af
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
@@ -6900,7 +6900,7 @@ MudSport_PlayerSelection:
 	call DrawWideTextBox_WaitForInput
 	call HandlePlayerSelectionFromDiscardPile_BasicEnergy
 	ret c
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	; pop af
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a

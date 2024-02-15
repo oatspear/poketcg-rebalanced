@@ -107,7 +107,7 @@ HandleAIEnergyTrans:
 
 	; store the deck index of energy card
 	ld a, e
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 
 	push de
 	ld d, 30
@@ -326,7 +326,7 @@ AIEnergyTransTransferEnergyToBench:
 
 	; store the deck index of energy card
 	ld a, e
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	jr .transfer
 
 .next_card
@@ -697,12 +697,12 @@ HandleAISynthesis:
 
 ; if any of the energy cards in deck is useful store it and use power
 	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	jp nc, HandleAIDecideToUsePokemonPower
 
 ; otherwise pick the first energy in the list
 	ld a, [wDuelTempList]
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	jp HandleAIDecideToUsePokemonPower
 
 
@@ -713,12 +713,12 @@ HandleAIMudSport:
 
 ; if any of the energy cards in deck is useful store it and use power
 	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	jp nc, HandleAIDecideToUsePokemonPower
 
 ; otherwise pick the first energy in the list
 	ld a, [wDuelTempList]
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	jp HandleAIDecideToUsePokemonPower
 
 
@@ -729,12 +729,12 @@ HandleAICrushingCharge:
 
 ; if any of the energy cards in deck is useful store it and use power
 	; call AIDecide_EnergySearch.CheckForUsefulEnergyCards
-	; ldh [hAIEnergyTransEnergyCard], a
+	; ldh [hEnergyTransEnergyCard], a
 	; jr nc, .choose_pokemon
 
 ; otherwise pick the first energy in the list
 	; ld a, [wDuelTempList]
-	; ldh [hAIEnergyTransEnergyCard], a
+	; ldh [hEnergyTransEnergyCard], a
 
 ; .choose_pokemon
 	xor a  ; PLAY_AREA_ARENA
@@ -755,12 +755,12 @@ HandleAIRainbowTeam:
 
 ; if any of the energy cards in deck is useful store it and use power
 	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	jr nc, .choose_bench
 
 ; otherwise pick the first energy in the list
 	ld a, [wDuelTempList]
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 
 .choose_bench
 ; TODO: improve
@@ -1274,7 +1274,7 @@ HandleAIFirestarterEnergy:
 
 	farcall CreateEnergyCardListFromDiscardPile_OnlyFire
 	ld a, [wDuelTempList]
-	ldh [hAIEnergyTransEnergyCard], a
+	ldh [hEnergyTransEnergyCard], a
 	ret c  ; no Energy
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
