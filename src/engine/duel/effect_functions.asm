@@ -5187,7 +5187,7 @@ UnaffectedByResistanceEffect:
 NutritionSupport_PlayerSelectEffect:
 EnergySpike_PlayerSelectEffect:
 	ld a, $ff
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 
 ; search cards in Deck
 	call CreateDeckCardList
@@ -5213,7 +5213,7 @@ EnergySpike_PlayerSelectEffect:
 	; Energy card selected
 
 	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	call EmptyScreen
 	ldtx hl, ChoosePokemonToAttachEnergyCardText
 	call DrawWideTextBox_WaitForInput
@@ -5252,7 +5252,7 @@ EnergySpike_PlayerSelectEffect:
 	; can exit
 
 	ld a, $ff
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	ret
 
 NutritionSupport_AISelectEffect:
@@ -5260,18 +5260,18 @@ EnergySpike_AISelectEffect:
 ; retrieve the presered [hTempPlayAreaLocation_ffa1] from scoring phase
 ; just for safety, ensure it is a valid play area index
 	ld a, $ff
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	cp [hl]
-	ret nc  ; error, use $ff for [hTemp_ffa0]
+	ret nc  ; error, use $ff for [hEnergyTransEnergyCard]
 ; find the first available energy
 	call CreateDeckCardList
 	ld hl, wDuelTempList
 .loop_deck
 	ld a, [hli]
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	cp $ff
 	ret z  ; end of list
 	call LoadCardDataToBuffer2_FromDeckIndex
@@ -5284,27 +5284,25 @@ EnergySpike_AISelectEffect:
 	ret
 
 EnergySpike_AttachEnergyEffect:
-	ldh a, [hTemp_ffa0]
+	ldh a, [hEnergyTransEnergyCard]
 	cp $ff
-	jr z, .done
+	jp z, SyncShuffleDeck  ; done
 
 ; add card to hand and attach it to the selected Pokemon
 	call SearchCardInDeckAndSetToJustDrawn
 	call AddCardToHand
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
-	ldh a, [hTemp_ffa0]
+	ldh a, [hEnergyTransEnergyCard]
 	call PutHandCardInPlayArea
 	call IsPlayerTurn
-	jr c, .done
+	jp c, SyncShuffleDeck  ; done
 
 ; not Player, so show detail screen
 ; and which Pokemon was chosen to attach Energy.
 	call Helper_ShowAttachedEnergyToPokemon
+	jp SyncShuffleDeck
 
-.done
-	call SyncShuffleDeck
-	ret
 
 NutritionSupport_AttachEnergyEffect:
 	call EnergySpike_AttachEnergyEffect
