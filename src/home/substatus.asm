@@ -1033,8 +1033,19 @@ IsCounterattackActive:
 	cp MACHAMP
 	; ld hl, 20  ; damage to return
 	; call z, AddToDamage_DE
-	jr nz, .dark_retribution
+	jr nz, .desperate_blast
 	ld de, 20  ; damage to return
+	jr .dark_retribution
+
+.desperate_blast
+	cp ELECTRODE_LV35
+	jr nz, .dark_retribution
+; only triggers if the Pokémon has been Knocked Out
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	or a
+	jr nz, .dark_retribution  ; not Knocked Out
+	ld de, 50  ; damage to return
 
 .dark_retribution
 	push de
