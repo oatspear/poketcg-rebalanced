@@ -604,6 +604,7 @@ CheckPlayedEnergyThisTurn:
 CardTypeTest_FunctionTable:
 	dw CardTypeTest_Pokemon
 	dw CardTypeTest_BasicPokemon
+	dw CardTypeTest_BasicEnergy
 
 
 CardTypeTest_Pokemon:
@@ -639,6 +640,26 @@ IsBasicPokemonCard:
 	ld a, [wLoadedCard2Stage]
 	or a  ; BASIC
 	ret nz  ; not a Basic Pokémon
+	scf
+	ret
+
+
+CardTypeTest_BasicEnergy:
+	ld a, [wDynamicFunctionArgument]
+	; fallthrough
+
+; input:
+;   a: deck index of the card
+; output:
+;   carry: set if the given card is a Basic Energy
+; preserves: hl, bc, de
+IsBasicEnergyCard:
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, bc, de
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_DOUBLE_COLORLESS
+	ret nc  ; not a Basic Energy card
+	and TYPE_ENERGY
+	ret z  ; not a Basic Energy card
 	scf
 	ret
 
