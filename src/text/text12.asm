@@ -1468,3 +1468,16 @@ DesperateBlastDescription:
 	line "Pokémon, put 5 damage counters on"
 	line "the Attacking Pokémon."
 	done
+
+EnergyGeneratorName:
+	text "Energy Generator"
+	done
+
+EnergyGeneratorDescription:
+	text "Once during your turn, you may"
+	line "search your deck for a Basic Energy"
+	line "card and attach it to 1 of your"
+	line "Pokémon. Then, shuffle your deck"
+	line "and put 2 damage counters on that"
+	line "Pokémon."
+	done

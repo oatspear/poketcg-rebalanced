@@ -12,7 +12,7 @@
 
 #### Electrode Lv42
 - **Tackle**: removed.
-- New attack: **Energy Spike** (L): 10 damage; attach an Energy from the deck to 1 Pokémon.
+- New Pokémon Power: **Energy Generator**: attach a Basic Energy from the deck to 1 Pokémon and put 2 damage counters on it.
 
 ## Version 0.7.0
 

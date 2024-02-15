@@ -5709,18 +5709,18 @@ ElectrodeLv42Card:
 	tx VoltorbName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 1 ; energies
-	tx EnergySpikeName ; name
-	tx EnergySpikeDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw EnergySpikeEffectCommands ; effect commands
+	energy 0 ; energies
+	tx EnergyGeneratorName ; name
+	tx EnergyGeneratorDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw EnergyGeneratorEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
