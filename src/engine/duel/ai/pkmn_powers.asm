@@ -489,8 +489,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_crushing_charge
 	cp MAROWAK_LV32
-	jr nz, .check_curse
+	jr nz, .check_energy_generator
 	call HandleAICrushingCharge
+	jr .next_1
+.check_energy_generator
+	cp ELECTRODE_LV42
+	jr nz, .check_curse
+	call HandleAIEnergyGenerator
 	jr .next_1
 .check_curse
 	cp HAUNTER_LV17
@@ -746,6 +751,39 @@ HandleAICrushingCharge:
 ; got the target card location in [hTempPlayAreaLocation_ff9d]
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTempPlayAreaLocation_ffa1], a
+	jp HandleAIDecideToUsePokemonPower
+
+
+HandleAIEnergyGenerator:
+	ld a, CARD_LOCATION_DECK
+	call FindBasicEnergyCardsInLocation
+	ret c  ; no cards
+
+; if any of the energy cards in deck is useful store it and use power
+	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
+	ldh [hEnergyTransEnergyCard], a
+	jr nc, .choose_pokemon
+
+; otherwise pick the first energy in the list
+	ld a, [wDuelTempList]
+	ldh [hEnergyTransEnergyCard], a
+
+.choose_pokemon
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ffa1], a
+	farcall AIProcessButDontPlayEnergy_SkipEvolution
+	ret nc  ; no energy card attachment is needed
+
+; got the target card location in [hTempPlayAreaLocation_ff9d]
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+; check whether the target has more than 20 HP left
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	cp 30
+	ret c  ; not enough HP
+
+; use Pokémon Power
 	jp HandleAIDecideToUsePokemonPower
 
 
