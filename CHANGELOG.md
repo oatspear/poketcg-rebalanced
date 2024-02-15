@@ -4,6 +4,11 @@
 
 ### Lightning Changes
 
+#### Magnemite Lv13
+- Increased HP from 40 to 50.
+- **Sonicboom**: removed.
+- New attack: **Searching Magnet** (C): add up to 2 Lightning Energy from deck to hand.
+
 #### Voltorb
 - **Tackle**: removed.
 - New attack: **Sonicboom** (C): 10 damage; not affected by Weakness or Resistance.

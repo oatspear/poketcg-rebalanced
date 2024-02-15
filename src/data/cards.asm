@@ -5398,11 +5398,25 @@ MagnemiteLv13Card:
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db MAGNEMITE_LV13
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx SearchingMagnetName ; name
+	tx SearchingMagnetDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw SearchingMagnetEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
 	energy LIGHTNING, 1 ; energies
 	tx ThunderWaveName ; name
 	tx MayInflictParalysisDescription ; description
@@ -5415,20 +5429,6 @@ MagnemiteLv13Card:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_THUNDER_WAVE ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx SonicboomName ; name
-	tx SonicboomDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SonicboomEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_TEAR ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness

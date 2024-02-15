@@ -3136,6 +3136,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DesperateBlastDescription
 	textpointer EnergyGeneratorName
 	textpointer EnergyGeneratorDescription
+	textpointer SearchingMagnetName
+	textpointer SearchingMagnetDescription
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

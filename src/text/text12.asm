@@ -1481,3 +1481,14 @@ EnergyGeneratorDescription:
 	line "and put 2 damage counters on that"
 	line "Pokémon."
 	done
+
+SearchingMagnetName:
+	text "Searching Magnet"
+	done
+
+SearchingMagnetDescription:
+	text "Search your deck for up to 2"
+	line "<LIGHTNING> Energy, reveal them, and put"
+	line "them in your hand."
+	line "Then, shuffle your deck."
+	done
