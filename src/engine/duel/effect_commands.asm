@@ -1307,6 +1307,12 @@ SynthesisEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Synthesis_PlayerSelection
 	db  $00
 
+EnergyGeneratorEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergyGenerator_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyGenerator_AttachEnergyEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergySpike_PlayerSelectEffect
+	db  $00
+
 QueenPressEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, QueenPressEffect
 	db  $00

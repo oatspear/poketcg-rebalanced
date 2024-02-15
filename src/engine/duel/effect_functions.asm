@@ -325,6 +325,7 @@ Trade_PreconditionCheck:
 	; fallthrough
 
 ; this Power needs to back up hTempPlayAreaLocation_ff9d
+EnergyGenerator_PreconditionCheck:
 CrushingCharge_PreconditionCheck:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
@@ -602,6 +603,16 @@ FullHeal_ClearStatusEffect:
 ; ------------------------------------------------------------------------------
 
 INCLUDE "engine/duel/effect_functions/damage.asm"
+
+
+; puts 2 damage counters on the target at location in e,
+; without counting as attack damage (does not trigger damage reduction, etc.)
+; assumes: call to SwapTurn if needed
+; inputs:
+;   e: PLAY_AREA_* of the target
+Put2DamageCountersOnTarget:
+	ld d, 20
+	jr ApplyDirectDamage_RegularAnim
 
 
 ; puts 1 damage counter on the target at location in e,
@@ -5239,6 +5250,7 @@ EnergySpike_AISelectEffect:
 	or a  ; reset carry flag
 	ret
 
+
 EnergySpike_AttachEnergyEffect:
 	ldh a, [hEnergyTransEnergyCard]
 	cp $ff
@@ -5266,6 +5278,17 @@ NutritionSupport_AttachEnergyEffect:
 	ld e, a   ; location
 	ld d, 10  ; damage
 	jp HealPlayAreaCardHP
+
+
+EnergyGenerator_AttachEnergyEffect:
+; restore [hTempPlayAreaLocation_ff9d] from [hTemp_ffa0]
+	ldh a, [hTemp_ffa0]
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call SetUsedPokemonPowerThisTurn
+	call EnergySpike_AttachEnergyEffect
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld e, a   ; location
+	jp Put2DamageCountersOnTarget
 
 
 RainbowTeam_OncePerTurnCheck:
