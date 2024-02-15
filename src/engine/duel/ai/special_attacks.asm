@@ -45,7 +45,7 @@ HandleSpecialAIAttacks:
 	jp z, .Earthquake
 	cp MAGNETON_LV35
 	jp z, .EnergySpike
-	cp ELECTRODE_LV42
+	cp ELECTRODE_LV35
 	jp z, .EnergySpike
 	cp DRAGONITE_LV45
 	jp z, .EnergySpike
