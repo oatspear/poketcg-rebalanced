@@ -5453,6 +5453,9 @@ MagnemiteLv15Card:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; (C) Magnetic Charge
+	; Attach up to 2 Basic Electric Energy from your discard pile onto 1 of your Benched Pokémon
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx TackleName ; name
