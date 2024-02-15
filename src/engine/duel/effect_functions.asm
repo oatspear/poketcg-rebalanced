@@ -678,7 +678,7 @@ ApplyDirectDamage:
 	pop af
 	or a
 	jr z, .skip_knocked_out
-	call PrintKnockedOutAndSetFlagIfHLZero
+	call PrintKnockedOutIfHLZero
 	call WaitForWideTextBoxInput
 .skip_knocked_out
 	pop bc
