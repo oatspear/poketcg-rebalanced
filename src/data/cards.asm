@@ -5608,17 +5608,17 @@ VoltorbCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx TackleName ; name
-	dw NONE ; description
+	tx SonicboomName ; name
+	tx SonicboomDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw SonicboomEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_TEAR ; animation
 
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies

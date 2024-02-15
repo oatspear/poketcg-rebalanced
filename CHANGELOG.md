@@ -4,6 +4,10 @@
 
 ### Lightning Changes
 
+#### Voltorb
+- **Tackle**: removed.
+- New attack: **Sonicboom** (C): 10 damage; not affected by Weakness or Resistance.
+
 #### Electrode Lv35
 - **Spark**: removed.
 - **Explosion**: removed.
