@@ -194,10 +194,6 @@ CheckIfEnergyIsUseful:
 	jr z, .set_carry
 	ld a, [wTempCardID]
 
-	ld d, FIGHTING_ENERGY
-	cp POLIWRATH
-	jr z, .check_energy
-
 	ld d, WATER_ENERGY
 	cp SURFING_PIKACHU_LV13
 	jr z, .check_energy
