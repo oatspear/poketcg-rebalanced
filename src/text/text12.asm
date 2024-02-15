@@ -1456,3 +1456,15 @@ Put1DamageCounterOnAnyPokemonDescription:
 	text "Put 1 damage counter on 1 of your"
 	line "opponent's Pokémon."
 	done
+
+DesperateBlastName:
+	text "Desperate Blast"
+	done
+
+DesperateBlastDescription:
+	text "If this is your Active Pokémon and"
+	line "it is Knocked Out by damage from"
+	line "an attack from your opponent's"
+	line "Pokémon, put 5 damage counters on"
+	line "the Attacking Pokémon."
+	done

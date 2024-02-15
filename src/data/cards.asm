@@ -5658,18 +5658,18 @@ ElectrodeLv35Card:
 	tx VoltorbName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 1 ; energies
-	tx SparkName ; name
-	tx Damage1BenchedPokemon10Description ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Damage1BenchedPokemon10EffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	energy 0 ; energies
+	tx DesperateBlastName ; name
+	tx DesperateBlastDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy LIGHTNING, 1 ; energies

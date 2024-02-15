@@ -5,7 +5,9 @@
 ### Lightning Changes
 
 #### Electrode Lv35
+- **Spark**: removed.
 - **Explosion**: removed.
+- New Pokémon Power: **Desperate Blast**: if KOed from an attack while Active, deal 50 damage to the attacker.
 - New attack: **Energy Spike** (L): 10 damage; attach an Energy from the deck to 1 Pokémon.
 
 #### Electrode Lv42
