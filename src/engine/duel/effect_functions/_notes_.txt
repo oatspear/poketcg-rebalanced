@@ -9,6 +9,26 @@ Spread damage to full Bench seems to be valued at 25 or 30 points.
 
 
 ; ------------------------------------------------------------------------------
+; Concepts - Lightning
+; ------------------------------------------------------------------------------
+
+- Volt Switch
+- Quick Attack or other bonuses when active (e.g. Paralysis)
+- Inflicting Paralysis
+- Discarding own Energy for damage
+- Energy acceleration from deck and discard pile
+- Recoil damage (to itself or own bench)
+- Spread damage
+- Moving energies around
+- (Ability) damage when opponent attaches energy
+- (Ability) recover discarded energy on KO
+- (Ability) card draw battlecry - plain or until X cards in hand
+- (Special Pikachu Ability) accelerate from hand to target without energies
+- Ignoring Weakness and Resistance
+- Strong attacks with drawback when having prize advantage
+
+
+; ------------------------------------------------------------------------------
 ; Concepts
 ; ------------------------------------------------------------------------------
 
