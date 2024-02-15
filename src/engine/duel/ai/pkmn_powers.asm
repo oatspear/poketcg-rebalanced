@@ -422,7 +422,7 @@ HandleAIPkmnPowers:
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	bank1call TryExecuteEffectCommandFunction
 	pop bc
-	jr c, .next_3
+	jp c, .next_3
 
 ; TryExecuteEffectCommandFunction was successful,
 ; so check what Pkmn Power this is through card's ID.
