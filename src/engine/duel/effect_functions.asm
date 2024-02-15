@@ -5195,65 +5195,21 @@ EnergySpike_PlayerSelectEffect:
 	ldtx bc, BasicEnergyText
 	lb de, SEARCHEFFECT_BASIC_ENERGY, 0
 	call LookForCardsInDeck
-	ret c
+	ret c  ; no cards, the Player refuses to search the deck
 
-	bank1call InitAndDrawCardListScreenLayout_MenuTypeSelectCheck
-	ldtx hl, ChooseBasicEnergyCardText
-	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
-.select_card
-	bank1call DisplayCardList
-	jr c, .try_cancel
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	cp TYPE_ENERGY_DOUBLE_COLORLESS
-	jr nc, .select_card ; not a Basic Energy card
-	and TYPE_ENERGY
-	jr z, .select_card ; not a Basic Energy card
-	; Energy card selected
-
-	ldh a, [hTempCardIndex_ff98]
+; choose a card from the deck
+	call HandlePlayerSelectionBasicEnergyFromDeckList
 	ldh [hEnergyTransEnergyCard], a
+	ret c  ; no cards or the Player cancelled selection
+
+; choose a Pokemon in Play Area to attach card
 	call EmptyScreen
 	ldtx hl, ChoosePokemonToAttachEnergyCardText
 	call DrawWideTextBox_WaitForInput
-
-; choose a Pokemon in Play Area to attach card
 	call HandlePlayerSelectionPokemonInPlayArea
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
-.play_sfx
-	call PlaySFX_InvalidChoice
-	jr .select_card
-
-.try_cancel
-; Player tried exiting screen, if there are
-; any Basic Energy cards, Player is forced to select them.
-; otherwise, they can safely exit.
-	ld a, DUELVARS_CARD_LOCATIONS
-	call GetTurnDuelistVariable
-.loop_deck
-	ld a, [hl]
-	cp CARD_LOCATION_DECK
-	jr nz, .next_card
-	ld a, l
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	and TYPE_ENERGY
-	jr z, .next_card
-	cp TYPE_ENERGY_DOUBLE_COLORLESS
-	jr c, .play_sfx
-.next_card
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop_deck
-	; can exit
-
-	ld a, $ff
-	ldh [hEnergyTransEnergyCard], a
-	ret
 
 NutritionSupport_AISelectEffect:
 EnergySpike_AISelectEffect:
