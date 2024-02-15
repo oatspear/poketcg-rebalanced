@@ -1671,6 +1671,12 @@ PlayAttackAnimation_DealAttackDamage:
 	pop hl
 .skip_draw_huds
 	call PrintKnockedOutIfHLZero
+	jr nc, .after_damage
+; Knocked Out Defending Pokémon
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetTurnDuelistVariable
+	set TURN_FLAG_KO_OPPONENT_POKEMON_F, [hl]
+.after_damage
 	ld a, [wTempNonTurnDuelistCardID]
 	push af
 	ld a, EFFECTCMDTYPE_AFTER_DAMAGE
@@ -2263,13 +2269,12 @@ PrintPlayAreaCardKnockedOutIfNoHP:
 	scf
 	ret
 
+
+; returns carry if a KO is detected
 PrintKnockedOutIfHLZero:
 	ld a, [hl] ; this is supposed to point to a remaining HP value after some form of damage calculation
 	or a
 	ret nz
-; HP is zero, got a Knock Out
-
-
 ;	fallthrough
 
 ; print in a text box that the Pokemon card at wTempNonTurnDuelistCardID
@@ -2405,6 +2410,16 @@ DealDamageToPlayAreaPokemon:
 	jr z, .skip_knocked_out
 	push de
 	call PrintKnockedOutIfHLZero
+	jr nc, .after_damage
+; Knocked Out the target Pokémon
+	ld a, [wIsDamageToSelf]
+	or a
+	jr nz, .after_damage
+; Knocked Out an opponent
+	ld a, DUELVARS_MISC_TURN_FLAGS
+	call GetNonTurnDuelistVariable
+	set TURN_FLAG_KO_OPPONENT_POKEMON_F, [hl]
+.after_damage
 	pop de
 .skip_knocked_out
 	call HandleStrikeBack_AgainstDamagingAttack

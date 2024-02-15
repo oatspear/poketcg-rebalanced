@@ -822,8 +822,10 @@ UpdateSubstatusConditions_StartOfTurn:
 UpdateSubstatusConditions_EndOfTurn:
 	ld a, DUELVARS_MISC_TURN_FLAGS
 	call GetTurnDuelistVariable
-	res TURN_FLAG_PKMN_POWERS_DISABLED_F, [hl]
-	res TURN_FLAG_TOSSED_TAILS_F, [hl]
+	; res TURN_FLAG_PKMN_POWERS_DISABLED_F, [hl]
+	; res TURN_FLAG_TOSSED_TAILS_F, [hl]
+	; res TURN_FLAG_KO_OPPONENT_POKEMON_F, [hl]
+	ld [hl], $0
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	ld [hl], $0
