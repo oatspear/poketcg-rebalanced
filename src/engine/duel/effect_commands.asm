@@ -664,6 +664,13 @@ WaterReserveEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, WaterReserve_AISelectEffect
 	db  $00
 
+SearchingMagnetEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCardList_AddToHandFromDeckEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SearchingMagnet_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SearchingMagnet_AISelectEffect
+	db  $00
+
 RocketShellEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RocketShell_AddToHandEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ReduceDamageTakenBy10Effect

@@ -1510,12 +1510,27 @@ TutorWaterEnergy_AISelectEffect:
 	ret
 
 
+SearchingMagnet_PlayerSelectEffect:
+	ld a, TYPE_ENERGY_LIGHTNING
+	jr Tutor2OfCardType_PlayerSelectEffect
+
+
 WaterReserve_PlayerSelectEffect:
+	ld a, TYPE_ENERGY_WATER
+	; jr Tutor2OfCardType_PlayerSelectEffect
+	; fallthrough
+
+; select 2 cards from the deck of the given type
+; input:
+;   a: TYPE_* constant of the card to search
+Tutor2OfCardType_PlayerSelectEffect:
+	; temporary storage
+	ldh [hTempList + 2], a
 	; ld b, 5
 	; call CreateDeckCardListTopNCards
 	call CreateDeckCardList
 ; select the first card
-	ld a, TYPE_ENERGY_WATER
+	ldh a, [hTempList + 2]
 	call HandlePlayerSelectionCardTypeFromDeckListToHand
 	ldh [hTempList], a
 	cp $ff
@@ -1523,19 +1538,33 @@ WaterReserve_PlayerSelectEffect:
 ; remove the first card from the list
 	call RemoveCardFromDuelTempList
 ; choose a second card
-	ld a, TYPE_ENERGY_WATER
+	ldh a, [hTempList + 2]
 	call HandlePlayerSelectionCardTypeFromDeckListToHand
 	ldh [hTempList + 1], a
 	ld a, $ff
 	ldh [hTempList + 2], a  ; terminator
 	ret
 
+
+SearchingMagnet_AISelectEffect:
+	ld b, TYPE_ENERGY_LIGHTNING
+	jr Tutor2OfCardType_AISelectEffect
+
 WaterReserve_AISelectEffect:
+	ld b, TYPE_ENERGY_WATER
+	; jr Tutor2OfCardType_AISelectEffect
+	; fallthrough
+
+; input:
+;   b: TYPE_* constant of the card to search
+Tutor2OfCardType_AISelectEffect:
+	push bc
 	; ld b, 5
 	; call CreateDeckCardListTopNCards
 	call CreateDeckCardList
-	ld b, TYPE_ENERGY_WATER
-	call ChooseCardOfGivenType_AISelectEffect
+	pop bc
+	; ld b, TYPE_ENERGY_WATER
+	call ChooseCardOfGivenType_AISelectEffect  ; preserves b
 	ldh [hTempList], a
 	cp $ff
 	ret z
@@ -1553,6 +1582,7 @@ WaterReserve_AISelectEffect:
 ;   b: TYPE_* constant of card to choose
 ; output:
 ;   a: deck index of the selected card
+; preserves: b
 ChooseCardOfGivenType_AISelectEffect:
 	ld hl, wDuelTempList
 .loop_cards
