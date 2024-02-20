@@ -1492,3 +1492,13 @@ SearchingMagnetDescription:
 	line "them in your hand."
 	line "Then, shuffle your deck."
 	done
+
+WaveRiderName:
+	text "Wave Rider"
+	done
+
+WaveRiderDescription:
+	text "Once during your turn, you may"
+	line "draw cards until you have 3 cards"
+	line "in your hand."
+	done

@@ -331,6 +331,7 @@ CrushingCharge_PreconditionCheck:
 	ldh [hTemp_ffa0], a
 	; fallthrough
 
+WaveRider_PreconditionCheck:
 Synthesis_PreconditionCheck:
 	call CheckDeckIsNotEmpty
 	ret c
@@ -7215,20 +7216,6 @@ ShuffleHandAndReturnToBottomOfDeck:
 	jr .loop_return_deck
 
 
-; input:
-;   a: how many cards to draw
-DrawNCards_NoCardDetails:
-	ld c, a  ; store in c to use later
-	bank1call DisplayDrawNCardsScreen  ; preserves bc
-.loop_draw
-	call DrawCardFromDeck
-	ret c
-	call AddCardToHand
-	dec c
-	jr nz, .loop_draw
-	ret
-
-
 ComputerSearch_PlayerSelection:
 ; create the list of the top 7 cards in deck
 	ld b, 7
@@ -7893,6 +7880,37 @@ Pokedex_OrderDeckCardsEffect:
 	ret
 
 
+
+DrawUntil5CardsInHandEffect:
+	ld c, 5
+	jr DrawUntilNCardsInHandEffect
+
+DrawUntil3CardsInHandEffect:
+	ld c, 3
+	; jr DrawUntilNCardsInHandEffect
+	; fallthrough
+
+; input:
+;   c: maximum number of cards to have in hand
+DrawUntilNCardsInHandEffect:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	sub c
+	ret nc
+; two's complement on a
+	cpl
+	inc a
+; draw (N - a)
+	cp 4
+	jr nc, DrawNCards_NoCardDetails
+; 3 or fewer cards, show details
+	dec a
+	jr z, Draw1Card
+	dec a
+	jr z, Draw2Cards
+	jr Draw3Cards
+
+
 ;
 Draw1CardEffect:
 	ldtx hl, Draw1CardFromTheDeckText
@@ -7924,7 +7942,6 @@ Draw2Cards:
 	ld c, 2
 	jr Draw3Cards.loop_draw
 
-BillEffect:
 Draw3Cards:
 	ld a, 3
 	bank1call DisplayDrawNCardsScreen
@@ -7943,6 +7960,20 @@ Draw3Cards:
 	dec c
 	jr nz, .loop_draw
 .done
+	ret
+
+
+; input:
+;   a: how many cards to draw
+DrawNCards_NoCardDetails:
+	ld c, a  ; store in c to use later
+	bank1call DisplayDrawNCardsScreen  ; preserves bc
+.loop_draw
+	call DrawCardFromDeck
+	ret c
+	call AddCardToHand
+	dec c
+	jr nz, .loop_draw
 	ret
 
 

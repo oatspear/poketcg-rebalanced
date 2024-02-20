@@ -4,6 +4,10 @@
 
 ### Lightning Changes
 
+#### Surfing Pikachu
+- **Surf**: reduced cost from (WC) to (C) and base damage from 20 to 10; double damage if attached energy this turn.
+- New Pokémon Power: **Wave Rider**: once per turn, draw cards until 3 in hand.
+
 #### Magnemite Lv13
 - Increased HP from 40 to 50.
 - **Sonicboom**: removed.

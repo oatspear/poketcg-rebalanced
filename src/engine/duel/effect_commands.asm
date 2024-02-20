@@ -587,6 +587,11 @@ CourierEffectCommands:
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Courier_SearchAndAddToHandEffect
 	db  $00
 
+WaveRiderEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, WaveRider_PreconditionCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DrawUntil3CardsInHandEffect
+	db  $00
+
 FleetFootedEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FleetFooted_PreconditionCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FleetFootedEffect
@@ -1492,7 +1497,7 @@ PokedexEffectCommands:
 	db  $00
 
 BillEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BillEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Draw3Cards
 	db  $00
 
 LassEffectCommands:

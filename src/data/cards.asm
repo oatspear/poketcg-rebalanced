@@ -5199,32 +5199,32 @@ SurfingPikachuLv13Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy WATER, 1, COLORLESS, 1 ; energies
+	energy 0 ; energies
+	tx WaveRiderName ; name
+	tx WaveRiderDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw WaveRiderEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy COLORLESS, 1 ; energies
 	tx SurfName ; name
-	dw NONE ; description
+	tx DoubleDamageIfAttachedEnergyDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw DoubleDamageIfAttachedEnergyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_WATER_JETS ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -7650,7 +7650,7 @@ SlowbroCard:
 	energy 0 ; energies
 	tx StrangeBehaviorName ; name
 	tx StrangeBehaviorDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw StrangeBehaviorEffectCommands ; effect commands
@@ -9254,7 +9254,7 @@ WigglytuffCard:
 	energy 0 ; energies
 	tx HelpingHandName ; name
 	tx HelpingHandDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw HelpingHandEffectCommands ; effect commands
@@ -9447,7 +9447,7 @@ PersianCard:
 	energy 0 ; energies
 	tx TradeName ; name
 	tx TradeDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw TradeEffectCommands ; effect commands
@@ -9549,7 +9549,7 @@ DoduoCard:
 	energy 0 ; energies
 	tx FleetFootedName ; name
 	tx FleetFootedDescription ; description
-	dw NONE ; description (cont)
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw FleetFootedEffectCommands ; effect commands
