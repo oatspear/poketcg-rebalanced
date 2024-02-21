@@ -5143,7 +5143,7 @@ FlyingPikachuCard:
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db FLYING_PIKACHU
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 

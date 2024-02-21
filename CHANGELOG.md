@@ -5,6 +5,7 @@
 ### Lightning Changes
 
 #### Flying Pikachu
+- Increased HP from 40 to 50.
 - **Fly**: reworked; no coin flip; gains immunity if the attack scores a KO.
 
 #### Surfing Pikachu
