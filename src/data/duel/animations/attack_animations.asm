@@ -162,7 +162,7 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_564f                ; ATK_ANIM_137
 	dw AttackAnimation_FullHeal            ; ATK_ANIM_FULL_HEAL
 	dw AttackAnimation_5659                ; ATK_ANIM_139
-	dw AttackAnimation_SpitPoisonSuccess   ; ATK_ANIM_SPIT_POISON_SUCCESS
+	dw AttackAnimation_ProtectNoGlow       ; ATK_ANIM_PROTECT_NO_GLOW
 	dw AttackAnimation_GustOfWind          ; ATK_ANIM_GUST_OF_WIND
 	dw AttackAnimation_HealBothSides       ; ATK_ANIM_HEAL_BOTH_SIDES
 	dw AttackAnimation_5673                ; ATK_ANIM_143
@@ -556,6 +556,9 @@ AttackAnimation_PetalDance:
 
 AttackAnimation_Protect:
 	anim_player         DUEL_ANIM_GLOW
+	; fallthrough
+
+AttackAnimation_ProtectNoGlow:
 	anim_player         DUEL_ANIM_PROTECT
 	anim_end
 
@@ -922,12 +925,6 @@ AttackAnimation_FullHeal:
 AttackAnimation_5659:
 	anim_player         DUEL_ANIM_SLEEP
 	anim_normal         $98
-	anim_end
-
-AttackAnimation_SpitPoisonSuccess:
-	anim_player         DUEL_ANIM_GLOW
-	anim_opponent       DUEL_ANIM_GOO
-	anim_normal         DUEL_ANIM_DISTORT
 	anim_end
 
 AttackAnimation_GustOfWind:

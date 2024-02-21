@@ -1,5 +1,33 @@
 ;
 
+FlyEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Fly_Success50PercentEffect
+	dbw EFFECTCMDTYPE_AI, Fly_AIEffect
+	db  $00
+
+Fly_AIEffect: ; 2e4f4 (b:64f4)
+	ld a, 30 / 2
+	lb de, 0, 30
+	jp SetExpectedAIDamage
+
+Fly_Success50PercentEffect: ; 2e4fc (b:64fc)
+	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
+	call TossCoin_BankB
+	jr c, .heads
+	xor a ; ATK_ANIM_NONE
+	ld [wLoadedAttackAnimation], a
+	call SetDefiniteDamage
+	call SetWasUnsuccessful
+	ret
+.heads
+	ld a, ATK_ANIM_AGILITY_PROTECT
+	ld [wLoadedAttackAnimation], a
+	ld a, SUBSTATUS1_FLY
+	call ApplySubstatus1ToAttackingCard
+	ret
+
+
+
 ; modern version
 SuperFangEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperFang_DamageEffect

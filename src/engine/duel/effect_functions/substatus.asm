@@ -32,6 +32,11 @@ IncreaseDamageTakenBy40Effect:
 	jr ApplySubstatus1ToAttackingCard
 
 
+ImmuneToDamageAndEffectsEffect:
+	ld a, SUBSTATUS1_FLY
+	jr ApplySubstatus1ToAttackingCard
+
+
 ; apply a status condition of type 1 identified by register a to the target
 ApplySubstatus1ToAttackingCard:
 	push af
@@ -40,6 +45,21 @@ ApplySubstatus1ToAttackingCard:
 	pop af
 	ld [hli], a
 	ret
+
+
+ImmuneIfKnockedOutOpponentEffect:
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	or a
+	ret nz
+; Knocked Out the opponent
+	ld a, ATK_ANIM_PROTECT_NO_GLOW
+	ld [wLoadedAttackAnimation], a
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+	jr ImmuneToDamageAndEffectsEffect
 
 
 ; ------------------------------------------------------------------------------

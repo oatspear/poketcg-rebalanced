@@ -2519,8 +2519,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThundershockName                                   ; 0x09c0
 	textpointer PikachuLv16Description                            ; 0x09c1
 	textpointer FlyingPikachuName                                  ; 0x09c2
-	textpointer FlyName                                            ; 0x09c3
-	textpointer FlyDescription                                     ; 0x09c4
+	textpointer FlyName
+	textpointer ImmuneIfKnockedOutOpponentDescription
 	textpointer FlyingPikachuDescription                           ; 0x09c5
 	textpointer SurfingPikachuName                                 ; 0x09c6
 	textpointer SurfName                                           ; 0x09c7

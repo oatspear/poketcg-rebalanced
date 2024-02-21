@@ -45,17 +45,16 @@ FlyingPikachuName: ; 5d19e (17:519e)
 	text "Flying Pikachu"
 	done
 
-FlyName: ; 5d1ae (17:51ae)
+FlyName:
 	text "Fly"
 	done
 
-FlyDescription: ; 5d1b3 (17:51b3)
-	text "Flip a coin. If heads, during your"
+ImmuneIfKnockedOutOpponentDescription:
+	text "If this attack Knocks Out the"
+	line "Defending Pokémon, during your"
 	line "opponent's next turn, prevent all"
 	line "effects of attacks, including"
-	line "damage, done to Flying Pikachu. "
-	line "If tails, this attack does nothing "
-	line "(not even damage)."
+	line "damage, done to this Pokémon."
 	done
 
 FlyingPikachuDescription: ; 5d26f (17:526f)

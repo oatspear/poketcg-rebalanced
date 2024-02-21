@@ -1017,9 +1017,8 @@ ZapdosThunderstormEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderstormEffect
 	db  $00
 
-FlyingPikachuFlyEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Fly_Success50PercentEffect
-	dbw EFFECTCMDTYPE_AI, Fly_AIEffect
+ImmuneIfKnockedOutOpponentEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ImmuneIfKnockedOutOpponentEffect
 	db  $00
 
 Damage1BenchedPokemon10EffectCommands:

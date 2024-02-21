@@ -4,6 +4,9 @@
 
 ### Lightning Changes
 
+#### Flying Pikachu
+- **Fly**: reworked; no coin flip; gains immunity if the attack scores a KO.
+
 #### Surfing Pikachu
 - **Surf**: reduced cost from (WC) to (C) and base damage from 20 to 10; double damage if attached energy this turn.
 - New Pokémon Power: **Wave Rider**: once per turn, draw cards until 3 in hand.

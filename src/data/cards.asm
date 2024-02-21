@@ -5164,11 +5164,11 @@ FlyingPikachuCard:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx FlyName ; name
-	tx FlyDescription ; description
+	tx ImmuneIfKnockedOutOpponentDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw FlyingPikachuFlyEffectCommands ; effect commands
+	dw ImmuneIfKnockedOutOpponentEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3

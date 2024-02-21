@@ -4891,28 +4891,6 @@ ThunderstormEffect: ; 2e429 (b:6429)
 	ret
 
 
-Fly_AIEffect: ; 2e4f4 (b:64f4)
-	ld a, 30 / 2
-	lb de, 0, 30
-	jp SetExpectedAIDamage
-
-Fly_Success50PercentEffect: ; 2e4fc (b:64fc)
-	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
-	call TossCoin_BankB
-	jr c, .heads
-	xor a ; ATK_ANIM_NONE
-	ld [wLoadedAttackAnimation], a
-	call SetDefiniteDamage
-	call SetWasUnsuccessful
-	ret
-.heads
-	ld a, ATK_ANIM_AGILITY_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_FLY
-	call ApplySubstatus1ToAttackingCard
-	ret
-
-
 ChainLightningEffect: ; 2e595 (b:6595)
 	ld a, 10
 	call SetDefiniteDamage
