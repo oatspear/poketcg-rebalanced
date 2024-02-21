@@ -479,8 +479,13 @@ HandleAIPkmnPowers:
 	jr .next_1
 .check_rainbow_team
 	cp EEVEE
-	jr nz, .check_fleet_footed
+	jr nz, .check_energy_lift
 	call HandleAIRainbowTeam
+	jr .next_1
+.check_energy_lift
+	cp FLYING_PIKACHU
+	jr nz, .check_fleet_footed
+	call HandleAIEnergyLift
 	jr .next_1
 .check_fleet_footed
 	cp DODUO
@@ -782,6 +787,40 @@ HandleAIEnergyGenerator:
 	call GetTurnDuelistVariable
 	cp 30
 	ret c  ; not enough HP
+
+; use Pokémon Power
+	jp HandleAIDecideToUsePokemonPower
+
+
+HandleAIEnergyLift:
+	ld a, CARD_LOCATION_HAND
+	call FindBasicEnergyCardsInLocation
+	ret c  ; no cards
+
+; if any of the energy cards in hand is useful store it and use power
+	call AIDecide_EnergySearch.CheckForUsefulEnergyCards
+	ldh [hEnergyTransEnergyCard], a
+	jr nc, .choose_pokemon
+
+; otherwise pick the first energy in the list
+	ld a, [wDuelTempList]
+	ldh [hEnergyTransEnergyCard], a
+
+.choose_pokemon
+	ld a,  PLAY_AREA_BENCH_1
+	ldh [hTempPlayAreaLocation_ffa1], a
+	farcall AIProcessButDontPlayEnergy_SkipEvolutionAndArena
+	ret nc  ; no energy card attachment is needed
+
+; got the target card location in [hTempPlayAreaLocation_ff9d]
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+; check whether the target has more than 20 HP left
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	or a
+	ret nz  ; already has attached energies
 
 ; use Pokémon Power
 	jp HandleAIDecideToUsePokemonPower
