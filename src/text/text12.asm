@@ -1502,3 +1502,14 @@ WaveRiderDescription:
 	line "draw cards until you have 3 cards"
 	line "in your hand."
 	done
+
+EnergyLiftName:
+	text "Energy Lift"
+	done
+
+EnergyLiftDescription:
+	text "Once during your turn, you may"
+	line "attach a Basic Energy card from your"
+	line "hand to 1 of your Benched Pokémon"
+	line "that has no attached Energy cards."
+	done

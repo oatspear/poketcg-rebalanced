@@ -1045,7 +1045,7 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 
 ; player
 	call Helper_SelectEnergyFromHand
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	ld d, a
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
@@ -1055,7 +1055,7 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 .link_opp
 	call SerialRecv8Bytes
 	ld a, d
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	ld a, e
 	ldh [hTempPlayAreaLocation_ffa1], a
 	jp AttachEnergyFromHand_AttachEnergyEffect
@@ -1063,7 +1063,7 @@ DraconicEvolution_AttachEnergyFromHandEffect:
 .ai_opp
 ; AI selects the first card
 	ld a, [wDuelTempList]
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	jp AttachEnergyFromHand_AttachEnergyEffect
 
 
@@ -5300,6 +5300,27 @@ EnergyGenerator_AttachEnergyEffect:
 	jp Put2DamageCountersOnTarget
 
 
+EnergyLift_PreconditionCheck:
+	call CheckPokemonPowerCanBeUsed
+	ret c  ; cannot be used
+	call CheckBenchIsNotEmpty
+	ret c  ; no bench
+	call AttachEnergyFromHand_HandCheck
+	ret c
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+
+;	ld a, [wAlreadyPlayedEnergyOrSupporter]
+;	and USED_FIRESTARTER_THIS_TURN
+;	jr nz, .already_used
+
+;.already_used
+;	ldtx hl, OnlyOncePerTurnText
+;	scf
+	ret
+
+
 RainbowTeam_OncePerTurnCheck:
 	call CheckPokemonPowerCanBeUsed
 	ret c  ; cannot be used
@@ -5835,7 +5856,7 @@ Helper_SelectEnergyFromHand:
 
 OptionalAttachEnergyFromHand_PlayerSelectEffect:
 	call Helper_SelectEnergyFromHand
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	cp $ff
 	ret z
 	jr AttachEnergyFromHand_PlayerSelectEffect.select_play_area
@@ -5843,7 +5864,7 @@ OptionalAttachEnergyFromHand_PlayerSelectEffect:
 AttachEnergyFromHand_PlayerSelectEffect:
 	call Helper_SelectEnergyFromHand
 	jr c, Helper_SelectEnergyFromHand.loop_hand_input
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 .select_play_area
 ; handle Player selection (play area)
 	call Helper_ChooseAPokemonInPlayArea_EmptyScreen
@@ -5857,30 +5878,62 @@ AttachEnergyFromHand_OnlyActive_PlayerSelectEffect:
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
+EnergyLift_PlayerSelectEffect:
+; choose an energy card from the hand
+	call Helper_SelectEnergyFromHand
+	ret c  ; cancelled
+	ldh [hEnergyTransEnergyCard], a
+; choose a Pokémon in the Bench
+	call EmptyScreen
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	call DrawWideTextBox_WaitForInput
+.loop
+	call HandlePlayerSelectionPokemonInBench_AllowCancel
+	ret c  ; cancelled
+	ldh [hTempPlayAreaLocation_ffa1], a
+; repeat if the Pokémon already has Energy attached
+	ld e, a
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wTotalAttachedEnergies]
+	or a
+	ret z
+	jr .loop
+
+
 AttachEnergyFromHand_AISelectEffect:
 ; AI doesn't select any card
 	ld a, $ff
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	ret
 
 AttachEnergyFromHand_OnlyActive_AISelectEffect:
 ; AI doesn't select any card
 	ld a, $ff
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 ; always choose Active Pokémon
 	xor a  ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
+
+EnergyLift_AttachEnergyEffect:
+	call SetUsedPokemonPowerThisTurn
+	; jr AttachEnergyFromHand_AttachEnergyEffect
+	; fallthrough
+
+
+; input:
+;   [hTempPlayAreaLocation_ffa1]: PLAY_AREA_* of the receiver
+;   [hEnergyTransEnergyCard]: deck index of the energy card
 AttachEnergyFromHand_AttachEnergyEffect:
-	ldh a, [hTemp_ffa0]
+	ldh a, [hEnergyTransEnergyCard]
 	cp $ff
 	ret z
 
 ; attach card to the selected Pokemon
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
-	ldh a, [hTemp_ffa0]
+	ldh a, [hEnergyTransEnergyCard]
 	call PutHandCardInPlayArea
 	call IsPlayerTurn
 	ret c
@@ -8496,15 +8549,7 @@ Helper_ChooseAPokemonInPlayArea_EmptyScreen:
 Helper_ChooseAPokemonInPlayArea:
 	ldtx hl, ChoosePokemonToAttachEnergyCardText
 	call DrawWideTextBox_WaitForInput
-; choose a Pokemon in Play Area
-	bank1call HasAlivePokemonInPlayArea
-.loop_play_area_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_play_area_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	; ldh [hTempPlayAreaLocation_ffa1], a
-	; using hTempPlayAreaLocation_ffa1 invalidates the use of hTempList
-	ret
+	jp HandlePlayerSelectionPokemonInPlayArea
 
 Helper_ShowAttachedEnergyToPokemon:
 ; show detail screen and which Pokemon was chosen to attach Energy
@@ -8519,7 +8564,7 @@ Helper_ShowAttachedEnergyToPokemon:
 	inc de
 	ld a, [hli]
 	ld [de], a
-	ldh a, [hTemp_ffa0]
+	ldh a, [hEnergyTransEnergyCard]
 	ldtx hl, AttachedEnergyToPokemonText
 	bank1call DisplayCardDetailScreen
 	ret
