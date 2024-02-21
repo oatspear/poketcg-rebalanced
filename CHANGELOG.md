@@ -6,7 +6,9 @@
 
 #### Flying Pikachu
 - Increased HP from 40 to 50.
+- **Thunder Shock**: removed.
 - **Fly**: reworked; no coin flip; gains immunity if the attack scores a KO.
+- New Pokémon Power: **Energy Lift**: once per turn, attach energy from hand to Benched Pokémon without any energies.
 
 #### Surfing Pikachu
 - **Surf**: reduced cost from (WC) to (C) and base damage from 20 to 10; double damage if attached energy this turn.

@@ -5162,11 +5162,11 @@ FlyingPikachuCard:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
+	energy COLORLESS, 2 ; energies
 	tx FlyName ; name
 	tx ImmuneIfKnockedOutOpponentDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw ImmuneIfKnockedOutOpponentEffectCommands ; effect commands
 	db NONE ; flags 1
