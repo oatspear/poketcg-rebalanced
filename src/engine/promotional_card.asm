@@ -31,8 +31,6 @@ _ShowPromotionalCardScreen:
 	ldtx hl, ReceivedPromotionalSurfingPikachuText
 	cp SURFING_PIKACHU_LV13
 	jr z, .print_text
-	cp SURFING_PIKACHU_ALT_LV13
-	jr z, .print_text
 	ldtx hl, ReceivedPromotionalCardText
 .print_text
 	push hl

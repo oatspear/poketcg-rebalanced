@@ -101,7 +101,7 @@
 	const PIKACHU_ALT_LV16            ; $64
 	const FLYING_PIKACHU              ; $65
 	const SURFING_PIKACHU_LV13        ; $66
-	const SURFING_PIKACHU_ALT_LV13    ; $67
+	const RAICHU_LV35                 ; $67
 	const RAICHU_LV40                 ; $68
 	const RAICHU_LV45                 ; $69
 	const MAGNEMITE_LV13              ; $6a

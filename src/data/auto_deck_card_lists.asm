@@ -346,8 +346,7 @@ CutePokemonCardList:
 	card_item PIKACHU_LV16,             1
 	card_item PIKACHU_ALT_LV16,         1
 	card_item FLYING_PIKACHU,           1
-	card_item SURFING_PIKACHU_LV13,     1
-	card_item SURFING_PIKACHU_ALT_LV13, 1
+	card_item SURFING_PIKACHU_LV13,     2
 	card_item RAICHU_LV40,              1
 	card_item RAICHU_LV45,              1
 	card_item JOLTEON_LV29,             1

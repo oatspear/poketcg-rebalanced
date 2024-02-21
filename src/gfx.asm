@@ -1898,10 +1898,6 @@ SurfingPikachuLv13CardGfx::
 	INCBIN "gfx/cards/surfingpikachu1.2bpp"
 	INCBIN "gfx/cards/surfingpikachu1.pal"
 
-SurfingPikachuAltLv13CardGfx::
-	INCBIN "gfx/cards/surfingpikachu2.2bpp"
-	INCBIN "gfx/cards/surfingpikachu2.pal"
-
 RaichuLv40CardGfx::
 	INCBIN "gfx/cards/raichu1.2bpp"
 	INCBIN "gfx/cards/raichu1.pal"
@@ -1909,6 +1905,10 @@ RaichuLv40CardGfx::
 RaichuLv45CardGfx::
 	INCBIN "gfx/cards/raichu2.2bpp"
 	INCBIN "gfx/cards/raichu2.pal"
+
+RaichuLv35CardGfx::
+	INCBIN "gfx/cards/raichu3.2bpp"
+	INCBIN "gfx/cards/raichu3.pal"
 
 	ds $58
 

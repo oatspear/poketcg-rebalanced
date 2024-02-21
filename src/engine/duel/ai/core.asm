@@ -194,12 +194,6 @@ CheckIfEnergyIsUseful:
 	jr z, .set_carry
 	ld a, [wTempCardID]
 
-	ld d, WATER_ENERGY
-	cp SURFING_PIKACHU_LV13
-	jr z, .check_energy
-	cp SURFING_PIKACHU_ALT_LV13
-	jr z, .check_energy
-
 ; Dragon Rage users benefit from all kinds of energy
 	cp GYARADOS
 	jr z, .set_carry

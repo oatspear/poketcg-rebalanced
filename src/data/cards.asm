@@ -103,7 +103,7 @@ CardPointers:
 	dw PikachuAltLv16Card
 	dw FlyingPikachuCard
 	dw SurfingPikachuLv13Card
-	dw SurfingPikachuAltLv13Card
+	dw RaichuLv35Card
 	dw RaichuLv40Card
 	dw RaichuLv45Card
 	dw MagnemiteLv13Card
@@ -5238,57 +5238,6 @@ SurfingPikachuLv13Card:
 	tx SurfingPikachuDescription ; description
 	db 0
 
-SurfingPikachuAltLv13Card:
-	db TYPE_PKMN_LIGHTNING ; type
-	gfx SurfingPikachuAltLv13CardGfx ; gfx
-	tx SurfingPikachuName ; name
-	db PROMOSTAR ; rarity
-	db PROMOTIONAL | PRO ; sets
-	db SURFING_PIKACHU_ALT_LV13
-	db 50 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
-
-	; attack 1
-	energy WATER, 1, COLORLESS, 1 ; energies
-	tx SurfName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_WATER_JETS ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
-
-	db 0 ; retreat cost
-	db WR_FIGHTING ; weakness
-	db NONE ; resistance
-	tx MouseName ; category
-	db 25 ; Pokedex number
-	db 0
-	db 13 ; level
-	db 1, 4 ; length
-	dw 13 * 10 ; weight
-	tx SurfingPikachuDescription ; description
-	db 0
-
 RaichuLv40Card:
 	db TYPE_PKMN_LIGHTNING ; type
 	gfx RaichuLv40CardGfx ; gfx
@@ -5378,6 +5327,57 @@ RaichuLv45Card:
 	db NONE ; flags 3
 	db 10
 	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
+
+	db 1 ; retreat cost
+	db WR_FIGHTING ; weakness
+	db NONE ; resistance
+	tx MouseName ; category
+	db 26 ; Pokedex number
+	db 0
+	db 45 ; level
+	db 2, 7 ; length
+	dw 66 * 10 ; weight
+	tx RaichuLv45Description ; description
+	db 0
+
+RaichuLv35Card:
+	db TYPE_PKMN_LIGHTNING ; type
+	gfx RaichuLv35CardGfx ; gfx
+	tx RaichuName ; name
+	db STAR ; rarity
+	db EVOLUTION | GB ; sets
+	db RAICHU_LV35
+	db 80 ; hp
+	db STAGE1 ; stage
+	tx PikachuName ; pre-evo name
+
+	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx QuickAttackName ; name
+	tx DoubleDamageIfActiveThisTurnDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw QuickAttackEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_QUICK_ATTACK ; animation
+
+	; attack 2
+	energy LIGHTNING, 2 ; energies
+	tx ThunderboltName ; name
+	tx ThunderboltDescription ; description
+	dw NONE ; description (cont)
+	db 60 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ThunderboltEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 9
+	db ATK_ANIM_THUNDERBOLT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
