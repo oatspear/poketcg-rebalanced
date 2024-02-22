@@ -1503,6 +1503,11 @@ WaveRiderDescription:
 	line "in your hand."
 	done
 
+DrawUntil5CardsInHandDescription:
+	text "Draw cards until you have 5 cards"
+	line "in your hand."
+	done
+
 EnergyLiftName:
 	text "Energy Lift"
 	done
@@ -1512,4 +1517,8 @@ EnergyLiftDescription:
 	line "attach a Basic Energy card from your"
 	line "hand to 1 of your Benched Pokémon"
 	line "that has no attached Energy cards."
+	done
+
+StrafeName:
+	text "Strafe"
 	done

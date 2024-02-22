@@ -143,17 +143,17 @@ FoulGasEffectCommands:
 DefensiveStanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal20DamageEffect_PreserveAttackAnimation
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Agility_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SwitchUser_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SwitchUser_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SwitchUser_AISelectEffect
 	db  $00
 
 DeepDiveEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Heal30DamageEffect_PreserveAttackAnimation
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Agility_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SwitchUser_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SwitchUser_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SwitchUser_AISelectEffect
 	db  $00
 
 TeleportEffectCommands:
@@ -164,18 +164,18 @@ TeleportEffectCommands:
 
 StealthPoisonEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Agility_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SwitchUser_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SwitchUser_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SwitchUser_AISelectEffect
 	db  $00
 
 OldTeleportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	; fallthrough
 SwitchUserEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Agility_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Agility_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Agility_AISelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SwitchUser_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SwitchUser_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SwitchUser_AISelectEffect
 	db  $00
 
 RapidSpinEffectCommands:
@@ -1106,6 +1106,10 @@ Draw1CardEffectCommands:
 
 Draw2CardsEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Draw2CardsEffect
+	db  $00
+
+DrawUntil5CardsInHandEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DrawUntil5CardsInHandEffect
 	db  $00
 
 FriendTackleEffectCommands:

@@ -107,9 +107,9 @@ UnableToEvolveDueToPrehistoricPowerText: ; 38359 (e:4359)
 	line "effects of Prehistoric Power."
 	done
 
-NoDamageOrEffectDueToFlyText: ; 38394 (e:4394)
+NoDamageOrEffectDueToAgilityText:
 	text "No damage or effect on next Attack"
-	line "due to the effects of Fly."
+	line "due to the effects of Agility."
 	done
 
 NoDamageOrEffectDueToBarrierText: ; 383d3 (e:43d3)

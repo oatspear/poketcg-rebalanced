@@ -257,9 +257,9 @@ HandleNoDamageOrEffectSubstatus:
 .attack
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
 	call GetTurnDuelistVariable
-	ld e, NO_DAMAGE_OR_EFFECT_FLY
-	ldtx hl, NoDamageOrEffectDueToFlyText
-	cp SUBSTATUS1_FLY
+	ld e, NO_DAMAGE_OR_EFFECT_AGILITY
+	ldtx hl, NoDamageOrEffectDueToAgilityText
+	cp SUBSTATUS1_AGILITY
 	jr z, .no_damage_or_effect
 	ld e, NO_DAMAGE_OR_EFFECT_BARRIER
 	ldtx hl, NoDamageOrEffectDueToBarrierText
@@ -359,7 +359,7 @@ CheckNoDamageOrEffect:
 NoDamageOrEffectTextIDTable:
 	tx NoDamageText                          ; NO_DAMAGE_OR_EFFECT_UNUSED
 	tx NoDamageOrEffectDueToBarrierText      ; NO_DAMAGE_OR_EFFECT_BARRIER
-	tx NoDamageOrEffectDueToFlyText          ; NO_DAMAGE_OR_EFFECT_FLY
+	tx NoDamageOrEffectDueToAgilityText      ; NO_DAMAGE_OR_EFFECT_AGILITY
 	tx NoDamageOrEffectDueToTransparencyText ; NO_DAMAGE_OR_EFFECT_TRANSPARENCY
 	tx NoDamageOrEffectDueToNShieldText      ; NO_DAMAGE_OR_EFFECT_NSHIELD
 

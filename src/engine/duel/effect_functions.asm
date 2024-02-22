@@ -2320,7 +2320,7 @@ FoulGas_PoisonOrConfusionEffect: ; 2c82a (b:482a)
 	jp ConfusionEffect
 
 
-Agility_PlayerSelectEffect:
+SwitchUser_PlayerSelectEffect:
 OldTeleport_PlayerSelectEffect:
 	ld a, $ff
 	ldh [hTemp_ffa0], a
@@ -2342,7 +2342,7 @@ OldTeleport_PlayerSelectEffect:
 	or a
 	ret
 
-Agility_AISelectEffect:
+SwitchUser_AISelectEffect:
 OldTeleport_AISelectEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -2350,7 +2350,7 @@ OldTeleport_AISelectEffect:
 	ldh [hTemp_ffa0], a
 	ret
 
-Agility_SwitchEffect:
+SwitchUser_SwitchEffect:
 OldTeleport_SwitchEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
@@ -5597,13 +5597,13 @@ HandleSwitchDefendingPokemonEffect:
 
 
 RapidSpin_PlayerSelectEffect:
-	call Agility_PlayerSelectEffect
+	call SwitchUser_PlayerSelectEffect
 	ldh a, [hTemp_ffa0]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	jp Whirlwind_SelectEffect
 
 RapidSpin_AISelectEffect:
-	call Agility_AISelectEffect
+	call SwitchUser_AISelectEffect
 	ldh a, [hTemp_ffa0]
 	ldh [hTempPlayAreaLocation_ffa1], a
 	jp Whirlwind_SelectEffect
@@ -5612,7 +5612,7 @@ RapidSpin_SwitchEffect:
 	call Whirlwind_SwitchEffect
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ldh [hTemp_ffa0], a
-	jp Agility_SwitchEffect
+	jp SwitchUser_SwitchEffect
 
 
 ; return carry if Defending Pokemon has no attacks

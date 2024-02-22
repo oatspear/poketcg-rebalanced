@@ -33,7 +33,7 @@ IncreaseDamageTakenBy40Effect:
 
 
 ImmuneToDamageAndEffectsEffect:
-	ld a, SUBSTATUS1_FLY
+	ld a, SUBSTATUS1_AGILITY
 	jr ApplySubstatus1ToAttackingCard
 
 

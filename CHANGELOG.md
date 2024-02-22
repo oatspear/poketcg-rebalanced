@@ -2,17 +2,26 @@
 
 ## Version 0.8.0
 
+### Fire Changes
+
+#### Rapidash
+- **Agility**: renamed to Strafe.
+
 ### Lightning Changes
 
 #### Flying Pikachu
 - Increased HP from 40 to 50.
 - **Thunder Shock**: removed.
-- **Fly**: reworked; no coin flip; gains immunity if the attack scores a KO.
+- **Fly**: removed.
 - New Pokémon Power: **Energy Lift**: once per turn, attach energy from hand to Benched Pokémon without any energies.
+- New attack: **Return** (CC): 10 damage; draw until you have 5 cards in hand.
 
 #### Surfing Pikachu
 - **Surf**: reduced cost from (WC) to (C) and base damage from 20 to 10; double damage if attached energy this turn.
 - New Pokémon Power: **Wave Rider**: once per turn, draw cards until 3 in hand.
+
+#### Raichu Lv40
+- **Agility**: renamed to Strafe.
 
 #### Magnemite Lv13
 - Increased HP from 40 to 50.

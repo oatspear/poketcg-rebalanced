@@ -258,7 +258,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer KnockedOutDueToDestinyBondText                     ; 0x0104
 	textpointer ReceivesDamageDueToStrikeBackText                 ; 0x0105
 	textpointer UnableToEvolveDueToPrehistoricPowerText            ; 0x0106
-	textpointer NoDamageOrEffectDueToFlyText                       ; 0x0107
+	textpointer NoDamageOrEffectDueToAgilityText
 	textpointer NoDamageOrEffectDueToBarrierText                   ; 0x0108
 	; textpointer NoDamageQueenPressText
 	textpointer UnableToUseAttackDueToNShieldText                  ; 0x010a
@@ -2519,7 +2519,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThundershockName                                   ; 0x09c0
 	textpointer PikachuLv16Description                            ; 0x09c1
 	textpointer FlyingPikachuName                                  ; 0x09c2
-	textpointer FlyName
+	textpointer ReturnName
 	textpointer ImmuneIfKnockedOutOpponentDescription
 	textpointer FlyingPikachuDescription                           ; 0x09c5
 	textpointer SurfingPikachuName                                 ; 0x09c6
@@ -3140,8 +3140,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SearchingMagnetDescription
 	textpointer WaveRiderName
 	textpointer WaveRiderDescription
+	textpointer DrawUntil5CardsInHandDescription
 	textpointer EnergyLiftName
 	textpointer EnergyLiftDescription
+	textpointer StrafeName
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

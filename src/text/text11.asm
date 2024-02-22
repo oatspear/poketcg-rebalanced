@@ -45,8 +45,8 @@ FlyingPikachuName: ; 5d19e (17:519e)
 	text "Flying Pikachu"
 	done
 
-FlyName:
-	text "Fly"
+ReturnName:
+	text "Return"
 	done
 
 ImmuneIfKnockedOutOpponentDescription:

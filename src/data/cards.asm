@@ -2947,7 +2947,7 @@ RapidashCard:
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
-	tx AgilityName ; name
+	tx StrafeName ; name
 	tx SwitchThisPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
@@ -5163,17 +5163,17 @@ FlyingPikachuCard:
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
-	tx FlyName ; name
-	tx ImmuneIfKnockedOutOpponentDescription ; description
+	tx ReturnName ; name
+	tx DrawUntil5CardsInHandDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ImmuneIfKnockedOutOpponentEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	dw DrawUntil5CardsInHandEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_BOYFRIENDS ; animation
 
 	db 0 ; retreat cost
 	db NONE ; weakness
@@ -5251,7 +5251,7 @@ RaichuLv40Card:
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
-	tx AgilityName ; name
+	tx StrafeName ; name
 	tx SwitchThisPokemonDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
@@ -5262,6 +5262,19 @@ RaichuLv40Card:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
+
+	; energy COLORLESS, 2 ; energies
+	; tx AgilityName ; name
+	; tx ImmuneIfKnockedOutOpponentDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw ImmuneIfKnockedOutOpponentEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
