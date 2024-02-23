@@ -5802,7 +5802,7 @@ ElectabuzzLv20Card:
 	db 0
 	db ATK_ANIM_BARRIER ; animation
 
-	attack 2
+	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
 	tx DoubleDamageIfActiveThisTurnDescription ; description
