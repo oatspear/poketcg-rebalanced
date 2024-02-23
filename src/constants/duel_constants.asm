@@ -323,3 +323,5 @@ DEF PRIZES_6    EQU $06
  	const CARDTEST_POKEMON                      ; $00
  	const CARDTEST_BASIC_POKEMON                ; $01
  	const CARDTEST_BASIC_ENERGY                 ; $02
+ 	const CARDTEST_MAGMAR                       ; $03
+ 	const CARDTEST_ELECTABUZZ                   ; $04
