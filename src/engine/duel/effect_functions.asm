@@ -4506,6 +4506,52 @@ Discard2Energies_DiscardEffect:
 	jp PutCardInDiscardPile
 
 
+IgnitedVoltage_PlayerSelectEffect:
+	ld a, CARDTEST_MAGMAR
+	jr DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect
+
+SearingSpark_PlayerSelectEffect:
+	ld a, CARDTEST_ELECTABUZZ
+	; jr DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect
+	; fallthrough
+
+; input:
+;   a: how to test the selected Pokémon (CARDTEST_* constants)
+; output:
+;   [hTemp_ffa0]: deck index of the selected energy to discard | $ff
+DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect:
+	call CheckMatchingPokemonInBench
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	jr c, .done
+.loop
+	call HandlePlayerSelectionPokemonInBench_AllowCancel
+	ret c  ; cancelled
+; selected Benched Pokémon
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call DynamicCardTypeTest
+	jr nc, .loop  ; invalid card
+; selected a valid Pokémon
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	call CreateArenaOrBenchEnergyCardList
+	jr c, .loop  ; no energy
+	call DiscardEnergy_PlayerSelectEffect.got_energy_list
+; ignore carry if set, otherwise the deck index is in [hTemp_ffa0]
+.done
+	or a
+	ret
+
+
+; FIXME does not select any energy to discard
+IgnitedVoltage_AISelectEffect:
+SearingSpark_AISelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Energy Discard (Opponent)
 ; ------------------------------------------------------------------------------
