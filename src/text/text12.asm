@@ -1541,6 +1541,6 @@ SearingSparkName:
 SearingSparkDescription:
 	text "If you have Electabuzz on your"
 	line "Bench, you may discard an energy"
-	line "card attached to it. If you do, this"
-	line "attack does 20 more damage."
+	line "card attached to it. If you do,"
+	line "this attack does 20 more damage."
 	done
