@@ -2997,13 +2997,26 @@ MagmarLv24Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIRE, 1, COLORLESS, 1 ; energies
-	tx FirePunchName ; name
-	dw NONE ; description
+	; energy FIRE, 1, COLORLESS, 1 ; energies
+	; tx FirePunchName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_FIRE_PUNCH ; animation
+
+	energy FIRE, 2 ; energies
+	tx SearingSparkName ; name
+	tx SearingSparkDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db DAMAGE_PLUS ; category
+	dw SearingSparkEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -5789,7 +5802,7 @@ ElectabuzzLv20Card:
 	db 0
 	db ATK_ANIM_BARRIER ; animation
 
-	; attack 2
+	attack 2
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
 	tx DoubleDamageIfActiveThisTurnDescription ; description
@@ -5841,14 +5854,27 @@ ElectabuzzLv35Card:
 	db ATK_ANIM_THUNDERSHOCK ; animation
 
 	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 2 ; energies
-	tx ThunderpunchName ; name
-	tx ThunderpunchDescription ; description
+	; energy LIGHTNING, 1, COLORLESS, 2 ; energies
+	; tx ThunderpunchName ; name
+	; tx ThunderpunchDescription ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_PLUS ; category
+	; dw ElectabuzzThunderpunchEffectCommands ; effect commands
+	; db LOW_RECOIL ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_THUNDERPUNCH ; animation
+
+	energy LIGHTNING, 2 ; energies
+	tx IgnitedVoltageName ; name
+	tx IgnitedVoltageDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw ElectabuzzThunderpunchEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
+	dw IgnitedVoltageEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
