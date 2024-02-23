@@ -290,6 +290,31 @@ CheckPokemonHasNoToolsAttached:
 	ret
 
 
+; input:
+;   a: how to test the selected Pokémon (CARDTEST_* constants)
+; output:
+;   carry: set if there is no matching Pokémon
+CheckMatchingPokemonInBench:
+	ld [wDataTableIndex], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld e, a
+	ld l, DUELVARS_BENCH
+	jr .next
+.loop
+	ld a, [hli]
+	push de
+	call DynamicCardTypeTest  ; preserves hl
+	pop de
+	ccf
+	ret nc  ; found matching card
+.next
+	dec e
+	jr nz, .loop
+	scf
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Damage
 ; ------------------------------------------------------------------------------
@@ -601,10 +626,26 @@ CheckPlayedEnergyThisTurn:
 ; ------------------------------------------------------------------------------
 
 
+; input:
+;   a: argument (e.g., deck index) to pass to a function in CardTypeTest_FunctionTable
+;   [wDataTableIndex]: CARDTEST_* constant
+; preserves: hl
+DynamicCardTypeTest:
+	ld [wDynamicFunctionArgument], a
+	ld a, [wDataTableIndex]
+	push hl
+	ld hl, CardTypeTest_FunctionTable
+	call JumpToFunctionInTable
+	pop hl
+	ret
+
+
 CardTypeTest_FunctionTable:
 	dw CardTypeTest_Pokemon       ; CARDTEST_POKEMON
 	dw CardTypeTest_BasicPokemon  ; CARDTEST_BASIC_POKEMON
 	dw CardTypeTest_BasicEnergy   ; CARDTEST_BASIC_ENERGY
+	dw CardTypeTest_IsMagmar      ; CARDTEST_MAGMAR
+	dw CardTypeTest_IsElectabuzz  ; CARDTEST_ELECTABUZZ
 
 
 CardTypeTest_Pokemon:
@@ -660,6 +701,54 @@ IsBasicEnergyCard:
 	ret nc  ; not a Basic Energy card
 	and TYPE_ENERGY
 	ret z  ; not a Basic Energy card
+	scf
+	ret
+
+
+CardTypeTest_IsMagmar:
+	ld a, [wDynamicFunctionArgument]
+	; fallthrough
+
+; input:
+;   a: deck index of the card
+; output:
+;   carry: set if the given card is Magmar
+; preserves: hl, bc, de
+IsMagmarCard:
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, bc, de
+	; ld a, [wLoadedCard2Type]
+	; cp TYPE_PKMN + 1
+	; ret nc  ; not a Pokémon card
+	ld a, [wLoadedCard2ID]
+	cp MAGMAR_LV24
+	jr z, .found
+	cp MAGMAR_LV31
+	ret nz  ; not a Magmar card
+.found
+	scf
+	ret
+
+
+CardTypeTest_IsElectabuzz:
+	ld a, [wDynamicFunctionArgument]
+	; fallthrough
+
+; input:
+;   a: deck index of the card
+; output:
+;   carry: set if the given card is Electabuzz
+; preserves: hl, bc, de
+IsElectabuzzCard:
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, bc, de
+	; ld a, [wLoadedCard2Type]
+	; cp TYPE_PKMN + 1
+	; ret nc  ; not a Pokémon card
+	ld a, [wLoadedCard2ID]
+	cp ELECTABUZZ_LV20
+	jr z, .found
+	cp ELECTABUZZ_LV35
+	ret nz  ; not an Electabuzz card
+.found
 	scf
 	ret
 

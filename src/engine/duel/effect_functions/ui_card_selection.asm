@@ -402,19 +402,6 @@ HandlePlayerSelectionFromDeckList:
 	ret
 
 
-; input:
-;   a: argument (e.g., deck index) to pass to a function in CardTypeTest_FunctionTable
-; preserves: hl
-DynamicCardTypeTest:
-	ld [wDynamicFunctionArgument], a
-	ld a, [wDataTableIndex]
-	push hl
-	ld hl, CardTypeTest_FunctionTable
-	call JumpToFunctionInTable
-	pop hl
-	ret
-
-
 ; ------------------------------------------------------------------------------
 ; Choose Pokémon In Play Area
 ; ------------------------------------------------------------------------------
