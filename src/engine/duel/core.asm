@@ -5212,12 +5212,14 @@ PrintPokemonCardLength:
 ; return carry if the turn holder has any Pokemon with non-zero HP on the bench.
 ; return how many Pokemon with non-zero HP in b.
 ; does this by calculating how many Pokemon in play area minus one
+; preserves: de
 HasAlivePokemonInBench:
 	ld a, $01
 	jr _HasAlivePokemonInPlayArea
 
 ; return carry if the turn holder has any Pokemon with non-zero HP in the play area.
 ; return how many Pokemon with non-zero HP in b.
+; preserves: de
 HasAlivePokemonInPlayArea:
 	xor a
 ;	fallthrough
