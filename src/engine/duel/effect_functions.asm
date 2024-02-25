@@ -2006,6 +2006,38 @@ GetBenchPokemonWithLowestHP:
 	ld a, d
 	ret
 
+
+; outputs:
+;   a: PLAY_AREA_* of Pokémon with highest HP
+;   d: PLAY_AREA_* of Pokémon with highest HP
+;   e: highest HP amount found
+GetBenchPokemonWithHighestHP:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a
+	lb de, PLAY_AREA_ARENA, 0
+	ld b, d
+	ld a, DUELVARS_BENCH1_CARD_HP
+	call GetTurnDuelistVariable
+	jr .start
+; find Play Area location with the highest HP
+.loop_bench
+	ld a, e
+	cp [hl]
+	jr nc, .next ; skip if HP is lower
+	ld e, [hl]
+	ld d, b
+
+.next
+	inc hl
+.start
+	inc b
+	dec c
+	jr nz, .loop_bench
+
+	ld a, d
+	ret
+
 ; handles drawing and selection of screen for
 ; choosing a color (excluding colorless), for use
 ; of Shift Pkmn Power and Conversion attacks.
