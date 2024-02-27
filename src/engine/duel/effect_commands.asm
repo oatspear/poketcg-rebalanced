@@ -880,6 +880,9 @@ CollectFireEffectCommands:
 
 EnergizeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasLightningEnergyCards
+	; fallthrough
+
+PlasmaEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Attach1LightningEnergyFromDiscard_SelectEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AccelerateFromDiscard_AttachToPokemonEffect
 	db  $00
