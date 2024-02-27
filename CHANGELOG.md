@@ -7,6 +7,11 @@
 #### Rapidash
 - **Agility**: renamed to Strafe.
 
+#### Magmar Lv24
+- Increased HP from 60 to 70.
+- **Flamethrower**: removed.
+- New attack: **Searing Spark** (FC): 20 damage; optional +20 damage if an energy is discarded from benched Electabuzz.
+
 ### Lightning Changes
 
 #### Flying Pikachu
@@ -41,6 +46,13 @@
 #### Electrode Lv42
 - **Tackle**: removed.
 - New Pokémon Power: **Energy Generator**: attach a Basic Energy from the deck to 1 Pokémon and put 2 damage counters on it.
+
+#### Electabuzz Lv35
+- **Thunder Shock**: removed.
+- **Thunderpunch**: reworked.
+- New attack: **Thunderpunch** (L): 20 damage; 10 damage to 1 of the user's benched Pokémon.
+- New attack: **Ignited Voltage** (LC): 20 damage; optional +20 damage if an energy is discarded from benched Magmar.
+
 
 ## Version 0.7.0
 

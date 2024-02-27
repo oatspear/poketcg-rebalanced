@@ -4786,20 +4786,6 @@ HardenEffect: ; 2e1f6 (b:61f6)
 	jp ApplySubstatus1ToAttackingCard
 
 
-Thunderpunch_AIEffect: ; 2e399 (b:6399)
-	ld a, (30 + 40) / 2
-	lb de, 30, 40
-	jp SetExpectedAIDamage
-
-Thunderpunch_ModifierEffect: ; 2e3a1 (b:63a1)
-	ldtx de, IfHeadPlus10IfTails10ToYourselfText
-	call TossCoin_BankB
-	ldh [hTemp_ffa0], a
-	ret nc ; return if got tails
-	ld a, 10
-	call AddToDamage
-	ret
-
 LightScreenEffect:
 	ld a, SUBSTATUS1_HALVE_DAMAGE
 	jp ApplySubstatus1ToAttackingCard

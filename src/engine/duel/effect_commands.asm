@@ -595,6 +595,11 @@ RageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
 	db  $00
 
+DoubleDamageIfUserIsDamagedEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleDamageIfUserIsDamaged_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, DoubleDamageIfUserIsDamaged_AIEffect
+	db  $00
+
 MoltresFiregiverEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Firegiver_InitialEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Firegiver_AddToHandEffect
@@ -1006,12 +1011,6 @@ OverwhelmEffectCommands:
 VengeanceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Vengeance_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Vengeance_AIEffect
-	db  $00
-
-ElectabuzzThunderpunchEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Thunderpunch_ModifierEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Thunderpunch_RecoilEffect
-	dbw EFFECTCMDTYPE_AI, Thunderpunch_AIEffect
 	db  $00
 
 ElectabuzzLightScreenEffectCommands:

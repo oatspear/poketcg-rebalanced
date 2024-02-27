@@ -2,13 +2,6 @@
 ; Recoil
 ; ------------------------------------------------------------------------------
 
-
-Thunderpunch_RecoilEffect:
-	ldh a, [hTemp_ffa0]
-	or a
-	ret nz ; return if got heads
-	; fallthrough
-
 Recoil10Effect:
 	ld a, 10
 	jp DealRecoilDamageToSelf

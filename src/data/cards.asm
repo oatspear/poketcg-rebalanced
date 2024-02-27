@@ -2992,25 +2992,26 @@ MagmarLv24Card:
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db MAGMAR_LV24
-	db 60 ; hp
+	db 70 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	; energy FIRE, 1, COLORLESS, 1 ; energies
-	; tx FirePunchName ; name
-	; dw NONE ; description
-	; dw NONE ; description (cont)
-	; db 20 ; damage
-	; db DAMAGE_NORMAL ; category
-	; dw NONE ; effect commands
-	; db NONE ; flags 1
-	; db NONE ; flags 2
-	; db NONE ; flags 3
-	; db 0
-	; db ATK_ANIM_FIRE_PUNCH ; animation
+	energy FIRE, 1 ; energies
+	tx FirePunchName ; name
+	tx DoubleDamageIfUserIsDamagedDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw DoubleDamageIfUserIsDamagedEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	db 0
+	db ATK_ANIM_FIRE_PUNCH ; animation
 
-	energy FIRE, 2 ; energies
+	; attack 2
+	energy FIRE, 1, COLORLESS, 1 ; energies
 	tx SearingSparkName ; name
 	tx SearingSparkDescription ; description
 	dw NONE ; description (cont)
@@ -3022,20 +3023,6 @@ MagmarLv24Card:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_FIRE_PUNCH ; animation
-
-	; attack 2
-	energy FIRE, 2, COLORLESS, 1 ; energies
-	tx FlamethrowerName ; name
-	tx Discard1EnergyDescription ; description
-	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Discard1EnergyEffectCommands ; effect commands
-	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
-	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
@@ -5841,33 +5828,20 @@ ElectabuzzLv35Card:
 
 	; attack 1
 	energy LIGHTNING, 1 ; energies
-	tx ThundershockName ; name
-	tx MayInflictParalysisDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
+	tx ThunderpunchName ; name
+	tx Damage1FriendlyBenchedPokemon10Description ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw Damage1FriendlyBenchedPokemon10EffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDERSHOCK ; animation
+	db ATK_ANIM_THUNDERPUNCH ; animation
 
 	; attack 2
-	; energy LIGHTNING, 1, COLORLESS, 2 ; energies
-	; tx ThunderpunchName ; name
-	; tx ThunderpunchDescription ; description
-	; dw NONE ; description (cont)
-	; db 30 ; damage
-	; db DAMAGE_PLUS ; category
-	; dw ElectabuzzThunderpunchEffectCommands ; effect commands
-	; db LOW_RECOIL ; flags 1
-	; db NONE ; flags 2
-	; db NONE ; flags 3
-	; db 0
-	; db ATK_ANIM_THUNDERPUNCH ; animation
-
-	energy LIGHTNING, 2 ; energies
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx IgnitedVoltageName ; name
 	tx IgnitedVoltageDescription ; description
 	dw NONE ; description (cont)

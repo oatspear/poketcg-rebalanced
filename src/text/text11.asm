@@ -256,14 +256,13 @@ ElectabuzzLv20Description: ; 5ddf6 (17:5df6)
 	line "and likes the color red."
 	done
 
-ThunderpunchName: ; 5de55 (17:5e55)
+ThunderpunchName:
 	text "Thunderpunch"
 	done
 
-ThunderpunchDescription: ; 5de63 (17:5e63)
-	text "Flip a coin. If heads, this attack"
-	line "does 10 more damage; if tails, this"
-	line "Pokémon does 10 damage to itself."
+Damage1FriendlyBenchedPokemon10Description:
+	text "This attack does 10 damage to 1 of"
+	line "your Benched Pokémon."
 	done
 
 ElectabuzzLv35Description: ; 5def9 (17:5ef9)

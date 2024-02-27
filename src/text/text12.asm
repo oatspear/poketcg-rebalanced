@@ -1523,6 +1523,12 @@ StrafeName:
 	text "Strafe"
 	done
 
+DoubleDamageIfUserIsDamagedDescription:
+	text "If this Pokémon has any damage"
+	line "counters on it, double this attack's"
+	line "damage."
+	done
+
 IgnitedVoltageName:
 	text "Ignited Voltage"
 	done

@@ -2560,8 +2560,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer OtherEffectsStillHappenDescriptionCont
 	textpointer ElectricName                                       ; 0x09ef
 	textpointer ElectabuzzLv20Description                         ; 0x09f0
-	textpointer ThunderpunchName                                   ; 0x09f1
-	textpointer ThunderpunchDescription                            ; 0x09f2
+	textpointer ThunderpunchName
+	textpointer Damage1FriendlyBenchedPokemon10Description
 	textpointer ElectabuzzLv35Description                         ; 0x09f3
 	textpointer JolteonName                                        ; 0x09f4
 	textpointer StunNeedleName                                     ; 0x09f6
@@ -3144,6 +3144,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EnergyLiftName
 	textpointer EnergyLiftDescription
 	textpointer StrafeName
+	textpointer DoubleDamageIfUserIsDamagedDescription
 	textpointer IgnitedVoltageName
 	textpointer IgnitedVoltageDescription
 	textpointer SearingSparkName
