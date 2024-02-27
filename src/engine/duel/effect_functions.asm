@@ -2,10 +2,8 @@
 ; Dummy Functions
 ; ------------------------------------------------------------------------------
 
-TransparencyEffect:
 Firegiver_InitialEffect:
 Quickfreeze_InitialEffect:
-PealOfThunder_InitialEffect:
 PassivePowerEffect:
 	scf
 	; fallthrough
