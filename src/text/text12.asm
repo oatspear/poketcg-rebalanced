@@ -1523,6 +1523,10 @@ StrafeName:
 	text "Strafe"
 	done
 
+ThunderSpearName:
+	text "Thunder Spear"
+	done
+
 DoubleDamageIfUserIsDamagedDescription:
 	text "If this Pokémon has any damage"
 	line "counters on it, double this attack's"

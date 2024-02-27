@@ -3154,6 +3154,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EnergyLiftName
 	textpointer EnergyLiftDescription
 	textpointer StrafeName
+	textpointer ThunderSpearName
 	textpointer DoubleDamageIfUserIsDamagedDescription
 	textpointer IgnitedVoltageName
 	textpointer IgnitedVoltageDescription
