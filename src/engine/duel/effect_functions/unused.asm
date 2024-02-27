@@ -1,5 +1,36 @@
 ;
 
+
+ElectabuzzThunderpunchEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Thunderpunch_ModifierEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Thunderpunch_RecoilEffect
+	dbw EFFECTCMDTYPE_AI, Thunderpunch_AIEffect
+	db  $00
+
+
+Thunderpunch_AIEffect: ; 2e399 (b:6399)
+	ld a, (30 + 40) / 2
+	lb de, 30, 40
+	jp SetExpectedAIDamage
+
+Thunderpunch_ModifierEffect: ; 2e3a1 (b:63a1)
+	ldtx de, IfHeadPlus10IfTails10ToYourselfText
+	call TossCoin_BankB
+	ldh [hTemp_ffa0], a
+	ret nc ; return if got tails
+	ld a, 10
+	call AddToDamage
+	ret
+
+
+Thunderpunch_RecoilEffect:
+	ldh a, [hTemp_ffa0]
+	or a
+	ret nz ; return if got heads
+	jp Recoil10Effect
+
+
+
 FlyEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Fly_Success50PercentEffect
 	dbw EFFECTCMDTYPE_AI, Fly_AIEffect
