@@ -85,11 +85,6 @@ ThunderName: ; 5d3a5 (17:53a5)
 	text "Thunder"
 	done
 
-Recoil30IfTailsDescription: ; 5d3ae (17:53ae)
-	text "Flip a coin. If tails, this Pokémon"
-	line "does 30 damage to itself."
-	done
-
 RaichuLv40Description: ; 5d3e7 (17:53e7)
 	text "Its long tail serves as a ground to"
 	line "protect itself from its own"
@@ -535,6 +530,10 @@ Recoil10Description:
 
 Recoil20Description:
 	text "Also does 20 damage to itself."
+	done
+
+Recoil30Description:
+	text "Also does 30 damage to itself."
 	done
 
 MachokeDescription: ; 5eb2c (17:6b2c)

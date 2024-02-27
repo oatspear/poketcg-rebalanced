@@ -481,6 +481,10 @@ Recoil20EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil20Effect
 	db  $00
 
+Recoil30EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil30Effect
+	db  $00
+
 Recoil40EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil40Effect
 	db  $00
@@ -1040,11 +1044,6 @@ ExplosionEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Selfdestruct100Bench20Effect
 	db  $00
 
-ZapdosThunderEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ZapdosThunder_Recoil50PercentEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ZapdosThunder_RecoilEffect
-	db  $00
-
 ThunderboltEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DiscardAllAttachedEnergiesEffect
 	db  $00
@@ -1112,11 +1111,6 @@ GrowlEffectCommands:
 
 ChainLightningEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ChainLightningEffect
-	db  $00
-
-RaichuThunderEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RaichuThunder_Recoil50PercentEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, RaichuThunder_RecoilEffect
 	db  $00
 
 DamageUpTo2Benched10EffectCommands:

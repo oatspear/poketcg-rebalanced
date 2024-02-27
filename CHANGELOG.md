@@ -10,9 +10,7 @@
 #### Magmar Lv24
 - Increased HP from 60 to 70.
 - **Fire Punch**: removed.
-- **Flamethrower**: removed.
-- New attack: **Ember** (F): 20 damage; discard 1 energy.
-- New attack: **Searing Spark** (FC): 20 damage; optional +20 damage if an energy is discarded from benched Electabuzz.
+- New attack: **Searing Spark** (F): 10 damage; optional +20 damage if an energy is discarded from benched Electabuzz.
 
 #### Magmar Lv31
 - **Smokescreen**: removed.
@@ -65,8 +63,8 @@
 #### Electabuzz Lv35
 - **Thunder Shock**: removed.
 - **Thunderpunch**: removed.
-- New attack: **Electric Current** (L): 10 damage; may move an energy to another Pokémon.
-- New attack: **Ignited Voltage** (LC): 20 damage; optional +20 damage if an energy is discarded from benched Magmar.
+- New attack: **Ignited Voltage** (L): 10 damage; optional +20 damage if an energy is discarded from benched Magmar.
+- New attack: **Thunder** (LLC): 60 damage; 30 recoil.
 
 ### Colorless Changes
 

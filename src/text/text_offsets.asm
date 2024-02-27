@@ -2532,7 +2532,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SurfingPikachuDescription                          ; 0x09c8
 	textpointer RaichuName                                         ; 0x09c9
 	textpointer ThunderName                                        ; 0x09cb
-	textpointer Recoil30IfTailsDescription                         ; 0x09cc
 	textpointer RaichuLv40Description                             ; 0x09cd
 	textpointer GigashockName                                    ; 0x09ce
 	textpointer DamageUpTo2BenchedDescription                      ; 0x09cf
@@ -2619,8 +2618,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer KarateChopDescription                              ; 0x0a28
 	textpointer ChopDownName
 	textpointer ChopDownDescription
-	textpointer Recoil10Description                                ; 0x0a2a
-	textpointer Recoil20Description                                ; 0x0a2a
+	textpointer Recoil10Description
+	textpointer Recoil20Description
+	textpointer Recoil30Description
 	textpointer MachokeDescription                                 ; 0x0a2b
 	textpointer MachampName                                        ; 0x0a2c
 	textpointer StrikeBackName

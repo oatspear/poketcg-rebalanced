@@ -3011,31 +3011,31 @@ MagmarLv24Card:
 
 	; attack 1
 	energy FIRE, 1 ; energies
-	tx EmberName ; name
-	tx Discard1EnergyDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Discard1EnergyEffectCommands ; effect commands
-	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
-	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_SMALL_FLAME ; animation
-
-	; attack 2
-	energy FIRE, 1, COLORLESS, 1 ; energies
 	tx SearingSparkName ; name
 	tx SearingSparkDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
 	dw SearingSparkEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_FIRE_PUNCH ; animation
+	db ATK_ANIM_SMALL_FLAME ; animation
+
+	; attack 2
+	energy FIRE, 2, COLORLESS, 1 ; energies
+	tx FlamethrowerName ; name
+	tx Discard1EnergyDescription ; description
+	dw NONE ; description (cont)
+	db 50 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Discard1EnergyEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 3
+	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
@@ -5058,6 +5058,19 @@ PikachuLv16Card:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; energy LIGHTNING, 1 ; energies
+	; tx ElectricCurrentName ; name
+	; tx EnergySlideDescription ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw EnergySlideEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db DISCARD_ENERGY ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_THUNDERSHOCK ; animation
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx GrowlName ; name
@@ -5292,11 +5305,11 @@ RaichuLv40Card:
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx ThunderName ; name
-	tx Recoil30IfTailsDescription ; description
+	tx Recoil30Description ; description
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
-	dw RaichuThunderEffectCommands ; effect commands
+	dw Recoil30EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -5809,7 +5822,7 @@ ElectabuzzLv20Card:
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw Damage1FriendlyBenchedPokemon10EffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
@@ -5854,31 +5867,31 @@ ElectabuzzLv35Card:
 
 	; attack 1
 	energy LIGHTNING, 1 ; energies
-	tx ElectricCurrentName ; name
-	tx EnergySlideDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw EnergySlideEffectCommands ; effect commands
-	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_THUNDERSHOCK ; animation
-
-	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx IgnitedVoltageName ; name
 	tx IgnitedVoltageDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
 	dw IgnitedVoltageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDERPUNCH ; animation
+	db ATK_ANIM_THUNDERSHOCK ; animation
+
+	; attack 2
+	energy LIGHTNING, 2, COLORLESS, 1 ; energies
+	tx ThunderName ; name
+	tx Recoil30Description ; description
+	dw NONE ; description (cont)
+	db 60 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Recoil30EffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_THUNDER ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -6073,11 +6086,11 @@ ZapdosLv64Card:
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx ThunderName ; name
-	tx Recoil30IfTailsDescription ; description
+	tx Recoil20Description ; description
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ZapdosThunderEffectCommands ; effect commands
+	dw Recoil20EffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

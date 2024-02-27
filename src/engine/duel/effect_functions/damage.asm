@@ -10,6 +10,10 @@ Recoil20Effect:
 	ld a, 20
 	jp DealRecoilDamageToSelf
 
+Recoil30Effect:
+	ld a, 30
+	jp DealRecoilDamageToSelf
+
 Recoil40Effect:
 	ld a, 40
 	jp DealRecoilDamageToSelf
