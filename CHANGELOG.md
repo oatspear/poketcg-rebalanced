@@ -55,10 +55,17 @@
 - **Tackle**: removed.
 - New Pokémon Power: **Energy Generator**: attach a Basic Energy from the deck to 1 Pokémon and put 2 damage counters on it.
 
+#### Electabuzz Lv20
+- Increased HP from 60 to 70.
+- **Light Screen**: removed.
+- **Quick Attack**: removed.
+- New attack: **Thunderpunch** (L): 20 damage; 10 damage to 1 of the user's benched Pokémon.
+- New attack: **Thunder Spear** (LCC): 30 damage to one of the opponent's Pokémon.
+
 #### Electabuzz Lv35
 - **Thunder Shock**: removed.
-- **Thunderpunch**: reworked.
-- New attack: **Thunderpunch** (L): 20 damage; 10 damage to 1 of the user's benched Pokémon.
+- **Thunderpunch**: removed.
+- New attack: **Electric Current** (L): 10 damage; may move an energy to another Pokémon.
 - New attack: **Ignited Voltage** (LC): 20 damage; optional +20 damage if an energy is discarded from benched Magmar.
 
 ### Colorless Changes
@@ -1239,7 +1246,7 @@
 - Increased HP from 60 to 70.
 - **Water Gun**: removed.
 - **Agility**: removed.
-- New attack: **Aqua Launcher** (WC): 30 damage to one of the opponent's Pokémon.
+- New attack: **Sharpshooter** (WC): 30 damage to one of the opponent's Pokémon.
 - New attack: **Twister** (WWC): 40 damage, discard an Energy from the opponent.
 
 #### Goldeen

@@ -5482,6 +5482,19 @@ MagnemiteLv15Card:
 	; (C) Magnetic Charge
 	; Attach up to 2 Basic Electric Energy from your discard pile onto 1 of your Benched Pokémon
 
+	; energy LIGHTNING, 1 ; energies
+	; tx LightScreenName ; name
+	; tx LightScreenDescription ; description
+	; tx OtherEffectsStillHappenDescriptionCont ; description (cont)
+	; db 0 ; damage
+	; db RESIDUAL ; category
+	; dw LightScreenEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_BARRIER ; animation
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx TackleName ; name
@@ -5784,37 +5797,37 @@ ElectabuzzLv20Card:
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db ELECTABUZZ_LV20
-	db 60 ; hp
+	db 70 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy LIGHTNING, 1 ; energies
-	tx LightScreenName ; name
-	tx LightScreenDescription ; description
-	tx OtherEffectsStillHappenDescriptionCont ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw ElectabuzzLightScreenEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_BARRIER ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx QuickAttackName ; name
-	tx DoubleDamageIfActiveThisTurnDescription ; description
-	dw NONE ; description (cont)
+	tx ThunderpunchName ; name
+	tx Damage1FriendlyBenchedPokemon10Description ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw QuickAttackEffectCommands ; effect commands
-	db NONE ; flags 1
+	db DAMAGE_NORMAL ; category
+	dw Damage1FriendlyBenchedPokemon10EffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_THUNDERPUNCH ; animation
+
+	; attack 2
+	energy LIGHTNING, 1, COLORLESS, 2 ; energies
+	tx ThunderSpearName ; name
+	tx Deal30ToAnyPokemonDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 3
+	db 2
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5841,17 +5854,17 @@ ElectabuzzLv35Card:
 
 	; attack 1
 	energy LIGHTNING, 1 ; energies
-	tx ThunderpunchName ; name
-	tx Damage1FriendlyBenchedPokemon10Description ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 20 ; damage
+	tx ElectricCurrentName ; name
+	tx EnergySlideDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Damage1FriendlyBenchedPokemon10EffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db NONE ; flags 2
+	dw EnergySlideEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDERPUNCH ; animation
+	db ATK_ANIM_THUNDERSHOCK ; animation
 
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies

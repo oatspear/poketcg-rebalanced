@@ -1527,6 +1527,10 @@ ThunderSpearName:
 	text "Thunder Spear"
 	done
 
+ElectricCurrentName:
+	text "Electric Current"
+	done
+
 DoubleDamageIfUserIsDamagedDescription:
 	text "If this Pokémon has any damage"
 	line "counters on it, double this attack's"
