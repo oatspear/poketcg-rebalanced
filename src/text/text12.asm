@@ -1550,3 +1550,15 @@ SearingSparkDescription:
 	line "card attached to it. If you do,"
 	line "this attack does 20 more damage."
 	done
+
+IncinerateName:
+	text "Incinerate"
+	done
+
+IncinerateDescription:
+	text "Before doing damage, discard any"
+	line "Trainer cards attached to the"
+	line "Defending Pokémon. If a card was"
+	line "discarded this way, double this"
+	line "attack's damage."
+	done

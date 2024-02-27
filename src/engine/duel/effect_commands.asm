@@ -572,6 +572,16 @@ DiscardToolsFromOpponentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DiscardOpponentTool_DiscardEffect
 	db  $00
 
+PluckEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PluckEffect
+	dbw EFFECTCMDTYPE_AI, IfOpponentHasAttachedToolDoubleDamage_AIEffect
+	db  $00
+
+IncinerateEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PluckEffect
+	dbw EFFECTCMDTYPE_AI, IfOpponentHasAttachedToolDoubleDamage_AIEffect
+	db  $00
+
 CorrosiveAcidEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardOpponentEnergyIfHeads_50PercentEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect

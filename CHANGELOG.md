@@ -9,8 +9,16 @@
 
 #### Magmar Lv24
 - Increased HP from 60 to 70.
+- **Fire Punch**: removed.
 - **Flamethrower**: removed.
+- New attack: **Ember** (F): 20 damage; discard 1 energy.
 - New attack: **Searing Spark** (FC): 20 damage; optional +20 damage if an energy is discarded from benched Electabuzz.
+
+#### Magmar Lv31
+- **Smokescreen**: removed.
+- **Combustion**: removed.
+- New attack: **Incinerate** (F): 10 damage; discards any Tools attached to the Defending Pokémon; double damage if a tool was discarded.
+- New attack: **Fire Punch** (FF): 20 damage; double damage if the user is damaged.
 
 ### Lightning Changes
 
@@ -52,6 +60,11 @@
 - **Thunderpunch**: reworked.
 - New attack: **Thunderpunch** (L): 20 damage; 10 damage to 1 of the user's benched Pokémon.
 - New attack: **Ignited Voltage** (LC): 20 damage; optional +20 damage if an energy is discarded from benched Magmar.
+
+### Colorless Changes
+
+#### Spearow
+- **Pluck**: double damage if a Tool was discarded from the opponent.
 
 
 ## Version 0.7.0

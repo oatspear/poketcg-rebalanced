@@ -2343,9 +2343,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MagmarName                                         ; 0x090c
 	textpointer FirePunchName                                      ; 0x090d
 	textpointer SpitfireName                                       ; 0x090f
-	textpointer MagmarLv24Description                             ; 0x0910
-	textpointer SmokescreenName                                    ; 0x0911
-	textpointer MagmarLv31Description                             ; 0x0913
+	textpointer MagmarLv24Description
+	textpointer SmokescreenName                                    ; unused
+	textpointer MagmarLv31Description
 	textpointer FlareonName                                        ; 0x0914
 	textpointer EeveeName                                          ; 0x0915
 	textpointer BiteName                                           ; 0x0916
@@ -2509,6 +2509,11 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DamagePerPokemonPowerDescription
 	textpointer Damage1BenchedPokemon20Description
 	textpointer NoPokemonWithoutDamageCountersText
+
+; ------------------------------------------------------------------------------
+; text11.asm
+; ------------------------------------------------------------------------------
+
 	textpointer VoltTackleName
 	textpointer MouseName                                          ; 0x09b9
 	textpointer PikachuLv12Description                            ; 0x09ba
@@ -2846,6 +2851,11 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThiefDescription
 	textpointer ChooseCardToPutOnTheBottomOfTheDeckText
 	textpointer PutOnTheBottomOfTheDeckText
+
+; ------------------------------------------------------------------------------
+; text12.asm
+; ------------------------------------------------------------------------------
+
 	textpointer RattataName
 	textpointer RatName                                            ; 0x0ae8
 	textpointer RattataDescription                                 ; 0x0ae9
@@ -3149,6 +3159,13 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer IgnitedVoltageDescription
 	textpointer SearingSparkName
 	textpointer SearingSparkDescription
+	textpointer IncinerateName
+	textpointer IncinerateDescription
+
+; ------------------------------------------------------------------------------
+; text13.asm
+; ------------------------------------------------------------------------------
+
 	textpointer ProfessorOakName                                   ; 0x0b68
 	textpointer ProfessorOakDescription                            ; 0x0b69
 	textpointer ImposterProfessorOakName                           ; 0x0b6a

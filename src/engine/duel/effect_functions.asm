@@ -1104,6 +1104,12 @@ PrimordialDream_MorphAndAddToHandEffect:
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
 
+PluckEffect:
+	call DiscardOpponentTool_DiscardEffect
+	jp c, DoubleDamage_DamageBoostEffect
+	ret
+
+
 RampageEffect:
 	call Rage_DamageBoostEffect
 	jp SelfConfusionEffect

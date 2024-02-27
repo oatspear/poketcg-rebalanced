@@ -2616,6 +2616,19 @@ VulpixCard:
 	db 3
 	db ATK_ANIM_SMALL_FLAME ; animation
 
+	; energy FIRE, 2 ; energies
+	; tx CombustionName ; name
+	; tx Discard1CardFromOpponentsDeckDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw SmallCombustionEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_SMALL_FLAME ; animation
+
 	db 0 ; retreat cost
 	db WR_WATER ; weakness
 	db NONE ; resistance
@@ -2998,17 +3011,17 @@ MagmarLv24Card:
 
 	; attack 1
 	energy FIRE, 1 ; energies
-	tx FirePunchName ; name
-	tx DoubleDamageIfUserIsDamagedDescription ; description
+	tx EmberName ; name
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw DoubleDamageIfUserIsDamagedEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Discard1EnergyEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db BOOST_IF_TAKEN_DAMAGE ; flags 3
-	db 0
-	db ATK_ANIM_FIRE_PUNCH ; animation
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 3
+	db ATK_ANIM_SMALL_FLAME ; animation
 
 	; attack 2
 	energy FIRE, 1, COLORLESS, 1 ; energies
@@ -3049,31 +3062,31 @@ MagmarLv31Card:
 
 	; attack 1
 	energy FIRE, 1 ; energies
-	tx SmokescreenName ; name
-	tx OpponentAttackMayDoNothingDescription ; description
+	tx IncinerateName ; name
+	tx IncinerateDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SmokescreenEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_DARK_GAS ; animation
-
-	; attack 2
-	energy FIRE, 2 ; energies
-	tx CombustionName ; name
-	tx Discard1CardFromOpponentsDeckDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SmallCombustionEffectCommands ; effect commands
+	db DAMAGE_PLUS ; category
+	dw IncinerateEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_SMALL_FLAME ; animation
+
+	; attack 2
+	energy FIRE, 2 ; energies
+	tx FirePunchName ; name
+	tx DoubleDamageIfUserIsDamagedDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw DoubleDamageIfUserIsDamagedEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	db 0
+	db ATK_ANIM_FIRE_PUNCH ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
@@ -8787,8 +8800,8 @@ SpearowCard:
 	tx PluckDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw DiscardToolsFromOpponentEffectCommands ; effect commands
+	db DAMAGE_PLUS ; category
+	dw PluckEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

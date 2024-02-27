@@ -174,6 +174,8 @@ DiscardArenaTool_DiscardEffect:
 
 ; input:
 ;   a: PLAY_AREA_* of the target
+; output:
+;   carry: set if a Tool was discarded
 ; preserves: nothing
 DiscardPlayAreaTool_DiscardEffect:
   ld c, a
@@ -196,18 +198,24 @@ DiscardPlayAreaTool_DiscardEffect:
 	jr nz, .skip  ; not in target play area location
 	ld a, l
 	call GetCardIDFromDeckIndex  ; preserves af, hl, bc
+  ld a, e
+  cp MYSTERIOUS_FOSSIL
+  jr z, .skip  ; not a Tool
 	call GetCardType  ; preserves hl, bc
 	cp TYPE_TRAINER
 	jr nz, .skip  ; not a trainer card
 	ld a, l
 ; assume: there is only one attached tool at a time
 ; no need to search for more cards
-	jp PutCardInDiscardPile
+	call PutCardInDiscardPile
+  scf
+  ret
 .skip
 	inc l
 	ld a, l
 	cp DECK_SIZE
 	jr c, .next_card
+  xor a
 	ret
 
 
