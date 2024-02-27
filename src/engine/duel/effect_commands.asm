@@ -1057,9 +1057,20 @@ Damage1BenchedPokemon30EffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
 	db  $00
 
-
 Damage1FriendlyBenchedPokemon10EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal10DamageToFriendlyTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageFriendlyBenchedPokemonIfAny_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageFriendlyBenchedPokemonIfAny_AISelectEffect
+	db  $00
+
+Damage1FriendlyBenchedPokemon20EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal20DamageToFriendlyTarget_DamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageFriendlyBenchedPokemonIfAny_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageFriendlyBenchedPokemonIfAny_AISelectEffect
+	db  $00
+
+Damage1FriendlyBenchedPokemon30EffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Deal30DamageToFriendlyTarget_DamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageFriendlyBenchedPokemonIfAny_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, DamageFriendlyBenchedPokemonIfAny_AISelectEffect
 	db  $00

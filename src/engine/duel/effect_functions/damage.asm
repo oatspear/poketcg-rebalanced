@@ -48,7 +48,6 @@ Deal30DamageToTarget_DamageEffect:
 	; jr DealDamageToTarget_DE_DamageEffect
 	; fallthrough
 
-
 ; Deals DE damage to 1 of the opponent's Pokémon
 DealDamageToTarget_DE_DamageEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
@@ -63,9 +62,25 @@ DealDamageToTarget_DE_DamageEffect:
 
 
 Deal10DamageToFriendlyTarget_DamageEffect:
-	call SwapTurn
-	call Deal10DamageToTarget_DamageEffect
-	jp SwapTurn
+	ld de, 10
+	jr DealDamageToFriendlyTarget_DE_DamageEffect
+
+Deal20DamageToFriendlyTarget_DamageEffect:
+	ld de, 20
+	jr DealDamageToFriendlyTarget_DE_DamageEffect
+
+Deal30DamageToFriendlyTarget_DamageEffect:
+	ld de, 30
+	; jr DealDamageToFriendlyTarget_DE_DamageEffect
+	; fallthrough
+
+; Deals DE damage to 1 of the turn holder's Pokémon
+DealDamageToFriendlyTarget_DE_DamageEffect:
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	cp $ff
+	ret z
+	ld b, a
+	jp DealDamageToPlayAreaPokemon_RegularAnim
 
 
 ; ------------------------------------------------------------------------------
@@ -86,14 +101,7 @@ DamageTargetPokemon_PlayerSelectEffect:
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
 	bank1call HasAlivePokemonInPlayArea
-
-.loop_input
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop_input
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempPlayAreaLocation_ffa1], a
-.got_target
-	call SwapTurn
+	call DamageTargetBenchedPokemon_PlayerSelectEffect.loop_input
 .done
 	or a
 	ret
