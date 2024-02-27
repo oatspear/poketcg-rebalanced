@@ -1117,7 +1117,7 @@ RampageEffect:
 MendEffect:
 	ld a, $ff
 	ldh [hTempList + 1], a
-	call EnergyAbsorption_AttachToPokemonEffect
+	call AccelerateFromDiscard_AttachToPokemonEffect
 	jp Heal10DamageEffect
 
 
@@ -4297,6 +4297,13 @@ Retrieve1WaterEnergyFromDiscard_SelectEffect:
 	jr PickFirstNCardsFromList_SelectEffect
 
 
+Attach1LightningEnergyFromDiscard_SelectEffect:
+; pick the first energy card
+	call CreateEnergyCardListFromDiscardPile_OnlyLightning
+	ld a, 1
+	jr PickFirstNCardsFromList_SelectEffect
+
+
 Attach1FireEnergyFromDiscard_SelectEffect:
 ; pick the first energy card
 	call CreateEnergyCardListFromDiscardPile_OnlyFire
@@ -4313,15 +4320,12 @@ PickFirstNCardsFromList_SelectEffect:
 	ld c, a
 .loop
 	ld a, [hli]
-	cp $ff
-	jr z, .done
 	ld [de], a
+	cp $ff  ; terminating byte
+	ret z   ; done
 	inc de
 	dec c
 	jr nz, .loop
-.done
-	ld a, $ff ; terminating byte
-	ld [de], a
 	ret
 
 
@@ -4361,9 +4365,9 @@ AttachEnergyFromDiscard_AttachToPokemonEffect:
 	ret
 
 
-CollectFire_AttachToPokemonEffect:
-GatherToxins_AttachToPokemonEffect:
-EnergyAbsorption_AttachToPokemonEffect:
+; input:
+;   [hTempList]: $ff-terminated list of discarded card indices to attach
+AccelerateFromDiscard_AttachToPokemonEffect:
 	ld e, CARD_LOCATION_ARENA
 	; jr SetCardLocationsFromDiscardPileToPlayArea
 	; fallthrough
@@ -4371,6 +4375,7 @@ EnergyAbsorption_AttachToPokemonEffect:
 
 ; input:
 ;   e: CARD_LOCATION_* constant
+;   [hTempList]: $ff-terminated list of discarded card indices to attach
 SetCardLocationsFromDiscardPileToPlayArea:
 	ld hl, hTempList
 .loop

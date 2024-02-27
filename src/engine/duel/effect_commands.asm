@@ -724,7 +724,7 @@ DoubleDamageIfAttachedEnergyEffectCommands:
 GatherToxinsEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GatherToxins_AttachToPokemonEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AccelerateFromDiscard_AttachToPokemonEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, GatherToxins_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, RetrieveBasicEnergyFromDiscardPile_AISelectEffect
 	db  $00
@@ -875,7 +875,13 @@ BarrierEffectCommands:
 CollectFireEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasFireEnergyCards
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Attach1FireEnergyFromDiscard_SelectEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CollectFire_AttachToPokemonEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AccelerateFromDiscard_AttachToPokemonEffect
+	db  $00
+
+EnergizeEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasLightningEnergyCards
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Attach1LightningEnergyFromDiscard_SelectEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AccelerateFromDiscard_AttachToPokemonEffect
 	db  $00
 
 AbsorbWaterEffectCommands:
@@ -904,7 +910,7 @@ MendEffectCommands:
 
 EnergyAbsorptionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AttachToPokemonEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AccelerateFromDiscard_AttachToPokemonEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyAbsorption_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyAbsorption_AISelectEffect
 	db  $00
@@ -1023,7 +1029,7 @@ VengeanceEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Vengeance_AIEffect
 	db  $00
 
-ElectabuzzLightScreenEffectCommands:
+LightScreenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LightScreenEffect
 	db  $00
 
