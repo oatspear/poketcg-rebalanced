@@ -212,6 +212,11 @@ CheckDiscardPileHasFireEnergyCards:
   jp CreateEnergyCardListFromDiscardPile_OnlyFire
 
 
+; return carry if no Lightning Energy cards in Discard Pile
+CheckDiscardPileHasLightningEnergyCards:
+  jp CreateEnergyCardListFromDiscardPile_OnlyLightning
+
+
 ; return carry if no Pokémon cards in Discard Pile
 CheckDiscardPileHasPokemonCards:
   call CreatePokemonCardListFromDiscardPile
