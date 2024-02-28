@@ -2997,7 +2997,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AscensionName
 	textpointer AscensionDescription
 	textpointer RagingStormName
-	textpointer RagingStormDescription
+	textpointer DoubleDamageIfMorePrizesDescription
 	textpointer VaporEssenceName
 	textpointer VaporEssenceDescription
 	textpointer JoltEssenceName

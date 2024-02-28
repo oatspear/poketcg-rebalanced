@@ -698,7 +698,7 @@ RagingStormName:
 	text "Raging Storm"
 	done
 
-RagingStormDescription:
+DoubleDamageIfMorePrizesDescription:
 	text "This attack does double damage if"
 	line "you have more Prize cards remaining"
 	line "than your opponent."

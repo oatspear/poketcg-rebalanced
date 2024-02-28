@@ -220,10 +220,9 @@ GrassKnotEffectCommands:
 	dbw EFFECTCMDTYPE_AI, GrassKnot_AIEffect
 	db  $00
 
-RevengeEffectCommands:
-RagingStormEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RagingStorm_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, RagingStorm_AIEffect
+DoubleDamageIfMorePrizesEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleDamageIfMorePrizes_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, DoubleDamageIfMorePrizes_AIEffect
 	db  $00
 
 ChopDownEffectCommands:
