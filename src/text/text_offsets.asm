@@ -3163,6 +3163,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SearingSparkDescription
 	textpointer IncinerateName
 	textpointer IncinerateDescription
+	textpointer OvervoltageName
+	textpointer OvervoltageDescription
 
 ; ------------------------------------------------------------------------------
 ; text13.asm

@@ -3024,18 +3024,18 @@ MagmarLv24Card:
 	db ATK_ANIM_SMALL_FLAME ; animation
 
 	; attack 2
-	energy FIRE, 2, COLORLESS, 1 ; energies
-	tx FlamethrowerName ; name
-	tx Discard1EnergyDescription ; description
+	energy FIRE, 1, COLORLESS, 1 ; energies
+	tx FirePunchName ; name
+	tx DoubleDamageIfMorePrizesDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Discard1EnergyEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw DoubleDamageIfMorePrizesEffectCommands ; effect commands
 	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_BIG_FLAME ; animation
+	db 0
+	db ATK_ANIM_FIRE_PUNCH ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
@@ -3075,18 +3075,18 @@ MagmarLv31Card:
 	db ATK_ANIM_SMALL_FLAME ; animation
 
 	; attack 2
-	energy FIRE, 2 ; energies
-	tx FirePunchName ; name
-	tx DoubleDamageIfUserIsDamagedDescription ; description
+	energy FIRE, 2, COLORLESS, 1 ; energies
+	tx FlamethrowerName ; name
+	tx Discard1EnergyDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw DoubleDamageIfUserIsDamagedEffectCommands ; effect commands
+	db 50 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Discard1EnergyEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db BOOST_IF_TAKEN_DAMAGE ; flags 3
-	db 0
-	db ATK_ANIM_FIRE_PUNCH ; animation
+	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 3
+	db 3
+	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness
@@ -5816,31 +5816,44 @@ ElectabuzzLv20Card:
 
 	; attack 1
 	energy LIGHTNING, 1 ; energies
-	tx ThunderpunchName ; name
-	tx Damage1FriendlyBenchedPokemon10Description ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Damage1FriendlyBenchedPokemon10EffectCommands ; effect commands
+	tx OvervoltageName ; name
+	tx OvervoltageDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw OvervoltageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDERPUNCH ; animation
+	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 2 ; energies
-	tx ThunderSpearName ; name
-	tx Deal30ToAnyPokemonDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw Deal30ToAnyPokemonEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	energy LIGHTNING, 2, COLORLESS, 1 ; energies
+	tx ThunderName ; name
+	tx Recoil30Description ; description
+	dw NONE ; description (cont)
+	db 60 ; damage
+	db DAMAGE_NORMAL ; category
+	dw Recoil30EffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 2
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db 0
+	db ATK_ANIM_THUNDER ; animation
+
+	; energy LIGHTNING, 1, COLORLESS, 2 ; energies
+	; tx ThunderSpearName ; name
+	; tx Deal30ToAnyPokemonDescription ; description
+	; tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	; db 0 ; damage
+	; db RESIDUAL ; category
+	; dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	; db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	; db FLAG_2_BIT_6 ; flags 2
+	; db NONE ; flags 3
+	; db 2
+	; db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5880,18 +5893,18 @@ ElectabuzzLv35Card:
 	db ATK_ANIM_THUNDERSHOCK ; animation
 
 	; attack 2
-	energy LIGHTNING, 2, COLORLESS, 1 ; energies
-	tx ThunderName ; name
-	tx Recoil30Description ; description
-	dw NONE ; description (cont)
-	db 60 ; damage
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx ThunderpunchName ; name
+	tx Damage1FriendlyBenchedPokemon10Description ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Recoil30EffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
+	dw Damage1FriendlyBenchedPokemon10EffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDER ; animation
+	db ATK_ANIM_THUNDERPUNCH ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

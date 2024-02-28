@@ -1570,3 +1570,15 @@ IncinerateDescription:
 	line "discarded this way, double this"
 	line "attack's damage."
 	done
+
+OvervoltageName:
+	text "Overvoltage"
+	done
+
+OvervoltageDescription:
+	text "Before doing damage, discard any"
+	line "Trainer cards attached to the"
+	line "Defending Pokémon. If a card was"
+	line "discarded this way, double this"
+	line "attack's damage."
+	done
