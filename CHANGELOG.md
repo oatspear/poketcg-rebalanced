@@ -9,7 +9,7 @@
 
 #### Magmar Lv24
 - Increased HP from 60 to 70.
-- **Fire Punch**: double damage if the opponent has taken more Prizes.
+- **Fire Punch**: double damage if the user is damaged.
 - **Flamethrower**: removed.
 - New attack: **Searing Spark** (F): 10 damage; optional +20 damage if an energy is discarded from benched Electabuzz.
 
