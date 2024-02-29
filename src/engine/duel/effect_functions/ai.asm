@@ -93,6 +93,18 @@ Prank_AISelectEffect:
 ; ------------------------------------------------------------------------------
 
 
+Put1DamageCounterOnTarget_AIEffect:
+	ld a, 10
+	lb de, 10, 10
+	jp UpdateExpectedAIDamage
+
+
+FirePunch_AIEffect:
+	ld a, 10
+	lb de, 10, 30
+	jp UpdateExpectedAIDamage
+
+
 
 ; ------------------------------------------------------------------------------
 ; Trainer Cards

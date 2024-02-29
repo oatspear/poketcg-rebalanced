@@ -3012,7 +3012,7 @@ MagmarLv24Card:
 	; attack 1
 	energy FIRE, 1 ; energies
 	tx FirePunchName ; name
-	tx DoubleDamageIfUserIsDamagedDescription ; description
+	tx FirePunchDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category

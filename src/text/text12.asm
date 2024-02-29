@@ -1531,9 +1531,11 @@ ElectricCurrentName:
 	text "Electric Current"
 	done
 
-DoubleDamageIfUserIsDamagedDescription:
+FirePunchDescription:
 	text "If this Pokémon has any damage"
-	line "counters on it, double this attack's"
+	line "counters on it, you may discard an"
+	line "energy card attached to it."
+	line "If you do, this attack does 20 more"
 	line "damage."
 	done
 

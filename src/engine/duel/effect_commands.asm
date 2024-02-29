@@ -553,6 +553,14 @@ Bounce1EnergyEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
+FirePunchEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FirePunch_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfSelectedCard20BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, FirePunch_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, FirePunch_AIEffect
+	db  $00
+
 ; FIXME
 IgnitedVoltageEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, IgnitedVoltage_PlayerSelectEffect

@@ -1001,12 +1001,6 @@ Put1DamageCounterOnTarget_DamageEffect:
 	jp SwapTurn
 
 
-Put1DamageCounterOnTarget_AIEffect:
-	ld a, 10
-	lb de, 10, 10
-	jp UpdateExpectedAIDamage
-
-
 ; Remove status conditions from target PLAY_AREA_* and attach an Energy from Hand.
 ; input:
 ;   [hTempPlayAreaLocation_ffa1]: PLAY_AREA_* of target card
@@ -4459,13 +4453,42 @@ DiscardEnergy_AISelectEffect:
 	ret
 
 
+FirePunch_AISelectEffect:
+	call _StoreFF_CheckIfUserIsDamaged
+	ret z  ; not damaged
+	ld a, [wAIAttackLogicFlags]
+	bit AI_LOGIC_MIN_DAMAGE_CAN_KO_F, a
+	ret nz  ; no need for bonus damage
+	bit AI_LOGIC_MAX_DAMAGE_CAN_KO_F, a
+	jr nz, DiscardEnergy_AISelectEffect  ; can KO with bonus
+	ret
+
+
 OptionalDiscardEnergy_PlayerSelectEffect:
 	ld a, $ff
 	ldh [hTemp_ffa0], a
+.select
 	xor a ; PLAY_AREA_ARENA
 	call CreateArenaOrBenchEnergyCardList
 	call nc, DiscardEnergy_PlayerSelectEffect.got_energy_list
 ; ignore carry if set, otherwise the deck index is in [hTemp_ffa0]
+	or a
+	ret
+
+
+FirePunch_PlayerSelectEffect:
+	call _StoreFF_CheckIfUserIsDamaged
+	jr nz, OptionalDiscardEnergy_PlayerSelectEffect.select
+	ret
+
+
+; output:
+;   z: set if the user did not take damage
+_StoreFF_CheckIfUserIsDamaged:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
 	or a
 	ret
 
