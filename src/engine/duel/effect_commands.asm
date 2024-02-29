@@ -571,12 +571,12 @@ IgnitedVoltageEffectCommands:
 	db  $00
 
 ; FIXME
-ElectricHeatEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ElectricHeat_PlayerSelectEffect
+SearingSparkEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SearingSpark_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfSelectedCard30BonusDamage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, ElectricHeat_AISelectEffect
-	; dbw EFFECTCMDTYPE_AI, ElectricHeat_AIEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SearingSpark_AISelectEffect
+	; dbw EFFECTCMDTYPE_AI, SearingSpark_AIEffect
 	db  $00
 
 DiscardToolsFromOpponentEffectCommands:

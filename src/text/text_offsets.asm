@@ -3159,8 +3159,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FirePunchDescription
 	textpointer IgnitedVoltageName
 	textpointer IgnitedVoltageDescription
-	textpointer ElectricHeatName
-	textpointer ElectricHeatDescription
+	textpointer SearingSparkName
+	textpointer SearingSparkDescription
 	textpointer IncinerateName
 	textpointer IncinerateDescription
 	textpointer OvervoltageName

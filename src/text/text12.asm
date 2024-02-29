@@ -1550,11 +1550,11 @@ IgnitedVoltageDescription:
 	line "attack does 30 more damage."
 	done
 
-ElectricHeatName:
-	text "Electric Heat"
+SearingSparkName:
+	text "Searing Spark"
 	done
 
-ElectricHeatDescription:
+SearingSparkDescription:
 	text "If you have Electabuzz on your"
 	line "Bench, you may discard an energy"
 	line "card attached to it. If you do,"

@@ -4574,7 +4574,7 @@ IgnitedVoltage_PlayerSelectEffect:
 	ld a, CARDTEST_MAGMAR
 	jr DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect
 
-ElectricHeat_PlayerSelectEffect:
+SearingSpark_PlayerSelectEffect:
 	ld a, CARDTEST_ELECTABUZZ
 	; jr DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect
 	; fallthrough
@@ -4610,7 +4610,7 @@ DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect:
 
 ; FIXME does not select any energy to discard
 IgnitedVoltage_AISelectEffect:
-ElectricHeat_AISelectEffect:
+SearingSpark_AISelectEffect:
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 	ret
