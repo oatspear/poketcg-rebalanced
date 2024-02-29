@@ -4571,11 +4571,11 @@ Discard2Energies_DiscardEffect:
 
 
 IgnitedVoltage_PlayerSelectEffect:
-	ld a, CARDTEST_MAGMAR
+	ld a, CARDTEST_ENERGIZED_MAGMAR
 	jr DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect
 
 SearingSpark_PlayerSelectEffect:
-	ld a, CARDTEST_ELECTABUZZ
+	ld a, CARDTEST_ENERGIZED_ELECTABUZZ
 	; jr DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect
 	; fallthrough
 
@@ -4598,20 +4598,43 @@ DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect:
 	call DynamicCardTypeTest
 	jr nc, .loop  ; invalid card
 ; selected a valid Pokémon
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CreateArenaOrBenchEnergyCardList
-	jr c, .loop  ; no energy
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+	; call CreateArenaOrBenchEnergyCardList
+	; jr c, .loop  ; no energy
 	call DiscardEnergy_PlayerSelectEffect.got_energy_list
-; ignore carry if set, otherwise the deck index is in [hTemp_ffa0]
+; ignore carry if set, because this is used for an EFFECTCMDTYPE_INITIAL_EFFECT_2
+; otherwise, the deck index is in [hTemp_ffa0]
 .done
 	or a
 	ret
 
 
-; FIXME does not select any energy to discard
+; discards energy if the bonus is enough to score a KO
 IgnitedVoltage_AISelectEffect:
+	ld a, CARDTEST_ENERGIZED_MAGMAR
+	jr FireLightningCombo_AISelectEffect
+
 SearingSpark_AISelectEffect:
+	ld a, CARDTEST_ENERGIZED_ELECTABUZZ
+	; jr FireLightningCombo_AISelectEffect
+	; fallthrough
+
+FireLightningCombo_AISelectEffect:
+	call CheckMatchingPokemonInBench
+	; ld e, a  ; play area location of the matching Pokémon
 	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret c  ; no matches
+	ld a, [wAIAttackLogicFlags]
+	bit AI_LOGIC_MIN_DAMAGE_CAN_KO_F, a
+	ret nz  ; no need for bonus damage
+	; bit AI_LOGIC_MAX_DAMAGE_CAN_KO_F, a
+	; ret z  ; bonus damage is not enough
+; choose an energy attached to the matching Pokémon
+; list of energy cards is already built in `CheckMatchingPokemonInBench`
+	; ld a, e
+	; call CreateArenaOrBenchEnergyCardList
+	ld a, [wDuelTempList] ; pick first card
 	ldh [hTemp_ffa0], a
 	ret
 
