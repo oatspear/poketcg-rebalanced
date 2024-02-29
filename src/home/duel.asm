@@ -465,9 +465,10 @@ CreateDeckCardListTopNCards:
 
 ; fill wDuelTempList with the turn holder's energy cards
 ; in the arena or in a bench slot (their 0-59 deck indexes).
-; if a == 0: search in CARD_LOCATION_ARENA
-; if a != 0: search in CARD_LOCATION_BENCH_[A]
-; return carry if no energy cards were found
+; input:
+;   a: PLAY_AREA_* of the Pokémon to check
+; output:
+;   carry: set if no energy cards were found
 CreateArenaOrBenchEnergyCardList:
 	or CARD_LOCATION_PLAY_AREA
 	ld c, a
