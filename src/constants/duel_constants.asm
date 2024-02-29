@@ -324,7 +324,9 @@ DEF PRIZES_6    EQU $06
  	const CARDTEST_BASIC_POKEMON                ; $01
  	const CARDTEST_BASIC_ENERGY                 ; $02
  	const CARDTEST_MAGMAR                       ; $03
- 	const CARDTEST_ELECTABUZZ                   ; $04
+ 	const CARDTEST_ENERGIZED_MAGMAR             ; $04
+ 	const CARDTEST_ELECTABUZZ                   ; $05
+ 	const CARDTEST_ENERGIZED_ELECTABUZZ         ; $06
 
 ; [wAIAttackLogicFlags] constants
 DEF AI_LOGIC_MIN_DAMAGE_CAN_KO_F     EQU 0

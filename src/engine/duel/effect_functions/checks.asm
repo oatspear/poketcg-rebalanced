@@ -642,7 +642,9 @@ CheckPlayedEnergyThisTurn:
 ; input:
 ;   a: argument (e.g., deck index) to pass to a function in CardTypeTest_FunctionTable
 ;   [wDataTableIndex]: CARDTEST_* constant
-; preserves: hl
+; preserves:
+;   hl: always
+;   bc, de: if the test function also does
 DynamicCardTypeTest:
 	ld [wDynamicFunctionArgument], a
 	ld a, [wDataTableIndex]
@@ -654,11 +656,13 @@ DynamicCardTypeTest:
 
 
 CardTypeTest_FunctionTable:
-	dw CardTypeTest_Pokemon       ; CARDTEST_POKEMON
-	dw CardTypeTest_BasicPokemon  ; CARDTEST_BASIC_POKEMON
-	dw CardTypeTest_BasicEnergy   ; CARDTEST_BASIC_ENERGY
-	dw CardTypeTest_IsMagmar      ; CARDTEST_MAGMAR
-	dw CardTypeTest_IsElectabuzz  ; CARDTEST_ELECTABUZZ
+	dw CardTypeTest_Pokemon                ; CARDTEST_POKEMON
+	dw CardTypeTest_BasicPokemon           ; CARDTEST_BASIC_POKEMON
+	dw CardTypeTest_BasicEnergy            ; CARDTEST_BASIC_ENERGY
+	dw CardTypeTest_IsMagmar               ; CARDTEST_MAGMAR
+	dw CardTypeTest_IsEnergizedMagmar      ; CARDTEST_ENERGIZED_MAGMAR
+	dw CardTypeTest_IsElectabuzz           ; CARDTEST_ELECTABUZZ
+	dw CardTypeTest_IsEnergizedElectabuzz  ; CARDTEST_ENERGIZED_ELECTABUZZ
 
 
 CardTypeTest_Pokemon:
@@ -742,6 +746,22 @@ IsMagmarCard:
 	ret
 
 
+; input:
+;   [wDynamicFunctionArgument]: PLAY_AREA_* of the Pokémon to check
+; output:
+;   carry: set if the given Pokémon is a Magmar with some attached energies
+;   [wDuelTempList]: list of attached energy cards
+; preserves: hl, bc, de
+CardTypeTest_IsEnergizedMagmar:
+	push de
+	ld a, [wDynamicFunctionArgument]
+	ld e, a
+	ld a, CARDTEST_MAGMAR
+	call IsEnergizedMatchingPokemon
+	pop de
+	ret
+
+
 CardTypeTest_IsElectabuzz:
 	ld a, [wDynamicFunctionArgument]
 	; fallthrough
@@ -766,6 +786,22 @@ IsElectabuzzCard:
 	ret
 
 
+; input:
+;   [wDynamicFunctionArgument]: PLAY_AREA_* of the Pokémon to check
+; output:
+;   carry: set if the given Pokémon is an Electabuzz with some attached energies
+;   [wDuelTempList]: list of attached energy cards
+; preserves: hl, bc, de
+CardTypeTest_IsEnergizedElectabuzz:
+	push de
+	ld a, [wDynamicFunctionArgument]
+	ld e, a
+	ld a, CARDTEST_ELECTABUZZ
+	call IsEnergizedMatchingPokemon
+	pop de
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Compound Checks
 ; ------------------------------------------------------------------------------
@@ -775,3 +811,35 @@ WickedTentacle_PreconditionCheck:
 	call CheckBenchIsNotEmpty
 	call nc, CheckArenaPokemonHasAnyEnergiesAttached
 	jp SwapTurn
+
+
+; input:
+;   a: how to test the selected Pokémon (CARDTEST_* constants)
+;   e: PLAY_AREA_* of the Pokémon to test
+; output:
+;   carry: set if the given Pokémon passes the test and has some attached energies
+;   [wDuelTempList]: list of attached energy cards
+; preserves: hl, bc, de
+IsEnergizedMatchingPokemon:
+	push hl
+	push bc
+	ld [wDataTableIndex], a
+	ld a, e
+; get the deck index of the play area Pokémon
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+; call the match test function
+	push de
+	call DynamicCardTypeTest
+	pop de
+	jr nc, .done  ; does not match
+; retrieve play area location again
+	ld a, e
+	push de
+	call CreateArenaOrBenchEnergyCardList
+	pop de
+	ccf  ; carry would be set if there are no energies
+.done
+	pop bc
+	pop hl
+	ret
