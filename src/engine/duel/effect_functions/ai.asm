@@ -105,6 +105,25 @@ FirePunch_AIEffect:
 	jp UpdateExpectedAIDamage
 
 
+IgnitedVoltage_AIEffect:
+	ld a, CARDTEST_ENERGIZED_MAGMAR
+	call CheckMatchingPokemonInBench
+	ret c
+; energized Magmar is available
+	ld a, 10
+	lb de, 10, 40
+	jp UpdateExpectedAIDamage
+
+
+SearingSpark_AIEffect:
+	ld a, CARDTEST_ENERGIZED_ELECTABUZZ
+	call CheckMatchingPokemonInBench
+	ret c
+; energized Electabuzz is available
+	ld a, 20
+	lb de, 20, 50
+	jp UpdateExpectedAIDamage
+
 
 ; ------------------------------------------------------------------------------
 ; Trainer Cards
