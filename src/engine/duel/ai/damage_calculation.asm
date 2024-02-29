@@ -23,6 +23,7 @@ EstimateDamage_VersusDefendingCard:
 	ld [hl], a  ; wDamageFlags
 	ld [wAIMinDamage], a
 	ld [wAIMaxDamage], a
+	ld [wAIAttackLogicFlags], a
 	ld e, a
 	ld d, a
 	ret
@@ -34,6 +35,8 @@ EstimateDamage_VersusDefendingCard:
 	ld a, [wDamage]
 	ld [wAIMinDamage], a
 	ld [wAIMaxDamage], a
+	xor a
+	ld [wAIAttackLogicFlags], a
 	ld a, EFFECTCMDTYPE_AI
 	call TryExecuteEffectCommandFunction
 	ld a, [wAIMinDamage]
@@ -86,21 +89,31 @@ EstimateDamage_VersusDefendingCard:
 ; calculates the damage that will be dealt to the player's active card
 ; using the card that is located in hTempPlayAreaLocation_ff9d
 ; taking into account weakness/resistance/pluspowers/defenders/etc
-; and outputs the result capped at a max of $ff
+; and outputs the result capped at a max of MAX_DAMAGE
 ; input:
 ;	[wAIMinDamage] = base damage
 ;	[wAIMaxDamage] = base damage
 ;	[wDamage]      = base damage
 ;	[hTempPlayAreaLocation_ff9d] = turn holder's card location as the attacker
-CalculateDamage_VersusDefendingPokemon: ; 14453 (5:4453)
+CalculateDamage_VersusDefendingPokemon:
 	ld hl, wAIMinDamage
 	call _CalculateDamage_VersusDefendingPokemon
+	jr nc, .check_max_damage
+	ld hl, wAIAttackLogicFlags
+	set AI_LOGIC_MIN_DAMAGE_CAN_KO_F, [hl]
+.check_max_damage
 	ld hl, wAIMaxDamage
 	call _CalculateDamage_VersusDefendingPokemon
+	jr nc, .check_normal_damage
+	ld hl, wAIAttackLogicFlags
+	set AI_LOGIC_MAX_DAMAGE_CAN_KO_F, [hl]
+.check_normal_damage
 	ld hl, wDamage
 ;	fallthrough
 
-_CalculateDamage_VersusDefendingPokemon: ; 14462 (5:4462)
+; output:
+;   carry: set if the end damage is enough to score a KO
+_CalculateDamage_VersusDefendingPokemon:
 	ld e, [hl]
 	ld d, $00
 	push hl
@@ -209,7 +222,13 @@ _CalculateDamage_VersusDefendingPokemon: ; 14462 (5:4462)
 ;.not_poisoned
 	call SwapTurn
 
+; is this enough damage to KO the Defending Pokémon?
 .done
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+; subtract 1 from HP so that we get carry if (HP <= damage)
+	dec a
+	cp e
 	pop hl
 	ld [hl], e
 	ret

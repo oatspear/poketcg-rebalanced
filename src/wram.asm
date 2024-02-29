@@ -785,8 +785,10 @@ wNumberPrizeCardsToTake:: ; ccc8
 	ds $1
 
 ; OATS I think this is unused anywhere.
-; set to 1 if the coin toss in the confusion check is heads (CheckSelfConfusionDamage)
+; set to 1 if the coin toss in the confusion check is tails (CheckSelfConfusionDamage)
 wGotTailsFromConfusionCheck:: ; ccc9
+; helpful flags to handle AI attack logic
+wAIAttackLogicFlags::
 	ds $1
 
 ; used to store card indices of all stages, in order, of a Play Area Pokémon
