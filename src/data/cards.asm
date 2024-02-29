@@ -3011,12 +3011,12 @@ MagmarLv24Card:
 
 	; attack 1
 	energy FIRE, 1 ; energies
-	tx SearingSparkName ; name
-	tx SearingSparkDescription ; description
+	tx ElectricHeatName ; name
+	tx ElectricHeatDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw SearingSparkEffectCommands ; effect commands
+	dw ElectricHeatEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

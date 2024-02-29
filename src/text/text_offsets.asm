@@ -3159,8 +3159,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DoubleDamageIfUserIsDamagedDescription
 	textpointer IgnitedVoltageName
 	textpointer IgnitedVoltageDescription
-	textpointer SearingSparkName
-	textpointer SearingSparkDescription
+	textpointer ElectricHeatName
+	textpointer ElectricHeatDescription
 	textpointer IncinerateName
 	textpointer IncinerateDescription
 	textpointer OvervoltageName

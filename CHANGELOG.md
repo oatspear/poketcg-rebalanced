@@ -11,7 +11,7 @@
 - Increased HP from 60 to 70.
 - **Fire Punch**: double damage if the user is damaged.
 - **Flamethrower**: removed.
-- New attack: **Searing Spark** (F): 10 damage; optional +20 damage if an energy is discarded from benched Electabuzz.
+- New attack: **Electric Heat** (F): 10 damage; optional +20 damage if an energy is discarded from benched Electabuzz.
 
 #### Magmar Lv31
 - **Smokescreen**: removed.
