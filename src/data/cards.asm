@@ -3010,11 +3010,11 @@ MagmarLv24Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIRE, 1, COLORLESS, 1 ; energies
+	energy FIRE, 1 ; energies
 	tx FirePunchName ; name
 	tx DoubleDamageIfUserIsDamagedDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_PLUS ; category
 	dw DoubleDamageIfUserIsDamagedEffectCommands ; effect commands
 	db NONE ; flags 1

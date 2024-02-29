@@ -9,7 +9,7 @@
 
 #### Magmar Lv24
 - Increased HP from 60 to 70.
-- **Fire Punch**: double damage if the user is damaged.
+- **Fire Punch**: reduced cost from (FC) to (F); reduced base damage from 20 to 10; double damage if the user is damaged.
 - **Flamethrower**: removed.
 - New attack: **Electric Heat** (FC): 20 damage; optional +30 damage if an energy is discarded from benched Electabuzz.
 
