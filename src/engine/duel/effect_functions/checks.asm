@@ -525,11 +525,19 @@ FullHeal_CheckPlayAreaStatus:
 
 CheckArenaPokemonHasAnyEnergiesAttached:
 	ld e, PLAY_AREA_ARENA
+	; jr CheckPlayAreaPokemonHasAnyEnergiesAttached
+	; fallthrough
+
+; input:
+;   e: PLAY_AREA_* of the Pokémon to check
+; output:
+;   carry: set if there are no attached energies
+CheckPlayAreaPokemonHasAnyEnergiesAttached:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wTotalAttachedEnergies]
 	ldtx hl, NoEnergyCardsText
 	cp 1
-	ret ; return carry if not enough energy
+	ret
 
 
 ;
