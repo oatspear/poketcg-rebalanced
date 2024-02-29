@@ -1014,16 +1014,12 @@ VengefulHorn_AIEffect:
 ; ------------------------------------------------------------------------------
 
 ; +20 damage if a card was selected (hTemp_ffa0 is not $ff)
-IfSelectedCard20BonusDamage_DamageBoostEffect:
+IfSelectedCard30BonusDamage_DamageBoostEffect:
 	ldh a, [hTemp_ffa0]
 	cp $ff
 	ret z
-	ld a, 20
+	ld a, 30
 	jp AddToDamage
-
-IfSelectedCard20BonusDamage_AIEffect:
-	call IfSelectedCard20BonusDamage_DamageBoostEffect
-	jp SetDefiniteAIDamage
 
 
 ; double damage if some stored value is true

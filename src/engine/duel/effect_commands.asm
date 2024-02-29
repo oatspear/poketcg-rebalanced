@@ -557,7 +557,7 @@ Bounce1EnergyEffectCommands:
 IgnitedVoltageEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, IgnitedVoltage_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfSelectedCard20BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfSelectedCard30BonusDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, IgnitedVoltage_AISelectEffect
 	; dbw EFFECTCMDTYPE_AI, IgnitedVoltage_AIEffect
 	db  $00
@@ -566,7 +566,7 @@ IgnitedVoltageEffectCommands:
 ElectricHeatEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ElectricHeat_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfSelectedCard20BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfSelectedCard30BonusDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, ElectricHeat_AISelectEffect
 	; dbw EFFECTCMDTYPE_AI, ElectricHeat_AIEffect
 	db  $00

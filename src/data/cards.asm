@@ -3010,20 +3010,6 @@ MagmarLv24Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIRE, 1 ; energies
-	tx ElectricHeatName ; name
-	tx ElectricHeatDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw ElectricHeatEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SMALL_FLAME ; animation
-
-	; attack 2
 	energy FIRE, 1, COLORLESS, 1 ; energies
 	tx FirePunchName ; name
 	tx DoubleDamageIfUserIsDamagedDescription ; description
@@ -3036,6 +3022,20 @@ MagmarLv24Card:
 	db BOOST_IF_TAKEN_DAMAGE ; flags 3
 	db 0
 	db ATK_ANIM_FIRE_PUNCH ; animation
+
+	; attack 2
+	energy FIRE, 1, COLORLESS, 1 ; energies
+	tx ElectricHeatName ; name
+	tx ElectricHeatDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw ElectricHeatEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_SMALL_FLAME ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness

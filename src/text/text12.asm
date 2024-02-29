@@ -1545,7 +1545,7 @@ IgnitedVoltageDescription:
 	text "If you have Magmar on your Bench,"
 	line "you may discard an energy card"
 	line "attached to it. If you do, this"
-	line "attack does 20 more damage."
+	line "attack does 30 more damage."
 	done
 
 ElectricHeatName:
@@ -1556,7 +1556,7 @@ ElectricHeatDescription:
 	text "If you have Electabuzz on your"
 	line "Bench, you may discard an energy"
 	line "card attached to it. If you do,"
-	line "this attack does 20 more damage."
+	line "this attack does 30 more damage."
 	done
 
 IncinerateName:

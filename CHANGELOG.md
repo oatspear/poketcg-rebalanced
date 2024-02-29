@@ -11,7 +11,7 @@
 - Increased HP from 60 to 70.
 - **Fire Punch**: double damage if the user is damaged.
 - **Flamethrower**: removed.
-- New attack: **Electric Heat** (F): 10 damage; optional +20 damage if an energy is discarded from benched Electabuzz.
+- New attack: **Electric Heat** (FC): 20 damage; optional +30 damage if an energy is discarded from benched Electabuzz.
 
 #### Magmar Lv31
 - **Smokescreen**: removed.
@@ -64,7 +64,7 @@
 #### Electabuzz Lv35
 - **Thunder Shock**: removed.
 - **Thunderpunch**: reworked; 10 damage to 1 of the user's benched Pokémon.
-- New attack: **Ignited Voltage** (L): 10 damage; optional +20 damage if an energy is discarded from benched Magmar.
+- New attack: **Ignited Voltage** (L): 10 damage; optional +30 damage if an energy is discarded from benched Magmar.
 
 ### Colorless Changes
 
