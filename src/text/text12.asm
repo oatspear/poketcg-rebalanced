@@ -1531,6 +1531,12 @@ ElectricCurrentName:
 	text "Electric Current"
 	done
 
+IfActiveThisTurn30BonusDamageDescription:
+	text "If this Pokémon moved into the"
+	line "Active Spot this turn, this attack"
+	line "does 30 more damage."
+	done
+
 FirePunchDescription:
 	text "If this Pokémon has any damage"
 	line "counters on it, you may discard an"

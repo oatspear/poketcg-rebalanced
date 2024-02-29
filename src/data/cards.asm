@@ -2808,11 +2808,11 @@ ArcanineLv34Card:
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx DoubleDamageIfActiveThisTurnDescription ; description
+	tx IfActiveThisTurn20BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw QuickAttackEffectCommands ; effect commands
+	dw QuickAttack20EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -5010,11 +5010,11 @@ PikachuLv14Card:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx QuickAttackName ; name
-	tx DoubleDamageIfActiveThisTurnDescription ; description
+	tx IfActiveThisTurn10BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw QuickAttackEffectCommands ; effect commands
+	dw QuickAttack10EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -5393,11 +5393,11 @@ RaichuLv35Card:
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx QuickAttackName ; name
-	tx DoubleDamageIfActiveThisTurnDescription ; description
+	tx IfActiveThisTurn20BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw QuickAttackEffectCommands ; effect commands
+	dw QuickAttack20EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -5944,18 +5944,18 @@ JolteonLv24Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx StunNeedleName ; name
-	tx MayInflictParalysisDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx QuickAttackName ; name
+	tx IfActiveThisTurn20BonusDamageDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw QuickAttack20EffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NEEDLES ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -10010,11 +10010,11 @@ EeveeCard:
 	; attack 2
 	energy COLORLESS, 1 ; energies
 	tx QuickAttackName ; name
-	tx DoubleDamageIfActiveThisTurnDescription ; description
+	tx IfActiveThisTurn10BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw QuickAttackEffectCommands ; effect commands
+	dw QuickAttack10EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

@@ -1054,13 +1054,19 @@ DoubleDamageIfCondition_AIEffect:
 
 
 ; bonus damage if the Pokémon became Active this turn
+IfActiveThisTurn10BonusDamage_DamageBoostEffect:
+	ld d, 10
+	jr IfActiveThisTurnBonusDamage_DamageBoostEffect
+
+IfActiveThisTurn10BonusDamage_AIEffect:
+  call IfActiveThisTurn10BonusDamage_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; bonus damage if the Pokémon became Active this turn
 IfActiveThisTurn20BonusDamage_DamageBoostEffect:
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
-	call GetTurnDuelistVariable
-	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
-	ret z  ; did not move to active spot this turn
-	ld a, 20
-	jp AddToDamage
+	ld d, 20
+	jr IfActiveThisTurnBonusDamage_DamageBoostEffect
 
 IfActiveThisTurn20BonusDamage_AIEffect:
   call IfActiveThisTurn20BonusDamage_DamageBoostEffect
@@ -1068,16 +1074,25 @@ IfActiveThisTurn20BonusDamage_AIEffect:
 
 
 ; bonus damage if the Pokémon became Active this turn
-IfActiveThisTurnDoubleDamage_DamageBoostEffect:
+IfActiveThisTurn30BonusDamage_DamageBoostEffect:
+	ld d, 30
+	jr IfActiveThisTurnBonusDamage_DamageBoostEffect
+
+IfActiveThisTurn30BonusDamage_AIEffect:
+  call IfActiveThisTurn30BonusDamage_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; bonus damage if the Pokémon became Active this turn
+; input:
+;   d: amount of bonus damage
+IfActiveThisTurnBonusDamage_DamageBoostEffect:
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
 	ret z  ; did not move to active spot this turn
-	jp DoubleDamage_DamageBoostEffect
-
-IfActiveThisTurnDoubleDamage_AIEffect:
-  call IfActiveThisTurnDoubleDamage_DamageBoostEffect
-  jp SetDefiniteAIDamage
+	ld a, d
+	jp AddToDamage
 
 
 Rototiller_DamageBoostEffect:

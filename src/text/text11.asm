@@ -270,10 +270,6 @@ JolteonName: ; 5df54 (17:5f54)
 	text "Jolteon"
 	done
 
-StunNeedleName: ; 5dfa2 (17:5fa2)
-	text "Stun Needle"
-	done
-
 LightningName: ; 5dfaf (17:5faf)
 	text "Lightning"
 	done
@@ -1683,4 +1679,10 @@ ChooseCardToPutOnTheBottomOfTheDeckText:
 PutOnTheBottomOfTheDeckText:
 	text "Put <RAMTEXT> on"
 	line "the bottom of the Deck."
+	done
+
+IfActiveThisTurn20BonusDamageDescription:
+	text "If this Pokémon moved into the"
+	line "Active Spot this turn, this attack"
+	line "does 20 more damage."
 	done

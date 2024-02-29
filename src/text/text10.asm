@@ -924,10 +924,10 @@ Heads10BonusDamageDescription: ; 5a56a (16:656a)
 	line "does 10 additional damage."
 	done
 
-DoubleDamageIfActiveThisTurnDescription:
+IfActiveThisTurn10BonusDamageDescription:
 	text "If this Pokémon moved into the"
-	line "Active Spot this turn, double"
-	line "this attack's damage."
+	line "Active Spot this turn, this attack"
+	line "does 10 more damage."
 	done
 
 FlamesOfRageName: ; 5a5d8 (16:65d8)

@@ -1,5 +1,25 @@
 ;
 
+QuickAttackEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurnDoubleDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, IfActiveThisTurnDoubleDamage_AIEffect
+	db  $00
+
+
+; bonus damage if the Pokémon became Active this turn
+IfActiveThisTurnDoubleDamage_DamageBoostEffect:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetTurnDuelistVariable
+	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
+	ret z  ; did not move to active spot this turn
+	jp DoubleDamage_DamageBoostEffect
+
+IfActiveThisTurnDoubleDamage_AIEffect:
+  call IfActiveThisTurnDoubleDamage_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+
 
 ElectabuzzThunderpunchEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Thunderpunch_ModifierEffect

@@ -492,9 +492,19 @@ Recoil50EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil50Effect
 	db  $00
 
-QuickAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurnDoubleDamage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, IfActiveThisTurnDoubleDamage_AIEffect
+QuickAttack10EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurn10BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, IfActiveThisTurn10BonusDamage_AIEffect
+	db  $00
+
+QuickAttack20EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurn20BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, IfActiveThisTurn20BonusDamage_AIEffect
+	db  $00
+
+QuickAttack30EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurn30BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, IfActiveThisTurn30BonusDamage_AIEffect
 	db  $00
 
 OutrageEffectCommands:

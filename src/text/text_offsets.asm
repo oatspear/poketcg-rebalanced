@@ -2324,7 +2324,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ArcanineName                                       ; 0x08f6
 	textpointer QuickAttackName                                    ; 0x08f7
 	textpointer Heads10BonusDamageDescription
-	textpointer DoubleDamageIfActiveThisTurnDescription
+	textpointer IfActiveThisTurn10BonusDamageDescription
 	textpointer FlamesOfRageName                                   ; 0x08f9
 	textpointer FlamesOfRageDescription                            ; 0x08fa
 	textpointer LegendaryName                                      ; 0x08fb
@@ -2568,7 +2568,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Damage1FriendlyBenchedPokemon10Description
 	textpointer ElectabuzzLv35Description                         ; 0x09f3
 	textpointer JolteonName                                        ; 0x09f4
-	textpointer StunNeedleName                                     ; 0x09f6
 	textpointer LightningName                                      ; 0x09f7
 	textpointer JolteonLv24Description                            ; 0x09f8
 	textpointer PinMissileName                                     ; 0x09f9
@@ -2851,6 +2850,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThiefDescription
 	textpointer ChooseCardToPutOnTheBottomOfTheDeckText
 	textpointer PutOnTheBottomOfTheDeckText
+	textpointer IfActiveThisTurn20BonusDamageDescription
 
 ; ------------------------------------------------------------------------------
 ; text12.asm
@@ -3156,6 +3156,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer StrafeName
 	textpointer ThunderSpearName
 	textpointer ElectricCurrentName
+	textpointer IfActiveThisTurn30BonusDamageDescription
 	textpointer FirePunchDescription
 	textpointer IgnitedVoltageName
 	textpointer IgnitedVoltageDescription
