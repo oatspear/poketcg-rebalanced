@@ -3156,8 +3156,11 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer StrafeName
 	textpointer ThunderSpearName
 	textpointer ElectricCurrentName
+	textpointer RagingThunderName
+	textpointer Damage1FriendlyBenchedPokemon20Description
 	textpointer IfActiveThisTurn30BonusDamageDescription
 	textpointer FirePunchDescription
+	textpointer ThunderPunchDescription
 	textpointer IgnitedVoltageName
 	textpointer IgnitedVoltageDescription
 	textpointer SearingSparkName
