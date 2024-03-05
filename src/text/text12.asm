@@ -1531,6 +1531,15 @@ ElectricCurrentName:
 	text "Electric Current"
 	done
 
+RagingThunderName:
+	text "Raging Thunder"
+	done
+
+Damage1FriendlyBenchedPokemon20Description:
+	text "This attack does 20 damage to 1 of"
+	line "your Benched Pokémon."
+	done
+
 IfActiveThisTurn30BonusDamageDescription:
 	text "If this Pokémon moved into the"
 	line "Active Spot this turn, this attack"
@@ -1540,6 +1549,14 @@ IfActiveThisTurn30BonusDamageDescription:
 FirePunchDescription:
 	text "If this Pokémon has any damage"
 	line "counters on it, you may discard an"
+	line "energy card attached to it."
+	line "If you do, this attack does 20 more"
+	line "damage."
+	done
+
+ThunderPunchDescription:
+	text "If this Pokémon entered the Active"
+	line "Spot this turn, you may discard an"
 	line "energy card attached to it."
 	line "If you do, this attack does 20 more"
 	line "damage."
