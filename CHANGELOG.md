@@ -65,7 +65,7 @@
 - **Thunder Shock**: removed.
 - **Thunderpunch**: reworked.
 - New attack: **Ignited Voltage** (L): 10 damage; optional +30 damage if an energy is discarded from benched Magmar.
-- New attack: **Thunderpunch** (LC): 20 damage; if active this turn, may discard an energy for +20 damage.
+- New attack: **Thunderpunch** (LC): 20 damage; if active this turn, may discard an energy for +30 damage.
 
 ### Colorless Changes
 

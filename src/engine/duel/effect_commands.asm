@@ -574,7 +574,7 @@ FirePunchEffectCommands:
 ThunderPunchEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ThunderPunch_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfSelectedCard20BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfSelectedCard30BonusDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, ThunderPunch_AISelectEffect
 	dbw EFFECTCMDTYPE_AI, ThunderPunch_AIEffect
 	db  $00
