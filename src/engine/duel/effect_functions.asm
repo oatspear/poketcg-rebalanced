@@ -4455,7 +4455,19 @@ DiscardEnergy_AISelectEffect:
 
 FirePunch_AISelectEffect:
 	call _StoreFF_CheckIfUserIsDamaged
-	ret z  ; not damaged
+	jr nz, OptionalDiscardEnergyForDamage_AISelectEffect
+	ret
+
+
+ThunderPunch_AISelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	call CheckEnteredActiveSpotThisTurn
+	ccf
+	ret nc  ; not active this turn
+	; fallthrough
+
+OptionalDiscardEnergyForDamage_AISelectEffect:
 	ld a, [wAIAttackLogicFlags]
 	bit AI_LOGIC_MIN_DAMAGE_CAN_KO_F, a
 	ret nz  ; no need for bonus damage
@@ -4490,6 +4502,15 @@ _StoreFF_CheckIfUserIsDamaged:
 	ld e, PLAY_AREA_ARENA
 	call GetCardDamageAndMaxHP
 	or a
+	ret
+
+
+ThunderPunch_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	call CheckEnteredActiveSpotThisTurn
+	jr nc, OptionalDiscardEnergy_PlayerSelectEffect.select
+	ccf
 	ret
 
 
