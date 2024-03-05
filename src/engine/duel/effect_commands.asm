@@ -1267,10 +1267,16 @@ EnergySlideEffectCommands:
 
 WickedTentacleEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, WickedTentacle_PreconditionCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WickedTentacle_TransferEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MoveOpponentEnergyToBench_TransferEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, TargetedPoisonEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, WickedTentacle_PlayerSelection
-	dbw EFFECTCMDTYPE_AI_SELECTION, WickedTentacle_AISelectEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MoveOpponentEnergyToBench_PlayerSelection
+	dbw EFFECTCMDTYPE_AI_SELECTION, MoveOpponentEnergyToBench_AISelectEffect
+	db  $00
+
+MoveOpponentEnergyToBenchEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MoveOpponentEnergyToBench_TransferEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MoveOpponentEnergyToBench_PlayerSelection
+	dbw EFFECTCMDTYPE_AI_SELECTION, OptionalMoveOpponentEnergyToBench_AISelectEffect
 	db  $00
 
 WhirlwindEffectCommands:

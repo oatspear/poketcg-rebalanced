@@ -1607,3 +1607,13 @@ OvervoltageDescription:
 	line "discarded this way, double this"
 	line "attack's damage."
 	done
+
+MagneticBlastName:
+	text "Magnetic Blast"
+	done
+
+MoveOpponentEnergyToBenchDescription:
+	text "Move a Basic Energy card from the"
+	line "Defending Pokémon to one of your"
+	line "opponent's Benched Pokémon."
+	done

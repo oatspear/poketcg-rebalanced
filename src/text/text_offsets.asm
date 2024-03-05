@@ -3169,6 +3169,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer IncinerateDescription
 	textpointer OvervoltageName
 	textpointer OvervoltageDescription
+	textpointer MagneticBlastName
+	textpointer MoveOpponentEnergyToBenchDescription
 
 ; ------------------------------------------------------------------------------
 ; text13.asm

@@ -40,6 +40,11 @@
 - **Sonicboom**: removed.
 - New attack: **Searching Magnet** (C): add up to 2 Lightning Energy from deck to hand.
 
+#### Magneton Lv28
+- Increased HP from 60 to 80.
+- **Chain Lightning**: removed.
+- New attack: **Magnetic Blast** (LC): 30 damage; move an energy from the Defending Pokémon to the opponent's bench.
+
 #### Voltorb
 - **Tackle**: removed.
 - New attack: **Sonicboom** (C): 10 damage; not affected by Weakness or Resistance.

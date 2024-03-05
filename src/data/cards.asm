@@ -5555,7 +5555,7 @@ MagnetonLv28Card:
 	db STAR ; rarity
 	db COLOSSEUM | NONE ; sets
 	db MAGNETON_LV28
-	db 60 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx MagnemiteName ; pre-evo name
 
@@ -5574,18 +5574,31 @@ MagnetonLv28Card:
 	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	; attack 2
-	energy LIGHTNING, 3 ; energies
-	tx ChainLightningName ; name
-	tx ChainLightningDescription ; description
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx MagneticBlastName ; name
+	tx MoveOpponentEnergyToBenchDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ChainLightningEffectCommands ; effect commands
+	dw MoveOpponentEnergyToBenchEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_CHAIN_LIGHTNING ; animation
+
+	; energy LIGHTNING, 3 ; energies
+	; tx ChainLightningName ; name
+	; tx ChainLightningDescription ; description
+	; dw NONE ; description (cont)
+	; db 40 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw ChainLightningEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db SPECIAL_AI_HANDLING ; flags 3
+	; db 0
+	; db ATK_ANIM_CHAIN_LIGHTNING ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

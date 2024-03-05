@@ -6629,13 +6629,22 @@ EnergySlide_AISelectEffect:
 	jr .loop_play_area
 
 
-WickedTentacle_PlayerSelection:
+MoveOpponentEnergyToBench_PlayerSelection:
 	call SwapTurn
 	call EnergySlide_PlayerSelection
 	jp SwapTurn
 
+OptionalMoveOpponentEnergyToBench_AISelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	or a
+	ret z  ; no benched Pokémon
+	; fallthrough
+
 ; Precondition ensures there are Bench Pokémon and energy on the Active Pokémon.
-WickedTentacle_AISelectEffect:
+MoveOpponentEnergyToBench_AISelectEffect:
 	call SwapTurn
 ; store energy to discard in [hTemp_ffa0]
 	call DiscardEnergy_AISelectEffect
@@ -6884,7 +6893,7 @@ SelectedCards_Discard1FromHand:
 	ret
 
 
-WickedTentacle_TransferEffect:
+MoveOpponentEnergyToBench_TransferEffect:
 	call SwapTurn
 	call EnergySlide_TransferEffect
 ; restore target location to [hTempPlayAreaLocation_ffa1]
