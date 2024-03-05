@@ -1087,10 +1087,8 @@ IfActiveThisTurn30BonusDamage_AIEffect:
 ; input:
 ;   d: amount of bonus damage
 IfActiveThisTurnBonusDamage_DamageBoostEffect:
-	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
-	call GetTurnDuelistVariable
-	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
-	ret z  ; did not move to active spot this turn
+	call CheckEnteredActiveSpotThisTurn
+	ret c  ; did not move to active spot this turn
 	ld a, d
 	jp AddToDamage
 
