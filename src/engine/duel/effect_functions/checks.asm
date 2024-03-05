@@ -325,6 +325,18 @@ CheckMatchingPokemonInBench:
 	ret
 
 
+; output:
+;   carry: set if the Pokémon did not enter the Active Spot this turn
+; preserves: bc, de
+CheckEnteredActiveSpotThisTurn:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetTurnDuelistVariable
+	bit SUBSTATUS3_THIS_TURN_ACTIVE, a
+	ret nz  ; moved to active spot this turn
+	scf
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Damage
 ; ------------------------------------------------------------------------------
