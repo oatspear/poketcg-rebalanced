@@ -5829,14 +5829,14 @@ ElectabuzzLv20Card:
 	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	; attack 2
-	energy LIGHTNING, 2, COLORLESS, 1 ; energies
-	tx ThunderName ; name
-	tx Recoil30Description ; description
-	dw NONE ; description (cont)
-	db 60 ; damage
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx RagingThunderName ; name
+	tx Damage1FriendlyBenchedPokemon20Description ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Recoil30EffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
+	dw Damage1FriendlyBenchedPokemon20EffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
@@ -5895,11 +5895,11 @@ ElectabuzzLv35Card:
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx ThunderpunchName ; name
-	tx Damage1FriendlyBenchedPokemon10Description ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Damage1FriendlyBenchedPokemon10EffectCommands ; effect commands
+	tx ThunderPunchDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw ThunderPunchEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

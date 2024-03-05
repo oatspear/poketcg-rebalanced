@@ -59,12 +59,13 @@
 - **Light Screen**: removed.
 - **Quick Attack**: removed.
 - New attack: **Overvoltage** (L): 10 damage; discards any Tools attached to the Defending Pokémon; double damage if a tool was discarded.
-- New attack: **Thunder** (LLC): 60 damage; 30 recoil.
+- New attack: **Raging Thunder** (LC): 40 damage; 20 damage to 1 of the user's benched Pokémon.
 
 #### Electabuzz Lv35
 - **Thunder Shock**: removed.
-- **Thunderpunch**: reworked; 10 damage to 1 of the user's benched Pokémon.
+- **Thunderpunch**: reworked.
 - New attack: **Ignited Voltage** (L): 10 damage; optional +30 damage if an energy is discarded from benched Magmar.
+- New attack: **Thunderpunch** (LC): 20 damage; if active this turn, may discard an energy for +20 damage.
 
 ### Colorless Changes
 
