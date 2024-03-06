@@ -5458,11 +5458,11 @@ MagnemiteLv13Card:
 	; attack 2
 	energy LIGHTNING, 1 ; energies
 	tx ThunderWaveName ; name
-	tx MayInflictParalysisDescription ; description
+	tx ParalysisIfDiscardedEnergyDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
+	dw ParalysisIfDiscardedEnergyEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -5562,11 +5562,11 @@ MagnetonLv28Card:
 	; attack 1
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx ThunderWaveName ; name
-	tx MayInflictParalysisDescription ; description
+	tx ParalysisIfDiscardedEnergyDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
+	dw ParalysisIfDiscardedEnergyEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

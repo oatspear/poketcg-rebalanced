@@ -2,6 +2,13 @@
 ; Status Effects
 ; ------------------------------------------------------------------------------
 
+ParalysisIfSelectedCardEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z  ; nothing to do
+	jr ParalysisEffect
+
+
 Poison50PercentEffect: ; 2c000 (b:4000)
 	ldtx de, PoisonCheckText
 	call TossCoin_BankB

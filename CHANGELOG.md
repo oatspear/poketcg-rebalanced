@@ -39,10 +39,12 @@
 #### Magnemite Lv13
 - Increased HP from 40 to 50.
 - **Sonicboom**: removed.
+- **Thunder Wave**: no coin flip; user may discard an energy in order to inflict Paralysis.
 - New attack: **Searching Magnet** (C): add up to 2 Lightning Energy from deck to hand.
 
 #### Magneton Lv28
 - Increased HP from 60 to 80.
+- **Thunder Wave**: base damage increased from 20 to 30; no coin flip; user may discard an energy in order to inflict Paralysis.
 - **Chain Lightning**: removed.
 - New attack: **Magnetic Blast** (LC): 30 damage; move an energy from the Defending Pokémon to the opponent's bench.
 

@@ -4303,6 +4303,13 @@ OptionalDiscardEnergyForDamage_AISelectEffect:
 	jr nz, DiscardEnergy_AISelectEffect  ; can KO with bonus
 	ret
 
+OptionalDiscardEnergyForStatus_AISelectEffect:
+	ld a, [wAIAttackLogicFlags]
+	bit AI_LOGIC_MIN_DAMAGE_CAN_KO_F, a
+; apply status if the attack's damage is not enough to score a KO
+	jr z, DiscardEnergy_AISelectEffect
+	ret  ; no need for bonus effects
+
 
 OptionalDiscardEnergy_PlayerSelectEffect:
 	ld a, $ff

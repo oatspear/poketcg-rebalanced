@@ -1623,3 +1623,9 @@ Recoil30UnlessActiveThisTurnDescription:
 	line "Active Spot this turn, it also"
 	line "does 30 damage to itself."
 	done
+
+ParalysisIfDiscardedEnergyDescription:
+	text "Unless this Pokémon entered the"
+	line "Active Spot this turn, it also"
+	line "does 30 damage to itself."
+	done
