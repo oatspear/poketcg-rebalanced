@@ -1617,3 +1617,9 @@ MoveOpponentEnergyToBenchDescription:
 	line "Defending Pokémon to one of your"
 	line "opponent's Benched Pokémon."
 	done
+
+Recoil30UnlessActiveThisTurnDescription:
+	text "Unless this Pokémon entered the"
+	line "Active Spot this turn, it also"
+	line "does 30 damage to itself."
+	done

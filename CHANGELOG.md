@@ -34,6 +34,7 @@
 
 #### Raichu Lv40
 - **Agility**: renamed to Strafe.
+- **Thunder**: base damage increased from 60 to 70; does not take recoil if active this turn.
 
 #### Magnemite Lv13
 - Increased HP from 40 to 50.
@@ -71,6 +72,10 @@
 - **Thunderpunch**: reworked.
 - New attack: **Ignited Voltage** (L): 10 damage; optional +30 damage if an energy is discarded from benched Magmar.
 - New attack: **Thunderpunch** (LC): 20 damage; if active this turn, may discard an energy for +30 damage.
+
+#### Zapdos Lv64
+- Reduced HP from 90 to 70.
+- **Thunder**: reduced cost from (LLC) to (LCC) and base damage from 60 to 50; increased recoil from 20 to 30, but only takes recoil if not active this turn.
 
 ### Colorless Changes
 

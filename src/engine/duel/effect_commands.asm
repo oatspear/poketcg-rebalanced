@@ -492,6 +492,10 @@ Recoil50EffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil50Effect
 	db  $00
 
+Recoil30UnlessActiveThisTurnEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil30UnlessActiveThisTurnEffect
+	db  $00
+
 QuickAttack10EffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurn10BonusDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, IfActiveThisTurn10BonusDamage_AIEffect

@@ -10,6 +10,12 @@ Recoil20Effect:
 	ld a, 20
 	jp DealRecoilDamageToSelf
 
+
+Recoil30UnlessActiveThisTurnEffect:
+	call CheckEnteredActiveSpotThisTurn
+	ret c
+	; fallthrough
+
 Recoil30Effect:
 	ld a, 30
 	jp DealRecoilDamageToSelf

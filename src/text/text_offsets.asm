@@ -3171,6 +3171,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer OvervoltageDescription
 	textpointer MagneticBlastName
 	textpointer MoveOpponentEnergyToBenchDescription
+	textpointer Recoil30UnlessActiveThisTurnDescription
 
 ; ------------------------------------------------------------------------------
 ; text13.asm

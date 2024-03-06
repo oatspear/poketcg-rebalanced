@@ -5305,12 +5305,12 @@ RaichuLv40Card:
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx ThunderName ; name
-	tx Recoil30Description ; description
+	tx Recoil30UnlessActiveThisTurnDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 70 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Recoil30EffectCommands ; effect commands
-	db NONE ; flags 1
+	dw Recoil30UnlessActiveThisTurnEffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
@@ -6091,7 +6091,7 @@ ZapdosLv64Card:
 	db STAR ; rarity
 	db COLOSSEUM | NONE ; sets
 	db ZAPDOS_LV64
-	db 90 ; hp
+	db 70 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -6110,13 +6110,13 @@ ZapdosLv64Card:
 	db ATK_ANIM_THUNDERBOLT ; animation
 
 	; attack 2
-	energy LIGHTNING, 2, COLORLESS, 1 ; energies
+	energy LIGHTNING, 1, COLORLESS, 2 ; energies
 	tx ThunderName ; name
-	tx Recoil20Description ; description
+	tx Recoil30UnlessActiveThisTurnDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Recoil20EffectCommands ; effect commands
+	dw Recoil30UnlessActiveThisTurnEffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
