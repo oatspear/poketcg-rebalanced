@@ -1519,7 +1519,7 @@ ParasCard:
 
 	db 0 ; retreat cost
 	db WR_FIRE ; weakness
-	db NONE ; resistance
+	db WR_WATER ; resistance
 	tx MushroomName ; category
 	db 46 ; Pokedex number
 	db 0
@@ -1570,7 +1570,7 @@ ParasectCard:
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
-	db NONE ; resistance
+	db WR_WATER ; resistance
 	tx MushroomName ; category
 	db 47 ; Pokedex number
 	db 0

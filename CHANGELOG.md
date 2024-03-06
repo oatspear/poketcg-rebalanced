@@ -2,6 +2,14 @@
 
 ## Version 0.8.0
 
+### Grass Changes
+
+#### Paras
+- Added Resistance to **Water**.
+
+#### Parasect
+- Added Resistance to **Water**.
+
 ### Fire Changes
 
 #### Rapidash
