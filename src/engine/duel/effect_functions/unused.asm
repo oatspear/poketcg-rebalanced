@@ -1,5 +1,155 @@
 ;
 
+
+
+DamageSwapEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DamageSwap_CheckDamage
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamageSwap_SelectAndSwapEffect
+	dbw EFFECTCMDTYPE_INTERACTIVE_STEP, DamageSwap_SwapEffect
+	db  $00
+
+
+; returns carry if Damage Swap cannot be used.
+DamageSwap_CheckDamage: ; 2db8e (b:5b8e)
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	call CheckIfPlayAreaHasAnyDamage
+	ret c
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	jp CheckCannotUseDueToStatus_Anywhere
+
+DamageSwap_SelectAndSwapEffect: ; 2dba2 (b:5ba2)
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_PLAYER
+	jr z, .player
+; non-player
+	bank1call Func_61a1
+	bank1call PrintPlayAreaCardList_EnableLCD
+	ret
+
+.player
+	ldtx hl, ProcedureForDamageSwapText
+	bank1call DrawWholeScreenTextBox
+	xor a
+	ldh [hCurSelectionItem], a
+	bank1call Func_61a1
+
+.start
+	bank1call PrintPlayAreaCardList_EnableLCD
+	push af
+	ldh a, [hCurSelectionItem]
+	ld hl, PlayAreaSelectionMenuParameters
+	call InitializeMenuParameters
+	pop af
+	ld [wNumMenuItems], a
+
+; handle selection of Pokemon to take damage from
+.loop_input_first
+	call DoFrame
+	call HandleMenuInput
+	jr nc, .loop_input_first
+	cp $ff
+	ret z ; quit when B button is pressed
+
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ldh [hCurSelectionItem], a
+
+; if card has no damage, play sfx and return to start
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .no_damage
+
+; take damage away temporarily to draw UI.
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	push af
+	push hl
+	add 10
+	ld [hl], a
+	bank1call PrintPlayAreaCardList_EnableLCD
+	pop hl
+	pop af
+	ld [hl], a
+
+; draw damage counter in cursor
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld b, SYM_HP_NOK
+	call DrawSymbolOnPlayAreaCursor
+
+; handle selection of Pokemon to give damage to
+.loop_input_second
+	call DoFrame
+	call HandleMenuInput
+	jr nc, .loop_input_second
+	; if B is pressed, return damage counter
+	; to card that it was taken from
+	cp $ff
+	jr z, .update_ui
+
+; try to give the card selected the damage counter
+; if it would KO, ignore it.
+	ldh [hPlayAreaEffectTarget], a
+	ldh [hCurSelectionItem], a
+	call TryGiveDamageCounter_DamageSwap
+	jr c, .loop_input_second
+
+	ld a, OPPACTION_EXECUTE_EFFECT_STEP
+	call SetOppAction_SerialSendDuelData
+
+.update_ui
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld b, SYM_SPACE
+	call DrawSymbolOnPlayAreaCursor
+	call EraseCursor
+	jr .start
+
+.no_damage
+	call PlaySFX_InvalidChoice
+	jr .loop_input_first
+
+; tries to give damage counter to hPlayAreaEffectTarget,
+; and if successful updates UI screen.
+DamageSwap_SwapEffect: ; 2dc27 (b:5c27)
+	call TryGiveDamageCounter_DamageSwap
+	ret c
+	bank1call PrintPlayAreaCardList_EnableLCD
+	or a
+	ret
+
+
+; tries to give the damage counter to the target
+; chosen by the Player (hPlayAreaEffectTarget).
+; if the damage counter would KO card, then do
+; not give the damage counter and return carry.
+TryGiveDamageCounter_DamageSwap: ; 2dc30 (b:5c30)
+	ldh a, [hPlayAreaEffectTarget]
+	add DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	sub 10
+	jr z, .set_carry ; would bring HP to zero?
+; has enough HP to receive a damage counter
+	ld [hl], a
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD_HP
+	ld l, a
+	ld a, 10
+	add [hl]
+	ld [hl], a
+	or a
+	ret
+.set_carry
+	scf
+	ret
+
+
+
+
+
+
+
+
 QuickAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurnDoubleDamage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, IfActiveThisTurnDoubleDamage_AIEffect

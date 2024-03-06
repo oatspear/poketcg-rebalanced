@@ -137,7 +137,6 @@ PoisonEvolutionEffectCommands:
 
 FoulGasEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FoulGas_PoisonOrConfusionEffect
-	dbw EFFECTCMDTYPE_AI, FoulGas_AIEffect
 	db  $00
 
 DefensiveStanceEffectCommands:
@@ -866,12 +865,6 @@ InvadeMindEffectCommands:
 	dbw EFFECTCMDTYPE_AI, InvadeMind_AIEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, CheckOpponentHandEffect
 	db  $00
-
-; AlakazamDamageSwapEffectCommands:
-; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DamageSwap_CheckDamage
-; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamageSwap_SelectAndSwapEffect
-; 	dbw EFFECTCMDTYPE_INTERACTIVE_STEP, DamageSwap_SwapEffect
-; 	db  $00
 
 InflictConfusionEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ConfusionEffect
