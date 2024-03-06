@@ -5471,7 +5471,7 @@ MagnemiteLv13Card:
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
-	db NONE ; resistance
+	db WR_GRASS ; resistance
 	tx MagnetName ; category
 	db 81 ; Pokedex number
 	db 0
@@ -5538,7 +5538,7 @@ MagnemiteLv15Card:
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
-	db NONE ; resistance
+	db WR_GRASS ; resistance
 	tx MagnetName ; category
 	db 81 ; Pokedex number
 	db 0
@@ -5602,7 +5602,7 @@ MagnetonLv28Card:
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
-	db NONE ; resistance
+	db WR_GRASS ; resistance
 	tx MagnetName ; category
 	db 82 ; Pokedex number
 	db 0
@@ -5653,7 +5653,7 @@ MagnetonLv35Card:
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
-	db NONE ; resistance
+	db WR_GRASS ; resistance
 	tx MagnetName ; category
 	db 82 ; Pokedex number
 	db 0

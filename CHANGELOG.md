@@ -38,15 +38,23 @@
 
 #### Magnemite Lv13
 - Increased HP from 40 to 50.
+- Added Resistance to **Grass**.
 - **Sonicboom**: removed.
 - **Thunder Wave**: no coin flip; user may discard an energy in order to inflict Paralysis.
 - New attack: **Searching Magnet** (C): add up to 2 Lightning Energy from deck to hand.
 
+#### Magnemite Lv15
+- Added Resistance to **Grass**.
+
 #### Magneton Lv28
 - Increased HP from 60 to 80.
+- Added Resistance to **Grass**.
 - **Thunder Wave**: base damage increased from 20 to 30; no coin flip; user may discard an energy in order to inflict Paralysis.
 - **Chain Lightning**: removed.
 - New attack: **Magnetic Blast** (LC): 30 damage; move an energy from the Defending Pokémon to the opponent's bench.
+
+#### Magneton Lv35
+- Added Resistance to **Grass**.
 
 #### Voltorb
 - **Tackle**: removed.
