@@ -4679,8 +4679,8 @@ Selfdestruct100Bench20Effect:
 	ld a, 100
 .recoil
 	call DealRecoilDamageToSelf
-	call Deal20DamageToAllFriendlyPokemon
-	jp Deal20DamageToAllOpponentBenchedPokemon
+	call DamageAllFriendlyPokemon20Effect
+	jp DamageAllOpponentBenched20Effect
 
 
 DiscardAllAttachedEnergiesEffect:
