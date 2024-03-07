@@ -679,7 +679,8 @@ PrimalThunder_DrawbackEffect:
 	ret c  ; opponent Prizes < user Prizes (losing)
 	ret z  ; opponent Prizes = user Prizes (tied)
 ; opponent Prizes > user Prizes (winning)
-	jp DamageAllFriendlyPokemon20Effect
+	call Recoil30Effect
+	jp DamageAllFriendlyPokemon30Effect
 
 
 ; ------------------------------------------------------------------------------

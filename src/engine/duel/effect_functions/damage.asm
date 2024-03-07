@@ -63,6 +63,11 @@ DamageAllFriendlyPokemon10Effect:
 ; deal 20 damage to each of the turn holder's benched Pokémon
 DamageAllFriendlyPokemon20Effect:
 	ld de, 20
+	jr DamageAllFriendlyPokemon
+
+; deal 30 damage to each of the turn holder's benched Pokémon
+DamageAllFriendlyPokemon30Effect:
+	ld de, 30
 	; jr DamageAllFriendlyPokemon
 	; fallthrough
 

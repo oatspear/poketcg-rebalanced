@@ -346,18 +346,14 @@ PealOfThunderDescription: ; 5e356 (17:6356)
 	line "apply Weakness and Resistance.)"
 	done
 
-BigThunderName: ; 5e400 (17:6400)
-	text "Big Thunder"
+PrimalThunderName:
+	text "Primal Thunder"
 	done
 
-BigThunderDescription: ; 5e40d (17:640d)
-	text "Choose a Pokémon other than Zapdos"
-	line "at random. This attack does 70"
-	line "damage to that Pokémon. Don't apply"
-	line "Weakness and Resistance for this"
-	line "attack. (Any other effects that"
-	line "would happen after applying Weakness"
-	line "and Resistance still happen.)"
+PrimalThunderDescription:
+	text "If you have less Prize cards left"
+	line "than your opponent, this attack does"
+	line "30 damage to each of your Pokémon."
 	done
 
 ZapdosLv68Description: ; 5e4f8 (17:64f8)

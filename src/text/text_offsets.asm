@@ -2582,8 +2582,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ZapdosLv64Description                             ; 0x0a03
 	textpointer PealOfThunderName                                  ; 0x0a04
 	textpointer PealOfThunderDescription                           ; 0x0a05
-	textpointer BigThunderName                                     ; 0x0a06
-	textpointer BigThunderDescription                              ; 0x0a07
+	textpointer PrimalThunderName
+	textpointer PrimalThunderDescription
 	textpointer ZapdosLv68Description                             ; 0x0a08
 	textpointer SandshrewName                                      ; 0x0a09
 	textpointer SandAttackName                                     ; 0x0a0a

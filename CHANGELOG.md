@@ -96,6 +96,11 @@
 - **Thunder**: removed.
 - New attack: **Energize** (C): attach (L) from the discard pile.
 
+#### Zapdos Lv68
+- Reduced HP from 100 to 80.
+- **Big Thunder**: removed.
+- New attack: **Primal Thunder** (LLL): 70 damage; 30 damage to all friendly Pokémon if the user has taken more Prizes.
+
 ### Colorless Changes
 
 #### Spearow

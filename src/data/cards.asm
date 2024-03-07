@@ -6142,7 +6142,7 @@ ZapdosLv68Card:
 	db STAR ; rarity
 	db PROMOTIONAL | GB ; sets
 	db ZAPDOS_LV68
-	db 100 ; hp
+	db 80 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -6162,13 +6162,13 @@ ZapdosLv68Card:
 
 	; attack 2
 	energy LIGHTNING, 3 ; energies
-	tx BigThunderName ; name
-	tx BigThunderDescription ; description
-	dw NONE ; description (cont)
+	tx PrimalThunderName ; name
+	tx PrimalThunderDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
 	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	dw PrimalThunderEffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
