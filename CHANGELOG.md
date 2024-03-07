@@ -93,7 +93,8 @@
 
 #### Zapdos Lv64
 - Reduced HP from 90 to 70.
-- **Thunder**: reduced cost from (LLC) to (LCC) and base damage from 60 to 50; increased recoil from 20 to 30, but only takes recoil if not active this turn.
+- **Thunder**: removed.
+- New attack: **Energize** (C): attach (L) from the discard pile.
 
 ### Colorless Changes
 

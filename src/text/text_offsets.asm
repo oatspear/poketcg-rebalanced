@@ -3173,6 +3173,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MoveOpponentEnergyToBenchDescription
 	textpointer Recoil30UnlessActiveThisTurnDescription
 	textpointer ParalysisIfDiscardedEnergyDescription
+	textpointer EnergizeName
+	textpointer Attach1LightningEnergyFromDiscardDescription
 
 ; ------------------------------------------------------------------------------
 ; text13.asm

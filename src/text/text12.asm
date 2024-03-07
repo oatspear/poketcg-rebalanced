@@ -1629,3 +1629,12 @@ ParalysisIfDiscardedEnergyDescription:
 	line "Active Spot this turn, it also"
 	line "does 30 damage to itself."
 	done
+
+EnergizeName:
+	text "Energize"
+	done
+
+Attach1LightningEnergyFromDiscardDescription:
+	text "Attach a <LIGHTNING> Energy from your"
+	line "discard pile to this Pokémon."
+	done

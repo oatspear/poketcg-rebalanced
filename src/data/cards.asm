@@ -6059,18 +6059,18 @@ ZapdosLv40Card:
 	db ATK_ANIM_THUNDERSTORM ; animation
 
 	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
+	energy LIGHTNING, 1, COLORLESS, 2 ; energies
+	tx ThunderName ; name
+	tx Recoil30UnlessActiveThisTurnDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	dw Recoil30UnlessActiveThisTurnEffectCommands ; effect commands
+	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_THUNDER ; animation
 
 	db 0 ; retreat cost
 	db NONE ; weakness
@@ -6096,6 +6096,20 @@ ZapdosLv64Card:
 	dw NONE ; pre-evo name
 
 	; attack 1
+	energy COLORLESS, 1 ; energies
+	tx EnergizeName ; name
+	tx Attach1LightningEnergyFromDiscardDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw EnergizeEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
 	energy LIGHTNING, 2 ; energies
 	tx ThunderboltName ; name
 	tx ThunderboltDescription ; description
@@ -6108,20 +6122,6 @@ ZapdosLv64Card:
 	db NONE ; flags 3
 	db 9
 	db ATK_ANIM_THUNDERBOLT ; animation
-
-	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 2 ; energies
-	tx ThunderName ; name
-	tx Recoil30UnlessActiveThisTurnDescription ; description
-	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Recoil30UnlessActiveThisTurnEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_THUNDER ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness
