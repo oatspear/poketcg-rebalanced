@@ -224,6 +224,10 @@ DoubleDamageIfMorePrizesEffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoubleDamageIfMorePrizes_AIEffect
 	db  $00
 
+PrimalThunderEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PrimalThunder_DrawbackEffect
+	db  $00
+
 ChopDownEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ChopDown_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, ChopDown_AIEffect

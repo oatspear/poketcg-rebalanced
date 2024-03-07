@@ -67,6 +67,9 @@ CheckThereIsCardTypeInDeck:
 
 ; Returns carry if the opponent has less prize cards remaining.
 ; Alt: Returns carry if the opponent has taken more prize cards.
+; output:
+;   a: opponent's remaining Prizes
+;   z: set if the number of Prizes is the same on both sides
 CheckOpponentHasMorePrizeCardsRemaining:
 	call CountPrizes  ; turn holder's remaining Prizes
 	ld c, a

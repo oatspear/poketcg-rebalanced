@@ -456,52 +456,6 @@ SetExpectedAIDamage: ; 2c0fb (b:40fb)
 	ret
 
 
-; deal damage to all the turn holder's benched Pokemon
-; input: a = amount of damage to deal to each Pokemon
-DealDamageToAllBenchedPokemon:
-	ld e, a
-	ld d, $00
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld c, a
-	ld b, PLAY_AREA_ARENA
-	jr .skip_to_bench
-.loop
-	push bc
-	call DealDamageToPlayAreaPokemon_RegularAnim
-	pop bc
-.skip_to_bench
-	inc b
-	dec c
-	jr nz, .loop
-	ret
-
-; deal damage to all the turn holder's benched Basic Pokémon
-; input: a = amount of damage to deal to each Pokémon
-DealDamageToAllBenchedBasicPokemon:
-	ld e, a
-	ld d, $00
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld c, a
-	ld b, PLAY_AREA_ARENA
-	jr .next
-.loop
-	ld a, DUELVARS_ARENA_CARD_STAGE
-	add b
-	call GetTurnDuelistVariable
-	or a
-	jr nz, .next  ; not a BASIC Pokémon
-	push bc
-	call DealDamageToPlayAreaPokemon_RegularAnim
-	pop bc
-.next
-	inc b
-	dec c
-	jr nz, .loop
-	ret
-
-
 Func_2c12e: ; 2c12e (b:412e)
 	ld [wLoadedAttackAnimation], a
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -718,6 +672,14 @@ Affliction_DamageEffect:
 	dec c
 	jr nz, .loop_play_area
 	jp SwapTurn
+
+
+PrimalThunder_DrawbackEffect:
+	call CheckOpponentHasMorePrizeCardsRemaining
+	ret c  ; opponent Prizes < user Prizes (losing)
+	ret z  ; opponent Prizes = user Prizes (tied)
+; opponent Prizes > user Prizes (winning)
+	jp DamageAllFriendlyPokemon20Effect
 
 
 ; ------------------------------------------------------------------------------
@@ -4704,54 +4666,21 @@ LightScreenEffect:
 
 ; deal 10 damage to all benched Pokémon
 Earthquake10Effect:
-	ld a, $01
-	ld [wIsDamageToSelf], a
-	ld a, 10
-	call DealDamageToAllBenchedPokemon
-	; fallthrough
-
-; deal 10 damage to each of the opponent's benched Pokémon
-DamageAllOpponentBenched10Effect:
-	call SwapTurn
-	xor a
-	ld [wIsDamageToSelf], a
-	ld a, 10
-	call DealDamageToAllBenchedPokemon
-	jp SwapTurn
-
-; deal 20 damage to each of the opponent's benched Basic Pokémon
-DamageAllOpponentBenchedBasic20Effect:
-	call SwapTurn
-	xor a
-	ld [wIsDamageToSelf], a
-	ld a, 20
-	call DealDamageToAllBenchedBasicPokemon
-	jp SwapTurn
+	call DamageAllFriendlyPokemon10Effect
+	jp DamageAllOpponentBenched10Effect
 
 
-Selfdestruct80Bench20Effect: ; 2e739 (b:6739)
+Selfdestruct80Bench20Effect:
 	ld a, 80
 	jr Selfdestruct100Bench20Effect.recoil
 
-Selfdestruct100Bench20Effect: ; 2e75f (b:675f)
+Selfdestruct100Bench20Effect:
 	ld a, 100
 .recoil
 	call DealRecoilDamageToSelf
+	call Deal20DamageToAllFriendlyPokemon
+	jp Deal20DamageToAllOpponentBenchedPokemon
 
-; own bench
-	ld a, $01
-	ld [wIsDamageToSelf], a
-	ld a, 20
-	call DealDamageToAllBenchedPokemon
-
-; opponent's bench
-	call SwapTurn
-	xor a
-	ld [wIsDamageToSelf], a
-	ld a, 20
-	call DealDamageToAllBenchedPokemon
-	call SwapTurn
-	ret
 
 DiscardAllAttachedEnergiesEffect:
 	xor a
