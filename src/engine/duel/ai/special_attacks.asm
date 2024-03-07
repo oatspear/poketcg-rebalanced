@@ -75,6 +75,8 @@ HandleSpecialAIAttacks:
 	jr z, .Sprout
 	cp MOLTRES_LV35
 	jp z, .CollectFire
+	cp ZAPDOS_LV64
+	jp z, .Energize
 	cp JYNX
 	jr z, .Mimic
 	cp CLEFAIRY
@@ -276,6 +278,7 @@ HandleSpecialAIAttacks:
 
 .CollectFire:
 	ld e, FIRE_ENERGY
+.accelerate_self_from_discard_got_energy
 	ld a, CARD_LOCATION_DISCARD_PILE
 	call CheckIfAnyCardIDinLocation
 	jp nc, .zero_score
@@ -285,6 +288,10 @@ HandleSpecialAIAttacks:
 	jp nc, .zero_score
 	ld a, $83
 	ret
+
+.Energize:
+	ld e, LIGHTNING_ENERGY
+	jr .accelerate_self_from_discard_got_energy
 
 .EnergyConversion:
 	ld a, CARD_LOCATION_DISCARD_PILE
