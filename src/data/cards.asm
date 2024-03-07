@@ -6165,7 +6165,7 @@ ZapdosLv68Card:
 	tx PrimalThunderName ; name
 	tx PrimalThunderDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 50 ; damage
+	db 70 ; damage
 	db DAMAGE_NORMAL ; category
 	dw PrimalThunderEffectCommands ; effect commands
 	db LOW_RECOIL ; flags 1
