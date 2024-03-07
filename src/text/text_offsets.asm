@@ -3175,6 +3175,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ParalysisIfDiscardedEnergyDescription
 	textpointer EnergizeName
 	textpointer Attach1LightningEnergyFromDiscardDescription
+	textpointer BoostedVoltageName
+	textpointer BoostedVoltageDescription
 
 ; ------------------------------------------------------------------------------
 ; text13.asm

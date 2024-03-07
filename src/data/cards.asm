@@ -5639,17 +5639,17 @@ MagnetonLv35Card:
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
-	tx SonicboomName ; name
-	tx SonicboomDescription ; description
-	dw NONE ; description (cont)
-	db 40 ; damage
+	tx BoostedVoltageName ; name
+	tx BoostedVoltageDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SonicboomEffectCommands ; effect commands
+	dw BoostedVoltageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_TEAR ; animation
+	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

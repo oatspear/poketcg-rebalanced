@@ -1638,3 +1638,14 @@ Attach1LightningEnergyFromDiscardDescription:
 	text "Attach a <LIGHTNING> Energy from your"
 	line "discard pile to this Pokémon."
 	done
+
+BoostedVoltageName:
+	text "Boosted Voltage"
+	done
+
+BoostedVoltageDescription:
+	text "If this Pokémon has a Trainer card"
+	text "attached to it, this attack does 10"
+	text "damage to each of your opponent's"
+	text "Benched Pokémon."
+	done

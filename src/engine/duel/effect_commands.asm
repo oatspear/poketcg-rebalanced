@@ -628,6 +628,10 @@ OvervoltageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, IfOpponentHasAttachedToolDoubleDamage_AIEffect
 	db  $00
 
+BoostedVoltageEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IfAttachedToolDamageOpponentBench10Effect
+	db  $00
+
 CorrosiveAcidEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardOpponentEnergyIfHeads_50PercentEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect

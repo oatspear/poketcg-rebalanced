@@ -134,6 +134,13 @@ DamageAllOpponentBenchedBasic20Effect:
 	jp SwapTurn
 
 
+IfAttachedToolDamageOpponentBench10Effect:
+	xor a  ; PLAY_AREA_ARENA
+	call CheckPokemonHasNoToolsAttached
+	ret nc  ; no Tool
+	jp DamageAllOpponentBenched10Effect
+
+
 ; ------------------------------------------------------------------------------
 ; Targeted Damage
 ; ------------------------------------------------------------------------------

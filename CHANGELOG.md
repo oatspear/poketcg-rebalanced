@@ -63,6 +63,8 @@
 
 #### Magneton Lv35
 - Added Resistance to **Grass**.
+- **Sonicboom**: removed.
+- New attack: **Boosted Voltage** (CCC): 30 damage; if the user has an attached Tool, deal 10 damage to all of the opponent's Benched Pokémon.
 
 #### Voltorb
 - **Tackle**: removed.
