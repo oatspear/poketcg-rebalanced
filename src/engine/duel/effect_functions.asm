@@ -3331,27 +3331,7 @@ Firegiver_AddToHandEffect: ; 2d6c2 (b:56c2)
 	call LoadTxRam3
 	ldtx hl, DrewFireEnergyFromTheHandText
 	call DrawWideTextBox_WaitForInput
-	call SyncShuffleDeck
-	ret
-
-MoltresLv37DiveBomb_AIEffect: ; 2d76e (b:576e)
-	ld a, 70 / 2
-	lb de, 0, 70
-	jp SetExpectedAIDamage
-
-MoltresLv37DiveBomb_Success50PercentEffect: ; 2d776 (b:5776)
-	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
-	call TossCoin_BankB
-	jr c, .heads
-; tails
-	xor a
-	call SetDefiniteDamage
-	call SetWasUnsuccessful
-	ret
-.heads
-	ld a, ATK_ANIM_DIVE_BOMB
-	ld [wLoadedAttackAnimation], a
-	ret
+	jp SyncShuffleDeck
 
 
 ; draws list of Energy Cards in Discard Pile
