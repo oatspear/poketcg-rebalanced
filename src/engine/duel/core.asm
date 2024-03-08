@@ -4850,8 +4850,8 @@ PrintAttackOrNonPokemonCardDescription:
 	ret z
 	dec hl
 	lb de, 1, 11
-	call PrintAttackOrCardDescription
-	ret
+	jp PrintAttackOrCardDescription
+
 
 DisplayCardPage_PokemonDescription:
 	; print surrounding box, card name at 5,1, type, set 2, and rarity
@@ -4991,11 +4991,16 @@ DisplayEnergyOrTrainerCardPage:
 	call InitTextPrinting_ProcessTextFromPointerToID
 	; OATS print Supporter tag for Supporter cards
 	ld a, [wLoadedCard1Type]
+	cp TYPE_TRAINER
+	jr c, .not_trainer_card
+	ld hl, CardPageItemTextData
+	jr z, .got_card_tag
 	cp TYPE_TRAINER_SUPPORTER
-	jr nz, .not_supporter_card
+	jr nz, .got_card_tag
 	ld hl, CardPageSupporterTextData
+.got_card_tag
 	call PlaceTextItems
-.not_supporter_card
+.not_trainer_card
 	; colorize the card image
 	lb de, 6, 4
 	call ApplyBGP6OrSGB3ToCardImage
@@ -5008,8 +5013,12 @@ DisplayEnergyOrTrainerCardPage:
 	; print the set 2 icon and rarity symbol of the card
 	call DrawCardPageSet2AndRarityIcons
 	pop hl
-	call PrintAttackOrNonPokemonCardDescription
-	ret
+	jp PrintAttackOrNonPokemonCardDescription
+
+
+CardPageItemTextData:
+	textitem 2, 5, ItemText
+	db $ff
 
 CardPageSupporterTextData:
 	textitem 1, 5, SupporterText
@@ -6070,8 +6079,8 @@ DisplayUsePokemonPowerScreen:
 	call InitTextPrinting_ProcessTextFromPointerToID
 	lb de, 1, 6
 	ld hl, wLoadedCard1Atk1Description
-	call PrintAttackOrCardDescription
-	ret
+	; jr PrintAttackOrCardDescription
+	; fallthrough
 
 ; print the description of an attack, a Pokemon power, or a trainer or energy card
 ; x,y coordinates of where to start printing the text are given at de
@@ -6281,8 +6290,8 @@ DisplayOpponentUsedAttackScreen:
 	call PrintAttackOrPkmnPowerInformation
 	lb de, 1, 4
 	ld hl, wLoadedAttackDescription
-	call PrintAttackOrCardDescription
-	ret
+	jp PrintAttackOrCardDescription
+
 
 ; display card detail when a trainer card is used, and print "Used xxx"
 ; hTempCardIndex_ff9f contains the card's deck index
