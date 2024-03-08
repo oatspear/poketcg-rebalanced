@@ -6161,7 +6161,7 @@ ZapdosLv68Card:
 	db ATK_ANIM_PEAL_OF_THUNDER ; animation
 
 	; attack 2
-	energy LIGHTNING, 3 ; energies
+	energy LIGHTNING, 2, COLORLESS, 1 ; energies
 	tx PrimalThunderName ; name
 	tx PrimalThunderDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
