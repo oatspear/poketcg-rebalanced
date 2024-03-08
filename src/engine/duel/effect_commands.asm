@@ -978,10 +978,8 @@ EnergySporesEffectCommands:
 
 ScavengeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Scavenge_CheckDiscardPile
-	; dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Scavenge_PlayerSelectEnergyEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Scavenge_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PlayerSelectAndStoreItemCardFromDiscardPile
-	; dbw EFFECTCMDTYPE_DISCARD_ENERGY, Scavenge_DiscardEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Scavenge_AISelectEffect
 	db  $00
 
