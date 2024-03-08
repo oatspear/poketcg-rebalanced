@@ -16,7 +16,9 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer LengthText                                         ; 0x000c
 	textpointer WeightText                                         ; 0x000d
 	textpointer PokemonText                                        ; 0x000e
-	textpointer SupporterText                                      ; 0x000e
+	textpointer ItemText
+	textpointer ToolText
+	textpointer SupporterText
 	textpointer MetresText                                         ; 0x000f
 	textpointer LbsText                                            ; 0x0010
 	textpointer PromostarRarityText                                ; 0x0011
@@ -226,15 +228,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SleepCheckText                                     ; 0x00e1
 	textpointer PoisonCheckText                                    ; 0x00e2
 	textpointer ConfusionCheckText                                 ; 0x00e3
-	textpointer VenomPowderCheckText                               ; 0x00e4
-	textpointer DamageCheckIfTailsNoDamageText                     ; 0x00e6
-	textpointer IfHeadsDraw1CardFromDeckText                       ; 0x00e7
 	textpointer FlipUntilFailAppears10DamageForEachHeadsText       ; 0x00e8
-	textpointer IfHeadPlus10IfTails10ToYourselfText                ; 0x00e9
-	textpointer DamageToOppBenchIfHeadsDamageToYoursIfTailsText    ; 0x00ea
 	textpointer IfTailsDamageToYourselfTooText                     ; 0x00ed
-	textpointer SuccessCheckIfHeadsAttackIsSuccessfulText          ; 0x00ee
-	textpointer TrainerCardSuccessCheckText                        ; 0x00ef
 	textpointer CardCheckIfHeads8CardsIfTails1CardText             ; 0x00f0
 	textpointer IfHeadsNoDamageNextTurnText                        ; 0x00f1
 	textpointer DamageCheckIfHeadsPlusDamageText                   ; 0x00f3

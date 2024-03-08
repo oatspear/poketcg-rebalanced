@@ -58,7 +58,15 @@ PokemonText: ; 36378 (d:6378)
 	text " Pokémon"
 	done
 
-SupporterText: ; 36378 (d:6378)
+ItemText:
+	text "Item"
+	done
+
+ToolText:
+	text "Tool"
+	done
+
+SupporterText:
 	text "Supporter"
 	done
 
@@ -1061,54 +1069,19 @@ ConfusionCheckText: ; 37ca8 (d:7ca8)
 	line "opponent becomes Confused."
 	done
 
-VenomPowderCheckText: ; 37cdf (d:7cdf)
-	text "Venom Powder check! If Heads,"
-	line "opponent is Poisoned & Confused."
-	done
-
 ; ParalysisSleepCheckText:
 ; 	text "Status check! If Heads, opponent"
 ; 	line "is Paralyzed. If tails, Asleep."
 ; 	done
-
-DamageCheckIfTailsNoDamageText: ; 37d4a (d:7d4a)
-	text "Damage check!"
-	line "If Tails, no damage!!!"
-	done
-
-IfHeadsDraw1CardFromDeckText: ; 37d70 (d:7d70)
-	text "If Heads,"
-	line "Draw 1 card from Deck!"
-	done
 
 FlipUntilFailAppears10DamageForEachHeadsText: ; 37d92 (d:7d92)
 	text "Flip until Tails appears."
 	line "10 damage for each Heads!!!"
 	done
 
-IfHeadPlus10IfTails10ToYourselfText: ; 37dc9 (d:7dc9)
-	text "Heads: +10 damage"
-	line "Tails: 10 damage to yourself"
-	done
-
-DamageToOppBenchIfHeadsDamageToYoursIfTailsText: ; 37e03 (d:7e03)
-	text "Heads: damage to opponent's Bench"
-	line "Tails: damage to your Bench"
-	done
-
 IfTailsDamageToYourselfTooText: ; 37e92 (d:7e92)
 	text "If Tails, <RAMNUM> damage"
 	line "to yourself, too."
-	done
-
-SuccessCheckIfHeadsAttackIsSuccessfulText: ; 37eb8 (d:7eb8)
-	text "Success check!!!"
-	line "If Heads, Attack is successful!"
-	done
-
-TrainerCardSuccessCheckText: ; 37eea (d:7eea)
-	text "Trainer card success check!"
-	line "If Heads, you're successful!"
 	done
 
 CardCheckIfHeads8CardsIfTails1CardText: ; 37f24 (d:7f24)
