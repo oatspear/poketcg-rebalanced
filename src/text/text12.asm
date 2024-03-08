@@ -519,16 +519,16 @@ SnorlaxName: ; 62fe1 (18:6fe1)
 	text "Snorlax"
 	done
 
-ThickSkinnedName: ; 62fea (18:6fea)
+ThickSkinnedName:
 	text "Thick Skinned"
 	done
 
-ThickSkinnedDescription: ; 62ff9 (18:6ff9)
-	text "Snorlax can't become Asleep,"
+ThickSkinnedDescription:
+	text "This Pokémon can't become Asleep,"
 	line "Confused, Paralyzed, or Poisoned."
-	line "This power can't be used if Snorlax"
-	line "is already Asleep, Confused, or"
-	line "Paralyzed."
+	line "This power can't be used if this"
+	line "Pokémon is already Asleep, Confused,"
+	line "or Paralyzed."
 	done
 
 BodySlamName: ; 63088 (18:7088)
@@ -1645,9 +1645,10 @@ Recoil30UnlessActiveThisTurnDescription:
 	done
 
 ParalysisIfDiscardedEnergyDescription:
-	text "Unless this Pokémon entered the"
-	line "Active Spot this turn, it also"
-	line "does 30 damage to itself."
+	text "You may discard an Energy card"
+	line "attached to this Pokémon."
+	line "If you do, the Defending Pokémon"
+	line "is now Paralyzed."
 	done
 
 EnergizeName:
