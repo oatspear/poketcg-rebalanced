@@ -220,6 +220,7 @@ SearchCardInDeckAndSetToJustDrawn:
 
 ; adds a card to the turn holder's hand and increments the number of cards in the hand
 ; the card is identified by register a, which contains the deck index (0-59) of the card
+; preserves: af, hl, de
 AddCardToHand:
 	push af
 	push hl
@@ -317,6 +318,7 @@ PutCardInDiscardPile:
 ; search a card in the turn holder's discard pile, extract it, and set its location to
 ; CARD_LOCATION_JUST_DRAWN. AddCardToHand is meant to be called next.
 ; the card is identified by register a, which contains the deck index (0-59) of the card
+; preserves: hl, bc, de
 MoveDiscardPileCardToHand:
 	push hl
 	push de
