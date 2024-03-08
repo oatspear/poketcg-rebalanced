@@ -95,12 +95,6 @@ HandlePlayerSelection2HandCardsExcludeSelf:
 ; Choose Cards From Discard Pile
 ; ------------------------------------------------------------------------------
 
-
-PlayerSelectAndStoreItemCardFromDiscardPile:
-	call HandlePlayerSelectionFromDiscardPile_ItemTrainer
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ret
-
 ; Handles screen for the Player to choose an Item Trainer card from the Discard Pile.
 ; output:
 ;   a: deck index of the selected card | $ff

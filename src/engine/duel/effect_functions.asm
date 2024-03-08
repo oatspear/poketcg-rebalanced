@@ -4194,30 +4194,16 @@ Helper_AttachCardFromDiscardPile:
 Scavenge_CheckDiscardPile:
 	jp CreateItemCardListFromDiscardPile
 
+Scavenge_PlayerSelectEffect:
+	call HandlePlayerSelectionFromDiscardPile_ItemTrainer
+	ldh [hTemp_ffa0], a
+	ret
+
 Scavenge_AISelectEffect:
 ; AI picks first Trainer card in list
 	call CreateItemCardListFromDiscardPile
 	ld a, [wDuelTempList]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ret
-
-; Fishing Tail uses hTemp_ffa0 for storage
-FishingTail_AddToHandEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret z
-	ldh [hTempPlayAreaLocation_ffa1], a
-	; fallthrough
-
-Scavenge_AddToHandEffect:
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	call MoveDiscardPileCardToHand
-	call AddCardToHand
-	call IsPlayerTurn
-	ret c
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ldtx hl, WasPlacedInTheHandText
-	bank1call DisplayCardDetailScreen
+	ldh [hTemp_ffa0], a
 	ret
 
 ; returns carry if Arena card has no Energies attached
@@ -6628,12 +6614,13 @@ SelectedCard_AddToHandFromDiscardPile:
 
 ; move the card with deck index given in a from the discard pile to the hand
 AddDiscardPileCardToHandEffect:
-	call MoveDiscardPileCardToHand
-	call AddCardToHand
-	call IsPlayerTurn
+	ld d, a
+	call MoveDiscardPileCardToHand  ; preserves de
+	call AddCardToHand  ; preserves de
+	call IsPlayerTurn  ; preserves de
 	ret c
 ; display card on screen
-	ldh a, [hTempList]
+	ld a, d
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 	ret
@@ -7620,8 +7607,8 @@ PokemonTrader_TradeCardsEffect:
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 .done
-	call SyncShuffleDeck
-	ret
+	jp SyncShuffleDeck
+
 
 ; makes list in wDuelTempList with all Pokemon cards
 ; that are in Turn Duelist's hand.

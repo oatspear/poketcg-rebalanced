@@ -813,7 +813,7 @@ PesterEffectCommands:
 
 FishingTailEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FishingTail_DiscardPileCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FishingTail_AddToHandEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCard_AddToHandFromDiscardPile
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, FishingTail_PlayerSelection
 	dbw EFFECTCMDTYPE_AI_SELECTION, FishingTail_AISelection
 	db  $00
@@ -978,7 +978,7 @@ EnergySporesEffectCommands:
 
 ScavengeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Scavenge_CheckDiscardPile
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Scavenge_AddToHandEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCard_AddToHandFromDiscardPile
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PlayerSelectAndStoreItemCardFromDiscardPile
 	dbw EFFECTCMDTYPE_AI_SELECTION, Scavenge_AISelectEffect
 	db  $00
