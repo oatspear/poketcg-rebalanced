@@ -1599,7 +1599,7 @@ VenonatCard:
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw UltravisionEffectCommands ; effect commands
-	db NONE ; flags 1
+	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db NONE ; SPECIAL_AI_HANDLING ; flags 3
 	db 0
@@ -5443,15 +5443,15 @@ MagnemiteLv13Card:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx SearchingMagnetName ; name
-	tx SearchingMagnetDescription ; description
+	tx MagneticChargeName ; name
+	tx MagneticChargeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw SearchingMagnetEffectCommands ; effect commands
-	db DRAW_CARD ; flags 1
+	dw MagneticChargeEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3
+	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
@@ -5488,7 +5488,7 @@ MagnemiteLv15Card:
 	db CIRCLE ; rarity
 	db LABORATORY | GB ; sets
 	db MAGNEMITE_LV15
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -5510,20 +5510,20 @@ MagnemiteLv15Card:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx TackleName ; name
-	dw NONE ; description
+	tx SearchingMagnetName ; name
+	tx SearchingMagnetDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw SearchingMagnetEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy LIGHTNING, 2 ; energies
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx SparkName ; name
 	tx Damage1BenchedPokemon10Description ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
@@ -5670,28 +5670,41 @@ VoltorbCard:
 	db CIRCLE ; rarity
 	db MYSTERY | NONE ; sets
 	db VOLTORB
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; energy COLORLESS, 1 ; energies
+	; tx SonicboomName ; name
+	; tx SonicboomDescription ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw SonicboomEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_TEAR ; animation
+
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx SonicboomName ; name
-	tx SonicboomDescription ; description
+	tx RapidChargeName ; name
+	tx RapidChargeDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SonicboomEffectCommands ; effect commands
-	db NONE ; flags 1
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw RapidChargeEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_TEAR ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx SelfdestructName ; name
-	tx Selfdestruct40Description ; description
+	tx Selfdestruct50Description ; description
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
@@ -6205,7 +6218,7 @@ SandshrewCard:
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw UltravisionEffectCommands ; effect commands
-	db NONE ; flags 1
+	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
@@ -8969,7 +8982,7 @@ ClefairyCard:
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw LeadEffectCommands ; effect commands
-	db NONE ; flags 1
+	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0

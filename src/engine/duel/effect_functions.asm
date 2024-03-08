@@ -1472,7 +1472,7 @@ TutorWaterEnergy_AISelectEffect:
 	ret
 
 
-SearchingMagnet_PlayerSelectEffect:
+RapidCharge_PlayerSelectEffect:
 	ld a, TYPE_ENERGY_LIGHTNING
 	jr Tutor2OfCardType_PlayerSelectEffect
 
@@ -1508,7 +1508,7 @@ Tutor2OfCardType_PlayerSelectEffect:
 	ret
 
 
-SearchingMagnet_AISelectEffect:
+RapidCharge_AISelectEffect:
 	ld b, TYPE_ENERGY_LIGHTNING
 	jr Tutor2OfCardType_AISelectEffect
 
@@ -4049,6 +4049,16 @@ AttachBasicEnergyFromDiscardPile_PlayerSelectEffect:
 	ret
 
 
+AttachBasicEnergyFromDiscardPileToBench_PlayerSelectEffect:
+	call AttachBasicEnergyFromDiscardPile_PlayerSelectEffect
+	call EmptyScreen
+	ldtx hl, ChoosePokemonToAttachEnergyCardText
+	call DrawWideTextBox_WaitForInput
+	call HandlePlayerSelectionPokemonInBench
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret
+
+
 RetrieveBasicEnergyFromDiscardPile_PlayerSelectEffect:
 	ldtx hl, Choose1BasicEnergyCardFromDiscardPileText
 	call DrawWideTextBox_WaitForInput
@@ -4063,6 +4073,13 @@ RetrieveBasicEnergyFromDiscardPile_AISelectEffect:
 	ld a, [wDuelTempList]
 	ldh [hTemp_ffa0], a
 	or a  ; ignore carry
+	ret
+
+AttachBasicEnergyFromDiscardPileToBench_AISelectEffect:
+	call RetrieveBasicEnergyFromDiscardPile_AISelectEffect
+	; FIXME
+	ld a, PLAY_AREA_BENCH_1
+	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
 
@@ -4149,6 +4166,16 @@ AttachEnergyFromDiscard_AttachToPokemonEffect:
 	or a
 	ret
 
+
+; input:
+;   [hTempList]: $ff-terminated list of discarded card indices to attach
+AccelerateFromDiscard_AttachToPlayAreaEffect:
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add CARD_LOCATION_ARENA
+	ld e, a
+	ld a, $ff
+	ldh [hTempList + 1], a
+	jr SetCardLocationsFromDiscardPileToPlayArea
 
 ; input:
 ;   [hTempList]: $ff-terminated list of discarded card indices to attach
@@ -6208,6 +6235,27 @@ StressPheromones_PlayerSelectEffect:
 	ldh [hAIPkmnPowerEffectParam], a
 	or a  ; the Power has been used, regardless of cancel
 	ret
+
+
+SearchingMagnet_PlayerSelectEffect:
+	call HandlePlayerSelectionItemTrainerFromDeck
+	ldh [hTemp_ffa0], a
+	ret
+
+; selects the first available card
+SearchingMagnet_AISelectEffect:
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z  ; none found
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	cp TYPE_TRAINER
+	ret z  ; found one
+	jr .loop_deck
 
 
 Lead_PlayerSelectEffect:

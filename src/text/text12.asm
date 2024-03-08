@@ -1482,15 +1482,35 @@ EnergyGeneratorDescription:
 	line "Pokémon."
 	done
 
+RapidChargeName:
+	text "Rapid Charge"
+	done
+
+RapidChargeDescription:
+	text "Search your deck for up to 2"
+	line "<LIGHTNING> Energy, reveal them, and put"
+	line "them in your hand."
+	line "Then, shuffle your deck."
+	done
+
 SearchingMagnetName:
 	text "Searching Magnet"
 	done
 
 SearchingMagnetDescription:
-	text "Search your deck for up to 2"
-	line "<LIGHTNING> Energy, reveal them, and put"
-	line "them in your hand."
-	line "Then, shuffle your deck."
+	text "Search your deck for an Item card,"
+	line "reveal it, and put it into your"
+	line "hand. Then, shuffle your deck."
+	done
+
+MagneticChargeName:
+	text "Magnetic Charge"
+	done
+
+MagneticChargeDescription:
+	text "Attach a Basic Energy from your"
+	line "discard pile to 1 of your Benched"
+	line "Pokémon."
 	done
 
 WaveRiderName:

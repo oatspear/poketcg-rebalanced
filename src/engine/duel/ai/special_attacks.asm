@@ -43,8 +43,8 @@ HandleSpecialAIAttacks:
 	jp z, .Earthquake
 	cp RHYDON
 	jp z, .Earthquake
-	cp MAGNETON_LV35
-	jp z, .EnergySpike
+	cp MAGNEMITE_LV13
+	jp z, .MagneticCharge
 	cp ELECTRODE_LV35
 	jp z, .EnergySpike
 	cp DRAGONITE_LV45
@@ -361,6 +361,18 @@ HandleSpecialAIAttacks:
 	jp c, .zero_score
 	jp z, .zero_score
 	ld a, $80
+	ret
+
+.MagneticCharge:
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call CheckIfAnyBasicEnergyInLocation
+	jp nc, .zero_score
+	call AIProcessButDontPlayEnergy_SkipEvolutionAndArena  ; FIXME card needs to be in hand
+	jp nc, .zero_score
+; preserve selected Pokémon card for the effect logic
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ld a, $83
 	ret
 
 ; if there's any lightning energy cards in deck,

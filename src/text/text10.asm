@@ -681,10 +681,10 @@ SelfdestructName: ; 59abe (16:5abe)
 	text "Selfdestruct"
 	done
 
-Selfdestruct40Description:
-	text "This Pokémon does 40 damage to"
-	line "itself."
-	done
+; Selfdestruct40Description:
+; 	text "This Pokémon does 40 damage to"
+; 	line "itself."
+; 	done
 
 Selfdestruct50Description:
 	text "This Pokémon does 50 damage to"

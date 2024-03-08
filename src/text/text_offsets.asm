@@ -2272,7 +2272,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SmogName
 	textpointer SmogDescription
 	textpointer SelfdestructName                                   ; 0x08c0
-	textpointer Selfdestruct40Description
+	; textpointer Selfdestruct40Description
 	textpointer Selfdestruct50Description
 	textpointer WeezingDescription                                 ; 0x08c2
 	textpointer TangelaName                                        ; 0x08c3
@@ -3146,8 +3146,12 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DesperateBlastDescription
 	textpointer EnergyGeneratorName
 	textpointer EnergyGeneratorDescription
+	textpointer RapidChargeName
+	textpointer RapidChargeDescription
 	textpointer SearchingMagnetName
 	textpointer SearchingMagnetDescription
+	textpointer MagneticChargeName
+	textpointer MagneticChargeDescription
 	textpointer WaveRiderName
 	textpointer WaveRiderDescription
 	textpointer DrawUntil5CardsInHandDescription

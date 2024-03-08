@@ -49,10 +49,14 @@
 - Added Resistance to **Grass**.
 - **Sonicboom**: removed.
 - **Thunder Wave**: no coin flip; user may discard an energy in order to inflict Paralysis.
-- New attack: **Searching Magnet** (C): add up to 2 Lightning Energy from deck to hand.
+- New attack: **Magnetic Charge** (C): attach a Basic Energy from discard to a Benched Pokémon.
 
 #### Magnemite Lv15
+- Increased HP from 40 to 50.
 - Added Resistance to **Grass**.
+- **Tackle**: removed.
+- **Spark**: reduced cost from (LL) to (LC).
+- New attack: **Searching Magnet** (C): add an Item from deck to hand.
 
 #### Magneton Lv28
 - Increased HP from 60 to 80.
@@ -67,8 +71,10 @@
 - New attack: **Boosted Voltage** (CCC): 30 damage; if the user has an attached Tool, deal 10 damage to all of the opponent's Benched Pokémon.
 
 #### Voltorb
+- Increased HP from 40 to 50.
 - **Tackle**: removed.
-- New attack: **Sonicboom** (C): 10 damage; not affected by Weakness or Resistance.
+- **Self-desctruct**: recoil increased from 40 to 50.
+- New attack: **Rapid Charge** (C): add up to 2 Lightning Energy from deck to hand.
 
 #### Electrode Lv35
 - **Spark**: removed.
@@ -123,7 +129,7 @@
 ### Lightning Changes
 
 #### Voltorb
-- **Self-destruction**: removed damage to Benched Pokémon.
+- **Self-destruct**: removed damage to Benched Pokémon.
 
 #### Electrode Lv35
 - **Self-destruct**: renamed to **Explosion**; reduced base damage from 100 to 80.

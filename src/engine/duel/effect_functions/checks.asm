@@ -826,6 +826,12 @@ CardTypeTest_IsEnergizedElectabuzz:
 ; Compound Checks
 ; ------------------------------------------------------------------------------
 
+MagneticCharge_PreconditionCheck:
+	call CheckBenchIsNotEmpty
+	ret c  ; no bench
+	jp CreateEnergyCardListFromDiscardPile_OnlyBasic
+
+
 WickedTentacle_PreconditionCheck:
 	call SwapTurn
 	call CheckBenchIsNotEmpty

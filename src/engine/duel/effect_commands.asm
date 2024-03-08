@@ -752,11 +752,11 @@ WaterReserveEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, WaterReserve_AISelectEffect
 	db  $00
 
-SearchingMagnetEffectCommands:
+RapidChargeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCardList_AddToHandFromDeckEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SearchingMagnet_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, SearchingMagnet_AISelectEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, RapidCharge_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, RapidCharge_AISelectEffect
 	db  $00
 
 RocketShellEffectCommands:
@@ -946,6 +946,13 @@ MudSportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, MudSport_PreconditionCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MudSport_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MudSport_PlayerSelection
+	db  $00
+
+MagneticChargeEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, MagneticCharge_PreconditionCheck
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AccelerateFromDiscard_AttachToPlayAreaEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, AttachBasicEnergyFromDiscardPileToBench_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, AttachBasicEnergyFromDiscardPileToBench_AISelectEffect
 	db  $00
 
 MendEffectCommands:
@@ -1382,6 +1389,13 @@ AquaLauncherEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AquaLauncherEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetPokemon_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetPokemon_AISelectEffect
+	db  $00
+
+SearchingMagnetEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelectedCard_AddToHandFromDeckEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SearchingMagnet_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SearchingMagnet_AISelectEffect
 	db  $00
 
 LeadEffectCommands:
