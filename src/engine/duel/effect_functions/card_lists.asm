@@ -2,10 +2,13 @@
 ; Card Lists and Filters
 ; ------------------------------------------------------------------------------
 
+CheckDiscardPileHasSupporterCards:
 CreateSupporterCardListFromDiscardPile:
 	ld c, TYPE_TRAINER_SUPPORTER
 	jr CreateTrainerCardListFromDiscardPile_
 
+
+CheckDiscardPileHasItemCards:
 CreateItemCardListFromDiscardPile:
 	ld c, TYPE_TRAINER
 	jr CreateTrainerCardListFromDiscardPile_
