@@ -1056,7 +1056,7 @@ EnergyConversionName: ; 60629 (18:4629)
 	text "Energy Conversion"
 	done
 
-EnergyConversionDescription: ; 6063c (18:463c)
+EnergyConversionDescription:
 	text "Put up to 2 Basic Energy cards from"
 	line "your discard pile into your hand."
 	done
@@ -1681,4 +1681,13 @@ IfActiveThisTurn20BonusDamageDescription:
 	text "If this Pokémon moved into the"
 	line "Active Spot this turn, this attack"
 	line "does 20 more damage."
+	done
+
+JunkMagnetName:
+	text "Junk Magnet"
+	done
+
+Put2ItemsFromDiscardPileIntoHandDescription:
+	text "Put up to 2 Item cards from your"
+	line "discard pile into your hand."
 	done

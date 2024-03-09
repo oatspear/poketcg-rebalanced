@@ -17,8 +17,8 @@ HandleSpecialAIAttacks:
 	jp z, .Staryu
 	cp SCYTHER
 	jp z, .SwordsDanceAndFocusEnergy
-	cp MAGNETON_LV28
-	jp z, .ChainLightning
+	cp MAGNETON_LV35
+	jp z, .JunkMagnet
 	cp MEW_LV23
 	jp z, .DevolutionBeam
 	; cp PORYGON
@@ -187,31 +187,6 @@ HandleSpecialAIAttacks:
 	ld a, $85
 	ret
 
-; checks player's active card color, then
-; loops through bench looking for a Pokémon
-; with that same color.
-; if none are found, returns score of $80 + 2.
-.ChainLightning:
-	call SwapTurn
-	call GetArenaCardColor
-	call SwapTurn
-	ld b, a
-	ld a, DUELVARS_BENCH
-	call GetTurnDuelistVariable
-.loop_chain_lightning_bench
-	ld a, [hli]
-	cp $ff
-	jr z, .chain_lightning_success
-	push bc
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	pop bc
-	cp b
-	jr nz, .loop_chain_lightning_bench
-	jp .zero_score
-.chain_lightning_success
-	ld a, $82
-	ret
 
 .DevolutionBeam:
 	call LookForCardThatIsKnockedOutOnDevolution
@@ -292,6 +267,13 @@ HandleSpecialAIAttacks:
 .Energize:
 	ld e, LIGHTNING_ENERGY
 	jr .accelerate_self_from_discard_got_energy
+
+.JunkMagnet:
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call CheckIfAnyItemInLocation
+	jp nc, .zero_score
+	ld a, $82
+	ret
 
 .EnergyConversion:
 	ld a, CARD_LOCATION_DISCARD_PILE

@@ -5637,13 +5637,13 @@ MagnetonLv35Card:
 	tx MagnemiteName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 1 ; energies
-	tx EnergySpikeName ; name
-	tx EnergySpikeDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx JunkMagnetName ; name
+	tx Put2ItemsFromDiscardPileIntoHandDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw EnergySpikeEffectCommands ; effect commands
+	dw JunkMagnetEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3

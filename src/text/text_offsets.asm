@@ -2846,6 +2846,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseCardToPutOnTheBottomOfTheDeckText
 	textpointer PutOnTheBottomOfTheDeckText
 	textpointer IfActiveThisTurn20BonusDamageDescription
+	textpointer JunkMagnetName
+	textpointer Put2ItemsFromDiscardPileIntoHandDescription
 
 ; ------------------------------------------------------------------------------
 ; text12.asm

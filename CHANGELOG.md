@@ -68,7 +68,9 @@
 
 #### Magneton Lv35
 - Added Resistance to **Grass**.
+- **Energy Spike**: removed.
 - **Sonicboom**: removed.
+- New attack: **Junk Magnet** (C): put up to 2 Items from the discard pile into hand.
 - New attack: **Boosted Voltage** (CCC): 30 damage; if the user has an attached Tool, deal 10 damage to all of the opponent's Benched Pokémon.
 
 #### Voltorb

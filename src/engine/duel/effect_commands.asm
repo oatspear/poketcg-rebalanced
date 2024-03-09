@@ -732,14 +732,14 @@ GastlyDestinyBondEffectCommands:
 
 EnergyConversionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasBasicEnergyCards
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyConversion_AddToHandEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCardList_AddToHandFromDiscardPileEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyConversion_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyConversion_AISelectEffect
 	db  $00
 
 RiptideEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Riptide_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyConversion_AddToHandEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCardList_AddToHandFromDiscardPileEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyConversion_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyConversion_AISelectEffect
 	dbw EFFECTCMDTYPE_AI, Riptide_AIEffect
@@ -977,10 +977,17 @@ EnergySporesEffectCommands:
 	db  $00
 
 ScavengeEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Scavenge_CheckDiscardPile
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasItemCards
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCard_AddToHandFromDiscardPile
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PlayerSelectAndStoreItemCardFromDiscardPile
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Scavenge_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Scavenge_AISelectEffect
+	db  $00
+
+JunkMagnetEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasItemCards
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SelectedCardList_AddToHandFromDiscardPileEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, JunkMagnet_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, JunkMagnet_AISelectEffect
 	db  $00
 
 RecoverEffectCommands:

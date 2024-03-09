@@ -3477,13 +3477,12 @@ PainAmplifier_DamageEffect:
 	ld a, b
 	dec c
 	jr nz, .loop
-	call SwapTurn
-	ret
+	jp SwapTurn
+
 
 ApplyDestinyBondEffect: ; 2d987 (b:5987)
 	ld a, SUBSTATUS1_DESTINY_BOND
-	call ApplySubstatus1ToAttackingCard
-	ret
+	jp ApplySubstatus1ToAttackingCard
 
 
 EnergyConversion_PlayerSelectEffect:
@@ -3491,47 +3490,17 @@ EnergyConversion_PlayerSelectEffect:
 	jp HandleEnergyCardsInDiscardPileSelection
 
 
+JunkMagnet_AISelectEffect:
+	call CreateItemCardListFromDiscardPile
+	ld a, 2
+	jp PickFirstNCardsFromList_SelectEffect
+
+
 EnergyConversion_AISelectEffect:
 	call CreateEnergyCardListFromDiscardPile_OnlyBasic
 	; call CreateEnergyCardListFromDiscardPile_AllEnergy
-	ld hl, wDuelTempList
-	ld de, hTempList
-	ld c, 2
-; select the first two energy cards found in Discard Pile
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .done
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .loop
-.done
-	ld a, $ff
-	ld [de], a
-	ret
-
-EnergyConversion_AddToHandEffect:
-; loop cards that were chosen
-; until $ff is reached,
-; and move them to the hand.
-	ld hl, hTempList
-	ld de, wDuelTempList
-.loop_cards
-	ld a, [hli]
-	ld [de], a
-	inc de
-	cp $ff
-	jr z, .done
-	call MoveDiscardPileCardToHand
-	call AddCardToHand
-	jr .loop_cards
-
-.done
-	call IsPlayerTurn
-	ret c
-	bank1call DisplayCardListDetails
-	ret
+	ld a, 2
+	jp PickFirstNCardsFromList_SelectEffect
 
 
 ; returns carry if neither the Turn Duelist or
@@ -4189,10 +4158,6 @@ Helper_AttachCardFromDiscardPile:
 	pop hl
 	ret
 
-
-; sets carry if no Trainer cards in the Discard Pile.
-Scavenge_CheckDiscardPile:
-	jp CreateItemCardListFromDiscardPile
 
 Scavenge_PlayerSelectEffect:
 	call HandlePlayerSelectionFromDiscardPile_ItemTrainer
@@ -6458,6 +6423,12 @@ Prank_PlayerSelectEffect:
 	ret
 
 
+JunkMagnet_PlayerSelectEffect:
+	ldtx hl, Put2ItemsFromDiscardPileIntoHandDescription
+	call CreateItemCardListFromDiscardPile
+	jp ChooseUpTo2Cards_PlayerDiscardPileSelection
+
+
 ; ------------------------------------------------------------------------------
 ; Move Selected Cards
 ; ------------------------------------------------------------------------------
@@ -6629,14 +6600,22 @@ AddDiscardPileCardToHandEffect:
 ; moves all the cards in hTempList from the discard pile to the turn holder's hand
 SelectedCardList_AddToHandFromDiscardPileEffect:
 	ld hl, hTempList
+	ld de, wDuelTempList
 .loop_cards
 	ld a, [hli]
+	ld [de], a
+	inc de
 	cp $ff
-	ret z  ; done
-	push hl
-	call AddDiscardPileCardToHandEffect
-	pop hl
+	jr z, .done
+	call MoveDiscardPileCardToHand
+	call AddCardToHand
 	jr .loop_cards
+
+.done
+	call IsPlayerTurn
+	ret c
+	bank1call DisplayCardListDetails
+	ret
 
 
 AbsorbWater_AddToHandEffect:
