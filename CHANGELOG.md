@@ -48,8 +48,9 @@
 - Increased HP from 40 to 50.
 - Added Resistance to **Grass**.
 - **Sonicboom**: removed.
-- **Thunder Wave**: no coin flip; user may discard an energy in order to inflict Paralysis.
+- **Thunder Wave**: removed.
 - New attack: **Magnetic Charge** (C): attach a Basic Energy from discard to a Benched Pokémon.
+- New attack: **Thunder Shock** (LC): 20 damage; coin flip; inflict Paralysis if heads.
 
 #### Magnemite Lv15
 - Increased HP from 40 to 50.
