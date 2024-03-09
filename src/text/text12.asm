@@ -1666,7 +1666,7 @@ BoostedVoltageName:
 
 BoostedVoltageDescription:
 	text "If this Pokémon has a Trainer card"
-	text "attached to it, this attack does 10"
-	text "damage to each of your opponent's"
-	text "Benched Pokémon."
+	line "attached to it, this attack does 10"
+	line "damage to each of your opponent's"
+	line "Benched Pokémon."
 	done
