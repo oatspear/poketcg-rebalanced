@@ -2,6 +2,21 @@
 
 
 
+; moves all the cards in hTempList from the discard pile to the turn holder's hand
+SelectedCardList_AddToHandFromDiscardPileEffect:
+	ld hl, hTempList
+.loop_cards
+	ld a, [hli]
+	cp $ff
+	ret z  ; done
+	push hl
+	call AddDiscardPileCardToHandEffect
+	pop hl
+	jr .loop_cards
+
+
+
+
 DamageSwapEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DamageSwap_CheckDamage
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamageSwap_SelectAndSwapEffect
