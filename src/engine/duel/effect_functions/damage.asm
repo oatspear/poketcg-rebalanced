@@ -168,6 +168,11 @@ DealDamageToTarget_DE_DamageEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	cp $ff
 	ret z
+	; fallthrough
+
+; Deals DE damage to 1 of the opponent's Pokémon
+; in play area location A
+DealDamageToTargetA_DE_DamageEffect:
 	call SwapTurn
 	; ldh a, [hTempPlayAreaLocation_ffa1]
 	ld b, a
