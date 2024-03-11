@@ -7194,11 +7194,21 @@ HandleOnPlayEnergyEffects:
 ; OATS introduce Potion Energy effect
 	ld a, CHANSEY  ; Healing Energy
 	call CountPokemonIDInPlayArea
-	jr nc, .full_heal_energy  ; no Pkmn Power-capable Chansey was found
+	jr nc, .electromagnetic_wall  ; no Pkmn Power-capable Pokémon was found
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld e, a   ; location
 	ld d, 10  ; damage
 	farcall HealPlayAreaCardHP
+.electromagnetic_wall
+	call SwapTurn
+	ld a, MAGNETON_LV28  ; Electromagnetic Wall
+	call CountPokemonIDInPlayArea
+	call SwapTurn
+	jr nc, .full_heal_energy  ; no Pkmn Power-capable Pokémon was found
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a    ; location
+	ld de, 10  ; damage
+	call DealDamageToPlayAreaPokemon_RegularAnim
 .full_heal_energy
 	ret
 
