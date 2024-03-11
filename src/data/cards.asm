@@ -5508,19 +5508,6 @@ MagnemiteLv15Card:
 	; (C) Magnetic Charge
 	; Attach up to 2 Basic Electric Energy from your discard pile onto 1 of your Benched Pokémon
 
-	; energy LIGHTNING, 1 ; energies
-	; tx LightScreenName ; name
-	; tx LightScreenDescription ; description
-	; tx OtherEffectsStillHappenDescriptionCont ; description (cont)
-	; db 0 ; damage
-	; db RESIDUAL ; category
-	; dw LightScreenEffectCommands ; effect commands
-	; db NONE ; flags 1
-	; db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	; db NONE ; flags 3
-	; db 0
-	; db ATK_ANIM_BARRIER ; animation
-
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx SearchingMagnetName ; name
@@ -5573,25 +5560,25 @@ MagnetonLv28Card:
 	tx MagnemiteName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx ThunderWaveName ; name
-	tx ParalysisIfDiscardedEnergyDescription ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ParalysisIfDiscardedEnergyEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	energy 0 ; energies
+	tx ElectromagneticWallName ; name
+	tx ElectromagneticWallDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw PassivePowerEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_THUNDER_WAVE ; animation
+	db 1
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx MagneticBlastName ; name
 	tx MoveOpponentEnergyToBenchDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw MoveOpponentEnergyToBenchEffectCommands ; effect commands
 	db NONE ; flags 1

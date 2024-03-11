@@ -7206,9 +7206,13 @@ HandleOnPlayEnergyEffects:
 	call SwapTurn
 	jr nc, .full_heal_energy  ; no Pkmn Power-capable Pokémon was found
 	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld b, a    ; location
-	ld de, 10  ; damage
-	call DealDamageToPlayAreaPokemon_RegularAnim
+; normal damage to target (unused)
+	; ld b, a    ; location
+	; ld de, 10  ; damage
+	; call DealDamageToPlayAreaPokemon_RegularAnim
+; placing damage counters directly
+	ld e, a
+	farcall Put1DamageCounterOnTarget
 .full_heal_energy
 	ret
 

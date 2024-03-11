@@ -223,19 +223,6 @@ ElectabuzzName: ; 5dc66 (17:5c66)
 	text "Electabuzz"
 	done
 
-LightScreenName: ; 5dc72 (17:5c72)
-	text "Light Screen"
-	done
-
-LightScreenDescription: ; 5dc80 (17:5c80)
-	text "Whenever an attack does damage to"
-	line "this Pokémon (after applying Weakness"
-	line "and Resistance) during your"
-	line "opponent's next turn, that attack"
-	line "only does half the damage (rounded"
-	line "down to the nearest 10)."
-	done
-
 OtherEffectsStillHappenDescriptionCont:
 	text "(Any other effects of attacks still"
 	line "happen.)"
@@ -1690,4 +1677,15 @@ JunkMagnetName:
 Put2ItemsFromDiscardPileIntoHandDescription:
 	text "Put up to 2 Item cards from your"
 	line "discard pile into your hand."
+	done
+
+ElectromagneticWallName:
+	text "Electromagnetic Wall"
+	done
+
+ElectromagneticWallDescription:
+	text "Whenever your opponent attaches"
+	line "an Energy from their hand to 1 of"
+	line "their Pokémon, put 1 damage counter"
+	line "on that Pokémon."
 	done

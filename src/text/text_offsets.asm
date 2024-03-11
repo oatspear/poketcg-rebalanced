@@ -2535,8 +2535,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThunderWaveName                                    ; 0x09d2
 	textpointer MagnetName                                         ; 0x09d4
 	textpointer MagnemiteLv13Description                          ; 0x09d5
-	; textpointer MagneticStormName                                  ; 0x09d6
-	; textpointer MagneticStormDescription                           ; 0x09d7
 	textpointer MagnemiteLv15Description                          ; 0x09d8
 	textpointer MagnetonName                                       ; 0x09d9
 	textpointer MagnetonLv28Description                           ; 0x09db
@@ -2554,8 +2552,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChainLightningDescription                          ; 0x09e8
 	textpointer ElectrodeLv42Description                          ; 0x09e9
 	textpointer ElectabuzzName                                     ; 0x09ea
-	textpointer LightScreenName                                    ; 0x09eb
-	textpointer LightScreenDescription                             ; 0x09ec
 	textpointer OtherEffectsStillHappenDescriptionCont
 	textpointer ElectricName                                       ; 0x09ef
 	textpointer ElectabuzzLv20Description                         ; 0x09f0
@@ -2848,6 +2844,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer IfActiveThisTurn20BonusDamageDescription
 	textpointer JunkMagnetName
 	textpointer Put2ItemsFromDiscardPileIntoHandDescription
+	textpointer ElectromagneticWallName
+	textpointer ElectromagneticWallDescription
 
 ; ------------------------------------------------------------------------------
 ; text12.asm

@@ -62,8 +62,9 @@
 #### Magneton Lv28
 - Increased HP from 60 to 80.
 - Added Resistance to **Grass**.
-- **Thunder Wave**: base damage increased from 20 to 30; no coin flip; user may discard an energy in order to inflict Paralysis.
+- **Thunder Wave**: removed.
 - **Chain Lightning**: removed.
+- New Pokémon Power: **Electromagnetic Wall**: whenever the opponent attached an Energy from hand, the target Pokémon takes 10 damage.
 - New attack: **Magnetic Blast** (LC): 30 damage; move an energy from the Defending Pokémon to the opponent's bench.
 
 #### Magneton Lv35
