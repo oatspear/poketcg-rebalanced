@@ -76,8 +76,10 @@ ROMX $07
 	"Booster Packs"
 ROMX $08
 	"AI Logic 2"
-ROMX $0b
+ROMX $0a
 	"Effect Functions"
+ROMX $0b
+	"Effect Functions 2"
 ROMX $0c
 	"Decks"
 ROMX $0d
