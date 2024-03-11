@@ -13,7 +13,7 @@ Recoil20Effect:
 
 Recoil30UnlessActiveThisTurnEffect:
 	call CheckEnteredActiveSpotThisTurn
-	ret c
+	ret nc  ; entered the Active Spot this turn
 	; fallthrough
 
 Recoil30Effect:
