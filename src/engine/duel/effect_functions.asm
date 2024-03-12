@@ -5261,8 +5261,10 @@ LightningHaste_AttachEnergyEffect:
 	xor a  ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ffa1], a
 	call .attach
-; deal 10 damage to the Active Pokémon
-	jp Deal10DamageToFriendlyTarget_DamageEffect
+; put 1 damage counter on the Active Pokémon
+	ld e, PLAY_AREA_ARENA
+	jp Put1DamageCounterOnTarget
+	; jp Deal10DamageToFriendlyTarget_DamageEffect
 
 ; this is a separate sub-routine because we need to `push hl` before jumping,
 ; and a `call` puts pointers on the stack above the `push hl`, so it must
