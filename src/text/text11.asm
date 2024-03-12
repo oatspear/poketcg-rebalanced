@@ -91,20 +91,14 @@ RaichuLv40Description: ; 5d3e7 (17:53e7)
 	line "high-voltage power."
 	done
 
-GigashockName: ; 5d43c (17:543c)
-	text "Gigashock"
-	done
+; GigashockName:
+; 	text "Gigashock"
+; 	done
 
 DamageUpTo2BenchedDescription:
 	text "Choose up to 2 of your opponent's"
 	line "Benched Pokémon. This attack does"
 	line "10 damage to each."
-	done
-
-RaichuLv45Description: ; 5d531 (17:5531)
-	text "Its long tail serves as a ground to"
-	line "protect itself from its own high"
-	line "voltage power."
 	done
 
 MagnemiteName: ; 5d586 (17:5586)

@@ -44,6 +44,13 @@
 - **Agility**: renamed to Strafe.
 - **Thunder**: base damage increased from 60 to 70; does not take recoil if active this turn.
 
+#### Raichu Lv45
+- Reduced HP from 90 to 70.
+- **Energy Conversion**: removed.
+- **Gigashock**: removed.
+- New Pokémon Power: **Lightning Haste**: once per turn, attach (L) from the discard pile to the Active Pokémon and deal 10 damage to it.
+- New attack: **Thunder Wave** (LC): 30 damage; may discard an attached energy to inflict Paralysis.
+
 #### Magnemite Lv13
 - Increased HP from 40 to 50.
 - Added Resistance to **Grass**.

@@ -5335,37 +5335,37 @@ RaichuLv45Card:
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db RAICHU_LV45
-	db 90 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx PikachuName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx EnergyConversionName ; name
-	tx EnergyConversionDescription ; description
-	dw NONE ; description (cont)
+	energy 0 ; energies
+	tx LightningHasteName ; name
+	tx LightningHasteDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw EnergyConversionEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw LightningHasteEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
-	db 10
-	db ATK_ANIM_ENERGY_CONVERSION ; animation
+	db NONE ; flags 3    ; SPECIAL_AI_HANDLING
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy LIGHTNING, 2, COLORLESS, 1 ; energies
-	tx GigashockName ; name
-	tx DamageUpTo2BenchedDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 40 ; damage
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx ThunderWaveName ; name
+	tx ParalysisIfDiscardedEnergyDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw DamageUpTo2Benched10EffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	dw ParalysisIfDiscardedEnergyEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
+	db 3
+	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5376,7 +5376,7 @@ RaichuLv45Card:
 	db 45 ; level
 	db 2, 7 ; length
 	dw 66 * 10 ; weight
-	tx RaichuLv45Description ; description
+	tx RaichuLv40Description ; description
 	db 0
 
 RaichuLv35Card:
@@ -5427,7 +5427,7 @@ RaichuLv35Card:
 	db 45 ; level
 	db 2, 7 ; length
 	dw 66 * 10 ; weight
-	tx RaichuLv45Description ; description
+	tx RaichuLv40Description ; description
 	db 0
 
 MagnemiteLv13Card:
@@ -5649,7 +5649,7 @@ MagnetonLv35Card:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDER_WAVE ; animation
+	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

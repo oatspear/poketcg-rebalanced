@@ -2528,9 +2528,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RaichuName                                         ; 0x09c9
 	textpointer ThunderName                                        ; 0x09cb
 	textpointer RaichuLv40Description                             ; 0x09cd
-	textpointer GigashockName                                    ; 0x09ce
 	textpointer DamageUpTo2BenchedDescription                      ; 0x09cf
-	textpointer RaichuLv45Description                             ; 0x09d0
 	textpointer MagnemiteName                                      ; 0x09d1
 	textpointer ThunderWaveName                                    ; 0x09d2
 	textpointer MagnetName                                         ; 0x09d4
