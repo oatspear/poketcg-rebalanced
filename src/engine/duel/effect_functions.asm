@@ -5246,6 +5246,33 @@ CrushingCharge_DiscardAndAttachEnergyEffect:
 	jr _AttachEnergyFromDiscardPileToBenchEffect
 
 
+LightningHaste_OncePerTurnCheck:
+	call CheckPokemonPowerCanBeUsed
+	ret c  ; cannot be used
+	call CreateEnergyCardListFromDiscardPile_OnlyLightning
+	ret c  ; no energy
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
+
+LightningHaste_AttachEnergyEffect:
+; attach an energy to the Active Pokémon
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ffa1], a
+	call .attach
+; deal 10 damage to the Active Pokémon
+	jp Deal10DamageToFriendlyTarget_DamageEffect
+
+; this is a separate sub-routine because we need to `push hl` before jumping,
+; and a `call` puts pointers on the stack above the `push hl`, so it must
+; be an explicit jump.
+.attach
+	ld hl, CreateEnergyCardListFromDiscardPile_OnlyLightning
+	push hl
+	jr _AttachEnergyFromDiscardPileToBenchEffect.attach
+
+
 Firestarter_OncePerTurnCheck:
 	call CheckPokemonPowerCanBeUsed
 	ret c  ; cannot be used
