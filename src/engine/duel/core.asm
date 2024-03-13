@@ -574,46 +574,14 @@ DuelMenu_Done:
 	ret
 
 ; triggered by selecting the "Retreat" item in the duel menu
-DuelMenu_Retreat:
+; note that the energy cards are discarded (DiscardRetreatCostCards), then returned
+; (ReturnRetreatCostCardsToArena), then discarded again for good (AttemptRetreat).
+; It's done this way so that the retreating Pokemon is listed with its energies updated
+; when the Play Area screen is shown to select the Pokemon to switch to. The reason why
+; AttemptRetreat is responsible for discarding the energy cards is because, if the
+; Pokemon is confused, it may not be able to retreat, so they cannot be discarded earlier.
 ; OATS confusion no longer prevents retreat
-;	ld a, DUELVARS_ARENA_CARD_STATUS
-;	call GetTurnDuelistVariable
-;	and CNF_SLP_PRZ
-;	cp CONFUSED
-;	ldh [hTemp_ffa0], a
-;	jr nz, .not_confused
-;	ld a, [wGotTailsFromConfusionCheckDuringRetreat]
-;	or a
-;	jr nz, .unable_due_to_confusion
-;	call CheckAbleToRetreat
-;	jr c, .unable_to_retreat
-;	call DisplayRetreatScreen
-;	jr c, .done
-;	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
-;	call DrawWideTextBox_WaitForInput
-;	call OpenPlayAreaScreenForSelection
-;	jr c, .done
-;	ld [wBenchSelectedPokemon], a
-;	ld a, [wBenchSelectedPokemon]
-;	ldh [hTempPlayAreaLocation_ffa1], a
-;	ld a, OPPACTION_ATTEMPT_RETREAT
-;	call SetOppAction_SerialSendDuelData
-;	call AttemptRetreat
-;	jr nc, .done
-;	call DrawDuelMainScene
-
-; .unable_due_to_confusion
-; 	ldtx hl, UnableToRetreatText
-; 	call DrawWideTextBox_WaitForInput
-; 	jp PrintDuelMenuAndHandleInput
-
-;.not_confused
-	; note that the energy cards are discarded (DiscardRetreatCostCards), then returned
-	; (ReturnRetreatCostCardsToArena), then discarded again for good (AttemptRetreat).
-	; It's done this way so that the retreating Pokemon is listed with its energies updated
-	; when the Play Area screen is shown to select the Pokemon to switch to. The reason why
-	; AttemptRetreat is responsible for discarding the energy cards is because, if the
-	; Pokemon is confused, it may not be able to retreat, so they cannot be discarded earlier.
+DuelMenu_Retreat:
 	call CheckAbleToRetreat
 	jr c, .unable_to_retreat
 	call DisplayRetreatScreen
