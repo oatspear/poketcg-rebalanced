@@ -9038,5 +9038,3 @@ DecideLinkDuelVariables:
 .link_continue
 	or a
 	ret
-
-	ret ; stray ret
