@@ -448,6 +448,7 @@ PrintDuelMenuAndHandleInput:
 	ld hl, DuelMenuFunctionTable
 	jp JumpToFunctionInTable
 
+
 DuelMenuFunctionTable:
 	dw DuelMenu_Hand
 	dw DuelMenu_Attack
@@ -456,6 +457,7 @@ DuelMenuFunctionTable:
 	dw DuelMenu_Retreat
 	dw DuelMenu_Done
 
+
 DrawCardFromDeckToHand:
 	call DrawCardFromDeck
 	call nc, AddCardToHand
@@ -463,15 +465,18 @@ DrawCardFromDeckToHand:
 	call SetOppAction_SerialSendDuelData
 	jp PrintDuelMenuAndHandleInput.menu_items_printed
 
+
 ; triggered by pressing B + UP in the duel menu
 DuelMenuShortcut_OpponentPlayArea:
 	call OpenNonTurnHolderPlayAreaScreen
 	jp DuelMainInterface
 
+
 ; triggered by pressing B + DOWN in the duel menu
 DuelMenuShortcut_PlayerPlayArea:
 	call OpenTurnHolderPlayAreaScreen
 	jp DuelMainInterface
+
 
 ; triggered by pressing B + RIGHT in the duel menu
 DuelMenuShortcut_OpponentDiscardPile:
@@ -479,23 +484,26 @@ DuelMenuShortcut_OpponentDiscardPile:
 	jp c, PrintDuelMenuAndHandleInput
 	jp DuelMainInterface
 
+
 ; triggered by pressing B + LEFT in the duel menu
 DuelMenuShortcut_PlayerDiscardPile:
 	call OpenTurnHolderDiscardPileScreen
 	jp c, PrintDuelMenuAndHandleInput
 	jp DuelMainInterface
 
+
 ; draw the non-turn holder's play area screen
 OpenNonTurnHolderPlayAreaScreen:
 	call SwapTurn
 	call OpenTurnHolderPlayAreaScreen
-	call SwapTurn
-	ret
+	jp SwapTurn
+
 
 ; draw the turn holder's play area screen
 OpenTurnHolderPlayAreaScreen:
 	call HasAlivePokemonInPlayArea
 	jp OpenPlayAreaScreenForViewing
+
 
 ; draw the non-turn holder's discard pile screen
 OpenNonTurnHolderDiscardPileScreen:
@@ -503,9 +511,11 @@ OpenNonTurnHolderDiscardPileScreen:
 	call OpenDiscardPileScreen
 	jp SwapTurn
 
+
 ; draw the turn holder's discard pile screen
 OpenTurnHolderDiscardPileScreen:
 	jp OpenDiscardPileScreen
+
 
 ; draw the non-turn holder's hand screen. simpler version of OpenPlayerHandScreen
 ; used only for checking the cards rather than for playing them.
@@ -513,6 +523,7 @@ OpenNonTurnHolderHandScreen_Simple:
 	call SwapTurn
 	call OpenTurnHolderHandScreen_Simple
 	jp SwapTurn
+
 
 ; draw the turn holder's hand screen. simpler version of OpenPlayerHandScreen
 ; used only for checking the cards rather than for playing them.
@@ -528,6 +539,7 @@ OpenTurnHolderHandScreen_Simple:
 	ldtx hl, NoCardsInHandText
 	jp DrawWideTextBox_WaitForInput
 
+
 ; triggered by pressing B + START in the duel menu
 DuelMenuShortcut_OpponentActivePokemon:
 	call SwapTurn
@@ -535,10 +547,12 @@ DuelMenuShortcut_OpponentActivePokemon:
 	call SwapTurn
 	jp DuelMainInterface
 
+
 ; triggered by pressing START in the duel menu
 DuelMenuShortcut_PlayerActivePokemon:
 	call OpenActivePokemonScreen
 	jp DuelMainInterface
+
 
 ; draw the turn holder's active Pokemon screen if it exists
 OpenActivePokemonScreen:
@@ -552,8 +566,8 @@ OpenActivePokemonScreen:
 	xor a
 	ld [hli], a
 	ld [hl], a ; wCurPlayAreaY
-	call OpenCardPage_FromCheckPlayArea
-	ret
+	jp OpenCardPage_FromCheckPlayArea
+
 
 ; triggered by selecting the "Pkmn Power" item in the duel menu
 DuelMenu_PkmnPower:
@@ -561,6 +575,7 @@ DuelMenu_PkmnPower:
 	jp c, DuelMainInterface
 	call UseAttackOrPokemonPower
 	jp DuelMainInterface
+
 
 ; triggered by selecting the "Done" item in the duel menu
 DuelMenu_Done:
@@ -570,8 +585,8 @@ DuelMenu_Done:
 	jp c, RestartPracticeDuelTurn
 	ld a, OPPACTION_FINISH_NO_ATTACK
 	call SetOppAction_SerialSendDuelData
-	call ClearNonTurnTemporaryDuelvars
-	ret
+	jp ClearNonTurnTemporaryDuelvars
+
 
 ; triggered by selecting the "Retreat" item in the duel menu
 ; note that the energy cards are discarded (DiscardRetreatCostCards), then returned
@@ -585,7 +600,8 @@ DuelMenu_Retreat:
 	call CheckAbleToRetreat
 	jr c, .unable_to_retreat
 	call DisplayRetreatScreen
-	jr c, .done
+	jp c, DuelMainInterface
+; able to retreat, selected energy cards
 	call DiscardRetreatCostCards
 	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
 	call DrawWideTextBox_WaitForInput
@@ -599,13 +615,13 @@ DuelMenu_Retreat:
 	ld a, OPPACTION_ATTEMPT_RETREAT
 	call SetOppAction_SerialSendDuelData
 	call AttemptRetreat
-
-.done
-	jp DuelMainInterface
+	call DuelMainInterface
+	jp HandleOnRetreatEffects
 
 .unable_to_retreat
 	call DrawWideTextBox_WaitForInput
 	jp PrintDuelMenuAndHandleInput
+
 
 ; triggered by selecting the "Hand" item in the duel menu
 DuelMenu_Hand:
@@ -616,6 +632,7 @@ DuelMenu_Hand:
 	ldtx hl, NoCardsInHandText
 	call DrawWideTextBox_WaitForInput
 	jp PrintDuelMenuAndHandleInput
+
 
 ; draw the screen for the player's hand and handle user input to for example check
 ; a card or attempt to use a card, playing the card if possible in that case.
@@ -653,6 +670,7 @@ OpenPlayerHandScreen:
 ; card was played and moved to discard pile
 	call HandleOnPlayTrainerEffects
 	jp DuelMainInterface
+
 
 ; play the energy card with deck index at hTempCardIndex_ff98
 ; c contains the type of energy card being played
@@ -6066,8 +6084,8 @@ PrintAttackOrCardDescription:
 	ld a, 19
 	call InitTextPrintingInTextbox
 	call ProcessTextFromID
-	call SetOneLineSeparation
-	ret
+	jp SetOneLineSeparation
+
 
 ; moves the cards loaded by deck index at hTempRetreatCostCards to the discard pile
 DiscardRetreatCostCards:
@@ -6078,6 +6096,7 @@ DiscardRetreatCostCards:
 	ret z
 	call PutCardInDiscardPile
 	jr .discard_loop
+
 
 ; moves the discard pile cards that were loaded to hTempRetreatCostCards back to the active Pokemon.
 ; this exists because they will be discarded again during the call to AttemptRetreat, so
@@ -6096,24 +6115,13 @@ ReturnRetreatCostCardsToArena:
 	pop hl
 	jr .loop
 
+
 ; discard retreat cost energy cards and attempt retreat of the arena card.
 ; return carry if unable to retreat this turn due to unsuccessful confusion check
 ; if successful, the retreated card is replaced with a bench Pokemon card
+; OATS status conditions no longer prevent retreat
 AttemptRetreat:
 	call DiscardRetreatCostCards
-; OATS status conditions no longer prevent retreat
-	; ldh a, [hTemp_ffa0]
-	; and CNF_SLP_PRZ
-	; cp CONFUSED
-	; jr nz, .success
-	; ldtx de, ConfusionCheckRetreatText
-	; call TossCoin
-	; jr c, .success
-	; ld a, 1
-	; ld [wGotTailsFromConfusionCheckDuringRetreat], a
-	; scf
-	; ret
-;.success
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 	call SwapArenaWithBenchPokemon
@@ -6123,6 +6131,7 @@ AttemptRetreat:
 	xor a
 	; ld [wGotTailsFromConfusionCheckDuringRetreat], a
 	ret
+
 
 ; given a number between 0-255 in a, converts it to TX_SYMBOL format,
 ; and writes it to wStringBuffer + 2 and to the BGMap0 address at bc.
@@ -6869,20 +6878,24 @@ OppAction_AttemptRetreat:
 	call GetTurnDuelistVariable
 	push af
 	call AttemptRetreat
-	ldtx hl, RetreatWasUnsuccessfulText
 	jr c, .failed
+; success
 	xor a
 	ld [wDuelDisplayedScreen], a
-	ldtx hl, RetreatedToTheBenchText
-.failed
-	push hl
 	call DrawDuelMainScene
-	pop hl
 	pop af
-	push hl
 	call LoadCardNameToTxRam2
-	pop hl
+	ldtx hl, RetreatedToTheBenchText
+	call DrawWideTextBox_WaitForInput
+	jp HandleOnRetreatEffects
+
+.failed
+	call DrawDuelMainScene
+	pop af
+	call LoadCardNameToTxRam2
+	ldtx hl, RetreatWasUnsuccessfulText
 	jp DrawWideTextBox_WaitForInput
+
 
 ; play trainer card from hand
 OppAction_PlayTrainerCard:
@@ -7194,6 +7207,10 @@ HandleOnEvolvePokemonEffects:
 	call DrawDuelMainScene
 	farcall DraconicEvolutionEffect
 .done
+	ret
+
+
+HandleOnRetreatEffects:
 	ret
 
 
