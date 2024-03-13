@@ -1055,6 +1055,40 @@ PrimordialDream_MorphAndAddToHandEffect:
 	jp SelectedCard_AddToHandFromDiscardPile
 
 
+; input:
+;   [hTempPlayAreaLocation_ffa1]: PLAY_AREA_* of the Pokémon that switched in
+;                                 (now with the previous Active Pokémon)
+;   [hTempRetreatCostCards]: $ff-terminated list of discarded deck indices
+VoltSwitchEffect:
+	ldh a, [hTempRetreatCostCards]
+	cp $ff
+	ret z  ; no cards were discarded
+; check for true Lightning energies
+	ld hl, hTempRetreatCostCards
+.loop
+	ld a, [hli]
+	cp $ff
+	ret z
+	ld d, a  ; deck index
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, de
+	ld a, [wLoadedCard2Type]
+	cp TYPE_ENERGY_LIGHTNING
+	jr nz, .loop
+; found a Lightning Energy
+	ld a, d
+	ld e, CARD_LOCATION_ARENA
+	call Helper_AttachCardFromDiscardPile
+
+	call IsPlayerTurn
+	ret c
+	xor a  ; PLAY_AREA_ARENA
+	jp Helper_GenericShowAttachedEnergyToPokemon.got_play_area_location
+
+; check for an active Energy Jolt
+	; ld a, [wEnergyColorOverride]
+	; cp LIGHTNING
+
+
 ; ------------------------------------------------------------------------------
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
@@ -6106,8 +6140,7 @@ ImakuniEffect: ; 2f216 (b:7216)
 	ld a, ATK_ANIM_IMAKUNI_CONFUSION
 	call PlayAttackAnimation_AdhocEffect
 	ldtx hl, ThereWasNoEffectText
-	call DrawWideTextBox_WaitForInput
-	ret
+	jp DrawWideTextBox_WaitForInput
 
 .success
 ; play confusion animation and confuse card
@@ -6122,14 +6155,13 @@ ImakuniEffect: ; 2f216 (b:7216)
 	ret
 
 ; returns carry if opponent has no energy cards attached
-RocketGrunts_EnergyCheck: ; 2f252 (b:7252)
+RocketGrunts_EnergyCheck:
 	call SwapTurn
 	call CheckIfThereAreAnyEnergyCardsAttached
 	ldtx hl, NoEnergyAttachedToOpponentsActiveText
-	call SwapTurn
-	ret
+	jp SwapTurn
 
-RocketGrunts_PlayerSelection: ; 2f25f (b:725f)
+RocketGrunts_PlayerSelection:
 	ldtx hl, ChoosePokemonToRemoveEnergyFromText
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
@@ -6138,11 +6170,10 @@ RocketGrunts_PlayerSelection: ; 2f25f (b:725f)
 	call c, CancelSupporterCard
 	ret
 
-RocketGrunts_AISelection: ; 2f26f (b:726f)
-	call AIPickEnergyCardToDiscardFromDefendingPokemon
-	ret
+RocketGrunts_AISelection:
+	jp AIPickEnergyCardToDiscardFromDefendingPokemon
 
-RocketGrunts_DiscardEffect: ; 2f273 (b:7273)
+RocketGrunts_DiscardEffect:
 	call SwapTurn
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	call PutCardInDiscardPile
@@ -7395,8 +7426,7 @@ PokemonFlute_PlaceInPlayAreaText:
 	ldh a, [hTemp_ffa0]
 	ldtx hl, CardWasChosenText
 	bank1call DisplayCardDetailScreen
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 
 PokemonFlute_DisablePowersEffect:
@@ -8510,6 +8540,7 @@ Helper_GenericShowAttachedEnergyToPokemon:
 ; show detail screen and which Pokemon was chosen to attach Energy
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD
+.got_play_area_location
 	call GetTurnDuelistVariable
 	ld c, a  ; deck index of Pokémon card
 	call LoadCardDataToBuffer1_FromDeckIndex

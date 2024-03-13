@@ -7210,7 +7210,16 @@ HandleOnEvolvePokemonEffects:
 	ret
 
 
+; input:
+;   [hTempPlayAreaLocation_ffa1]: PLAY_AREA_* of the Pokémon that switched in
+;                                 (now with the previous Active Pokémon)
+;   [hTempRetreatCostCards]: $ff-terminated list of discarded deck indices
 HandleOnRetreatEffects:
+	ld a, JOLTEON_LV24  ; Volt Switch
+	call CountPokemonIDInPlayArea
+	jr nc, .done  ; no Power-capable Pokémon was found
+	farcall VoltSwitchEffect
+.done
 	ret
 
 
