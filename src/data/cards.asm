@@ -5349,18 +5349,18 @@ RaichuLv45Card:
 	dw LightningHasteEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db NONE ; flags 3    ; SPECIAL_AI_HANDLING
+	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
 	tx ThunderWaveName ; name
-	tx ParalysisIfDiscardedEnergyDescription ; description
+	tx ThunderWaveDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ParalysisIfDiscardedEnergyEffectCommands ; effect commands
+	dw ThunderWaveEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

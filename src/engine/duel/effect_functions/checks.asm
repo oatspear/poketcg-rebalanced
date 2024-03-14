@@ -826,6 +826,12 @@ CardTypeTest_IsEnergizedElectabuzz:
 ; Compound Checks
 ; ------------------------------------------------------------------------------
 
+ThunderWave_PreconditionCheck:
+	call CheckEnteredActiveSpotThisTurn
+	ret nc  ; active this turn
+	jp CheckArenaPokemonHasAnyEnergiesAttached
+
+
 MagneticCharge_PreconditionCheck:
 	call CheckBenchIsNotEmpty
 	ret c  ; no bench

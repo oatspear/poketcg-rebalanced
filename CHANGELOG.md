@@ -52,7 +52,7 @@
 - **Energy Conversion**: removed.
 - **Gigashock**: removed.
 - New Pokémon Power: **Lightning Haste**: once per turn, attach (L) from the discard pile to the Active Pokémon and deal 10 damage to it.
-- New attack: **Thunder Wave** (LC): 30 damage; may discard an attached energy to inflict Paralysis.
+- New attack: **Thunder Wave** (LC): 20 damage; discard an attached energy (unless Active this turn) to inflict Paralysis.
 
 #### Magnemite Lv13
 - Increased HP from 40 to 50.

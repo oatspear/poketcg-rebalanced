@@ -1544,11 +1544,12 @@ Recoil30UnlessActiveThisTurnDescription:
 	line "does 30 damage to itself."
 	done
 
-ParalysisIfDiscardedEnergyDescription:
-	text "You may discard an Energy card"
-	line "attached to this Pokémon."
-	line "If you do, the Defending Pokémon"
-	line "is now Paralyzed."
+ThunderWaveDescription:
+	text "Discard an Energy card attached to"
+	line "this Pokémon, unless it moved into"
+	line "the Active Spot this turn."
+	line "The Defending Pokémon is now"
+	line "Paralyzed."
 	done
 
 EnergizeName:

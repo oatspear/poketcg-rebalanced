@@ -3152,7 +3152,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer MagneticBlastName
 	textpointer MoveOpponentEnergyToBenchDescription
 	textpointer Recoil30UnlessActiveThisTurnDescription
-	textpointer ParalysisIfDiscardedEnergyDescription
+	textpointer ThunderWaveDescription
 	textpointer EnergizeName
 	textpointer Attach1LightningEnergyFromDiscardDescription
 	textpointer BoostedVoltageName

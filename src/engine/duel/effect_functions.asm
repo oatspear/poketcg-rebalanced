@@ -4407,6 +4407,22 @@ FireLightningCombo_AISelectEffect:
 	ret
 
 
+ThunderWave_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	call CheckEnteredActiveSpotThisTurn
+	ret nc  ; active this turn
+	jp DiscardEnergy_PlayerSelectEffect
+
+
+ThunderWave_AISelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	call CheckEnteredActiveSpotThisTurn
+	ret nc  ; active this turn
+	jp DiscardEnergy_AISelectEffect
+
+
 ; ------------------------------------------------------------------------------
 ; Energy Discard (Opponent)
 ; ------------------------------------------------------------------------------
