@@ -1060,15 +1060,11 @@ PrimordialDream_MorphAndAddToHandEffect:
 ;                                 (now with the previous Active Pokémon)
 ;   [hTempRetreatCostCards]: $ff-terminated list of discarded deck indices
 VoltSwitchEffect:
-	ldh a, [hTempRetreatCostCards]
-	cp $ff
-	ret z  ; no cards were discarded
-; check for true Lightning energies
 	ld hl, hTempRetreatCostCards
 .loop
 	ld a, [hli]
 	cp $ff
-	ret z
+	ret z  ; no (more) cards were discarded
 	ld d, a  ; deck index
 	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, de
 	ld a, [wLoadedCard2Type]
