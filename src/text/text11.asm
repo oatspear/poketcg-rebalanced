@@ -1664,6 +1664,18 @@ IfActiveThisTurn20BonusDamageDescription:
 	line "does 20 more damage."
 	done
 
+IfActiveThisTurn40BonusDamageDescription:
+	text "If this Pokémon moved into the"
+	line "Active Spot this turn, this attack"
+	line "does 40 more damage."
+	done
+
+IfActiveThisTurn50BonusDamageDescription:
+	text "If this Pokémon moved into the"
+	line "Active Spot this turn, this attack"
+	line "does 50 more damage."
+	done
+
 JunkMagnetName:
 	text "Junk Magnet"
 	done

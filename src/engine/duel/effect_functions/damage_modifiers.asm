@@ -1101,6 +1101,26 @@ IfActiveThisTurn30BonusDamage_AIEffect:
 
 
 ; bonus damage if the Pokémon became Active this turn
+IfActiveThisTurn40BonusDamage_DamageBoostEffect:
+	ld d, 40
+	jr IfActiveThisTurnBonusDamage_DamageBoostEffect
+
+IfActiveThisTurn40BonusDamage_AIEffect:
+  call IfActiveThisTurn40BonusDamage_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; bonus damage if the Pokémon became Active this turn
+IfActiveThisTurn50BonusDamage_DamageBoostEffect:
+	ld d, 50
+	jr IfActiveThisTurnBonusDamage_DamageBoostEffect
+
+IfActiveThisTurn50BonusDamage_AIEffect:
+  call IfActiveThisTurn50BonusDamage_DamageBoostEffect
+  jp SetDefiniteAIDamage
+
+
+; bonus damage if the Pokémon became Active this turn
 ; input:
 ;   d: amount of bonus damage
 IfActiveThisTurnBonusDamage_DamageBoostEffect:

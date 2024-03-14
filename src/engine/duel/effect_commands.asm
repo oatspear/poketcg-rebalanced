@@ -511,6 +511,16 @@ QuickAttack30EffectCommands:
 	dbw EFFECTCMDTYPE_AI, IfActiveThisTurn30BonusDamage_AIEffect
 	db  $00
 
+QuickAttack40EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurn40BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, IfActiveThisTurn40BonusDamage_AIEffect
+	db  $00
+
+QuickAttack50EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IfActiveThisTurn50BonusDamage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, IfActiveThisTurn50BonusDamage_AIEffect
+	db  $00
+
 OutrageEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckArenaPokemonHasAnyEnergiesAttached
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardEnergy_PlayerSelectEffect

@@ -2840,6 +2840,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChooseCardToPutOnTheBottomOfTheDeckText
 	textpointer PutOnTheBottomOfTheDeckText
 	textpointer IfActiveThisTurn20BonusDamageDescription
+	textpointer IfActiveThisTurn40BonusDamageDescription
+	textpointer IfActiveThisTurn50BonusDamageDescription
 	textpointer JunkMagnetName
 	textpointer Put2ItemsFromDiscardPileIntoHandDescription
 	textpointer ElectromagneticWallName
