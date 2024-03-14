@@ -704,36 +704,6 @@ DoubleDamageIfMorePrizesDescription:
 	line "than your opponent."
 	done
 
-VaporEssenceName:
-	text "Vapor Essence"
-	done
-
-VaporEssenceDescription:
-	text "If your Active Pokémon is an evolved"
-	line "Pokémon, you may change its type"
-	line "to <WATER>."
-	done
-
-JoltEssenceName:
-	text "Jolt Essence"
-	done
-
-JoltEssenceDescription:
-	text "If your Active Pokémon is an evolved"
-	line "Pokémon, you may change its type"
-	line "to <LIGHTNING>."
-	done
-
-FlareEssenceName:
-	text "Flare Essence"
-	done
-
-FlareEssenceDescription:
-	text "If your Active Pokémon is an evolved"
-	line "Pokémon, you may change its type"
-	line "to <FIRE>."
-	done
-
 NutritionSupportName:
 	text "Nutrition Support"
 	done
@@ -988,27 +958,6 @@ TailSwingDescription:
 	line "each of your opponent's Benched"
 	line "Basic Pokémon."
 	done
-
-; SinisterFogName:
-; 	text "Sinister Fog"
-; 	done
-;
-; SinisterFogDescription:
-; 	text "The Defending Pokémon is now"
-; 	line "Poisoned. This attack does"
-; 	line "10 damage to each of your"
-; 	line "opponent's Benched Pokémon."
-; 	done
-
-; Received10DamageDueToAfflictionText:
-; 	text "<RAMTEXT> received"
-; 	line "10 damage due to Affliction."
-; 	done
-
-; Received10DamageDueToSpikesText:
-; 	text "<RAMTEXT> received"
-; 	line "10 damage due to Spikes."
-; 	done
 
 NightAmbushName:
 	text "Night Ambush"
@@ -1267,14 +1216,6 @@ ExcavateName:
 	text "Excavate"
 	done
 
-; ExcavateDescription:
-; 	text "You may put a non-Supporter Trainer"
-; 	line "card or a Basic Energy card from"
-; 	line "your Discard Pile into your hand."
-; 	line "If you do not, this attack does 10"
-; 	line "additional damage."
-; 	done
-
 LandslideName:
 	text "Landslide"
 	done
@@ -1283,17 +1224,6 @@ Discard2CardsFromYourDeckDescription:
 	text "Discard the top 2 cards from"
 	line "your deck."
 	done
-
-; MountainBreakName:
-; 	text "Mountain Break"
-; 	done
-
-; MountainBreakDescription:
-; 	text "Discard the top 4 cards from your"
-; 	line "deck. This attack does 20 more"
-; 	line "damage for each Energy discarded"
-; 	line "this way."
-; 	done
 
 MountainSwingName:
 	text "Mountain Swing"
@@ -1318,36 +1248,6 @@ IncreaseDamageTakenBy40Description:
 RevengeName:
 	text "Revenge"
 	done
-
-; BadgeOfDisciplineName:
-; 	text "Badge of Discipline"
-; 	done
-
-; BadgeOfDisciplineDescription:
-; 	text "The damage of your Pokémon's attacks"
-; 	line "is not affected by Resistance."
-; 	done
-
-; RockAndRollName:
-; 	text "Rock And Roll"
-; 	done
-
-; RockAndRollDescription:
-; 	text "Your Pokémon's attacks do 10 more"
-; 	line "damage, but their Retreat Cost"
-; 	line "is <COLORLESS> more."
-; 	line "Only one Pokémon Power with this"
-; 	line "name can be active at any time."
-; 	done
-
-; BodyguardName:
-; 	text "Bodyguard"
-; 	done
-
-; BodyguardDescription:
-; 	text "Prevent all damage done to your"
-; 	line "Benched Pokémon by attacks."
-; 	done
 
 MendName:
 	text "Mend"
@@ -1669,4 +1569,26 @@ BoostedVoltageDescription:
 	line "attached to it, this attack does 10"
 	line "damage to each of your opponent's"
 	line "Benched Pokémon."
+	done
+
+LightningHasteName:
+	text "Lightning Haste"
+	done
+
+LightningHasteDescription:
+	text "Once during your turn, you may"
+	line "put 1 damage counter on your Active"
+	line "Pokémon and attach a <LIGHTNING> Energy from"
+	line "your discard pile to it."
+	done
+
+VoltSwitchName:
+	text "Volt Switch"
+	done
+
+VoltSwitchDescription:
+	text "If you discard a <LIGHTNING> Energy to pay"
+	line "for the Retreat Cost of your Active"
+	line "Pokémon, you may attach it to the"
+	line "new Active Pokémon."
 	done

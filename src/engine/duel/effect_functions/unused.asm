@@ -1,5 +1,107 @@
 ;
 
+energy 0 ; energies
+tx VaporEssenceName ; name
+tx VaporEssenceDescription ; description
+tx PokemonPowerDescriptionCont ; description (cont)
+db 0 ; damage
+db POKEMON_POWER ; category
+dw VaporEssenceEffectCommands ; effect commands
+db NONE ; flags 1
+db NONE ; flags 2
+db NONE ; flags 3
+db 0
+db ATK_ANIM_PKMN_POWER_1 ; animation
+
+
+energy 0 ; energies
+tx JoltEssenceName ; name
+tx JoltEssenceDescription ; description
+tx PokemonPowerDescriptionCont ; description (cont)
+db 0 ; damage
+db POKEMON_POWER ; category
+dw JoltEssenceEffectCommands ; effect commands
+db NONE ; flags 1
+db NONE ; flags 2
+db NONE ; flags 3
+db 0
+db ATK_ANIM_PKMN_POWER_1 ; animation
+
+
+energy 0 ; energies
+tx FlareEssenceName ; name
+tx FlareEssenceDescription ; description
+tx PokemonPowerDescriptionCont ; description (cont)
+db 0 ; damage
+db POKEMON_POWER ; category
+dw FlareEssenceEffectCommands ; effect commands
+db NONE ; flags 1
+db NONE ; flags 2
+db NONE ; flags 3
+db 0
+db ATK_ANIM_PKMN_POWER_1 ; animation
+
+
+
+
+VaporEssenceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, VaporEssence_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VaporEssence_ChangeColorEffect
+	db  $00
+
+JoltEssenceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, JoltEssence_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, JoltEssence_ChangeColorEffect
+	db  $00
+
+FlareEssenceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FlareEssence_OncePerTurnCheck
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FlareEssence_ChangeColorEffect
+	db  $00
+
+
+VaporEssence_OncePerTurnCheck:
+JoltEssence_OncePerTurnCheck:
+FlareEssence_OncePerTurnCheck:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	; add DUELVARS_ARENA_CARD_FLAGS
+	; call GetTurnDuelistVariable
+	; and USED_PKMN_POWER_THIS_TURN
+	; jr nz, .already_used
+	call CheckCannotUseDueToStatus_Anywhere
+	ret c
+	ld a, DUELVARS_ARENA_CARD_STAGE
+	call GetTurnDuelistVariable
+	ldtx hl, OnlyWorksOnEvolvedPokemonText
+	cp STAGE1
+	ret
+; .already_used
+	; ldtx hl, OnlyOncePerTurnText
+	; scf
+	; ret
+	
+
+VaporEssence_ChangeColorEffect:
+	call SetUsedPokemonPowerThisTurn
+	ld e, PLAY_AREA_ARENA
+	ld d, WATER
+	jr ColorShift_ChangeColorEffect
+
+JoltEssence_ChangeColorEffect:
+	call SetUsedPokemonPowerThisTurn
+	ld e, PLAY_AREA_ARENA
+	ld d, LIGHTNING
+	jr ColorShift_ChangeColorEffect
+
+FlareEssence_ChangeColorEffect:
+	call SetUsedPokemonPowerThisTurn
+	ld e, PLAY_AREA_ARENA
+	ld d, FIRE
+	jr ColorShift_ChangeColorEffect
+
+
+
+
 
 
 ; moves all the cards in hTempList from the discard pile to the turn holder's hand

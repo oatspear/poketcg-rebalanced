@@ -3112,18 +3112,18 @@ FlareonLv22Card:
 	tx EeveeName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx FlareEssenceName ; name
-	tx FlareEssenceDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw FlareEssenceEffectCommands ; effect commands
+	energy COLORLESS, 1 ; energies
+	tx QuickAttackName ; name
+	tx IfActiveThisTurn20BonusDamageDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw QuickAttack20EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies
@@ -4597,18 +4597,18 @@ VaporeonLv29Card:
 	tx EeveeName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx VaporEssenceName ; name
-	tx VaporEssenceDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw VaporEssenceEffectCommands ; effect commands
+	energy COLORLESS, 1 ; energies
+	tx QuickAttackName ; name
+	tx IfActiveThisTurn20BonusDamageDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw QuickAttack20EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
@@ -5938,18 +5938,18 @@ JolteonLv24Card:
 	db DIAMOND ; rarity
 	db MYSTERY | GB ; sets
 	db JOLTEON_LV24
-	db 80 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
-	tx JoltEssenceName ; name
-	tx JoltEssenceDescription ; description
+	tx VoltSwitchName ; name
+	tx VoltSwitchDescription ; description
 	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw JoltEssenceEffectCommands ; effect commands
+	dw PassivePowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

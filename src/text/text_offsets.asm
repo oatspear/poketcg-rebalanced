@@ -2991,12 +2991,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer AscensionDescription
 	textpointer RagingStormName
 	textpointer DoubleDamageIfMorePrizesDescription
-	textpointer VaporEssenceName
-	textpointer VaporEssenceDescription
-	textpointer JoltEssenceName
-	textpointer JoltEssenceDescription
-	textpointer FlareEssenceName
-	textpointer FlareEssenceDescription
 	textpointer NutritionSupportName
 	textpointer NutritionSupportDescription
 	textpointer GrassKnotName
@@ -3047,10 +3041,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer FamilyPowerDescription
 	textpointer TailSwingName
 	textpointer TailSwingDescription
-	; textpointer SinisterFogName
-	; textpointer SinisterFogDescription
-	; textpointer Received10DamageDueToAfflictionText
-	; textpointer Received10DamageDueToSpikesText
 	textpointer NightAmbushName
 	textpointer NightAmbushDescription
 	textpointer DraconicEvolutionName
@@ -3098,22 +3088,13 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RototillerName
 	textpointer RototillerDescription
 	textpointer ExcavateName
-	; textpointer ExcavateDescription
 	textpointer LandslideName
 	textpointer Discard2CardsFromYourDeckDescription
-	; textpointer MountainBreakName
-	; textpointer MountainBreakDescription
 	textpointer MountainSwingName
 	textpointer MountainSwingDescription
 	textpointer UnaffectedByResistanceDescription
 	textpointer IncreaseDamageTakenBy40Description
 	textpointer RevengeName
-	; textpointer BadgeOfDisciplineName
-	; textpointer BadgeOfDisciplineDescription
-	; textpointer RockAndRollName
-	; textpointer RockAndRollDescription
-	; textpointer BodyguardName
-	; textpointer BodyguardDescription
 	textpointer MendName
 	textpointer MendDescription
 	textpointer FightingFuryName
@@ -3174,13 +3155,35 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Attach1LightningEnergyFromDiscardDescription
 	textpointer BoostedVoltageName
 	textpointer BoostedVoltageDescription
+	textpointer LightningHasteName
+	textpointer LightningHasteDescription
+	textpointer VoltSwitchName
+	textpointer VoltSwitchDescription
 
 ; ------------------------------------------------------------------------------
 ; text13.asm
 ; ------------------------------------------------------------------------------
 
-	textpointer LightningHasteName
-	textpointer LightningHasteDescription
+	; unused
+	; textpointer VaporEssenceName
+	; textpointer VaporEssenceDescription
+	; textpointer JoltEssenceName
+	; textpointer JoltEssenceDescription
+	; textpointer FlareEssenceName
+	; textpointer FlareEssenceDescription
+	; textpointer BadgeOfDisciplineName
+	; textpointer BadgeOfDisciplineDescription
+	; textpointer RockAndRollName
+	; textpointer RockAndRollDescription
+	; textpointer BodyguardName
+	; textpointer BodyguardDescription
+	; textpointer MountainBreakName
+	; textpointer MountainBreakDescription
+	; textpointer ExcavateDescription
+	; textpointer SinisterFogName
+	; textpointer SinisterFogDescription
+	; textpointer Received10DamageDueToAfflictionText
+	; textpointer Received10DamageDueToSpikesText
 
 ; ------------------------------------------------------------------------------
 ; text14.asm

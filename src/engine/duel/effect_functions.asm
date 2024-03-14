@@ -2587,27 +2587,6 @@ EnergyBurn_ChangeColorEffect:
 	jp SetUsedPokemonPowerThisTurn
 
 
-VaporEssence_OncePerTurnCheck:
-JoltEssence_OncePerTurnCheck:
-FlareEssence_OncePerTurnCheck:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	; add DUELVARS_ARENA_CARD_FLAGS
-	; call GetTurnDuelistVariable
-	; and USED_PKMN_POWER_THIS_TURN
-	; jr nz, .already_used
-	call CheckCannotUseDueToStatus_Anywhere
-	ret c
-	ld a, DUELVARS_ARENA_CARD_STAGE
-	call GetTurnDuelistVariable
-	ldtx hl, OnlyWorksOnEvolvedPokemonText
-	cp STAGE1
-	ret
-; .already_used
-	; ldtx hl, OnlyOncePerTurnText
-	; scf
-	; ret
-
-
 Shift_PlayerSelectEffect: ; 2cd21 (b:4d21)
 	ldtx hl, ChoosePokemonWishToColorChangeText
 	ldh a, [hTemp_ffa0]
@@ -2683,26 +2662,8 @@ Shift_ChangeColorEffect:
 	ld e, a
 	ldh a, [hAIPkmnPowerEffectParam]
 	ld d, a
-	jr ColorShift_ChangeColorEffect
-
-VaporEssence_ChangeColorEffect:
-	call SetUsedPokemonPowerThisTurn
-	ld e, PLAY_AREA_ARENA
-	ld d, WATER
-	jr ColorShift_ChangeColorEffect
-
-JoltEssence_ChangeColorEffect:
-	call SetUsedPokemonPowerThisTurn
-	ld e, PLAY_AREA_ARENA
-	ld d, LIGHTNING
-	jr ColorShift_ChangeColorEffect
-
-FlareEssence_ChangeColorEffect:
-	call SetUsedPokemonPowerThisTurn
-	ld e, PLAY_AREA_ARENA
-	ld d, FIRE
-	jr ColorShift_ChangeColorEffect
-
+	; jr ColorShift_ChangeColorEffect
+	; fallthrough
 
 ; changes the effective color of a Pokémon in play
 ; input:
