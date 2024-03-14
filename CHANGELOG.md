@@ -110,6 +110,13 @@
 - New attack: **Ignited Voltage** (L): 10 damage; optional +30 damage if an energy is discarded from benched Magmar.
 - New attack: **Thunderpunch** (LC): 20 damage; if active this turn, may discard an energy for +30 damage.
 
+#### Jolteon Lv24
+- Reduced HP from 80 to 70.
+- **Jolt Essence**: removed.
+- **Stun Needle**: removed.
+- New Pokémon Power: **Volt Switch**: if 1 (L) is used to pay for Retreat, it is attached to the new Active Pokémon.
+- New attack: **Quick Attack** (CC): 10 damage; +40 damage if the Pokémon became Active this turn.
+
 #### Zapdos Lv64
 - Reduced HP from 90 to 70.
 - **Thunder**: removed.

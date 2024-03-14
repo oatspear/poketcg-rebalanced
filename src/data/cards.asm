@@ -5957,13 +5957,13 @@ JolteonLv24Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx QuickAttackName ; name
-	tx IfActiveThisTurn20BonusDamageDescription ; description
+	tx IfActiveThisTurn40BonusDamageDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_PLUS ; category
-	dw QuickAttack20EffectCommands ; effect commands
+	dw QuickAttack40EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
