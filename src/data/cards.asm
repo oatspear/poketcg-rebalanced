@@ -5740,11 +5740,11 @@ ElectrodeLv35Card:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy LIGHTNING, 1 ; energies
+	energy COLORLESS, 2 ; energies
 	tx EnergySpikeName ; name
 	tx EnergySpikeDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw EnergySpikeEffectCommands ; effect commands
 	db NONE ; flags 1
