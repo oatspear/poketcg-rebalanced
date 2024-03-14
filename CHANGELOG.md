@@ -12,6 +12,9 @@
 
 ### Fire Changes
 
+#### Arcanine Lv34
+- **Quick Attack**: base damage reduced from 20 to 10; bonus damage increased from 20 to 50.
+
 #### Rapidash
 - **Agility**: renamed to Strafe.
 
