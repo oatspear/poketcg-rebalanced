@@ -3166,6 +3166,9 @@ TextOffsets:: ; 34000 (d:4000)
 ; text13.asm
 ; ------------------------------------------------------------------------------
 
+	textpointer DischargeName
+	textpointer DischargeDescription
+
 	; unused
 	; textpointer VaporEssenceName
 	; textpointer VaporEssenceDescription

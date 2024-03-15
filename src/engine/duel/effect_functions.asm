@@ -1089,6 +1089,14 @@ VoltSwitchEffect:
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
 
+Discharge_DamageParalysisEffect:
+	call Discharge_MultiplierEffect
+	ldh a, [hTemp_ffa0]
+	cp 2
+	jp nc, ParalysisEffect
+	ret
+
+
 PluckEffect:
 	call DiscardOpponentTool_DiscardEffect
 	jp c, DoubleDamage_DamageBoostEffect

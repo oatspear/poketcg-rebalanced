@@ -1,4 +1,22 @@
 ; ------------------------------------------------------------------------------
+; Lightning
+; ------------------------------------------------------------------------------
+
+DischargeName:
+	text "Discharge"
+	done
+
+DischargeDescription:
+	text "Discard any number of <LIGHTNING> Energy"
+	line "attached to this Pokémon. This"
+	line "attack does 20 damage for each card"
+	line "discarded this way. If you discarded"
+	line "at least 2, the Defending Pokémon is"
+	line "now Paralyzed."
+	done
+
+
+; ------------------------------------------------------------------------------
 ; Unused Text
 ; ------------------------------------------------------------------------------
 
