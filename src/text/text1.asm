@@ -919,8 +919,8 @@ NotEnoughFireEnergyText: ; 3779b (d:779b)
 	text "Not enough Fire Energy."
 	done
 
-NotEnoughPsychicEnergyText: ; 377b4 (d:77b4)
-	text "Not enough Psychic Energy."
+NotEnoughLightningEnergyText:
+	text "Not enough Lightning Energy."
 	done
 
 NotEnoughWaterEnergyText: ; 377d0 (d:77d0)

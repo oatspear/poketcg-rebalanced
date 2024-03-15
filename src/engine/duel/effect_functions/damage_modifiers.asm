@@ -432,6 +432,23 @@ DoubleDamageIfAttachedEnergy_AIEffect:
 	jp SetDefiniteAIDamage
 
 
+Discharge_MultiplierEffect:
+	ldh a, [hTemp_ffa0]
+	add a  ; x2
+	call ATimes10
+	jp SetDefiniteDamage
+
+Discharge_AIEffect:
+	call CreateListOfLightningEnergyAttachedToArena
+	add a  ; x2
+	call ATimes10
+	; ld d, 0
+	; ld e, a
+	; jp UpdateExpectedAIDamage
+	call SetDefiniteDamage
+	jp SetDefiniteAIDamage
+
+
 ; ------------------------------------------------------------------------------
 ; Based on Trainer Cards
 ; ------------------------------------------------------------------------------

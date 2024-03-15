@@ -3128,8 +3128,19 @@ AIPickFireEnergyCardToDiscard: ; 2d35a (b:535a)
 	ret
 
 
+; return carry if no Lightning energy cards
+Discharge_CheckEnergy:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
+	ldtx hl, NotEnoughLightningEnergyText
+	ld a, [wAttachedEnergies + LIGHTNING]
+	cp 1
+	ret
+
+
 ; return carry if no Fire energy cards
-Wildfire_CheckEnergy: ; 2d49b (b:549b)
+Wildfire_CheckEnergy:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
 	call HandleEnergyBurn
@@ -3138,14 +3149,26 @@ Wildfire_CheckEnergy: ; 2d49b (b:549b)
 	cp 1
 	ret
 
-Wildfire_PlayerSelectEffect: ; 2d4a9 (b:54a9)
+
+Discharge_PlayerSelectEffect:
+	; ldtx hl, DiscardOppDeckAsManyFireEnergyCardsText
+	; call DrawWideTextBox_WaitForInput
+	call CreateListOfLightningEnergyAttachedToArena
+	jr DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect
+
+
+Wildfire_PlayerSelectEffect:
 	ldtx hl, DiscardOppDeckAsManyFireEnergyCardsText
 	call DrawWideTextBox_WaitForInput
+	call CreateListOfFireEnergyAttachedToArena
+	; jr DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect
+	; fallthrough
 
+; input:
+;   [wDuelTempList]: list of attached energy cards to choose from
+DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect:
 	xor a
 	ldh [hCurSelectionItem], a
-	call CreateListOfFireEnergyAttachedToArena
-	xor a
 	bank1call DisplayEnergyDiscardScreen
 
 ; show list to Player and for each card selected to discard,
@@ -3175,21 +3198,40 @@ Wildfire_PlayerSelectEffect: ; 2d4a9 (b:54a9)
 	scf
 	ret
 
-Wildfire_AISelectEffect: ; 2d4dd (b:54dd)
-; AI always chooses 0 cards to discard
-	xor a
-	ldh [hTempList], a
+
+Discharge_AISelectEffect:
+; AI always chooses all cards to discard
+	call CreateListOfLightningEnergyAttachedToArena
+	ldh [hTemp_ffa0], a
 	ret
 
-Wildfire_DiscardEnergyEffect: ; 2d4e1 (b:54e1)
+
+Wildfire_AISelectEffect:
+; AI always chooses 0 cards to discard
+	xor a
+	ldh [hTemp_ffa0], a
+	ret
+
+
+Discharge_DiscardEnergyEffect:
+	call CreateListOfLightningEnergyAttachedToArena
+	jr DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect
+
+Wildfire_DiscardEnergyEffect:
 	call CreateListOfFireEnergyAttachedToArena
+	; jr DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect
+	; fallthrough
+
+; input:
+;   [wDuelTempList]: list of energy cards to discard from
+DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect:
 	ldh a, [hTemp_ffa0]
 	or a
 	ret z ; no cards to discard
 
 ; discard cards from wDuelTempList equal to the number
 ; of cards that were input in hTemp_ffa0.
-; these are all the Fire Energy cards attached to Arena card
+; these are all the matching Energy cards attached to Arena card
 ; so it will discard the cards in order, regardless
 ; of the actual order that was selected by Player.
 	ld c, a
@@ -3202,7 +3244,7 @@ Wildfire_DiscardEnergyEffect: ; 2d4e1 (b:54e1)
 	ret
 
 
-Firegiver_AddToHandEffect: ; 2d6c2 (b:56c2)
+Firegiver_AddToHandEffect:
 ; fill wDuelTempList with all Fire Energy card
 ; deck indices that are in the Deck.
 	ld a, DUELVARS_CARD_LOCATIONS

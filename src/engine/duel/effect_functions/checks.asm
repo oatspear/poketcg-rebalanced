@@ -594,6 +594,22 @@ GetNumAttachedEnergiesAtMostA:
 	ret
 
 
+; return carry if no energy cards of the given type
+;   d:  which type of energy to check (FIRE, LIGHTNING, etc.)
+; CheckArenaPokemonHasEnergiesOfType:
+; 	ld e, PLAY_AREA_ARENA
+; 	call GetPlayAreaCardAttachedEnergies  ; preserves hl, bc, de
+; 	call HandleEnergyBurn  ; preserves de
+; 	; ldtx hl, NotEnoughFireEnergyText
+; 	ld e, d
+; 	ld d, 0
+; 	ld hl, wAttachedEnergies
+; 	add hl, de
+; 	ld a, [hl]
+; 	cp 1
+; 	ldtx hl, NotEnoughEnergyCardsText
+; 	ret
+
 
 CheckIfCardHasGrassEnergyAttached:
 	ld c, TYPE_ENERGY_GRASS

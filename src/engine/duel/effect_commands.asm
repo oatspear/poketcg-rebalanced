@@ -1108,6 +1108,15 @@ ThunderboltEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DiscardAllAttachedEnergiesEffect
 	db  $00
 
+DischargeEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Discharge_CheckEnergy
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discharge_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Discharge_MultiplierEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Discharge_DiscardEnergyEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Discharge_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, Discharge_AIEffect
+	db  $00
+
 ZapdosThunderstormEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderstormEffect
 	db  $00

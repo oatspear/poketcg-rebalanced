@@ -1308,6 +1308,7 @@ SwapPlayAreaPokemon:
 ; or a Pokemon card in the bench, depending on the value of register e.
 ; input: e = location to check, i.e. PLAY_AREA_*
 ; Feedback is returned in wAttachedEnergies and wTotalAttachedEnergies.
+; preserves: hl, bc, de
 GetPlayAreaCardAttachedEnergies:
 	push hl
 	push de

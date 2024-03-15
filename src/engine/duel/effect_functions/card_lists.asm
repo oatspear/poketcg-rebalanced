@@ -306,9 +306,15 @@ CreatePokemonCardListFromDiscardPile:
 	ret
 
 
+; creates in wDuelTempList list of attached Lightning Energy cards
+; that are attached to the Turn Duelist's Arena card.
+CreateListOfLightningEnergyAttachedToArena:
+	ld a, TYPE_ENERGY_LIGHTNING
+	jr CreateListOfEnergyAttachedToArena
+
 ; creates in wDuelTempList list of attached Fire Energy cards
 ; that are attached to the Turn Duelist's Arena card.
-CreateListOfFireEnergyAttachedToArena: ; 2c197 (b:4197)
+CreateListOfFireEnergyAttachedToArena:
 	ld a, TYPE_ENERGY_FIRE
 	; fallthrough
 
@@ -321,7 +327,7 @@ CreateListOfFireEnergyAttachedToArena: ; 2c197 (b:4197)
 ; output:
 ;	a = number of cards in list;
 ;	wDuelTempList filled with cards, terminated by $ff
-CreateListOfEnergyAttachedToArena: ; 2c199 (b:4199)
+CreateListOfEnergyAttachedToArena:
 	ld b, a
 	ld c, 0
 	ld de, wDuelTempList
@@ -347,7 +353,7 @@ CreateListOfEnergyAttachedToArena: ; 2c199 (b:4199)
 	ld a, l
 	cp DECK_SIZE
 	jr c, .loop
-
+; done counting
 	ld a, $ff
 	ld [de], a
 	ld a, c

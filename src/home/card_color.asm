@@ -118,6 +118,7 @@ InvertedPowersOf2:
 ; this function checks if turn holder's energy color override is active and,
 ; if so, turns all energies at wAttachedEnergies (except double colorless energies)
 ; into energies of the override color
+; preserves: de
 HandleEnergyBurn:
 	; ld a, DUELVARS_ARENA_CARD
 	; call GetTurnDuelistVariable

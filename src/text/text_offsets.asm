@@ -195,7 +195,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EnergyCardsRequiredToRetreatText                   ; 0x00bf
 	textpointer NotEnoughEnergyCardsText                           ; 0x00c0
 	textpointer NotEnoughFireEnergyText                            ; 0x00c1
-	textpointer NotEnoughPsychicEnergyText                         ; 0x00c2
+	textpointer NotEnoughLightningEnergyText
 	textpointer NotEnoughWaterEnergyText                           ; 0x00c3
 	textpointer ThereAreNoTrainerCardsInDiscardPileText            ; 0x00c4
 	textpointer NoAttackMayBeChoosenText                           ; 0x00c5
