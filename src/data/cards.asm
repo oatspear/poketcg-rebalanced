@@ -5335,7 +5335,7 @@ RaichuLv45Card:
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db RAICHU_LV45
-	db 70 ; hp
+	db 80 ; hp
 	db STAGE1 ; stage
 	tx PikachuName ; pre-evo name
 
@@ -5354,18 +5354,18 @@ RaichuLv45Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx ThunderWaveName ; name
-	tx ThunderWaveDescription ; description
+	energy LIGHTNING, 1 ; energies
+	tx DischargeName ; name
+	tx DischargeDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ThunderWaveEffectCommands ; effect commands
+	db DAMAGE_X ; category
+	dw DischargeEffectCommands ; effect commands
 	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_THUNDER_WAVE ; animation
+	db 9
+	db ATK_ANIM_THUNDERBOLT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5391,18 +5391,18 @@ RaichuLv35Card:
 	tx PikachuName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx QuickAttackName ; name
-	tx IfActiveThisTurn20BonusDamageDescription ; description
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx ThunderWaveName ; name
+	tx ThunderWaveDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw QuickAttack20EffectCommands ; effect commands
-	db NONE ; flags 1
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ThunderWaveEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db 3
+	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	; attack 2
 	energy LIGHTNING, 2 ; energies
