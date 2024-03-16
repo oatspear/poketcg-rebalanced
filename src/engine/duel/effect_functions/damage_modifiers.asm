@@ -439,7 +439,9 @@ Discharge_MultiplierEffect:
 	jp SetDefiniteDamage
 
 Discharge_AIEffect:
-	call CreateListOfLightningEnergyAttachedToArena
+	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
+	ld a, [wAttachedEnergies + LIGHTNING]
 	add a  ; x2
 	call ATimes10
 	; ld d, 0
