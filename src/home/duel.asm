@@ -470,10 +470,13 @@ CreateDeckCardListTopNCards:
 ; input:
 ;   a: PLAY_AREA_* of the Pokémon to check
 ; output:
+;   a: total number of energy cards found
 ;   carry: set if no energy cards were found
+;   [wDuelTempList]: $ff-terminated list of energy cards
 CreateArenaOrBenchEnergyCardList:
 	or CARD_LOCATION_PLAY_AREA
 	ld c, a
+	ld b, 0  ; counter
 	ld de, wDuelTempList
 	ld a, DUELVARS_CARD_LOCATIONS
 	call GetTurnDuelistVariable
@@ -489,22 +492,30 @@ CreateArenaOrBenchEnergyCardList:
 	ld a, l
 	ld [de], a ; add to wDuelTempList
 	inc de
+	inc b
 .skip_card
 	inc l
 	ld a, l
 	cp DECK_SIZE
 	jr c, .next_card_loop
-	; all cards checked
+; all cards checked
 	ld a, $ff
 	ld [de], a
-	ld a, [wDuelTempList]
-	cp $ff
-	jr z, .no_energies_found
+	ld a, b  ; load total number of cards
 	or a
-	ret
-.no_energies_found
+	ret nz  ; found some
+; no energies found
 	scf
 	ret
+
+; 	ld a, [wDuelTempList]
+; 	cp $ff
+; 	jr z, .no_energies_found
+; 	or a
+; 	ret
+; .no_energies_found
+; 	scf
+; 	ret
 
 ; fill wDuelTempList with the turn holder's hand cards (their 0-59 deck indexes)
 ; return carry if the turn holder has no cards in hand
