@@ -324,14 +324,29 @@ CreateListOfFireEnergyAttachedToArena:
 ; this is called to list Energy cards of a specific type
 ; that are attached to the Arena Pokemon.
 ; input:
-;	a = TYPE_ENERGY_* constant
+;	  a: TYPE_ENERGY_* constant
 ; output:
-;	a = number of cards in list;
-;	wDuelTempList filled with cards, terminated by $ff
+;	  a: number of cards in list
+;   carry: set if no cards were found
+;	  [wDuelTempList]: $ff-terminated card list
 CreateListOfMatchingEnergyAttachedToArena:
 	ld b, a
 	ld c, 0
 	ld de, wDuelTempList
+; handle energy color changing abilities
+	ld a, [wEnergyColorOverride]
+	cp $ff
+	jr z, .no_override
+; convert color constant into energy type
+	or (1 << TYPE_ENERGY_F)
+	cp b
+; if the same as input filter, then all cards match
+	ld a, PLAY_AREA_ARENA
+	jp z, CreateArenaOrBenchEnergyCardList
+; if overridden with another type, then no cards match
+	jr .done_counting
+
+.no_override
 	ld a, DUELVARS_CARD_LOCATIONS
 	call GetTurnDuelistVariable
 .loop
@@ -354,10 +369,14 @@ CreateListOfMatchingEnergyAttachedToArena:
 	ld a, l
 	cp DECK_SIZE
 	jr c, .loop
-; done counting
+.done_counting
 	ld a, $ff
 	ld [de], a
 	ld a, c
+	or a
+	ret nz  ; found some
+; no energies found
+	scf
 	ret
 
 
