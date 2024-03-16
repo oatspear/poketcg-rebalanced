@@ -2984,6 +2984,26 @@ FlamesOfRage_DiscardEffect: ; 2d3de (b:53de)
 	ret
 
 
+;
+
+
+PlayerPickFireEnergyCardToDiscard: ; 2d34b (b:534b)
+	call CreateListOfFireEnergyAttachedToArena
+	xor a
+	bank1call DisplayEnergyDiscardScreen
+	bank1call HandleEnergyDiscardMenuInput
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTempList], a
+	ret
+
+AIPickFireEnergyCardToDiscard: ; 2d35a (b:535a)
+	call CreateListOfFireEnergyAttachedToArena
+	ld a, [wDuelTempList]
+	ldh [hTempList], a ; pick first in list
+	ret
+
+
+
 
 ;
 MixUpEffect: ; 2d647 (b:5647)
