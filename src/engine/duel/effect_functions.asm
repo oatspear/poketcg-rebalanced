@@ -3206,7 +3206,17 @@ Discharge_AISelectEffect:
 ; AI always chooses all cards to discard
 	call CreateListOfLightningEnergyAttachedToArena
 	ldh [hTemp_ffa0], a
-	ret
+	; fallthrough
+
+; input:
+;   a: number of selected cards
+;   [wDuelTempList]: list of valid attached energy cards
+DiscardAnyNumberOfAttachedEnergy_AISelectEffect:
+	ld hl, wDuelTempList
+	ld de, wDuelTempList + DECK_SIZE
+	ld c, a
+	ld b, 0
+	jp CopyDataHLtoDE
 
 
 Wildfire_AISelectEffect:
