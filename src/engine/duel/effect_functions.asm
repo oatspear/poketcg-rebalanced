@@ -3236,7 +3236,8 @@ Wildfire_DiscardEnergyEffect:
 	; fallthrough
 
 ; input:
-;   [wDuelTempList]: list of energy cards to discard from
+;   [hTemp_ffa0]: number of cards to discard
+;   [wDuelTempList + DECK_SIZE]: list of energy cards to discard
 DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect:
 	ldh a, [hTemp_ffa0]
 	or a
@@ -3248,7 +3249,7 @@ DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect:
 ; so it will discard the cards in order, regardless
 ; of the actual order that was selected by Player.
 	ld c, a
-	ld hl, wDuelTempList
+	ld hl, wDuelTempList + DECK_SIZE
 .loop_discard
 	ld a, [hli]
 	call PutCardInDiscardPile
