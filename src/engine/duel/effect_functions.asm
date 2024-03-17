@@ -3158,14 +3158,17 @@ Wildfire_PlayerSelectEffect:
 
 ; input:
 ;   [wDuelTempList]: list of attached energy cards to choose from
+; output:
+;   a: number of selected cards to discard
+;   [hTemp_ffa0]: number of selected cards to discard
+;   [wDuelTempList + DECK_SIZE]: list of selected energy cards
 DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect:
 	xor a
 	ldh [hCurSelectionItem], a
 	bank1call DisplayEnergyDiscardScreen
 
-; show list to Player and for each card selected to discard,
-; just increase a counter and store it.
-; this will be the output used by Wildfire_DiscardEnergyEffect.
+; show list to Player and, for each card selected to discard,
+; increase a counter and store it
 	xor a
 	ld [wEnergyDiscardMenuDenominator], a
 .loop
@@ -3173,10 +3176,18 @@ DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect:
 	ld [wEnergyDiscardMenuNumerator], a
 	bank1call HandleEnergyDiscardMenuInput
 	jr c, .done
+	ld c, a  ; deck index
+	call RemoveCardFromDuelTempList  ; preserves bc
+	jr c, .done
+	ldh a, [hCurSelectionItem]
+	ld d, 0
+	ld e, a  ; offset
+	ld hl, wDuelTempList + DECK_SIZE
+	add hl, de
+	ld a, c  ; deck index
+	ld [hl], a
 	ld hl, hCurSelectionItem
 	inc [hl]
-	call RemoveCardFromDuelTempList
-	jr c, .done
 	bank1call DisplayEnergyDiscardMenu
 	jr .loop
 
