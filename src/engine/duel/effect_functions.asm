@@ -243,10 +243,6 @@ SetNoEffectFromStatus: ; 2c09c (b:409c)
 	ld [wEffectFailed], a
 	ret
 
-SetWasUnsuccessful: ; 2c0a2 (b:40a2)
-	ld a, EFFECT_FAILED_UNSUCCESSFUL
-	ld [wEffectFailed], a
-	ret
 
 Func_2c0a8: ; 2c0a8 (b:40a8)
 	ldh a, [hTemp_ffa0]
@@ -262,11 +258,12 @@ Func_2c0a8: ; 2c0a8 (b:40a8)
 	ld a, c
 	ret
 
-SyncShuffleDeck: ; 2c0bd (b:40bd)
+
+SyncShuffleDeck:
 	call ExchangeRNG
 	bank1call AnimateShuffleDeck
-	call ShuffleDeck
-	ret
+	jp ShuffleDeck
+
 
 ; ------------------------------------------------------------------------------
 ; Checks and Tests
@@ -3074,19 +3071,7 @@ Cowardice_RemoveFromPlayAreaEffect:
 	ret
 
 
-Quickfreeze_Paralysis50PercentEffect: ; 2d2f3 (b:52f3)
-	ldtx de, ParalysisCheckText
-	call TossCoin_BankB
-	jr c, .heads
-
-; tails
-	call SetWasUnsuccessful
-	bank1call DrawDuelMainScene
-	call PrintNoEffectTextOrUnsuccessfulText
-	call WaitForWideTextBoxInput
-	ret
-
-.heads
+Quickfreeze_Paralysis50PercentEffect:
 	call ParalysisEffect
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld b, a
@@ -3101,6 +3086,7 @@ Quickfreeze_Paralysis50PercentEffect: ; 2d2f3 (b:52f3)
 	call PrintNoEffectTextOrUnsuccessfulText
 	call c, WaitForWideTextBoxInput
 	ret
+
 
 IceBreath_ZeroDamage: ; 2d329 (b:5329)
 	xor a
