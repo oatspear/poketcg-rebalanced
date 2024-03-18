@@ -2,6 +2,15 @@
 
 ## Version 0.8.0
 
+### New Cards
+
+#### Raichu Lv35
+- Stage 1, 70 HP, Lightning Pokémon, evolves from Pikachu.
+- Weakness: Fightning.
+- Retreat Cost: 1.
+- Pokémon Power: **Lightning Haste**: once per turn, attach (L) from the discard pile to the Active Pokémon and deal 10 damage to it.
+- Attack: **Discharge** (L): discard any number of attached (L); 20 damage for each discarded energy; inflicts Paralysis if 2 or more were discarded.
+
 ### Grass Changes
 
 #### Paras
@@ -51,11 +60,8 @@
 - Reduced HP from 90 to 80.
 - **Energy Conversion**: removed.
 - **Gigashock**: removed.
-- New Pokémon Power: **Lightning Haste**: once per turn, attach (L) from the discard pile to the Active Pokémon and deal 10 damage to it.
-- New attack: **Discharge** (L): discard any number of attached (L); 20 damage for each discarded energy; inflicts Paralysis if 2 or more were discarded.
-
-#### Raichu Lv35
 - New attack: **Thunder Wave** (LC): 20 damage; discard an attached energy (unless Active this turn); inflicts Paralysis.
+- New attack: **Thunderbolt** (LLC): 100 damage; discard all attached energies.
 
 #### Magnemite Lv13
 - Increased HP from 40 to 50.
