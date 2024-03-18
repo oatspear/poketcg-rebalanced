@@ -727,7 +727,7 @@ wLoadedAttack:: ; cca6
 ; the damage field of a used attack is loaded here
 ; doubles as "wAIAverageDamage" when complementing wAIMinDamage and wAIMaxDamage
 ; ~~little-endian~~  capped at 250
-; second byte may have UNAFFECTED_BY_WEAKNESS_RESISTANCE_F set/unset
+; second byte may have UNAFFECTED_BY_WEAKNESS_F and other flags set/unset
 wDamage:: ; ccb9
 	ds $1
 wDamageFlags:: ; ccba

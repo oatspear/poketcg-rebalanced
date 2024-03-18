@@ -150,7 +150,7 @@ _CalculateDamage_VersusDefendingPokemon:
 	call HandleDamageBoostingPowers
 ; 2. apply weakness bonus
 	ld a, [wDamageFlags]
-	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
+	bit UNAFFECTED_BY_WEAKNESS_F, a
 	jr nz, .apply_pluspower
 ; handle weakness
 	call SwapTurn
@@ -175,8 +175,6 @@ _CalculateDamage_VersusDefendingPokemon:
 	call CapMaximumDamage_DE
 ; 5. apply resistance
 	ld a, [wDamageFlags]
-	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
-	jr nz, .apply_defender
 	bit UNAFFECTED_BY_RESISTANCE_F, a
 	jr nz, .apply_defender
 ; affected by resistance
@@ -376,7 +374,7 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 	call HandleDamageBoostingPowers
 ; 2. apply weakness bonus
 	ld a, [wDamageFlags]
-	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
+	bit UNAFFECTED_BY_WEAKNESS_F, a
 	jr nz, .apply_pluspower
 ; handle weakness
 	call SwapTurn
@@ -399,8 +397,6 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 	call CapMaximumDamage_DE
 ; 5. apply resistance
 	ld a, [wDamageFlags]
-	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
-	jr nz, .apply_defender
 	bit UNAFFECTED_BY_RESISTANCE_F, a
 	jr nz, .apply_defender
 ; affected by Resistance

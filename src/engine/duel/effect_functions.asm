@@ -5066,7 +5066,8 @@ SelectUpTo2Benched_BenchDamageEffect: ; 2e71f (b:671f)
 
 Sonicboom_UnaffectedByColorEffect:
 	ld hl, wDamageFlags
-	set UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, [hl]
+	set UNAFFECTED_BY_WEAKNESS_F, [hl]
+	set UNAFFECTED_BY_RESISTANCE_F, [hl]
 	ret
 
 UnaffectedByResistanceEffect:

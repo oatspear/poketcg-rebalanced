@@ -2005,7 +2005,7 @@ IF DEBUG_MODE
 	call Debug_Print_DE
 ENDC
 	ld a, [wDamageFlags]
-	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
+	bit UNAFFECTED_BY_WEAKNESS_F, a
 	jr nz, .apply_pluspower
 	call SwapTurn
 	call GetArenaCardWeakness  ; preserves de
@@ -2031,8 +2031,6 @@ IF DEBUG_MODE
 	call Debug_Print_DE
 ENDC
 	ld a, [wDamageFlags]
-	bit UNAFFECTED_BY_WEAKNESS_RESISTANCE_F, a
-	jr nz, .apply_defender
 	bit UNAFFECTED_BY_RESISTANCE_F, a
 	jr nz, .apply_defender
 ; affected by Resistance
