@@ -1,5 +1,35 @@
 ;
 
+
+Quickfreeze_Paralysis50PercentEffect: ; 2d2f3 (b:52f3)
+	ldtx de, ParalysisCheckText
+	call TossCoin_BankB
+	jr c, .heads
+
+; tails
+	call SetWasUnsuccessful
+	bank1call DrawDuelMainScene
+	call PrintNoEffectTextOrUnsuccessfulText
+	call WaitForWideTextBoxInput
+	ret
+
+.heads
+	call ParalysisEffect
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call Func_741a
+	bank1call WaitAttackAnimation
+	bank1call Func_6df1
+	bank1call DrawDuelHUDs
+	call PrintNoEffectTextOrUnsuccessfulText
+	call c, WaitForWideTextBoxInput
+	ret
+
+
 energy 0 ; energies
 tx VaporEssenceName ; name
 tx VaporEssenceDescription ; description
