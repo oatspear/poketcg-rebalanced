@@ -340,6 +340,17 @@ CheckEnteredActiveSpotThisTurn:
 	ret
 
 
+; returns carry if the Pokémon at play area location in [hTempPlayAreaLocation_ff9d]
+; is not on the bench
+CheckTriggeringPokemonIsOnTheBench:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	or a
+	ret nz  ; not PLAY_AREA_ARENA
+	ldtx hl, CanOnlyBeUsedOnTheBenchText
+	scf
+	ret
+
+
 ; ------------------------------------------------------------------------------
 ; Damage
 ; ------------------------------------------------------------------------------
@@ -490,6 +501,17 @@ CheckPokemonPowerCanBeUsed:
 
 .already_used
 	ldtx hl, OnlyOncePerTurnText
+	scf
+	ret
+
+
+; return carry if the turn holder's Arena card has no status conditions
+CheckArenaPokemonHasStatus:
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	or a
+	ret nz
+	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
 	scf
 	ret
 

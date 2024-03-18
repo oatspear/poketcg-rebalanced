@@ -2817,36 +2817,13 @@ PetalDance_BonusEffect:
 HelpingHand_CheckUse:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
-	ldtx hl, CanOnlyBeUsedOnTheBenchText
-	or a
-	jr z, .set_carry
-
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	and USED_PKMN_POWER_THIS_TURN
-	jr nz, .already_used
-
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call CheckCannotUseDueToStatus_Anywhere
-	ret c ; can't use PKMN due to status or Toxic Gas
-
+	call CheckTriggeringPokemonIsOnTheBench
+	ret c  ; can't use this Power on the Active Spot
+	call CheckPokemonPowerCanBeUsed
+	ret c  ; can't use this Power due to status or Toxic Gas
 ; return carry if the Arena card does not have status conditions
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	or a
-	jr z, .no_status
-	ret
+	jp CheckArenaPokemonHasStatus
 
-.already_used
-	ldtx hl, OnlyOncePerTurnText
-	scf
-	ret
-
-.no_status
-	ldtx hl, NotAffectedByPoisonSleepParalysisOrConfusionText
-.set_carry
-	scf
-	ret
 
 HelpingHand_RemoveStatusEffect:
 	ld a, ATK_ANIM_HEAL
