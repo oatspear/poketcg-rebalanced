@@ -194,9 +194,13 @@ _CalculateDamage_VersusDefendingPokemon:
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedDefender
 ; 7. apply damage reduction effects
+	ld a, [wDamageFlags]
+	bit UNAFFECTED_BY_POWERS_OR_EFFECTS_F, a
+	jr nz, .apply_attacker_debuffs
 	xor a  ; PLAY_AREA_ARENA
 	call HandleDamageReducingPowers
 	call HandleDefenderDamageReductionEffects
+.apply_attacker_debuffs
 	call HandleAttackerDamageReductionEffects
 ; 8. cap damage at zero if negative
 	call CapMinimumDamage_DE
@@ -417,6 +421,14 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 	ld b, a
 	call ApplyAttachedDefender
 ; 7. apply damage reduction effects
+	ld a, [wDamageFlags]
+	bit UNAFFECTED_BY_POWERS_OR_EFFECTS_F, a
+	jr z, .apply_powers_and_effects
+; unaffected by Powers or effects
+	call HandleAttackerDamageReductionEffects
+	jr .cap_min_damage
+
+.apply_powers_and_effects
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
 	jr nz, .no_damage_reduction
@@ -426,6 +438,7 @@ CalculateDamage_FromDefendingPokemon: ; 1458c (5:458c)
 ; 8. cap damage at zero if negative
 .no_damage_reduction
 	call HandleDamageReducingPowers
+.cap_min_damage
 	call CapMinimumDamage_DE
 
 	ldh a, [hTempPlayAreaLocation_ff9d]

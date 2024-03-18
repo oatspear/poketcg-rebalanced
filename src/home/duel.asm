@@ -2051,12 +2051,16 @@ ENDC
 IF DEBUG_MODE
 	call Debug_Print_DE
 ENDC
+	ld a, [wDamageFlags]
+	bit UNAFFECTED_BY_POWERS_OR_EFFECTS_F, a
+	jr nz, .apply_attacker_debuffs
 	xor a  ; PLAY_AREA_ARENA
 	call HandleDamageReducingPowers
 	call HandleDefenderDamageReductionEffects
 IF DEBUG_MODE
 	call Debug_Print_DE
 ENDC
+.apply_attacker_debuffs
 	call HandleAttackerDamageReductionEffects
 ; 8. cap damage at zero if negative
 IF DEBUG_MODE

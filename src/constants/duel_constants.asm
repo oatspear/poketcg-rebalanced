@@ -228,8 +228,7 @@ DEF MAX_DAMAGE EQU 250
 ; whether damage is unaffected by Weakness/Resistance
 DEF UNAFFECTED_BY_WEAKNESS_F EQU 7
 DEF UNAFFECTED_BY_RESISTANCE_F EQU 6
-DEF UNAFFECTED_BY_POKEMON_POWERS_F EQU 5
-DEF UNAFFECTED_BY_EFFECTS_F EQU 4
+DEF UNAFFECTED_BY_POWERS_OR_EFFECTS_F EQU 5
 
 ; effect command constants (TryExecuteEffectCommandFunction)
 ; ordered by (roughly) execution time

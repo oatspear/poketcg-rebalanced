@@ -5075,6 +5075,13 @@ UnaffectedByResistanceEffect:
 	set UNAFFECTED_BY_RESISTANCE_F, [hl]
 	ret
 
+UnaffectedByWeaknessResistancePowersEffectsEffect:
+	ld hl, wDamageFlags
+	set UNAFFECTED_BY_WEAKNESS_F, [hl]
+	set UNAFFECTED_BY_RESISTANCE_F, [hl]
+	set UNAFFECTED_BY_POWERS_OR_EFFECTS_F, [hl]
+	ret
+
 
 NutritionSupport_PlayerSelectEffect:
 EnergySpike_PlayerSelectEffect:
