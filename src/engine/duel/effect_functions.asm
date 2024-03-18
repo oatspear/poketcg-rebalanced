@@ -3238,6 +3238,8 @@ Wildfire_DiscardEnergyEffect:
 ; input:
 ;   [hTemp_ffa0]: number of cards to discard
 ;   [wDuelTempList + DECK_SIZE]: list of energy cards to discard
+; output:
+;   [hTemp_ffa0]: updated number of discarded energies (counting double energies)
 DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect:
 	ldh a, [hTemp_ffa0]
 	or a
@@ -3248,13 +3250,41 @@ DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect:
 ; these are all the matching Energy cards attached to Arena card
 ; so it will discard the cards in order, regardless
 ; of the actual order that was selected by Player.
+	ld b, 0
 	ld c, a
 	ld hl, wDuelTempList + DECK_SIZE
 .loop_discard
 	ld a, [hli]
-	call PutCardInDiscardPile
+	call PutCardInDiscardPile  ; preserves af, hl, bc
+	call GetHowMuchEnergyCardIsWorth  ; preserves hl, bc
+	add b
+	ld b, a
 	dec c
 	jr nz, .loop_discard
+	ld a, b
+	ldh [hTemp_ffa0], a
+	ret
+
+
+; input:
+;   a: deck index
+; output:
+;   a: how much energy the given card is worth
+; preserves: hl, bc, de
+GetHowMuchEnergyCardIsWorth:
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, bc, de
+	ld a, [wLoadedCard2Type]
+	bit TYPE_ENERGY_F, a
+	jr z, .not_an_energy_card
+	and TYPE_PKMN  ; zero bit 3 to extract the type
+	cp COLORLESS
+	ld a, 1
+	ret nz
+	ld a, 2
+	ret
+
+.not_an_energy_card
+	xor a
 	ret
 
 
