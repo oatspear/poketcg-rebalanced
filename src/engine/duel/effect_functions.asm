@@ -2953,54 +2953,6 @@ ApplyAmnesiaToAttack:
 	jp SwapTurn
 
 
-Whirlpool_PlayerSelectEffect: ; 2d1e6 (b:51e6)
-	call SwapTurn
-	xor a ; PLAY_AREA_ARENA
-	call CreateArenaOrBenchEnergyCardList
-	jr c, .no_energy
-
-	ldtx hl, ChooseDiscardEnergyCardFromOpponentText
-	call DrawWideTextBox_WaitForInput
-	xor a ; PLAY_AREA_ARENA
-	bank1call DisplayEnergyDiscardScreen
-.loop_input
-	bank1call HandleEnergyDiscardMenuInput
-	jr c, .loop_input
-
-	call SwapTurn
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a ; store selected card to discard
-	ret
-
-.no_energy
-	call SwapTurn
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ret
-
-Whirlpool_AISelectEffect: ; 2d20e (b:520e)
-	call AIPickEnergyCardToDiscardFromDefendingPokemon
-	ldh [hTemp_ffa0], a
-	ret
-
-Whirlpool_DiscardEffect: ; 2d214 (b:5214)
-	call HandleNoDamageOrEffect
-	ret c ; return if attack had no effect
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret z ; return if none selected
-
-	; discard Defending card's energy
-	; this doesn't update DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
-	call SwapTurn
-	call PutCardInDiscardPile
-	; ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
-	; call GetTurnDuelistVariable
-	; ld [hl], LAST_TURN_EFFECT_DISCARD_ENERGY
-	call SwapTurn
-	ret
-
-
 ; return carry if can use Cowardice
 Cowardice_Check:
 	ldh a, [hTempPlayAreaLocation_ff9d]
