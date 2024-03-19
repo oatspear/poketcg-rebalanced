@@ -33,8 +33,6 @@ HandleSpecialAIAttacks:
 	jp z, .BigThunder
 	cp GROWLITHE
 	jp z, .Collect
-	cp PIKACHU_LV14
-	jp z, .Collect
 	cp MEOWTH_LV14
 	jp z, .Collect
 	cp PIDGEY

@@ -115,8 +115,7 @@ SqueakingMouseCardList:
 	card_item LIGHTNING_ENERGY,         8
 	card_item FIGHTING_ENERGY,         15
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item PIKACHU_LV12,             2
-	card_item PIKACHU_LV14,             2
+	card_item PIKACHU_LV12,             4
 	card_item RAICHU_LV40,              1
 	card_item RAICHU_LV45,              1
 	card_item SANDSHREW,                4
@@ -341,10 +340,8 @@ CutePokemonCardList:
 	card_item DOUBLE_COLORLESS_ENERGY,  2
 	card_item FLAREON_LV28,             1
 	card_item VAPOREON_LV42,            1
-	card_item PIKACHU_LV12,             1
-	card_item PIKACHU_LV14,             1
-	card_item PIKACHU_LV16,             1
-	card_item PIKACHU_ALT_LV16,         1
+	card_item PIKACHU_LV12,             2
+	card_item PIKACHU_LV16,             2
 	card_item FLYING_PIKACHU,           1
 	card_item SURFING_PIKACHU_LV13,     2
 	card_item RAICHU_LV40,              1
@@ -392,8 +389,7 @@ PokemonFluteCardList:
 YellowFlashCardList:
 	deck_list_start
 	card_item LIGHTNING_ENERGY, 26
-	card_item PIKACHU_LV12,      2
-	card_item PIKACHU_LV14,      1
+	card_item PIKACHU_LV12,      3
 	card_item RAICHU_LV40,       1
 	card_item RAICHU_LV45,       1
 	card_item MAGNEMITE_LV13,    2
@@ -422,9 +418,8 @@ ElectricShockCardList:
 	deck_list_start
 	card_item LIGHTNING_ENERGY,        24
 	card_item DOUBLE_COLORLESS_ENERGY,  1
-	card_item PIKACHU_LV14,             2
-	card_item PIKACHU_LV16,             1
-	card_item PIKACHU_ALT_LV16,         1
+	card_item PIKACHU_LV12,             2
+	card_item PIKACHU_LV16,             2
 	card_item RAICHU_LV40,              2
 	card_item MAGNEMITE_LV13,           2
 	card_item MAGNEMITE_LV15,           2

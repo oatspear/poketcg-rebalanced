@@ -1481,7 +1481,7 @@ ChallengeCupPrizeCards:
 	db PIKACHU_LV16
 	tx PikachuTradeCardName
 
-	db PIKACHU_ALT_LV16
+	db PIKACHU_LV16
 	tx PikachuTradeCardName
 
 	db SURFING_PIKACHU_LV13

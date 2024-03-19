@@ -350,11 +350,7 @@ AIDecideEvolution:
 	ld a, [wLoadedCard1ID]
 	cp PIKACHU_LV12
 	jr z, .pikachu
-	cp PIKACHU_LV14
-	jr z, .pikachu
 	cp PIKACHU_LV16
-	jr z, .pikachu
-	cp PIKACHU_ALT_LV16
 	jr nz, .check_score
 .pikachu
 	ld a, 3

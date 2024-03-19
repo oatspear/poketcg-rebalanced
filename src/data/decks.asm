@@ -145,8 +145,7 @@ UnnamedDeck:
 	; card_item GENGAR,            2
 	; card_item ELECTABUZZ_LV35,   2
 	; card_item ELECTABUZZ_LV20,   2
-	; card_item PIKACHU_LV12,      2
-	; card_item PIKACHU_LV14,      2
+	; card_item PIKACHU_LV12,      4
 	; card_item RAICHU_LV40,       1
 	; card_item RAICHU_LV45,       2
 	; card_item ZAPDOS_LV68,       2
@@ -264,9 +263,9 @@ UnnamedDeck:
 	; card_item JOLTEON_LV29,      4
 	; card_item FLYING_PIKACHU,    4
 	; card_item PIKACHU_LV16,      4
-	; card_item PIKACHU_ALT_LV16,  4
+	; card_item SURFING_PIKACHU,   4
 	; card_item PIKACHU_LV12,      4
-	; card_item PIKACHU_LV14,      4
+	; card_item VOLTORB,           4
 	; card_item RAICHU_LV40,       4
 	; deck_list_end
 	db 0
@@ -466,9 +465,9 @@ UnnamedDeck2:
 	; card_item JOLTEON_LV29,      4
 	; card_item FLYING_PIKACHU,    4
 	; card_item PIKACHU_LV16,      4
-	; card_item PIKACHU_ALT_LV16,  4
+	; card_item SURFING_PIKACHU,   4
 	; card_item PIKACHU_LV12,      4
-	; card_item PIKACHU_LV14,      4
+	; card_item VOLTORB,           4
 	; card_item RAICHU_LV40,       4
 	; deck_list_end
 
@@ -581,7 +580,7 @@ SamsPracticeDeck:
 	card_item MACHOKE,                 1
 	card_item LIGHTNING_ENERGY,        1
 	card_item LIGHTNING_ENERGY,        1
-	card_item GIOVANNI,            1
+	card_item GIOVANNI,                1
 	card_item JOLTEON_LV29,            1
 	card_item LIGHTNING_ENERGY,        1
 	card_item ELECTABUZZ_LV35,         1
@@ -599,7 +598,7 @@ SamsPracticeDeck:
 	card_item LIGHTNING_ENERGY,        1
 	card_item POTION,                  1
 	card_item LIGHTNING_ENERGY,        1
-	card_item PIKACHU_LV14,            1
+	card_item PIKACHU_LV12,            1
 	card_item LIGHTNING_ENERGY,        1
 	card_item RAICHU_LV40,             1
 	card_item RAICHU_LV45,             1
@@ -813,7 +812,7 @@ LightningAndFireDeck:
 	card_item MAGMAR_LV24,              1
 	card_item MAGMAR_LV31,              1
 	card_item PIKACHU_LV12,             1
-	card_item PIKACHU_LV14,             1
+	card_item PIKACHU_LV16,             1
 	card_item RAICHU_LV40,              1
 	card_item MAGNEMITE_LV13,           2
 	card_item MAGNETON_LV28,            1
@@ -1470,10 +1469,8 @@ PikachuDeck:
 	deck_list_start
 	card_item WATER_ENERGY,             6
 	card_item LIGHTNING_ENERGY,        16
-	card_item PIKACHU_LV12,             1
-	card_item PIKACHU_LV14,             1
-	card_item PIKACHU_LV16,             1
-	card_item PIKACHU_ALT_LV16,         1
+	card_item PIKACHU_LV12,             2
+	card_item PIKACHU_LV16,             2
 	card_item FLYING_PIKACHU,           4
 	card_item SURFING_PIKACHU_LV13,     4
 	card_item RAICHU_LV40,              2
@@ -1509,8 +1506,7 @@ BoomBoomSelfdestructDeck:
 PowerGeneratorDeck:
 	deck_list_start
 	card_item LIGHTNING_ENERGY, 26
-	card_item PIKACHU_LV12,      2
-	card_item PIKACHU_LV14,      1
+	card_item PIKACHU_LV12,      3
 	card_item RAICHU_LV40,       1
 	card_item MAGNEMITE_LV13,    1
 	card_item MAGNEMITE_LV15,    1

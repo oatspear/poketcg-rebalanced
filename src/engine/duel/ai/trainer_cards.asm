@@ -4452,15 +4452,7 @@ AIDecide_Pokeball:
 ; this deck runs a deck check for specific
 ; card IDs in order of decreasing priority
 .pikachu
-	ld e, PIKACHU_LV14
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
-	ret c
 	ld e, PIKACHU_LV16
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
-	ret c
-	ld e, PIKACHU_ALT_LV16
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation
 	ret c
@@ -5071,18 +5063,10 @@ AIDecide_PokemonTrader_PowerGenerator:
 ; Play Area or in the hand. If there is, choose it as target.
 ; otherwise, check if the evolution card is in
 ; hand and if so, choose it as target instead.
-	ld b, PIKACHU_LV14
-	ld a, RAICHU_LV40
-	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
-	jp c, .find_duplicates
 	ld b, PIKACHU_LV12
 	ld a, RAICHU_LV40
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jp c, .find_duplicates
-	ld a, PIKACHU_LV14
-	ld b, RAICHU_LV40
-	call LookForCardIDInDeck_GivenCardIDInHand
-	jr c, .find_duplicates
 	ld a, PIKACHU_LV12
 	ld b, RAICHU_LV40
 	call LookForCardIDInDeck_GivenCardIDInHand
