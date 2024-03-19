@@ -52,6 +52,11 @@
 - **Surf**: reduced cost from (WC) to (C) and base damage from 20 to 10; double damage if attached energy this turn.
 - New Pokémon Power: **Wave Rider**: once per turn, draw cards until 3 in hand.
 
+#### Pikachu Lv12
+- Reduced HP from 50 to 40.
+- **Gnaw**: removed.
+- New attack: **Collect** (C): draw 2 cards.
+
 #### Raichu Lv40
 - **Agility**: immune to all damage and effects next turn if the attack Knocks Out the Defending Pokémon.
 - **Thunder**: cost reduced from (LLC) to (LCC); base damage increased from 60 to 70; does not take recoil if active this turn.

@@ -2497,7 +2497,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ArticunoLv37Description                           ; 0x09b4
 	textpointer OnlyWorksOnEvolvedPokemonText
 	textpointer PikachuName                                        ; 0x09b5
-	textpointer GnawName                                           ; 0x09b6
+	; textpointer GnawName
 	textpointer SkillDiveName
 	textpointer PoisonPaybackName
 	textpointer PoisonPaybackDescription
