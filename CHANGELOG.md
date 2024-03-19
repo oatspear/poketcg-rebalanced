@@ -54,7 +54,7 @@
 
 #### Raichu Lv40
 - **Agility**: immune to all damage and effects next turn if the attack Knocks Out the Defending Pokémon.
-- **Thunder**: base damage increased from 60 to 70; does not take recoil if active this turn.
+- **Thunder**: cost reduced from (LLC) to (LCC); base damage increased from 60 to 70; does not take recoil if active this turn.
 
 #### Raichu Lv45
 - Reduced HP from 90 to 80.
