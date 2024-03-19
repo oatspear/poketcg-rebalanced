@@ -53,7 +53,7 @@
 - New Pokémon Power: **Wave Rider**: once per turn, draw cards until 3 in hand.
 
 #### Raichu Lv40
-- **Agility**: renamed to Strafe.
+- **Agility**: immune to all damage and effects next turn if the attack Knocks Out the Defending Pokémon.
 - **Thunder**: base damage increased from 60 to 70; does not take recoil if active this turn.
 
 #### Raichu Lv45

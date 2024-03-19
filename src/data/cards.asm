@@ -5276,31 +5276,31 @@ RaichuLv40Card:
 	tx PikachuName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx StrafeName ; name
-	tx SwitchThisPokemonDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SwitchUserEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
-
 	; energy COLORLESS, 2 ; energies
-	; tx AgilityName ; name
-	; tx ImmuneIfKnockedOutOpponentDescription ; description
+	; tx StrafeName ; name
+	; tx SwitchThisPokemonDescription ; description
 	; dw NONE ; description (cont)
 	; db 20 ; damage
 	; db DAMAGE_NORMAL ; category
-	; dw ImmuneIfKnockedOutOpponentEffectCommands ; effect commands
+	; dw SwitchUserEffectCommands ; effect commands
 	; db NONE ; flags 1
-	; db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	; db NONE ; flags 2
 	; db NONE ; flags 3
 	; db 0
 	; db ATK_ANIM_QUICK_ATTACK ; animation
+
+	energy COLORLESS, 2 ; energies
+	tx AgilityName ; name
+	tx ImmuneIfKnockedOutOpponentDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ImmuneIfKnockedOutOpponentEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
