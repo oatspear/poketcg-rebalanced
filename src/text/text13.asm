@@ -22,6 +22,17 @@ DischargeDescription:
 	line "Defending Pokémon is now Paralyzed."
 	done
 
+EvolutionaryThunderName:
+	text "Evolutionary Thunder"
+	done
+
+EvolutionaryThunderDescription:
+	text "When you play this Pokémon from your"
+	line "hand to evolve 1 of your Pokémon,"
+	line "it does 10 damage to each of your"
+	line "opponent's Pokémon."
+	done
+
 
 ; ------------------------------------------------------------------------------
 ; Unused Text

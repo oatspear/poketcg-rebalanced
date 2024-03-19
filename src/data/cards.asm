@@ -98,7 +98,6 @@ CardPointers:
 	dw ArticunoLv35Card
 	dw ArticunoLv37Card
 	dw PikachuLv12Card
-	dw PikachuLv14Card
 	dw PikachuLv16Card
 	dw PikachuAltLv16Card
 	dw FlyingPikachuCard
@@ -117,6 +116,7 @@ CardPointers:
 	dw ElectabuzzLv35Card
 	dw JolteonLv24Card
 	dw JolteonLv29Card
+	dw JolteonLv35Card
 	dw ZapdosLv40Card
 	dw ZapdosLv64Card
 	dw ZapdosLv68Card
@@ -4996,57 +4996,6 @@ PikachuLv12Card:
 	tx PikachuDescription ; description
 	db 19
 
-PikachuLv14Card:
-	db TYPE_PKMN_LIGHTNING ; type
-	gfx PikachuLv14CardGfx ; gfx
-	tx PikachuName ; name
-	db CIRCLE ; rarity
-	db MYSTERY | JUNGLE ; sets
-	db PIKACHU_LV14
-	db 40 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
-
-	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx QuickAttackName ; name
-	tx IfActiveThisTurn10BonusDamageDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw QuickAttack10EffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
-
-	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx SparkName ; name
-	tx Damage1BenchedPokemon10Description ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Damage1BenchedPokemon10EffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
-
-	db 0 ; retreat cost
-	db WR_FIGHTING ; weakness
-	db NONE ; resistance
-	tx MouseName ; category
-	db 25 ; Pokedex number
-	db 0
-	db 14 ; level
-	db 1, 4 ; length
-	dw 13 * 10 ; weight
-	tx PikachuDescription ; description
-	db 16
-
 PikachuLv16Card:
 	db TYPE_PKMN_LIGHTNING ; type
 	gfx PikachuLv16CardGfx ; gfx
@@ -5855,19 +5804,6 @@ ElectabuzzLv20Card:
 	db 0
 	db ATK_ANIM_THUNDER ; animation
 
-	; energy LIGHTNING, 1, COLORLESS, 2 ; energies
-	; tx ThunderSpearName ; name
-	; tx Deal30ToAnyPokemonDescription ; description
-	; tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	; db 0 ; damage
-	; db RESIDUAL ; category
-	; dw Deal30ToAnyPokemonEffectCommands ; effect commands
-	; db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	; db FLAG_2_BIT_6 ; flags 2
-	; db NONE ; flags 3
-	; db 2
-	; db ATK_ANIM_GLOW_EFFECT ; animation
-
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
@@ -6020,6 +5956,85 @@ JolteonLv29Card:
 	db NONE ; flags 3
 	db 9
 	db ATK_ANIM_THUNDERBOLT ; animation
+
+	db 1 ; retreat cost
+	db WR_FIGHTING ; weakness
+	db NONE ; resistance
+	tx LightningName ; category
+	db 135 ; Pokedex number
+	db 0
+	db 29 ; level
+	db 2, 7 ; length
+	dw 54 * 10 ; weight
+	tx JolteonLv29Description ; description
+	db 0
+
+JolteonLv35Card:
+	db TYPE_PKMN_LIGHTNING ; type
+	gfx JolteonLv35CardGfx ; gfx
+	tx JolteonName ; name
+	db STAR ; rarity
+	db MYSTERY | JUNGLE ; sets
+	db JOLTEON_LV35
+	db 80 ; hp
+	db STAGE1 ; stage
+	tx EeveeName ; pre-evo name
+
+	; Ability: Evolutionary Thunder
+	; Once during your turn, when you play Jolteon ex from your hand to evolve
+	; 1 of your Pokémon, you may put 1 damage counter on each of your opponent's Pokémon.
+
+	; (LLC) Return Spark  50
+	; You may return an Energy card attached to Jolteon to your hand.
+	; If you do, this attack does 20 damage to 1 of your opponent's Benched Pokémon.
+	; (Don't apply Weakness and Resistance for Benched Pokémon.)
+
+	; Ability: Undevelop
+	; Once during your turn (before your attack), you may devolve Jolteon and put Jolteon
+	; into your hand. This power can't be used if Jolteon is affected by a Special Condition.
+
+	; (LC) Evolving Thunder  50
+	; If Jolteon evolved from Eevee during this turn, this attack does 10 damage to each of
+	; your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)
+
+	; (LCC) Flash Ray  40
+	; During your opponent's next turn, prevent all damage done to this Pokémon by attacks
+	; from your opponent's Basic Pokémon.
+
+	; Ability: Speed Cheer
+	; The attacks of your Pokémon-GX in play that evolve from Eevee cost Colorless less.
+	; You can't apply more than 1 Speed Cheer Ability at a time 
+
+	; (LCC) Fighting Lightning  40
+	; If your opponent's Active Pokémon is a Pokémon ex/V, this attack does 40 more damage.
+
+	; attack 1
+	energy 0 ; energies
+	tx EvolutionaryThunderName ; name
+	tx EvolutionaryThunderDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw EvolutionaryThunderEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx ThunderSpearName ; name
+	tx Deal30ToAnyPokemonDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 3
+	db 2
+	db ATK_ANIM_MAGNETIC_STORM ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness

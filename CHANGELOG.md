@@ -2,6 +2,9 @@
 
 ## Version 0.8.0
 
+### Removed Cards
+- Pikachu Lv14
+
 ### New Cards
 
 #### Raichu Lv35
@@ -10,6 +13,13 @@
 - Retreat Cost: 1.
 - Pokémon Power: **Lightning Haste**: once per turn, attach (L) from the discard pile to the Active Pokémon and deal 10 damage to it.
 - Attack: **Discharge** (L): discard any number of attached (L); 20 damage for each discarded energy; inflicts Paralysis if 2 or more were discarded.
+
+#### Jolteon Lv35
+- Stage 1, 80 HP, Lightning Pokémon, evolves from Eevee.
+- Weakness: Fightning.
+- Retreat Cost: 1.
+- Pokémon Power: **Evolutionary Thunder**: when played from the hand to evolve, deal 10 damage to all of the opponent's Pokémon.
+- Attack: **Thunder Spear** (LC): 30 damage to 1 of the opponent's Pokémon.
 
 ### Grass Changes
 

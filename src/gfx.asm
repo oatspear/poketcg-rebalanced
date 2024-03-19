@@ -1878,10 +1878,6 @@ PikachuLv12CardGfx::
 	INCBIN "gfx/cards/pikachu1.2bpp"
 	INCBIN "gfx/cards/pikachu1.pal"
 
-PikachuLv14CardGfx::
-	INCBIN "gfx/cards/pikachu2.2bpp"
-	INCBIN "gfx/cards/pikachu2.pal"
-
 PikachuLv16CardGfx::
 	INCBIN "gfx/cards/pikachu5.2bpp"
 	INCBIN "gfx/cards/pikachu5.pal"
@@ -1909,6 +1905,10 @@ RaichuLv45CardGfx::
 RaichuLv35CardGfx::
 	INCBIN "gfx/cards/raichu3.2bpp"
 	INCBIN "gfx/cards/raichu3.pal"
+
+JolteonLv35CardGfx::
+	INCBIN "gfx/cards/jolteon3.2bpp"
+	INCBIN "gfx/cards/jolteon3.pal"
 
 	ds $58
 

@@ -34,6 +34,40 @@ Recoil50Effect:
 ; ------------------------------------------------------------------------------
 
 
+; deal 10 damage to each of the opponent's Pokémon
+DamageAllOpponentPokemon10Effect_ThunderAnim:
+	ld a, ATK_ANIM_THUNDER_PLAY_AREA
+	ld [wLoadedAttackAnimation], a
+	ld de, 10
+	jr DamageAllOpponentPokemon_DE
+
+; deal 10 damage to each of the opponent's Pokémon
+DamageAllOpponentPokemon10Effect:
+	ld a, ATK_ANIM_BENCH_HIT
+	ld [wLoadedAttackAnimation], a
+	ld de, 10
+	; jr DamageAllOpponentPokemon_DE
+	; fallthrough
+
+; deal 10 damage to each of the opponent's Pokémon
+; input:
+;   de: amount of damage to deal
+;   [wLoadedAttackAnimation]: the animation of the effect
+DamageAllOpponentPokemon_DE:
+	call SwapTurn
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a
+	ld b, PLAY_AREA_ARENA
+.loop
+	; use the animation loaded into [wLoadedAttackAnimation]
+	call DealDamageToPlayAreaPokemon  ; preserves bc, de
+	inc b
+	dec c
+	jr nz, .loop
+	jp SwapTurn
+
+
 ; deal 10 damage to each of the opponent's benched Pokémon
 DamageAllOpponentBenched10Effect:
 	ld de, 10

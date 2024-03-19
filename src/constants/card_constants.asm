@@ -96,25 +96,25 @@
 	const ARTICUNO_LV35               ; $5f
 	const ARTICUNO_LV37               ; $60
 	const PIKACHU_LV12                ; $61
-	const PIKACHU_LV14                ; $62
-	const PIKACHU_LV16                ; $63
-	const PIKACHU_ALT_LV16            ; $64
-	const FLYING_PIKACHU              ; $65
-	const SURFING_PIKACHU_LV13        ; $66
-	const RAICHU_LV35                 ; $67
-	const RAICHU_LV40                 ; $68
-	const RAICHU_LV45                 ; $69
-	const MAGNEMITE_LV13              ; $6a
-	const MAGNEMITE_LV15              ; $6b
-	const MAGNETON_LV28               ; $6c
-	const MAGNETON_LV35               ; $6d
-	const VOLTORB                     ; $6e
-	const ELECTRODE_LV35              ; $6f
-	const ELECTRODE_LV42              ; $70
-	const ELECTABUZZ_LV20             ; $71
-	const ELECTABUZZ_LV35             ; $72
-	const JOLTEON_LV24                ; $73
-	const JOLTEON_LV29                ; $74
+	const PIKACHU_LV16                ; $62
+	const PIKACHU_ALT_LV16            ; $63
+	const FLYING_PIKACHU              ; $64
+	const SURFING_PIKACHU_LV13        ; $65
+	const RAICHU_LV35                 ; $66
+	const RAICHU_LV40                 ; $67
+	const RAICHU_LV45                 ; $68
+	const MAGNEMITE_LV13              ; $69
+	const MAGNEMITE_LV15              ; $6a
+	const MAGNETON_LV28               ; $6b
+	const MAGNETON_LV35               ; $6c
+	const VOLTORB                     ; $6d
+	const ELECTRODE_LV35              ; $6e
+	const ELECTRODE_LV42              ; $6f
+	const ELECTABUZZ_LV20             ; $70
+	const ELECTABUZZ_LV35             ; $71
+	const JOLTEON_LV24                ; $72
+	const JOLTEON_LV29                ; $73
+	const JOLTEON_LV35                ; $74
 	const ZAPDOS_LV40                 ; $75
 	const ZAPDOS_LV64                 ; $76
 	const ZAPDOS_LV68                 ; $77
