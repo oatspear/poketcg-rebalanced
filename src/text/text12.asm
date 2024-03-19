@@ -1447,10 +1447,6 @@ ThunderSpearName:
 	text "Thunder Spear"
 	done
 
-ElectricCurrentName:
-	text "Electric Current"
-	done
-
 RagingThunderName:
 	text "Raging Thunder"
 	done

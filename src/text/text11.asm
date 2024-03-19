@@ -1,15 +1,11 @@
-VoltTackleName:
-	text "Volt Tackle"
-	done
-
 MouseName: ; 5ceeb (17:4eeb)
 	text "Mouse"
 	done
 
-PikachuLv12Description: ; 5cef2 (17:4ef2)
+PikachuDescription:
 	text "When several of these Pokémon"
-	line "gather, their electricity can cause"
-	line "lightning storms."
+	line "gather, their electricity can build"
+	line "and cause lightning storms."
 	done
 
 SparkName: ; 5cf47 (17:4f47)
@@ -21,24 +17,18 @@ Damage1BenchedPokemon10Description:
 	line "your opponent's Benched Pokémon."
 	done
 
-PikachuLv14Description: ; 5cfeb (17:4feb)
-	text "When several of these Pokémon"
-	line "gather, their electricity can build"
-	line "and cause lightning storms."
-	done
-
 GrowlName:
 	text "Growl"
 	done
 
-ThundershockName: ; 5d12f (17:512f)
+ThundershockName:
 	text "Thundershock"
 	done
 
-PikachuLv16Description: ; 5d13d (17:513d)
-	text "When several of these Pokémon"
-	line "gather, their electricity could"
-	line "build and cause lightning storms."
+Thundershock20Description:
+	text "This Pokémon also does 20 damage to"
+	line "itself. The Defending Pokémon is now"
+	line "Paralyzed."
 	done
 
 FlyingPikachuName: ; 5d19e (17:519e)

@@ -1883,8 +1883,8 @@ PikachuLv14CardGfx::
 	INCBIN "gfx/cards/pikachu2.pal"
 
 PikachuLv16CardGfx::
-	INCBIN "gfx/cards/pikachu3.2bpp"
-	INCBIN "gfx/cards/pikachu3.pal"
+	INCBIN "gfx/cards/pikachu5.2bpp"
+	INCBIN "gfx/cards/pikachu5.pal"
 
 PikachuAltLv16CardGfx::
 	INCBIN "gfx/cards/pikachu4.2bpp"

@@ -422,6 +422,11 @@ Paralysis50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
+ParalysisRecoil20EffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ParalysisEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil20Effect
+	db  $00
+
 ParalysisIfDiscardedEnergyEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, OptionalDiscardEnergy_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ParalysisIfSelectedCardEffect

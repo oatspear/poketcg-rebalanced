@@ -2509,15 +2509,13 @@ TextOffsets:: ; 34000 (d:4000)
 ; text11.asm
 ; ------------------------------------------------------------------------------
 
-	textpointer VoltTackleName
 	textpointer MouseName                                          ; 0x09b9
-	textpointer PikachuLv12Description                            ; 0x09ba
+	textpointer PikachuDescription
 	textpointer SparkName                                          ; 0x09bb
 	textpointer Damage1BenchedPokemon10Description                 ; 0x09bc
-	textpointer PikachuLv14Description                            ; 0x09bd
 	textpointer GrowlName                                          ; 0x09be
-	textpointer ThundershockName                                   ; 0x09c0
-	textpointer PikachuLv16Description                            ; 0x09c1
+	textpointer ThundershockName
+	textpointer Thundershock20Description
 	textpointer FlyingPikachuName                                  ; 0x09c2
 	textpointer ReturnName
 	textpointer ImmuneIfKnockedOutOpponentDescription
@@ -3135,7 +3133,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EnergyLiftDescription
 	textpointer StrafeName
 	textpointer ThunderSpearName
-	textpointer ElectricCurrentName
 	textpointer RagingThunderName
 	textpointer Damage1FriendlyBenchedPokemon20Description
 	textpointer IfActiveThisTurn30BonusDamageDescription

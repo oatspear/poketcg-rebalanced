@@ -53,9 +53,16 @@
 - New Pokémon Power: **Wave Rider**: once per turn, draw cards until 3 in hand.
 
 #### Pikachu Lv12
-- Reduced HP from 50 to 40.
 - **Gnaw**: removed.
-- New attack: **Collect** (C): draw 2 cards.
+- **Volt Tackle**: removed.
+- New attack: **Rapid Charge** (C): add up to 2 Lightning Energy from deck to hand.
+- New attack: **Thundershock** (LC): 20 damage; does 20 recoil damage; inflicts Paralysis.
+
+#### Pikachu Lv16
+- **Growl**: removed.
+- **Thundershock**: removed.
+- New attack: **Quick Attack** (C): 10 damage; +10 damage if the Pokémon moved into the Active Spot this turn.
+- New attack: **Agility** (LL): 20 damage; immune to all damage and effects next turn if the attack Knocks Out the Defending Pokémon.
 
 #### Raichu Lv40
 - **Agility**: immune to all damage and effects next turn if the attack Knocks Out the Defending Pokémon.
@@ -102,7 +109,7 @@
 - Increased HP from 40 to 50.
 - **Tackle**: removed.
 - **Self-desctruct**: recoil increased from 40 to 50.
-- New attack: **Rapid Charge** (C): add up to 2 Lightning Energy from deck to hand.
+- New attack: **Energy Slide** (C): 10 damage; may move an attached Basic Energy to a Benched Pokémon.
 
 #### Electrode Lv35
 - **Spark**: removed.
@@ -524,7 +531,7 @@
 #### Seel
 - **Headbutt**: removed.
 - New attack: **Find Ice** (C): add up to 2 Water Energy from deck to hand.
-- New attack: **Energy Slide** (W): 10 damage; move an attached Basic Energy to a Benched Pokémon.
+- New attack: **Energy Slide** (W): 10 damage; may move an attached Basic Energy to a Benched Pokémon.
 
 #### Dewgong
 - Added a Resistance to Fire.

@@ -4952,33 +4952,33 @@ PikachuLv12Card:
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db PIKACHU_LV12
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx CollectName ; name
-	tx Draw2CardsDescription ; description
+	tx RapidChargeName ; name
+	tx RapidChargeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw Draw2CardsEffectCommands ; effect commands
+	dw RapidChargeEffectCommands ; effect commands
 	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx VoltTackleName ; name
-	tx Recoil10Description ; description
+	tx ThundershockName ; name
+	tx Thundershock20Description ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Recoil10EffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
+	dw ParalysisRecoil20EffectCommands ; effect commands
+	db LOW_RECOIL | INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
@@ -4993,7 +4993,7 @@ PikachuLv12Card:
 	db 12 ; level
 	db 1, 4 ; length
 	dw 13 * 10 ; weight
-	tx PikachuLv12Description ; description
+	tx PikachuDescription ; description
 	db 19
 
 PikachuLv14Card:
@@ -5044,7 +5044,7 @@ PikachuLv14Card:
 	db 14 ; level
 	db 1, 4 ; length
 	dw 13 * 10 ; weight
-	tx PikachuLv14Description ; description
+	tx PikachuDescription ; description
 	db 16
 
 PikachuLv16Card:
@@ -5059,7 +5059,7 @@ PikachuLv16Card:
 	dw NONE ; pre-evo name
 
 	; energy LIGHTNING, 1 ; energies
-	; tx ElectricCurrentName ; name
+	; tx EnergySlideName ; name
 	; tx EnergySlideDescription ; description
 	; dw NONE ; description (cont)
 	; db 10 ; damage
@@ -5073,31 +5073,31 @@ PikachuLv16Card:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx GrowlName ; name
-	tx ReduceDamageBy20Description ; description
+	tx QuickAttackName ; name
+	tx IfActiveThisTurn10BonusDamageDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw GrowlEffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw QuickAttack10EffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 10
-	db ATK_ANIM_SUPERSONIC ; animation
-
-	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx ThundershockName ; name
-	tx MayInflictParalysisDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Paralysis50PercentEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDERSHOCK ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
+
+	; attack 2
+	energy LIGHTNING, 2 ; energies
+	tx AgilityName ; name
+	tx ImmuneIfKnockedOutOpponentDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw ImmuneIfKnockedOutOpponentEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	db 0 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5108,7 +5108,7 @@ PikachuLv16Card:
 	db 16 ; level
 	db 1, 4 ; length
 	dw 13 * 10 ; weight
-	tx PikachuLv16Description ; description
+	tx PikachuDescription ; description
 	db 16
 
 PikachuAltLv16Card:
@@ -5159,7 +5159,7 @@ PikachuAltLv16Card:
 	db 16 ; level
 	db 1, 4 ; length
 	dw 13 * 10 ; weight
-	tx PikachuLv16Description ; description
+	tx PikachuDescription ; description
 	db 16
 
 FlyingPikachuCard:
@@ -5676,17 +5676,17 @@ VoltorbCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx RapidChargeName ; name
-	tx RapidChargeDescription ; description
+	tx EnergySlideName ; name
+	tx EnergySlideDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw RapidChargeEffectCommands ; effect commands
-	db DRAW_CARD ; flags 1
-	db NONE ; flags 2
+	db 10 ; damage
+	db DAMAGE_NORMAL ; category
+	dw EnergySlideEffectCommands ; effect commands
+	db NONE ; flags 1
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	; attack 2
 	energy LIGHTNING, 1, COLORLESS, 1 ; energies
@@ -5695,11 +5695,11 @@ VoltorbCard:
 	dw NONE ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Recoil40EffectCommands ; effect commands
+	dw Recoil50EffectCommands ; effect commands
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 40
+	db 50
 	db ATK_ANIM_SELFDESTRUCT ; animation
 
 	db 0 ; retreat cost
