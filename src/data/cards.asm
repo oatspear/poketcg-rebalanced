@@ -5340,18 +5340,18 @@ RaichuLv45Card:
 	tx PikachuName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx ThunderWaveName ; name
-	tx ThunderWaveDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx SwiftName ; name
+	tx UnaffectedByWeaknessResistancePowersEffectsDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ThunderWaveEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw UnaffectedByWeaknessResistancePowersOrEffectsEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_THUNDER_WAVE ; animation
+	db 0
+	db ATK_ANIM_HIT ; animation
 
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies

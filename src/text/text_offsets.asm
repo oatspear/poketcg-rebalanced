@@ -3166,6 +3166,7 @@ TextOffsets:: ; 34000 (d:4000)
 ; text13.asm
 ; ------------------------------------------------------------------------------
 
+	textpointer UnaffectedByWeaknessResistancePowersEffectsDescription
 	textpointer DischargeName
 	textpointer DischargeDescription
 

@@ -60,7 +60,7 @@
 - Reduced HP from 90 to 80.
 - **Energy Conversion**: removed.
 - **Gigashock**: removed.
-- New attack: **Thunder Wave** (LC): 20 damage; discard an attached energy (unless Active this turn); inflicts Paralysis.
+- New attack: **Swift** (CC): 30 damage; unaffected by Weakness, Resistance, Pokémon Powers or effects on the Defending Pokémon.
 - New attack: **Thunderbolt** (LLC): 100 damage; discard all attached energies.
 
 #### Magnemite Lv13

@@ -1199,6 +1199,11 @@ UnaffectedByResistanceEffectCommands:
 	dbw EFFECTCMDTYPE_AI, UnaffectedByResistanceEffect
 	db  $00
 
+UnaffectedByWeaknessResistancePowersOrEffectsEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnaffectedByWeaknessResistancePowersEffectsEffect
+	dbw EFFECTCMDTYPE_AI, UnaffectedByWeaknessResistancePowersEffectsEffect
+	db  $00
+
 NutritionSupportEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDeckIsNotEmpty
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NutritionSupport_AttachEnergyEffect

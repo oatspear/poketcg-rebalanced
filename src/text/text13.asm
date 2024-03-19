@@ -2,6 +2,13 @@
 ; Lightning
 ; ------------------------------------------------------------------------------
 
+UnaffectedByWeaknessResistancePowersEffectsDescription:
+	text "This attack's damage isn't affected"
+	line "by Weakness, Resistance, Pokémon"
+	line "Powers, or any other effect on the"
+	line "Defending Pokémon."
+	done
+
 DischargeName:
 	text "Discharge"
 	done
