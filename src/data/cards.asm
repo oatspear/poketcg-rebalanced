@@ -5303,7 +5303,7 @@ RaichuLv40Card:
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
-	energy LIGHTNING, 2, COLORLESS, 1 ; energies
+	energy LIGHTNING, 1, COLORLESS, 2 ; energies
 	tx ThunderName ; name
 	tx Recoil30UnlessActiveThisTurnDescription ; description
 	dw NONE ; description (cont)
