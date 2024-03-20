@@ -244,3 +244,12 @@ EvolutionFromDeck_EvolveEffect:
 	pop af
 	ldh [hTempCardIndex_ff9f], a
 	jp SyncShuffleDeck
+
+
+; ------------------------------------------------------------------------------
+; Pokémon Devolution
+; ------------------------------------------------------------------------------
+
+
+DevolvePokemon:
+	ret
