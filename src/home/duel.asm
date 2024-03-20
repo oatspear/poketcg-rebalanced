@@ -860,7 +860,7 @@ EvolvePokemonCard:
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ldh a, [hTempCardIndex_ff98]
 	call PutHandCardInPlayArea
-	; update the Pokemon's HP with the difference
+; update the Pokemon's HP with the difference
 	ld a, e
 	add DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
@@ -870,7 +870,7 @@ EvolvePokemonCard:
 	sub c
 	add [hl]
 	ld [hl], a
-; reset status (if in arena) and set the flag that prevents it from evolving again this turn
+; reset status and set the flag that prevents it from evolving again this turn
 	ld a, e
 	add DUELVARS_ARENA_CARD_FLAGS
 	ld l, a
@@ -879,10 +879,13 @@ EvolvePokemonCard:
 	add DUELVARS_ARENA_CARD_CHANGED_TYPE
 	ld l, a
 	ld [hl], $00
-; OATS evolution no longer clears status conditions
-	; ld a, e
-	; or a
+; OATS evolution clears status conditions for all Play Area locations
+	ld a, e
+	or a
 	; call z, ClearAllArenaStatusAndEffects
+	call z, ClearAllArenaEffectsAndSubstatus  ; preserves de
+	ld a, e
+	call ClearStatusFromTarget
 ; set the new evolution stage of the card
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD_STAGE
