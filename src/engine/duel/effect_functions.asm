@@ -3817,14 +3817,14 @@ DevolveDefendingPokemonEffect:
 	ld c, $00
 	ldh a, [hWhoseTurn]
 	ld h, a
-	call DevolutionBeam_DevolveEffect.DevolvePokemonSkipAnimation
+	call DevolvePokemonEffect.skip_animation
 	jp SwapTurn
 
 
-DevolutionBeam_DevolveEffect: ; 2dcbb (b:5cbb)
+DevolutionBeam_DevolveEffect:
 	ldh a, [hTemp_ffa0]
 	or a
-	jr z, .DevolvePokemon
+	jr z, DevolvePokemonEffect
 	cp $ff
 	ret z
 
@@ -3834,13 +3834,13 @@ DevolutionBeam_DevolveEffect: ; 2dcbb (b:5cbb)
 	or a
 	jr nz, .skip_handle_no_damage_effect
 	call HandleNoDamageOrEffect
-	jr c, .unaffected
+	jp c, SwapTurn  ; unaffected
 .skip_handle_no_damage_effect
-	call .DevolvePokemon
-.unaffected
+	call DevolvePokemonEffect
 	jp SwapTurn
 
-.DevolvePokemon
+
+DevolvePokemonEffect:
 	ld a, ATK_ANIM_DEVOLUTION_BEAM
 	ld [wLoadedAttackAnimation], a
 	ldh a, [hTempPlayAreaLocation_ffa1]
@@ -3851,7 +3851,7 @@ DevolutionBeam_DevolveEffect: ; 2dcbb (b:5cbb)
 	bank1call PlayAttackAnimation
 	bank1call WaitAttackAnimation
 
-.DevolvePokemonSkipAnimation
+.skip_animation
 ; load selected card's data
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ldh [hTempPlayAreaLocation_ff9d], a
