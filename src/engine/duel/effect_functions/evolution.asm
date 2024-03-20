@@ -176,8 +176,8 @@ Hatch_EvolveEffect:
 	; fallthrough
 
 PokemonBreeder_EvolveEffect:
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	call ClearStatusFromTarget_NoAnim
+	; ldh a, [hTempPlayAreaLocation_ffa1]
+	; call ClearStatusFromTarget_NoAnim
 	; jr EvolutionFromDeck_EvolveEffect
 	; fallthrough
 
