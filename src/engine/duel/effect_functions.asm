@@ -1770,13 +1770,14 @@ UpdateDevolvedCardHPAndStage: ; 2c431 (b:4431)
 
 ; OATS possibly unreferenced after all changes.
 ; reset various status after devolving card.
-ResetDevolvedCardStatus: ; 2c45d (b:445d)
-; if it's Arena card, clear status conditions
+ResetDevolvedCardStatus:
+; clear status conditions
 	ldh a, [hTempPlayAreaLocation_ff9d]
-	or a
-	jr nz, .skip_clear_status
-	call ClearAllArenaStatusAndEffects
-.skip_clear_status
+	call ClearStatusFromTarget
+; if it's Arena card, clear other effects
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	or a  ; cp PLAY_AREA_ARENA
+	call z, ClearAllArenaEffectsAndSubstatus
 ; reset changed color status
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD_CHANGED_TYPE
