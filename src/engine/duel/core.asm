@@ -7935,7 +7935,7 @@ ReplaceKnockedOutPokemon:
 	call GetTurnDuelistVariable
 	or a
 	ret nz
-	call ClearAllStatusConditionsAndEffects
+	call ClearAllArenaStatusAndEffects
 	call HasAlivePokemonInBench
 	jr nc, .can_replace_pokemon
 

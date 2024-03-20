@@ -882,7 +882,7 @@ EvolvePokemonCard:
 ; OATS evolution no longer clears status conditions
 	; ld a, e
 	; or a
-	; call z, ClearAllStatusConditionsAndEffects
+	; call z, ClearAllArenaStatusAndEffects
 ; set the new evolution stage of the card
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD_STAGE
@@ -976,7 +976,8 @@ CheckIfCanEvolveInto_BasicToStage2:
 	scf
 	ret
 
-; OATS similar to ClearAllStatusConditionsAndEffects
+
+; OATS similar to ClearAllArenaStatusAndEffects
 ; but does not remove POISONED, ASLEEP or PARALYZED.
 ClearStatusOnSwitch:
 	push hl
@@ -986,25 +987,32 @@ ClearStatusOnSwitch:
 	ld a, [hl]
 	and CNF_SLP_PRZ
 	cp CONFUSED
-	jr nz, ClearAllArenaEffectsAndSubstatus  ; only clear confusion
+	jr nz, .skip_confusion
+; clear confusion, preserve poison nybble
 	ld a, [hl]
 	and PSN_DBLPSN
-	ld [hl], a ; preserve just the poison nybble
+	ld [hl], a
+.skip_confusion
+	pop hl
 	jr ClearAllArenaEffectsAndSubstatus
 
-; clear the status, all substatuses, and temporary duelvars of the turn holder's
-; arena Pokemon. called when sending a new Pokemon into the arena.
-; does not reset Headache, since it targets a player rather than a Pokemon.
-ClearAllStatusConditionsAndEffects:
+
+; clear the status, all substatuses, and temporary duelvars of the
+; turn holder's Pokémon at location a.
+; Does not reset Headache, since it targets a player rather than a Pokémon.
+; input:
+;   a: PLAY_AREA_* offset of the target Pokémon
+; preserves: bc, de
+ClearAllArenaStatusAndEffects:
+	xor a  ; PLAY_AREA_ARENA
+	call ClearStatusFromTarget
+	; fallthrough
+
+; preserves: hl, bc, de
+ClearAllArenaEffectsAndSubstatus:
 	push hl
 	ldh a, [hWhoseTurn]
 	ld h, a
-	xor a
-	ld l, DUELVARS_ARENA_CARD_STATUS
-	ld [hl], a ; NO_STATUS
-	; fallthrough
-
-ClearAllArenaEffectsAndSubstatus:
 	xor a
 	ld l, DUELVARS_ARENA_CARD_SUBSTATUS1
 	ld [hl], a
@@ -1029,19 +1037,20 @@ ClearAllArenaEffectsAndSubstatus:
 	pop hl
 	ret
 
-; unreferenced
-; Removes status conditions from turn holder's target.
-; Input:
-;    a: [0, 5] (PLAY_AREA_* offsets)
-; Affects hl.
-; ClearStatusFromTarget:
-; 	add DUELVARS_ARENA_CARD_STATUS
-; 	ld l, a
-; 	ldh a, [hWhoseTurn]
-; 	ld h, a
-; 	xor a
-; 	ld [hl], a ; NO_STATUS
-; 	ret
+
+; Removes status conditions from the turn holder's Pokémon.
+; input:
+;    a: PLAY_AREA_* offset of the target Pokémon
+; preserves: bc, de
+ClearStatusFromTarget:
+	add DUELVARS_ARENA_CARD_STATUS
+	ld l, a
+	ldh a, [hWhoseTurn]
+	ld h, a
+	xor a
+	ld [hl], a ; NO_STATUS
+	ret
+
 
 ; unreferenced
 ; Returns the status conditions of the turn holder's target.
@@ -1122,8 +1131,8 @@ PutHandPokemonCardInPlayArea:
 ; Change call below to handle just the Active flags and substatuses.
 	ld a, e
 	or a
-	; call z, ClearAllStatusConditionsAndEffects ; only call if Pokemon is being placed in the arena
-	call z, ClearAllArenaEffectsAndSubstatus
+	; call z, ClearAllArenaStatusAndEffects ; only call if Pokemon is being placed in the arena
+	call z, ClearAllArenaEffectsAndSubstatus  ; preserves de
 	ld a, e
 	or a
 	ret
@@ -1231,7 +1240,7 @@ ShiftTurnPokemonToFirstPlayAreaSlots:
 ; e is the play area location offset of the bench Pokemon (PLAY_AREA_*).
 SwapArenaWithBenchPokemon:
 ; OATS switching no longer clears all status conditions
-	call ClearStatusOnSwitch  ; ClearAllStatusConditionsAndEffects
+	call ClearStatusOnSwitch  ; ClearAllArenaStatusAndEffects
 	ld d, PLAY_AREA_ARENA
 	call SwapPlayAreaPokemon
 ; OATS trigger "on Active" Pokémon Powers

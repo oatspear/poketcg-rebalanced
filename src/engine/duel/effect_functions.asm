@@ -1152,7 +1152,7 @@ NaturalRemedy_HealEffect:
 
 ; heal up to 30 damage from user and put it to sleep
 Rest_HealEffect:
-	call ClearAllStatusConditionsAndEffects
+	call ClearAllArenaStatusAndEffects
 	ld a, 30
 	call HealADamageEffect
 	call SwapTurn
@@ -1775,7 +1775,7 @@ ResetDevolvedCardStatus: ; 2c45d (b:445d)
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
 	jr nz, .skip_clear_status
-	call ClearAllStatusConditionsAndEffects
+	call ClearAllArenaStatusAndEffects
 .skip_clear_status
 ; reset changed color status
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -3899,6 +3899,7 @@ DevolutionBeam_DevolveEffect: ; 2dcbb (b:5cbb)
 	ld [wDuelDisplayedScreen], a
 	ret
 
+
 ; returns carry if Turn Duelist
 ; has no Stage1 or Stage2 cards in Play Area.
 CheckIfTurnDuelistHasEvolvedCards: ; 2dd3b (b:5d3b)
@@ -5960,7 +5961,7 @@ MorphEffect:
 ; clear changed color and status
 	ld l, DUELVARS_ARENA_CARD_CHANGED_TYPE
 	ld [hl], $00
-	call ClearAllStatusConditionsAndEffects
+	call ClearAllArenaStatusAndEffects
 
 ; load both card's names for printing text
 	ld a, [wTempTurnDuelistCardID]
@@ -8133,154 +8134,6 @@ Revive_PlaceInPlayAreaEffect: ; 2fbb0 (b:7bb0)
 	ldh a, [hTemp_ffa0]
 	ldtx hl, PlacedOnTheBenchText
 	bank1call DisplayCardDetailScreen
-	ret
-
-; return carry if Turn Duelist has no Evolution cards in Play Area
-DevolutionSpray_PlayAreaEvolutionCheck: ; 2fc0b (b:7c0b)
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld c, a
-	ld l, DUELVARS_ARENA_CARD
-.loop
-	ld a, [hli]
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Stage]
-	or a
-	ret nz ; found an Evolution card
-	dec c
-	jr nz, .loop
-
-	ldtx hl, ThereAreNoStage1PokemonText
-	scf
-	ret
-
-DevolutionSpray_PlayerSelection: ; 2fc24 (b:7c24)
-; display textbox
-	ldtx hl, ChooseEvolutionCardAndPressAButtonToDevolveText
-	call DrawWideTextBox_WaitForInput
-
-; have Player select an Evolution card in Play Area
-	ld a, 1
-	ldh [hCurSelectionItem], a
-	bank1call HasAlivePokemonInPlayArea
-.read_input
-	bank1call OpenPlayAreaScreenForSelection
-	ret c ; exit if B was pressed
-	bank1call GetCardOneStageBelow
-	jr c, .read_input ; can't select Basic cards
-
-; get pre-evolution card data
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	push hl
-	push af
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_STAGE
-	ld l, a
-	ld a, [hl]
-	push hl
-	push af
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD
-	ld l, a
-	ld a, [hl]
-	push hl
-	push af
-	jr .update_data
-
-.repeat_devolution
-; show Play Area screen with static cursor
-; so that the Player either presses A to do one more devolution
-; or presses B to finish selection.
-	bank1call Func_6194
-	jr c, .done_selection ; if B pressed, end selection instead
-	; do one more devolution
-	bank1call GetCardOneStageBelow
-
-.update_data
-; overwrite the card data to new devolved stats
-	ld a, d
-	call UpdateDevolvedCardHPAndStage
-	call GetNextPositionInTempList
-	ld [hl], e
-	ld a, d
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .repeat_devolution ; can do one more devolution
-
-.done_selection
-	call GetNextPositionInTempList
-	ld [hl], $ff ; terminating byte
-
-; store this Play Area location in first item of temp list
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempList], a
-
-; update Play Area location display of this Pokemon
-	call EmptyScreen
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld hl, wHUDEnergyAndHPBarsX
-	ld [hli], a
-	ld [hl], $00
-	bank1call PrintPlayAreaCardInformationAndLocation
-	call EnableLCD
-	pop bc
-	pop hl
-
-; rewrite all duelvars from before the selection was done
-; this is so that if "No" is selected in confirmation menu,
-; then the Pokemon isn't devolved and remains unchanged.
-	ld [hl], b
-	ldtx hl, IsThisOKText
-	call YesOrNoMenuWithText
-	pop bc
-	pop hl
-
-	ld [hl], b
-	pop bc
-	pop hl
-
-	ld [hl], b
-	ret
-
-DevolutionSpray_DevolutionEffect: ; 2fc99 (b:7c99)
-; first byte in list is Play Area location chosen
-	ld hl, hTempList
-	ld a, [hli]
-	ldh [hTempPlayAreaLocation_ff9d], a
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	push hl
-	push af
-
-; loop through devolutions selected
-	ld hl, hTempList + 1
-.loop_devolutions
-	ld a, [hl]
-	cp $ff
-	jr z, .check_ko ; list is over
-	; devolve card to its stage below
-	push hl
-	bank1call GetCardOneStageBelow
-	ld a, d
-	call UpdateDevolvedCardHPAndStage
-	call ResetDevolvedCardStatus
-	pop hl
-	ld a, [hli]
-	call PutCardInDiscardPile
-	jr .loop_devolutions
-
-.check_ko
-	pop af
-	ld e, a
-	pop hl
-	ld d, [hl]
-	call PrintDevolvedCardNameAndLevelText
-	ldh a, [hTempList]
-	call PrintPlayAreaCardKnockedOutIfNoHP
-	bank1call Func_6e49
 	ret
 
 

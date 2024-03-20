@@ -358,7 +358,7 @@ ClearStatusFromTarget:
 	or a
 	jr nz, PlayStatusClearAnimation_PlayAreaPokemon
 ; arena Pokémon additionally clears all substatus effects from attacks
-	; call ClearEffectsFromArenaPokemon
+	; call ClearAllArenaEffectsAndSubstatus
 	call ClearSubstatus2FromArenaPokemon
 	jr PlayStatusClearAnimation_ArenaPokemon
 
@@ -373,7 +373,7 @@ ClearStatusFromTarget_NoAnim:
 	or a
 	ret nz
 	; arena Pokémon additionally clears all substatus effects from attacks
-	; call ClearEffectsFromArenaPokemon
+	; call ClearAllArenaEffectsAndSubstatus
 	jr ClearSubstatus2FromArenaPokemon
 
 ; Removes status conditions from turn holder's target.
@@ -389,11 +389,6 @@ _ClearStatusFromTarget:
 	ld [hl], a ; NO_STATUS
 	ret
 
-ClearEffectsFromArenaPokemon:
-	push hl
-	ldh a, [hWhoseTurn]
-	ld h, a
-	jp ClearAllArenaEffectsAndSubstatus  ; pop hl
 
 ; clears SUBSTATUS2 effects (harmful) from arena Pokémon
 ClearSubstatus2FromArenaPokemon:
