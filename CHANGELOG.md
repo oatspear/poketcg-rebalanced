@@ -21,6 +21,10 @@
 - Pokémon Power: **Evolutionary Thunder**: when played from the hand to evolve, deal 10 damage to all of the opponent's Pokémon.
 - Attack: **Thunder Spear** (LC): 30 damage to 1 of the opponent's Pokémon.
 
+### Changed Mechanics
+
+- Evolving Pokémon clears status conditions and effects again, as in the original version.
+
 ### Grass Changes
 
 #### Paras
