@@ -465,40 +465,6 @@ Func_2c12e: ; 2c12e (b:412e)
 	ret
 
 
-; prints the text "<X> devolved to <Y>!" with
-; the proper card names and levels.
-; input:
-;	d = deck index of the lower stage card
-;	e = deck index of card that was devolved
-PrintDevolvedCardNameAndLevelText: ; 2c1c4 (b:41c4)
-	push de
-	ld a, e
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld bc, wTxRam2
-	ld hl, wLoadedCard1Name
-	ld a, [hli]
-	ld [bc], a
-	inc bc
-	ld a, [hl]
-	ld [bc], a
-
-	inc bc ; wTxRam2_b
-	xor a
-	ld [bc], a
-	inc bc
-	ld [bc], a
-
-	ld a, d
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, 18
-	call CopyCardNameAndLevel
-	ld [hl], $00
-	ldtx hl, PokemonDevolvedToText
-	call DrawWideTextBox_WaitForInput
-	pop de
-	ret
-
-
 ; returns carry if Defending has No Damage or Effect
 ; if so, print its appropriate text.
 HandleNoDamageOrEffect: ; 2c216 (b:4216)
@@ -1727,68 +1693,6 @@ CheckIfDefendingPokemonHasAnyAttack: ; 2c40e (b:440e)
 	or a
 	ret
 
-; overwrites HP and Stage data of the card that was
-; devolved in the Play Area to the values of new card.
-; if the damage exceeds HP of pre-evolution,
-; then HP is set to zero.
-; input:
-;	a = card index of pre-evolved card
-UpdateDevolvedCardHPAndStage: ; 2c431 (b:4431)
-	push bc
-	push de
-	push af
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld e, a
-	call GetCardDamageAndMaxHP
-	ld b, a ; store damage
-	ld a, e
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	pop af
-
-	ld [hl], a
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, e
-	add DUELVARS_ARENA_CARD_HP
-	ld l, a
-	ld a, [wLoadedCard2HP]
-	sub b ; subtract damage from new HP
-	jr nc, .got_hp
-	; damage exceeds HP
-	xor a ; 0 HP
-.got_hp
-	ld [hl], a
-	ld a, e
-; overwrite card stage
-	add DUELVARS_ARENA_CARD_STAGE
-	ld l, a
-	ld a, [wLoadedCard2Stage]
-	ld [hl], a
-	pop de
-	pop bc
-	ret
-
-; OATS possibly unreferenced after all changes.
-; reset various status after devolving card.
-ResetDevolvedCardStatus:
-; clear status conditions
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call ClearStatusFromTarget
-; if it's Arena card, clear other effects
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	or a  ; cp PLAY_AREA_ARENA
-	call z, ClearAllArenaEffectsAndSubstatus
-; reset changed color status
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_CHANGED_TYPE
-	call GetTurnDuelistVariable
-	ld [hl], $00
-; reset C2 flags
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_FLAGS
-	ld l, a
-	ld [hl], $00
-	ret
 
 ; prompts the Player with a Yes/No question
 ; whether to quit the screen, even though
@@ -3852,49 +3756,7 @@ DevolvePokemonEffect:
 	bank1call WaitAttackAnimation
 
 .skip_animation
-; load selected card's data
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ldh [hTempPlayAreaLocation_ff9d], a
-	ld [wTempPlayAreaLocation_cceb], a
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-
-; check if card is affected
-	ld a, [wLoadedCard1ID]
-	ld [wTempNonTurnDuelistCardID], a
-	ld de, $0
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	or a
-	jr nz, .skip_substatus_check
-	call HandleNoDamageOrEffectSubstatus
-	jr c, .check_no_damage_effect
-.skip_substatus_check
-	call HandleDamageReductionOrNoDamageFromPkmnPowerEffects
-.check_no_damage_effect
-	call CheckNoDamageOrEffect
-	jr nc, .devolve
-	jp DrawWideTextBox_WaitForInput
-
-.devolve
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ldh [hTempPlayAreaLocation_ff9d], a
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	bank1call GetCardOneStageBelow
-	call PrintDevolvedCardNameAndLevelText
-
-	ld a, d
-	call UpdateDevolvedCardHPAndStage
-	call ResetDevolvedCardStatus
-
-; add the evolved card to the hand
-	ld a, e
-	call AddCardToHand
-
-; check if this devolution KO's card
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	call PrintPlayAreaCardKnockedOutIfNoHP
+	call TryDevolvePokemon
 
 	xor a
 	ld [wDuelDisplayedScreen], a
