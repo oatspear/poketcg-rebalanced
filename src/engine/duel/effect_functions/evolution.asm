@@ -191,7 +191,7 @@ EvolutionFromDeck_EvolveEffect:
 ; check if a card was chosen from the deck
 	ldh a, [hTemp_ffa0]
 	cp $ff
-	jr z, .done ; skip if no evolution card was chosen
+	jp z, SyncShuffleDeck ; skip if no evolution card was chosen
 
 ; add evolution card to the hand and skip showing it on screen
 	call SearchCardInDeckAndSetToJustDrawn
@@ -243,7 +243,4 @@ EvolutionFromDeck_EvolveEffect:
 	bank1call OnPokemonPlayedInitVariablesAndPowers
 	pop af
 	ldh [hTempCardIndex_ff9f], a
-
-.done
-	call SyncShuffleDeck
-	ret
+	jp SyncShuffleDeck
