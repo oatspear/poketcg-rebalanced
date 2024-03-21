@@ -891,8 +891,8 @@ ThereAreNoCardsInTheDiscardPileText: ; 37680 (d:7680)
 	line "Discard Pile."
 	done
 
-ThereAreNoStage1PokemonText: ; 376a9 (d:76a9)
-	text "There are no Stage 1 Pokémon"
+ThereAreNoEvolvedPokemonInPlayAreaText:
+	text "There are no Evolved Pokémon"
 	line "in the Play Area."
 	done
 

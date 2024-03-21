@@ -298,6 +298,15 @@ CheckPokemonHasNoToolsAttached:
 	ret
 
 
+; return carry if Turn Duelist has no Evolution cards in Play Area
+CheckEvolvedPokemonInPlayArea:
+	ld a, CARDTEST_EVOLVED_POKEMON
+	call CheckMatchingPokemonInPlayArea
+; carry set if there is no evolved Pokémon
+	ldtx hl, ThereAreNoEvolvedPokemonInPlayAreaText
+	ret
+
+
 ; input:
 ;   a: how to test the selected Pokémon (CARDTEST_* constants)
 ; output:
@@ -730,6 +739,7 @@ DynamicCardTypeTest:
 CardTypeTest_FunctionTable:
 	dw CardTypeTest_Pokemon                ; CARDTEST_POKEMON
 	dw CardTypeTest_BasicPokemon           ; CARDTEST_BASIC_POKEMON
+	dw CardTypeTest_EvolvedPokemon         ; CARDTEST_EVOLVED_POKEMON
 	dw CardTypeTest_BasicEnergy            ; CARDTEST_BASIC_ENERGY
 	dw CardTypeTest_IsMagmar               ; CARDTEST_MAGMAR
 	dw CardTypeTest_IsEnergizedMagmar      ; CARDTEST_ENERGIZED_MAGMAR
@@ -768,8 +778,29 @@ IsBasicPokemonCard:
 	cp TYPE_PKMN + 1
 	ret nc  ; not a Pokémon card
 	ld a, [wLoadedCard2Stage]
-	or a  ; BASIC
+	or a    ; BASIC
 	ret nz  ; not a Basic Pokémon
+	scf
+	ret
+
+
+CardTypeTest_EvolvedPokemon:
+	ld a, [wDynamicFunctionArgument]
+	; fallthrough
+
+; input:
+;   a: deck index of the card
+; output:
+;   carry: set if the given card is an Evolution Pokémon
+; preserves: hl, bc, de
+IsEvolutionPokemonCard:
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves hl, bc, de
+	ld a, [wLoadedCard2Type]
+	cp TYPE_PKMN + 1
+	ret nc  ; not a Pokémon card
+	ld a, [wLoadedCard2Stage]
+	or a   ; BASIC
+	ret z  ; not an Evolution Pokémon
 	scf
 	ret
 

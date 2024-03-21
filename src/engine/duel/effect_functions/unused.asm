@@ -24,7 +24,7 @@ DevolutionSpray_PlayAreaEvolutionCheck: ; 2fc0b (b:7c0b)
 	dec c
 	jr nz, .loop
 
-	ldtx hl, ThereAreNoStage1PokemonText
+	ldtx hl, ThereAreNoEvolvedPokemonInPlayAreaText
 	scf
 	ret
 

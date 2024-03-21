@@ -189,7 +189,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ConditionsForEvolvingToStage2NotFulfilledText      ; 0x00b9
 	textpointer ThereAreNoCardsInHandThatYouCanChangeText          ; 0x00ba
 	textpointer ThereAreNoCardsInTheDiscardPileText                ; 0x00bb
-	textpointer ThereAreNoStage1PokemonText                        ; 0x00bc
+	textpointer ThereAreNoEvolvedPokemonInPlayAreaText
 	textpointer NoEnergyCardsAttachedToPokemonInYourPlayAreaText   ; 0x00bd
 	textpointer NoEnergyCardsAttachedToPokemonInOppPlayAreaText    ; 0x00be
 	textpointer EnergyCardsRequiredToRetreatText                   ; 0x00bf

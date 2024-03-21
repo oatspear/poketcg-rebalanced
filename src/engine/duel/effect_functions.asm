@@ -3626,7 +3626,7 @@ DevolutionBeam_CheckPlayArea: ; 2dc53 (b:5c53)
 	call SwapTurn
 	call CheckIfTurnDuelistHasEvolvedCards
 	call SwapTurn
-	ldtx hl, ThereAreNoStage1PokemonText
+	ldtx hl, ThereAreNoEvolvedPokemonInPlayAreaText
 	ret
 
 ; returns carry of Player cancelled selection.
