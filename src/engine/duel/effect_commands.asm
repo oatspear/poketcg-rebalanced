@@ -31,6 +31,13 @@ EffectCommands:
 ;       EFFECTCMDTYPE_INITIAL_EFFECT_1 or EFFECTCMDTYPE_INITIAL_EFFECT_2
 ;       return carry.
 
+; NOTE: The AI executes EFFECTCMDTYPE_INITIAL_EFFECT_1 to determine whether
+;       a Trainer card is playable.
+;       EFFECTCMDTYPE_INITIAL_EFFECT_2 and EFFECTCMDTYPE_AI_SELECTION are skipped.
+;       Custom AI_Decide logic is executed in their place.
+;       The EFFECTCMDTYPE_DISCARD_ENERGY and EFFECTCMDTYPE_BEFORE_DAMAGE effects
+;       are executed as normal.
+
 ; Attacks that have an EFFECTCMDTYPE_REQUIRE_SELECTION also must have either an EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN or an
 ; EFFECTCMDTYPE_AI_SELECTION (for anything not involving switching the defending Pokemon), to handle selections involving the AI.
 
