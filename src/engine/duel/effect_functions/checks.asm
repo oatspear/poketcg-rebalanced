@@ -303,14 +303,13 @@ CheckPokemonHasNoToolsAttached:
 ; output:
 ;   a: PLAY_AREA_* of the first matching Pokémon | $ff
 ;   carry: set if there is no matching Pokémon
-CheckMatchingPokemonInBench:
+CheckMatchingPokemonInPlayArea:
 	ld [wDataTableIndex], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld d, PLAY_AREA_ARENA
 	ld e, a
-	ld l, DUELVARS_BENCH
-	jr .next
+	ld l, DUELVARS_ARENA_CARD
 .loop
 	ld a, [hli]
 	push de
@@ -326,6 +325,21 @@ CheckMatchingPokemonInBench:
 	ld a, $ff
 	scf
 	ret
+
+
+; input:
+;   a: how to test the selected Pokémon (CARDTEST_* constants)
+; output:
+;   a: PLAY_AREA_* of the first matching Pokémon | $ff
+;   carry: set if there is no matching Pokémon
+CheckMatchingPokemonInBench:
+	ld [wDataTableIndex], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, PLAY_AREA_ARENA
+	ld e, a
+	ld l, DUELVARS_BENCH
+	jr CheckMatchingPokemonInPlayArea.next
 
 
 ; output:
