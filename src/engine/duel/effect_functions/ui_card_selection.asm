@@ -427,6 +427,35 @@ HandlePlayerSelectionPokemonInBench:
 	jr HandlePlayerSelectionPokemonInPlayArea.loop_input
 
 
+; input:
+;   a: how to test the selected Pokémon (CARDTEST_* constants)
+; output:
+;   a: PLAY_AREA_* of the selected card | $ff
+;   carry: set if the Player cancelled selection
+HandlePlayerSelectionMatchingPokemonInPlayArea_AllowCancel:
+	ld d, a
+	bank1call HasAlivePokemonInPlayArea  ; preserves de
+.loop_input
+	push de
+	bank1call OpenPlayAreaScreenForSelection
+	pop de
+	ld a, $ff
+	ret c
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld e, a  ; play area location
+	ld a, d  ; card type test
+	push de
+	call CheckPlayAreaPokemonMatchesPattern
+	pop de
+	ret nc  ; found a match
+	jr .loop_input  ; no match
+
+HandlePlayerSelectionMatchingPokemonInBench_AllowCancel:
+	ld d, a
+	bank1call HasAlivePokemonInBench  ; preserves de
+	jr HandlePlayerSelectionMatchingPokemonInPlayArea_AllowCancel.loop_input
+
+
 ; uses de and bc
 HandlePlayerSelectionDamagedPokemonInPlayArea:
 	bank1call HasAlivePokemonInPlayArea
@@ -471,6 +500,19 @@ PlayerSelectAndStoreOpponentPokemonInPlayArea:
 PlayerSelectAndStoreOpponentPokemonInBench:
 	call HandlePlayerSelectionOpponentPokemonInBench
 	ldh [hTemp_ffa0], a
+	ret
+
+
+; output:
+;   [hTempPlayAreaLocation_ffa1]: PLAY_AREA_* of the selected card | $ff
+;   carry: set if the Player cancelled selection
+DevolvePlayAreaPokemon_PlayerSelectEffect:
+	ldtx hl, ChooseEvolvedPokemonInPlayAreaText
+	call DrawWideTextBox_WaitForInput
+	ld a, CARDTEST_EVOLVED_POKEMON
+	call HandlePlayerSelectionMatchingPokemonInPlayArea_AllowCancel
+	; a: PLAY_AREA_* of the selected card | $ff
+	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
 

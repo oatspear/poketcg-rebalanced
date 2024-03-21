@@ -349,7 +349,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EvolutionCardText                                  ; 0x0164
 	textpointer CardWasChosenText                                  ; 0x0165
 	textpointer ChooseBasicPokemonToPlaceOnBenchText               ; 0x0166
-	textpointer ChooseEvolutionCardAndPressAButtonToDevolveText    ; 0x0167
+	textpointer ChooseEvolvedPokemonInPlayAreaText
 	textpointer ChoosePokemonInYourAreaThenPokemonInYourOppText    ; 0x0168
 	textpointer ChooseUpToNFromDiscardPileText                     ; 0x0169
 	textpointer ChooseAPokemonToSwitchWithActivePokemonText        ; 0x016a

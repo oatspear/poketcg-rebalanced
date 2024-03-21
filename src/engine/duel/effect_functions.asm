@@ -4217,7 +4217,7 @@ SearingSpark_PlayerSelectEffect:
 ; output:
 ;   [hTemp_ffa0]: deck index of the selected energy to discard | $ff
 DiscardEnergyFromMatchingPokemonInBench_PlayerSelectEffect:
-	call CheckMatchingPokemonInBench
+	call CheckSomeMatchingPokemonInBench
 	ld a, $ff
 	ldh [hTemp_ffa0], a
 	jr c, .done
@@ -4253,7 +4253,7 @@ SearingSpark_AISelectEffect:
 	; fallthrough
 
 FireLightningCombo_AISelectEffect:
-	call CheckMatchingPokemonInBench
+	call CheckSomeMatchingPokemonInBench
 	; ld e, a  ; play area location of the matching Pokémon
 	ld a, $ff
 	ldh [hTemp_ffa0], a
@@ -4264,7 +4264,7 @@ FireLightningCombo_AISelectEffect:
 	; bit AI_LOGIC_MAX_DAMAGE_CAN_KO_F, a
 	; ret z  ; bonus damage is not enough
 ; choose an energy attached to the matching Pokémon
-; list of energy cards is already built in `CheckMatchingPokemonInBench`
+; list of energy cards is already built in `CheckSomeMatchingPokemonInBench`
 	; ld a, e
 	; call CreateArenaOrBenchEnergyCardList
 	ld a, [wDuelTempList] ; pick first card

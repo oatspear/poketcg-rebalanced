@@ -299,9 +299,9 @@ CheckPokemonHasNoToolsAttached:
 
 
 ; return carry if Turn Duelist has no Evolution cards in Play Area
-CheckEvolvedPokemonInPlayArea:
+CheckSomeEvolvedPokemonInPlayArea:
 	ld a, CARDTEST_EVOLVED_POKEMON
-	call CheckMatchingPokemonInPlayArea
+	call CheckSomeMatchingPokemonInPlayArea
 ; carry set if there is no evolved Pokémon
 	ldtx hl, ThereAreNoEvolvedPokemonInPlayAreaText
 	ret
@@ -312,7 +312,7 @@ CheckEvolvedPokemonInPlayArea:
 ; output:
 ;   a: PLAY_AREA_* of the first matching Pokémon | $ff
 ;   carry: set if there is no matching Pokémon
-CheckMatchingPokemonInPlayArea:
+CheckSomeMatchingPokemonInPlayArea:
 	ld [wDataTableIndex], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -341,14 +341,30 @@ CheckMatchingPokemonInPlayArea:
 ; output:
 ;   a: PLAY_AREA_* of the first matching Pokémon | $ff
 ;   carry: set if there is no matching Pokémon
-CheckMatchingPokemonInBench:
+CheckSomeMatchingPokemonInBench:
 	ld [wDataTableIndex], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld d, PLAY_AREA_ARENA
 	ld e, a
 	ld l, DUELVARS_BENCH
-	jr CheckMatchingPokemonInPlayArea.next
+	jr CheckSomeMatchingPokemonInPlayArea.next
+
+
+; input:
+;   a: how to test the selected Pokémon (CARDTEST_* constants)
+;   e: PLAY_AREA_* of the tested Pokémon
+; output:
+;   a: PLAY_AREA_* of the first matching Pokémon | $ff
+;   carry: set if there is no match
+CheckPlayAreaPokemonMatchesPattern:
+	ld [wDataTableIndex], a
+	ld a, DUELVARS_ARENA_CARD
+	add e
+	call GetTurnDuelistVariable
+	call DynamicCardTypeTest
+	ccf
+	ret
 
 
 ; output:
@@ -656,12 +672,13 @@ GetNumAttachedEnergiesAtMostA:
 ; 	ret
 
 
-CheckIfCardHasGrassEnergyAttached:
-	ld c, TYPE_ENERGY_GRASS
-	jr CheckIfCardHasSpecificEnergyAttached
-
+; unreferenced
 CheckIfCardHasDarknessEnergyAttached:
 	ld c, TYPE_ENERGY_DARKNESS
+	jr CheckIfCardHasSpecificEnergyAttached
+
+CheckIfCardHasGrassEnergyAttached:
+	ld c, TYPE_ENERGY_GRASS
 	; jr CheckIfCardHasSpecificEnergyAttached
 	; fallthrough
 

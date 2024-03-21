@@ -30,7 +30,7 @@ DevolutionSpray_PlayAreaEvolutionCheck: ; 2fc0b (b:7c0b)
 
 DevolutionSpray_PlayerSelection: ; 2fc24 (b:7c24)
 ; display textbox
-	ldtx hl, ChooseEvolutionCardAndPressAButtonToDevolveText
+	ldtx hl, ChooseEvolvedPokemonInPlayAreaText
 	call DrawWideTextBox_WaitForInput
 
 ; have Player select an Evolution card in Play Area

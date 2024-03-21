@@ -113,7 +113,7 @@ ThunderPunch_AIEffect:
 
 IgnitedVoltage_AIEffect:
 	ld a, CARDTEST_ENERGIZED_MAGMAR
-	call CheckMatchingPokemonInBench
+	call CheckSomeMatchingPokemonInBench
 	ret c
 ; energized Magmar is available
 	ld a, 10
@@ -123,7 +123,7 @@ IgnitedVoltage_AIEffect:
 
 SearingSpark_AIEffect:
 	ld a, CARDTEST_ENERGIZED_ELECTABUZZ
-	call CheckMatchingPokemonInBench
+	call CheckSomeMatchingPokemonInBench
 	ret c
 ; energized Electabuzz is available
 	ld a, 20
