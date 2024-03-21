@@ -2731,16 +2731,10 @@ HelpingHand_CheckUse:
 
 
 HelpingHand_RemoveStatusEffect:
-	ld a, ATK_ANIM_HEAL
-	ld [wLoadedAttackAnimation], a
-	bank1call Func_7415
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld b, a
-	ld c, $00
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
+	ld a, ATK_ANIM_HEAL
+	bank1call PlayAdhocAnimationOnPlayAreaLocation
 
 	ldh a, [hTemp_ffa0]
 	add DUELVARS_ARENA_CARD_FLAGS
@@ -3724,43 +3718,6 @@ DevolveDefendingPokemonEffect:
 	call DevolvePokemonEffect.skip_animation
 	jp SwapTurn
 
-
-DevolutionBeam_DevolveEffect:
-	ldh a, [hTemp_ffa0]
-	or a
-	jr z, DevolvePokemonEffect
-	cp $ff
-	ret z
-
-; opponent's Play Area
-	call SwapTurn
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	or a
-	jr nz, .skip_handle_no_damage_effect
-	call HandleNoDamageOrEffect
-	jp c, SwapTurn  ; unaffected
-.skip_handle_no_damage_effect
-	call DevolvePokemonEffect
-	jp SwapTurn
-
-
-DevolvePokemonEffect:
-	ld a, ATK_ANIM_DEVOLUTION_BEAM
-	ld [wLoadedAttackAnimation], a
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ld b, a
-	ld c, $00
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-
-.skip_animation
-	call TryDevolvePokemon
-
-	xor a
-	ld [wDuelDisplayedScreen], a
-	ret
 
 
 ; returns carry if Turn Duelist
@@ -5984,14 +5941,14 @@ ImakuniEffect: ; 2f216 (b:7216)
 .failed
 ; play confusion animation and print failure text
 	ld a, ATK_ANIM_IMAKUNI_CONFUSION
-	call PlayAttackAnimation_AdhocEffect
+	bank1call PlayAdhocAnimationOnPlayAreaArena_NoEffectiveness
 	ldtx hl, ThereWasNoEffectText
 	jp DrawWideTextBox_WaitForInput
 
 .success
 ; play confusion animation and confuse card
 	ld a, ATK_ANIM_IMAKUNI_CONFUSION
-	call PlayAttackAnimation_AdhocEffect
+	bank1call PlayAdhocAnimationOnPlayAreaArena_NoEffectiveness
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and PSN_DBLPSN
@@ -8124,10 +8081,10 @@ Giovanni_PlayerSelection: ; 2fe79 (b:7e79)
 	call c, CancelSupporterCard
 	ret
 
-Giovanni_SwitchEffect: ; 2fe90 (b:7e90)
+Giovanni_SwitchEffect:
 ; play whirlwind animation
 	ld a, ATK_ANIM_GUST_OF_WIND
-	call PlayAttackAnimation_AdhocEffect
+	bank1call PlayAdhocAnimationOnPlayAreaArena_NoEffectiveness
 
 ; switch Arena card
 	call SwapTurn
@@ -8140,19 +8097,6 @@ Giovanni_SwitchEffect: ; 2fe90 (b:7e90)
 	ld [wDuelDisplayedScreen], a
 	ret
 
-; plays animation on turn holder's side (e.g. for play area animations)
-; input:
-;	  a: attack animation to play
-; preserves: de
-PlayAttackAnimation_AdhocEffect:
-	ld [wLoadedAttackAnimation], a
-	bank1call Func_7415
-	ld bc, $0
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-	ret
 
 CancelSupporterCard:
 	push af  ; retain flags

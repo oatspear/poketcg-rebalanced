@@ -219,16 +219,11 @@ PlayHealingAnimation_PlayAreaPokemon:
 ; play heal animation
 	push de
 	ld b, e
-	ld c, $01
+; animation requires damage to heal in de, not d
 	ld e, d
 	ld d, $00
-	bank1call Func_7415
 	ld a, ATK_ANIM_HEALING_WIND_PLAY_AREA
-	ld [wLoadedAttackAnimation], a
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation  ; requires damage to heal in de, not d
-	bank1call WaitAttackAnimation  ; preserves de
+	bank1call PlayAdhocAnimationOnPlayAreaLocation_Weakness  ; preserves de
 	ld l, e
 	ld h, d
 
@@ -269,7 +264,7 @@ HealNDamageFromAll:
 	push bc
 ; play the global healing wind animation (uses bc)
 	; ld a, ATK_ANIM_HEALING_WIND
-	; call PlayAttackAnimation_AdhocEffect
+	; bank1call PlayAdhocAnimationOnPlayAreaArena_NoEffectiveness
 
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -312,7 +307,7 @@ Recover_HealEffect:
 ; plays a healing animation for the arena Pokémon
 ; preserves: de
 PlayStatusClearAnimation_ArenaPokemon:
-	ld bc, $0
+	ld bc, $00
 	ld a, ATK_ANIM_FULL_HEAL
 	jr _PlayStatusClearAnimation
 
@@ -323,20 +318,14 @@ PlayStatusClearAnimation_ArenaPokemon:
 PlayStatusClearAnimation_PlayAreaPokemon:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld b, a
-	ld c, $01
+	ld c, WEAKNESS
 	ld a, ATK_ANIM_GLOW_PLAY_AREA
 	; jr _PlayStatusClearAnimation
 	; fallthrough
 
 _PlayStatusClearAnimation:
 	push de
-	ld [wLoadedAttackAnimation], a
-	bank1call Func_7415
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-
+	bank1call PlayAdhocAnimationOnPlayAreaLocation
 ; print Pokemon card name
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD

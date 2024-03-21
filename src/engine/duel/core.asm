@@ -8848,6 +8848,53 @@ Func_7415:
 	ld [wce7e], a
 	ret
 
+; input:
+;   a: ATK_ANIM_* to play
+;   b: PLAY_AREA_* of the target
+;   de: damage to show (if applicable)
+; preserves: de (maybe hl, bc)
+PlayAdhocAnimationOnPlayAreaLocation_Weakness:
+	ld c, WEAKNESS
+	jr PlayAdhocAnimationOnPlayAreaLocation
+
+; input:
+;   a: ATK_ANIM_* to play
+;   de: damage to show (if applicable)
+; preserves: de (maybe hl, bc)
+PlayAdhocAnimationOnPlayAreaArena_NoEffectiveness:
+	ld bc, $00
+	jr PlayAdhocAnimationOnPlayAreaLocation
+
+; input:
+;   a: ATK_ANIM_* to play
+;   b: PLAY_AREA_* of the target
+;   de: damage to show (if applicable)
+; preserves: de (maybe hl, bc)
+PlayAdhocAnimationOnPlayAreaLocation_NoEffectiveness:
+	ld c, $00
+	; jr PlayAdhocAnimationOnPlayAreaLocation
+	; fallthrough
+
+; input:
+;   a: ATK_ANIM_* to play
+;   b: PLAY_AREA_* of the target
+;   c: wDamageEffectiveness constant
+;   de: damage to show (if applicable)
+; preserves: de (maybe hl, bc)
+PlayAdhocAnimationOnPlayAreaLocation:
+	ld [wLoadedAttackAnimation], a
+	; call Func_7415
+	xor a
+	ld [wce7e], a
+	; ldh a, [hTempPlayAreaLocation_ffa1]
+	; ld b, a
+	; ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	call PlayAttackAnimation  ; preserves hl, bc, de
+	jp WaitAttackAnimation    ; preserves de, (hl, bc)?
+
+
 Func_741a:
 	ld hl, wEffectFunctionsFeedbackIndex
 	ld a, [hl]
@@ -8899,14 +8946,15 @@ Func_741a:
 
 
 ; if [wLoadedAttackAnimation] != 0, wait until the animation is over
+; preserves: de
 WaitAttackAnimation:
 	ld a, [wLoadedAttackAnimation]
 	or a
 	ret z
 	push de
 .anim_loop
-	call DoFrame
-	call CheckAnyAnimationPlaying
+	call DoFrame  ; preserves af, hl, bc, de
+	call CheckAnyAnimationPlaying  ; preserves hl, bc, de
 	jr c, .anim_loop
 	pop de
 	ret
@@ -8942,6 +8990,7 @@ PlayAttackAnimation_DealAttackDamageSimple:
 ; - [wLoadedAttackAnimation]: animation to play
 ; - de: damage dealt by the attack (to display the animation with the number)
 ; - c: a wDamageEffectiveness constant (to print WEAK or RESIST if necessary)
+; preserves: hl, bc, de
 PlayAttackAnimation:
 	ldh a, [hWhoseTurn]
 	push af

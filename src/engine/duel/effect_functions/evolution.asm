@@ -251,7 +251,64 @@ EvolutionFromDeck_EvolveEffect:
 ; ------------------------------------------------------------------------------
 
 
-TryDevolvePokemon:
+DevolutionSpray_DevolutionEffect:
+	; ldh a, [hTempPlayAreaLocation_ffa1]
+	; cp $ff
+	; ret
+	ld a, ATK_ANIM_GLOW_PLAY_AREA
+	ld [wLoadedAttackAnimation], a
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld b, a
+	ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+	call DevolveSelectedPokemonEffect
+	xor a
+	ld [wDuelDisplayedScreen], a
+	ret
+
+
+DevolutionBeam_DevolveEffect:
+	ldh a, [hTemp_ffa0]
+	or a
+	jr z, DevolvePokemonEffect
+	cp $ff
+	ret z
+
+; opponent's Play Area
+	call SwapTurn
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	or a
+	jr nz, .skip_handle_no_damage_effect
+	call HandleNoDamageOrEffect
+	jp c, SwapTurn  ; unaffected
+.skip_handle_no_damage_effect
+	call DevolvePokemonEffect
+	jp SwapTurn
+
+
+DevolvePokemonEffect:
+	ld a, ATK_ANIM_DEVOLUTION_BEAM
+	ld [wLoadedAttackAnimation], a
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	ld b, a
+	ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+
+.skip_animation
+	call TryDevolveSelectedPokemonEffect
+
+	xor a
+	ld [wDuelDisplayedScreen], a
+	ret
+
+
+TryDevolveSelectedPokemonEffect:
 	; load selected card's data
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ldh [hTempPlayAreaLocation_ff9d], a
@@ -276,7 +333,7 @@ TryDevolvePokemon:
 	jp c, DrawWideTextBox_WaitForInput
 	; fallthrough
 
-DevolvePokemonEffect:
+DevolveSelectedPokemonEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	call DevolvePokemon
 	ld a, e
