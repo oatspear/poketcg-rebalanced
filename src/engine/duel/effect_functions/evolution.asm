@@ -34,13 +34,18 @@ AdaptiveEvolution_AllowEvolutionEffect:
 
 ; cancellable
 PokemonBreeder_PlayArea_PlayerSelectEffect:
-	call HandlePlayerSelectionPokemonInPlayArea
+	call HandlePlayerSelectionPokemonInPlayArea_AllowCancel
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret  ; carry if cancelled
 
 ; deck search is not cancellable
 PokemonBreeder_Deck_PlayerSelectEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
+	jr EvolutionFromDeck_PlayerSelectEffect
+
+
+LunarPower_PlayerSelectEffect:
+	call HandlePlayerSelectionPokemonInPlayArea  ; forced
 	jr EvolutionFromDeck_PlayerSelectEffect
 
 
@@ -183,11 +188,6 @@ Hatch_EvolveEffect:
 	; fallthrough
 
 PokemonBreeder_EvolveEffect:
-	; ldh a, [hTempPlayAreaLocation_ffa1]
-	; call ClearStatusFromTarget_NoAnim
-	; jr EvolutionFromDeck_EvolveEffect
-	; fallthrough
-
 Ascension_EvolveEffect:
 PoisonEvolution_EvolveEffect:
 	; fallthrough
