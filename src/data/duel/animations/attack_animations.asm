@@ -665,9 +665,7 @@ AttackAnimation_MirrorMove:
 AttackAnimation_DevolutionBeam:
 	anim_player         DUEL_ANIM_GLOW
 	anim_normal         DUEL_ANIM_FLASH
-	anim_unknown        $04
-	anim_unknown2       DUEL_ANIM_70
-	anim_end
+	; fallthrough
 
 AttackAnimation_GlowPlayArea:
 	anim_unknown        $04
