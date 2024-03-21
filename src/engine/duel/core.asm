@@ -7846,9 +7846,9 @@ ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome:
 	jr .asm_6ecc
 .asm_6e9f
 	call SwapTurn
-	call Func_6eff
+	call ReplaceKnockedOutPokemon_SetGameResultFlag
 	call SwapTurn
-	call Func_6eff
+	call ReplaceKnockedOutPokemon_SetGameResultFlag
 	ld a, [wcce8]
 	or a
 	jr nz, .asm_6ec4
@@ -7898,7 +7898,7 @@ TakePrizesForEachKnockOut_SetGameResultFlag:
 	rl [hl]
 	ret
 
-Func_6eff:
+ReplaceKnockedOutPokemon_SetGameResultFlag:
 	call ReplaceKnockedOutPokemon
 	ld hl, wcce8
 	rl [hl]
