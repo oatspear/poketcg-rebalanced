@@ -10,6 +10,7 @@ DoAFrames:
 
 ; updates background, sprites and other game variables, halts until vblank, and reads user input
 ; if wDebugPauseAllowed is not 0, the game can be paused (and resumed) by pressing the SELECT button
+; preserves: af, hl, bc, de
 DoFrame:
 	push af
 	push hl

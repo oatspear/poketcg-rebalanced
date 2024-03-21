@@ -1,5 +1,6 @@
 ; return nc if wd42a, wd4c0, and wAnimationQueue[] are all equal to $ff
 ; nc means no animation is playing (or animation(s) has/have ended)
+; preserves: hl, bc, de
 CheckAnyAnimationPlaying:
 	push hl
 	push bc
