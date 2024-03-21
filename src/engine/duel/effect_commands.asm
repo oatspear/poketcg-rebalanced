@@ -1,4 +1,4 @@
-EffectCommands: ; 186f7 (6:46f7)
+EffectCommands:
 ; Each attack has a two-byte effect pointer (attack's 7th param) that points to one of these structures.
 ; Similarly, trainer cards have a two-byte pointer (7th param) to one of these structures, which determines the card's function.
 ; Energy cards also point to one of these, but their data is just $00.
@@ -22,15 +22,17 @@ EffectCommands: ; 186f7 (6:46f7)
 ; - EFFECTCMDTYPE_AI_SELECTION: When AI is required to select a card
 
 ; NOTE: EFFECTCMDTYPE_INITIAL_EFFECT_2 in ATTACKS is not executed by AI.
+
 ; NOTE: EFFECTCMDTYPE_INITIAL_EFFECT_1 in POWERS is only used to determine if
 ;       the ability is passive. The error message is always the same.
 ;       Use EFFECTCMDTYPE_INITIAL_EFFECT_2 for precondition checks.
 
+; NOTE: SUPPORTER trainer cards are automatically cancelled if either
+;       EFFECTCMDTYPE_INITIAL_EFFECT_1 or EFFECTCMDTYPE_INITIAL_EFFECT_2
+;       return carry.
+
 ; Attacks that have an EFFECTCMDTYPE_REQUIRE_SELECTION also must have either an EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN or an
 ; EFFECTCMDTYPE_AI_SELECTION (for anything not involving switching the defending Pokemon), to handle selections involving the AI.
-
-; Similar attack effects of different Pokemon cards all point to a different command list,
-; even though in some cases their commands and function pointers match.
 
 
 PassivePowerEffectCommands:
