@@ -637,9 +637,9 @@ ChooseBasicPokemonToPlaceOnBenchText: ; 3987a (e:587a)
 	line "to place on the Bench."
 	done
 
-ChooseEvolutionCardAndPressAButtonToDevolveText: ; 398a9 (e:58a9)
-	text "Choose an Evolution card and"
-	line "press the A Button to Devolve 1."
+ChooseEvolvedPokemonInPlayAreaText:
+	text "Choose an Evolved Pokémon in"
+	line "the Play Area."
 	done
 
 ChoosePokemonInYourAreaThenPokemonInYourOppText: ; 398e8 (e:58e8)
