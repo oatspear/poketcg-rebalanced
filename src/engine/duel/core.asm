@@ -3855,8 +3855,8 @@ DrawWholeScreenTextBox:
 	call ProcessTextFromID
 	call EnableLCD
 	call SetOneLineSeparation
-	call WaitForWideTextBoxInput
-	ret
+	jp WaitForWideTextBoxInput
+
 
 Func_5805:
 	call Func_3b31
