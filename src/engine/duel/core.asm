@@ -7817,7 +7817,7 @@ Func_6e4c:
 	ld a, [wcce8]
 	or a
 	jr z, .asm_6e86
-	call Func_6ff7
+	call CheckHasSomePokemonAliveInPlayArea
 	jr c, .asm_6e86
 	call CountKnockedOutPokemon
 	ld c, a
@@ -7839,7 +7839,7 @@ Func_6e4c:
 	cp $01
 	jr nz, .asm_6e9f
 	call SwapTurn
-	call Func_6ff7
+	call CheckHasSomePokemonAliveInPlayArea
 	call SwapTurn
 	jr c, .asm_6e9f
 	ld a, $02
@@ -7893,7 +7893,7 @@ ClearDamageReductionSubstatus2OfKnockedOutPokemon:
 	ret
 
 Func_6ef6:
-	call Func_6fa5
+	call CountKnockedOutPokemonAndTakeThatManyPrizes
 	ld hl, wcce8
 	rl [hl]
 	ret
@@ -8006,7 +8006,7 @@ ReplaceKnockedOutPokemon:
 	ldh [hTempPlayAreaLocation_ff9d], a
 	jr .replace_pokemon
 
-Func_6fa5:
+CountKnockedOutPokemonAndTakeThatManyPrizes:
 	call CountKnockedOutPokemon
 	ret nc
 	; at least one Pokemon knocked out
@@ -8065,7 +8065,8 @@ CountKnockedOutPokemon:
 	scf
 	ret
 
-Func_6ff7:
+; returns carry if all Pokémon in the turn holder's play area have zero HP
+CheckHasSomePokemonAliveInPlayArea:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld c, a
