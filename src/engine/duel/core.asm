@@ -8862,8 +8862,8 @@ PlayAdhocAnimationOnPlayAreaLocation_Weakness:
 ;   de: damage to show (if applicable)
 ; preserves: de (maybe hl, bc)
 PlayAdhocAnimationOnPlayAreaArena_NoEffectiveness:
-	ld bc, $00
-	jr PlayAdhocAnimationOnPlayAreaLocation
+	ld b, PLAY_AREA_ARENA
+	; fallthrough
 
 ; input:
 ;   a: ATK_ANIM_* to play
