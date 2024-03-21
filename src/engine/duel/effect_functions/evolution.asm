@@ -285,6 +285,8 @@ TryDevolvePokemon:
 ; check if this devolution KO's card
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	call PrintPlayAreaCardKnockedOutIfNoHP
+	ret nc  ; not Knocked Out
+	bank1call ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome
 	ret
 
 
