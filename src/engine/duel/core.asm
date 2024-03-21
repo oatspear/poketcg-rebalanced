@@ -7371,7 +7371,7 @@ HandleBetweenTurnsEvents:
 .asm_6c3a
 	call DiscardAttachedDefenders
 	call SwapTurn
-	jp Func_6e4c
+	jp ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome
 
 
 ; unreferenced
@@ -7807,12 +7807,12 @@ Func_6e49:
 	call HandleDestinyBondSubstatus
 	; fallthrough
 
-Func_6e4c:
+ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome:
 	call ClearDamageReductionSubstatus2OfKnockedOutPokemon
 	xor a
 	ld [wcce8], a
 	call SwapTurn
-	call Func_6ef6
+	call TakePrizesForEachKnockOut_SetGameResultFlag
 	call SwapTurn
 	ld a, [wcce8]
 	or a
@@ -7834,7 +7834,7 @@ Func_6e4c:
 	ld a, $01
 	jr .asm_6ecc
 .asm_6e86
-	call Func_6ef6
+	call TakePrizesForEachKnockOut_SetGameResultFlag
 	ld a, [wcce8]
 	cp $01
 	jr nz, .asm_6e9f
@@ -7892,7 +7892,7 @@ ClearDamageReductionSubstatus2OfKnockedOutPokemon:
 	call z, ClearDamageReductionSubstatus2
 	ret
 
-Func_6ef6:
+TakePrizesForEachKnockOut_SetGameResultFlag:
 	call CountKnockedOutPokemonAndTakeThatManyPrizes
 	ld hl, wcce8
 	rl [hl]
