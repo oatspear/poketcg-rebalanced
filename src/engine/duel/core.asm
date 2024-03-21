@@ -7803,7 +7803,7 @@ ApplyStatusConditionToArenaPokemon:
 	ld [de], a
 	ret
 
-Func_6e49:
+HandleDestinyBond_ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome:
 	call HandleDestinyBondSubstatus
 	; fallthrough
 

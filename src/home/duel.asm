@@ -1714,7 +1714,7 @@ PlayAttackAnimation_DealAttackDamage:
 	bank1call Func_6df1
 	call Func_1bb4
 	bank1call Func_7195
-	call Func_6e49
+	call HandleDestinyBond_ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome
 	or a
 	ret
 
@@ -1748,7 +1748,7 @@ HandleConfusionDamageToSelf:
 	ld a, 10 ; damage
 	call DealConfusionDamageToSelf
 	call Func_1bb4
-	call Func_6e49
+	call HandleDestinyBond_ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome
 	bank1call ClearNonTurnTemporaryDuelvars
 	or a
 	ret

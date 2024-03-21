@@ -154,7 +154,7 @@ DevolutionSpray_DevolutionEffect: ; 2fc99 (b:7c99)
 	call PrintDevolvedCardNameAndLevelText
 	ldh a, [hTempList]
 	call PrintPlayAreaCardKnockedOutIfNoHP
-	bank1call Func_6e49
+	bank1call HandleDestinyBond_ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome
 	ret
 
 
@@ -2240,7 +2240,7 @@ Curse_TransferDamageEffect: ; 2d8bb (b:58bb)
 .done
 	call SwapTurn
 	call ExchangeRNG
-	bank1call Func_6e49
+	bank1call HandleDestinyBond_ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome
 	ret
 
 
@@ -4393,7 +4393,7 @@ PealOfThunder_RandomlyDamageEffect: ; 2e780 (b:6780)
 	call ExchangeRNG
 	ld de, 30 ; damage to inflict
 	call RandomlyDamagePlayAreaPokemon
-	bank1call Func_6e49
+	bank1call HandleDestinyBond_ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome
 	ret
 
 ; randomly damages a Pokemon in play, except
