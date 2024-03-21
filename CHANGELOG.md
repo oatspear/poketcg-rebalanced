@@ -170,6 +170,11 @@
 #### Spearow
 - **Pluck**: double damage if a Tool was discarded from the opponent.
 
+### Trainer Cards Changes
+
+#### Devolution Spray
+- Returns the highest Stage card of the selected Pokémon to the hand.
+
 
 ## Version 0.7.0
 

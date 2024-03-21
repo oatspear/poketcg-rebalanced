@@ -282,15 +282,15 @@ GiovanniDescription:
 	line "Active Pokémon."
 	done
 
-DevolutionSprayName: ; 6442b (19:442b)
+DevolutionSprayName:
 	text "Devolution Spray"
 	done
 
-DevolutionSprayDescription: ; 6443d (19:443d)
-	text "Choose 1 of your own Pokémon in play"
-	line "and a Stage of Evolution. Discard"
-	line "all Evolution cards of that Stage or"
-	line "higher attached to that Pokémon."
+DevolutionSprayDescription:
+	text "Devolve 1 of your evolved Pokémon"
+	line "and put the highest Stage Evolution"
+	line "card on it into your hand. (That"
+	line "Pokémon can't evolve this turn.)"
 	done
 
 DevolutionSprayDescriptionCont: ; 644cb (19:44cb)
