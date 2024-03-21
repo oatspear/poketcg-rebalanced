@@ -274,15 +274,14 @@ TryDevolvePokemon:
 .check_no_damage_effect
 	call CheckNoDamageOrEffect
 	jp c, DrawWideTextBox_WaitForInput
+	; fallthrough
 
+DevolvePokemonEffect:
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	call DevolvePokemon
-
-; add the evolved card to the hand
 	ld a, e
 	call PrintDevolvedCardNameAndLevelText
-
-; check if this devolution KO's card
+; check if this devolution is a Knock Out
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	call PrintPlayAreaCardKnockedOutIfNoHP
 	ret nc  ; not Knocked Out
@@ -323,9 +322,10 @@ DevolvePokemon:
 	bank1call GetCardOneStageBelow
 	; d: deck index of the lower stage card
 	; e: deck index of the higher stage card
-
+; add the evolved card to the hand
 	ld a, e
 	call AddCardToHand  ; preserves af, hl, de
+; update the devolved card's stats and status
 	ld a, d
 	call UpdateDevolvedCardHPAndStage  ; preserves bc, de
 	; jr ResetDevolvedCardStatus       ; preserves bc, de
