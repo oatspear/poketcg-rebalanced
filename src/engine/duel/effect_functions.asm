@@ -5919,8 +5919,7 @@ RocketGrunts_PlayerSelection:
 	call SwapTurn
 	call HandlePokemonAndEnergySelectionScreen
 	call SwapTurn
-	call c, CancelSupporterCard
-	ret
+	ret  ; carry if cancelled
 
 RocketGrunts_AISelection:
 	jp AIPickEnergyCardToDiscardFromDefendingPokemon
@@ -6104,7 +6103,6 @@ EnergySwitch_PlayerSelection:
 	ldtx hl, ChoosePokemonToRemoveEnergyFromText
 	call DrawWideTextBox_WaitForInput
 	call HandlePokemonAndBasicEnergySelectionScreen
-	; call c, CancelSupporterCard
 	ret c  ; gave up on using the card
 ; choose a Pokemon in Play Area to attach card
 	call EmptyScreen
@@ -6820,10 +6818,7 @@ GamblerEffect: ; 2f3f9 (b:73f9)
 ItemFinder_PlayerSelection:
 	; call HandlePlayerSelection2HandCardsToDiscardExcludeSelf
 	call HandlePlayerSelection1HandCardToDiscardExcludeSelf
-	; was operation cancelled?
-	; call c, CancelSupporterCard
-	ret c
-
+	ret c  ; cancelled selection
 ; cards were selected to discard from hand
 	ldh [hTempList], a
 ; now to choose an Item card from Deck
@@ -7004,11 +6999,8 @@ ComputerSearch_PlayerSelection:
 MrFuji_PlayerSelection:
 	ldtx hl, ChoosePokemonToReturnToTheDeckText
 	call DrawWideTextBox_WaitForInput
-	bank1call HasAlivePokemonInBench
-	bank1call OpenPlayAreaScreenForSelection
-	ldh a, [hTempPlayAreaLocation_ff9d]
+	call HandlePlayerSelectionPokemonInBench_AllowCancel
 	ldh [hTemp_ffa0], a
-	call c, CancelSupporterCard
 	ret
 
 MrFuji_ReturnToDeckEffect:
@@ -7105,24 +7097,21 @@ PlusPowerEffect:
 	ret
 
 ; return carry if no Pokemon in the Bench.
-Switch_BenchCheck: ; 2f5ee (b:75ee)
+Switch_BenchCheck:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ldtx hl, EffectNoPokemonOnTheBenchText
 	cp 2
 	ret
 
-Switch_PlayerSelection: ; 2f5f9 (b:75f9)
+Switch_PlayerSelection:
 	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
 	call DrawWideTextBox_WaitForInput
-	bank1call HasAlivePokemonInBench
-	bank1call OpenPlayAreaScreenForSelection
-	ldh a, [hTempPlayAreaLocation_ff9d]
+	call HandlePlayerSelectionPokemonInBench_AllowCancel
 	ldh [hTemp_ffa0], a
-	call c, CancelSupporterCard
 	ret
 
-Switch_SwitchEffect: ; 2f60a (b:760a)
+Switch_SwitchEffect:
 	ldh a, [hTemp_ffa0]
 	ld e, a
 	call SwapArenaWithBenchPokemon
@@ -7201,8 +7190,7 @@ ScoopUpNet_PlayerSelection:
 ; handle Player selection
 	bank1call HasAlivePokemonInPlayArea
 	bank1call OpenPlayAreaScreenForSelection
-	; call c, CancelSupporterCard
-	ret c ; exit if B was pressed
+	ret c  ; exit if B was pressed
 
 	; ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
@@ -7337,7 +7325,6 @@ PokemonTrader_PlayerHandSelection:
 	ldtx de, DuelistHandText
 	bank1call SetCardListHeaderText
 	bank1call DisplayCardList
-	call c, CancelSupporterCard
 	ldh [hTemp_ffa0], a
 	ret
 
@@ -8011,14 +7998,14 @@ EnergyRecycler_ReturnToDeckEffect:
 
 
 ; return carry if non-turn duelist has no benched Pokemon
-Giovanni_BenchCheck: ; 2fe6e (b:7e6e)
+Giovanni_BenchCheck:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	ldtx hl, EffectNoPokemonOnTheBenchText
 	cp 2
 	ret
 
-Giovanni_PlayerSelection: ; 2fe79 (b:7e79)
+Giovanni_PlayerSelection:
 	ldtx hl, ChooseAPokemonToSwitchWithActivePokemonText
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
@@ -8026,9 +8013,7 @@ Giovanni_PlayerSelection: ; 2fe79 (b:7e79)
 	bank1call OpenPlayAreaScreenForSelection
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
-	call SwapTurn
-	call c, CancelSupporterCard
-	ret
+	jp SwapTurn
 
 Giovanni_SwitchEffect:
 ; play whirlwind animation
@@ -8046,14 +8031,6 @@ Giovanni_SwitchEffect:
 	ld [wDuelDisplayedScreen], a
 	ret
 
-
-CancelSupporterCard:
-	push af  ; retain flags
-	ld a, [wAlreadyPlayedEnergyOrSupporter]
-	and ~PLAYED_SUPPORTER_THIS_TURN  ; clear this flag
-	ld [wAlreadyPlayedEnergyOrSupporter], a
-	pop af
-	ret
 
 ; makes a list in wDuelTempList with the deck indices
 ; of energy cards found in Turn Duelist's Hand.

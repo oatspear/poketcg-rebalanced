@@ -32,8 +32,15 @@ AdaptiveEvolution_AllowEvolutionEffect:
 ; 	; jr EvolutionFromDeck_PlayerSelectEffect
 ; 	; fallthrough
 
-PokemonBreeder_PlayerSelectEffect:
+; cancellable
+PokemonBreeder_PlayArea_PlayerSelectEffect:
 	call HandlePlayerSelectionPokemonInPlayArea
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ret  ; carry if cancelled
+
+; deck search is not cancellable
+PokemonBreeder_Deck_PlayerSelectEffect:
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	jr EvolutionFromDeck_PlayerSelectEffect
 
 

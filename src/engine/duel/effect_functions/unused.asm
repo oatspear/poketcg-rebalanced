@@ -3476,6 +3476,16 @@ PokemonCenter_HealDiscardEnergyEffect: ; 2f618 (b:7618)
 
 
 ;
+CancelSupporterCard:
+	push af  ; retain flags
+	ld a, [wAlreadyPlayedEnergyOrSupporter]
+	and ~PLAYED_SUPPORTER_THIS_TURN  ; clear this flag
+	ld [wAlreadyPlayedEnergyOrSupporter], a
+	pop af
+	ret
+
+
+;
 ; return carry if not enough cards in hand to discard
 ; or if there are no cards left in the deck.
 ComputerSearch_HandDeckCheck: ; 2f513 (b:7513)
