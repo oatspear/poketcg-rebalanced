@@ -170,6 +170,9 @@
 #### Spearow
 - **Pluck**: double damage if a Tool was discarded from the opponent.
 
+#### Dragonair
+- **Draconic Evolution**: no longer removes status conditions; instead, heals 20 damage from the evolving Pokémon.
+
 ### Trainer Cards Changes
 
 #### Devolution Spray

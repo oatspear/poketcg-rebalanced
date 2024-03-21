@@ -933,15 +933,12 @@ Put1DamageCounterOnTarget_DamageEffect:
 DraconicEvolutionEffect:
 	; ldtx hl, DraconicEvolutionActivatesText
 	; call DrawWideTextBox_WaitForInput
-; check status
+; heal damage
 	ldh a, [hTempPlayAreaLocation_ffa1]
-	add DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	or a
-	ldh a, [hTempPlayAreaLocation_ffa1]
-; remove status
-	call nz, ClearStatusFromTarget
-	bank1call DrawDuelHUDs
+	ld e, a   ; location
+	ld d, 20  ; damage
+	call HealPlayAreaCardHP
+	; bank1call DrawDuelHUDs
 ; check energy cards in hand
 	call AttachEnergyFromHand_HandCheck
 ; choose energy card to attach
