@@ -340,9 +340,9 @@ _PlayStatusClearAnimation:
 ; Input:
 ;    a: [0, 5] (PLAY_AREA_* offsets)
 ; Affects hl.
-ClearStatusFromTarget:
+ClearStatusFromTargetEffect:
 	ldh [hTempPlayAreaLocation_ff9d], a
-	call _ClearStatusFromTarget
+	call _ClearStatusFromTargetEffect
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
 	jr nz, PlayStatusClearAnimation_PlayAreaPokemon
@@ -357,7 +357,7 @@ ClearStatusFromTarget:
 ; Affects hl.
 ClearStatusFromTarget_NoAnim:
 	push af
-	call _ClearStatusFromTarget
+	call _ClearStatusFromTargetEffect
 	pop af
 	or a
 	ret nz
@@ -369,7 +369,7 @@ ClearStatusFromTarget_NoAnim:
 ; Input:
 ;    a: [0, 5] (PLAY_AREA_* offsets)
 ; Affects hl.
-_ClearStatusFromTarget:
+_ClearStatusFromTargetEffect:
 	add DUELVARS_ARENA_CARD_STATUS
 	ld l, a
 	ldh a, [hWhoseTurn]

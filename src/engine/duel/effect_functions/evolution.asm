@@ -356,6 +356,7 @@ DevolutionSpray_DevolutionEffect:
 	ld a, ATK_ANIM_GLOW_PLAY_AREA
 	bank1call PlayAdhocAnimationOnPlayAreaLocation_NoEffectiveness
 	jp DevolveSelectedPokemonEffect
+	; bank1call DrawDuelHUDs
 
 
 ; Devolves a Pokémon in the turn holder's Play Area and returns the
