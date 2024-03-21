@@ -577,7 +577,7 @@ wEnergyDiscardMenuDenominator:: ; cbfa
 wEnergyDiscardMenuNumerator:: ; cbfb
 	ds $1
 
-; used by Func_5805 to store the remaining Prizes, so that if more than that
+; used by TakePrizesUpToTheNumberOfKnockedOutPokemon to store the remaining Prizes, so that if more than that
 ; amount would be taken, only the remaining amount is taken
 wTempNumRemainingPrizeCards:: ; cbfc
 	ds $1
@@ -779,7 +779,7 @@ wSelectedAttack:: ; ccc6
 wNoDamageOrEffect:: ; ccc7
 	ds $1
 
-; used by CountKnockedOutPokemon and Func_5805 to store the amount
+; used by CountKnockedOutPokemon and TakePrizesUpToTheNumberOfKnockedOutPokemon to store the amount
 ; of prizes to take (equal to the number of Pokemon knocked out)
 wNumberPrizeCardsToTake:: ; ccc8
 	ds $1

@@ -3858,7 +3858,7 @@ DrawWholeScreenTextBox:
 	jp WaitForWideTextBoxInput
 
 
-Func_5805:
+TakePrizesUpToTheNumberOfKnockedOutPokemon:
 	call Func_3b31
 	ld a, [wNumberPrizeCardsToTake]
 	ld l, a
@@ -8011,7 +8011,7 @@ Func_6fa5:
 	ret nc
 	; at least one Pokemon knocked out
 	call SwapTurn
-	call Func_5805
+	call TakePrizesUpToTheNumberOfKnockedOutPokemon
 	call SwapTurn
 	ret nc
 	call SwapTurn
