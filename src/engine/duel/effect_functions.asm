@@ -5348,7 +5348,7 @@ HandleSwitchDefendingPokemonEffect:
 
 ; if 0, handle Destiny Bond first
 	push de
-	bank1call HandleDestinyBondSubstatus
+	call HandleDestinyBondSubstatus
 	pop de
 
 .switch
