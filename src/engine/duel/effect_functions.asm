@@ -3614,11 +3614,11 @@ PsywaveEffect: ; 2dc49 (b:5c49)
 	ret
 
 ; returns carry if neither Duelist has evolved Pokemon.
-DevolutionBeam_CheckPlayArea: ; 2dc53 (b:5c53)
-	call CheckIfTurnDuelistHasEvolvedCards
+DevolutionBeam_CheckPlayArea:
+	call CheckSomeEvolvedPokemonInPlayArea
 	ret nc
 	call SwapTurn
-	call CheckIfTurnDuelistHasEvolvedCards
+	call CheckSomeEvolvedPokemonInPlayArea
 	call SwapTurn
 	ldtx hl, ThereAreNoEvolvedPokemonInPlayAreaText
 	ret
@@ -3688,26 +3688,6 @@ DevolutionBeam_LoadAnimation: ; 2dcb6 (b:5cb6)
 	ld [wLoadedAttackAnimation], a
 	ret
 
-
-; returns carry if Turn Duelist
-; has no Stage1 or Stage2 cards in Play Area.
-CheckIfTurnDuelistHasEvolvedCards: ; 2dd3b (b:5d3b)
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	ld d, h
-	ld e, DUELVARS_ARENA_CARD_STAGE
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	ld a, [de]
-	inc de
-	or a
-	jr z, .loop ; is Basic Stage
-	ret
-.set_carry
-	scf
-	ret
 
 ; handles Player selection of an evolved card in Play Area.
 ; returns carry if Player cancelled operation.

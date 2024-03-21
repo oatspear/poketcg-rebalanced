@@ -298,12 +298,35 @@ CheckPokemonHasNoToolsAttached:
 	ret
 
 
+; unreferenced
 ; return carry if Turn Duelist has no Evolution cards in Play Area
+; Evolution cards played as Basic Pokémon count for this check
+; CheckSomeEvolutionPokemonCardsInPlayArea:
+; 	ld a, CARDTEST_EVOLVED_POKEMON
+; 	call CheckSomeMatchingPokemonInPlayArea
+; ; carry set if there is no evolved Pokémon
+; 	ldtx hl, ThereAreNoEvolvedPokemonInPlayAreaText
+; 	ret
+
+
+; returns carry if Turn Duelist
+; has no Stage1 or Stage2 cards in Play Area.
 CheckSomeEvolvedPokemonInPlayArea:
-	ld a, CARDTEST_EVOLVED_POKEMON
-	call CheckSomeMatchingPokemonInPlayArea
-; carry set if there is no evolved Pokémon
-	ldtx hl, ThereAreNoEvolvedPokemonInPlayAreaText
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	ld d, h
+	ld e, DUELVARS_ARENA_CARD_STAGE
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	ld a, [de]
+	inc de
+	or a
+	jr z, .loop ; is Basic Stage
+	ret
+.set_carry
+	scf
 	ret
 
 
