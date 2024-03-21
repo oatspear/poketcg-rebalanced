@@ -251,29 +251,39 @@ EvolutionFromDeck_EvolveEffect:
 ; ------------------------------------------------------------------------------
 
 
-DevolutionSpray_DevolutionEffect:
-	; ldh a, [hTempPlayAreaLocation_ffa1]
-	; cp $ff
-	; ret
-	ld a, ATK_ANIM_GLOW_PLAY_AREA
-	ld [wLoadedAttackAnimation], a
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ld b, a
-	ld c, $00
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-	call DevolveSelectedPokemonEffect
-	xor a
-	ld [wDuelDisplayedScreen], a
-	ret
+DevolveDefendingPokemonEffect:
+; did this attack KO the Defending Pokémon?
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	or a
+	ret z  ; nothing to do
+
+; is the Defending Pokémon a Basic Pokémon?
+	ld a, DUELVARS_ARENA_CARD_STAGE
+	call GetNonTurnDuelistVariable
+	or a  ; BASIC
+	ret z  ; nothing to do
+
+; devolve the Defending Pokémon
+	ld a, 1  ; opponent's Play Area
+	ldh [hTemp_ffa0], a
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ffa1], a
+
+	call SwapTurn
+	call HandleNoDamageOrEffect
+	jp c, SwapTurn  ; exit
+
+	; ld b, PLAY_AREA_ARENA
+	; ld c, $00
+	call TryDevolveSelectedPokemonEffect
+	jp SwapTurn
 
 
 DevolutionBeam_DevolveEffect:
 	ldh a, [hTemp_ffa0]
 	or a
-	jr z, DevolvePokemonEffect
+	jr z, .devolve
 	cp $ff
 	ret z
 
@@ -285,27 +295,16 @@ DevolutionBeam_DevolveEffect:
 	call HandleNoDamageOrEffect
 	jp c, SwapTurn  ; unaffected
 .skip_handle_no_damage_effect
-	call DevolvePokemonEffect
+	call .devolve
 	jp SwapTurn
 
-
-DevolvePokemonEffect:
-	ld a, ATK_ANIM_DEVOLUTION_BEAM
-	ld [wLoadedAttackAnimation], a
+.devolve
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld b, a
-	ld c, $00
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-
-.skip_animation
-	call TryDevolveSelectedPokemonEffect
-
-	xor a
-	ld [wDuelDisplayedScreen], a
-	ret
+	ld a, ATK_ANIM_DEVOLUTION_BEAM
+	bank1call PlayAdhocAnimationOnDuelScene_NoEffectiveness
+	; jr TryDevolveSelectedPokemonEffect
+	; falllthrough
 
 
 TryDevolveSelectedPokemonEffect:
@@ -343,26 +342,20 @@ DevolveSelectedPokemonEffect:
 	call PrintPlayAreaCardKnockedOutIfNoHP
 	ret nc  ; not Knocked Out
 	bank1call ClearKnockedOutPokemon_TakePrizes_CheckGameOutcome
+	xor a  ; REFRESH_DUEL_SCREEN
+	ld [wDuelDisplayedScreen], a
 	ret
 
 
-; maybe unreferenced
-; input:
-;   a: PLAY_AREA_* of the target Pokémon
-; output:
-;   d: deck index of the lower stage Pokémon (after devolving)
-;   e: deck index of the higher stage Pokémon (before devolving)
-DevolvePokemon_PreserveTempPlayArea:
-	ld l, a
-; preserve [hTempPlayAreaLocation_ff9d]
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	push af
-	ld a, l
-	call DevolvePokemon
-; restore [hTempPlayAreaLocation_ff9d]
-	pop af
-	ldh [hTempPlayAreaLocation_ff9d], a
-	ret
+;
+DevolutionSpray_DevolutionEffect:
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	; cp $ff
+	; ret z
+	ld b, a
+	ld a, ATK_ANIM_GLOW_PLAY_AREA
+	bank1call PlayAdhocAnimationOnPlayAreaLocation_NoEffectiveness
+	jp DevolveSelectedPokemonEffect
 
 
 ; Devolves a Pokémon in the turn holder's Play Area and returns the

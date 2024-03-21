@@ -8886,6 +8886,28 @@ PlayAdhocAnimationOnPlayAreaLocation:
 	; call Func_7415
 	xor a
 	ld [wce7e], a
+	jr PlayAdhocAnimationOnDuelScene.got_animation
+
+
+; input:
+;   a: ATK_ANIM_* to play
+;   b: PLAY_AREA_* of the target
+;   de: damage to show (if applicable)
+; preserves: de (maybe hl, bc)
+PlayAdhocAnimationOnDuelScene_NoEffectiveness:
+	ld c, $00
+	; jr PlayAdhocAnimationOnDuelScene
+	; fallthrough
+
+; input:
+;   a: ATK_ANIM_* to play
+;   b: PLAY_AREA_* of the target
+;   c: wDamageEffectiveness constant
+;   de: damage to show (if applicable)
+; preserves: de (maybe hl, bc)
+PlayAdhocAnimationOnDuelScene:
+	ld [wLoadedAttackAnimation], a
+.got_animation
 	; ldh a, [hTempPlayAreaLocation_ffa1]
 	; ld b, a
 	; ld c, $00
