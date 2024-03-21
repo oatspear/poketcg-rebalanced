@@ -1685,7 +1685,7 @@ ReviveEffectCommands:
 	db  $00
 
 DevolutionSprayEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DevolutionSpray_PlayAreaEvolutionCheck
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckEvolvedPokemonInPlayArea
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DevolutionSpray_PlayerSelection
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DevolutionSpray_DevolutionEffect
 	db  $00
