@@ -881,11 +881,7 @@ EvolvePokemonCard:
 	ld [hl], $00
 ; OATS evolution clears status conditions for all Play Area locations
 	ld a, e
-	or a
-	; call z, ClearAllArenaStatusAndEffects
-	call z, ClearAllArenaEffectsAndSubstatus  ; preserves de
-	ld a, e
-	call ClearStatusFromTarget
+	call ClearAllStatusAndEffectsFromTarget  ; preserves de
 ; set the new evolution stage of the card
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD_STAGE
@@ -1000,15 +996,28 @@ ClearStatusOnSwitch:
 	jr ClearAllArenaEffectsAndSubstatus
 
 
-; clear the status, all substatuses, and temporary duelvars of the
-; turn holder's Pokémon at location a.
+; Clears the status, all substatuses, and temporary duelvars
+; of the turn holder's Arena Pokémon.
 ; Does not reset Headache, since it targets a player rather than a Pokémon.
-; input:
-;   a: PLAY_AREA_* offset of the target Pokémon
 ; preserves: bc, de
 ClearAllArenaStatusAndEffects:
 	xor a  ; PLAY_AREA_ARENA
 	call ClearStatusFromTarget
+	jr ClearAllArenaEffectsAndSubstatus
+
+
+; Clears the status, all substatuses, and temporary duelvars
+; of the turn holder's Pokémon at location a.
+; Does not reset Headache, since it targets a player rather than a Pokémon.
+; input:
+;   a: PLAY_AREA_* offset of the target Pokémon
+; preserves: bc, de
+ClearAllStatusAndEffectsFromTarget:
+	push af
+	call ClearStatusFromTarget
+	pop af
+	or a
+	ret nz
 	; fallthrough
 
 ; preserves: hl, bc, de
@@ -1130,11 +1139,10 @@ PutHandPokemonCardInPlayArea:
 	call EmptyPlayAreaSlot.init_duelvar
 	call EmptyPlayAreaSlot.zero_vars
 ; OATS status conditions apply to benched Pokemon too
-; and they are already handled in EmptyPlayAreaSlot.
-; Change call below to handle just the Active flags and substatuses.
+; and they are already handled/reset in EmptyPlayAreaSlot.
+; Below, we just need to handle the Active flags and substatuses.
 	ld a, e
 	or a
-	; call z, ClearAllArenaStatusAndEffects ; only call if Pokemon is being placed in the arena
 	call z, ClearAllArenaEffectsAndSubstatus  ; preserves de
 	ld a, e
 	or a
