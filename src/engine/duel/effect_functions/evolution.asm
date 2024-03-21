@@ -280,7 +280,6 @@ TryDevolvePokemon:
 
 ; add the evolved card to the hand
 	ld a, e
-	call AddCardToHand  ; preserves af, hl, de
 	call PrintDevolvedCardNameAndLevelText
 
 ; check if this devolution KO's card
@@ -308,6 +307,8 @@ DevolvePokemon_PreserveTempPlayArea:
 	ret
 
 
+; Devolves a Pokémon in the turn holder's Play Area and returns the
+; highest Stage card to the turn holder's hand.
 ; input:
 ;   a: PLAY_AREA_* of the target Pokémon
 ; output:
@@ -321,12 +322,13 @@ DevolvePokemon:
 	; d: deck index of the lower stage card
 	; e: deck index of the higher stage card
 
+	ld a, e
+	call AddCardToHand  ; preserves af, hl, de
 	ld a, d
 	call UpdateDevolvedCardHPAndStage  ; preserves bc, de
 	; jr ResetDevolvedCardStatus       ; preserves bc, de
 	; fallthrough
 
-; OATS possibly unreferenced after all changes.
 ; Reset status and effects after devolving card.
 ; preserves: bc, de
 ResetDevolvedCardStatus:
