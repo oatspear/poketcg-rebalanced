@@ -271,6 +271,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ChangedTheColorOfText                              ; 0x0116
 	textpointer Draw1CardFromTheDeckText                           ; 0x0117
 	textpointer Draw2CardsFromTheDeckText                          ; 0x0117
+	textpointer Draw3CardsFromTheDeckText
 	textpointer DrawCardsFromTheDeckText                           ; 0x0118
 	textpointer CannotDrawCardBecauseNoCardsInDeckText             ; 0x0119
 	textpointer ChoosePkmnToGiveDamageText                         ; 0x011a

@@ -198,6 +198,10 @@ Draw2CardsFromTheDeckText: ; 386f2 (e:46f2)
 	text "Draw 2 cards from the Deck."
 	done
 
+Draw3CardsFromTheDeckText:
+	text "Draw 3 cards from the Deck."
+	done
+
 DrawCardsFromTheDeckText: ; 3870e (e:470e)
 	text "Draw <RAMNUM> card(s) from the Deck."
 	done

@@ -178,6 +178,9 @@
 #### Devolution Spray
 - Returns the highest Stage card of the selected Pokémon to the hand.
 
+#### Mr. Fuji
+- After shuffling a Pokémon into the deck, draws 1 card per Pokémon card shuffled.
+
 
 ## Version 0.7.0
 

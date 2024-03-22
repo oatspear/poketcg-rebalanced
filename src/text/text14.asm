@@ -44,6 +44,8 @@ MrFujiDescription:
 	text "Choose a Pokémon on your Bench."
 	line "Shuffle it and any cards attached"
 	line "to it into your deck."
+	line "Then, draw a card for each Pokémon"
+	line "card returned to your deck this way."
 	done
 
 LassName:

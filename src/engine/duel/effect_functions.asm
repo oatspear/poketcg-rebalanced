@@ -6997,13 +6997,24 @@ MrFuji_PlayerSelection:
 	ldtx hl, ChoosePokemonToReturnToTheDeckText
 	call DrawWideTextBox_WaitForInput
 	call HandlePlayerSelectionPokemonInBench_AllowCancel
-	ldh [hTemp_ffa0], a
+	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
-MrFuji_ReturnToDeckEffect:
-; get Play Area location's card index
-	ldh a, [hTemp_ffa0]
-	; fallthrough
+
+MrFuji_ReturnToDeckAndDrawEffect:
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	call ReturnPlayAreaPokemonToDeckEffect
+; determine how many cards to draw based on Stage
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	add DUELVARS_ARENA_CARD_STAGE
+	call GetTurnDuelistVariable
+	or a  ; BASIC
+	jp z, Draw1CardEffect
+	cp STAGE2
+	jp z, Draw3CardsEffect
+	; STAGE1 or STAGE2_WITHOUT_STAGE1
+	jp Draw2CardsEffect
+
 
 ; Return the Pokémon in the location given in a
 ; and all cards attached to it to the turn holder's deck.
@@ -7019,7 +7030,7 @@ ReturnPlayAreaPokemonToDeckEffect:
 ; if Pokemon was in Arena, then switch it with the selected Bench card first
 ; this avoids a bug that occurs when arena is empty before
 ; calling ShiftAllPokemonToFirstPlayAreaSlots
-	ldh a, [hTemp_ffa0]
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 ; this eventually calls ClearAllArenaEffectsAndSubstatus
 	call SwapArenaWithBenchPokemon
@@ -7031,7 +7042,7 @@ _ReturnBenchedPokemonToDeckEffect:
 ; find all cards that are in the same location
 ; (previous evolutions and energy cards attached)
 ; and return them all to the deck.
-	ldh a, [hTemp_ffa0]
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	or CARD_LOCATION_PLAY_AREA
 	ld e, a
 	ld a, DUELVARS_CARD_LOCATIONS
@@ -7053,7 +7064,7 @@ _ReturnBenchedPokemonToDeckEffect:
 	jr c, .loop_cards
 
 ; clear Play Area location of card
-	ldh a, [hTemp_ffa0]
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 	call EmptyPlayAreaSlot
 	ld l, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -7675,6 +7686,12 @@ Draw2Cards:
 	bank1call DisplayDrawNCardsScreen
 	ld c, 2
 	jr Draw3Cards.loop_draw
+
+;
+Draw3CardsEffect:
+	ldtx hl, Draw3CardsFromTheDeckText
+	call DrawWideTextBox_WaitForInput
+	; fallthrough
 
 Draw3Cards:
 	ld a, 3

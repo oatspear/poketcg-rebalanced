@@ -1602,7 +1602,7 @@ ClefairyDollEffectCommands:
 MrFujiEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, MrFuji_PlayerSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MrFuji_ReturnToDeckEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MrFuji_ReturnToDeckAndDrawEffect
 	db  $00
 
 PlusPowerEffectCommands:
