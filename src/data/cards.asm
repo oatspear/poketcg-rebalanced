@@ -116,7 +116,6 @@ CardPointers:
 	dw ElectabuzzLv35Card
 	dw JolteonLv24Card
 	dw JolteonLv29Card
-	dw JolteonLv35Card
 	dw ZapdosLv40Card
 	dw ZapdosLv64Card
 	dw ZapdosLv68Card
