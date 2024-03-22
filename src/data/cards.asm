@@ -3111,18 +3111,18 @@ FlareonLv22Card:
 	tx EeveeName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx QuickAttackName ; name
-	tx IfActiveThisTurn20BonusDamageDescription ; description
+	energy 0 ; energies
+	tx EvolutionaryFlameName ; name
+	tx EvolutionaryFlameDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw QuickAttack20EffectCommands ; effect commands
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw EvolutionaryFlameEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy COLORLESS, 3 ; energies

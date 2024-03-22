@@ -48,6 +48,8 @@
 
 #### Flareon Lv22
 - Reduced HP from 80 to 70.
+- **Quick Attack**: removed.
+- New Pokémon Power: **Evolutionary Flame**: when played from the hand to evolve, discard an Energy from the opponent's Active Pokémon.
 
 ### Water Changes
 

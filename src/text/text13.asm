@@ -33,6 +33,17 @@ EvolutionaryThunderDescription:
 	line "opponent's Pokémon."
 	done
 
+EvolutionaryFlameName:
+	text "Evolutionary Flame"
+	done
+
+EvolutionaryFlameDescription:
+	text "When you play this Pokémon from your"
+	line "hand to evolve 1 of your Pokémon,"
+	line "you may discard an Energy attached"
+	line "to your opponent's Active Pokémon."
+	done
+
 
 ; ------------------------------------------------------------------------------
 ; Unused Text

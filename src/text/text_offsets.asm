@@ -3169,6 +3169,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer DischargeDescription
 	textpointer EvolutionaryThunderName
 	textpointer EvolutionaryThunderDescription
+	textpointer EvolutionaryFlameName
+	textpointer EvolutionaryFlameDescription
 
 	; unused
 	; textpointer VaporEssenceName

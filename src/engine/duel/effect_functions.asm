@@ -658,7 +658,37 @@ INCLUDE "engine/duel/effect_functions/damage_modifiers.asm"
 ; ------------------------------------------------------------------------------
 
 
-; Discard 1 card and draw 2 cards per turn.
+EvolutionaryFlame_DiscardBurnEffect:
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_LINK_OPP
+	jr z, .link_opp
+	and DUELIST_TYPE_AI_OPP
+	jr nz, .ai_opp
+
+; player
+	call DiscardOpponentEnergy_PlayerSelectEffect
+	ldh a, [hEnergyTransEnergyCard]
+	call SerialSend8Bytes
+	jr .done
+
+.link_opp
+	call SerialRecv8Bytes
+	ldh [hEnergyTransEnergyCard], a
+	jr .done
+
+.ai_opp
+	call DiscardOpponentEnergy_AISelectEffect
+	ldh a, [hEnergyTransEnergyCard]
+	; fallthrough
+
+.done
+	cp $ff
+	ret z
+	jp DiscardOpponentEnergy_DiscardEffect.affected
+
+
+; Draw 1 card per turn if in the Active Spot.
 FleetFootedEffect:
 	call SetUsedPokemonPowerThisTurn
 	jp Draw1Card
@@ -4197,7 +4227,7 @@ ThunderWave_AISelectEffect:
 
 ; handles screen for selecting an Energy card to discard
 ; that is attached to Defending Pokemon,
-; and store the Player selection in [hTemp_ffa0].
+; and store the Player selection in [hEnergyTransEnergyCard].
 DiscardOpponentEnergy_PlayerSelectEffect:
 	call SwapTurn
 	xor a ; PLAY_AREA_ARENA
@@ -4214,26 +4244,26 @@ DiscardOpponentEnergy_PlayerSelectEffect:
 
 	call SwapTurn
 	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a ; store selected card to discard
+	ldh [hEnergyTransEnergyCard], a ; store selected card to discard
 	ret
 
 .no_energy
 	call SwapTurn
 	ld a, $ff
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	ret
 
 DiscardOpponentEnergy_AISelectEffect:
 	call AIPickEnergyCardToDiscardFromDefendingPokemon
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	ret
 
 DiscardOpponentEnergy_DiscardEffect:
 	call HandleNoDamageOrEffect
 	ret c ; return if attack had no effect
-
+.affected
 	; check if energy card was chosen to discard
-	ldh a, [hTemp_ffa0]
+	ldh a, [hEnergyTransEnergyCard]
 	cp $ff
 	ret z ; return if none selected
 
@@ -4243,34 +4273,34 @@ DiscardOpponentEnergy_DiscardEffect:
 	ld a, DUELVARS_ARENA_CARD_LAST_TURN_EFFECT
 	call GetTurnDuelistVariable
 	ld [hl], LAST_TURN_EFFECT_DISCARD_ENERGY
-	call SwapTurn
-	ret
+	jp SwapTurn
+
 
 DiscardOpponentEnergyIfHeads_50PercentEffect:
 	ldtx de, IfHeadsDiscard1EnergyFromTargetText
 	call TossCoin_BankB
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	or a  ; reset carry, otherwise heads cancels the attack
 	ret
 
 DiscardOpponentEnergyIfHeads_PlayerSelectEffect:
 ; check the result of the previous coin flip
-	ldh a, [hTemp_ffa0]
+	ldh a, [hEnergyTransEnergyCard]
 	or a
 	jr nz, DiscardOpponentEnergy_PlayerSelectEffect
 ; no energy chosen if tails
 	ld a, $ff
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	ret
 
 DiscardOpponentEnergyIfHeads_AISelectEffect:
 ; check the result of the previous coin flip
-	ldh a, [hTemp_ffa0]
+	ldh a, [hEnergyTransEnergyCard]
 	or a
 	jr nz, DiscardOpponentEnergy_AISelectEffect
 ; no energy chosen if tails
 	ld a, $ff
-	ldh [hTemp_ffa0], a
+	ldh [hEnergyTransEnergyCard], a
 	ret
 
 ; ------------------------------------------------------------------------------
