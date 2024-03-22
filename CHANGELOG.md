@@ -84,8 +84,10 @@
 - New attack: **Agility** (LL): 20 damage; immune to all damage and effects next turn if the attack Knocks Out the Defending Pokémon.
 
 #### Raichu Lv40
-- **Agility**: immune to all damage and effects next turn if the attack Knocks Out the Defending Pokémon.
-- **Thunder**: cost reduced from (LLC) to (LCC); base damage increased from 60 to 70; does not take recoil if active this turn.
+- Reduced HP from 80 to 70.
+- **Agility**: removed.
+- New Pokémon Power: **Volt Switch**: if 1 (L) is used to pay for Retreat, it is attached to the new Active Pokémon.
+- **Thunder**: base damage increased from 60 to 70; does not take recoil if active this turn.
 
 #### Raichu Lv45
 - Reduced HP from 90 to 80.
@@ -157,7 +159,7 @@
 - Reduced HP from 80 to 70.
 - **Jolt Essence**: removed.
 - **Stun Needle**: removed.
-- New Pokémon Power: **Volt Switch**: if 1 (L) is used to pay for Retreat, it is attached to the new Active Pokémon.
+- New attack: **Agility** (CC): 20 damage; immune to all damage and effects next turn if the attack Knocks Out the Defending Pokémon.
 - New attack: **Quick Attack** (CC): 10 damage; +40 damage if the Pokémon became Active this turn.
 
 #### Jolteon Lv29

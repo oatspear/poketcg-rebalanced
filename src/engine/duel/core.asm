@@ -7215,7 +7215,7 @@ HandleOnEvolvePokemonEffects:
 ;                                 (now with the previous Active Pokémon)
 ;   [hTempRetreatCostCards]: $ff-terminated list of discarded deck indices
 HandleOnRetreatEffects:
-	ld a, JOLTEON_LV24  ; Volt Switch
+	ld a, RAICHU_LV40  ; Volt Switch
 	call CountPokemonIDInPlayArea
 	jr nc, .done  ; no Power-capable Pokémon was found
 	farcall VoltSwitchEffect
