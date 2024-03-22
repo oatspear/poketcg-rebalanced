@@ -1727,12 +1727,12 @@ MagmarLv31CardGfx::
 	INCBIN "gfx/cards/magmar3.pal"
 
 FlareonLv22CardGfx::
-	INCBIN "gfx/cards/flareon1.2bpp"
-	INCBIN "gfx/cards/flareon1.pal"
+	INCBIN "gfx/cards/flareon3.2bpp"
+	INCBIN "gfx/cards/flareon3.pal"
 
 FlareonLv28CardGfx::
-	INCBIN "gfx/cards/flareon2.2bpp"
-	INCBIN "gfx/cards/flareon2.pal"
+	INCBIN "gfx/cards/flareon1.2bpp"
+	INCBIN "gfx/cards/flareon1.pal"
 
 	ds $58
 
@@ -1851,12 +1851,12 @@ LaprasCardGfx::
 	INCBIN "gfx/cards/lapras.pal"
 
 VaporeonLv29CardGfx::
-	INCBIN "gfx/cards/vaporeon1.2bpp"
-	INCBIN "gfx/cards/vaporeon1.pal"
+	INCBIN "gfx/cards/vaporeon3.2bpp"
+	INCBIN "gfx/cards/vaporeon3.pal"
 
 VaporeonLv42CardGfx::
-	INCBIN "gfx/cards/vaporeon2.2bpp"
-	INCBIN "gfx/cards/vaporeon2.pal"
+	INCBIN "gfx/cards/vaporeon1.2bpp"
+	INCBIN "gfx/cards/vaporeon1.pal"
 
 OmanyteCardGfx::
 	INCBIN "gfx/cards/omanyte.2bpp"
@@ -1906,10 +1906,6 @@ RaichuLv35CardGfx::
 	INCBIN "gfx/cards/raichu3.2bpp"
 	INCBIN "gfx/cards/raichu3.pal"
 
-JolteonLv35CardGfx::
-	INCBIN "gfx/cards/jolteon3.2bpp"
-	INCBIN "gfx/cards/jolteon3.pal"
-
 	ds $58
 
 SECTION "Card Gfx 6", ROMX
@@ -1951,12 +1947,12 @@ ElectabuzzLv35CardGfx::
 	INCBIN "gfx/cards/electabuzz2.pal"
 
 JolteonLv24CardGfx::
-	INCBIN "gfx/cards/jolteon1.2bpp"
-	INCBIN "gfx/cards/jolteon1.pal"
+	INCBIN "gfx/cards/jolteon3.2bpp"
+	INCBIN "gfx/cards/jolteon3.pal"
 
 JolteonLv29CardGfx::
-	INCBIN "gfx/cards/jolteon2.2bpp"
-	INCBIN "gfx/cards/jolteon2.pal"
+	INCBIN "gfx/cards/jolteon1.2bpp"
+	INCBIN "gfx/cards/jolteon1.pal"
 
 ZapdosLv40CardGfx::
 	INCBIN "gfx/cards/zapdos1.2bpp"

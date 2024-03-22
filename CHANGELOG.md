@@ -14,13 +14,6 @@
 - Pokémon Power: **Lightning Haste**: once per turn, attach (L) from the discard pile to the Active Pokémon and deal 10 damage to it.
 - Attack: **Discharge** (L): discard any number of attached (L); 20 damage for each discarded energy; inflicts Paralysis if 2 or more were discarded.
 
-#### Jolteon Lv35
-- Stage 1, 80 HP, Lightning Pokémon, evolves from Eevee.
-- Weakness: Fightning.
-- Retreat Cost: 1.
-- Pokémon Power: **Evolutionary Thunder**: when played from the hand to evolve, deal 10 damage to all of the opponent's Pokémon.
-- Attack: **Thunder Spear** (LC): 30 damage to 1 of the opponent's Pokémon.
-
 ### Changed Mechanics
 
 - Evolving Pokémon clears status conditions and effects again, as in the original version.
@@ -53,10 +46,18 @@
 - New attack: **Incinerate** (F): 10 damage; discards any Tools attached to the Defending Pokémon; double damage if a tool was discarded.
 - New attack: **Flamethrower** (FFC): 50 damage; discard one energy.
 
+#### Flareon Lv22
+- Reduced HP from 80 to 70.
+
 ### Water Changes
 
 #### Dewgong
 - **Blizzard**: reduced cost from (WWCC) to (WWC) and base damage from 40 to 30.
+
+#### Vaporeon Lv29
+- Reduced HP from 80 to 70.
+- **Quick Attack**: removed.
+- **Bite**: removed.
 
 ### Lightning Changes
 
@@ -159,11 +160,10 @@
 - Reduced HP from 80 to 70.
 - **Jolt Essence**: removed.
 - **Stun Needle**: removed.
-- New attack: **Agility** (CC): 20 damage; immune to all damage and effects next turn if the attack Knocks Out the Defending Pokémon.
-- New attack: **Quick Attack** (CC): 10 damage; +40 damage if the Pokémon became Active this turn.
+- New Pokémon Power: **Evolutionary Thunder**: when played from the hand to evolve, deal 10 damage to all of the opponent's Pokémon.
+- New Attack: **Thunder Spear** (LC): 30 damage to 1 of the opponent's Pokémon.
 
 #### Jolteon Lv29
-- Reduced HP from 80 to 70.
 - **Thunderbolt**: removed.
 - New attack: **Discharge** (L): discard any number of attached (L); 20 damage for each discarded energy; inflicts Paralysis if 2 or more were discarded.
 
@@ -647,7 +647,7 @@
 - Increased HP from 70 to 80.
 - **Quick Attack**: removed.
 - **Pin Missile**: removed.
-- New Pokémon Power: **Energy Soak**: until end of turn, changes all energies to Water energy.
+- New Pokémon Power: **Energy Jolt**: until end of turn, changes all energies to Lightning energy.
 - New attack: **Thunderbolt** (LL): 60 damage; discards all attached energy.
 
 

@@ -3107,7 +3107,7 @@ FlareonLv22Card:
 	db DIAMOND ; rarity
 	db MYSTERY | GB ; sets
 	db FLAREON_LV22
-	db 80 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
 
@@ -4592,37 +4592,37 @@ VaporeonLv29Card:
 	db DIAMOND ; rarity
 	db MYSTERY | GB ; sets
 	db VAPOREON_LV29
-	db 80 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx QuickAttackName ; name
-	tx IfActiveThisTurn20BonusDamageDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw QuickAttack20EffectCommands ; effect commands
+	energy 0 ; energies
+	tx EnergySoakName ; name
+	tx EnergySoakDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw EnergySoakEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy COLORLESS, 2 ; energies
-	tx BiteName ; name
-	dw NONE ; description
+	tx HydroPumpName ; name
+	tx HydroPumpDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw HydroPumpEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	db MAX_ENERGY_BOOST_IS_NOT_LIMITED
+	db ATK_ANIM_HYDRO_PUMP ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -5866,32 +5866,32 @@ JolteonLv24Card:
 	tx EeveeName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx AgilityName ; name
-	tx ImmuneIfKnockedOutOpponentDescription ; description
+	energy 0 ; energies
+	tx EvolutionaryThunderName ; name
+	tx EvolutionaryThunderDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ImmuneIfKnockedOutOpponentEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
-
-	; attack 2
-	energy COLORLESS, 2 ; energies
-	tx QuickAttackName ; name
-	tx IfActiveThisTurn40BonusDamageDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw QuickAttack40EffectCommands ; effect commands
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw EvolutionaryThunderEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx ThunderSpearName ; name
+	tx Deal30ToAnyPokemonDescription ; description
+	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw Deal30ToAnyPokemonEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 3
+	db 2
+	db ATK_ANIM_MAGNETIC_STORM ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
@@ -5912,57 +5912,6 @@ JolteonLv29Card:
 	db STAR ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db JOLTEON_LV29
-	db 80 ; hp
-	db STAGE1 ; stage
-	tx EeveeName ; pre-evo name
-
-	; attack 1
-	energy 0 ; energies
-	tx EnergyJoltName ; name
-	tx EnergyJoltDescription ; description
-	tx PokemonPowerDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw EnergyJoltEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
-
-	; attack 2
-	energy LIGHTNING, 1 ; energies
-	tx DischargeName ; name
-	tx DischargeDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_X ; category
-	dw DischargeEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db DISCARD_ENERGY ; flags 2
-	db NONE ; flags 3
-	db 9
-	db ATK_ANIM_THUNDERBOLT ; animation
-
-	db 1 ; retreat cost
-	db WR_FIGHTING ; weakness
-	db NONE ; resistance
-	tx LightningName ; category
-	db 135 ; Pokedex number
-	db 0
-	db 29 ; level
-	db 2, 7 ; length
-	dw 54 * 10 ; weight
-	tx JolteonLv29Description ; description
-	db 0
-
-JolteonLv35Card:
-	db TYPE_PKMN_LIGHTNING ; type
-	gfx JolteonLv35CardGfx ; gfx
-	tx JolteonName ; name
-	db STAR ; rarity
-	db MYSTERY | JUNGLE ; sets
-	db JOLTEON_LV35
 	db 80 ; hp
 	db STAGE1 ; stage
 	tx EeveeName ; pre-evo name
@@ -5997,12 +5946,12 @@ JolteonLv35Card:
 
 	; attack 1
 	energy 0 ; energies
-	tx EvolutionaryThunderName ; name
-	tx EvolutionaryThunderDescription ; description
-	dw NONE ; description (cont)
+	tx EnergyJoltName ; name
+	tx EnergyJoltDescription ; description
+	tx PokemonPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw EvolutionaryThunderEffectCommands ; effect commands
+	dw EnergyJoltEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -6010,18 +5959,18 @@ JolteonLv35Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx ThunderSpearName ; name
-	tx Deal30ToAnyPokemonDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw Deal30ToAnyPokemonEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	energy LIGHTNING, 1 ; energies
+	tx DischargeName ; name
+	tx DischargeDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_X ; category
+	dw DischargeEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 2
-	db ATK_ANIM_MAGNETIC_STORM ; animation
+	db 9
+	db ATK_ANIM_THUNDERBOLT ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
