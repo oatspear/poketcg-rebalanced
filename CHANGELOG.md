@@ -53,6 +53,11 @@
 - New attack: **Incinerate** (F): 10 damage; discards any Tools attached to the Defending Pokémon; double damage if a tool was discarded.
 - New attack: **Flamethrower** (FFC): 50 damage; discard one energy.
 
+### Water Changes
+
+#### Dewgong
+- **Blizzard**: reduced cost from (WWCC) to (WWC) and base damage from 40 to 30.
+
 ### Lightning Changes
 
 #### Flying Pikachu

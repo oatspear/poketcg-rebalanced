@@ -3891,11 +3891,11 @@ DewgongCard:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy WATER, 2, COLORLESS, 2 ; energies
+	energy WATER, 2, COLORLESS, 1 ; energies
 	tx BlizzardName ; name
 	tx DamageOpponentBench10Description ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 40 ; damage
+	db 30 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DamageAllOpponentBenched10EffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
