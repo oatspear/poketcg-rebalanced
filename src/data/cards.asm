@@ -5944,14 +5944,14 @@ JolteonLv29Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy LIGHTNING, 2 ; energies
-	tx ThunderboltName ; name
-	tx ThunderboltDescription ; description
+	energy LIGHTNING, 1 ; energies
+	tx DischargeName ; name
+	tx DischargeDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ThunderboltEffectCommands ; effect commands
-	db NONE ; flags 1
+	db 20 ; damage
+	db DAMAGE_X ; category
+	dw DischargeEffectCommands ; effect commands
+	db INFLICT_PARALYSIS ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
 	db 9

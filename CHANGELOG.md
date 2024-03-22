@@ -155,6 +155,11 @@
 - New Pokémon Power: **Volt Switch**: if 1 (L) is used to pay for Retreat, it is attached to the new Active Pokémon.
 - New attack: **Quick Attack** (CC): 10 damage; +40 damage if the Pokémon became Active this turn.
 
+#### Jolteon Lv29
+- Reduced HP from 80 to 70.
+- **Thunderbolt**: removed.
+- New attack: **Discharge** (L): discard any number of attached (L); 20 damage for each discarded energy; inflicts Paralysis if 2 or more were discarded.
+
 #### Zapdos Lv64
 - Reduced HP from 90 to 70.
 - **Thunder**: removed.
