@@ -670,22 +670,25 @@ EvolutionaryFlame_DiscardBurnEffect:
 	call DiscardOpponentEnergy_PlayerSelectEffect
 	ldh a, [hEnergyTransEnergyCard]
 	call SerialSend8Bytes
-	jr .done
+	jr .selected
 
 .link_opp
 	call SerialRecv8Bytes
 	ldh [hEnergyTransEnergyCard], a
-	jr .done
+	jr .selected
 
 .ai_opp
 	call DiscardOpponentEnergy_AISelectEffect
 	ldh a, [hEnergyTransEnergyCard]
 	; fallthrough
 
-.done
+.selected
 	cp $ff
-	ret z
-	jp DiscardOpponentEnergy_DiscardEffect.affected
+	jp nz, DiscardOpponentEnergy_DiscardEffect.affected
+; no energy, deal damage instead
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jp Deal20DamageToTarget_DamageEffect
 
 
 ; Draw 1 card per turn if in the Active Spot.
@@ -1806,7 +1809,7 @@ AIPickEnergyCardToDiscardFromDefendingPokemon: ; 2c4da (b:44da)
 	jr nc, .has_energy
 	; no energy, return
 	ld a, $ff
-	jr .done
+	jp SwapTurn
 
 .has_energy
 	ld a, DUELVARS_ARENA_CARD
@@ -1851,9 +1854,7 @@ AIPickEnergyCardToDiscardFromDefendingPokemon: ; 2c4da (b:44da)
 
 .done_chosen
 	ld a, [hl]
-.done
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 .choose_random
 	call CountCardsInDuelTempList
