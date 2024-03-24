@@ -60,6 +60,8 @@
 - Reduced HP from 80 to 70.
 - **Quick Attack**: removed.
 - **Bite**: removed.
+- New Pokémon Power: **Evolutionary Wave**: when played from the hand to evolve, heal 20 damage from each of the user's Pokémon.
+- New attack: **Energy Swirl** (WC): 20 damage; return 1 Energy attached to the Defending Pokémon to the opponent's hand.
 
 ### Lightning Changes
 

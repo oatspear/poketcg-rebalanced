@@ -44,6 +44,27 @@ EvolutionaryFlameDescription:
 	line "to your opponent's Active Pokémon."
 	done
 
+EvolutionaryWaveName:
+	text "Evolutionary Wave"
+	done
+
+EvolutionaryWaveDescription:
+	text "When you play this Pokémon from your"
+	line "hand to evolve 1 of your Pokémon,"
+	line "heal 20 damage from each of your"
+	line "Pokémon."
+	done
+
+EnergySwirlName:
+	text "Energy Swirl"
+	done
+
+EnergySwirlDescription:
+	text "Return 1 Energy attached to"
+	line "the Defending Pokémon to"
+	line "your opponent's hand."
+	done
+
 
 ; ------------------------------------------------------------------------------
 ; Unused Text

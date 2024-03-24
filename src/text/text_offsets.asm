@@ -3171,6 +3171,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EvolutionaryThunderDescription
 	textpointer EvolutionaryFlameName
 	textpointer EvolutionaryFlameDescription
+	textpointer EvolutionaryWaveName
+	textpointer EvolutionaryWaveDescription
+	textpointer EnergySwirlName
+	textpointer EnergySwirlDescription
 
 	; unused
 	; textpointer VaporEssenceName

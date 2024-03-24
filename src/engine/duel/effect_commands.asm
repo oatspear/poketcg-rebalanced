@@ -604,6 +604,12 @@ Bounce1EnergyEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
+Bounce1EnergyFromOpponentEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, BounceOpponentEnergy_BounceEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergy_AISelectEffect
+	db  $00
+
 FirePunchEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FirePunch_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, DiscardEnergy_DiscardEffect

@@ -4067,12 +4067,28 @@ BounceEnergy_BounceEffect:
 	call MoveDiscardPileCardToHand
 	call AddCardToHand
 	ld d, a
+.display_card
 	call IsPlayerTurn  ; preserves bc, de
 	ld a, d
 	ret c
 	ldtx hl, WasPlacedInTheHandText
 	bank1call DisplayCardDetailScreen
 	ret
+
+
+BounceOpponentEnergy_BounceEffect:
+	call HandleNoDamageOrEffect
+	ret c ; return if attack had no effect
+	ldh a, [hEnergyTransEnergyCard]
+	cp $ff
+	ret 
+	call SwapTurn
+	call PutCardInDiscardPile
+	call MoveDiscardPileCardToHand
+	call AddCardToHand
+	ld d, a
+	call SwapTurn
+	jr BounceEnergy_BounceEffect.display_card
 
 
 DiscardEnergy_DiscardEffect:
