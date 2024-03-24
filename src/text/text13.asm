@@ -66,6 +66,14 @@ EnergySwirlDescription:
 	line "your opponent's hand."
 	done
 
+BurnOutName:
+	text "Burn Out"
+	done
+
+BurnOutDescription:
+	text "This Pokémon is now Confused."
+	done
+
 
 ; ------------------------------------------------------------------------------
 ; Unused Text

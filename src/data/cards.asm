@@ -3125,18 +3125,18 @@ FlareonLv22Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx RageName ; name
-	tx RageDescription ; description
+	energy FIRE, 1, COLORLESS, 1 ; energies
+	tx BurnOutName ; name
+	tx BurnOutDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_PLUS ; category
-	dw RageEffectCommands ; effect commands
+	db 50 ; damage
+	db DAMAGE_NORMAL ; category
+	dw BurnOutEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
-	db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	db FLAG_2_BIT_7 ; flags 2
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost
 	db WR_WATER ; weakness

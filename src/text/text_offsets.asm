@@ -3175,6 +3175,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer EvolutionaryWaveDescription
 	textpointer EnergySwirlName
 	textpointer EnergySwirlDescription
+	textpointer BurnOutName
+	textpointer BurnOutDescription
 
 	; unused
 	; textpointer VaporEssenceName

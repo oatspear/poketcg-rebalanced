@@ -1036,6 +1036,7 @@ FurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_AI, FurySwipes_AIEffect
 	db  $00
 
+BurnOutEffectCommands:
 TantrumEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelfConfusionEffect
 	db  $00
