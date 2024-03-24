@@ -40,9 +40,9 @@ EvolutionaryFlameName:
 EvolutionaryFlameDescription:
 	text "When you play this Pokémon from your"
 	line "hand to evolve 1 of your Pokémon,"
-	line "discard an Energy attached to your"
-	line "opponent's Active Pokémon. If there"
-	line "are none, do 20 damage instead."
+	line "it does 20 damage to the opponent's"
+	line "Active Pokémon. That Pokémon is now"
+	line "Burned."
 	done
 
 EvolutionaryWaveName:
