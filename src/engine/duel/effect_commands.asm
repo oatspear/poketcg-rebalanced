@@ -582,7 +582,7 @@ Discard1EnergyFromOpponentEffectCommands:
 
 EvolutionaryFlameEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
-	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, EvolutionaryFlame_DiscardBurnEffect
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, EvolutionaryFlame_DamageBurnEffect
 	db  $00
 
 ; EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN runs after EFFECTCMDTYPE_DISCARD_ENERGY,
