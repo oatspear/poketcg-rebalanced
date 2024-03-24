@@ -1376,6 +1376,10 @@ HealingMelodyEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal10DamageFromAll_HealEffect
 	db  $00
 
+EvolutionaryWaveEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
+	; fallthrough
+
 AromatherapyEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Heal20DamageFromAll_HealEffect
 	db  $00
