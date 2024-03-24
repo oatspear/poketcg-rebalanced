@@ -140,6 +140,11 @@ SelfConfusionEffect:
 	call ConfusionEffect
 	jp SwapTurn
 
+SelfPoisonEffect:
+	call SwapTurn
+	call PoisonEffect
+	jp SwapTurn
+
 ; If heads, Poison + Paralysis.
 ; If tails, Poison + Sleep.
 PollenFrenzy_Status50PercentEffect:
