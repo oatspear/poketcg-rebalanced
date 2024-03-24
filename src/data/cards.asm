@@ -3176,17 +3176,17 @@ FlareonLv28Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy FIRE, 2 ; energies
-	tx FlamethrowerName ; name
-	tx Discard1EnergyDescription ; description
+	energy FIRE, 1 ; energies
+	tx ScorchingColumnName ; name
+	tx ScorchingColumnDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Discard1EnergyEffectCommands ; effect commands
-	db NONE ; flags 1
+	db 20 ; damage
+	db DAMAGE_X ; category
+	dw ScorchingColumnEffectCommands ; effect commands
+	db INFLICT_POISON ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 9
 	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost

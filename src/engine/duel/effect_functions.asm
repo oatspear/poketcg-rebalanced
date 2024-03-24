@@ -1056,6 +1056,14 @@ VoltSwitchEffect:
 ; Compound Attacks
 ; ------------------------------------------------------------------------------
 
+ScorchingColumn_DamageBurnEffect:
+	call ScorchingColumn_MultiplierEffect
+	ldh a, [hTemp_ffa0]
+	cp 2
+	jp nc, PoisonEffect
+	ret
+
+
 Discharge_DamageParalysisEffect:
 	call Discharge_MultiplierEffect
 	ldh a, [hTemp_ffa0]
@@ -2968,6 +2976,9 @@ Discharge_PlayerSelectEffect:
 Wildfire_PlayerSelectEffect:
 	ldtx hl, DiscardOppDeckAsManyFireEnergyCardsText
 	call DrawWideTextBox_WaitForInput
+	; fallthrough
+
+ScorchingColumn_PlayerSelectEffect:
 	call CreateListOfFireEnergyAttachedToArena
 	; jr DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect
 	; fallthrough
@@ -3018,10 +3029,18 @@ DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect:
 	ret
 
 
+ScorchingColumn_AISelectEffect:
+; AI always chooses all cards to discard
+	call CreateListOfFireEnergyAttachedToArena
+	ldh [hTemp_ffa0], a
+	jr DiscardAnyNumberOfAttachedEnergy_AISelectEffect
+
+
 Discharge_AISelectEffect:
 ; AI always chooses all cards to discard
 	call CreateListOfLightningEnergyAttachedToArena
 	ldh [hTemp_ffa0], a
+	; jr DiscardAnyNumberOfAttachedEnergy_AISelectEffect
 	; fallthrough
 
 ; input:

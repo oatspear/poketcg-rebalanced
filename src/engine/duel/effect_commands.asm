@@ -1148,6 +1148,15 @@ DischargeEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Discharge_AIEffect
 	db  $00
 
+ScorchingColumnEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Wildfire_CheckEnergy
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ScorchingColumn_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ScorchingColumn_DamageBurnEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Wildfire_DiscardEnergyEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, ScorchingColumn_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, ScorchingColumn_AIEffect
+	db  $00
+
 ZapdosThunderstormEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderstormEffect
 	db  $00

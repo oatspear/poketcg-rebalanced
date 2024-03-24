@@ -22,6 +22,19 @@ DischargeDescription:
 	line "Defending Pokémon is now Paralyzed."
 	done
 
+ScorchingColumnName:
+	text "Scorching Column"
+	done
+
+ScorchingColumnDescription:
+	text "Discard any number of <FIRE> Energy"
+	line "attached to this Pokémon."
+	line "This attack does 20 damage for each"
+	line "Energy discarded this way."
+	line "If you discarded at least 2, the"
+	line "Defending Pokémon is now Burned."
+	done
+
 EvolutionaryThunderName:
 	text "Evolutionary Thunder"
 	done

@@ -3167,6 +3167,8 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer UnaffectedByWeaknessResistancePowersEffectsDescription
 	textpointer DischargeName
 	textpointer DischargeDescription
+	textpointer ScorchingColumnName
+	textpointer ScorchingColumnDescription
 	textpointer EvolutionaryThunderName
 	textpointer EvolutionaryThunderDescription
 	textpointer EvolutionaryFlameName

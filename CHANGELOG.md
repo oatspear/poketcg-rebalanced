@@ -53,6 +53,10 @@
 - New Pokémon Power: **Evolutionary Flame**: when played from the hand to evolve, deal 20 damage and inflict Burn on the opponent's Active Pokémon.
 - New attack: **Burn Out** (FC): 50 damage; the user becomes Confused.
 
+#### Flareon Lv28
+- **Flamethrower**: removed.
+- New attack: **Scorching Column** (F): discard any number of attached (F); 20 damage for each discarded energy; inflicts Burn if 2 or more were discarded.
+
 ### Water Changes
 
 #### Dewgong
