@@ -51,7 +51,7 @@
 - **Quick Attack**: removed.
 - **Rage**: removed.
 - New Pokémon Power: **Evolutionary Flame**: when played from the hand to evolve, deal 20 damage and inflict Burn on the opponent's Active Pokémon.
-- New attack: **Burn Out** (FC): 50 damage; the user becomes Confused.
+- New attack: **Burn Out** (FC): 50 damage; 10 damage recoil; the user becomes Confused.
 
 #### Flareon Lv28
 - **Flamethrower**: removed.

@@ -84,7 +84,8 @@ BurnOutName:
 	done
 
 BurnOutDescription:
-	text "This Pokémon is now Confused."
+	text "This Pokémon does 10 damage to"
+	line "itself, and it is now Confused."
 	done
 
 

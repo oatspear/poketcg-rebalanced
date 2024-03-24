@@ -3132,10 +3132,10 @@ FlareonLv22Card:
 	db 50 ; damage
 	db DAMAGE_NORMAL ; category
 	dw BurnOutEffectCommands ; effect commands
-	db NONE ; flags 1
+	db LOW_RECOIL ; flags 1
 	db FLAG_2_BIT_7 ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 10
 	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost

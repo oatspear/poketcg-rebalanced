@@ -1037,6 +1037,11 @@ FurySwipesEffectCommands:
 	db  $00
 
 BurnOutEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Recoil10Effect
+	; dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelfConfusionEffect
+	; db  $00
+	; fallthrough
+
 TantrumEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SelfConfusionEffect
 	db  $00
