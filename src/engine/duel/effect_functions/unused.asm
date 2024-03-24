@@ -1,6 +1,47 @@
 ;
 
 
+EvolutionaryFlameEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, EvolutionaryFlame_DiscardBurnEffect
+	db  $00
+
+
+
+EvolutionaryFlame_DiscardBurnEffect:
+	ld a, DUELVARS_DUELIST_TYPE
+	call GetTurnDuelistVariable
+	cp DUELIST_TYPE_LINK_OPP
+	jr z, .link_opp
+	and DUELIST_TYPE_AI_OPP
+	jr nz, .ai_opp
+
+; player
+	call DiscardOpponentEnergy_PlayerSelectEffect
+	ldh a, [hEnergyTransEnergyCard]
+	call SerialSend8Bytes
+	jr .selected
+
+.link_opp
+	call SerialRecv8Bytes
+	ldh [hEnergyTransEnergyCard], a
+	jr .selected
+
+.ai_opp
+	call DiscardOpponentEnergy_AISelectEffect
+	ldh a, [hEnergyTransEnergyCard]
+	; fallthrough
+
+.selected
+	cp $ff
+	jp nz, DiscardOpponentEnergy_DiscardEffect.affected
+; no energy, deal damage instead
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hTempPlayAreaLocation_ffa1], a
+	jp Deal20DamageToTarget_DamageEffect
+
+
+
 
 DevolutionSprayEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DevolutionSpray_PlayAreaEvolutionCheck
