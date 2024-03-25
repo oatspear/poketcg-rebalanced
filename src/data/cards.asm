@@ -5260,7 +5260,7 @@ RaichuLv40Card:
 	db 40 ; level
 	db 2, 7 ; length
 	dw 66 * 10 ; weight
-	tx RaichuLv40Description ; description
+	tx RaichuDescription ; description
 	db 0
 
 RaichuLv45Card:
@@ -5311,7 +5311,7 @@ RaichuLv45Card:
 	db 45 ; level
 	db 2, 7 ; length
 	dw 66 * 10 ; weight
-	tx RaichuLv40Description ; description
+	tx RaichuDescription ; description
 	db 0
 
 RaichuLv35Card:
@@ -5362,7 +5362,7 @@ RaichuLv35Card:
 	db 45 ; level
 	db 2, 7 ; length
 	dw 66 * 10 ; weight
-	tx RaichuLv40Description ; description
+	tx RaichuDescription ; description
 	db 0
 
 MagnemiteLv13Card:
@@ -5426,7 +5426,7 @@ MagnemiteLv13Card:
 	db 13 ; level
 	db 1, 0 ; length
 	dw 13 * 10 ; weight
-	tx MagnemiteLv13Description ; description
+	tx MagnemiteDescription ; description
 	db 19
 
 MagnemiteLv15Card:
@@ -5480,7 +5480,7 @@ MagnemiteLv15Card:
 	db 15 ; level
 	db 1, 0 ; length
 	dw 13 * 10 ; weight
-	tx MagnemiteLv15Description ; description
+	tx MagnemiteDescription ; description
 	db 19
 
 MagnetonLv28Card:
@@ -5544,7 +5544,7 @@ MagnetonLv28Card:
 	db 28 ; level
 	db 3, 3 ; length
 	dw 132 * 10 ; weight
-	tx MagnetonLv28Description ; description
+	tx MagnetonDescription ; description
 	db 0
 
 MagnetonLv35Card:
@@ -5595,7 +5595,7 @@ MagnetonLv35Card:
 	db 35 ; level
 	db 3, 3 ; length
 	dw 132 * 10 ; weight
-	tx MagnetonLv35Description ; description
+	tx MagnetonDescription ; description
 	db 0
 
 VoltorbCard:

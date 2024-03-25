@@ -2526,18 +2526,16 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SurfingPikachuDescription                          ; 0x09c8
 	textpointer RaichuName                                         ; 0x09c9
 	textpointer ThunderName                                        ; 0x09cb
-	textpointer RaichuLv40Description                             ; 0x09cd
+	textpointer RaichuDescription
 	textpointer DamageUpTo2BenchedDescription                      ; 0x09cf
 	textpointer MagnemiteName                                      ; 0x09d1
 	textpointer ThunderWaveName                                    ; 0x09d2
 	textpointer MagnetName                                         ; 0x09d4
-	textpointer MagnemiteLv13Description                          ; 0x09d5
-	textpointer MagnemiteLv15Description                          ; 0x09d8
+	textpointer MagnemiteDescription
 	textpointer MagnetonName                                       ; 0x09d9
-	textpointer MagnetonLv28Description                           ; 0x09db
+	textpointer MagnetonDescription
 	textpointer SonicboomName                                      ; 0x09dc
 	textpointer SonicboomDescription                               ; 0x09dd
-	textpointer MagnetonLv35Description                           ; 0x09df
 	textpointer VoltorbName                                        ; 0x09e0
 	textpointer BallName                                           ; 0x09e1
 	textpointer VoltorbDescription                                 ; 0x09e2

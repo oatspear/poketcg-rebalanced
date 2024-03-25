@@ -75,15 +75,11 @@ ThunderName: ; 5d3a5 (17:53a5)
 	text "Thunder"
 	done
 
-RaichuLv40Description: ; 5d3e7 (17:53e7)
+RaichuDescription:
 	text "Its long tail serves as a ground to"
 	line "protect itself from its own"
 	line "high-voltage power."
 	done
-
-; GigashockName:
-; 	text "Gigashock"
-; 	done
 
 DamageUpTo2BenchedDescription:
 	text "Choose up to 2 of your opponent's"
@@ -103,33 +99,17 @@ MagnetName: ; 5d636 (17:5636)
 	text "Magnet"
 	done
 
-MagnemiteLv13Description: ; 5d63e (17:563e)
+MagnemiteDescription:
 	text "Uses anti-gravity to stay suspended."
 	line "Appears without warning and uses"
-	line "attacks like Thunder Wave."
-	done
-
-; MagneticStormName: ; 5d6a0 (17:56a0)
-; 	text "Magnetic Storm"
-; 	done
-;
-; MagneticStormDescription: ; 5d6b0 (17:56b0)
-; 	text "Remove all Energy cards attached to"
-; 	line "all of your Pokémon, then randomly"
-; 	line "reattach each of them."
-; 	done
-
-MagnemiteLv15Description: ; 5d70f (17:570f)
-	text "It is born with the ability to defy"
-	line "gravity. Floats in air on powerful"
-	line "electromagnetic waves."
+	line "electromagnetic attacks."
 	done
 
 MagnetonName: ; 5d76e (17:576e)
 	text "Magneton"
 	done
 
-MagnetonLv28Description: ; 5d80e (17:580e)
+MagnetonDescription:
 	text "Formed by several Magnemites linked"
 	line "together. It frequently appears when"
 	line "sunspots flare up."
@@ -142,12 +122,6 @@ SonicboomName: ; 5d86b (17:586b)
 SonicboomDescription:
 	text "Don't apply Weakness and Resistance"
 	line "for this attack."
-	done
-
-MagnetonLv35Description: ; 5d99e (17:599e)
-	text "Formed by several Magnemites linked"
-	line "together. They frequently appear"
-	line "when sunspots flare up."
 	done
 
 VoltorbName: ; 5d9fc (17:59fc)
