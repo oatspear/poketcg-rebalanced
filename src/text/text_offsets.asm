@@ -2843,6 +2843,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer Put2ItemsFromDiscardPileIntoHandDescription
 	textpointer ElectromagneticWallName
 	textpointer ElectromagneticWallDescription
+	textpointer MoveThisPokemonToTheActiveSpotText
 
 ; ------------------------------------------------------------------------------
 ; text12.asm

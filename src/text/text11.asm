@@ -1659,3 +1659,7 @@ ElectromagneticWallDescription:
 	line "their Pokémon, put 1 damage counter"
 	line "on that Pokémon."
 	done
+
+MoveThisPokemonToTheActiveSpotText:
+	text "Move to the Active Spot?"
+	done
