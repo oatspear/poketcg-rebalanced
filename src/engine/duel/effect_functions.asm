@@ -2857,11 +2857,9 @@ Cowardice_Check:
 	call GetTurnDuelistVariable
 	ldtx hl, CannotBeUsedInTurnWhichWasPlayedText
 	and CAN_EVOLVE_THIS_TURN
-	scf
-	ret z ; return if was played this turn
-
-	or a
+	cp 1  ; set carry if zero (played this turn)
 	ret
+
 
 Cowardice_PlayerSelectEffect:
 	ldh a, [hTemp_ffa0]
@@ -2874,6 +2872,7 @@ Cowardice_PlayerSelectEffect:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hAIPkmnPowerEffectParam], a
 	ret
+
 
 Cowardice_RemoveFromPlayAreaEffect:
 	ldh a, [hTemp_ffa0]
@@ -7230,35 +7229,40 @@ PokemonFlute_DisablePowersEffect:
 
 
 
-ScoopUpNet_PlayerSelection:
-; print text box
+ScoopUpNet_PlayerSelectEffect:
 	ldtx hl, ChoosePokemonToScoopUpText
 	call DrawWideTextBox_WaitForInput
-
 ; handle Player selection
-	bank1call HasAlivePokemonInPlayArea
-	bank1call OpenPlayAreaScreenForSelection
-	ret c  ; exit if B was pressed
-
-	; ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	or a
-	ret nz ; if it wasn't the Active Pokemon, we are done
-
-; handle switching to a Pokemon in Bench and store location selected.
-	call EmptyScreen
-	ldtx hl, SelectPokemonToPlaceInTheArenaText
-	call DrawWideTextBox_WaitForInput
-	bank1call HasAlivePokemonInBench
-	bank1call OpenPlayAreaScreenForSelection
-	; ldh a, [hTempPlayAreaLocation_ff9d]
+	ld a, CARDTEST_BASIC_POKEMON
+	call HandlePlayerSelectionMatchingPokemonInBench_AllowCancel
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ret
 
 
+PokemonNurse_PlayerSelectEffect:
+	ldtx hl, ChoosePokemonToScoopUpText
+	call DrawWideTextBox_WaitForInput
+; handle Player selection
+	call HandlePlayerSelectionPokemonInPlayArea_AllowCancel
+	ret c  ; exit if B was pressed
+
+	ldh [hTempPlayAreaLocation_ffa1], a
+	or a
+	ret nz ; if it wasn't the Active Pokemon, we are done
+
+; handle switching to a Pokemon in Bench and store selected location
+	call EmptyScreen
+	ldtx hl, SelectPokemonToPlaceInTheArenaText
+	call DrawWideTextBox_WaitForInput
+	call HandlePlayerSelectionPokemonInBench_AllowCancel
+	ldh [hTemp_ffa0], a
+	ret
+
+
 ScoopUpNet_ReturnToHandEffect:
+PokemonNurse_ReturnToHandEffect:
 ; if card was in Bench, simply return Pokémon to hand
-	ldh a, [hTemp_ffa0]
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	or a
 	jr nz, ScoopUpFromBench
 	; fallthrough
@@ -7267,14 +7271,13 @@ ScoopUpNet_ReturnToHandEffect:
 ; this avoids a bug that occurs when arena is empty before
 ; calling ShiftAllPokemonToFirstPlayAreaSlots
 ScoopUpFromArena:
-	ldh a, [hTempPlayAreaLocation_ffa1]
+	ldh a, [hTemp_ffa0]
 	ld e, a
 ; this eventually calls ClearAllArenaEffectsAndSubstatus
 	call SwapArenaWithBenchPokemon
 
 ; after switching, scoop up the benched Pokémon as normal
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ldh [hTemp_ffa0], a
+	ldh a, [hTemp_ffa0]
 	call _ReturnBenchedPokemonToHandEffect
 
 ; if card was not played by Player, show detail screen
@@ -7288,6 +7291,7 @@ ScoopUpFromArena:
 
 
 ScoopUpFromBench:
+	ldh a, [hTempPlayAreaLocation_ffa1]
 	call _ReturnBenchedPokemonToHandEffect
 
 ; if card was not played by Player, show detail screen
@@ -7300,9 +7304,11 @@ ScoopUpFromBench:
 	ret
 
 
+; input:
+;   a: PLAY_AREA_* of the benched Pokémon to scoop up
 _ReturnBenchedPokemonToHandEffect:
 ; store chosen card location to Scoop Up
-	ldh a, [hTemp_ffa0]
+	ld d, a
 	or CARD_LOCATION_PLAY_AREA
 	ld e, a
 
@@ -7315,7 +7321,7 @@ _ReturnBenchedPokemonToHandEffect:
 	cp e
 	jr nz, .next_card ; skip if not in selected location
 	ld a, l
-	call LoadCardDataToBuffer2_FromDeckIndex
+	call LoadCardDataToBuffer2_FromDeckIndex  ; preserves de
 	ld a, [wLoadedCard2Type]
 	cp TYPE_ENERGY
 	jr nc, .next_card ; skip if not Pokemon card
@@ -7325,7 +7331,7 @@ _ReturnBenchedPokemonToHandEffect:
 ; found
 	ld a, l
 	ldh [hTempCardIndex_ff98], a
-	call AddCardToHand
+	call AddCardToHand  ; preserves de
 .next_card
 	inc l
 	ld a, l
@@ -7334,13 +7340,12 @@ _ReturnBenchedPokemonToHandEffect:
 
 ; The Pokémon has been moved to hand.
 ; MovePlayAreaCardToDiscardPile will discard other cards that were attached.
-	ldh a, [hTemp_ffa0]
-	ld e, a
+	ld e, d
 	call MovePlayAreaCardToDiscardPile
 
 ; clear status from Pokémon location
 ; handled by EmptyPlayAreaSlot, called by MovePlayAreaCardToDiscardPile
-;	ldh a, [hTemp_ffa0]
+;	ldh a, [hTempPlayAreaLocation_ffa1]
 ;	call ClearStatusFromTarget_NoAnim
 
 ; finally, shift Pokemon slots

@@ -218,6 +218,16 @@ ScoopUpNetName:
 	done
 
 ScoopUpNetDescription:
+	text "Choose 1 of your Benched Basic"
+	line "Pokémon and return it to your hand."
+	line "(Discard all cards attached to it.)"
+	done
+
+PokemonNurseName:
+	text "Pokémon Nurse"
+	done
+
+PokemonNurseDescription:
 	text "Choose 1 of your Pokémon in play"
 	line "and return it to your hand."
 	line "(Discard all cards attached to it.)"
@@ -388,16 +398,6 @@ RecycleDescription:
 	text "Put a Pokémon or Basic Energy card"
 	line "in your discard pile on the top of"
 	line "your deck."
-	done
-
-PokemonNurseName:
-	text "Pokémon Nurse"
-	done
-
-PokemonNurseDescription:
-	text "Choose 1 of your Pokémon in play"
-	line "and return it to your hand."
-	line "(Discard all cards attached to it.)"
 	done
 
 AlreadyHasAToolAttachedText:

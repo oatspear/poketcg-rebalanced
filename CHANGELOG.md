@@ -211,6 +211,9 @@
 #### Mr. Fuji
 - After shuffling a Pokémon into the deck, draws 1 card per Pokémon card shuffled.
 
+#### Scoop Up Net
+- Can only scoop Benched Basic Pokémon.
+
 
 ## Version 0.7.0
 

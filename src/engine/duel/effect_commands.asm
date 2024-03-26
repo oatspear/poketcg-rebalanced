@@ -1673,10 +1673,15 @@ RareCandyEffectCommands:
 	db  $00
 
 ScoopUpNetEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ScoopUpNet_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ScoopUpNet_ReturnToHandEffect
+	db  $00
+
 PokemonNurseEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ScoopUpNet_PlayerSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ScoopUpNet_ReturnToHandEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, PokemonNurse_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PokemonNurse_ReturnToHandEffect
 	db  $00
 
 PokemonTraderEffectCommands:
