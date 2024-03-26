@@ -384,7 +384,7 @@ VenusaurLv64Card:
 	db 64 ; level
 	db 6, 7 ; length
 	dw 221 * 10 ; weight
-	tx VenusaurLv64Description ; description
+	tx VenusaurDescription ; description
 	db 0
 
 VenusaurLv67Card:
@@ -435,7 +435,7 @@ VenusaurLv67Card:
 	db 67 ; level
 	db 6, 7 ; length
 	dw 221 * 10 ; weight
-	tx VenusaurLv67Description ; description
+	tx VenusaurDescription ; description
 	db 0
 
 CaterpieCard:
@@ -2268,7 +2268,7 @@ TangelaLv8Card:
 	db 8 ; level
 	db 3, 3 ; length
 	dw 77 * 10 ; weight
-	tx TangelaLv8Description ; description
+	tx TangelaDescription ; description
 	db 0
 
 TangelaLv12Card:
@@ -2319,7 +2319,7 @@ TangelaLv12Card:
 	db 12 ; level
 	db 3, 3 ; length
 	dw 77 * 10 ; weight
-	tx TangelaLv12Description ; description
+	tx TangelaDescription ; description
 	db 0
 
 ScytherCard:
@@ -2689,7 +2689,7 @@ NinetalesLv32Card:
 	db 32 ; level
 	db 3, 7 ; length
 	dw 44 * 10 ; weight
-	tx NinetalesLv32Description ; description
+	tx NinetalesDescription ; description
 	db 0
 
 NinetalesLv35Card:
@@ -2740,7 +2740,7 @@ NinetalesLv35Card:
 	db 35 ; level
 	db 3, 7 ; length
 	dw 44 * 10 ; weight
-	tx NinetalesLv35Description ; description
+	tx NinetalesDescription ; description
 	db 0
 
 GrowlitheCard:
@@ -2842,7 +2842,7 @@ ArcanineLv34Card:
 	db 34 ; level
 	db 6, 3 ; length
 	dw 342 * 10 ; weight
-	tx ArcanineLv34Description ; description
+	tx ArcanineDescription ; description
 	db 0
 
 ArcanineLv45Card:
@@ -2893,7 +2893,7 @@ ArcanineLv45Card:
 	db 45 ; level
 	db 6, 3 ; length
 	dw 342 * 10 ; weight
-	tx ArcanineLv45Description ; description
+	tx ArcanineDescription ; description
 	db 0
 
 PonytaCard:
@@ -3046,7 +3046,7 @@ MagmarLv24Card:
 	db 24 ; level
 	db 4, 3 ; length
 	dw 98 * 10 ; weight
-	tx MagmarLv24Description ; description
+	tx MagmarDescription ; description
 	db 0
 
 MagmarLv31Card:
@@ -3097,7 +3097,7 @@ MagmarLv31Card:
 	db 31 ; level
 	db 4, 3 ; length
 	dw 98 * 10 ; weight
-	tx MagmarLv31Description ; description
+	tx MagmarDescription ; description
 	db 3
 
 FlareonLv22Card:
@@ -3148,7 +3148,7 @@ FlareonLv22Card:
 	db 22 ; level
 	db 2, 11 ; length
 	dw 55 * 10 ; weight
-	tx FlareonLv22Description ; description
+	tx FlareonDescription ; description
 	db 0
 
 FlareonLv28Card:
@@ -3199,7 +3199,7 @@ FlareonLv28Card:
 	db 28 ; level
 	db 2, 11 ; length
 	dw 55 * 10 ; weight
-	tx FlareonLv28Description ; description
+	tx FlareonDescription ; description
 	db 0
 
 MoltresLv35Card:
@@ -3250,7 +3250,7 @@ MoltresLv35Card:
 	db 35 ; level
 	db 6, 7 ; length
 	dw 132 * 10 ; weight
-	tx MoltresLv35Description ; description
+	tx MoltresDescription ; description
 	db 0
 
 MoltresLv37Card:
@@ -3301,7 +3301,7 @@ MoltresLv37Card:
 	db 37 ; level
 	db 6, 7 ; length
 	dw 132 * 10 ; weight
-	tx MoltresLv37Description ; description
+	tx MoltresDescription ; description
 	db 0
 
 SquirtleCard:
@@ -4633,7 +4633,7 @@ VaporeonLv29Card:
 	db 29 ; level
 	db 3, 3 ; length
 	dw 64 * 10 ; weight
-	tx VaporeonLv29Description ; description
+	tx VaporeonDescription ; description
 	db 0
 
 VaporeonLv42Card:
@@ -4684,7 +4684,7 @@ VaporeonLv42Card:
 	db 42 ; level
 	db 3, 3 ; length
 	dw 64 * 10 ; weight
-	tx VaporeonLv42Description ; description
+	tx VaporeonDescription ; description
 	db 0
 
 OmanyteCard:
@@ -4891,7 +4891,7 @@ ArticunoLv35Card:
 	db 35 ; level
 	db 5, 7 ; length
 	dw 122 * 10 ; weight
-	tx ArticunoLv35Description ; description
+	tx ArticunoDescription ; description
 	db 0
 
 ArticunoLv37Card:
@@ -4942,7 +4942,7 @@ ArticunoLv37Card:
 	db 37 ; level
 	db 5, 7 ; length
 	dw 122 * 10 ; weight
-	tx ArticunoLv37Description ; description
+	tx ArticunoDescription ; description
 	db 0
 
 PikachuLv12Card:
@@ -5698,7 +5698,7 @@ ElectrodeLv35Card:
 	db 35 ; level
 	db 3, 11 ; length
 	dw 147 * 10 ; weight
-	tx ElectrodeLv35Description ; description
+	tx ElectrodeDescription ; description
 	db 0
 
 ElectrodeLv42Card:
@@ -5749,7 +5749,7 @@ ElectrodeLv42Card:
 	db 42 ; level
 	db 3, 11 ; length
 	dw 147 * 10 ; weight
-	tx ElectrodeLv42Description ; description
+	tx ElectrodeDescription ; description
 	db 0
 
 ElectabuzzLv20Card:
@@ -5800,7 +5800,7 @@ ElectabuzzLv20Card:
 	db 20 ; level
 	db 3, 7 ; length
 	dw 66 * 10 ; weight
-	tx ElectabuzzLv20Description ; description
+	tx ElectabuzzDescription ; description
 	db 0
 
 ElectabuzzLv35Card:
@@ -5851,7 +5851,7 @@ ElectabuzzLv35Card:
 	db 35 ; level
 	db 3, 7 ; length
 	dw 66 * 10 ; weight
-	tx ElectabuzzLv35Description ; description
+	tx ElectabuzzDescription ; description
 	db 0
 
 JolteonLv24Card:
@@ -5902,7 +5902,7 @@ JolteonLv24Card:
 	db 24 ; level
 	db 2, 7 ; length
 	dw 54 * 10 ; weight
-	tx JolteonLv24Description ; description
+	tx JolteonDescription ; description
 	db 0
 
 JolteonLv29Card:
@@ -5981,7 +5981,7 @@ JolteonLv29Card:
 	db 29 ; level
 	db 2, 7 ; length
 	dw 54 * 10 ; weight
-	tx JolteonLv29Description ; description
+	tx JolteonDescription ; description
 	db 0
 
 ZapdosLv40Card:
@@ -6032,7 +6032,7 @@ ZapdosLv40Card:
 	db 40 ; level
 	db 5, 3 ; length
 	dw 116 * 10 ; weight
-	tx ZapdosLv40Description ; description
+	tx ZapdosDescription ; description
 	db 0
 
 ZapdosLv64Card:
@@ -6083,7 +6083,7 @@ ZapdosLv64Card:
 	db 64 ; level
 	db 5, 3 ; length
 	dw 116 * 10 ; weight
-	tx ZapdosLv64Description ; description
+	tx ZapdosDescription ; description
 	db 0
 
 ZapdosLv68Card:
@@ -6134,7 +6134,7 @@ ZapdosLv68Card:
 	db 68 ; level
 	db 5, 3 ; length
 	dw 116 * 10 ; weight
-	tx ZapdosLv68Description ; description
+	tx ZapdosDescription ; description
 	db 0
 
 SandshrewCard:
@@ -6928,7 +6928,7 @@ MarowakLv26Card:
 	db 26 ; level
 	db 3, 3 ; length
 	dw 99 * 10 ; weight
-	tx MarowakLv26Description ; description
+	tx MarowakDescription ; description
 	db 0
 
 MarowakLv32Card:
@@ -6979,7 +6979,7 @@ MarowakLv32Card:
 	db 32 ; level
 	db 3, 3 ; length
 	dw 99 * 10 ; weight
-	tx MarowakLv32Description ; description
+	tx MarowakDescription ; description
 	db 0
 
 HitmonleeCard:
@@ -7610,7 +7610,7 @@ SlowpokeLv9Card:
 	db 9 ; level
 	db 3, 11 ; length
 	dw 79 * 10 ; weight
-	tx SlowpokeLv9Description ; description
+	tx SlowpokeDescription ; description
 	db 19
 
 SlowpokeLv18Card:
@@ -7661,7 +7661,7 @@ SlowpokeLv18Card:
 	db 18 ; level
 	db 3, 11 ; length
 	dw 79 * 10 ; weight
-	tx SlowpokeLv9Description ; description
+	tx SlowpokeDescription ; description
 	db 16
 
 SlowbroCard:
@@ -7763,7 +7763,7 @@ GastlyLv8Card:
 	db 8 ; level
 	db 4, 3 ; length
 	dw 2 ; weight
-	tx GastlyLv8Description ; description
+	tx GastlyDescription ; description
 	db 16
 
 GastlyLv17Card:
@@ -7814,7 +7814,7 @@ GastlyLv17Card:
 	db 17 ; level
 	db 4, 3 ; length
 	dw 2 ; weight
-	tx GastlyLv17Description ; description
+	tx GastlyDescription ; description
 	db 19
 
 HaunterLv17Card:
@@ -8222,7 +8222,7 @@ MewtwoLv53Card:
 	db 53 ; level
 	db 6, 7 ; length
 	dw 269 * 10 ; weight
-	tx MewtwoLv53Description ; description
+	tx MewtwoDescription ; description
 	db 0
 
 MewtwoLv60Card:
@@ -8273,7 +8273,7 @@ MewtwoLv60Card:
 	db 60 ; level
 	db 6, 7 ; length
 	dw 269 * 10 ; weight
-	tx MewtwoLv60Description ; description
+	tx MewtwoDescription ; description
 	db 0
 
 MewtwoAltLV60Card:
@@ -8324,7 +8324,7 @@ MewtwoAltLV60Card:
 	db 60 ; level
 	db 6, 7 ; length
 	dw 269 * 10 ; weight
-	tx MewtwoLv60Description ; description
+	tx MewtwoDescription ; description
 	db 0
 
 MewLv8Card:
@@ -8375,7 +8375,7 @@ MewLv8Card:
 	db 8 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MewLv8Description ; description
+	tx MewDescription ; description
 	db 3
 
 MewLv15Card:
@@ -8426,7 +8426,7 @@ MewLv15Card:
 	db 15 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MewLv15Description ; description
+	tx MewDescription ; description
 	db 0
 
 MewLv23Card:
@@ -8477,7 +8477,7 @@ MewLv23Card:
 	db 23 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MewLv8Description ; description
+	tx MewDescription ; description
 	db 8
 
 PidgeyCard:
@@ -9133,7 +9133,7 @@ JigglypuffLv12Card:
 	db 12 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx JigglypuffLv12Description ; description
+	tx JigglypuffDescription ; description
 	db 16
 
 JigglypuffLv13Card:
@@ -9184,7 +9184,7 @@ JigglypuffLv13Card:
 	db 13 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx JigglypuffLv13Description ; description
+	tx JigglypuffDescription ; description
 	db 16
 
 JigglypuffLv14Card:
@@ -9235,7 +9235,7 @@ JigglypuffLv14Card:
 	db 14 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx JigglypuffLv14Description ; description
+	tx JigglypuffDescription ; description
 	db 16
 
 WigglytuffCard:
@@ -9367,7 +9367,7 @@ MeowthLv14Card:
 	db 14 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MeowthLv14Description ; description
+	tx MeowthDescription ; description
 	db 16
 
 MeowthLv15Card:
@@ -9430,7 +9430,7 @@ MeowthLv15Card:
 	db 15 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MeowthLv15Description ; description
+	tx MeowthDescription ; description
 	db 16
 
 PersianCard:
@@ -10314,7 +10314,7 @@ DragoniteLv41Card:
 	db 41 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteLv41Description ; description
+	tx DragoniteDescription ; description
 	db 0
 
 DragoniteLv45Card:

@@ -152,7 +152,7 @@ EnergySpikeDescription: ; 5da80 (17:5a80)
 	line "Pokémon. Then, shuffle your deck."
 	done
 
-ElectrodeLv35Description: ; 5daeb (17:5aeb)
+ElectrodeDescription:
 	text "Stores electrical energy inside its"
 	line "body. Even the slightest shock could"
 	line "trigger a huge explosion."
@@ -170,13 +170,6 @@ ChainLightningDescription: ; 5db60 (17:5b60)
 	line "Pokémon (including your own)."
 	done
 
-ElectrodeLv42Description: ; 5dbfe (17:5bfe)
-	text "It stores electrical energy under"
-	line "very high pressure. It often"
-	line "explodes with little or no"
-	line "provocation."
-	done
-
 ElectabuzzName: ; 5dc66 (17:5c66)
 	text "Electabuzz"
 	done
@@ -190,7 +183,7 @@ ElectricName: ; 5ddec (17:5dec)
 	text "Electric"
 	done
 
-ElectabuzzLv20Description: ; 5ddf6 (17:5df6)
+ElectabuzzDescription:
 	text "A wild Pokémon with a short temper."
 	line "It is able to distinguish colors"
 	line "and likes the color red."
@@ -205,12 +198,6 @@ Damage1FriendlyBenchedPokemon10Description:
 	line "your Benched Pokémon."
 	done
 
-ElectabuzzLv35Description: ; 5def9 (17:5ef9)
-	text "Normally found near power plants,"
-	line "it can wander away and cause major"
-	line "blackouts in cities."
-	done
-
 JolteonName: ; 5df54 (17:5f54)
 	text "Jolteon"
 	done
@@ -219,22 +206,16 @@ LightningName: ; 5dfaf (17:5faf)
 	text "Lightning"
 	done
 
-JolteonLv24Description: ; 5dfba (17:5fba)
-	text "A sensitive Pokémon that easily"
-	line "becomes sad or angry. Every time"
-	line "its mood changes, it charges power."
-	done
+; PinMissileName:
+; 	text "Pin Missile"
+; 	done
 
-PinMissileName: ; 5e020 (17:6020)
-	text "Pin Missile"
-	done
+; TripleAttackX20X10Description:
+; 	text "Flip 3 coins. Does 20 damage for"
+; 	line "each Heads and 10 for each Tails."
+; 	done
 
-TripleAttackX20X10Description: ; 5e02d (17:602d)
-	text "Flip 3 coins. Does 20 damage for"
-	line "each Heads and 10 for each Tails."
-	done
-
-JolteonLv29Description: ; 5e072 (17:6072)
+JolteonDescription:
 	text "It accumulates negative ions from"
 	line "the atmosphere to blast out 10,000-"
 	line "volt lightning bolts."
@@ -257,13 +238,6 @@ ThunderstormDescription:
 	line "the number of tails to itself."
 	done
 
-ZapdosLv40Description: ; 5e1d2 (17:61d2)
-	text "A legendary thunderbird Pokémon"
-	line "whose anger is said to cause storms."
-	line "Some say it has lived above the"
-	line "clouds for thousands of years."
-	done
-
 ThunderboltName: ; 5e290 (17:6290)
 	text "Thunderbolt"
 	done
@@ -273,7 +247,7 @@ ThunderboltDescription: ; 5e29d (17:629d)
 	line "this Pokémon."
 	done
 
-ZapdosLv64Description: ; 5e2e7 (17:62e7)
+ZapdosDescription:
 	text "A legendary bird Pokémon said to"
 	line "appear from clouds while wielding"
 	line "enormous lightning bolts."
@@ -299,12 +273,6 @@ PrimalThunderDescription:
 	text "If you have less Prize cards left"
 	line "than your opponent, this attack does"
 	line "30 damage to each of your Pokémon."
-	done
-
-ZapdosLv68Description: ; 5e4f8 (17:64f8)
-	text "This legendary bird Pokémon is said"
-	line "to appear when the sky turns dark"
-	line "and lightning showers down."
 	done
 
 SandshrewName: ; 5e55b (17:655b)
@@ -652,7 +620,7 @@ BonekeeperName: ; 5f3e9 (17:73e9)
 	text "Bonekeeper"
 	done
 
-MarowakLv26Description: ; 5f3f5 (17:73f5)
+MarowakDescription:
 	text "The bone it holds is its key weapon."
 	line "It throws the bone skillfully like"
 	line "a boomerang to K.O. targets."
@@ -676,12 +644,6 @@ VengeanceDescription:
 	text "This attack does 10 more damage"
 	line "for each Pokémon card (up to 5)"
 	line "in your discard pile."
-	done
-
-MarowakLv32Description: ; 5f5b6 (17:75b6)
-	text "Small and weak, this Pokémon is"
-	line "adept with its bone club. It has"
-	line "grown more vicious over the ages."
 	done
 
 HitmonleeName: ; 5f61a (17:761a)
@@ -928,7 +890,7 @@ DopeyName: ; 601c8 (18:41c8)
 	text "Dopey"
 	done
 
-SlowpokeLv9Description: ; 601cf (18:41cf)
+SlowpokeDescription:
 	text "Incredibly slow and dopey. It takes"
 	line "5 seconds for it to feel pain when"
 	line "under attack."
@@ -987,7 +949,7 @@ GasName: ; 605bf (18:45bf)
 	text "Gas"
 	done
 
-GastlyLv8Description: ; 605c4 (18:45c4)
+GastlyDescription:
 	text "Almost invisible, this gaseous"
 	line "Pokémon cloaks the target and puts"
 	line "it to sleep without notice."
@@ -1004,13 +966,6 @@ EnergyConversionName: ; 60629 (18:4629)
 EnergyConversionDescription:
 	text "Put up to 2 Basic Energy cards from"
 	line "your discard pile into your hand."
-	done
-
-GastlyLv17Description: ; 6069e (18:469e)
-	text "A mysterious Pokémon. Some say it is"
-	line "a lifeform from another dimension,"
-	line "while others believe it is formed"
-	line "from smog."
 	done
 
 HaunterName: ; 60714 (18:4714)
@@ -1208,7 +1163,7 @@ GeneticName: ; 60ff3 (18:4ff3)
 	text "Genetic"
 	done
 
-MewtwoLv53Description: ; 60ffc (18:4ffc)
+MewtwoDescription:
 	text "A scientist created this Pokémon"
 	line "after years of horrific"
 	line "gene-splicing and DNA engineering"
@@ -1227,12 +1182,6 @@ EnergyAbsorptionDescription: ; 61078 (18:5078)
 
 PsyburnName: ; 610c7 (18:50c7)
 	text "Psyburn"
-	done
-
-MewtwoLv60Description: ; 610d0 (18:50d0)
-	text "Years of genetic experiments"
-	line "resulted in the creation of this"
-	line "never-before-seen violent Pokémon."
 	done
 
 MewName: ; 61132 (18:5132)
@@ -1254,16 +1203,10 @@ NewSpeciesName: ; 611fa (18:51fa)
 	text "New Species"
 	done
 
-MewLv8Description: ; 61207 (18:5207)
+MewDescription:
 	text "So rare that it is still said to be"
 	line "a mirage by many experts. Only a few"
 	line "people have seen it worldwide."
-	done
-
-MewLv15Description: ; 612f1 (18:52f1)
-	text "When viewed through a microscope, "
-	line "this Pokémon's short, fine, delicate"
-	line "hair can be seen."
 	done
 
 PsywaveName: ; 6134c (18:534c)

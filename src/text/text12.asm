@@ -155,13 +155,6 @@ BalloonName: ; 61f38 (18:5f38)
 	text "Balloon"
 	done
 
-JigglypuffLv12Description: ; 61f41 (18:5f41)
-	text "When its huge eyes light up, it"
-	line "sings a mysteriously soothing"
-	line "melody that lulls its enemies to"
-	line "sleep."
-	done
-
 FriendshipSongName: ; 61fa8 (18:5fa8)
 	text "Friendship Song"
 	done
@@ -177,7 +170,7 @@ ReduceDamageTakenBy10Description: ; 62056 (18:6056)
 	line "Weakness and Resistance)."
 	done
 
-JigglypuffLv13Description: ; 620d1 (18:60d1)
+JigglypuffDescription:
 	text "Uses its alluring eyes to enrapture"
 	line "its foe. It then sings a pleasing"
 	line "melody that lulls the foe to sleep."
@@ -185,12 +178,6 @@ JigglypuffLv13Description: ; 620d1 (18:60d1)
 
 LullabyName: ; 6213c (18:613c)
 	text "Lullaby"
-	done
-
-JigglypuffLv14Description: ; 62145 (18:6145)
-	text "When its huge eyes light up, it"
-	line "sings a mysteriously soothing melody"
-	line "that lulls its enemies to sleep."
 	done
 
 WigglytuffName: ; 621ac (18:61ac)
@@ -222,7 +209,7 @@ ScratchCatName: ; 62359 (18:6359)
 	text "Scratch Cat"
 	done
 
-MeowthLv14Description: ; 62366 (18:6366)
+MeowthDescription:
 	text "Appears to be more active at night."
 	line "It loves round and shiny things, so"
 	line "it can't stop from picking them up."
@@ -230,12 +217,6 @@ MeowthLv14Description: ; 62366 (18:6366)
 
 PayDayName: ; 623d3 (18:63d3)
 	text "Pay Day"
-	done
-
-MeowthLv15Description: ; 62401 (18:6401)
-	text "Adores circular objects. Wanders"
-	line "the streets on a nightly basis to"
-	line "look for dropped loose change."
 	done
 
 PersianName: ; 62464 (18:6464)
@@ -586,13 +567,7 @@ HealingWindDescription: ; 631f2 (18:71f2)
 	line "Pokémon."
 	done
 
-DragoniteLv41Description: ; 632a2 (18:72a2)
-	text "It is said that this Pokémon lives"
-	line "somewhere in the sea and that it"
-	line "flies. However, it is only a rumor."
-	done
-
-DragoniteDescription: ; 633d1 (18:73d1)
+DragoniteDescription:
 	text "An extremely rarely seen marine"
 	line "Pokémon. Its intelligence is said"
 	line "to match that of humans."

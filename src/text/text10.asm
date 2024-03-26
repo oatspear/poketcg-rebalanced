@@ -709,7 +709,7 @@ VineName: ; 59bcd (16:5bcd)
 	text "Vine"
 	done
 
-TangelaLv8Description: ; 59bd3 (16:5bd3)
+TangelaDescription:
 	text "Its whole body is swathed with wide"
 	line "vines that are similar to seaweed."
 	line "These vines shake as it walks."
@@ -717,12 +717,6 @@ TangelaLv8Description: ; 59bd3 (16:5bd3)
 
 PoisonWhipName: ; 59c3a (16:5c3a)
 	text "Poison Whip"
-	done
-
-TangelaLv12Description: ; 59c47 (16:5c47)
-	text "Its identity is obscured by masses"
-	line "of thick, blue vines. The vines are"
-	line "said to never stop growing."
 	done
 
 ScytherName: ; 59cab (16:5cab)
@@ -877,7 +871,7 @@ FireBlastName: ; 5a231 (16:6231)
 	text "Fire Blast"
 	done
 
-NinetalesLv32Description: ; 5a28a (16:628a)
+NinetalesDescription:
 	text "Very smart and very vengeful."
 	line "Grabbing one of its many tails could"
 	line "result in a 1,000-year curse."
@@ -885,12 +879,6 @@ NinetalesLv32Description: ; 5a28a (16:628a)
 
 FireFangName: ; 5a2ec (16:62ec)
 	text "Fire Fang"
-	done
-
-NinetalesLv35Description: ; 5a486 (16:6486)
-	text "According to an enduring legend,"
-	line "9 noble heroes were united and"
-	line "reincarnated as this."
 	done
 
 GrowlitheName: ; 5a4dd (16:64dd)
@@ -945,17 +933,11 @@ LegendaryName: ; 5a689 (16:6689)
 	text "Legendary"
 	done
 
-ArcanineLv34Description: ; 5a694 (16:6694)
-	text "A legendary Pokémon famous for its"
-	line "beauty. It looks almost as if it"
-	line "flies when it runs."
-	done
-
 TakeDownName: ; 5a739 (16:6739)
 	text "Take Down"
 	done
 
-ArcanineLv45Description: ; 5a768 (16:6768)
+ArcanineDescription:
 	text "A Pokémon that has been long admired"
 	line "for its beauty. It runs gracefully,"
 	line "as if on wings."
@@ -1013,7 +995,7 @@ SpitfireName: ; 5aa09 (16:6a09)
 	text "Spitfire"
 	done
 
-MagmarLv24Description: ; 5aa13 (16:6a13)
+MagmarDescription:
 	text "Its body always burns with an orange"
 	line "glow that enables it to hide"
 	line "perfectly among flames."
@@ -1021,13 +1003,6 @@ MagmarLv24Description: ; 5aa13 (16:6a13)
 
 SmokescreenName: ; 5aa6e (16:6a6e)
 	text "Smokescreen"
-	done
-
-MagmarLv31Description: ; 5ab07 (16:6b07)
-	text "Found at the mouths of volcanoes and"
-	line "extremely hard to spot. There are"
-	line "very few instances of capturing this"
-	line "Pokémon."
 	done
 
 FlareonName: ; 5ab7d (16:6b7d)
@@ -1046,13 +1021,7 @@ RageName: ; 5ab93 (16:6b93)
 	text "Rage"
 	done
 
-FlareonLv22Description: ; 5abe1 (16:6be1)
-	text "It has a flame chamber inside its"
-	line "body. It inhales, then blows out"
-	line "fire that is over 3,000 degrees."
-	done
-
-FlareonLv28Description: ; 5ac91 (16:6c91)
+FlareonDescription:
 	text "When storing thermal energy in its"
 	line "body, its temperature could soar to"
 	line "over 1,600 degrees."
@@ -1078,7 +1047,7 @@ DiveBombName: ; 5ada6 (16:6da6)
 	text "Dive Bomb"
 	done
 
-MoltresLv35Description: ; 5adb1 (16:6db1)
+MoltresDescription:
 	text "Known as the legendary bird of fire."
 	line "Every flap of its wings creates a"
 	line "dazzling flash of flames."
@@ -1095,12 +1064,6 @@ FiregiverDescription: ; 5ae1e (16:6e1e)
 	line "random) <FIRE> Energy cards from your"
 	line "deck into your hand. Shuffle your"
 	line "deck afterward."
-	done
-
-MoltresLv37Description: ; 5aed3 (16:6ed3)
-	text "A legendary bird Pokémon. As it"
-	line "flaps its flaming wings, even the"
-	line "night sky will turn red."
 	done
 
 SquirtleName: ; 5af2f (16:6f2f)
@@ -1671,16 +1634,10 @@ BubbleJetName: ; 5c70b (17:470b)
 	text "Bubble Jet"
 	done
 
-VaporeonLv29Description: ; 5c717 (17:4717)
+VaporeonDescription:
 	text "Its cell structure is similar to"
 	line "water molecules. It will melt away"
 	line "and become invisible in water."
-	done
-
-VaporeonLv42Description: ; 5c829 (17:4829)
-	text "Lives close to water. Its long tail"
-	line "is ridged with a fin that is often"
-	line "mistaken for a mermaid's."
 	done
 
 OmanyteName: ; 5c88b (17:488b)
@@ -1741,12 +1698,6 @@ FreezeName: ; 5cc5b (17:4c5b)
 	text "Freeze"
 	done
 
-ArticunoLv35Description: ; 5cc63 (17:4c63)
-	text "A legendary bird Pokémon that is"
-	line "said to appear to doomed people who"
-	line "are lost in icy mountains."
-	done
-
 QuickfreezeName: ; 5ccc4 (17:4cc4)
 	text "Quickfreeze"
 	done
@@ -1771,7 +1722,7 @@ IceBreathDescription: ; 5cd63 (17:4d63)
 	line "and Resistance still happen.)"
 	done
 
-ArticunoLv37Description: ; 5ce35 (17:4e35)
+ArticunoDescription:
 	text "A legendary bird Pokémon. It freezes"
 	line "water that is contained in winter"
 	line "air and makes it snow."

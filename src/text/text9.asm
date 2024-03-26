@@ -1317,7 +1317,7 @@ HealHalfDamageDealtDescription:
 	line "(rounded up to the nearest 10)."
 	done
 
-VenusaurLv64Description: ; 578fd (15:78fd)
+VenusaurDescription:
 	text "The flower on its back catches"
 	line "the sun's rays. The sunlight is then"
 	line "absorbed and used for energy."
@@ -1354,12 +1354,6 @@ SolarBeamName: ; 57a51 (15:7a51)
 ; 	line "<GRASS> or <FIRE> Energy attached to"
 ; 	line "this Pokémon."
 ; 	done
-
-VenusaurLv67Description: ; 57a5c (15:7a5c)
-	text "This plant blooms when it is"
-	line "absorbing solar energy. It stays on"
-	line "the move to seek sunlight."
-	done
 
 CaterpieName: ; 57ab9 (15:7ab9)
 	text "Caterpie"
