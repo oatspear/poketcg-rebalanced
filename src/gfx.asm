@@ -1558,7 +1558,6 @@ NidoranFCardGfx::
 	INCBIN "gfx/cards/nidoranf.2bpp"
 	INCBIN "gfx/cards/nidoranf.pal"
 
-	ds $58
 
 SECTION "Card Gfx 2", ROMX
 
@@ -1646,7 +1645,6 @@ ExeggutorCardGfx::
 	INCBIN "gfx/cards/exeggutor.2bpp"
 	INCBIN "gfx/cards/exeggutor.pal"
 
-	ds $58
 
 SECTION "Card Gfx 3", ROMX
 
@@ -1734,7 +1732,6 @@ FlareonLv28CardGfx::
 	INCBIN "gfx/cards/flareon1.2bpp"
 	INCBIN "gfx/cards/flareon1.pal"
 
-	ds $58
 
 SECTION "Card Gfx 4", ROMX
 
@@ -1822,7 +1819,6 @@ GoldeenCardGfx::
 	INCBIN "gfx/cards/goldeen.2bpp"
 	INCBIN "gfx/cards/goldeen.pal"
 
-	ds $58
 
 SECTION "Card Gfx 5", ROMX
 
@@ -1906,7 +1902,10 @@ RaichuLv35CardGfx::
 	INCBIN "gfx/cards/raichu3.2bpp"
 	INCBIN "gfx/cards/raichu3.pal"
 
-	ds $58
+PokemonNurseCardGfx::
+	INCBIN "gfx/cards/pokemonnurse.2bpp"
+	INCBIN "gfx/cards/pokemonnurse.pal"
+
 
 SECTION "Card Gfx 6", ROMX
 
@@ -1994,7 +1993,6 @@ MachopCardGfx::
 	INCBIN "gfx/cards/machop.2bpp"
 	INCBIN "gfx/cards/machop.pal"
 
-	ds $58
 
 SECTION "Card Gfx 7", ROMX
 
@@ -2082,7 +2080,6 @@ SlowpokeLv18CardGfx::
 	INCBIN "gfx/cards/slowpoke2.2bpp"
 	INCBIN "gfx/cards/slowpoke2.pal"
 
-	ds $58
 
 SECTION "Card Gfx 8", ROMX
 
@@ -2170,7 +2167,6 @@ RattataCardGfx::
 	INCBIN "gfx/cards/rattata.2bpp"
 	INCBIN "gfx/cards/rattata.pal"
 
-	ds $58
 
 SECTION "Card Gfx 9", ROMX
 
@@ -2258,7 +2254,6 @@ EeveeCardGfx::
 	INCBIN "gfx/cards/eevee.2bpp"
 	INCBIN "gfx/cards/eevee.pal"
 
-	ds $58
 
 SECTION "Card Gfx 10", ROMX
 

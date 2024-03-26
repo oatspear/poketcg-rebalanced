@@ -14,6 +14,10 @@
 - Pokémon Power: **Lightning Haste**: once per turn, attach (L) from the discard pile to the Active Pokémon and deal 10 damage to it.
 - Attack: **Discharge** (L): discard any number of attached (L); 20 damage for each discarded energy; inflicts Paralysis if 2 or more were discarded.
 
+#### Pokémon Nurse
+- Supporter Trainer card.
+- Returns 1 of the user's Pokémon in play to the user's hand. All cards attached to the Pokémon are discarded.
+
 ### Changed Mechanics
 
 - Evolving Pokémon clears status conditions and effects again, as in the original version.

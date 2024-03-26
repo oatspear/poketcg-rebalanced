@@ -1673,6 +1673,7 @@ RareCandyEffectCommands:
 	db  $00
 
 ScoopUpNetEffectCommands:
+PokemonNurseEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckBenchIsNotEmpty
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ScoopUpNet_PlayerSelection
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ScoopUpNet_ReturnToHandEffect

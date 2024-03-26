@@ -228,6 +228,7 @@
 	const GAMBLER                     ; $e3
 	const RECYCLE                     ; $e4
 	const RARE_CANDY                  ; $e5
+	const POKEMON_NURSE               ; $e6
 DEF NUM_CARDS EQU const_value - 1
 
 DEF ENERGY_IDS_START  EQU GRASS_ENERGY

@@ -390,6 +390,16 @@ RecycleDescription:
 	line "your deck."
 	done
 
+PokemonNurseName:
+	text "Pokémon Nurse"
+	done
+
+PokemonNurseDescription:
+	text "Choose 1 of your Pokémon in play"
+	line "and return it to your hand."
+	line "(Discard all cards attached to it.)"
+	done
+
 AlreadyHasAToolAttachedText:
 	text "That Pokémon already has a Tool"
 	line "attached to it."

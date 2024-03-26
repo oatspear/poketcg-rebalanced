@@ -230,6 +230,7 @@ CardPointers:
 	dw GamblerCard
 	dw RecycleCard
 	dw RareCandyCard
+	dw PokemonNurseCard
 	dw NULL
 	assert_table_length NUM_CARDS + 2
 
@@ -10838,4 +10839,15 @@ RareCandyCard:
 	db RARE_CANDY
 	dw RareCandyEffectCommands ; effect commands
 	tx RareCandyDescription ; description
+	dw NONE ; description (cont)
+
+PokemonNurseCard:
+	db TYPE_TRAINER_SUPPORTER ; type
+	gfx PokemonNurseCardGfx ; gfx
+	tx PokemonNurseName ; name
+	db DIAMOND ; rarity
+	db COLOSSEUM | GB ; sets
+	db POKEMON_NURSE
+	dw PokemonNurseEffectCommands ; effect commands
+	tx PokemonNurseDescription ; description
 	dw NONE ; description (cont)
