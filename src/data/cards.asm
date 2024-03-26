@@ -7691,11 +7691,11 @@ SlowbroCard:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx SpiralDrainName ; name
-	tx Heal30DamageDescription ; description
+	tx Heal20DamageDescription ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_NORMAL ; category
-	dw Leech30DamageEffectCommands ; effect commands
+	dw Leech20DamageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3

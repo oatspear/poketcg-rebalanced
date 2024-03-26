@@ -187,6 +187,11 @@
 - **Big Thunder**: removed.
 - New attack: **Primal Thunder** (LLC): 70 damage; 30 damage to all friendly Pokémon if the user has taken more Prizes.
 
+### Psychic Changes
+
+#### Slowbro
+- **Spiral Drain**: reduced healing from 30 to 20.
+
 ### Colorless Changes
 
 #### Spearow
