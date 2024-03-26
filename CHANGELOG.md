@@ -156,9 +156,8 @@
 #### Electabuzz Lv20
 - Increased HP from 60 to 70.
 - **Light Screen**: removed.
-- **Quick Attack**: removed.
+- **Quick Attack**: reduced base damage from 20 to 10; bonus damage is now +30, instead of double.
 - New attack: **Overvoltage** (L): 10 damage; discards any Tools attached to the Defending Pokémon; double damage if a tool was discarded.
-- New attack: **Raging Thunder** (LC): 40 damage; 20 damage to 1 of the user's benched Pokémon.
 
 #### Electabuzz Lv35
 - **Thunder Shock**: removed.

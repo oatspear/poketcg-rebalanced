@@ -5777,18 +5777,18 @@ ElectabuzzLv20Card:
 	db ATK_ANIM_THUNDER_WAVE ; animation
 
 	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx RagingThunderName ; name
-	tx Damage1FriendlyBenchedPokemon20Description ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Damage1FriendlyBenchedPokemon20EffectCommands ; effect commands
+	energy COLORLESS, 2 ; energies
+	tx QuickAttackName ; name
+	tx IfActiveThisTurn30BonusDamageDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw QuickAttack30EffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDER ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	db 1 ; retreat cost
 	db WR_FIGHTING ; weakness
