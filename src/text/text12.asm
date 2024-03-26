@@ -1,19 +1,389 @@
-RattataName: ; 618c5 (18:58c5)
-	text "Rattata"
+LeechSeedName: ; 5755d (15:755d)
+	text "Leech Seed"
+	done
+
+Heal10DamageDescription:
+	text "Heal 10 damage from this Pokémon."
+	done
+
+SeedName: ; 575cb (15:75cb)
+	text "Seed"
+	done
+
+VineWhipName: ; 57644 (15:7644)
+	text "Vine Whip"
+	done
+
+PoisonPowderName: ; 5764f (15:764f)
+	text "Poisonpowder"
+	done
+
+InflictPoisonDescription: ; 5765d (15:765d)
+	text "The Defending Pokémon is now"
+	line "Poisoned."
+	done
+
+MegaDrainName: ; 577f9 (15:77f9)
+	text "Mega Drain"
+	done
+
+Heal20DamageDescription:
+	text "Heal 20 damage from this Pokémon."
+	done
+
+Heal30DamageDescription:
+	text "Heal 30 damage from this Pokémon."
+	done
+
+HealHalfDamageDealtDescription:
+	text "Heal from this Pokémon half the"
+	line "damage dealt with this attack"
+	line "(rounded up to the nearest 10)."
+	done
+
+EnergyTransName: ; 57960 (15:7960)
+	text "Energy Trans"
+	done
+
+EnergyTransDescription: ; 5796e (15:796e)
+	text "As often as you like during your"
+	line "turn (before your attack), you may"
+	line "move 1 <GRASS> Energy card attached to"
+	line "one of your Pokémon to another."
+	done
+
+PollenFrenzyName:
+	text "Pollen Frenzy"
+	done
+
+PollenFrenzyDescription:
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is now Paralyzed and"
+	line "Poisoned. If tails, the Defending"
+	line "Pokémon is now Asleep and Poisoned."
+	done
+
+SolarBeamName: ; 57a51 (15:7a51)
+	text "Solarbeam"
+	done
+
+; SolarBeamDescription:
+; 	text "Deal 10 additional damage for each"
+; 	line "<GRASS> or <FIRE> Energy attached to"
+; 	line "this Pokémon."
+; 	done
+
+StringShotName: ; 57ac3 (15:7ac3)
+	text "String Shot"
+	done
+
+MayInflictParalysisDescription: ; 57ad0 (15:7ad0)
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is now Paralyzed."
+	done
+
+WormName: ; 57b10 (15:7b10)
+	text "Worm"
+	done
+
+HardenName: ; 5ee18 (17:6e18)
+	text "Harden"
+	done
+
+HardenDescription: ; 5ee20 (17:6e20)
+	text "During your opponent's next turn,"
+	line "whenever 30 or less damage is done"
+	line "to this Pokémon (after applying"
+	line "Weakness and Resistance), prevent"
+	line "that damage."
+	done
+
+StunSporeName: ; 57c14 (15:7c14)
+	text "Stun Spore"
+	done
+
+CocoonName:
+	text "Cocoon"
+	done
+
+WhirlwindName: ; 57c8e (15:7c8e)
+	text "Whirlwind"
+	done
+
+OpponentSwitchesPokemonDescription: ; 57c99 (15:7c99)
+	text "Your opponent switches their"
+	line "Active Pokémon with one of their"
+	line "Benched Pokémon."
+	done
+
+ButterflyName: ; 57e36 (15:7e36)
+	text "Butterfly"
+	done
+
+PoisonStingName: ; 57ea1 (15:7ea1)
+	text "Poison Sting"
+	done
+
+MayInflictPoisonDescription: ; 57eaf (15:7eaf)
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is now Poisoned."
+	done
+
+HairyBugName: ; 57eee (15:7eee)
+	text "Hairy Bug"
+	done
+
+TwineedleName: ; 58070 (16:4070)
+	text "Twineedle"
+	done
+
+PoisonBeeName: ; 580c0 (16:40c0)
+	text "Poison Bee"
+	done
+
+SpitPoisonName: ; 58131 (16:4131)
+	text "Spit Poison"
+	done
+
+WrapName: ; 5813e (16:413e)
+	text "Wrap"
+	done
+
+SnakeName: ; 58144 (16:4144)
+	text "Snake"
+	done
+
+TerrorStrikeName: ; 581ad (16:41ad)
+	text "Terror Strike"
+	done
+
+PoisonFangName: ; 58277 (16:4277)
+	text "Poison Fang"
+	done
+
+CobraName: ; 58284 (16:4284)
+	text "Cobra"
+	done
+
+FurySwipesName: ; 582ef (16:42ef)
+	text "Fury Swipes"
+	done
+
+PoisonPinName: ; 583ff (16:43ff)
+	text "Poison Pin"
+	done
+
+SwiftName:
+	text "Swift"
+	done
+
+RapidSpinName:
+	text "Rapid Spin"
+	done
+
+BothPlayersSwitchDescription:
+	text "Both players switch their"
+	line "Active Pokémon with one of"
+	line "their Benched Pokémon."
+	done
+
+OverrunName:
+	text "Overrun"
+	done
+
+Damage1BenchedPokemon30Description:
+	text "This attack does 30 damage to 1 of"
+	line "your opponent's Benched Pokémon."
+	done
+
+NoWeaknessResistanceForBenchDescriptionCont:
+	text "Don't apply Weakness and Resistance"
+	line "for Benched Pokémon."
+	done
+
+CombustionName:
+	text "Combustion"
+	done
+
+Discard1CardFromOpponentsDeckDescription:
+	text "Discard 1 card from the top"
+	line "of your opponent's deck."
+	done
+
+Discard2CardsFromOpponentsDeckDescription:
+	text "Discard 2 cards from the top"
+	line "of your opponent's deck."
+	done
+
+MultiplePokemonOfTheSameColorText:
+	text "There are multiple Pokémon"
+	line "of the same Color."
+	done
+
+SupersonicName: ; 58474 (16:4474)
+	text "Supersonic"
+	done
+
+MayInflictConfusionDescription: ; 58480 (16:4480)
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is now Confused."
+	done
+
+AdaptiveEvolutionName:
+	text "Adaptive Evolution"
+	done
+
+AdaptiveEvolutionDescription:
+	text "This Pokémon can evolve during your"
+	line "first turn or the turn you play it."
+	done
+
+PowerLariatName:
+	text "Power Lariat"
+	done
+
+PowerLariatDescription:
+	text "This attack does 20 more damage for"
+	line "each Evolved Pokémon on your Bench."
+	done
+
+DrillName: ; 58590 (16:4590)
+	text "Drill"
+	done
+
+RetaliateName:
+	text "Retaliate"
+	done
+
+RetaliateDescription:
+	text "This attack can only be used if"
+	line "this Pokémon has any damage"
+	line "counters on it."
+	done
+
+HornDrillName: ; 586a3 (16:46a3)
+	text "Horn Drill"
+	done
+
+RoutName:
+	text "Rout"
+	done
+
+RoutDescription:
+	text "This attack does 10 more damage"
+	line "for each of your opponent's"
+	line "Benched Pokémon."
+	done
+
+ToxicName: ; 587b5 (16:47b5)
+	text "Toxic"
+	done
+
+ToxicDescription: ; 587bc (16:47bc)
+	text "The Defending Pokémon is now Badly"
+	line "Poisoned. It takes 20 Poison damage"
+	line "instead of 10."
+	done
+
+LeechLifeName: ; 588a7 (16:48a7)
+	text "Leech Life"
+	done
+
+LeechLifeDescription: ; 588b3 (16:48b3)
+	text "Heal from this Pokémon the same"
+	line "amount of damage you did to the"
+	line "Defending Pokémon."
+	done
+
+BatName: ; 58980 (16:4980)
+	text "Bat"
+	done
+
+GrowthName:
+	text "Growth"
+	done
+
+GrowthDescription:
+	text "Attach a Basic Energy card from"
+	line "your hand to this Pokémon."
+	done
+
+SproutName:
+	text "Sprout"
+	done
+
+SproutDescription:
+	text "Search your Deck for a <GRASS> Energy"
+	line "or a <GRASS> Pokémon and add it to"
+	line "your hand."
+	done
+
+WeedName: ; 58be1 (16:4be1)
+	text "Weed"
+	done
+
+AromatherapyName:
+	text "Aromatherapy"
+	done
+
+Heal20DamageFromAllDescription:
+	text "Heal 20 damage from each of your"
+	line "Pokémon."
+	done
+
+; unreferenced
+;HealingNectarName:
+;	text "Healing Nectar"
+;	done
+
+; unreferenced
+;HealingNectarDescription:
+;	text "Heal 10 damage, at the end of your"
+;	line "turns, from each of your Benched"
+;	line "Pokémon with attached Energies."
+;	done
+
+SilverWhirlwindName:
+	text "Silver Whirlwind"
+	done
+
+SilverWhirlwindDescription:
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is Asleep. If tails, it is"
+	line "Poisoned. Then, your opponent"
+	line "switches their Active Pokémon with"
+	line "one of their Benched Pokémon."
+	done
+
+HatchName:
+	text "Hatch"
+	done
+
+HatchDescription:
+	text "Heal 30 damage from this Pokémon and"
+	line "remove all Special Conditions on it."
+	line "Then, search your deck for a card"
+	line "that evolves from this Pokémon and"
+	line "attach it to this Pokémon."
+	done
+
+PoisonEvolutionName:
+	text "Poison Evolution"
+	done
+
+PoisonEvolutionDescription:
+	text "The Defending Pokémon is now"
+	line "Poisoned. Search your deck for a"
+	line "card that evolves from this Pokémon"
+	line "and attach it to this Pokémon."
+	done
+
+ExoskeletonName:
+	text "Exoskeleton"
 	done
 
 RatName: ; 618ce (18:58ce)
 	text "Rat"
-	done
-
-RattataDescription: ; 618d3 (18:58d3)
-	text "Bites anything when it attacks."
-	line "Small and very quick, it is a common"
-	line "sight in many places."
-	done
-
-RaticateName: ; 6192f (18:592f)
-	text "Raticate"
 	done
 
 FinishingBiteName:
@@ -35,12 +405,6 @@ FinishingBiteDescription:
 ; 	line "Pokémon until its remaing HP is 10."
 ; 	done
 
-RaticateDescription: ; 619be (18:59be)
-	text "It uses its whiskers to maintain its"
-	line "balance. It seems to slow down if"
-	line "they are cut off."
-	done
-
 CourierName:
 	text "Courier"
 	done
@@ -53,20 +417,6 @@ CourierDescription:
 	line "Shuffle your deck afterward."
 	done
 
-SpearowName: ; 61a18 (18:5a18)
-	text "Spearow"
-	done
-
-; PeckName:
-; 	text "Peck"
-; 	done
-
-; PeckDescription:
-; 	text "If your opponent's Active Pokémon"
-; 	line "is a <GRASS> Pokémon, this attack"
-; 	line "does 10 more damage."
-; 	done
-
 DevastatingWindName:
 	text "Devastating Wind"
 	done
@@ -76,38 +426,12 @@ DevastatingWindDescription:
 	line "into their deck and draws 4 cards."
 	done
 
-; SpearowsMirrorMoveDescription: ; 61a27 (18:5a27)
-; 	text "If Spearow was attacked last turn,"
-; 	line "do the final result of that attack"
-; 	line "on Spearow to the Defending Pokémon."
-; 	done
-
-SpearowDescription: ; 61a93 (18:5a93)
-	text "Eats bugs in grassy areas. It has to"
-	line "flap its short wings at high speed"
-	line "to stay airborne."
-	done
-
-FearowName: ; 61aee (18:5aee)
-	text "Fearow"
-	done
-
 DrillPeckName: ; 61b72 (18:5b72)
 	text "Drill Peck"
 	done
 
 BeakName: ; 61b7e (18:5b7e)
 	text "Beak"
-	done
-
-FearowDescription: ; 61b84 (18:5b84)
-	text "With its huge and magnificent wings,"
-	line "it can keep aloft without ever"
-	line "having to land for rest."
-	done
-
-ClefairyName: ; 61be2 (18:5be2)
-	text "Clefairy"
 	done
 
 MetronomeName:
@@ -125,26 +449,6 @@ MetronomeDescription:
 
 FairyName: ; 61cb9 (18:5cb9)
 	text "Fairy"
-	done
-
-ClefairyDescription: ; 61cc0 (18:5cc0)
-	text "Its magical and cute appeal has many"
-	line "admirers. It is rare and found only"
-	line "in certain areas."
-	done
-
-ClefableName: ; 61d1c (18:5d1c)
-	text "Clefable"
-	done
-
-ClefableDescription: ; 61e66 (18:5e66)
-	text "A timid Fairy Pokémon that is rarely"
-	line "seen. It will run and hide the"
-	line "moment it senses people."
-	done
-
-JigglypuffName: ; 61ec4 (18:5ec4)
-	text "Jigglypuff"
 	done
 
 DoubleEdgeName: ; 61f05 (18:5f05)
@@ -170,18 +474,8 @@ ReduceDamageTakenBy10Description: ; 62056 (18:6056)
 	line "Weakness and Resistance)."
 	done
 
-JigglypuffDescription:
-	text "Uses its alluring eyes to enrapture"
-	line "its foe. It then sings a pleasing"
-	line "melody that lulls the foe to sleep."
-	done
-
 LullabyName: ; 6213c (18:613c)
 	text "Lullaby"
-	done
-
-WigglytuffName: ; 621ac (18:61ac)
-	text "Wigglytuff"
 	done
 
 DoTheWaveName: ; 621b8 (18:61b8)
@@ -195,32 +489,12 @@ DoTheWaveDescription: ; 621c5 (18:61c5)
 	line "Benched Pokémon."
 	done
 
-WigglytuffDescription: ; 6220b (18:620b)
-	text "The body is soft and rubbery. When"
-	line "angered, it will suck in air and"
-	line "inflate itself to an enormous size."
-	done
-
-MeowthName: ; 62274 (18:6274)
-	text "Meowth"
-	done
-
 ScratchCatName: ; 62359 (18:6359)
 	text "Scratch Cat"
 	done
 
-MeowthDescription:
-	text "Appears to be more active at night."
-	line "It loves round and shiny things, so"
-	line "it can't stop from picking them up."
-	done
-
 PayDayName: ; 623d3 (18:63d3)
 	text "Pay Day"
-	done
-
-PersianName: ; 62464 (18:6464)
-	text "Persian"
 	done
 
 PounceName: ; 6246d (18:646d)
@@ -239,16 +513,6 @@ ClassyCatName: ; 62552 (18:6552)
 	text "Classy Cat"
 	done
 
-PersianDescription: ; 6255e (18:655e)
-	text "Although its fur has many admirers,"
-	line "it is tough to raise as a pet"
-	line "because of its fickle meanness."
-	done
-
-FarfetchdName: ; 625c1 (18:65c1)
-	text "Farfetch'd"
-	done
-
 LeekSlapName:
 	text "Leek Slap"
 	done
@@ -260,16 +524,6 @@ NextTurnUnableToAttackDescription:
 
 WildDuckName: ; 626a8 (18:66a8)
 	text "Wild Duck"
-	done
-
-FarfetchdDescription: ; 626b3 (18:66b3)
-	text "The sprig of green onions it holds"
-	line "is its weapon. This sprig is used"
-	line "much like a metal sword."
-	done
-
-DoduoName: ; 62712 (18:6712)
-	text "Doduo"
 	done
 
 FuryAttackName:
@@ -286,16 +540,6 @@ TwinBirdName: ; 62726 (18:6726)
 	text "Twin Bird"
 	done
 
-DoduoDescription: ; 62731 (18:6731)
-	text "A bird that makes up for its poor"
-	line "flying with its fast foot speed."
-	line "Leaves giant footprints."
-	done
-
-DodrioName: ; 6278e (18:678e)
-	text "Dodrio"
-	done
-
 RetreatAidName:
 	text "Retreat Aid"
 	done
@@ -310,42 +554,12 @@ TriplebirdName: ; 62835 (18:6835)
 	text "Triplebird"
 	done
 
-DodrioDescription: ; 62841 (18:6841)
-	text "Uses its three brains to execute"
-	line "complex plans. While two heads"
-	line "sleep, one head stays awake."
-	done
-
-LickitungName: ; 6289f (18:689f)
-	text "Lickitung"
-	done
-
 TongueStretchName: ; 628aa (18:68aa)
 	text "Tongue Stretch"
 	done
 
 LickingName: ; 628b7 (18:68b7)
 	text "Licking"
-	done
-
-LickitungDescription: ; 628c0 (18:68c0)
-	text "Its tongue can be extended like a"
-	line "chameleon's. It leaves a stinging"
-	line "sensation when it licks enemies."
-	done
-
-ChanseyName: ; 62926 (18:6926)
-	text "Chansey"
-	done
-
-ChanseyDescription: ; 629e5 (18:69e5)
-	text "A rare and elusive Pokémon that is"
-	line "said to bring happiness to those"
-	line "who manage to catch it."
-	done
-
-KangaskhanName: ; 62a42 (18:6a42)
-	text "Kangaskhan"
 	done
 
 FetchName: ; 62a4e (18:6a4e)
@@ -368,16 +582,6 @@ ParentName: ; 62a70 (18:6a70)
 	text "Parent"
 	done
 
-KangaskhanDescription: ; 62a78 (18:6a78)
-	text "The infant rarely ventures out of"
-	line "its mother's protective pouch until"
-	line "it is three years old."
-	done
-
-TaurosName: ; 62ad6 (18:6ad6)
-	text "Tauros"
-	done
-
 RampageName: ; 62ade (18:6ade)
 	text "Rampage"
 	done
@@ -391,16 +595,6 @@ RampageDescription:
 
 WildBullName: ; 62b72 (18:6b72)
 	text "Wild Bull"
-	done
-
-TaurosDescription: ; 62b7d (18:6b7d)
-	text "When it targets an enemy, it charges"
-	line "furiously while whipping its body"
-	line "with its long tails."
-	done
-
-DittoName: ; 62bda (18:6bda)
-	text "Ditto"
 	done
 
 CopyName:
@@ -423,58 +617,9 @@ TransformName:
 	text "Transform"
 	done
 
-DittoDescription: ; 62d2e (18:6d2e)
-	text "When it spots an enemy, its body"
-	line "transfigures into an almost perfect"
-	line "copy of its opponent."
-	done
-
-TailWagName: ; 62d8a (18:6d8a)
-	text "Tail Wag"
-	done
-
-TailWagDescription: ; 62d94 (18:6d94)
-	text "Flip a coin. If heads, the Defending"
-	line "Pokémon can't attack Eevee during"
-	line "your opponent's next turn. (Benching"
-	line "or evolving either Pokémon ends this"
-	line "effect.)"
-	done
-
 EvolutionName: ; 62e2f (18:6e2f)
 	text "Evolution"
 	done
-
-EeveeDescription: ; 62e3a (18:6e3a)
-	text "Its genetic code is irregular."
-	line "It may mutate if it is exposed to"
-	line "radiation from elemental stones."
-	done
-
-PorygonName: ; 62e9d (18:6e9d)
-	text "Porygon"
-	done
-
-; Conversion1Name:
-; 	text "Conversion 1"
-; 	done
-;
-; Conversion1Description:
-; 	text "If the Defending Pokémon has a"
-; 	line "Weakness, you may change it to a"
-; 	line "type of your choice other than"
-; 	line "Colorless."
-; 	done
-
-; Conversion2Name:
-; 	text "Conversion 2"
-; 	done
-;
-; Conversion2Description:
-; 	text "Change this Pokémon's Resistance to"
-; 	line "a type of your choice other than"
-; 	line "Colorless."
-; 	done
 
 ConversionBeamName:
 	text "Conversion Beam"
@@ -488,16 +633,6 @@ ConversionBeamDescription:
 
 VirtualName: ; 62f79 (18:6f79)
 	text "Virtual"
-	done
-
-PorygonDescription: ; 62f82 (18:6f82)
-	text "A Pokémon that consists entirely of"
-	line "programming code. Capable of moving"
-	line "freely in cyberspace."
-	done
-
-SnorlaxName: ; 62fe1 (18:6fe1)
-	text "Snorlax"
 	done
 
 ThickSkinnedName:
@@ -520,68 +655,9 @@ SleepingName: ; 63093 (18:7093)
 	text "Sleeping"
 	done
 
-SnorlaxDescription: ; 6309d (18:709d)
-	text "Very lazy. Just eats and sleeps."
-	line "As its rotund bulk builds,"
-	line "it becomes steadily more slothful."
-	done
-
-DratiniName: ; 630fd (18:70fd)
-	text "Dratini"
-	done
-
-DratiniDescription: ; 63106 (18:7106)
-	text "Long considered a mythical Pokémon"
-	line "until recently, when a small colony"
-	line "was found living underwater."
-	done
-
-DragonairName: ; 6316b (18:716b)
-	text "Dragonair"
-	done
-
-SlamName: ; 63176 (18:7176)
-	text "Slam"
-	done
-
-DragonairDescription: ; 6317c (18:717c)
-	text "A mystical Pokémon that exudes a"
-	line "gentle aura. Has the ability to"
-	line "change climate conditions."
-	done
-
-DragoniteName: ; 631d9 (18:71d9)
-	text "Dragonite"
-	done
-
 HealingWindName: ; 631e4 (18:71e4)
 	text "Healing Wind"
 	done
-
-HealingWindDescription: ; 631f2 (18:71f2)
-	text "When you put Dragonite into play,"
-	line "remove 2 damage counters from each"
-	line "of your Pokémon. If a Pokémon has "
-	line "fewer damage counters than that,"
-	line "remove all of them from that"
-	line "Pokémon."
-	done
-
-DragoniteDescription:
-	text "An extremely rarely seen marine"
-	line "Pokémon. Its intelligence is said"
-	line "to match that of humans."
-	done
-
-; PunishingSlapName:
-; 	text "Punishing Slap"
-; 	done
-
-; PunishingSlapDescription:
-; 	text "If any of your opponent's Pokémon"
-; 	line "have <DARKNESS> Energy attached to them,"
-; 	line "this attack does 10 more damage."
-; 	done
 
 HelpingHandName:
 	text "Helping Hand"

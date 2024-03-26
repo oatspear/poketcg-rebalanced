@@ -3658,7 +3658,7 @@ PoliwhirlCard:
 	db 28 ; level
 	db 3, 4 ; length
 	dw 44 * 10 ; weight
-	tx PoliwhirlsDescription ; description
+	tx PoliwhirlDescription ; description
 	db 16
 
 PoliwrathCard:
@@ -8630,7 +8630,7 @@ Pidgeot1Card:
 	db 38 ; level
 	db 4, 11 ; length
 	dw 87 * 10 ; weight
-	tx Pidgeot1Description ; description
+	tx PidgeotDescription ; description
 	db 0
 
 Pidgeot2Card:
@@ -8681,7 +8681,7 @@ Pidgeot2Card:
 	db 40 ; level
 	db 4, 11 ; length
 	dw 87 * 10 ; weight
-	tx Pidgeot2Description ; description
+	tx PidgeotDescription ; description
 	db 0
 
 RattataCard:

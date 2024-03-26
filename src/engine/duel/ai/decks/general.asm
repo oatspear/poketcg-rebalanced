@@ -165,7 +165,7 @@ ENDC
 	ld a, AI_TRAINER_CARD_PHASE_11
 	call AIProcessHandTrainerCards
 IF DEBUG_MODE
-	ldtx hl, WaterGunName
+	ldtx hl, FlamethrowerName
 	call DrawWideTextBox_WaitForInput
 ENDC
 
