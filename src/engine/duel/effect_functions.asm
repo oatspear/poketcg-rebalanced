@@ -3002,12 +3002,12 @@ DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect:
 	ldh a, [hCurSelectionItem]
 	ld d, 0
 	ld e, a  ; offset
+	inc a
+	ldh [hCurSelectionItem], a
 	ld hl, wDuelTempList + DECK_SIZE
 	add hl, de
 	ld a, c  ; deck index
 	ld [hl], a
-	ld hl, hCurSelectionItem
-	inc [hl]
 	bank1call DisplayEnergyDiscardMenu
 	jr .loop
 
