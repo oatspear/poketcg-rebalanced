@@ -2473,9 +2473,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RageName                                           ; 0x0917
 	textpointer WildfireName                                       ; 0x091d
 	textpointer WildfireDescription                                ; 0x091e
-	textpointer DiveBombName                                       ; 0x091f
-	textpointer FiregiverName                                      ; 0x0921
-	textpointer FiregiverDescription                               ; 0x0922
 	textpointer BubbleName                                         ; 0x0925
 	textpointer WithdrawName                                       ; 0x0926
 	textpointer TinyTurtleName                                     ; 0x0928
@@ -2544,10 +2541,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer BlizzardName                                       ; 0x09ac
 	textpointer DamageOpponentBench10Description                   ; 0x09ad
 	textpointer FreezeName                                         ; 0x09ae
-	textpointer QuickfreezeName                                    ; 0x09b0
-	textpointer QuickfreezeDescription                             ; 0x09b1
-	textpointer IceBreathName                                      ; 0x09b2
-	textpointer IceBreathDescription                               ; 0x09b3
 	textpointer OnlyWorksOnEvolvedPokemonText
 	; textpointer GnawName
 	textpointer SkillDiveName
@@ -2583,8 +2576,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThunderstormDescription                            ; 0x09fe
 	textpointer ThunderboltName                                    ; 0x0a01
 	textpointer ThunderboltDescription                             ; 0x0a02
-	textpointer PealOfThunderName                                  ; 0x0a04
-	textpointer PealOfThunderDescription                           ; 0x0a05
+	textpointer PrimalColdName
+	textpointer PrimalColdDescription
+	textpointer PrimalFireName
+	textpointer PrimalFireDescription
 	textpointer PrimalThunderName
 	textpointer PrimalThunderDescription
 	textpointer SandAttackName                                     ; 0x0a0a

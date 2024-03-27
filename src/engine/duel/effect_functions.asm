@@ -2,8 +2,6 @@
 ; Dummy Functions
 ; ------------------------------------------------------------------------------
 
-Firegiver_InitialEffect:
-Quickfreeze_InitialEffect:
 PassivePowerEffect:
 	scf
 	; fallthrough
@@ -392,6 +390,23 @@ PrimalScythe_DiscardDamageBoostEffect:
 	call SelectedCards_Discard1FromHand
 	ret c  ; no Mysterious Fossil
 	jp PrimalScythe_DamageBoostEffect
+
+
+PrimalCold_DrawbackEffect:
+	call CheckOpponentHasMorePrizeCardsRemaining
+	ret c  ; opponent Prizes < user Prizes (losing)
+	ret z  ; opponent Prizes = user Prizes (tied)
+; opponent Prizes > user Prizes (winning)
+	jp DiscardAllAttachedEnergiesOnTurnHolderSideEffect
+
+
+PrimalFire_DrawbackEffect:
+	call CheckOpponentHasMorePrizeCardsRemaining
+	ret c  ; opponent Prizes < user Prizes (losing)
+	ret z  ; opponent Prizes = user Prizes (tied)
+; opponent Prizes > user Prizes (winning)
+	ld a, 10
+	jp DiscardFromDeckEffect
 
 
 ; ------------------------------------------------------------------------------
@@ -2908,41 +2923,6 @@ Cowardice_RemoveFromPlayAreaEffect:
 	ret
 
 
-Quickfreeze_Paralysis50PercentEffect:
-	call ParalysisEffect
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ld b, a
-	ld c, $00
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call Func_741a
-	bank1call WaitAttackAnimation
-	bank1call Func_6df1
-	bank1call DrawDuelHUDs
-	call PrintNoEffectTextOrUnsuccessfulText
-	call c, WaitForWideTextBoxInput
-	ret
-
-
-IceBreath_ZeroDamage: ; 2d329 (b:5329)
-	xor a
-	call SetDefiniteDamage
-	ret
-
-IceBreath_BenchDamageEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	ret z
-	call SwapTurn
-	ldh a, [hTemp_ffa0]
-	ld b, a
-	ld de, 40
-	call DealDamageToPlayAreaPokemon_RegularAnim
-	call SwapTurn
-	ret
-
-
 ; return carry if no Lightning energy cards
 Discharge_CheckEnergy:
 	ld e, PLAY_AREA_ARENA
@@ -3120,129 +3100,6 @@ GetHowMuchEnergyCardIsWorth:
 .not_an_energy_card
 	xor a
 	ret
-
-
-Firegiver_AddToHandEffect:
-; fill wDuelTempList with all Fire Energy card
-; deck indices that are in the Deck.
-	ld a, DUELVARS_CARD_LOCATIONS
-	call GetTurnDuelistVariable
-	ld de, wDuelTempList
-	ld c, 0
-.loop_cards
-	ld a, [hl]
-	cp CARD_LOCATION_DECK
-	jr nz, .next
-	push hl
-	push de
-	ld a, l
-	call GetCardIDFromDeckIndex
-	call GetCardType
-	pop de
-	pop hl
-	cp TYPE_ENERGY_FIRE
-	jr nz, .next
-	ld a, l
-	ld [de], a
-	inc de
-	inc c
-.next
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop_cards
-	ld a, $ff
-	ld [de], a
-
-; check how many were found
-	ld a, c
-	or a
-	jr nz, .found
-	; return if none found
-	ldtx hl, ThereWasNoFireEnergyText
-	call DrawWideTextBox_WaitForInput
-	call SyncShuffleDeck
-	ret
-
-.found
-; pick a random number between 1 and 4,
-; up to the maximum number of Fire Energy
-; cards that were found.
-	ld a, 4
-	call Random
-	inc a
-	cp c
-	jr c, .ok
-	ld a, c
-
-.ok
-	ldh [hCurSelectionItem], a
-; load correct attack animation depending
-; on what side the effect is from.
-	ld d, ATK_ANIM_FIREGIVER_PLAYER
-	ld a, [wDuelistType]
-	cp DUELIST_TYPE_PLAYER
-	jr z, .player_1
-; opponent
-	ld d, ATK_ANIM_FIREGIVER_OPP
-.player_1
-	ld a, d
-	ld [wLoadedAttackAnimation], a
-
-; start loop for adding Energy cards to hand
-	ldh a, [hCurSelectionItem]
-	ld c, a
-	ld hl, wDuelTempList
-.loop_energy
-	push hl
-	push bc
-	ld bc, $0
-	ldh a, [hWhoseTurn]
-	ld h, a
-	bank1call PlayAttackAnimation
-	bank1call WaitAttackAnimation
-
-; load correct coordinates to update the number of cards
-; in hand and deck during animation.
-	lb bc, 18, 7 ; x, y for hand number
-	ld e, 3 ; y for deck number
-	ld a, [wLoadedAttackAnimation]
-	cp ATK_ANIM_FIREGIVER_PLAYER
-	jr z, .player_2
-	lb bc, 4, 5 ; x, y for hand number
-	ld e, 10 ; y for deck number
-
-.player_2
-; update and print number of cards in hand
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetTurnDuelistVariable
-	inc a
-	bank1call WriteTwoDigitNumberInTxSymbolFormat
-; update and print number of cards in deck
-	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
-	call GetTurnDuelistVariable
-	ld a, DECK_SIZE - 1
-	sub [hl]
-	ld c, e
-	bank1call WriteTwoDigitNumberInTxSymbolFormat
-
-; load Fire Energy card index and add to hand
-	pop bc
-	pop hl
-	ld a, [hli]
-	call SearchCardInDeckAndSetToJustDrawn
-	call AddCardToHand
-	dec c
-	jr nz, .loop_energy
-
-; load the number of cards added to hand and print text
-	ldh a, [hCurSelectionItem]
-	ld l, a
-	ld h, $00
-	call LoadTxRam3
-	ldtx hl, DrewFireEnergyFromTheHandText
-	call DrawWideTextBox_WaitForInput
-	jp SyncShuffleDeck
 
 
 ; draws list of Energy Cards in Discard Pile
@@ -4456,7 +4313,13 @@ Selfdestruct100Bench20Effect:
 
 
 DiscardAllAttachedEnergiesEffect:
-	xor a
+	xor a  ; PLAY_AREA_ARENA
+	; jr DiscardAllAttachedEnergies
+	; fallthrough
+
+; input:
+;   a: PLAY_AREA_* of the target Pokémon
+DiscardAllAttachedEnergies:
 	call CreateArenaOrBenchEnergyCardList
 	ld hl, wDuelTempList
 ; put all energy cards in Discard Pile
@@ -4466,6 +4329,50 @@ DiscardAllAttachedEnergiesEffect:
 	ret z
 	call PutCardInDiscardPile
 	jr .loop
+
+
+; similar to CreateArenaOrBenchEnergyCardList
+; fill wDuelTempList with the turn holder's energy cards
+; in the arena or in a bench slot (their 0-59 deck indexes).
+; the cards are also moved to the discard pile
+; output:
+;   a: total number of energy cards found
+;   carry: set if no energy cards were found
+;   [wDuelTempList]: $ff-terminated list of energy cards
+DiscardAllAttachedEnergiesOnTurnHolderSideEffect:
+	ld c, CARD_LOCATION_PLAY_AREA
+	ld b, 0  ; counter
+	ld de, wDuelTempList
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.next_card_loop
+	ld a, [hl]
+	and c
+	jr z, .skip_card ; jump if not in play area
+	ld a, l
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Type]
+	and 1 << TYPE_ENERGY_F
+	jr z, .skip_card ; jump if Pokemon or trainer card
+	ld a, l
+	ld [de], a ; add to wDuelTempList
+	inc de
+	inc b
+.skip_card
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .next_card_loop
+; all cards checked
+	ld a, $ff
+	ld [de], a
+	ld a, b  ; load total number of cards
+	or a
+	ret nz  ; found some
+; no energies found
+	scf
+	ret
+	
 
 ThunderstormEffect: ; 2e429 (b:6429)
 	ld a, 1

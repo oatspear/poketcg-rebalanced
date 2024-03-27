@@ -233,6 +233,14 @@ DoubleDamageIfMorePrizesEffectCommands:
 	dbw EFFECTCMDTYPE_AI, DoubleDamageIfMorePrizes_AIEffect
 	db  $00
 
+PrimalColdEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PrimalCold_DrawbackEffect
+	db  $00
+
+PrimalFireEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PrimalFire_DrawbackEffect
+	db  $00
+
 PrimalThunderEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PrimalThunder_DrawbackEffect
 	db  $00
@@ -473,11 +481,6 @@ SilverWhirlwindEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Whirlwind_SelectEffect
 	db  $00
 
-ArticunoQuickfreezeEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Quickfreeze_InitialEffect
-	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Quickfreeze_Paralysis50PercentEffect
-	db  $00
-
 FocusEnergyEffectCommands:
 SwordsDanceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FocusEnergyEffect
@@ -691,11 +694,6 @@ RageEffectCommands:
 DoubleDamageIfUserIsDamagedEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleDamageIfUserIsDamaged_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, DoubleDamageIfUserIsDamaged_AIEffect
-	db  $00
-
-MoltresFiregiverEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Firegiver_InitialEffect
-	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Firegiver_AddToHandEffect
 	db  $00
 
 CourierEffectCommands:
@@ -1209,12 +1207,6 @@ Damage1FriendlyBenchedPokemon30EffectCommands:
 SteamrollerEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Steamroller_ChangeColorEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Steamroller_DamageAndColorEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemonIfAny_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
-	db  $00
-
-ArticunoIceBreathEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IceBreath_BenchDamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemonIfAny_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
 	db  $00

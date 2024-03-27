@@ -62,8 +62,11 @@
 - New attack: **Scorching Column** (F): discard any number of attached (F); 20 damage for each discarded energy; inflicts Burn if 2 or more were discarded.
 
 #### Moltres Lv37
+- Reduced HP from 100 to 90.
 - **Firegiver**: removed.
+- **Dive Bomb**: removed.
 - New attack: **Strafe** (FC): 20 damage; switch.
+- New attack: **Primal Fire** (FFC): 70 damage; discard top 10 cards from deck if the user has taken more Prizes.
 
 ### Water Changes
 
@@ -78,8 +81,11 @@
 - New attack: **Energy Swirl** (WC): 20 damage; return 1 Energy attached to the Defending Pokémon to the opponent's hand.
 
 #### Articuno Lv37
+- Reduced HP from 100 to 90.
 - **Quickfreeze**: removed.
+- **Ice Breath**: removed.
 - New attack: **Strafe** (WC): 20 damage; switch.
+- New attack: **Primal Cold** (WWC): 70 damage; discard all energies from the user's Pokémon if the user has taken more Prizes.
 
 ### Lightning Changes
 
@@ -194,7 +200,7 @@
 - New attack: **Energize** (C): attach (L) from the discard pile.
 
 #### Zapdos Lv68
-- Reduced HP from 100 to 80.
+- Reduced HP from 100 to 90.
 - **Peal of Thunder**: removed.
 - **Big Thunder**: removed.
 - New attack: **Strafe** (LC): 20 damage; switch.

@@ -1,6 +1,193 @@
 ;
 
 
+MoltresFiregiverEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Firegiver_InitialEffect
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Firegiver_AddToHandEffect
+	db  $00
+
+
+Firegiver_AddToHandEffect:
+; fill wDuelTempList with all Fire Energy card
+; deck indices that are in the Deck.
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+	ld de, wDuelTempList
+	ld c, 0
+.loop_cards
+	ld a, [hl]
+	cp CARD_LOCATION_DECK
+	jr nz, .next
+	push hl
+	push de
+	ld a, l
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	pop de
+	pop hl
+	cp TYPE_ENERGY_FIRE
+	jr nz, .next
+	ld a, l
+	ld [de], a
+	inc de
+	inc c
+.next
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_cards
+	ld a, $ff
+	ld [de], a
+
+; check how many were found
+	ld a, c
+	or a
+	jr nz, .found
+	; return if none found
+	ldtx hl, ThereWasNoFireEnergyText
+	call DrawWideTextBox_WaitForInput
+	call SyncShuffleDeck
+	ret
+
+.found
+; pick a random number between 1 and 4,
+; up to the maximum number of Fire Energy
+; cards that were found.
+	ld a, 4
+	call Random
+	inc a
+	cp c
+	jr c, .ok
+	ld a, c
+
+.ok
+	ldh [hCurSelectionItem], a
+; load correct attack animation depending
+; on what side the effect is from.
+	ld d, ATK_ANIM_FIREGIVER_PLAYER
+	ld a, [wDuelistType]
+	cp DUELIST_TYPE_PLAYER
+	jr z, .player_1
+; opponent
+	ld d, ATK_ANIM_FIREGIVER_OPP
+.player_1
+	ld a, d
+	ld [wLoadedAttackAnimation], a
+
+; start loop for adding Energy cards to hand
+	ldh a, [hCurSelectionItem]
+	ld c, a
+	ld hl, wDuelTempList
+.loop_energy
+	push hl
+	push bc
+	ld bc, $0
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call WaitAttackAnimation
+
+; load correct coordinates to update the number of cards
+; in hand and deck during animation.
+	lb bc, 18, 7 ; x, y for hand number
+	ld e, 3 ; y for deck number
+	ld a, [wLoadedAttackAnimation]
+	cp ATK_ANIM_FIREGIVER_PLAYER
+	jr z, .player_2
+	lb bc, 4, 5 ; x, y for hand number
+	ld e, 10 ; y for deck number
+
+.player_2
+; update and print number of cards in hand
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	inc a
+	bank1call WriteTwoDigitNumberInTxSymbolFormat
+; update and print number of cards in deck
+	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
+	call GetTurnDuelistVariable
+	ld a, DECK_SIZE - 1
+	sub [hl]
+	ld c, e
+	bank1call WriteTwoDigitNumberInTxSymbolFormat
+
+; load Fire Energy card index and add to hand
+	pop bc
+	pop hl
+	ld a, [hli]
+	call SearchCardInDeckAndSetToJustDrawn
+	call AddCardToHand
+	dec c
+	jr nz, .loop_energy
+
+; load the number of cards added to hand and print text
+	ldh a, [hCurSelectionItem]
+	ld l, a
+	ld h, $00
+	call LoadTxRam3
+	ldtx hl, DrewFireEnergyFromTheHandText
+	call DrawWideTextBox_WaitForInput
+	jp SyncShuffleDeck
+	
+
+
+
+ArticunoQuickfreezeEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Quickfreeze_InitialEffect
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Quickfreeze_Paralysis50PercentEffect
+	db  $00
+
+
+
+Quickfreeze_Paralysis50PercentEffect:
+	call ParalysisEffect
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ld b, a
+	ld c, $00
+	ldh a, [hWhoseTurn]
+	ld h, a
+	bank1call PlayAttackAnimation
+	bank1call Func_741a
+	bank1call WaitAttackAnimation
+	bank1call Func_6df1
+	bank1call DrawDuelHUDs
+	call PrintNoEffectTextOrUnsuccessfulText
+	call c, WaitForWideTextBoxInput
+	ret
+
+
+
+
+ArticunoIceBreathEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IceBreath_BenchDamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DamageTargetBenchedPokemonIfAny_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, DamageTargetBenchedPokemonIfAny_AISelectEffect
+	db  $00
+
+
+IceBreath_ZeroDamage: ; 2d329 (b:5329)
+	xor a
+	call SetDefiniteDamage
+	ret
+
+IceBreath_BenchDamageEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z
+	call SwapTurn
+	ldh a, [hTemp_ffa0]
+	ld b, a
+	ld de, 40
+	call DealDamageToPlayAreaPokemon_RegularAnim
+	call SwapTurn
+	ret
+
+
+
+
+
+
+
 EvolutionaryFlameEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PassivePowerEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, EvolutionaryFlame_DiscardBurnEffect

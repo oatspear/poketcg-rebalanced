@@ -422,23 +422,6 @@ WildfireDescription:
 	line "opponent's deck."
 	done
 
-DiveBombName: ; 5ada6 (16:6da6)
-	text "Dive Bomb"
-	done
-
-FiregiverName: ; 5ae13 (16:6e13)
-	text "Firegiver"
-	done
-
-FiregiverDescription: ; 5ae1e (16:6e1e)
-	text "When you put Moltres into play"
-	line "during your turn (not during"
-	line "set-up), put from 1 to 4 (chosen at"
-	line "random) <FIRE> Energy cards from your"
-	line "deck into your hand. Shuffle your"
-	line "deck afterward."
-	done
-
 BubbleName: ; 5af39 (16:6f39)
 	text "Bubble"
 	done
@@ -748,30 +731,6 @@ FreezeName: ; 5cc5b (17:4c5b)
 	text "Freeze"
 	done
 
-QuickfreezeName: ; 5ccc4 (17:4cc4)
-	text "Quickfreeze"
-	done
-
-QuickfreezeDescription: ; 5ccd1 (17:4cd1)
-	text "When you put Articuno into play"
-	line "during your turn (not during"
-	line "set-up), flip a coin. If heads, the"
-	line "Defending Pokémon is now Paralyzed."
-	done
-
-IceBreathName: ; 5cd57 (17:4d57)
-	text "Ice Breath"
-	done
-
-IceBreathDescription: ; 5cd63 (17:4d63)
-	text "Does 40 damage to 1 of your"
-	line "opponent's Pokémon. Don't apply"
-	line "Weakness and Resistance for this"
-	line "attack. (Any other effects that"
-	line "would happen after applying Weakness"
-	line "and Resistance still happen.)"
-	done
-
 OnlyWorksOnEvolvedPokemonText:
 	text "Only works on evolved Pokémon."
 	done
@@ -985,16 +944,25 @@ ThunderboltDescription: ; 5e29d (17:629d)
 	line "this Pokémon."
 	done
 
-PealOfThunderName: ; 5e345 (17:6345)
-	text "Peal of Thunder"
+PrimalColdName:
+	text "Primal Cold"
 	done
 
-PealOfThunderDescription: ; 5e356 (17:6356)
-	text "When you put Zapdos into play during"
-	line "your turn (not during set-up), do"
-	line "30 damage to a Pokémon other than"
-	line "Zapdos chosen at random. (Don't"
-	line "apply Weakness and Resistance.)"
+PrimalColdDescription:
+	text "If you have less Prize cards left"
+	line "than your opponent, discard all"
+	line "energy cards attached to all of"
+	line "your Pokémon."
+	done
+
+PrimalFireName:
+	text "Primal Fire"
+	done
+
+PrimalFireDescription:
+	text "If you have less Prize cards left"
+	line "than your opponent, discard the"
+	line "top 10 cards from your deck."
 	done
 
 PrimalThunderName:

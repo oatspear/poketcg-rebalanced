@@ -3260,7 +3260,7 @@ MoltresLv37Card:
 	db STAR ; rarity
 	db PROMOTIONAL | GB ; sets
 	db MOLTRES_LV37
-	db 100 ; hp
+	db 90 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -3293,17 +3293,17 @@ MoltresLv37Card:
 
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
-	tx DiveBombName ; name
-	dw NONE ; description
+	tx PrimalFireName ; name
+	tx PrimalFireDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 70 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw PrimalFireEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_DIVE_BOMB ; animation
+	db ATK_ANIM_FIRE_SPIN ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness
@@ -4914,7 +4914,7 @@ ArticunoLv37Card:
 	db STAR ; rarity
 	db PROMOTIONAL | GB ; sets
 	db ARTICUNO_LV37
-	db 100 ; hp
+	db 90 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -4946,18 +4946,18 @@ ArticunoLv37Card:
 	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
-	energy WATER, 3 ; energies
-	tx IceBreathName ; name
-	tx IceBreathDescription ; description
+	energy WATER, 2, COLORLESS, 1 ; energies
+	tx PrimalColdName ; name
+	tx PrimalColdDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db RESIDUAL ; category
-	dw ArticunoIceBreathEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db 70 ; damage
+	db DAMAGE_NORMAL ; category
+	dw PrimalColdEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_WHIRLWIND_ZIGZAG ; animation
+	db 0
+	db ATK_ANIM_BLIZZARD ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness
@@ -6119,7 +6119,7 @@ ZapdosLv68Card:
 	db STAR ; rarity
 	db PROMOTIONAL | GB ; sets
 	db ZAPDOS_LV68
-	db 80 ; hp
+	db 90 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
