@@ -3016,9 +3016,7 @@ DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect:
 ; output the result in hTemp_ffa0
 	ldh a, [hCurSelectionItem]
 	ldh [hTemp_ffa0], a
-	or a
-	ret nz
-	scf
+	cp 1  ; carry if zero
 	ret
 
 
@@ -3731,8 +3729,13 @@ Attach1FireEnergyFromDiscard_SelectEffect:
 ; input:
 ;   a: number of cards to pick from wDuelTempList
 PickFirstNCardsFromList_SelectEffect:
-	ld hl, wDuelTempList
 	ld de, hTempList
+
+; input:
+;   a: number of cards to pick from wDuelTempList
+;   de: pointer to destination list
+PickFirstNCardsFromList_SelectEffect_DE:
+	ld hl, wDuelTempList
 	ld c, a
 .loop
 	ld a, [hli]
@@ -4175,6 +4178,84 @@ DiscardOpponentEnergy_DiscardEffect:
 	call GetTurnDuelistVariable
 	ld [hl], LAST_TURN_EFFECT_DISCARD_ENERGY
 	jp SwapTurn
+
+
+; input:
+;   [hTemp_ffa0]: maximum number of energies to discard
+; output:
+;   a: number of selected cards to discard
+;   [hTempRetreatCostCards]: list of selected energy cards
+IceCyclone_DiscardOpponentEnergies_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTempRetreatCostCards], a
+	ldh [hTempRetreatCostCards + 1], a
+	ldh [hTempRetreatCostCards + 2], a
+	ldh [hTempRetreatCostCards + 3], a
+	ldh [hTempRetreatCostCards + 4], a
+	ldh [hTempRetreatCostCards + 5], a
+	call SwapTurn
+	xor a  ; PLAY_AREA_ARENA
+	call CreateArenaOrBenchEnergyCardList
+	jr nc, .choose
+; no energy
+	xor a
+	scf
+	ret
+
+.choose
+	ldtx hl, ChooseDiscardEnergyCardFromOpponentText
+	call DrawWideTextBox_WaitForInput
+
+	xor a  ; PLAY_AREA_ARENA
+	ldh [hCurSelectionItem], a
+	bank1call DisplayEnergyDiscardScreen
+
+; show list to Player and, for each card selected to discard,
+; increase a counter and store it
+	ldh a, [hTemp_ffa0]
+	ld [wEnergyDiscardMenuDenominator], a
+.loop
+	ldh a, [hCurSelectionItem]
+	ld [wEnergyDiscardMenuNumerator], a
+	bank1call HandleEnergyDiscardMenuInput
+	jr c, .done  ; cancelled
+	ld c, a  ; deck index
+	call RemoveCardFromDuelTempList  ; preserves bc
+	jr c, .done
+; store the chosen card
+	ldh a, [hCurSelectionItem]
+	ld d, 0
+	ld e, a  ; offset
+	inc a
+	ldh [hCurSelectionItem], a
+	ld hl, hTempRetreatCostCards
+	add hl, de
+	ld a, c  ; deck index
+	ld [hl], a
+; check for maximum number of cards
+	inc e
+	ldh a, [hTemp_ffa0]
+	cp e
+	jr nc, .done
+	bank1call DisplayEnergyDiscardMenu
+	jr .loop
+
+.done
+; return carry if no cards were discarded
+	ldh a, [hCurSelectionItem]
+	cp 1  ; carry if zero
+	jp SwapTurn
+
+
+IceCyclone_DiscardOpponentEnergies_AISelectEffect:
+	call SwapTurn
+	xor a  ; PLAY_AREA_ARENA
+	call CreateArenaOrBenchEnergyCardList
+	call SwapTurn
+	ldh a, [hTemp_ffa0]
+	ld de, hTempRetreatCostCards
+	jp PickFirstNCardsFromList_SelectEffect_DE
+
 
 
 ; ------------------------------------------------------------------------------
