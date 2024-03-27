@@ -3977,7 +3977,16 @@ DiscardEnergy_DiscardEffect:
 Discard2Energies_PlayerSelectEffect:
 	ldtx hl, ChooseAndDiscard2EnergyCardsText
 	call DrawWideTextBox_WaitForInput
+	ld a, 2
+	; jr HandlePlayerSelection_EnergiesToDiscard
+	; fallthrough
 
+; input:
+;   a: how many energies
+; output:
+;   carry: set if the selection was cancelled
+HandlePlayerSelection_EnergiesToDiscard:
+	push af
 	xor a
 	ldh [hCurSelectionItem], a
 	; xor a ; PLAY_AREA_ARENA
@@ -3985,9 +3994,9 @@ Discard2Energies_PlayerSelectEffect:
 	call SortCardsInDuelTempListByID
 	xor a ; PLAY_AREA_ARENA
 	bank1call DisplayEnergyDiscardScreen
-
-	ld a, 2
+	pop af
 	ld [wEnergyDiscardMenuDenominator], a
+
 .loop_input
 	bank1call HandleEnergyDiscardMenuInput
 	ret c
@@ -3996,8 +4005,10 @@ Discard2Energies_PlayerSelectEffect:
 	ld [hl], a
 	ld hl, wEnergyDiscardMenuNumerator
 	inc [hl]
+	ld a, [wEnergyDiscardMenuDenominator]
+	ld c, a
 	ldh a, [hCurSelectionItem]
-	cp 2
+	cp c
 	jr nc, .done
 	ldh a, [hTempCardIndex_ff98]
 	call RemoveCardFromDuelTempList
