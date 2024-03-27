@@ -3228,18 +3228,18 @@ MoltresLv35Card:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy FIRE, 1, COLORLESS, 2 ; energies
+	energy FIRE, 1 ; energies
 	tx WildfireName ; name
 	tx WildfireDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
+	db 10 ; damage
+	db DAMAGE_X ; category
 	dw WildfireEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_5 ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_FIRE_SPIN ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness

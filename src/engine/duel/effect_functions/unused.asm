@@ -1,6 +1,14 @@
 ;
 
 
+Wildfire_AISelectEffect:
+; AI always chooses 0 cards to discard
+	xor a
+	ldh [hTemp_ffa0], a
+	ret
+
+
+
 MoltresFiregiverEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Firegiver_InitialEffect
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, Firegiver_AddToHandEffect

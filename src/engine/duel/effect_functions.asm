@@ -2946,8 +2946,6 @@ Wildfire_CheckEnergy:
 
 
 Discharge_PlayerSelectEffect:
-	; ldtx hl, DiscardOppDeckAsManyFireEnergyCardsText
-	; call DrawWideTextBox_WaitForInput
 	call CreateListOfLightningEnergyAttachedToArena
 	jr DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect
 
@@ -3008,6 +3006,7 @@ DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect:
 	ret
 
 
+Wildfire_AISelectEffect:
 ScorchingColumn_AISelectEffect:
 ; AI always chooses all cards to discard
 	call CreateListOfFireEnergyAttachedToArena
@@ -3031,13 +3030,6 @@ DiscardAnyNumberOfAttachedEnergy_AISelectEffect:
 	ld c, a
 	ld b, 0
 	jp CopyDataHLtoDE
-
-
-Wildfire_AISelectEffect:
-; AI always chooses 0 cards to discard
-	xor a
-	ldh [hTemp_ffa0], a
-	ret
 
 
 Discharge_DiscardEnergyEffect:

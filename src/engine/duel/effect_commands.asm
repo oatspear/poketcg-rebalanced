@@ -562,14 +562,6 @@ Discard1EnergyEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardEnergy_AISelectEffect
 	db  $00
 
-WildfireEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Wildfire_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Wildfire_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Wildfire_DiscardDeckEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Wildfire_DiscardEnergyEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Wildfire_AISelectEffect
-	db  $00
-
 Discard2EnergiesEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Check2EnergiesAttached
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discard2Energies_PlayerSelectEffect
@@ -1140,6 +1132,16 @@ ExplosionEffectCommands:
 
 ThunderboltEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DiscardAllAttachedEnergiesEffect
+	db  $00
+
+WildfireEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Wildfire_CheckEnergy
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Wildfire_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Wildfire_MultiplierEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Wildfire_DiscardDeckEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Wildfire_DiscardEnergyEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Wildfire_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, Wildfire_AIEffect
 	db  $00
 
 DischargeEffectCommands:

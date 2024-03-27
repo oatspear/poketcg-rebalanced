@@ -432,6 +432,12 @@ DoubleDamageIfAttachedEnergy_AIEffect:
 	jp SetDefiniteAIDamage
 
 
+Wildfire_MultiplierEffect:
+	ldh a, [hTemp_ffa0]
+	call ATimes10
+	jp SetDefiniteDamage
+
+
 ScorchingColumn_MultiplierEffect:
 Discharge_MultiplierEffect:
 	ldh a, [hTemp_ffa0]
@@ -444,6 +450,18 @@ Discharge_AIEffect:
 	call HandleEnergyBurn
 	ld a, [wAttachedEnergies + LIGHTNING]
 	add a  ; x2
+	call ATimes10
+	; ld d, 0
+	; ld e, a
+	; jp UpdateExpectedAIDamage
+	call SetDefiniteDamage
+	jp SetDefiniteAIDamage
+
+
+Wildfire_AIEffect:
+	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
+	ld a, [wAttachedEnergies + FIRE]
 	call ATimes10
 	; ld d, 0
 	; ld e, a

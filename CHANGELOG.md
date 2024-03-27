@@ -61,6 +61,9 @@
 - **Flamethrower**: removed.
 - New attack: **Scorching Column** (F): discard any number of attached (F); 20 damage for each discarded energy; inflicts Burn if 2 or more were discarded.
 
+#### Moltres Lv35
+- **Wildfire**: reduced cost from (FCC) to (F); changed base damage to 10 per energy discarded.
+
 #### Moltres Lv37
 - Reduced HP from 100 to 90.
 - **Firegiver**: removed.

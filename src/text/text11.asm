@@ -415,11 +415,12 @@ WildfireName:
 	done
 
 WildfireDescription:
-	text "You may discard any number of <FIRE>"
-	line "Energy cards attached to this"
-	line "Pokémon. If you do, discard that"
-	line "many cards from the top of your"
-	line "opponent's deck."
+	text "Discard any number of <FIRE> Energy"
+	line "attached to this Pokémon."
+	line "This attack does 10 damage for each"
+	line "Energy discarded this way."
+	line "Discard that many cards from the"
+	line "top of your opponent's deck."
 	done
 
 BubbleName: ; 5af39 (16:6f39)
