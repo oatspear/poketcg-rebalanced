@@ -4145,16 +4145,14 @@ DiscardOpponentEnergy_PlayerSelectEffect:
 	bank1call HandleEnergyDiscardMenuInput
 	jr c, .loop_input
 
-	call SwapTurn
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hEnergyTransEnergyCard], a ; store selected card to discard
-	ret
+	jp SwapTurn
 
 .no_energy
-	call SwapTurn
 	ld a, $ff
 	ldh [hEnergyTransEnergyCard], a
-	ret
+	jp SwapTurn
 
 DiscardOpponentEnergy_AISelectEffect:
 	call AIPickEnergyCardToDiscardFromDefendingPokemon
