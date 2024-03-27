@@ -85,7 +85,9 @@
 
 #### Articuno Lv35
 - **Freeze Dry**: removed.
+- **Blizzard**: removed.
 - New attack: **Freeze** (C): attach (W) from the discard pile.
+- New attack: **Ice Cyclone** (W): discard any number of attached (W); 10 damage for each discarded energy; 10 damage to all of the opponent's Benched Pokémon.
 
 #### Articuno Lv37
 - Reduced HP from 100 to 90.

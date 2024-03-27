@@ -423,6 +423,19 @@ WildfireDescription:
 	line "top of your opponent's deck."
 	done
 
+IceCycloneName:
+	text "Ice Cyclone"
+	done
+
+IceCycloneDescription:
+	text "Discard any number of <WATER> Energy"
+	line "attached to this Pokémon."
+	line "This attack does 10 damage for each"
+	line "Energy discarded this way."
+	line "It also does 10 damage to each of"
+	line "of your opponent's Benched Pokémon."
+	done
+
 BubbleName: ; 5af39 (16:6f39)
 	text "Bubble"
 	done

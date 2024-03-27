@@ -306,6 +306,12 @@ CreatePokemonCardListFromDiscardPile:
 	ret
 
 
+; creates in wDuelTempList list of attached Water Energy cards
+; that are attached to the Turn Duelist's Arena card.
+CreateListOfWaterEnergyAttachedToArena:
+	ld a, TYPE_ENERGY_WATER
+	jr CreateListOfMatchingEnergyAttachedToArena
+
 ; creates in wDuelTempList list of attached Lightning Energy cards
 ; that are attached to the Turn Duelist's Arena card.
 CreateListOfLightningEnergyAttachedToArena:

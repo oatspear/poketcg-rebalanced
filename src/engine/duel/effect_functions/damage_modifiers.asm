@@ -432,6 +432,7 @@ DoubleDamageIfAttachedEnergy_AIEffect:
 	jp SetDefiniteAIDamage
 
 
+IceCyclone_MultiplierEffect:
 Wildfire_MultiplierEffect:
 	ldh a, [hTemp_ffa0]
 	call ATimes10
@@ -450,6 +451,18 @@ Discharge_AIEffect:
 	call HandleEnergyBurn
 	ld a, [wAttachedEnergies + LIGHTNING]
 	add a  ; x2
+	call ATimes10
+	; ld d, 0
+	; ld e, a
+	; jp UpdateExpectedAIDamage
+	call SetDefiniteDamage
+	jp SetDefiniteAIDamage
+
+
+IceCyclone_AIEffect:
+	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
+	ld a, [wAttachedEnergies + WATER]
 	call ATimes10
 	; ld d, 0
 	; ld e, a

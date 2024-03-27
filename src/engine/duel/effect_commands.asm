@@ -1150,6 +1150,16 @@ WildfireEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Wildfire_AIEffect
 	db  $00
 
+IceCycloneEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, IceCyclone_CheckEnergy
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, IceCyclone_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IceCyclone_MultiplierEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenched10Effect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, IceCyclone_DiscardEnergyEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, IceCyclone_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, IceCyclone_AIEffect
+	db  $00
+
 DischargeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Discharge_CheckEnergy
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Discharge_PlayerSelectEffect

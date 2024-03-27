@@ -2945,6 +2945,22 @@ Wildfire_CheckEnergy:
 	ret
 
 
+; return carry if no Water energy cards
+IceCyclone_CheckEnergy:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
+	ldtx hl, NotEnoughWaterEnergyText
+	ld a, [wAttachedEnergies + WATER]
+	cp 1
+	ret
+
+
+IceCyclone_PlayerSelectEffect:
+	call CreateListOfWaterEnergyAttachedToArena
+	jr DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect
+
+
 Discharge_PlayerSelectEffect:
 	call CreateListOfLightningEnergyAttachedToArena
 	jr DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect
@@ -3006,6 +3022,13 @@ DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect:
 	ret
 
 
+IceCyclone_AISelectEffect:
+; AI always chooses all cards to discard
+	call CreateListOfWaterEnergyAttachedToArena
+	ldh [hTemp_ffa0], a
+	jr DiscardAnyNumberOfAttachedEnergy_AISelectEffect
+
+
 Wildfire_AISelectEffect:
 ScorchingColumn_AISelectEffect:
 ; AI always chooses all cards to discard
@@ -3031,6 +3054,10 @@ DiscardAnyNumberOfAttachedEnergy_AISelectEffect:
 	ld b, 0
 	jp CopyDataHLtoDE
 
+
+IceCyclone_DiscardEnergyEffect:
+	call CreateListOfWaterEnergyAttachedToArena
+	jr DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect
 
 Discharge_DiscardEnergyEffect:
 	call CreateListOfLightningEnergyAttachedToArena

@@ -2471,8 +2471,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SmokescreenName                                    ; unused
 	textpointer BiteName                                           ; 0x0916
 	textpointer RageName                                           ; 0x0917
-	textpointer WildfireName                                       ; 0x091d
-	textpointer WildfireDescription                                ; 0x091e
+	textpointer WildfireName
+	textpointer WildfireDescription
+	textpointer IceCycloneName
+	textpointer IceCycloneDescription
 	textpointer BubbleName                                         ; 0x0925
 	textpointer WithdrawName                                       ; 0x0926
 	textpointer TinyTurtleName                                     ; 0x0928

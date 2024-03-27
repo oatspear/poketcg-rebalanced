@@ -4882,18 +4882,31 @@ ArticunoLv35Card:
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy WATER, 2, COLORLESS, 2 ; energies
-	tx BlizzardName ; name
-	tx DamageOpponentBench10Description ; description
+	energy WATER, 1 ; energies
+	tx IceCycloneName ; name
+	tx IceCycloneDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw DamageAllOpponentBenched10EffectCommands ; effect commands
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw IceCycloneEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db NONE ; flags 2
+	db FLAG_2_BIT_5 ; flags 2
 	db NONE ; flags 3
 	db 10
 	db ATK_ANIM_BLIZZARD ; animation
+
+	; energy WATER, 2, COLORLESS, 2 ; energies
+	; tx BlizzardName ; name
+	; tx DamageOpponentBench10Description ; description
+	; tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw DamageAllOpponentBenched10EffectCommands ; effect commands
+	; db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 10
+	; db ATK_ANIM_BLIZZARD ; animation
 
 	db 1 ; retreat cost
 	db NONE ; weakness
