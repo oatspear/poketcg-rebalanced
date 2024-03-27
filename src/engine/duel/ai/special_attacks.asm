@@ -71,6 +71,8 @@ HandleSpecialAIAttacks:
 	jr z, .CallForFamily
 	cp ODDISH
 	jr z, .Sprout
+	cp ARTICUNO_LV35
+	jp z, .Freeze
 	cp MOLTRES_LV35
 	jp z, .CollectFire
 	cp ZAPDOS_LV64
@@ -264,6 +266,10 @@ HandleSpecialAIAttacks:
 
 .Energize:
 	ld e, LIGHTNING_ENERGY
+	jr .accelerate_self_from_discard_got_energy
+
+.Freeze:
+	ld e, WATER_ENERGY
 	jr .accelerate_self_from_discard_got_energy
 
 .JunkMagnet:

@@ -83,6 +83,10 @@
 - New Pokémon Power: **Evolutionary Wave**: when played from the hand to evolve, heal 20 damage from each of the user's Pokémon.
 - New attack: **Energy Swirl** (WC): 20 damage; return 1 Energy attached to the Defending Pokémon to the opponent's hand.
 
+#### Articuno Lv35
+- **Freeze Dry**: removed.
+- New attack: **Freeze** (C): attach (W) from the discard pile.
+
 #### Articuno Lv37
 - Reduced HP from 100 to 90.
 - **Quickfreeze**: removed.

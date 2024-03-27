@@ -846,6 +846,11 @@ Attach1FireEnergyFromDiscardDescription:
 	line "discard pile to this Pokémon."
 	done
 
+Attach1WaterEnergyFromDiscardDescription:
+	text "Attach a <WATER> Energy from your"
+	line "discard pile to this Pokémon."
+	done
+
 AbsorbWaterName:
 	text "Absorb Water"
 	done

@@ -3679,6 +3679,13 @@ Retrieve1WaterEnergyFromDiscard_SelectEffect:
 	jr PickFirstNCardsFromList_SelectEffect
 
 
+Attach1WaterEnergyFromDiscard_SelectEffect:
+; pick the first energy card
+	call CreateEnergyCardListFromDiscardPile_OnlyWater
+	ld a, 1
+	jr PickFirstNCardsFromList_SelectEffect
+
+
 Attach1LightningEnergyFromDiscard_SelectEffect:
 ; pick the first energy card
 	call CreateEnergyCardListFromDiscardPile_OnlyLightning

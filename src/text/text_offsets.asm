@@ -2537,7 +2537,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ClairvoyanceName                                   ; 0x09a2
 	textpointer ClairvoyanceDescription                            ; 0x09a3
 	textpointer SpiralName                                         ; 0x09a5
-	textpointer FreezeDryName                                      ; 0x09ab
 	textpointer BlizzardName                                       ; 0x09ac
 	textpointer DamageOpponentBench10Description                   ; 0x09ad
 	textpointer FreezeName                                         ; 0x09ae
@@ -2950,6 +2949,7 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer NaturalRemedyDescription
 	textpointer CollectFireName
 	textpointer Attach1FireEnergyFromDiscardDescription
+	textpointer Attach1WaterEnergyFromDiscardDescription
 	textpointer AbsorbWaterName
 	textpointer Retrieve1WaterEnergyFromDiscardDescription
 	textpointer MudSportName

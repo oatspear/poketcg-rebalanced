@@ -715,10 +715,6 @@ SpiralName: ; 5c9df (17:49df)
 	text "Spiral"
 	done
 
-FreezeDryName: ; 5cb61 (17:4b61)
-	text "Freeze Dry"
-	done
-
 BlizzardName: ; 5cb6d (17:4b6d)
 	text "Blizzard"
 	done
