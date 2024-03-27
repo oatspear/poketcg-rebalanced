@@ -61,6 +61,10 @@
 - **Flamethrower**: removed.
 - New attack: **Scorching Column** (F): discard any number of attached (F); 20 damage for each discarded energy; inflicts Burn if 2 or more were discarded.
 
+#### Moltres Lv37
+- **Firegiver**: removed.
+- New attack: **Strafe** (FC): 20 damage; switch.
+
 ### Water Changes
 
 #### Dewgong
@@ -72,6 +76,10 @@
 - **Bite**: removed.
 - New Pokémon Power: **Evolutionary Wave**: when played from the hand to evolve, heal 20 damage from each of the user's Pokémon.
 - New attack: **Energy Swirl** (WC): 20 damage; return 1 Energy attached to the Defending Pokémon to the opponent's hand.
+
+#### Articuno Lv37
+- **Quickfreeze**: removed.
+- New attack: **Strafe** (WC): 20 damage; switch.
 
 ### Lightning Changes
 
@@ -187,7 +195,9 @@
 
 #### Zapdos Lv68
 - Reduced HP from 100 to 80.
+- **Peal of Thunder**: removed.
 - **Big Thunder**: removed.
+- New attack: **Strafe** (LC): 20 damage; switch.
 - New attack: **Primal Thunder** (LLC): 70 damage; 30 damage to all friendly Pokémon if the user has taken more Prizes.
 
 ### Psychic Changes

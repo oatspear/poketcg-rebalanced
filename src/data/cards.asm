@@ -3264,19 +3264,32 @@ MoltresLv37Card:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; energy 0 ; energies
+	; tx FiregiverName ; name
+	; tx FiregiverDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db POKEMON_POWER ; category
+	; dw MoltresFiregiverEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_FIREGIVER ; animation
+
 	; attack 1
-	energy 0 ; energies
-	tx FiregiverName ; name
-	tx FiregiverDescription ; description
+	energy FIRE, 1, COLORLESS, 1 ; energies
+	tx StrafeName ; name
+	tx SwitchThisPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw MoltresFiregiverEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw SwitchUserEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_FIREGIVER ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
 	energy FIRE, 2, COLORLESS, 1 ; energies
@@ -4905,19 +4918,32 @@ ArticunoLv37Card:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; energy 0 ; energies
+	; tx QuickfreezeName ; name
+	; tx QuickfreezeDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db POKEMON_POWER ; category
+	; dw ArticunoQuickfreezeEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_QUICKFREEZE ; animation
+
 	; attack 1
-	energy 0 ; energies
-	tx QuickfreezeName ; name
-	tx QuickfreezeDescription ; description
+	energy WATER, 1, COLORLESS, 1 ; energies
+	tx StrafeName ; name
+	tx SwitchThisPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw ArticunoQuickfreezeEffectCommands ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw SwitchUserEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICKFREEZE ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
 	energy WATER, 3 ; energies
@@ -6097,19 +6123,32 @@ ZapdosLv68Card:
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
+	; energy 0 ; energies
+	; tx PealOfThunderName ; name
+	; tx PealOfThunderDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db POKEMON_POWER ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_PEAL_OF_THUNDER ; animation
+
 	; attack 1
-	energy 0 ; energies
-	tx PealOfThunderName ; name
-	tx PealOfThunderDescription ; description
+	energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	tx StrafeName ; name
+	tx SwitchThisPokemonDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw NONE ; effect commands
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw SwitchUserEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PEAL_OF_THUNDER ; animation
+	db ATK_ANIM_QUICK_ATTACK ; animation
 
 	; attack 2
 	energy LIGHTNING, 2, COLORLESS, 1 ; energies
