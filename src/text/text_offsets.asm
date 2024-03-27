@@ -2491,7 +2491,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer SpiralDrainName                                    ; 0x093c
 	textpointer HyperBeamName                                      ; 0x093d
 	textpointer Discard1EnergyFromTargetDescription
-	textpointer IfHeadsDiscard1EnergyFromTargetDescription
 	textpointer TadpoleName                                        ; 0x0943
 	textpointer AmnesiaName                                        ; 0x0946
 	textpointer AmnesiaDescription                                 ; 0x0947

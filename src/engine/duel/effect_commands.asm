@@ -660,13 +660,6 @@ BoostedVoltageEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, IfAttachedToolDamageOpponentBench10Effect
 	db  $00
 
-CorrosiveAcidEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DiscardOpponentEnergyIfHeads_50PercentEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergyIfHeads_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, DiscardOpponentEnergyIfHeads_AISelectEffect
-	db  $00
-
 Confusion50PercentEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect
 	db  $00

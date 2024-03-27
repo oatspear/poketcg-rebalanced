@@ -4168,33 +4168,6 @@ DiscardOpponentEnergy_DiscardEffect:
 	jp SwapTurn
 
 
-DiscardOpponentEnergyIfHeads_50PercentEffect:
-	ldtx de, IfHeadsDiscard1EnergyFromTargetText
-	call TossCoin_BankB
-	ldh [hEnergyTransEnergyCard], a
-	or a  ; reset carry, otherwise heads cancels the attack
-	ret
-
-DiscardOpponentEnergyIfHeads_PlayerSelectEffect:
-; check the result of the previous coin flip
-	ldh a, [hEnergyTransEnergyCard]
-	or a
-	jr nz, DiscardOpponentEnergy_PlayerSelectEffect
-; no energy chosen if tails
-	ld a, $ff
-	ldh [hEnergyTransEnergyCard], a
-	ret
-
-DiscardOpponentEnergyIfHeads_AISelectEffect:
-; check the result of the previous coin flip
-	ldh a, [hEnergyTransEnergyCard]
-	or a
-	jr nz, DiscardOpponentEnergy_AISelectEffect
-; no energy chosen if tails
-	ld a, $ff
-	ldh [hEnergyTransEnergyCard], a
-	ret
-
 ; ------------------------------------------------------------------------------
 
 

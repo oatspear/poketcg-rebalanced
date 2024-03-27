@@ -1784,11 +1784,11 @@ WeepinbellCard:
 	; attack 2
 	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx CorrosiveAcidName ; name
-	tx IfHeadsDiscard1EnergyFromTargetDescription ; description
+	tx Discard1EnergyFromTargetDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw CorrosiveAcidEffectCommands ; effect commands
+	dw Discard1EnergyFromOpponentEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3

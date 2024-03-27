@@ -30,6 +30,9 @@
 #### Parasect
 - Added Resistance to **Water**.
 
+#### Weepinbell
+- **Corrosive Acid**: removed coin flip.
+
 ### Fire Changes
 
 #### Arcanine Lv34

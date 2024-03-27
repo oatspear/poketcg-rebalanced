@@ -512,12 +512,6 @@ Discard1EnergyFromTargetDescription:
 	line "Defending Pokémon."
 	done
 
-IfHeadsDiscard1EnergyFromTargetDescription:
-	text "Flip a coin. If Heads, discard an"
-	line "Energy card from the Defending"
-	line "Pokémon."
-	done
-
 TadpoleName: ; 5b5f4 (16:75f4)
 	text "Tadpole"
 	done
