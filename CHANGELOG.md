@@ -35,6 +35,11 @@
 
 ### Fire Changes
 
+#### Growlithe
+- **Fetch**: draws 2 cards.
+- **Flare**: removed.
+- New attack: **Bite** (FC): 20 damage.
+
 #### Arcanine Lv34
 - **Quick Attack**: base damage reduced from 20 to 10; bonus damage increased from 20 to 50.
 
@@ -65,6 +70,7 @@
 - New attack: **Scorching Column** (F): discard any number of attached (F); 20 damage for each discarded energy; inflicts Burn if 2 or more were discarded.
 
 #### Moltres Lv35
+- **Collect Fire**: renamed to **Flare**.
 - **Wildfire**: reduced cost from (FCC) to (F); changed base damage to 10; +10 damage per energy discarded.
 
 #### Moltres Lv37

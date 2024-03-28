@@ -837,10 +837,6 @@ NaturalRemedyDescription:
 	line "your Pokémon."
 	done
 
-CollectFireName:
-	text "Collect Fire"
-	done
-
 Attach1FireEnergyFromDiscardDescription:
 	text "Attach a <FIRE> Energy from your"
 	line "discard pile to this Pokémon."

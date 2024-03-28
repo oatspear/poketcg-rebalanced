@@ -938,7 +938,7 @@ FreezeEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AccelerateFromDiscard_AttachToPokemonEffect
 	db  $00
 
-CollectFireEffectCommands:
+FlareEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CheckDiscardPileHasFireEnergyCards
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Attach1FireEnergyFromDiscard_SelectEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AccelerateFromDiscard_AttachToPokemonEffect

@@ -74,7 +74,7 @@ HandleSpecialAIAttacks:
 	cp ARTICUNO_LV35
 	jp z, .Freeze
 	cp MOLTRES_LV35
-	jp z, .CollectFire
+	jp z, .Flare
 	cp ZAPDOS_LV64
 	jp z, .Energize
 	cp JYNX
@@ -251,7 +251,7 @@ HandleSpecialAIAttacks:
 	ld a, $82
 	ret
 
-.CollectFire:
+.Flare:
 	ld e, FIRE_ENERGY
 .accelerate_self_from_discard_got_energy
 	ld a, CARD_LOCATION_DISCARD_PILE

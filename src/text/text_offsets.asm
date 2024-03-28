@@ -2948,7 +2948,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer HealingEnergyDescription
 	textpointer NaturalRemedyName
 	textpointer NaturalRemedyDescription
-	textpointer CollectFireName
 	textpointer Attach1FireEnergyFromDiscardDescription
 	textpointer Attach1WaterEnergyFromDiscardDescription
 	textpointer AbsorbWaterName
