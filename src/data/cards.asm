@@ -3233,7 +3233,7 @@ MoltresLv35Card:
 	tx WildfireDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_X ; category
+	db DAMAGE_PLUS ; category
 	dw WildfireEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_5 ; flags 2
@@ -4883,15 +4883,15 @@ ArticunoLv35Card:
 
 	; attack 2
 	energy WATER, 1 ; energies
-	tx IceCycloneName ; name
-	tx IceCycloneDescription ; description
-	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
+	tx SheerColdName ; name
+	tx SheerColdDescription ; description
+	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_X ; category
-	dw IceCycloneEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db DAMAGE_PLUS ; category
+	dw SheerColdEffectCommands ; effect commands
+	db NONE ; flags 1
 	db FLAG_2_BIT_5 ; flags 2
-	db NONE ; flags 3
+	db NONE ; flags 3  | SPECIAL_AI_HANDLING
 	db 10
 	db ATK_ANIM_BLIZZARD ; animation
 
@@ -6030,39 +6030,39 @@ ZapdosLv40Card:
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db ZAPDOS_LV40
-	db 80 ; hp
+	db 70 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 3 ; energies
+	energy COLORLESS, 1 ; energies
+	tx EnergizeName ; name
+	tx Attach1LightningEnergyFromDiscardDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw EnergizeEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy LIGHTNING, 1 ; energies
 	tx ThunderstormName ; name
 	tx ThunderstormDescription ; description
 	tx NoWeaknessResistanceForBenchDescriptionCont ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ZapdosThunderstormEffectCommands ; effect commands
-	db LOW_RECOIL | DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw ThunderstormEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db FLAG_2_BIT_5 ; flags 2
+	db NONE ; flags 3  | SPECIAL_AI_HANDLING
+	db 10
 	db ATK_ANIM_THUNDERSTORM ; animation
 
-	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 2 ; energies
-	tx ThunderName ; name
-	tx Recoil30UnlessActiveThisTurnDescription ; description
-	dw NONE ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Recoil30UnlessActiveThisTurnEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_THUNDER ; animation
-
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db NONE ; weakness
 	db WR_FIGHTING ; resistance
 	tx ElectricName ; category

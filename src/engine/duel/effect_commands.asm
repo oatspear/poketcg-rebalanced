@@ -1136,21 +1136,32 @@ ThunderboltEffectCommands:
 WildfireEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Wildfire_CheckEnergy
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Wildfire_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Wildfire_MultiplierEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Wildfire_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Wildfire_DiscardDeckEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Wildfire_DiscardEnergyEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Wildfire_AISelectEffect
 	dbw EFFECTCMDTYPE_AI, Wildfire_AIEffect
 	db  $00
 
-IceCycloneEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, IceCyclone_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, IceCyclone_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IceCyclone_MultiplierEffect
+SheerColdEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SheerCold_CheckEnergy
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SheerCold_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SheerCold_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DiscardOpponentEnergy_DiscardEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, SheerCold_DiscardEnergyEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, DiscardOpponentEnergy_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SheerCold_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, SheerCold_AIEffect
+	db  $00
+
+ThunderstormEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Thunderstorm_CheckEnergy
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Thunderstorm_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Thunderstorm_MultiplierEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenched10Effect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, IceCyclone_DiscardEnergyEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, IceCyclone_AISelectEffect
-	dbw EFFECTCMDTYPE_AI, IceCyclone_AIEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Thunderstorm_DiscardEnergyEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Thunderstorm_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, Thunderstorm_AIEffect
 	db  $00
 
 DischargeEffectCommands:
@@ -1169,10 +1180,6 @@ ScorchingColumnEffectCommands:
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Wildfire_DiscardEnergyEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, ScorchingColumn_AISelectEffect
 	dbw EFFECTCMDTYPE_AI, ScorchingColumn_AIEffect
-	db  $00
-
-ZapdosThunderstormEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderstormEffect
 	db  $00
 
 ImmuneIfKnockedOutOpponentEffectCommands:

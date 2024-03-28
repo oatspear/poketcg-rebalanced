@@ -417,18 +417,31 @@ WildfireName:
 WildfireDescription:
 	text "Discard any number of <FIRE> Energy"
 	line "attached to this Pokémon."
-	line "This attack does 10 damage for each"
-	line "Energy discarded this way."
+	line "This attack does 10 more damage for"
+	line "each Energy discarded this way."
 	line "Discard that many cards from the"
 	line "top of your opponent's deck."
 	done
 
-IceCycloneName:
-	text "Ice Cyclone"
+SheerColdName:
+	text "Sheer Cold"
 	done
 
-IceCycloneDescription:
+SheerColdDescription:
 	text "Discard any number of <WATER> Energy"
+	line "attached to this Pokémon."
+	line "This attack does 10 more damage for"
+	line "each Energy discarded this way."
+	line "Discard an Energy attached to the"
+	line "Defending Pokémon."
+	done
+
+ThunderstormName:
+	text "Thunderstorm"
+	done
+
+ThunderstormDescription:
+	text "Discard any number of <LIGHTNING> Energy"
 	line "attached to this Pokémon."
 	line "This attack does 10 damage for each"
 	line "Energy discarded this way."
@@ -924,19 +937,6 @@ Damage1FriendlyBenchedPokemon10Description:
 
 LightningName: ; 5dfaf (17:5faf)
 	text "Lightning"
-	done
-
-ThunderstormName: ; 5e0d7 (17:60d7)
-	text "Thunderstorm"
-	done
-
-ThunderstormDescription:
-	text "For each of your opponent's Benched"
-	line "Pokémon, flip a coin. If heads,"
-	line "this attack does 20 damage to that"
-	line "Pokémon."
-	line "Then, Zapdos does 10 damage times"
-	line "the number of tails to itself."
 	done
 
 ThunderboltName: ; 5e290 (17:6290)

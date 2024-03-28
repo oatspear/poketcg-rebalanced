@@ -2473,8 +2473,10 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer RageName                                           ; 0x0917
 	textpointer WildfireName
 	textpointer WildfireDescription
-	textpointer IceCycloneName
-	textpointer IceCycloneDescription
+	textpointer SheerColdName
+	textpointer SheerColdDescription
+	textpointer ThunderstormName
+	textpointer ThunderstormDescription
 	textpointer BubbleName                                         ; 0x0925
 	textpointer WithdrawName                                       ; 0x0926
 	textpointer TinyTurtleName                                     ; 0x0928
@@ -2572,8 +2574,6 @@ TextOffsets:: ; 34000 (d:4000)
 	textpointer ThunderpunchName
 	textpointer Damage1FriendlyBenchedPokemon10Description
 	textpointer LightningName                                      ; 0x09f7
-	textpointer ThunderstormName                                   ; 0x09fd
-	textpointer ThunderstormDescription                            ; 0x09fe
 	textpointer ThunderboltName                                    ; 0x0a01
 	textpointer ThunderboltDescription                             ; 0x0a02
 	textpointer PrimalColdName

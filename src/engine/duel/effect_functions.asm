@@ -2924,6 +2924,7 @@ Cowardice_RemoveFromPlayAreaEffect:
 
 
 ; return carry if no Lightning energy cards
+Thunderstorm_CheckEnergy:
 Discharge_CheckEnergy:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
@@ -2946,7 +2947,7 @@ Wildfire_CheckEnergy:
 
 
 ; return carry if no Water energy cards
-IceCyclone_CheckEnergy:
+SheerCold_CheckEnergy:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
 	call HandleEnergyBurn
@@ -2956,11 +2957,12 @@ IceCyclone_CheckEnergy:
 	ret
 
 
-IceCyclone_PlayerSelectEffect:
+SheerCold_PlayerSelectEffect:
 	call CreateListOfWaterEnergyAttachedToArena
 	jr DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect
 
 
+Thunderstorm_PlayerSelectEffect:
 Discharge_PlayerSelectEffect:
 	call CreateListOfLightningEnergyAttachedToArena
 	jr DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect
@@ -3020,7 +3022,8 @@ DiscardAnyNumberOfAttachedEnergy_PlayerSelectEffect:
 	ret
 
 
-IceCyclone_AISelectEffect:
+SheerCold_AISelectEffect:
+	call DiscardOpponentEnergy_AISelectEffect
 ; AI always chooses all cards to discard
 	call CreateListOfWaterEnergyAttachedToArena
 	ldh [hTemp_ffa0], a
@@ -3035,6 +3038,7 @@ ScorchingColumn_AISelectEffect:
 	jr DiscardAnyNumberOfAttachedEnergy_AISelectEffect
 
 
+Thunderstorm_AISelectEffect:
 Discharge_AISelectEffect:
 ; AI always chooses all cards to discard
 	call CreateListOfLightningEnergyAttachedToArena
@@ -3053,10 +3057,11 @@ DiscardAnyNumberOfAttachedEnergy_AISelectEffect:
 	jp CopyDataHLtoDE
 
 
-IceCyclone_DiscardEnergyEffect:
+SheerCold_DiscardEnergyEffect:
 	call CreateListOfWaterEnergyAttachedToArena
 	jr DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect
 
+Thunderstorm_DiscardEnergyEffect:
 Discharge_DiscardEnergyEffect:
 	call CreateListOfLightningEnergyAttachedToArena
 	jr DiscardAnyNumberOfAttachedEnergy_DiscardEnergyEffect

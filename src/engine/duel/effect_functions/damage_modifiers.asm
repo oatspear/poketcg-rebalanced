@@ -432,11 +432,17 @@ DoubleDamageIfAttachedEnergy_AIEffect:
 	jp SetDefiniteAIDamage
 
 
-IceCyclone_MultiplierEffect:
-Wildfire_MultiplierEffect:
+Thunderstorm_MultiplierEffect:
 	ldh a, [hTemp_ffa0]
 	call ATimes10
 	jp SetDefiniteDamage
+
+
+SheerCold_DamageBoostEffect:
+Wildfire_DamageBoostEffect:
+	ldh a, [hTemp_ffa0]
+	call ATimes10
+	jp AddToDamage
 
 
 ScorchingColumn_MultiplierEffect:
@@ -459,7 +465,7 @@ Discharge_AIEffect:
 	jp SetDefiniteAIDamage
 
 
-IceCyclone_AIEffect:
+SheerCold_AIEffect:
 	call GetPlayAreaCardAttachedEnergies
 	call HandleEnergyBurn
 	ld a, [wAttachedEnergies + WATER]
@@ -467,7 +473,7 @@ IceCyclone_AIEffect:
 	; ld d, 0
 	; ld e, a
 	; jp UpdateExpectedAIDamage
-	call SetDefiniteDamage
+	call AddToDamage
 	jp SetDefiniteAIDamage
 
 
@@ -479,7 +485,7 @@ Wildfire_AIEffect:
 	; ld d, 0
 	; ld e, a
 	; jp UpdateExpectedAIDamage
-	call SetDefiniteDamage
+	call AddToDamage
 	jp SetDefiniteAIDamage
 
 
@@ -488,6 +494,18 @@ ScorchingColumn_AIEffect:
 	call HandleEnergyBurn
 	ld a, [wAttachedEnergies + FIRE]
 	add a  ; x2
+	call ATimes10
+	; ld d, 0
+	; ld e, a
+	; jp UpdateExpectedAIDamage
+	call SetDefiniteDamage
+	jp SetDefiniteAIDamage
+
+
+Thunderstorm_AIEffect:
+	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
+	ld a, [wAttachedEnergies + LIGHTNING]
 	call ATimes10
 	; ld d, 0
 	; ld e, a

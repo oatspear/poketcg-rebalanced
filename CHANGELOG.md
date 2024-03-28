@@ -65,7 +65,7 @@
 - New attack: **Scorching Column** (F): discard any number of attached (F); 20 damage for each discarded energy; inflicts Burn if 2 or more were discarded.
 
 #### Moltres Lv35
-- **Wildfire**: reduced cost from (FCC) to (F); changed base damage to 10 per energy discarded.
+- **Wildfire**: reduced cost from (FCC) to (F); changed base damage to 10; +10 damage per energy discarded.
 
 #### Moltres Lv37
 - Reduced HP from 100 to 90.
@@ -90,7 +90,7 @@
 - **Freeze Dry**: removed.
 - **Blizzard**: removed.
 - New attack: **Freeze** (C): attach (W) from the discard pile.
-- New attack: **Ice Cyclone** (W): discard any number of attached (W); 10 damage for each discarded energy; 10 damage to all of the opponent's Benched Pokémon.
+- New attack: **Sheer Cold** (W): discard any number of attached (W); 10 base damage; +10 damage for each discarded energy; discard 1 Energy from the Defending Pokémon.
 
 #### Articuno Lv37
 - Reduced HP from 100 to 90.
@@ -205,6 +205,13 @@
 #### Jolteon Lv29
 - **Thunderbolt**: removed.
 - New attack: **Discharge** (L): discard any number of attached (L); 20 damage for each discarded energy; inflicts Paralysis if 2 or more were discarded.
+
+#### Zapdos Lv40
+- Reduced HP from 80 to 70.
+- Increased Retreat Cost from 0 to 1.
+- **Thunderstorm**: reworked.
+- New attack: **Energize** (C): attach (L) from the discard pile.
+- New attack: **Thunderstorm** (L): discard any number of attached (L); 10 damage for each discarded energy; 10 damage to all of the opponent's Benched Pokémon.
 
 #### Zapdos Lv64
 - Reduced HP from 90 to 70.

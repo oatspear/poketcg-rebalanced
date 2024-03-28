@@ -1,5 +1,56 @@
 ;
 
+ZapdosThunderstormEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ThunderstormEffect
+	db  $00
+
+
+
+
+; IceCycloneName:
+; 	text "Ice Cyclone"
+; 	done
+
+; IceCycloneDescription:
+; 	text "Discard any number of <WATER> Energy"
+; 	line "attached to this Pokémon."
+; 	line "This attack does 10 damage for each"
+; 	line "Energy discarded this way."
+; 	line "It also does 10 damage to each of"
+; 	line "of your opponent's Benched Pokémon."
+; 	done
+
+
+
+IceCycloneEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, IceCyclone_CheckEnergy
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, IceCyclone_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, IceCyclone_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageAllOpponentBenched10Effect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, IceCyclone_DiscardEnergyEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, IceCyclone_AISelectEffect
+	dbw EFFECTCMDTYPE_AI, IceCyclone_AIEffect
+	db  $00
+
+
+IceCyclone_MultiplierEffect:
+	Wildfire_MultiplierEffect:
+		ldh a, [hTemp_ffa0]
+		call ATimes10
+		jp SetDefiniteDamage
+
+
+IceCyclone_AIEffect:
+	call GetPlayAreaCardAttachedEnergies
+	call HandleEnergyBurn
+	ld a, [wAttachedEnergies + WATER]
+	call ATimes10
+	; ld d, 0
+	; ld e, a
+	; jp UpdateExpectedAIDamage
+	call SetDefiniteDamage
+	jp SetDefiniteAIDamage
+
 
 
 
