@@ -215,8 +215,7 @@
 
 #### Zapdos Lv64
 - Reduced HP from 90 to 70.
-- **Thunder**: removed.
-- New attack: **Energize** (C): attach (L) from the discard pile.
+- **Thunder**: does not take recoil if active this turn.
 
 #### Zapdos Lv68
 - Reduced HP from 100 to 90.
